@@ -20,31 +20,31 @@ type ReceiptInvalid struct {
 }
 
 func (p ReceiptInvalid) Type() string {
-    return "MoneyReceiptInvalid"
+	return "MoneyReceiptInvalid"
 }
 
 func (p ReceiptInvalid) Code() string {
-    return "receipt.payload.invalid"
+	return "receipt.payload.invalid"
 }
 
 type Conflict struct {
 }
 
 func (p Conflict) Type() string {
-    return "MoneyConflict"
+	return "MoneyConflict"
 }
 
 func (p Conflict) Code() string {
-    return "wallet.operation.conflict"
+	return "wallet.operation.conflict"
 }
 
 type Insufficient struct {
 }
 
 func (p Insufficient) Type() string {
-    return "MoneyInsufficient"
+	return "MoneyInsufficient"
 }
 
 func (p Insufficient) Code() string {
-    return "wallet.balance.insufficient"
+	return "wallet.balance.insufficient"
 }

@@ -18,8 +18,9 @@ package stamina
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
 	"strings"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Gs2StaminaRestClient struct {
@@ -56,13 +57,13 @@ func describeNamespacesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeNamespacesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeNamespacesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -86,10 +87,10 @@ func (p Gs2StaminaRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -141,13 +142,13 @@ func createNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -163,35 +164,35 @@ func (p Gs2StaminaRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.OverflowTriggerScript != nil {
-        bodies["overflowTriggerScript"] = request.OverflowTriggerScript.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.OverflowTriggerScript != nil {
+		bodies["overflowTriggerScript"] = request.OverflowTriggerScript.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -235,13 +236,13 @@ func getNamespaceStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -255,19 +256,19 @@ func (p Gs2StaminaRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -319,13 +320,13 @@ func getNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -339,19 +340,19 @@ func (p Gs2StaminaRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -403,13 +404,13 @@ func updateNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -423,39 +424,39 @@ func (p Gs2StaminaRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.OverflowTriggerScript != nil {
-        bodies["overflowTriggerScript"] = request.OverflowTriggerScript.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.OverflowTriggerScript != nil {
+		bodies["overflowTriggerScript"] = request.OverflowTriggerScript.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -499,13 +500,13 @@ func deleteNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -519,19 +520,19 @@ func (p Gs2StaminaRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -583,13 +584,13 @@ func describeStaminaModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeStaminaModelMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStaminaModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeStaminaModelMastersAsyncResult{
 		result: &result,
@@ -603,11 +604,11 @@ func (p Gs2StaminaRestClient) DescribeStaminaModelMastersAsync(
 	callback chan<- DescribeStaminaModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -618,10 +619,10 @@ func (p Gs2StaminaRestClient) DescribeStaminaModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeStaminaModelMastersAsyncHandler(
 		p,
@@ -673,13 +674,13 @@ func createStaminaModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateStaminaModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateStaminaModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateStaminaModelMasterAsyncResult{
 		result: &result,
@@ -693,63 +694,63 @@ func (p Gs2StaminaRestClient) CreateStaminaModelMasterAsync(
 	callback chan<- CreateStaminaModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.RecoverIntervalMinutes != nil {
-        bodies["recoverIntervalMinutes"] = *request.RecoverIntervalMinutes
-    }
-    if request.RecoverValue != nil {
-        bodies["recoverValue"] = *request.RecoverValue
-    }
-    if request.InitialCapacity != nil {
-        bodies["initialCapacity"] = *request.InitialCapacity
-    }
-    if request.IsOverflow != nil {
-        bodies["isOverflow"] = *request.IsOverflow
-    }
-    if request.MaxCapacity != nil {
-        bodies["maxCapacity"] = *request.MaxCapacity
-    }
-    if request.MaxStaminaTableName != nil && *request.MaxStaminaTableName != "" {
-        bodies["maxStaminaTableName"] = *request.MaxStaminaTableName
-    }
-    if request.RecoverIntervalTableName != nil && *request.RecoverIntervalTableName != "" {
-        bodies["recoverIntervalTableName"] = *request.RecoverIntervalTableName
-    }
-    if request.RecoverValueTableName != nil && *request.RecoverValueTableName != "" {
-        bodies["recoverValueTableName"] = *request.RecoverValueTableName
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.RecoverIntervalMinutes != nil {
+		bodies["recoverIntervalMinutes"] = *request.RecoverIntervalMinutes
+	}
+	if request.RecoverValue != nil {
+		bodies["recoverValue"] = *request.RecoverValue
+	}
+	if request.InitialCapacity != nil {
+		bodies["initialCapacity"] = *request.InitialCapacity
+	}
+	if request.IsOverflow != nil {
+		bodies["isOverflow"] = *request.IsOverflow
+	}
+	if request.MaxCapacity != nil {
+		bodies["maxCapacity"] = *request.MaxCapacity
+	}
+	if request.MaxStaminaTableName != nil && *request.MaxStaminaTableName != "" {
+		bodies["maxStaminaTableName"] = *request.MaxStaminaTableName
+	}
+	if request.RecoverIntervalTableName != nil && *request.RecoverIntervalTableName != "" {
+		bodies["recoverIntervalTableName"] = *request.RecoverIntervalTableName
+	}
+	if request.RecoverValueTableName != nil && *request.RecoverValueTableName != "" {
+		bodies["recoverValueTableName"] = *request.RecoverValueTableName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createStaminaModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -793,13 +794,13 @@ func getStaminaModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStaminaModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStaminaModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetStaminaModelMasterAsyncResult{
 		result: &result,
@@ -813,24 +814,24 @@ func (p Gs2StaminaRestClient) GetStaminaModelMasterAsync(
 	callback chan<- GetStaminaModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{staminaName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getStaminaModelMasterAsyncHandler(
 		p,
@@ -882,13 +883,13 @@ func updateStaminaModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateStaminaModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateStaminaModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateStaminaModelMasterAsyncResult{
 		result: &result,
@@ -902,65 +903,65 @@ func (p Gs2StaminaRestClient) UpdateStaminaModelMasterAsync(
 	callback chan<- UpdateStaminaModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{staminaName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.RecoverIntervalMinutes != nil {
-        bodies["recoverIntervalMinutes"] = *request.RecoverIntervalMinutes
-    }
-    if request.RecoverValue != nil {
-        bodies["recoverValue"] = *request.RecoverValue
-    }
-    if request.InitialCapacity != nil {
-        bodies["initialCapacity"] = *request.InitialCapacity
-    }
-    if request.IsOverflow != nil {
-        bodies["isOverflow"] = *request.IsOverflow
-    }
-    if request.MaxCapacity != nil {
-        bodies["maxCapacity"] = *request.MaxCapacity
-    }
-    if request.MaxStaminaTableName != nil && *request.MaxStaminaTableName != "" {
-        bodies["maxStaminaTableName"] = *request.MaxStaminaTableName
-    }
-    if request.RecoverIntervalTableName != nil && *request.RecoverIntervalTableName != "" {
-        bodies["recoverIntervalTableName"] = *request.RecoverIntervalTableName
-    }
-    if request.RecoverValueTableName != nil && *request.RecoverValueTableName != "" {
-        bodies["recoverValueTableName"] = *request.RecoverValueTableName
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.RecoverIntervalMinutes != nil {
+		bodies["recoverIntervalMinutes"] = *request.RecoverIntervalMinutes
+	}
+	if request.RecoverValue != nil {
+		bodies["recoverValue"] = *request.RecoverValue
+	}
+	if request.InitialCapacity != nil {
+		bodies["initialCapacity"] = *request.InitialCapacity
+	}
+	if request.IsOverflow != nil {
+		bodies["isOverflow"] = *request.IsOverflow
+	}
+	if request.MaxCapacity != nil {
+		bodies["maxCapacity"] = *request.MaxCapacity
+	}
+	if request.MaxStaminaTableName != nil && *request.MaxStaminaTableName != "" {
+		bodies["maxStaminaTableName"] = *request.MaxStaminaTableName
+	}
+	if request.RecoverIntervalTableName != nil && *request.RecoverIntervalTableName != "" {
+		bodies["recoverIntervalTableName"] = *request.RecoverIntervalTableName
+	}
+	if request.RecoverValueTableName != nil && *request.RecoverValueTableName != "" {
+		bodies["recoverValueTableName"] = *request.RecoverValueTableName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateStaminaModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1004,13 +1005,13 @@ func deleteStaminaModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteStaminaModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteStaminaModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteStaminaModelMasterAsyncResult{
 		result: &result,
@@ -1024,24 +1025,24 @@ func (p Gs2StaminaRestClient) DeleteStaminaModelMasterAsync(
 	callback chan<- DeleteStaminaModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{staminaName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteStaminaModelMasterAsyncHandler(
 		p,
@@ -1093,13 +1094,13 @@ func describeMaxStaminaTableMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeMaxStaminaTableMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMaxStaminaTableMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeMaxStaminaTableMastersAsyncResult{
 		result: &result,
@@ -1113,11 +1114,11 @@ func (p Gs2StaminaRestClient) DescribeMaxStaminaTableMastersAsync(
 	callback chan<- DescribeMaxStaminaTableMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/maxStaminaTable"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1128,10 +1129,10 @@ func (p Gs2StaminaRestClient) DescribeMaxStaminaTableMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeMaxStaminaTableMastersAsyncHandler(
 		p,
@@ -1183,13 +1184,13 @@ func createMaxStaminaTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateMaxStaminaTableMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateMaxStaminaTableMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateMaxStaminaTableMasterAsyncResult{
 		result: &result,
@@ -1203,49 +1204,49 @@ func (p Gs2StaminaRestClient) CreateMaxStaminaTableMasterAsync(
 	callback chan<- CreateMaxStaminaTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/maxStaminaTable"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
-        bodies["experienceModelId"] = *request.ExperienceModelId
-    }
-    if request.Values != nil {
-        var _values []interface {}
-        for _, item := range request.Values {
-            _values = append(_values, item)
-        }
-        bodies["values"] = _values
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
+		bodies["experienceModelId"] = *request.ExperienceModelId
+	}
+	if request.Values != nil {
+		var _values []interface{}
+		for _, item := range request.Values {
+			_values = append(_values, item)
+		}
+		bodies["values"] = _values
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createMaxStaminaTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1289,13 +1290,13 @@ func getMaxStaminaTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetMaxStaminaTableMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetMaxStaminaTableMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetMaxStaminaTableMasterAsyncResult{
 		result: &result,
@@ -1309,24 +1310,24 @@ func (p Gs2StaminaRestClient) GetMaxStaminaTableMasterAsync(
 	callback chan<- GetMaxStaminaTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/maxStaminaTable/{maxStaminaTableName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MaxStaminaTableName != nil && *request.MaxStaminaTableName != ""  {
-        path = strings.ReplaceAll(path, "{maxStaminaTableName}", core.ToString(*request.MaxStaminaTableName))
-    } else {
-        path = strings.ReplaceAll(path, "{maxStaminaTableName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MaxStaminaTableName != nil && *request.MaxStaminaTableName != "" {
+		path = strings.ReplaceAll(path, "{maxStaminaTableName}", core.ToString(*request.MaxStaminaTableName))
+	} else {
+		path = strings.ReplaceAll(path, "{maxStaminaTableName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getMaxStaminaTableMasterAsyncHandler(
 		p,
@@ -1378,13 +1379,13 @@ func updateMaxStaminaTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateMaxStaminaTableMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateMaxStaminaTableMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateMaxStaminaTableMasterAsyncResult{
 		result: &result,
@@ -1398,51 +1399,51 @@ func (p Gs2StaminaRestClient) UpdateMaxStaminaTableMasterAsync(
 	callback chan<- UpdateMaxStaminaTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/maxStaminaTable/{maxStaminaTableName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MaxStaminaTableName != nil && *request.MaxStaminaTableName != ""  {
-        path = strings.ReplaceAll(path, "{maxStaminaTableName}", core.ToString(*request.MaxStaminaTableName))
-    } else {
-        path = strings.ReplaceAll(path, "{maxStaminaTableName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
-        bodies["experienceModelId"] = *request.ExperienceModelId
-    }
-    if request.Values != nil {
-        var _values []interface {}
-        for _, item := range request.Values {
-            _values = append(_values, item)
-        }
-        bodies["values"] = _values
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MaxStaminaTableName != nil && *request.MaxStaminaTableName != "" {
+		path = strings.ReplaceAll(path, "{maxStaminaTableName}", core.ToString(*request.MaxStaminaTableName))
+	} else {
+		path = strings.ReplaceAll(path, "{maxStaminaTableName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
+		bodies["experienceModelId"] = *request.ExperienceModelId
+	}
+	if request.Values != nil {
+		var _values []interface{}
+		for _, item := range request.Values {
+			_values = append(_values, item)
+		}
+		bodies["values"] = _values
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateMaxStaminaTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1486,13 +1487,13 @@ func deleteMaxStaminaTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteMaxStaminaTableMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteMaxStaminaTableMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteMaxStaminaTableMasterAsyncResult{
 		result: &result,
@@ -1506,24 +1507,24 @@ func (p Gs2StaminaRestClient) DeleteMaxStaminaTableMasterAsync(
 	callback chan<- DeleteMaxStaminaTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/maxStaminaTable/{maxStaminaTableName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MaxStaminaTableName != nil && *request.MaxStaminaTableName != ""  {
-        path = strings.ReplaceAll(path, "{maxStaminaTableName}", core.ToString(*request.MaxStaminaTableName))
-    } else {
-        path = strings.ReplaceAll(path, "{maxStaminaTableName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MaxStaminaTableName != nil && *request.MaxStaminaTableName != "" {
+		path = strings.ReplaceAll(path, "{maxStaminaTableName}", core.ToString(*request.MaxStaminaTableName))
+	} else {
+		path = strings.ReplaceAll(path, "{maxStaminaTableName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteMaxStaminaTableMasterAsyncHandler(
 		p,
@@ -1575,13 +1576,13 @@ func describeRecoverIntervalTableMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeRecoverIntervalTableMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRecoverIntervalTableMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeRecoverIntervalTableMastersAsyncResult{
 		result: &result,
@@ -1595,11 +1596,11 @@ func (p Gs2StaminaRestClient) DescribeRecoverIntervalTableMastersAsync(
 	callback chan<- DescribeRecoverIntervalTableMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverIntervalTable"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1610,10 +1611,10 @@ func (p Gs2StaminaRestClient) DescribeRecoverIntervalTableMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeRecoverIntervalTableMastersAsyncHandler(
 		p,
@@ -1665,13 +1666,13 @@ func createRecoverIntervalTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateRecoverIntervalTableMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateRecoverIntervalTableMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateRecoverIntervalTableMasterAsyncResult{
 		result: &result,
@@ -1685,49 +1686,49 @@ func (p Gs2StaminaRestClient) CreateRecoverIntervalTableMasterAsync(
 	callback chan<- CreateRecoverIntervalTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverIntervalTable"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
-        bodies["experienceModelId"] = *request.ExperienceModelId
-    }
-    if request.Values != nil {
-        var _values []interface {}
-        for _, item := range request.Values {
-            _values = append(_values, item)
-        }
-        bodies["values"] = _values
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
+		bodies["experienceModelId"] = *request.ExperienceModelId
+	}
+	if request.Values != nil {
+		var _values []interface{}
+		for _, item := range request.Values {
+			_values = append(_values, item)
+		}
+		bodies["values"] = _values
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createRecoverIntervalTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1771,13 +1772,13 @@ func getRecoverIntervalTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRecoverIntervalTableMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRecoverIntervalTableMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetRecoverIntervalTableMasterAsyncResult{
 		result: &result,
@@ -1791,24 +1792,24 @@ func (p Gs2StaminaRestClient) GetRecoverIntervalTableMasterAsync(
 	callback chan<- GetRecoverIntervalTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverIntervalTable/{recoverIntervalTableName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RecoverIntervalTableName != nil && *request.RecoverIntervalTableName != ""  {
-        path = strings.ReplaceAll(path, "{recoverIntervalTableName}", core.ToString(*request.RecoverIntervalTableName))
-    } else {
-        path = strings.ReplaceAll(path, "{recoverIntervalTableName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RecoverIntervalTableName != nil && *request.RecoverIntervalTableName != "" {
+		path = strings.ReplaceAll(path, "{recoverIntervalTableName}", core.ToString(*request.RecoverIntervalTableName))
+	} else {
+		path = strings.ReplaceAll(path, "{recoverIntervalTableName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getRecoverIntervalTableMasterAsyncHandler(
 		p,
@@ -1860,13 +1861,13 @@ func updateRecoverIntervalTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateRecoverIntervalTableMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateRecoverIntervalTableMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateRecoverIntervalTableMasterAsyncResult{
 		result: &result,
@@ -1880,51 +1881,51 @@ func (p Gs2StaminaRestClient) UpdateRecoverIntervalTableMasterAsync(
 	callback chan<- UpdateRecoverIntervalTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverIntervalTable/{recoverIntervalTableName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RecoverIntervalTableName != nil && *request.RecoverIntervalTableName != ""  {
-        path = strings.ReplaceAll(path, "{recoverIntervalTableName}", core.ToString(*request.RecoverIntervalTableName))
-    } else {
-        path = strings.ReplaceAll(path, "{recoverIntervalTableName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
-        bodies["experienceModelId"] = *request.ExperienceModelId
-    }
-    if request.Values != nil {
-        var _values []interface {}
-        for _, item := range request.Values {
-            _values = append(_values, item)
-        }
-        bodies["values"] = _values
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RecoverIntervalTableName != nil && *request.RecoverIntervalTableName != "" {
+		path = strings.ReplaceAll(path, "{recoverIntervalTableName}", core.ToString(*request.RecoverIntervalTableName))
+	} else {
+		path = strings.ReplaceAll(path, "{recoverIntervalTableName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
+		bodies["experienceModelId"] = *request.ExperienceModelId
+	}
+	if request.Values != nil {
+		var _values []interface{}
+		for _, item := range request.Values {
+			_values = append(_values, item)
+		}
+		bodies["values"] = _values
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateRecoverIntervalTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1968,13 +1969,13 @@ func deleteRecoverIntervalTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteRecoverIntervalTableMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteRecoverIntervalTableMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteRecoverIntervalTableMasterAsyncResult{
 		result: &result,
@@ -1988,24 +1989,24 @@ func (p Gs2StaminaRestClient) DeleteRecoverIntervalTableMasterAsync(
 	callback chan<- DeleteRecoverIntervalTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverIntervalTable/{recoverIntervalTableName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RecoverIntervalTableName != nil && *request.RecoverIntervalTableName != ""  {
-        path = strings.ReplaceAll(path, "{recoverIntervalTableName}", core.ToString(*request.RecoverIntervalTableName))
-    } else {
-        path = strings.ReplaceAll(path, "{recoverIntervalTableName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RecoverIntervalTableName != nil && *request.RecoverIntervalTableName != "" {
+		path = strings.ReplaceAll(path, "{recoverIntervalTableName}", core.ToString(*request.RecoverIntervalTableName))
+	} else {
+		path = strings.ReplaceAll(path, "{recoverIntervalTableName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteRecoverIntervalTableMasterAsyncHandler(
 		p,
@@ -2057,13 +2058,13 @@ func describeRecoverValueTableMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeRecoverValueTableMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRecoverValueTableMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeRecoverValueTableMastersAsyncResult{
 		result: &result,
@@ -2077,11 +2078,11 @@ func (p Gs2StaminaRestClient) DescribeRecoverValueTableMastersAsync(
 	callback chan<- DescribeRecoverValueTableMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverValueTable"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -2092,10 +2093,10 @@ func (p Gs2StaminaRestClient) DescribeRecoverValueTableMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeRecoverValueTableMastersAsyncHandler(
 		p,
@@ -2147,13 +2148,13 @@ func createRecoverValueTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateRecoverValueTableMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateRecoverValueTableMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateRecoverValueTableMasterAsyncResult{
 		result: &result,
@@ -2167,49 +2168,49 @@ func (p Gs2StaminaRestClient) CreateRecoverValueTableMasterAsync(
 	callback chan<- CreateRecoverValueTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverValueTable"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
-        bodies["experienceModelId"] = *request.ExperienceModelId
-    }
-    if request.Values != nil {
-        var _values []interface {}
-        for _, item := range request.Values {
-            _values = append(_values, item)
-        }
-        bodies["values"] = _values
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
+		bodies["experienceModelId"] = *request.ExperienceModelId
+	}
+	if request.Values != nil {
+		var _values []interface{}
+		for _, item := range request.Values {
+			_values = append(_values, item)
+		}
+		bodies["values"] = _values
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createRecoverValueTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2253,13 +2254,13 @@ func getRecoverValueTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRecoverValueTableMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRecoverValueTableMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetRecoverValueTableMasterAsyncResult{
 		result: &result,
@@ -2273,24 +2274,24 @@ func (p Gs2StaminaRestClient) GetRecoverValueTableMasterAsync(
 	callback chan<- GetRecoverValueTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverValueTable/{recoverValueTableName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RecoverValueTableName != nil && *request.RecoverValueTableName != ""  {
-        path = strings.ReplaceAll(path, "{recoverValueTableName}", core.ToString(*request.RecoverValueTableName))
-    } else {
-        path = strings.ReplaceAll(path, "{recoverValueTableName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RecoverValueTableName != nil && *request.RecoverValueTableName != "" {
+		path = strings.ReplaceAll(path, "{recoverValueTableName}", core.ToString(*request.RecoverValueTableName))
+	} else {
+		path = strings.ReplaceAll(path, "{recoverValueTableName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getRecoverValueTableMasterAsyncHandler(
 		p,
@@ -2342,13 +2343,13 @@ func updateRecoverValueTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateRecoverValueTableMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateRecoverValueTableMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateRecoverValueTableMasterAsyncResult{
 		result: &result,
@@ -2362,51 +2363,51 @@ func (p Gs2StaminaRestClient) UpdateRecoverValueTableMasterAsync(
 	callback chan<- UpdateRecoverValueTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverValueTable/{recoverValueTableName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RecoverValueTableName != nil && *request.RecoverValueTableName != ""  {
-        path = strings.ReplaceAll(path, "{recoverValueTableName}", core.ToString(*request.RecoverValueTableName))
-    } else {
-        path = strings.ReplaceAll(path, "{recoverValueTableName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
-        bodies["experienceModelId"] = *request.ExperienceModelId
-    }
-    if request.Values != nil {
-        var _values []interface {}
-        for _, item := range request.Values {
-            _values = append(_values, item)
-        }
-        bodies["values"] = _values
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RecoverValueTableName != nil && *request.RecoverValueTableName != "" {
+		path = strings.ReplaceAll(path, "{recoverValueTableName}", core.ToString(*request.RecoverValueTableName))
+	} else {
+		path = strings.ReplaceAll(path, "{recoverValueTableName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
+		bodies["experienceModelId"] = *request.ExperienceModelId
+	}
+	if request.Values != nil {
+		var _values []interface{}
+		for _, item := range request.Values {
+			_values = append(_values, item)
+		}
+		bodies["values"] = _values
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateRecoverValueTableMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2450,13 +2451,13 @@ func deleteRecoverValueTableMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteRecoverValueTableMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteRecoverValueTableMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteRecoverValueTableMasterAsyncResult{
 		result: &result,
@@ -2470,24 +2471,24 @@ func (p Gs2StaminaRestClient) DeleteRecoverValueTableMasterAsync(
 	callback chan<- DeleteRecoverValueTableMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/recoverValueTable/{recoverValueTableName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RecoverValueTableName != nil && *request.RecoverValueTableName != ""  {
-        path = strings.ReplaceAll(path, "{recoverValueTableName}", core.ToString(*request.RecoverValueTableName))
-    } else {
-        path = strings.ReplaceAll(path, "{recoverValueTableName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RecoverValueTableName != nil && *request.RecoverValueTableName != "" {
+		path = strings.ReplaceAll(path, "{recoverValueTableName}", core.ToString(*request.RecoverValueTableName))
+	} else {
+		path = strings.ReplaceAll(path, "{recoverValueTableName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteRecoverValueTableMasterAsyncHandler(
 		p,
@@ -2539,13 +2540,13 @@ func exportMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ExportMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExportMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -2559,19 +2560,19 @@ func (p Gs2StaminaRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go exportMasterAsyncHandler(
 		p,
@@ -2623,13 +2624,13 @@ func getCurrentStaminaMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCurrentStaminaMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCurrentStaminaMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetCurrentStaminaMasterAsyncResult{
 		result: &result,
@@ -2643,19 +2644,19 @@ func (p Gs2StaminaRestClient) GetCurrentStaminaMasterAsync(
 	callback chan<- GetCurrentStaminaMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getCurrentStaminaMasterAsyncHandler(
 		p,
@@ -2707,13 +2708,13 @@ func updateCurrentStaminaMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentStaminaMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentStaminaMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateCurrentStaminaMasterAsyncResult{
 		result: &result,
@@ -2727,33 +2728,33 @@ func (p Gs2StaminaRestClient) UpdateCurrentStaminaMasterAsync(
 	callback chan<- UpdateCurrentStaminaMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Settings != nil && *request.Settings != "" {
-        bodies["settings"] = *request.Settings
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Settings != nil && *request.Settings != "" {
+		bodies["settings"] = *request.Settings
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateCurrentStaminaMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2797,13 +2798,13 @@ func updateCurrentStaminaMasterFromGitHubAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentStaminaMasterFromGitHubAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentStaminaMasterFromGitHubAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateCurrentStaminaMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2817,33 +2818,33 @@ func (p Gs2StaminaRestClient) UpdateCurrentStaminaMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentStaminaMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.CheckoutSetting != nil {
-        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.CheckoutSetting != nil {
+		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateCurrentStaminaMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2887,13 +2888,13 @@ func describeStaminaModelsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeStaminaModelsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStaminaModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeStaminaModelsAsyncResult{
 		result: &result,
@@ -2907,19 +2908,19 @@ func (p Gs2StaminaRestClient) DescribeStaminaModelsAsync(
 	callback chan<- DescribeStaminaModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/model"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeStaminaModelsAsyncHandler(
 		p,
@@ -2971,13 +2972,13 @@ func getStaminaModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStaminaModelAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStaminaModelAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetStaminaModelAsyncResult{
 		result: &result,
@@ -2991,24 +2992,24 @@ func (p Gs2StaminaRestClient) GetStaminaModelAsync(
 	callback chan<- GetStaminaModelAsyncResult,
 ) {
 	path := "/{namespaceName}/model/{staminaName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getStaminaModelAsyncHandler(
 		p,
@@ -3060,13 +3061,13 @@ func describeStaminasAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeStaminasAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStaminasAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeStaminasAsyncResult{
 		result: &result,
@@ -3080,11 +3081,11 @@ func (p Gs2StaminaRestClient) DescribeStaminasAsync(
 	callback chan<- DescribeStaminasAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/stamina"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3095,13 +3096,13 @@ func (p Gs2StaminaRestClient) DescribeStaminasAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go describeStaminasAsyncHandler(
 		p,
@@ -3153,13 +3154,13 @@ func describeStaminasByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeStaminasByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStaminasByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeStaminasByUserIdAsyncResult{
 		result: &result,
@@ -3173,16 +3174,16 @@ func (p Gs2StaminaRestClient) DescribeStaminasByUserIdAsync(
 	callback chan<- DescribeStaminasByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -3193,10 +3194,10 @@ func (p Gs2StaminaRestClient) DescribeStaminasByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeStaminasByUserIdAsyncHandler(
 		p,
@@ -3248,13 +3249,13 @@ func getStaminaAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStaminaAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStaminaAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetStaminaAsyncResult{
 		result: &result,
@@ -3268,27 +3269,27 @@ func (p Gs2StaminaRestClient) GetStaminaAsync(
 	callback chan<- GetStaminaAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/stamina/{staminaName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go getStaminaAsyncHandler(
 		p,
@@ -3340,13 +3341,13 @@ func getStaminaByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStaminaByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStaminaByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetStaminaByUserIdAsyncResult{
 		result: &result,
@@ -3360,29 +3361,29 @@ func (p Gs2StaminaRestClient) GetStaminaByUserIdAsync(
 	callback chan<- GetStaminaByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getStaminaByUserIdAsyncHandler(
 		p,
@@ -3434,13 +3435,13 @@ func updateStaminaByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateStaminaByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateStaminaByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateStaminaByUserIdAsyncResult{
 		result: &result,
@@ -3454,55 +3455,55 @@ func (p Gs2StaminaRestClient) UpdateStaminaByUserIdAsync(
 	callback chan<- UpdateStaminaByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Value != nil {
-        bodies["value"] = *request.Value
-    }
-    if request.MaxValue != nil {
-        bodies["maxValue"] = *request.MaxValue
-    }
-    if request.RecoverIntervalMinutes != nil {
-        bodies["recoverIntervalMinutes"] = *request.RecoverIntervalMinutes
-    }
-    if request.RecoverValue != nil {
-        bodies["recoverValue"] = *request.RecoverValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MaxValue != nil {
+		bodies["maxValue"] = *request.MaxValue
+	}
+	if request.RecoverIntervalMinutes != nil {
+		bodies["recoverIntervalMinutes"] = *request.RecoverIntervalMinutes
+	}
+	if request.RecoverValue != nil {
+		bodies["recoverValue"] = *request.RecoverValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go updateStaminaByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3540,25 +3541,25 @@ func consumeStaminaAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ConsumeStaminaResult
 	if asyncResult.Err != nil {
-        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
-        if ok {
-            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "stamina.stamina.insufficient" {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "stamina.stamina.insufficient" {
 				asyncResult.Err = gs2err.SetClientError(Insufficient{})
-            }
-        }
+			}
+		}
 		callback <- ConsumeStaminaAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ConsumeStaminaAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ConsumeStaminaAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ConsumeStaminaAsyncResult{
 		result: &result,
@@ -3572,44 +3573,44 @@ func (p Gs2StaminaRestClient) ConsumeStaminaAsync(
 	callback chan<- ConsumeStaminaAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/stamina/{staminaName}/consume"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.ConsumeValue != nil {
-        bodies["consumeValue"] = *request.ConsumeValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ConsumeValue != nil {
+		bodies["consumeValue"] = *request.ConsumeValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go consumeStaminaAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3647,25 +3648,25 @@ func consumeStaminaByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ConsumeStaminaByUserIdResult
 	if asyncResult.Err != nil {
-        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
-        if ok {
-            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "stamina.stamina.insufficient" {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "stamina.stamina.insufficient" {
 				asyncResult.Err = gs2err.SetClientError(Insufficient{})
-            }
-        }
+			}
+		}
 		callback <- ConsumeStaminaByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ConsumeStaminaByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ConsumeStaminaByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ConsumeStaminaByUserIdAsyncResult{
 		result: &result,
@@ -3679,46 +3680,46 @@ func (p Gs2StaminaRestClient) ConsumeStaminaByUserIdAsync(
 	callback chan<- ConsumeStaminaByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/consume"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.ConsumeValue != nil {
-        bodies["consumeValue"] = *request.ConsumeValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ConsumeValue != nil {
+		bodies["consumeValue"] = *request.ConsumeValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go consumeStaminaByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3762,13 +3763,13 @@ func recoverStaminaByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RecoverStaminaByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RecoverStaminaByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- RecoverStaminaByUserIdAsyncResult{
 		result: &result,
@@ -3782,46 +3783,46 @@ func (p Gs2StaminaRestClient) RecoverStaminaByUserIdAsync(
 	callback chan<- RecoverStaminaByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/recover"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.RecoverValue != nil {
-        bodies["recoverValue"] = *request.RecoverValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.RecoverValue != nil {
+		bodies["recoverValue"] = *request.RecoverValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go recoverStaminaByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3865,13 +3866,13 @@ func raiseMaxValueByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RaiseMaxValueByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RaiseMaxValueByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- RaiseMaxValueByUserIdAsyncResult{
 		result: &result,
@@ -3885,46 +3886,46 @@ func (p Gs2StaminaRestClient) RaiseMaxValueByUserIdAsync(
 	callback chan<- RaiseMaxValueByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/raise"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.RaiseValue != nil {
-        bodies["raiseValue"] = *request.RaiseValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.RaiseValue != nil {
+		bodies["raiseValue"] = *request.RaiseValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go raiseMaxValueByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -3968,13 +3969,13 @@ func decreaseMaxValueByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DecreaseMaxValueByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DecreaseMaxValueByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DecreaseMaxValueByUserIdAsyncResult{
 		result: &result,
@@ -3988,46 +3989,46 @@ func (p Gs2StaminaRestClient) DecreaseMaxValueByUserIdAsync(
 	callback chan<- DecreaseMaxValueByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/decrease"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.DecreaseValue != nil {
-        bodies["decreaseValue"] = *request.DecreaseValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.DecreaseValue != nil {
+		bodies["decreaseValue"] = *request.DecreaseValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go decreaseMaxValueByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -4071,13 +4072,13 @@ func setMaxValueByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetMaxValueByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetMaxValueByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetMaxValueByUserIdAsyncResult{
 		result: &result,
@@ -4091,46 +4092,46 @@ func (p Gs2StaminaRestClient) SetMaxValueByUserIdAsync(
 	callback chan<- SetMaxValueByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/set"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.MaxValue != nil {
-        bodies["maxValue"] = *request.MaxValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.MaxValue != nil {
+		bodies["maxValue"] = *request.MaxValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go setMaxValueByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -4174,13 +4175,13 @@ func setRecoverIntervalByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetRecoverIntervalByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetRecoverIntervalByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetRecoverIntervalByUserIdAsyncResult{
 		result: &result,
@@ -4194,46 +4195,46 @@ func (p Gs2StaminaRestClient) SetRecoverIntervalByUserIdAsync(
 	callback chan<- SetRecoverIntervalByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/recoverInterval/set"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.RecoverIntervalMinutes != nil {
-        bodies["recoverIntervalMinutes"] = *request.RecoverIntervalMinutes
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.RecoverIntervalMinutes != nil {
+		bodies["recoverIntervalMinutes"] = *request.RecoverIntervalMinutes
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go setRecoverIntervalByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -4277,13 +4278,13 @@ func setRecoverValueByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetRecoverValueByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetRecoverValueByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetRecoverValueByUserIdAsyncResult{
 		result: &result,
@@ -4297,46 +4298,46 @@ func (p Gs2StaminaRestClient) SetRecoverValueByUserIdAsync(
 	callback chan<- SetRecoverValueByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}/recoverValue/set"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.RecoverValue != nil {
-        bodies["recoverValue"] = *request.RecoverValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.RecoverValue != nil {
+		bodies["recoverValue"] = *request.RecoverValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go setRecoverValueByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -4380,13 +4381,13 @@ func setMaxValueByStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetMaxValueByStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetMaxValueByStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetMaxValueByStatusAsyncResult{
 		result: &result,
@@ -4400,50 +4401,50 @@ func (p Gs2StaminaRestClient) SetMaxValueByStatusAsync(
 	callback chan<- SetMaxValueByStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/stamina/{staminaName}/set"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-    if request.SignedStatusBody != nil && *request.SignedStatusBody != "" {
-        bodies["signedStatusBody"] = *request.SignedStatusBody
-    }
-    if request.SignedStatusSignature != nil && *request.SignedStatusSignature != "" {
-        bodies["signedStatusSignature"] = *request.SignedStatusSignature
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.SignedStatusBody != nil && *request.SignedStatusBody != "" {
+		bodies["signedStatusBody"] = *request.SignedStatusBody
+	}
+	if request.SignedStatusSignature != nil && *request.SignedStatusSignature != "" {
+		bodies["signedStatusSignature"] = *request.SignedStatusSignature
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go setMaxValueByStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -4487,13 +4488,13 @@ func setRecoverIntervalByStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetRecoverIntervalByStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetRecoverIntervalByStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetRecoverIntervalByStatusAsyncResult{
 		result: &result,
@@ -4507,50 +4508,50 @@ func (p Gs2StaminaRestClient) SetRecoverIntervalByStatusAsync(
 	callback chan<- SetRecoverIntervalByStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/stamina/{staminaName}/recoverInterval/set"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-    if request.SignedStatusBody != nil && *request.SignedStatusBody != "" {
-        bodies["signedStatusBody"] = *request.SignedStatusBody
-    }
-    if request.SignedStatusSignature != nil && *request.SignedStatusSignature != "" {
-        bodies["signedStatusSignature"] = *request.SignedStatusSignature
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.SignedStatusBody != nil && *request.SignedStatusBody != "" {
+		bodies["signedStatusBody"] = *request.SignedStatusBody
+	}
+	if request.SignedStatusSignature != nil && *request.SignedStatusSignature != "" {
+		bodies["signedStatusSignature"] = *request.SignedStatusSignature
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go setRecoverIntervalByStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -4594,13 +4595,13 @@ func setRecoverValueByStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetRecoverValueByStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetRecoverValueByStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetRecoverValueByStatusAsyncResult{
 		result: &result,
@@ -4614,50 +4615,50 @@ func (p Gs2StaminaRestClient) SetRecoverValueByStatusAsync(
 	callback chan<- SetRecoverValueByStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/stamina/{staminaName}/recoverValue/set"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-    if request.SignedStatusBody != nil && *request.SignedStatusBody != "" {
-        bodies["signedStatusBody"] = *request.SignedStatusBody
-    }
-    if request.SignedStatusSignature != nil && *request.SignedStatusSignature != "" {
-        bodies["signedStatusSignature"] = *request.SignedStatusSignature
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.SignedStatusBody != nil && *request.SignedStatusBody != "" {
+		bodies["signedStatusBody"] = *request.SignedStatusBody
+	}
+	if request.SignedStatusSignature != nil && *request.SignedStatusSignature != "" {
+		bodies["signedStatusSignature"] = *request.SignedStatusSignature
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go setRecoverValueByStatusAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -4701,13 +4702,13 @@ func deleteStaminaByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteStaminaByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteStaminaByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteStaminaByUserIdAsyncResult{
 		result: &result,
@@ -4721,32 +4722,32 @@ func (p Gs2StaminaRestClient) DeleteStaminaByUserIdAsync(
 	callback chan<- DeleteStaminaByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/stamina/{staminaName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go deleteStaminaByUserIdAsyncHandler(
 		p,
@@ -4798,13 +4799,13 @@ func recoverStaminaByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RecoverStaminaByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RecoverStaminaByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- RecoverStaminaByStampSheetAsyncResult{
 		result: &result,
@@ -4820,29 +4821,29 @@ func (p Gs2StaminaRestClient) RecoverStaminaByStampSheetAsync(
 	path := "/stamina/recover"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go recoverStaminaByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -4886,13 +4887,13 @@ func raiseMaxValueByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RaiseMaxValueByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RaiseMaxValueByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- RaiseMaxValueByStampSheetAsyncResult{
 		result: &result,
@@ -4908,29 +4909,29 @@ func (p Gs2StaminaRestClient) RaiseMaxValueByStampSheetAsync(
 	path := "/stamina/raise"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go raiseMaxValueByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -4974,13 +4975,13 @@ func decreaseMaxValueByStampTaskAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DecreaseMaxValueByStampTaskAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DecreaseMaxValueByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DecreaseMaxValueByStampTaskAsyncResult{
 		result: &result,
@@ -4996,29 +4997,29 @@ func (p Gs2StaminaRestClient) DecreaseMaxValueByStampTaskAsync(
 	path := "/stamina/decrease"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampTask != nil && *request.StampTask != "" {
-        bodies["stampTask"] = *request.StampTask
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go decreaseMaxValueByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -5062,13 +5063,13 @@ func setMaxValueByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetMaxValueByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetMaxValueByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetMaxValueByStampSheetAsyncResult{
 		result: &result,
@@ -5084,29 +5085,29 @@ func (p Gs2StaminaRestClient) SetMaxValueByStampSheetAsync(
 	path := "/stamina/max/set"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go setMaxValueByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -5150,13 +5151,13 @@ func setRecoverIntervalByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetRecoverIntervalByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetRecoverIntervalByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetRecoverIntervalByStampSheetAsyncResult{
 		result: &result,
@@ -5172,29 +5173,29 @@ func (p Gs2StaminaRestClient) SetRecoverIntervalByStampSheetAsync(
 	path := "/stamina/recoverInterval/set"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go setRecoverIntervalByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -5238,13 +5239,13 @@ func setRecoverValueByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetRecoverValueByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetRecoverValueByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- SetRecoverValueByStampSheetAsyncResult{
 		result: &result,
@@ -5260,29 +5261,29 @@ func (p Gs2StaminaRestClient) SetRecoverValueByStampSheetAsync(
 	path := "/stamina/recoverValue/set"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go setRecoverValueByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -5326,13 +5327,13 @@ func consumeStaminaByStampTaskAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ConsumeStaminaByStampTaskAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ConsumeStaminaByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ConsumeStaminaByStampTaskAsyncResult{
 		result: &result,
@@ -5348,29 +5349,29 @@ func (p Gs2StaminaRestClient) ConsumeStaminaByStampTaskAsync(
 	path := "/stamina/consume"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampTask != nil && *request.StampTask != "" {
-        bodies["stampTask"] = *request.StampTask
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go consumeStaminaByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("stamina").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)

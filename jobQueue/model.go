@@ -17,102 +17,103 @@ permissions and limitations under the License.
 package jobQueue
 
 import (
-    "encoding/json"
-    "github.com/gs2io/gs2-golang-sdk/core"
+	"encoding/json"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Namespace struct {
-	NamespaceId *string `json:"namespaceId"`
-	Name *string `json:"name"`
-	Description *string `json:"description"`
-	EnableAutoRun *bool `json:"enableAutoRun"`
-	RunNotification *NotificationSetting `json:"runNotification"`
+	NamespaceId      *string              `json:"namespaceId"`
+	Name             *string              `json:"name"`
+	Description      *string              `json:"description"`
+	EnableAutoRun    *bool                `json:"enableAutoRun"`
+	RunNotification  *NotificationSetting `json:"runNotification"`
 	PushNotification *NotificationSetting `json:"pushNotification"`
-	LogSetting *LogSetting `json:"logSetting"`
-	CreatedAt *int64 `json:"createdAt"`
-	UpdatedAt *int64 `json:"updatedAt"`
-	Revision *int64 `json:"revision"`
+	LogSetting       *LogSetting          `json:"logSetting"`
+	CreatedAt        *int64               `json:"createdAt"`
+	UpdatedAt        *int64               `json:"updatedAt"`
+	Revision         *int64               `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewNamespaceFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNamespaceFromDict(dict)
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
-    return Namespace {
-        NamespaceId: core.CastString(data["namespaceId"]),
-        Name: core.CastString(data["name"]),
-        Description: core.CastString(data["description"]),
-        EnableAutoRun: core.CastBool(data["enableAutoRun"]),
-        RunNotification: NewNotificationSettingFromDict(core.CastMap(data["runNotification"])).Pointer(),
-        PushNotification: NewNotificationSettingFromDict(core.CastMap(data["pushNotification"])).Pointer(),
-        LogSetting: NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-        UpdatedAt: core.CastInt64(data["updatedAt"]),
-        Revision: core.CastInt64(data["revision"]),
-    }
+	return Namespace{
+		NamespaceId:      core.CastString(data["namespaceId"]),
+		Name:             core.CastString(data["name"]),
+		Description:      core.CastString(data["description"]),
+		EnableAutoRun:    core.CastBool(data["enableAutoRun"]),
+		RunNotification:  NewNotificationSettingFromDict(core.CastMap(data["runNotification"])).Pointer(),
+		PushNotification: NewNotificationSettingFromDict(core.CastMap(data["pushNotification"])).Pointer(),
+		LogSetting:       NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:        core.CastInt64(data["createdAt"]),
+		UpdatedAt:        core.CastInt64(data["updatedAt"]),
+		Revision:         core.CastInt64(data["revision"]),
+	}
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-    
-    var namespaceId *string
-    if p.NamespaceId != nil {
-        namespaceId = p.NamespaceId
-    }
-    var name *string
-    if p.Name != nil {
-        name = p.Name
-    }
-    var description *string
-    if p.Description != nil {
-        description = p.Description
-    }
-    var enableAutoRun *bool
-    if p.EnableAutoRun != nil {
-        enableAutoRun = p.EnableAutoRun
-    }
-    var runNotification map[string]interface{}
-    if p.RunNotification != nil {
-        runNotification = p.RunNotification.ToDict()
-    }
-    var pushNotification map[string]interface{}
-    if p.PushNotification != nil {
-        pushNotification = p.PushNotification.ToDict()
-    }
-    var logSetting map[string]interface{}
-    if p.LogSetting != nil {
-        logSetting = p.LogSetting.ToDict()
-    }
-    var createdAt *int64
-    if p.CreatedAt != nil {
-        createdAt = p.CreatedAt
-    }
-    var updatedAt *int64
-    if p.UpdatedAt != nil {
-        updatedAt = p.UpdatedAt
-    }
-    var revision *int64
-    if p.Revision != nil {
-        revision = p.Revision
-    }
-    return map[string]interface{} {
-        "namespaceId": namespaceId,
-        "name": name,
-        "description": description,
-        "enableAutoRun": enableAutoRun,
-        "runNotification": runNotification,
-        "pushNotification": pushNotification,
-        "logSetting": logSetting,
-        "createdAt": createdAt,
-        "updatedAt": updatedAt,
-        "revision": revision,
-    }
+
+	var namespaceId *string
+	if p.NamespaceId != nil {
+		namespaceId = p.NamespaceId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var description *string
+	if p.Description != nil {
+		description = p.Description
+	}
+	var enableAutoRun *bool
+	if p.EnableAutoRun != nil {
+		enableAutoRun = p.EnableAutoRun
+	}
+	var runNotification map[string]interface{}
+	if p.RunNotification != nil {
+		runNotification = p.RunNotification.ToDict()
+	}
+	var pushNotification map[string]interface{}
+	if p.PushNotification != nil {
+		pushNotification = p.PushNotification.ToDict()
+	}
+	var logSetting map[string]interface{}
+	if p.LogSetting != nil {
+		logSetting = p.LogSetting.ToDict()
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	return map[string]interface{}{
+		"namespaceId":      namespaceId,
+		"name":             name,
+		"description":      description,
+		"enableAutoRun":    enableAutoRun,
+		"runNotification":  runNotification,
+		"pushNotification": pushNotification,
+		"logSetting":       logSetting,
+		"createdAt":        createdAt,
+		"updatedAt":        updatedAt,
+		"revision":         revision,
+	}
 }
 
 func (p Namespace) Pointer() *Namespace {
-    return &p
+	return &p
 }
 
 func CastNamespaces(data []interface{}) []Namespace {
@@ -124,98 +125,98 @@ func CastNamespaces(data []interface{}) []Namespace {
 }
 
 func CastNamespacesFromDict(data []Namespace) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type Job struct {
-	JobId *string `json:"jobId"`
-	Name *string `json:"name"`
-	UserId *string `json:"userId"`
-	ScriptId *string `json:"scriptId"`
-	Args *string `json:"args"`
-	CurrentRetryCount *int32 `json:"currentRetryCount"`
-	MaxTryCount *int32 `json:"maxTryCount"`
-	CreatedAt *int64 `json:"createdAt"`
-	UpdatedAt *int64 `json:"updatedAt"`
+	JobId             *string `json:"jobId"`
+	Name              *string `json:"name"`
+	UserId            *string `json:"userId"`
+	ScriptId          *string `json:"scriptId"`
+	Args              *string `json:"args"`
+	CurrentRetryCount *int32  `json:"currentRetryCount"`
+	MaxTryCount       *int32  `json:"maxTryCount"`
+	CreatedAt         *int64  `json:"createdAt"`
+	UpdatedAt         *int64  `json:"updatedAt"`
 }
 
 func NewJobFromJson(data string) Job {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewJobFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewJobFromDict(dict)
 }
 
 func NewJobFromDict(data map[string]interface{}) Job {
-    return Job {
-        JobId: core.CastString(data["jobId"]),
-        Name: core.CastString(data["name"]),
-        UserId: core.CastString(data["userId"]),
-        ScriptId: core.CastString(data["scriptId"]),
-        Args: core.CastString(data["args"]),
-        CurrentRetryCount: core.CastInt32(data["currentRetryCount"]),
-        MaxTryCount: core.CastInt32(data["maxTryCount"]),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-        UpdatedAt: core.CastInt64(data["updatedAt"]),
-    }
+	return Job{
+		JobId:             core.CastString(data["jobId"]),
+		Name:              core.CastString(data["name"]),
+		UserId:            core.CastString(data["userId"]),
+		ScriptId:          core.CastString(data["scriptId"]),
+		Args:              core.CastString(data["args"]),
+		CurrentRetryCount: core.CastInt32(data["currentRetryCount"]),
+		MaxTryCount:       core.CastInt32(data["maxTryCount"]),
+		CreatedAt:         core.CastInt64(data["createdAt"]),
+		UpdatedAt:         core.CastInt64(data["updatedAt"]),
+	}
 }
 
 func (p Job) ToDict() map[string]interface{} {
-    
-    var jobId *string
-    if p.JobId != nil {
-        jobId = p.JobId
-    }
-    var name *string
-    if p.Name != nil {
-        name = p.Name
-    }
-    var userId *string
-    if p.UserId != nil {
-        userId = p.UserId
-    }
-    var scriptId *string
-    if p.ScriptId != nil {
-        scriptId = p.ScriptId
-    }
-    var args *string
-    if p.Args != nil {
-        args = p.Args
-    }
-    var currentRetryCount *int32
-    if p.CurrentRetryCount != nil {
-        currentRetryCount = p.CurrentRetryCount
-    }
-    var maxTryCount *int32
-    if p.MaxTryCount != nil {
-        maxTryCount = p.MaxTryCount
-    }
-    var createdAt *int64
-    if p.CreatedAt != nil {
-        createdAt = p.CreatedAt
-    }
-    var updatedAt *int64
-    if p.UpdatedAt != nil {
-        updatedAt = p.UpdatedAt
-    }
-    return map[string]interface{} {
-        "jobId": jobId,
-        "name": name,
-        "userId": userId,
-        "scriptId": scriptId,
-        "args": args,
-        "currentRetryCount": currentRetryCount,
-        "maxTryCount": maxTryCount,
-        "createdAt": createdAt,
-        "updatedAt": updatedAt,
-    }
+
+	var jobId *string
+	if p.JobId != nil {
+		jobId = p.JobId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var scriptId *string
+	if p.ScriptId != nil {
+		scriptId = p.ScriptId
+	}
+	var args *string
+	if p.Args != nil {
+		args = p.Args
+	}
+	var currentRetryCount *int32
+	if p.CurrentRetryCount != nil {
+		currentRetryCount = p.CurrentRetryCount
+	}
+	var maxTryCount *int32
+	if p.MaxTryCount != nil {
+		maxTryCount = p.MaxTryCount
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	return map[string]interface{}{
+		"jobId":             jobId,
+		"name":              name,
+		"userId":            userId,
+		"scriptId":          scriptId,
+		"args":              args,
+		"currentRetryCount": currentRetryCount,
+		"maxTryCount":       maxTryCount,
+		"createdAt":         createdAt,
+		"updatedAt":         updatedAt,
+	}
 }
 
 func (p Job) Pointer() *Job {
-    return &p
+	return &p
 }
 
 func CastJobs(data []interface{}) []Job {
@@ -227,91 +228,91 @@ func CastJobs(data []interface{}) []Job {
 }
 
 func CastJobsFromDict(data []Job) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type JobResult struct {
 	JobResultId *string `json:"jobResultId"`
-	JobId *string `json:"jobId"`
-	ScriptId *string `json:"scriptId"`
-	Args *string `json:"args"`
-	TryNumber *int32 `json:"tryNumber"`
-	StatusCode *int32 `json:"statusCode"`
-	Result *string `json:"result"`
-	TryAt *int64 `json:"tryAt"`
+	JobId       *string `json:"jobId"`
+	ScriptId    *string `json:"scriptId"`
+	Args        *string `json:"args"`
+	TryNumber   *int32  `json:"tryNumber"`
+	StatusCode  *int32  `json:"statusCode"`
+	Result      *string `json:"result"`
+	TryAt       *int64  `json:"tryAt"`
 }
 
 func NewJobResultFromJson(data string) JobResult {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewJobResultFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewJobResultFromDict(dict)
 }
 
 func NewJobResultFromDict(data map[string]interface{}) JobResult {
-    return JobResult {
-        JobResultId: core.CastString(data["jobResultId"]),
-        JobId: core.CastString(data["jobId"]),
-        ScriptId: core.CastString(data["scriptId"]),
-        Args: core.CastString(data["args"]),
-        TryNumber: core.CastInt32(data["tryNumber"]),
-        StatusCode: core.CastInt32(data["statusCode"]),
-        Result: core.CastString(data["result"]),
-        TryAt: core.CastInt64(data["tryAt"]),
-    }
+	return JobResult{
+		JobResultId: core.CastString(data["jobResultId"]),
+		JobId:       core.CastString(data["jobId"]),
+		ScriptId:    core.CastString(data["scriptId"]),
+		Args:        core.CastString(data["args"]),
+		TryNumber:   core.CastInt32(data["tryNumber"]),
+		StatusCode:  core.CastInt32(data["statusCode"]),
+		Result:      core.CastString(data["result"]),
+		TryAt:       core.CastInt64(data["tryAt"]),
+	}
 }
 
 func (p JobResult) ToDict() map[string]interface{} {
-    
-    var jobResultId *string
-    if p.JobResultId != nil {
-        jobResultId = p.JobResultId
-    }
-    var jobId *string
-    if p.JobId != nil {
-        jobId = p.JobId
-    }
-    var scriptId *string
-    if p.ScriptId != nil {
-        scriptId = p.ScriptId
-    }
-    var args *string
-    if p.Args != nil {
-        args = p.Args
-    }
-    var tryNumber *int32
-    if p.TryNumber != nil {
-        tryNumber = p.TryNumber
-    }
-    var statusCode *int32
-    if p.StatusCode != nil {
-        statusCode = p.StatusCode
-    }
-    var result *string
-    if p.Result != nil {
-        result = p.Result
-    }
-    var tryAt *int64
-    if p.TryAt != nil {
-        tryAt = p.TryAt
-    }
-    return map[string]interface{} {
-        "jobResultId": jobResultId,
-        "jobId": jobId,
-        "scriptId": scriptId,
-        "args": args,
-        "tryNumber": tryNumber,
-        "statusCode": statusCode,
-        "result": result,
-        "tryAt": tryAt,
-    }
+
+	var jobResultId *string
+	if p.JobResultId != nil {
+		jobResultId = p.JobResultId
+	}
+	var jobId *string
+	if p.JobId != nil {
+		jobId = p.JobId
+	}
+	var scriptId *string
+	if p.ScriptId != nil {
+		scriptId = p.ScriptId
+	}
+	var args *string
+	if p.Args != nil {
+		args = p.Args
+	}
+	var tryNumber *int32
+	if p.TryNumber != nil {
+		tryNumber = p.TryNumber
+	}
+	var statusCode *int32
+	if p.StatusCode != nil {
+		statusCode = p.StatusCode
+	}
+	var result *string
+	if p.Result != nil {
+		result = p.Result
+	}
+	var tryAt *int64
+	if p.TryAt != nil {
+		tryAt = p.TryAt
+	}
+	return map[string]interface{}{
+		"jobResultId": jobResultId,
+		"jobId":       jobId,
+		"scriptId":    scriptId,
+		"args":        args,
+		"tryNumber":   tryNumber,
+		"statusCode":  statusCode,
+		"result":      result,
+		"tryAt":       tryAt,
+	}
 }
 
 func (p JobResult) Pointer() *JobResult {
-    return &p
+	return &p
 }
 
 func CastJobResults(data []interface{}) []JobResult {
@@ -323,93 +324,93 @@ func CastJobResults(data []interface{}) []JobResult {
 }
 
 func CastJobResultsFromDict(data []JobResult) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type DeadLetterJob struct {
-	DeadLetterJobId *string `json:"deadLetterJobId"`
-	Name *string `json:"name"`
-	UserId *string `json:"userId"`
-	ScriptId *string `json:"scriptId"`
-	Args *string `json:"args"`
-	Result []JobResultBody `json:"result"`
-	CreatedAt *int64 `json:"createdAt"`
-	UpdatedAt *int64 `json:"updatedAt"`
+	DeadLetterJobId *string         `json:"deadLetterJobId"`
+	Name            *string         `json:"name"`
+	UserId          *string         `json:"userId"`
+	ScriptId        *string         `json:"scriptId"`
+	Args            *string         `json:"args"`
+	Result          []JobResultBody `json:"result"`
+	CreatedAt       *int64          `json:"createdAt"`
+	UpdatedAt       *int64          `json:"updatedAt"`
 }
 
 func NewDeadLetterJobFromJson(data string) DeadLetterJob {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewDeadLetterJobFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeadLetterJobFromDict(dict)
 }
 
 func NewDeadLetterJobFromDict(data map[string]interface{}) DeadLetterJob {
-    return DeadLetterJob {
-        DeadLetterJobId: core.CastString(data["deadLetterJobId"]),
-        Name: core.CastString(data["name"]),
-        UserId: core.CastString(data["userId"]),
-        ScriptId: core.CastString(data["scriptId"]),
-        Args: core.CastString(data["args"]),
-        Result: CastJobResultBodies(core.CastArray(data["result"])),
-        CreatedAt: core.CastInt64(data["createdAt"]),
-        UpdatedAt: core.CastInt64(data["updatedAt"]),
-    }
+	return DeadLetterJob{
+		DeadLetterJobId: core.CastString(data["deadLetterJobId"]),
+		Name:            core.CastString(data["name"]),
+		UserId:          core.CastString(data["userId"]),
+		ScriptId:        core.CastString(data["scriptId"]),
+		Args:            core.CastString(data["args"]),
+		Result:          CastJobResultBodies(core.CastArray(data["result"])),
+		CreatedAt:       core.CastInt64(data["createdAt"]),
+		UpdatedAt:       core.CastInt64(data["updatedAt"]),
+	}
 }
 
 func (p DeadLetterJob) ToDict() map[string]interface{} {
-    
-    var deadLetterJobId *string
-    if p.DeadLetterJobId != nil {
-        deadLetterJobId = p.DeadLetterJobId
-    }
-    var name *string
-    if p.Name != nil {
-        name = p.Name
-    }
-    var userId *string
-    if p.UserId != nil {
-        userId = p.UserId
-    }
-    var scriptId *string
-    if p.ScriptId != nil {
-        scriptId = p.ScriptId
-    }
-    var args *string
-    if p.Args != nil {
-        args = p.Args
-    }
-    var result []interface{}
-    if p.Result != nil {
-        result = CastJobResultBodiesFromDict(
-            p.Result,
-        )
-    }
-    var createdAt *int64
-    if p.CreatedAt != nil {
-        createdAt = p.CreatedAt
-    }
-    var updatedAt *int64
-    if p.UpdatedAt != nil {
-        updatedAt = p.UpdatedAt
-    }
-    return map[string]interface{} {
-        "deadLetterJobId": deadLetterJobId,
-        "name": name,
-        "userId": userId,
-        "scriptId": scriptId,
-        "args": args,
-        "result": result,
-        "createdAt": createdAt,
-        "updatedAt": updatedAt,
-    }
+
+	var deadLetterJobId *string
+	if p.DeadLetterJobId != nil {
+		deadLetterJobId = p.DeadLetterJobId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var scriptId *string
+	if p.ScriptId != nil {
+		scriptId = p.ScriptId
+	}
+	var args *string
+	if p.Args != nil {
+		args = p.Args
+	}
+	var result []interface{}
+	if p.Result != nil {
+		result = CastJobResultBodiesFromDict(
+			p.Result,
+		)
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	return map[string]interface{}{
+		"deadLetterJobId": deadLetterJobId,
+		"name":            name,
+		"userId":          userId,
+		"scriptId":        scriptId,
+		"args":            args,
+		"result":          result,
+		"createdAt":       createdAt,
+		"updatedAt":       updatedAt,
+	}
 }
 
 func (p DeadLetterJob) Pointer() *DeadLetterJob {
-    return &p
+	return &p
 }
 
 func CastDeadLetterJobs(data []interface{}) []DeadLetterJob {
@@ -421,56 +422,56 @@ func CastDeadLetterJobs(data []interface{}) []DeadLetterJob {
 }
 
 func CastDeadLetterJobsFromDict(data []DeadLetterJob) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type NotificationSetting struct {
-	GatewayNamespaceId *string `json:"gatewayNamespaceId"`
-	EnableTransferMobileNotification *bool `json:"enableTransferMobileNotification"`
-	Sound *string `json:"sound"`
+	GatewayNamespaceId               *string `json:"gatewayNamespaceId"`
+	EnableTransferMobileNotification *bool   `json:"enableTransferMobileNotification"`
+	Sound                            *string `json:"sound"`
 }
 
 func NewNotificationSettingFromJson(data string) NotificationSetting {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewNotificationSettingFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewNotificationSettingFromDict(dict)
 }
 
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
-    return NotificationSetting {
-        GatewayNamespaceId: core.CastString(data["gatewayNamespaceId"]),
-        EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
-        Sound: core.CastString(data["sound"]),
-    }
+	return NotificationSetting{
+		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
+		EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
+		Sound:                            core.CastString(data["sound"]),
+	}
 }
 
 func (p NotificationSetting) ToDict() map[string]interface{} {
-    
-    var gatewayNamespaceId *string
-    if p.GatewayNamespaceId != nil {
-        gatewayNamespaceId = p.GatewayNamespaceId
-    }
-    var enableTransferMobileNotification *bool
-    if p.EnableTransferMobileNotification != nil {
-        enableTransferMobileNotification = p.EnableTransferMobileNotification
-    }
-    var sound *string
-    if p.Sound != nil {
-        sound = p.Sound
-    }
-    return map[string]interface{} {
-        "gatewayNamespaceId": gatewayNamespaceId,
-        "enableTransferMobileNotification": enableTransferMobileNotification,
-        "sound": sound,
-    }
+
+	var gatewayNamespaceId *string
+	if p.GatewayNamespaceId != nil {
+		gatewayNamespaceId = p.GatewayNamespaceId
+	}
+	var enableTransferMobileNotification *bool
+	if p.EnableTransferMobileNotification != nil {
+		enableTransferMobileNotification = p.EnableTransferMobileNotification
+	}
+	var sound *string
+	if p.Sound != nil {
+		sound = p.Sound
+	}
+	return map[string]interface{}{
+		"gatewayNamespaceId":               gatewayNamespaceId,
+		"enableTransferMobileNotification": enableTransferMobileNotification,
+		"sound":                            sound,
+	}
 }
 
 func (p NotificationSetting) Pointer() *NotificationSetting {
-    return &p
+	return &p
 }
 
 func CastNotificationSettings(data []interface{}) []NotificationSetting {
@@ -482,11 +483,11 @@ func CastNotificationSettings(data []interface{}) []NotificationSetting {
 }
 
 func CastNotificationSettingsFromDict(data []NotificationSetting) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type LogSetting struct {
@@ -494,30 +495,30 @@ type LogSetting struct {
 }
 
 func NewLogSettingFromJson(data string) LogSetting {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewLogSettingFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLogSettingFromDict(dict)
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
-    return LogSetting {
-        LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
-    }
+	return LogSetting{
+		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+	}
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-    
-    var loggingNamespaceId *string
-    if p.LoggingNamespaceId != nil {
-        loggingNamespaceId = p.LoggingNamespaceId
-    }
-    return map[string]interface{} {
-        "loggingNamespaceId": loggingNamespaceId,
-    }
+
+	var loggingNamespaceId *string
+	if p.LoggingNamespaceId != nil {
+		loggingNamespaceId = p.LoggingNamespaceId
+	}
+	return map[string]interface{}{
+		"loggingNamespaceId": loggingNamespaceId,
+	}
 }
 
 func (p LogSetting) Pointer() *LogSetting {
-    return &p
+	return &p
 }
 
 func CastLogSettings(data []interface{}) []LogSetting {
@@ -529,56 +530,56 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type JobEntry struct {
-	ScriptId *string `json:"scriptId"`
-	Args *string `json:"args"`
-	MaxTryCount *int32 `json:"maxTryCount"`
+	ScriptId    *string `json:"scriptId"`
+	Args        *string `json:"args"`
+	MaxTryCount *int32  `json:"maxTryCount"`
 }
 
 func NewJobEntryFromJson(data string) JobEntry {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewJobEntryFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewJobEntryFromDict(dict)
 }
 
 func NewJobEntryFromDict(data map[string]interface{}) JobEntry {
-    return JobEntry {
-        ScriptId: core.CastString(data["scriptId"]),
-        Args: core.CastString(data["args"]),
-        MaxTryCount: core.CastInt32(data["maxTryCount"]),
-    }
+	return JobEntry{
+		ScriptId:    core.CastString(data["scriptId"]),
+		Args:        core.CastString(data["args"]),
+		MaxTryCount: core.CastInt32(data["maxTryCount"]),
+	}
 }
 
 func (p JobEntry) ToDict() map[string]interface{} {
-    
-    var scriptId *string
-    if p.ScriptId != nil {
-        scriptId = p.ScriptId
-    }
-    var args *string
-    if p.Args != nil {
-        args = p.Args
-    }
-    var maxTryCount *int32
-    if p.MaxTryCount != nil {
-        maxTryCount = p.MaxTryCount
-    }
-    return map[string]interface{} {
-        "scriptId": scriptId,
-        "args": args,
-        "maxTryCount": maxTryCount,
-    }
+
+	var scriptId *string
+	if p.ScriptId != nil {
+		scriptId = p.ScriptId
+	}
+	var args *string
+	if p.Args != nil {
+		args = p.Args
+	}
+	var maxTryCount *int32
+	if p.MaxTryCount != nil {
+		maxTryCount = p.MaxTryCount
+	}
+	return map[string]interface{}{
+		"scriptId":    scriptId,
+		"args":        args,
+		"maxTryCount": maxTryCount,
+	}
 }
 
 func (p JobEntry) Pointer() *JobEntry {
-    return &p
+	return &p
 }
 
 func CastJobEntries(data []interface{}) []JobEntry {
@@ -590,63 +591,63 @@ func CastJobEntries(data []interface{}) []JobEntry {
 }
 
 func CastJobEntriesFromDict(data []JobEntry) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }
 
 type JobResultBody struct {
-	TryNumber *int32 `json:"tryNumber"`
-	StatusCode *int32 `json:"statusCode"`
-	Result *string `json:"result"`
-	TryAt *int64 `json:"tryAt"`
+	TryNumber  *int32  `json:"tryNumber"`
+	StatusCode *int32  `json:"statusCode"`
+	Result     *string `json:"result"`
+	TryAt      *int64  `json:"tryAt"`
 }
 
 func NewJobResultBodyFromJson(data string) JobResultBody {
-    dict := map[string]interface{}{}
-    _ = json.Unmarshal([]byte(data), &dict)
-    return NewJobResultBodyFromDict(dict)
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewJobResultBodyFromDict(dict)
 }
 
 func NewJobResultBodyFromDict(data map[string]interface{}) JobResultBody {
-    return JobResultBody {
-        TryNumber: core.CastInt32(data["tryNumber"]),
-        StatusCode: core.CastInt32(data["statusCode"]),
-        Result: core.CastString(data["result"]),
-        TryAt: core.CastInt64(data["tryAt"]),
-    }
+	return JobResultBody{
+		TryNumber:  core.CastInt32(data["tryNumber"]),
+		StatusCode: core.CastInt32(data["statusCode"]),
+		Result:     core.CastString(data["result"]),
+		TryAt:      core.CastInt64(data["tryAt"]),
+	}
 }
 
 func (p JobResultBody) ToDict() map[string]interface{} {
-    
-    var tryNumber *int32
-    if p.TryNumber != nil {
-        tryNumber = p.TryNumber
-    }
-    var statusCode *int32
-    if p.StatusCode != nil {
-        statusCode = p.StatusCode
-    }
-    var result *string
-    if p.Result != nil {
-        result = p.Result
-    }
-    var tryAt *int64
-    if p.TryAt != nil {
-        tryAt = p.TryAt
-    }
-    return map[string]interface{} {
-        "tryNumber": tryNumber,
-        "statusCode": statusCode,
-        "result": result,
-        "tryAt": tryAt,
-    }
+
+	var tryNumber *int32
+	if p.TryNumber != nil {
+		tryNumber = p.TryNumber
+	}
+	var statusCode *int32
+	if p.StatusCode != nil {
+		statusCode = p.StatusCode
+	}
+	var result *string
+	if p.Result != nil {
+		result = p.Result
+	}
+	var tryAt *int64
+	if p.TryAt != nil {
+		tryAt = p.TryAt
+	}
+	return map[string]interface{}{
+		"tryNumber":  tryNumber,
+		"statusCode": statusCode,
+		"result":     result,
+		"tryAt":      tryAt,
+	}
 }
 
 func (p JobResultBody) Pointer() *JobResultBody {
-    return &p
+	return &p
 }
 
 func CastJobResultBodies(data []interface{}) []JobResultBody {
@@ -658,9 +659,9 @@ func CastJobResultBodies(data []interface{}) []JobResultBody {
 }
 
 func CastJobResultBodiesFromDict(data []JobResultBody) []interface{} {
-    v := make([]interface{}, 0)
-    for _, d := range data {
-        v = append(v, d.ToDict())
-    }
-    return v
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

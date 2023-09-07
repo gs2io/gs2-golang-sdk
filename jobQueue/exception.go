@@ -20,9 +20,9 @@ type Conflict struct {
 }
 
 func (p Conflict) Type() string {
-    return "JobQueueConflict"
+	return "JobQueueConflict"
 }
 
 func (p Conflict) Code() string {
-    return "jobQueue.execution.conflict"
+	return "jobQueue.execution.conflict"
 }

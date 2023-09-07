@@ -18,8 +18,9 @@ package watch
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
 	"strings"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Gs2WatchRestClient struct {
@@ -56,13 +57,13 @@ func getChartAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetChartAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetChartAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetChartAsyncResult{
 		result: &result,
@@ -76,65 +77,65 @@ func (p Gs2WatchRestClient) GetChartAsync(
 	callback chan<- GetChartAsyncResult,
 ) {
 	path := "/chart/{measure}"
-    if request.Measure != nil && *request.Measure != ""  {
-        path = strings.ReplaceAll(path, "{measure}", core.ToString(*request.Measure))
-    } else {
-        path = strings.ReplaceAll(path, "{measure}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Grn != nil && *request.Grn != "" {
-        bodies["grn"] = *request.Grn
-    }
-    if request.Round != nil && *request.Round != "" {
-        bodies["round"] = *request.Round
-    }
-    if request.Filters != nil {
-        var _filters []interface {}
-        for _, item := range request.Filters {
-            _filters = append(_filters, item)
-        }
-        bodies["filters"] = _filters
-    }
-    if request.GroupBys != nil {
-        var _groupBys []interface {}
-        for _, item := range request.GroupBys {
-            _groupBys = append(_groupBys, item)
-        }
-        bodies["groupBys"] = _groupBys
-    }
-    if request.CountBy != nil && *request.CountBy != "" {
-        bodies["countBy"] = *request.CountBy
-    }
-    if request.Begin != nil {
-        bodies["begin"] = *request.Begin
-    }
-    if request.End != nil {
-        bodies["end"] = *request.End
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.Measure != nil && *request.Measure != "" {
+		path = strings.ReplaceAll(path, "{measure}", core.ToString(*request.Measure))
+	} else {
+		path = strings.ReplaceAll(path, "{measure}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Grn != nil && *request.Grn != "" {
+		bodies["grn"] = *request.Grn
+	}
+	if request.Round != nil && *request.Round != "" {
+		bodies["round"] = *request.Round
+	}
+	if request.Filters != nil {
+		var _filters []interface{}
+		for _, item := range request.Filters {
+			_filters = append(_filters, item)
+		}
+		bodies["filters"] = _filters
+	}
+	if request.GroupBys != nil {
+		var _groupBys []interface{}
+		for _, item := range request.GroupBys {
+			_groupBys = append(_groupBys, item)
+		}
+		bodies["groupBys"] = _groupBys
+	}
+	if request.CountBy != nil && *request.CountBy != "" {
+		bodies["countBy"] = *request.CountBy
+	}
+	if request.Begin != nil {
+		bodies["begin"] = *request.Begin
+	}
+	if request.End != nil {
+		bodies["end"] = *request.End
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getChartAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -178,13 +179,13 @@ func getDistributionAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetDistributionAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetDistributionAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetDistributionAsyncResult{
 		result: &result,
@@ -198,59 +199,59 @@ func (p Gs2WatchRestClient) GetDistributionAsync(
 	callback chan<- GetDistributionAsyncResult,
 ) {
 	path := "/distribution/{measure}"
-    if request.Measure != nil && *request.Measure != ""  {
-        path = strings.ReplaceAll(path, "{measure}", core.ToString(*request.Measure))
-    } else {
-        path = strings.ReplaceAll(path, "{measure}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Grn != nil && *request.Grn != "" {
-        bodies["grn"] = *request.Grn
-    }
-    if request.Filters != nil {
-        var _filters []interface {}
-        for _, item := range request.Filters {
-            _filters = append(_filters, item)
-        }
-        bodies["filters"] = _filters
-    }
-    if request.GroupBys != nil {
-        var _groupBys []interface {}
-        for _, item := range request.GroupBys {
-            _groupBys = append(_groupBys, item)
-        }
-        bodies["groupBys"] = _groupBys
-    }
-    if request.Begin != nil {
-        bodies["begin"] = *request.Begin
-    }
-    if request.End != nil {
-        bodies["end"] = *request.End
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.Measure != nil && *request.Measure != "" {
+		path = strings.ReplaceAll(path, "{measure}", core.ToString(*request.Measure))
+	} else {
+		path = strings.ReplaceAll(path, "{measure}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Grn != nil && *request.Grn != "" {
+		bodies["grn"] = *request.Grn
+	}
+	if request.Filters != nil {
+		var _filters []interface{}
+		for _, item := range request.Filters {
+			_filters = append(_filters, item)
+		}
+		bodies["filters"] = _filters
+	}
+	if request.GroupBys != nil {
+		var _groupBys []interface{}
+		for _, item := range request.GroupBys {
+			_groupBys = append(_groupBys, item)
+		}
+		bodies["groupBys"] = _groupBys
+	}
+	if request.Begin != nil {
+		bodies["begin"] = *request.Begin
+	}
+	if request.End != nil {
+		bodies["end"] = *request.End
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getDistributionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -294,13 +295,13 @@ func getCumulativeAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCumulativeAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCumulativeAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetCumulativeAsyncResult{
 		result: &result,
@@ -314,33 +315,33 @@ func (p Gs2WatchRestClient) GetCumulativeAsync(
 	callback chan<- GetCumulativeAsyncResult,
 ) {
 	path := "/cumulative/{name}"
-    if request.Name != nil && *request.Name != ""  {
-        path = strings.ReplaceAll(path, "{name}", core.ToString(*request.Name))
-    } else {
-        path = strings.ReplaceAll(path, "{name}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.ResourceGrn != nil && *request.ResourceGrn != "" {
-        bodies["resourceGrn"] = *request.ResourceGrn
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.Name != nil && *request.Name != "" {
+		path = strings.ReplaceAll(path, "{name}", core.ToString(*request.Name))
+	} else {
+		path = strings.ReplaceAll(path, "{name}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ResourceGrn != nil && *request.ResourceGrn != "" {
+		bodies["resourceGrn"] = *request.ResourceGrn
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getCumulativeAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -384,13 +385,13 @@ func describeBillingActivitiesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeBillingActivitiesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeBillingActivitiesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeBillingActivitiesAsyncResult{
 		result: &result,
@@ -404,16 +405,16 @@ func (p Gs2WatchRestClient) DescribeBillingActivitiesAsync(
 	callback chan<- DescribeBillingActivitiesAsyncResult,
 ) {
 	path := "/billingActivity/{year}/{month}"
-    if request.Year != nil {
-        path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
-    } else {
-        path = strings.ReplaceAll(path, "{year}", "null")
-    }
-    if request.Month != nil {
-        path = strings.ReplaceAll(path, "{month}", core.ToString(*request.Month))
-    } else {
-        path = strings.ReplaceAll(path, "{month}", "null")
-    }
+	if request.Year != nil {
+		path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
+	} else {
+		path = strings.ReplaceAll(path, "{year}", "null")
+	}
+	if request.Month != nil {
+		path = strings.ReplaceAll(path, "{month}", core.ToString(*request.Month))
+	} else {
+		path = strings.ReplaceAll(path, "{month}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -427,10 +428,10 @@ func (p Gs2WatchRestClient) DescribeBillingActivitiesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeBillingActivitiesAsyncHandler(
 		p,
@@ -482,13 +483,13 @@ func getBillingActivityAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetBillingActivityAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetBillingActivityAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetBillingActivityAsyncResult{
 		result: &result,
@@ -502,45 +503,45 @@ func (p Gs2WatchRestClient) GetBillingActivityAsync(
 	callback chan<- GetBillingActivityAsyncResult,
 ) {
 	path := "/billingActivity/{year}/{month}/{service}/{activityType}"
-    if request.Year != nil {
-        path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
-    } else {
-        path = strings.ReplaceAll(path, "{year}", "null")
-    }
-    if request.Month != nil {
-        path = strings.ReplaceAll(path, "{month}", core.ToString(*request.Month))
-    } else {
-        path = strings.ReplaceAll(path, "{month}", "null")
-    }
-    if request.Service != nil && *request.Service != ""  {
-        path = strings.ReplaceAll(path, "{service}", core.ToString(*request.Service))
-    } else {
-        path = strings.ReplaceAll(path, "{service}", "null")
-    }
-    if request.ActivityType != nil && *request.ActivityType != ""  {
-        path = strings.ReplaceAll(path, "{activityType}", core.ToString(*request.ActivityType))
-    } else {
-        path = strings.ReplaceAll(path, "{activityType}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.Year != nil {
+		path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
+	} else {
+		path = strings.ReplaceAll(path, "{year}", "null")
+	}
+	if request.Month != nil {
+		path = strings.ReplaceAll(path, "{month}", core.ToString(*request.Month))
+	} else {
+		path = strings.ReplaceAll(path, "{month}", "null")
+	}
+	if request.Service != nil && *request.Service != "" {
+		path = strings.ReplaceAll(path, "{service}", core.ToString(*request.Service))
+	} else {
+		path = strings.ReplaceAll(path, "{service}", "null")
+	}
+	if request.ActivityType != nil && *request.ActivityType != "" {
+		path = strings.ReplaceAll(path, "{activityType}", core.ToString(*request.ActivityType))
+	} else {
+		path = strings.ReplaceAll(path, "{activityType}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getBillingActivityAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("watch").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("watch").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -584,13 +585,13 @@ func getGeneralMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetGeneralMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetGeneralMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetGeneralMetricsAsyncResult{
 		result: &result,
@@ -608,10 +609,10 @@ func (p Gs2WatchRestClient) GetGeneralMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getGeneralMetricsAsyncHandler(
 		p,
@@ -663,13 +664,13 @@ func describeAccountNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeAccountNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeAccountNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeAccountNamespaceMetricsAsyncResult{
 		result: &result,
@@ -687,10 +688,10 @@ func (p Gs2WatchRestClient) DescribeAccountNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeAccountNamespaceMetricsAsyncHandler(
 		p,
@@ -742,13 +743,13 @@ func getAccountNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetAccountNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetAccountNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetAccountNamespaceMetricsAsyncResult{
 		result: &result,
@@ -762,19 +763,19 @@ func (p Gs2WatchRestClient) GetAccountNamespaceMetricsAsync(
 	callback chan<- GetAccountNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/account/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getAccountNamespaceMetricsAsyncHandler(
 		p,
@@ -826,13 +827,13 @@ func describeChatNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeChatNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeChatNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeChatNamespaceMetricsAsyncResult{
 		result: &result,
@@ -850,10 +851,10 @@ func (p Gs2WatchRestClient) DescribeChatNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeChatNamespaceMetricsAsyncHandler(
 		p,
@@ -905,13 +906,13 @@ func getChatNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetChatNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetChatNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetChatNamespaceMetricsAsyncResult{
 		result: &result,
@@ -925,19 +926,19 @@ func (p Gs2WatchRestClient) GetChatNamespaceMetricsAsync(
 	callback chan<- GetChatNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/chat/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getChatNamespaceMetricsAsyncHandler(
 		p,
@@ -989,13 +990,13 @@ func describeDatastoreNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeDatastoreNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeDatastoreNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeDatastoreNamespaceMetricsAsyncResult{
 		result: &result,
@@ -1013,10 +1014,10 @@ func (p Gs2WatchRestClient) DescribeDatastoreNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeDatastoreNamespaceMetricsAsyncHandler(
 		p,
@@ -1068,13 +1069,13 @@ func getDatastoreNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetDatastoreNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetDatastoreNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetDatastoreNamespaceMetricsAsyncResult{
 		result: &result,
@@ -1088,19 +1089,19 @@ func (p Gs2WatchRestClient) GetDatastoreNamespaceMetricsAsync(
 	callback chan<- GetDatastoreNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/datastore/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getDatastoreNamespaceMetricsAsyncHandler(
 		p,
@@ -1152,13 +1153,13 @@ func describeDictionaryNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeDictionaryNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeDictionaryNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeDictionaryNamespaceMetricsAsyncResult{
 		result: &result,
@@ -1176,10 +1177,10 @@ func (p Gs2WatchRestClient) DescribeDictionaryNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeDictionaryNamespaceMetricsAsyncHandler(
 		p,
@@ -1231,13 +1232,13 @@ func getDictionaryNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetDictionaryNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetDictionaryNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetDictionaryNamespaceMetricsAsyncResult{
 		result: &result,
@@ -1251,19 +1252,19 @@ func (p Gs2WatchRestClient) GetDictionaryNamespaceMetricsAsync(
 	callback chan<- GetDictionaryNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/dictionary/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getDictionaryNamespaceMetricsAsyncHandler(
 		p,
@@ -1315,13 +1316,13 @@ func describeExchangeRateModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeExchangeRateModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeExchangeRateModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeExchangeRateModelMetricsAsyncResult{
 		result: &result,
@@ -1335,19 +1336,19 @@ func (p Gs2WatchRestClient) DescribeExchangeRateModelMetricsAsync(
 	callback chan<- DescribeExchangeRateModelMetricsAsyncResult,
 ) {
 	path := "/metrics/exchange/namespace/{namespaceName}/rateModel"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeExchangeRateModelMetricsAsyncHandler(
 		p,
@@ -1399,13 +1400,13 @@ func getExchangeRateModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetExchangeRateModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetExchangeRateModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetExchangeRateModelMetricsAsyncResult{
 		result: &result,
@@ -1419,24 +1420,24 @@ func (p Gs2WatchRestClient) GetExchangeRateModelMetricsAsync(
 	callback chan<- GetExchangeRateModelMetricsAsyncResult,
 ) {
 	path := "/metrics/exchange/namespace/{namespaceName}/rateModel/{rateName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.RateName != nil && *request.RateName != ""  {
-        path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
-    } else {
-        path = strings.ReplaceAll(path, "{rateName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+	} else {
+		path = strings.ReplaceAll(path, "{rateName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getExchangeRateModelMetricsAsyncHandler(
 		p,
@@ -1488,13 +1489,13 @@ func describeExchangeNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeExchangeNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeExchangeNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeExchangeNamespaceMetricsAsyncResult{
 		result: &result,
@@ -1512,10 +1513,10 @@ func (p Gs2WatchRestClient) DescribeExchangeNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeExchangeNamespaceMetricsAsyncHandler(
 		p,
@@ -1567,13 +1568,13 @@ func getExchangeNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetExchangeNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetExchangeNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetExchangeNamespaceMetricsAsyncResult{
 		result: &result,
@@ -1587,19 +1588,19 @@ func (p Gs2WatchRestClient) GetExchangeNamespaceMetricsAsync(
 	callback chan<- GetExchangeNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/exchange/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getExchangeNamespaceMetricsAsyncHandler(
 		p,
@@ -1651,13 +1652,13 @@ func describeExperienceStatusMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeExperienceStatusMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeExperienceStatusMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeExperienceStatusMetricsAsyncResult{
 		result: &result,
@@ -1671,24 +1672,24 @@ func (p Gs2WatchRestClient) DescribeExperienceStatusMetricsAsync(
 	callback chan<- DescribeExperienceStatusMetricsAsyncResult,
 ) {
 	path := "/metrics/experience/namespace/{namespaceName}/experienceModel/{experienceName}/status"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != ""  {
-        path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
-    } else {
-        path = strings.ReplaceAll(path, "{experienceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
+	} else {
+		path = strings.ReplaceAll(path, "{experienceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeExperienceStatusMetricsAsyncHandler(
 		p,
@@ -1740,13 +1741,13 @@ func describeExperienceExperienceModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeExperienceExperienceModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeExperienceExperienceModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeExperienceExperienceModelMetricsAsyncResult{
 		result: &result,
@@ -1760,19 +1761,19 @@ func (p Gs2WatchRestClient) DescribeExperienceExperienceModelMetricsAsync(
 	callback chan<- DescribeExperienceExperienceModelMetricsAsyncResult,
 ) {
 	path := "/metrics/experience/namespace/{namespaceName}/experienceModel"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeExperienceExperienceModelMetricsAsyncHandler(
 		p,
@@ -1824,13 +1825,13 @@ func getExperienceExperienceModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetExperienceExperienceModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetExperienceExperienceModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetExperienceExperienceModelMetricsAsyncResult{
 		result: &result,
@@ -1844,24 +1845,24 @@ func (p Gs2WatchRestClient) GetExperienceExperienceModelMetricsAsync(
 	callback chan<- GetExperienceExperienceModelMetricsAsyncResult,
 ) {
 	path := "/metrics/experience/namespace/{namespaceName}/experienceModel/{experienceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != ""  {
-        path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
-    } else {
-        path = strings.ReplaceAll(path, "{experienceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
+	} else {
+		path = strings.ReplaceAll(path, "{experienceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getExperienceExperienceModelMetricsAsyncHandler(
 		p,
@@ -1913,13 +1914,13 @@ func describeExperienceNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeExperienceNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeExperienceNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeExperienceNamespaceMetricsAsyncResult{
 		result: &result,
@@ -1937,10 +1938,10 @@ func (p Gs2WatchRestClient) DescribeExperienceNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeExperienceNamespaceMetricsAsyncHandler(
 		p,
@@ -1992,13 +1993,13 @@ func getExperienceNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetExperienceNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetExperienceNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetExperienceNamespaceMetricsAsyncResult{
 		result: &result,
@@ -2012,19 +2013,19 @@ func (p Gs2WatchRestClient) GetExperienceNamespaceMetricsAsync(
 	callback chan<- GetExperienceNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/experience/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getExperienceNamespaceMetricsAsyncHandler(
 		p,
@@ -2076,13 +2077,13 @@ func describeFormationFormMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeFormationFormMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeFormationFormMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeFormationFormMetricsAsyncResult{
 		result: &result,
@@ -2096,24 +2097,24 @@ func (p Gs2WatchRestClient) DescribeFormationFormMetricsAsync(
 	callback chan<- DescribeFormationFormMetricsAsyncResult,
 ) {
 	path := "/metrics/formation/namespace/{namespaceName}/mold/{moldName}/form"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MoldName != nil && *request.MoldName != ""  {
-        path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
-    } else {
-        path = strings.ReplaceAll(path, "{moldName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MoldName != nil && *request.MoldName != "" {
+		path = strings.ReplaceAll(path, "{moldName}", core.ToString(*request.MoldName))
+	} else {
+		path = strings.ReplaceAll(path, "{moldName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeFormationFormMetricsAsyncHandler(
 		p,
@@ -2165,13 +2166,13 @@ func describeFormationMoldMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeFormationMoldMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeFormationMoldMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeFormationMoldMetricsAsyncResult{
 		result: &result,
@@ -2185,19 +2186,19 @@ func (p Gs2WatchRestClient) DescribeFormationMoldMetricsAsync(
 	callback chan<- DescribeFormationMoldMetricsAsyncResult,
 ) {
 	path := "/metrics/formation/namespace/{namespaceName}/mold"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeFormationMoldMetricsAsyncHandler(
 		p,
@@ -2249,13 +2250,13 @@ func describeFormationNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeFormationNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeFormationNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeFormationNamespaceMetricsAsyncResult{
 		result: &result,
@@ -2273,10 +2274,10 @@ func (p Gs2WatchRestClient) DescribeFormationNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeFormationNamespaceMetricsAsyncHandler(
 		p,
@@ -2328,13 +2329,13 @@ func getFormationNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFormationNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetFormationNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetFormationNamespaceMetricsAsyncResult{
 		result: &result,
@@ -2348,19 +2349,19 @@ func (p Gs2WatchRestClient) GetFormationNamespaceMetricsAsync(
 	callback chan<- GetFormationNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/formation/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getFormationNamespaceMetricsAsyncHandler(
 		p,
@@ -2412,13 +2413,13 @@ func describeFriendNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeFriendNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeFriendNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeFriendNamespaceMetricsAsyncResult{
 		result: &result,
@@ -2436,10 +2437,10 @@ func (p Gs2WatchRestClient) DescribeFriendNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeFriendNamespaceMetricsAsyncHandler(
 		p,
@@ -2491,13 +2492,13 @@ func getFriendNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetFriendNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetFriendNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetFriendNamespaceMetricsAsyncResult{
 		result: &result,
@@ -2511,19 +2512,19 @@ func (p Gs2WatchRestClient) GetFriendNamespaceMetricsAsync(
 	callback chan<- GetFriendNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/friend/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getFriendNamespaceMetricsAsyncHandler(
 		p,
@@ -2575,13 +2576,13 @@ func describeInboxNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeInboxNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeInboxNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeInboxNamespaceMetricsAsyncResult{
 		result: &result,
@@ -2599,10 +2600,10 @@ func (p Gs2WatchRestClient) DescribeInboxNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeInboxNamespaceMetricsAsyncHandler(
 		p,
@@ -2654,13 +2655,13 @@ func getInboxNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetInboxNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetInboxNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetInboxNamespaceMetricsAsyncResult{
 		result: &result,
@@ -2674,19 +2675,19 @@ func (p Gs2WatchRestClient) GetInboxNamespaceMetricsAsync(
 	callback chan<- GetInboxNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/inbox/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getInboxNamespaceMetricsAsyncHandler(
 		p,
@@ -2738,13 +2739,13 @@ func describeInventoryItemSetMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeInventoryItemSetMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeInventoryItemSetMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeInventoryItemSetMetricsAsyncResult{
 		result: &result,
@@ -2758,24 +2759,24 @@ func (p Gs2WatchRestClient) DescribeInventoryItemSetMetricsAsync(
 	callback chan<- DescribeInventoryItemSetMetricsAsyncResult,
 ) {
 	path := "/metrics/inventory/namespace/{namespaceName}/inventory/{inventoryName}/itemSet"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.InventoryName != nil && *request.InventoryName != ""  {
-        path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{inventoryName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{inventoryName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeInventoryItemSetMetricsAsyncHandler(
 		p,
@@ -2827,13 +2828,13 @@ func describeInventoryInventoryMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeInventoryInventoryMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeInventoryInventoryMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeInventoryInventoryMetricsAsyncResult{
 		result: &result,
@@ -2847,19 +2848,19 @@ func (p Gs2WatchRestClient) DescribeInventoryInventoryMetricsAsync(
 	callback chan<- DescribeInventoryInventoryMetricsAsyncResult,
 ) {
 	path := "/metrics/inventory/namespace/{namespaceName}/inventory"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeInventoryInventoryMetricsAsyncHandler(
 		p,
@@ -2911,13 +2912,13 @@ func describeInventoryNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeInventoryNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeInventoryNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeInventoryNamespaceMetricsAsyncResult{
 		result: &result,
@@ -2935,10 +2936,10 @@ func (p Gs2WatchRestClient) DescribeInventoryNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeInventoryNamespaceMetricsAsyncHandler(
 		p,
@@ -2990,13 +2991,13 @@ func getInventoryNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetInventoryNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetInventoryNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetInventoryNamespaceMetricsAsyncResult{
 		result: &result,
@@ -3010,19 +3011,19 @@ func (p Gs2WatchRestClient) GetInventoryNamespaceMetricsAsync(
 	callback chan<- GetInventoryNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/inventory/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getInventoryNamespaceMetricsAsyncHandler(
 		p,
@@ -3074,13 +3075,13 @@ func describeKeyNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeKeyNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeKeyNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeKeyNamespaceMetricsAsyncResult{
 		result: &result,
@@ -3098,10 +3099,10 @@ func (p Gs2WatchRestClient) DescribeKeyNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeKeyNamespaceMetricsAsyncHandler(
 		p,
@@ -3153,13 +3154,13 @@ func getKeyNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetKeyNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetKeyNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetKeyNamespaceMetricsAsyncResult{
 		result: &result,
@@ -3173,19 +3174,19 @@ func (p Gs2WatchRestClient) GetKeyNamespaceMetricsAsync(
 	callback chan<- GetKeyNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/key/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getKeyNamespaceMetricsAsyncHandler(
 		p,
@@ -3237,13 +3238,13 @@ func describeLimitCounterMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeLimitCounterMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeLimitCounterMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeLimitCounterMetricsAsyncResult{
 		result: &result,
@@ -3257,24 +3258,24 @@ func (p Gs2WatchRestClient) DescribeLimitCounterMetricsAsync(
 	callback chan<- DescribeLimitCounterMetricsAsyncResult,
 ) {
 	path := "/metrics/limit/namespace/{namespaceName}/limitModel/{limitName}/counter"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.LimitName != nil && *request.LimitName != ""  {
-        path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
-    } else {
-        path = strings.ReplaceAll(path, "{limitName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.LimitName != nil && *request.LimitName != "" {
+		path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
+	} else {
+		path = strings.ReplaceAll(path, "{limitName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeLimitCounterMetricsAsyncHandler(
 		p,
@@ -3326,13 +3327,13 @@ func describeLimitLimitModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeLimitLimitModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeLimitLimitModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeLimitLimitModelMetricsAsyncResult{
 		result: &result,
@@ -3346,19 +3347,19 @@ func (p Gs2WatchRestClient) DescribeLimitLimitModelMetricsAsync(
 	callback chan<- DescribeLimitLimitModelMetricsAsyncResult,
 ) {
 	path := "/metrics/limit/namespace/{namespaceName}/limitModel"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeLimitLimitModelMetricsAsyncHandler(
 		p,
@@ -3410,13 +3411,13 @@ func getLimitLimitModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetLimitLimitModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetLimitLimitModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetLimitLimitModelMetricsAsyncResult{
 		result: &result,
@@ -3430,24 +3431,24 @@ func (p Gs2WatchRestClient) GetLimitLimitModelMetricsAsync(
 	callback chan<- GetLimitLimitModelMetricsAsyncResult,
 ) {
 	path := "/metrics/limit/namespace/{namespaceName}/limitModel/{limitName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.LimitName != nil && *request.LimitName != ""  {
-        path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
-    } else {
-        path = strings.ReplaceAll(path, "{limitName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.LimitName != nil && *request.LimitName != "" {
+		path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
+	} else {
+		path = strings.ReplaceAll(path, "{limitName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getLimitLimitModelMetricsAsyncHandler(
 		p,
@@ -3499,13 +3500,13 @@ func describeLimitNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeLimitNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeLimitNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeLimitNamespaceMetricsAsyncResult{
 		result: &result,
@@ -3523,10 +3524,10 @@ func (p Gs2WatchRestClient) DescribeLimitNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeLimitNamespaceMetricsAsyncHandler(
 		p,
@@ -3578,13 +3579,13 @@ func getLimitNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetLimitNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetLimitNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetLimitNamespaceMetricsAsyncResult{
 		result: &result,
@@ -3598,19 +3599,19 @@ func (p Gs2WatchRestClient) GetLimitNamespaceMetricsAsync(
 	callback chan<- GetLimitNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/limit/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getLimitNamespaceMetricsAsyncHandler(
 		p,
@@ -3662,13 +3663,13 @@ func describeLotteryLotteryMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeLotteryLotteryMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeLotteryLotteryMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeLotteryLotteryMetricsAsyncResult{
 		result: &result,
@@ -3682,19 +3683,19 @@ func (p Gs2WatchRestClient) DescribeLotteryLotteryMetricsAsync(
 	callback chan<- DescribeLotteryLotteryMetricsAsyncResult,
 ) {
 	path := "/metrics/lottery/namespace/{namespaceName}/lottery"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeLotteryLotteryMetricsAsyncHandler(
 		p,
@@ -3746,13 +3747,13 @@ func getLotteryLotteryMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetLotteryLotteryMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetLotteryLotteryMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetLotteryLotteryMetricsAsyncResult{
 		result: &result,
@@ -3766,24 +3767,24 @@ func (p Gs2WatchRestClient) GetLotteryLotteryMetricsAsync(
 	callback chan<- GetLotteryLotteryMetricsAsyncResult,
 ) {
 	path := "/metrics/lottery/namespace/{namespaceName}/lotteryModel/{lotteryName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.LotteryName != nil && *request.LotteryName != ""  {
-        path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
-    } else {
-        path = strings.ReplaceAll(path, "{lotteryName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.LotteryName != nil && *request.LotteryName != "" {
+		path = strings.ReplaceAll(path, "{lotteryName}", core.ToString(*request.LotteryName))
+	} else {
+		path = strings.ReplaceAll(path, "{lotteryName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getLotteryLotteryMetricsAsyncHandler(
 		p,
@@ -3835,13 +3836,13 @@ func describeLotteryNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeLotteryNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeLotteryNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeLotteryNamespaceMetricsAsyncResult{
 		result: &result,
@@ -3859,10 +3860,10 @@ func (p Gs2WatchRestClient) DescribeLotteryNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeLotteryNamespaceMetricsAsyncHandler(
 		p,
@@ -3914,13 +3915,13 @@ func getLotteryNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetLotteryNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetLotteryNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetLotteryNamespaceMetricsAsyncResult{
 		result: &result,
@@ -3934,19 +3935,19 @@ func (p Gs2WatchRestClient) GetLotteryNamespaceMetricsAsync(
 	callback chan<- GetLotteryNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/lottery/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getLotteryNamespaceMetricsAsyncHandler(
 		p,
@@ -3998,13 +3999,13 @@ func describeMatchmakingNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeMatchmakingNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMatchmakingNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeMatchmakingNamespaceMetricsAsyncResult{
 		result: &result,
@@ -4022,10 +4023,10 @@ func (p Gs2WatchRestClient) DescribeMatchmakingNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeMatchmakingNamespaceMetricsAsyncHandler(
 		p,
@@ -4077,13 +4078,13 @@ func getMatchmakingNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetMatchmakingNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetMatchmakingNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetMatchmakingNamespaceMetricsAsyncResult{
 		result: &result,
@@ -4097,19 +4098,19 @@ func (p Gs2WatchRestClient) GetMatchmakingNamespaceMetricsAsync(
 	callback chan<- GetMatchmakingNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/matchmaking/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getMatchmakingNamespaceMetricsAsyncHandler(
 		p,
@@ -4161,13 +4162,13 @@ func describeMissionCounterMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeMissionCounterMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMissionCounterMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeMissionCounterMetricsAsyncResult{
 		result: &result,
@@ -4181,19 +4182,19 @@ func (p Gs2WatchRestClient) DescribeMissionCounterMetricsAsync(
 	callback chan<- DescribeMissionCounterMetricsAsyncResult,
 ) {
 	path := "/metrics/mission/namespace/{namespaceName}/counter"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeMissionCounterMetricsAsyncHandler(
 		p,
@@ -4245,13 +4246,13 @@ func describeMissionMissionGroupModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeMissionMissionGroupModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMissionMissionGroupModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeMissionMissionGroupModelMetricsAsyncResult{
 		result: &result,
@@ -4265,19 +4266,19 @@ func (p Gs2WatchRestClient) DescribeMissionMissionGroupModelMetricsAsync(
 	callback chan<- DescribeMissionMissionGroupModelMetricsAsyncResult,
 ) {
 	path := "/metrics/mission/namespace/{namespaceName}/missionGroupModel"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeMissionMissionGroupModelMetricsAsyncHandler(
 		p,
@@ -4329,13 +4330,13 @@ func getMissionMissionGroupModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetMissionMissionGroupModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetMissionMissionGroupModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetMissionMissionGroupModelMetricsAsyncResult{
 		result: &result,
@@ -4349,24 +4350,24 @@ func (p Gs2WatchRestClient) GetMissionMissionGroupModelMetricsAsync(
 	callback chan<- GetMissionMissionGroupModelMetricsAsyncResult,
 ) {
 	path := "/metrics/mission/namespace/{namespaceName}/missionGroupModel/{missionGroupName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.MissionGroupName != nil && *request.MissionGroupName != ""  {
-        path = strings.ReplaceAll(path, "{missionGroupName}", core.ToString(*request.MissionGroupName))
-    } else {
-        path = strings.ReplaceAll(path, "{missionGroupName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		path = strings.ReplaceAll(path, "{missionGroupName}", core.ToString(*request.MissionGroupName))
+	} else {
+		path = strings.ReplaceAll(path, "{missionGroupName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getMissionMissionGroupModelMetricsAsyncHandler(
 		p,
@@ -4418,13 +4419,13 @@ func describeMissionNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeMissionNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMissionNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeMissionNamespaceMetricsAsyncResult{
 		result: &result,
@@ -4442,10 +4443,10 @@ func (p Gs2WatchRestClient) DescribeMissionNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeMissionNamespaceMetricsAsyncHandler(
 		p,
@@ -4497,13 +4498,13 @@ func getMissionNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetMissionNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetMissionNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetMissionNamespaceMetricsAsyncResult{
 		result: &result,
@@ -4517,19 +4518,19 @@ func (p Gs2WatchRestClient) GetMissionNamespaceMetricsAsync(
 	callback chan<- GetMissionNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/mission/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getMissionNamespaceMetricsAsyncHandler(
 		p,
@@ -4581,13 +4582,13 @@ func describeMoneyWalletMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeMoneyWalletMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMoneyWalletMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeMoneyWalletMetricsAsyncResult{
 		result: &result,
@@ -4601,19 +4602,19 @@ func (p Gs2WatchRestClient) DescribeMoneyWalletMetricsAsync(
 	callback chan<- DescribeMoneyWalletMetricsAsyncResult,
 ) {
 	path := "/metrics/money/namespace/{namespaceName}/wallet"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeMoneyWalletMetricsAsyncHandler(
 		p,
@@ -4665,13 +4666,13 @@ func describeMoneyReceiptMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeMoneyReceiptMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMoneyReceiptMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeMoneyReceiptMetricsAsyncResult{
 		result: &result,
@@ -4685,19 +4686,19 @@ func (p Gs2WatchRestClient) DescribeMoneyReceiptMetricsAsync(
 	callback chan<- DescribeMoneyReceiptMetricsAsyncResult,
 ) {
 	path := "/metrics/money/namespace/{namespaceName}/receipt"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeMoneyReceiptMetricsAsyncHandler(
 		p,
@@ -4749,13 +4750,13 @@ func describeMoneyNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeMoneyNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMoneyNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeMoneyNamespaceMetricsAsyncResult{
 		result: &result,
@@ -4773,10 +4774,10 @@ func (p Gs2WatchRestClient) DescribeMoneyNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeMoneyNamespaceMetricsAsyncHandler(
 		p,
@@ -4828,13 +4829,13 @@ func getMoneyNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetMoneyNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetMoneyNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetMoneyNamespaceMetricsAsyncResult{
 		result: &result,
@@ -4848,19 +4849,19 @@ func (p Gs2WatchRestClient) GetMoneyNamespaceMetricsAsync(
 	callback chan<- GetMoneyNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/money/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getMoneyNamespaceMetricsAsyncHandler(
 		p,
@@ -4912,13 +4913,13 @@ func describeQuestQuestModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeQuestQuestModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeQuestQuestModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeQuestQuestModelMetricsAsyncResult{
 		result: &result,
@@ -4932,24 +4933,24 @@ func (p Gs2WatchRestClient) DescribeQuestQuestModelMetricsAsync(
 	callback chan<- DescribeQuestQuestModelMetricsAsyncResult,
 ) {
 	path := "/metrics/quest/namespace/{namespaceName}/questGroupModel/{questGroupName}/questModel"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
-        path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
-    } else {
-        path = strings.ReplaceAll(path, "{questGroupName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.QuestGroupName != nil && *request.QuestGroupName != "" {
+		path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
+	} else {
+		path = strings.ReplaceAll(path, "{questGroupName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeQuestQuestModelMetricsAsyncHandler(
 		p,
@@ -5001,13 +5002,13 @@ func getQuestQuestModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetQuestQuestModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetQuestQuestModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetQuestQuestModelMetricsAsyncResult{
 		result: &result,
@@ -5021,29 +5022,29 @@ func (p Gs2WatchRestClient) GetQuestQuestModelMetricsAsync(
 	callback chan<- GetQuestQuestModelMetricsAsyncResult,
 ) {
 	path := "/metrics/quest/namespace/{namespaceName}/questGroupModel/{questGroupName}/questModel/{questName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
-        path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
-    } else {
-        path = strings.ReplaceAll(path, "{questGroupName}", "null")
-    }
-    if request.QuestName != nil && *request.QuestName != ""  {
-        path = strings.ReplaceAll(path, "{questName}", core.ToString(*request.QuestName))
-    } else {
-        path = strings.ReplaceAll(path, "{questName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.QuestGroupName != nil && *request.QuestGroupName != "" {
+		path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
+	} else {
+		path = strings.ReplaceAll(path, "{questGroupName}", "null")
+	}
+	if request.QuestName != nil && *request.QuestName != "" {
+		path = strings.ReplaceAll(path, "{questName}", core.ToString(*request.QuestName))
+	} else {
+		path = strings.ReplaceAll(path, "{questName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getQuestQuestModelMetricsAsyncHandler(
 		p,
@@ -5095,13 +5096,13 @@ func describeQuestQuestGroupModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeQuestQuestGroupModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeQuestQuestGroupModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeQuestQuestGroupModelMetricsAsyncResult{
 		result: &result,
@@ -5115,19 +5116,19 @@ func (p Gs2WatchRestClient) DescribeQuestQuestGroupModelMetricsAsync(
 	callback chan<- DescribeQuestQuestGroupModelMetricsAsyncResult,
 ) {
 	path := "/metrics/quest/namespace/{namespaceName}/questGroupModel"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeQuestQuestGroupModelMetricsAsyncHandler(
 		p,
@@ -5179,13 +5180,13 @@ func getQuestQuestGroupModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetQuestQuestGroupModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetQuestQuestGroupModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetQuestQuestGroupModelMetricsAsyncResult{
 		result: &result,
@@ -5199,24 +5200,24 @@ func (p Gs2WatchRestClient) GetQuestQuestGroupModelMetricsAsync(
 	callback chan<- GetQuestQuestGroupModelMetricsAsyncResult,
 ) {
 	path := "/metrics/quest/namespace/{namespaceName}/questGroupModel/{questGroupName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.QuestGroupName != nil && *request.QuestGroupName != ""  {
-        path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
-    } else {
-        path = strings.ReplaceAll(path, "{questGroupName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.QuestGroupName != nil && *request.QuestGroupName != "" {
+		path = strings.ReplaceAll(path, "{questGroupName}", core.ToString(*request.QuestGroupName))
+	} else {
+		path = strings.ReplaceAll(path, "{questGroupName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getQuestQuestGroupModelMetricsAsyncHandler(
 		p,
@@ -5268,13 +5269,13 @@ func describeQuestNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeQuestNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeQuestNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeQuestNamespaceMetricsAsyncResult{
 		result: &result,
@@ -5292,10 +5293,10 @@ func (p Gs2WatchRestClient) DescribeQuestNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeQuestNamespaceMetricsAsyncHandler(
 		p,
@@ -5347,13 +5348,13 @@ func getQuestNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetQuestNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetQuestNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetQuestNamespaceMetricsAsyncResult{
 		result: &result,
@@ -5367,19 +5368,19 @@ func (p Gs2WatchRestClient) GetQuestNamespaceMetricsAsync(
 	callback chan<- GetQuestNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/quest/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getQuestNamespaceMetricsAsyncHandler(
 		p,
@@ -5431,13 +5432,13 @@ func describeRankingCategoryModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeRankingCategoryModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRankingCategoryModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeRankingCategoryModelMetricsAsyncResult{
 		result: &result,
@@ -5451,19 +5452,19 @@ func (p Gs2WatchRestClient) DescribeRankingCategoryModelMetricsAsync(
 	callback chan<- DescribeRankingCategoryModelMetricsAsyncResult,
 ) {
 	path := "/metrics/ranking/namespace/{namespaceName}/categoryModel"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeRankingCategoryModelMetricsAsyncHandler(
 		p,
@@ -5515,13 +5516,13 @@ func getRankingCategoryModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRankingCategoryModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRankingCategoryModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetRankingCategoryModelMetricsAsyncResult{
 		result: &result,
@@ -5535,24 +5536,24 @@ func (p Gs2WatchRestClient) GetRankingCategoryModelMetricsAsync(
 	callback chan<- GetRankingCategoryModelMetricsAsyncResult,
 ) {
 	path := "/metrics/ranking/namespace/{namespaceName}/categoryModel/{categoryName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.CategoryName != nil && *request.CategoryName != ""  {
-        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{categoryName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getRankingCategoryModelMetricsAsyncHandler(
 		p,
@@ -5604,13 +5605,13 @@ func describeRankingNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeRankingNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRankingNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeRankingNamespaceMetricsAsyncResult{
 		result: &result,
@@ -5628,10 +5629,10 @@ func (p Gs2WatchRestClient) DescribeRankingNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeRankingNamespaceMetricsAsyncHandler(
 		p,
@@ -5683,13 +5684,13 @@ func getRankingNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRankingNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRankingNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetRankingNamespaceMetricsAsyncResult{
 		result: &result,
@@ -5703,19 +5704,19 @@ func (p Gs2WatchRestClient) GetRankingNamespaceMetricsAsync(
 	callback chan<- GetRankingNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/ranking/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getRankingNamespaceMetricsAsyncHandler(
 		p,
@@ -5767,13 +5768,13 @@ func describeShowcaseDisplayItemMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeShowcaseDisplayItemMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeShowcaseDisplayItemMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeShowcaseDisplayItemMetricsAsyncResult{
 		result: &result,
@@ -5787,24 +5788,24 @@ func (p Gs2WatchRestClient) DescribeShowcaseDisplayItemMetricsAsync(
 	callback chan<- DescribeShowcaseDisplayItemMetricsAsyncResult,
 ) {
 	path := "/metrics/showcase/namespace/{namespaceName}/showcase/{showcaseName}/displayItem"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
-        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-    } else {
-        path = strings.ReplaceAll(path, "{showcaseName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+	} else {
+		path = strings.ReplaceAll(path, "{showcaseName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeShowcaseDisplayItemMetricsAsyncHandler(
 		p,
@@ -5856,13 +5857,13 @@ func getShowcaseDisplayItemMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetShowcaseDisplayItemMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetShowcaseDisplayItemMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetShowcaseDisplayItemMetricsAsyncResult{
 		result: &result,
@@ -5876,29 +5877,29 @@ func (p Gs2WatchRestClient) GetShowcaseDisplayItemMetricsAsync(
 	callback chan<- GetShowcaseDisplayItemMetricsAsyncResult,
 ) {
 	path := "/metrics/showcase/namespace/{namespaceName}/showcase/{showcaseName}/displayItem/{displayItemId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
-        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-    } else {
-        path = strings.ReplaceAll(path, "{showcaseName}", "null")
-    }
-    if request.DisplayItemId != nil && *request.DisplayItemId != ""  {
-        path = strings.ReplaceAll(path, "{displayItemId}", core.ToString(*request.DisplayItemId))
-    } else {
-        path = strings.ReplaceAll(path, "{displayItemId}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+	} else {
+		path = strings.ReplaceAll(path, "{showcaseName}", "null")
+	}
+	if request.DisplayItemId != nil && *request.DisplayItemId != "" {
+		path = strings.ReplaceAll(path, "{displayItemId}", core.ToString(*request.DisplayItemId))
+	} else {
+		path = strings.ReplaceAll(path, "{displayItemId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getShowcaseDisplayItemMetricsAsyncHandler(
 		p,
@@ -5950,13 +5951,13 @@ func describeShowcaseShowcaseMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeShowcaseShowcaseMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeShowcaseShowcaseMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeShowcaseShowcaseMetricsAsyncResult{
 		result: &result,
@@ -5970,19 +5971,19 @@ func (p Gs2WatchRestClient) DescribeShowcaseShowcaseMetricsAsync(
 	callback chan<- DescribeShowcaseShowcaseMetricsAsyncResult,
 ) {
 	path := "/metrics/showcase/namespace/{namespaceName}/showcase"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeShowcaseShowcaseMetricsAsyncHandler(
 		p,
@@ -6034,13 +6035,13 @@ func getShowcaseShowcaseMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetShowcaseShowcaseMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetShowcaseShowcaseMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetShowcaseShowcaseMetricsAsyncResult{
 		result: &result,
@@ -6054,24 +6055,24 @@ func (p Gs2WatchRestClient) GetShowcaseShowcaseMetricsAsync(
 	callback chan<- GetShowcaseShowcaseMetricsAsyncResult,
 ) {
 	path := "/metrics/showcase/namespace/{namespaceName}/showcase/{showcaseName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.ShowcaseName != nil && *request.ShowcaseName != ""  {
-        path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
-    } else {
-        path = strings.ReplaceAll(path, "{showcaseName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+		path = strings.ReplaceAll(path, "{showcaseName}", core.ToString(*request.ShowcaseName))
+	} else {
+		path = strings.ReplaceAll(path, "{showcaseName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getShowcaseShowcaseMetricsAsyncHandler(
 		p,
@@ -6123,13 +6124,13 @@ func describeShowcaseNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeShowcaseNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeShowcaseNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeShowcaseNamespaceMetricsAsyncResult{
 		result: &result,
@@ -6147,10 +6148,10 @@ func (p Gs2WatchRestClient) DescribeShowcaseNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeShowcaseNamespaceMetricsAsyncHandler(
 		p,
@@ -6202,13 +6203,13 @@ func getShowcaseNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetShowcaseNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetShowcaseNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetShowcaseNamespaceMetricsAsyncResult{
 		result: &result,
@@ -6222,19 +6223,19 @@ func (p Gs2WatchRestClient) GetShowcaseNamespaceMetricsAsync(
 	callback chan<- GetShowcaseNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/showcase/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getShowcaseNamespaceMetricsAsyncHandler(
 		p,
@@ -6286,13 +6287,13 @@ func describeStaminaStaminaModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeStaminaStaminaModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStaminaStaminaModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeStaminaStaminaModelMetricsAsyncResult{
 		result: &result,
@@ -6306,19 +6307,19 @@ func (p Gs2WatchRestClient) DescribeStaminaStaminaModelMetricsAsync(
 	callback chan<- DescribeStaminaStaminaModelMetricsAsyncResult,
 ) {
 	path := "/metrics/stamina/namespace/{namespaceName}/staminaModel"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeStaminaStaminaModelMetricsAsyncHandler(
 		p,
@@ -6370,13 +6371,13 @@ func getStaminaStaminaModelMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStaminaStaminaModelMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStaminaStaminaModelMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetStaminaStaminaModelMetricsAsyncResult{
 		result: &result,
@@ -6390,24 +6391,24 @@ func (p Gs2WatchRestClient) GetStaminaStaminaModelMetricsAsync(
 	callback chan<- GetStaminaStaminaModelMetricsAsyncResult,
 ) {
 	path := "/metrics/stamina/namespace/{namespaceName}/staminaModel/{staminaName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.StaminaName != nil && *request.StaminaName != ""  {
-        path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
-    } else {
-        path = strings.ReplaceAll(path, "{staminaName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getStaminaStaminaModelMetricsAsyncHandler(
 		p,
@@ -6459,13 +6460,13 @@ func describeStaminaNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeStaminaNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStaminaNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeStaminaNamespaceMetricsAsyncResult{
 		result: &result,
@@ -6483,10 +6484,10 @@ func (p Gs2WatchRestClient) DescribeStaminaNamespaceMetricsAsync(
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeStaminaNamespaceMetricsAsyncHandler(
 		p,
@@ -6538,13 +6539,13 @@ func getStaminaNamespaceMetricsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStaminaNamespaceMetricsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStaminaNamespaceMetricsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetStaminaNamespaceMetricsAsyncResult{
 		result: &result,
@@ -6558,19 +6559,19 @@ func (p Gs2WatchRestClient) GetStaminaNamespaceMetricsAsync(
 	callback chan<- GetStaminaNamespaceMetricsAsyncResult,
 ) {
 	path := "/metrics/stamina/namespace/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getStaminaNamespaceMetricsAsyncHandler(
 		p,

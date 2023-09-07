@@ -18,8 +18,9 @@ package idle
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
 	"strings"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Gs2IdleRestClient struct {
@@ -56,13 +57,13 @@ func describeNamespacesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeNamespacesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeNamespacesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -86,10 +87,10 @@ func (p Gs2IdleRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -141,13 +142,13 @@ func createNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -163,38 +164,38 @@ func (p Gs2IdleRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.TransactionSetting != nil {
-        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-    }
-    if request.ReceiveScript != nil {
-        bodies["receiveScript"] = request.ReceiveScript.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.ReceiveScript != nil {
+		bodies["receiveScript"] = request.ReceiveScript.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -238,13 +239,13 @@ func getNamespaceStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -258,19 +259,19 @@ func (p Gs2IdleRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -322,13 +323,13 @@ func getNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -342,19 +343,19 @@ func (p Gs2IdleRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -406,13 +407,13 @@ func updateNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -426,42 +427,42 @@ func (p Gs2IdleRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.TransactionSetting != nil {
-        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-    }
-    if request.ReceiveScript != nil {
-        bodies["receiveScript"] = request.ReceiveScript.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.ReceiveScript != nil {
+		bodies["receiveScript"] = request.ReceiveScript.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -505,13 +506,13 @@ func deleteNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -525,19 +526,19 @@ func (p Gs2IdleRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -589,13 +590,13 @@ func describeCategoryModelMastersAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeCategoryModelMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeCategoryModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeCategoryModelMastersAsyncResult{
 		result: &result,
@@ -609,11 +610,11 @@ func (p Gs2IdleRestClient) DescribeCategoryModelMastersAsync(
 	callback chan<- DescribeCategoryModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -624,10 +625,10 @@ func (p Gs2IdleRestClient) DescribeCategoryModelMastersAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeCategoryModelMastersAsyncHandler(
 		p,
@@ -679,13 +680,13 @@ func createCategoryModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateCategoryModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateCategoryModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateCategoryModelMasterAsyncResult{
 		result: &result,
@@ -699,58 +700,58 @@ func (p Gs2IdleRestClient) CreateCategoryModelMasterAsync(
 	callback chan<- CreateCategoryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.RewardIntervalMinutes != nil {
-        bodies["rewardIntervalMinutes"] = *request.RewardIntervalMinutes
-    }
-    if request.DefaultMaximumIdleMinutes != nil {
-        bodies["defaultMaximumIdleMinutes"] = *request.DefaultMaximumIdleMinutes
-    }
-    if request.AcquireActions != nil {
-        var _acquireActions []interface {}
-        for _, item := range request.AcquireActions {
-            _acquireActions = append(_acquireActions, item)
-        }
-        bodies["acquireActions"] = _acquireActions
-    }
-    if request.IdlePeriodScheduleId != nil && *request.IdlePeriodScheduleId != "" {
-        bodies["idlePeriodScheduleId"] = *request.IdlePeriodScheduleId
-    }
-    if request.ReceivePeriodScheduleId != nil && *request.ReceivePeriodScheduleId != "" {
-        bodies["receivePeriodScheduleId"] = *request.ReceivePeriodScheduleId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.RewardIntervalMinutes != nil {
+		bodies["rewardIntervalMinutes"] = *request.RewardIntervalMinutes
+	}
+	if request.DefaultMaximumIdleMinutes != nil {
+		bodies["defaultMaximumIdleMinutes"] = *request.DefaultMaximumIdleMinutes
+	}
+	if request.AcquireActions != nil {
+		var _acquireActions []interface{}
+		for _, item := range request.AcquireActions {
+			_acquireActions = append(_acquireActions, item)
+		}
+		bodies["acquireActions"] = _acquireActions
+	}
+	if request.IdlePeriodScheduleId != nil && *request.IdlePeriodScheduleId != "" {
+		bodies["idlePeriodScheduleId"] = *request.IdlePeriodScheduleId
+	}
+	if request.ReceivePeriodScheduleId != nil && *request.ReceivePeriodScheduleId != "" {
+		bodies["receivePeriodScheduleId"] = *request.ReceivePeriodScheduleId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createCategoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -794,13 +795,13 @@ func getCategoryModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCategoryModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCategoryModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetCategoryModelMasterAsyncResult{
 		result: &result,
@@ -814,24 +815,24 @@ func (p Gs2IdleRestClient) GetCategoryModelMasterAsync(
 	callback chan<- GetCategoryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{categoryName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.CategoryName != nil && *request.CategoryName != ""  {
-        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{categoryName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getCategoryModelMasterAsyncHandler(
 		p,
@@ -883,13 +884,13 @@ func updateCategoryModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCategoryModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCategoryModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateCategoryModelMasterAsyncResult{
 		result: &result,
@@ -903,60 +904,60 @@ func (p Gs2IdleRestClient) UpdateCategoryModelMasterAsync(
 	callback chan<- UpdateCategoryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{categoryName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.CategoryName != nil && *request.CategoryName != ""  {
-        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{categoryName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.RewardIntervalMinutes != nil {
-        bodies["rewardIntervalMinutes"] = *request.RewardIntervalMinutes
-    }
-    if request.DefaultMaximumIdleMinutes != nil {
-        bodies["defaultMaximumIdleMinutes"] = *request.DefaultMaximumIdleMinutes
-    }
-    if request.AcquireActions != nil {
-        var _acquireActions []interface {}
-        for _, item := range request.AcquireActions {
-            _acquireActions = append(_acquireActions, item)
-        }
-        bodies["acquireActions"] = _acquireActions
-    }
-    if request.IdlePeriodScheduleId != nil && *request.IdlePeriodScheduleId != "" {
-        bodies["idlePeriodScheduleId"] = *request.IdlePeriodScheduleId
-    }
-    if request.ReceivePeriodScheduleId != nil && *request.ReceivePeriodScheduleId != "" {
-        bodies["receivePeriodScheduleId"] = *request.ReceivePeriodScheduleId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.RewardIntervalMinutes != nil {
+		bodies["rewardIntervalMinutes"] = *request.RewardIntervalMinutes
+	}
+	if request.DefaultMaximumIdleMinutes != nil {
+		bodies["defaultMaximumIdleMinutes"] = *request.DefaultMaximumIdleMinutes
+	}
+	if request.AcquireActions != nil {
+		var _acquireActions []interface{}
+		for _, item := range request.AcquireActions {
+			_acquireActions = append(_acquireActions, item)
+		}
+		bodies["acquireActions"] = _acquireActions
+	}
+	if request.IdlePeriodScheduleId != nil && *request.IdlePeriodScheduleId != "" {
+		bodies["idlePeriodScheduleId"] = *request.IdlePeriodScheduleId
+	}
+	if request.ReceivePeriodScheduleId != nil && *request.ReceivePeriodScheduleId != "" {
+		bodies["receivePeriodScheduleId"] = *request.ReceivePeriodScheduleId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateCategoryModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1000,13 +1001,13 @@ func deleteCategoryModelMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteCategoryModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteCategoryModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteCategoryModelMasterAsyncResult{
 		result: &result,
@@ -1020,24 +1021,24 @@ func (p Gs2IdleRestClient) DeleteCategoryModelMasterAsync(
 	callback chan<- DeleteCategoryModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{categoryName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.CategoryName != nil && *request.CategoryName != ""  {
-        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{categoryName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteCategoryModelMasterAsyncHandler(
 		p,
@@ -1089,13 +1090,13 @@ func describeCategoryModelsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeCategoryModelsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeCategoryModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeCategoryModelsAsyncResult{
 		result: &result,
@@ -1109,19 +1110,19 @@ func (p Gs2IdleRestClient) DescribeCategoryModelsAsync(
 	callback chan<- DescribeCategoryModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/model"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeCategoryModelsAsyncHandler(
 		p,
@@ -1173,13 +1174,13 @@ func getCategoryModelAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCategoryModelAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCategoryModelAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetCategoryModelAsyncResult{
 		result: &result,
@@ -1193,24 +1194,24 @@ func (p Gs2IdleRestClient) GetCategoryModelAsync(
 	callback chan<- GetCategoryModelAsyncResult,
 ) {
 	path := "/{namespaceName}/model/{categoryName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.CategoryName != nil && *request.CategoryName != ""  {
-        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{categoryName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getCategoryModelAsyncHandler(
 		p,
@@ -1262,13 +1263,13 @@ func describeStatusesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeStatusesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStatusesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeStatusesAsyncResult{
 		result: &result,
@@ -1282,11 +1283,11 @@ func (p Gs2IdleRestClient) DescribeStatusesAsync(
 	callback chan<- DescribeStatusesAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/status"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1297,13 +1298,13 @@ func (p Gs2IdleRestClient) DescribeStatusesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go describeStatusesAsyncHandler(
 		p,
@@ -1355,13 +1356,13 @@ func describeStatusesByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeStatusesByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStatusesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeStatusesByUserIdAsyncResult{
 		result: &result,
@@ -1375,16 +1376,16 @@ func (p Gs2IdleRestClient) DescribeStatusesByUserIdAsync(
 	callback chan<- DescribeStatusesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1395,10 +1396,10 @@ func (p Gs2IdleRestClient) DescribeStatusesByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeStatusesByUserIdAsyncHandler(
 		p,
@@ -1450,13 +1451,13 @@ func getStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetStatusAsyncResult{
 		result: &result,
@@ -1470,27 +1471,27 @@ func (p Gs2IdleRestClient) GetStatusAsync(
 	callback chan<- GetStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/status/{categoryName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.CategoryName != nil && *request.CategoryName != ""  {
-        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{categoryName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go getStatusAsyncHandler(
 		p,
@@ -1542,13 +1543,13 @@ func getStatusByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStatusByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetStatusByUserIdAsyncResult{
 		result: &result,
@@ -1562,29 +1563,29 @@ func (p Gs2IdleRestClient) GetStatusByUserIdAsync(
 	callback chan<- GetStatusByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/{categoryName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.CategoryName != nil && *request.CategoryName != ""  {
-        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{categoryName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getStatusByUserIdAsyncHandler(
 		p,
@@ -1636,13 +1637,13 @@ func predictionAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- PredictionAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PredictionAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- PredictionAsyncResult{
 		result: &result,
@@ -1656,41 +1657,41 @@ func (p Gs2IdleRestClient) PredictionAsync(
 	callback chan<- PredictionAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/status/model/{categoryName}/prediction"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.CategoryName != nil && *request.CategoryName != ""  {
-        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{categoryName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go predictionAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1734,13 +1735,13 @@ func predictionByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- PredictionByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PredictionByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- PredictionByUserIdAsyncResult{
 		result: &result,
@@ -1754,43 +1755,43 @@ func (p Gs2IdleRestClient) PredictionByUserIdAsync(
 	callback chan<- PredictionByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/model/{categoryName}/prediction"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.CategoryName != nil && *request.CategoryName != ""  {
-        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{categoryName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go predictionByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1834,13 +1835,13 @@ func receiveAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ReceiveAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ReceiveAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ReceiveAsyncResult{
 		result: &result,
@@ -1854,48 +1855,48 @@ func (p Gs2IdleRestClient) ReceiveAsync(
 	callback chan<- ReceiveAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/status/model/{categoryName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.CategoryName != nil && *request.CategoryName != ""  {
-        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{categoryName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Config != nil {
-        var _config []interface {}
-        for _, item := range request.Config {
-            _config = append(_config, item)
-        }
-        bodies["config"] = _config
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go receiveAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1939,13 +1940,13 @@ func receiveByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ReceiveByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ReceiveByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ReceiveByUserIdAsyncResult{
 		result: &result,
@@ -1959,50 +1960,50 @@ func (p Gs2IdleRestClient) ReceiveByUserIdAsync(
 	callback chan<- ReceiveByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/model/{categoryName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.CategoryName != nil && *request.CategoryName != ""  {
-        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{categoryName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Config != nil {
-        var _config []interface {}
-        for _, item := range request.Config {
-            _config = append(_config, item)
-        }
-        bodies["config"] = _config
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go receiveByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2046,13 +2047,13 @@ func increaseMaximumIdleMinutesByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- IncreaseMaximumIdleMinutesByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- IncreaseMaximumIdleMinutesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- IncreaseMaximumIdleMinutesByUserIdAsyncResult{
 		result: &result,
@@ -2066,46 +2067,46 @@ func (p Gs2IdleRestClient) IncreaseMaximumIdleMinutesByUserIdAsync(
 	callback chan<- IncreaseMaximumIdleMinutesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/model/{categoryName}/maximumIdle/increase"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.CategoryName != nil && *request.CategoryName != ""  {
-        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{categoryName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.IncreaseMinutes != nil {
-        bodies["increaseMinutes"] = *request.IncreaseMinutes
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.IncreaseMinutes != nil {
+		bodies["increaseMinutes"] = *request.IncreaseMinutes
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go increaseMaximumIdleMinutesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2149,13 +2150,13 @@ func decreaseMaximumIdleMinutesByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DecreaseMaximumIdleMinutesByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DecreaseMaximumIdleMinutesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DecreaseMaximumIdleMinutesByUserIdAsyncResult{
 		result: &result,
@@ -2169,46 +2170,46 @@ func (p Gs2IdleRestClient) DecreaseMaximumIdleMinutesByUserIdAsync(
 	callback chan<- DecreaseMaximumIdleMinutesByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/status/model/{categoryName}/maximumIdle/decrease"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.CategoryName != nil && *request.CategoryName != ""  {
-        path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
-    } else {
-        path = strings.ReplaceAll(path, "{categoryName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.DecreaseMinutes != nil {
-        bodies["decreaseMinutes"] = *request.DecreaseMinutes
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.DecreaseMinutes != nil {
+		bodies["decreaseMinutes"] = *request.DecreaseMinutes
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go decreaseMaximumIdleMinutesByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2252,13 +2253,13 @@ func increaseMaximumIdleMinutesByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- IncreaseMaximumIdleMinutesByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- IncreaseMaximumIdleMinutesByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- IncreaseMaximumIdleMinutesByStampSheetAsyncResult{
 		result: &result,
@@ -2274,29 +2275,29 @@ func (p Gs2IdleRestClient) IncreaseMaximumIdleMinutesByStampSheetAsync(
 	path := "/stamp/status/maximumIdleMinutes/add"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go increaseMaximumIdleMinutesByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2340,13 +2341,13 @@ func decreaseMaximumIdleMinutesByStampTaskAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DecreaseMaximumIdleMinutesByStampTaskAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DecreaseMaximumIdleMinutesByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DecreaseMaximumIdleMinutesByStampTaskAsyncResult{
 		result: &result,
@@ -2362,29 +2363,29 @@ func (p Gs2IdleRestClient) DecreaseMaximumIdleMinutesByStampTaskAsync(
 	path := "/stamp/status/maximumIdleMinutes/sub"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampTask != nil && *request.StampTask != "" {
-        bodies["stampTask"] = *request.StampTask
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go decreaseMaximumIdleMinutesByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2428,13 +2429,13 @@ func exportMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ExportMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExportMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
@@ -2448,19 +2449,19 @@ func (p Gs2IdleRestClient) ExportMasterAsync(
 	callback chan<- ExportMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/export"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go exportMasterAsyncHandler(
 		p,
@@ -2512,13 +2513,13 @@ func getCurrentCategoryMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCurrentCategoryMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCurrentCategoryMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetCurrentCategoryMasterAsyncResult{
 		result: &result,
@@ -2532,19 +2533,19 @@ func (p Gs2IdleRestClient) GetCurrentCategoryMasterAsync(
 	callback chan<- GetCurrentCategoryMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getCurrentCategoryMasterAsyncHandler(
 		p,
@@ -2596,13 +2597,13 @@ func updateCurrentCategoryMasterAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentCategoryMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentCategoryMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateCurrentCategoryMasterAsyncResult{
 		result: &result,
@@ -2616,33 +2617,33 @@ func (p Gs2IdleRestClient) UpdateCurrentCategoryMasterAsync(
 	callback chan<- UpdateCurrentCategoryMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Settings != nil && *request.Settings != "" {
-        bodies["settings"] = *request.Settings
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Settings != nil && *request.Settings != "" {
+		bodies["settings"] = *request.Settings
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateCurrentCategoryMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2686,13 +2687,13 @@ func updateCurrentCategoryMasterFromGitHubAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentCategoryMasterFromGitHubAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentCategoryMasterFromGitHubAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateCurrentCategoryMasterFromGitHubAsyncResult{
 		result: &result,
@@ -2706,33 +2707,33 @@ func (p Gs2IdleRestClient) UpdateCurrentCategoryMasterFromGitHubAsync(
 	callback chan<- UpdateCurrentCategoryMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.CheckoutSetting != nil {
-        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.CheckoutSetting != nil {
+		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateCurrentCategoryMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("idle").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)

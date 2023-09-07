@@ -18,8 +18,9 @@ package money
 
 import (
 	"encoding/json"
-	"github.com/gs2io/gs2-golang-sdk/core"
 	"strings"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
 )
 
 type Gs2MoneyRestClient struct {
@@ -56,13 +57,13 @@ func describeNamespacesAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeNamespacesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeNamespacesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
@@ -86,10 +87,10 @@ func (p Gs2MoneyRestClient) DescribeNamespacesAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -141,13 +142,13 @@ func createNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
@@ -163,59 +164,59 @@ func (p Gs2MoneyRestClient) CreateNamespaceAsync(
 	path := "/"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Priority != nil && *request.Priority != "" {
-        bodies["priority"] = *request.Priority
-    }
-    if request.ShareFree != nil {
-        bodies["shareFree"] = *request.ShareFree
-    }
-    if request.Currency != nil && *request.Currency != "" {
-        bodies["currency"] = *request.Currency
-    }
-    if request.AppleKey != nil && *request.AppleKey != "" {
-        bodies["appleKey"] = *request.AppleKey
-    }
-    if request.GoogleKey != nil && *request.GoogleKey != "" {
-        bodies["googleKey"] = *request.GoogleKey
-    }
-    if request.EnableFakeReceipt != nil {
-        bodies["enableFakeReceipt"] = *request.EnableFakeReceipt
-    }
-    if request.CreateWalletScript != nil {
-        bodies["createWalletScript"] = request.CreateWalletScript.ToDict()
-    }
-    if request.DepositScript != nil {
-        bodies["depositScript"] = request.DepositScript.ToDict()
-    }
-    if request.WithdrawScript != nil {
-        bodies["withdrawScript"] = request.WithdrawScript.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Priority != nil && *request.Priority != "" {
+		bodies["priority"] = *request.Priority
+	}
+	if request.ShareFree != nil {
+		bodies["shareFree"] = *request.ShareFree
+	}
+	if request.Currency != nil && *request.Currency != "" {
+		bodies["currency"] = *request.Currency
+	}
+	if request.AppleKey != nil && *request.AppleKey != "" {
+		bodies["appleKey"] = *request.AppleKey
+	}
+	if request.GoogleKey != nil && *request.GoogleKey != "" {
+		bodies["googleKey"] = *request.GoogleKey
+	}
+	if request.EnableFakeReceipt != nil {
+		bodies["enableFakeReceipt"] = *request.EnableFakeReceipt
+	}
+	if request.CreateWalletScript != nil {
+		bodies["createWalletScript"] = request.CreateWalletScript.ToDict()
+	}
+	if request.DepositScript != nil {
+		bodies["depositScript"] = request.DepositScript.ToDict()
+	}
+	if request.WithdrawScript != nil {
+		bodies["withdrawScript"] = request.WithdrawScript.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go createNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -259,13 +260,13 @@ func getNamespaceStatusAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
@@ -279,19 +280,19 @@ func (p Gs2MoneyRestClient) GetNamespaceStatusAsync(
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
 	path := "/{namespaceName}/status"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -343,13 +344,13 @@ func getNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
@@ -363,19 +364,19 @@ func (p Gs2MoneyRestClient) GetNamespaceAsync(
 	callback chan<- GetNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getNamespaceAsyncHandler(
 		p,
@@ -427,13 +428,13 @@ func updateNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
@@ -447,57 +448,57 @@ func (p Gs2MoneyRestClient) UpdateNamespaceAsync(
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Priority != nil && *request.Priority != "" {
-        bodies["priority"] = *request.Priority
-    }
-    if request.AppleKey != nil && *request.AppleKey != "" {
-        bodies["appleKey"] = *request.AppleKey
-    }
-    if request.GoogleKey != nil && *request.GoogleKey != "" {
-        bodies["googleKey"] = *request.GoogleKey
-    }
-    if request.EnableFakeReceipt != nil {
-        bodies["enableFakeReceipt"] = *request.EnableFakeReceipt
-    }
-    if request.CreateWalletScript != nil {
-        bodies["createWalletScript"] = request.CreateWalletScript.ToDict()
-    }
-    if request.DepositScript != nil {
-        bodies["depositScript"] = request.DepositScript.ToDict()
-    }
-    if request.WithdrawScript != nil {
-        bodies["withdrawScript"] = request.WithdrawScript.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Priority != nil && *request.Priority != "" {
+		bodies["priority"] = *request.Priority
+	}
+	if request.AppleKey != nil && *request.AppleKey != "" {
+		bodies["appleKey"] = *request.AppleKey
+	}
+	if request.GoogleKey != nil && *request.GoogleKey != "" {
+		bodies["googleKey"] = *request.GoogleKey
+	}
+	if request.EnableFakeReceipt != nil {
+		bodies["enableFakeReceipt"] = *request.EnableFakeReceipt
+	}
+	if request.CreateWalletScript != nil {
+		bodies["createWalletScript"] = request.CreateWalletScript.ToDict()
+	}
+	if request.DepositScript != nil {
+		bodies["depositScript"] = request.DepositScript.ToDict()
+	}
+	if request.WithdrawScript != nil {
+		bodies["withdrawScript"] = request.WithdrawScript.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go updateNamespaceAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
-			Method:       core.Put,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -541,13 +542,13 @@ func deleteNamespaceAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
@@ -561,19 +562,19 @@ func (p Gs2MoneyRestClient) DeleteNamespaceAsync(
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
 	path := "/{namespaceName}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -625,13 +626,13 @@ func describeWalletsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeWalletsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeWalletsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeWalletsAsyncResult{
 		result: &result,
@@ -645,11 +646,11 @@ func (p Gs2MoneyRestClient) DescribeWalletsAsync(
 	callback chan<- DescribeWalletsAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/wallet"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -660,13 +661,13 @@ func (p Gs2MoneyRestClient) DescribeWalletsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go describeWalletsAsyncHandler(
 		p,
@@ -718,13 +719,13 @@ func describeWalletsByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeWalletsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeWalletsByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeWalletsByUserIdAsyncResult{
 		result: &result,
@@ -738,16 +739,16 @@ func (p Gs2MoneyRestClient) DescribeWalletsByUserIdAsync(
 	callback chan<- DescribeWalletsByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/wallet"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -758,10 +759,10 @@ func (p Gs2MoneyRestClient) DescribeWalletsByUserIdAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeWalletsByUserIdAsyncHandler(
 		p,
@@ -813,13 +814,13 @@ func getWalletAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetWalletAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetWalletAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetWalletAsyncResult{
 		result: &result,
@@ -833,27 +834,27 @@ func (p Gs2MoneyRestClient) GetWalletAsync(
 	callback chan<- GetWalletAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/wallet/{slot}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.Slot != nil {
-        path = strings.ReplaceAll(path, "{slot}", core.ToString(*request.Slot))
-    } else {
-        path = strings.ReplaceAll(path, "{slot}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Slot != nil {
+		path = strings.ReplaceAll(path, "{slot}", core.ToString(*request.Slot))
+	} else {
+		path = strings.ReplaceAll(path, "{slot}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
 
 	go getWalletAsyncHandler(
 		p,
@@ -905,13 +906,13 @@ func getWalletByUserIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetWalletByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetWalletByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetWalletByUserIdAsyncResult{
 		result: &result,
@@ -925,29 +926,29 @@ func (p Gs2MoneyRestClient) GetWalletByUserIdAsync(
 	callback chan<- GetWalletByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/wallet/{slot}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.Slot != nil {
-        path = strings.ReplaceAll(path, "{slot}", core.ToString(*request.Slot))
-    } else {
-        path = strings.ReplaceAll(path, "{slot}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.Slot != nil {
+		path = strings.ReplaceAll(path, "{slot}", core.ToString(*request.Slot))
+	} else {
+		path = strings.ReplaceAll(path, "{slot}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getWalletByUserIdAsyncHandler(
 		p,
@@ -993,25 +994,25 @@ func depositByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DepositByUserIdResult
 	if asyncResult.Err != nil {
-        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
-        if ok {
-            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.operation.conflict" {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.operation.conflict" {
 				asyncResult.Err = gs2err.SetClientError(Conflict{})
-            }
-        }
+			}
+		}
 		callback <- DepositByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DepositByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DepositByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DepositByUserIdAsyncResult{
 		result: &result,
@@ -1025,49 +1026,49 @@ func (p Gs2MoneyRestClient) DepositByUserIdAsync(
 	callback chan<- DepositByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/wallet/{slot}/deposit"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.Slot != nil {
-        path = strings.ReplaceAll(path, "{slot}", core.ToString(*request.Slot))
-    } else {
-        path = strings.ReplaceAll(path, "{slot}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Price != nil {
-        bodies["price"] = *request.Price
-    }
-    if request.Count != nil {
-        bodies["count"] = *request.Count
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.Slot != nil {
+		path = strings.ReplaceAll(path, "{slot}", core.ToString(*request.Slot))
+	} else {
+		path = strings.ReplaceAll(path, "{slot}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Price != nil {
+		bodies["price"] = *request.Price
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go depositByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1105,28 +1106,28 @@ func withdrawAsyncHandler(
 	asyncResult := <-internalCallback
 	var result WithdrawResult
 	if asyncResult.Err != nil {
-        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
-        if ok {
-            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.operation.conflict" {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.operation.conflict" {
 				asyncResult.Err = gs2err.SetClientError(Conflict{})
-            }
-            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.balance.insufficient" {
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.balance.insufficient" {
 				asyncResult.Err = gs2err.SetClientError(Insufficient{})
-            }
-        }
+			}
+		}
 		callback <- WithdrawAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- WithdrawAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- WithdrawAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- WithdrawAsyncResult{
 		result: &result,
@@ -1140,47 +1141,47 @@ func (p Gs2MoneyRestClient) WithdrawAsync(
 	callback chan<- WithdrawAsyncResult,
 ) {
 	path := "/{namespaceName}/user/me/wallet/{slot}/withdraw"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.Slot != nil {
-        path = strings.ReplaceAll(path, "{slot}", core.ToString(*request.Slot))
-    } else {
-        path = strings.ReplaceAll(path, "{slot}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Count != nil {
-        bodies["count"] = *request.Count
-    }
-    if request.PaidOnly != nil {
-        bodies["paidOnly"] = *request.PaidOnly
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Slot != nil {
+		path = strings.ReplaceAll(path, "{slot}", core.ToString(*request.Slot))
+	} else {
+		path = strings.ReplaceAll(path, "{slot}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.AccessToken != nil {
-        headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.PaidOnly != nil {
+		bodies["paidOnly"] = *request.PaidOnly
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go withdrawAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1218,28 +1219,28 @@ func withdrawByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result WithdrawByUserIdResult
 	if asyncResult.Err != nil {
-        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
-        if ok {
-            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.operation.conflict" {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.operation.conflict" {
 				asyncResult.Err = gs2err.SetClientError(Conflict{})
-            }
-            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.balance.insufficient" {
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "wallet.balance.insufficient" {
 				asyncResult.Err = gs2err.SetClientError(Insufficient{})
-            }
-        }
+			}
+		}
 		callback <- WithdrawByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- WithdrawByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- WithdrawByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- WithdrawByUserIdAsyncResult{
 		result: &result,
@@ -1253,49 +1254,49 @@ func (p Gs2MoneyRestClient) WithdrawByUserIdAsync(
 	callback chan<- WithdrawByUserIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/wallet/{slot}/withdraw"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.Slot != nil {
-        path = strings.ReplaceAll(path, "{slot}", core.ToString(*request.Slot))
-    } else {
-        path = strings.ReplaceAll(path, "{slot}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Count != nil {
-        bodies["count"] = *request.Count
-    }
-    if request.PaidOnly != nil {
-        bodies["paidOnly"] = *request.PaidOnly
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.Slot != nil {
+		path = strings.ReplaceAll(path, "{slot}", core.ToString(*request.Slot))
+	} else {
+		path = strings.ReplaceAll(path, "{slot}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.PaidOnly != nil {
+		bodies["paidOnly"] = *request.PaidOnly
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go withdrawByUserIdAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1339,13 +1340,13 @@ func depositByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DepositByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DepositByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DepositByStampSheetAsyncResult{
 		result: &result,
@@ -1361,29 +1362,29 @@ func (p Gs2MoneyRestClient) DepositByStampSheetAsync(
 	path := "/stamp/deposit"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go depositByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1427,13 +1428,13 @@ func withdrawByStampTaskAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- WithdrawByStampTaskAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- WithdrawByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- WithdrawByStampTaskAsyncResult{
 		result: &result,
@@ -1449,29 +1450,29 @@ func (p Gs2MoneyRestClient) WithdrawByStampTaskAsync(
 	path := "/stamp/withdraw"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampTask != nil && *request.StampTask != "" {
-        bodies["stampTask"] = *request.StampTask
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go withdrawByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1515,13 +1516,13 @@ func describeReceiptsAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeReceiptsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeReceiptsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- DescribeReceiptsAsyncResult{
 		result: &result,
@@ -1535,11 +1536,11 @@ func (p Gs2MoneyRestClient) DescribeReceiptsAsync(
 	callback chan<- DescribeReceiptsAsyncResult,
 ) {
 	path := "/{namespaceName}/receipt"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
@@ -1562,10 +1563,10 @@ func (p Gs2MoneyRestClient) DescribeReceiptsAsync(
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go describeReceiptsAsyncHandler(
 		p,
@@ -1617,13 +1618,13 @@ func getByUserIdAndTransactionIdAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetByUserIdAndTransactionIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetByUserIdAndTransactionIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- GetByUserIdAndTransactionIdAsyncResult{
 		result: &result,
@@ -1637,29 +1638,29 @@ func (p Gs2MoneyRestClient) GetByUserIdAndTransactionIdAsync(
 	callback chan<- GetByUserIdAndTransactionIdAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/receipt/{transactionId}"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-    if request.TransactionId != nil && *request.TransactionId != ""  {
-        path = strings.ReplaceAll(path, "{transactionId}", core.ToString(*request.TransactionId))
-    } else {
-        path = strings.ReplaceAll(path, "{transactionId}", "null")
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.TransactionId != nil && *request.TransactionId != "" {
+		path = strings.ReplaceAll(path, "{transactionId}", core.ToString(*request.TransactionId))
+	} else {
+		path = strings.ReplaceAll(path, "{transactionId}", "null")
+	}
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go getByUserIdAndTransactionIdAsyncHandler(
 		p,
@@ -1705,25 +1706,25 @@ func recordReceiptAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RecordReceiptResult
 	if asyncResult.Err != nil {
-        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
-        if ok {
-            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "receipt.payload.invalid" {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "receipt.payload.invalid" {
 				asyncResult.Err = gs2err.SetClientError(ReceiptInvalid{})
-            }
-        }
+			}
+		}
 		callback <- RecordReceiptAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RecordReceiptAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RecordReceiptAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- RecordReceiptAsyncResult{
 		result: &result,
@@ -1737,44 +1738,44 @@ func (p Gs2MoneyRestClient) RecordReceiptAsync(
 	callback chan<- RecordReceiptAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/receipt"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.ContentsId != nil && *request.ContentsId != "" {
-        bodies["contentsId"] = *request.ContentsId
-    }
-    if request.Receipt != nil && *request.Receipt != "" {
-        bodies["receipt"] = *request.Receipt
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContentsId != nil && *request.ContentsId != "" {
+		bodies["contentsId"] = *request.ContentsId
+	}
+	if request.Receipt != nil && *request.Receipt != "" {
+		bodies["receipt"] = *request.Receipt
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go recordReceiptAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1818,13 +1819,13 @@ func revertRecordReceiptAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RevertRecordReceiptAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RevertRecordReceiptAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- RevertRecordReceiptAsyncResult{
 		result: &result,
@@ -1838,41 +1839,41 @@ func (p Gs2MoneyRestClient) RevertRecordReceiptAsync(
 	callback chan<- RevertRecordReceiptAsyncResult,
 ) {
 	path := "/{namespaceName}/user/{userId}/receipt/revert"
-    if request.NamespaceName != nil && *request.NamespaceName != ""  {
-        path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-    } else {
-        path = strings.ReplaceAll(path, "{namespaceName}", "null")
-    }
-    if request.UserId != nil && *request.UserId != ""  {
-        path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-    } else {
-        path = strings.ReplaceAll(path, "{userId}", "null")
-    }
-
-	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.Receipt != nil && *request.Receipt != "" {
-        bodies["receipt"] = *request.Receipt
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
-    if request.DuplicationAvoider != nil {
-      headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-    }
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Receipt != nil && *request.Receipt != "" {
+		bodies["receipt"] = *request.Receipt
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 
 	go revertRecordReceiptAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -1916,13 +1917,13 @@ func recordReceiptByStampTaskAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RecordReceiptByStampTaskAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RecordReceiptByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- RecordReceiptByStampTaskAsyncResult{
 		result: &result,
@@ -1938,29 +1939,29 @@ func (p Gs2MoneyRestClient) RecordReceiptByStampTaskAsync(
 	path := "/stamp/receipt/record"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampTask != nil && *request.StampTask != "" {
-        bodies["stampTask"] = *request.StampTask
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go recordReceiptByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)
@@ -2004,13 +2005,13 @@ func revertRecordReceiptByStampSheetAsyncHandler(
 		return
 	}
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RevertRecordReceiptByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RevertRecordReceiptByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
 	callback <- RevertRecordReceiptByStampSheetAsyncResult{
 		result: &result,
@@ -2026,29 +2027,29 @@ func (p Gs2MoneyRestClient) RevertRecordReceiptByStampSheetAsync(
 	path := "/stamp/receipt/record/revert"
 
 	replacer := strings.NewReplacer()
-    var bodies = core.Bodies{}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
-    headers := p.CreateAuthorizedHeaders()
-    if request.RequestId != nil {
-        headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-    }
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
 
 	go revertRecordReceiptByStampSheetAsyncHandler(
 		p,
 		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("money").AppendPath(path, replacer),
-			Method:       core.Post,
-			Headers:      headers,
-			Bodies: bodies,
+			Url:     p.Session.EndpointHost("money").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
 		},
 		callback,
 	)

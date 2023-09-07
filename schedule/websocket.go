@@ -18,6 +18,7 @@ package schedule
 
 import (
 	"encoding/json"
+
 	"github.com/google/uuid"
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -49,16 +50,16 @@ func (p Gs2ScheduleWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeNamespacesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeNamespacesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -70,33 +71,33 @@ func (p Gs2ScheduleWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "namespace",
-    		"function": "describeNamespaces",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "namespace",
+			"function":    "describeNamespaces",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -133,16 +134,16 @@ func (p Gs2ScheduleWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -154,36 +155,36 @@ func (p Gs2ScheduleWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "namespace",
-    		"function": "createNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "namespace",
+			"function":    "createNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -220,16 +221,16 @@ func (p Gs2ScheduleWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -241,30 +242,30 @@ func (p Gs2ScheduleWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "namespace",
-    		"function": "getNamespaceStatus",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "namespace",
+			"function":    "getNamespaceStatus",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -301,16 +302,16 @@ func (p Gs2ScheduleWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -322,30 +323,30 @@ func (p Gs2ScheduleWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "namespace",
-    		"function": "getNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "namespace",
+			"function":    "getNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -382,16 +383,16 @@ func (p Gs2ScheduleWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -403,36 +404,36 @@ func (p Gs2ScheduleWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "namespace",
-    		"function": "updateNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "namespace",
+			"function":    "updateNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -469,16 +470,16 @@ func (p Gs2ScheduleWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -490,30 +491,30 @@ func (p Gs2ScheduleWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "namespace",
-    		"function": "deleteNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "namespace",
+			"function":    "deleteNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -550,16 +551,16 @@ func (p Gs2ScheduleWebSocketClient) describeEventMastersAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeEventMastersResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeEventMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeEventMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeEventMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -571,36 +572,36 @@ func (p Gs2ScheduleWebSocketClient) DescribeEventMastersAsync(
 	request *DescribeEventMastersRequest,
 	callback chan<- DescribeEventMastersAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "eventMaster",
-    		"function": "describeEventMasters",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "eventMaster",
+			"function":    "describeEventMasters",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeEventMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -637,16 +638,16 @@ func (p Gs2ScheduleWebSocketClient) createEventMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateEventMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateEventMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateEventMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- CreateEventMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -658,72 +659,72 @@ func (p Gs2ScheduleWebSocketClient) CreateEventMasterAsync(
 	request *CreateEventMasterRequest,
 	callback chan<- CreateEventMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "eventMaster",
-    		"function": "createEventMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "eventMaster",
+			"function":    "createEventMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.ScheduleType != nil && *request.ScheduleType != "" {
-        bodies["scheduleType"] = *request.ScheduleType
-    }
-    if request.AbsoluteBegin != nil {
-        bodies["absoluteBegin"] = *request.AbsoluteBegin
-    }
-    if request.AbsoluteEnd != nil {
-        bodies["absoluteEnd"] = *request.AbsoluteEnd
-    }
-    if request.RepeatType != nil && *request.RepeatType != "" {
-        bodies["repeatType"] = *request.RepeatType
-    }
-    if request.RepeatBeginDayOfMonth != nil {
-        bodies["repeatBeginDayOfMonth"] = *request.RepeatBeginDayOfMonth
-    }
-    if request.RepeatEndDayOfMonth != nil {
-        bodies["repeatEndDayOfMonth"] = *request.RepeatEndDayOfMonth
-    }
-    if request.RepeatBeginDayOfWeek != nil && *request.RepeatBeginDayOfWeek != "" {
-        bodies["repeatBeginDayOfWeek"] = *request.RepeatBeginDayOfWeek
-    }
-    if request.RepeatEndDayOfWeek != nil && *request.RepeatEndDayOfWeek != "" {
-        bodies["repeatEndDayOfWeek"] = *request.RepeatEndDayOfWeek
-    }
-    if request.RepeatBeginHour != nil {
-        bodies["repeatBeginHour"] = *request.RepeatBeginHour
-    }
-    if request.RepeatEndHour != nil {
-        bodies["repeatEndHour"] = *request.RepeatEndHour
-    }
-    if request.RelativeTriggerName != nil && *request.RelativeTriggerName != "" {
-        bodies["relativeTriggerName"] = *request.RelativeTriggerName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ScheduleType != nil && *request.ScheduleType != "" {
+		bodies["scheduleType"] = *request.ScheduleType
+	}
+	if request.AbsoluteBegin != nil {
+		bodies["absoluteBegin"] = *request.AbsoluteBegin
+	}
+	if request.AbsoluteEnd != nil {
+		bodies["absoluteEnd"] = *request.AbsoluteEnd
+	}
+	if request.RepeatType != nil && *request.RepeatType != "" {
+		bodies["repeatType"] = *request.RepeatType
+	}
+	if request.RepeatBeginDayOfMonth != nil {
+		bodies["repeatBeginDayOfMonth"] = *request.RepeatBeginDayOfMonth
+	}
+	if request.RepeatEndDayOfMonth != nil {
+		bodies["repeatEndDayOfMonth"] = *request.RepeatEndDayOfMonth
+	}
+	if request.RepeatBeginDayOfWeek != nil && *request.RepeatBeginDayOfWeek != "" {
+		bodies["repeatBeginDayOfWeek"] = *request.RepeatBeginDayOfWeek
+	}
+	if request.RepeatEndDayOfWeek != nil && *request.RepeatEndDayOfWeek != "" {
+		bodies["repeatEndDayOfWeek"] = *request.RepeatEndDayOfWeek
+	}
+	if request.RepeatBeginHour != nil {
+		bodies["repeatBeginHour"] = *request.RepeatBeginHour
+	}
+	if request.RepeatEndHour != nil {
+		bodies["repeatEndHour"] = *request.RepeatEndHour
+	}
+	if request.RelativeTriggerName != nil && *request.RelativeTriggerName != "" {
+		bodies["relativeTriggerName"] = *request.RelativeTriggerName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.createEventMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -760,16 +761,16 @@ func (p Gs2ScheduleWebSocketClient) getEventMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetEventMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetEventMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetEventMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetEventMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -781,33 +782,33 @@ func (p Gs2ScheduleWebSocketClient) GetEventMasterAsync(
 	request *GetEventMasterRequest,
 	callback chan<- GetEventMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "eventMaster",
-    		"function": "getEventMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "eventMaster",
+			"function":    "getEventMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.EventName != nil && *request.EventName != "" {
-        bodies["eventName"] = *request.EventName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.EventName != nil && *request.EventName != "" {
+		bodies["eventName"] = *request.EventName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getEventMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -844,16 +845,16 @@ func (p Gs2ScheduleWebSocketClient) updateEventMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateEventMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateEventMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateEventMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateEventMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -865,72 +866,72 @@ func (p Gs2ScheduleWebSocketClient) UpdateEventMasterAsync(
 	request *UpdateEventMasterRequest,
 	callback chan<- UpdateEventMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "eventMaster",
-    		"function": "updateEventMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "eventMaster",
+			"function":    "updateEventMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.EventName != nil && *request.EventName != "" {
-        bodies["eventName"] = *request.EventName
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.ScheduleType != nil && *request.ScheduleType != "" {
-        bodies["scheduleType"] = *request.ScheduleType
-    }
-    if request.AbsoluteBegin != nil {
-        bodies["absoluteBegin"] = *request.AbsoluteBegin
-    }
-    if request.AbsoluteEnd != nil {
-        bodies["absoluteEnd"] = *request.AbsoluteEnd
-    }
-    if request.RepeatType != nil && *request.RepeatType != "" {
-        bodies["repeatType"] = *request.RepeatType
-    }
-    if request.RepeatBeginDayOfMonth != nil {
-        bodies["repeatBeginDayOfMonth"] = *request.RepeatBeginDayOfMonth
-    }
-    if request.RepeatEndDayOfMonth != nil {
-        bodies["repeatEndDayOfMonth"] = *request.RepeatEndDayOfMonth
-    }
-    if request.RepeatBeginDayOfWeek != nil && *request.RepeatBeginDayOfWeek != "" {
-        bodies["repeatBeginDayOfWeek"] = *request.RepeatBeginDayOfWeek
-    }
-    if request.RepeatEndDayOfWeek != nil && *request.RepeatEndDayOfWeek != "" {
-        bodies["repeatEndDayOfWeek"] = *request.RepeatEndDayOfWeek
-    }
-    if request.RepeatBeginHour != nil {
-        bodies["repeatBeginHour"] = *request.RepeatBeginHour
-    }
-    if request.RepeatEndHour != nil {
-        bodies["repeatEndHour"] = *request.RepeatEndHour
-    }
-    if request.RelativeTriggerName != nil && *request.RelativeTriggerName != "" {
-        bodies["relativeTriggerName"] = *request.RelativeTriggerName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.EventName != nil && *request.EventName != "" {
+		bodies["eventName"] = *request.EventName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ScheduleType != nil && *request.ScheduleType != "" {
+		bodies["scheduleType"] = *request.ScheduleType
+	}
+	if request.AbsoluteBegin != nil {
+		bodies["absoluteBegin"] = *request.AbsoluteBegin
+	}
+	if request.AbsoluteEnd != nil {
+		bodies["absoluteEnd"] = *request.AbsoluteEnd
+	}
+	if request.RepeatType != nil && *request.RepeatType != "" {
+		bodies["repeatType"] = *request.RepeatType
+	}
+	if request.RepeatBeginDayOfMonth != nil {
+		bodies["repeatBeginDayOfMonth"] = *request.RepeatBeginDayOfMonth
+	}
+	if request.RepeatEndDayOfMonth != nil {
+		bodies["repeatEndDayOfMonth"] = *request.RepeatEndDayOfMonth
+	}
+	if request.RepeatBeginDayOfWeek != nil && *request.RepeatBeginDayOfWeek != "" {
+		bodies["repeatBeginDayOfWeek"] = *request.RepeatBeginDayOfWeek
+	}
+	if request.RepeatEndDayOfWeek != nil && *request.RepeatEndDayOfWeek != "" {
+		bodies["repeatEndDayOfWeek"] = *request.RepeatEndDayOfWeek
+	}
+	if request.RepeatBeginHour != nil {
+		bodies["repeatBeginHour"] = *request.RepeatBeginHour
+	}
+	if request.RepeatEndHour != nil {
+		bodies["repeatEndHour"] = *request.RepeatEndHour
+	}
+	if request.RelativeTriggerName != nil && *request.RelativeTriggerName != "" {
+		bodies["relativeTriggerName"] = *request.RelativeTriggerName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateEventMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -967,16 +968,16 @@ func (p Gs2ScheduleWebSocketClient) deleteEventMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteEventMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteEventMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteEventMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteEventMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -988,33 +989,33 @@ func (p Gs2ScheduleWebSocketClient) DeleteEventMasterAsync(
 	request *DeleteEventMasterRequest,
 	callback chan<- DeleteEventMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "eventMaster",
-    		"function": "deleteEventMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "eventMaster",
+			"function":    "deleteEventMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.EventName != nil && *request.EventName != "" {
-        bodies["eventName"] = *request.EventName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.EventName != nil && *request.EventName != "" {
+		bodies["eventName"] = *request.EventName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteEventMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1051,16 +1052,16 @@ func (p Gs2ScheduleWebSocketClient) describeTriggersAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeTriggersResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeTriggersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeTriggersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeTriggersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1072,42 +1073,42 @@ func (p Gs2ScheduleWebSocketClient) DescribeTriggersAsync(
 	request *DescribeTriggersRequest,
 	callback chan<- DescribeTriggersAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "trigger",
-    		"function": "describeTriggers",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "trigger",
+			"function":    "describeTriggers",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
 
 	go p.describeTriggersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1144,16 +1145,16 @@ func (p Gs2ScheduleWebSocketClient) describeTriggersByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeTriggersByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeTriggersByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeTriggersByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeTriggersByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1165,39 +1166,39 @@ func (p Gs2ScheduleWebSocketClient) DescribeTriggersByUserIdAsync(
 	request *DescribeTriggersByUserIdRequest,
 	callback chan<- DescribeTriggersByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "trigger",
-    		"function": "describeTriggersByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "trigger",
+			"function":    "describeTriggersByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeTriggersByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1234,16 +1235,16 @@ func (p Gs2ScheduleWebSocketClient) getTriggerAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetTriggerResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetTriggerAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetTriggerAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetTriggerAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1255,39 +1256,39 @@ func (p Gs2ScheduleWebSocketClient) GetTriggerAsync(
 	request *GetTriggerRequest,
 	callback chan<- GetTriggerAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "trigger",
-    		"function": "getTrigger",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "trigger",
+			"function":    "getTrigger",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.TriggerName != nil && *request.TriggerName != "" {
-        bodies["triggerName"] = *request.TriggerName
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.TriggerName != nil && *request.TriggerName != "" {
+		bodies["triggerName"] = *request.TriggerName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
 
 	go p.getTriggerAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1324,16 +1325,16 @@ func (p Gs2ScheduleWebSocketClient) getTriggerByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetTriggerByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetTriggerByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetTriggerByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetTriggerByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1345,36 +1346,36 @@ func (p Gs2ScheduleWebSocketClient) GetTriggerByUserIdAsync(
 	request *GetTriggerByUserIdRequest,
 	callback chan<- GetTriggerByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "trigger",
-    		"function": "getTriggerByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "trigger",
+			"function":    "getTriggerByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.TriggerName != nil && *request.TriggerName != "" {
-        bodies["triggerName"] = *request.TriggerName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.TriggerName != nil && *request.TriggerName != "" {
+		bodies["triggerName"] = *request.TriggerName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getTriggerByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1411,16 +1412,16 @@ func (p Gs2ScheduleWebSocketClient) triggerByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result TriggerByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- TriggerByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- TriggerByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- TriggerByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1432,45 +1433,45 @@ func (p Gs2ScheduleWebSocketClient) TriggerByUserIdAsync(
 	request *TriggerByUserIdRequest,
 	callback chan<- TriggerByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "trigger",
-    		"function": "triggerByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "trigger",
+			"function":    "triggerByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.TriggerName != nil && *request.TriggerName != "" {
-        bodies["triggerName"] = *request.TriggerName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.TriggerStrategy != nil && *request.TriggerStrategy != "" {
-        bodies["triggerStrategy"] = *request.TriggerStrategy
-    }
-    if request.Ttl != nil {
-        bodies["ttl"] = *request.Ttl
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.TriggerName != nil && *request.TriggerName != "" {
+		bodies["triggerName"] = *request.TriggerName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.TriggerStrategy != nil && *request.TriggerStrategy != "" {
+		bodies["triggerStrategy"] = *request.TriggerStrategy
+	}
+	if request.Ttl != nil {
+		bodies["ttl"] = *request.Ttl
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.triggerByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1507,16 +1508,16 @@ func (p Gs2ScheduleWebSocketClient) triggerByStampSheetAsyncHandler(
 	asyncResult := <-internalCallback
 	var result TriggerByStampSheetResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- TriggerByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- TriggerByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- TriggerByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1528,33 +1529,33 @@ func (p Gs2ScheduleWebSocketClient) TriggerByStampSheetAsync(
 	request *TriggerByStampSheetRequest,
 	callback chan<- TriggerByStampSheetAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "trigger",
-    		"function": "triggerByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "trigger",
+			"function":    "triggerByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.triggerByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1591,16 +1592,16 @@ func (p Gs2ScheduleWebSocketClient) deleteTriggerAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteTriggerResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteTriggerAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteTriggerAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteTriggerAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1612,42 +1613,42 @@ func (p Gs2ScheduleWebSocketClient) DeleteTriggerAsync(
 	request *DeleteTriggerRequest,
 	callback chan<- DeleteTriggerAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "trigger",
-    		"function": "deleteTrigger",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "trigger",
+			"function":    "deleteTrigger",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.TriggerName != nil && *request.TriggerName != "" {
-        bodies["triggerName"] = *request.TriggerName
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.TriggerName != nil && *request.TriggerName != "" {
+		bodies["triggerName"] = *request.TriggerName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.deleteTriggerAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1684,16 +1685,16 @@ func (p Gs2ScheduleWebSocketClient) deleteTriggerByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteTriggerByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteTriggerByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteTriggerByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteTriggerByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1705,39 +1706,39 @@ func (p Gs2ScheduleWebSocketClient) DeleteTriggerByUserIdAsync(
 	request *DeleteTriggerByUserIdRequest,
 	callback chan<- DeleteTriggerByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "trigger",
-    		"function": "deleteTriggerByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "trigger",
+			"function":    "deleteTriggerByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.TriggerName != nil && *request.TriggerName != "" {
-        bodies["triggerName"] = *request.TriggerName
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.TriggerName != nil && *request.TriggerName != "" {
+		bodies["triggerName"] = *request.TriggerName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.deleteTriggerByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1774,16 +1775,16 @@ func (p Gs2ScheduleWebSocketClient) deleteTriggerByStampTaskAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteTriggerByStampTaskResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteTriggerByStampTaskAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteTriggerByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteTriggerByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1795,33 +1796,33 @@ func (p Gs2ScheduleWebSocketClient) DeleteTriggerByStampTaskAsync(
 	request *DeleteTriggerByStampTaskRequest,
 	callback chan<- DeleteTriggerByStampTaskAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "trigger",
-    		"function": "deleteTriggerByStampTask",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "trigger",
+			"function":    "deleteTriggerByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampTask != nil && *request.StampTask != "" {
-        bodies["stampTask"] = *request.StampTask
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteTriggerByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1858,16 +1859,16 @@ func (p Gs2ScheduleWebSocketClient) describeEventsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeEventsResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeEventsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeEventsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeEventsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1879,36 +1880,36 @@ func (p Gs2ScheduleWebSocketClient) DescribeEventsAsync(
 	request *DescribeEventsRequest,
 	callback chan<- DescribeEventsAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "event",
-    		"function": "describeEvents",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "event",
+			"function":    "describeEvents",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
 
 	go p.describeEventsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1945,16 +1946,16 @@ func (p Gs2ScheduleWebSocketClient) describeEventsByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeEventsByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeEventsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeEventsByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeEventsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1966,33 +1967,33 @@ func (p Gs2ScheduleWebSocketClient) DescribeEventsByUserIdAsync(
 	request *DescribeEventsByUserIdRequest,
 	callback chan<- DescribeEventsByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "event",
-    		"function": "describeEventsByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "event",
+			"function":    "describeEventsByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeEventsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2029,16 +2030,16 @@ func (p Gs2ScheduleWebSocketClient) describeRawEventsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeRawEventsResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeRawEventsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeRawEventsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeRawEventsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2050,30 +2051,30 @@ func (p Gs2ScheduleWebSocketClient) DescribeRawEventsAsync(
 	request *DescribeRawEventsRequest,
 	callback chan<- DescribeRawEventsAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "event",
-    		"function": "describeRawEvents",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "event",
+			"function":    "describeRawEvents",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeRawEventsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2110,16 +2111,16 @@ func (p Gs2ScheduleWebSocketClient) getEventAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetEventResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetEventAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetEventAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetEventAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2131,42 +2132,42 @@ func (p Gs2ScheduleWebSocketClient) GetEventAsync(
 	request *GetEventRequest,
 	callback chan<- GetEventAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "event",
-    		"function": "getEvent",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "event",
+			"function":    "getEvent",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.EventName != nil && *request.EventName != "" {
-        bodies["eventName"] = *request.EventName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.IsInSchedule != nil {
-        bodies["isInSchedule"] = *request.IsInSchedule
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
+	if request.EventName != nil && *request.EventName != "" {
+		bodies["eventName"] = *request.EventName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.IsInSchedule != nil {
+		bodies["isInSchedule"] = *request.IsInSchedule
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
 
 	go p.getEventAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2203,16 +2204,16 @@ func (p Gs2ScheduleWebSocketClient) getEventByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetEventByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetEventByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetEventByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetEventByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2224,39 +2225,39 @@ func (p Gs2ScheduleWebSocketClient) GetEventByUserIdAsync(
 	request *GetEventByUserIdRequest,
 	callback chan<- GetEventByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "event",
-    		"function": "getEventByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "event",
+			"function":    "getEventByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.EventName != nil && *request.EventName != "" {
-        bodies["eventName"] = *request.EventName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.IsInSchedule != nil {
-        bodies["isInSchedule"] = *request.IsInSchedule
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.EventName != nil && *request.EventName != "" {
+		bodies["eventName"] = *request.EventName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.IsInSchedule != nil {
+		bodies["isInSchedule"] = *request.IsInSchedule
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getEventByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2293,16 +2294,16 @@ func (p Gs2ScheduleWebSocketClient) getRawEventAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetRawEventResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetRawEventAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetRawEventAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetRawEventAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2314,33 +2315,33 @@ func (p Gs2ScheduleWebSocketClient) GetRawEventAsync(
 	request *GetRawEventRequest,
 	callback chan<- GetRawEventAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "event",
-    		"function": "getRawEvent",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "event",
+			"function":    "getRawEvent",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.EventName != nil && *request.EventName != "" {
-        bodies["eventName"] = *request.EventName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.EventName != nil && *request.EventName != "" {
+		bodies["eventName"] = *request.EventName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getRawEventAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2377,16 +2378,16 @@ func (p Gs2ScheduleWebSocketClient) exportMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ExportMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ExportMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExportMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2398,30 +2399,30 @@ func (p Gs2ScheduleWebSocketClient) ExportMasterAsync(
 	request *ExportMasterRequest,
 	callback chan<- ExportMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "currentEventMaster",
-    		"function": "exportMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "currentEventMaster",
+			"function":    "exportMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2458,16 +2459,16 @@ func (p Gs2ScheduleWebSocketClient) getCurrentEventMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCurrentEventMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCurrentEventMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCurrentEventMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetCurrentEventMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2479,30 +2480,30 @@ func (p Gs2ScheduleWebSocketClient) GetCurrentEventMasterAsync(
 	request *GetCurrentEventMasterRequest,
 	callback chan<- GetCurrentEventMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "currentEventMaster",
-    		"function": "getCurrentEventMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "currentEventMaster",
+			"function":    "getCurrentEventMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getCurrentEventMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2539,16 +2540,16 @@ func (p Gs2ScheduleWebSocketClient) updateCurrentEventMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCurrentEventMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentEventMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentEventMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateCurrentEventMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2560,33 +2561,33 @@ func (p Gs2ScheduleWebSocketClient) UpdateCurrentEventMasterAsync(
 	request *UpdateCurrentEventMasterRequest,
 	callback chan<- UpdateCurrentEventMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "currentEventMaster",
-    		"function": "updateCurrentEventMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "currentEventMaster",
+			"function":    "updateCurrentEventMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Settings != nil && *request.Settings != "" {
-        bodies["settings"] = *request.Settings
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Settings != nil && *request.Settings != "" {
+		bodies["settings"] = *request.Settings
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateCurrentEventMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2623,16 +2624,16 @@ func (p Gs2ScheduleWebSocketClient) updateCurrentEventMasterFromGitHubAsyncHandl
 	asyncResult := <-internalCallback
 	var result UpdateCurrentEventMasterFromGitHubResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentEventMasterFromGitHubAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentEventMasterFromGitHubAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateCurrentEventMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2644,33 +2645,33 @@ func (p Gs2ScheduleWebSocketClient) UpdateCurrentEventMasterFromGitHubAsync(
 	request *UpdateCurrentEventMasterFromGitHubRequest,
 	callback chan<- UpdateCurrentEventMasterFromGitHubAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "schedule",
-    		"component": "currentEventMaster",
-    		"function": "updateCurrentEventMasterFromGitHub",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "schedule",
+			"component":   "currentEventMaster",
+			"function":    "updateCurrentEventMasterFromGitHub",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CheckoutSetting != nil {
-        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CheckoutSetting != nil {
+		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateCurrentEventMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)

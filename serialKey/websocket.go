@@ -18,6 +18,7 @@ package serialKey
 
 import (
 	"encoding/json"
+
 	"github.com/google/uuid"
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -49,16 +50,16 @@ func (p Gs2SerialKeyWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeNamespacesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeNamespacesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -70,33 +71,33 @@ func (p Gs2SerialKeyWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "namespace",
-    		"function": "describeNamespaces",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "namespace",
+			"function":    "describeNamespaces",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -133,16 +134,16 @@ func (p Gs2SerialKeyWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -154,36 +155,36 @@ func (p Gs2SerialKeyWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "namespace",
-    		"function": "createNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "namespace",
+			"function":    "createNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -220,16 +221,16 @@ func (p Gs2SerialKeyWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -241,30 +242,30 @@ func (p Gs2SerialKeyWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "namespace",
-    		"function": "getNamespaceStatus",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "namespace",
+			"function":    "getNamespaceStatus",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -301,16 +302,16 @@ func (p Gs2SerialKeyWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -322,30 +323,30 @@ func (p Gs2SerialKeyWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "namespace",
-    		"function": "getNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "namespace",
+			"function":    "getNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -382,16 +383,16 @@ func (p Gs2SerialKeyWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -403,36 +404,36 @@ func (p Gs2SerialKeyWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "namespace",
-    		"function": "updateNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "namespace",
+			"function":    "updateNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -469,16 +470,16 @@ func (p Gs2SerialKeyWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -490,30 +491,30 @@ func (p Gs2SerialKeyWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "namespace",
-    		"function": "deleteNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "namespace",
+			"function":    "deleteNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -550,16 +551,16 @@ func (p Gs2SerialKeyWebSocketClient) describeIssueJobsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeIssueJobsResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeIssueJobsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeIssueJobsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeIssueJobsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -571,39 +572,39 @@ func (p Gs2SerialKeyWebSocketClient) DescribeIssueJobsAsync(
 	request *DescribeIssueJobsRequest,
 	callback chan<- DescribeIssueJobsAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "issueJob",
-    		"function": "describeIssueJobs",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "issueJob",
+			"function":    "describeIssueJobs",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CampaignModelName != nil && *request.CampaignModelName != "" {
-        bodies["campaignModelName"] = *request.CampaignModelName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CampaignModelName != nil && *request.CampaignModelName != "" {
+		bodies["campaignModelName"] = *request.CampaignModelName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeIssueJobsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -640,16 +641,16 @@ func (p Gs2SerialKeyWebSocketClient) getIssueJobAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetIssueJobResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetIssueJobAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetIssueJobAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetIssueJobAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -661,36 +662,36 @@ func (p Gs2SerialKeyWebSocketClient) GetIssueJobAsync(
 	request *GetIssueJobRequest,
 	callback chan<- GetIssueJobAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "issueJob",
-    		"function": "getIssueJob",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "issueJob",
+			"function":    "getIssueJob",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CampaignModelName != nil && *request.CampaignModelName != "" {
-        bodies["campaignModelName"] = *request.CampaignModelName
-    }
-    if request.IssueJobName != nil && *request.IssueJobName != "" {
-        bodies["issueJobName"] = *request.IssueJobName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CampaignModelName != nil && *request.CampaignModelName != "" {
+		bodies["campaignModelName"] = *request.CampaignModelName
+	}
+	if request.IssueJobName != nil && *request.IssueJobName != "" {
+		bodies["issueJobName"] = *request.IssueJobName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getIssueJobAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -727,16 +728,16 @@ func (p Gs2SerialKeyWebSocketClient) issueAsyncHandler(
 	asyncResult := <-internalCallback
 	var result IssueResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- IssueAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- IssueAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- IssueAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -748,39 +749,39 @@ func (p Gs2SerialKeyWebSocketClient) IssueAsync(
 	request *IssueRequest,
 	callback chan<- IssueAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "issueJob",
-    		"function": "issue",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "issueJob",
+			"function":    "issue",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CampaignModelName != nil && *request.CampaignModelName != "" {
-        bodies["campaignModelName"] = *request.CampaignModelName
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.IssueRequestCount != nil {
-        bodies["issueRequestCount"] = *request.IssueRequestCount
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CampaignModelName != nil && *request.CampaignModelName != "" {
+		bodies["campaignModelName"] = *request.CampaignModelName
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.IssueRequestCount != nil {
+		bodies["issueRequestCount"] = *request.IssueRequestCount
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.issueAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -817,16 +818,16 @@ func (p Gs2SerialKeyWebSocketClient) describeSerialKeysAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeSerialKeysResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeSerialKeysAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeSerialKeysAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeSerialKeysAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -838,42 +839,42 @@ func (p Gs2SerialKeyWebSocketClient) DescribeSerialKeysAsync(
 	request *DescribeSerialKeysRequest,
 	callback chan<- DescribeSerialKeysAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "serialKey",
-    		"function": "describeSerialKeys",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "serialKey",
+			"function":    "describeSerialKeys",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CampaignModelName != nil && *request.CampaignModelName != "" {
-        bodies["campaignModelName"] = *request.CampaignModelName
-    }
-    if request.IssueJobName != nil && *request.IssueJobName != "" {
-        bodies["issueJobName"] = *request.IssueJobName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CampaignModelName != nil && *request.CampaignModelName != "" {
+		bodies["campaignModelName"] = *request.CampaignModelName
+	}
+	if request.IssueJobName != nil && *request.IssueJobName != "" {
+		bodies["issueJobName"] = *request.IssueJobName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeSerialKeysAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -910,16 +911,16 @@ func (p Gs2SerialKeyWebSocketClient) downloadSerialCodesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DownloadSerialCodesResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DownloadSerialCodesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DownloadSerialCodesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DownloadSerialCodesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -931,36 +932,36 @@ func (p Gs2SerialKeyWebSocketClient) DownloadSerialCodesAsync(
 	request *DownloadSerialCodesRequest,
 	callback chan<- DownloadSerialCodesAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "serialKey",
-    		"function": "downloadSerialCodes",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "serialKey",
+			"function":    "downloadSerialCodes",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CampaignModelName != nil && *request.CampaignModelName != "" {
-        bodies["campaignModelName"] = *request.CampaignModelName
-    }
-    if request.IssueJobName != nil && *request.IssueJobName != "" {
-        bodies["issueJobName"] = *request.IssueJobName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CampaignModelName != nil && *request.CampaignModelName != "" {
+		bodies["campaignModelName"] = *request.CampaignModelName
+	}
+	if request.IssueJobName != nil && *request.IssueJobName != "" {
+		bodies["issueJobName"] = *request.IssueJobName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.downloadSerialCodesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -997,16 +998,16 @@ func (p Gs2SerialKeyWebSocketClient) getSerialKeyAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetSerialKeyResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetSerialKeyAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetSerialKeyAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetSerialKeyAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1018,33 +1019,33 @@ func (p Gs2SerialKeyWebSocketClient) GetSerialKeyAsync(
 	request *GetSerialKeyRequest,
 	callback chan<- GetSerialKeyAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "serialKey",
-    		"function": "getSerialKey",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "serialKey",
+			"function":    "getSerialKey",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Code != nil && *request.Code != "" {
-        bodies["code"] = *request.Code
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Code != nil && *request.Code != "" {
+		bodies["code"] = *request.Code
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getSerialKeyAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1081,25 +1082,25 @@ func (p Gs2SerialKeyWebSocketClient) useAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UseResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UseAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UseAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-        gs2err, ok := asyncResult.Err.(core.Gs2Exception)
-        if ok {
-            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "code.status.invalid" {
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "code.status.invalid" {
 				asyncResult.Err = gs2err.SetClientError(AlreadyUsed{})
-            }
-            if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "code.code.notFound" {
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "code.code.notFound" {
 				asyncResult.Err = gs2err.SetClientError(CodeNotFound{})
-            }
-        }
-    }
+			}
+		}
+	}
 	callback <- UseAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1111,42 +1112,42 @@ func (p Gs2SerialKeyWebSocketClient) UseAsync(
 	request *UseRequest,
 	callback chan<- UseAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "serialKey",
-    		"function": "use",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "serialKey",
+			"function":    "use",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.Code != nil && *request.Code != "" {
-        bodies["code"] = *request.Code
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.Code != nil && *request.Code != "" {
+		bodies["code"] = *request.Code
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.useAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1183,16 +1184,16 @@ func (p Gs2SerialKeyWebSocketClient) useByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UseByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UseByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UseByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UseByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1204,39 +1205,39 @@ func (p Gs2SerialKeyWebSocketClient) UseByUserIdAsync(
 	request *UseByUserIdRequest,
 	callback chan<- UseByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "serialKey",
-    		"function": "useByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "serialKey",
+			"function":    "useByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.Code != nil && *request.Code != "" {
-        bodies["code"] = *request.Code
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Code != nil && *request.Code != "" {
+		bodies["code"] = *request.Code
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.useByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1273,16 +1274,16 @@ func (p Gs2SerialKeyWebSocketClient) revertUseByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RevertUseByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RevertUseByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RevertUseByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- RevertUseByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1294,39 +1295,39 @@ func (p Gs2SerialKeyWebSocketClient) RevertUseByUserIdAsync(
 	request *RevertUseByUserIdRequest,
 	callback chan<- RevertUseByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "serialKey",
-    		"function": "revertUseByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "serialKey",
+			"function":    "revertUseByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.Code != nil && *request.Code != "" {
-        bodies["code"] = *request.Code
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Code != nil && *request.Code != "" {
+		bodies["code"] = *request.Code
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.revertUseByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1363,16 +1364,16 @@ func (p Gs2SerialKeyWebSocketClient) useByStampTaskAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UseByStampTaskResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UseByStampTaskAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UseByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UseByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1384,33 +1385,33 @@ func (p Gs2SerialKeyWebSocketClient) UseByStampTaskAsync(
 	request *UseByStampTaskRequest,
 	callback chan<- UseByStampTaskAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "serialKey",
-    		"function": "useByStampTask",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "serialKey",
+			"function":    "useByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampTask != nil && *request.StampTask != "" {
-        bodies["stampTask"] = *request.StampTask
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.useByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1447,16 +1448,16 @@ func (p Gs2SerialKeyWebSocketClient) revertUseByStampSheetAsyncHandler(
 	asyncResult := <-internalCallback
 	var result RevertUseByStampSheetResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- RevertUseByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RevertUseByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- RevertUseByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1468,33 +1469,33 @@ func (p Gs2SerialKeyWebSocketClient) RevertUseByStampSheetAsync(
 	request *RevertUseByStampSheetRequest,
 	callback chan<- RevertUseByStampSheetAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "serialKey",
-    		"function": "revertUseByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "serialKey",
+			"function":    "revertUseByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.revertUseByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1531,16 +1532,16 @@ func (p Gs2SerialKeyWebSocketClient) describeCampaignModelsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeCampaignModelsResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeCampaignModelsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeCampaignModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeCampaignModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1552,30 +1553,30 @@ func (p Gs2SerialKeyWebSocketClient) DescribeCampaignModelsAsync(
 	request *DescribeCampaignModelsRequest,
 	callback chan<- DescribeCampaignModelsAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "campaignModel",
-    		"function": "describeCampaignModels",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "campaignModel",
+			"function":    "describeCampaignModels",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeCampaignModelsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1612,16 +1613,16 @@ func (p Gs2SerialKeyWebSocketClient) getCampaignModelAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCampaignModelResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCampaignModelAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCampaignModelAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetCampaignModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1633,33 +1634,33 @@ func (p Gs2SerialKeyWebSocketClient) GetCampaignModelAsync(
 	request *GetCampaignModelRequest,
 	callback chan<- GetCampaignModelAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "campaignModel",
-    		"function": "getCampaignModel",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "campaignModel",
+			"function":    "getCampaignModel",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CampaignModelName != nil && *request.CampaignModelName != "" {
-        bodies["campaignModelName"] = *request.CampaignModelName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CampaignModelName != nil && *request.CampaignModelName != "" {
+		bodies["campaignModelName"] = *request.CampaignModelName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getCampaignModelAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1696,16 +1697,16 @@ func (p Gs2SerialKeyWebSocketClient) describeCampaignModelMastersAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeCampaignModelMastersResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeCampaignModelMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeCampaignModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeCampaignModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1717,36 +1718,36 @@ func (p Gs2SerialKeyWebSocketClient) DescribeCampaignModelMastersAsync(
 	request *DescribeCampaignModelMastersRequest,
 	callback chan<- DescribeCampaignModelMastersAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "campaignModelMaster",
-    		"function": "describeCampaignModelMasters",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "campaignModelMaster",
+			"function":    "describeCampaignModelMasters",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeCampaignModelMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1783,16 +1784,16 @@ func (p Gs2SerialKeyWebSocketClient) createCampaignModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateCampaignModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateCampaignModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateCampaignModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- CreateCampaignModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1804,42 +1805,42 @@ func (p Gs2SerialKeyWebSocketClient) CreateCampaignModelMasterAsync(
 	request *CreateCampaignModelMasterRequest,
 	callback chan<- CreateCampaignModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "campaignModelMaster",
-    		"function": "createCampaignModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "campaignModelMaster",
+			"function":    "createCampaignModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.EnableCampaignCode != nil {
-        bodies["enableCampaignCode"] = *request.EnableCampaignCode
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.EnableCampaignCode != nil {
+		bodies["enableCampaignCode"] = *request.EnableCampaignCode
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.createCampaignModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1876,16 +1877,16 @@ func (p Gs2SerialKeyWebSocketClient) getCampaignModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCampaignModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCampaignModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCampaignModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetCampaignModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1897,33 +1898,33 @@ func (p Gs2SerialKeyWebSocketClient) GetCampaignModelMasterAsync(
 	request *GetCampaignModelMasterRequest,
 	callback chan<- GetCampaignModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "campaignModelMaster",
-    		"function": "getCampaignModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "campaignModelMaster",
+			"function":    "getCampaignModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CampaignModelName != nil && *request.CampaignModelName != "" {
-        bodies["campaignModelName"] = *request.CampaignModelName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CampaignModelName != nil && *request.CampaignModelName != "" {
+		bodies["campaignModelName"] = *request.CampaignModelName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getCampaignModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1960,16 +1961,16 @@ func (p Gs2SerialKeyWebSocketClient) updateCampaignModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCampaignModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCampaignModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCampaignModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateCampaignModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1981,42 +1982,42 @@ func (p Gs2SerialKeyWebSocketClient) UpdateCampaignModelMasterAsync(
 	request *UpdateCampaignModelMasterRequest,
 	callback chan<- UpdateCampaignModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "campaignModelMaster",
-    		"function": "updateCampaignModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "campaignModelMaster",
+			"function":    "updateCampaignModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CampaignModelName != nil && *request.CampaignModelName != "" {
-        bodies["campaignModelName"] = *request.CampaignModelName
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.EnableCampaignCode != nil {
-        bodies["enableCampaignCode"] = *request.EnableCampaignCode
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CampaignModelName != nil && *request.CampaignModelName != "" {
+		bodies["campaignModelName"] = *request.CampaignModelName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.EnableCampaignCode != nil {
+		bodies["enableCampaignCode"] = *request.EnableCampaignCode
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateCampaignModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2053,16 +2054,16 @@ func (p Gs2SerialKeyWebSocketClient) deleteCampaignModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteCampaignModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteCampaignModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteCampaignModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteCampaignModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2074,33 +2075,33 @@ func (p Gs2SerialKeyWebSocketClient) DeleteCampaignModelMasterAsync(
 	request *DeleteCampaignModelMasterRequest,
 	callback chan<- DeleteCampaignModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "campaignModelMaster",
-    		"function": "deleteCampaignModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "campaignModelMaster",
+			"function":    "deleteCampaignModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CampaignModelName != nil && *request.CampaignModelName != "" {
-        bodies["campaignModelName"] = *request.CampaignModelName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CampaignModelName != nil && *request.CampaignModelName != "" {
+		bodies["campaignModelName"] = *request.CampaignModelName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteCampaignModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2137,16 +2138,16 @@ func (p Gs2SerialKeyWebSocketClient) exportMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ExportMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ExportMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExportMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2158,30 +2159,30 @@ func (p Gs2SerialKeyWebSocketClient) ExportMasterAsync(
 	request *ExportMasterRequest,
 	callback chan<- ExportMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "currentCampaignMaster",
-    		"function": "exportMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "currentCampaignMaster",
+			"function":    "exportMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2218,16 +2219,16 @@ func (p Gs2SerialKeyWebSocketClient) getCurrentCampaignMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCurrentCampaignMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCurrentCampaignMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCurrentCampaignMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetCurrentCampaignMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2239,30 +2240,30 @@ func (p Gs2SerialKeyWebSocketClient) GetCurrentCampaignMasterAsync(
 	request *GetCurrentCampaignMasterRequest,
 	callback chan<- GetCurrentCampaignMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "currentCampaignMaster",
-    		"function": "getCurrentCampaignMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "currentCampaignMaster",
+			"function":    "getCurrentCampaignMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getCurrentCampaignMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2299,16 +2300,16 @@ func (p Gs2SerialKeyWebSocketClient) updateCurrentCampaignMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCurrentCampaignMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentCampaignMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentCampaignMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateCurrentCampaignMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2320,33 +2321,33 @@ func (p Gs2SerialKeyWebSocketClient) UpdateCurrentCampaignMasterAsync(
 	request *UpdateCurrentCampaignMasterRequest,
 	callback chan<- UpdateCurrentCampaignMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "currentCampaignMaster",
-    		"function": "updateCurrentCampaignMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "currentCampaignMaster",
+			"function":    "updateCurrentCampaignMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Settings != nil && *request.Settings != "" {
-        bodies["settings"] = *request.Settings
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Settings != nil && *request.Settings != "" {
+		bodies["settings"] = *request.Settings
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateCurrentCampaignMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2383,16 +2384,16 @@ func (p Gs2SerialKeyWebSocketClient) updateCurrentCampaignMasterFromGitHubAsyncH
 	asyncResult := <-internalCallback
 	var result UpdateCurrentCampaignMasterFromGitHubResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentCampaignMasterFromGitHubAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentCampaignMasterFromGitHubAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateCurrentCampaignMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2404,33 +2405,33 @@ func (p Gs2SerialKeyWebSocketClient) UpdateCurrentCampaignMasterFromGitHubAsync(
 	request *UpdateCurrentCampaignMasterFromGitHubRequest,
 	callback chan<- UpdateCurrentCampaignMasterFromGitHubAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "serial_key",
-    		"component": "currentCampaignMaster",
-    		"function": "updateCurrentCampaignMasterFromGitHub",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "serial_key",
+			"component":   "currentCampaignMaster",
+			"function":    "updateCurrentCampaignMasterFromGitHub",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CheckoutSetting != nil {
-        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CheckoutSetting != nil {
+		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateCurrentCampaignMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)

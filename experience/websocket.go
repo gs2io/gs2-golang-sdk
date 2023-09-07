@@ -18,6 +18,7 @@ package experience
 
 import (
 	"encoding/json"
+
 	"github.com/google/uuid"
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -49,16 +50,16 @@ func (p Gs2ExperienceWebSocketClient) describeNamespacesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeNamespacesResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeNamespacesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeNamespacesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeNamespacesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -70,33 +71,33 @@ func (p Gs2ExperienceWebSocketClient) DescribeNamespacesAsync(
 	request *DescribeNamespacesRequest,
 	callback chan<- DescribeNamespacesAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "namespace",
-    		"function": "describeNamespaces",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "namespace",
+			"function":    "describeNamespaces",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -133,16 +134,16 @@ func (p Gs2ExperienceWebSocketClient) createNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- CreateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -154,54 +155,54 @@ func (p Gs2ExperienceWebSocketClient) CreateNamespaceAsync(
 	request *CreateNamespaceRequest,
 	callback chan<- CreateNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "namespace",
-    		"function": "createNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "namespace",
+			"function":    "createNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.TransactionSetting != nil {
-        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-    }
-    if request.ExperienceCapScriptId != nil && *request.ExperienceCapScriptId != "" {
-        bodies["experienceCapScriptId"] = *request.ExperienceCapScriptId
-    }
-    if request.ChangeExperienceScript != nil {
-        bodies["changeExperienceScript"] = request.ChangeExperienceScript.ToDict()
-    }
-    if request.ChangeRankScript != nil {
-        bodies["changeRankScript"] = request.ChangeRankScript.ToDict()
-    }
-    if request.ChangeRankCapScript != nil {
-        bodies["changeRankCapScript"] = request.ChangeRankCapScript.ToDict()
-    }
-    if request.OverflowExperienceScript != nil {
-        bodies["overflowExperienceScript"] = request.OverflowExperienceScript.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.ExperienceCapScriptId != nil && *request.ExperienceCapScriptId != "" {
+		bodies["experienceCapScriptId"] = *request.ExperienceCapScriptId
+	}
+	if request.ChangeExperienceScript != nil {
+		bodies["changeExperienceScript"] = request.ChangeExperienceScript.ToDict()
+	}
+	if request.ChangeRankScript != nil {
+		bodies["changeRankScript"] = request.ChangeRankScript.ToDict()
+	}
+	if request.ChangeRankCapScript != nil {
+		bodies["changeRankCapScript"] = request.ChangeRankCapScript.ToDict()
+	}
+	if request.OverflowExperienceScript != nil {
+		bodies["overflowExperienceScript"] = request.OverflowExperienceScript.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -238,16 +239,16 @@ func (p Gs2ExperienceWebSocketClient) getNamespaceStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceStatusResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetNamespaceStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -259,30 +260,30 @@ func (p Gs2ExperienceWebSocketClient) GetNamespaceStatusAsync(
 	request *GetNamespaceStatusRequest,
 	callback chan<- GetNamespaceStatusAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "namespace",
-    		"function": "getNamespaceStatus",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "namespace",
+			"function":    "getNamespaceStatus",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -319,16 +320,16 @@ func (p Gs2ExperienceWebSocketClient) getNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -340,30 +341,30 @@ func (p Gs2ExperienceWebSocketClient) GetNamespaceAsync(
 	request *GetNamespaceRequest,
 	callback chan<- GetNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "namespace",
-    		"function": "getNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "namespace",
+			"function":    "getNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -400,16 +401,16 @@ func (p Gs2ExperienceWebSocketClient) updateNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -421,54 +422,54 @@ func (p Gs2ExperienceWebSocketClient) UpdateNamespaceAsync(
 	request *UpdateNamespaceRequest,
 	callback chan<- UpdateNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "namespace",
-    		"function": "updateNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "namespace",
+			"function":    "updateNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.TransactionSetting != nil {
-        bodies["transactionSetting"] = request.TransactionSetting.ToDict()
-    }
-    if request.ExperienceCapScriptId != nil && *request.ExperienceCapScriptId != "" {
-        bodies["experienceCapScriptId"] = *request.ExperienceCapScriptId
-    }
-    if request.ChangeExperienceScript != nil {
-        bodies["changeExperienceScript"] = request.ChangeExperienceScript.ToDict()
-    }
-    if request.ChangeRankScript != nil {
-        bodies["changeRankScript"] = request.ChangeRankScript.ToDict()
-    }
-    if request.ChangeRankCapScript != nil {
-        bodies["changeRankCapScript"] = request.ChangeRankCapScript.ToDict()
-    }
-    if request.OverflowExperienceScript != nil {
-        bodies["overflowExperienceScript"] = request.OverflowExperienceScript.ToDict()
-    }
-    if request.LogSetting != nil {
-        bodies["logSetting"] = request.LogSetting.ToDict()
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
+	if request.ExperienceCapScriptId != nil && *request.ExperienceCapScriptId != "" {
+		bodies["experienceCapScriptId"] = *request.ExperienceCapScriptId
+	}
+	if request.ChangeExperienceScript != nil {
+		bodies["changeExperienceScript"] = request.ChangeExperienceScript.ToDict()
+	}
+	if request.ChangeRankScript != nil {
+		bodies["changeRankScript"] = request.ChangeRankScript.ToDict()
+	}
+	if request.ChangeRankCapScript != nil {
+		bodies["changeRankCapScript"] = request.ChangeRankCapScript.ToDict()
+	}
+	if request.OverflowExperienceScript != nil {
+		bodies["overflowExperienceScript"] = request.OverflowExperienceScript.ToDict()
+	}
+	if request.LogSetting != nil {
+		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -505,16 +506,16 @@ func (p Gs2ExperienceWebSocketClient) deleteNamespaceAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteNamespaceResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteNamespaceAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteNamespaceAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -526,30 +527,30 @@ func (p Gs2ExperienceWebSocketClient) DeleteNamespaceAsync(
 	request *DeleteNamespaceRequest,
 	callback chan<- DeleteNamespaceAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "namespace",
-    		"function": "deleteNamespace",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "namespace",
+			"function":    "deleteNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -586,16 +587,16 @@ func (p Gs2ExperienceWebSocketClient) describeExperienceModelMastersAsyncHandler
 	asyncResult := <-internalCallback
 	var result DescribeExperienceModelMastersResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeExperienceModelMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeExperienceModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeExperienceModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -607,36 +608,36 @@ func (p Gs2ExperienceWebSocketClient) DescribeExperienceModelMastersAsync(
 	request *DescribeExperienceModelMastersRequest,
 	callback chan<- DescribeExperienceModelMastersAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "experienceModelMaster",
-    		"function": "describeExperienceModelMasters",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "experienceModelMaster",
+			"function":    "describeExperienceModelMasters",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeExperienceModelMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -673,16 +674,16 @@ func (p Gs2ExperienceWebSocketClient) createExperienceModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateExperienceModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateExperienceModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateExperienceModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- CreateExperienceModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -694,58 +695,58 @@ func (p Gs2ExperienceWebSocketClient) CreateExperienceModelMasterAsync(
 	request *CreateExperienceModelMasterRequest,
 	callback chan<- CreateExperienceModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "experienceModelMaster",
-    		"function": "createExperienceModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "experienceModelMaster",
+			"function":    "createExperienceModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.DefaultExperience != nil {
-        bodies["defaultExperience"] = *request.DefaultExperience
-    }
-    if request.DefaultRankCap != nil {
-        bodies["defaultRankCap"] = *request.DefaultRankCap
-    }
-    if request.MaxRankCap != nil {
-        bodies["maxRankCap"] = *request.MaxRankCap
-    }
-    if request.RankThresholdName != nil && *request.RankThresholdName != "" {
-        bodies["rankThresholdName"] = *request.RankThresholdName
-    }
-    if request.AcquireActionRates != nil {
-        var _acquireActionRates []interface {}
-        for _, item := range request.AcquireActionRates {
-            _acquireActionRates = append(_acquireActionRates, item)
-        }
-        bodies["acquireActionRates"] = _acquireActionRates
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.DefaultExperience != nil {
+		bodies["defaultExperience"] = *request.DefaultExperience
+	}
+	if request.DefaultRankCap != nil {
+		bodies["defaultRankCap"] = *request.DefaultRankCap
+	}
+	if request.MaxRankCap != nil {
+		bodies["maxRankCap"] = *request.MaxRankCap
+	}
+	if request.RankThresholdName != nil && *request.RankThresholdName != "" {
+		bodies["rankThresholdName"] = *request.RankThresholdName
+	}
+	if request.AcquireActionRates != nil {
+		var _acquireActionRates []interface{}
+		for _, item := range request.AcquireActionRates {
+			_acquireActionRates = append(_acquireActionRates, item)
+		}
+		bodies["acquireActionRates"] = _acquireActionRates
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.createExperienceModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -782,16 +783,16 @@ func (p Gs2ExperienceWebSocketClient) getExperienceModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetExperienceModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetExperienceModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetExperienceModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetExperienceModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -803,33 +804,33 @@ func (p Gs2ExperienceWebSocketClient) GetExperienceModelMasterAsync(
 	request *GetExperienceModelMasterRequest,
 	callback chan<- GetExperienceModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "experienceModelMaster",
-    		"function": "getExperienceModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "experienceModelMaster",
+			"function":    "getExperienceModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getExperienceModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -866,16 +867,16 @@ func (p Gs2ExperienceWebSocketClient) updateExperienceModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateExperienceModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateExperienceModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateExperienceModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateExperienceModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -887,58 +888,58 @@ func (p Gs2ExperienceWebSocketClient) UpdateExperienceModelMasterAsync(
 	request *UpdateExperienceModelMasterRequest,
 	callback chan<- UpdateExperienceModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "experienceModelMaster",
-    		"function": "updateExperienceModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "experienceModelMaster",
+			"function":    "updateExperienceModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.DefaultExperience != nil {
-        bodies["defaultExperience"] = *request.DefaultExperience
-    }
-    if request.DefaultRankCap != nil {
-        bodies["defaultRankCap"] = *request.DefaultRankCap
-    }
-    if request.MaxRankCap != nil {
-        bodies["maxRankCap"] = *request.MaxRankCap
-    }
-    if request.RankThresholdName != nil && *request.RankThresholdName != "" {
-        bodies["rankThresholdName"] = *request.RankThresholdName
-    }
-    if request.AcquireActionRates != nil {
-        var _acquireActionRates []interface {}
-        for _, item := range request.AcquireActionRates {
-            _acquireActionRates = append(_acquireActionRates, item)
-        }
-        bodies["acquireActionRates"] = _acquireActionRates
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.DefaultExperience != nil {
+		bodies["defaultExperience"] = *request.DefaultExperience
+	}
+	if request.DefaultRankCap != nil {
+		bodies["defaultRankCap"] = *request.DefaultRankCap
+	}
+	if request.MaxRankCap != nil {
+		bodies["maxRankCap"] = *request.MaxRankCap
+	}
+	if request.RankThresholdName != nil && *request.RankThresholdName != "" {
+		bodies["rankThresholdName"] = *request.RankThresholdName
+	}
+	if request.AcquireActionRates != nil {
+		var _acquireActionRates []interface{}
+		for _, item := range request.AcquireActionRates {
+			_acquireActionRates = append(_acquireActionRates, item)
+		}
+		bodies["acquireActionRates"] = _acquireActionRates
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateExperienceModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -975,16 +976,16 @@ func (p Gs2ExperienceWebSocketClient) deleteExperienceModelMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteExperienceModelMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteExperienceModelMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteExperienceModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteExperienceModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -996,33 +997,33 @@ func (p Gs2ExperienceWebSocketClient) DeleteExperienceModelMasterAsync(
 	request *DeleteExperienceModelMasterRequest,
 	callback chan<- DeleteExperienceModelMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "experienceModelMaster",
-    		"function": "deleteExperienceModelMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "experienceModelMaster",
+			"function":    "deleteExperienceModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteExperienceModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1059,16 +1060,16 @@ func (p Gs2ExperienceWebSocketClient) describeExperienceModelsAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeExperienceModelsResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeExperienceModelsAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeExperienceModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeExperienceModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1080,30 +1081,30 @@ func (p Gs2ExperienceWebSocketClient) DescribeExperienceModelsAsync(
 	request *DescribeExperienceModelsRequest,
 	callback chan<- DescribeExperienceModelsAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "experienceModel",
-    		"function": "describeExperienceModels",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "experienceModel",
+			"function":    "describeExperienceModels",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeExperienceModelsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1140,16 +1141,16 @@ func (p Gs2ExperienceWebSocketClient) getExperienceModelAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetExperienceModelResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetExperienceModelAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetExperienceModelAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetExperienceModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1161,33 +1162,33 @@ func (p Gs2ExperienceWebSocketClient) GetExperienceModelAsync(
 	request *GetExperienceModelRequest,
 	callback chan<- GetExperienceModelAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "experienceModel",
-    		"function": "getExperienceModel",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "experienceModel",
+			"function":    "getExperienceModel",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getExperienceModelAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1224,16 +1225,16 @@ func (p Gs2ExperienceWebSocketClient) describeThresholdMastersAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeThresholdMastersResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeThresholdMastersAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeThresholdMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeThresholdMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1245,36 +1246,36 @@ func (p Gs2ExperienceWebSocketClient) DescribeThresholdMastersAsync(
 	request *DescribeThresholdMastersRequest,
 	callback chan<- DescribeThresholdMastersAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "thresholdMaster",
-    		"function": "describeThresholdMasters",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "thresholdMaster",
+			"function":    "describeThresholdMasters",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeThresholdMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1311,16 +1312,16 @@ func (p Gs2ExperienceWebSocketClient) createThresholdMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result CreateThresholdMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- CreateThresholdMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateThresholdMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- CreateThresholdMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1332,46 +1333,46 @@ func (p Gs2ExperienceWebSocketClient) CreateThresholdMasterAsync(
 	request *CreateThresholdMasterRequest,
 	callback chan<- CreateThresholdMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "thresholdMaster",
-    		"function": "createThresholdMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "thresholdMaster",
+			"function":    "createThresholdMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Name != nil && *request.Name != "" {
-        bodies["name"] = *request.Name
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.Values != nil {
-        var _values []interface {}
-        for _, item := range request.Values {
-            _values = append(_values, item)
-        }
-        bodies["values"] = _values
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.Values != nil {
+		var _values []interface{}
+		for _, item := range request.Values {
+			_values = append(_values, item)
+		}
+		bodies["values"] = _values
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.createThresholdMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1408,16 +1409,16 @@ func (p Gs2ExperienceWebSocketClient) getThresholdMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetThresholdMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetThresholdMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetThresholdMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetThresholdMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1429,33 +1430,33 @@ func (p Gs2ExperienceWebSocketClient) GetThresholdMasterAsync(
 	request *GetThresholdMasterRequest,
 	callback chan<- GetThresholdMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "thresholdMaster",
-    		"function": "getThresholdMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "thresholdMaster",
+			"function":    "getThresholdMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ThresholdName != nil && *request.ThresholdName != "" {
-        bodies["thresholdName"] = *request.ThresholdName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ThresholdName != nil && *request.ThresholdName != "" {
+		bodies["thresholdName"] = *request.ThresholdName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getThresholdMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1492,16 +1493,16 @@ func (p Gs2ExperienceWebSocketClient) updateThresholdMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateThresholdMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateThresholdMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateThresholdMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateThresholdMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1513,46 +1514,46 @@ func (p Gs2ExperienceWebSocketClient) UpdateThresholdMasterAsync(
 	request *UpdateThresholdMasterRequest,
 	callback chan<- UpdateThresholdMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "thresholdMaster",
-    		"function": "updateThresholdMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "thresholdMaster",
+			"function":    "updateThresholdMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ThresholdName != nil && *request.ThresholdName != "" {
-        bodies["thresholdName"] = *request.ThresholdName
-    }
-    if request.Description != nil && *request.Description != "" {
-        bodies["description"] = *request.Description
-    }
-    if request.Metadata != nil && *request.Metadata != "" {
-        bodies["metadata"] = *request.Metadata
-    }
-    if request.Values != nil {
-        var _values []interface {}
-        for _, item := range request.Values {
-            _values = append(_values, item)
-        }
-        bodies["values"] = _values
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ThresholdName != nil && *request.ThresholdName != "" {
+		bodies["thresholdName"] = *request.ThresholdName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.Values != nil {
+		var _values []interface{}
+		for _, item := range request.Values {
+			_values = append(_values, item)
+		}
+		bodies["values"] = _values
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateThresholdMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1589,16 +1590,16 @@ func (p Gs2ExperienceWebSocketClient) deleteThresholdMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteThresholdMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteThresholdMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteThresholdMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteThresholdMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1610,33 +1611,33 @@ func (p Gs2ExperienceWebSocketClient) DeleteThresholdMasterAsync(
 	request *DeleteThresholdMasterRequest,
 	callback chan<- DeleteThresholdMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "thresholdMaster",
-    		"function": "deleteThresholdMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "thresholdMaster",
+			"function":    "deleteThresholdMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ThresholdName != nil && *request.ThresholdName != "" {
-        bodies["thresholdName"] = *request.ThresholdName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ThresholdName != nil && *request.ThresholdName != "" {
+		bodies["thresholdName"] = *request.ThresholdName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.deleteThresholdMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1673,16 +1674,16 @@ func (p Gs2ExperienceWebSocketClient) exportMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ExportMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- ExportMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ExportMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- ExportMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1694,30 +1695,30 @@ func (p Gs2ExperienceWebSocketClient) ExportMasterAsync(
 	request *ExportMasterRequest,
 	callback chan<- ExportMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "currentExperienceMaster",
-    		"function": "exportMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "currentExperienceMaster",
+			"function":    "exportMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1754,16 +1755,16 @@ func (p Gs2ExperienceWebSocketClient) getCurrentExperienceMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetCurrentExperienceMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetCurrentExperienceMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetCurrentExperienceMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetCurrentExperienceMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1775,30 +1776,30 @@ func (p Gs2ExperienceWebSocketClient) GetCurrentExperienceMasterAsync(
 	request *GetCurrentExperienceMasterRequest,
 	callback chan<- GetCurrentExperienceMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "currentExperienceMaster",
-    		"function": "getCurrentExperienceMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "currentExperienceMaster",
+			"function":    "getCurrentExperienceMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getCurrentExperienceMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1835,16 +1836,16 @@ func (p Gs2ExperienceWebSocketClient) updateCurrentExperienceMasterAsyncHandler(
 	asyncResult := <-internalCallback
 	var result UpdateCurrentExperienceMasterResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentExperienceMasterAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentExperienceMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateCurrentExperienceMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1856,33 +1857,33 @@ func (p Gs2ExperienceWebSocketClient) UpdateCurrentExperienceMasterAsync(
 	request *UpdateCurrentExperienceMasterRequest,
 	callback chan<- UpdateCurrentExperienceMasterAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "currentExperienceMaster",
-    		"function": "updateCurrentExperienceMaster",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "currentExperienceMaster",
+			"function":    "updateCurrentExperienceMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.Settings != nil && *request.Settings != "" {
-        bodies["settings"] = *request.Settings
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Settings != nil && *request.Settings != "" {
+		bodies["settings"] = *request.Settings
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateCurrentExperienceMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -1919,16 +1920,16 @@ func (p Gs2ExperienceWebSocketClient) updateCurrentExperienceMasterFromGitHubAsy
 	asyncResult := <-internalCallback
 	var result UpdateCurrentExperienceMasterFromGitHubResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- UpdateCurrentExperienceMasterFromGitHubAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateCurrentExperienceMasterFromGitHubAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- UpdateCurrentExperienceMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -1940,33 +1941,33 @@ func (p Gs2ExperienceWebSocketClient) UpdateCurrentExperienceMasterFromGitHubAsy
 	request *UpdateCurrentExperienceMasterFromGitHubRequest,
 	callback chan<- UpdateCurrentExperienceMasterFromGitHubAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "currentExperienceMaster",
-    		"function": "updateCurrentExperienceMasterFromGitHub",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "currentExperienceMaster",
+			"function":    "updateCurrentExperienceMasterFromGitHub",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.CheckoutSetting != nil {
-        bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CheckoutSetting != nil {
+		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.updateCurrentExperienceMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2003,16 +2004,16 @@ func (p Gs2ExperienceWebSocketClient) describeStatusesAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeStatusesResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeStatusesAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStatusesAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeStatusesAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2024,45 +2025,45 @@ func (p Gs2ExperienceWebSocketClient) DescribeStatusesAsync(
 	request *DescribeStatusesRequest,
 	callback chan<- DescribeStatusesAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "describeStatuses",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "describeStatuses",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
 
 	go p.describeStatusesAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2099,16 +2100,16 @@ func (p Gs2ExperienceWebSocketClient) describeStatusesByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DescribeStatusesByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DescribeStatusesByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStatusesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DescribeStatusesByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2120,42 +2121,42 @@ func (p Gs2ExperienceWebSocketClient) DescribeStatusesByUserIdAsync(
 	request *DescribeStatusesByUserIdRequest,
 	callback chan<- DescribeStatusesByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "describeStatusesByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "describeStatusesByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.PageToken != nil && *request.PageToken != "" {
-        bodies["pageToken"] = *request.PageToken
-    }
-    if request.Limit != nil {
-        bodies["limit"] = *request.Limit
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.describeStatusesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2192,16 +2193,16 @@ func (p Gs2ExperienceWebSocketClient) getStatusAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetStatusResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStatusAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStatusAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetStatusAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2213,42 +2214,42 @@ func (p Gs2ExperienceWebSocketClient) GetStatusAsync(
 	request *GetStatusRequest,
 	callback chan<- GetStatusAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "getStatus",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "getStatus",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
 
 	go p.getStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2285,16 +2286,16 @@ func (p Gs2ExperienceWebSocketClient) getStatusByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetStatusByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStatusByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2306,39 +2307,39 @@ func (p Gs2ExperienceWebSocketClient) GetStatusByUserIdAsync(
 	request *GetStatusByUserIdRequest,
 	callback chan<- GetStatusByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "getStatusByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "getStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2375,16 +2376,16 @@ func (p Gs2ExperienceWebSocketClient) getStatusWithSignatureAsyncHandler(
 	asyncResult := <-internalCallback
 	var result GetStatusWithSignatureResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStatusWithSignatureAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStatusWithSignatureAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetStatusWithSignatureAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2396,45 +2397,45 @@ func (p Gs2ExperienceWebSocketClient) GetStatusWithSignatureAsync(
 	request *GetStatusWithSignatureRequest,
 	callback chan<- GetStatusWithSignatureAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "getStatusWithSignature",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "getStatusWithSignature",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.AccessToken != nil && *request.AccessToken != "" {
-        bodies["accessToken"] = *request.AccessToken
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.AccessToken != nil {
-        bodies["xGs2AccessToken"] = string(*request.AccessToken)
-    }
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
 
 	go p.getStatusWithSignatureAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2471,16 +2472,16 @@ func (p Gs2ExperienceWebSocketClient) getStatusWithSignatureByUserIdAsyncHandler
 	asyncResult := <-internalCallback
 	var result GetStatusWithSignatureByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- GetStatusWithSignatureByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetStatusWithSignatureByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- GetStatusWithSignatureByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2492,42 +2493,42 @@ func (p Gs2ExperienceWebSocketClient) GetStatusWithSignatureByUserIdAsync(
 	request *GetStatusWithSignatureByUserIdRequest,
 	callback chan<- GetStatusWithSignatureByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "getStatusWithSignatureByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "getStatusWithSignatureByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.getStatusWithSignatureByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2564,16 +2565,16 @@ func (p Gs2ExperienceWebSocketClient) addExperienceByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AddExperienceByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AddExperienceByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AddExperienceByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- AddExperienceByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2585,45 +2586,45 @@ func (p Gs2ExperienceWebSocketClient) AddExperienceByUserIdAsync(
 	request *AddExperienceByUserIdRequest,
 	callback chan<- AddExperienceByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "addExperienceByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "addExperienceByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.ExperienceValue != nil {
-        bodies["experienceValue"] = *request.ExperienceValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ExperienceValue != nil {
+		bodies["experienceValue"] = *request.ExperienceValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.addExperienceByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2660,16 +2661,16 @@ func (p Gs2ExperienceWebSocketClient) subExperienceByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SubExperienceByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SubExperienceByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SubExperienceByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SubExperienceByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2681,45 +2682,45 @@ func (p Gs2ExperienceWebSocketClient) SubExperienceByUserIdAsync(
 	request *SubExperienceByUserIdRequest,
 	callback chan<- SubExperienceByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "subExperienceByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "subExperienceByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.ExperienceValue != nil {
-        bodies["experienceValue"] = *request.ExperienceValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ExperienceValue != nil {
+		bodies["experienceValue"] = *request.ExperienceValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.subExperienceByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2756,16 +2757,16 @@ func (p Gs2ExperienceWebSocketClient) setExperienceByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetExperienceByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetExperienceByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetExperienceByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SetExperienceByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2777,45 +2778,45 @@ func (p Gs2ExperienceWebSocketClient) SetExperienceByUserIdAsync(
 	request *SetExperienceByUserIdRequest,
 	callback chan<- SetExperienceByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "setExperienceByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "setExperienceByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.ExperienceValue != nil {
-        bodies["experienceValue"] = *request.ExperienceValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ExperienceValue != nil {
+		bodies["experienceValue"] = *request.ExperienceValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.setExperienceByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2852,16 +2853,16 @@ func (p Gs2ExperienceWebSocketClient) addRankCapByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AddRankCapByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AddRankCapByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AddRankCapByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- AddRankCapByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2873,45 +2874,45 @@ func (p Gs2ExperienceWebSocketClient) AddRankCapByUserIdAsync(
 	request *AddRankCapByUserIdRequest,
 	callback chan<- AddRankCapByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "addRankCapByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "addRankCapByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.RankCapValue != nil {
-        bodies["rankCapValue"] = *request.RankCapValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.RankCapValue != nil {
+		bodies["rankCapValue"] = *request.RankCapValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.addRankCapByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -2948,16 +2949,16 @@ func (p Gs2ExperienceWebSocketClient) subRankCapByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SubRankCapByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SubRankCapByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SubRankCapByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SubRankCapByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -2969,45 +2970,45 @@ func (p Gs2ExperienceWebSocketClient) SubRankCapByUserIdAsync(
 	request *SubRankCapByUserIdRequest,
 	callback chan<- SubRankCapByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "subRankCapByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "subRankCapByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.RankCapValue != nil {
-        bodies["rankCapValue"] = *request.RankCapValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.RankCapValue != nil {
+		bodies["rankCapValue"] = *request.RankCapValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.subRankCapByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3044,16 +3045,16 @@ func (p Gs2ExperienceWebSocketClient) setRankCapByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetRankCapByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetRankCapByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetRankCapByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SetRankCapByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3065,45 +3066,45 @@ func (p Gs2ExperienceWebSocketClient) SetRankCapByUserIdAsync(
 	request *SetRankCapByUserIdRequest,
 	callback chan<- SetRankCapByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "setRankCapByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "setRankCapByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.RankCapValue != nil {
-        bodies["rankCapValue"] = *request.RankCapValue
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.RankCapValue != nil {
+		bodies["rankCapValue"] = *request.RankCapValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.setRankCapByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3140,16 +3141,16 @@ func (p Gs2ExperienceWebSocketClient) deleteStatusByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result DeleteStatusByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- DeleteStatusByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteStatusByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- DeleteStatusByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3161,42 +3162,42 @@ func (p Gs2ExperienceWebSocketClient) DeleteStatusByUserIdAsync(
 	request *DeleteStatusByUserIdRequest,
 	callback chan<- DeleteStatusByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "deleteStatusByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "deleteStatusByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.deleteStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3233,16 +3234,16 @@ func (p Gs2ExperienceWebSocketClient) addExperienceByStampSheetAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AddExperienceByStampSheetResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AddExperienceByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AddExperienceByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- AddExperienceByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3254,33 +3255,33 @@ func (p Gs2ExperienceWebSocketClient) AddExperienceByStampSheetAsync(
 	request *AddExperienceByStampSheetRequest,
 	callback chan<- AddExperienceByStampSheetAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "addExperienceByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "addExperienceByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.addExperienceByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3317,16 +3318,16 @@ func (p Gs2ExperienceWebSocketClient) subExperienceByStampTaskAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SubExperienceByStampTaskResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SubExperienceByStampTaskAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SubExperienceByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SubExperienceByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3338,33 +3339,33 @@ func (p Gs2ExperienceWebSocketClient) SubExperienceByStampTaskAsync(
 	request *SubExperienceByStampTaskRequest,
 	callback chan<- SubExperienceByStampTaskAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "subExperienceByStampTask",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "subExperienceByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampTask != nil && *request.StampTask != "" {
-        bodies["stampTask"] = *request.StampTask
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.subExperienceByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3401,16 +3402,16 @@ func (p Gs2ExperienceWebSocketClient) addRankCapByStampSheetAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AddRankCapByStampSheetResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- AddRankCapByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AddRankCapByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- AddRankCapByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3422,33 +3423,33 @@ func (p Gs2ExperienceWebSocketClient) AddRankCapByStampSheetAsync(
 	request *AddRankCapByStampSheetRequest,
 	callback chan<- AddRankCapByStampSheetAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "addRankCapByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "addRankCapByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.addRankCapByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3485,16 +3486,16 @@ func (p Gs2ExperienceWebSocketClient) subRankCapByStampTaskAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SubRankCapByStampTaskResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SubRankCapByStampTaskAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SubRankCapByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SubRankCapByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3506,33 +3507,33 @@ func (p Gs2ExperienceWebSocketClient) SubRankCapByStampTaskAsync(
 	request *SubRankCapByStampTaskRequest,
 	callback chan<- SubRankCapByStampTaskAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "subRankCapByStampTask",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "subRankCapByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampTask != nil && *request.StampTask != "" {
-        bodies["stampTask"] = *request.StampTask
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.subRankCapByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3569,16 +3570,16 @@ func (p Gs2ExperienceWebSocketClient) setRankCapByStampSheetAsyncHandler(
 	asyncResult := <-internalCallback
 	var result SetRankCapByStampSheetResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- SetRankCapByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetRankCapByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- SetRankCapByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3590,33 +3591,33 @@ func (p Gs2ExperienceWebSocketClient) SetRankCapByStampSheetAsync(
 	request *SetRankCapByStampSheetRequest,
 	callback chan<- SetRankCapByStampSheetAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "setRankCapByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "setRankCapByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.setRankCapByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3653,16 +3654,16 @@ func (p Gs2ExperienceWebSocketClient) multiplyAcquireActionsByUserIdAsyncHandler
 	asyncResult := <-internalCallback
 	var result MultiplyAcquireActionsByUserIdResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- MultiplyAcquireActionsByUserIdAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- MultiplyAcquireActionsByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- MultiplyAcquireActionsByUserIdAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3674,52 +3675,52 @@ func (p Gs2ExperienceWebSocketClient) MultiplyAcquireActionsByUserIdAsync(
 	request *MultiplyAcquireActionsByUserIdRequest,
 	callback chan<- MultiplyAcquireActionsByUserIdAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "multiplyAcquireActionsByUserId",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "multiplyAcquireActionsByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.NamespaceName != nil && *request.NamespaceName != "" {
-        bodies["namespaceName"] = *request.NamespaceName
-    }
-    if request.UserId != nil && *request.UserId != "" {
-        bodies["userId"] = *request.UserId
-    }
-    if request.ExperienceName != nil && *request.ExperienceName != "" {
-        bodies["experienceName"] = *request.ExperienceName
-    }
-    if request.PropertyId != nil && *request.PropertyId != "" {
-        bodies["propertyId"] = *request.PropertyId
-    }
-    if request.RateName != nil && *request.RateName != "" {
-        bodies["rateName"] = *request.RateName
-    }
-    if request.AcquireActions != nil {
-        var _acquireActions []interface {}
-        for _, item := range request.AcquireActions {
-            _acquireActions = append(_acquireActions, item)
-        }
-        bodies["acquireActions"] = _acquireActions
-    }
-	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
 	}
-    if request.DuplicationAvoider != nil {
-      bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-    }
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		bodies["rateName"] = *request.RateName
+	}
+	if request.AcquireActions != nil {
+		var _acquireActions []interface{}
+		for _, item := range request.AcquireActions {
+			_acquireActions = append(_acquireActions, item)
+		}
+		bodies["acquireActions"] = _acquireActions
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.multiplyAcquireActionsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
@@ -3756,16 +3757,16 @@ func (p Gs2ExperienceWebSocketClient) multiplyAcquireActionsByStampSheetAsyncHan
 	asyncResult := <-internalCallback
 	var result MultiplyAcquireActionsByStampSheetResult
 	if asyncResult.Payload != "" {
-        err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-        if err != nil {
-            callback <- MultiplyAcquireActionsByStampSheetAsyncResult{
-                err: err,
-            }
-            return
-        }
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- MultiplyAcquireActionsByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
 	}
-    if asyncResult.Err != nil {
-    }
+	if asyncResult.Err != nil {
+	}
 	callback <- MultiplyAcquireActionsByStampSheetAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
@@ -3777,33 +3778,33 @@ func (p Gs2ExperienceWebSocketClient) MultiplyAcquireActionsByStampSheetAsync(
 	request *MultiplyAcquireActionsByStampSheetRequest,
 	callback chan<- MultiplyAcquireActionsByStampSheetAsyncResult,
 ) {
-    requestId := core.WebSocketRequestId(uuid.New().String())
-    var bodies = core.WebSocketBodies{
-    	"x_gs2": map[string]interface{} {
-    		"service": "experience",
-    		"component": "status",
-    		"function": "multiplyAcquireActionsByStampSheet",
-            "contentType": "application/json",
-    		"requestId": requestId,
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "multiplyAcquireActionsByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
 		},
 	}
 	for k, v := range p.Session.CreateAuthorizationHeader() {
 		bodies[k] = v
 	}
-    if request.StampSheet != nil && *request.StampSheet != "" {
-        bodies["stampSheet"] = *request.StampSheet
-    }
-    if request.KeyId != nil && *request.KeyId != "" {
-        bodies["keyId"] = *request.KeyId
-    }
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
 	if request.ContextStack != nil {
-    	bodies["contextStack"] = *request.ContextStack;
+		bodies["contextStack"] = *request.ContextStack
 	}
 
 	go p.multiplyAcquireActionsByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
-			Bodies: bodies,
+			Bodies:    bodies,
 		},
 		callback,
 	)
