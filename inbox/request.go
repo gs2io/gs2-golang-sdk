@@ -262,6 +262,7 @@ type DescribeMessagesRequest struct {
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
 	AccessToken   *string `json:"accessToken"`
+	IsRead        *bool   `json:"isRead"`
 	PageToken     *string `json:"pageToken"`
 	Limit         *int32  `json:"limit"`
 }
@@ -276,6 +277,7 @@ func NewDescribeMessagesRequestFromDict(data map[string]interface{}) DescribeMes
 	return DescribeMessagesRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 		AccessToken:   core.CastString(data["accessToken"]),
+		IsRead:        core.CastBool(data["isRead"]),
 		PageToken:     core.CastString(data["pageToken"]),
 		Limit:         core.CastInt32(data["limit"]),
 	}
@@ -285,6 +287,7 @@ func (p DescribeMessagesRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
+		"isRead":        p.IsRead,
 		"pageToken":     p.PageToken,
 		"limit":         p.Limit,
 	}
@@ -299,6 +302,7 @@ type DescribeMessagesByUserIdRequest struct {
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
 	UserId        *string `json:"userId"`
+	IsRead        *bool   `json:"isRead"`
 	PageToken     *string `json:"pageToken"`
 	Limit         *int32  `json:"limit"`
 }
@@ -313,6 +317,7 @@ func NewDescribeMessagesByUserIdRequestFromDict(data map[string]interface{}) Des
 	return DescribeMessagesByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 		UserId:        core.CastString(data["userId"]),
+		IsRead:        core.CastBool(data["isRead"]),
 		PageToken:     core.CastString(data["pageToken"]),
 		Limit:         core.CastInt32(data["limit"]),
 	}
@@ -322,6 +327,7 @@ func (p DescribeMessagesByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"userId":        p.UserId,
+		"isRead":        p.IsRead,
 		"pageToken":     p.PageToken,
 		"limit":         p.Limit,
 	}

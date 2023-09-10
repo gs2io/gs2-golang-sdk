@@ -639,6 +639,9 @@ func (p Gs2InboxWebSocketClient) DescribeMessagesAsync(
 	if request.AccessToken != nil && *request.AccessToken != "" {
 		bodies["accessToken"] = *request.AccessToken
 	}
+	if request.IsRead != nil {
+		bodies["isRead"] = *request.IsRead
+	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken
 	}
@@ -731,6 +734,9 @@ func (p Gs2InboxWebSocketClient) DescribeMessagesByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.IsRead != nil {
+		bodies["isRead"] = *request.IsRead
 	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken

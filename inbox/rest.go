@@ -654,6 +654,9 @@ func (p Gs2InboxRestClient) DescribeMessagesAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.IsRead != nil {
+		queryStrings["isRead"] = core.ToString(*request.IsRead)
+	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
 	}
@@ -749,6 +752,9 @@ func (p Gs2InboxRestClient) DescribeMessagesByUserIdAsync(
 	queryStrings := core.QueryStrings{}
 	if request.UserId != nil {
 		queryStrings["userId"] = core.ToString(*request.UserId)
+	}
+	if request.IsRead != nil {
+		queryStrings["isRead"] = core.ToString(*request.IsRead)
 	}
 	if request.PageToken != nil {
 		queryStrings["pageToken"] = core.ToString(*request.PageToken)
