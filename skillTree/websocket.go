@@ -550,9 +550,9 @@ func (p Gs2SkillTreeWebSocketClient) DeleteNamespace(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2SkillTreeWebSocketClient) describeStatusModelsAsyncHandler(
+func (p Gs2SkillTreeWebSocketClient) describeNodeModelsAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeStatusModelsAsyncResult,
+	callback chan<- DescribeNodeModelsAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -561,17 +561,17 @@ func (p Gs2SkillTreeWebSocketClient) describeStatusModelsAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- DescribeStatusModelsAsyncResult{
+		callback <- DescribeNodeModelsAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result DescribeStatusModelsResult
+	var result DescribeNodeModelsResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- DescribeStatusModelsAsyncResult{
+			callback <- DescribeNodeModelsAsyncResult{
 				err: err,
 			}
 			return
@@ -579,23 +579,23 @@ func (p Gs2SkillTreeWebSocketClient) describeStatusModelsAsyncHandler(
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- DescribeStatusModelsAsyncResult{
+	callback <- DescribeNodeModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeWebSocketClient) DescribeStatusModelsAsync(
-	request *DescribeStatusModelsRequest,
-	callback chan<- DescribeStatusModelsAsyncResult,
+func (p Gs2SkillTreeWebSocketClient) DescribeNodeModelsAsync(
+	request *DescribeNodeModelsRequest,
+	callback chan<- DescribeNodeModelsAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "skill_tree",
 			"component":   "nodeModel",
-			"function":    "describeStatusModels",
+			"function":    "describeNodeModels",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -610,7 +610,7 @@ func (p Gs2SkillTreeWebSocketClient) DescribeStatusModelsAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.describeStatusModelsAsyncHandler(
+	go p.describeNodeModelsAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -619,11 +619,11 @@ func (p Gs2SkillTreeWebSocketClient) DescribeStatusModelsAsync(
 	)
 }
 
-func (p Gs2SkillTreeWebSocketClient) DescribeStatusModels(
-	request *DescribeStatusModelsRequest,
-) (*DescribeStatusModelsResult, error) {
-	callback := make(chan DescribeStatusModelsAsyncResult, 1)
-	go p.DescribeStatusModelsAsync(
+func (p Gs2SkillTreeWebSocketClient) DescribeNodeModels(
+	request *DescribeNodeModelsRequest,
+) (*DescribeNodeModelsResult, error) {
+	callback := make(chan DescribeNodeModelsAsyncResult, 1)
+	go p.DescribeNodeModelsAsync(
 		request,
 		callback,
 	)
@@ -631,9 +631,9 @@ func (p Gs2SkillTreeWebSocketClient) DescribeStatusModels(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2SkillTreeWebSocketClient) getStatusModelAsyncHandler(
+func (p Gs2SkillTreeWebSocketClient) getNodeModelAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- GetStatusModelAsyncResult,
+	callback chan<- GetNodeModelAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -642,17 +642,17 @@ func (p Gs2SkillTreeWebSocketClient) getStatusModelAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- GetStatusModelAsyncResult{
+		callback <- GetNodeModelAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result GetStatusModelResult
+	var result GetNodeModelResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- GetStatusModelAsyncResult{
+			callback <- GetNodeModelAsyncResult{
 				err: err,
 			}
 			return
@@ -660,23 +660,23 @@ func (p Gs2SkillTreeWebSocketClient) getStatusModelAsyncHandler(
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- GetStatusModelAsyncResult{
+	callback <- GetNodeModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeWebSocketClient) GetStatusModelAsync(
-	request *GetStatusModelRequest,
-	callback chan<- GetStatusModelAsyncResult,
+func (p Gs2SkillTreeWebSocketClient) GetNodeModelAsync(
+	request *GetNodeModelRequest,
+	callback chan<- GetNodeModelAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "skill_tree",
 			"component":   "nodeModel",
-			"function":    "getStatusModel",
+			"function":    "getNodeModel",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -694,7 +694,7 @@ func (p Gs2SkillTreeWebSocketClient) GetStatusModelAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.getStatusModelAsyncHandler(
+	go p.getNodeModelAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -703,11 +703,11 @@ func (p Gs2SkillTreeWebSocketClient) GetStatusModelAsync(
 	)
 }
 
-func (p Gs2SkillTreeWebSocketClient) GetStatusModel(
-	request *GetStatusModelRequest,
-) (*GetStatusModelResult, error) {
-	callback := make(chan GetStatusModelAsyncResult, 1)
-	go p.GetStatusModelAsync(
+func (p Gs2SkillTreeWebSocketClient) GetNodeModel(
+	request *GetNodeModelRequest,
+) (*GetNodeModelResult, error) {
+	callback := make(chan GetNodeModelAsyncResult, 1)
+	go p.GetNodeModelAsync(
 		request,
 		callback,
 	)
@@ -715,9 +715,9 @@ func (p Gs2SkillTreeWebSocketClient) GetStatusModel(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2SkillTreeWebSocketClient) describeStatusModelMastersAsyncHandler(
+func (p Gs2SkillTreeWebSocketClient) describeNodeModelMastersAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- DescribeStatusModelMastersAsyncResult,
+	callback chan<- DescribeNodeModelMastersAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -726,17 +726,17 @@ func (p Gs2SkillTreeWebSocketClient) describeStatusModelMastersAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- DescribeStatusModelMastersAsyncResult{
+		callback <- DescribeNodeModelMastersAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result DescribeStatusModelMastersResult
+	var result DescribeNodeModelMastersResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- DescribeStatusModelMastersAsyncResult{
+			callback <- DescribeNodeModelMastersAsyncResult{
 				err: err,
 			}
 			return
@@ -744,23 +744,23 @@ func (p Gs2SkillTreeWebSocketClient) describeStatusModelMastersAsyncHandler(
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- DescribeStatusModelMastersAsyncResult{
+	callback <- DescribeNodeModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeWebSocketClient) DescribeStatusModelMastersAsync(
-	request *DescribeStatusModelMastersRequest,
-	callback chan<- DescribeStatusModelMastersAsyncResult,
+func (p Gs2SkillTreeWebSocketClient) DescribeNodeModelMastersAsync(
+	request *DescribeNodeModelMastersRequest,
+	callback chan<- DescribeNodeModelMastersAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "skill_tree",
 			"component":   "nodeModelMaster",
-			"function":    "describeStatusModelMasters",
+			"function":    "describeNodeModelMasters",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -781,7 +781,7 @@ func (p Gs2SkillTreeWebSocketClient) DescribeStatusModelMastersAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.describeStatusModelMastersAsyncHandler(
+	go p.describeNodeModelMastersAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -790,11 +790,11 @@ func (p Gs2SkillTreeWebSocketClient) DescribeStatusModelMastersAsync(
 	)
 }
 
-func (p Gs2SkillTreeWebSocketClient) DescribeStatusModelMasters(
-	request *DescribeStatusModelMastersRequest,
-) (*DescribeStatusModelMastersResult, error) {
-	callback := make(chan DescribeStatusModelMastersAsyncResult, 1)
-	go p.DescribeStatusModelMastersAsync(
+func (p Gs2SkillTreeWebSocketClient) DescribeNodeModelMasters(
+	request *DescribeNodeModelMastersRequest,
+) (*DescribeNodeModelMastersResult, error) {
+	callback := make(chan DescribeNodeModelMastersAsyncResult, 1)
+	go p.DescribeNodeModelMastersAsync(
 		request,
 		callback,
 	)
@@ -802,9 +802,9 @@ func (p Gs2SkillTreeWebSocketClient) DescribeStatusModelMasters(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2SkillTreeWebSocketClient) createStatusModelMasterAsyncHandler(
+func (p Gs2SkillTreeWebSocketClient) createNodeModelMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- CreateStatusModelMasterAsyncResult,
+	callback chan<- CreateNodeModelMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -813,17 +813,17 @@ func (p Gs2SkillTreeWebSocketClient) createStatusModelMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- CreateStatusModelMasterAsyncResult{
+		callback <- CreateNodeModelMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result CreateStatusModelMasterResult
+	var result CreateNodeModelMasterResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- CreateStatusModelMasterAsyncResult{
+			callback <- CreateNodeModelMasterAsyncResult{
 				err: err,
 			}
 			return
@@ -831,23 +831,23 @@ func (p Gs2SkillTreeWebSocketClient) createStatusModelMasterAsyncHandler(
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- CreateStatusModelMasterAsyncResult{
+	callback <- CreateNodeModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeWebSocketClient) CreateStatusModelMasterAsync(
-	request *CreateStatusModelMasterRequest,
-	callback chan<- CreateStatusModelMasterAsyncResult,
+func (p Gs2SkillTreeWebSocketClient) CreateNodeModelMasterAsync(
+	request *CreateNodeModelMasterRequest,
+	callback chan<- CreateNodeModelMasterAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "skill_tree",
 			"component":   "nodeModelMaster",
-			"function":    "createStatusModelMaster",
+			"function":    "createNodeModelMaster",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -888,7 +888,7 @@ func (p Gs2SkillTreeWebSocketClient) CreateStatusModelMasterAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.createStatusModelMasterAsyncHandler(
+	go p.createNodeModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -897,11 +897,11 @@ func (p Gs2SkillTreeWebSocketClient) CreateStatusModelMasterAsync(
 	)
 }
 
-func (p Gs2SkillTreeWebSocketClient) CreateStatusModelMaster(
-	request *CreateStatusModelMasterRequest,
-) (*CreateStatusModelMasterResult, error) {
-	callback := make(chan CreateStatusModelMasterAsyncResult, 1)
-	go p.CreateStatusModelMasterAsync(
+func (p Gs2SkillTreeWebSocketClient) CreateNodeModelMaster(
+	request *CreateNodeModelMasterRequest,
+) (*CreateNodeModelMasterResult, error) {
+	callback := make(chan CreateNodeModelMasterAsyncResult, 1)
+	go p.CreateNodeModelMasterAsync(
 		request,
 		callback,
 	)
@@ -909,9 +909,9 @@ func (p Gs2SkillTreeWebSocketClient) CreateStatusModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2SkillTreeWebSocketClient) getStatusModelMasterAsyncHandler(
+func (p Gs2SkillTreeWebSocketClient) getNodeModelMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- GetStatusModelMasterAsyncResult,
+	callback chan<- GetNodeModelMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -920,17 +920,17 @@ func (p Gs2SkillTreeWebSocketClient) getStatusModelMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- GetStatusModelMasterAsyncResult{
+		callback <- GetNodeModelMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result GetStatusModelMasterResult
+	var result GetNodeModelMasterResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- GetStatusModelMasterAsyncResult{
+			callback <- GetNodeModelMasterAsyncResult{
 				err: err,
 			}
 			return
@@ -938,23 +938,23 @@ func (p Gs2SkillTreeWebSocketClient) getStatusModelMasterAsyncHandler(
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- GetStatusModelMasterAsyncResult{
+	callback <- GetNodeModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeWebSocketClient) GetStatusModelMasterAsync(
-	request *GetStatusModelMasterRequest,
-	callback chan<- GetStatusModelMasterAsyncResult,
+func (p Gs2SkillTreeWebSocketClient) GetNodeModelMasterAsync(
+	request *GetNodeModelMasterRequest,
+	callback chan<- GetNodeModelMasterAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "skill_tree",
 			"component":   "nodeModelMaster",
-			"function":    "getStatusModelMaster",
+			"function":    "getNodeModelMaster",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -972,7 +972,7 @@ func (p Gs2SkillTreeWebSocketClient) GetStatusModelMasterAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.getStatusModelMasterAsyncHandler(
+	go p.getNodeModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -981,11 +981,11 @@ func (p Gs2SkillTreeWebSocketClient) GetStatusModelMasterAsync(
 	)
 }
 
-func (p Gs2SkillTreeWebSocketClient) GetStatusModelMaster(
-	request *GetStatusModelMasterRequest,
-) (*GetStatusModelMasterResult, error) {
-	callback := make(chan GetStatusModelMasterAsyncResult, 1)
-	go p.GetStatusModelMasterAsync(
+func (p Gs2SkillTreeWebSocketClient) GetNodeModelMaster(
+	request *GetNodeModelMasterRequest,
+) (*GetNodeModelMasterResult, error) {
+	callback := make(chan GetNodeModelMasterAsyncResult, 1)
+	go p.GetNodeModelMasterAsync(
 		request,
 		callback,
 	)
@@ -993,9 +993,9 @@ func (p Gs2SkillTreeWebSocketClient) GetStatusModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2SkillTreeWebSocketClient) updateStatusModelMasterAsyncHandler(
+func (p Gs2SkillTreeWebSocketClient) updateNodeModelMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- UpdateStatusModelMasterAsyncResult,
+	callback chan<- UpdateNodeModelMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -1004,17 +1004,17 @@ func (p Gs2SkillTreeWebSocketClient) updateStatusModelMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- UpdateStatusModelMasterAsyncResult{
+		callback <- UpdateNodeModelMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateStatusModelMasterResult
+	var result UpdateNodeModelMasterResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- UpdateStatusModelMasterAsyncResult{
+			callback <- UpdateNodeModelMasterAsyncResult{
 				err: err,
 			}
 			return
@@ -1022,23 +1022,23 @@ func (p Gs2SkillTreeWebSocketClient) updateStatusModelMasterAsyncHandler(
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- UpdateStatusModelMasterAsyncResult{
+	callback <- UpdateNodeModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeWebSocketClient) UpdateStatusModelMasterAsync(
-	request *UpdateStatusModelMasterRequest,
-	callback chan<- UpdateStatusModelMasterAsyncResult,
+func (p Gs2SkillTreeWebSocketClient) UpdateNodeModelMasterAsync(
+	request *UpdateNodeModelMasterRequest,
+	callback chan<- UpdateNodeModelMasterAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "skill_tree",
 			"component":   "nodeModelMaster",
-			"function":    "updateStatusModelMaster",
+			"function":    "updateNodeModelMaster",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -1079,7 +1079,7 @@ func (p Gs2SkillTreeWebSocketClient) UpdateStatusModelMasterAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.updateStatusModelMasterAsyncHandler(
+	go p.updateNodeModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -1088,11 +1088,11 @@ func (p Gs2SkillTreeWebSocketClient) UpdateStatusModelMasterAsync(
 	)
 }
 
-func (p Gs2SkillTreeWebSocketClient) UpdateStatusModelMaster(
-	request *UpdateStatusModelMasterRequest,
-) (*UpdateStatusModelMasterResult, error) {
-	callback := make(chan UpdateStatusModelMasterAsyncResult, 1)
-	go p.UpdateStatusModelMasterAsync(
+func (p Gs2SkillTreeWebSocketClient) UpdateNodeModelMaster(
+	request *UpdateNodeModelMasterRequest,
+) (*UpdateNodeModelMasterResult, error) {
+	callback := make(chan UpdateNodeModelMasterAsyncResult, 1)
+	go p.UpdateNodeModelMasterAsync(
 		request,
 		callback,
 	)
@@ -1100,9 +1100,9 @@ func (p Gs2SkillTreeWebSocketClient) UpdateStatusModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2SkillTreeWebSocketClient) deleteStatusModelMasterAsyncHandler(
+func (p Gs2SkillTreeWebSocketClient) deleteNodeModelMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- DeleteStatusModelMasterAsyncResult,
+	callback chan<- DeleteNodeModelMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -1111,17 +1111,17 @@ func (p Gs2SkillTreeWebSocketClient) deleteStatusModelMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- DeleteStatusModelMasterAsyncResult{
+		callback <- DeleteNodeModelMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result DeleteStatusModelMasterResult
+	var result DeleteNodeModelMasterResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- DeleteStatusModelMasterAsyncResult{
+			callback <- DeleteNodeModelMasterAsyncResult{
 				err: err,
 			}
 			return
@@ -1129,23 +1129,23 @@ func (p Gs2SkillTreeWebSocketClient) deleteStatusModelMasterAsyncHandler(
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- DeleteStatusModelMasterAsyncResult{
+	callback <- DeleteNodeModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeWebSocketClient) DeleteStatusModelMasterAsync(
-	request *DeleteStatusModelMasterRequest,
-	callback chan<- DeleteStatusModelMasterAsyncResult,
+func (p Gs2SkillTreeWebSocketClient) DeleteNodeModelMasterAsync(
+	request *DeleteNodeModelMasterRequest,
+	callback chan<- DeleteNodeModelMasterAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "skill_tree",
 			"component":   "nodeModelMaster",
-			"function":    "deleteStatusModelMaster",
+			"function":    "deleteNodeModelMaster",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -1163,7 +1163,7 @@ func (p Gs2SkillTreeWebSocketClient) DeleteStatusModelMasterAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.deleteStatusModelMasterAsyncHandler(
+	go p.deleteNodeModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -1172,11 +1172,11 @@ func (p Gs2SkillTreeWebSocketClient) DeleteStatusModelMasterAsync(
 	)
 }
 
-func (p Gs2SkillTreeWebSocketClient) DeleteStatusModelMaster(
-	request *DeleteStatusModelMasterRequest,
-) (*DeleteStatusModelMasterResult, error) {
-	callback := make(chan DeleteStatusModelMasterAsyncResult, 1)
-	go p.DeleteStatusModelMasterAsync(
+func (p Gs2SkillTreeWebSocketClient) DeleteNodeModelMaster(
+	request *DeleteNodeModelMasterRequest,
+) (*DeleteNodeModelMasterResult, error) {
+	callback := make(chan DeleteNodeModelMasterAsyncResult, 1)
+	go p.DeleteNodeModelMasterAsync(
 		request,
 		callback,
 	)
@@ -2393,9 +2393,9 @@ func (p Gs2SkillTreeWebSocketClient) ExportMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2SkillTreeWebSocketClient) getCurrentStatusMasterAsyncHandler(
+func (p Gs2SkillTreeWebSocketClient) getCurrentTreeMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- GetCurrentStatusMasterAsyncResult,
+	callback chan<- GetCurrentTreeMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2404,17 +2404,17 @@ func (p Gs2SkillTreeWebSocketClient) getCurrentStatusMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- GetCurrentStatusMasterAsyncResult{
+		callback <- GetCurrentTreeMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result GetCurrentStatusMasterResult
+	var result GetCurrentTreeMasterResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- GetCurrentStatusMasterAsyncResult{
+			callback <- GetCurrentTreeMasterAsyncResult{
 				err: err,
 			}
 			return
@@ -2422,23 +2422,23 @@ func (p Gs2SkillTreeWebSocketClient) getCurrentStatusMasterAsyncHandler(
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- GetCurrentStatusMasterAsyncResult{
+	callback <- GetCurrentTreeMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeWebSocketClient) GetCurrentStatusMasterAsync(
-	request *GetCurrentStatusMasterRequest,
-	callback chan<- GetCurrentStatusMasterAsyncResult,
+func (p Gs2SkillTreeWebSocketClient) GetCurrentTreeMasterAsync(
+	request *GetCurrentTreeMasterRequest,
+	callback chan<- GetCurrentTreeMasterAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "skill_tree",
 			"component":   "currentTreeMaster",
-			"function":    "getCurrentStatusMaster",
+			"function":    "getCurrentTreeMaster",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -2453,7 +2453,7 @@ func (p Gs2SkillTreeWebSocketClient) GetCurrentStatusMasterAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.getCurrentStatusMasterAsyncHandler(
+	go p.getCurrentTreeMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -2462,11 +2462,11 @@ func (p Gs2SkillTreeWebSocketClient) GetCurrentStatusMasterAsync(
 	)
 }
 
-func (p Gs2SkillTreeWebSocketClient) GetCurrentStatusMaster(
-	request *GetCurrentStatusMasterRequest,
-) (*GetCurrentStatusMasterResult, error) {
-	callback := make(chan GetCurrentStatusMasterAsyncResult, 1)
-	go p.GetCurrentStatusMasterAsync(
+func (p Gs2SkillTreeWebSocketClient) GetCurrentTreeMaster(
+	request *GetCurrentTreeMasterRequest,
+) (*GetCurrentTreeMasterResult, error) {
+	callback := make(chan GetCurrentTreeMasterAsyncResult, 1)
+	go p.GetCurrentTreeMasterAsync(
 		request,
 		callback,
 	)
@@ -2474,9 +2474,9 @@ func (p Gs2SkillTreeWebSocketClient) GetCurrentStatusMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2SkillTreeWebSocketClient) updateCurrentStatusMasterAsyncHandler(
+func (p Gs2SkillTreeWebSocketClient) updateCurrentTreeMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- UpdateCurrentStatusMasterAsyncResult,
+	callback chan<- UpdateCurrentTreeMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2485,17 +2485,17 @@ func (p Gs2SkillTreeWebSocketClient) updateCurrentStatusMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentStatusMasterAsyncResult{
+		callback <- UpdateCurrentTreeMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentStatusMasterResult
+	var result UpdateCurrentTreeMasterResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- UpdateCurrentStatusMasterAsyncResult{
+			callback <- UpdateCurrentTreeMasterAsyncResult{
 				err: err,
 			}
 			return
@@ -2503,23 +2503,23 @@ func (p Gs2SkillTreeWebSocketClient) updateCurrentStatusMasterAsyncHandler(
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- UpdateCurrentStatusMasterAsyncResult{
+	callback <- UpdateCurrentTreeMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeWebSocketClient) UpdateCurrentStatusMasterAsync(
-	request *UpdateCurrentStatusMasterRequest,
-	callback chan<- UpdateCurrentStatusMasterAsyncResult,
+func (p Gs2SkillTreeWebSocketClient) UpdateCurrentTreeMasterAsync(
+	request *UpdateCurrentTreeMasterRequest,
+	callback chan<- UpdateCurrentTreeMasterAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "skill_tree",
 			"component":   "currentTreeMaster",
-			"function":    "updateCurrentStatusMaster",
+			"function":    "updateCurrentTreeMaster",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -2537,7 +2537,7 @@ func (p Gs2SkillTreeWebSocketClient) UpdateCurrentStatusMasterAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.updateCurrentStatusMasterAsyncHandler(
+	go p.updateCurrentTreeMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -2546,11 +2546,11 @@ func (p Gs2SkillTreeWebSocketClient) UpdateCurrentStatusMasterAsync(
 	)
 }
 
-func (p Gs2SkillTreeWebSocketClient) UpdateCurrentStatusMaster(
-	request *UpdateCurrentStatusMasterRequest,
-) (*UpdateCurrentStatusMasterResult, error) {
-	callback := make(chan UpdateCurrentStatusMasterAsyncResult, 1)
-	go p.UpdateCurrentStatusMasterAsync(
+func (p Gs2SkillTreeWebSocketClient) UpdateCurrentTreeMaster(
+	request *UpdateCurrentTreeMasterRequest,
+) (*UpdateCurrentTreeMasterResult, error) {
+	callback := make(chan UpdateCurrentTreeMasterAsyncResult, 1)
+	go p.UpdateCurrentTreeMasterAsync(
 		request,
 		callback,
 	)
@@ -2558,9 +2558,9 @@ func (p Gs2SkillTreeWebSocketClient) UpdateCurrentStatusMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2SkillTreeWebSocketClient) updateCurrentStatusMasterFromGitHubAsyncHandler(
+func (p Gs2SkillTreeWebSocketClient) updateCurrentTreeMasterFromGitHubAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- UpdateCurrentStatusMasterFromGitHubAsyncResult,
+	callback chan<- UpdateCurrentTreeMasterFromGitHubAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2569,17 +2569,17 @@ func (p Gs2SkillTreeWebSocketClient) updateCurrentStatusMasterFromGitHubAsyncHan
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentStatusMasterFromGitHubAsyncResult{
+		callback <- UpdateCurrentTreeMasterFromGitHubAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentStatusMasterFromGitHubResult
+	var result UpdateCurrentTreeMasterFromGitHubResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- UpdateCurrentStatusMasterFromGitHubAsyncResult{
+			callback <- UpdateCurrentTreeMasterFromGitHubAsyncResult{
 				err: err,
 			}
 			return
@@ -2587,23 +2587,23 @@ func (p Gs2SkillTreeWebSocketClient) updateCurrentStatusMasterFromGitHubAsyncHan
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- UpdateCurrentStatusMasterFromGitHubAsyncResult{
+	callback <- UpdateCurrentTreeMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeWebSocketClient) UpdateCurrentStatusMasterFromGitHubAsync(
-	request *UpdateCurrentStatusMasterFromGitHubRequest,
-	callback chan<- UpdateCurrentStatusMasterFromGitHubAsyncResult,
+func (p Gs2SkillTreeWebSocketClient) UpdateCurrentTreeMasterFromGitHubAsync(
+	request *UpdateCurrentTreeMasterFromGitHubRequest,
+	callback chan<- UpdateCurrentTreeMasterFromGitHubAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "skill_tree",
 			"component":   "currentTreeMaster",
-			"function":    "updateCurrentStatusMasterFromGitHub",
+			"function":    "updateCurrentTreeMasterFromGitHub",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -2621,7 +2621,7 @@ func (p Gs2SkillTreeWebSocketClient) UpdateCurrentStatusMasterFromGitHubAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.updateCurrentStatusMasterFromGitHubAsyncHandler(
+	go p.updateCurrentTreeMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -2630,11 +2630,11 @@ func (p Gs2SkillTreeWebSocketClient) UpdateCurrentStatusMasterFromGitHubAsync(
 	)
 }
 
-func (p Gs2SkillTreeWebSocketClient) UpdateCurrentStatusMasterFromGitHub(
-	request *UpdateCurrentStatusMasterFromGitHubRequest,
-) (*UpdateCurrentStatusMasterFromGitHubResult, error) {
-	callback := make(chan UpdateCurrentStatusMasterFromGitHubAsyncResult, 1)
-	go p.UpdateCurrentStatusMasterFromGitHubAsync(
+func (p Gs2SkillTreeWebSocketClient) UpdateCurrentTreeMasterFromGitHub(
+	request *UpdateCurrentTreeMasterFromGitHubRequest,
+) (*UpdateCurrentTreeMasterFromGitHubResult, error) {
+	callback := make(chan UpdateCurrentTreeMasterFromGitHubAsyncResult, 1)
+	go p.UpdateCurrentTreeMasterFromGitHubAsync(
 		request,
 		callback,
 	)

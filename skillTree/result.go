@@ -213,28 +213,28 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 	return &p
 }
 
-type DescribeStatusModelsResult struct {
+type DescribeNodeModelsResult struct {
 	Items []NodeModel `json:"items"`
 }
 
-type DescribeStatusModelsAsyncResult struct {
-	result *DescribeStatusModelsResult
+type DescribeNodeModelsAsyncResult struct {
+	result *DescribeNodeModelsResult
 	err    error
 }
 
-func NewDescribeStatusModelsResultFromJson(data string) DescribeStatusModelsResult {
+func NewDescribeNodeModelsResultFromJson(data string) DescribeNodeModelsResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeStatusModelsResultFromDict(dict)
+	return NewDescribeNodeModelsResultFromDict(dict)
 }
 
-func NewDescribeStatusModelsResultFromDict(data map[string]interface{}) DescribeStatusModelsResult {
-	return DescribeStatusModelsResult{
+func NewDescribeNodeModelsResultFromDict(data map[string]interface{}) DescribeNodeModelsResult {
+	return DescribeNodeModelsResult{
 		Items: CastNodeModels(core.CastArray(data["items"])),
 	}
 }
 
-func (p DescribeStatusModelsResult) ToDict() map[string]interface{} {
+func (p DescribeNodeModelsResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"items": CastNodeModelsFromDict(
 			p.Items,
@@ -242,65 +242,65 @@ func (p DescribeStatusModelsResult) ToDict() map[string]interface{} {
 	}
 }
 
-func (p DescribeStatusModelsResult) Pointer() *DescribeStatusModelsResult {
+func (p DescribeNodeModelsResult) Pointer() *DescribeNodeModelsResult {
 	return &p
 }
 
-type GetStatusModelResult struct {
+type GetNodeModelResult struct {
 	Item *NodeModel `json:"item"`
 }
 
-type GetStatusModelAsyncResult struct {
-	result *GetStatusModelResult
+type GetNodeModelAsyncResult struct {
+	result *GetNodeModelResult
 	err    error
 }
 
-func NewGetStatusModelResultFromJson(data string) GetStatusModelResult {
+func NewGetNodeModelResultFromJson(data string) GetNodeModelResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStatusModelResultFromDict(dict)
+	return NewGetNodeModelResultFromDict(dict)
 }
 
-func NewGetStatusModelResultFromDict(data map[string]interface{}) GetStatusModelResult {
-	return GetStatusModelResult{
+func NewGetNodeModelResultFromDict(data map[string]interface{}) GetNodeModelResult {
+	return GetNodeModelResult{
 		Item: NewNodeModelFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
-func (p GetStatusModelResult) ToDict() map[string]interface{} {
+func (p GetNodeModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
 	}
 }
 
-func (p GetStatusModelResult) Pointer() *GetStatusModelResult {
+func (p GetNodeModelResult) Pointer() *GetNodeModelResult {
 	return &p
 }
 
-type DescribeStatusModelMastersResult struct {
+type DescribeNodeModelMastersResult struct {
 	Items         []NodeModelMaster `json:"items"`
 	NextPageToken *string           `json:"nextPageToken"`
 }
 
-type DescribeStatusModelMastersAsyncResult struct {
-	result *DescribeStatusModelMastersResult
+type DescribeNodeModelMastersAsyncResult struct {
+	result *DescribeNodeModelMastersResult
 	err    error
 }
 
-func NewDescribeStatusModelMastersResultFromJson(data string) DescribeStatusModelMastersResult {
+func NewDescribeNodeModelMastersResultFromJson(data string) DescribeNodeModelMastersResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeStatusModelMastersResultFromDict(dict)
+	return NewDescribeNodeModelMastersResultFromDict(dict)
 }
 
-func NewDescribeStatusModelMastersResultFromDict(data map[string]interface{}) DescribeStatusModelMastersResult {
-	return DescribeStatusModelMastersResult{
+func NewDescribeNodeModelMastersResultFromDict(data map[string]interface{}) DescribeNodeModelMastersResult {
+	return DescribeNodeModelMastersResult{
 		Items:         CastNodeModelMasters(core.CastArray(data["items"])),
 		NextPageToken: core.CastString(data["nextPageToken"]),
 	}
 }
 
-func (p DescribeStatusModelMastersResult) ToDict() map[string]interface{} {
+func (p DescribeNodeModelMastersResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"items": CastNodeModelMastersFromDict(
 			p.Items,
@@ -309,131 +309,131 @@ func (p DescribeStatusModelMastersResult) ToDict() map[string]interface{} {
 	}
 }
 
-func (p DescribeStatusModelMastersResult) Pointer() *DescribeStatusModelMastersResult {
+func (p DescribeNodeModelMastersResult) Pointer() *DescribeNodeModelMastersResult {
 	return &p
 }
 
-type CreateStatusModelMasterResult struct {
+type CreateNodeModelMasterResult struct {
 	Item *NodeModelMaster `json:"item"`
 }
 
-type CreateStatusModelMasterAsyncResult struct {
-	result *CreateStatusModelMasterResult
+type CreateNodeModelMasterAsyncResult struct {
+	result *CreateNodeModelMasterResult
 	err    error
 }
 
-func NewCreateStatusModelMasterResultFromJson(data string) CreateStatusModelMasterResult {
+func NewCreateNodeModelMasterResultFromJson(data string) CreateNodeModelMasterResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateStatusModelMasterResultFromDict(dict)
+	return NewCreateNodeModelMasterResultFromDict(dict)
 }
 
-func NewCreateStatusModelMasterResultFromDict(data map[string]interface{}) CreateStatusModelMasterResult {
-	return CreateStatusModelMasterResult{
+func NewCreateNodeModelMasterResultFromDict(data map[string]interface{}) CreateNodeModelMasterResult {
+	return CreateNodeModelMasterResult{
 		Item: NewNodeModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
-func (p CreateStatusModelMasterResult) ToDict() map[string]interface{} {
+func (p CreateNodeModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
 	}
 }
 
-func (p CreateStatusModelMasterResult) Pointer() *CreateStatusModelMasterResult {
+func (p CreateNodeModelMasterResult) Pointer() *CreateNodeModelMasterResult {
 	return &p
 }
 
-type GetStatusModelMasterResult struct {
+type GetNodeModelMasterResult struct {
 	Item *NodeModelMaster `json:"item"`
 }
 
-type GetStatusModelMasterAsyncResult struct {
-	result *GetStatusModelMasterResult
+type GetNodeModelMasterAsyncResult struct {
+	result *GetNodeModelMasterResult
 	err    error
 }
 
-func NewGetStatusModelMasterResultFromJson(data string) GetStatusModelMasterResult {
+func NewGetNodeModelMasterResultFromJson(data string) GetNodeModelMasterResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStatusModelMasterResultFromDict(dict)
+	return NewGetNodeModelMasterResultFromDict(dict)
 }
 
-func NewGetStatusModelMasterResultFromDict(data map[string]interface{}) GetStatusModelMasterResult {
-	return GetStatusModelMasterResult{
+func NewGetNodeModelMasterResultFromDict(data map[string]interface{}) GetNodeModelMasterResult {
+	return GetNodeModelMasterResult{
 		Item: NewNodeModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
-func (p GetStatusModelMasterResult) ToDict() map[string]interface{} {
+func (p GetNodeModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
 	}
 }
 
-func (p GetStatusModelMasterResult) Pointer() *GetStatusModelMasterResult {
+func (p GetNodeModelMasterResult) Pointer() *GetNodeModelMasterResult {
 	return &p
 }
 
-type UpdateStatusModelMasterResult struct {
+type UpdateNodeModelMasterResult struct {
 	Item *NodeModelMaster `json:"item"`
 }
 
-type UpdateStatusModelMasterAsyncResult struct {
-	result *UpdateStatusModelMasterResult
+type UpdateNodeModelMasterAsyncResult struct {
+	result *UpdateNodeModelMasterResult
 	err    error
 }
 
-func NewUpdateStatusModelMasterResultFromJson(data string) UpdateStatusModelMasterResult {
+func NewUpdateNodeModelMasterResultFromJson(data string) UpdateNodeModelMasterResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateStatusModelMasterResultFromDict(dict)
+	return NewUpdateNodeModelMasterResultFromDict(dict)
 }
 
-func NewUpdateStatusModelMasterResultFromDict(data map[string]interface{}) UpdateStatusModelMasterResult {
-	return UpdateStatusModelMasterResult{
+func NewUpdateNodeModelMasterResultFromDict(data map[string]interface{}) UpdateNodeModelMasterResult {
+	return UpdateNodeModelMasterResult{
 		Item: NewNodeModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
-func (p UpdateStatusModelMasterResult) ToDict() map[string]interface{} {
+func (p UpdateNodeModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
 	}
 }
 
-func (p UpdateStatusModelMasterResult) Pointer() *UpdateStatusModelMasterResult {
+func (p UpdateNodeModelMasterResult) Pointer() *UpdateNodeModelMasterResult {
 	return &p
 }
 
-type DeleteStatusModelMasterResult struct {
+type DeleteNodeModelMasterResult struct {
 	Item *NodeModelMaster `json:"item"`
 }
 
-type DeleteStatusModelMasterAsyncResult struct {
-	result *DeleteStatusModelMasterResult
+type DeleteNodeModelMasterAsyncResult struct {
+	result *DeleteNodeModelMasterResult
 	err    error
 }
 
-func NewDeleteStatusModelMasterResultFromJson(data string) DeleteStatusModelMasterResult {
+func NewDeleteNodeModelMasterResultFromJson(data string) DeleteNodeModelMasterResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteStatusModelMasterResultFromDict(dict)
+	return NewDeleteNodeModelMasterResultFromDict(dict)
 }
 
-func NewDeleteStatusModelMasterResultFromDict(data map[string]interface{}) DeleteStatusModelMasterResult {
-	return DeleteStatusModelMasterResult{
+func NewDeleteNodeModelMasterResultFromDict(data map[string]interface{}) DeleteNodeModelMasterResult {
+	return DeleteNodeModelMasterResult{
 		Item: NewNodeModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
-func (p DeleteStatusModelMasterResult) ToDict() map[string]interface{} {
+func (p DeleteNodeModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
 	}
 }
 
-func (p DeleteStatusModelMasterResult) Pointer() *DeleteStatusModelMasterResult {
+func (p DeleteNodeModelMasterResult) Pointer() *DeleteNodeModelMasterResult {
 	return &p
 }
 
@@ -915,95 +915,95 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
 	return &p
 }
 
-type GetCurrentStatusMasterResult struct {
+type GetCurrentTreeMasterResult struct {
 	Item *CurrentTreeMaster `json:"item"`
 }
 
-type GetCurrentStatusMasterAsyncResult struct {
-	result *GetCurrentStatusMasterResult
+type GetCurrentTreeMasterAsyncResult struct {
+	result *GetCurrentTreeMasterResult
 	err    error
 }
 
-func NewGetCurrentStatusMasterResultFromJson(data string) GetCurrentStatusMasterResult {
+func NewGetCurrentTreeMasterResultFromJson(data string) GetCurrentTreeMasterResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetCurrentStatusMasterResultFromDict(dict)
+	return NewGetCurrentTreeMasterResultFromDict(dict)
 }
 
-func NewGetCurrentStatusMasterResultFromDict(data map[string]interface{}) GetCurrentStatusMasterResult {
-	return GetCurrentStatusMasterResult{
+func NewGetCurrentTreeMasterResultFromDict(data map[string]interface{}) GetCurrentTreeMasterResult {
+	return GetCurrentTreeMasterResult{
 		Item: NewCurrentTreeMasterFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
-func (p GetCurrentStatusMasterResult) ToDict() map[string]interface{} {
+func (p GetCurrentTreeMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
 	}
 }
 
-func (p GetCurrentStatusMasterResult) Pointer() *GetCurrentStatusMasterResult {
+func (p GetCurrentTreeMasterResult) Pointer() *GetCurrentTreeMasterResult {
 	return &p
 }
 
-type UpdateCurrentStatusMasterResult struct {
+type UpdateCurrentTreeMasterResult struct {
 	Item *CurrentTreeMaster `json:"item"`
 }
 
-type UpdateCurrentStatusMasterAsyncResult struct {
-	result *UpdateCurrentStatusMasterResult
+type UpdateCurrentTreeMasterAsyncResult struct {
+	result *UpdateCurrentTreeMasterResult
 	err    error
 }
 
-func NewUpdateCurrentStatusMasterResultFromJson(data string) UpdateCurrentStatusMasterResult {
+func NewUpdateCurrentTreeMasterResultFromJson(data string) UpdateCurrentTreeMasterResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentStatusMasterResultFromDict(dict)
+	return NewUpdateCurrentTreeMasterResultFromDict(dict)
 }
 
-func NewUpdateCurrentStatusMasterResultFromDict(data map[string]interface{}) UpdateCurrentStatusMasterResult {
-	return UpdateCurrentStatusMasterResult{
+func NewUpdateCurrentTreeMasterResultFromDict(data map[string]interface{}) UpdateCurrentTreeMasterResult {
+	return UpdateCurrentTreeMasterResult{
 		Item: NewCurrentTreeMasterFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
-func (p UpdateCurrentStatusMasterResult) ToDict() map[string]interface{} {
+func (p UpdateCurrentTreeMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
 	}
 }
 
-func (p UpdateCurrentStatusMasterResult) Pointer() *UpdateCurrentStatusMasterResult {
+func (p UpdateCurrentTreeMasterResult) Pointer() *UpdateCurrentTreeMasterResult {
 	return &p
 }
 
-type UpdateCurrentStatusMasterFromGitHubResult struct {
+type UpdateCurrentTreeMasterFromGitHubResult struct {
 	Item *CurrentTreeMaster `json:"item"`
 }
 
-type UpdateCurrentStatusMasterFromGitHubAsyncResult struct {
-	result *UpdateCurrentStatusMasterFromGitHubResult
+type UpdateCurrentTreeMasterFromGitHubAsyncResult struct {
+	result *UpdateCurrentTreeMasterFromGitHubResult
 	err    error
 }
 
-func NewUpdateCurrentStatusMasterFromGitHubResultFromJson(data string) UpdateCurrentStatusMasterFromGitHubResult {
+func NewUpdateCurrentTreeMasterFromGitHubResultFromJson(data string) UpdateCurrentTreeMasterFromGitHubResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentStatusMasterFromGitHubResultFromDict(dict)
+	return NewUpdateCurrentTreeMasterFromGitHubResultFromDict(dict)
 }
 
-func NewUpdateCurrentStatusMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentStatusMasterFromGitHubResult {
-	return UpdateCurrentStatusMasterFromGitHubResult{
+func NewUpdateCurrentTreeMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentTreeMasterFromGitHubResult {
+	return UpdateCurrentTreeMasterFromGitHubResult{
 		Item: NewCurrentTreeMasterFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
-func (p UpdateCurrentStatusMasterFromGitHubResult) ToDict() map[string]interface{} {
+func (p UpdateCurrentTreeMasterFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
 	}
 }
 
-func (p UpdateCurrentStatusMasterFromGitHubResult) Pointer() *UpdateCurrentStatusMasterFromGitHubResult {
+func (p UpdateCurrentTreeMasterFromGitHubResult) Pointer() *UpdateCurrentTreeMasterFromGitHubResult {
 	return &p
 }

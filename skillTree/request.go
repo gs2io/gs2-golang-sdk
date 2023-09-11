@@ -223,66 +223,66 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 	return &p
 }
 
-type DescribeStatusModelsRequest struct {
+type DescribeNodeModelsRequest struct {
 	RequestId     *string `json:"requestId"`
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
 }
 
-func NewDescribeStatusModelsRequestFromJson(data string) DescribeStatusModelsRequest {
+func NewDescribeNodeModelsRequestFromJson(data string) DescribeNodeModelsRequest {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeStatusModelsRequestFromDict(dict)
+	return NewDescribeNodeModelsRequestFromDict(dict)
 }
 
-func NewDescribeStatusModelsRequestFromDict(data map[string]interface{}) DescribeStatusModelsRequest {
-	return DescribeStatusModelsRequest{
+func NewDescribeNodeModelsRequestFromDict(data map[string]interface{}) DescribeNodeModelsRequest {
+	return DescribeNodeModelsRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 	}
 }
 
-func (p DescribeStatusModelsRequest) ToDict() map[string]interface{} {
+func (p DescribeNodeModelsRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 	}
 }
 
-func (p DescribeStatusModelsRequest) Pointer() *DescribeStatusModelsRequest {
+func (p DescribeNodeModelsRequest) Pointer() *DescribeNodeModelsRequest {
 	return &p
 }
 
-type GetStatusModelRequest struct {
+type GetNodeModelRequest struct {
 	RequestId     *string `json:"requestId"`
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
 	NodeModelName *string `json:"nodeModelName"`
 }
 
-func NewGetStatusModelRequestFromJson(data string) GetStatusModelRequest {
+func NewGetNodeModelRequestFromJson(data string) GetNodeModelRequest {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStatusModelRequestFromDict(dict)
+	return NewGetNodeModelRequestFromDict(dict)
 }
 
-func NewGetStatusModelRequestFromDict(data map[string]interface{}) GetStatusModelRequest {
-	return GetStatusModelRequest{
+func NewGetNodeModelRequestFromDict(data map[string]interface{}) GetNodeModelRequest {
+	return GetNodeModelRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 		NodeModelName: core.CastString(data["nodeModelName"]),
 	}
 }
 
-func (p GetStatusModelRequest) ToDict() map[string]interface{} {
+func (p GetNodeModelRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"nodeModelName": p.NodeModelName,
 	}
 }
 
-func (p GetStatusModelRequest) Pointer() *GetStatusModelRequest {
+func (p GetNodeModelRequest) Pointer() *GetNodeModelRequest {
 	return &p
 }
 
-type DescribeStatusModelMastersRequest struct {
+type DescribeNodeModelMastersRequest struct {
 	RequestId     *string `json:"requestId"`
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
@@ -290,21 +290,21 @@ type DescribeStatusModelMastersRequest struct {
 	Limit         *int32  `json:"limit"`
 }
 
-func NewDescribeStatusModelMastersRequestFromJson(data string) DescribeStatusModelMastersRequest {
+func NewDescribeNodeModelMastersRequestFromJson(data string) DescribeNodeModelMastersRequest {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeStatusModelMastersRequestFromDict(dict)
+	return NewDescribeNodeModelMastersRequestFromDict(dict)
 }
 
-func NewDescribeStatusModelMastersRequestFromDict(data map[string]interface{}) DescribeStatusModelMastersRequest {
-	return DescribeStatusModelMastersRequest{
+func NewDescribeNodeModelMastersRequestFromDict(data map[string]interface{}) DescribeNodeModelMastersRequest {
+	return DescribeNodeModelMastersRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 		PageToken:     core.CastString(data["pageToken"]),
 		Limit:         core.CastInt32(data["limit"]),
 	}
 }
 
-func (p DescribeStatusModelMastersRequest) ToDict() map[string]interface{} {
+func (p DescribeNodeModelMastersRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"pageToken":     p.PageToken,
@@ -312,11 +312,11 @@ func (p DescribeStatusModelMastersRequest) ToDict() map[string]interface{} {
 	}
 }
 
-func (p DescribeStatusModelMastersRequest) Pointer() *DescribeStatusModelMastersRequest {
+func (p DescribeNodeModelMastersRequest) Pointer() *DescribeNodeModelMastersRequest {
 	return &p
 }
 
-type CreateStatusModelMasterRequest struct {
+type CreateNodeModelMasterRequest struct {
 	RequestId             *string         `json:"requestId"`
 	ContextStack          *string         `json:"contextStack"`
 	NamespaceName         *string         `json:"namespaceName"`
@@ -328,14 +328,14 @@ type CreateStatusModelMasterRequest struct {
 	PremiseNodeNames      []*string       `json:"premiseNodeNames"`
 }
 
-func NewCreateStatusModelMasterRequestFromJson(data string) CreateStatusModelMasterRequest {
+func NewCreateNodeModelMasterRequestFromJson(data string) CreateNodeModelMasterRequest {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateStatusModelMasterRequestFromDict(dict)
+	return NewCreateNodeModelMasterRequestFromDict(dict)
 }
 
-func NewCreateStatusModelMasterRequestFromDict(data map[string]interface{}) CreateStatusModelMasterRequest {
-	return CreateStatusModelMasterRequest{
+func NewCreateNodeModelMasterRequestFromDict(data map[string]interface{}) CreateNodeModelMasterRequest {
+	return CreateNodeModelMasterRequest{
 		NamespaceName:         core.CastString(data["namespaceName"]),
 		Name:                  core.CastString(data["name"]),
 		Description:           core.CastString(data["description"]),
@@ -346,7 +346,7 @@ func NewCreateStatusModelMasterRequestFromDict(data map[string]interface{}) Crea
 	}
 }
 
-func (p CreateStatusModelMasterRequest) ToDict() map[string]interface{} {
+func (p CreateNodeModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"name":          p.Name,
@@ -362,42 +362,42 @@ func (p CreateStatusModelMasterRequest) ToDict() map[string]interface{} {
 	}
 }
 
-func (p CreateStatusModelMasterRequest) Pointer() *CreateStatusModelMasterRequest {
+func (p CreateNodeModelMasterRequest) Pointer() *CreateNodeModelMasterRequest {
 	return &p
 }
 
-type GetStatusModelMasterRequest struct {
+type GetNodeModelMasterRequest struct {
 	RequestId     *string `json:"requestId"`
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
 	NodeModelName *string `json:"nodeModelName"`
 }
 
-func NewGetStatusModelMasterRequestFromJson(data string) GetStatusModelMasterRequest {
+func NewGetNodeModelMasterRequestFromJson(data string) GetNodeModelMasterRequest {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStatusModelMasterRequestFromDict(dict)
+	return NewGetNodeModelMasterRequestFromDict(dict)
 }
 
-func NewGetStatusModelMasterRequestFromDict(data map[string]interface{}) GetStatusModelMasterRequest {
-	return GetStatusModelMasterRequest{
+func NewGetNodeModelMasterRequestFromDict(data map[string]interface{}) GetNodeModelMasterRequest {
+	return GetNodeModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 		NodeModelName: core.CastString(data["nodeModelName"]),
 	}
 }
 
-func (p GetStatusModelMasterRequest) ToDict() map[string]interface{} {
+func (p GetNodeModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"nodeModelName": p.NodeModelName,
 	}
 }
 
-func (p GetStatusModelMasterRequest) Pointer() *GetStatusModelMasterRequest {
+func (p GetNodeModelMasterRequest) Pointer() *GetNodeModelMasterRequest {
 	return &p
 }
 
-type UpdateStatusModelMasterRequest struct {
+type UpdateNodeModelMasterRequest struct {
 	RequestId             *string         `json:"requestId"`
 	ContextStack          *string         `json:"contextStack"`
 	NamespaceName         *string         `json:"namespaceName"`
@@ -409,14 +409,14 @@ type UpdateStatusModelMasterRequest struct {
 	PremiseNodeNames      []*string       `json:"premiseNodeNames"`
 }
 
-func NewUpdateStatusModelMasterRequestFromJson(data string) UpdateStatusModelMasterRequest {
+func NewUpdateNodeModelMasterRequestFromJson(data string) UpdateNodeModelMasterRequest {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateStatusModelMasterRequestFromDict(dict)
+	return NewUpdateNodeModelMasterRequestFromDict(dict)
 }
 
-func NewUpdateStatusModelMasterRequestFromDict(data map[string]interface{}) UpdateStatusModelMasterRequest {
-	return UpdateStatusModelMasterRequest{
+func NewUpdateNodeModelMasterRequestFromDict(data map[string]interface{}) UpdateNodeModelMasterRequest {
+	return UpdateNodeModelMasterRequest{
 		NamespaceName:         core.CastString(data["namespaceName"]),
 		NodeModelName:         core.CastString(data["nodeModelName"]),
 		Description:           core.CastString(data["description"]),
@@ -427,7 +427,7 @@ func NewUpdateStatusModelMasterRequestFromDict(data map[string]interface{}) Upda
 	}
 }
 
-func (p UpdateStatusModelMasterRequest) ToDict() map[string]interface{} {
+func (p UpdateNodeModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"nodeModelName": p.NodeModelName,
@@ -443,38 +443,38 @@ func (p UpdateStatusModelMasterRequest) ToDict() map[string]interface{} {
 	}
 }
 
-func (p UpdateStatusModelMasterRequest) Pointer() *UpdateStatusModelMasterRequest {
+func (p UpdateNodeModelMasterRequest) Pointer() *UpdateNodeModelMasterRequest {
 	return &p
 }
 
-type DeleteStatusModelMasterRequest struct {
+type DeleteNodeModelMasterRequest struct {
 	RequestId     *string `json:"requestId"`
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
 	NodeModelName *string `json:"nodeModelName"`
 }
 
-func NewDeleteStatusModelMasterRequestFromJson(data string) DeleteStatusModelMasterRequest {
+func NewDeleteNodeModelMasterRequestFromJson(data string) DeleteNodeModelMasterRequest {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteStatusModelMasterRequestFromDict(dict)
+	return NewDeleteNodeModelMasterRequestFromDict(dict)
 }
 
-func NewDeleteStatusModelMasterRequestFromDict(data map[string]interface{}) DeleteStatusModelMasterRequest {
-	return DeleteStatusModelMasterRequest{
+func NewDeleteNodeModelMasterRequestFromDict(data map[string]interface{}) DeleteNodeModelMasterRequest {
+	return DeleteNodeModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 		NodeModelName: core.CastString(data["nodeModelName"]),
 	}
 }
 
-func (p DeleteStatusModelMasterRequest) ToDict() map[string]interface{} {
+func (p DeleteNodeModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"nodeModelName": p.NodeModelName,
 	}
 }
 
-func (p DeleteStatusModelMasterRequest) Pointer() *DeleteStatusModelMasterRequest {
+func (p DeleteNodeModelMasterRequest) Pointer() *DeleteNodeModelMasterRequest {
 	return &p
 }
 
@@ -946,92 +946,92 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 	return &p
 }
 
-type GetCurrentStatusMasterRequest struct {
+type GetCurrentTreeMasterRequest struct {
 	RequestId     *string `json:"requestId"`
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
 }
 
-func NewGetCurrentStatusMasterRequestFromJson(data string) GetCurrentStatusMasterRequest {
+func NewGetCurrentTreeMasterRequestFromJson(data string) GetCurrentTreeMasterRequest {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetCurrentStatusMasterRequestFromDict(dict)
+	return NewGetCurrentTreeMasterRequestFromDict(dict)
 }
 
-func NewGetCurrentStatusMasterRequestFromDict(data map[string]interface{}) GetCurrentStatusMasterRequest {
-	return GetCurrentStatusMasterRequest{
+func NewGetCurrentTreeMasterRequestFromDict(data map[string]interface{}) GetCurrentTreeMasterRequest {
+	return GetCurrentTreeMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 	}
 }
 
-func (p GetCurrentStatusMasterRequest) ToDict() map[string]interface{} {
+func (p GetCurrentTreeMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 	}
 }
 
-func (p GetCurrentStatusMasterRequest) Pointer() *GetCurrentStatusMasterRequest {
+func (p GetCurrentTreeMasterRequest) Pointer() *GetCurrentTreeMasterRequest {
 	return &p
 }
 
-type UpdateCurrentStatusMasterRequest struct {
+type UpdateCurrentTreeMasterRequest struct {
 	RequestId     *string `json:"requestId"`
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
 	Settings      *string `json:"settings"`
 }
 
-func NewUpdateCurrentStatusMasterRequestFromJson(data string) UpdateCurrentStatusMasterRequest {
+func NewUpdateCurrentTreeMasterRequestFromJson(data string) UpdateCurrentTreeMasterRequest {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentStatusMasterRequestFromDict(dict)
+	return NewUpdateCurrentTreeMasterRequestFromDict(dict)
 }
 
-func NewUpdateCurrentStatusMasterRequestFromDict(data map[string]interface{}) UpdateCurrentStatusMasterRequest {
-	return UpdateCurrentStatusMasterRequest{
+func NewUpdateCurrentTreeMasterRequestFromDict(data map[string]interface{}) UpdateCurrentTreeMasterRequest {
+	return UpdateCurrentTreeMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 		Settings:      core.CastString(data["settings"]),
 	}
 }
 
-func (p UpdateCurrentStatusMasterRequest) ToDict() map[string]interface{} {
+func (p UpdateCurrentTreeMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"settings":      p.Settings,
 	}
 }
 
-func (p UpdateCurrentStatusMasterRequest) Pointer() *UpdateCurrentStatusMasterRequest {
+func (p UpdateCurrentTreeMasterRequest) Pointer() *UpdateCurrentTreeMasterRequest {
 	return &p
 }
 
-type UpdateCurrentStatusMasterFromGitHubRequest struct {
+type UpdateCurrentTreeMasterFromGitHubRequest struct {
 	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
-func NewUpdateCurrentStatusMasterFromGitHubRequestFromJson(data string) UpdateCurrentStatusMasterFromGitHubRequest {
+func NewUpdateCurrentTreeMasterFromGitHubRequestFromJson(data string) UpdateCurrentTreeMasterFromGitHubRequest {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentStatusMasterFromGitHubRequestFromDict(dict)
+	return NewUpdateCurrentTreeMasterFromGitHubRequestFromDict(dict)
 }
 
-func NewUpdateCurrentStatusMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentStatusMasterFromGitHubRequest {
-	return UpdateCurrentStatusMasterFromGitHubRequest{
+func NewUpdateCurrentTreeMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentTreeMasterFromGitHubRequest {
+	return UpdateCurrentTreeMasterFromGitHubRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
 		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
 	}
 }
 
-func (p UpdateCurrentStatusMasterFromGitHubRequest) ToDict() map[string]interface{} {
+func (p UpdateCurrentTreeMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName":   p.NamespaceName,
 		"checkoutSetting": p.CheckoutSetting.ToDict(),
 	}
 }
 
-func (p UpdateCurrentStatusMasterFromGitHubRequest) Pointer() *UpdateCurrentStatusMasterFromGitHubRequest {
+func (p UpdateCurrentTreeMasterFromGitHubRequest) Pointer() *UpdateCurrentTreeMasterFromGitHubRequest {
 	return &p
 }

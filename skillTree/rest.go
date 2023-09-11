@@ -570,10 +570,10 @@ func (p Gs2SkillTreeRestClient) DeleteNamespace(
 	return asyncResult.result, asyncResult.err
 }
 
-func describeStatusModelsAsyncHandler(
+func describeNodeModelsAsyncHandler(
 	client Gs2SkillTreeRestClient,
 	job *core.NetworkJob,
-	callback chan<- DescribeStatusModelsAsyncResult,
+	callback chan<- DescribeNodeModelsAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -582,15 +582,15 @@ func describeStatusModelsAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- DescribeStatusModelsAsyncResult{
+		callback <- DescribeNodeModelsAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result DescribeStatusModelsResult
+	var result DescribeNodeModelsResult
 	if asyncResult.Err != nil {
-		callback <- DescribeStatusModelsAsyncResult{
+		callback <- DescribeNodeModelsAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -598,22 +598,22 @@ func describeStatusModelsAsyncHandler(
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- DescribeStatusModelsAsyncResult{
+			callback <- DescribeNodeModelsAsyncResult{
 				err: err,
 			}
 			return
 		}
 	}
-	callback <- DescribeStatusModelsAsyncResult{
+	callback <- DescribeNodeModelsAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeRestClient) DescribeStatusModelsAsync(
-	request *DescribeStatusModelsRequest,
-	callback chan<- DescribeStatusModelsAsyncResult,
+func (p Gs2SkillTreeRestClient) DescribeNodeModelsAsync(
+	request *DescribeNodeModelsRequest,
+	callback chan<- DescribeNodeModelsAsyncResult,
 ) {
 	path := "/{namespaceName}/model"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
@@ -630,7 +630,7 @@ func (p Gs2SkillTreeRestClient) DescribeStatusModelsAsync(
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
 
-	go describeStatusModelsAsyncHandler(
+	go describeNodeModelsAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
@@ -642,11 +642,11 @@ func (p Gs2SkillTreeRestClient) DescribeStatusModelsAsync(
 	)
 }
 
-func (p Gs2SkillTreeRestClient) DescribeStatusModels(
-	request *DescribeStatusModelsRequest,
-) (*DescribeStatusModelsResult, error) {
-	callback := make(chan DescribeStatusModelsAsyncResult, 1)
-	go p.DescribeStatusModelsAsync(
+func (p Gs2SkillTreeRestClient) DescribeNodeModels(
+	request *DescribeNodeModelsRequest,
+) (*DescribeNodeModelsResult, error) {
+	callback := make(chan DescribeNodeModelsAsyncResult, 1)
+	go p.DescribeNodeModelsAsync(
 		request,
 		callback,
 	)
@@ -654,10 +654,10 @@ func (p Gs2SkillTreeRestClient) DescribeStatusModels(
 	return asyncResult.result, asyncResult.err
 }
 
-func getStatusModelAsyncHandler(
+func getNodeModelAsyncHandler(
 	client Gs2SkillTreeRestClient,
 	job *core.NetworkJob,
-	callback chan<- GetStatusModelAsyncResult,
+	callback chan<- GetNodeModelAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -666,15 +666,15 @@ func getStatusModelAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- GetStatusModelAsyncResult{
+		callback <- GetNodeModelAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result GetStatusModelResult
+	var result GetNodeModelResult
 	if asyncResult.Err != nil {
-		callback <- GetStatusModelAsyncResult{
+		callback <- GetNodeModelAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -682,22 +682,22 @@ func getStatusModelAsyncHandler(
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- GetStatusModelAsyncResult{
+			callback <- GetNodeModelAsyncResult{
 				err: err,
 			}
 			return
 		}
 	}
-	callback <- GetStatusModelAsyncResult{
+	callback <- GetNodeModelAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeRestClient) GetStatusModelAsync(
-	request *GetStatusModelRequest,
-	callback chan<- GetStatusModelAsyncResult,
+func (p Gs2SkillTreeRestClient) GetNodeModelAsync(
+	request *GetNodeModelRequest,
+	callback chan<- GetNodeModelAsyncResult,
 ) {
 	path := "/{namespaceName}/model/{nodeModelName}"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
@@ -719,7 +719,7 @@ func (p Gs2SkillTreeRestClient) GetStatusModelAsync(
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
 
-	go getStatusModelAsyncHandler(
+	go getNodeModelAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
@@ -731,11 +731,11 @@ func (p Gs2SkillTreeRestClient) GetStatusModelAsync(
 	)
 }
 
-func (p Gs2SkillTreeRestClient) GetStatusModel(
-	request *GetStatusModelRequest,
-) (*GetStatusModelResult, error) {
-	callback := make(chan GetStatusModelAsyncResult, 1)
-	go p.GetStatusModelAsync(
+func (p Gs2SkillTreeRestClient) GetNodeModel(
+	request *GetNodeModelRequest,
+) (*GetNodeModelResult, error) {
+	callback := make(chan GetNodeModelAsyncResult, 1)
+	go p.GetNodeModelAsync(
 		request,
 		callback,
 	)
@@ -743,10 +743,10 @@ func (p Gs2SkillTreeRestClient) GetStatusModel(
 	return asyncResult.result, asyncResult.err
 }
 
-func describeStatusModelMastersAsyncHandler(
+func describeNodeModelMastersAsyncHandler(
 	client Gs2SkillTreeRestClient,
 	job *core.NetworkJob,
-	callback chan<- DescribeStatusModelMastersAsyncResult,
+	callback chan<- DescribeNodeModelMastersAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -755,15 +755,15 @@ func describeStatusModelMastersAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- DescribeStatusModelMastersAsyncResult{
+		callback <- DescribeNodeModelMastersAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result DescribeStatusModelMastersResult
+	var result DescribeNodeModelMastersResult
 	if asyncResult.Err != nil {
-		callback <- DescribeStatusModelMastersAsyncResult{
+		callback <- DescribeNodeModelMastersAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -771,22 +771,22 @@ func describeStatusModelMastersAsyncHandler(
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- DescribeStatusModelMastersAsyncResult{
+			callback <- DescribeNodeModelMastersAsyncResult{
 				err: err,
 			}
 			return
 		}
 	}
-	callback <- DescribeStatusModelMastersAsyncResult{
+	callback <- DescribeNodeModelMastersAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeRestClient) DescribeStatusModelMastersAsync(
-	request *DescribeStatusModelMastersRequest,
-	callback chan<- DescribeStatusModelMastersAsyncResult,
+func (p Gs2SkillTreeRestClient) DescribeNodeModelMastersAsync(
+	request *DescribeNodeModelMastersRequest,
+	callback chan<- DescribeNodeModelMastersAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
@@ -809,7 +809,7 @@ func (p Gs2SkillTreeRestClient) DescribeStatusModelMastersAsync(
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
 
-	go describeStatusModelMastersAsyncHandler(
+	go describeNodeModelMastersAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
@@ -821,11 +821,11 @@ func (p Gs2SkillTreeRestClient) DescribeStatusModelMastersAsync(
 	)
 }
 
-func (p Gs2SkillTreeRestClient) DescribeStatusModelMasters(
-	request *DescribeStatusModelMastersRequest,
-) (*DescribeStatusModelMastersResult, error) {
-	callback := make(chan DescribeStatusModelMastersAsyncResult, 1)
-	go p.DescribeStatusModelMastersAsync(
+func (p Gs2SkillTreeRestClient) DescribeNodeModelMasters(
+	request *DescribeNodeModelMastersRequest,
+) (*DescribeNodeModelMastersResult, error) {
+	callback := make(chan DescribeNodeModelMastersAsyncResult, 1)
+	go p.DescribeNodeModelMastersAsync(
 		request,
 		callback,
 	)
@@ -833,10 +833,10 @@ func (p Gs2SkillTreeRestClient) DescribeStatusModelMasters(
 	return asyncResult.result, asyncResult.err
 }
 
-func createStatusModelMasterAsyncHandler(
+func createNodeModelMasterAsyncHandler(
 	client Gs2SkillTreeRestClient,
 	job *core.NetworkJob,
-	callback chan<- CreateStatusModelMasterAsyncResult,
+	callback chan<- CreateNodeModelMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -845,15 +845,15 @@ func createStatusModelMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- CreateStatusModelMasterAsyncResult{
+		callback <- CreateNodeModelMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result CreateStatusModelMasterResult
+	var result CreateNodeModelMasterResult
 	if asyncResult.Err != nil {
-		callback <- CreateStatusModelMasterAsyncResult{
+		callback <- CreateNodeModelMasterAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -861,22 +861,22 @@ func createStatusModelMasterAsyncHandler(
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- CreateStatusModelMasterAsyncResult{
+			callback <- CreateNodeModelMasterAsyncResult{
 				err: err,
 			}
 			return
 		}
 	}
-	callback <- CreateStatusModelMasterAsyncResult{
+	callback <- CreateNodeModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeRestClient) CreateStatusModelMasterAsync(
-	request *CreateStatusModelMasterRequest,
-	callback chan<- CreateStatusModelMasterAsyncResult,
+func (p Gs2SkillTreeRestClient) CreateNodeModelMasterAsync(
+	request *CreateNodeModelMasterRequest,
+	callback chan<- CreateNodeModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
@@ -922,7 +922,7 @@ func (p Gs2SkillTreeRestClient) CreateStatusModelMasterAsync(
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
 
-	go createStatusModelMasterAsyncHandler(
+	go createNodeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
@@ -934,11 +934,11 @@ func (p Gs2SkillTreeRestClient) CreateStatusModelMasterAsync(
 	)
 }
 
-func (p Gs2SkillTreeRestClient) CreateStatusModelMaster(
-	request *CreateStatusModelMasterRequest,
-) (*CreateStatusModelMasterResult, error) {
-	callback := make(chan CreateStatusModelMasterAsyncResult, 1)
-	go p.CreateStatusModelMasterAsync(
+func (p Gs2SkillTreeRestClient) CreateNodeModelMaster(
+	request *CreateNodeModelMasterRequest,
+) (*CreateNodeModelMasterResult, error) {
+	callback := make(chan CreateNodeModelMasterAsyncResult, 1)
+	go p.CreateNodeModelMasterAsync(
 		request,
 		callback,
 	)
@@ -946,10 +946,10 @@ func (p Gs2SkillTreeRestClient) CreateStatusModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func getStatusModelMasterAsyncHandler(
+func getNodeModelMasterAsyncHandler(
 	client Gs2SkillTreeRestClient,
 	job *core.NetworkJob,
-	callback chan<- GetStatusModelMasterAsyncResult,
+	callback chan<- GetNodeModelMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -958,15 +958,15 @@ func getStatusModelMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- GetStatusModelMasterAsyncResult{
+		callback <- GetNodeModelMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result GetStatusModelMasterResult
+	var result GetNodeModelMasterResult
 	if asyncResult.Err != nil {
-		callback <- GetStatusModelMasterAsyncResult{
+		callback <- GetNodeModelMasterAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -974,22 +974,22 @@ func getStatusModelMasterAsyncHandler(
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- GetStatusModelMasterAsyncResult{
+			callback <- GetNodeModelMasterAsyncResult{
 				err: err,
 			}
 			return
 		}
 	}
-	callback <- GetStatusModelMasterAsyncResult{
+	callback <- GetNodeModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeRestClient) GetStatusModelMasterAsync(
-	request *GetStatusModelMasterRequest,
-	callback chan<- GetStatusModelMasterAsyncResult,
+func (p Gs2SkillTreeRestClient) GetNodeModelMasterAsync(
+	request *GetNodeModelMasterRequest,
+	callback chan<- GetNodeModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{nodeModelName}"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
@@ -1011,7 +1011,7 @@ func (p Gs2SkillTreeRestClient) GetStatusModelMasterAsync(
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
 
-	go getStatusModelMasterAsyncHandler(
+	go getNodeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
@@ -1023,11 +1023,11 @@ func (p Gs2SkillTreeRestClient) GetStatusModelMasterAsync(
 	)
 }
 
-func (p Gs2SkillTreeRestClient) GetStatusModelMaster(
-	request *GetStatusModelMasterRequest,
-) (*GetStatusModelMasterResult, error) {
-	callback := make(chan GetStatusModelMasterAsyncResult, 1)
-	go p.GetStatusModelMasterAsync(
+func (p Gs2SkillTreeRestClient) GetNodeModelMaster(
+	request *GetNodeModelMasterRequest,
+) (*GetNodeModelMasterResult, error) {
+	callback := make(chan GetNodeModelMasterAsyncResult, 1)
+	go p.GetNodeModelMasterAsync(
 		request,
 		callback,
 	)
@@ -1035,10 +1035,10 @@ func (p Gs2SkillTreeRestClient) GetStatusModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func updateStatusModelMasterAsyncHandler(
+func updateNodeModelMasterAsyncHandler(
 	client Gs2SkillTreeRestClient,
 	job *core.NetworkJob,
-	callback chan<- UpdateStatusModelMasterAsyncResult,
+	callback chan<- UpdateNodeModelMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -1047,15 +1047,15 @@ func updateStatusModelMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- UpdateStatusModelMasterAsyncResult{
+		callback <- UpdateNodeModelMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateStatusModelMasterResult
+	var result UpdateNodeModelMasterResult
 	if asyncResult.Err != nil {
-		callback <- UpdateStatusModelMasterAsyncResult{
+		callback <- UpdateNodeModelMasterAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -1063,22 +1063,22 @@ func updateStatusModelMasterAsyncHandler(
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- UpdateStatusModelMasterAsyncResult{
+			callback <- UpdateNodeModelMasterAsyncResult{
 				err: err,
 			}
 			return
 		}
 	}
-	callback <- UpdateStatusModelMasterAsyncResult{
+	callback <- UpdateNodeModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeRestClient) UpdateStatusModelMasterAsync(
-	request *UpdateStatusModelMasterRequest,
-	callback chan<- UpdateStatusModelMasterAsyncResult,
+func (p Gs2SkillTreeRestClient) UpdateNodeModelMasterAsync(
+	request *UpdateNodeModelMasterRequest,
+	callback chan<- UpdateNodeModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{nodeModelName}"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
@@ -1126,7 +1126,7 @@ func (p Gs2SkillTreeRestClient) UpdateStatusModelMasterAsync(
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
 
-	go updateStatusModelMasterAsyncHandler(
+	go updateNodeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
@@ -1138,11 +1138,11 @@ func (p Gs2SkillTreeRestClient) UpdateStatusModelMasterAsync(
 	)
 }
 
-func (p Gs2SkillTreeRestClient) UpdateStatusModelMaster(
-	request *UpdateStatusModelMasterRequest,
-) (*UpdateStatusModelMasterResult, error) {
-	callback := make(chan UpdateStatusModelMasterAsyncResult, 1)
-	go p.UpdateStatusModelMasterAsync(
+func (p Gs2SkillTreeRestClient) UpdateNodeModelMaster(
+	request *UpdateNodeModelMasterRequest,
+) (*UpdateNodeModelMasterResult, error) {
+	callback := make(chan UpdateNodeModelMasterAsyncResult, 1)
+	go p.UpdateNodeModelMasterAsync(
 		request,
 		callback,
 	)
@@ -1150,10 +1150,10 @@ func (p Gs2SkillTreeRestClient) UpdateStatusModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func deleteStatusModelMasterAsyncHandler(
+func deleteNodeModelMasterAsyncHandler(
 	client Gs2SkillTreeRestClient,
 	job *core.NetworkJob,
-	callback chan<- DeleteStatusModelMasterAsyncResult,
+	callback chan<- DeleteNodeModelMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -1162,15 +1162,15 @@ func deleteStatusModelMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- DeleteStatusModelMasterAsyncResult{
+		callback <- DeleteNodeModelMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result DeleteStatusModelMasterResult
+	var result DeleteNodeModelMasterResult
 	if asyncResult.Err != nil {
-		callback <- DeleteStatusModelMasterAsyncResult{
+		callback <- DeleteNodeModelMasterAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -1178,22 +1178,22 @@ func deleteStatusModelMasterAsyncHandler(
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- DeleteStatusModelMasterAsyncResult{
+			callback <- DeleteNodeModelMasterAsyncResult{
 				err: err,
 			}
 			return
 		}
 	}
-	callback <- DeleteStatusModelMasterAsyncResult{
+	callback <- DeleteNodeModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeRestClient) DeleteStatusModelMasterAsync(
-	request *DeleteStatusModelMasterRequest,
-	callback chan<- DeleteStatusModelMasterAsyncResult,
+func (p Gs2SkillTreeRestClient) DeleteNodeModelMasterAsync(
+	request *DeleteNodeModelMasterRequest,
+	callback chan<- DeleteNodeModelMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master/model/{nodeModelName}"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
@@ -1215,7 +1215,7 @@ func (p Gs2SkillTreeRestClient) DeleteStatusModelMasterAsync(
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
 
-	go deleteStatusModelMasterAsyncHandler(
+	go deleteNodeModelMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
@@ -1227,11 +1227,11 @@ func (p Gs2SkillTreeRestClient) DeleteStatusModelMasterAsync(
 	)
 }
 
-func (p Gs2SkillTreeRestClient) DeleteStatusModelMaster(
-	request *DeleteStatusModelMasterRequest,
-) (*DeleteStatusModelMasterResult, error) {
-	callback := make(chan DeleteStatusModelMasterAsyncResult, 1)
-	go p.DeleteStatusModelMasterAsync(
+func (p Gs2SkillTreeRestClient) DeleteNodeModelMaster(
+	request *DeleteNodeModelMasterRequest,
+) (*DeleteNodeModelMasterResult, error) {
+	callback := make(chan DeleteNodeModelMasterAsyncResult, 1)
+	go p.DeleteNodeModelMasterAsync(
 		request,
 		callback,
 	)
@@ -2096,7 +2096,7 @@ func (p Gs2SkillTreeRestClient) ResetAsync(
 	request *ResetRequest,
 	callback chan<- ResetAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/status/reset"
+	path := "/{namespaceName}/user/me/status/reset"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
@@ -2196,7 +2196,7 @@ func (p Gs2SkillTreeRestClient) ResetByUserIdAsync(
 	request *ResetByUserIdRequest,
 	callback chan<- ResetByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/status"
+	path := "/{namespaceName}/user/{userId}/status/reset"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
@@ -2503,10 +2503,10 @@ func (p Gs2SkillTreeRestClient) ExportMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func getCurrentStatusMasterAsyncHandler(
+func getCurrentTreeMasterAsyncHandler(
 	client Gs2SkillTreeRestClient,
 	job *core.NetworkJob,
-	callback chan<- GetCurrentStatusMasterAsyncResult,
+	callback chan<- GetCurrentTreeMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2515,15 +2515,15 @@ func getCurrentStatusMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- GetCurrentStatusMasterAsyncResult{
+		callback <- GetCurrentTreeMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result GetCurrentStatusMasterResult
+	var result GetCurrentTreeMasterResult
 	if asyncResult.Err != nil {
-		callback <- GetCurrentStatusMasterAsyncResult{
+		callback <- GetCurrentTreeMasterAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -2531,22 +2531,22 @@ func getCurrentStatusMasterAsyncHandler(
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- GetCurrentStatusMasterAsyncResult{
+			callback <- GetCurrentTreeMasterAsyncResult{
 				err: err,
 			}
 			return
 		}
 	}
-	callback <- GetCurrentStatusMasterAsyncResult{
+	callback <- GetCurrentTreeMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeRestClient) GetCurrentStatusMasterAsync(
-	request *GetCurrentStatusMasterRequest,
-	callback chan<- GetCurrentStatusMasterAsyncResult,
+func (p Gs2SkillTreeRestClient) GetCurrentTreeMasterAsync(
+	request *GetCurrentTreeMasterRequest,
+	callback chan<- GetCurrentTreeMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
@@ -2563,7 +2563,7 @@ func (p Gs2SkillTreeRestClient) GetCurrentStatusMasterAsync(
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
 
-	go getCurrentStatusMasterAsyncHandler(
+	go getCurrentTreeMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
@@ -2575,11 +2575,11 @@ func (p Gs2SkillTreeRestClient) GetCurrentStatusMasterAsync(
 	)
 }
 
-func (p Gs2SkillTreeRestClient) GetCurrentStatusMaster(
-	request *GetCurrentStatusMasterRequest,
-) (*GetCurrentStatusMasterResult, error) {
-	callback := make(chan GetCurrentStatusMasterAsyncResult, 1)
-	go p.GetCurrentStatusMasterAsync(
+func (p Gs2SkillTreeRestClient) GetCurrentTreeMaster(
+	request *GetCurrentTreeMasterRequest,
+) (*GetCurrentTreeMasterResult, error) {
+	callback := make(chan GetCurrentTreeMasterAsyncResult, 1)
+	go p.GetCurrentTreeMasterAsync(
 		request,
 		callback,
 	)
@@ -2587,10 +2587,10 @@ func (p Gs2SkillTreeRestClient) GetCurrentStatusMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func updateCurrentStatusMasterAsyncHandler(
+func updateCurrentTreeMasterAsyncHandler(
 	client Gs2SkillTreeRestClient,
 	job *core.NetworkJob,
-	callback chan<- UpdateCurrentStatusMasterAsyncResult,
+	callback chan<- UpdateCurrentTreeMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2599,15 +2599,15 @@ func updateCurrentStatusMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentStatusMasterAsyncResult{
+		callback <- UpdateCurrentTreeMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentStatusMasterResult
+	var result UpdateCurrentTreeMasterResult
 	if asyncResult.Err != nil {
-		callback <- UpdateCurrentStatusMasterAsyncResult{
+		callback <- UpdateCurrentTreeMasterAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -2615,22 +2615,22 @@ func updateCurrentStatusMasterAsyncHandler(
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- UpdateCurrentStatusMasterAsyncResult{
+			callback <- UpdateCurrentTreeMasterAsyncResult{
 				err: err,
 			}
 			return
 		}
 	}
-	callback <- UpdateCurrentStatusMasterAsyncResult{
+	callback <- UpdateCurrentTreeMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeRestClient) UpdateCurrentStatusMasterAsync(
-	request *UpdateCurrentStatusMasterRequest,
-	callback chan<- UpdateCurrentStatusMasterAsyncResult,
+func (p Gs2SkillTreeRestClient) UpdateCurrentTreeMasterAsync(
+	request *UpdateCurrentTreeMasterRequest,
+	callback chan<- UpdateCurrentTreeMasterAsyncResult,
 ) {
 	path := "/{namespaceName}/master"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
@@ -2653,7 +2653,7 @@ func (p Gs2SkillTreeRestClient) UpdateCurrentStatusMasterAsync(
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
 
-	go updateCurrentStatusMasterAsyncHandler(
+	go updateCurrentTreeMasterAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
@@ -2665,11 +2665,11 @@ func (p Gs2SkillTreeRestClient) UpdateCurrentStatusMasterAsync(
 	)
 }
 
-func (p Gs2SkillTreeRestClient) UpdateCurrentStatusMaster(
-	request *UpdateCurrentStatusMasterRequest,
-) (*UpdateCurrentStatusMasterResult, error) {
-	callback := make(chan UpdateCurrentStatusMasterAsyncResult, 1)
-	go p.UpdateCurrentStatusMasterAsync(
+func (p Gs2SkillTreeRestClient) UpdateCurrentTreeMaster(
+	request *UpdateCurrentTreeMasterRequest,
+) (*UpdateCurrentTreeMasterResult, error) {
+	callback := make(chan UpdateCurrentTreeMasterAsyncResult, 1)
+	go p.UpdateCurrentTreeMasterAsync(
 		request,
 		callback,
 	)
@@ -2677,10 +2677,10 @@ func (p Gs2SkillTreeRestClient) UpdateCurrentStatusMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func updateCurrentStatusMasterFromGitHubAsyncHandler(
+func updateCurrentTreeMasterFromGitHubAsyncHandler(
 	client Gs2SkillTreeRestClient,
 	job *core.NetworkJob,
-	callback chan<- UpdateCurrentStatusMasterFromGitHubAsyncResult,
+	callback chan<- UpdateCurrentTreeMasterFromGitHubAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2689,15 +2689,15 @@ func updateCurrentStatusMasterFromGitHubAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentStatusMasterFromGitHubAsyncResult{
+		callback <- UpdateCurrentTreeMasterFromGitHubAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentStatusMasterFromGitHubResult
+	var result UpdateCurrentTreeMasterFromGitHubResult
 	if asyncResult.Err != nil {
-		callback <- UpdateCurrentStatusMasterFromGitHubAsyncResult{
+		callback <- UpdateCurrentTreeMasterFromGitHubAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -2705,22 +2705,22 @@ func updateCurrentStatusMasterFromGitHubAsyncHandler(
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- UpdateCurrentStatusMasterFromGitHubAsyncResult{
+			callback <- UpdateCurrentTreeMasterFromGitHubAsyncResult{
 				err: err,
 			}
 			return
 		}
 	}
-	callback <- UpdateCurrentStatusMasterFromGitHubAsyncResult{
+	callback <- UpdateCurrentTreeMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2SkillTreeRestClient) UpdateCurrentStatusMasterFromGitHubAsync(
-	request *UpdateCurrentStatusMasterFromGitHubRequest,
-	callback chan<- UpdateCurrentStatusMasterFromGitHubAsyncResult,
+func (p Gs2SkillTreeRestClient) UpdateCurrentTreeMasterFromGitHubAsync(
+	request *UpdateCurrentTreeMasterFromGitHubRequest,
+	callback chan<- UpdateCurrentTreeMasterFromGitHubAsyncResult,
 ) {
 	path := "/{namespaceName}/master/from_git_hub"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
@@ -2743,7 +2743,7 @@ func (p Gs2SkillTreeRestClient) UpdateCurrentStatusMasterFromGitHubAsync(
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
 
-	go updateCurrentStatusMasterFromGitHubAsyncHandler(
+	go updateCurrentTreeMasterFromGitHubAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:     p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
@@ -2755,11 +2755,11 @@ func (p Gs2SkillTreeRestClient) UpdateCurrentStatusMasterFromGitHubAsync(
 	)
 }
 
-func (p Gs2SkillTreeRestClient) UpdateCurrentStatusMasterFromGitHub(
-	request *UpdateCurrentStatusMasterFromGitHubRequest,
-) (*UpdateCurrentStatusMasterFromGitHubResult, error) {
-	callback := make(chan UpdateCurrentStatusMasterFromGitHubAsyncResult, 1)
-	go p.UpdateCurrentStatusMasterFromGitHubAsync(
+func (p Gs2SkillTreeRestClient) UpdateCurrentTreeMasterFromGitHub(
+	request *UpdateCurrentTreeMasterFromGitHubRequest,
+) (*UpdateCurrentTreeMasterFromGitHubResult, error) {
+	callback := make(chan UpdateCurrentTreeMasterFromGitHubAsyncResult, 1)
+	go p.UpdateCurrentTreeMasterFromGitHubAsync(
 		request,
 		callback,
 	)
