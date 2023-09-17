@@ -239,6 +239,37 @@ func (p UpdateStackRequest) Pointer() *UpdateStackRequest {
 	return &p
 }
 
+type ChangeSetRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StackName    *string `json:"stackName"`
+	Template     *string `json:"template"`
+}
+
+func NewChangeSetRequestFromJson(data string) ChangeSetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewChangeSetRequestFromDict(dict)
+}
+
+func NewChangeSetRequestFromDict(data map[string]interface{}) ChangeSetRequest {
+	return ChangeSetRequest{
+		StackName: core.CastString(data["stackName"]),
+		Template:  core.CastString(data["template"]),
+	}
+}
+
+func (p ChangeSetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stackName": p.StackName,
+		"template":  p.Template,
+	}
+}
+
+func (p ChangeSetRequest) Pointer() *ChangeSetRequest {
+	return &p
+}
+
 type UpdateStackFromGitHubRequest struct {
 	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`

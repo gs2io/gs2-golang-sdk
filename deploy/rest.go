@@ -644,6 +644,96 @@ func (p Gs2DeployRestClient) UpdateStack(
 	return asyncResult.result, asyncResult.err
 }
 
+func changeSetAsyncHandler(
+	client Gs2DeployRestClient,
+	job *core.NetworkJob,
+	callback chan<- ChangeSetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ChangeSetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ChangeSetResult
+	if asyncResult.Err != nil {
+		callback <- ChangeSetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ChangeSetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- ChangeSetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DeployRestClient) ChangeSetAsync(
+	request *ChangeSetRequest,
+	callback chan<- ChangeSetAsyncResult,
+) {
+	path := "/stack/{stackName}"
+	if request.StackName != nil && *request.StackName != "" {
+		path = strings.ReplaceAll(path, "{stackName}", core.ToString(*request.StackName))
+	} else {
+		path = strings.ReplaceAll(path, "{stackName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Template != nil && *request.Template != "" {
+		bodies["template"] = *request.Template
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go changeSetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("deploy").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DeployRestClient) ChangeSet(
+	request *ChangeSetRequest,
+) (*ChangeSetResult, error) {
+	callback := make(chan ChangeSetAsyncResult, 1)
+	go p.ChangeSetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func updateStackFromGitHubAsyncHandler(
 	client Gs2DeployRestClient,
 	job *core.NetworkJob,

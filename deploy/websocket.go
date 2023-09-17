@@ -619,6 +619,90 @@ func (p Gs2DeployWebSocketClient) UpdateStack(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2DeployWebSocketClient) changeSetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ChangeSetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ChangeSetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ChangeSetResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ChangeSetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- ChangeSetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DeployWebSocketClient) ChangeSetAsync(
+	request *ChangeSetRequest,
+	callback chan<- ChangeSetAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "deploy",
+			"component":   "stack",
+			"function":    "changeSet",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StackName != nil && *request.StackName != "" {
+		bodies["stackName"] = *request.StackName
+	}
+	if request.Template != nil && *request.Template != "" {
+		bodies["template"] = *request.Template
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.changeSetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DeployWebSocketClient) ChangeSet(
+	request *ChangeSetRequest,
+) (*ChangeSetResult, error) {
+	callback := make(chan ChangeSetAsyncResult, 1)
+	go p.ChangeSetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2DeployWebSocketClient) updateStackFromGitHubAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- UpdateStackFromGitHubAsyncResult,

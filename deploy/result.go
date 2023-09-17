@@ -239,6 +239,39 @@ func (p UpdateStackResult) Pointer() *UpdateStackResult {
 	return &p
 }
 
+type ChangeSetResult struct {
+	Items []ChangeSet `json:"items"`
+}
+
+type ChangeSetAsyncResult struct {
+	result *ChangeSetResult
+	err    error
+}
+
+func NewChangeSetResultFromJson(data string) ChangeSetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewChangeSetResultFromDict(dict)
+}
+
+func NewChangeSetResultFromDict(data map[string]interface{}) ChangeSetResult {
+	return ChangeSetResult{
+		Items: CastChangeSets(core.CastArray(data["items"])),
+	}
+}
+
+func (p ChangeSetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastChangeSetsFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p ChangeSetResult) Pointer() *ChangeSetResult {
+	return &p
+}
+
 type UpdateStackFromGitHubResult struct {
 	Item *Stack `json:"item"`
 }

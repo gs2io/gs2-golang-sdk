@@ -396,6 +396,121 @@ func CastOutputsFromDict(data []Output) []interface{} {
 	return v
 }
 
+type OutputField struct {
+	Name      *string `json:"name"`
+	FieldName *string `json:"fieldName"`
+}
+
+func NewOutputFieldFromJson(data string) OutputField {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewOutputFieldFromDict(dict)
+}
+
+func NewOutputFieldFromDict(data map[string]interface{}) OutputField {
+	return OutputField{
+		Name:      core.CastString(data["name"]),
+		FieldName: core.CastString(data["fieldName"]),
+	}
+}
+
+func (p OutputField) ToDict() map[string]interface{} {
+
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var fieldName *string
+	if p.FieldName != nil {
+		fieldName = p.FieldName
+	}
+	return map[string]interface{}{
+		"name":      name,
+		"fieldName": fieldName,
+	}
+}
+
+func (p OutputField) Pointer() *OutputField {
+	return &p
+}
+
+func CastOutputFields(data []interface{}) []OutputField {
+	v := make([]OutputField, 0)
+	for _, d := range data {
+		v = append(v, NewOutputFieldFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastOutputFieldsFromDict(data []OutputField) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type ChangeSet struct {
+	ResourceName *string `json:"resourceName"`
+	ResourceType *string `json:"resourceType"`
+	Operation    *string `json:"operation"`
+}
+
+func NewChangeSetFromJson(data string) ChangeSet {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewChangeSetFromDict(dict)
+}
+
+func NewChangeSetFromDict(data map[string]interface{}) ChangeSet {
+	return ChangeSet{
+		ResourceName: core.CastString(data["resourceName"]),
+		ResourceType: core.CastString(data["resourceType"]),
+		Operation:    core.CastString(data["operation"]),
+	}
+}
+
+func (p ChangeSet) ToDict() map[string]interface{} {
+
+	var resourceName *string
+	if p.ResourceName != nil {
+		resourceName = p.ResourceName
+	}
+	var resourceType *string
+	if p.ResourceType != nil {
+		resourceType = p.ResourceType
+	}
+	var operation *string
+	if p.Operation != nil {
+		operation = p.Operation
+	}
+	return map[string]interface{}{
+		"resourceName": resourceName,
+		"resourceType": resourceType,
+		"operation":    operation,
+	}
+}
+
+func (p ChangeSet) Pointer() *ChangeSet {
+	return &p
+}
+
+func CastChangeSets(data []interface{}) []ChangeSet {
+	v := make([]ChangeSet, 0)
+	for _, d := range data {
+		v = append(v, NewChangeSetFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastChangeSetsFromDict(data []ChangeSet) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type GitHubCheckoutSetting struct {
 	ApiKeyId       *string `json:"apiKeyId"`
 	RepositoryName *string `json:"repositoryName"`
@@ -478,60 +593,6 @@ func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
 }
 
 func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
-}
-
-type OutputField struct {
-	Name      *string `json:"name"`
-	FieldName *string `json:"fieldName"`
-}
-
-func NewOutputFieldFromJson(data string) OutputField {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewOutputFieldFromDict(dict)
-}
-
-func NewOutputFieldFromDict(data map[string]interface{}) OutputField {
-	return OutputField{
-		Name:      core.CastString(data["name"]),
-		FieldName: core.CastString(data["fieldName"]),
-	}
-}
-
-func (p OutputField) ToDict() map[string]interface{} {
-
-	var name *string
-	if p.Name != nil {
-		name = p.Name
-	}
-	var fieldName *string
-	if p.FieldName != nil {
-		fieldName = p.FieldName
-	}
-	return map[string]interface{}{
-		"name":      name,
-		"fieldName": fieldName,
-	}
-}
-
-func (p OutputField) Pointer() *OutputField {
-	return &p
-}
-
-func CastOutputFields(data []interface{}) []OutputField {
-	v := make([]OutputField, 0)
-	for _, d := range data {
-		v = append(v, NewOutputFieldFromDict(d.(map[string]interface{})))
-	}
-	return v
-}
-
-func CastOutputFieldsFromDict(data []OutputField) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
