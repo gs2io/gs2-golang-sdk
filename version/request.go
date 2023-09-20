@@ -258,18 +258,20 @@ func (p DescribeVersionModelMastersRequest) Pointer() *DescribeVersionModelMaste
 }
 
 type CreateVersionModelMasterRequest struct {
-	RequestId      *string  `json:"requestId"`
-	ContextStack   *string  `json:"contextStack"`
-	NamespaceName  *string  `json:"namespaceName"`
-	Name           *string  `json:"name"`
-	Description    *string  `json:"description"`
-	Metadata       *string  `json:"metadata"`
-	WarningVersion *Version `json:"warningVersion"`
-	ErrorVersion   *Version `json:"errorVersion"`
-	Scope          *string  `json:"scope"`
-	CurrentVersion *Version `json:"currentVersion"`
-	NeedSignature  *bool    `json:"needSignature"`
-	SignatureKeyId *string  `json:"signatureKeyId"`
+	RequestId        *string           `json:"requestId"`
+	ContextStack     *string           `json:"contextStack"`
+	NamespaceName    *string           `json:"namespaceName"`
+	Name             *string           `json:"name"`
+	Description      *string           `json:"description"`
+	Metadata         *string           `json:"metadata"`
+	Scope            *string           `json:"scope"`
+	Type             *string           `json:"type"`
+	CurrentVersion   *Version          `json:"currentVersion"`
+	WarningVersion   *Version          `json:"warningVersion"`
+	ErrorVersion     *Version          `json:"errorVersion"`
+	ScheduleVersions []ScheduleVersion `json:"scheduleVersions"`
+	NeedSignature    *bool             `json:"needSignature"`
+	SignatureKeyId   *string           `json:"signatureKeyId"`
 }
 
 func NewCreateVersionModelMasterRequestFromJson(data string) CreateVersionModelMasterRequest {
@@ -280,16 +282,18 @@ func NewCreateVersionModelMasterRequestFromJson(data string) CreateVersionModelM
 
 func NewCreateVersionModelMasterRequestFromDict(data map[string]interface{}) CreateVersionModelMasterRequest {
 	return CreateVersionModelMasterRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		Name:           core.CastString(data["name"]),
-		Description:    core.CastString(data["description"]),
-		Metadata:       core.CastString(data["metadata"]),
-		WarningVersion: NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer(),
-		ErrorVersion:   NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer(),
-		Scope:          core.CastString(data["scope"]),
-		CurrentVersion: NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer(),
-		NeedSignature:  core.CastBool(data["needSignature"]),
-		SignatureKeyId: core.CastString(data["signatureKeyId"]),
+		NamespaceName:    core.CastString(data["namespaceName"]),
+		Name:             core.CastString(data["name"]),
+		Description:      core.CastString(data["description"]),
+		Metadata:         core.CastString(data["metadata"]),
+		Scope:            core.CastString(data["scope"]),
+		Type:             core.CastString(data["type"]),
+		CurrentVersion:   NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer(),
+		WarningVersion:   NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer(),
+		ErrorVersion:     NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer(),
+		ScheduleVersions: CastScheduleVersions(core.CastArray(data["scheduleVersions"])),
+		NeedSignature:    core.CastBool(data["needSignature"]),
+		SignatureKeyId:   core.CastString(data["signatureKeyId"]),
 	}
 }
 
@@ -299,10 +303,14 @@ func (p CreateVersionModelMasterRequest) ToDict() map[string]interface{} {
 		"name":           p.Name,
 		"description":    p.Description,
 		"metadata":       p.Metadata,
+		"scope":          p.Scope,
+		"type":           p.Type,
+		"currentVersion": p.CurrentVersion.ToDict(),
 		"warningVersion": p.WarningVersion.ToDict(),
 		"errorVersion":   p.ErrorVersion.ToDict(),
-		"scope":          p.Scope,
-		"currentVersion": p.CurrentVersion.ToDict(),
+		"scheduleVersions": CastScheduleVersionsFromDict(
+			p.ScheduleVersions,
+		),
 		"needSignature":  p.NeedSignature,
 		"signatureKeyId": p.SignatureKeyId,
 	}
@@ -344,18 +352,20 @@ func (p GetVersionModelMasterRequest) Pointer() *GetVersionModelMasterRequest {
 }
 
 type UpdateVersionModelMasterRequest struct {
-	RequestId      *string  `json:"requestId"`
-	ContextStack   *string  `json:"contextStack"`
-	NamespaceName  *string  `json:"namespaceName"`
-	VersionName    *string  `json:"versionName"`
-	Description    *string  `json:"description"`
-	Metadata       *string  `json:"metadata"`
-	WarningVersion *Version `json:"warningVersion"`
-	ErrorVersion   *Version `json:"errorVersion"`
-	Scope          *string  `json:"scope"`
-	CurrentVersion *Version `json:"currentVersion"`
-	NeedSignature  *bool    `json:"needSignature"`
-	SignatureKeyId *string  `json:"signatureKeyId"`
+	RequestId        *string           `json:"requestId"`
+	ContextStack     *string           `json:"contextStack"`
+	NamespaceName    *string           `json:"namespaceName"`
+	VersionName      *string           `json:"versionName"`
+	Description      *string           `json:"description"`
+	Metadata         *string           `json:"metadata"`
+	Scope            *string           `json:"scope"`
+	Type             *string           `json:"type"`
+	CurrentVersion   *Version          `json:"currentVersion"`
+	WarningVersion   *Version          `json:"warningVersion"`
+	ErrorVersion     *Version          `json:"errorVersion"`
+	ScheduleVersions []ScheduleVersion `json:"scheduleVersions"`
+	NeedSignature    *bool             `json:"needSignature"`
+	SignatureKeyId   *string           `json:"signatureKeyId"`
 }
 
 func NewUpdateVersionModelMasterRequestFromJson(data string) UpdateVersionModelMasterRequest {
@@ -366,16 +376,18 @@ func NewUpdateVersionModelMasterRequestFromJson(data string) UpdateVersionModelM
 
 func NewUpdateVersionModelMasterRequestFromDict(data map[string]interface{}) UpdateVersionModelMasterRequest {
 	return UpdateVersionModelMasterRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		VersionName:    core.CastString(data["versionName"]),
-		Description:    core.CastString(data["description"]),
-		Metadata:       core.CastString(data["metadata"]),
-		WarningVersion: NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer(),
-		ErrorVersion:   NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer(),
-		Scope:          core.CastString(data["scope"]),
-		CurrentVersion: NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer(),
-		NeedSignature:  core.CastBool(data["needSignature"]),
-		SignatureKeyId: core.CastString(data["signatureKeyId"]),
+		NamespaceName:    core.CastString(data["namespaceName"]),
+		VersionName:      core.CastString(data["versionName"]),
+		Description:      core.CastString(data["description"]),
+		Metadata:         core.CastString(data["metadata"]),
+		Scope:            core.CastString(data["scope"]),
+		Type:             core.CastString(data["type"]),
+		CurrentVersion:   NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer(),
+		WarningVersion:   NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer(),
+		ErrorVersion:     NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer(),
+		ScheduleVersions: CastScheduleVersions(core.CastArray(data["scheduleVersions"])),
+		NeedSignature:    core.CastBool(data["needSignature"]),
+		SignatureKeyId:   core.CastString(data["signatureKeyId"]),
 	}
 }
 
@@ -385,10 +397,14 @@ func (p UpdateVersionModelMasterRequest) ToDict() map[string]interface{} {
 		"versionName":    p.VersionName,
 		"description":    p.Description,
 		"metadata":       p.Metadata,
+		"scope":          p.Scope,
+		"type":           p.Type,
+		"currentVersion": p.CurrentVersion.ToDict(),
 		"warningVersion": p.WarningVersion.ToDict(),
 		"errorVersion":   p.ErrorVersion.ToDict(),
-		"scope":          p.Scope,
-		"currentVersion": p.CurrentVersion.ToDict(),
+		"scheduleVersions": CastScheduleVersionsFromDict(
+			p.ScheduleVersions,
+		),
 		"needSignature":  p.NeedSignature,
 		"signatureKeyId": p.SignatureKeyId,
 	}

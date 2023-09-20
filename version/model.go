@@ -133,19 +133,21 @@ func CastNamespacesFromDict(data []Namespace) []interface{} {
 }
 
 type VersionModelMaster struct {
-	VersionModelId *string  `json:"versionModelId"`
-	Name           *string  `json:"name"`
-	Description    *string  `json:"description"`
-	Metadata       *string  `json:"metadata"`
-	WarningVersion *Version `json:"warningVersion"`
-	ErrorVersion   *Version `json:"errorVersion"`
-	Scope          *string  `json:"scope"`
-	CurrentVersion *Version `json:"currentVersion"`
-	NeedSignature  *bool    `json:"needSignature"`
-	SignatureKeyId *string  `json:"signatureKeyId"`
-	CreatedAt      *int64   `json:"createdAt"`
-	UpdatedAt      *int64   `json:"updatedAt"`
-	Revision       *int64   `json:"revision"`
+	VersionModelId   *string           `json:"versionModelId"`
+	Name             *string           `json:"name"`
+	Description      *string           `json:"description"`
+	Metadata         *string           `json:"metadata"`
+	Scope            *string           `json:"scope"`
+	Type             *string           `json:"type"`
+	CurrentVersion   *Version          `json:"currentVersion"`
+	WarningVersion   *Version          `json:"warningVersion"`
+	ErrorVersion     *Version          `json:"errorVersion"`
+	ScheduleVersions []ScheduleVersion `json:"scheduleVersions"`
+	NeedSignature    *bool             `json:"needSignature"`
+	SignatureKeyId   *string           `json:"signatureKeyId"`
+	CreatedAt        *int64            `json:"createdAt"`
+	UpdatedAt        *int64            `json:"updatedAt"`
+	Revision         *int64            `json:"revision"`
 }
 
 func NewVersionModelMasterFromJson(data string) VersionModelMaster {
@@ -156,19 +158,21 @@ func NewVersionModelMasterFromJson(data string) VersionModelMaster {
 
 func NewVersionModelMasterFromDict(data map[string]interface{}) VersionModelMaster {
 	return VersionModelMaster{
-		VersionModelId: core.CastString(data["versionModelId"]),
-		Name:           core.CastString(data["name"]),
-		Description:    core.CastString(data["description"]),
-		Metadata:       core.CastString(data["metadata"]),
-		WarningVersion: NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer(),
-		ErrorVersion:   NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer(),
-		Scope:          core.CastString(data["scope"]),
-		CurrentVersion: NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer(),
-		NeedSignature:  core.CastBool(data["needSignature"]),
-		SignatureKeyId: core.CastString(data["signatureKeyId"]),
-		CreatedAt:      core.CastInt64(data["createdAt"]),
-		UpdatedAt:      core.CastInt64(data["updatedAt"]),
-		Revision:       core.CastInt64(data["revision"]),
+		VersionModelId:   core.CastString(data["versionModelId"]),
+		Name:             core.CastString(data["name"]),
+		Description:      core.CastString(data["description"]),
+		Metadata:         core.CastString(data["metadata"]),
+		Scope:            core.CastString(data["scope"]),
+		Type:             core.CastString(data["type"]),
+		CurrentVersion:   NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer(),
+		WarningVersion:   NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer(),
+		ErrorVersion:     NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer(),
+		ScheduleVersions: CastScheduleVersions(core.CastArray(data["scheduleVersions"])),
+		NeedSignature:    core.CastBool(data["needSignature"]),
+		SignatureKeyId:   core.CastString(data["signatureKeyId"]),
+		CreatedAt:        core.CastInt64(data["createdAt"]),
+		UpdatedAt:        core.CastInt64(data["updatedAt"]),
+		Revision:         core.CastInt64(data["revision"]),
 	}
 }
 
@@ -190,6 +194,18 @@ func (p VersionModelMaster) ToDict() map[string]interface{} {
 	if p.Metadata != nil {
 		metadata = p.Metadata
 	}
+	var scope *string
+	if p.Scope != nil {
+		scope = p.Scope
+	}
+	var _type *string
+	if p.Type != nil {
+		_type = p.Type
+	}
+	var currentVersion map[string]interface{}
+	if p.CurrentVersion != nil {
+		currentVersion = p.CurrentVersion.ToDict()
+	}
 	var warningVersion map[string]interface{}
 	if p.WarningVersion != nil {
 		warningVersion = p.WarningVersion.ToDict()
@@ -198,13 +214,11 @@ func (p VersionModelMaster) ToDict() map[string]interface{} {
 	if p.ErrorVersion != nil {
 		errorVersion = p.ErrorVersion.ToDict()
 	}
-	var scope *string
-	if p.Scope != nil {
-		scope = p.Scope
-	}
-	var currentVersion map[string]interface{}
-	if p.CurrentVersion != nil {
-		currentVersion = p.CurrentVersion.ToDict()
+	var scheduleVersions []interface{}
+	if p.ScheduleVersions != nil {
+		scheduleVersions = CastScheduleVersionsFromDict(
+			p.ScheduleVersions,
+		)
 	}
 	var needSignature *bool
 	if p.NeedSignature != nil {
@@ -227,19 +241,21 @@ func (p VersionModelMaster) ToDict() map[string]interface{} {
 		revision = p.Revision
 	}
 	return map[string]interface{}{
-		"versionModelId": versionModelId,
-		"name":           name,
-		"description":    description,
-		"metadata":       metadata,
-		"warningVersion": warningVersion,
-		"errorVersion":   errorVersion,
-		"scope":          scope,
-		"currentVersion": currentVersion,
-		"needSignature":  needSignature,
-		"signatureKeyId": signatureKeyId,
-		"createdAt":      createdAt,
-		"updatedAt":      updatedAt,
-		"revision":       revision,
+		"versionModelId":   versionModelId,
+		"name":             name,
+		"description":      description,
+		"metadata":         metadata,
+		"scope":            scope,
+		"type":             _type,
+		"currentVersion":   currentVersion,
+		"warningVersion":   warningVersion,
+		"errorVersion":     errorVersion,
+		"scheduleVersions": scheduleVersions,
+		"needSignature":    needSignature,
+		"signatureKeyId":   signatureKeyId,
+		"createdAt":        createdAt,
+		"updatedAt":        updatedAt,
+		"revision":         revision,
 	}
 }
 
@@ -263,77 +279,18 @@ func CastVersionModelMastersFromDict(data []VersionModelMaster) []interface{} {
 	return v
 }
 
-type Version struct {
-	Major *int32 `json:"major"`
-	Minor *int32 `json:"minor"`
-	Micro *int32 `json:"micro"`
-}
-
-func NewVersionFromJson(data string) Version {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewVersionFromDict(dict)
-}
-
-func NewVersionFromDict(data map[string]interface{}) Version {
-	return Version{
-		Major: core.CastInt32(data["major"]),
-		Minor: core.CastInt32(data["minor"]),
-		Micro: core.CastInt32(data["micro"]),
-	}
-}
-
-func (p Version) ToDict() map[string]interface{} {
-
-	var major *int32
-	if p.Major != nil {
-		major = p.Major
-	}
-	var minor *int32
-	if p.Minor != nil {
-		minor = p.Minor
-	}
-	var micro *int32
-	if p.Micro != nil {
-		micro = p.Micro
-	}
-	return map[string]interface{}{
-		"major": major,
-		"minor": minor,
-		"micro": micro,
-	}
-}
-
-func (p Version) Pointer() *Version {
-	return &p
-}
-
-func CastVersions(data []interface{}) []Version {
-	v := make([]Version, 0)
-	for _, d := range data {
-		v = append(v, NewVersionFromDict(d.(map[string]interface{})))
-	}
-	return v
-}
-
-func CastVersionsFromDict(data []Version) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
-}
-
 type VersionModel struct {
-	VersionModelId *string  `json:"versionModelId"`
-	Name           *string  `json:"name"`
-	Metadata       *string  `json:"metadata"`
-	WarningVersion *Version `json:"warningVersion"`
-	ErrorVersion   *Version `json:"errorVersion"`
-	Scope          *string  `json:"scope"`
-	CurrentVersion *Version `json:"currentVersion"`
-	NeedSignature  *bool    `json:"needSignature"`
-	SignatureKeyId *string  `json:"signatureKeyId"`
+	VersionModelId   *string           `json:"versionModelId"`
+	Name             *string           `json:"name"`
+	Metadata         *string           `json:"metadata"`
+	Scope            *string           `json:"scope"`
+	Type             *string           `json:"type"`
+	CurrentVersion   *Version          `json:"currentVersion"`
+	WarningVersion   *Version          `json:"warningVersion"`
+	ErrorVersion     *Version          `json:"errorVersion"`
+	ScheduleVersions []ScheduleVersion `json:"scheduleVersions"`
+	NeedSignature    *bool             `json:"needSignature"`
+	SignatureKeyId   *string           `json:"signatureKeyId"`
 }
 
 func NewVersionModelFromJson(data string) VersionModel {
@@ -344,15 +301,17 @@ func NewVersionModelFromJson(data string) VersionModel {
 
 func NewVersionModelFromDict(data map[string]interface{}) VersionModel {
 	return VersionModel{
-		VersionModelId: core.CastString(data["versionModelId"]),
-		Name:           core.CastString(data["name"]),
-		Metadata:       core.CastString(data["metadata"]),
-		WarningVersion: NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer(),
-		ErrorVersion:   NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer(),
-		Scope:          core.CastString(data["scope"]),
-		CurrentVersion: NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer(),
-		NeedSignature:  core.CastBool(data["needSignature"]),
-		SignatureKeyId: core.CastString(data["signatureKeyId"]),
+		VersionModelId:   core.CastString(data["versionModelId"]),
+		Name:             core.CastString(data["name"]),
+		Metadata:         core.CastString(data["metadata"]),
+		Scope:            core.CastString(data["scope"]),
+		Type:             core.CastString(data["type"]),
+		CurrentVersion:   NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer(),
+		WarningVersion:   NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer(),
+		ErrorVersion:     NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer(),
+		ScheduleVersions: CastScheduleVersions(core.CastArray(data["scheduleVersions"])),
+		NeedSignature:    core.CastBool(data["needSignature"]),
+		SignatureKeyId:   core.CastString(data["signatureKeyId"]),
 	}
 }
 
@@ -370,6 +329,18 @@ func (p VersionModel) ToDict() map[string]interface{} {
 	if p.Metadata != nil {
 		metadata = p.Metadata
 	}
+	var scope *string
+	if p.Scope != nil {
+		scope = p.Scope
+	}
+	var _type *string
+	if p.Type != nil {
+		_type = p.Type
+	}
+	var currentVersion map[string]interface{}
+	if p.CurrentVersion != nil {
+		currentVersion = p.CurrentVersion.ToDict()
+	}
 	var warningVersion map[string]interface{}
 	if p.WarningVersion != nil {
 		warningVersion = p.WarningVersion.ToDict()
@@ -378,13 +349,11 @@ func (p VersionModel) ToDict() map[string]interface{} {
 	if p.ErrorVersion != nil {
 		errorVersion = p.ErrorVersion.ToDict()
 	}
-	var scope *string
-	if p.Scope != nil {
-		scope = p.Scope
-	}
-	var currentVersion map[string]interface{}
-	if p.CurrentVersion != nil {
-		currentVersion = p.CurrentVersion.ToDict()
+	var scheduleVersions []interface{}
+	if p.ScheduleVersions != nil {
+		scheduleVersions = CastScheduleVersionsFromDict(
+			p.ScheduleVersions,
+		)
 	}
 	var needSignature *bool
 	if p.NeedSignature != nil {
@@ -395,15 +364,17 @@ func (p VersionModel) ToDict() map[string]interface{} {
 		signatureKeyId = p.SignatureKeyId
 	}
 	return map[string]interface{}{
-		"versionModelId": versionModelId,
-		"name":           name,
-		"metadata":       metadata,
-		"warningVersion": warningVersion,
-		"errorVersion":   errorVersion,
-		"scope":          scope,
-		"currentVersion": currentVersion,
-		"needSignature":  needSignature,
-		"signatureKeyId": signatureKeyId,
+		"versionModelId":   versionModelId,
+		"name":             name,
+		"metadata":         metadata,
+		"scope":            scope,
+		"type":             _type,
+		"currentVersion":   currentVersion,
+		"warningVersion":   warningVersion,
+		"errorVersion":     errorVersion,
+		"scheduleVersions": scheduleVersions,
+		"needSignature":    needSignature,
+		"signatureKeyId":   signatureKeyId,
 	}
 }
 
@@ -572,9 +543,9 @@ func CastStatusesFromDict(data []Status) []interface{} {
 
 type TargetVersion struct {
 	VersionName *string  `json:"versionName"`
-	Version     *Version `json:"version"`
 	Body        *string  `json:"body"`
 	Signature   *string  `json:"signature"`
+	Version     *Version `json:"version"`
 }
 
 func NewTargetVersionFromJson(data string) TargetVersion {
@@ -586,9 +557,9 @@ func NewTargetVersionFromJson(data string) TargetVersion {
 func NewTargetVersionFromDict(data map[string]interface{}) TargetVersion {
 	return TargetVersion{
 		VersionName: core.CastString(data["versionName"]),
-		Version:     NewVersionFromDict(core.CastMap(data["version"])).Pointer(),
 		Body:        core.CastString(data["body"]),
 		Signature:   core.CastString(data["signature"]),
+		Version:     NewVersionFromDict(core.CastMap(data["version"])).Pointer(),
 	}
 }
 
@@ -598,10 +569,6 @@ func (p TargetVersion) ToDict() map[string]interface{} {
 	if p.VersionName != nil {
 		versionName = p.VersionName
 	}
-	var version map[string]interface{}
-	if p.Version != nil {
-		version = p.Version.ToDict()
-	}
 	var body *string
 	if p.Body != nil {
 		body = p.Body
@@ -610,11 +577,15 @@ func (p TargetVersion) ToDict() map[string]interface{} {
 	if p.Signature != nil {
 		signature = p.Signature
 	}
+	var version map[string]interface{}
+	if p.Version != nil {
+		version = p.Version.ToDict()
+	}
 	return map[string]interface{}{
 		"versionName": versionName,
-		"version":     version,
 		"body":        body,
 		"signature":   signature,
+		"version":     version,
 	}
 }
 
@@ -957,6 +928,135 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type Version struct {
+	Major *int32 `json:"major"`
+	Minor *int32 `json:"minor"`
+	Micro *int32 `json:"micro"`
+}
+
+func NewVersionFromJson(data string) Version {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVersionFromDict(dict)
+}
+
+func NewVersionFromDict(data map[string]interface{}) Version {
+	return Version{
+		Major: core.CastInt32(data["major"]),
+		Minor: core.CastInt32(data["minor"]),
+		Micro: core.CastInt32(data["micro"]),
+	}
+}
+
+func (p Version) ToDict() map[string]interface{} {
+
+	var major *int32
+	if p.Major != nil {
+		major = p.Major
+	}
+	var minor *int32
+	if p.Minor != nil {
+		minor = p.Minor
+	}
+	var micro *int32
+	if p.Micro != nil {
+		micro = p.Micro
+	}
+	return map[string]interface{}{
+		"major": major,
+		"minor": minor,
+		"micro": micro,
+	}
+}
+
+func (p Version) Pointer() *Version {
+	return &p
+}
+
+func CastVersions(data []interface{}) []Version {
+	v := make([]Version, 0)
+	for _, d := range data {
+		v = append(v, NewVersionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastVersionsFromDict(data []Version) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type ScheduleVersion struct {
+	CurrentVersion  *Version `json:"currentVersion"`
+	WarningVersion  *Version `json:"warningVersion"`
+	ErrorVersion    *Version `json:"errorVersion"`
+	ScheduleEventId *string  `json:"scheduleEventId"`
+}
+
+func NewScheduleVersionFromJson(data string) ScheduleVersion {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewScheduleVersionFromDict(dict)
+}
+
+func NewScheduleVersionFromDict(data map[string]interface{}) ScheduleVersion {
+	return ScheduleVersion{
+		CurrentVersion:  NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer(),
+		WarningVersion:  NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer(),
+		ErrorVersion:    NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer(),
+		ScheduleEventId: core.CastString(data["scheduleEventId"]),
+	}
+}
+
+func (p ScheduleVersion) ToDict() map[string]interface{} {
+
+	var currentVersion map[string]interface{}
+	if p.CurrentVersion != nil {
+		currentVersion = p.CurrentVersion.ToDict()
+	}
+	var warningVersion map[string]interface{}
+	if p.WarningVersion != nil {
+		warningVersion = p.WarningVersion.ToDict()
+	}
+	var errorVersion map[string]interface{}
+	if p.ErrorVersion != nil {
+		errorVersion = p.ErrorVersion.ToDict()
+	}
+	var scheduleEventId *string
+	if p.ScheduleEventId != nil {
+		scheduleEventId = p.ScheduleEventId
+	}
+	return map[string]interface{}{
+		"currentVersion":  currentVersion,
+		"warningVersion":  warningVersion,
+		"errorVersion":    errorVersion,
+		"scheduleEventId": scheduleEventId,
+	}
+}
+
+func (p ScheduleVersion) Pointer() *ScheduleVersion {
+	return &p
+}
+
+func CastScheduleVersions(data []interface{}) []ScheduleVersion {
+	v := make([]ScheduleVersion, 0)
+	for _, d := range data {
+		v = append(v, NewScheduleVersionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScheduleVersionsFromDict(data []ScheduleVersion) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

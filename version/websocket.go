@@ -702,17 +702,27 @@ func (p Gs2VersionWebSocketClient) CreateVersionModelMasterAsync(
 	if request.Metadata != nil && *request.Metadata != "" {
 		bodies["metadata"] = *request.Metadata
 	}
+	if request.Scope != nil && *request.Scope != "" {
+		bodies["scope"] = *request.Scope
+	}
+	if request.Type != nil && *request.Type != "" {
+		bodies["type"] = *request.Type
+	}
+	if request.CurrentVersion != nil {
+		bodies["currentVersion"] = request.CurrentVersion.ToDict()
+	}
 	if request.WarningVersion != nil {
 		bodies["warningVersion"] = request.WarningVersion.ToDict()
 	}
 	if request.ErrorVersion != nil {
 		bodies["errorVersion"] = request.ErrorVersion.ToDict()
 	}
-	if request.Scope != nil && *request.Scope != "" {
-		bodies["scope"] = *request.Scope
-	}
-	if request.CurrentVersion != nil {
-		bodies["currentVersion"] = request.CurrentVersion.ToDict()
+	if request.ScheduleVersions != nil {
+		var _scheduleVersions []interface{}
+		for _, item := range request.ScheduleVersions {
+			_scheduleVersions = append(_scheduleVersions, item)
+		}
+		bodies["scheduleVersions"] = _scheduleVersions
 	}
 	if request.NeedSignature != nil {
 		bodies["needSignature"] = *request.NeedSignature
@@ -894,17 +904,27 @@ func (p Gs2VersionWebSocketClient) UpdateVersionModelMasterAsync(
 	if request.Metadata != nil && *request.Metadata != "" {
 		bodies["metadata"] = *request.Metadata
 	}
+	if request.Scope != nil && *request.Scope != "" {
+		bodies["scope"] = *request.Scope
+	}
+	if request.Type != nil && *request.Type != "" {
+		bodies["type"] = *request.Type
+	}
+	if request.CurrentVersion != nil {
+		bodies["currentVersion"] = request.CurrentVersion.ToDict()
+	}
 	if request.WarningVersion != nil {
 		bodies["warningVersion"] = request.WarningVersion.ToDict()
 	}
 	if request.ErrorVersion != nil {
 		bodies["errorVersion"] = request.ErrorVersion.ToDict()
 	}
-	if request.Scope != nil && *request.Scope != "" {
-		bodies["scope"] = *request.Scope
-	}
-	if request.CurrentVersion != nil {
-		bodies["currentVersion"] = request.CurrentVersion.ToDict()
+	if request.ScheduleVersions != nil {
+		var _scheduleVersions []interface{}
+		for _, item := range request.ScheduleVersions {
+			_scheduleVersions = append(_scheduleVersions, item)
+		}
+		bodies["scheduleVersions"] = _scheduleVersions
 	}
 	if request.NeedSignature != nil {
 		bodies["needSignature"] = *request.NeedSignature
