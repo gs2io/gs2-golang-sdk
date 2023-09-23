@@ -154,13 +154,14 @@ func CastNamespacesFromDict(data []Namespace) []interface{} {
 }
 
 type Account struct {
-	AccountId  *string `json:"accountId"`
-	UserId     *string `json:"userId"`
-	Password   *string `json:"password"`
-	TimeOffset *int32  `json:"timeOffset"`
-	Banned     *bool   `json:"banned"`
-	CreatedAt  *int64  `json:"createdAt"`
-	Revision   *int64  `json:"revision"`
+	AccountId   *string     `json:"accountId"`
+	UserId      *string     `json:"userId"`
+	Password    *string     `json:"password"`
+	TimeOffset  *int32      `json:"timeOffset"`
+	BanStatuses []BanStatus `json:"banStatuses"`
+	Banned      *bool       `json:"banned"`
+	CreatedAt   *int64      `json:"createdAt"`
+	Revision    *int64      `json:"revision"`
 }
 
 func NewAccountFromJson(data string) Account {
@@ -171,13 +172,14 @@ func NewAccountFromJson(data string) Account {
 
 func NewAccountFromDict(data map[string]interface{}) Account {
 	return Account{
-		AccountId:  core.CastString(data["accountId"]),
-		UserId:     core.CastString(data["userId"]),
-		Password:   core.CastString(data["password"]),
-		TimeOffset: core.CastInt32(data["timeOffset"]),
-		Banned:     core.CastBool(data["banned"]),
-		CreatedAt:  core.CastInt64(data["createdAt"]),
-		Revision:   core.CastInt64(data["revision"]),
+		AccountId:   core.CastString(data["accountId"]),
+		UserId:      core.CastString(data["userId"]),
+		Password:    core.CastString(data["password"]),
+		TimeOffset:  core.CastInt32(data["timeOffset"]),
+		BanStatuses: CastBanStatuses(core.CastArray(data["banStatuses"])),
+		Banned:      core.CastBool(data["banned"]),
+		CreatedAt:   core.CastInt64(data["createdAt"]),
+		Revision:    core.CastInt64(data["revision"]),
 	}
 }
 
@@ -199,6 +201,12 @@ func (p Account) ToDict() map[string]interface{} {
 	if p.TimeOffset != nil {
 		timeOffset = p.TimeOffset
 	}
+	var banStatuses []interface{}
+	if p.BanStatuses != nil {
+		banStatuses = CastBanStatusesFromDict(
+			p.BanStatuses,
+		)
+	}
 	var banned *bool
 	if p.Banned != nil {
 		banned = p.Banned
@@ -212,13 +220,14 @@ func (p Account) ToDict() map[string]interface{} {
 		revision = p.Revision
 	}
 	return map[string]interface{}{
-		"accountId":  accountId,
-		"userId":     userId,
-		"password":   password,
-		"timeOffset": timeOffset,
-		"banned":     banned,
-		"createdAt":  createdAt,
-		"revision":   revision,
+		"accountId":   accountId,
+		"userId":      userId,
+		"password":    password,
+		"timeOffset":  timeOffset,
+		"banStatuses": banStatuses,
+		"banned":      banned,
+		"createdAt":   createdAt,
+		"revision":    revision,
 	}
 }
 
@@ -399,6 +408,67 @@ func CastDataOwners(data []interface{}) []DataOwner {
 }
 
 func CastDataOwnersFromDict(data []DataOwner) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type BanStatus struct {
+	Name             *string `json:"name"`
+	Reason           *string `json:"reason"`
+	ReleaseTimestamp *int64  `json:"releaseTimestamp"`
+}
+
+func NewBanStatusFromJson(data string) BanStatus {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBanStatusFromDict(dict)
+}
+
+func NewBanStatusFromDict(data map[string]interface{}) BanStatus {
+	return BanStatus{
+		Name:             core.CastString(data["name"]),
+		Reason:           core.CastString(data["reason"]),
+		ReleaseTimestamp: core.CastInt64(data["releaseTimestamp"]),
+	}
+}
+
+func (p BanStatus) ToDict() map[string]interface{} {
+
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var reason *string
+	if p.Reason != nil {
+		reason = p.Reason
+	}
+	var releaseTimestamp *int64
+	if p.ReleaseTimestamp != nil {
+		releaseTimestamp = p.ReleaseTimestamp
+	}
+	return map[string]interface{}{
+		"name":             name,
+		"reason":           reason,
+		"releaseTimestamp": releaseTimestamp,
+	}
+}
+
+func (p BanStatus) Pointer() *BanStatus {
+	return &p
+}
+
+func CastBanStatuses(data []interface{}) []BanStatus {
+	v := make([]BanStatus, 0)
+	for _, d := range data {
+		v = append(v, NewBanStatusFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastBanStatusesFromDict(data []BanStatus) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

@@ -370,6 +370,76 @@ func (p UpdateBannedRequest) Pointer() *UpdateBannedRequest {
 	return &p
 }
 
+type AddBanRequest struct {
+	RequestId          *string    `json:"requestId"`
+	ContextStack       *string    `json:"contextStack"`
+	DuplicationAvoider *string    `json:"duplicationAvoider"`
+	NamespaceName      *string    `json:"namespaceName"`
+	UserId             *string    `json:"userId"`
+	BanStatus          *BanStatus `json:"banStatus"`
+}
+
+func NewAddBanRequestFromJson(data string) AddBanRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddBanRequestFromDict(dict)
+}
+
+func NewAddBanRequestFromDict(data map[string]interface{}) AddBanRequest {
+	return AddBanRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		UserId:        core.CastString(data["userId"]),
+		BanStatus:     NewBanStatusFromDict(core.CastMap(data["banStatus"])).Pointer(),
+	}
+}
+
+func (p AddBanRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"banStatus":     p.BanStatus.ToDict(),
+	}
+}
+
+func (p AddBanRequest) Pointer() *AddBanRequest {
+	return &p
+}
+
+type RemoveBanRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	BanStatusName      *string `json:"banStatusName"`
+}
+
+func NewRemoveBanRequestFromJson(data string) RemoveBanRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRemoveBanRequestFromDict(dict)
+}
+
+func NewRemoveBanRequestFromDict(data map[string]interface{}) RemoveBanRequest {
+	return RemoveBanRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		UserId:        core.CastString(data["userId"]),
+		BanStatusName: core.CastString(data["banStatusName"]),
+	}
+}
+
+func (p RemoveBanRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"banStatusName": p.BanStatusName,
+	}
+}
+
+func (p RemoveBanRequest) Pointer() *RemoveBanRequest {
+	return &p
+}
+
 type GetAccountRequest struct {
 	RequestId     *string `json:"requestId"`
 	ContextStack  *string `json:"contextStack"`

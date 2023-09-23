@@ -342,6 +342,68 @@ func (p UpdateBannedResult) Pointer() *UpdateBannedResult {
 	return &p
 }
 
+type AddBanResult struct {
+	Item *Account `json:"item"`
+}
+
+type AddBanAsyncResult struct {
+	result *AddBanResult
+	err    error
+}
+
+func NewAddBanResultFromJson(data string) AddBanResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddBanResultFromDict(dict)
+}
+
+func NewAddBanResultFromDict(data map[string]interface{}) AddBanResult {
+	return AddBanResult{
+		Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p AddBanResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p AddBanResult) Pointer() *AddBanResult {
+	return &p
+}
+
+type RemoveBanResult struct {
+	Item *Account `json:"item"`
+}
+
+type RemoveBanAsyncResult struct {
+	result *RemoveBanResult
+	err    error
+}
+
+func NewRemoveBanResultFromJson(data string) RemoveBanResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRemoveBanResultFromDict(dict)
+}
+
+func NewRemoveBanResultFromDict(data map[string]interface{}) RemoveBanResult {
+	return RemoveBanResult{
+		Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p RemoveBanResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p RemoveBanResult) Pointer() *RemoveBanResult {
+	return &p
+}
+
 type GetAccountResult struct {
 	Item *Account `json:"item"`
 }
@@ -405,9 +467,10 @@ func (p DeleteAccountResult) Pointer() *DeleteAccountResult {
 }
 
 type AuthenticationResult struct {
-	Item      *Account `json:"item"`
-	Body      *string  `json:"body"`
-	Signature *string  `json:"signature"`
+	Item        *Account    `json:"item"`
+	BanStatuses []BanStatus `json:"banStatuses"`
+	Body        *string     `json:"body"`
+	Signature   *string     `json:"signature"`
 }
 
 type AuthenticationAsyncResult struct {
@@ -423,15 +486,19 @@ func NewAuthenticationResultFromJson(data string) AuthenticationResult {
 
 func NewAuthenticationResultFromDict(data map[string]interface{}) AuthenticationResult {
 	return AuthenticationResult{
-		Item:      NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
-		Body:      core.CastString(data["body"]),
-		Signature: core.CastString(data["signature"]),
+		Item:        NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+		BanStatuses: CastBanStatuses(core.CastArray(data["banStatuses"])),
+		Body:        core.CastString(data["body"]),
+		Signature:   core.CastString(data["signature"]),
 	}
 }
 
 func (p AuthenticationResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
+		"item": p.Item.ToDict(),
+		"banStatuses": CastBanStatusesFromDict(
+			p.BanStatuses,
+		),
 		"body":      p.Body,
 		"signature": p.Signature,
 	}
