@@ -860,6 +860,7 @@ func CastDrawnPrizesFromDict(data []DrawnPrize) []interface{} {
 }
 
 type BoxItem struct {
+	PrizeId        *string         `json:"prizeId"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
 	Remaining      *int32          `json:"remaining"`
 	Initial        *int32          `json:"initial"`
@@ -873,6 +874,7 @@ func NewBoxItemFromJson(data string) BoxItem {
 
 func NewBoxItemFromDict(data map[string]interface{}) BoxItem {
 	return BoxItem{
+		PrizeId:        core.CastString(data["prizeId"]),
 		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
 		Remaining:      core.CastInt32(data["remaining"]),
 		Initial:        core.CastInt32(data["initial"]),
@@ -881,6 +883,10 @@ func NewBoxItemFromDict(data map[string]interface{}) BoxItem {
 
 func (p BoxItem) ToDict() map[string]interface{} {
 
+	var prizeId *string
+	if p.PrizeId != nil {
+		prizeId = p.PrizeId
+	}
 	var acquireActions []interface{}
 	if p.AcquireActions != nil {
 		acquireActions = CastAcquireActionsFromDict(
@@ -896,6 +902,7 @@ func (p BoxItem) ToDict() map[string]interface{} {
 		initial = p.Initial
 	}
 	return map[string]interface{}{
+		"prizeId":        prizeId,
 		"acquireActions": acquireActions,
 		"remaining":      remaining,
 		"initial":        initial,
