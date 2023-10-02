@@ -1320,6 +1320,182 @@ func (p DeleteStatusByUserIdRequest) Pointer() *DeleteStatusByUserIdRequest {
 	return &p
 }
 
+type VerifyRankRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	ExperienceName     *string `json:"experienceName"`
+	VerifyType         *string `json:"verifyType"`
+	PropertyId         *string `json:"propertyId"`
+	RankValue          *int64  `json:"rankValue"`
+}
+
+func NewVerifyRankRequestFromJson(data string) VerifyRankRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRankRequestFromDict(dict)
+}
+
+func NewVerifyRankRequestFromDict(data map[string]interface{}) VerifyRankRequest {
+	return VerifyRankRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		AccessToken:    core.CastString(data["accessToken"]),
+		ExperienceName: core.CastString(data["experienceName"]),
+		VerifyType:     core.CastString(data["verifyType"]),
+		PropertyId:     core.CastString(data["propertyId"]),
+		RankValue:      core.CastInt64(data["rankValue"]),
+	}
+}
+
+func (p VerifyRankRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"accessToken":    p.AccessToken,
+		"experienceName": p.ExperienceName,
+		"verifyType":     p.VerifyType,
+		"propertyId":     p.PropertyId,
+		"rankValue":      p.RankValue,
+	}
+}
+
+func (p VerifyRankRequest) Pointer() *VerifyRankRequest {
+	return &p
+}
+
+type VerifyRankByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	ExperienceName     *string `json:"experienceName"`
+	VerifyType         *string `json:"verifyType"`
+	PropertyId         *string `json:"propertyId"`
+	RankValue          *int64  `json:"rankValue"`
+}
+
+func NewVerifyRankByUserIdRequestFromJson(data string) VerifyRankByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRankByUserIdRequestFromDict(dict)
+}
+
+func NewVerifyRankByUserIdRequestFromDict(data map[string]interface{}) VerifyRankByUserIdRequest {
+	return VerifyRankByUserIdRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		UserId:         core.CastString(data["userId"]),
+		ExperienceName: core.CastString(data["experienceName"]),
+		VerifyType:     core.CastString(data["verifyType"]),
+		PropertyId:     core.CastString(data["propertyId"]),
+		RankValue:      core.CastInt64(data["rankValue"]),
+	}
+}
+
+func (p VerifyRankByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"userId":         p.UserId,
+		"experienceName": p.ExperienceName,
+		"verifyType":     p.VerifyType,
+		"propertyId":     p.PropertyId,
+		"rankValue":      p.RankValue,
+	}
+}
+
+func (p VerifyRankByUserIdRequest) Pointer() *VerifyRankByUserIdRequest {
+	return &p
+}
+
+type VerifyRankCapRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	ExperienceName     *string `json:"experienceName"`
+	VerifyType         *string `json:"verifyType"`
+	PropertyId         *string `json:"propertyId"`
+	RankCapValue       *int64  `json:"rankCapValue"`
+}
+
+func NewVerifyRankCapRequestFromJson(data string) VerifyRankCapRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRankCapRequestFromDict(dict)
+}
+
+func NewVerifyRankCapRequestFromDict(data map[string]interface{}) VerifyRankCapRequest {
+	return VerifyRankCapRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		AccessToken:    core.CastString(data["accessToken"]),
+		ExperienceName: core.CastString(data["experienceName"]),
+		VerifyType:     core.CastString(data["verifyType"]),
+		PropertyId:     core.CastString(data["propertyId"]),
+		RankCapValue:   core.CastInt64(data["rankCapValue"]),
+	}
+}
+
+func (p VerifyRankCapRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"accessToken":    p.AccessToken,
+		"experienceName": p.ExperienceName,
+		"verifyType":     p.VerifyType,
+		"propertyId":     p.PropertyId,
+		"rankCapValue":   p.RankCapValue,
+	}
+}
+
+func (p VerifyRankCapRequest) Pointer() *VerifyRankCapRequest {
+	return &p
+}
+
+type VerifyRankCapByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	ExperienceName     *string `json:"experienceName"`
+	VerifyType         *string `json:"verifyType"`
+	PropertyId         *string `json:"propertyId"`
+	RankCapValue       *int64  `json:"rankCapValue"`
+}
+
+func NewVerifyRankCapByUserIdRequestFromJson(data string) VerifyRankCapByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRankCapByUserIdRequestFromDict(dict)
+}
+
+func NewVerifyRankCapByUserIdRequestFromDict(data map[string]interface{}) VerifyRankCapByUserIdRequest {
+	return VerifyRankCapByUserIdRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		UserId:         core.CastString(data["userId"]),
+		ExperienceName: core.CastString(data["experienceName"]),
+		VerifyType:     core.CastString(data["verifyType"]),
+		PropertyId:     core.CastString(data["propertyId"]),
+		RankCapValue:   core.CastInt64(data["rankCapValue"]),
+	}
+}
+
+func (p VerifyRankCapByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"userId":         p.UserId,
+		"experienceName": p.ExperienceName,
+		"verifyType":     p.VerifyType,
+		"propertyId":     p.PropertyId,
+		"rankCapValue":   p.RankCapValue,
+	}
+}
+
+func (p VerifyRankCapByUserIdRequest) Pointer() *VerifyRankCapByUserIdRequest {
+	return &p
+}
+
 type AddExperienceByStampSheetRequest struct {
 	RequestId    *string `json:"requestId"`
 	ContextStack *string `json:"contextStack"`
@@ -1549,5 +1725,67 @@ func (p MultiplyAcquireActionsByStampSheetRequest) ToDict() map[string]interface
 }
 
 func (p MultiplyAcquireActionsByStampSheetRequest) Pointer() *MultiplyAcquireActionsByStampSheetRequest {
+	return &p
+}
+
+type VerifyRankByStampTaskRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewVerifyRankByStampTaskRequestFromJson(data string) VerifyRankByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRankByStampTaskRequestFromDict(dict)
+}
+
+func NewVerifyRankByStampTaskRequestFromDict(data map[string]interface{}) VerifyRankByStampTaskRequest {
+	return VerifyRankByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifyRankByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyRankByStampTaskRequest) Pointer() *VerifyRankByStampTaskRequest {
+	return &p
+}
+
+type VerifyRankCapByStampTaskRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewVerifyRankCapByStampTaskRequestFromJson(data string) VerifyRankCapByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRankCapByStampTaskRequestFromDict(dict)
+}
+
+func NewVerifyRankCapByStampTaskRequestFromDict(data map[string]interface{}) VerifyRankCapByStampTaskRequest {
+	return VerifyRankCapByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifyRankCapByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyRankCapByStampTaskRequest) Pointer() *VerifyRankCapByStampTaskRequest {
 	return &p
 }

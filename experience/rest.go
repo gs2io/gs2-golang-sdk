@@ -3427,6 +3427,446 @@ func (p Gs2ExperienceRestClient) DeleteStatusByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyRankAsyncHandler(
+	client Gs2ExperienceRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyRankAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyRankAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyRankResult
+	if asyncResult.Err != nil {
+		callback <- VerifyRankAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRankAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyRankAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceRestClient) VerifyRankAsync(
+	request *VerifyRankRequest,
+	callback chan<- VerifyRankAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/status/{experienceName}/verify/rank/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
+	} else {
+		path = strings.ReplaceAll(path, "{experienceName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.RankValue != nil {
+		bodies["rankValue"] = *request.RankValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyRankAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceRestClient) VerifyRank(
+	request *VerifyRankRequest,
+) (*VerifyRankResult, error) {
+	callback := make(chan VerifyRankAsyncResult, 1)
+	go p.VerifyRankAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyRankByUserIdAsyncHandler(
+	client Gs2ExperienceRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyRankByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyRankByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyRankByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyRankByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRankByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyRankByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceRestClient) VerifyRankByUserIdAsync(
+	request *VerifyRankByUserIdRequest,
+	callback chan<- VerifyRankByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/status/{experienceName}/verify/rank/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
+	} else {
+		path = strings.ReplaceAll(path, "{experienceName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.RankValue != nil {
+		bodies["rankValue"] = *request.RankValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyRankByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceRestClient) VerifyRankByUserId(
+	request *VerifyRankByUserIdRequest,
+) (*VerifyRankByUserIdResult, error) {
+	callback := make(chan VerifyRankByUserIdAsyncResult, 1)
+	go p.VerifyRankByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyRankCapAsyncHandler(
+	client Gs2ExperienceRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyRankCapAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyRankCapAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyRankCapResult
+	if asyncResult.Err != nil {
+		callback <- VerifyRankCapAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRankCapAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyRankCapAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceRestClient) VerifyRankCapAsync(
+	request *VerifyRankCapRequest,
+	callback chan<- VerifyRankCapAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/status/{experienceName}/verify/rankCap/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
+	} else {
+		path = strings.ReplaceAll(path, "{experienceName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.RankCapValue != nil {
+		bodies["rankCapValue"] = *request.RankCapValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyRankCapAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceRestClient) VerifyRankCap(
+	request *VerifyRankCapRequest,
+) (*VerifyRankCapResult, error) {
+	callback := make(chan VerifyRankCapAsyncResult, 1)
+	go p.VerifyRankCapAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyRankCapByUserIdAsyncHandler(
+	client Gs2ExperienceRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyRankCapByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyRankCapByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyRankCapByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyRankCapByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRankCapByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyRankCapByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceRestClient) VerifyRankCapByUserIdAsync(
+	request *VerifyRankCapByUserIdRequest,
+	callback chan<- VerifyRankCapByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/status/{experienceName}/verify/rankCap/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
+	} else {
+		path = strings.ReplaceAll(path, "{experienceName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.RankCapValue != nil {
+		bodies["rankCapValue"] = *request.RankCapValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyRankCapByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceRestClient) VerifyRankCapByUserId(
+	request *VerifyRankCapByUserIdRequest,
+) (*VerifyRankCapByUserIdResult, error) {
+	callback := make(chan VerifyRankCapByUserIdAsyncResult, 1)
+	go p.VerifyRankCapByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func addExperienceByStampSheetAsyncHandler(
 	client Gs2ExperienceRestClient,
 	job *core.NetworkJob,
@@ -4065,6 +4505,182 @@ func (p Gs2ExperienceRestClient) MultiplyAcquireActionsByStampSheet(
 ) (*MultiplyAcquireActionsByStampSheetResult, error) {
 	callback := make(chan MultiplyAcquireActionsByStampSheetAsyncResult, 1)
 	go p.MultiplyAcquireActionsByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyRankByStampTaskAsyncHandler(
+	client Gs2ExperienceRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyRankByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyRankByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyRankByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyRankByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRankByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyRankByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceRestClient) VerifyRankByStampTaskAsync(
+	request *VerifyRankByStampTaskRequest,
+	callback chan<- VerifyRankByStampTaskAsyncResult,
+) {
+	path := "/stamp/rank/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifyRankByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceRestClient) VerifyRankByStampTask(
+	request *VerifyRankByStampTaskRequest,
+) (*VerifyRankByStampTaskResult, error) {
+	callback := make(chan VerifyRankByStampTaskAsyncResult, 1)
+	go p.VerifyRankByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyRankCapByStampTaskAsyncHandler(
+	client Gs2ExperienceRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyRankCapByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyRankCapByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyRankCapByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyRankCapByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyRankCapByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyRankCapByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceRestClient) VerifyRankCapByStampTaskAsync(
+	request *VerifyRankCapByStampTaskRequest,
+	callback chan<- VerifyRankCapByStampTaskAsyncResult,
+) {
+	path := "/stamp/rankCap/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifyRankCapByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceRestClient) VerifyRankCapByStampTask(
+	request *VerifyRankCapByStampTaskRequest,
+) (*VerifyRankCapByStampTaskResult, error) {
+	callback := make(chan VerifyRankCapByStampTaskAsyncResult, 1)
+	go p.VerifyRankCapByStampTaskAsync(
 		request,
 		callback,
 	)

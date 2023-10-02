@@ -1152,6 +1152,110 @@ func (p DeleteStatusByUserIdResult) Pointer() *DeleteStatusByUserIdResult {
 	return &p
 }
 
+type VerifyRankResult struct {
+}
+
+type VerifyRankAsyncResult struct {
+	result *VerifyRankResult
+	err    error
+}
+
+func NewVerifyRankResultFromJson(data string) VerifyRankResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRankResultFromDict(dict)
+}
+
+func NewVerifyRankResultFromDict(data map[string]interface{}) VerifyRankResult {
+	return VerifyRankResult{}
+}
+
+func (p VerifyRankResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyRankResult) Pointer() *VerifyRankResult {
+	return &p
+}
+
+type VerifyRankByUserIdResult struct {
+}
+
+type VerifyRankByUserIdAsyncResult struct {
+	result *VerifyRankByUserIdResult
+	err    error
+}
+
+func NewVerifyRankByUserIdResultFromJson(data string) VerifyRankByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRankByUserIdResultFromDict(dict)
+}
+
+func NewVerifyRankByUserIdResultFromDict(data map[string]interface{}) VerifyRankByUserIdResult {
+	return VerifyRankByUserIdResult{}
+}
+
+func (p VerifyRankByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyRankByUserIdResult) Pointer() *VerifyRankByUserIdResult {
+	return &p
+}
+
+type VerifyRankCapResult struct {
+}
+
+type VerifyRankCapAsyncResult struct {
+	result *VerifyRankCapResult
+	err    error
+}
+
+func NewVerifyRankCapResultFromJson(data string) VerifyRankCapResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRankCapResultFromDict(dict)
+}
+
+func NewVerifyRankCapResultFromDict(data map[string]interface{}) VerifyRankCapResult {
+	return VerifyRankCapResult{}
+}
+
+func (p VerifyRankCapResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyRankCapResult) Pointer() *VerifyRankCapResult {
+	return &p
+}
+
+type VerifyRankCapByUserIdResult struct {
+}
+
+type VerifyRankCapByUserIdAsyncResult struct {
+	result *VerifyRankCapByUserIdResult
+	err    error
+}
+
+func NewVerifyRankCapByUserIdResultFromJson(data string) VerifyRankCapByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRankCapByUserIdResultFromDict(dict)
+}
+
+func NewVerifyRankCapByUserIdResultFromDict(data map[string]interface{}) VerifyRankCapByUserIdResult {
+	return VerifyRankCapByUserIdResult{}
+}
+
+func (p VerifyRankCapByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyRankCapByUserIdResult) Pointer() *VerifyRankCapByUserIdResult {
+	return &p
+}
+
 type AddExperienceByStampSheetResult struct {
 	Item *Status `json:"item"`
 }
@@ -1403,5 +1507,67 @@ func (p MultiplyAcquireActionsByStampSheetResult) ToDict() map[string]interface{
 }
 
 func (p MultiplyAcquireActionsByStampSheetResult) Pointer() *MultiplyAcquireActionsByStampSheetResult {
+	return &p
+}
+
+type VerifyRankByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifyRankByStampTaskAsyncResult struct {
+	result *VerifyRankByStampTaskResult
+	err    error
+}
+
+func NewVerifyRankByStampTaskResultFromJson(data string) VerifyRankByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRankByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyRankByStampTaskResultFromDict(data map[string]interface{}) VerifyRankByStampTaskResult {
+	return VerifyRankByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyRankByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyRankByStampTaskResult) Pointer() *VerifyRankByStampTaskResult {
+	return &p
+}
+
+type VerifyRankCapByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifyRankCapByStampTaskAsyncResult struct {
+	result *VerifyRankCapByStampTaskResult
+	err    error
+}
+
+func NewVerifyRankCapByStampTaskResultFromJson(data string) VerifyRankCapByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyRankCapByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyRankCapByStampTaskResultFromDict(data map[string]interface{}) VerifyRankCapByStampTaskResult {
+	return VerifyRankCapByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyRankCapByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyRankCapByStampTaskResult) Pointer() *VerifyRankCapByStampTaskResult {
 	return &p
 }
