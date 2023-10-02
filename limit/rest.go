@@ -1384,6 +1384,230 @@ func (p Gs2LimitRestClient) DeleteCounterByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyCounterAsyncHandler(
+	client Gs2LimitRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCounterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCounterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCounterResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCounterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCounterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCounterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LimitRestClient) VerifyCounterAsync(
+	request *VerifyCounterRequest,
+	callback chan<- VerifyCounterAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/counter/{limitName}/{counterName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.LimitName != nil && *request.LimitName != "" {
+		path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
+	} else {
+		path = strings.ReplaceAll(path, "{limitName}", "null")
+	}
+	if request.CounterName != nil && *request.CounterName != "" {
+		path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
+	} else {
+		path = strings.ReplaceAll(path, "{counterName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyCounterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LimitRestClient) VerifyCounter(
+	request *VerifyCounterRequest,
+) (*VerifyCounterResult, error) {
+	callback := make(chan VerifyCounterAsyncResult, 1)
+	go p.VerifyCounterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyCounterByUserIdAsyncHandler(
+	client Gs2LimitRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCounterByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCounterByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCounterByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCounterByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCounterByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCounterByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LimitRestClient) VerifyCounterByUserIdAsync(
+	request *VerifyCounterByUserIdRequest,
+	callback chan<- VerifyCounterByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/counter/{limitName}/{counterName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.LimitName != nil && *request.LimitName != "" {
+		path = strings.ReplaceAll(path, "{limitName}", core.ToString(*request.LimitName))
+	} else {
+		path = strings.ReplaceAll(path, "{limitName}", "null")
+	}
+	if request.CounterName != nil && *request.CounterName != "" {
+		path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
+	} else {
+		path = strings.ReplaceAll(path, "{counterName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyCounterByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LimitRestClient) VerifyCounterByUserId(
+	request *VerifyCounterByUserIdRequest,
+) (*VerifyCounterByUserIdResult, error) {
+	callback := make(chan VerifyCounterByUserIdAsyncResult, 1)
+	go p.VerifyCounterByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func countUpByStampTaskAsyncHandler(
 	client Gs2LimitRestClient,
 	job *core.NetworkJob,
@@ -1641,6 +1865,94 @@ func (p Gs2LimitRestClient) DeleteByStampSheet(
 ) (*DeleteByStampSheetResult, error) {
 	callback := make(chan DeleteByStampSheetAsyncResult, 1)
 	go p.DeleteByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyCounterByStampTaskAsyncHandler(
+	client Gs2LimitRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCounterByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCounterByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCounterByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCounterByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCounterByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCounterByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LimitRestClient) VerifyCounterByStampTaskAsync(
+	request *VerifyCounterByStampTaskRequest,
+	callback chan<- VerifyCounterByStampTaskAsyncResult,
+) {
+	path := "/stamp/counter/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifyCounterByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("limit").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LimitRestClient) VerifyCounterByStampTask(
+	request *VerifyCounterByStampTaskRequest,
+) (*VerifyCounterByStampTaskResult, error) {
+	callback := make(chan VerifyCounterByStampTaskAsyncResult, 1)
+	go p.VerifyCounterByStampTaskAsync(
 		request,
 		callback,
 	)

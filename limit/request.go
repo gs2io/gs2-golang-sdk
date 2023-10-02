@@ -526,6 +526,94 @@ func (p DeleteCounterByUserIdRequest) Pointer() *DeleteCounterByUserIdRequest {
 	return &p
 }
 
+type VerifyCounterRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	LimitName          *string `json:"limitName"`
+	CounterName        *string `json:"counterName"`
+	VerifyType         *string `json:"verifyType"`
+	Count              *int32  `json:"count"`
+}
+
+func NewVerifyCounterRequestFromJson(data string) VerifyCounterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCounterRequestFromDict(dict)
+}
+
+func NewVerifyCounterRequestFromDict(data map[string]interface{}) VerifyCounterRequest {
+	return VerifyCounterRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		LimitName:     core.CastString(data["limitName"]),
+		CounterName:   core.CastString(data["counterName"]),
+		VerifyType:    core.CastString(data["verifyType"]),
+		Count:         core.CastInt32(data["count"]),
+	}
+}
+
+func (p VerifyCounterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"limitName":     p.LimitName,
+		"counterName":   p.CounterName,
+		"verifyType":    p.VerifyType,
+		"count":         p.Count,
+	}
+}
+
+func (p VerifyCounterRequest) Pointer() *VerifyCounterRequest {
+	return &p
+}
+
+type VerifyCounterByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	LimitName          *string `json:"limitName"`
+	CounterName        *string `json:"counterName"`
+	VerifyType         *string `json:"verifyType"`
+	Count              *int32  `json:"count"`
+}
+
+func NewVerifyCounterByUserIdRequestFromJson(data string) VerifyCounterByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCounterByUserIdRequestFromDict(dict)
+}
+
+func NewVerifyCounterByUserIdRequestFromDict(data map[string]interface{}) VerifyCounterByUserIdRequest {
+	return VerifyCounterByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		UserId:        core.CastString(data["userId"]),
+		LimitName:     core.CastString(data["limitName"]),
+		CounterName:   core.CastString(data["counterName"]),
+		VerifyType:    core.CastString(data["verifyType"]),
+		Count:         core.CastInt32(data["count"]),
+	}
+}
+
+func (p VerifyCounterByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"limitName":     p.LimitName,
+		"counterName":   p.CounterName,
+		"verifyType":    p.VerifyType,
+		"count":         p.Count,
+	}
+}
+
+func (p VerifyCounterByUserIdRequest) Pointer() *VerifyCounterByUserIdRequest {
+	return &p
+}
+
 type CountUpByStampTaskRequest struct {
 	RequestId    *string `json:"requestId"`
 	ContextStack *string `json:"contextStack"`
@@ -616,6 +704,37 @@ func (p DeleteByStampSheetRequest) ToDict() map[string]interface{} {
 }
 
 func (p DeleteByStampSheetRequest) Pointer() *DeleteByStampSheetRequest {
+	return &p
+}
+
+type VerifyCounterByStampTaskRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewVerifyCounterByStampTaskRequestFromJson(data string) VerifyCounterByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCounterByStampTaskRequestFromDict(dict)
+}
+
+func NewVerifyCounterByStampTaskRequestFromDict(data map[string]interface{}) VerifyCounterByStampTaskRequest {
+	return VerifyCounterByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifyCounterByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyCounterByStampTaskRequest) Pointer() *VerifyCounterByStampTaskRequest {
 	return &p
 }
 

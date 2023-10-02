@@ -1306,6 +1306,207 @@ func (p Gs2LimitWebSocketClient) DeleteCounterByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2LimitWebSocketClient) verifyCounterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyCounterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCounterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCounterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCounterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyCounterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LimitWebSocketClient) VerifyCounterAsync(
+	request *VerifyCounterRequest,
+	callback chan<- VerifyCounterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "limit",
+			"component":   "counter",
+			"function":    "verifyCounter",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.LimitName != nil && *request.LimitName != "" {
+		bodies["limitName"] = *request.LimitName
+	}
+	if request.CounterName != nil && *request.CounterName != "" {
+		bodies["counterName"] = *request.CounterName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyCounterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LimitWebSocketClient) VerifyCounter(
+	request *VerifyCounterRequest,
+) (*VerifyCounterResult, error) {
+	callback := make(chan VerifyCounterAsyncResult, 1)
+	go p.VerifyCounterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LimitWebSocketClient) verifyCounterByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyCounterByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCounterByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCounterByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCounterByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyCounterByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LimitWebSocketClient) VerifyCounterByUserIdAsync(
+	request *VerifyCounterByUserIdRequest,
+	callback chan<- VerifyCounterByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "limit",
+			"component":   "counter",
+			"function":    "verifyCounterByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.LimitName != nil && *request.LimitName != "" {
+		bodies["limitName"] = *request.LimitName
+	}
+	if request.CounterName != nil && *request.CounterName != "" {
+		bodies["counterName"] = *request.CounterName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyCounterByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LimitWebSocketClient) VerifyCounterByUserId(
+	request *VerifyCounterByUserIdRequest,
+) (*VerifyCounterByUserIdResult, error) {
+	callback := make(chan VerifyCounterByUserIdAsyncResult, 1)
+	go p.VerifyCounterByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2LimitWebSocketClient) countUpByStampTaskAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- CountUpByStampTaskAsyncResult,
@@ -1551,6 +1752,90 @@ func (p Gs2LimitWebSocketClient) DeleteByStampSheet(
 ) (*DeleteByStampSheetResult, error) {
 	callback := make(chan DeleteByStampSheetAsyncResult, 1)
 	go p.DeleteByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LimitWebSocketClient) verifyCounterByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyCounterByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCounterByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCounterByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCounterByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyCounterByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LimitWebSocketClient) VerifyCounterByStampTaskAsync(
+	request *VerifyCounterByStampTaskRequest,
+	callback chan<- VerifyCounterByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "limit",
+			"component":   "counter",
+			"function":    "verifyCounterByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.verifyCounterByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LimitWebSocketClient) VerifyCounterByStampTask(
+	request *VerifyCounterByStampTaskRequest,
+) (*VerifyCounterByStampTaskResult, error) {
+	callback := make(chan VerifyCounterByStampTaskAsyncResult, 1)
+	go p.VerifyCounterByStampTaskAsync(
 		request,
 		callback,
 	)
