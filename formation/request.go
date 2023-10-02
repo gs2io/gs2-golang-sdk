@@ -228,7 +228,6 @@ type GetFormModelRequest struct {
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
 	MoldModelName *string `json:"moldModelName"`
-	FormModelName *string `json:"formModelName"`
 }
 
 func NewGetFormModelRequestFromJson(data string) GetFormModelRequest {
@@ -241,7 +240,6 @@ func NewGetFormModelRequestFromDict(data map[string]interface{}) GetFormModelReq
 	return GetFormModelRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 		MoldModelName: core.CastString(data["moldModelName"]),
-		FormModelName: core.CastString(data["formModelName"]),
 	}
 }
 
@@ -249,7 +247,6 @@ func (p GetFormModelRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"moldModelName": p.MoldModelName,
-		"formModelName": p.FormModelName,
 	}
 }
 

@@ -615,7 +615,7 @@ func (p Gs2FormationRestClient) GetFormModelAsync(
 	request *GetFormModelRequest,
 	callback chan<- GetFormModelAsyncResult,
 ) {
-	path := "/{namespaceName}/model/{moldModelName}/form/{formModelName}"
+	path := "/{namespaceName}/model/{moldModelName}/form"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
@@ -625,11 +625,6 @@ func (p Gs2FormationRestClient) GetFormModelAsync(
 		path = strings.ReplaceAll(path, "{moldModelName}", core.ToString(*request.MoldModelName))
 	} else {
 		path = strings.ReplaceAll(path, "{moldModelName}", "null")
-	}
-	if request.FormModelName != nil && *request.FormModelName != "" {
-		path = strings.ReplaceAll(path, "{formModelName}", core.ToString(*request.FormModelName))
-	} else {
-		path = strings.ReplaceAll(path, "{formModelName}", "null")
 	}
 
 	replacer := strings.NewReplacer()

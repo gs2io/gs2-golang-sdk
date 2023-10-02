@@ -609,9 +609,6 @@ func (p Gs2FormationWebSocketClient) GetFormModelAsync(
 	if request.MoldModelName != nil && *request.MoldModelName != "" {
 		bodies["moldModelName"] = *request.MoldModelName
 	}
-	if request.FormModelName != nil && *request.FormModelName != "" {
-		bodies["formModelName"] = *request.FormModelName
-	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
