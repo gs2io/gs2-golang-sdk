@@ -704,6 +704,58 @@ func (p ResetByUserIdResult) Pointer() *ResetByUserIdResult {
 	return &p
 }
 
+type VerifyEntryResult struct {
+}
+
+type VerifyEntryAsyncResult struct {
+	result *VerifyEntryResult
+	err    error
+}
+
+func NewVerifyEntryResultFromJson(data string) VerifyEntryResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEntryResultFromDict(dict)
+}
+
+func NewVerifyEntryResultFromDict(data map[string]interface{}) VerifyEntryResult {
+	return VerifyEntryResult{}
+}
+
+func (p VerifyEntryResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyEntryResult) Pointer() *VerifyEntryResult {
+	return &p
+}
+
+type VerifyEntryByUserIdResult struct {
+}
+
+type VerifyEntryByUserIdAsyncResult struct {
+	result *VerifyEntryByUserIdResult
+	err    error
+}
+
+func NewVerifyEntryByUserIdResultFromJson(data string) VerifyEntryByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEntryByUserIdResultFromDict(dict)
+}
+
+func NewVerifyEntryByUserIdResultFromDict(data map[string]interface{}) VerifyEntryByUserIdResult {
+	return VerifyEntryByUserIdResult{}
+}
+
+func (p VerifyEntryByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyEntryByUserIdResult) Pointer() *VerifyEntryByUserIdResult {
+	return &p
+}
+
 type DeleteEntriesByUserIdResult struct {
 	Items []Entry `json:"items"`
 }
@@ -803,6 +855,37 @@ func (p DeleteEntriesByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p DeleteEntriesByStampTaskResult) Pointer() *DeleteEntriesByStampTaskResult {
+	return &p
+}
+
+type VerifyEntryByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifyEntryByStampTaskAsyncResult struct {
+	result *VerifyEntryByStampTaskResult
+	err    error
+}
+
+func NewVerifyEntryByStampTaskResultFromJson(data string) VerifyEntryByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEntryByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyEntryByStampTaskResultFromDict(data map[string]interface{}) VerifyEntryByStampTaskResult {
+	return VerifyEntryByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyEntryByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyEntryByStampTaskResult) Pointer() *VerifyEntryByStampTaskResult {
 	return &p
 }
 

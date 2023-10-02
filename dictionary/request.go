@@ -731,6 +731,82 @@ func (p ResetByUserIdRequest) Pointer() *ResetByUserIdRequest {
 	return &p
 }
 
+type VerifyEntryRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	EntryModelName     *string `json:"entryModelName"`
+	VerifyType         *string `json:"verifyType"`
+}
+
+func NewVerifyEntryRequestFromJson(data string) VerifyEntryRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEntryRequestFromDict(dict)
+}
+
+func NewVerifyEntryRequestFromDict(data map[string]interface{}) VerifyEntryRequest {
+	return VerifyEntryRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		AccessToken:    core.CastString(data["accessToken"]),
+		EntryModelName: core.CastString(data["entryModelName"]),
+		VerifyType:     core.CastString(data["verifyType"]),
+	}
+}
+
+func (p VerifyEntryRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"accessToken":    p.AccessToken,
+		"entryModelName": p.EntryModelName,
+		"verifyType":     p.VerifyType,
+	}
+}
+
+func (p VerifyEntryRequest) Pointer() *VerifyEntryRequest {
+	return &p
+}
+
+type VerifyEntryByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	EntryModelName     *string `json:"entryModelName"`
+	VerifyType         *string `json:"verifyType"`
+}
+
+func NewVerifyEntryByUserIdRequestFromJson(data string) VerifyEntryByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEntryByUserIdRequestFromDict(dict)
+}
+
+func NewVerifyEntryByUserIdRequestFromDict(data map[string]interface{}) VerifyEntryByUserIdRequest {
+	return VerifyEntryByUserIdRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		UserId:         core.CastString(data["userId"]),
+		EntryModelName: core.CastString(data["entryModelName"]),
+		VerifyType:     core.CastString(data["verifyType"]),
+	}
+}
+
+func (p VerifyEntryByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"userId":         p.UserId,
+		"entryModelName": p.EntryModelName,
+		"verifyType":     p.VerifyType,
+	}
+}
+
+func (p VerifyEntryByUserIdRequest) Pointer() *VerifyEntryByUserIdRequest {
+	return &p
+}
+
 type DeleteEntriesByUserIdRequest struct {
 	RequestId          *string   `json:"requestId"`
 	ContextStack       *string   `json:"contextStack"`
@@ -827,6 +903,37 @@ func (p DeleteEntriesByStampTaskRequest) ToDict() map[string]interface{} {
 }
 
 func (p DeleteEntriesByStampTaskRequest) Pointer() *DeleteEntriesByStampTaskRequest {
+	return &p
+}
+
+type VerifyEntryByStampTaskRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewVerifyEntryByStampTaskRequestFromJson(data string) VerifyEntryByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEntryByStampTaskRequestFromDict(dict)
+}
+
+func NewVerifyEntryByStampTaskRequestFromDict(data map[string]interface{}) VerifyEntryByStampTaskRequest {
+	return VerifyEntryByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifyEntryByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyEntryByStampTaskRequest) Pointer() *VerifyEntryByStampTaskRequest {
 	return &p
 }
 

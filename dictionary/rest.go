@@ -1959,6 +1959,214 @@ func (p Gs2DictionaryRestClient) ResetByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyEntryAsyncHandler(
+	client Gs2DictionaryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyEntryAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyEntryAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyEntryResult
+	if asyncResult.Err != nil {
+		callback <- VerifyEntryAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyEntryAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyEntryAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DictionaryRestClient) VerifyEntryAsync(
+	request *VerifyEntryRequest,
+	callback chan<- VerifyEntryAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/entry/{entryModelName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.EntryModelName != nil && *request.EntryModelName != "" {
+		path = strings.ReplaceAll(path, "{entryModelName}", core.ToString(*request.EntryModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{entryModelName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyEntryAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DictionaryRestClient) VerifyEntry(
+	request *VerifyEntryRequest,
+) (*VerifyEntryResult, error) {
+	callback := make(chan VerifyEntryAsyncResult, 1)
+	go p.VerifyEntryAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyEntryByUserIdAsyncHandler(
+	client Gs2DictionaryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyEntryByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyEntryByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyEntryByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyEntryByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyEntryByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyEntryByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DictionaryRestClient) VerifyEntryByUserIdAsync(
+	request *VerifyEntryByUserIdRequest,
+	callback chan<- VerifyEntryByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/entry/{entryModelName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.EntryModelName != nil && *request.EntryModelName != "" {
+		path = strings.ReplaceAll(path, "{entryModelName}", core.ToString(*request.EntryModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{entryModelName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyEntryByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DictionaryRestClient) VerifyEntryByUserId(
+	request *VerifyEntryByUserIdRequest,
+) (*VerifyEntryByUserIdResult, error) {
+	callback := make(chan VerifyEntryByUserIdAsyncResult, 1)
+	go p.VerifyEntryByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteEntriesByUserIdAsyncHandler(
 	client Gs2DictionaryRestClient,
 	job *core.NetworkJob,
@@ -2230,6 +2438,94 @@ func (p Gs2DictionaryRestClient) DeleteEntriesByStampTask(
 ) (*DeleteEntriesByStampTaskResult, error) {
 	callback := make(chan DeleteEntriesByStampTaskAsyncResult, 1)
 	go p.DeleteEntriesByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyEntryByStampTaskAsyncHandler(
+	client Gs2DictionaryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyEntryByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyEntryByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyEntryByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyEntryByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyEntryByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyEntryByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DictionaryRestClient) VerifyEntryByStampTaskAsync(
+	request *VerifyEntryByStampTaskRequest,
+	callback chan<- VerifyEntryByStampTaskAsyncResult,
+) {
+	path := "/stamp/entry/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifyEntryByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DictionaryRestClient) VerifyEntryByStampTask(
+	request *VerifyEntryByStampTaskRequest,
+) (*VerifyEntryByStampTaskResult, error) {
+	callback := make(chan VerifyEntryByStampTaskAsyncResult, 1)
+	go p.VerifyEntryByStampTaskAsync(
 		request,
 		callback,
 	)
