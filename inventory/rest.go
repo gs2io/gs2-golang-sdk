@@ -6796,6 +6796,236 @@ func (p Gs2InventoryRestClient) DeleteItemSetByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyItemSetAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyItemSetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyItemSetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyItemSetResult
+	if asyncResult.Err != nil {
+		callback <- VerifyItemSetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyItemSetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyItemSetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) VerifyItemSetAsync(
+	request *VerifyItemSetRequest,
+	callback chan<- VerifyItemSetAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/inventory/{inventoryName}/item/{itemName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{inventoryName}", "null")
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+	} else {
+		path = strings.ReplaceAll(path, "{itemName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ItemSetName != nil && *request.ItemSetName != "" {
+		bodies["itemSetName"] = *request.ItemSetName
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyItemSetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) VerifyItemSet(
+	request *VerifyItemSetRequest,
+) (*VerifyItemSetResult, error) {
+	callback := make(chan VerifyItemSetAsyncResult, 1)
+	go p.VerifyItemSetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyItemSetByUserIdAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyItemSetByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyItemSetByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyItemSetByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyItemSetByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyItemSetByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyItemSetByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) VerifyItemSetByUserIdAsync(
+	request *VerifyItemSetByUserIdRequest,
+	callback chan<- VerifyItemSetByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{inventoryName}", "null")
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+	} else {
+		path = strings.ReplaceAll(path, "{itemName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ItemSetName != nil && *request.ItemSetName != "" {
+		bodies["itemSetName"] = *request.ItemSetName
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyItemSetByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) VerifyItemSetByUserId(
+	request *VerifyItemSetByUserIdRequest,
+) (*VerifyItemSetByUserIdResult, error) {
+	callback := make(chan VerifyItemSetByUserIdAsyncResult, 1)
+	go p.VerifyItemSetByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func acquireItemSetByStampSheetAsyncHandler(
 	client Gs2InventoryRestClient,
 	job *core.NetworkJob,
@@ -6965,6 +7195,94 @@ func (p Gs2InventoryRestClient) ConsumeItemSetByStampTask(
 ) (*ConsumeItemSetByStampTaskResult, error) {
 	callback := make(chan ConsumeItemSetByStampTaskAsyncResult, 1)
 	go p.ConsumeItemSetByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyItemSetByStampTaskAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyItemSetByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyItemSetByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyItemSetByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyItemSetByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyItemSetByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyItemSetByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) VerifyItemSetByStampTaskAsync(
+	request *VerifyItemSetByStampTaskRequest,
+	callback chan<- VerifyItemSetByStampTaskAsyncResult,
+) {
+	path := "/stamp/item/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifyItemSetByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) VerifyItemSetByStampTask(
+	request *VerifyItemSetByStampTaskRequest,
+) (*VerifyItemSetByStampTaskResult, error) {
+	callback := make(chan VerifyItemSetByStampTaskAsyncResult, 1)
+	go p.VerifyItemSetByStampTaskAsync(
 		request,
 		callback,
 	)
@@ -9378,6 +9696,230 @@ func (p Gs2InventoryRestClient) DeleteSimpleItemsByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifySimpleItemAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifySimpleItemAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifySimpleItemAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifySimpleItemResult
+	if asyncResult.Err != nil {
+		callback <- VerifySimpleItemAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifySimpleItemAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifySimpleItemAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) VerifySimpleItemAsync(
+	request *VerifySimpleItemRequest,
+	callback chan<- VerifySimpleItemAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/simple/inventory/{inventoryName}/item/{itemName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{inventoryName}", "null")
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+	} else {
+		path = strings.ReplaceAll(path, "{itemName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifySimpleItemAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) VerifySimpleItem(
+	request *VerifySimpleItemRequest,
+) (*VerifySimpleItemResult, error) {
+	callback := make(chan VerifySimpleItemAsyncResult, 1)
+	go p.VerifySimpleItemAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifySimpleItemByUserIdAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifySimpleItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifySimpleItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifySimpleItemByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifySimpleItemByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifySimpleItemByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifySimpleItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) VerifySimpleItemByUserIdAsync(
+	request *VerifySimpleItemByUserIdRequest,
+	callback chan<- VerifySimpleItemByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/simple/inventory/{inventoryName}/item/{itemName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{inventoryName}", "null")
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+	} else {
+		path = strings.ReplaceAll(path, "{itemName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifySimpleItemByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) VerifySimpleItemByUserId(
+	request *VerifySimpleItemByUserIdRequest,
+) (*VerifySimpleItemByUserIdResult, error) {
+	callback := make(chan VerifySimpleItemByUserIdAsyncResult, 1)
+	go p.VerifySimpleItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func acquireSimpleItemsByStampSheetAsyncHandler(
 	client Gs2InventoryRestClient,
 	job *core.NetworkJob,
@@ -9547,6 +10089,94 @@ func (p Gs2InventoryRestClient) ConsumeSimpleItemsByStampTask(
 ) (*ConsumeSimpleItemsByStampTaskResult, error) {
 	callback := make(chan ConsumeSimpleItemsByStampTaskAsyncResult, 1)
 	go p.ConsumeSimpleItemsByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifySimpleItemByStampTaskAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifySimpleItemByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifySimpleItemByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifySimpleItemByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifySimpleItemByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifySimpleItemByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifySimpleItemByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) VerifySimpleItemByStampTaskAsync(
+	request *VerifySimpleItemByStampTaskRequest,
+	callback chan<- VerifySimpleItemByStampTaskAsyncResult,
+) {
+	path := "/stamp/simple/item/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifySimpleItemByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) VerifySimpleItemByStampTask(
+	request *VerifySimpleItemByStampTaskRequest,
+) (*VerifySimpleItemByStampTaskResult, error) {
+	callback := make(chan VerifySimpleItemByStampTaskAsyncResult, 1)
+	go p.VerifySimpleItemByStampTaskAsync(
 		request,
 		callback,
 	)
@@ -10396,6 +11026,230 @@ func (p Gs2InventoryRestClient) DeleteBigItemByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyBigItemAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyBigItemAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyBigItemAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyBigItemResult
+	if asyncResult.Err != nil {
+		callback <- VerifyBigItemAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyBigItemAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyBigItemAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) VerifyBigItemAsync(
+	request *VerifyBigItemRequest,
+	callback chan<- VerifyBigItemAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/big/inventory/{inventoryName}/item/{itemName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{inventoryName}", "null")
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+	} else {
+		path = strings.ReplaceAll(path, "{itemName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Count != nil && *request.Count != "" {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyBigItemAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) VerifyBigItem(
+	request *VerifyBigItemRequest,
+) (*VerifyBigItemResult, error) {
+	callback := make(chan VerifyBigItemAsyncResult, 1)
+	go p.VerifyBigItemAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyBigItemByUserIdAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyBigItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyBigItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyBigItemByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyBigItemByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyBigItemByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyBigItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) VerifyBigItemByUserIdAsync(
+	request *VerifyBigItemByUserIdRequest,
+	callback chan<- VerifyBigItemByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/big/inventory/{inventoryName}/item/{itemName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{inventoryName}", "null")
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+	} else {
+		path = strings.ReplaceAll(path, "{itemName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Count != nil && *request.Count != "" {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyBigItemByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) VerifyBigItemByUserId(
+	request *VerifyBigItemByUserIdRequest,
+) (*VerifyBigItemByUserIdResult, error) {
+	callback := make(chan VerifyBigItemByUserIdAsyncResult, 1)
+	go p.VerifyBigItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func acquireBigItemByStampSheetAsyncHandler(
 	client Gs2InventoryRestClient,
 	job *core.NetworkJob,
@@ -10565,6 +11419,94 @@ func (p Gs2InventoryRestClient) ConsumeBigItemByStampTask(
 ) (*ConsumeBigItemByStampTaskResult, error) {
 	callback := make(chan ConsumeBigItemByStampTaskAsyncResult, 1)
 	go p.ConsumeBigItemByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyBigItemByStampTaskAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyBigItemByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyBigItemByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyBigItemByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyBigItemByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyBigItemByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyBigItemByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) VerifyBigItemByStampTaskAsync(
+	request *VerifyBigItemByStampTaskRequest,
+	callback chan<- VerifyBigItemByStampTaskAsyncResult,
+) {
+	path := "/stamp/big/item/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifyBigItemByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) VerifyBigItemByStampTask(
+	request *VerifyBigItemByStampTaskRequest,
+) (*VerifyBigItemByStampTaskResult, error) {
+	callback := make(chan VerifyBigItemByStampTaskAsyncResult, 1)
+	go p.VerifyBigItemByStampTaskAsync(
 		request,
 		callback,
 	)

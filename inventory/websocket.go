@@ -6382,6 +6382,213 @@ func (p Gs2InventoryWebSocketClient) DeleteItemSetByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2InventoryWebSocketClient) verifyItemSetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyItemSetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyItemSetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyItemSetResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyItemSetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyItemSetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyItemSetAsync(
+	request *VerifyItemSetRequest,
+	callback chan<- VerifyItemSetAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "itemSet",
+			"function":    "verifyItemSet",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		bodies["inventoryName"] = *request.InventoryName
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		bodies["itemName"] = *request.ItemName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.ItemSetName != nil && *request.ItemSetName != "" {
+		bodies["itemSetName"] = *request.ItemSetName
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyItemSetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyItemSet(
+	request *VerifyItemSetRequest,
+) (*VerifyItemSetResult, error) {
+	callback := make(chan VerifyItemSetAsyncResult, 1)
+	go p.VerifyItemSetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) verifyItemSetByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyItemSetByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyItemSetByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyItemSetByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyItemSetByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyItemSetByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyItemSetByUserIdAsync(
+	request *VerifyItemSetByUserIdRequest,
+	callback chan<- VerifyItemSetByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "itemSet",
+			"function":    "verifyItemSetByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		bodies["inventoryName"] = *request.InventoryName
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		bodies["itemName"] = *request.ItemName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.ItemSetName != nil && *request.ItemSetName != "" {
+		bodies["itemSetName"] = *request.ItemSetName
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyItemSetByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyItemSetByUserId(
+	request *VerifyItemSetByUserIdRequest,
+) (*VerifyItemSetByUserIdResult, error) {
+	callback := make(chan VerifyItemSetByUserIdAsyncResult, 1)
+	go p.VerifyItemSetByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2InventoryWebSocketClient) acquireItemSetByStampSheetAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- AcquireItemSetByStampSheetAsyncResult,
@@ -6543,6 +6750,90 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetByStampTask(
 ) (*ConsumeItemSetByStampTaskResult, error) {
 	callback := make(chan ConsumeItemSetByStampTaskAsyncResult, 1)
 	go p.ConsumeItemSetByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) verifyItemSetByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyItemSetByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyItemSetByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyItemSetByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyItemSetByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyItemSetByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyItemSetByStampTaskAsync(
+	request *VerifyItemSetByStampTaskRequest,
+	callback chan<- VerifyItemSetByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "itemSet",
+			"function":    "verifyItemSetByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.verifyItemSetByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyItemSetByStampTask(
+	request *VerifyItemSetByStampTaskRequest,
+) (*VerifyItemSetByStampTaskResult, error) {
+	callback := make(chan VerifyItemSetByStampTaskAsyncResult, 1)
+	go p.VerifyItemSetByStampTaskAsync(
 		request,
 		callback,
 	)
@@ -8764,6 +9055,207 @@ func (p Gs2InventoryWebSocketClient) DeleteSimpleItemsByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2InventoryWebSocketClient) verifySimpleItemAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifySimpleItemAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifySimpleItemAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifySimpleItemResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifySimpleItemAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifySimpleItemAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifySimpleItemAsync(
+	request *VerifySimpleItemRequest,
+	callback chan<- VerifySimpleItemAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "simpleItem",
+			"function":    "verifySimpleItem",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		bodies["inventoryName"] = *request.InventoryName
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		bodies["itemName"] = *request.ItemName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifySimpleItemAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifySimpleItem(
+	request *VerifySimpleItemRequest,
+) (*VerifySimpleItemResult, error) {
+	callback := make(chan VerifySimpleItemAsyncResult, 1)
+	go p.VerifySimpleItemAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) verifySimpleItemByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifySimpleItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifySimpleItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifySimpleItemByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifySimpleItemByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifySimpleItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifySimpleItemByUserIdAsync(
+	request *VerifySimpleItemByUserIdRequest,
+	callback chan<- VerifySimpleItemByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "simpleItem",
+			"function":    "verifySimpleItemByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		bodies["inventoryName"] = *request.InventoryName
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		bodies["itemName"] = *request.ItemName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifySimpleItemByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifySimpleItemByUserId(
+	request *VerifySimpleItemByUserIdRequest,
+) (*VerifySimpleItemByUserIdResult, error) {
+	callback := make(chan VerifySimpleItemByUserIdAsyncResult, 1)
+	go p.VerifySimpleItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2InventoryWebSocketClient) acquireSimpleItemsByStampSheetAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- AcquireSimpleItemsByStampSheetAsyncResult,
@@ -8925,6 +9417,90 @@ func (p Gs2InventoryWebSocketClient) ConsumeSimpleItemsByStampTask(
 ) (*ConsumeSimpleItemsByStampTaskResult, error) {
 	callback := make(chan ConsumeSimpleItemsByStampTaskAsyncResult, 1)
 	go p.ConsumeSimpleItemsByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) verifySimpleItemByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifySimpleItemByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifySimpleItemByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifySimpleItemByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifySimpleItemByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifySimpleItemByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifySimpleItemByStampTaskAsync(
+	request *VerifySimpleItemByStampTaskRequest,
+	callback chan<- VerifySimpleItemByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "simpleItem",
+			"function":    "verifySimpleItemByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.verifySimpleItemByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifySimpleItemByStampTask(
+	request *VerifySimpleItemByStampTaskRequest,
+) (*VerifySimpleItemByStampTaskResult, error) {
+	callback := make(chan VerifySimpleItemByStampTaskAsyncResult, 1)
+	go p.VerifySimpleItemByStampTaskAsync(
 		request,
 		callback,
 	)
@@ -9712,6 +10288,207 @@ func (p Gs2InventoryWebSocketClient) DeleteBigItemByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2InventoryWebSocketClient) verifyBigItemAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyBigItemAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyBigItemAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyBigItemResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyBigItemAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyBigItemAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyBigItemAsync(
+	request *VerifyBigItemRequest,
+	callback chan<- VerifyBigItemAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "bigItem",
+			"function":    "verifyBigItem",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		bodies["inventoryName"] = *request.InventoryName
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		bodies["itemName"] = *request.ItemName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Count != nil && *request.Count != "" {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyBigItemAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyBigItem(
+	request *VerifyBigItemRequest,
+) (*VerifyBigItemResult, error) {
+	callback := make(chan VerifyBigItemAsyncResult, 1)
+	go p.VerifyBigItemAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) verifyBigItemByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyBigItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyBigItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyBigItemByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyBigItemByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyBigItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyBigItemByUserIdAsync(
+	request *VerifyBigItemByUserIdRequest,
+	callback chan<- VerifyBigItemByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "bigItem",
+			"function":    "verifyBigItemByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		bodies["inventoryName"] = *request.InventoryName
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		bodies["itemName"] = *request.ItemName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Count != nil && *request.Count != "" {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyBigItemByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyBigItemByUserId(
+	request *VerifyBigItemByUserIdRequest,
+) (*VerifyBigItemByUserIdResult, error) {
+	callback := make(chan VerifyBigItemByUserIdAsyncResult, 1)
+	go p.VerifyBigItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2InventoryWebSocketClient) acquireBigItemByStampSheetAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- AcquireBigItemByStampSheetAsyncResult,
@@ -9873,6 +10650,90 @@ func (p Gs2InventoryWebSocketClient) ConsumeBigItemByStampTask(
 ) (*ConsumeBigItemByStampTaskResult, error) {
 	callback := make(chan ConsumeBigItemByStampTaskAsyncResult, 1)
 	go p.ConsumeBigItemByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) verifyBigItemByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyBigItemByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyBigItemByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyBigItemByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyBigItemByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyBigItemByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyBigItemByStampTaskAsync(
+	request *VerifyBigItemByStampTaskRequest,
+	callback chan<- VerifyBigItemByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "bigItem",
+			"function":    "verifyBigItemByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.verifyBigItemByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyBigItemByStampTask(
+	request *VerifyBigItemByStampTaskRequest,
+) (*VerifyBigItemByStampTaskResult, error) {
+	callback := make(chan VerifyBigItemByStampTaskAsyncResult, 1)
+	go p.VerifyBigItemByStampTaskAsync(
 		request,
 		callback,
 	)

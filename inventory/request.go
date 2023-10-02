@@ -2554,6 +2554,100 @@ func (p DeleteItemSetByUserIdRequest) Pointer() *DeleteItemSetByUserIdRequest {
 	return &p
 }
 
+type VerifyItemSetRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	InventoryName      *string `json:"inventoryName"`
+	ItemName           *string `json:"itemName"`
+	VerifyType         *string `json:"verifyType"`
+	ItemSetName        *string `json:"itemSetName"`
+	Count              *int64  `json:"count"`
+}
+
+func NewVerifyItemSetRequestFromJson(data string) VerifyItemSetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyItemSetRequestFromDict(dict)
+}
+
+func NewVerifyItemSetRequestFromDict(data map[string]interface{}) VerifyItemSetRequest {
+	return VerifyItemSetRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		InventoryName: core.CastString(data["inventoryName"]),
+		ItemName:      core.CastString(data["itemName"]),
+		VerifyType:    core.CastString(data["verifyType"]),
+		ItemSetName:   core.CastString(data["itemSetName"]),
+		Count:         core.CastInt64(data["count"]),
+	}
+}
+
+func (p VerifyItemSetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"inventoryName": p.InventoryName,
+		"itemName":      p.ItemName,
+		"verifyType":    p.VerifyType,
+		"itemSetName":   p.ItemSetName,
+		"count":         p.Count,
+	}
+}
+
+func (p VerifyItemSetRequest) Pointer() *VerifyItemSetRequest {
+	return &p
+}
+
+type VerifyItemSetByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	InventoryName      *string `json:"inventoryName"`
+	ItemName           *string `json:"itemName"`
+	VerifyType         *string `json:"verifyType"`
+	ItemSetName        *string `json:"itemSetName"`
+	Count              *int64  `json:"count"`
+}
+
+func NewVerifyItemSetByUserIdRequestFromJson(data string) VerifyItemSetByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyItemSetByUserIdRequestFromDict(dict)
+}
+
+func NewVerifyItemSetByUserIdRequestFromDict(data map[string]interface{}) VerifyItemSetByUserIdRequest {
+	return VerifyItemSetByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		UserId:        core.CastString(data["userId"]),
+		InventoryName: core.CastString(data["inventoryName"]),
+		ItemName:      core.CastString(data["itemName"]),
+		VerifyType:    core.CastString(data["verifyType"]),
+		ItemSetName:   core.CastString(data["itemSetName"]),
+		Count:         core.CastInt64(data["count"]),
+	}
+}
+
+func (p VerifyItemSetByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"inventoryName": p.InventoryName,
+		"itemName":      p.ItemName,
+		"verifyType":    p.VerifyType,
+		"itemSetName":   p.ItemSetName,
+		"count":         p.Count,
+	}
+}
+
+func (p VerifyItemSetByUserIdRequest) Pointer() *VerifyItemSetByUserIdRequest {
+	return &p
+}
+
 type AcquireItemSetByStampSheetRequest struct {
 	RequestId    *string `json:"requestId"`
 	ContextStack *string `json:"contextStack"`
@@ -2613,6 +2707,37 @@ func (p ConsumeItemSetByStampTaskRequest) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeItemSetByStampTaskRequest) Pointer() *ConsumeItemSetByStampTaskRequest {
+	return &p
+}
+
+type VerifyItemSetByStampTaskRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewVerifyItemSetByStampTaskRequestFromJson(data string) VerifyItemSetByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyItemSetByStampTaskRequestFromDict(dict)
+}
+
+func NewVerifyItemSetByStampTaskRequestFromDict(data map[string]interface{}) VerifyItemSetByStampTaskRequest {
+	return VerifyItemSetByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifyItemSetByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyItemSetByStampTaskRequest) Pointer() *VerifyItemSetByStampTaskRequest {
 	return &p
 }
 
@@ -3534,6 +3659,94 @@ func (p DeleteSimpleItemsByUserIdRequest) Pointer() *DeleteSimpleItemsByUserIdRe
 	return &p
 }
 
+type VerifySimpleItemRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	InventoryName      *string `json:"inventoryName"`
+	ItemName           *string `json:"itemName"`
+	VerifyType         *string `json:"verifyType"`
+	Count              *int64  `json:"count"`
+}
+
+func NewVerifySimpleItemRequestFromJson(data string) VerifySimpleItemRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifySimpleItemRequestFromDict(dict)
+}
+
+func NewVerifySimpleItemRequestFromDict(data map[string]interface{}) VerifySimpleItemRequest {
+	return VerifySimpleItemRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		InventoryName: core.CastString(data["inventoryName"]),
+		ItemName:      core.CastString(data["itemName"]),
+		VerifyType:    core.CastString(data["verifyType"]),
+		Count:         core.CastInt64(data["count"]),
+	}
+}
+
+func (p VerifySimpleItemRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"inventoryName": p.InventoryName,
+		"itemName":      p.ItemName,
+		"verifyType":    p.VerifyType,
+		"count":         p.Count,
+	}
+}
+
+func (p VerifySimpleItemRequest) Pointer() *VerifySimpleItemRequest {
+	return &p
+}
+
+type VerifySimpleItemByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	InventoryName      *string `json:"inventoryName"`
+	ItemName           *string `json:"itemName"`
+	VerifyType         *string `json:"verifyType"`
+	Count              *int64  `json:"count"`
+}
+
+func NewVerifySimpleItemByUserIdRequestFromJson(data string) VerifySimpleItemByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifySimpleItemByUserIdRequestFromDict(dict)
+}
+
+func NewVerifySimpleItemByUserIdRequestFromDict(data map[string]interface{}) VerifySimpleItemByUserIdRequest {
+	return VerifySimpleItemByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		UserId:        core.CastString(data["userId"]),
+		InventoryName: core.CastString(data["inventoryName"]),
+		ItemName:      core.CastString(data["itemName"]),
+		VerifyType:    core.CastString(data["verifyType"]),
+		Count:         core.CastInt64(data["count"]),
+	}
+}
+
+func (p VerifySimpleItemByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"inventoryName": p.InventoryName,
+		"itemName":      p.ItemName,
+		"verifyType":    p.VerifyType,
+		"count":         p.Count,
+	}
+}
+
+func (p VerifySimpleItemByUserIdRequest) Pointer() *VerifySimpleItemByUserIdRequest {
+	return &p
+}
+
 type AcquireSimpleItemsByStampSheetRequest struct {
 	RequestId    *string `json:"requestId"`
 	ContextStack *string `json:"contextStack"`
@@ -3593,6 +3806,37 @@ func (p ConsumeSimpleItemsByStampTaskRequest) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeSimpleItemsByStampTaskRequest) Pointer() *ConsumeSimpleItemsByStampTaskRequest {
+	return &p
+}
+
+type VerifySimpleItemByStampTaskRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewVerifySimpleItemByStampTaskRequestFromJson(data string) VerifySimpleItemByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifySimpleItemByStampTaskRequestFromDict(dict)
+}
+
+func NewVerifySimpleItemByStampTaskRequestFromDict(data map[string]interface{}) VerifySimpleItemByStampTaskRequest {
+	return VerifySimpleItemByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifySimpleItemByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifySimpleItemByStampTaskRequest) Pointer() *VerifySimpleItemByStampTaskRequest {
 	return &p
 }
 
@@ -3911,6 +4155,94 @@ func (p DeleteBigItemByUserIdRequest) Pointer() *DeleteBigItemByUserIdRequest {
 	return &p
 }
 
+type VerifyBigItemRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	InventoryName      *string `json:"inventoryName"`
+	ItemName           *string `json:"itemName"`
+	VerifyType         *string `json:"verifyType"`
+	Count              *string `json:"count"`
+}
+
+func NewVerifyBigItemRequestFromJson(data string) VerifyBigItemRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyBigItemRequestFromDict(dict)
+}
+
+func NewVerifyBigItemRequestFromDict(data map[string]interface{}) VerifyBigItemRequest {
+	return VerifyBigItemRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		InventoryName: core.CastString(data["inventoryName"]),
+		ItemName:      core.CastString(data["itemName"]),
+		VerifyType:    core.CastString(data["verifyType"]),
+		Count:         core.CastString(data["count"]),
+	}
+}
+
+func (p VerifyBigItemRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"inventoryName": p.InventoryName,
+		"itemName":      p.ItemName,
+		"verifyType":    p.VerifyType,
+		"count":         p.Count,
+	}
+}
+
+func (p VerifyBigItemRequest) Pointer() *VerifyBigItemRequest {
+	return &p
+}
+
+type VerifyBigItemByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	InventoryName      *string `json:"inventoryName"`
+	ItemName           *string `json:"itemName"`
+	VerifyType         *string `json:"verifyType"`
+	Count              *string `json:"count"`
+}
+
+func NewVerifyBigItemByUserIdRequestFromJson(data string) VerifyBigItemByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyBigItemByUserIdRequestFromDict(dict)
+}
+
+func NewVerifyBigItemByUserIdRequestFromDict(data map[string]interface{}) VerifyBigItemByUserIdRequest {
+	return VerifyBigItemByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		UserId:        core.CastString(data["userId"]),
+		InventoryName: core.CastString(data["inventoryName"]),
+		ItemName:      core.CastString(data["itemName"]),
+		VerifyType:    core.CastString(data["verifyType"]),
+		Count:         core.CastString(data["count"]),
+	}
+}
+
+func (p VerifyBigItemByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"inventoryName": p.InventoryName,
+		"itemName":      p.ItemName,
+		"verifyType":    p.VerifyType,
+		"count":         p.Count,
+	}
+}
+
+func (p VerifyBigItemByUserIdRequest) Pointer() *VerifyBigItemByUserIdRequest {
+	return &p
+}
+
 type AcquireBigItemByStampSheetRequest struct {
 	RequestId    *string `json:"requestId"`
 	ContextStack *string `json:"contextStack"`
@@ -3970,5 +4302,36 @@ func (p ConsumeBigItemByStampTaskRequest) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeBigItemByStampTaskRequest) Pointer() *ConsumeBigItemByStampTaskRequest {
+	return &p
+}
+
+type VerifyBigItemByStampTaskRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewVerifyBigItemByStampTaskRequestFromJson(data string) VerifyBigItemByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyBigItemByStampTaskRequestFromDict(dict)
+}
+
+func NewVerifyBigItemByStampTaskRequestFromDict(data map[string]interface{}) VerifyBigItemByStampTaskRequest {
+	return VerifyBigItemByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifyBigItemByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyBigItemByStampTaskRequest) Pointer() *VerifyBigItemByStampTaskRequest {
 	return &p
 }

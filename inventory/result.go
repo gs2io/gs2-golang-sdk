@@ -2372,6 +2372,58 @@ func (p DeleteItemSetByUserIdResult) Pointer() *DeleteItemSetByUserIdResult {
 	return &p
 }
 
+type VerifyItemSetResult struct {
+}
+
+type VerifyItemSetAsyncResult struct {
+	result *VerifyItemSetResult
+	err    error
+}
+
+func NewVerifyItemSetResultFromJson(data string) VerifyItemSetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyItemSetResultFromDict(dict)
+}
+
+func NewVerifyItemSetResultFromDict(data map[string]interface{}) VerifyItemSetResult {
+	return VerifyItemSetResult{}
+}
+
+func (p VerifyItemSetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyItemSetResult) Pointer() *VerifyItemSetResult {
+	return &p
+}
+
+type VerifyItemSetByUserIdResult struct {
+}
+
+type VerifyItemSetByUserIdAsyncResult struct {
+	result *VerifyItemSetByUserIdResult
+	err    error
+}
+
+func NewVerifyItemSetByUserIdResultFromJson(data string) VerifyItemSetByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyItemSetByUserIdResultFromDict(dict)
+}
+
+func NewVerifyItemSetByUserIdResultFromDict(data map[string]interface{}) VerifyItemSetByUserIdResult {
+	return VerifyItemSetByUserIdResult{}
+}
+
+func (p VerifyItemSetByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyItemSetByUserIdResult) Pointer() *VerifyItemSetByUserIdResult {
+	return &p
+}
+
 type AcquireItemSetByStampSheetResult struct {
 	Items         []ItemSet  `json:"items"`
 	ItemModel     *ItemModel `json:"itemModel"`
@@ -2453,6 +2505,37 @@ func (p ConsumeItemSetByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeItemSetByStampTaskResult) Pointer() *ConsumeItemSetByStampTaskResult {
+	return &p
+}
+
+type VerifyItemSetByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifyItemSetByStampTaskAsyncResult struct {
+	result *VerifyItemSetByStampTaskResult
+	err    error
+}
+
+func NewVerifyItemSetByStampTaskResultFromJson(data string) VerifyItemSetByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyItemSetByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyItemSetByStampTaskResultFromDict(data map[string]interface{}) VerifyItemSetByStampTaskResult {
+	return VerifyItemSetByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyItemSetByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyItemSetByStampTaskResult) Pointer() *VerifyItemSetByStampTaskResult {
 	return &p
 }
 
@@ -3350,6 +3433,58 @@ func (p DeleteSimpleItemsByUserIdResult) Pointer() *DeleteSimpleItemsByUserIdRes
 	return &p
 }
 
+type VerifySimpleItemResult struct {
+}
+
+type VerifySimpleItemAsyncResult struct {
+	result *VerifySimpleItemResult
+	err    error
+}
+
+func NewVerifySimpleItemResultFromJson(data string) VerifySimpleItemResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifySimpleItemResultFromDict(dict)
+}
+
+func NewVerifySimpleItemResultFromDict(data map[string]interface{}) VerifySimpleItemResult {
+	return VerifySimpleItemResult{}
+}
+
+func (p VerifySimpleItemResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifySimpleItemResult) Pointer() *VerifySimpleItemResult {
+	return &p
+}
+
+type VerifySimpleItemByUserIdResult struct {
+}
+
+type VerifySimpleItemByUserIdAsyncResult struct {
+	result *VerifySimpleItemByUserIdResult
+	err    error
+}
+
+func NewVerifySimpleItemByUserIdResultFromJson(data string) VerifySimpleItemByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifySimpleItemByUserIdResultFromDict(dict)
+}
+
+func NewVerifySimpleItemByUserIdResultFromDict(data map[string]interface{}) VerifySimpleItemByUserIdResult {
+	return VerifySimpleItemByUserIdResult{}
+}
+
+func (p VerifySimpleItemByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifySimpleItemByUserIdResult) Pointer() *VerifySimpleItemByUserIdResult {
+	return &p
+}
+
 type AcquireSimpleItemsByStampSheetResult struct {
 	Items []SimpleItem `json:"items"`
 }
@@ -3416,6 +3551,37 @@ func (p ConsumeSimpleItemsByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeSimpleItemsByStampTaskResult) Pointer() *ConsumeSimpleItemsByStampTaskResult {
+	return &p
+}
+
+type VerifySimpleItemByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifySimpleItemByStampTaskAsyncResult struct {
+	result *VerifySimpleItemByStampTaskResult
+	err    error
+}
+
+func NewVerifySimpleItemByStampTaskResultFromJson(data string) VerifySimpleItemByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifySimpleItemByStampTaskResultFromDict(dict)
+}
+
+func NewVerifySimpleItemByStampTaskResultFromDict(data map[string]interface{}) VerifySimpleItemByStampTaskResult {
+	return VerifySimpleItemByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifySimpleItemByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifySimpleItemByStampTaskResult) Pointer() *VerifySimpleItemByStampTaskResult {
 	return &p
 }
 
@@ -3683,6 +3849,58 @@ func (p DeleteBigItemByUserIdResult) Pointer() *DeleteBigItemByUserIdResult {
 	return &p
 }
 
+type VerifyBigItemResult struct {
+}
+
+type VerifyBigItemAsyncResult struct {
+	result *VerifyBigItemResult
+	err    error
+}
+
+func NewVerifyBigItemResultFromJson(data string) VerifyBigItemResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyBigItemResultFromDict(dict)
+}
+
+func NewVerifyBigItemResultFromDict(data map[string]interface{}) VerifyBigItemResult {
+	return VerifyBigItemResult{}
+}
+
+func (p VerifyBigItemResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyBigItemResult) Pointer() *VerifyBigItemResult {
+	return &p
+}
+
+type VerifyBigItemByUserIdResult struct {
+}
+
+type VerifyBigItemByUserIdAsyncResult struct {
+	result *VerifyBigItemByUserIdResult
+	err    error
+}
+
+func NewVerifyBigItemByUserIdResultFromJson(data string) VerifyBigItemByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyBigItemByUserIdResultFromDict(dict)
+}
+
+func NewVerifyBigItemByUserIdResultFromDict(data map[string]interface{}) VerifyBigItemByUserIdResult {
+	return VerifyBigItemByUserIdResult{}
+}
+
+func (p VerifyBigItemByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyBigItemByUserIdResult) Pointer() *VerifyBigItemByUserIdResult {
+	return &p
+}
+
 type AcquireBigItemByStampSheetResult struct {
 	Item *BigItem `json:"item"`
 }
@@ -3745,5 +3963,36 @@ func (p ConsumeBigItemByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeBigItemByStampTaskResult) Pointer() *ConsumeBigItemByStampTaskResult {
+	return &p
+}
+
+type VerifyBigItemByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifyBigItemByStampTaskAsyncResult struct {
+	result *VerifyBigItemByStampTaskResult
+	err    error
+}
+
+func NewVerifyBigItemByStampTaskResultFromJson(data string) VerifyBigItemByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyBigItemByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyBigItemByStampTaskResultFromDict(data map[string]interface{}) VerifyBigItemByStampTaskResult {
+	return VerifyBigItemByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyBigItemByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyBigItemByStampTaskResult) Pointer() *VerifyBigItemByStampTaskResult {
 	return &p
 }
