@@ -1101,7 +1101,7 @@ func (p Gs2AccountRestClient) RemoveBanAsync(
 	request *RemoveBanRequest,
 	callback chan<- RemoveBanAsyncResult,
 ) {
-	path := "/{namespaceName}/account/{userId}/ban/{banName}"
+	path := "/{namespaceName}/account/{userId}/ban/{banStatusName}"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
@@ -2434,6 +2434,103 @@ func (p Gs2AccountRestClient) DeleteTakeOverByUserIdentifier(
 ) (*DeleteTakeOverByUserIdentifierResult, error) {
 	callback := make(chan DeleteTakeOverByUserIdentifierAsyncResult, 1)
 	go p.DeleteTakeOverByUserIdentifierAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteTakeOverByUserIdAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteTakeOverByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteTakeOverByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteTakeOverByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DeleteTakeOverByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteTakeOverByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DeleteTakeOverByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) DeleteTakeOverByUserIdAsync(
+	request *DeleteTakeOverByUserIdRequest,
+	callback chan<- DeleteTakeOverByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/account/{userId}/takeover/type/{type}/takeover"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.Type != nil {
+		path = strings.ReplaceAll(path, "{type}", core.ToString(*request.Type))
+	} else {
+		path = strings.ReplaceAll(path, "{type}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go deleteTakeOverByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) DeleteTakeOverByUserId(
+	request *DeleteTakeOverByUserIdRequest,
+) (*DeleteTakeOverByUserIdResult, error) {
+	callback := make(chan DeleteTakeOverByUserIdAsyncResult, 1)
+	go p.DeleteTakeOverByUserIdAsync(
 		request,
 		callback,
 	)

@@ -2314,6 +2314,96 @@ func (p Gs2AccountWebSocketClient) DeleteTakeOverByUserIdentifier(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2AccountWebSocketClient) deleteTakeOverByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteTakeOverByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteTakeOverByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteTakeOverByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteTakeOverByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DeleteTakeOverByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountWebSocketClient) DeleteTakeOverByUserIdAsync(
+	request *DeleteTakeOverByUserIdRequest,
+	callback chan<- DeleteTakeOverByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "account",
+			"component":   "takeOver",
+			"function":    "deleteTakeOverByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Type != nil {
+		bodies["type"] = *request.Type
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.deleteTakeOverByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountWebSocketClient) DeleteTakeOverByUserId(
+	request *DeleteTakeOverByUserIdRequest,
+) (*DeleteTakeOverByUserIdResult, error) {
+	callback := make(chan DeleteTakeOverByUserIdAsyncResult, 1)
+	go p.DeleteTakeOverByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2AccountWebSocketClient) doTakeOverAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DoTakeOverAsyncResult,

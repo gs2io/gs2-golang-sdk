@@ -828,6 +828,37 @@ func (p DeleteTakeOverByUserIdentifierResult) Pointer() *DeleteTakeOverByUserIde
 	return &p
 }
 
+type DeleteTakeOverByUserIdResult struct {
+	Item *TakeOver `json:"item"`
+}
+
+type DeleteTakeOverByUserIdAsyncResult struct {
+	result *DeleteTakeOverByUserIdResult
+	err    error
+}
+
+func NewDeleteTakeOverByUserIdResultFromJson(data string) DeleteTakeOverByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteTakeOverByUserIdResultFromDict(dict)
+}
+
+func NewDeleteTakeOverByUserIdResultFromDict(data map[string]interface{}) DeleteTakeOverByUserIdResult {
+	return DeleteTakeOverByUserIdResult{
+		Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeleteTakeOverByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeleteTakeOverByUserIdResult) Pointer() *DeleteTakeOverByUserIdResult {
+	return &p
+}
+
 type DoTakeOverResult struct {
 	Item *Account `json:"item"`
 }

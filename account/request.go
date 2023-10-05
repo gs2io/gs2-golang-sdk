@@ -920,6 +920,41 @@ func (p DeleteTakeOverByUserIdentifierRequest) Pointer() *DeleteTakeOverByUserId
 	return &p
 }
 
+type DeleteTakeOverByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	Type               *int32  `json:"type"`
+}
+
+func NewDeleteTakeOverByUserIdRequestFromJson(data string) DeleteTakeOverByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteTakeOverByUserIdRequestFromDict(dict)
+}
+
+func NewDeleteTakeOverByUserIdRequestFromDict(data map[string]interface{}) DeleteTakeOverByUserIdRequest {
+	return DeleteTakeOverByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		UserId:        core.CastString(data["userId"]),
+		Type:          core.CastInt32(data["type"]),
+	}
+}
+
+func (p DeleteTakeOverByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"type":          p.Type,
+	}
+}
+
+func (p DeleteTakeOverByUserIdRequest) Pointer() *DeleteTakeOverByUserIdRequest {
+	return &p
+}
+
 type DoTakeOverRequest struct {
 	RequestId      *string `json:"requestId"`
 	ContextStack   *string `json:"contextStack"`
