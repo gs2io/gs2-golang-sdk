@@ -217,6 +217,122 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 	return &p
 }
 
+type DumpUserDataByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	UserId             *string `json:"userId"`
+}
+
+func NewDumpUserDataByUserIdRequestFromJson(data string) DumpUserDataByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDumpUserDataByUserIdRequestFromDict(dict)
+}
+
+func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
+	return DumpUserDataByUserIdRequest{
+		UserId: core.CastString(data["userId"]),
+	}
+}
+
+func (p DumpUserDataByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId": p.UserId,
+	}
+}
+
+func (p DumpUserDataByUserIdRequest) Pointer() *DumpUserDataByUserIdRequest {
+	return &p
+}
+
+type CheckDumpUserDataByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	UserId             *string `json:"userId"`
+}
+
+func NewCheckDumpUserDataByUserIdRequestFromJson(data string) CheckDumpUserDataByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCheckDumpUserDataByUserIdRequestFromDict(dict)
+}
+
+func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
+	return CheckDumpUserDataByUserIdRequest{
+		UserId: core.CastString(data["userId"]),
+	}
+}
+
+func (p CheckDumpUserDataByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId": p.UserId,
+	}
+}
+
+func (p CheckDumpUserDataByUserIdRequest) Pointer() *CheckDumpUserDataByUserIdRequest {
+	return &p
+}
+
+type CleanUserDataByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	UserId             *string `json:"userId"`
+}
+
+func NewCleanUserDataByUserIdRequestFromJson(data string) CleanUserDataByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCleanUserDataByUserIdRequestFromDict(dict)
+}
+
+func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
+	return CleanUserDataByUserIdRequest{
+		UserId: core.CastString(data["userId"]),
+	}
+}
+
+func (p CleanUserDataByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId": p.UserId,
+	}
+}
+
+func (p CleanUserDataByUserIdRequest) Pointer() *CleanUserDataByUserIdRequest {
+	return &p
+}
+
+type CheckCleanUserDataByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	UserId             *string `json:"userId"`
+}
+
+func NewCheckCleanUserDataByUserIdRequestFromJson(data string) CheckCleanUserDataByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCheckCleanUserDataByUserIdRequestFromDict(dict)
+}
+
+func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
+	return CheckCleanUserDataByUserIdRequest{
+		UserId: core.CastString(data["userId"]),
+	}
+}
+
+func (p CheckCleanUserDataByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId": p.UserId,
+	}
+}
+
+func (p CheckCleanUserDataByUserIdRequest) Pointer() *CheckCleanUserDataByUserIdRequest {
+	return &p
+}
+
 type DescribeEntryModelsRequest struct {
 	RequestId     *string `json:"requestId"`
 	ContextStack  *string `json:"contextStack"`

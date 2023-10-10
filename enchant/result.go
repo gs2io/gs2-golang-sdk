@@ -213,6 +213,115 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 	return &p
 }
 
+type DumpUserDataByUserIdResult struct {
+}
+
+type DumpUserDataByUserIdAsyncResult struct {
+	result *DumpUserDataByUserIdResult
+	err    error
+}
+
+func NewDumpUserDataByUserIdResultFromJson(data string) DumpUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDumpUserDataByUserIdResultFromDict(dict)
+}
+
+func NewDumpUserDataByUserIdResultFromDict(data map[string]interface{}) DumpUserDataByUserIdResult {
+	return DumpUserDataByUserIdResult{}
+}
+
+func (p DumpUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
+	return &p
+}
+
+type CheckDumpUserDataByUserIdResult struct {
+	Url *string `json:"url"`
+}
+
+type CheckDumpUserDataByUserIdAsyncResult struct {
+	result *CheckDumpUserDataByUserIdResult
+	err    error
+}
+
+func NewCheckDumpUserDataByUserIdResultFromJson(data string) CheckDumpUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCheckDumpUserDataByUserIdResultFromDict(dict)
+}
+
+func NewCheckDumpUserDataByUserIdResultFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdResult {
+	return CheckDumpUserDataByUserIdResult{
+		Url: core.CastString(data["url"]),
+	}
+}
+
+func (p CheckDumpUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"url": p.Url,
+	}
+}
+
+func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdResult {
+	return &p
+}
+
+type CleanUserDataByUserIdResult struct {
+}
+
+type CleanUserDataByUserIdAsyncResult struct {
+	result *CleanUserDataByUserIdResult
+	err    error
+}
+
+func NewCleanUserDataByUserIdResultFromJson(data string) CleanUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCleanUserDataByUserIdResultFromDict(dict)
+}
+
+func NewCleanUserDataByUserIdResultFromDict(data map[string]interface{}) CleanUserDataByUserIdResult {
+	return CleanUserDataByUserIdResult{}
+}
+
+func (p CleanUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
+	return &p
+}
+
+type CheckCleanUserDataByUserIdResult struct {
+}
+
+type CheckCleanUserDataByUserIdAsyncResult struct {
+	result *CheckCleanUserDataByUserIdResult
+	err    error
+}
+
+func NewCheckCleanUserDataByUserIdResultFromJson(data string) CheckCleanUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCheckCleanUserDataByUserIdResultFromDict(dict)
+}
+
+func NewCheckCleanUserDataByUserIdResultFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdResult {
+	return CheckCleanUserDataByUserIdResult{}
+}
+
+func (p CheckCleanUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdResult {
+	return &p
+}
+
 type DescribeBalanceParameterModelsResult struct {
 	Items []BalanceParameterModel `json:"items"`
 }

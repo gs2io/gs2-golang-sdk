@@ -564,6 +564,360 @@ func (p Gs2LoginRewardRestClient) DeleteNamespace(
 	return asyncResult.result, asyncResult.err
 }
 
+func dumpUserDataByUserIdAsyncHandler(
+	client Gs2LoginRewardRestClient,
+	job *core.NetworkJob,
+	callback chan<- DumpUserDataByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DumpUserDataByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DumpUserDataByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DumpUserDataByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DumpUserDataByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DumpUserDataByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LoginRewardRestClient) DumpUserDataByUserIdAsync(
+	request *DumpUserDataByUserIdRequest,
+	callback chan<- DumpUserDataByUserIdAsyncResult,
+) {
+	path := "/system/user/{userId}/dump"
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go dumpUserDataByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LoginRewardRestClient) DumpUserDataByUserId(
+	request *DumpUserDataByUserIdRequest,
+) (*DumpUserDataByUserIdResult, error) {
+	callback := make(chan DumpUserDataByUserIdAsyncResult, 1)
+	go p.DumpUserDataByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func checkDumpUserDataByUserIdAsyncHandler(
+	client Gs2LoginRewardRestClient,
+	job *core.NetworkJob,
+	callback chan<- CheckDumpUserDataByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CheckDumpUserDataByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CheckDumpUserDataByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- CheckDumpUserDataByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CheckDumpUserDataByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- CheckDumpUserDataByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LoginRewardRestClient) CheckDumpUserDataByUserIdAsync(
+	request *CheckDumpUserDataByUserIdRequest,
+	callback chan<- CheckDumpUserDataByUserIdAsyncResult,
+) {
+	path := "/system/user/{userId}/dump"
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go checkDumpUserDataByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LoginRewardRestClient) CheckDumpUserDataByUserId(
+	request *CheckDumpUserDataByUserIdRequest,
+) (*CheckDumpUserDataByUserIdResult, error) {
+	callback := make(chan CheckDumpUserDataByUserIdAsyncResult, 1)
+	go p.CheckDumpUserDataByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func cleanUserDataByUserIdAsyncHandler(
+	client Gs2LoginRewardRestClient,
+	job *core.NetworkJob,
+	callback chan<- CleanUserDataByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CleanUserDataByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CleanUserDataByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- CleanUserDataByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CleanUserDataByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- CleanUserDataByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LoginRewardRestClient) CleanUserDataByUserIdAsync(
+	request *CleanUserDataByUserIdRequest,
+	callback chan<- CleanUserDataByUserIdAsyncResult,
+) {
+	path := "/system/user/{userId}/clean"
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go cleanUserDataByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LoginRewardRestClient) CleanUserDataByUserId(
+	request *CleanUserDataByUserIdRequest,
+) (*CleanUserDataByUserIdResult, error) {
+	callback := make(chan CleanUserDataByUserIdAsyncResult, 1)
+	go p.CleanUserDataByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func checkCleanUserDataByUserIdAsyncHandler(
+	client Gs2LoginRewardRestClient,
+	job *core.NetworkJob,
+	callback chan<- CheckCleanUserDataByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CheckCleanUserDataByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CheckCleanUserDataByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- CheckCleanUserDataByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CheckCleanUserDataByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- CheckCleanUserDataByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LoginRewardRestClient) CheckCleanUserDataByUserIdAsync(
+	request *CheckCleanUserDataByUserIdRequest,
+	callback chan<- CheckCleanUserDataByUserIdAsyncResult,
+) {
+	path := "/system/user/{userId}/clean"
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go checkCleanUserDataByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("login-reward").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LoginRewardRestClient) CheckCleanUserDataByUserId(
+	request *CheckCleanUserDataByUserIdRequest,
+) (*CheckCleanUserDataByUserIdResult, error) {
+	callback := make(chan CheckCleanUserDataByUserIdAsyncResult, 1)
+	go p.CheckCleanUserDataByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describeBonusModelMastersAsyncHandler(
 	client Gs2LoginRewardRestClient,
 	job *core.NetworkJob,
