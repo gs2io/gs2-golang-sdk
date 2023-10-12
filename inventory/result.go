@@ -2020,6 +2020,89 @@ func (p DeleteInventoryByUserIdResult) Pointer() *DeleteInventoryByUserIdResult 
 	return &p
 }
 
+type VerifyInventoryCurrentMaxCapacityResult struct {
+}
+
+type VerifyInventoryCurrentMaxCapacityAsyncResult struct {
+	result *VerifyInventoryCurrentMaxCapacityResult
+	err    error
+}
+
+func NewVerifyInventoryCurrentMaxCapacityResultFromJson(data string) VerifyInventoryCurrentMaxCapacityResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyInventoryCurrentMaxCapacityResultFromDict(dict)
+}
+
+func NewVerifyInventoryCurrentMaxCapacityResultFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityResult {
+	return VerifyInventoryCurrentMaxCapacityResult{}
+}
+
+func (p VerifyInventoryCurrentMaxCapacityResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyInventoryCurrentMaxCapacityResult) Pointer() *VerifyInventoryCurrentMaxCapacityResult {
+	return &p
+}
+
+type VerifyInventoryCurrentMaxCapacityByUserIdResult struct {
+}
+
+type VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult struct {
+	result *VerifyInventoryCurrentMaxCapacityByUserIdResult
+	err    error
+}
+
+func NewVerifyInventoryCurrentMaxCapacityByUserIdResultFromJson(data string) VerifyInventoryCurrentMaxCapacityByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyInventoryCurrentMaxCapacityByUserIdResultFromDict(dict)
+}
+
+func NewVerifyInventoryCurrentMaxCapacityByUserIdResultFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityByUserIdResult {
+	return VerifyInventoryCurrentMaxCapacityByUserIdResult{}
+}
+
+func (p VerifyInventoryCurrentMaxCapacityByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyInventoryCurrentMaxCapacityByUserIdResult) Pointer() *VerifyInventoryCurrentMaxCapacityByUserIdResult {
+	return &p
+}
+
+type VerifyInventoryCurrentMaxCapacityByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult struct {
+	result *VerifyInventoryCurrentMaxCapacityByStampTaskResult
+	err    error
+}
+
+func NewVerifyInventoryCurrentMaxCapacityByStampTaskResultFromJson(data string) VerifyInventoryCurrentMaxCapacityByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyInventoryCurrentMaxCapacityByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyInventoryCurrentMaxCapacityByStampTaskResultFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityByStampTaskResult {
+	return VerifyInventoryCurrentMaxCapacityByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyInventoryCurrentMaxCapacityByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyInventoryCurrentMaxCapacityByStampTaskResult) Pointer() *VerifyInventoryCurrentMaxCapacityByStampTaskResult {
+	return &p
+}
+
 type AddCapacityByStampSheetResult struct {
 	Item *Inventory `json:"item"`
 }

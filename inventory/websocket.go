@@ -5551,6 +5551,285 @@ func (p Gs2InventoryWebSocketClient) DeleteInventoryByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2InventoryWebSocketClient) verifyInventoryCurrentMaxCapacityAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyInventoryCurrentMaxCapacityAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyInventoryCurrentMaxCapacityAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyInventoryCurrentMaxCapacityResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyInventoryCurrentMaxCapacityAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyInventoryCurrentMaxCapacityAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyInventoryCurrentMaxCapacityAsync(
+	request *VerifyInventoryCurrentMaxCapacityRequest,
+	callback chan<- VerifyInventoryCurrentMaxCapacityAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "inventory",
+			"function":    "verifyInventoryCurrentMaxCapacity",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		bodies["inventoryName"] = *request.InventoryName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.CurrentInventoryMaxCapacity != nil {
+		bodies["currentInventoryMaxCapacity"] = *request.CurrentInventoryMaxCapacity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyInventoryCurrentMaxCapacityAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyInventoryCurrentMaxCapacity(
+	request *VerifyInventoryCurrentMaxCapacityRequest,
+) (*VerifyInventoryCurrentMaxCapacityResult, error) {
+	callback := make(chan VerifyInventoryCurrentMaxCapacityAsyncResult, 1)
+	go p.VerifyInventoryCurrentMaxCapacityAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) verifyInventoryCurrentMaxCapacityByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyInventoryCurrentMaxCapacityByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyInventoryCurrentMaxCapacityByUserIdAsync(
+	request *VerifyInventoryCurrentMaxCapacityByUserIdRequest,
+	callback chan<- VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "inventory",
+			"function":    "verifyInventoryCurrentMaxCapacityByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		bodies["inventoryName"] = *request.InventoryName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.CurrentInventoryMaxCapacity != nil {
+		bodies["currentInventoryMaxCapacity"] = *request.CurrentInventoryMaxCapacity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyInventoryCurrentMaxCapacityByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyInventoryCurrentMaxCapacityByUserId(
+	request *VerifyInventoryCurrentMaxCapacityByUserIdRequest,
+) (*VerifyInventoryCurrentMaxCapacityByUserIdResult, error) {
+	callback := make(chan VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult, 1)
+	go p.VerifyInventoryCurrentMaxCapacityByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) verifyInventoryCurrentMaxCapacityByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyInventoryCurrentMaxCapacityByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyInventoryCurrentMaxCapacityByStampTaskAsync(
+	request *VerifyInventoryCurrentMaxCapacityByStampTaskRequest,
+	callback chan<- VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "inventory",
+			"function":    "verifyInventoryCurrentMaxCapacityByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.verifyInventoryCurrentMaxCapacityByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) VerifyInventoryCurrentMaxCapacityByStampTask(
+	request *VerifyInventoryCurrentMaxCapacityByStampTaskRequest,
+) (*VerifyInventoryCurrentMaxCapacityByStampTaskResult, error) {
+	callback := make(chan VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult, 1)
+	go p.VerifyInventoryCurrentMaxCapacityByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2InventoryWebSocketClient) addCapacityByStampSheetAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- AddCapacityByStampSheetAsyncResult,

@@ -2183,6 +2183,119 @@ func (p DeleteInventoryByUserIdRequest) Pointer() *DeleteInventoryByUserIdReques
 	return &p
 }
 
+type VerifyInventoryCurrentMaxCapacityRequest struct {
+	RequestId                   *string `json:"requestId"`
+	ContextStack                *string `json:"contextStack"`
+	DuplicationAvoider          *string `json:"duplicationAvoider"`
+	NamespaceName               *string `json:"namespaceName"`
+	AccessToken                 *string `json:"accessToken"`
+	InventoryName               *string `json:"inventoryName"`
+	VerifyType                  *string `json:"verifyType"`
+	CurrentInventoryMaxCapacity *int32  `json:"currentInventoryMaxCapacity"`
+}
+
+func NewVerifyInventoryCurrentMaxCapacityRequestFromJson(data string) VerifyInventoryCurrentMaxCapacityRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyInventoryCurrentMaxCapacityRequestFromDict(dict)
+}
+
+func NewVerifyInventoryCurrentMaxCapacityRequestFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityRequest {
+	return VerifyInventoryCurrentMaxCapacityRequest{
+		NamespaceName:               core.CastString(data["namespaceName"]),
+		AccessToken:                 core.CastString(data["accessToken"]),
+		InventoryName:               core.CastString(data["inventoryName"]),
+		VerifyType:                  core.CastString(data["verifyType"]),
+		CurrentInventoryMaxCapacity: core.CastInt32(data["currentInventoryMaxCapacity"]),
+	}
+}
+
+func (p VerifyInventoryCurrentMaxCapacityRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":               p.NamespaceName,
+		"accessToken":                 p.AccessToken,
+		"inventoryName":               p.InventoryName,
+		"verifyType":                  p.VerifyType,
+		"currentInventoryMaxCapacity": p.CurrentInventoryMaxCapacity,
+	}
+}
+
+func (p VerifyInventoryCurrentMaxCapacityRequest) Pointer() *VerifyInventoryCurrentMaxCapacityRequest {
+	return &p
+}
+
+type VerifyInventoryCurrentMaxCapacityByUserIdRequest struct {
+	RequestId                   *string `json:"requestId"`
+	ContextStack                *string `json:"contextStack"`
+	DuplicationAvoider          *string `json:"duplicationAvoider"`
+	NamespaceName               *string `json:"namespaceName"`
+	UserId                      *string `json:"userId"`
+	InventoryName               *string `json:"inventoryName"`
+	VerifyType                  *string `json:"verifyType"`
+	CurrentInventoryMaxCapacity *int32  `json:"currentInventoryMaxCapacity"`
+}
+
+func NewVerifyInventoryCurrentMaxCapacityByUserIdRequestFromJson(data string) VerifyInventoryCurrentMaxCapacityByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyInventoryCurrentMaxCapacityByUserIdRequestFromDict(dict)
+}
+
+func NewVerifyInventoryCurrentMaxCapacityByUserIdRequestFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityByUserIdRequest {
+	return VerifyInventoryCurrentMaxCapacityByUserIdRequest{
+		NamespaceName:               core.CastString(data["namespaceName"]),
+		UserId:                      core.CastString(data["userId"]),
+		InventoryName:               core.CastString(data["inventoryName"]),
+		VerifyType:                  core.CastString(data["verifyType"]),
+		CurrentInventoryMaxCapacity: core.CastInt32(data["currentInventoryMaxCapacity"]),
+	}
+}
+
+func (p VerifyInventoryCurrentMaxCapacityByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":               p.NamespaceName,
+		"userId":                      p.UserId,
+		"inventoryName":               p.InventoryName,
+		"verifyType":                  p.VerifyType,
+		"currentInventoryMaxCapacity": p.CurrentInventoryMaxCapacity,
+	}
+}
+
+func (p VerifyInventoryCurrentMaxCapacityByUserIdRequest) Pointer() *VerifyInventoryCurrentMaxCapacityByUserIdRequest {
+	return &p
+}
+
+type VerifyInventoryCurrentMaxCapacityByStampTaskRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewVerifyInventoryCurrentMaxCapacityByStampTaskRequestFromJson(data string) VerifyInventoryCurrentMaxCapacityByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyInventoryCurrentMaxCapacityByStampTaskRequestFromDict(dict)
+}
+
+func NewVerifyInventoryCurrentMaxCapacityByStampTaskRequestFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityByStampTaskRequest {
+	return VerifyInventoryCurrentMaxCapacityByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifyInventoryCurrentMaxCapacityByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyInventoryCurrentMaxCapacityByStampTaskRequest) Pointer() *VerifyInventoryCurrentMaxCapacityByStampTaskRequest {
+	return &p
+}
+
 type AddCapacityByStampSheetRequest struct {
 	RequestId    *string `json:"requestId"`
 	ContextStack *string `json:"contextStack"`

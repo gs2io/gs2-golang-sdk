@@ -5900,6 +5900,308 @@ func (p Gs2InventoryRestClient) DeleteInventoryByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyInventoryCurrentMaxCapacityAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyInventoryCurrentMaxCapacityAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyInventoryCurrentMaxCapacityAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyInventoryCurrentMaxCapacityResult
+	if asyncResult.Err != nil {
+		callback <- VerifyInventoryCurrentMaxCapacityAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyInventoryCurrentMaxCapacityAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyInventoryCurrentMaxCapacityAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) VerifyInventoryCurrentMaxCapacityAsync(
+	request *VerifyInventoryCurrentMaxCapacityRequest,
+	callback chan<- VerifyInventoryCurrentMaxCapacityAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/inventory/{inventoryName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{inventoryName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.CurrentInventoryMaxCapacity != nil {
+		bodies["currentInventoryMaxCapacity"] = *request.CurrentInventoryMaxCapacity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyInventoryCurrentMaxCapacityAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) VerifyInventoryCurrentMaxCapacity(
+	request *VerifyInventoryCurrentMaxCapacityRequest,
+) (*VerifyInventoryCurrentMaxCapacityResult, error) {
+	callback := make(chan VerifyInventoryCurrentMaxCapacityAsyncResult, 1)
+	go p.VerifyInventoryCurrentMaxCapacityAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyInventoryCurrentMaxCapacityByUserIdAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyInventoryCurrentMaxCapacityByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) VerifyInventoryCurrentMaxCapacityByUserIdAsync(
+	request *VerifyInventoryCurrentMaxCapacityByUserIdRequest,
+	callback chan<- VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{inventoryName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.CurrentInventoryMaxCapacity != nil {
+		bodies["currentInventoryMaxCapacity"] = *request.CurrentInventoryMaxCapacity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyInventoryCurrentMaxCapacityByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) VerifyInventoryCurrentMaxCapacityByUserId(
+	request *VerifyInventoryCurrentMaxCapacityByUserIdRequest,
+) (*VerifyInventoryCurrentMaxCapacityByUserIdResult, error) {
+	callback := make(chan VerifyInventoryCurrentMaxCapacityByUserIdAsyncResult, 1)
+	go p.VerifyInventoryCurrentMaxCapacityByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyInventoryCurrentMaxCapacityByStampTaskAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyInventoryCurrentMaxCapacityByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) VerifyInventoryCurrentMaxCapacityByStampTaskAsync(
+	request *VerifyInventoryCurrentMaxCapacityByStampTaskRequest,
+	callback chan<- VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult,
+) {
+	path := "/stamp/inventory/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifyInventoryCurrentMaxCapacityByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) VerifyInventoryCurrentMaxCapacityByStampTask(
+	request *VerifyInventoryCurrentMaxCapacityByStampTaskRequest,
+) (*VerifyInventoryCurrentMaxCapacityByStampTaskResult, error) {
+	callback := make(chan VerifyInventoryCurrentMaxCapacityByStampTaskAsyncResult, 1)
+	go p.VerifyInventoryCurrentMaxCapacityByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func addCapacityByStampSheetAsyncHandler(
 	client Gs2InventoryRestClient,
 	job *core.NetworkJob,
