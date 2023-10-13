@@ -886,6 +886,264 @@ func (p Gs2AdRewardWebSocketClient) CheckCleanUserDataByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2AdRewardWebSocketClient) prepareImportUserDataByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PrepareImportUserDataByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PrepareImportUserDataByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PrepareImportUserDataByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PrepareImportUserDataByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PrepareImportUserDataByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AdRewardWebSocketClient) PrepareImportUserDataByUserIdAsync(
+	request *PrepareImportUserDataByUserIdRequest,
+	callback chan<- PrepareImportUserDataByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ad_reward",
+			"component":   "namespace",
+			"function":    "prepareImportUserDataByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.prepareImportUserDataByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AdRewardWebSocketClient) PrepareImportUserDataByUserId(
+	request *PrepareImportUserDataByUserIdRequest,
+) (*PrepareImportUserDataByUserIdResult, error) {
+	callback := make(chan PrepareImportUserDataByUserIdAsyncResult, 1)
+	go p.PrepareImportUserDataByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2AdRewardWebSocketClient) importUserDataByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ImportUserDataByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ImportUserDataByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ImportUserDataByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ImportUserDataByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- ImportUserDataByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AdRewardWebSocketClient) ImportUserDataByUserIdAsync(
+	request *ImportUserDataByUserIdRequest,
+	callback chan<- ImportUserDataByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ad_reward",
+			"component":   "namespace",
+			"function":    "importUserDataByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.importUserDataByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AdRewardWebSocketClient) ImportUserDataByUserId(
+	request *ImportUserDataByUserIdRequest,
+) (*ImportUserDataByUserIdResult, error) {
+	callback := make(chan ImportUserDataByUserIdAsyncResult, 1)
+	go p.ImportUserDataByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2AdRewardWebSocketClient) checkImportUserDataByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- CheckImportUserDataByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CheckImportUserDataByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CheckImportUserDataByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CheckImportUserDataByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- CheckImportUserDataByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AdRewardWebSocketClient) CheckImportUserDataByUserIdAsync(
+	request *CheckImportUserDataByUserIdRequest,
+	callback chan<- CheckImportUserDataByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ad_reward",
+			"component":   "namespace",
+			"function":    "checkImportUserDataByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.checkImportUserDataByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AdRewardWebSocketClient) CheckImportUserDataByUserId(
+	request *CheckImportUserDataByUserIdRequest,
+) (*CheckImportUserDataByUserIdResult, error) {
+	callback := make(chan CheckImportUserDataByUserIdAsyncResult, 1)
+	go p.CheckImportUserDataByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2AdRewardWebSocketClient) getPointAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- GetPointAsyncResult,

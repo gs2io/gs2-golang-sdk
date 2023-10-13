@@ -942,6 +942,276 @@ func (p Gs2QuestRestClient) CheckCleanUserDataByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func prepareImportUserDataByUserIdAsyncHandler(
+	client Gs2QuestRestClient,
+	job *core.NetworkJob,
+	callback chan<- PrepareImportUserDataByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PrepareImportUserDataByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PrepareImportUserDataByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- PrepareImportUserDataByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PrepareImportUserDataByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- PrepareImportUserDataByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2QuestRestClient) PrepareImportUserDataByUserIdAsync(
+	request *PrepareImportUserDataByUserIdRequest,
+	callback chan<- PrepareImportUserDataByUserIdAsyncResult,
+) {
+	path := "/system/user/{userId}/import/prepare"
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go prepareImportUserDataByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2QuestRestClient) PrepareImportUserDataByUserId(
+	request *PrepareImportUserDataByUserIdRequest,
+) (*PrepareImportUserDataByUserIdResult, error) {
+	callback := make(chan PrepareImportUserDataByUserIdAsyncResult, 1)
+	go p.PrepareImportUserDataByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func importUserDataByUserIdAsyncHandler(
+	client Gs2QuestRestClient,
+	job *core.NetworkJob,
+	callback chan<- ImportUserDataByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ImportUserDataByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ImportUserDataByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- ImportUserDataByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ImportUserDataByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- ImportUserDataByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2QuestRestClient) ImportUserDataByUserIdAsync(
+	request *ImportUserDataByUserIdRequest,
+	callback chan<- ImportUserDataByUserIdAsyncResult,
+) {
+	path := "/system/user/{userId}/import"
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		bodies["uploadToken"] = *request.UploadToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go importUserDataByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2QuestRestClient) ImportUserDataByUserId(
+	request *ImportUserDataByUserIdRequest,
+) (*ImportUserDataByUserIdResult, error) {
+	callback := make(chan ImportUserDataByUserIdAsyncResult, 1)
+	go p.ImportUserDataByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func checkImportUserDataByUserIdAsyncHandler(
+	client Gs2QuestRestClient,
+	job *core.NetworkJob,
+	callback chan<- CheckImportUserDataByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CheckImportUserDataByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CheckImportUserDataByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- CheckImportUserDataByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CheckImportUserDataByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- CheckImportUserDataByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2QuestRestClient) CheckImportUserDataByUserIdAsync(
+	request *CheckImportUserDataByUserIdRequest,
+	callback chan<- CheckImportUserDataByUserIdAsyncResult,
+) {
+	path := "/system/user/{userId}/import"
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go checkImportUserDataByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("quest").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2QuestRestClient) CheckImportUserDataByUserId(
+	request *CheckImportUserDataByUserIdRequest,
+) (*CheckImportUserDataByUserIdResult, error) {
+	callback := make(chan CheckImportUserDataByUserIdAsyncResult, 1)
+	go p.CheckImportUserDataByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describeQuestGroupModelMastersAsyncHandler(
 	client Gs2QuestRestClient,
 	job *core.NetworkJob,

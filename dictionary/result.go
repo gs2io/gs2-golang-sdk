@@ -322,6 +322,97 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 	return &p
 }
 
+type PrepareImportUserDataByUserIdResult struct {
+	UploadToken *string `json:"uploadToken"`
+	UploadUrl   *string `json:"uploadUrl"`
+}
+
+type PrepareImportUserDataByUserIdAsyncResult struct {
+	result *PrepareImportUserDataByUserIdResult
+	err    error
+}
+
+func NewPrepareImportUserDataByUserIdResultFromJson(data string) PrepareImportUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareImportUserDataByUserIdResultFromDict(dict)
+}
+
+func NewPrepareImportUserDataByUserIdResultFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdResult {
+	return PrepareImportUserDataByUserIdResult{
+		UploadToken: core.CastString(data["uploadToken"]),
+		UploadUrl:   core.CastString(data["uploadUrl"]),
+	}
+}
+
+func (p PrepareImportUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+	}
+}
+
+func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByUserIdResult {
+	return &p
+}
+
+type ImportUserDataByUserIdResult struct {
+}
+
+type ImportUserDataByUserIdAsyncResult struct {
+	result *ImportUserDataByUserIdResult
+	err    error
+}
+
+func NewImportUserDataByUserIdResultFromJson(data string) ImportUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewImportUserDataByUserIdResultFromDict(dict)
+}
+
+func NewImportUserDataByUserIdResultFromDict(data map[string]interface{}) ImportUserDataByUserIdResult {
+	return ImportUserDataByUserIdResult{}
+}
+
+func (p ImportUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
+	return &p
+}
+
+type CheckImportUserDataByUserIdResult struct {
+	Url *string `json:"url"`
+}
+
+type CheckImportUserDataByUserIdAsyncResult struct {
+	result *CheckImportUserDataByUserIdResult
+	err    error
+}
+
+func NewCheckImportUserDataByUserIdResultFromJson(data string) CheckImportUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCheckImportUserDataByUserIdResultFromDict(dict)
+}
+
+func NewCheckImportUserDataByUserIdResultFromDict(data map[string]interface{}) CheckImportUserDataByUserIdResult {
+	return CheckImportUserDataByUserIdResult{
+		Url: core.CastString(data["url"]),
+	}
+}
+
+func (p CheckImportUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"url": p.Url,
+	}
+}
+
+func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserIdResult {
+	return &p
+}
+
 type DescribeEntryModelsResult struct {
 	Items []EntryModel `json:"items"`
 }

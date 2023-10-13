@@ -357,6 +357,99 @@ func (p CheckCleanUserDataByUserIdRequest) Pointer() *CheckCleanUserDataByUserId
 	return &p
 }
 
+type PrepareImportUserDataByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	UserId             *string `json:"userId"`
+}
+
+func NewPrepareImportUserDataByUserIdRequestFromJson(data string) PrepareImportUserDataByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareImportUserDataByUserIdRequestFromDict(dict)
+}
+
+func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
+	return PrepareImportUserDataByUserIdRequest{
+		UserId: core.CastString(data["userId"]),
+	}
+}
+
+func (p PrepareImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId": p.UserId,
+	}
+}
+
+func (p PrepareImportUserDataByUserIdRequest) Pointer() *PrepareImportUserDataByUserIdRequest {
+	return &p
+}
+
+type ImportUserDataByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	UserId             *string `json:"userId"`
+	UploadToken        *string `json:"uploadToken"`
+}
+
+func NewImportUserDataByUserIdRequestFromJson(data string) ImportUserDataByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewImportUserDataByUserIdRequestFromDict(dict)
+}
+
+func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
+	return ImportUserDataByUserIdRequest{
+		UserId:      core.CastString(data["userId"]),
+		UploadToken: core.CastString(data["uploadToken"]),
+	}
+}
+
+func (p ImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId":      p.UserId,
+		"uploadToken": p.UploadToken,
+	}
+}
+
+func (p ImportUserDataByUserIdRequest) Pointer() *ImportUserDataByUserIdRequest {
+	return &p
+}
+
+type CheckImportUserDataByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	UserId             *string `json:"userId"`
+	UploadToken        *string `json:"uploadToken"`
+}
+
+func NewCheckImportUserDataByUserIdRequestFromJson(data string) CheckImportUserDataByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCheckImportUserDataByUserIdRequestFromDict(dict)
+}
+
+func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
+	return CheckImportUserDataByUserIdRequest{
+		UserId:      core.CastString(data["userId"]),
+		UploadToken: core.CastString(data["uploadToken"]),
+	}
+}
+
+func (p CheckImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId":      p.UserId,
+		"uploadToken": p.UploadToken,
+	}
+}
+
+func (p CheckImportUserDataByUserIdRequest) Pointer() *CheckImportUserDataByUserIdRequest {
+	return &p
+}
+
 type DescribeExperienceModelMastersRequest struct {
 	RequestId     *string `json:"requestId"`
 	ContextStack  *string `json:"contextStack"`
