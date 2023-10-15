@@ -1164,11 +1164,16 @@ func (p Gs2EnhanceRestClient) CheckImportUserDataByUserIdAsync(
 	request *CheckImportUserDataByUserIdRequest,
 	callback chan<- CheckImportUserDataByUserIdAsyncResult,
 ) {
-	path := "/system/user/{userId}/import"
+	path := "/system/user/{userId}/import/{uploadToken}"
 	if request.UserId != nil && *request.UserId != "" {
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
 		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.UploadToken != nil && *request.UploadToken != "" {
+		path = strings.ReplaceAll(path, "{uploadToken}", core.ToString(*request.UploadToken))
+	} else {
+		path = strings.ReplaceAll(path, "{uploadToken}", "null")
 	}
 
 	replacer := strings.NewReplacer()
