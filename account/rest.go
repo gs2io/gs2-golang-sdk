@@ -630,7 +630,7 @@ func (p Gs2AccountRestClient) DumpUserDataByUserIdAsync(
 	request *DumpUserDataByUserIdRequest,
 	callback chan<- DumpUserDataByUserIdAsyncResult,
 ) {
-	path := "/system/user/{userId}/dump"
+	path := "/system/dump/user/{userId}"
 	if request.UserId != nil && *request.UserId != "" {
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
@@ -720,7 +720,7 @@ func (p Gs2AccountRestClient) CheckDumpUserDataByUserIdAsync(
 	request *CheckDumpUserDataByUserIdRequest,
 	callback chan<- CheckDumpUserDataByUserIdAsyncResult,
 ) {
-	path := "/system/user/{userId}/dump"
+	path := "/system/dump/user/{userId}"
 	if request.UserId != nil && *request.UserId != "" {
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
@@ -807,7 +807,7 @@ func (p Gs2AccountRestClient) CleanUserDataByUserIdAsync(
 	request *CleanUserDataByUserIdRequest,
 	callback chan<- CleanUserDataByUserIdAsyncResult,
 ) {
-	path := "/system/user/{userId}/clean"
+	path := "/system/clean/user/{userId}"
 	if request.UserId != nil && *request.UserId != "" {
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
@@ -897,7 +897,7 @@ func (p Gs2AccountRestClient) CheckCleanUserDataByUserIdAsync(
 	request *CheckCleanUserDataByUserIdRequest,
 	callback chan<- CheckCleanUserDataByUserIdAsyncResult,
 ) {
-	path := "/system/user/{userId}/clean"
+	path := "/system/clean/user/{userId}"
 	if request.UserId != nil && *request.UserId != "" {
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
@@ -984,7 +984,7 @@ func (p Gs2AccountRestClient) PrepareImportUserDataByUserIdAsync(
 	request *PrepareImportUserDataByUserIdRequest,
 	callback chan<- PrepareImportUserDataByUserIdAsyncResult,
 ) {
-	path := "/system/user/{userId}/import/prepare"
+	path := "/system/import/user/{userId}/prepare"
 	if request.UserId != nil && *request.UserId != "" {
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
@@ -1074,7 +1074,7 @@ func (p Gs2AccountRestClient) ImportUserDataByUserIdAsync(
 	request *ImportUserDataByUserIdRequest,
 	callback chan<- ImportUserDataByUserIdAsyncResult,
 ) {
-	path := "/system/user/{userId}/import"
+	path := "/system/import/user/{userId}"
 	if request.UserId != nil && *request.UserId != "" {
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
@@ -1167,7 +1167,7 @@ func (p Gs2AccountRestClient) CheckImportUserDataByUserIdAsync(
 	request *CheckImportUserDataByUserIdRequest,
 	callback chan<- CheckImportUserDataByUserIdAsyncResult,
 ) {
-	path := "/system/user/{userId}/import/{uploadToken}"
+	path := "/system/import/user/{userId}/{uploadToken}"
 	if request.UserId != nil && *request.UserId != "" {
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
