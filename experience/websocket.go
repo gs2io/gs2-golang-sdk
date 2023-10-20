@@ -177,8 +177,8 @@ func (p Gs2ExperienceWebSocketClient) CreateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
-	if request.ExperienceCapScriptId != nil && *request.ExperienceCapScriptId != "" {
-		bodies["experienceCapScriptId"] = *request.ExperienceCapScriptId
+	if request.RankCapScriptId != nil && *request.RankCapScriptId != "" {
+		bodies["rankCapScriptId"] = *request.RankCapScriptId
 	}
 	if request.ChangeExperienceScript != nil {
 		bodies["changeExperienceScript"] = request.ChangeExperienceScript.ToDict()
@@ -444,8 +444,8 @@ func (p Gs2ExperienceWebSocketClient) UpdateNamespaceAsync(
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
-	if request.ExperienceCapScriptId != nil && *request.ExperienceCapScriptId != "" {
-		bodies["experienceCapScriptId"] = *request.ExperienceCapScriptId
+	if request.RankCapScriptId != nil && *request.RankCapScriptId != "" {
+		bodies["rankCapScriptId"] = *request.RankCapScriptId
 	}
 	if request.ChangeExperienceScript != nil {
 		bodies["changeExperienceScript"] = request.ChangeExperienceScript.ToDict()

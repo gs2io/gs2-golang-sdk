@@ -59,7 +59,7 @@ type CreateNamespaceRequest struct {
 	Name                     *string             `json:"name"`
 	Description              *string             `json:"description"`
 	TransactionSetting       *TransactionSetting `json:"transactionSetting"`
-	ExperienceCapScriptId    *string             `json:"experienceCapScriptId"`
+	RankCapScriptId          *string             `json:"rankCapScriptId"`
 	ChangeExperienceScript   *ScriptSetting      `json:"changeExperienceScript"`
 	ChangeRankScript         *ScriptSetting      `json:"changeRankScript"`
 	ChangeRankCapScript      *ScriptSetting      `json:"changeRankCapScript"`
@@ -78,7 +78,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 		Name:                     core.CastString(data["name"]),
 		Description:              core.CastString(data["description"]),
 		TransactionSetting:       NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		ExperienceCapScriptId:    core.CastString(data["experienceCapScriptId"]),
+		RankCapScriptId:          core.CastString(data["rankCapScriptId"]),
 		ChangeExperienceScript:   NewScriptSettingFromDict(core.CastMap(data["changeExperienceScript"])).Pointer(),
 		ChangeRankScript:         NewScriptSettingFromDict(core.CastMap(data["changeRankScript"])).Pointer(),
 		ChangeRankCapScript:      NewScriptSettingFromDict(core.CastMap(data["changeRankCapScript"])).Pointer(),
@@ -92,7 +92,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"name":                     p.Name,
 		"description":              p.Description,
 		"transactionSetting":       p.TransactionSetting.ToDict(),
-		"experienceCapScriptId":    p.ExperienceCapScriptId,
+		"rankCapScriptId":          p.RankCapScriptId,
 		"changeExperienceScript":   p.ChangeExperienceScript.ToDict(),
 		"changeRankScript":         p.ChangeRankScript.ToDict(),
 		"changeRankCapScript":      p.ChangeRankCapScript.ToDict(),
@@ -167,7 +167,7 @@ type UpdateNamespaceRequest struct {
 	NamespaceName            *string             `json:"namespaceName"`
 	Description              *string             `json:"description"`
 	TransactionSetting       *TransactionSetting `json:"transactionSetting"`
-	ExperienceCapScriptId    *string             `json:"experienceCapScriptId"`
+	RankCapScriptId          *string             `json:"rankCapScriptId"`
 	ChangeExperienceScript   *ScriptSetting      `json:"changeExperienceScript"`
 	ChangeRankScript         *ScriptSetting      `json:"changeRankScript"`
 	ChangeRankCapScript      *ScriptSetting      `json:"changeRankCapScript"`
@@ -186,7 +186,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 		NamespaceName:            core.CastString(data["namespaceName"]),
 		Description:              core.CastString(data["description"]),
 		TransactionSetting:       NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		ExperienceCapScriptId:    core.CastString(data["experienceCapScriptId"]),
+		RankCapScriptId:          core.CastString(data["rankCapScriptId"]),
 		ChangeExperienceScript:   NewScriptSettingFromDict(core.CastMap(data["changeExperienceScript"])).Pointer(),
 		ChangeRankScript:         NewScriptSettingFromDict(core.CastMap(data["changeRankScript"])).Pointer(),
 		ChangeRankCapScript:      NewScriptSettingFromDict(core.CastMap(data["changeRankCapScript"])).Pointer(),
@@ -200,7 +200,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"namespaceName":            p.NamespaceName,
 		"description":              p.Description,
 		"transactionSetting":       p.TransactionSetting.ToDict(),
-		"experienceCapScriptId":    p.ExperienceCapScriptId,
+		"rankCapScriptId":          p.RankCapScriptId,
 		"changeExperienceScript":   p.ChangeExperienceScript.ToDict(),
 		"changeRankScript":         p.ChangeRankScript.ToDict(),
 		"changeRankCapScript":      p.ChangeRankCapScript.ToDict(),

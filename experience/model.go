@@ -27,7 +27,7 @@ type Namespace struct {
 	Name                     *string             `json:"name"`
 	Description              *string             `json:"description"`
 	TransactionSetting       *TransactionSetting `json:"transactionSetting"`
-	ExperienceCapScriptId    *string             `json:"experienceCapScriptId"`
+	RankCapScriptId          *string             `json:"rankCapScriptId"`
 	ChangeExperienceScript   *ScriptSetting      `json:"changeExperienceScript"`
 	ChangeRankScript         *ScriptSetting      `json:"changeRankScript"`
 	ChangeRankCapScript      *ScriptSetting      `json:"changeRankCapScript"`
@@ -50,7 +50,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 		Name:                     core.CastString(data["name"]),
 		Description:              core.CastString(data["description"]),
 		TransactionSetting:       NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		ExperienceCapScriptId:    core.CastString(data["experienceCapScriptId"]),
+		RankCapScriptId:          core.CastString(data["rankCapScriptId"]),
 		ChangeExperienceScript:   NewScriptSettingFromDict(core.CastMap(data["changeExperienceScript"])).Pointer(),
 		ChangeRankScript:         NewScriptSettingFromDict(core.CastMap(data["changeRankScript"])).Pointer(),
 		ChangeRankCapScript:      NewScriptSettingFromDict(core.CastMap(data["changeRankCapScript"])).Pointer(),
@@ -80,9 +80,9 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.TransactionSetting != nil {
 		transactionSetting = p.TransactionSetting.ToDict()
 	}
-	var experienceCapScriptId *string
-	if p.ExperienceCapScriptId != nil {
-		experienceCapScriptId = p.ExperienceCapScriptId
+	var rankCapScriptId *string
+	if p.RankCapScriptId != nil {
+		rankCapScriptId = p.RankCapScriptId
 	}
 	var changeExperienceScript map[string]interface{}
 	if p.ChangeExperienceScript != nil {
@@ -121,7 +121,7 @@ func (p Namespace) ToDict() map[string]interface{} {
 		"name":                     name,
 		"description":              description,
 		"transactionSetting":       transactionSetting,
-		"experienceCapScriptId":    experienceCapScriptId,
+		"rankCapScriptId":          rankCapScriptId,
 		"changeExperienceScript":   changeExperienceScript,
 		"changeRankScript":         changeRankScript,
 		"changeRankCapScript":      changeRankCapScript,
