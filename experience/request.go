@@ -63,7 +63,7 @@ type CreateNamespaceRequest struct {
 	ChangeExperienceScript   *ScriptSetting      `json:"changeExperienceScript"`
 	ChangeRankScript         *ScriptSetting      `json:"changeRankScript"`
 	ChangeRankCapScript      *ScriptSetting      `json:"changeRankCapScript"`
-	OverflowExperienceScript *ScriptSetting      `json:"overflowExperienceScript"`
+	OverflowExperienceScript *string             `json:"overflowExperienceScript"`
 	LogSetting               *LogSetting         `json:"logSetting"`
 }
 
@@ -82,7 +82,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 		ChangeExperienceScript:   NewScriptSettingFromDict(core.CastMap(data["changeExperienceScript"])).Pointer(),
 		ChangeRankScript:         NewScriptSettingFromDict(core.CastMap(data["changeRankScript"])).Pointer(),
 		ChangeRankCapScript:      NewScriptSettingFromDict(core.CastMap(data["changeRankCapScript"])).Pointer(),
-		OverflowExperienceScript: NewScriptSettingFromDict(core.CastMap(data["overflowExperienceScript"])).Pointer(),
+		OverflowExperienceScript: core.CastString(data["overflowExperienceScript"]),
 		LogSetting:               NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
@@ -96,7 +96,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"changeExperienceScript":   p.ChangeExperienceScript.ToDict(),
 		"changeRankScript":         p.ChangeRankScript.ToDict(),
 		"changeRankCapScript":      p.ChangeRankCapScript.ToDict(),
-		"overflowExperienceScript": p.OverflowExperienceScript.ToDict(),
+		"overflowExperienceScript": p.OverflowExperienceScript,
 		"logSetting":               p.LogSetting.ToDict(),
 	}
 }
@@ -171,7 +171,7 @@ type UpdateNamespaceRequest struct {
 	ChangeExperienceScript   *ScriptSetting      `json:"changeExperienceScript"`
 	ChangeRankScript         *ScriptSetting      `json:"changeRankScript"`
 	ChangeRankCapScript      *ScriptSetting      `json:"changeRankCapScript"`
-	OverflowExperienceScript *ScriptSetting      `json:"overflowExperienceScript"`
+	OverflowExperienceScript *string             `json:"overflowExperienceScript"`
 	LogSetting               *LogSetting         `json:"logSetting"`
 }
 
@@ -190,7 +190,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 		ChangeExperienceScript:   NewScriptSettingFromDict(core.CastMap(data["changeExperienceScript"])).Pointer(),
 		ChangeRankScript:         NewScriptSettingFromDict(core.CastMap(data["changeRankScript"])).Pointer(),
 		ChangeRankCapScript:      NewScriptSettingFromDict(core.CastMap(data["changeRankCapScript"])).Pointer(),
-		OverflowExperienceScript: NewScriptSettingFromDict(core.CastMap(data["overflowExperienceScript"])).Pointer(),
+		OverflowExperienceScript: core.CastString(data["overflowExperienceScript"]),
 		LogSetting:               NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
@@ -204,7 +204,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"changeExperienceScript":   p.ChangeExperienceScript.ToDict(),
 		"changeRankScript":         p.ChangeRankScript.ToDict(),
 		"changeRankCapScript":      p.ChangeRankCapScript.ToDict(),
-		"overflowExperienceScript": p.OverflowExperienceScript.ToDict(),
+		"overflowExperienceScript": p.OverflowExperienceScript,
 		"logSetting":               p.LogSetting.ToDict(),
 	}
 }

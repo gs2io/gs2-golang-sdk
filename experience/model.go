@@ -31,7 +31,7 @@ type Namespace struct {
 	ChangeExperienceScript   *ScriptSetting      `json:"changeExperienceScript"`
 	ChangeRankScript         *ScriptSetting      `json:"changeRankScript"`
 	ChangeRankCapScript      *ScriptSetting      `json:"changeRankCapScript"`
-	OverflowExperienceScript *ScriptSetting      `json:"overflowExperienceScript"`
+	OverflowExperienceScript *string             `json:"overflowExperienceScript"`
 	LogSetting               *LogSetting         `json:"logSetting"`
 	CreatedAt                *int64              `json:"createdAt"`
 	UpdatedAt                *int64              `json:"updatedAt"`
@@ -54,7 +54,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 		ChangeExperienceScript:   NewScriptSettingFromDict(core.CastMap(data["changeExperienceScript"])).Pointer(),
 		ChangeRankScript:         NewScriptSettingFromDict(core.CastMap(data["changeRankScript"])).Pointer(),
 		ChangeRankCapScript:      NewScriptSettingFromDict(core.CastMap(data["changeRankCapScript"])).Pointer(),
-		OverflowExperienceScript: NewScriptSettingFromDict(core.CastMap(data["overflowExperienceScript"])).Pointer(),
+		OverflowExperienceScript: core.CastString(data["overflowExperienceScript"]),
 		LogSetting:               NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 		CreatedAt:                core.CastInt64(data["createdAt"]),
 		UpdatedAt:                core.CastInt64(data["updatedAt"]),
@@ -96,9 +96,9 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.ChangeRankCapScript != nil {
 		changeRankCapScript = p.ChangeRankCapScript.ToDict()
 	}
-	var overflowExperienceScript map[string]interface{}
+	var overflowExperienceScript *string
 	if p.OverflowExperienceScript != nil {
-		overflowExperienceScript = p.OverflowExperienceScript.ToDict()
+		overflowExperienceScript = p.OverflowExperienceScript
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {

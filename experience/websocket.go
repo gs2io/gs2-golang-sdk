@@ -189,8 +189,8 @@ func (p Gs2ExperienceWebSocketClient) CreateNamespaceAsync(
 	if request.ChangeRankCapScript != nil {
 		bodies["changeRankCapScript"] = request.ChangeRankCapScript.ToDict()
 	}
-	if request.OverflowExperienceScript != nil {
-		bodies["overflowExperienceScript"] = request.OverflowExperienceScript.ToDict()
+	if request.OverflowExperienceScript != nil && *request.OverflowExperienceScript != "" {
+		bodies["overflowExperienceScript"] = *request.OverflowExperienceScript
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
@@ -456,8 +456,8 @@ func (p Gs2ExperienceWebSocketClient) UpdateNamespaceAsync(
 	if request.ChangeRankCapScript != nil {
 		bodies["changeRankCapScript"] = request.ChangeRankCapScript.ToDict()
 	}
-	if request.OverflowExperienceScript != nil {
-		bodies["overflowExperienceScript"] = request.OverflowExperienceScript.ToDict()
+	if request.OverflowExperienceScript != nil && *request.OverflowExperienceScript != "" {
+		bodies["overflowExperienceScript"] = *request.OverflowExperienceScript
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
