@@ -532,8 +532,10 @@ func CastThresholdsFromDict(data []Threshold) []interface{} {
 }
 
 type AcquireActionRate struct {
-	Name  *string    `json:"name"`
-	Rates []*float64 `json:"rates"`
+	Name     *string    `json:"name"`
+	Mode     *string    `json:"mode"`
+	Rates    []*float64 `json:"rates"`
+	BigRates []*string  `json:"bigRates"`
 }
 
 func NewAcquireActionRateFromJson(data string) AcquireActionRate {
@@ -544,8 +546,10 @@ func NewAcquireActionRateFromJson(data string) AcquireActionRate {
 
 func NewAcquireActionRateFromDict(data map[string]interface{}) AcquireActionRate {
 	return AcquireActionRate{
-		Name:  core.CastString(data["name"]),
-		Rates: core.CastFloat64s(core.CastArray(data["rates"])),
+		Name:     core.CastString(data["name"]),
+		Mode:     core.CastString(data["mode"]),
+		Rates:    core.CastFloat64s(core.CastArray(data["rates"])),
+		BigRates: core.CastStrings(core.CastArray(data["bigRates"])),
 	}
 }
 
@@ -555,15 +559,27 @@ func (p AcquireActionRate) ToDict() map[string]interface{} {
 	if p.Name != nil {
 		name = p.Name
 	}
+	var mode *string
+	if p.Mode != nil {
+		mode = p.Mode
+	}
 	var rates []interface{}
 	if p.Rates != nil {
 		rates = core.CastFloat64sFromDict(
 			p.Rates,
 		)
 	}
+	var bigRates []interface{}
+	if p.BigRates != nil {
+		bigRates = core.CastStringsFromDict(
+			p.BigRates,
+		)
+	}
 	return map[string]interface{}{
-		"name":  name,
-		"rates": rates,
+		"name":     name,
+		"mode":     mode,
+		"rates":    rates,
+		"bigRates": bigRates,
 	}
 }
 
