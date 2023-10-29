@@ -438,6 +438,7 @@ func (p DeleteScriptResult) Pointer() *DeleteScriptResult {
 type InvokeScriptResult struct {
 	Code        *int32    `json:"code"`
 	Result      *string   `json:"result"`
+	Transaction *string   `json:"transaction"`
 	ExecuteTime *int32    `json:"executeTime"`
 	Charged     *int32    `json:"charged"`
 	Output      []*string `json:"output"`
@@ -458,6 +459,7 @@ func NewInvokeScriptResultFromDict(data map[string]interface{}) InvokeScriptResu
 	return InvokeScriptResult{
 		Code:        core.CastInt32(data["code"]),
 		Result:      core.CastString(data["result"]),
+		Transaction: core.CastString(data["transaction"]),
 		ExecuteTime: core.CastInt32(data["executeTime"]),
 		Charged:     core.CastInt32(data["charged"]),
 		Output:      core.CastStrings(core.CastArray(data["output"])),
@@ -468,6 +470,7 @@ func (p InvokeScriptResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"code":        p.Code,
 		"result":      p.Result,
+		"transaction": p.Transaction,
 		"executeTime": p.ExecuteTime,
 		"charged":     p.Charged,
 		"output": core.CastStringsFromDict(
@@ -483,6 +486,7 @@ func (p InvokeScriptResult) Pointer() *InvokeScriptResult {
 type DebugInvokeResult struct {
 	Code        *int32    `json:"code"`
 	Result      *string   `json:"result"`
+	Transaction *string   `json:"transaction"`
 	ExecuteTime *int32    `json:"executeTime"`
 	Charged     *int32    `json:"charged"`
 	Output      []*string `json:"output"`
@@ -503,6 +507,7 @@ func NewDebugInvokeResultFromDict(data map[string]interface{}) DebugInvokeResult
 	return DebugInvokeResult{
 		Code:        core.CastInt32(data["code"]),
 		Result:      core.CastString(data["result"]),
+		Transaction: core.CastString(data["transaction"]),
 		ExecuteTime: core.CastInt32(data["executeTime"]),
 		Charged:     core.CastInt32(data["charged"]),
 		Output:      core.CastStrings(core.CastArray(data["output"])),
@@ -513,6 +518,7 @@ func (p DebugInvokeResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"code":        p.Code,
 		"result":      p.Result,
+		"transaction": p.Transaction,
 		"executeTime": p.ExecuteTime,
 		"charged":     p.Charged,
 		"output": core.CastStringsFromDict(
