@@ -335,3 +335,113 @@ func CastLogSettingsFromDict(data []LogSetting) []interface{} {
 	}
 	return v
 }
+
+type RandomStatus struct {
+	Seed *int64       `json:"seed"`
+	Used []RandomUsed `json:"used"`
+}
+
+func NewRandomStatusFromJson(data string) RandomStatus {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRandomStatusFromDict(dict)
+}
+
+func NewRandomStatusFromDict(data map[string]interface{}) RandomStatus {
+	return RandomStatus{
+		Seed: core.CastInt64(data["seed"]),
+		Used: CastRandomUseds(core.CastArray(data["used"])),
+	}
+}
+
+func (p RandomStatus) ToDict() map[string]interface{} {
+
+	var seed *int64
+	if p.Seed != nil {
+		seed = p.Seed
+	}
+	var used []interface{}
+	if p.Used != nil {
+		used = CastRandomUsedsFromDict(
+			p.Used,
+		)
+	}
+	return map[string]interface{}{
+		"seed": seed,
+		"used": used,
+	}
+}
+
+func (p RandomStatus) Pointer() *RandomStatus {
+	return &p
+}
+
+func CastRandomStatuses(data []interface{}) []RandomStatus {
+	v := make([]RandomStatus, 0)
+	for _, d := range data {
+		v = append(v, NewRandomStatusFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRandomStatusesFromDict(data []RandomStatus) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type RandomUsed struct {
+	Category *int64 `json:"category"`
+	Used     *int64 `json:"used"`
+}
+
+func NewRandomUsedFromJson(data string) RandomUsed {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRandomUsedFromDict(dict)
+}
+
+func NewRandomUsedFromDict(data map[string]interface{}) RandomUsed {
+	return RandomUsed{
+		Category: core.CastInt64(data["category"]),
+		Used:     core.CastInt64(data["used"]),
+	}
+}
+
+func (p RandomUsed) ToDict() map[string]interface{} {
+
+	var category *int64
+	if p.Category != nil {
+		category = p.Category
+	}
+	var used *int64
+	if p.Used != nil {
+		used = p.Used
+	}
+	return map[string]interface{}{
+		"category": category,
+		"used":     used,
+	}
+}
+
+func (p RandomUsed) Pointer() *RandomUsed {
+	return &p
+}
+
+func CastRandomUseds(data []interface{}) []RandomUsed {
+	v := make([]RandomUsed, 0)
+	for _, d := range data {
+		v = append(v, NewRandomUsedFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRandomUsedsFromDict(data []RandomUsed) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}

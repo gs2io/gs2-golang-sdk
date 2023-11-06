@@ -1209,6 +1209,9 @@ func (p Gs2ScriptWebSocketClient) InvokeScriptAsync(
 	if request.Args != nil && *request.Args != "" {
 		bodies["args"] = *request.Args
 	}
+	if request.RandomStatus != nil {
+		bodies["randomStatus"] = request.RandomStatus.ToDict()
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1292,6 +1295,9 @@ func (p Gs2ScriptWebSocketClient) DebugInvokeAsync(
 	}
 	if request.Args != nil && *request.Args != "" {
 		bodies["args"] = *request.Args
+	}
+	if request.RandomStatus != nil {
+		bodies["randomStatus"] = request.RandomStatus.ToDict()
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

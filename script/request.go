@@ -450,11 +450,12 @@ func (p DeleteScriptRequest) Pointer() *DeleteScriptRequest {
 }
 
 type InvokeScriptRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	ScriptId     *string `json:"scriptId"`
-	UserId       *string `json:"userId"`
-	Args         *string `json:"args"`
+	RequestId    *string       `json:"requestId"`
+	ContextStack *string       `json:"contextStack"`
+	ScriptId     *string       `json:"scriptId"`
+	UserId       *string       `json:"userId"`
+	Args         *string       `json:"args"`
+	RandomStatus *RandomStatus `json:"randomStatus"`
 }
 
 func NewInvokeScriptRequestFromJson(data string) InvokeScriptRequest {
@@ -465,17 +466,19 @@ func NewInvokeScriptRequestFromJson(data string) InvokeScriptRequest {
 
 func NewInvokeScriptRequestFromDict(data map[string]interface{}) InvokeScriptRequest {
 	return InvokeScriptRequest{
-		ScriptId: core.CastString(data["scriptId"]),
-		UserId:   core.CastString(data["userId"]),
-		Args:     core.CastString(data["args"]),
+		ScriptId:     core.CastString(data["scriptId"]),
+		UserId:       core.CastString(data["userId"]),
+		Args:         core.CastString(data["args"]),
+		RandomStatus: NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
 	}
 }
 
 func (p InvokeScriptRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"scriptId": p.ScriptId,
-		"userId":   p.UserId,
-		"args":     p.Args,
+		"scriptId":     p.ScriptId,
+		"userId":       p.UserId,
+		"args":         p.Args,
+		"randomStatus": p.RandomStatus.ToDict(),
 	}
 }
 
@@ -484,10 +487,11 @@ func (p InvokeScriptRequest) Pointer() *InvokeScriptRequest {
 }
 
 type DebugInvokeRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	Script       *string `json:"script"`
-	Args         *string `json:"args"`
+	RequestId    *string       `json:"requestId"`
+	ContextStack *string       `json:"contextStack"`
+	Script       *string       `json:"script"`
+	Args         *string       `json:"args"`
+	RandomStatus *RandomStatus `json:"randomStatus"`
 }
 
 func NewDebugInvokeRequestFromJson(data string) DebugInvokeRequest {
@@ -498,15 +502,17 @@ func NewDebugInvokeRequestFromJson(data string) DebugInvokeRequest {
 
 func NewDebugInvokeRequestFromDict(data map[string]interface{}) DebugInvokeRequest {
 	return DebugInvokeRequest{
-		Script: core.CastString(data["script"]),
-		Args:   core.CastString(data["args"]),
+		Script:       core.CastString(data["script"]),
+		Args:         core.CastString(data["args"]),
+		RandomStatus: NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
 	}
 }
 
 func (p DebugInvokeRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"script": p.Script,
-		"args":   p.Args,
+		"script":       p.Script,
+		"args":         p.Args,
+		"randomStatus": p.RandomStatus.ToDict(),
 	}
 }
 
