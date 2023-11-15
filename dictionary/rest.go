@@ -174,8 +174,8 @@ func (p Gs2DictionaryRestClient) CreateNamespaceAsync(
 	if request.EntryScript != nil {
 		bodies["entryScript"] = request.EntryScript.ToDict()
 	}
-	if request.DuplicateEntryScript != nil {
-		bodies["duplicateEntryScript"] = request.DuplicateEntryScript.ToDict()
+	if request.DuplicateEntryScript != nil && *request.DuplicateEntryScript != "" {
+		bodies["duplicateEntryScript"] = *request.DuplicateEntryScript
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
@@ -441,8 +441,8 @@ func (p Gs2DictionaryRestClient) UpdateNamespaceAsync(
 	if request.EntryScript != nil {
 		bodies["entryScript"] = request.EntryScript.ToDict()
 	}
-	if request.DuplicateEntryScript != nil {
-		bodies["duplicateEntryScript"] = request.DuplicateEntryScript.ToDict()
+	if request.DuplicateEntryScript != nil && *request.DuplicateEntryScript != "" {
+		bodies["duplicateEntryScript"] = *request.DuplicateEntryScript
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()

@@ -59,7 +59,7 @@ type CreateNamespaceRequest struct {
 	Name                 *string        `json:"name"`
 	Description          *string        `json:"description"`
 	EntryScript          *ScriptSetting `json:"entryScript"`
-	DuplicateEntryScript *ScriptSetting `json:"duplicateEntryScript"`
+	DuplicateEntryScript *string        `json:"duplicateEntryScript"`
 	LogSetting           *LogSetting    `json:"logSetting"`
 }
 
@@ -74,7 +74,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 		Name:                 core.CastString(data["name"]),
 		Description:          core.CastString(data["description"]),
 		EntryScript:          NewScriptSettingFromDict(core.CastMap(data["entryScript"])).Pointer(),
-		DuplicateEntryScript: NewScriptSettingFromDict(core.CastMap(data["duplicateEntryScript"])).Pointer(),
+		DuplicateEntryScript: core.CastString(data["duplicateEntryScript"]),
 		LogSetting:           NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
@@ -84,7 +84,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"name":                 p.Name,
 		"description":          p.Description,
 		"entryScript":          p.EntryScript.ToDict(),
-		"duplicateEntryScript": p.DuplicateEntryScript.ToDict(),
+		"duplicateEntryScript": p.DuplicateEntryScript,
 		"logSetting":           p.LogSetting.ToDict(),
 	}
 }
@@ -155,7 +155,7 @@ type UpdateNamespaceRequest struct {
 	NamespaceName        *string        `json:"namespaceName"`
 	Description          *string        `json:"description"`
 	EntryScript          *ScriptSetting `json:"entryScript"`
-	DuplicateEntryScript *ScriptSetting `json:"duplicateEntryScript"`
+	DuplicateEntryScript *string        `json:"duplicateEntryScript"`
 	LogSetting           *LogSetting    `json:"logSetting"`
 }
 
@@ -170,7 +170,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 		NamespaceName:        core.CastString(data["namespaceName"]),
 		Description:          core.CastString(data["description"]),
 		EntryScript:          NewScriptSettingFromDict(core.CastMap(data["entryScript"])).Pointer(),
-		DuplicateEntryScript: NewScriptSettingFromDict(core.CastMap(data["duplicateEntryScript"])).Pointer(),
+		DuplicateEntryScript: core.CastString(data["duplicateEntryScript"]),
 		LogSetting:           NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
@@ -180,7 +180,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"namespaceName":        p.NamespaceName,
 		"description":          p.Description,
 		"entryScript":          p.EntryScript.ToDict(),
-		"duplicateEntryScript": p.DuplicateEntryScript.ToDict(),
+		"duplicateEntryScript": p.DuplicateEntryScript,
 		"logSetting":           p.LogSetting.ToDict(),
 	}
 }

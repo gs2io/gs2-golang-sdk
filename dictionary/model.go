@@ -27,7 +27,7 @@ type Namespace struct {
 	Name                 *string        `json:"name"`
 	Description          *string        `json:"description"`
 	EntryScript          *ScriptSetting `json:"entryScript"`
-	DuplicateEntryScript *ScriptSetting `json:"duplicateEntryScript"`
+	DuplicateEntryScript *string        `json:"duplicateEntryScript"`
 	LogSetting           *LogSetting    `json:"logSetting"`
 	CreatedAt            *int64         `json:"createdAt"`
 	UpdatedAt            *int64         `json:"updatedAt"`
@@ -46,7 +46,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 		Name:                 core.CastString(data["name"]),
 		Description:          core.CastString(data["description"]),
 		EntryScript:          NewScriptSettingFromDict(core.CastMap(data["entryScript"])).Pointer(),
-		DuplicateEntryScript: NewScriptSettingFromDict(core.CastMap(data["duplicateEntryScript"])).Pointer(),
+		DuplicateEntryScript: core.CastString(data["duplicateEntryScript"]),
 		LogSetting:           NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 		CreatedAt:            core.CastInt64(data["createdAt"]),
 		UpdatedAt:            core.CastInt64(data["updatedAt"]),
@@ -72,9 +72,9 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.EntryScript != nil {
 		entryScript = p.EntryScript.ToDict()
 	}
-	var duplicateEntryScript map[string]interface{}
+	var duplicateEntryScript *string
 	if p.DuplicateEntryScript != nil {
-		duplicateEntryScript = p.DuplicateEntryScript.ToDict()
+		duplicateEntryScript = p.DuplicateEntryScript
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {

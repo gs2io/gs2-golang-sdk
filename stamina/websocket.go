@@ -174,8 +174,8 @@ func (p Gs2StaminaWebSocketClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
-	if request.OverflowTriggerScript != nil {
-		bodies["overflowTriggerScript"] = request.OverflowTriggerScript.ToDict()
+	if request.OverflowTriggerScript != nil && *request.OverflowTriggerScript != "" {
+		bodies["overflowTriggerScript"] = *request.OverflowTriggerScript
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
@@ -426,8 +426,8 @@ func (p Gs2StaminaWebSocketClient) UpdateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
-	if request.OverflowTriggerScript != nil {
-		bodies["overflowTriggerScript"] = request.OverflowTriggerScript.ToDict()
+	if request.OverflowTriggerScript != nil && *request.OverflowTriggerScript != "" {
+		bodies["overflowTriggerScript"] = *request.OverflowTriggerScript
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()

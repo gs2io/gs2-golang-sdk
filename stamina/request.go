@@ -54,12 +54,12 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	RequestId             *string        `json:"requestId"`
-	ContextStack          *string        `json:"contextStack"`
-	Name                  *string        `json:"name"`
-	Description           *string        `json:"description"`
-	OverflowTriggerScript *ScriptSetting `json:"overflowTriggerScript"`
-	LogSetting            *LogSetting    `json:"logSetting"`
+	RequestId             *string     `json:"requestId"`
+	ContextStack          *string     `json:"contextStack"`
+	Name                  *string     `json:"name"`
+	Description           *string     `json:"description"`
+	OverflowTriggerScript *string     `json:"overflowTriggerScript"`
+	LogSetting            *LogSetting `json:"logSetting"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
@@ -72,7 +72,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 	return CreateNamespaceRequest{
 		Name:                  core.CastString(data["name"]),
 		Description:           core.CastString(data["description"]),
-		OverflowTriggerScript: NewScriptSettingFromDict(core.CastMap(data["overflowTriggerScript"])).Pointer(),
+		OverflowTriggerScript: core.CastString(data["overflowTriggerScript"]),
 		LogSetting:            NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
@@ -81,7 +81,7 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"name":                  p.Name,
 		"description":           p.Description,
-		"overflowTriggerScript": p.OverflowTriggerScript.ToDict(),
+		"overflowTriggerScript": p.OverflowTriggerScript,
 		"logSetting":            p.LogSetting.ToDict(),
 	}
 }
@@ -147,12 +147,12 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId             *string        `json:"requestId"`
-	ContextStack          *string        `json:"contextStack"`
-	NamespaceName         *string        `json:"namespaceName"`
-	Description           *string        `json:"description"`
-	OverflowTriggerScript *ScriptSetting `json:"overflowTriggerScript"`
-	LogSetting            *LogSetting    `json:"logSetting"`
+	RequestId             *string     `json:"requestId"`
+	ContextStack          *string     `json:"contextStack"`
+	NamespaceName         *string     `json:"namespaceName"`
+	Description           *string     `json:"description"`
+	OverflowTriggerScript *string     `json:"overflowTriggerScript"`
+	LogSetting            *LogSetting `json:"logSetting"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -165,7 +165,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 	return UpdateNamespaceRequest{
 		NamespaceName:         core.CastString(data["namespaceName"]),
 		Description:           core.CastString(data["description"]),
-		OverflowTriggerScript: NewScriptSettingFromDict(core.CastMap(data["overflowTriggerScript"])).Pointer(),
+		OverflowTriggerScript: core.CastString(data["overflowTriggerScript"]),
 		LogSetting:            NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
@@ -174,7 +174,7 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName":         p.NamespaceName,
 		"description":           p.Description,
-		"overflowTriggerScript": p.OverflowTriggerScript.ToDict(),
+		"overflowTriggerScript": p.OverflowTriggerScript,
 		"logSetting":            p.LogSetting.ToDict(),
 	}
 }

@@ -23,14 +23,14 @@ import (
 )
 
 type Namespace struct {
-	NamespaceId           *string        `json:"namespaceId"`
-	Name                  *string        `json:"name"`
-	Description           *string        `json:"description"`
-	OverflowTriggerScript *ScriptSetting `json:"overflowTriggerScript"`
-	LogSetting            *LogSetting    `json:"logSetting"`
-	CreatedAt             *int64         `json:"createdAt"`
-	UpdatedAt             *int64         `json:"updatedAt"`
-	Revision              *int64         `json:"revision"`
+	NamespaceId           *string     `json:"namespaceId"`
+	Name                  *string     `json:"name"`
+	Description           *string     `json:"description"`
+	OverflowTriggerScript *string     `json:"overflowTriggerScript"`
+	LogSetting            *LogSetting `json:"logSetting"`
+	CreatedAt             *int64      `json:"createdAt"`
+	UpdatedAt             *int64      `json:"updatedAt"`
+	Revision              *int64      `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -44,7 +44,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 		NamespaceId:           core.CastString(data["namespaceId"]),
 		Name:                  core.CastString(data["name"]),
 		Description:           core.CastString(data["description"]),
-		OverflowTriggerScript: NewScriptSettingFromDict(core.CastMap(data["overflowTriggerScript"])).Pointer(),
+		OverflowTriggerScript: core.CastString(data["overflowTriggerScript"]),
 		LogSetting:            NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 		CreatedAt:             core.CastInt64(data["createdAt"]),
 		UpdatedAt:             core.CastInt64(data["updatedAt"]),
@@ -66,9 +66,9 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.Description != nil {
 		description = p.Description
 	}
-	var overflowTriggerScript map[string]interface{}
+	var overflowTriggerScript *string
 	if p.OverflowTriggerScript != nil {
-		overflowTriggerScript = p.OverflowTriggerScript.ToDict()
+		overflowTriggerScript = p.OverflowTriggerScript
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
