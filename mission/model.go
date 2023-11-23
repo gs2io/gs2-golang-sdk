@@ -1575,8 +1575,9 @@ func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
 type TransactionSetting struct {
 	EnableAutoRun          *bool   `json:"enableAutoRun"`
 	DistributorNamespaceId *string `json:"distributorNamespaceId"`
-	KeyId                  *string `json:"keyId"`
-	QueueNamespaceId       *string `json:"queueNamespaceId"`
+	// Deprecated: should not be used
+	KeyId            *string `json:"keyId"`
+	QueueNamespaceId *string `json:"queueNamespaceId"`
 }
 
 func NewTransactionSettingFromJson(data string) TransactionSetting {

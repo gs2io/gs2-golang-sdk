@@ -280,7 +280,6 @@ type Entry struct {
 	UserId     *string `json:"userId"`
 	Name       *string `json:"name"`
 	AcquiredAt *int64  `json:"acquiredAt"`
-	Revision   *int64  `json:"revision"`
 }
 
 func NewEntryFromJson(data string) Entry {
@@ -295,7 +294,6 @@ func NewEntryFromDict(data map[string]interface{}) Entry {
 		UserId:     core.CastString(data["userId"]),
 		Name:       core.CastString(data["name"]),
 		AcquiredAt: core.CastInt64(data["acquiredAt"]),
-		Revision:   core.CastInt64(data["revision"]),
 	}
 }
 
@@ -317,16 +315,11 @@ func (p Entry) ToDict() map[string]interface{} {
 	if p.AcquiredAt != nil {
 		acquiredAt = p.AcquiredAt
 	}
-	var revision *int64
-	if p.Revision != nil {
-		revision = p.Revision
-	}
 	return map[string]interface{}{
 		"entryId":    entryId,
 		"userId":     userId,
 		"name":       name,
 		"acquiredAt": acquiredAt,
-		"revision":   revision,
 	}
 }
 
