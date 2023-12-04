@@ -2022,6 +2022,9 @@ func (p Gs2JobQueueRestClient) GetJobResultAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.TryNumber != nil {
+		queryStrings["tryNumber"] = core.ToString(*request.TryNumber)
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.RequestId != nil {
@@ -2119,6 +2122,9 @@ func (p Gs2JobQueueRestClient) GetJobResultByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.TryNumber != nil {
+		queryStrings["tryNumber"] = core.ToString(*request.TryNumber)
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.RequestId != nil {

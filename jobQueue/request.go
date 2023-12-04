@@ -707,6 +707,7 @@ type GetJobResultRequest struct {
 	NamespaceName *string `json:"namespaceName"`
 	AccessToken   *string `json:"accessToken"`
 	JobName       *string `json:"jobName"`
+	TryNumber     *int32  `json:"tryNumber"`
 }
 
 func NewGetJobResultRequestFromJson(data string) GetJobResultRequest {
@@ -720,6 +721,7 @@ func NewGetJobResultRequestFromDict(data map[string]interface{}) GetJobResultReq
 		NamespaceName: core.CastString(data["namespaceName"]),
 		AccessToken:   core.CastString(data["accessToken"]),
 		JobName:       core.CastString(data["jobName"]),
+		TryNumber:     core.CastInt32(data["tryNumber"]),
 	}
 }
 
@@ -728,6 +730,7 @@ func (p GetJobResultRequest) ToDict() map[string]interface{} {
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
 		"jobName":       p.JobName,
+		"tryNumber":     p.TryNumber,
 	}
 }
 
@@ -741,6 +744,7 @@ type GetJobResultByUserIdRequest struct {
 	NamespaceName *string `json:"namespaceName"`
 	UserId        *string `json:"userId"`
 	JobName       *string `json:"jobName"`
+	TryNumber     *int32  `json:"tryNumber"`
 }
 
 func NewGetJobResultByUserIdRequestFromJson(data string) GetJobResultByUserIdRequest {
@@ -754,6 +758,7 @@ func NewGetJobResultByUserIdRequestFromDict(data map[string]interface{}) GetJobR
 		NamespaceName: core.CastString(data["namespaceName"]),
 		UserId:        core.CastString(data["userId"]),
 		JobName:       core.CastString(data["jobName"]),
+		TryNumber:     core.CastInt32(data["tryNumber"]),
 	}
 }
 
@@ -762,6 +767,7 @@ func (p GetJobResultByUserIdRequest) ToDict() map[string]interface{} {
 		"namespaceName": p.NamespaceName,
 		"userId":        p.UserId,
 		"jobName":       p.JobName,
+		"tryNumber":     p.TryNumber,
 	}
 }
 

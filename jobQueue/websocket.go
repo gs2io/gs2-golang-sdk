@@ -1924,6 +1924,9 @@ func (p Gs2JobQueueWebSocketClient) GetJobResultAsync(
 	if request.JobName != nil && *request.JobName != "" {
 		bodies["jobName"] = *request.JobName
 	}
+	if request.TryNumber != nil {
+		bodies["tryNumber"] = *request.TryNumber
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2013,6 +2016,9 @@ func (p Gs2JobQueueWebSocketClient) GetJobResultByUserIdAsync(
 	}
 	if request.JobName != nil && *request.JobName != "" {
 		bodies["jobName"] = *request.JobName
+	}
+	if request.TryNumber != nil {
+		bodies["tryNumber"] = *request.TryNumber
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
