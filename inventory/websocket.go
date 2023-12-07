@@ -9838,6 +9838,109 @@ func (p Gs2InventoryWebSocketClient) ConsumeSimpleItemsByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2InventoryWebSocketClient) setSimpleItemsByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SetSimpleItemsByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetSimpleItemsByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetSimpleItemsByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetSimpleItemsByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+			}
+		}
+	}
+	callback <- SetSimpleItemsByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) SetSimpleItemsByUserIdAsync(
+	request *SetSimpleItemsByUserIdRequest,
+	callback chan<- SetSimpleItemsByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "simpleItem",
+			"function":    "setSimpleItemsByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		bodies["inventoryName"] = *request.InventoryName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Counts != nil {
+		var _counts []interface{}
+		for _, item := range request.Counts {
+			_counts = append(_counts, item)
+		}
+		bodies["counts"] = _counts
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.setSimpleItemsByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) SetSimpleItemsByUserId(
+	request *SetSimpleItemsByUserIdRequest,
+) (*SetSimpleItemsByUserIdResult, error) {
+	callback := make(chan SetSimpleItemsByUserIdAsyncResult, 1)
+	go p.SetSimpleItemsByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2InventoryWebSocketClient) deleteSimpleItemsByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DeleteSimpleItemsByUserIdAsyncResult,
@@ -10290,6 +10393,90 @@ func (p Gs2InventoryWebSocketClient) ConsumeSimpleItemsByStampTask(
 ) (*ConsumeSimpleItemsByStampTaskResult, error) {
 	callback := make(chan ConsumeSimpleItemsByStampTaskAsyncResult, 1)
 	go p.ConsumeSimpleItemsByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) setSimpleItemsByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SetSimpleItemsByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetSimpleItemsByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetSimpleItemsByStampSheetResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetSimpleItemsByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SetSimpleItemsByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) SetSimpleItemsByStampSheetAsync(
+	request *SetSimpleItemsByStampSheetRequest,
+	callback chan<- SetSimpleItemsByStampSheetAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "simpleItem",
+			"function":    "setSimpleItemsByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.setSimpleItemsByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) SetSimpleItemsByStampSheet(
+	request *SetSimpleItemsByStampSheetRequest,
+) (*SetSimpleItemsByStampSheetResult, error) {
+	callback := make(chan SetSimpleItemsByStampSheetAsyncResult, 1)
+	go p.SetSimpleItemsByStampSheetAsync(
 		request,
 		callback,
 	)
@@ -11068,6 +11255,108 @@ func (p Gs2InventoryWebSocketClient) ConsumeBigItemByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2InventoryWebSocketClient) setBigItemByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SetBigItemByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetBigItemByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetBigItemByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetBigItemByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+			}
+		}
+	}
+	callback <- SetBigItemByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) SetBigItemByUserIdAsync(
+	request *SetBigItemByUserIdRequest,
+	callback chan<- SetBigItemByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "bigItem",
+			"function":    "setBigItemByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		bodies["inventoryName"] = *request.InventoryName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		bodies["itemName"] = *request.ItemName
+	}
+	if request.Count != nil && *request.Count != "" {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.setBigItemByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) SetBigItemByUserId(
+	request *SetBigItemByUserIdRequest,
+) (*SetBigItemByUserIdResult, error) {
+	callback := make(chan SetBigItemByUserIdAsyncResult, 1)
+	go p.SetBigItemByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2InventoryWebSocketClient) deleteBigItemByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DeleteBigItemByUserIdAsyncResult,
@@ -11523,6 +11812,90 @@ func (p Gs2InventoryWebSocketClient) ConsumeBigItemByStampTask(
 ) (*ConsumeBigItemByStampTaskResult, error) {
 	callback := make(chan ConsumeBigItemByStampTaskAsyncResult, 1)
 	go p.ConsumeBigItemByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) setBigItemByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SetBigItemByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetBigItemByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetBigItemByStampSheetResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetBigItemByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SetBigItemByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) SetBigItemByStampSheetAsync(
+	request *SetBigItemByStampSheetRequest,
+	callback chan<- SetBigItemByStampSheetAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "bigItem",
+			"function":    "setBigItemByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.setBigItemByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) SetBigItemByStampSheet(
+	request *SetBigItemByStampSheetRequest,
+) (*SetBigItemByStampSheetResult, error) {
+	callback := make(chan SetBigItemByStampSheetAsyncResult, 1)
+	go p.SetBigItemByStampSheetAsync(
 		request,
 		callback,
 	)

@@ -2123,3 +2123,57 @@ func CastConsumeCountsFromDict(data []ConsumeCount) []interface{} {
 	}
 	return v
 }
+
+type HeldCount struct {
+	ItemName *string `json:"itemName"`
+	Count    *int64  `json:"count"`
+}
+
+func NewHeldCountFromJson(data string) HeldCount {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewHeldCountFromDict(dict)
+}
+
+func NewHeldCountFromDict(data map[string]interface{}) HeldCount {
+	return HeldCount{
+		ItemName: core.CastString(data["itemName"]),
+		Count:    core.CastInt64(data["count"]),
+	}
+}
+
+func (p HeldCount) ToDict() map[string]interface{} {
+
+	var itemName *string
+	if p.ItemName != nil {
+		itemName = p.ItemName
+	}
+	var count *int64
+	if p.Count != nil {
+		count = p.Count
+	}
+	return map[string]interface{}{
+		"itemName": itemName,
+		"count":    count,
+	}
+}
+
+func (p HeldCount) Pointer() *HeldCount {
+	return &p
+}
+
+func CastHeldCounts(data []interface{}) []HeldCount {
+	v := make([]HeldCount, 0)
+	for _, d := range data {
+		v = append(v, NewHeldCountFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastHeldCountsFromDict(data []HeldCount) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}

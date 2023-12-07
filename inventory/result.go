@@ -3690,6 +3690,39 @@ func (p ConsumeSimpleItemsByUserIdResult) Pointer() *ConsumeSimpleItemsByUserIdR
 	return &p
 }
 
+type SetSimpleItemsByUserIdResult struct {
+	Items []SimpleItem `json:"items"`
+}
+
+type SetSimpleItemsByUserIdAsyncResult struct {
+	result *SetSimpleItemsByUserIdResult
+	err    error
+}
+
+func NewSetSimpleItemsByUserIdResultFromJson(data string) SetSimpleItemsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetSimpleItemsByUserIdResultFromDict(dict)
+}
+
+func NewSetSimpleItemsByUserIdResultFromDict(data map[string]interface{}) SetSimpleItemsByUserIdResult {
+	return SetSimpleItemsByUserIdResult{
+		Items: CastSimpleItems(core.CastArray(data["items"])),
+	}
+}
+
+func (p SetSimpleItemsByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastSimpleItemsFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p SetSimpleItemsByUserIdResult) Pointer() *SetSimpleItemsByUserIdResult {
+	return &p
+}
+
 type DeleteSimpleItemsByUserIdResult struct {
 }
 
@@ -3834,6 +3867,39 @@ func (p ConsumeSimpleItemsByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeSimpleItemsByStampTaskResult) Pointer() *ConsumeSimpleItemsByStampTaskResult {
+	return &p
+}
+
+type SetSimpleItemsByStampSheetResult struct {
+	Items []SimpleItem `json:"items"`
+}
+
+type SetSimpleItemsByStampSheetAsyncResult struct {
+	result *SetSimpleItemsByStampSheetResult
+	err    error
+}
+
+func NewSetSimpleItemsByStampSheetResultFromJson(data string) SetSimpleItemsByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetSimpleItemsByStampSheetResultFromDict(dict)
+}
+
+func NewSetSimpleItemsByStampSheetResultFromDict(data map[string]interface{}) SetSimpleItemsByStampSheetResult {
+	return SetSimpleItemsByStampSheetResult{
+		Items: CastSimpleItems(core.CastArray(data["items"])),
+	}
+}
+
+func (p SetSimpleItemsByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastSimpleItemsFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p SetSimpleItemsByStampSheetResult) Pointer() *SetSimpleItemsByStampSheetResult {
 	return &p
 }
 
@@ -4101,6 +4167,37 @@ func (p ConsumeBigItemByUserIdResult) Pointer() *ConsumeBigItemByUserIdResult {
 	return &p
 }
 
+type SetBigItemByUserIdResult struct {
+	Item *BigItem `json:"item"`
+}
+
+type SetBigItemByUserIdAsyncResult struct {
+	result *SetBigItemByUserIdResult
+	err    error
+}
+
+func NewSetBigItemByUserIdResultFromJson(data string) SetBigItemByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetBigItemByUserIdResultFromDict(dict)
+}
+
+func NewSetBigItemByUserIdResultFromDict(data map[string]interface{}) SetBigItemByUserIdResult {
+	return SetBigItemByUserIdResult{
+		Item: NewBigItemFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p SetBigItemByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p SetBigItemByUserIdResult) Pointer() *SetBigItemByUserIdResult {
+	return &p
+}
+
 type DeleteBigItemByUserIdResult struct {
 	Item *BigItem `json:"item"`
 }
@@ -4246,6 +4343,37 @@ func (p ConsumeBigItemByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeBigItemByStampTaskResult) Pointer() *ConsumeBigItemByStampTaskResult {
+	return &p
+}
+
+type SetBigItemByStampSheetResult struct {
+	Item *BigItem `json:"item"`
+}
+
+type SetBigItemByStampSheetAsyncResult struct {
+	result *SetBigItemByStampSheetResult
+	err    error
+}
+
+func NewSetBigItemByStampSheetResultFromJson(data string) SetBigItemByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetBigItemByStampSheetResultFromDict(dict)
+}
+
+func NewSetBigItemByStampSheetResultFromDict(data map[string]interface{}) SetBigItemByStampSheetResult {
+	return SetBigItemByStampSheetResult{
+		Item: NewBigItemFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p SetBigItemByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p SetBigItemByStampSheetResult) Pointer() *SetBigItemByStampSheetResult {
 	return &p
 }
 

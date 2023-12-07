@@ -3946,6 +3946,46 @@ func (p ConsumeSimpleItemsByUserIdRequest) Pointer() *ConsumeSimpleItemsByUserId
 	return &p
 }
 
+type SetSimpleItemsByUserIdRequest struct {
+	RequestId          *string     `json:"requestId"`
+	ContextStack       *string     `json:"contextStack"`
+	DuplicationAvoider *string     `json:"duplicationAvoider"`
+	NamespaceName      *string     `json:"namespaceName"`
+	InventoryName      *string     `json:"inventoryName"`
+	UserId             *string     `json:"userId"`
+	Counts             []HeldCount `json:"counts"`
+}
+
+func NewSetSimpleItemsByUserIdRequestFromJson(data string) SetSimpleItemsByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetSimpleItemsByUserIdRequestFromDict(dict)
+}
+
+func NewSetSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) SetSimpleItemsByUserIdRequest {
+	return SetSimpleItemsByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		InventoryName: core.CastString(data["inventoryName"]),
+		UserId:        core.CastString(data["userId"]),
+		Counts:        CastHeldCounts(core.CastArray(data["counts"])),
+	}
+}
+
+func (p SetSimpleItemsByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"inventoryName": p.InventoryName,
+		"userId":        p.UserId,
+		"counts": CastHeldCountsFromDict(
+			p.Counts,
+		),
+	}
+}
+
+func (p SetSimpleItemsByUserIdRequest) Pointer() *SetSimpleItemsByUserIdRequest {
+	return &p
+}
+
 type DeleteSimpleItemsByUserIdRequest struct {
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
@@ -4128,6 +4168,37 @@ func (p ConsumeSimpleItemsByStampTaskRequest) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeSimpleItemsByStampTaskRequest) Pointer() *ConsumeSimpleItemsByStampTaskRequest {
+	return &p
+}
+
+type SetSimpleItemsByStampSheetRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewSetSimpleItemsByStampSheetRequestFromJson(data string) SetSimpleItemsByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetSimpleItemsByStampSheetRequestFromDict(dict)
+}
+
+func NewSetSimpleItemsByStampSheetRequestFromDict(data map[string]interface{}) SetSimpleItemsByStampSheetRequest {
+	return SetSimpleItemsByStampSheetRequest{
+		StampSheet: core.CastString(data["stampSheet"]),
+		KeyId:      core.CastString(data["keyId"]),
+	}
+}
+
+func (p SetSimpleItemsByStampSheetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampSheet": p.StampSheet,
+		"keyId":      p.KeyId,
+	}
+}
+
+func (p SetSimpleItemsByStampSheetRequest) Pointer() *SetSimpleItemsByStampSheetRequest {
 	return &p
 }
 
@@ -4439,6 +4510,47 @@ func (p ConsumeBigItemByUserIdRequest) Pointer() *ConsumeBigItemByUserIdRequest 
 	return &p
 }
 
+type SetBigItemByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	InventoryName      *string `json:"inventoryName"`
+	UserId             *string `json:"userId"`
+	ItemName           *string `json:"itemName"`
+	Count              *string `json:"count"`
+}
+
+func NewSetBigItemByUserIdRequestFromJson(data string) SetBigItemByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetBigItemByUserIdRequestFromDict(dict)
+}
+
+func NewSetBigItemByUserIdRequestFromDict(data map[string]interface{}) SetBigItemByUserIdRequest {
+	return SetBigItemByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		InventoryName: core.CastString(data["inventoryName"]),
+		UserId:        core.CastString(data["userId"]),
+		ItemName:      core.CastString(data["itemName"]),
+		Count:         core.CastString(data["count"]),
+	}
+}
+
+func (p SetBigItemByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"inventoryName": p.InventoryName,
+		"userId":        p.UserId,
+		"itemName":      p.ItemName,
+		"count":         p.Count,
+	}
+}
+
+func (p SetBigItemByUserIdRequest) Pointer() *SetBigItemByUserIdRequest {
+	return &p
+}
+
 type DeleteBigItemByUserIdRequest struct {
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
@@ -4624,6 +4736,37 @@ func (p ConsumeBigItemByStampTaskRequest) ToDict() map[string]interface{} {
 }
 
 func (p ConsumeBigItemByStampTaskRequest) Pointer() *ConsumeBigItemByStampTaskRequest {
+	return &p
+}
+
+type SetBigItemByStampSheetRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewSetBigItemByStampSheetRequestFromJson(data string) SetBigItemByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetBigItemByStampSheetRequestFromDict(dict)
+}
+
+func NewSetBigItemByStampSheetRequestFromDict(data map[string]interface{}) SetBigItemByStampSheetRequest {
+	return SetBigItemByStampSheetRequest{
+		StampSheet: core.CastString(data["stampSheet"]),
+		KeyId:      core.CastString(data["keyId"]),
+	}
+}
+
+func (p SetBigItemByStampSheetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampSheet": p.StampSheet,
+		"keyId":      p.KeyId,
+	}
+}
+
+func (p SetBigItemByStampSheetRequest) Pointer() *SetBigItemByStampSheetRequest {
 	return &p
 }
 
