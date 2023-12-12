@@ -171,6 +171,12 @@ func (p Gs2StateMachineRestClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.SupportSpeculativeExecution != nil && *request.SupportSpeculativeExecution != "" {
+		bodies["supportSpeculativeExecution"] = *request.SupportSpeculativeExecution
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.StartScript != nil {
 		bodies["startScript"] = request.StartScript.ToDict()
 	}
@@ -443,6 +449,12 @@ func (p Gs2StateMachineRestClient) UpdateNamespaceAsync(
 	var bodies = core.Bodies{}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.SupportSpeculativeExecution != nil && *request.SupportSpeculativeExecution != "" {
+		bodies["supportSpeculativeExecution"] = *request.SupportSpeculativeExecution
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.StartScript != nil {
 		bodies["startScript"] = request.StartScript.ToDict()
@@ -2008,6 +2020,9 @@ func (p Gs2StateMachineRestClient) StartStateMachineByUserIdAsync(
 	if request.Args != nil && *request.Args != "" {
 		bodies["args"] = *request.Args
 	}
+	if request.EnableSpeculativeExecution != nil && *request.EnableSpeculativeExecution != "" {
+		bodies["enableSpeculativeExecution"] = *request.EnableSpeculativeExecution
+	}
 	if request.Ttl != nil {
 		bodies["ttl"] = *request.Ttl
 	}
@@ -2338,6 +2353,224 @@ func (p Gs2StateMachineRestClient) EmitByUserId(
 ) (*EmitByUserIdResult, error) {
 	callback := make(chan EmitByUserIdAsyncResult, 1)
 	go p.EmitByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func reportAsyncHandler(
+	client Gs2StateMachineRestClient,
+	job *core.NetworkJob,
+	callback chan<- ReportAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ReportAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ReportResult
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "stateMachine.state.mismatch" {
+				asyncResult.Err = gs2err.SetClientError(StateMismatch{})
+			}
+		}
+		callback <- ReportAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ReportAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- ReportAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StateMachineRestClient) ReportAsync(
+	request *ReportRequest,
+	callback chan<- ReportAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/status/{statusName}/report"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StatusName != nil && *request.StatusName != "" {
+		path = strings.ReplaceAll(path, "{statusName}", core.ToString(*request.StatusName))
+	} else {
+		path = strings.ReplaceAll(path, "{statusName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Events != nil {
+		var _events []interface{}
+		for _, item := range request.Events {
+			_events = append(_events, item)
+		}
+		bodies["events"] = _events
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go reportAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StateMachineRestClient) Report(
+	request *ReportRequest,
+) (*ReportResult, error) {
+	callback := make(chan ReportAsyncResult, 1)
+	go p.ReportAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func reportByUserIdAsyncHandler(
+	client Gs2StateMachineRestClient,
+	job *core.NetworkJob,
+	callback chan<- ReportByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ReportByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ReportByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- ReportByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ReportByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- ReportByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StateMachineRestClient) ReportByUserIdAsync(
+	request *ReportByUserIdRequest,
+	callback chan<- ReportByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/status/{statusName}/report"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.StatusName != nil && *request.StatusName != "" {
+		path = strings.ReplaceAll(path, "{statusName}", core.ToString(*request.StatusName))
+	} else {
+		path = strings.ReplaceAll(path, "{statusName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Events != nil {
+		var _events []interface{}
+		for _, item := range request.Events {
+			_events = append(_events, item)
+		}
+		bodies["events"] = _events
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go reportByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("state-machine").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StateMachineRestClient) ReportByUserId(
+	request *ReportByUserIdRequest,
+) (*ReportByUserIdResult, error) {
+	callback := make(chan ReportByUserIdAsyncResult, 1)
+	go p.ReportByUserIdAsync(
 		request,
 		callback,
 	)

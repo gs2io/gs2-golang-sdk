@@ -54,15 +54,17 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	RequestId                 *string        `json:"requestId"`
-	ContextStack              *string        `json:"contextStack"`
-	Name                      *string        `json:"name"`
-	Description               *string        `json:"description"`
-	StartScript               *ScriptSetting `json:"startScript"`
-	PassScript                *ScriptSetting `json:"passScript"`
-	ErrorScript               *ScriptSetting `json:"errorScript"`
-	LowestStateMachineVersion *int64         `json:"lowestStateMachineVersion"`
-	LogSetting                *LogSetting    `json:"logSetting"`
+	RequestId                   *string             `json:"requestId"`
+	ContextStack                *string             `json:"contextStack"`
+	Name                        *string             `json:"name"`
+	Description                 *string             `json:"description"`
+	SupportSpeculativeExecution *string             `json:"supportSpeculativeExecution"`
+	TransactionSetting          *TransactionSetting `json:"transactionSetting"`
+	StartScript                 *ScriptSetting      `json:"startScript"`
+	PassScript                  *ScriptSetting      `json:"passScript"`
+	ErrorScript                 *ScriptSetting      `json:"errorScript"`
+	LowestStateMachineVersion   *int64              `json:"lowestStateMachineVersion"`
+	LogSetting                  *LogSetting         `json:"logSetting"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
@@ -73,25 +75,29 @@ func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:                      core.CastString(data["name"]),
-		Description:               core.CastString(data["description"]),
-		StartScript:               NewScriptSettingFromDict(core.CastMap(data["startScript"])).Pointer(),
-		PassScript:                NewScriptSettingFromDict(core.CastMap(data["passScript"])).Pointer(),
-		ErrorScript:               NewScriptSettingFromDict(core.CastMap(data["errorScript"])).Pointer(),
-		LowestStateMachineVersion: core.CastInt64(data["lowestStateMachineVersion"]),
-		LogSetting:                NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name:                        core.CastString(data["name"]),
+		Description:                 core.CastString(data["description"]),
+		SupportSpeculativeExecution: core.CastString(data["supportSpeculativeExecution"]),
+		TransactionSetting:          NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+		StartScript:                 NewScriptSettingFromDict(core.CastMap(data["startScript"])).Pointer(),
+		PassScript:                  NewScriptSettingFromDict(core.CastMap(data["passScript"])).Pointer(),
+		ErrorScript:                 NewScriptSettingFromDict(core.CastMap(data["errorScript"])).Pointer(),
+		LowestStateMachineVersion:   core.CastInt64(data["lowestStateMachineVersion"]),
+		LogSetting:                  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                      p.Name,
-		"description":               p.Description,
-		"startScript":               p.StartScript.ToDict(),
-		"passScript":                p.PassScript.ToDict(),
-		"errorScript":               p.ErrorScript.ToDict(),
-		"lowestStateMachineVersion": p.LowestStateMachineVersion,
-		"logSetting":                p.LogSetting.ToDict(),
+		"name":                        p.Name,
+		"description":                 p.Description,
+		"supportSpeculativeExecution": p.SupportSpeculativeExecution,
+		"transactionSetting":          p.TransactionSetting.ToDict(),
+		"startScript":                 p.StartScript.ToDict(),
+		"passScript":                  p.PassScript.ToDict(),
+		"errorScript":                 p.ErrorScript.ToDict(),
+		"lowestStateMachineVersion":   p.LowestStateMachineVersion,
+		"logSetting":                  p.LogSetting.ToDict(),
 	}
 }
 
@@ -156,15 +162,17 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId                 *string        `json:"requestId"`
-	ContextStack              *string        `json:"contextStack"`
-	NamespaceName             *string        `json:"namespaceName"`
-	Description               *string        `json:"description"`
-	StartScript               *ScriptSetting `json:"startScript"`
-	PassScript                *ScriptSetting `json:"passScript"`
-	ErrorScript               *ScriptSetting `json:"errorScript"`
-	LowestStateMachineVersion *int64         `json:"lowestStateMachineVersion"`
-	LogSetting                *LogSetting    `json:"logSetting"`
+	RequestId                   *string             `json:"requestId"`
+	ContextStack                *string             `json:"contextStack"`
+	NamespaceName               *string             `json:"namespaceName"`
+	Description                 *string             `json:"description"`
+	SupportSpeculativeExecution *string             `json:"supportSpeculativeExecution"`
+	TransactionSetting          *TransactionSetting `json:"transactionSetting"`
+	StartScript                 *ScriptSetting      `json:"startScript"`
+	PassScript                  *ScriptSetting      `json:"passScript"`
+	ErrorScript                 *ScriptSetting      `json:"errorScript"`
+	LowestStateMachineVersion   *int64              `json:"lowestStateMachineVersion"`
+	LogSetting                  *LogSetting         `json:"logSetting"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -175,25 +183,29 @@ func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:             core.CastString(data["namespaceName"]),
-		Description:               core.CastString(data["description"]),
-		StartScript:               NewScriptSettingFromDict(core.CastMap(data["startScript"])).Pointer(),
-		PassScript:                NewScriptSettingFromDict(core.CastMap(data["passScript"])).Pointer(),
-		ErrorScript:               NewScriptSettingFromDict(core.CastMap(data["errorScript"])).Pointer(),
-		LowestStateMachineVersion: core.CastInt64(data["lowestStateMachineVersion"]),
-		LogSetting:                NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName:               core.CastString(data["namespaceName"]),
+		Description:                 core.CastString(data["description"]),
+		SupportSpeculativeExecution: core.CastString(data["supportSpeculativeExecution"]),
+		TransactionSetting:          NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+		StartScript:                 NewScriptSettingFromDict(core.CastMap(data["startScript"])).Pointer(),
+		PassScript:                  NewScriptSettingFromDict(core.CastMap(data["passScript"])).Pointer(),
+		ErrorScript:                 NewScriptSettingFromDict(core.CastMap(data["errorScript"])).Pointer(),
+		LowestStateMachineVersion:   core.CastInt64(data["lowestStateMachineVersion"]),
+		LogSetting:                  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":             p.NamespaceName,
-		"description":               p.Description,
-		"startScript":               p.StartScript.ToDict(),
-		"passScript":                p.PassScript.ToDict(),
-		"errorScript":               p.ErrorScript.ToDict(),
-		"lowestStateMachineVersion": p.LowestStateMachineVersion,
-		"logSetting":                p.LogSetting.ToDict(),
+		"namespaceName":               p.NamespaceName,
+		"description":                 p.Description,
+		"supportSpeculativeExecution": p.SupportSpeculativeExecution,
+		"transactionSetting":          p.TransactionSetting.ToDict(),
+		"startScript":                 p.StartScript.ToDict(),
+		"passScript":                  p.PassScript.ToDict(),
+		"errorScript":                 p.ErrorScript.ToDict(),
+		"lowestStateMachineVersion":   p.LowestStateMachineVersion,
+		"logSetting":                  p.LogSetting.ToDict(),
 	}
 }
 
@@ -717,13 +729,14 @@ func (p GetStatusByUserIdRequest) Pointer() *GetStatusByUserIdRequest {
 }
 
 type StartStateMachineByUserIdRequest struct {
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	Args               *string `json:"args"`
-	Ttl                *int32  `json:"ttl"`
+	RequestId                  *string `json:"requestId"`
+	ContextStack               *string `json:"contextStack"`
+	DuplicationAvoider         *string `json:"duplicationAvoider"`
+	NamespaceName              *string `json:"namespaceName"`
+	UserId                     *string `json:"userId"`
+	Args                       *string `json:"args"`
+	EnableSpeculativeExecution *string `json:"enableSpeculativeExecution"`
+	Ttl                        *int32  `json:"ttl"`
 }
 
 func NewStartStateMachineByUserIdRequestFromJson(data string) StartStateMachineByUserIdRequest {
@@ -734,19 +747,21 @@ func NewStartStateMachineByUserIdRequestFromJson(data string) StartStateMachineB
 
 func NewStartStateMachineByUserIdRequestFromDict(data map[string]interface{}) StartStateMachineByUserIdRequest {
 	return StartStateMachineByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		Args:          core.CastString(data["args"]),
-		Ttl:           core.CastInt32(data["ttl"]),
+		NamespaceName:              core.CastString(data["namespaceName"]),
+		UserId:                     core.CastString(data["userId"]),
+		Args:                       core.CastString(data["args"]),
+		EnableSpeculativeExecution: core.CastString(data["enableSpeculativeExecution"]),
+		Ttl:                        core.CastInt32(data["ttl"]),
 	}
 }
 
 func (p StartStateMachineByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"args":          p.Args,
-		"ttl":           p.Ttl,
+		"namespaceName":              p.NamespaceName,
+		"userId":                     p.UserId,
+		"args":                       p.Args,
+		"enableSpeculativeExecution": p.EnableSpeculativeExecution,
+		"ttl":                        p.Ttl,
 	}
 }
 
@@ -864,6 +879,86 @@ func (p EmitByUserIdRequest) ToDict() map[string]interface{} {
 }
 
 func (p EmitByUserIdRequest) Pointer() *EmitByUserIdRequest {
+	return &p
+}
+
+type ReportRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	StatusName         *string `json:"statusName"`
+	Events             []Event `json:"events"`
+}
+
+func NewReportRequestFromJson(data string) ReportRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewReportRequestFromDict(dict)
+}
+
+func NewReportRequestFromDict(data map[string]interface{}) ReportRequest {
+	return ReportRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		StatusName:    core.CastString(data["statusName"]),
+		Events:        CastEvents(core.CastArray(data["events"])),
+	}
+}
+
+func (p ReportRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"statusName":    p.StatusName,
+		"events": CastEventsFromDict(
+			p.Events,
+		),
+	}
+}
+
+func (p ReportRequest) Pointer() *ReportRequest {
+	return &p
+}
+
+type ReportByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	StatusName         *string `json:"statusName"`
+	Events             []Event `json:"events"`
+}
+
+func NewReportByUserIdRequestFromJson(data string) ReportByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewReportByUserIdRequestFromDict(dict)
+}
+
+func NewReportByUserIdRequestFromDict(data map[string]interface{}) ReportByUserIdRequest {
+	return ReportByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		UserId:        core.CastString(data["userId"]),
+		StatusName:    core.CastString(data["statusName"]),
+		Events:        CastEvents(core.CastArray(data["events"])),
+	}
+}
+
+func (p ReportByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"statusName":    p.StatusName,
+		"events": CastEventsFromDict(
+			p.Events,
+		),
+	}
+}
+
+func (p ReportByUserIdRequest) Pointer() *ReportByUserIdRequest {
 	return &p
 }
 

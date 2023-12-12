@@ -800,6 +800,68 @@ func (p EmitByUserIdResult) Pointer() *EmitByUserIdResult {
 	return &p
 }
 
+type ReportResult struct {
+	Item *Status `json:"item"`
+}
+
+type ReportAsyncResult struct {
+	result *ReportResult
+	err    error
+}
+
+func NewReportResultFromJson(data string) ReportResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewReportResultFromDict(dict)
+}
+
+func NewReportResultFromDict(data map[string]interface{}) ReportResult {
+	return ReportResult{
+		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p ReportResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p ReportResult) Pointer() *ReportResult {
+	return &p
+}
+
+type ReportByUserIdResult struct {
+	Item *Status `json:"item"`
+}
+
+type ReportByUserIdAsyncResult struct {
+	result *ReportByUserIdResult
+	err    error
+}
+
+func NewReportByUserIdResultFromJson(data string) ReportByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewReportByUserIdResultFromDict(dict)
+}
+
+func NewReportByUserIdResultFromDict(data map[string]interface{}) ReportByUserIdResult {
+	return ReportByUserIdResult{
+		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p ReportByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p ReportByUserIdResult) Pointer() *ReportByUserIdResult {
+	return &p
+}
+
 type DeleteStatusByUserIdResult struct {
 	Item *Status `json:"item"`
 }

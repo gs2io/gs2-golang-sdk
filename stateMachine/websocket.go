@@ -174,6 +174,12 @@ func (p Gs2StateMachineWebSocketClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.SupportSpeculativeExecution != nil && *request.SupportSpeculativeExecution != "" {
+		bodies["supportSpeculativeExecution"] = *request.SupportSpeculativeExecution
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.StartScript != nil {
 		bodies["startScript"] = request.StartScript.ToDict()
 	}
@@ -434,6 +440,12 @@ func (p Gs2StateMachineWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.SupportSpeculativeExecution != nil && *request.SupportSpeculativeExecution != "" {
+		bodies["supportSpeculativeExecution"] = *request.SupportSpeculativeExecution
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.StartScript != nil {
 		bodies["startScript"] = request.StartScript.ToDict()
@@ -1920,6 +1932,9 @@ func (p Gs2StateMachineWebSocketClient) StartStateMachineByUserIdAsync(
 	if request.Args != nil && *request.Args != "" {
 		bodies["args"] = *request.Args
 	}
+	if request.EnableSpeculativeExecution != nil && *request.EnableSpeculativeExecution != "" {
+		bodies["enableSpeculativeExecution"] = *request.EnableSpeculativeExecution
+	}
 	if request.Ttl != nil {
 		bodies["ttl"] = *request.Ttl
 	}
@@ -2223,6 +2238,209 @@ func (p Gs2StateMachineWebSocketClient) EmitByUserId(
 ) (*EmitByUserIdResult, error) {
 	callback := make(chan EmitByUserIdAsyncResult, 1)
 	go p.EmitByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StateMachineWebSocketClient) reportAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ReportAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ReportAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ReportResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ReportAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "stateMachine.state.mismatch" {
+				asyncResult.Err = gs2err.SetClientError(StateMismatch{})
+			}
+		}
+	}
+	callback <- ReportAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StateMachineWebSocketClient) ReportAsync(
+	request *ReportRequest,
+	callback chan<- ReportAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "state_machine",
+			"component":   "status",
+			"function":    "report",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.StatusName != nil && *request.StatusName != "" {
+		bodies["statusName"] = *request.StatusName
+	}
+	if request.Events != nil {
+		var _events []interface{}
+		for _, item := range request.Events {
+			_events = append(_events, item)
+		}
+		bodies["events"] = _events
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.reportAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StateMachineWebSocketClient) Report(
+	request *ReportRequest,
+) (*ReportResult, error) {
+	callback := make(chan ReportAsyncResult, 1)
+	go p.ReportAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2StateMachineWebSocketClient) reportByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ReportByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ReportByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ReportByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ReportByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- ReportByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StateMachineWebSocketClient) ReportByUserIdAsync(
+	request *ReportByUserIdRequest,
+	callback chan<- ReportByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "state_machine",
+			"component":   "status",
+			"function":    "reportByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.StatusName != nil && *request.StatusName != "" {
+		bodies["statusName"] = *request.StatusName
+	}
+	if request.Events != nil {
+		var _events []interface{}
+		for _, item := range request.Events {
+			_events = append(_events, item)
+		}
+		bodies["events"] = _events
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.reportByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StateMachineWebSocketClient) ReportByUserId(
+	request *ReportByUserIdRequest,
+) (*ReportByUserIdResult, error) {
+	callback := make(chan ReportByUserIdAsyncResult, 1)
+	go p.ReportByUserIdAsync(
 		request,
 		callback,
 	)
