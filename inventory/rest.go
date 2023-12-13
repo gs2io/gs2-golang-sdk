@@ -9548,7 +9548,7 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfByStampTaskAsync(
 	request *VerifyReferenceOfByStampTaskRequest,
 	callback chan<- VerifyReferenceOfByStampTaskAsyncResult,
 ) {
-	path := "/stamp/item/verify"
+	path := "/stamp/item/reference/verify"
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}

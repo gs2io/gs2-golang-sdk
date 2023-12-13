@@ -1932,9 +1932,6 @@ func (p Gs2StateMachineWebSocketClient) StartStateMachineByUserIdAsync(
 	if request.Args != nil && *request.Args != "" {
 		bodies["args"] = *request.Args
 	}
-	if request.EnableSpeculativeExecution != nil && *request.EnableSpeculativeExecution != "" {
-		bodies["enableSpeculativeExecution"] = *request.EnableSpeculativeExecution
-	}
 	if request.Ttl != nil {
 		bodies["ttl"] = *request.Ttl
 	}

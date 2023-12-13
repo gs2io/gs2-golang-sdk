@@ -729,14 +729,13 @@ func (p GetStatusByUserIdRequest) Pointer() *GetStatusByUserIdRequest {
 }
 
 type StartStateMachineByUserIdRequest struct {
-	RequestId                  *string `json:"requestId"`
-	ContextStack               *string `json:"contextStack"`
-	DuplicationAvoider         *string `json:"duplicationAvoider"`
-	NamespaceName              *string `json:"namespaceName"`
-	UserId                     *string `json:"userId"`
-	Args                       *string `json:"args"`
-	EnableSpeculativeExecution *string `json:"enableSpeculativeExecution"`
-	Ttl                        *int32  `json:"ttl"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	Args               *string `json:"args"`
+	Ttl                *int32  `json:"ttl"`
 }
 
 func NewStartStateMachineByUserIdRequestFromJson(data string) StartStateMachineByUserIdRequest {
@@ -747,21 +746,19 @@ func NewStartStateMachineByUserIdRequestFromJson(data string) StartStateMachineB
 
 func NewStartStateMachineByUserIdRequestFromDict(data map[string]interface{}) StartStateMachineByUserIdRequest {
 	return StartStateMachineByUserIdRequest{
-		NamespaceName:              core.CastString(data["namespaceName"]),
-		UserId:                     core.CastString(data["userId"]),
-		Args:                       core.CastString(data["args"]),
-		EnableSpeculativeExecution: core.CastString(data["enableSpeculativeExecution"]),
-		Ttl:                        core.CastInt32(data["ttl"]),
+		NamespaceName: core.CastString(data["namespaceName"]),
+		UserId:        core.CastString(data["userId"]),
+		Args:          core.CastString(data["args"]),
+		Ttl:           core.CastInt32(data["ttl"]),
 	}
 }
 
 func (p StartStateMachineByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":              p.NamespaceName,
-		"userId":                     p.UserId,
-		"args":                       p.Args,
-		"enableSpeculativeExecution": p.EnableSpeculativeExecution,
-		"ttl":                        p.Ttl,
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"args":          p.Args,
+		"ttl":           p.Ttl,
 	}
 }
 
