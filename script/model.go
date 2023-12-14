@@ -200,6 +200,282 @@ func CastScriptsFromDict(data []Script) []interface{} {
 	return v
 }
 
+type RandomStatus struct {
+	Seed *int64       `json:"seed"`
+	Used []RandomUsed `json:"used"`
+}
+
+func NewRandomStatusFromJson(data string) RandomStatus {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRandomStatusFromDict(dict)
+}
+
+func NewRandomStatusFromDict(data map[string]interface{}) RandomStatus {
+	return RandomStatus{
+		Seed: core.CastInt64(data["seed"]),
+		Used: CastRandomUseds(core.CastArray(data["used"])),
+	}
+}
+
+func (p RandomStatus) ToDict() map[string]interface{} {
+
+	var seed *int64
+	if p.Seed != nil {
+		seed = p.Seed
+	}
+	var used []interface{}
+	if p.Used != nil {
+		used = CastRandomUsedsFromDict(
+			p.Used,
+		)
+	}
+	return map[string]interface{}{
+		"seed": seed,
+		"used": used,
+	}
+}
+
+func (p RandomStatus) Pointer() *RandomStatus {
+	return &p
+}
+
+func CastRandomStatuses(data []interface{}) []RandomStatus {
+	v := make([]RandomStatus, 0)
+	for _, d := range data {
+		v = append(v, NewRandomStatusFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRandomStatusesFromDict(data []RandomStatus) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type RandomUsed struct {
+	Category *int64 `json:"category"`
+	Used     *int64 `json:"used"`
+}
+
+func NewRandomUsedFromJson(data string) RandomUsed {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRandomUsedFromDict(dict)
+}
+
+func NewRandomUsedFromDict(data map[string]interface{}) RandomUsed {
+	return RandomUsed{
+		Category: core.CastInt64(data["category"]),
+		Used:     core.CastInt64(data["used"]),
+	}
+}
+
+func (p RandomUsed) ToDict() map[string]interface{} {
+
+	var category *int64
+	if p.Category != nil {
+		category = p.Category
+	}
+	var used *int64
+	if p.Used != nil {
+		used = p.Used
+	}
+	return map[string]interface{}{
+		"category": category,
+		"used":     used,
+	}
+}
+
+func (p RandomUsed) Pointer() *RandomUsed {
+	return &p
+}
+
+func CastRandomUseds(data []interface{}) []RandomUsed {
+	v := make([]RandomUsed, 0)
+	for _, d := range data {
+		v = append(v, NewRandomUsedFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRandomUsedsFromDict(data []RandomUsed) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type AcquireAction struct {
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func NewAcquireActionFromJson(data string) AcquireAction {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireActionFromDict(dict)
+}
+
+func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
+	return AcquireAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p AcquireAction) ToDict() map[string]interface{} {
+
+	var action *string
+	if p.Action != nil {
+		action = p.Action
+	}
+	var request *string
+	if p.Request != nil {
+		request = p.Request
+	}
+	return map[string]interface{}{
+		"action":  action,
+		"request": request,
+	}
+}
+
+func (p AcquireAction) Pointer() *AcquireAction {
+	return &p
+}
+
+func CastAcquireActions(data []interface{}) []AcquireAction {
+	v := make([]AcquireAction, 0)
+	for _, d := range data {
+		v = append(v, NewAcquireActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type ConsumeAction struct {
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func NewConsumeActionFromJson(data string) ConsumeAction {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewConsumeActionFromDict(dict)
+}
+
+func NewConsumeActionFromDict(data map[string]interface{}) ConsumeAction {
+	return ConsumeAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p ConsumeAction) ToDict() map[string]interface{} {
+
+	var action *string
+	if p.Action != nil {
+		action = p.Action
+	}
+	var request *string
+	if p.Request != nil {
+		request = p.Request
+	}
+	return map[string]interface{}{
+		"action":  action,
+		"request": request,
+	}
+}
+
+func (p ConsumeAction) Pointer() *ConsumeAction {
+	return &p
+}
+
+func CastConsumeActions(data []interface{}) []ConsumeAction {
+	v := make([]ConsumeAction, 0)
+	for _, d := range data {
+		v = append(v, NewConsumeActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastConsumeActionsFromDict(data []ConsumeAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type Transaction struct {
+	ConsumeActions []ConsumeAction `json:"consumeActions"`
+	AcquireActions []AcquireAction `json:"acquireActions"`
+}
+
+func NewTransactionFromJson(data string) Transaction {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewTransactionFromDict(dict)
+}
+
+func NewTransactionFromDict(data map[string]interface{}) Transaction {
+	return Transaction{
+		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
+		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+	}
+}
+
+func (p Transaction) ToDict() map[string]interface{} {
+
+	var consumeActions []interface{}
+	if p.ConsumeActions != nil {
+		consumeActions = CastConsumeActionsFromDict(
+			p.ConsumeActions,
+		)
+	}
+	var acquireActions []interface{}
+	if p.AcquireActions != nil {
+		acquireActions = CastAcquireActionsFromDict(
+			p.AcquireActions,
+		)
+	}
+	return map[string]interface{}{
+		"consumeActions": consumeActions,
+		"acquireActions": acquireActions,
+	}
+}
+
+func (p Transaction) Pointer() *Transaction {
+	return &p
+}
+
+func CastTransactions(data []interface{}) []Transaction {
+	v := make([]Transaction, 0)
+	for _, d := range data {
+		v = append(v, NewTransactionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTransactionsFromDict(data []Transaction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type GitHubCheckoutSetting struct {
 	ApiKeyId       *string `json:"apiKeyId"`
 	RepositoryName *string `json:"repositoryName"`
@@ -329,116 +605,6 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
-}
-
-type RandomStatus struct {
-	Seed *int64       `json:"seed"`
-	Used []RandomUsed `json:"used"`
-}
-
-func NewRandomStatusFromJson(data string) RandomStatus {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRandomStatusFromDict(dict)
-}
-
-func NewRandomStatusFromDict(data map[string]interface{}) RandomStatus {
-	return RandomStatus{
-		Seed: core.CastInt64(data["seed"]),
-		Used: CastRandomUseds(core.CastArray(data["used"])),
-	}
-}
-
-func (p RandomStatus) ToDict() map[string]interface{} {
-
-	var seed *int64
-	if p.Seed != nil {
-		seed = p.Seed
-	}
-	var used []interface{}
-	if p.Used != nil {
-		used = CastRandomUsedsFromDict(
-			p.Used,
-		)
-	}
-	return map[string]interface{}{
-		"seed": seed,
-		"used": used,
-	}
-}
-
-func (p RandomStatus) Pointer() *RandomStatus {
-	return &p
-}
-
-func CastRandomStatuses(data []interface{}) []RandomStatus {
-	v := make([]RandomStatus, 0)
-	for _, d := range data {
-		v = append(v, NewRandomStatusFromDict(d.(map[string]interface{})))
-	}
-	return v
-}
-
-func CastRandomStatusesFromDict(data []RandomStatus) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
-}
-
-type RandomUsed struct {
-	Category *int64 `json:"category"`
-	Used     *int64 `json:"used"`
-}
-
-func NewRandomUsedFromJson(data string) RandomUsed {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRandomUsedFromDict(dict)
-}
-
-func NewRandomUsedFromDict(data map[string]interface{}) RandomUsed {
-	return RandomUsed{
-		Category: core.CastInt64(data["category"]),
-		Used:     core.CastInt64(data["used"]),
-	}
-}
-
-func (p RandomUsed) ToDict() map[string]interface{} {
-
-	var category *int64
-	if p.Category != nil {
-		category = p.Category
-	}
-	var used *int64
-	if p.Used != nil {
-		used = p.Used
-	}
-	return map[string]interface{}{
-		"category": category,
-		"used":     used,
-	}
-}
-
-func (p RandomUsed) Pointer() *RandomUsed {
-	return &p
-}
-
-func CastRandomUseds(data []interface{}) []RandomUsed {
-	v := make([]RandomUsed, 0)
-	for _, d := range data {
-		v = append(v, NewRandomUsedFromDict(d.(map[string]interface{})))
-	}
-	return v
-}
-
-func CastRandomUsedsFromDict(data []RandomUsed) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

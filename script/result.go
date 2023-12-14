@@ -438,7 +438,7 @@ func (p DeleteScriptResult) Pointer() *DeleteScriptResult {
 type InvokeScriptResult struct {
 	Code         *int32        `json:"code"`
 	Result       *string       `json:"result"`
-	Transaction  *string       `json:"transaction"`
+	Transaction  *Transaction  `json:"transaction"`
 	RandomStatus *RandomStatus `json:"randomStatus"`
 	ExecuteTime  *int32        `json:"executeTime"`
 	Charged      *int32        `json:"charged"`
@@ -460,7 +460,7 @@ func NewInvokeScriptResultFromDict(data map[string]interface{}) InvokeScriptResu
 	return InvokeScriptResult{
 		Code:         core.CastInt32(data["code"]),
 		Result:       core.CastString(data["result"]),
-		Transaction:  core.CastString(data["transaction"]),
+		Transaction:  NewTransactionFromDict(core.CastMap(data["transaction"])).Pointer(),
 		RandomStatus: NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
 		ExecuteTime:  core.CastInt32(data["executeTime"]),
 		Charged:      core.CastInt32(data["charged"]),
@@ -472,7 +472,7 @@ func (p InvokeScriptResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"code":         p.Code,
 		"result":       p.Result,
-		"transaction":  p.Transaction,
+		"transaction":  p.Transaction.ToDict(),
 		"randomStatus": p.RandomStatus.ToDict(),
 		"executeTime":  p.ExecuteTime,
 		"charged":      p.Charged,
@@ -489,7 +489,7 @@ func (p InvokeScriptResult) Pointer() *InvokeScriptResult {
 type DebugInvokeResult struct {
 	Code         *int32        `json:"code"`
 	Result       *string       `json:"result"`
-	Transaction  *string       `json:"transaction"`
+	Transaction  *Transaction  `json:"transaction"`
 	RandomStatus *RandomStatus `json:"randomStatus"`
 	ExecuteTime  *int32        `json:"executeTime"`
 	Charged      *int32        `json:"charged"`
@@ -511,7 +511,7 @@ func NewDebugInvokeResultFromDict(data map[string]interface{}) DebugInvokeResult
 	return DebugInvokeResult{
 		Code:         core.CastInt32(data["code"]),
 		Result:       core.CastString(data["result"]),
-		Transaction:  core.CastString(data["transaction"]),
+		Transaction:  NewTransactionFromDict(core.CastMap(data["transaction"])).Pointer(),
 		RandomStatus: NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
 		ExecuteTime:  core.CastInt32(data["executeTime"]),
 		Charged:      core.CastInt32(data["charged"]),
@@ -523,7 +523,7 @@ func (p DebugInvokeResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"code":         p.Code,
 		"result":       p.Result,
-		"transaction":  p.Transaction,
+		"transaction":  p.Transaction.ToDict(),
 		"randomStatus": p.RandomStatus.ToDict(),
 		"executeTime":  p.ExecuteTime,
 		"charged":      p.Charged,
