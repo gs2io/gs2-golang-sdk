@@ -109,14 +109,14 @@ func CastString(value interface{}) *string {
 	{
 		v, ok := value.(float64)
 		if ok {
-			v2 := fmt.Sprintf("%f", v)
+			v2 := fmt.Sprintf("%v", v)
 			return &v2
 		}
 	}
 	{
 		v, ok := value.(*float64)
 		if ok {
-			v2 := fmt.Sprintf("%f", *v)
+			v2 := fmt.Sprintf("%v", *v)
 			return &v2
 		}
 	}

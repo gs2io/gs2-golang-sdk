@@ -30,12 +30,9 @@ type DescribeNamespacesRequest struct {
 }
 
 func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDescribeNamespacesRequestFromDict(dict2)
+	return NewDescribeNamespacesRequestFromDict(dict)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -67,12 +64,9 @@ type CreateNamespaceRequest struct {
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewCreateNamespaceRequestFromDict(dict2)
+	return NewCreateNamespaceRequestFromDict(dict)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -106,12 +100,9 @@ type GetNamespaceStatusRequest struct {
 }
 
 func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewGetNamespaceStatusRequestFromDict(dict2)
+	return NewGetNamespaceStatusRequestFromDict(dict)
 }
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
@@ -137,12 +128,9 @@ type GetNamespaceRequest struct {
 }
 
 func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewGetNamespaceRequestFromDict(dict2)
+	return NewGetNamespaceRequestFromDict(dict)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -172,12 +160,9 @@ type UpdateNamespaceRequest struct {
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewUpdateNamespaceRequestFromDict(dict2)
+	return NewUpdateNamespaceRequestFromDict(dict)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -211,12 +196,9 @@ type DeleteNamespaceRequest struct {
 }
 
 func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDeleteNamespaceRequestFromDict(dict2)
+	return NewDeleteNamespaceRequestFromDict(dict)
 }
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
@@ -244,12 +226,9 @@ type DescribeDistributorModelMastersRequest struct {
 }
 
 func NewDescribeDistributorModelMastersRequestFromJson(data string) DescribeDistributorModelMastersRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDescribeDistributorModelMastersRequestFromDict(dict2)
+	return NewDescribeDistributorModelMastersRequestFromDict(dict)
 }
 
 func NewDescribeDistributorModelMastersRequestFromDict(data map[string]interface{}) DescribeDistributorModelMastersRequest {
@@ -284,12 +263,9 @@ type CreateDistributorModelMasterRequest struct {
 }
 
 func NewCreateDistributorModelMasterRequestFromJson(data string) CreateDistributorModelMasterRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewCreateDistributorModelMasterRequestFromDict(dict2)
+	return NewCreateDistributorModelMasterRequestFromDict(dict)
 }
 
 func NewCreateDistributorModelMasterRequestFromDict(data map[string]interface{}) CreateDistributorModelMasterRequest {
@@ -328,12 +304,9 @@ type GetDistributorModelMasterRequest struct {
 }
 
 func NewGetDistributorModelMasterRequestFromJson(data string) GetDistributorModelMasterRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewGetDistributorModelMasterRequestFromDict(dict2)
+	return NewGetDistributorModelMasterRequestFromDict(dict)
 }
 
 func NewGetDistributorModelMasterRequestFromDict(data map[string]interface{}) GetDistributorModelMasterRequest {
@@ -366,12 +339,9 @@ type UpdateDistributorModelMasterRequest struct {
 }
 
 func NewUpdateDistributorModelMasterRequestFromJson(data string) UpdateDistributorModelMasterRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewUpdateDistributorModelMasterRequestFromDict(dict2)
+	return NewUpdateDistributorModelMasterRequestFromDict(dict)
 }
 
 func NewUpdateDistributorModelMasterRequestFromDict(data map[string]interface{}) UpdateDistributorModelMasterRequest {
@@ -410,12 +380,9 @@ type DeleteDistributorModelMasterRequest struct {
 }
 
 func NewDeleteDistributorModelMasterRequestFromJson(data string) DeleteDistributorModelMasterRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDeleteDistributorModelMasterRequestFromDict(dict2)
+	return NewDeleteDistributorModelMasterRequestFromDict(dict)
 }
 
 func NewDeleteDistributorModelMasterRequestFromDict(data map[string]interface{}) DeleteDistributorModelMasterRequest {
@@ -443,12 +410,9 @@ type DescribeDistributorModelsRequest struct {
 }
 
 func NewDescribeDistributorModelsRequestFromJson(data string) DescribeDistributorModelsRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDescribeDistributorModelsRequestFromDict(dict2)
+	return NewDescribeDistributorModelsRequestFromDict(dict)
 }
 
 func NewDescribeDistributorModelsRequestFromDict(data map[string]interface{}) DescribeDistributorModelsRequest {
@@ -475,12 +439,9 @@ type GetDistributorModelRequest struct {
 }
 
 func NewGetDistributorModelRequestFromJson(data string) GetDistributorModelRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewGetDistributorModelRequestFromDict(dict2)
+	return NewGetDistributorModelRequestFromDict(dict)
 }
 
 func NewGetDistributorModelRequestFromDict(data map[string]interface{}) GetDistributorModelRequest {
@@ -508,12 +469,9 @@ type ExportMasterRequest struct {
 }
 
 func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewExportMasterRequestFromDict(dict2)
+	return NewExportMasterRequestFromDict(dict)
 }
 
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
@@ -539,12 +497,9 @@ type GetCurrentDistributorMasterRequest struct {
 }
 
 func NewGetCurrentDistributorMasterRequestFromJson(data string) GetCurrentDistributorMasterRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewGetCurrentDistributorMasterRequestFromDict(dict2)
+	return NewGetCurrentDistributorMasterRequestFromDict(dict)
 }
 
 func NewGetCurrentDistributorMasterRequestFromDict(data map[string]interface{}) GetCurrentDistributorMasterRequest {
@@ -571,12 +526,9 @@ type UpdateCurrentDistributorMasterRequest struct {
 }
 
 func NewUpdateCurrentDistributorMasterRequestFromJson(data string) UpdateCurrentDistributorMasterRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewUpdateCurrentDistributorMasterRequestFromDict(dict2)
+	return NewUpdateCurrentDistributorMasterRequestFromDict(dict)
 }
 
 func NewUpdateCurrentDistributorMasterRequestFromDict(data map[string]interface{}) UpdateCurrentDistributorMasterRequest {
@@ -605,12 +557,9 @@ type UpdateCurrentDistributorMasterFromGitHubRequest struct {
 }
 
 func NewUpdateCurrentDistributorMasterFromGitHubRequestFromJson(data string) UpdateCurrentDistributorMasterFromGitHubRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewUpdateCurrentDistributorMasterFromGitHubRequestFromDict(dict2)
+	return NewUpdateCurrentDistributorMasterFromGitHubRequestFromDict(dict)
 }
 
 func NewUpdateCurrentDistributorMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentDistributorMasterFromGitHubRequest {
@@ -641,12 +590,9 @@ type DistributeRequest struct {
 }
 
 func NewDistributeRequestFromJson(data string) DistributeRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDistributeRequestFromDict(dict2)
+	return NewDistributeRequestFromDict(dict)
 }
 
 func NewDistributeRequestFromDict(data map[string]interface{}) DistributeRequest {
@@ -679,12 +625,9 @@ type DistributeWithoutOverflowProcessRequest struct {
 }
 
 func NewDistributeWithoutOverflowProcessRequestFromJson(data string) DistributeWithoutOverflowProcessRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDistributeWithoutOverflowProcessRequestFromDict(dict2)
+	return NewDistributeWithoutOverflowProcessRequestFromDict(dict)
 }
 
 func NewDistributeWithoutOverflowProcessRequestFromDict(data map[string]interface{}) DistributeWithoutOverflowProcessRequest {
@@ -714,12 +657,9 @@ type RunStampTaskRequest struct {
 }
 
 func NewRunStampTaskRequestFromJson(data string) RunStampTaskRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewRunStampTaskRequestFromDict(dict2)
+	return NewRunStampTaskRequestFromDict(dict)
 }
 
 func NewRunStampTaskRequestFromDict(data map[string]interface{}) RunStampTaskRequest {
@@ -751,12 +691,9 @@ type RunStampSheetRequest struct {
 }
 
 func NewRunStampSheetRequestFromJson(data string) RunStampSheetRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewRunStampSheetRequestFromDict(dict2)
+	return NewRunStampSheetRequestFromDict(dict)
 }
 
 func NewRunStampSheetRequestFromDict(data map[string]interface{}) RunStampSheetRequest {
@@ -788,12 +725,9 @@ type RunStampSheetExpressRequest struct {
 }
 
 func NewRunStampSheetExpressRequestFromJson(data string) RunStampSheetExpressRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewRunStampSheetExpressRequestFromDict(dict2)
+	return NewRunStampSheetExpressRequestFromDict(dict)
 }
 
 func NewRunStampSheetExpressRequestFromDict(data map[string]interface{}) RunStampSheetExpressRequest {
@@ -824,12 +758,9 @@ type RunStampTaskWithoutNamespaceRequest struct {
 }
 
 func NewRunStampTaskWithoutNamespaceRequestFromJson(data string) RunStampTaskWithoutNamespaceRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewRunStampTaskWithoutNamespaceRequestFromDict(dict2)
+	return NewRunStampTaskWithoutNamespaceRequestFromDict(dict)
 }
 
 func NewRunStampTaskWithoutNamespaceRequestFromDict(data map[string]interface{}) RunStampTaskWithoutNamespaceRequest {
@@ -858,12 +789,9 @@ type RunStampSheetWithoutNamespaceRequest struct {
 }
 
 func NewRunStampSheetWithoutNamespaceRequestFromJson(data string) RunStampSheetWithoutNamespaceRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewRunStampSheetWithoutNamespaceRequestFromDict(dict2)
+	return NewRunStampSheetWithoutNamespaceRequestFromDict(dict)
 }
 
 func NewRunStampSheetWithoutNamespaceRequestFromDict(data map[string]interface{}) RunStampSheetWithoutNamespaceRequest {
@@ -892,12 +820,9 @@ type RunStampSheetExpressWithoutNamespaceRequest struct {
 }
 
 func NewRunStampSheetExpressWithoutNamespaceRequestFromJson(data string) RunStampSheetExpressWithoutNamespaceRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewRunStampSheetExpressWithoutNamespaceRequestFromDict(dict2)
+	return NewRunStampSheetExpressWithoutNamespaceRequestFromDict(dict)
 }
 
 func NewRunStampSheetExpressWithoutNamespaceRequestFromDict(data map[string]interface{}) RunStampSheetExpressWithoutNamespaceRequest {
@@ -927,12 +852,9 @@ type GetStampSheetResultRequest struct {
 }
 
 func NewGetStampSheetResultRequestFromJson(data string) GetStampSheetResultRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewGetStampSheetResultRequestFromDict(dict2)
+	return NewGetStampSheetResultRequestFromDict(dict)
 }
 
 func NewGetStampSheetResultRequestFromDict(data map[string]interface{}) GetStampSheetResultRequest {
@@ -964,12 +886,9 @@ type GetStampSheetResultByUserIdRequest struct {
 }
 
 func NewGetStampSheetResultByUserIdRequestFromJson(data string) GetStampSheetResultByUserIdRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewGetStampSheetResultByUserIdRequestFromDict(dict2)
+	return NewGetStampSheetResultByUserIdRequestFromDict(dict)
 }
 
 func NewGetStampSheetResultByUserIdRequestFromDict(data map[string]interface{}) GetStampSheetResultByUserIdRequest {

@@ -30,12 +30,9 @@ type DescribeStacksRequest struct {
 }
 
 func NewDescribeStacksRequestFromJson(data string) DescribeStacksRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDescribeStacksRequestFromDict(dict2)
+	return NewDescribeStacksRequestFromDict(dict)
 }
 
 func NewDescribeStacksRequestFromDict(data map[string]interface{}) DescribeStacksRequest {
@@ -65,12 +62,9 @@ type CreateStackRequest struct {
 }
 
 func NewCreateStackRequestFromJson(data string) CreateStackRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewCreateStackRequestFromDict(dict2)
+	return NewCreateStackRequestFromDict(dict)
 }
 
 func NewCreateStackRequestFromDict(data map[string]interface{}) CreateStackRequest {
@@ -102,12 +96,9 @@ type CreateStackFromGitHubRequest struct {
 }
 
 func NewCreateStackFromGitHubRequestFromJson(data string) CreateStackFromGitHubRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewCreateStackFromGitHubRequestFromDict(dict2)
+	return NewCreateStackFromGitHubRequestFromDict(dict)
 }
 
 func NewCreateStackFromGitHubRequestFromDict(data map[string]interface{}) CreateStackFromGitHubRequest {
@@ -137,12 +128,9 @@ type ValidateRequest struct {
 }
 
 func NewValidateRequestFromJson(data string) ValidateRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewValidateRequestFromDict(dict2)
+	return NewValidateRequestFromDict(dict)
 }
 
 func NewValidateRequestFromDict(data map[string]interface{}) ValidateRequest {
@@ -168,12 +156,9 @@ type GetStackStatusRequest struct {
 }
 
 func NewGetStackStatusRequestFromJson(data string) GetStackStatusRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewGetStackStatusRequestFromDict(dict2)
+	return NewGetStackStatusRequestFromDict(dict)
 }
 
 func NewGetStackStatusRequestFromDict(data map[string]interface{}) GetStackStatusRequest {
@@ -199,12 +184,9 @@ type GetStackRequest struct {
 }
 
 func NewGetStackRequestFromJson(data string) GetStackRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewGetStackRequestFromDict(dict2)
+	return NewGetStackRequestFromDict(dict)
 }
 
 func NewGetStackRequestFromDict(data map[string]interface{}) GetStackRequest {
@@ -232,12 +214,9 @@ type UpdateStackRequest struct {
 }
 
 func NewUpdateStackRequestFromJson(data string) UpdateStackRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewUpdateStackRequestFromDict(dict2)
+	return NewUpdateStackRequestFromDict(dict)
 }
 
 func NewUpdateStackRequestFromDict(data map[string]interface{}) UpdateStackRequest {
@@ -268,12 +247,9 @@ type ChangeSetRequest struct {
 }
 
 func NewChangeSetRequestFromJson(data string) ChangeSetRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewChangeSetRequestFromDict(dict2)
+	return NewChangeSetRequestFromDict(dict)
 }
 
 func NewChangeSetRequestFromDict(data map[string]interface{}) ChangeSetRequest {
@@ -303,12 +279,9 @@ type UpdateStackFromGitHubRequest struct {
 }
 
 func NewUpdateStackFromGitHubRequestFromJson(data string) UpdateStackFromGitHubRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewUpdateStackFromGitHubRequestFromDict(dict2)
+	return NewUpdateStackFromGitHubRequestFromDict(dict)
 }
 
 func NewUpdateStackFromGitHubRequestFromDict(data map[string]interface{}) UpdateStackFromGitHubRequest {
@@ -338,12 +311,9 @@ type DeleteStackRequest struct {
 }
 
 func NewDeleteStackRequestFromJson(data string) DeleteStackRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDeleteStackRequestFromDict(dict2)
+	return NewDeleteStackRequestFromDict(dict)
 }
 
 func NewDeleteStackRequestFromDict(data map[string]interface{}) DeleteStackRequest {
@@ -369,12 +339,9 @@ type ForceDeleteStackRequest struct {
 }
 
 func NewForceDeleteStackRequestFromJson(data string) ForceDeleteStackRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewForceDeleteStackRequestFromDict(dict2)
+	return NewForceDeleteStackRequestFromDict(dict)
 }
 
 func NewForceDeleteStackRequestFromDict(data map[string]interface{}) ForceDeleteStackRequest {
@@ -400,12 +367,9 @@ type DeleteStackResourcesRequest struct {
 }
 
 func NewDeleteStackResourcesRequestFromJson(data string) DeleteStackResourcesRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDeleteStackResourcesRequestFromDict(dict2)
+	return NewDeleteStackResourcesRequestFromDict(dict)
 }
 
 func NewDeleteStackResourcesRequestFromDict(data map[string]interface{}) DeleteStackResourcesRequest {
@@ -431,12 +395,9 @@ type DeleteStackEntityRequest struct {
 }
 
 func NewDeleteStackEntityRequestFromJson(data string) DeleteStackEntityRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDeleteStackEntityRequestFromDict(dict2)
+	return NewDeleteStackEntityRequestFromDict(dict)
 }
 
 func NewDeleteStackEntityRequestFromDict(data map[string]interface{}) DeleteStackEntityRequest {
@@ -464,12 +425,9 @@ type DescribeResourcesRequest struct {
 }
 
 func NewDescribeResourcesRequestFromJson(data string) DescribeResourcesRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDescribeResourcesRequestFromDict(dict2)
+	return NewDescribeResourcesRequestFromDict(dict)
 }
 
 func NewDescribeResourcesRequestFromDict(data map[string]interface{}) DescribeResourcesRequest {
@@ -500,12 +458,9 @@ type GetResourceRequest struct {
 }
 
 func NewGetResourceRequestFromJson(data string) GetResourceRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewGetResourceRequestFromDict(dict2)
+	return NewGetResourceRequestFromDict(dict)
 }
 
 func NewGetResourceRequestFromDict(data map[string]interface{}) GetResourceRequest {
@@ -535,12 +490,9 @@ type DescribeEventsRequest struct {
 }
 
 func NewDescribeEventsRequestFromJson(data string) DescribeEventsRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDescribeEventsRequestFromDict(dict2)
+	return NewDescribeEventsRequestFromDict(dict)
 }
 
 func NewDescribeEventsRequestFromDict(data map[string]interface{}) DescribeEventsRequest {
@@ -571,12 +523,9 @@ type GetEventRequest struct {
 }
 
 func NewGetEventRequestFromJson(data string) GetEventRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewGetEventRequestFromDict(dict2)
+	return NewGetEventRequestFromDict(dict)
 }
 
 func NewGetEventRequestFromDict(data map[string]interface{}) GetEventRequest {
@@ -606,12 +555,9 @@ type DescribeOutputsRequest struct {
 }
 
 func NewDescribeOutputsRequestFromJson(data string) DescribeOutputsRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewDescribeOutputsRequestFromDict(dict2)
+	return NewDescribeOutputsRequestFromDict(dict)
 }
 
 func NewDescribeOutputsRequestFromDict(data map[string]interface{}) DescribeOutputsRequest {
@@ -642,12 +588,9 @@ type GetOutputRequest struct {
 }
 
 func NewGetOutputRequestFromJson(data string) GetOutputRequest {
-	dict := map[string]string{}
+	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	dict2 := map[string]interface{}{}
-	data2, _ := json.Marshal(&dict2)
-	_ = json.Unmarshal(data2, &dict2)
-	return NewGetOutputRequestFromDict(dict2)
+	return NewGetOutputRequestFromDict(dict)
 }
 
 func NewGetOutputRequestFromDict(data map[string]interface{}) GetOutputRequest {
