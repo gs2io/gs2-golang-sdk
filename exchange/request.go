@@ -30,9 +30,12 @@ type DescribeNamespacesRequest struct {
 }
 
 func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeNamespacesRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDescribeNamespacesRequestFromDict(dict2)
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -70,9 +73,12 @@ type CreateNamespaceRequest struct {
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateNamespaceRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewCreateNamespaceRequestFromDict(dict2)
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -114,9 +120,12 @@ type GetNamespaceStatusRequest struct {
 }
 
 func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceStatusRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewGetNamespaceStatusRequestFromDict(dict2)
 }
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
@@ -142,9 +151,12 @@ type GetNamespaceRequest struct {
 }
 
 func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewGetNamespaceRequestFromDict(dict2)
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -180,9 +192,12 @@ type UpdateNamespaceRequest struct {
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateNamespaceRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewUpdateNamespaceRequestFromDict(dict2)
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -224,9 +239,12 @@ type DeleteNamespaceRequest struct {
 }
 
 func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteNamespaceRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDeleteNamespaceRequestFromDict(dict2)
 }
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
@@ -253,9 +271,12 @@ type DumpUserDataByUserIdRequest struct {
 }
 
 func NewDumpUserDataByUserIdRequestFromJson(data string) DumpUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDumpUserDataByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDumpUserDataByUserIdRequestFromDict(dict2)
 }
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
@@ -282,9 +303,12 @@ type CheckDumpUserDataByUserIdRequest struct {
 }
 
 func NewCheckDumpUserDataByUserIdRequestFromJson(data string) CheckDumpUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCheckDumpUserDataByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewCheckDumpUserDataByUserIdRequestFromDict(dict2)
 }
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
@@ -311,9 +335,12 @@ type CleanUserDataByUserIdRequest struct {
 }
 
 func NewCleanUserDataByUserIdRequestFromJson(data string) CleanUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCleanUserDataByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewCleanUserDataByUserIdRequestFromDict(dict2)
 }
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
@@ -340,9 +367,12 @@ type CheckCleanUserDataByUserIdRequest struct {
 }
 
 func NewCheckCleanUserDataByUserIdRequestFromJson(data string) CheckCleanUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCheckCleanUserDataByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewCheckCleanUserDataByUserIdRequestFromDict(dict2)
 }
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
@@ -369,9 +399,12 @@ type PrepareImportUserDataByUserIdRequest struct {
 }
 
 func NewPrepareImportUserDataByUserIdRequestFromJson(data string) PrepareImportUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareImportUserDataByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewPrepareImportUserDataByUserIdRequestFromDict(dict2)
 }
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
@@ -399,9 +432,12 @@ type ImportUserDataByUserIdRequest struct {
 }
 
 func NewImportUserDataByUserIdRequestFromJson(data string) ImportUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewImportUserDataByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewImportUserDataByUserIdRequestFromDict(dict2)
 }
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
@@ -431,9 +467,12 @@ type CheckImportUserDataByUserIdRequest struct {
 }
 
 func NewCheckImportUserDataByUserIdRequestFromJson(data string) CheckImportUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCheckImportUserDataByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewCheckImportUserDataByUserIdRequestFromDict(dict2)
 }
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
@@ -461,9 +500,12 @@ type DescribeRateModelsRequest struct {
 }
 
 func NewDescribeRateModelsRequestFromJson(data string) DescribeRateModelsRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRateModelsRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDescribeRateModelsRequestFromDict(dict2)
 }
 
 func NewDescribeRateModelsRequestFromDict(data map[string]interface{}) DescribeRateModelsRequest {
@@ -490,9 +532,12 @@ type GetRateModelRequest struct {
 }
 
 func NewGetRateModelRequestFromJson(data string) GetRateModelRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRateModelRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewGetRateModelRequestFromDict(dict2)
 }
 
 func NewGetRateModelRequestFromDict(data map[string]interface{}) GetRateModelRequest {
@@ -522,9 +567,12 @@ type DescribeRateModelMastersRequest struct {
 }
 
 func NewDescribeRateModelMastersRequestFromJson(data string) DescribeRateModelMastersRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRateModelMastersRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDescribeRateModelMastersRequestFromDict(dict2)
 }
 
 func NewDescribeRateModelMastersRequestFromDict(data map[string]interface{}) DescribeRateModelMastersRequest {
@@ -563,9 +611,12 @@ type CreateRateModelMasterRequest struct {
 }
 
 func NewCreateRateModelMasterRequestFromJson(data string) CreateRateModelMasterRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateRateModelMasterRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewCreateRateModelMasterRequestFromDict(dict2)
 }
 
 func NewCreateRateModelMasterRequestFromDict(data map[string]interface{}) CreateRateModelMasterRequest {
@@ -616,9 +667,12 @@ type GetRateModelMasterRequest struct {
 }
 
 func NewGetRateModelMasterRequestFromJson(data string) GetRateModelMasterRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRateModelMasterRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewGetRateModelMasterRequestFromDict(dict2)
 }
 
 func NewGetRateModelMasterRequestFromDict(data map[string]interface{}) GetRateModelMasterRequest {
@@ -655,9 +709,12 @@ type UpdateRateModelMasterRequest struct {
 }
 
 func NewUpdateRateModelMasterRequestFromJson(data string) UpdateRateModelMasterRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateRateModelMasterRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewUpdateRateModelMasterRequestFromDict(dict2)
 }
 
 func NewUpdateRateModelMasterRequestFromDict(data map[string]interface{}) UpdateRateModelMasterRequest {
@@ -708,9 +765,12 @@ type DeleteRateModelMasterRequest struct {
 }
 
 func NewDeleteRateModelMasterRequestFromJson(data string) DeleteRateModelMasterRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteRateModelMasterRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDeleteRateModelMasterRequestFromDict(dict2)
 }
 
 func NewDeleteRateModelMasterRequestFromDict(data map[string]interface{}) DeleteRateModelMasterRequest {
@@ -738,9 +798,12 @@ type DescribeIncrementalRateModelsRequest struct {
 }
 
 func NewDescribeIncrementalRateModelsRequestFromJson(data string) DescribeIncrementalRateModelsRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeIncrementalRateModelsRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDescribeIncrementalRateModelsRequestFromDict(dict2)
 }
 
 func NewDescribeIncrementalRateModelsRequestFromDict(data map[string]interface{}) DescribeIncrementalRateModelsRequest {
@@ -767,9 +830,12 @@ type GetIncrementalRateModelRequest struct {
 }
 
 func NewGetIncrementalRateModelRequestFromJson(data string) GetIncrementalRateModelRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetIncrementalRateModelRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewGetIncrementalRateModelRequestFromDict(dict2)
 }
 
 func NewGetIncrementalRateModelRequestFromDict(data map[string]interface{}) GetIncrementalRateModelRequest {
@@ -799,9 +865,12 @@ type DescribeIncrementalRateModelMastersRequest struct {
 }
 
 func NewDescribeIncrementalRateModelMastersRequestFromJson(data string) DescribeIncrementalRateModelMastersRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeIncrementalRateModelMastersRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDescribeIncrementalRateModelMastersRequestFromDict(dict2)
 }
 
 func NewDescribeIncrementalRateModelMastersRequestFromDict(data map[string]interface{}) DescribeIncrementalRateModelMastersRequest {
@@ -842,9 +911,12 @@ type CreateIncrementalRateModelMasterRequest struct {
 }
 
 func NewCreateIncrementalRateModelMasterRequestFromJson(data string) CreateIncrementalRateModelMasterRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateIncrementalRateModelMasterRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewCreateIncrementalRateModelMasterRequestFromDict(dict2)
 }
 
 func NewCreateIncrementalRateModelMasterRequestFromDict(data map[string]interface{}) CreateIncrementalRateModelMasterRequest {
@@ -895,9 +967,12 @@ type GetIncrementalRateModelMasterRequest struct {
 }
 
 func NewGetIncrementalRateModelMasterRequestFromJson(data string) GetIncrementalRateModelMasterRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetIncrementalRateModelMasterRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewGetIncrementalRateModelMasterRequestFromDict(dict2)
 }
 
 func NewGetIncrementalRateModelMasterRequestFromDict(data map[string]interface{}) GetIncrementalRateModelMasterRequest {
@@ -936,9 +1011,12 @@ type UpdateIncrementalRateModelMasterRequest struct {
 }
 
 func NewUpdateIncrementalRateModelMasterRequestFromJson(data string) UpdateIncrementalRateModelMasterRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateIncrementalRateModelMasterRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewUpdateIncrementalRateModelMasterRequestFromDict(dict2)
 }
 
 func NewUpdateIncrementalRateModelMasterRequestFromDict(data map[string]interface{}) UpdateIncrementalRateModelMasterRequest {
@@ -989,9 +1067,12 @@ type DeleteIncrementalRateModelMasterRequest struct {
 }
 
 func NewDeleteIncrementalRateModelMasterRequestFromJson(data string) DeleteIncrementalRateModelMasterRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteIncrementalRateModelMasterRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDeleteIncrementalRateModelMasterRequestFromDict(dict2)
 }
 
 func NewDeleteIncrementalRateModelMasterRequestFromDict(data map[string]interface{}) DeleteIncrementalRateModelMasterRequest {
@@ -1024,9 +1105,12 @@ type ExchangeRequest struct {
 }
 
 func NewExchangeRequestFromJson(data string) ExchangeRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewExchangeRequestFromDict(dict2)
 }
 
 func NewExchangeRequestFromDict(data map[string]interface{}) ExchangeRequest {
@@ -1067,9 +1151,12 @@ type ExchangeByUserIdRequest struct {
 }
 
 func NewExchangeByUserIdRequestFromJson(data string) ExchangeByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewExchangeByUserIdRequestFromDict(dict2)
 }
 
 func NewExchangeByUserIdRequestFromDict(data map[string]interface{}) ExchangeByUserIdRequest {
@@ -1106,9 +1193,12 @@ type ExchangeByStampSheetRequest struct {
 }
 
 func NewExchangeByStampSheetRequestFromJson(data string) ExchangeByStampSheetRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeByStampSheetRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewExchangeByStampSheetRequestFromDict(dict2)
 }
 
 func NewExchangeByStampSheetRequestFromDict(data map[string]interface{}) ExchangeByStampSheetRequest {
@@ -1141,9 +1231,12 @@ type IncrementalExchangeRequest struct {
 }
 
 func NewIncrementalExchangeRequestFromJson(data string) IncrementalExchangeRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewIncrementalExchangeRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewIncrementalExchangeRequestFromDict(dict2)
 }
 
 func NewIncrementalExchangeRequestFromDict(data map[string]interface{}) IncrementalExchangeRequest {
@@ -1184,9 +1277,12 @@ type IncrementalExchangeByUserIdRequest struct {
 }
 
 func NewIncrementalExchangeByUserIdRequestFromJson(data string) IncrementalExchangeByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewIncrementalExchangeByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewIncrementalExchangeByUserIdRequestFromDict(dict2)
 }
 
 func NewIncrementalExchangeByUserIdRequestFromDict(data map[string]interface{}) IncrementalExchangeByUserIdRequest {
@@ -1223,9 +1319,12 @@ type IncrementalExchangeByStampSheetRequest struct {
 }
 
 func NewIncrementalExchangeByStampSheetRequestFromJson(data string) IncrementalExchangeByStampSheetRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewIncrementalExchangeByStampSheetRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewIncrementalExchangeByStampSheetRequestFromDict(dict2)
 }
 
 func NewIncrementalExchangeByStampSheetRequestFromDict(data map[string]interface{}) IncrementalExchangeByStampSheetRequest {
@@ -1257,9 +1356,12 @@ type UnlockIncrementalExchangeByUserIdRequest struct {
 }
 
 func NewUnlockIncrementalExchangeByUserIdRequestFromJson(data string) UnlockIncrementalExchangeByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUnlockIncrementalExchangeByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewUnlockIncrementalExchangeByUserIdRequestFromDict(dict2)
 }
 
 func NewUnlockIncrementalExchangeByUserIdRequestFromDict(data map[string]interface{}) UnlockIncrementalExchangeByUserIdRequest {
@@ -1292,9 +1394,12 @@ type UnlockIncrementalExchangeByStampSheetRequest struct {
 }
 
 func NewUnlockIncrementalExchangeByStampSheetRequestFromJson(data string) UnlockIncrementalExchangeByStampSheetRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUnlockIncrementalExchangeByStampSheetRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewUnlockIncrementalExchangeByStampSheetRequestFromDict(dict2)
 }
 
 func NewUnlockIncrementalExchangeByStampSheetRequestFromDict(data map[string]interface{}) UnlockIncrementalExchangeByStampSheetRequest {
@@ -1322,9 +1427,12 @@ type ExportMasterRequest struct {
 }
 
 func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExportMasterRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewExportMasterRequestFromDict(dict2)
 }
 
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
@@ -1350,9 +1458,12 @@ type GetCurrentRateMasterRequest struct {
 }
 
 func NewGetCurrentRateMasterRequestFromJson(data string) GetCurrentRateMasterRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetCurrentRateMasterRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewGetCurrentRateMasterRequestFromDict(dict2)
 }
 
 func NewGetCurrentRateMasterRequestFromDict(data map[string]interface{}) GetCurrentRateMasterRequest {
@@ -1379,9 +1490,12 @@ type UpdateCurrentRateMasterRequest struct {
 }
 
 func NewUpdateCurrentRateMasterRequestFromJson(data string) UpdateCurrentRateMasterRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentRateMasterRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewUpdateCurrentRateMasterRequestFromDict(dict2)
 }
 
 func NewUpdateCurrentRateMasterRequestFromDict(data map[string]interface{}) UpdateCurrentRateMasterRequest {
@@ -1410,9 +1524,12 @@ type UpdateCurrentRateMasterFromGitHubRequest struct {
 }
 
 func NewUpdateCurrentRateMasterFromGitHubRequestFromJson(data string) UpdateCurrentRateMasterFromGitHubRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentRateMasterFromGitHubRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewUpdateCurrentRateMasterFromGitHubRequestFromDict(dict2)
 }
 
 func NewUpdateCurrentRateMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentRateMasterFromGitHubRequest {
@@ -1444,9 +1561,12 @@ type CreateAwaitByUserIdRequest struct {
 }
 
 func NewCreateAwaitByUserIdRequestFromJson(data string) CreateAwaitByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateAwaitByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewCreateAwaitByUserIdRequestFromDict(dict2)
 }
 
 func NewCreateAwaitByUserIdRequestFromDict(data map[string]interface{}) CreateAwaitByUserIdRequest {
@@ -1482,9 +1602,12 @@ type DescribeAwaitsRequest struct {
 }
 
 func NewDescribeAwaitsRequestFromJson(data string) DescribeAwaitsRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeAwaitsRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDescribeAwaitsRequestFromDict(dict2)
 }
 
 func NewDescribeAwaitsRequestFromDict(data map[string]interface{}) DescribeAwaitsRequest {
@@ -1522,9 +1645,12 @@ type DescribeAwaitsByUserIdRequest struct {
 }
 
 func NewDescribeAwaitsByUserIdRequestFromJson(data string) DescribeAwaitsByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeAwaitsByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDescribeAwaitsByUserIdRequestFromDict(dict2)
 }
 
 func NewDescribeAwaitsByUserIdRequestFromDict(data map[string]interface{}) DescribeAwaitsByUserIdRequest {
@@ -1560,9 +1686,12 @@ type GetAwaitRequest struct {
 }
 
 func NewGetAwaitRequestFromJson(data string) GetAwaitRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetAwaitRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewGetAwaitRequestFromDict(dict2)
 }
 
 func NewGetAwaitRequestFromDict(data map[string]interface{}) GetAwaitRequest {
@@ -1594,9 +1723,12 @@ type GetAwaitByUserIdRequest struct {
 }
 
 func NewGetAwaitByUserIdRequestFromJson(data string) GetAwaitByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetAwaitByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewGetAwaitByUserIdRequestFromDict(dict2)
 }
 
 func NewGetAwaitByUserIdRequestFromDict(data map[string]interface{}) GetAwaitByUserIdRequest {
@@ -1630,9 +1762,12 @@ type AcquireRequest struct {
 }
 
 func NewAcquireRequestFromJson(data string) AcquireRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAcquireRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewAcquireRequestFromDict(dict2)
 }
 
 func NewAcquireRequestFromDict(data map[string]interface{}) AcquireRequest {
@@ -1670,9 +1805,12 @@ type AcquireByUserIdRequest struct {
 }
 
 func NewAcquireByUserIdRequestFromJson(data string) AcquireByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAcquireByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewAcquireByUserIdRequestFromDict(dict2)
 }
 
 func NewAcquireByUserIdRequestFromDict(data map[string]interface{}) AcquireByUserIdRequest {
@@ -1710,9 +1848,12 @@ type AcquireForceByUserIdRequest struct {
 }
 
 func NewAcquireForceByUserIdRequestFromJson(data string) AcquireForceByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAcquireForceByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewAcquireForceByUserIdRequestFromDict(dict2)
 }
 
 func NewAcquireForceByUserIdRequestFromDict(data map[string]interface{}) AcquireForceByUserIdRequest {
@@ -1750,9 +1891,12 @@ type SkipRequest struct {
 }
 
 func NewSkipRequestFromJson(data string) SkipRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSkipRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewSkipRequestFromDict(dict2)
 }
 
 func NewSkipRequestFromDict(data map[string]interface{}) SkipRequest {
@@ -1790,9 +1934,12 @@ type SkipByUserIdRequest struct {
 }
 
 func NewSkipByUserIdRequestFromJson(data string) SkipByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSkipByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewSkipByUserIdRequestFromDict(dict2)
 }
 
 func NewSkipByUserIdRequestFromDict(data map[string]interface{}) SkipByUserIdRequest {
@@ -1829,9 +1976,12 @@ type DeleteAwaitRequest struct {
 }
 
 func NewDeleteAwaitRequestFromJson(data string) DeleteAwaitRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteAwaitRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDeleteAwaitRequestFromDict(dict2)
 }
 
 func NewDeleteAwaitRequestFromDict(data map[string]interface{}) DeleteAwaitRequest {
@@ -1864,9 +2014,12 @@ type DeleteAwaitByUserIdRequest struct {
 }
 
 func NewDeleteAwaitByUserIdRequestFromJson(data string) DeleteAwaitByUserIdRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteAwaitByUserIdRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDeleteAwaitByUserIdRequestFromDict(dict2)
 }
 
 func NewDeleteAwaitByUserIdRequestFromDict(data map[string]interface{}) DeleteAwaitByUserIdRequest {
@@ -1897,9 +2050,12 @@ type CreateAwaitByStampSheetRequest struct {
 }
 
 func NewCreateAwaitByStampSheetRequestFromJson(data string) CreateAwaitByStampSheetRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateAwaitByStampSheetRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewCreateAwaitByStampSheetRequestFromDict(dict2)
 }
 
 func NewCreateAwaitByStampSheetRequestFromDict(data map[string]interface{}) CreateAwaitByStampSheetRequest {
@@ -1928,9 +2084,12 @@ type DeleteAwaitByStampTaskRequest struct {
 }
 
 func NewDeleteAwaitByStampTaskRequestFromJson(data string) DeleteAwaitByStampTaskRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteAwaitByStampTaskRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewDeleteAwaitByStampTaskRequestFromDict(dict2)
 }
 
 func NewDeleteAwaitByStampTaskRequestFromDict(data map[string]interface{}) DeleteAwaitByStampTaskRequest {

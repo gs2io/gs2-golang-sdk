@@ -30,9 +30,12 @@ type LoginRequest struct {
 }
 
 func NewLoginRequestFromJson(data string) LoginRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLoginRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewLoginRequestFromDict(dict2)
 }
 
 func NewLoginRequestFromDict(data map[string]interface{}) LoginRequest {
@@ -62,9 +65,12 @@ type LoginBySignatureRequest struct {
 }
 
 func NewLoginBySignatureRequestFromJson(data string) LoginBySignatureRequest {
-	dict := map[string]interface{}{}
+	dict := map[string]string{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLoginBySignatureRequestFromDict(dict)
+	dict2 := map[string]interface{}{}
+	data2, _ := json.Marshal(&dict2)
+	_ = json.Unmarshal(data2, &dict2)
+	return NewLoginBySignatureRequestFromDict(dict2)
 }
 
 func NewLoginBySignatureRequestFromDict(data map[string]interface{}) LoginBySignatureRequest {
