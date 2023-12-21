@@ -65,6 +65,86 @@ func CastString(value interface{}) *string {
 		}
 	}
 	{
+		v, ok := value.(int32)
+		if ok {
+			v2 := fmt.Sprintf("%d", v)
+			return &v2
+		}
+	}
+	{
+		v, ok := value.(*int32)
+		if ok {
+			v2 := fmt.Sprintf("%d", *v)
+			return &v2
+		}
+	}
+	{
+		v, ok := value.(int64)
+		if ok {
+			v2 := fmt.Sprintf("%d", v)
+			return &v2
+		}
+	}
+	{
+		v, ok := value.(*int64)
+		if ok {
+			v2 := fmt.Sprintf("%d", *v)
+			return &v2
+		}
+	}
+	{
+		v, ok := value.(float32)
+		if ok {
+			v2 := fmt.Sprintf("%f", v)
+			return &v2
+		}
+	}
+	{
+		v, ok := value.(*float32)
+		if ok {
+			v2 := fmt.Sprintf("%f", *v)
+			return &v2
+		}
+	}
+	{
+		v, ok := value.(float64)
+		if ok {
+			v2 := fmt.Sprintf("%f", v)
+			return &v2
+		}
+	}
+	{
+		v, ok := value.(*float64)
+		if ok {
+			v2 := fmt.Sprintf("%f", *v)
+			return &v2
+		}
+	}
+	{
+		v, ok := value.(bool)
+		if ok {
+			if v {
+				v2 := "true"
+				return &v2
+			} else {
+				v2 := "false"
+				return &v2
+			}
+		}
+	}
+	{
+		v, ok := value.(*bool)
+		if ok {
+			if *v {
+				v2 := "true"
+				return &v2
+			} else {
+				v2 := "false"
+				return &v2
+			}
+		}
+	}
+	{
 		v, ok := value.(map[string]interface{})
 		if ok {
 			v2, _ := json.Marshal(v)
