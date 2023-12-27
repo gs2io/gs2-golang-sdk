@@ -397,6 +397,209 @@ func CastRateModelMastersFromDict(data []RateModelMaster) []interface{} {
 	return v
 }
 
+type UnleashRateModel struct {
+	UnleashRateModelId     *string                 `json:"unleashRateModelId"`
+	Name                   *string                 `json:"name"`
+	Description            *string                 `json:"description"`
+	Metadata               *string                 `json:"metadata"`
+	TargetInventoryModelId *string                 `json:"targetInventoryModelId"`
+	GradeModelId           *string                 `json:"gradeModelId"`
+	GradeEntries           []UnleashRateEntryModel `json:"gradeEntries"`
+}
+
+func NewUnleashRateModelFromJson(data string) UnleashRateModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnleashRateModelFromDict(dict)
+}
+
+func NewUnleashRateModelFromDict(data map[string]interface{}) UnleashRateModel {
+	return UnleashRateModel{
+		UnleashRateModelId:     core.CastString(data["unleashRateModelId"]),
+		Name:                   core.CastString(data["name"]),
+		Description:            core.CastString(data["description"]),
+		Metadata:               core.CastString(data["metadata"]),
+		TargetInventoryModelId: core.CastString(data["targetInventoryModelId"]),
+		GradeModelId:           core.CastString(data["gradeModelId"]),
+		GradeEntries:           CastUnleashRateEntryModels(core.CastArray(data["gradeEntries"])),
+	}
+}
+
+func (p UnleashRateModel) ToDict() map[string]interface{} {
+
+	var unleashRateModelId *string
+	if p.UnleashRateModelId != nil {
+		unleashRateModelId = p.UnleashRateModelId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var description *string
+	if p.Description != nil {
+		description = p.Description
+	}
+	var metadata *string
+	if p.Metadata != nil {
+		metadata = p.Metadata
+	}
+	var targetInventoryModelId *string
+	if p.TargetInventoryModelId != nil {
+		targetInventoryModelId = p.TargetInventoryModelId
+	}
+	var gradeModelId *string
+	if p.GradeModelId != nil {
+		gradeModelId = p.GradeModelId
+	}
+	var gradeEntries []interface{}
+	if p.GradeEntries != nil {
+		gradeEntries = CastUnleashRateEntryModelsFromDict(
+			p.GradeEntries,
+		)
+	}
+	return map[string]interface{}{
+		"unleashRateModelId":     unleashRateModelId,
+		"name":                   name,
+		"description":            description,
+		"metadata":               metadata,
+		"targetInventoryModelId": targetInventoryModelId,
+		"gradeModelId":           gradeModelId,
+		"gradeEntries":           gradeEntries,
+	}
+}
+
+func (p UnleashRateModel) Pointer() *UnleashRateModel {
+	return &p
+}
+
+func CastUnleashRateModels(data []interface{}) []UnleashRateModel {
+	v := make([]UnleashRateModel, 0)
+	for _, d := range data {
+		v = append(v, NewUnleashRateModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastUnleashRateModelsFromDict(data []UnleashRateModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type UnleashRateModelMaster struct {
+	UnleashRateModelId     *string                 `json:"unleashRateModelId"`
+	Name                   *string                 `json:"name"`
+	Description            *string                 `json:"description"`
+	Metadata               *string                 `json:"metadata"`
+	TargetInventoryModelId *string                 `json:"targetInventoryModelId"`
+	GradeModelId           *string                 `json:"gradeModelId"`
+	GradeEntries           []UnleashRateEntryModel `json:"gradeEntries"`
+	CreatedAt              *int64                  `json:"createdAt"`
+	UpdatedAt              *int64                  `json:"updatedAt"`
+	Revision               *int64                  `json:"revision"`
+}
+
+func NewUnleashRateModelMasterFromJson(data string) UnleashRateModelMaster {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnleashRateModelMasterFromDict(dict)
+}
+
+func NewUnleashRateModelMasterFromDict(data map[string]interface{}) UnleashRateModelMaster {
+	return UnleashRateModelMaster{
+		UnleashRateModelId:     core.CastString(data["unleashRateModelId"]),
+		Name:                   core.CastString(data["name"]),
+		Description:            core.CastString(data["description"]),
+		Metadata:               core.CastString(data["metadata"]),
+		TargetInventoryModelId: core.CastString(data["targetInventoryModelId"]),
+		GradeModelId:           core.CastString(data["gradeModelId"]),
+		GradeEntries:           CastUnleashRateEntryModels(core.CastArray(data["gradeEntries"])),
+		CreatedAt:              core.CastInt64(data["createdAt"]),
+		UpdatedAt:              core.CastInt64(data["updatedAt"]),
+		Revision:               core.CastInt64(data["revision"]),
+	}
+}
+
+func (p UnleashRateModelMaster) ToDict() map[string]interface{} {
+
+	var unleashRateModelId *string
+	if p.UnleashRateModelId != nil {
+		unleashRateModelId = p.UnleashRateModelId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var description *string
+	if p.Description != nil {
+		description = p.Description
+	}
+	var metadata *string
+	if p.Metadata != nil {
+		metadata = p.Metadata
+	}
+	var targetInventoryModelId *string
+	if p.TargetInventoryModelId != nil {
+		targetInventoryModelId = p.TargetInventoryModelId
+	}
+	var gradeModelId *string
+	if p.GradeModelId != nil {
+		gradeModelId = p.GradeModelId
+	}
+	var gradeEntries []interface{}
+	if p.GradeEntries != nil {
+		gradeEntries = CastUnleashRateEntryModelsFromDict(
+			p.GradeEntries,
+		)
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	return map[string]interface{}{
+		"unleashRateModelId":     unleashRateModelId,
+		"name":                   name,
+		"description":            description,
+		"metadata":               metadata,
+		"targetInventoryModelId": targetInventoryModelId,
+		"gradeModelId":           gradeModelId,
+		"gradeEntries":           gradeEntries,
+		"createdAt":              createdAt,
+		"updatedAt":              updatedAt,
+		"revision":               revision,
+	}
+}
+
+func (p UnleashRateModelMaster) Pointer() *UnleashRateModelMaster {
+	return &p
+}
+
+func CastUnleashRateModelMasters(data []interface{}) []UnleashRateModelMaster {
+	v := make([]UnleashRateModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewUnleashRateModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastUnleashRateModelMastersFromDict(data []UnleashRateModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type Progress struct {
 	ProgressId      *string  `json:"progressId"`
 	UserId          *string  `json:"userId"`
@@ -662,6 +865,60 @@ func CastMaterials(data []interface{}) []Material {
 }
 
 func CastMaterialsFromDict(data []Material) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type UnleashRateEntryModel struct {
+	GradeValue *int64 `json:"gradeValue"`
+	NeedCount  *int32 `json:"needCount"`
+}
+
+func NewUnleashRateEntryModelFromJson(data string) UnleashRateEntryModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnleashRateEntryModelFromDict(dict)
+}
+
+func NewUnleashRateEntryModelFromDict(data map[string]interface{}) UnleashRateEntryModel {
+	return UnleashRateEntryModel{
+		GradeValue: core.CastInt64(data["gradeValue"]),
+		NeedCount:  core.CastInt32(data["needCount"]),
+	}
+}
+
+func (p UnleashRateEntryModel) ToDict() map[string]interface{} {
+
+	var gradeValue *int64
+	if p.GradeValue != nil {
+		gradeValue = p.GradeValue
+	}
+	var needCount *int32
+	if p.NeedCount != nil {
+		needCount = p.NeedCount
+	}
+	return map[string]interface{}{
+		"gradeValue": gradeValue,
+		"needCount":  needCount,
+	}
+}
+
+func (p UnleashRateEntryModel) Pointer() *UnleashRateEntryModel {
+	return &p
+}
+
+func CastUnleashRateEntryModels(data []interface{}) []UnleashRateEntryModel {
+	v := make([]UnleashRateEntryModel, 0)
+	for _, d := range data {
+		v = append(v, NewUnleashRateEntryModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastUnleashRateEntryModelsFromDict(data []UnleashRateEntryModel) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

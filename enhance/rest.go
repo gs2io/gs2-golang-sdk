@@ -1898,6 +1898,667 @@ func (p Gs2EnhanceRestClient) DeleteRateModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
+func describeUnleashRateModelsAsyncHandler(
+	client Gs2EnhanceRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeUnleashRateModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeUnleashRateModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeUnleashRateModelsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeUnleashRateModelsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeUnleashRateModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeUnleashRateModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceRestClient) DescribeUnleashRateModelsAsync(
+	request *DescribeUnleashRateModelsRequest,
+	callback chan<- DescribeUnleashRateModelsAsyncResult,
+) {
+	path := "/{namespaceName}/unleash/model"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go describeUnleashRateModelsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceRestClient) DescribeUnleashRateModels(
+	request *DescribeUnleashRateModelsRequest,
+) (*DescribeUnleashRateModelsResult, error) {
+	callback := make(chan DescribeUnleashRateModelsAsyncResult, 1)
+	go p.DescribeUnleashRateModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getUnleashRateModelAsyncHandler(
+	client Gs2EnhanceRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetUnleashRateModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetUnleashRateModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetUnleashRateModelResult
+	if asyncResult.Err != nil {
+		callback <- GetUnleashRateModelAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetUnleashRateModelAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetUnleashRateModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceRestClient) GetUnleashRateModelAsync(
+	request *GetUnleashRateModelRequest,
+	callback chan<- GetUnleashRateModelAsyncResult,
+) {
+	path := "/{namespaceName}/unleash/model/{rateName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+	} else {
+		path = strings.ReplaceAll(path, "{rateName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go getUnleashRateModelAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceRestClient) GetUnleashRateModel(
+	request *GetUnleashRateModelRequest,
+) (*GetUnleashRateModelResult, error) {
+	callback := make(chan GetUnleashRateModelAsyncResult, 1)
+	go p.GetUnleashRateModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeUnleashRateModelMastersAsyncHandler(
+	client Gs2EnhanceRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeUnleashRateModelMastersAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeUnleashRateModelMastersAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeUnleashRateModelMastersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeUnleashRateModelMastersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeUnleashRateModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeUnleashRateModelMastersAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceRestClient) DescribeUnleashRateModelMastersAsync(
+	request *DescribeUnleashRateModelMastersRequest,
+	callback chan<- DescribeUnleashRateModelMastersAsyncResult,
+) {
+	path := "/{namespaceName}/master/unleash/model"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go describeUnleashRateModelMastersAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceRestClient) DescribeUnleashRateModelMasters(
+	request *DescribeUnleashRateModelMastersRequest,
+) (*DescribeUnleashRateModelMastersResult, error) {
+	callback := make(chan DescribeUnleashRateModelMastersAsyncResult, 1)
+	go p.DescribeUnleashRateModelMastersAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func createUnleashRateModelMasterAsyncHandler(
+	client Gs2EnhanceRestClient,
+	job *core.NetworkJob,
+	callback chan<- CreateUnleashRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateUnleashRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateUnleashRateModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- CreateUnleashRateModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateUnleashRateModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- CreateUnleashRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceRestClient) CreateUnleashRateModelMasterAsync(
+	request *CreateUnleashRateModelMasterRequest,
+	callback chan<- CreateUnleashRateModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/unleash/model"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.TargetInventoryModelId != nil && *request.TargetInventoryModelId != "" {
+		bodies["targetInventoryModelId"] = *request.TargetInventoryModelId
+	}
+	if request.GradeModelId != nil && *request.GradeModelId != "" {
+		bodies["gradeModelId"] = *request.GradeModelId
+	}
+	if request.GradeEntries != nil {
+		var _gradeEntries []interface{}
+		for _, item := range request.GradeEntries {
+			_gradeEntries = append(_gradeEntries, item)
+		}
+		bodies["gradeEntries"] = _gradeEntries
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go createUnleashRateModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceRestClient) CreateUnleashRateModelMaster(
+	request *CreateUnleashRateModelMasterRequest,
+) (*CreateUnleashRateModelMasterResult, error) {
+	callback := make(chan CreateUnleashRateModelMasterAsyncResult, 1)
+	go p.CreateUnleashRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getUnleashRateModelMasterAsyncHandler(
+	client Gs2EnhanceRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetUnleashRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetUnleashRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetUnleashRateModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- GetUnleashRateModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetUnleashRateModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetUnleashRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceRestClient) GetUnleashRateModelMasterAsync(
+	request *GetUnleashRateModelMasterRequest,
+	callback chan<- GetUnleashRateModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/unleash/model/{rateName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+	} else {
+		path = strings.ReplaceAll(path, "{rateName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go getUnleashRateModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceRestClient) GetUnleashRateModelMaster(
+	request *GetUnleashRateModelMasterRequest,
+) (*GetUnleashRateModelMasterResult, error) {
+	callback := make(chan GetUnleashRateModelMasterAsyncResult, 1)
+	go p.GetUnleashRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func updateUnleashRateModelMasterAsyncHandler(
+	client Gs2EnhanceRestClient,
+	job *core.NetworkJob,
+	callback chan<- UpdateUnleashRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateUnleashRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateUnleashRateModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- UpdateUnleashRateModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateUnleashRateModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- UpdateUnleashRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceRestClient) UpdateUnleashRateModelMasterAsync(
+	request *UpdateUnleashRateModelMasterRequest,
+	callback chan<- UpdateUnleashRateModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/unleash/model/{rateName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+	} else {
+		path = strings.ReplaceAll(path, "{rateName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.TargetInventoryModelId != nil && *request.TargetInventoryModelId != "" {
+		bodies["targetInventoryModelId"] = *request.TargetInventoryModelId
+	}
+	if request.GradeModelId != nil && *request.GradeModelId != "" {
+		bodies["gradeModelId"] = *request.GradeModelId
+	}
+	if request.GradeEntries != nil {
+		var _gradeEntries []interface{}
+		for _, item := range request.GradeEntries {
+			_gradeEntries = append(_gradeEntries, item)
+		}
+		bodies["gradeEntries"] = _gradeEntries
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go updateUnleashRateModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceRestClient) UpdateUnleashRateModelMaster(
+	request *UpdateUnleashRateModelMasterRequest,
+) (*UpdateUnleashRateModelMasterResult, error) {
+	callback := make(chan UpdateUnleashRateModelMasterAsyncResult, 1)
+	go p.UpdateUnleashRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteUnleashRateModelMasterAsyncHandler(
+	client Gs2EnhanceRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteUnleashRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteUnleashRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteUnleashRateModelMasterResult
+	if asyncResult.Err != nil {
+		callback <- DeleteUnleashRateModelMasterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteUnleashRateModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DeleteUnleashRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceRestClient) DeleteUnleashRateModelMasterAsync(
+	request *DeleteUnleashRateModelMasterRequest,
+	callback chan<- DeleteUnleashRateModelMasterAsyncResult,
+) {
+	path := "/{namespaceName}/master/unleash/model/{rateName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+	} else {
+		path = strings.ReplaceAll(path, "{rateName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go deleteUnleashRateModelMasterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceRestClient) DeleteUnleashRateModelMaster(
+	request *DeleteUnleashRateModelMasterRequest,
+) (*DeleteUnleashRateModelMasterResult, error) {
+	callback := make(chan DeleteUnleashRateModelMasterAsyncResult, 1)
+	go p.DeleteUnleashRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func directEnhanceAsyncHandler(
 	client Gs2EnhanceRestClient,
 	job *core.NetworkJob,
@@ -2211,6 +2872,326 @@ func (p Gs2EnhanceRestClient) DirectEnhanceByStampSheet(
 ) (*DirectEnhanceByStampSheetResult, error) {
 	callback := make(chan DirectEnhanceByStampSheetAsyncResult, 1)
 	go p.DirectEnhanceByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func unleashAsyncHandler(
+	client Gs2EnhanceRestClient,
+	job *core.NetworkJob,
+	callback chan<- UnleashAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnleashAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnleashResult
+	if asyncResult.Err != nil {
+		callback <- UnleashAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UnleashAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- UnleashAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceRestClient) UnleashAsync(
+	request *UnleashRequest,
+	callback chan<- UnleashAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/unleash/{rateName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+	} else {
+		path = strings.ReplaceAll(path, "{rateName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.TargetItemSetId != nil && *request.TargetItemSetId != "" {
+		bodies["targetItemSetId"] = *request.TargetItemSetId
+	}
+	if request.Materials != nil {
+		var _materials []interface{}
+		for _, item := range request.Materials {
+			_materials = append(_materials, item)
+		}
+		bodies["materials"] = _materials
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go unleashAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceRestClient) Unleash(
+	request *UnleashRequest,
+) (*UnleashResult, error) {
+	callback := make(chan UnleashAsyncResult, 1)
+	go p.UnleashAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func unleashByUserIdAsyncHandler(
+	client Gs2EnhanceRestClient,
+	job *core.NetworkJob,
+	callback chan<- UnleashByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnleashByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnleashByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- UnleashByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UnleashByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- UnleashByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceRestClient) UnleashByUserIdAsync(
+	request *UnleashByUserIdRequest,
+	callback chan<- UnleashByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/unleash/{rateName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		path = strings.ReplaceAll(path, "{rateName}", core.ToString(*request.RateName))
+	} else {
+		path = strings.ReplaceAll(path, "{rateName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.TargetItemSetId != nil && *request.TargetItemSetId != "" {
+		bodies["targetItemSetId"] = *request.TargetItemSetId
+	}
+	if request.Materials != nil {
+		var _materials []interface{}
+		for _, item := range request.Materials {
+			_materials = append(_materials, item)
+		}
+		bodies["materials"] = _materials
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go unleashByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceRestClient) UnleashByUserId(
+	request *UnleashByUserIdRequest,
+) (*UnleashByUserIdResult, error) {
+	callback := make(chan UnleashByUserIdAsyncResult, 1)
+	go p.UnleashByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func unleashByStampSheetAsyncHandler(
+	client Gs2EnhanceRestClient,
+	job *core.NetworkJob,
+	callback chan<- UnleashByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnleashByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnleashByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- UnleashByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UnleashByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- UnleashByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceRestClient) UnleashByStampSheetAsync(
+	request *UnleashByStampSheetRequest,
+	callback chan<- UnleashByStampSheetAsyncResult,
+) {
+	path := "/stamp/unleash"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go unleashByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("enhance").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceRestClient) UnleashByStampSheet(
+	request *UnleashByStampSheetRequest,
+) (*UnleashByStampSheetResult, error) {
+	callback := make(chan UnleashByStampSheetAsyncResult, 1)
+	go p.UnleashByStampSheetAsync(
 		request,
 		callback,
 	)

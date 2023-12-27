@@ -637,6 +637,230 @@ func (p DeleteRateModelMasterResult) Pointer() *DeleteRateModelMasterResult {
 	return &p
 }
 
+type DescribeUnleashRateModelsResult struct {
+	Items []UnleashRateModel `json:"items"`
+}
+
+type DescribeUnleashRateModelsAsyncResult struct {
+	result *DescribeUnleashRateModelsResult
+	err    error
+}
+
+func NewDescribeUnleashRateModelsResultFromJson(data string) DescribeUnleashRateModelsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeUnleashRateModelsResultFromDict(dict)
+}
+
+func NewDescribeUnleashRateModelsResultFromDict(data map[string]interface{}) DescribeUnleashRateModelsResult {
+	return DescribeUnleashRateModelsResult{
+		Items: CastUnleashRateModels(core.CastArray(data["items"])),
+	}
+}
+
+func (p DescribeUnleashRateModelsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastUnleashRateModelsFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p DescribeUnleashRateModelsResult) Pointer() *DescribeUnleashRateModelsResult {
+	return &p
+}
+
+type GetUnleashRateModelResult struct {
+	Item *UnleashRateModel `json:"item"`
+}
+
+type GetUnleashRateModelAsyncResult struct {
+	result *GetUnleashRateModelResult
+	err    error
+}
+
+func NewGetUnleashRateModelResultFromJson(data string) GetUnleashRateModelResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetUnleashRateModelResultFromDict(dict)
+}
+
+func NewGetUnleashRateModelResultFromDict(data map[string]interface{}) GetUnleashRateModelResult {
+	return GetUnleashRateModelResult{
+		Item: NewUnleashRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetUnleashRateModelResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetUnleashRateModelResult) Pointer() *GetUnleashRateModelResult {
+	return &p
+}
+
+type DescribeUnleashRateModelMastersResult struct {
+	Items         []UnleashRateModelMaster `json:"items"`
+	NextPageToken *string                  `json:"nextPageToken"`
+}
+
+type DescribeUnleashRateModelMastersAsyncResult struct {
+	result *DescribeUnleashRateModelMastersResult
+	err    error
+}
+
+func NewDescribeUnleashRateModelMastersResultFromJson(data string) DescribeUnleashRateModelMastersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeUnleashRateModelMastersResultFromDict(dict)
+}
+
+func NewDescribeUnleashRateModelMastersResultFromDict(data map[string]interface{}) DescribeUnleashRateModelMastersResult {
+	return DescribeUnleashRateModelMastersResult{
+		Items:         CastUnleashRateModelMasters(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeUnleashRateModelMastersResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastUnleashRateModelMastersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeUnleashRateModelMastersResult) Pointer() *DescribeUnleashRateModelMastersResult {
+	return &p
+}
+
+type CreateUnleashRateModelMasterResult struct {
+	Item *UnleashRateModelMaster `json:"item"`
+}
+
+type CreateUnleashRateModelMasterAsyncResult struct {
+	result *CreateUnleashRateModelMasterResult
+	err    error
+}
+
+func NewCreateUnleashRateModelMasterResultFromJson(data string) CreateUnleashRateModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateUnleashRateModelMasterResultFromDict(dict)
+}
+
+func NewCreateUnleashRateModelMasterResultFromDict(data map[string]interface{}) CreateUnleashRateModelMasterResult {
+	return CreateUnleashRateModelMasterResult{
+		Item: NewUnleashRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p CreateUnleashRateModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p CreateUnleashRateModelMasterResult) Pointer() *CreateUnleashRateModelMasterResult {
+	return &p
+}
+
+type GetUnleashRateModelMasterResult struct {
+	Item *UnleashRateModelMaster `json:"item"`
+}
+
+type GetUnleashRateModelMasterAsyncResult struct {
+	result *GetUnleashRateModelMasterResult
+	err    error
+}
+
+func NewGetUnleashRateModelMasterResultFromJson(data string) GetUnleashRateModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetUnleashRateModelMasterResultFromDict(dict)
+}
+
+func NewGetUnleashRateModelMasterResultFromDict(data map[string]interface{}) GetUnleashRateModelMasterResult {
+	return GetUnleashRateModelMasterResult{
+		Item: NewUnleashRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetUnleashRateModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetUnleashRateModelMasterResult) Pointer() *GetUnleashRateModelMasterResult {
+	return &p
+}
+
+type UpdateUnleashRateModelMasterResult struct {
+	Item *UnleashRateModelMaster `json:"item"`
+}
+
+type UpdateUnleashRateModelMasterAsyncResult struct {
+	result *UpdateUnleashRateModelMasterResult
+	err    error
+}
+
+func NewUpdateUnleashRateModelMasterResultFromJson(data string) UpdateUnleashRateModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateUnleashRateModelMasterResultFromDict(dict)
+}
+
+func NewUpdateUnleashRateModelMasterResultFromDict(data map[string]interface{}) UpdateUnleashRateModelMasterResult {
+	return UpdateUnleashRateModelMasterResult{
+		Item: NewUnleashRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p UpdateUnleashRateModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p UpdateUnleashRateModelMasterResult) Pointer() *UpdateUnleashRateModelMasterResult {
+	return &p
+}
+
+type DeleteUnleashRateModelMasterResult struct {
+	Item *UnleashRateModelMaster `json:"item"`
+}
+
+type DeleteUnleashRateModelMasterAsyncResult struct {
+	result *DeleteUnleashRateModelMasterResult
+	err    error
+}
+
+func NewDeleteUnleashRateModelMasterResultFromJson(data string) DeleteUnleashRateModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteUnleashRateModelMasterResultFromDict(dict)
+}
+
+func NewDeleteUnleashRateModelMasterResultFromDict(data map[string]interface{}) DeleteUnleashRateModelMasterResult {
+	return DeleteUnleashRateModelMasterResult{
+		Item: NewUnleashRateModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeleteUnleashRateModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeleteUnleashRateModelMasterResult) Pointer() *DeleteUnleashRateModelMasterResult {
+	return &p
+}
+
 type DirectEnhanceResult struct {
 	Item                      *RateModel `json:"item"`
 	TransactionId             *string    `json:"transactionId"`
@@ -781,6 +1005,135 @@ func (p DirectEnhanceByStampSheetResult) ToDict() map[string]interface{} {
 }
 
 func (p DirectEnhanceByStampSheetResult) Pointer() *DirectEnhanceByStampSheetResult {
+	return &p
+}
+
+type UnleashResult struct {
+	Item                      *UnleashRateModel `json:"item"`
+	TransactionId             *string           `json:"transactionId"`
+	StampSheet                *string           `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string           `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool             `json:"autoRunStampSheet"`
+}
+
+type UnleashAsyncResult struct {
+	result *UnleashResult
+	err    error
+}
+
+func NewUnleashResultFromJson(data string) UnleashResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnleashResultFromDict(dict)
+}
+
+func NewUnleashResultFromDict(data map[string]interface{}) UnleashResult {
+	return UnleashResult{
+		Item:                      NewUnleashRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+		TransactionId:             core.CastString(data["transactionId"]),
+		StampSheet:                core.CastString(data["stampSheet"]),
+		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+	}
+}
+
+func (p UnleashResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":                      p.Item.ToDict(),
+		"transactionId":             p.TransactionId,
+		"stampSheet":                p.StampSheet,
+		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+		"autoRunStampSheet":         p.AutoRunStampSheet,
+	}
+}
+
+func (p UnleashResult) Pointer() *UnleashResult {
+	return &p
+}
+
+type UnleashByUserIdResult struct {
+	Item                      *UnleashRateModel `json:"item"`
+	TransactionId             *string           `json:"transactionId"`
+	StampSheet                *string           `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string           `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool             `json:"autoRunStampSheet"`
+}
+
+type UnleashByUserIdAsyncResult struct {
+	result *UnleashByUserIdResult
+	err    error
+}
+
+func NewUnleashByUserIdResultFromJson(data string) UnleashByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnleashByUserIdResultFromDict(dict)
+}
+
+func NewUnleashByUserIdResultFromDict(data map[string]interface{}) UnleashByUserIdResult {
+	return UnleashByUserIdResult{
+		Item:                      NewUnleashRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+		TransactionId:             core.CastString(data["transactionId"]),
+		StampSheet:                core.CastString(data["stampSheet"]),
+		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+	}
+}
+
+func (p UnleashByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":                      p.Item.ToDict(),
+		"transactionId":             p.TransactionId,
+		"stampSheet":                p.StampSheet,
+		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+		"autoRunStampSheet":         p.AutoRunStampSheet,
+	}
+}
+
+func (p UnleashByUserIdResult) Pointer() *UnleashByUserIdResult {
+	return &p
+}
+
+type UnleashByStampSheetResult struct {
+	Item                      *UnleashRateModel `json:"item"`
+	TransactionId             *string           `json:"transactionId"`
+	StampSheet                *string           `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string           `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool             `json:"autoRunStampSheet"`
+}
+
+type UnleashByStampSheetAsyncResult struct {
+	result *UnleashByStampSheetResult
+	err    error
+}
+
+func NewUnleashByStampSheetResultFromJson(data string) UnleashByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnleashByStampSheetResultFromDict(dict)
+}
+
+func NewUnleashByStampSheetResultFromDict(data map[string]interface{}) UnleashByStampSheetResult {
+	return UnleashByStampSheetResult{
+		Item:                      NewUnleashRateModelFromDict(core.CastMap(data["item"])).Pointer(),
+		TransactionId:             core.CastString(data["transactionId"]),
+		StampSheet:                core.CastString(data["stampSheet"]),
+		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+	}
+}
+
+func (p UnleashByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":                      p.Item.ToDict(),
+		"transactionId":             p.TransactionId,
+		"stampSheet":                p.StampSheet,
+		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+		"autoRunStampSheet":         p.AutoRunStampSheet,
+	}
+}
+
+func (p UnleashByStampSheetResult) Pointer() *UnleashByStampSheetResult {
 	return &p
 }
 

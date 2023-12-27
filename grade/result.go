@@ -20,6 +20,7 @@ import (
 	"encoding/json"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
+	"github.com/gs2io/gs2-golang-sdk/experience"
 )
 
 type DescribeNamespacesResult struct {
@@ -772,7 +773,9 @@ func (p GetStatusByUserIdResult) Pointer() *GetStatusByUserIdResult {
 }
 
 type AddGradeByUserIdResult struct {
-	Item *Status `json:"item"`
+	Item                    *Status            `json:"item"`
+	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status `json:"experienceStatus"`
 }
 
 type AddGradeByUserIdAsyncResult struct {
@@ -788,13 +791,17 @@ func NewAddGradeByUserIdResultFromJson(data string) AddGradeByUserIdResult {
 
 func NewAddGradeByUserIdResultFromDict(data map[string]interface{}) AddGradeByUserIdResult {
 	return AddGradeByUserIdResult{
-		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item:                    NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		ExperienceNamespaceName: core.CastString(data["experienceNamespaceName"]),
+		ExperienceStatus:        experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer(),
 	}
 }
 
 func (p AddGradeByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item":                    p.Item.ToDict(),
+		"experienceNamespaceName": p.ExperienceNamespaceName,
+		"experienceStatus":        p.ExperienceStatus.ToDict(),
 	}
 }
 
@@ -803,7 +810,9 @@ func (p AddGradeByUserIdResult) Pointer() *AddGradeByUserIdResult {
 }
 
 type SubGradeByUserIdResult struct {
-	Item *Status `json:"item"`
+	Item                    *Status            `json:"item"`
+	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status `json:"experienceStatus"`
 }
 
 type SubGradeByUserIdAsyncResult struct {
@@ -819,13 +828,17 @@ func NewSubGradeByUserIdResultFromJson(data string) SubGradeByUserIdResult {
 
 func NewSubGradeByUserIdResultFromDict(data map[string]interface{}) SubGradeByUserIdResult {
 	return SubGradeByUserIdResult{
-		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item:                    NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		ExperienceNamespaceName: core.CastString(data["experienceNamespaceName"]),
+		ExperienceStatus:        experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer(),
 	}
 }
 
 func (p SubGradeByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item":                    p.Item.ToDict(),
+		"experienceNamespaceName": p.ExperienceNamespaceName,
+		"experienceStatus":        p.ExperienceStatus.ToDict(),
 	}
 }
 
@@ -834,8 +847,10 @@ func (p SubGradeByUserIdResult) Pointer() *SubGradeByUserIdResult {
 }
 
 type SetGradeByUserIdResult struct {
-	Item *Status `json:"item"`
-	Old  *Status `json:"old"`
+	Item                    *Status            `json:"item"`
+	Old                     *Status            `json:"old"`
+	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status `json:"experienceStatus"`
 }
 
 type SetGradeByUserIdAsyncResult struct {
@@ -851,15 +866,19 @@ func NewSetGradeByUserIdResultFromJson(data string) SetGradeByUserIdResult {
 
 func NewSetGradeByUserIdResultFromDict(data map[string]interface{}) SetGradeByUserIdResult {
 	return SetGradeByUserIdResult{
-		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewStatusFromDict(core.CastMap(data["old"])).Pointer(),
+		Item:                    NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Old:                     NewStatusFromDict(core.CastMap(data["old"])).Pointer(),
+		ExperienceNamespaceName: core.CastString(data["experienceNamespaceName"]),
+		ExperienceStatus:        experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer(),
 	}
 }
 
 func (p SetGradeByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item":                    p.Item.ToDict(),
+		"old":                     p.Old.ToDict(),
+		"experienceNamespaceName": p.ExperienceNamespaceName,
+		"experienceStatus":        p.ExperienceStatus.ToDict(),
 	}
 }
 
@@ -868,7 +887,9 @@ func (p SetGradeByUserIdResult) Pointer() *SetGradeByUserIdResult {
 }
 
 type ApplyRankCapResult struct {
-	Item *Status `json:"item"`
+	Item                    *Status            `json:"item"`
+	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status `json:"experienceStatus"`
 }
 
 type ApplyRankCapAsyncResult struct {
@@ -884,13 +905,17 @@ func NewApplyRankCapResultFromJson(data string) ApplyRankCapResult {
 
 func NewApplyRankCapResultFromDict(data map[string]interface{}) ApplyRankCapResult {
 	return ApplyRankCapResult{
-		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item:                    NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		ExperienceNamespaceName: core.CastString(data["experienceNamespaceName"]),
+		ExperienceStatus:        experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer(),
 	}
 }
 
 func (p ApplyRankCapResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item":                    p.Item.ToDict(),
+		"experienceNamespaceName": p.ExperienceNamespaceName,
+		"experienceStatus":        p.ExperienceStatus.ToDict(),
 	}
 }
 
@@ -899,7 +924,9 @@ func (p ApplyRankCapResult) Pointer() *ApplyRankCapResult {
 }
 
 type ApplyRankCapByUserIdResult struct {
-	Item *Status `json:"item"`
+	Item                    *Status            `json:"item"`
+	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status `json:"experienceStatus"`
 }
 
 type ApplyRankCapByUserIdAsyncResult struct {
@@ -915,13 +942,17 @@ func NewApplyRankCapByUserIdResultFromJson(data string) ApplyRankCapByUserIdResu
 
 func NewApplyRankCapByUserIdResultFromDict(data map[string]interface{}) ApplyRankCapByUserIdResult {
 	return ApplyRankCapByUserIdResult{
-		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item:                    NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		ExperienceNamespaceName: core.CastString(data["experienceNamespaceName"]),
+		ExperienceStatus:        experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer(),
 	}
 }
 
 func (p ApplyRankCapByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item":                    p.Item.ToDict(),
+		"experienceNamespaceName": p.ExperienceNamespaceName,
+		"experienceStatus":        p.ExperienceStatus.ToDict(),
 	}
 }
 

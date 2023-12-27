@@ -1808,6 +1808,632 @@ func (p Gs2EnhanceWebSocketClient) DeleteRateModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2EnhanceWebSocketClient) describeUnleashRateModelsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeUnleashRateModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeUnleashRateModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeUnleashRateModelsResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeUnleashRateModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeUnleashRateModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceWebSocketClient) DescribeUnleashRateModelsAsync(
+	request *DescribeUnleashRateModelsRequest,
+	callback chan<- DescribeUnleashRateModelsAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enhance",
+			"component":   "unleashRateModel",
+			"function":    "describeUnleashRateModels",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.describeUnleashRateModelsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceWebSocketClient) DescribeUnleashRateModels(
+	request *DescribeUnleashRateModelsRequest,
+) (*DescribeUnleashRateModelsResult, error) {
+	callback := make(chan DescribeUnleashRateModelsAsyncResult, 1)
+	go p.DescribeUnleashRateModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2EnhanceWebSocketClient) getUnleashRateModelAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetUnleashRateModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetUnleashRateModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetUnleashRateModelResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetUnleashRateModelAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetUnleashRateModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceWebSocketClient) GetUnleashRateModelAsync(
+	request *GetUnleashRateModelRequest,
+	callback chan<- GetUnleashRateModelAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enhance",
+			"component":   "unleashRateModel",
+			"function":    "getUnleashRateModel",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		bodies["rateName"] = *request.RateName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.getUnleashRateModelAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceWebSocketClient) GetUnleashRateModel(
+	request *GetUnleashRateModelRequest,
+) (*GetUnleashRateModelResult, error) {
+	callback := make(chan GetUnleashRateModelAsyncResult, 1)
+	go p.GetUnleashRateModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2EnhanceWebSocketClient) describeUnleashRateModelMastersAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeUnleashRateModelMastersAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeUnleashRateModelMastersAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeUnleashRateModelMastersResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeUnleashRateModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeUnleashRateModelMastersAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceWebSocketClient) DescribeUnleashRateModelMastersAsync(
+	request *DescribeUnleashRateModelMastersRequest,
+	callback chan<- DescribeUnleashRateModelMastersAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enhance",
+			"component":   "unleashRateModelMaster",
+			"function":    "describeUnleashRateModelMasters",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.describeUnleashRateModelMastersAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceWebSocketClient) DescribeUnleashRateModelMasters(
+	request *DescribeUnleashRateModelMastersRequest,
+) (*DescribeUnleashRateModelMastersResult, error) {
+	callback := make(chan DescribeUnleashRateModelMastersAsyncResult, 1)
+	go p.DescribeUnleashRateModelMastersAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2EnhanceWebSocketClient) createUnleashRateModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- CreateUnleashRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateUnleashRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateUnleashRateModelMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateUnleashRateModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- CreateUnleashRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceWebSocketClient) CreateUnleashRateModelMasterAsync(
+	request *CreateUnleashRateModelMasterRequest,
+	callback chan<- CreateUnleashRateModelMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enhance",
+			"component":   "unleashRateModelMaster",
+			"function":    "createUnleashRateModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.TargetInventoryModelId != nil && *request.TargetInventoryModelId != "" {
+		bodies["targetInventoryModelId"] = *request.TargetInventoryModelId
+	}
+	if request.GradeModelId != nil && *request.GradeModelId != "" {
+		bodies["gradeModelId"] = *request.GradeModelId
+	}
+	if request.GradeEntries != nil {
+		var _gradeEntries []interface{}
+		for _, item := range request.GradeEntries {
+			_gradeEntries = append(_gradeEntries, item)
+		}
+		bodies["gradeEntries"] = _gradeEntries
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.createUnleashRateModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceWebSocketClient) CreateUnleashRateModelMaster(
+	request *CreateUnleashRateModelMasterRequest,
+) (*CreateUnleashRateModelMasterResult, error) {
+	callback := make(chan CreateUnleashRateModelMasterAsyncResult, 1)
+	go p.CreateUnleashRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2EnhanceWebSocketClient) getUnleashRateModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetUnleashRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetUnleashRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetUnleashRateModelMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetUnleashRateModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetUnleashRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceWebSocketClient) GetUnleashRateModelMasterAsync(
+	request *GetUnleashRateModelMasterRequest,
+	callback chan<- GetUnleashRateModelMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enhance",
+			"component":   "unleashRateModelMaster",
+			"function":    "getUnleashRateModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		bodies["rateName"] = *request.RateName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.getUnleashRateModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceWebSocketClient) GetUnleashRateModelMaster(
+	request *GetUnleashRateModelMasterRequest,
+) (*GetUnleashRateModelMasterResult, error) {
+	callback := make(chan GetUnleashRateModelMasterAsyncResult, 1)
+	go p.GetUnleashRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2EnhanceWebSocketClient) updateUnleashRateModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UpdateUnleashRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateUnleashRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateUnleashRateModelMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateUnleashRateModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- UpdateUnleashRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceWebSocketClient) UpdateUnleashRateModelMasterAsync(
+	request *UpdateUnleashRateModelMasterRequest,
+	callback chan<- UpdateUnleashRateModelMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enhance",
+			"component":   "unleashRateModelMaster",
+			"function":    "updateUnleashRateModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		bodies["rateName"] = *request.RateName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.TargetInventoryModelId != nil && *request.TargetInventoryModelId != "" {
+		bodies["targetInventoryModelId"] = *request.TargetInventoryModelId
+	}
+	if request.GradeModelId != nil && *request.GradeModelId != "" {
+		bodies["gradeModelId"] = *request.GradeModelId
+	}
+	if request.GradeEntries != nil {
+		var _gradeEntries []interface{}
+		for _, item := range request.GradeEntries {
+			_gradeEntries = append(_gradeEntries, item)
+		}
+		bodies["gradeEntries"] = _gradeEntries
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.updateUnleashRateModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceWebSocketClient) UpdateUnleashRateModelMaster(
+	request *UpdateUnleashRateModelMasterRequest,
+) (*UpdateUnleashRateModelMasterResult, error) {
+	callback := make(chan UpdateUnleashRateModelMasterAsyncResult, 1)
+	go p.UpdateUnleashRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2EnhanceWebSocketClient) deleteUnleashRateModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteUnleashRateModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteUnleashRateModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteUnleashRateModelMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteUnleashRateModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DeleteUnleashRateModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceWebSocketClient) DeleteUnleashRateModelMasterAsync(
+	request *DeleteUnleashRateModelMasterRequest,
+	callback chan<- DeleteUnleashRateModelMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enhance",
+			"component":   "unleashRateModelMaster",
+			"function":    "deleteUnleashRateModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		bodies["rateName"] = *request.RateName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.deleteUnleashRateModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceWebSocketClient) DeleteUnleashRateModelMaster(
+	request *DeleteUnleashRateModelMasterRequest,
+) (*DeleteUnleashRateModelMasterResult, error) {
+	callback := make(chan DeleteUnleashRateModelMasterAsyncResult, 1)
+	go p.DeleteUnleashRateModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2EnhanceWebSocketClient) directEnhanceAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DirectEnhanceAsyncResult,
@@ -2102,6 +2728,307 @@ func (p Gs2EnhanceWebSocketClient) DirectEnhanceByStampSheet(
 ) (*DirectEnhanceByStampSheetResult, error) {
 	callback := make(chan DirectEnhanceByStampSheetAsyncResult, 1)
 	go p.DirectEnhanceByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2EnhanceWebSocketClient) unleashAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UnleashAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnleashAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnleashResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UnleashAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- UnleashAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceWebSocketClient) UnleashAsync(
+	request *UnleashRequest,
+	callback chan<- UnleashAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enhance",
+			"component":   "enhance",
+			"function":    "unleash",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		bodies["rateName"] = *request.RateName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.TargetItemSetId != nil && *request.TargetItemSetId != "" {
+		bodies["targetItemSetId"] = *request.TargetItemSetId
+	}
+	if request.Materials != nil {
+		var _materials []interface{}
+		for _, item := range request.Materials {
+			_materials = append(_materials, item)
+		}
+		bodies["materials"] = _materials
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.unleashAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceWebSocketClient) Unleash(
+	request *UnleashRequest,
+) (*UnleashResult, error) {
+	callback := make(chan UnleashAsyncResult, 1)
+	go p.UnleashAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2EnhanceWebSocketClient) unleashByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UnleashByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnleashByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnleashByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UnleashByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- UnleashByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceWebSocketClient) UnleashByUserIdAsync(
+	request *UnleashByUserIdRequest,
+	callback chan<- UnleashByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enhance",
+			"component":   "enhance",
+			"function":    "unleashByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.RateName != nil && *request.RateName != "" {
+		bodies["rateName"] = *request.RateName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.TargetItemSetId != nil && *request.TargetItemSetId != "" {
+		bodies["targetItemSetId"] = *request.TargetItemSetId
+	}
+	if request.Materials != nil {
+		var _materials []interface{}
+		for _, item := range request.Materials {
+			_materials = append(_materials, item)
+		}
+		bodies["materials"] = _materials
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.unleashByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceWebSocketClient) UnleashByUserId(
+	request *UnleashByUserIdRequest,
+) (*UnleashByUserIdResult, error) {
+	callback := make(chan UnleashByUserIdAsyncResult, 1)
+	go p.UnleashByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2EnhanceWebSocketClient) unleashByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UnleashByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UnleashByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UnleashByStampSheetResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UnleashByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- UnleashByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2EnhanceWebSocketClient) UnleashByStampSheetAsync(
+	request *UnleashByStampSheetRequest,
+	callback chan<- UnleashByStampSheetAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "enhance",
+			"component":   "enhance",
+			"function":    "unleashByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.unleashByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2EnhanceWebSocketClient) UnleashByStampSheet(
+	request *UnleashByStampSheetRequest,
+) (*UnleashByStampSheetResult, error) {
+	callback := make(chan UnleashByStampSheetAsyncResult, 1)
+	go p.UnleashByStampSheetAsync(
 		request,
 		callback,
 	)

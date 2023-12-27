@@ -721,6 +721,257 @@ func (p DeleteRateModelMasterRequest) Pointer() *DeleteRateModelMasterRequest {
 	return &p
 }
 
+type DescribeUnleashRateModelsRequest struct {
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+}
+
+func NewDescribeUnleashRateModelsRequestFromJson(data string) DescribeUnleashRateModelsRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeUnleashRateModelsRequestFromDict(dict)
+}
+
+func NewDescribeUnleashRateModelsRequestFromDict(data map[string]interface{}) DescribeUnleashRateModelsRequest {
+	return DescribeUnleashRateModelsRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+	}
+}
+
+func (p DescribeUnleashRateModelsRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+	}
+}
+
+func (p DescribeUnleashRateModelsRequest) Pointer() *DescribeUnleashRateModelsRequest {
+	return &p
+}
+
+type GetUnleashRateModelRequest struct {
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RateName      *string `json:"rateName"`
+}
+
+func NewGetUnleashRateModelRequestFromJson(data string) GetUnleashRateModelRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetUnleashRateModelRequestFromDict(dict)
+}
+
+func NewGetUnleashRateModelRequestFromDict(data map[string]interface{}) GetUnleashRateModelRequest {
+	return GetUnleashRateModelRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RateName:      core.CastString(data["rateName"]),
+	}
+}
+
+func (p GetUnleashRateModelRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"rateName":      p.RateName,
+	}
+}
+
+func (p GetUnleashRateModelRequest) Pointer() *GetUnleashRateModelRequest {
+	return &p
+}
+
+type DescribeUnleashRateModelMastersRequest struct {
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+}
+
+func NewDescribeUnleashRateModelMastersRequestFromJson(data string) DescribeUnleashRateModelMastersRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeUnleashRateModelMastersRequestFromDict(dict)
+}
+
+func NewDescribeUnleashRateModelMastersRequestFromDict(data map[string]interface{}) DescribeUnleashRateModelMastersRequest {
+	return DescribeUnleashRateModelMastersRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
+}
+
+func (p DescribeUnleashRateModelMastersRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p DescribeUnleashRateModelMastersRequest) Pointer() *DescribeUnleashRateModelMastersRequest {
+	return &p
+}
+
+type CreateUnleashRateModelMasterRequest struct {
+	RequestId              *string                 `json:"requestId"`
+	ContextStack           *string                 `json:"contextStack"`
+	NamespaceName          *string                 `json:"namespaceName"`
+	Name                   *string                 `json:"name"`
+	Description            *string                 `json:"description"`
+	Metadata               *string                 `json:"metadata"`
+	TargetInventoryModelId *string                 `json:"targetInventoryModelId"`
+	GradeModelId           *string                 `json:"gradeModelId"`
+	GradeEntries           []UnleashRateEntryModel `json:"gradeEntries"`
+}
+
+func NewCreateUnleashRateModelMasterRequestFromJson(data string) CreateUnleashRateModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateUnleashRateModelMasterRequestFromDict(dict)
+}
+
+func NewCreateUnleashRateModelMasterRequestFromDict(data map[string]interface{}) CreateUnleashRateModelMasterRequest {
+	return CreateUnleashRateModelMasterRequest{
+		NamespaceName:          core.CastString(data["namespaceName"]),
+		Name:                   core.CastString(data["name"]),
+		Description:            core.CastString(data["description"]),
+		Metadata:               core.CastString(data["metadata"]),
+		TargetInventoryModelId: core.CastString(data["targetInventoryModelId"]),
+		GradeModelId:           core.CastString(data["gradeModelId"]),
+		GradeEntries:           CastUnleashRateEntryModels(core.CastArray(data["gradeEntries"])),
+	}
+}
+
+func (p CreateUnleashRateModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":          p.NamespaceName,
+		"name":                   p.Name,
+		"description":            p.Description,
+		"metadata":               p.Metadata,
+		"targetInventoryModelId": p.TargetInventoryModelId,
+		"gradeModelId":           p.GradeModelId,
+		"gradeEntries": CastUnleashRateEntryModelsFromDict(
+			p.GradeEntries,
+		),
+	}
+}
+
+func (p CreateUnleashRateModelMasterRequest) Pointer() *CreateUnleashRateModelMasterRequest {
+	return &p
+}
+
+type GetUnleashRateModelMasterRequest struct {
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RateName      *string `json:"rateName"`
+}
+
+func NewGetUnleashRateModelMasterRequestFromJson(data string) GetUnleashRateModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetUnleashRateModelMasterRequestFromDict(dict)
+}
+
+func NewGetUnleashRateModelMasterRequestFromDict(data map[string]interface{}) GetUnleashRateModelMasterRequest {
+	return GetUnleashRateModelMasterRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RateName:      core.CastString(data["rateName"]),
+	}
+}
+
+func (p GetUnleashRateModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"rateName":      p.RateName,
+	}
+}
+
+func (p GetUnleashRateModelMasterRequest) Pointer() *GetUnleashRateModelMasterRequest {
+	return &p
+}
+
+type UpdateUnleashRateModelMasterRequest struct {
+	RequestId              *string                 `json:"requestId"`
+	ContextStack           *string                 `json:"contextStack"`
+	NamespaceName          *string                 `json:"namespaceName"`
+	RateName               *string                 `json:"rateName"`
+	Description            *string                 `json:"description"`
+	Metadata               *string                 `json:"metadata"`
+	TargetInventoryModelId *string                 `json:"targetInventoryModelId"`
+	GradeModelId           *string                 `json:"gradeModelId"`
+	GradeEntries           []UnleashRateEntryModel `json:"gradeEntries"`
+}
+
+func NewUpdateUnleashRateModelMasterRequestFromJson(data string) UpdateUnleashRateModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateUnleashRateModelMasterRequestFromDict(dict)
+}
+
+func NewUpdateUnleashRateModelMasterRequestFromDict(data map[string]interface{}) UpdateUnleashRateModelMasterRequest {
+	return UpdateUnleashRateModelMasterRequest{
+		NamespaceName:          core.CastString(data["namespaceName"]),
+		RateName:               core.CastString(data["rateName"]),
+		Description:            core.CastString(data["description"]),
+		Metadata:               core.CastString(data["metadata"]),
+		TargetInventoryModelId: core.CastString(data["targetInventoryModelId"]),
+		GradeModelId:           core.CastString(data["gradeModelId"]),
+		GradeEntries:           CastUnleashRateEntryModels(core.CastArray(data["gradeEntries"])),
+	}
+}
+
+func (p UpdateUnleashRateModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":          p.NamespaceName,
+		"rateName":               p.RateName,
+		"description":            p.Description,
+		"metadata":               p.Metadata,
+		"targetInventoryModelId": p.TargetInventoryModelId,
+		"gradeModelId":           p.GradeModelId,
+		"gradeEntries": CastUnleashRateEntryModelsFromDict(
+			p.GradeEntries,
+		),
+	}
+}
+
+func (p UpdateUnleashRateModelMasterRequest) Pointer() *UpdateUnleashRateModelMasterRequest {
+	return &p
+}
+
+type DeleteUnleashRateModelMasterRequest struct {
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	RateName      *string `json:"rateName"`
+}
+
+func NewDeleteUnleashRateModelMasterRequestFromJson(data string) DeleteUnleashRateModelMasterRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteUnleashRateModelMasterRequestFromDict(dict)
+}
+
+func NewDeleteUnleashRateModelMasterRequestFromDict(data map[string]interface{}) DeleteUnleashRateModelMasterRequest {
+	return DeleteUnleashRateModelMasterRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RateName:      core.CastString(data["rateName"]),
+	}
+}
+
+func (p DeleteUnleashRateModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"rateName":      p.RateName,
+	}
+}
+
+func (p DeleteUnleashRateModelMasterRequest) Pointer() *DeleteUnleashRateModelMasterRequest {
+	return &p
+}
+
 type DirectEnhanceRequest struct {
 	RequestId          *string    `json:"requestId"`
 	ContextStack       *string    `json:"contextStack"`
@@ -845,6 +1096,133 @@ func (p DirectEnhanceByStampSheetRequest) ToDict() map[string]interface{} {
 }
 
 func (p DirectEnhanceByStampSheetRequest) Pointer() *DirectEnhanceByStampSheetRequest {
+	return &p
+}
+
+type UnleashRequest struct {
+	RequestId          *string   `json:"requestId"`
+	ContextStack       *string   `json:"contextStack"`
+	DuplicationAvoider *string   `json:"duplicationAvoider"`
+	NamespaceName      *string   `json:"namespaceName"`
+	RateName           *string   `json:"rateName"`
+	AccessToken        *string   `json:"accessToken"`
+	TargetItemSetId    *string   `json:"targetItemSetId"`
+	Materials          []*string `json:"materials"`
+	Config             []Config  `json:"config"`
+}
+
+func NewUnleashRequestFromJson(data string) UnleashRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnleashRequestFromDict(dict)
+}
+
+func NewUnleashRequestFromDict(data map[string]interface{}) UnleashRequest {
+	return UnleashRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		RateName:        core.CastString(data["rateName"]),
+		AccessToken:     core.CastString(data["accessToken"]),
+		TargetItemSetId: core.CastString(data["targetItemSetId"]),
+		Materials:       core.CastStrings(core.CastArray(data["materials"])),
+		Config:          CastConfigs(core.CastArray(data["config"])),
+	}
+}
+
+func (p UnleashRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"rateName":        p.RateName,
+		"accessToken":     p.AccessToken,
+		"targetItemSetId": p.TargetItemSetId,
+		"materials": core.CastStringsFromDict(
+			p.Materials,
+		),
+		"config": CastConfigsFromDict(
+			p.Config,
+		),
+	}
+}
+
+func (p UnleashRequest) Pointer() *UnleashRequest {
+	return &p
+}
+
+type UnleashByUserIdRequest struct {
+	RequestId          *string   `json:"requestId"`
+	ContextStack       *string   `json:"contextStack"`
+	DuplicationAvoider *string   `json:"duplicationAvoider"`
+	NamespaceName      *string   `json:"namespaceName"`
+	RateName           *string   `json:"rateName"`
+	UserId             *string   `json:"userId"`
+	TargetItemSetId    *string   `json:"targetItemSetId"`
+	Materials          []*string `json:"materials"`
+	Config             []Config  `json:"config"`
+}
+
+func NewUnleashByUserIdRequestFromJson(data string) UnleashByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnleashByUserIdRequestFromDict(dict)
+}
+
+func NewUnleashByUserIdRequestFromDict(data map[string]interface{}) UnleashByUserIdRequest {
+	return UnleashByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		RateName:        core.CastString(data["rateName"]),
+		UserId:          core.CastString(data["userId"]),
+		TargetItemSetId: core.CastString(data["targetItemSetId"]),
+		Materials:       core.CastStrings(core.CastArray(data["materials"])),
+		Config:          CastConfigs(core.CastArray(data["config"])),
+	}
+}
+
+func (p UnleashByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"rateName":        p.RateName,
+		"userId":          p.UserId,
+		"targetItemSetId": p.TargetItemSetId,
+		"materials": core.CastStringsFromDict(
+			p.Materials,
+		),
+		"config": CastConfigsFromDict(
+			p.Config,
+		),
+	}
+}
+
+func (p UnleashByUserIdRequest) Pointer() *UnleashByUserIdRequest {
+	return &p
+}
+
+type UnleashByStampSheetRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewUnleashByStampSheetRequestFromJson(data string) UnleashByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUnleashByStampSheetRequestFromDict(dict)
+}
+
+func NewUnleashByStampSheetRequestFromDict(data map[string]interface{}) UnleashByStampSheetRequest {
+	return UnleashByStampSheetRequest{
+		StampSheet: core.CastString(data["stampSheet"]),
+		KeyId:      core.CastString(data["keyId"]),
+	}
+}
+
+func (p UnleashByStampSheetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampSheet": p.StampSheet,
+		"keyId":      p.KeyId,
+	}
+}
+
+func (p UnleashByStampSheetRequest) Pointer() *UnleashByStampSheetRequest {
 	return &p
 }
 
