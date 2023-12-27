@@ -1096,7 +1096,9 @@ func (p VerifyGradeUpMaterialByUserIdResult) Pointer() *VerifyGradeUpMaterialByU
 }
 
 type AddGradeByStampSheetResult struct {
-	Item *Status `json:"item"`
+	Item                    *Status            `json:"item"`
+	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status `json:"experienceStatus"`
 }
 
 type AddGradeByStampSheetAsyncResult struct {
@@ -1112,13 +1114,17 @@ func NewAddGradeByStampSheetResultFromJson(data string) AddGradeByStampSheetResu
 
 func NewAddGradeByStampSheetResultFromDict(data map[string]interface{}) AddGradeByStampSheetResult {
 	return AddGradeByStampSheetResult{
-		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item:                    NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		ExperienceNamespaceName: core.CastString(data["experienceNamespaceName"]),
+		ExperienceStatus:        experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer(),
 	}
 }
 
 func (p AddGradeByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item":                    p.Item.ToDict(),
+		"experienceNamespaceName": p.ExperienceNamespaceName,
+		"experienceStatus":        p.ExperienceStatus.ToDict(),
 	}
 }
 
@@ -1127,7 +1133,9 @@ func (p AddGradeByStampSheetResult) Pointer() *AddGradeByStampSheetResult {
 }
 
 type ApplyRankCapByStampSheetResult struct {
-	Item *Status `json:"item"`
+	Item                    *Status            `json:"item"`
+	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status `json:"experienceStatus"`
 }
 
 type ApplyRankCapByStampSheetAsyncResult struct {
@@ -1143,13 +1151,17 @@ func NewApplyRankCapByStampSheetResultFromJson(data string) ApplyRankCapByStampS
 
 func NewApplyRankCapByStampSheetResultFromDict(data map[string]interface{}) ApplyRankCapByStampSheetResult {
 	return ApplyRankCapByStampSheetResult{
-		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item:                    NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		ExperienceNamespaceName: core.CastString(data["experienceNamespaceName"]),
+		ExperienceStatus:        experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer(),
 	}
 }
 
 func (p ApplyRankCapByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item":                    p.Item.ToDict(),
+		"experienceNamespaceName": p.ExperienceNamespaceName,
+		"experienceStatus":        p.ExperienceStatus.ToDict(),
 	}
 }
 
@@ -1158,8 +1170,10 @@ func (p ApplyRankCapByStampSheetResult) Pointer() *ApplyRankCapByStampSheetResul
 }
 
 type SubGradeByStampTaskResult struct {
-	Item            *Status `json:"item"`
-	NewContextStack *string `json:"newContextStack"`
+	Item                    *Status            `json:"item"`
+	NewContextStack         *string            `json:"newContextStack"`
+	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status `json:"experienceStatus"`
 }
 
 type SubGradeByStampTaskAsyncResult struct {
@@ -1175,15 +1189,19 @@ func NewSubGradeByStampTaskResultFromJson(data string) SubGradeByStampTaskResult
 
 func NewSubGradeByStampTaskResultFromDict(data map[string]interface{}) SubGradeByStampTaskResult {
 	return SubGradeByStampTaskResult{
-		Item:            NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
+		Item:                    NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		NewContextStack:         core.CastString(data["newContextStack"]),
+		ExperienceNamespaceName: core.CastString(data["experienceNamespaceName"]),
+		ExperienceStatus:        experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer(),
 	}
 }
 
 func (p SubGradeByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
-		"newContextStack": p.NewContextStack,
+		"item":                    p.Item.ToDict(),
+		"newContextStack":         p.NewContextStack,
+		"experienceNamespaceName": p.ExperienceNamespaceName,
+		"experienceStatus":        p.ExperienceStatus.ToDict(),
 	}
 }
 
