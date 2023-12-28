@@ -4428,3 +4428,91 @@ func (p Gs2LotteryRestClient) ResetBoxByUserId(
 	asyncResult := <-callback
 	return asyncResult.result, asyncResult.err
 }
+
+func resetByStampSheetAsyncHandler(
+	client Gs2LotteryRestClient,
+	job *core.NetworkJob,
+	callback chan<- ResetByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ResetByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ResetByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- ResetByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ResetByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- ResetByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LotteryRestClient) ResetByStampSheetAsync(
+	request *ResetByStampSheetRequest,
+	callback chan<- ResetByStampSheetAsyncResult,
+) {
+	path := "/stamp/box/reset"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go resetByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("lottery").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LotteryRestClient) ResetByStampSheet(
+	request *ResetByStampSheetRequest,
+) (*ResetByStampSheetResult, error) {
+	callback := make(chan ResetByStampSheetAsyncResult, 1)
+	go p.ResetByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}

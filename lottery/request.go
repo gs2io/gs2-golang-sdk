@@ -1644,3 +1644,34 @@ func (p ResetBoxByUserIdRequest) ToDict() map[string]interface{} {
 func (p ResetBoxByUserIdRequest) Pointer() *ResetBoxByUserIdRequest {
 	return &p
 }
+
+type ResetByStampSheetRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewResetByStampSheetRequestFromJson(data string) ResetByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewResetByStampSheetRequestFromDict(dict)
+}
+
+func NewResetByStampSheetRequestFromDict(data map[string]interface{}) ResetByStampSheetRequest {
+	return ResetByStampSheetRequest{
+		StampSheet: core.CastString(data["stampSheet"]),
+		KeyId:      core.CastString(data["keyId"]),
+	}
+}
+
+func (p ResetByStampSheetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampSheet": p.StampSheet,
+		"keyId":      p.KeyId,
+	}
+}
+
+func (p ResetByStampSheetRequest) Pointer() *ResetByStampSheetRequest {
+	return &p
+}

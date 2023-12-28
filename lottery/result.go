@@ -1530,3 +1530,29 @@ func (p ResetBoxByUserIdResult) ToDict() map[string]interface{} {
 func (p ResetBoxByUserIdResult) Pointer() *ResetBoxByUserIdResult {
 	return &p
 }
+
+type ResetByStampSheetResult struct {
+}
+
+type ResetByStampSheetAsyncResult struct {
+	result *ResetByStampSheetResult
+	err    error
+}
+
+func NewResetByStampSheetResultFromJson(data string) ResetByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewResetByStampSheetResultFromDict(dict)
+}
+
+func NewResetByStampSheetResultFromDict(data map[string]interface{}) ResetByStampSheetResult {
+	return ResetByStampSheetResult{}
+}
+
+func (p ResetByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p ResetByStampSheetResult) Pointer() *ResetByStampSheetResult {
+	return &p
+}
