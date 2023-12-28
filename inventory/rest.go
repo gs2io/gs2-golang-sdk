@@ -7384,6 +7384,123 @@ func (p Gs2InventoryRestClient) AcquireItemSetByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func acquireItemSetWithGradeByUserIdAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- AcquireItemSetWithGradeByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcquireItemSetWithGradeByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcquireItemSetWithGradeByUserIdResult
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+			}
+		}
+		callback <- AcquireItemSetWithGradeByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AcquireItemSetWithGradeByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- AcquireItemSetWithGradeByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) AcquireItemSetWithGradeByUserIdAsync(
+	request *AcquireItemSetWithGradeByUserIdRequest,
+	callback chan<- AcquireItemSetWithGradeByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/inventory/{inventoryName}/item/{itemName}/acquire/grade"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		path = strings.ReplaceAll(path, "{inventoryName}", core.ToString(*request.InventoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{inventoryName}", "null")
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		path = strings.ReplaceAll(path, "{itemName}", core.ToString(*request.ItemName))
+	} else {
+		path = strings.ReplaceAll(path, "{itemName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.GradeModelId != nil && *request.GradeModelId != "" {
+		bodies["gradeModelId"] = *request.GradeModelId
+	}
+	if request.GradeValue != nil {
+		bodies["gradeValue"] = *request.GradeValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go acquireItemSetWithGradeByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) AcquireItemSetWithGradeByUserId(
+	request *AcquireItemSetWithGradeByUserIdRequest,
+) (*AcquireItemSetWithGradeByUserIdResult, error) {
+	callback := make(chan AcquireItemSetWithGradeByUserIdAsyncResult, 1)
+	go p.AcquireItemSetWithGradeByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func consumeItemSetAsyncHandler(
 	client Gs2InventoryRestClient,
 	job *core.NetworkJob,
@@ -8038,6 +8155,94 @@ func (p Gs2InventoryRestClient) AcquireItemSetByStampSheet(
 ) (*AcquireItemSetByStampSheetResult, error) {
 	callback := make(chan AcquireItemSetByStampSheetAsyncResult, 1)
 	go p.AcquireItemSetByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func acquireItemSetWithGradeByStampSheetAsyncHandler(
+	client Gs2InventoryRestClient,
+	job *core.NetworkJob,
+	callback chan<- AcquireItemSetWithGradeByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcquireItemSetWithGradeByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcquireItemSetWithGradeByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- AcquireItemSetWithGradeByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AcquireItemSetWithGradeByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- AcquireItemSetWithGradeByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryRestClient) AcquireItemSetWithGradeByStampSheetAsync(
+	request *AcquireItemSetWithGradeByStampSheetRequest,
+	callback chan<- AcquireItemSetWithGradeByStampSheetAsyncResult,
+) {
+	path := "/stamp/item/acquire/grade"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go acquireItemSetWithGradeByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("inventory").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryRestClient) AcquireItemSetWithGradeByStampSheet(
+	request *AcquireItemSetWithGradeByStampSheetRequest,
+) (*AcquireItemSetWithGradeByStampSheetResult, error) {
+	callback := make(chan AcquireItemSetWithGradeByStampSheetAsyncResult, 1)
+	go p.AcquireItemSetWithGradeByStampSheetAsync(
 		request,
 		callback,
 	)

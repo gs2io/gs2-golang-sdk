@@ -20,6 +20,7 @@ import (
 	"encoding/json"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
+	"github.com/gs2io/gs2-golang-sdk/grade"
 )
 
 type DescribeNamespacesResult struct {
@@ -2538,6 +2539,49 @@ func (p AcquireItemSetByUserIdResult) Pointer() *AcquireItemSetByUserIdResult {
 	return &p
 }
 
+type AcquireItemSetWithGradeByUserIdResult struct {
+	Item          *ItemSet      `json:"item"`
+	Status        *grade.Status `json:"status"`
+	ItemModel     *ItemModel    `json:"itemModel"`
+	Inventory     *Inventory    `json:"inventory"`
+	OverflowCount *int64        `json:"overflowCount"`
+}
+
+type AcquireItemSetWithGradeByUserIdAsyncResult struct {
+	result *AcquireItemSetWithGradeByUserIdResult
+	err    error
+}
+
+func NewAcquireItemSetWithGradeByUserIdResultFromJson(data string) AcquireItemSetWithGradeByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireItemSetWithGradeByUserIdResultFromDict(dict)
+}
+
+func NewAcquireItemSetWithGradeByUserIdResultFromDict(data map[string]interface{}) AcquireItemSetWithGradeByUserIdResult {
+	return AcquireItemSetWithGradeByUserIdResult{
+		Item:          NewItemSetFromDict(core.CastMap(data["item"])).Pointer(),
+		Status:        grade.NewStatusFromDict(core.CastMap(data["status"])).Pointer(),
+		ItemModel:     NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
+		Inventory:     NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
+		OverflowCount: core.CastInt64(data["overflowCount"]),
+	}
+}
+
+func (p AcquireItemSetWithGradeByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":          p.Item.ToDict(),
+		"status":        p.Status.ToDict(),
+		"itemModel":     p.ItemModel.ToDict(),
+		"inventory":     p.Inventory.ToDict(),
+		"overflowCount": p.OverflowCount,
+	}
+}
+
+func (p AcquireItemSetWithGradeByUserIdResult) Pointer() *AcquireItemSetWithGradeByUserIdResult {
+	return &p
+}
+
 type ConsumeItemSetResult struct {
 	Items     []ItemSet  `json:"items"`
 	ItemModel *ItemModel `json:"itemModel"`
@@ -2746,6 +2790,49 @@ func (p AcquireItemSetByStampSheetResult) ToDict() map[string]interface{} {
 }
 
 func (p AcquireItemSetByStampSheetResult) Pointer() *AcquireItemSetByStampSheetResult {
+	return &p
+}
+
+type AcquireItemSetWithGradeByStampSheetResult struct {
+	Item          *ItemSet      `json:"item"`
+	Status        *grade.Status `json:"status"`
+	ItemModel     *ItemModel    `json:"itemModel"`
+	Inventory     *Inventory    `json:"inventory"`
+	OverflowCount *int64        `json:"overflowCount"`
+}
+
+type AcquireItemSetWithGradeByStampSheetAsyncResult struct {
+	result *AcquireItemSetWithGradeByStampSheetResult
+	err    error
+}
+
+func NewAcquireItemSetWithGradeByStampSheetResultFromJson(data string) AcquireItemSetWithGradeByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireItemSetWithGradeByStampSheetResultFromDict(dict)
+}
+
+func NewAcquireItemSetWithGradeByStampSheetResultFromDict(data map[string]interface{}) AcquireItemSetWithGradeByStampSheetResult {
+	return AcquireItemSetWithGradeByStampSheetResult{
+		Item:          NewItemSetFromDict(core.CastMap(data["item"])).Pointer(),
+		Status:        grade.NewStatusFromDict(core.CastMap(data["status"])).Pointer(),
+		ItemModel:     NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
+		Inventory:     NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
+		OverflowCount: core.CastInt64(data["overflowCount"]),
+	}
+}
+
+func (p AcquireItemSetWithGradeByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":          p.Item.ToDict(),
+		"status":        p.Status.ToDict(),
+		"itemModel":     p.ItemModel.ToDict(),
+		"inventory":     p.Inventory.ToDict(),
+		"overflowCount": p.OverflowCount,
+	}
+}
+
+func (p AcquireItemSetWithGradeByStampSheetResult) Pointer() *AcquireItemSetWithGradeByStampSheetResult {
 	return &p
 }
 

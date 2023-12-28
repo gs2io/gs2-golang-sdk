@@ -2747,6 +2747,50 @@ func (p AcquireItemSetByUserIdRequest) Pointer() *AcquireItemSetByUserIdRequest 
 	return &p
 }
 
+type AcquireItemSetWithGradeByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	InventoryName      *string `json:"inventoryName"`
+	ItemName           *string `json:"itemName"`
+	UserId             *string `json:"userId"`
+	GradeModelId       *string `json:"gradeModelId"`
+	GradeValue         *int64  `json:"gradeValue"`
+}
+
+func NewAcquireItemSetWithGradeByUserIdRequestFromJson(data string) AcquireItemSetWithGradeByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireItemSetWithGradeByUserIdRequestFromDict(dict)
+}
+
+func NewAcquireItemSetWithGradeByUserIdRequestFromDict(data map[string]interface{}) AcquireItemSetWithGradeByUserIdRequest {
+	return AcquireItemSetWithGradeByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		InventoryName: core.CastString(data["inventoryName"]),
+		ItemName:      core.CastString(data["itemName"]),
+		UserId:        core.CastString(data["userId"]),
+		GradeModelId:  core.CastString(data["gradeModelId"]),
+		GradeValue:    core.CastInt64(data["gradeValue"]),
+	}
+}
+
+func (p AcquireItemSetWithGradeByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"inventoryName": p.InventoryName,
+		"itemName":      p.ItemName,
+		"userId":        p.UserId,
+		"gradeModelId":  p.GradeModelId,
+		"gradeValue":    p.GradeValue,
+	}
+}
+
+func (p AcquireItemSetWithGradeByUserIdRequest) Pointer() *AcquireItemSetWithGradeByUserIdRequest {
+	return &p
+}
+
 type ConsumeItemSetRequest struct {
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
@@ -2998,6 +3042,37 @@ func (p AcquireItemSetByStampSheetRequest) ToDict() map[string]interface{} {
 }
 
 func (p AcquireItemSetByStampSheetRequest) Pointer() *AcquireItemSetByStampSheetRequest {
+	return &p
+}
+
+type AcquireItemSetWithGradeByStampSheetRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewAcquireItemSetWithGradeByStampSheetRequestFromJson(data string) AcquireItemSetWithGradeByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireItemSetWithGradeByStampSheetRequestFromDict(dict)
+}
+
+func NewAcquireItemSetWithGradeByStampSheetRequestFromDict(data map[string]interface{}) AcquireItemSetWithGradeByStampSheetRequest {
+	return AcquireItemSetWithGradeByStampSheetRequest{
+		StampSheet: core.CastString(data["stampSheet"]),
+		KeyId:      core.CastString(data["keyId"]),
+	}
+}
+
+func (p AcquireItemSetWithGradeByStampSheetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampSheet": p.StampSheet,
+		"keyId":      p.KeyId,
+	}
+}
+
+func (p AcquireItemSetWithGradeByStampSheetRequest) Pointer() *AcquireItemSetWithGradeByStampSheetRequest {
 	return &p
 }
 

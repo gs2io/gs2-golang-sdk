@@ -6940,6 +6940,111 @@ func (p Gs2InventoryWebSocketClient) AcquireItemSetByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2InventoryWebSocketClient) acquireItemSetWithGradeByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- AcquireItemSetWithGradeByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcquireItemSetWithGradeByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcquireItemSetWithGradeByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AcquireItemSetWithGradeByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "itemSet.operation.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+			}
+		}
+	}
+	callback <- AcquireItemSetWithGradeByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) AcquireItemSetWithGradeByUserIdAsync(
+	request *AcquireItemSetWithGradeByUserIdRequest,
+	callback chan<- AcquireItemSetWithGradeByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "itemSet",
+			"function":    "acquireItemSetWithGradeByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.InventoryName != nil && *request.InventoryName != "" {
+		bodies["inventoryName"] = *request.InventoryName
+	}
+	if request.ItemName != nil && *request.ItemName != "" {
+		bodies["itemName"] = *request.ItemName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.GradeModelId != nil && *request.GradeModelId != "" {
+		bodies["gradeModelId"] = *request.GradeModelId
+	}
+	if request.GradeValue != nil {
+		bodies["gradeValue"] = *request.GradeValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.acquireItemSetWithGradeByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) AcquireItemSetWithGradeByUserId(
+	request *AcquireItemSetWithGradeByUserIdRequest,
+) (*AcquireItemSetWithGradeByUserIdResult, error) {
+	callback := make(chan AcquireItemSetWithGradeByUserIdAsyncResult, 1)
+	go p.AcquireItemSetWithGradeByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2InventoryWebSocketClient) consumeItemSetAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- ConsumeItemSetAsyncResult,
@@ -7539,6 +7644,90 @@ func (p Gs2InventoryWebSocketClient) AcquireItemSetByStampSheet(
 ) (*AcquireItemSetByStampSheetResult, error) {
 	callback := make(chan AcquireItemSetByStampSheetAsyncResult, 1)
 	go p.AcquireItemSetByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2InventoryWebSocketClient) acquireItemSetWithGradeByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- AcquireItemSetWithGradeByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcquireItemSetWithGradeByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcquireItemSetWithGradeByStampSheetResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AcquireItemSetWithGradeByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- AcquireItemSetWithGradeByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2InventoryWebSocketClient) AcquireItemSetWithGradeByStampSheetAsync(
+	request *AcquireItemSetWithGradeByStampSheetRequest,
+	callback chan<- AcquireItemSetWithGradeByStampSheetAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "inventory",
+			"component":   "itemSet",
+			"function":    "acquireItemSetWithGradeByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.acquireItemSetWithGradeByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2InventoryWebSocketClient) AcquireItemSetWithGradeByStampSheet(
+	request *AcquireItemSetWithGradeByStampSheetRequest,
+) (*AcquireItemSetWithGradeByStampSheetResult, error) {
+	callback := make(chan AcquireItemSetWithGradeByStampSheetAsyncResult, 1)
+	go p.AcquireItemSetWithGradeByStampSheetAsync(
 		request,
 		callback,
 	)
