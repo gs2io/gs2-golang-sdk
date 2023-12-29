@@ -863,6 +863,7 @@ func (p GetPrizeTableResult) Pointer() *GetPrizeTableResult {
 
 type DrawByUserIdResult struct {
 	Items                     []DrawnPrize `json:"items"`
+	BoxItems                  *BoxItems    `json:"boxItems"`
 	TransactionId             *string      `json:"transactionId"`
 	StampSheet                *string      `json:"stampSheet"`
 	StampSheetEncryptionKeyId *string      `json:"stampSheetEncryptionKeyId"`
@@ -883,6 +884,7 @@ func NewDrawByUserIdResultFromJson(data string) DrawByUserIdResult {
 func NewDrawByUserIdResultFromDict(data map[string]interface{}) DrawByUserIdResult {
 	return DrawByUserIdResult{
 		Items:                     CastDrawnPrizes(core.CastArray(data["items"])),
+		BoxItems:                  NewBoxItemsFromDict(core.CastMap(data["boxItems"])).Pointer(),
 		TransactionId:             core.CastString(data["transactionId"]),
 		StampSheet:                core.CastString(data["stampSheet"]),
 		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
@@ -895,6 +897,7 @@ func (p DrawByUserIdResult) ToDict() map[string]interface{} {
 		"items": CastDrawnPrizesFromDict(
 			p.Items,
 		),
+		"boxItems":                  p.BoxItems.ToDict(),
 		"transactionId":             p.TransactionId,
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
@@ -1019,6 +1022,7 @@ func (p DrawWithRandomSeedByUserIdResult) Pointer() *DrawWithRandomSeedByUserIdR
 
 type DrawByStampSheetResult struct {
 	Items                     []DrawnPrize `json:"items"`
+	BoxItems                  *BoxItems    `json:"boxItems"`
 	TransactionId             *string      `json:"transactionId"`
 	StampSheet                *string      `json:"stampSheet"`
 	StampSheetEncryptionKeyId *string      `json:"stampSheetEncryptionKeyId"`
@@ -1039,6 +1043,7 @@ func NewDrawByStampSheetResultFromJson(data string) DrawByStampSheetResult {
 func NewDrawByStampSheetResultFromDict(data map[string]interface{}) DrawByStampSheetResult {
 	return DrawByStampSheetResult{
 		Items:                     CastDrawnPrizes(core.CastArray(data["items"])),
+		BoxItems:                  NewBoxItemsFromDict(core.CastMap(data["boxItems"])).Pointer(),
 		TransactionId:             core.CastString(data["transactionId"]),
 		StampSheet:                core.CastString(data["stampSheet"]),
 		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
@@ -1051,6 +1056,7 @@ func (p DrawByStampSheetResult) ToDict() map[string]interface{} {
 		"items": CastDrawnPrizesFromDict(
 			p.Items,
 		),
+		"boxItems":                  p.BoxItems.ToDict(),
 		"transactionId":             p.TransactionId,
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
