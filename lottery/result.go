@@ -1486,6 +1486,7 @@ func (p GetBoxByUserIdResult) Pointer() *GetBoxByUserIdResult {
 }
 
 type ResetBoxResult struct {
+	Item *BoxItems `json:"item"`
 }
 
 type ResetBoxAsyncResult struct {
@@ -1500,11 +1501,15 @@ func NewResetBoxResultFromJson(data string) ResetBoxResult {
 }
 
 func NewResetBoxResultFromDict(data map[string]interface{}) ResetBoxResult {
-	return ResetBoxResult{}
+	return ResetBoxResult{
+		Item: NewBoxItemsFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p ResetBoxResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p ResetBoxResult) Pointer() *ResetBoxResult {
@@ -1512,6 +1517,7 @@ func (p ResetBoxResult) Pointer() *ResetBoxResult {
 }
 
 type ResetBoxByUserIdResult struct {
+	Item *BoxItems `json:"item"`
 }
 
 type ResetBoxByUserIdAsyncResult struct {
@@ -1526,11 +1532,15 @@ func NewResetBoxByUserIdResultFromJson(data string) ResetBoxByUserIdResult {
 }
 
 func NewResetBoxByUserIdResultFromDict(data map[string]interface{}) ResetBoxByUserIdResult {
-	return ResetBoxByUserIdResult{}
+	return ResetBoxByUserIdResult{
+		Item: NewBoxItemsFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p ResetBoxByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p ResetBoxByUserIdResult) Pointer() *ResetBoxByUserIdResult {
@@ -1538,6 +1548,7 @@ func (p ResetBoxByUserIdResult) Pointer() *ResetBoxByUserIdResult {
 }
 
 type ResetByStampSheetResult struct {
+	Item *BoxItems `json:"item"`
 }
 
 type ResetByStampSheetAsyncResult struct {
@@ -1552,11 +1563,15 @@ func NewResetByStampSheetResultFromJson(data string) ResetByStampSheetResult {
 }
 
 func NewResetByStampSheetResultFromDict(data map[string]interface{}) ResetByStampSheetResult {
-	return ResetByStampSheetResult{}
+	return ResetByStampSheetResult{
+		Item: NewBoxItemsFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p ResetByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p ResetByStampSheetResult) Pointer() *ResetByStampSheetResult {
