@@ -1990,15 +1990,15 @@ func (p SetFormWithSignatureRequest) Pointer() *SetFormWithSignatureRequest {
 }
 
 type AcquireActionsToFormPropertiesRequest struct {
-	RequestId          *string               `json:"requestId"`
-	ContextStack       *string               `json:"contextStack"`
-	DuplicationAvoider *string               `json:"duplicationAvoider"`
-	NamespaceName      *string               `json:"namespaceName"`
-	UserId             *string               `json:"userId"`
-	MoldModelName      *string               `json:"moldModelName"`
-	Index              *int32                `json:"index"`
-	AcquireAction      *AcquireAction        `json:"acquireAction"`
-	Config             []AcquireActionConfig `json:"config"`
+	RequestId          *string        `json:"requestId"`
+	ContextStack       *string        `json:"contextStack"`
+	DuplicationAvoider *string        `json:"duplicationAvoider"`
+	NamespaceName      *string        `json:"namespaceName"`
+	UserId             *string        `json:"userId"`
+	MoldModelName      *string        `json:"moldModelName"`
+	Index              *int32         `json:"index"`
+	AcquireAction      *AcquireAction `json:"acquireAction"`
+	Config             []Config       `json:"config"`
 }
 
 func NewAcquireActionsToFormPropertiesRequestFromJson(data string) AcquireActionsToFormPropertiesRequest {
@@ -2014,7 +2014,7 @@ func NewAcquireActionsToFormPropertiesRequestFromDict(data map[string]interface{
 		MoldModelName: core.CastString(data["moldModelName"]),
 		Index:         core.CastInt32(data["index"]),
 		AcquireAction: NewAcquireActionFromDict(core.CastMap(data["acquireAction"])).Pointer(),
-		Config:        CastAcquireActionConfigs(core.CastArray(data["config"])),
+		Config:        CastConfigs(core.CastArray(data["config"])),
 	}
 }
 
@@ -2025,7 +2025,7 @@ func (p AcquireActionsToFormPropertiesRequest) ToDict() map[string]interface{} {
 		"moldModelName": p.MoldModelName,
 		"index":         p.Index,
 		"acquireAction": p.AcquireAction.ToDict(),
-		"config": CastAcquireActionConfigsFromDict(
+		"config": CastConfigsFromDict(
 			p.Config,
 		),
 	}
@@ -2466,15 +2466,15 @@ func (p SetPropertyFormWithSignatureRequest) Pointer() *SetPropertyFormWithSigna
 }
 
 type AcquireActionsToPropertyFormPropertiesRequest struct {
-	RequestId             *string               `json:"requestId"`
-	ContextStack          *string               `json:"contextStack"`
-	DuplicationAvoider    *string               `json:"duplicationAvoider"`
-	NamespaceName         *string               `json:"namespaceName"`
-	UserId                *string               `json:"userId"`
-	PropertyFormModelName *string               `json:"propertyFormModelName"`
-	PropertyId            *string               `json:"propertyId"`
-	AcquireAction         *AcquireAction        `json:"acquireAction"`
-	Config                []AcquireActionConfig `json:"config"`
+	RequestId             *string        `json:"requestId"`
+	ContextStack          *string        `json:"contextStack"`
+	DuplicationAvoider    *string        `json:"duplicationAvoider"`
+	NamespaceName         *string        `json:"namespaceName"`
+	UserId                *string        `json:"userId"`
+	PropertyFormModelName *string        `json:"propertyFormModelName"`
+	PropertyId            *string        `json:"propertyId"`
+	AcquireAction         *AcquireAction `json:"acquireAction"`
+	Config                []Config       `json:"config"`
 }
 
 func NewAcquireActionsToPropertyFormPropertiesRequestFromJson(data string) AcquireActionsToPropertyFormPropertiesRequest {
@@ -2490,7 +2490,7 @@ func NewAcquireActionsToPropertyFormPropertiesRequestFromDict(data map[string]in
 		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
 		PropertyId:            core.CastString(data["propertyId"]),
 		AcquireAction:         NewAcquireActionFromDict(core.CastMap(data["acquireAction"])).Pointer(),
-		Config:                CastAcquireActionConfigs(core.CastArray(data["config"])),
+		Config:                CastConfigs(core.CastArray(data["config"])),
 	}
 }
 
@@ -2501,7 +2501,7 @@ func (p AcquireActionsToPropertyFormPropertiesRequest) ToDict() map[string]inter
 		"propertyFormModelName": p.PropertyFormModelName,
 		"propertyId":            p.PropertyId,
 		"acquireAction":         p.AcquireAction.ToDict(),
-		"config": CastAcquireActionConfigsFromDict(
+		"config": CastConfigsFromDict(
 			p.Config,
 		),
 	}

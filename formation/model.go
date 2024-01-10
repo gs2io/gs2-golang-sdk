@@ -1243,62 +1243,6 @@ func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
 	return v
 }
 
-type AcquireActionConfig struct {
-	Name   *string  `json:"name"`
-	Config []Config `json:"config"`
-}
-
-func NewAcquireActionConfigFromJson(data string) AcquireActionConfig {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAcquireActionConfigFromDict(dict)
-}
-
-func NewAcquireActionConfigFromDict(data map[string]interface{}) AcquireActionConfig {
-	return AcquireActionConfig{
-		Name:   core.CastString(data["name"]),
-		Config: CastConfigs(core.CastArray(data["config"])),
-	}
-}
-
-func (p AcquireActionConfig) ToDict() map[string]interface{} {
-
-	var name *string
-	if p.Name != nil {
-		name = p.Name
-	}
-	var config []interface{}
-	if p.Config != nil {
-		config = CastConfigsFromDict(
-			p.Config,
-		)
-	}
-	return map[string]interface{}{
-		"name":   name,
-		"config": config,
-	}
-}
-
-func (p AcquireActionConfig) Pointer() *AcquireActionConfig {
-	return &p
-}
-
-func CastAcquireActionConfigs(data []interface{}) []AcquireActionConfig {
-	v := make([]AcquireActionConfig, 0)
-	for _, d := range data {
-		v = append(v, NewAcquireActionConfigFromDict(d.(map[string]interface{})))
-	}
-	return v
-}
-
-func CastAcquireActionConfigsFromDict(data []AcquireActionConfig) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
-}
-
 type Config struct {
 	Key   *string `json:"key"`
 	Value *string `json:"value"`
