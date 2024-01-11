@@ -188,6 +188,7 @@ type Wallet struct {
 	Paid      *int32         `json:"paid"`
 	Free      *int32         `json:"free"`
 	Detail    []WalletDetail `json:"detail"`
+	ShareFree *bool          `json:"shareFree"`
 	CreatedAt *int64         `json:"createdAt"`
 	UpdatedAt *int64         `json:"updatedAt"`
 	Revision  *int64         `json:"revision"`
@@ -207,6 +208,7 @@ func NewWalletFromDict(data map[string]interface{}) Wallet {
 		Paid:      core.CastInt32(data["paid"]),
 		Free:      core.CastInt32(data["free"]),
 		Detail:    CastWalletDetails(core.CastArray(data["detail"])),
+		ShareFree: core.CastBool(data["shareFree"]),
 		CreatedAt: core.CastInt64(data["createdAt"]),
 		UpdatedAt: core.CastInt64(data["updatedAt"]),
 		Revision:  core.CastInt64(data["revision"]),
@@ -241,6 +243,10 @@ func (p Wallet) ToDict() map[string]interface{} {
 			p.Detail,
 		)
 	}
+	var shareFree *bool
+	if p.ShareFree != nil {
+		shareFree = p.ShareFree
+	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
 		createdAt = p.CreatedAt
@@ -260,6 +266,7 @@ func (p Wallet) ToDict() map[string]interface{} {
 		"paid":      paid,
 		"free":      free,
 		"detail":    detail,
+		"shareFree": shareFree,
 		"createdAt": createdAt,
 		"updatedAt": updatedAt,
 		"revision":  revision,
