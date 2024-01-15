@@ -23,16 +23,18 @@ import (
 )
 
 type Namespace struct {
-	NamespaceId    *string        `json:"namespaceId"`
-	Name           *string        `json:"name"`
-	Description    *string        `json:"description"`
-	AcquireScript  *ScriptSetting `json:"acquireScript"`
-	OverflowScript *ScriptSetting `json:"overflowScript"`
-	ConsumeScript  *ScriptSetting `json:"consumeScript"`
-	LogSetting     *LogSetting    `json:"logSetting"`
-	CreatedAt      *int64         `json:"createdAt"`
-	UpdatedAt      *int64         `json:"updatedAt"`
-	Revision       *int64         `json:"revision"`
+	NamespaceId             *string        `json:"namespaceId"`
+	Name                    *string        `json:"name"`
+	Description             *string        `json:"description"`
+	AcquireScript           *ScriptSetting `json:"acquireScript"`
+	OverflowScript          *ScriptSetting `json:"overflowScript"`
+	ConsumeScript           *ScriptSetting `json:"consumeScript"`
+	SimpleItemAcquireScript *ScriptSetting `json:"simpleItemAcquireScript"`
+	SimpleItemConsumeScript *ScriptSetting `json:"simpleItemConsumeScript"`
+	LogSetting              *LogSetting    `json:"logSetting"`
+	CreatedAt               *int64         `json:"createdAt"`
+	UpdatedAt               *int64         `json:"updatedAt"`
+	Revision                *int64         `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -43,16 +45,18 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:    core.CastString(data["namespaceId"]),
-		Name:           core.CastString(data["name"]),
-		Description:    core.CastString(data["description"]),
-		AcquireScript:  NewScriptSettingFromDict(core.CastMap(data["acquireScript"])).Pointer(),
-		OverflowScript: NewScriptSettingFromDict(core.CastMap(data["overflowScript"])).Pointer(),
-		ConsumeScript:  NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer(),
-		LogSetting:     NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:      core.CastInt64(data["createdAt"]),
-		UpdatedAt:      core.CastInt64(data["updatedAt"]),
-		Revision:       core.CastInt64(data["revision"]),
+		NamespaceId:             core.CastString(data["namespaceId"]),
+		Name:                    core.CastString(data["name"]),
+		Description:             core.CastString(data["description"]),
+		AcquireScript:           NewScriptSettingFromDict(core.CastMap(data["acquireScript"])).Pointer(),
+		OverflowScript:          NewScriptSettingFromDict(core.CastMap(data["overflowScript"])).Pointer(),
+		ConsumeScript:           NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer(),
+		SimpleItemAcquireScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemAcquireScript"])).Pointer(),
+		SimpleItemConsumeScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemConsumeScript"])).Pointer(),
+		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:               core.CastInt64(data["createdAt"]),
+		UpdatedAt:               core.CastInt64(data["updatedAt"]),
+		Revision:                core.CastInt64(data["revision"]),
 	}
 }
 
@@ -82,6 +86,14 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.ConsumeScript != nil {
 		consumeScript = p.ConsumeScript.ToDict()
 	}
+	var simpleItemAcquireScript map[string]interface{}
+	if p.SimpleItemAcquireScript != nil {
+		simpleItemAcquireScript = p.SimpleItemAcquireScript.ToDict()
+	}
+	var simpleItemConsumeScript map[string]interface{}
+	if p.SimpleItemConsumeScript != nil {
+		simpleItemConsumeScript = p.SimpleItemConsumeScript.ToDict()
+	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
 		logSetting = p.LogSetting.ToDict()
@@ -99,16 +111,18 @@ func (p Namespace) ToDict() map[string]interface{} {
 		revision = p.Revision
 	}
 	return map[string]interface{}{
-		"namespaceId":    namespaceId,
-		"name":           name,
-		"description":    description,
-		"acquireScript":  acquireScript,
-		"overflowScript": overflowScript,
-		"consumeScript":  consumeScript,
-		"logSetting":     logSetting,
-		"createdAt":      createdAt,
-		"updatedAt":      updatedAt,
-		"revision":       revision,
+		"namespaceId":             namespaceId,
+		"name":                    name,
+		"description":             description,
+		"acquireScript":           acquireScript,
+		"overflowScript":          overflowScript,
+		"consumeScript":           consumeScript,
+		"simpleItemAcquireScript": simpleItemAcquireScript,
+		"simpleItemConsumeScript": simpleItemConsumeScript,
+		"logSetting":              logSetting,
+		"createdAt":               createdAt,
+		"updatedAt":               updatedAt,
+		"revision":                revision,
 	}
 }
 
