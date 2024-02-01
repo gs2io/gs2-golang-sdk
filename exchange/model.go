@@ -722,13 +722,14 @@ func CastCurrentRateMastersFromDict(data []CurrentRateMaster) []interface{} {
 }
 
 type Await struct {
-	AwaitId     *string `json:"awaitId"`
-	UserId      *string `json:"userId"`
-	RateName    *string `json:"rateName"`
-	Name        *string `json:"name"`
-	Count       *int32  `json:"count"`
-	ExchangedAt *int64  `json:"exchangedAt"`
-	Revision    *int64  `json:"revision"`
+	AwaitId     *string  `json:"awaitId"`
+	UserId      *string  `json:"userId"`
+	RateName    *string  `json:"rateName"`
+	Name        *string  `json:"name"`
+	Count       *int32   `json:"count"`
+	Config      []Config `json:"config"`
+	ExchangedAt *int64   `json:"exchangedAt"`
+	Revision    *int64   `json:"revision"`
 }
 
 func NewAwaitFromJson(data string) Await {
@@ -744,6 +745,7 @@ func NewAwaitFromDict(data map[string]interface{}) Await {
 		RateName:    core.CastString(data["rateName"]),
 		Name:        core.CastString(data["name"]),
 		Count:       core.CastInt32(data["count"]),
+		Config:      CastConfigs(core.CastArray(data["config"])),
 		ExchangedAt: core.CastInt64(data["exchangedAt"]),
 		Revision:    core.CastInt64(data["revision"]),
 	}
@@ -771,6 +773,12 @@ func (p Await) ToDict() map[string]interface{} {
 	if p.Count != nil {
 		count = p.Count
 	}
+	var config []interface{}
+	if p.Config != nil {
+		config = CastConfigsFromDict(
+			p.Config,
+		)
+	}
 	var exchangedAt *int64
 	if p.ExchangedAt != nil {
 		exchangedAt = p.ExchangedAt
@@ -785,6 +793,7 @@ func (p Await) ToDict() map[string]interface{} {
 		"rateName":    rateName,
 		"name":        name,
 		"count":       count,
+		"config":      config,
 		"exchangedAt": exchangedAt,
 		"revision":    revision,
 	}

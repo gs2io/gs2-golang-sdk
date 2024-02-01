@@ -1434,13 +1434,14 @@ func (p UpdateCurrentRateMasterFromGitHubRequest) Pointer() *UpdateCurrentRateMa
 }
 
 type CreateAwaitByUserIdRequest struct {
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	RateName           *string `json:"rateName"`
-	Count              *int32  `json:"count"`
+	RequestId          *string  `json:"requestId"`
+	ContextStack       *string  `json:"contextStack"`
+	DuplicationAvoider *string  `json:"duplicationAvoider"`
+	NamespaceName      *string  `json:"namespaceName"`
+	UserId             *string  `json:"userId"`
+	RateName           *string  `json:"rateName"`
+	Count              *int32   `json:"count"`
+	Config             []Config `json:"config"`
 }
 
 func NewCreateAwaitByUserIdRequestFromJson(data string) CreateAwaitByUserIdRequest {
@@ -1455,6 +1456,7 @@ func NewCreateAwaitByUserIdRequestFromDict(data map[string]interface{}) CreateAw
 		UserId:        core.CastString(data["userId"]),
 		RateName:      core.CastString(data["rateName"]),
 		Count:         core.CastInt32(data["count"]),
+		Config:        CastConfigs(core.CastArray(data["config"])),
 	}
 }
 
@@ -1464,6 +1466,9 @@ func (p CreateAwaitByUserIdRequest) ToDict() map[string]interface{} {
 		"userId":        p.UserId,
 		"rateName":      p.RateName,
 		"count":         p.Count,
+		"config": CastConfigsFromDict(
+			p.Config,
+		),
 	}
 }
 
