@@ -180,6 +180,9 @@ func (p Gs2FormationRestClient) CreateNamespaceAsync(
 	if request.UpdateFormScript != nil {
 		bodies["updateFormScript"] = request.UpdateFormScript.ToDict()
 	}
+	if request.UpdatePropertyFormScript != nil {
+		bodies["updatePropertyFormScript"] = request.UpdatePropertyFormScript.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -449,6 +452,9 @@ func (p Gs2FormationRestClient) UpdateNamespaceAsync(
 	}
 	if request.UpdateFormScript != nil {
 		bodies["updateFormScript"] = request.UpdateFormScript.ToDict()
+	}
+	if request.UpdatePropertyFormScript != nil {
+		bodies["updatePropertyFormScript"] = request.UpdatePropertyFormScript.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()

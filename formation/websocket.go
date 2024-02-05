@@ -183,6 +183,9 @@ func (p Gs2FormationWebSocketClient) CreateNamespaceAsync(
 	if request.UpdateFormScript != nil {
 		bodies["updateFormScript"] = request.UpdateFormScript.ToDict()
 	}
+	if request.UpdatePropertyFormScript != nil {
+		bodies["updatePropertyFormScript"] = request.UpdatePropertyFormScript.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -440,6 +443,9 @@ func (p Gs2FormationWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.UpdateFormScript != nil {
 		bodies["updateFormScript"] = request.UpdateFormScript.ToDict()
+	}
+	if request.UpdatePropertyFormScript != nil {
+		bodies["updatePropertyFormScript"] = request.UpdatePropertyFormScript.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()

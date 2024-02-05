@@ -54,14 +54,15 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	RequestId          *string             `json:"requestId"`
-	ContextStack       *string             `json:"contextStack"`
-	Name               *string             `json:"name"`
-	Description        *string             `json:"description"`
-	TransactionSetting *TransactionSetting `json:"transactionSetting"`
-	UpdateMoldScript   *ScriptSetting      `json:"updateMoldScript"`
-	UpdateFormScript   *ScriptSetting      `json:"updateFormScript"`
-	LogSetting         *LogSetting         `json:"logSetting"`
+	RequestId                *string             `json:"requestId"`
+	ContextStack             *string             `json:"contextStack"`
+	Name                     *string             `json:"name"`
+	Description              *string             `json:"description"`
+	TransactionSetting       *TransactionSetting `json:"transactionSetting"`
+	UpdateMoldScript         *ScriptSetting      `json:"updateMoldScript"`
+	UpdateFormScript         *ScriptSetting      `json:"updateFormScript"`
+	UpdatePropertyFormScript *ScriptSetting      `json:"updatePropertyFormScript"`
+	LogSetting               *LogSetting         `json:"logSetting"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
@@ -72,23 +73,25 @@ func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		UpdateMoldScript:   NewScriptSettingFromDict(core.CastMap(data["updateMoldScript"])).Pointer(),
-		UpdateFormScript:   NewScriptSettingFromDict(core.CastMap(data["updateFormScript"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name:                     core.CastString(data["name"]),
+		Description:              core.CastString(data["description"]),
+		TransactionSetting:       NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+		UpdateMoldScript:         NewScriptSettingFromDict(core.CastMap(data["updateMoldScript"])).Pointer(),
+		UpdateFormScript:         NewScriptSettingFromDict(core.CastMap(data["updateFormScript"])).Pointer(),
+		UpdatePropertyFormScript: NewScriptSettingFromDict(core.CastMap(data["updatePropertyFormScript"])).Pointer(),
+		LogSetting:               NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":               p.Name,
-		"description":        p.Description,
-		"transactionSetting": p.TransactionSetting.ToDict(),
-		"updateMoldScript":   p.UpdateMoldScript.ToDict(),
-		"updateFormScript":   p.UpdateFormScript.ToDict(),
-		"logSetting":         p.LogSetting.ToDict(),
+		"name":                     p.Name,
+		"description":              p.Description,
+		"transactionSetting":       p.TransactionSetting.ToDict(),
+		"updateMoldScript":         p.UpdateMoldScript.ToDict(),
+		"updateFormScript":         p.UpdateFormScript.ToDict(),
+		"updatePropertyFormScript": p.UpdatePropertyFormScript.ToDict(),
+		"logSetting":               p.LogSetting.ToDict(),
 	}
 }
 
@@ -153,14 +156,15 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId          *string             `json:"requestId"`
-	ContextStack       *string             `json:"contextStack"`
-	NamespaceName      *string             `json:"namespaceName"`
-	Description        *string             `json:"description"`
-	TransactionSetting *TransactionSetting `json:"transactionSetting"`
-	UpdateMoldScript   *ScriptSetting      `json:"updateMoldScript"`
-	UpdateFormScript   *ScriptSetting      `json:"updateFormScript"`
-	LogSetting         *LogSetting         `json:"logSetting"`
+	RequestId                *string             `json:"requestId"`
+	ContextStack             *string             `json:"contextStack"`
+	NamespaceName            *string             `json:"namespaceName"`
+	Description              *string             `json:"description"`
+	TransactionSetting       *TransactionSetting `json:"transactionSetting"`
+	UpdateMoldScript         *ScriptSetting      `json:"updateMoldScript"`
+	UpdateFormScript         *ScriptSetting      `json:"updateFormScript"`
+	UpdatePropertyFormScript *ScriptSetting      `json:"updatePropertyFormScript"`
+	LogSetting               *LogSetting         `json:"logSetting"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -171,23 +175,25 @@ func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		Description:        core.CastString(data["description"]),
-		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		UpdateMoldScript:   NewScriptSettingFromDict(core.CastMap(data["updateMoldScript"])).Pointer(),
-		UpdateFormScript:   NewScriptSettingFromDict(core.CastMap(data["updateFormScript"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName:            core.CastString(data["namespaceName"]),
+		Description:              core.CastString(data["description"]),
+		TransactionSetting:       NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+		UpdateMoldScript:         NewScriptSettingFromDict(core.CastMap(data["updateMoldScript"])).Pointer(),
+		UpdateFormScript:         NewScriptSettingFromDict(core.CastMap(data["updateFormScript"])).Pointer(),
+		UpdatePropertyFormScript: NewScriptSettingFromDict(core.CastMap(data["updatePropertyFormScript"])).Pointer(),
+		LogSetting:               NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":      p.NamespaceName,
-		"description":        p.Description,
-		"transactionSetting": p.TransactionSetting.ToDict(),
-		"updateMoldScript":   p.UpdateMoldScript.ToDict(),
-		"updateFormScript":   p.UpdateFormScript.ToDict(),
-		"logSetting":         p.LogSetting.ToDict(),
+		"namespaceName":            p.NamespaceName,
+		"description":              p.Description,
+		"transactionSetting":       p.TransactionSetting.ToDict(),
+		"updateMoldScript":         p.UpdateMoldScript.ToDict(),
+		"updateFormScript":         p.UpdateFormScript.ToDict(),
+		"updatePropertyFormScript": p.UpdatePropertyFormScript.ToDict(),
+		"logSetting":               p.LogSetting.ToDict(),
 	}
 }
 
