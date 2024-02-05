@@ -1081,6 +1081,89 @@ func (p GetRawEventResult) Pointer() *GetRawEventResult {
 	return &p
 }
 
+type VerifyEventResult struct {
+}
+
+type VerifyEventAsyncResult struct {
+	result *VerifyEventResult
+	err    error
+}
+
+func NewVerifyEventResultFromJson(data string) VerifyEventResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEventResultFromDict(dict)
+}
+
+func NewVerifyEventResultFromDict(data map[string]interface{}) VerifyEventResult {
+	return VerifyEventResult{}
+}
+
+func (p VerifyEventResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyEventResult) Pointer() *VerifyEventResult {
+	return &p
+}
+
+type VerifyEventByUserIdResult struct {
+}
+
+type VerifyEventByUserIdAsyncResult struct {
+	result *VerifyEventByUserIdResult
+	err    error
+}
+
+func NewVerifyEventByUserIdResultFromJson(data string) VerifyEventByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEventByUserIdResultFromDict(dict)
+}
+
+func NewVerifyEventByUserIdResultFromDict(data map[string]interface{}) VerifyEventByUserIdResult {
+	return VerifyEventByUserIdResult{}
+}
+
+func (p VerifyEventByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyEventByUserIdResult) Pointer() *VerifyEventByUserIdResult {
+	return &p
+}
+
+type VerifyEventByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifyEventByStampTaskAsyncResult struct {
+	result *VerifyEventByStampTaskResult
+	err    error
+}
+
+func NewVerifyEventByStampTaskResultFromJson(data string) VerifyEventByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEventByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyEventByStampTaskResultFromDict(data map[string]interface{}) VerifyEventByStampTaskResult {
+	return VerifyEventByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyEventByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyEventByStampTaskResult) Pointer() *VerifyEventByStampTaskResult {
+	return &p
+}
+
 type ExportMasterResult struct {
 	Item *CurrentEventMaster `json:"item"`
 }

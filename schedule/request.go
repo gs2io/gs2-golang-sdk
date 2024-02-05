@@ -1160,6 +1160,113 @@ func (p GetRawEventRequest) Pointer() *GetRawEventRequest {
 	return &p
 }
 
+type VerifyEventRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	EventName          *string `json:"eventName"`
+	VerifyType         *string `json:"verifyType"`
+}
+
+func NewVerifyEventRequestFromJson(data string) VerifyEventRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEventRequestFromDict(dict)
+}
+
+func NewVerifyEventRequestFromDict(data map[string]interface{}) VerifyEventRequest {
+	return VerifyEventRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		EventName:     core.CastString(data["eventName"]),
+		VerifyType:    core.CastString(data["verifyType"]),
+	}
+}
+
+func (p VerifyEventRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"eventName":     p.EventName,
+		"verifyType":    p.VerifyType,
+	}
+}
+
+func (p VerifyEventRequest) Pointer() *VerifyEventRequest {
+	return &p
+}
+
+type VerifyEventByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	EventName          *string `json:"eventName"`
+	VerifyType         *string `json:"verifyType"`
+}
+
+func NewVerifyEventByUserIdRequestFromJson(data string) VerifyEventByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEventByUserIdRequestFromDict(dict)
+}
+
+func NewVerifyEventByUserIdRequestFromDict(data map[string]interface{}) VerifyEventByUserIdRequest {
+	return VerifyEventByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		UserId:        core.CastString(data["userId"]),
+		EventName:     core.CastString(data["eventName"]),
+		VerifyType:    core.CastString(data["verifyType"]),
+	}
+}
+
+func (p VerifyEventByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"eventName":     p.EventName,
+		"verifyType":    p.VerifyType,
+	}
+}
+
+func (p VerifyEventByUserIdRequest) Pointer() *VerifyEventByUserIdRequest {
+	return &p
+}
+
+type VerifyEventByStampTaskRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampTask    *string `json:"stampTask"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewVerifyEventByStampTaskRequestFromJson(data string) VerifyEventByStampTaskRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyEventByStampTaskRequestFromDict(dict)
+}
+
+func NewVerifyEventByStampTaskRequestFromDict(data map[string]interface{}) VerifyEventByStampTaskRequest {
+	return VerifyEventByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifyEventByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyEventByStampTaskRequest) Pointer() *VerifyEventByStampTaskRequest {
+	return &p
+}
+
 type ExportMasterRequest struct {
 	RequestId     *string `json:"requestId"`
 	ContextStack  *string `json:"contextStack"`
