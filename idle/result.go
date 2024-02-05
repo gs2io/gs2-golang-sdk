@@ -995,6 +995,40 @@ func (p DecreaseMaximumIdleMinutesByUserIdResult) Pointer() *DecreaseMaximumIdle
 	return &p
 }
 
+type SetMaximumIdleMinutesByUserIdResult struct {
+	Item *Status `json:"item"`
+	Old  *Status `json:"old"`
+}
+
+type SetMaximumIdleMinutesByUserIdAsyncResult struct {
+	result *SetMaximumIdleMinutesByUserIdResult
+	err    error
+}
+
+func NewSetMaximumIdleMinutesByUserIdResultFromJson(data string) SetMaximumIdleMinutesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetMaximumIdleMinutesByUserIdResultFromDict(dict)
+}
+
+func NewSetMaximumIdleMinutesByUserIdResultFromDict(data map[string]interface{}) SetMaximumIdleMinutesByUserIdResult {
+	return SetMaximumIdleMinutesByUserIdResult{
+		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Old:  NewStatusFromDict(core.CastMap(data["old"])).Pointer(),
+	}
+}
+
+func (p SetMaximumIdleMinutesByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+		"old":  p.Old.ToDict(),
+	}
+}
+
+func (p SetMaximumIdleMinutesByUserIdResult) Pointer() *SetMaximumIdleMinutesByUserIdResult {
+	return &p
+}
+
 type IncreaseMaximumIdleMinutesByStampSheetResult struct {
 	Item *Status `json:"item"`
 }
@@ -1057,6 +1091,37 @@ func (p DecreaseMaximumIdleMinutesByStampTaskResult) ToDict() map[string]interfa
 }
 
 func (p DecreaseMaximumIdleMinutesByStampTaskResult) Pointer() *DecreaseMaximumIdleMinutesByStampTaskResult {
+	return &p
+}
+
+type SetMaximumIdleMinutesByStampSheetResult struct {
+	Item *Status `json:"item"`
+}
+
+type SetMaximumIdleMinutesByStampSheetAsyncResult struct {
+	result *SetMaximumIdleMinutesByStampSheetResult
+	err    error
+}
+
+func NewSetMaximumIdleMinutesByStampSheetResultFromJson(data string) SetMaximumIdleMinutesByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetMaximumIdleMinutesByStampSheetResultFromDict(dict)
+}
+
+func NewSetMaximumIdleMinutesByStampSheetResultFromDict(data map[string]interface{}) SetMaximumIdleMinutesByStampSheetResult {
+	return SetMaximumIdleMinutesByStampSheetResult{
+		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p SetMaximumIdleMinutesByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p SetMaximumIdleMinutesByStampSheetResult) Pointer() *SetMaximumIdleMinutesByStampSheetResult {
 	return &p
 }
 

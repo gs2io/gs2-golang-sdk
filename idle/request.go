@@ -1057,6 +1057,44 @@ func (p DecreaseMaximumIdleMinutesByUserIdRequest) Pointer() *DecreaseMaximumIdl
 	return &p
 }
 
+type SetMaximumIdleMinutesByUserIdRequest struct {
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	CategoryName       *string `json:"categoryName"`
+	MaximumIdleMinutes *int32  `json:"maximumIdleMinutes"`
+}
+
+func NewSetMaximumIdleMinutesByUserIdRequestFromJson(data string) SetMaximumIdleMinutesByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetMaximumIdleMinutesByUserIdRequestFromDict(dict)
+}
+
+func NewSetMaximumIdleMinutesByUserIdRequestFromDict(data map[string]interface{}) SetMaximumIdleMinutesByUserIdRequest {
+	return SetMaximumIdleMinutesByUserIdRequest{
+		NamespaceName:      core.CastString(data["namespaceName"]),
+		UserId:             core.CastString(data["userId"]),
+		CategoryName:       core.CastString(data["categoryName"]),
+		MaximumIdleMinutes: core.CastInt32(data["maximumIdleMinutes"]),
+	}
+}
+
+func (p SetMaximumIdleMinutesByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":      p.NamespaceName,
+		"userId":             p.UserId,
+		"categoryName":       p.CategoryName,
+		"maximumIdleMinutes": p.MaximumIdleMinutes,
+	}
+}
+
+func (p SetMaximumIdleMinutesByUserIdRequest) Pointer() *SetMaximumIdleMinutesByUserIdRequest {
+	return &p
+}
+
 type IncreaseMaximumIdleMinutesByStampSheetRequest struct {
 	RequestId    *string `json:"requestId"`
 	ContextStack *string `json:"contextStack"`
@@ -1116,6 +1154,37 @@ func (p DecreaseMaximumIdleMinutesByStampTaskRequest) ToDict() map[string]interf
 }
 
 func (p DecreaseMaximumIdleMinutesByStampTaskRequest) Pointer() *DecreaseMaximumIdleMinutesByStampTaskRequest {
+	return &p
+}
+
+type SetMaximumIdleMinutesByStampSheetRequest struct {
+	RequestId    *string `json:"requestId"`
+	ContextStack *string `json:"contextStack"`
+	StampSheet   *string `json:"stampSheet"`
+	KeyId        *string `json:"keyId"`
+}
+
+func NewSetMaximumIdleMinutesByStampSheetRequestFromJson(data string) SetMaximumIdleMinutesByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetMaximumIdleMinutesByStampSheetRequestFromDict(dict)
+}
+
+func NewSetMaximumIdleMinutesByStampSheetRequestFromDict(data map[string]interface{}) SetMaximumIdleMinutesByStampSheetRequest {
+	return SetMaximumIdleMinutesByStampSheetRequest{
+		StampSheet: core.CastString(data["stampSheet"]),
+		KeyId:      core.CastString(data["keyId"]),
+	}
+}
+
+func (p SetMaximumIdleMinutesByStampSheetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampSheet": p.StampSheet,
+		"keyId":      p.KeyId,
+	}
+}
+
+func (p SetMaximumIdleMinutesByStampSheetRequest) Pointer() *SetMaximumIdleMinutesByStampSheetRequest {
 	return &p
 }
 

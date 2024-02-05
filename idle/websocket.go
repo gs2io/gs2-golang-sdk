@@ -2702,6 +2702,99 @@ func (p Gs2IdleWebSocketClient) DecreaseMaximumIdleMinutesByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2IdleWebSocketClient) setMaximumIdleMinutesByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SetMaximumIdleMinutesByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetMaximumIdleMinutesByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetMaximumIdleMinutesByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetMaximumIdleMinutesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SetMaximumIdleMinutesByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2IdleWebSocketClient) SetMaximumIdleMinutesByUserIdAsync(
+	request *SetMaximumIdleMinutesByUserIdRequest,
+	callback chan<- SetMaximumIdleMinutesByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "idle",
+			"component":   "status",
+			"function":    "setMaximumIdleMinutesByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		bodies["categoryName"] = *request.CategoryName
+	}
+	if request.MaximumIdleMinutes != nil {
+		bodies["maximumIdleMinutes"] = *request.MaximumIdleMinutes
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.setMaximumIdleMinutesByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2IdleWebSocketClient) SetMaximumIdleMinutesByUserId(
+	request *SetMaximumIdleMinutesByUserIdRequest,
+) (*SetMaximumIdleMinutesByUserIdResult, error) {
+	callback := make(chan SetMaximumIdleMinutesByUserIdAsyncResult, 1)
+	go p.SetMaximumIdleMinutesByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2IdleWebSocketClient) increaseMaximumIdleMinutesByStampSheetAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- IncreaseMaximumIdleMinutesByStampSheetAsyncResult,
@@ -2863,6 +2956,90 @@ func (p Gs2IdleWebSocketClient) DecreaseMaximumIdleMinutesByStampTask(
 ) (*DecreaseMaximumIdleMinutesByStampTaskResult, error) {
 	callback := make(chan DecreaseMaximumIdleMinutesByStampTaskAsyncResult, 1)
 	go p.DecreaseMaximumIdleMinutesByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2IdleWebSocketClient) setMaximumIdleMinutesByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SetMaximumIdleMinutesByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetMaximumIdleMinutesByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetMaximumIdleMinutesByStampSheetResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetMaximumIdleMinutesByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SetMaximumIdleMinutesByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2IdleWebSocketClient) SetMaximumIdleMinutesByStampSheetAsync(
+	request *SetMaximumIdleMinutesByStampSheetRequest,
+	callback chan<- SetMaximumIdleMinutesByStampSheetAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "idle",
+			"component":   "status",
+			"function":    "setMaximumIdleMinutesByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.setMaximumIdleMinutesByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2IdleWebSocketClient) SetMaximumIdleMinutesByStampSheet(
+	request *SetMaximumIdleMinutesByStampSheetRequest,
+) (*SetMaximumIdleMinutesByStampSheetResult, error) {
+	callback := make(chan SetMaximumIdleMinutesByStampSheetAsyncResult, 1)
+	go p.SetMaximumIdleMinutesByStampSheetAsync(
 		request,
 		callback,
 	)

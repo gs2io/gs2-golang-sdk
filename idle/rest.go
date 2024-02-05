@@ -2856,6 +2856,109 @@ func (p Gs2IdleRestClient) DecreaseMaximumIdleMinutesByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func setMaximumIdleMinutesByUserIdAsyncHandler(
+	client Gs2IdleRestClient,
+	job *core.NetworkJob,
+	callback chan<- SetMaximumIdleMinutesByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetMaximumIdleMinutesByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetMaximumIdleMinutesByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- SetMaximumIdleMinutesByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetMaximumIdleMinutesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SetMaximumIdleMinutesByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2IdleRestClient) SetMaximumIdleMinutesByUserIdAsync(
+	request *SetMaximumIdleMinutesByUserIdRequest,
+	callback chan<- SetMaximumIdleMinutesByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/status/model/{categoryName}/maximumIdle"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.MaximumIdleMinutes != nil {
+		bodies["maximumIdleMinutes"] = *request.MaximumIdleMinutes
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go setMaximumIdleMinutesByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2IdleRestClient) SetMaximumIdleMinutesByUserId(
+	request *SetMaximumIdleMinutesByUserIdRequest,
+) (*SetMaximumIdleMinutesByUserIdResult, error) {
+	callback := make(chan SetMaximumIdleMinutesByUserIdAsyncResult, 1)
+	go p.SetMaximumIdleMinutesByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func increaseMaximumIdleMinutesByStampSheetAsyncHandler(
 	client Gs2IdleRestClient,
 	job *core.NetworkJob,
@@ -3025,6 +3128,94 @@ func (p Gs2IdleRestClient) DecreaseMaximumIdleMinutesByStampTask(
 ) (*DecreaseMaximumIdleMinutesByStampTaskResult, error) {
 	callback := make(chan DecreaseMaximumIdleMinutesByStampTaskAsyncResult, 1)
 	go p.DecreaseMaximumIdleMinutesByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func setMaximumIdleMinutesByStampSheetAsyncHandler(
+	client Gs2IdleRestClient,
+	job *core.NetworkJob,
+	callback chan<- SetMaximumIdleMinutesByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetMaximumIdleMinutesByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetMaximumIdleMinutesByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- SetMaximumIdleMinutesByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetMaximumIdleMinutesByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SetMaximumIdleMinutesByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2IdleRestClient) SetMaximumIdleMinutesByStampSheetAsync(
+	request *SetMaximumIdleMinutesByStampSheetRequest,
+	callback chan<- SetMaximumIdleMinutesByStampSheetAsyncResult,
+) {
+	path := "/stamp/status/maximumIdleMinutes/set"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go setMaximumIdleMinutesByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2IdleRestClient) SetMaximumIdleMinutesByStampSheet(
+	request *SetMaximumIdleMinutesByStampSheetRequest,
+) (*SetMaximumIdleMinutesByStampSheetResult, error) {
+	callback := make(chan SetMaximumIdleMinutesByStampSheetAsyncResult, 1)
+	go p.SetMaximumIdleMinutesByStampSheetAsync(
 		request,
 		callback,
 	)
