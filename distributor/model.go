@@ -367,7 +367,9 @@ type StampSheetResult struct {
 	TransactionId      *string         `json:"transactionId"`
 	TaskRequests       []ConsumeAction `json:"taskRequests"`
 	SheetRequest       *AcquireAction  `json:"sheetRequest"`
+	TaskResultCodes    []*int32        `json:"taskResultCodes"`
 	TaskResults        []*string       `json:"taskResults"`
+	SheetResultCode    *int32          `json:"sheetResultCode"`
 	SheetResult        *string         `json:"sheetResult"`
 	NextTransactionId  *string         `json:"nextTransactionId"`
 	CreatedAt          *int64          `json:"createdAt"`
@@ -387,7 +389,9 @@ func NewStampSheetResultFromDict(data map[string]interface{}) StampSheetResult {
 		TransactionId:      core.CastString(data["transactionId"]),
 		TaskRequests:       CastConsumeActions(core.CastArray(data["taskRequests"])),
 		SheetRequest:       NewAcquireActionFromDict(core.CastMap(data["sheetRequest"])).Pointer(),
+		TaskResultCodes:    core.CastInt32s(core.CastArray(data["taskResultCodes"])),
 		TaskResults:        core.CastStrings(core.CastArray(data["taskResults"])),
+		SheetResultCode:    core.CastInt32(data["sheetResultCode"]),
 		SheetResult:        core.CastString(data["sheetResult"]),
 		NextTransactionId:  core.CastString(data["nextTransactionId"]),
 		CreatedAt:          core.CastInt64(data["createdAt"]),
@@ -419,11 +423,21 @@ func (p StampSheetResult) ToDict() map[string]interface{} {
 	if p.SheetRequest != nil {
 		sheetRequest = p.SheetRequest.ToDict()
 	}
+	var taskResultCodes []interface{}
+	if p.TaskResultCodes != nil {
+		taskResultCodes = core.CastInt32sFromDict(
+			p.TaskResultCodes,
+		)
+	}
 	var taskResults []interface{}
 	if p.TaskResults != nil {
 		taskResults = core.CastStringsFromDict(
 			p.TaskResults,
 		)
+	}
+	var sheetResultCode *int32
+	if p.SheetResultCode != nil {
+		sheetResultCode = p.SheetResultCode
 	}
 	var sheetResult *string
 	if p.SheetResult != nil {
@@ -447,7 +461,9 @@ func (p StampSheetResult) ToDict() map[string]interface{} {
 		"transactionId":      transactionId,
 		"taskRequests":       taskRequests,
 		"sheetRequest":       sheetRequest,
+		"taskResultCodes":    taskResultCodes,
 		"taskResults":        taskResults,
+		"sheetResultCode":    sheetResultCode,
 		"sheetResult":        sheetResult,
 		"nextTransactionId":  nextTransactionId,
 		"createdAt":          createdAt,
