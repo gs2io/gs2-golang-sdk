@@ -845,6 +845,7 @@ func (p PredictionByUserIdResult) Pointer() *PredictionByUserIdResult {
 
 type ReceiveResult struct {
 	Items                     []AcquireAction `json:"items"`
+	Status                    *Status         `json:"status"`
 	TransactionId             *string         `json:"transactionId"`
 	StampSheet                *string         `json:"stampSheet"`
 	StampSheetEncryptionKeyId *string         `json:"stampSheetEncryptionKeyId"`
@@ -865,6 +866,7 @@ func NewReceiveResultFromJson(data string) ReceiveResult {
 func NewReceiveResultFromDict(data map[string]interface{}) ReceiveResult {
 	return ReceiveResult{
 		Items:                     CastAcquireActions(core.CastArray(data["items"])),
+		Status:                    NewStatusFromDict(core.CastMap(data["status"])).Pointer(),
 		TransactionId:             core.CastString(data["transactionId"]),
 		StampSheet:                core.CastString(data["stampSheet"]),
 		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
@@ -877,6 +879,7 @@ func (p ReceiveResult) ToDict() map[string]interface{} {
 		"items": CastAcquireActionsFromDict(
 			p.Items,
 		),
+		"status":                    p.Status.ToDict(),
 		"transactionId":             p.TransactionId,
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
@@ -890,6 +893,7 @@ func (p ReceiveResult) Pointer() *ReceiveResult {
 
 type ReceiveByUserIdResult struct {
 	Items                     []AcquireAction `json:"items"`
+	Status                    *Status         `json:"status"`
 	TransactionId             *string         `json:"transactionId"`
 	StampSheet                *string         `json:"stampSheet"`
 	StampSheetEncryptionKeyId *string         `json:"stampSheetEncryptionKeyId"`
@@ -910,6 +914,7 @@ func NewReceiveByUserIdResultFromJson(data string) ReceiveByUserIdResult {
 func NewReceiveByUserIdResultFromDict(data map[string]interface{}) ReceiveByUserIdResult {
 	return ReceiveByUserIdResult{
 		Items:                     CastAcquireActions(core.CastArray(data["items"])),
+		Status:                    NewStatusFromDict(core.CastMap(data["status"])).Pointer(),
 		TransactionId:             core.CastString(data["transactionId"]),
 		StampSheet:                core.CastString(data["stampSheet"]),
 		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
@@ -922,6 +927,7 @@ func (p ReceiveByUserIdResult) ToDict() map[string]interface{} {
 		"items": CastAcquireActionsFromDict(
 			p.Items,
 		),
+		"status":                    p.Status.ToDict(),
 		"transactionId":             p.TransactionId,
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
