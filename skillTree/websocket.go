@@ -1837,6 +1837,9 @@ func (p Gs2SkillTreeWebSocketClient) MarkReleaseByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
 	if request.NodeModelNames != nil {
 		var _nodeModelNames []interface{}
 		for _, item := range request.NodeModelNames {
@@ -1930,6 +1933,9 @@ func (p Gs2SkillTreeWebSocketClient) ReleaseAsync(
 	}
 	if request.AccessToken != nil && *request.AccessToken != "" {
 		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
 	}
 	if request.NodeModelNames != nil {
 		var _nodeModelNames []interface{}
@@ -2035,6 +2041,9 @@ func (p Gs2SkillTreeWebSocketClient) ReleaseByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
 	if request.NodeModelNames != nil {
 		var _nodeModelNames []interface{}
 		for _, item := range request.NodeModelNames {
@@ -2136,6 +2145,9 @@ func (p Gs2SkillTreeWebSocketClient) MarkRestrainByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
 	if request.NodeModelNames != nil {
 		var _nodeModelNames []interface{}
 		for _, item := range request.NodeModelNames {
@@ -2229,6 +2241,9 @@ func (p Gs2SkillTreeWebSocketClient) RestrainAsync(
 	}
 	if request.AccessToken != nil && *request.AccessToken != "" {
 		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
 	}
 	if request.NodeModelNames != nil {
 		var _nodeModelNames []interface{}
@@ -2334,6 +2349,9 @@ func (p Gs2SkillTreeWebSocketClient) RestrainByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
 	if request.NodeModelNames != nil {
 		var _nodeModelNames []interface{}
 		for _, item := range request.NodeModelNames {
@@ -2369,6 +2387,189 @@ func (p Gs2SkillTreeWebSocketClient) RestrainByUserId(
 ) (*RestrainByUserIdResult, error) {
 	callback := make(chan RestrainByUserIdAsyncResult, 1)
 	go p.RestrainByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2SkillTreeWebSocketClient) describeStatusesAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeStatusesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeStatusesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeStatusesResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStatusesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeStatusesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SkillTreeWebSocketClient) DescribeStatusesAsync(
+	request *DescribeStatusesRequest,
+	callback chan<- DescribeStatusesAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "skill_tree",
+			"component":   "status",
+			"function":    "describeStatuses",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+
+	go p.describeStatusesAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SkillTreeWebSocketClient) DescribeStatuses(
+	request *DescribeStatusesRequest,
+) (*DescribeStatusesResult, error) {
+	callback := make(chan DescribeStatusesAsyncResult, 1)
+	go p.DescribeStatusesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2SkillTreeWebSocketClient) describeStatusesByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeStatusesByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeStatusesByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeStatusesByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStatusesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeStatusesByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SkillTreeWebSocketClient) DescribeStatusesByUserIdAsync(
+	request *DescribeStatusesByUserIdRequest,
+	callback chan<- DescribeStatusesByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "skill_tree",
+			"component":   "status",
+			"function":    "describeStatusesByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.describeStatusesByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SkillTreeWebSocketClient) DescribeStatusesByUserId(
+	request *DescribeStatusesByUserIdRequest,
+) (*DescribeStatusesByUserIdResult, error) {
+	callback := make(chan DescribeStatusesByUserIdAsyncResult, 1)
+	go p.DescribeStatusesByUserIdAsync(
 		request,
 		callback,
 	)
@@ -2434,6 +2635,9 @@ func (p Gs2SkillTreeWebSocketClient) GetStatusAsync(
 	}
 	if request.AccessToken != nil && *request.AccessToken != "" {
 		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2522,6 +2726,9 @@ func (p Gs2SkillTreeWebSocketClient) GetStatusByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2605,6 +2812,9 @@ func (p Gs2SkillTreeWebSocketClient) ResetAsync(
 	}
 	if request.AccessToken != nil && *request.AccessToken != "" {
 		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
 	}
 	if request.Config != nil {
 		var _config []interface{}
@@ -2702,6 +2912,9 @@ func (p Gs2SkillTreeWebSocketClient) ResetByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
 	}
 	if request.Config != nil {
 		var _config []interface{}

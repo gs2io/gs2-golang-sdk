@@ -344,6 +344,7 @@ func CastNodeModelMastersFromDict(data []NodeModelMaster) []interface{} {
 type Status struct {
 	StatusId          *string   `json:"statusId"`
 	UserId            *string   `json:"userId"`
+	PropertyId        *string   `json:"propertyId"`
 	ReleasedNodeNames []*string `json:"releasedNodeNames"`
 	CreatedAt         *int64    `json:"createdAt"`
 	UpdatedAt         *int64    `json:"updatedAt"`
@@ -360,6 +361,7 @@ func NewStatusFromDict(data map[string]interface{}) Status {
 	return Status{
 		StatusId:          core.CastString(data["statusId"]),
 		UserId:            core.CastString(data["userId"]),
+		PropertyId:        core.CastString(data["propertyId"]),
 		ReleasedNodeNames: core.CastStrings(core.CastArray(data["releasedNodeNames"])),
 		CreatedAt:         core.CastInt64(data["createdAt"]),
 		UpdatedAt:         core.CastInt64(data["updatedAt"]),
@@ -376,6 +378,10 @@ func (p Status) ToDict() map[string]interface{} {
 	var userId *string
 	if p.UserId != nil {
 		userId = p.UserId
+	}
+	var propertyId *string
+	if p.PropertyId != nil {
+		propertyId = p.PropertyId
 	}
 	var releasedNodeNames []interface{}
 	if p.ReleasedNodeNames != nil {
@@ -398,6 +404,7 @@ func (p Status) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"statusId":          statusId,
 		"userId":            userId,
+		"propertyId":        propertyId,
 		"releasedNodeNames": releasedNodeNames,
 		"createdAt":         createdAt,
 		"updatedAt":         updatedAt,

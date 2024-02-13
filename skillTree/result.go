@@ -871,6 +871,78 @@ func (p RestrainByUserIdResult) Pointer() *RestrainByUserIdResult {
 	return &p
 }
 
+type DescribeStatusesResult struct {
+	Items         []Status `json:"items"`
+	NextPageToken *string  `json:"nextPageToken"`
+}
+
+type DescribeStatusesAsyncResult struct {
+	result *DescribeStatusesResult
+	err    error
+}
+
+func NewDescribeStatusesResultFromJson(data string) DescribeStatusesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStatusesResultFromDict(dict)
+}
+
+func NewDescribeStatusesResultFromDict(data map[string]interface{}) DescribeStatusesResult {
+	return DescribeStatusesResult{
+		Items:         CastStatuses(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeStatusesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastStatusesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeStatusesResult) Pointer() *DescribeStatusesResult {
+	return &p
+}
+
+type DescribeStatusesByUserIdResult struct {
+	Items         []Status `json:"items"`
+	NextPageToken *string  `json:"nextPageToken"`
+}
+
+type DescribeStatusesByUserIdAsyncResult struct {
+	result *DescribeStatusesByUserIdResult
+	err    error
+}
+
+func NewDescribeStatusesByUserIdResultFromJson(data string) DescribeStatusesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStatusesByUserIdResultFromDict(dict)
+}
+
+func NewDescribeStatusesByUserIdResultFromDict(data map[string]interface{}) DescribeStatusesByUserIdResult {
+	return DescribeStatusesByUserIdResult{
+		Items:         CastStatuses(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeStatusesByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastStatusesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeStatusesByUserIdResult) Pointer() *DescribeStatusesByUserIdResult {
+	return &p
+}
+
 type GetStatusResult struct {
 	Item *Status `json:"item"`
 }

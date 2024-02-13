@@ -1913,7 +1913,7 @@ func (p Gs2SkillTreeRestClient) MarkReleaseByUserIdAsync(
 	request *MarkReleaseByUserIdRequest,
 	callback chan<- MarkReleaseByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/status/node/release/mark"
+	path := "/{namespaceName}/user/{userId}/status/{propertyId}/node/release/mark"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
@@ -1923,6 +1923,11 @@ func (p Gs2SkillTreeRestClient) MarkReleaseByUserIdAsync(
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
 		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
 	}
 
 	replacer := strings.NewReplacer()
@@ -2015,11 +2020,16 @@ func (p Gs2SkillTreeRestClient) ReleaseAsync(
 	request *ReleaseRequest,
 	callback chan<- ReleaseAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/status/node/release"
+	path := "/{namespaceName}/user/me/status/{propertyId}/node/release"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
 		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
 	}
 
 	replacer := strings.NewReplacer()
@@ -2122,7 +2132,7 @@ func (p Gs2SkillTreeRestClient) ReleaseByUserIdAsync(
 	request *ReleaseByUserIdRequest,
 	callback chan<- ReleaseByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/status/node/release"
+	path := "/{namespaceName}/user/{userId}/status/{propertyId}/node/release"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
@@ -2132,6 +2142,11 @@ func (p Gs2SkillTreeRestClient) ReleaseByUserIdAsync(
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
 		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
 	}
 
 	replacer := strings.NewReplacer()
@@ -2231,7 +2246,7 @@ func (p Gs2SkillTreeRestClient) MarkRestrainByUserIdAsync(
 	request *MarkRestrainByUserIdRequest,
 	callback chan<- MarkRestrainByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/status/node/restrain/mark"
+	path := "/{namespaceName}/user/{userId}/status/{propertyId}/node/restrain/mark"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
@@ -2241,6 +2256,11 @@ func (p Gs2SkillTreeRestClient) MarkRestrainByUserIdAsync(
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
 		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
 	}
 
 	replacer := strings.NewReplacer()
@@ -2333,11 +2353,16 @@ func (p Gs2SkillTreeRestClient) RestrainAsync(
 	request *RestrainRequest,
 	callback chan<- RestrainAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/status/node/restrain"
+	path := "/{namespaceName}/user/me/status/{propertyId}/node/restrain"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
 		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
 	}
 
 	replacer := strings.NewReplacer()
@@ -2440,7 +2465,7 @@ func (p Gs2SkillTreeRestClient) RestrainByUserIdAsync(
 	request *RestrainByUserIdRequest,
 	callback chan<- RestrainByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/status/node/restrain"
+	path := "/{namespaceName}/user/{userId}/status/{propertyId}/node/restrain"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
@@ -2450,6 +2475,11 @@ func (p Gs2SkillTreeRestClient) RestrainByUserIdAsync(
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
 		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
 	}
 
 	replacer := strings.NewReplacer()
@@ -2504,6 +2534,194 @@ func (p Gs2SkillTreeRestClient) RestrainByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func describeStatusesAsyncHandler(
+	client Gs2SkillTreeRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeStatusesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeStatusesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeStatusesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeStatusesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStatusesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeStatusesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SkillTreeRestClient) DescribeStatusesAsync(
+	request *DescribeStatusesRequest,
+	callback chan<- DescribeStatusesAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/status"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+
+	go describeStatusesAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SkillTreeRestClient) DescribeStatuses(
+	request *DescribeStatusesRequest,
+) (*DescribeStatusesResult, error) {
+	callback := make(chan DescribeStatusesAsyncResult, 1)
+	go p.DescribeStatusesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeStatusesByUserIdAsyncHandler(
+	client Gs2SkillTreeRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeStatusesByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeStatusesByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeStatusesByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DescribeStatusesByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeStatusesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeStatusesByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SkillTreeRestClient) DescribeStatusesByUserIdAsync(
+	request *DescribeStatusesByUserIdRequest,
+	callback chan<- DescribeStatusesByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/status/"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go describeStatusesByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("skill-tree").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SkillTreeRestClient) DescribeStatusesByUserId(
+	request *DescribeStatusesByUserIdRequest,
+) (*DescribeStatusesByUserIdResult, error) {
+	callback := make(chan DescribeStatusesByUserIdAsyncResult, 1)
+	go p.DescribeStatusesByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func getStatusAsyncHandler(
 	client Gs2SkillTreeRestClient,
 	job *core.NetworkJob,
@@ -2549,11 +2767,16 @@ func (p Gs2SkillTreeRestClient) GetStatusAsync(
 	request *GetStatusRequest,
 	callback chan<- GetStatusAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/status"
+	path := "/{namespaceName}/user/me/status/{propertyId}"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
 		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
 	}
 
 	replacer := strings.NewReplacer()
@@ -2636,7 +2859,7 @@ func (p Gs2SkillTreeRestClient) GetStatusByUserIdAsync(
 	request *GetStatusByUserIdRequest,
 	callback chan<- GetStatusByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/status"
+	path := "/{namespaceName}/user/{userId}/status/{propertyId}"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
@@ -2646,6 +2869,11 @@ func (p Gs2SkillTreeRestClient) GetStatusByUserIdAsync(
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
 		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
 	}
 
 	replacer := strings.NewReplacer()
@@ -2725,11 +2953,16 @@ func (p Gs2SkillTreeRestClient) ResetAsync(
 	request *ResetRequest,
 	callback chan<- ResetAsyncResult,
 ) {
-	path := "/{namespaceName}/user/me/status/reset"
+	path := "/{namespaceName}/user/me/status/{propertyId}/reset"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
 		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
 	}
 
 	replacer := strings.NewReplacer()
@@ -2825,7 +3058,7 @@ func (p Gs2SkillTreeRestClient) ResetByUserIdAsync(
 	request *ResetByUserIdRequest,
 	callback chan<- ResetByUserIdAsyncResult,
 ) {
-	path := "/{namespaceName}/user/{userId}/status/reset"
+	path := "/{namespaceName}/user/{userId}/status/{propertyId}/reset"
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
 	} else {
@@ -2835,6 +3068,11 @@ func (p Gs2SkillTreeRestClient) ResetByUserIdAsync(
 		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
 	} else {
 		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
 	}
 
 	replacer := strings.NewReplacer()

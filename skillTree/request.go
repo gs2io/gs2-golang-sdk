@@ -693,6 +693,7 @@ type MarkReleaseByUserIdRequest struct {
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
 	NamespaceName      *string   `json:"namespaceName"`
 	UserId             *string   `json:"userId"`
+	PropertyId         *string   `json:"propertyId"`
 	NodeModelNames     []*string `json:"nodeModelNames"`
 }
 
@@ -706,6 +707,7 @@ func NewMarkReleaseByUserIdRequestFromDict(data map[string]interface{}) MarkRele
 	return MarkReleaseByUserIdRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
 		UserId:         core.CastString(data["userId"]),
+		PropertyId:     core.CastString(data["propertyId"]),
 		NodeModelNames: core.CastStrings(core.CastArray(data["nodeModelNames"])),
 	}
 }
@@ -714,6 +716,7 @@ func (p MarkReleaseByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"userId":        p.UserId,
+		"propertyId":    p.PropertyId,
 		"nodeModelNames": core.CastStringsFromDict(
 			p.NodeModelNames,
 		),
@@ -730,6 +733,7 @@ type ReleaseRequest struct {
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
 	NamespaceName      *string   `json:"namespaceName"`
 	AccessToken        *string   `json:"accessToken"`
+	PropertyId         *string   `json:"propertyId"`
 	NodeModelNames     []*string `json:"nodeModelNames"`
 	Config             []Config  `json:"config"`
 }
@@ -744,6 +748,7 @@ func NewReleaseRequestFromDict(data map[string]interface{}) ReleaseRequest {
 	return ReleaseRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
 		AccessToken:    core.CastString(data["accessToken"]),
+		PropertyId:     core.CastString(data["propertyId"]),
 		NodeModelNames: core.CastStrings(core.CastArray(data["nodeModelNames"])),
 		Config:         CastConfigs(core.CastArray(data["config"])),
 	}
@@ -753,6 +758,7 @@ func (p ReleaseRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
+		"propertyId":    p.PropertyId,
 		"nodeModelNames": core.CastStringsFromDict(
 			p.NodeModelNames,
 		),
@@ -772,6 +778,7 @@ type ReleaseByUserIdRequest struct {
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
 	NamespaceName      *string   `json:"namespaceName"`
 	UserId             *string   `json:"userId"`
+	PropertyId         *string   `json:"propertyId"`
 	NodeModelNames     []*string `json:"nodeModelNames"`
 	Config             []Config  `json:"config"`
 }
@@ -786,6 +793,7 @@ func NewReleaseByUserIdRequestFromDict(data map[string]interface{}) ReleaseByUse
 	return ReleaseByUserIdRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
 		UserId:         core.CastString(data["userId"]),
+		PropertyId:     core.CastString(data["propertyId"]),
 		NodeModelNames: core.CastStrings(core.CastArray(data["nodeModelNames"])),
 		Config:         CastConfigs(core.CastArray(data["config"])),
 	}
@@ -795,6 +803,7 @@ func (p ReleaseByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"userId":        p.UserId,
+		"propertyId":    p.PropertyId,
 		"nodeModelNames": core.CastStringsFromDict(
 			p.NodeModelNames,
 		),
@@ -814,6 +823,7 @@ type MarkRestrainByUserIdRequest struct {
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
 	NamespaceName      *string   `json:"namespaceName"`
 	UserId             *string   `json:"userId"`
+	PropertyId         *string   `json:"propertyId"`
 	NodeModelNames     []*string `json:"nodeModelNames"`
 }
 
@@ -827,6 +837,7 @@ func NewMarkRestrainByUserIdRequestFromDict(data map[string]interface{}) MarkRes
 	return MarkRestrainByUserIdRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
 		UserId:         core.CastString(data["userId"]),
+		PropertyId:     core.CastString(data["propertyId"]),
 		NodeModelNames: core.CastStrings(core.CastArray(data["nodeModelNames"])),
 	}
 }
@@ -835,6 +846,7 @@ func (p MarkRestrainByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"userId":        p.UserId,
+		"propertyId":    p.PropertyId,
 		"nodeModelNames": core.CastStringsFromDict(
 			p.NodeModelNames,
 		),
@@ -851,6 +863,7 @@ type RestrainRequest struct {
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
 	NamespaceName      *string   `json:"namespaceName"`
 	AccessToken        *string   `json:"accessToken"`
+	PropertyId         *string   `json:"propertyId"`
 	NodeModelNames     []*string `json:"nodeModelNames"`
 	Config             []Config  `json:"config"`
 }
@@ -865,6 +878,7 @@ func NewRestrainRequestFromDict(data map[string]interface{}) RestrainRequest {
 	return RestrainRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
 		AccessToken:    core.CastString(data["accessToken"]),
+		PropertyId:     core.CastString(data["propertyId"]),
 		NodeModelNames: core.CastStrings(core.CastArray(data["nodeModelNames"])),
 		Config:         CastConfigs(core.CastArray(data["config"])),
 	}
@@ -874,6 +888,7 @@ func (p RestrainRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
+		"propertyId":    p.PropertyId,
 		"nodeModelNames": core.CastStringsFromDict(
 			p.NodeModelNames,
 		),
@@ -893,6 +908,7 @@ type RestrainByUserIdRequest struct {
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
 	NamespaceName      *string   `json:"namespaceName"`
 	UserId             *string   `json:"userId"`
+	PropertyId         *string   `json:"propertyId"`
 	NodeModelNames     []*string `json:"nodeModelNames"`
 	Config             []Config  `json:"config"`
 }
@@ -907,6 +923,7 @@ func NewRestrainByUserIdRequestFromDict(data map[string]interface{}) RestrainByU
 	return RestrainByUserIdRequest{
 		NamespaceName:  core.CastString(data["namespaceName"]),
 		UserId:         core.CastString(data["userId"]),
+		PropertyId:     core.CastString(data["propertyId"]),
 		NodeModelNames: core.CastStrings(core.CastArray(data["nodeModelNames"])),
 		Config:         CastConfigs(core.CastArray(data["config"])),
 	}
@@ -916,6 +933,7 @@ func (p RestrainByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"userId":        p.UserId,
+		"propertyId":    p.PropertyId,
 		"nodeModelNames": core.CastStringsFromDict(
 			p.NodeModelNames,
 		),
@@ -929,11 +947,86 @@ func (p RestrainByUserIdRequest) Pointer() *RestrainByUserIdRequest {
 	return &p
 }
 
+type DescribeStatusesRequest struct {
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	AccessToken   *string `json:"accessToken"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+}
+
+func NewDescribeStatusesRequestFromJson(data string) DescribeStatusesRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStatusesRequestFromDict(dict)
+}
+
+func NewDescribeStatusesRequestFromDict(data map[string]interface{}) DescribeStatusesRequest {
+	return DescribeStatusesRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
+}
+
+func (p DescribeStatusesRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p DescribeStatusesRequest) Pointer() *DescribeStatusesRequest {
+	return &p
+}
+
+type DescribeStatusesByUserIdRequest struct {
+	RequestId     *string `json:"requestId"`
+	ContextStack  *string `json:"contextStack"`
+	NamespaceName *string `json:"namespaceName"`
+	UserId        *string `json:"userId"`
+	PageToken     *string `json:"pageToken"`
+	Limit         *int32  `json:"limit"`
+}
+
+func NewDescribeStatusesByUserIdRequestFromJson(data string) DescribeStatusesByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeStatusesByUserIdRequestFromDict(dict)
+}
+
+func NewDescribeStatusesByUserIdRequestFromDict(data map[string]interface{}) DescribeStatusesByUserIdRequest {
+	return DescribeStatusesByUserIdRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		UserId:        core.CastString(data["userId"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
+}
+
+func (p DescribeStatusesByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p DescribeStatusesByUserIdRequest) Pointer() *DescribeStatusesByUserIdRequest {
+	return &p
+}
+
 type GetStatusRequest struct {
 	RequestId     *string `json:"requestId"`
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
 	AccessToken   *string `json:"accessToken"`
+	PropertyId    *string `json:"propertyId"`
 }
 
 func NewGetStatusRequestFromJson(data string) GetStatusRequest {
@@ -946,6 +1039,7 @@ func NewGetStatusRequestFromDict(data map[string]interface{}) GetStatusRequest {
 	return GetStatusRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 		AccessToken:   core.CastString(data["accessToken"]),
+		PropertyId:    core.CastString(data["propertyId"]),
 	}
 }
 
@@ -953,6 +1047,7 @@ func (p GetStatusRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
+		"propertyId":    p.PropertyId,
 	}
 }
 
@@ -965,6 +1060,7 @@ type GetStatusByUserIdRequest struct {
 	ContextStack  *string `json:"contextStack"`
 	NamespaceName *string `json:"namespaceName"`
 	UserId        *string `json:"userId"`
+	PropertyId    *string `json:"propertyId"`
 }
 
 func NewGetStatusByUserIdRequestFromJson(data string) GetStatusByUserIdRequest {
@@ -977,6 +1073,7 @@ func NewGetStatusByUserIdRequestFromDict(data map[string]interface{}) GetStatusB
 	return GetStatusByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 		UserId:        core.CastString(data["userId"]),
+		PropertyId:    core.CastString(data["propertyId"]),
 	}
 }
 
@@ -984,6 +1081,7 @@ func (p GetStatusByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"userId":        p.UserId,
+		"propertyId":    p.PropertyId,
 	}
 }
 
@@ -997,6 +1095,7 @@ type ResetRequest struct {
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
 	NamespaceName      *string  `json:"namespaceName"`
 	AccessToken        *string  `json:"accessToken"`
+	PropertyId         *string  `json:"propertyId"`
 	Config             []Config `json:"config"`
 }
 
@@ -1010,6 +1109,7 @@ func NewResetRequestFromDict(data map[string]interface{}) ResetRequest {
 	return ResetRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 		AccessToken:   core.CastString(data["accessToken"]),
+		PropertyId:    core.CastString(data["propertyId"]),
 		Config:        CastConfigs(core.CastArray(data["config"])),
 	}
 }
@@ -1018,6 +1118,7 @@ func (p ResetRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
+		"propertyId":    p.PropertyId,
 		"config": CastConfigsFromDict(
 			p.Config,
 		),
@@ -1034,6 +1135,7 @@ type ResetByUserIdRequest struct {
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
 	NamespaceName      *string  `json:"namespaceName"`
 	UserId             *string  `json:"userId"`
+	PropertyId         *string  `json:"propertyId"`
 	Config             []Config `json:"config"`
 }
 
@@ -1047,6 +1149,7 @@ func NewResetByUserIdRequestFromDict(data map[string]interface{}) ResetByUserIdR
 	return ResetByUserIdRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 		UserId:        core.CastString(data["userId"]),
+		PropertyId:    core.CastString(data["propertyId"]),
 		Config:        CastConfigs(core.CastArray(data["config"])),
 	}
 }
@@ -1055,6 +1158,7 @@ func (p ResetByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"userId":        p.UserId,
+		"propertyId":    p.PropertyId,
 		"config": CastConfigsFromDict(
 			p.Config,
 		),
