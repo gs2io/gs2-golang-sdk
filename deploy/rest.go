@@ -88,6 +88,9 @@ func (p Gs2DeployRestClient) DescribeStacksAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -179,6 +182,9 @@ func (p Gs2DeployRestClient) CreateStackAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -270,6 +276,9 @@ func (p Gs2DeployRestClient) CreateStackFromGitHubAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -355,6 +364,9 @@ func (p Gs2DeployRestClient) ValidateAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -439,6 +451,9 @@ func (p Gs2DeployRestClient) GetStackStatusAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -523,6 +538,9 @@ func (p Gs2DeployRestClient) GetStackAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -616,6 +634,9 @@ func (p Gs2DeployRestClient) UpdateStackAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -706,6 +727,9 @@ func (p Gs2DeployRestClient) ChangeSetAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -799,6 +823,9 @@ func (p Gs2DeployRestClient) UpdateStackFromGitHubAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -883,6 +910,9 @@ func (p Gs2DeployRestClient) DeleteStackAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -967,6 +997,9 @@ func (p Gs2DeployRestClient) ForceDeleteStackAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -1051,6 +1084,9 @@ func (p Gs2DeployRestClient) DeleteStackResourcesAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -1135,6 +1171,9 @@ func (p Gs2DeployRestClient) DeleteStackEntityAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -1225,6 +1264,9 @@ func (p Gs2DeployRestClient) DescribeResourcesAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -1314,6 +1356,9 @@ func (p Gs2DeployRestClient) GetResourceAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -1404,6 +1449,9 @@ func (p Gs2DeployRestClient) DescribeEventsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -1493,6 +1541,9 @@ func (p Gs2DeployRestClient) GetEventAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -1583,6 +1634,9 @@ func (p Gs2DeployRestClient) DescribeOutputsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -1672,6 +1726,9 @@ func (p Gs2DeployRestClient) GetOutputAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}

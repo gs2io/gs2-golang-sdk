@@ -88,6 +88,9 @@ func (p Gs2ScriptRestClient) DescribeNamespacesAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -182,6 +185,9 @@ func (p Gs2ScriptRestClient) CreateNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -266,6 +272,9 @@ func (p Gs2ScriptRestClient) GetNamespaceStatusAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -350,6 +359,9 @@ func (p Gs2ScriptRestClient) GetNamespaceAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -446,6 +458,9 @@ func (p Gs2ScriptRestClient) UpdateNamespaceAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -530,6 +545,9 @@ func (p Gs2ScriptRestClient) DeleteNamespaceAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -620,6 +638,9 @@ func (p Gs2ScriptRestClient) DescribeScriptsAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -716,6 +737,9 @@ func (p Gs2ScriptRestClient) CreateScriptAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -812,6 +836,9 @@ func (p Gs2ScriptRestClient) CreateScriptFromGitHubAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -901,6 +928,9 @@ func (p Gs2ScriptRestClient) GetScriptAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -999,6 +1029,9 @@ func (p Gs2ScriptRestClient) UpdateScriptAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -1097,6 +1130,9 @@ func (p Gs2ScriptRestClient) UpdateScriptFromGitHubAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -1186,6 +1222,9 @@ func (p Gs2ScriptRestClient) DeleteScriptAsync(
 	queryStrings := core.QueryStrings{}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -1280,6 +1319,9 @@ func (p Gs2ScriptRestClient) InvokeScriptAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
@@ -1371,6 +1413,9 @@ func (p Gs2ScriptRestClient) DebugInvokeAsync(
 	}
 
 	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}

@@ -23,10 +23,11 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
@@ -54,6 +55,7 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
+	SourceRequestId    *string             `json:"sourceRequestId"`
 	RequestId          *string             `json:"requestId"`
 	ContextStack       *string             `json:"contextStack"`
 	Name               *string             `json:"name"`
@@ -91,9 +93,10 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
@@ -119,9 +122,10 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
@@ -147,6 +151,7 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
+	SourceRequestId    *string             `json:"sourceRequestId"`
 	RequestId          *string             `json:"requestId"`
 	ContextStack       *string             `json:"contextStack"`
 	NamespaceName      *string             `json:"namespaceName"`
@@ -184,9 +189,10 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
@@ -212,6 +218,7 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DumpUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -241,6 +248,7 @@ func (p DumpUserDataByUserIdRequest) Pointer() *DumpUserDataByUserIdRequest {
 }
 
 type CheckDumpUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -270,6 +278,7 @@ func (p CheckDumpUserDataByUserIdRequest) Pointer() *CheckDumpUserDataByUserIdRe
 }
 
 type CleanUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -299,6 +308,7 @@ func (p CleanUserDataByUserIdRequest) Pointer() *CleanUserDataByUserIdRequest {
 }
 
 type CheckCleanUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -328,6 +338,7 @@ func (p CheckCleanUserDataByUserIdRequest) Pointer() *CheckCleanUserDataByUserId
 }
 
 type PrepareImportUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -357,6 +368,7 @@ func (p PrepareImportUserDataByUserIdRequest) Pointer() *PrepareImportUserDataBy
 }
 
 type ImportUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -389,6 +401,7 @@ func (p ImportUserDataByUserIdRequest) Pointer() *ImportUserDataByUserIdRequest 
 }
 
 type CheckImportUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -421,9 +434,10 @@ func (p CheckImportUserDataByUserIdRequest) Pointer() *CheckImportUserDataByUser
 }
 
 type DescribeBalanceParameterModelsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeBalanceParameterModelsRequestFromJson(data string) DescribeBalanceParameterModelsRequest {
@@ -449,10 +463,11 @@ func (p DescribeBalanceParameterModelsRequest) Pointer() *DescribeBalanceParamet
 }
 
 type GetBalanceParameterModelRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ParameterName *string `json:"parameterName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ParameterName   *string `json:"parameterName"`
 }
 
 func NewGetBalanceParameterModelRequestFromJson(data string) GetBalanceParameterModelRequest {
@@ -480,11 +495,12 @@ func (p GetBalanceParameterModelRequest) Pointer() *GetBalanceParameterModelRequ
 }
 
 type DescribeBalanceParameterModelMastersRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeBalanceParameterModelMastersRequestFromJson(data string) DescribeBalanceParameterModelMastersRequest {
@@ -514,6 +530,7 @@ func (p DescribeBalanceParameterModelMastersRequest) Pointer() *DescribeBalanceP
 }
 
 type CreateBalanceParameterModelMasterRequest struct {
+	SourceRequestId      *string                      `json:"sourceRequestId"`
 	RequestId            *string                      `json:"requestId"`
 	ContextStack         *string                      `json:"contextStack"`
 	NamespaceName        *string                      `json:"namespaceName"`
@@ -562,10 +579,11 @@ func (p CreateBalanceParameterModelMasterRequest) Pointer() *CreateBalanceParame
 }
 
 type GetBalanceParameterModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ParameterName *string `json:"parameterName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ParameterName   *string `json:"parameterName"`
 }
 
 func NewGetBalanceParameterModelMasterRequestFromJson(data string) GetBalanceParameterModelMasterRequest {
@@ -593,6 +611,7 @@ func (p GetBalanceParameterModelMasterRequest) Pointer() *GetBalanceParameterMod
 }
 
 type UpdateBalanceParameterModelMasterRequest struct {
+	SourceRequestId      *string                      `json:"sourceRequestId"`
 	RequestId            *string                      `json:"requestId"`
 	ContextStack         *string                      `json:"contextStack"`
 	NamespaceName        *string                      `json:"namespaceName"`
@@ -641,10 +660,11 @@ func (p UpdateBalanceParameterModelMasterRequest) Pointer() *UpdateBalanceParame
 }
 
 type DeleteBalanceParameterModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ParameterName *string `json:"parameterName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ParameterName   *string `json:"parameterName"`
 }
 
 func NewDeleteBalanceParameterModelMasterRequestFromJson(data string) DeleteBalanceParameterModelMasterRequest {
@@ -672,9 +692,10 @@ func (p DeleteBalanceParameterModelMasterRequest) Pointer() *DeleteBalanceParame
 }
 
 type DescribeRarityParameterModelsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeRarityParameterModelsRequestFromJson(data string) DescribeRarityParameterModelsRequest {
@@ -700,10 +721,11 @@ func (p DescribeRarityParameterModelsRequest) Pointer() *DescribeRarityParameter
 }
 
 type GetRarityParameterModelRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ParameterName *string `json:"parameterName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ParameterName   *string `json:"parameterName"`
 }
 
 func NewGetRarityParameterModelRequestFromJson(data string) GetRarityParameterModelRequest {
@@ -731,11 +753,12 @@ func (p GetRarityParameterModelRequest) Pointer() *GetRarityParameterModelReques
 }
 
 type DescribeRarityParameterModelMastersRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeRarityParameterModelMastersRequestFromJson(data string) DescribeRarityParameterModelMastersRequest {
@@ -765,6 +788,7 @@ func (p DescribeRarityParameterModelMastersRequest) Pointer() *DescribeRarityPar
 }
 
 type CreateRarityParameterModelMasterRequest struct {
+	SourceRequestId       *string                     `json:"sourceRequestId"`
 	RequestId             *string                     `json:"requestId"`
 	ContextStack          *string                     `json:"contextStack"`
 	NamespaceName         *string                     `json:"namespaceName"`
@@ -815,10 +839,11 @@ func (p CreateRarityParameterModelMasterRequest) Pointer() *CreateRarityParamete
 }
 
 type GetRarityParameterModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ParameterName *string `json:"parameterName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ParameterName   *string `json:"parameterName"`
 }
 
 func NewGetRarityParameterModelMasterRequestFromJson(data string) GetRarityParameterModelMasterRequest {
@@ -846,6 +871,7 @@ func (p GetRarityParameterModelMasterRequest) Pointer() *GetRarityParameterModel
 }
 
 type UpdateRarityParameterModelMasterRequest struct {
+	SourceRequestId       *string                     `json:"sourceRequestId"`
 	RequestId             *string                     `json:"requestId"`
 	ContextStack          *string                     `json:"contextStack"`
 	NamespaceName         *string                     `json:"namespaceName"`
@@ -896,10 +922,11 @@ func (p UpdateRarityParameterModelMasterRequest) Pointer() *UpdateRarityParamete
 }
 
 type DeleteRarityParameterModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ParameterName *string `json:"parameterName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ParameterName   *string `json:"parameterName"`
 }
 
 func NewDeleteRarityParameterModelMasterRequestFromJson(data string) DeleteRarityParameterModelMasterRequest {
@@ -927,9 +954,10 @@ func (p DeleteRarityParameterModelMasterRequest) Pointer() *DeleteRarityParamete
 }
 
 type ExportMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
@@ -955,9 +983,10 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 }
 
 type GetCurrentParameterMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetCurrentParameterMasterRequestFromJson(data string) GetCurrentParameterMasterRequest {
@@ -983,10 +1012,11 @@ func (p GetCurrentParameterMasterRequest) Pointer() *GetCurrentParameterMasterRe
 }
 
 type UpdateCurrentParameterMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Settings      *string `json:"settings"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Settings        *string `json:"settings"`
 }
 
 func NewUpdateCurrentParameterMasterRequestFromJson(data string) UpdateCurrentParameterMasterRequest {
@@ -1014,6 +1044,7 @@ func (p UpdateCurrentParameterMasterRequest) Pointer() *UpdateCurrentParameterMa
 }
 
 type UpdateCurrentParameterMasterFromGitHubRequest struct {
+	SourceRequestId *string                `json:"sourceRequestId"`
 	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
@@ -1045,13 +1076,14 @@ func (p UpdateCurrentParameterMasterFromGitHubRequest) Pointer() *UpdateCurrentP
 }
 
 type DescribeBalanceParameterStatusesRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AccessToken   *string `json:"accessToken"`
-	ParameterName *string `json:"parameterName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AccessToken     *string `json:"accessToken"`
+	ParameterName   *string `json:"parameterName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeBalanceParameterStatusesRequestFromJson(data string) DescribeBalanceParameterStatusesRequest {
@@ -1085,13 +1117,14 @@ func (p DescribeBalanceParameterStatusesRequest) Pointer() *DescribeBalanceParam
 }
 
 type DescribeBalanceParameterStatusesByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
-	ParameterName *string `json:"parameterName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	ParameterName   *string `json:"parameterName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeBalanceParameterStatusesByUserIdRequestFromJson(data string) DescribeBalanceParameterStatusesByUserIdRequest {
@@ -1125,12 +1158,13 @@ func (p DescribeBalanceParameterStatusesByUserIdRequest) Pointer() *DescribeBala
 }
 
 type GetBalanceParameterStatusRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AccessToken   *string `json:"accessToken"`
-	ParameterName *string `json:"parameterName"`
-	PropertyId    *string `json:"propertyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AccessToken     *string `json:"accessToken"`
+	ParameterName   *string `json:"parameterName"`
+	PropertyId      *string `json:"propertyId"`
 }
 
 func NewGetBalanceParameterStatusRequestFromJson(data string) GetBalanceParameterStatusRequest {
@@ -1162,12 +1196,13 @@ func (p GetBalanceParameterStatusRequest) Pointer() *GetBalanceParameterStatusRe
 }
 
 type GetBalanceParameterStatusByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
-	ParameterName *string `json:"parameterName"`
-	PropertyId    *string `json:"propertyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	ParameterName   *string `json:"parameterName"`
+	PropertyId      *string `json:"propertyId"`
 }
 
 func NewGetBalanceParameterStatusByUserIdRequestFromJson(data string) GetBalanceParameterStatusByUserIdRequest {
@@ -1199,6 +1234,7 @@ func (p GetBalanceParameterStatusByUserIdRequest) Pointer() *GetBalanceParameter
 }
 
 type DeleteBalanceParameterStatusByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -1237,6 +1273,7 @@ func (p DeleteBalanceParameterStatusByUserIdRequest) Pointer() *DeleteBalancePar
 }
 
 type ReDrawBalanceParameterStatusByUserIdRequest struct {
+	SourceRequestId     *string   `json:"sourceRequestId"`
 	RequestId           *string   `json:"requestId"`
 	ContextStack        *string   `json:"contextStack"`
 	DuplicationAvoider  *string   `json:"duplicationAvoider"`
@@ -1280,10 +1317,11 @@ func (p ReDrawBalanceParameterStatusByUserIdRequest) Pointer() *ReDrawBalancePar
 }
 
 type ReDrawBalanceParameterStatusByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewReDrawBalanceParameterStatusByStampSheetRequestFromJson(data string) ReDrawBalanceParameterStatusByStampSheetRequest {
@@ -1311,6 +1349,7 @@ func (p ReDrawBalanceParameterStatusByStampSheetRequest) Pointer() *ReDrawBalanc
 }
 
 type SetBalanceParameterStatusByUserIdRequest struct {
+	SourceRequestId    *string                 `json:"sourceRequestId"`
 	RequestId          *string                 `json:"requestId"`
 	ContextStack       *string                 `json:"contextStack"`
 	DuplicationAvoider *string                 `json:"duplicationAvoider"`
@@ -1354,10 +1393,11 @@ func (p SetBalanceParameterStatusByUserIdRequest) Pointer() *SetBalanceParameter
 }
 
 type SetBalanceParameterStatusByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewSetBalanceParameterStatusByStampSheetRequestFromJson(data string) SetBalanceParameterStatusByStampSheetRequest {
@@ -1385,13 +1425,14 @@ func (p SetBalanceParameterStatusByStampSheetRequest) Pointer() *SetBalanceParam
 }
 
 type DescribeRarityParameterStatusesRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AccessToken   *string `json:"accessToken"`
-	ParameterName *string `json:"parameterName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AccessToken     *string `json:"accessToken"`
+	ParameterName   *string `json:"parameterName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeRarityParameterStatusesRequestFromJson(data string) DescribeRarityParameterStatusesRequest {
@@ -1425,13 +1466,14 @@ func (p DescribeRarityParameterStatusesRequest) Pointer() *DescribeRarityParamet
 }
 
 type DescribeRarityParameterStatusesByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
-	ParameterName *string `json:"parameterName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	ParameterName   *string `json:"parameterName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeRarityParameterStatusesByUserIdRequestFromJson(data string) DescribeRarityParameterStatusesByUserIdRequest {
@@ -1465,12 +1507,13 @@ func (p DescribeRarityParameterStatusesByUserIdRequest) Pointer() *DescribeRarit
 }
 
 type GetRarityParameterStatusRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AccessToken   *string `json:"accessToken"`
-	ParameterName *string `json:"parameterName"`
-	PropertyId    *string `json:"propertyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AccessToken     *string `json:"accessToken"`
+	ParameterName   *string `json:"parameterName"`
+	PropertyId      *string `json:"propertyId"`
 }
 
 func NewGetRarityParameterStatusRequestFromJson(data string) GetRarityParameterStatusRequest {
@@ -1502,12 +1545,13 @@ func (p GetRarityParameterStatusRequest) Pointer() *GetRarityParameterStatusRequ
 }
 
 type GetRarityParameterStatusByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
-	ParameterName *string `json:"parameterName"`
-	PropertyId    *string `json:"propertyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	ParameterName   *string `json:"parameterName"`
+	PropertyId      *string `json:"propertyId"`
 }
 
 func NewGetRarityParameterStatusByUserIdRequestFromJson(data string) GetRarityParameterStatusByUserIdRequest {
@@ -1539,6 +1583,7 @@ func (p GetRarityParameterStatusByUserIdRequest) Pointer() *GetRarityParameterSt
 }
 
 type DeleteRarityParameterStatusByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -1577,6 +1622,7 @@ func (p DeleteRarityParameterStatusByUserIdRequest) Pointer() *DeleteRarityParam
 }
 
 type ReDrawRarityParameterStatusByUserIdRequest struct {
+	SourceRequestId     *string   `json:"sourceRequestId"`
 	RequestId           *string   `json:"requestId"`
 	ContextStack        *string   `json:"contextStack"`
 	DuplicationAvoider  *string   `json:"duplicationAvoider"`
@@ -1620,10 +1666,11 @@ func (p ReDrawRarityParameterStatusByUserIdRequest) Pointer() *ReDrawRarityParam
 }
 
 type ReDrawRarityParameterStatusByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewReDrawRarityParameterStatusByStampSheetRequestFromJson(data string) ReDrawRarityParameterStatusByStampSheetRequest {
@@ -1651,6 +1698,7 @@ func (p ReDrawRarityParameterStatusByStampSheetRequest) Pointer() *ReDrawRarityP
 }
 
 type AddRarityParameterStatusByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -1692,10 +1740,11 @@ func (p AddRarityParameterStatusByUserIdRequest) Pointer() *AddRarityParameterSt
 }
 
 type AddRarityParameterStatusByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewAddRarityParameterStatusByStampSheetRequestFromJson(data string) AddRarityParameterStatusByStampSheetRequest {
@@ -1723,6 +1772,7 @@ func (p AddRarityParameterStatusByStampSheetRequest) Pointer() *AddRarityParamet
 }
 
 type VerifyRarityParameterStatusRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -1770,6 +1820,7 @@ func (p VerifyRarityParameterStatusRequest) Pointer() *VerifyRarityParameterStat
 }
 
 type VerifyRarityParameterStatusByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -1817,10 +1868,11 @@ func (p VerifyRarityParameterStatusByUserIdRequest) Pointer() *VerifyRarityParam
 }
 
 type VerifyRarityParameterStatusByStampTaskRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampTask    *string `json:"stampTask"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewVerifyRarityParameterStatusByStampTaskRequestFromJson(data string) VerifyRarityParameterStatusByStampTaskRequest {
@@ -1848,6 +1900,7 @@ func (p VerifyRarityParameterStatusByStampTaskRequest) Pointer() *VerifyRarityPa
 }
 
 type SetRarityParameterStatusByUserIdRequest struct {
+	SourceRequestId    *string                `json:"sourceRequestId"`
 	RequestId          *string                `json:"requestId"`
 	ContextStack       *string                `json:"contextStack"`
 	DuplicationAvoider *string                `json:"duplicationAvoider"`
@@ -1891,10 +1944,11 @@ func (p SetRarityParameterStatusByUserIdRequest) Pointer() *SetRarityParameterSt
 }
 
 type SetRarityParameterStatusByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewSetRarityParameterStatusByStampSheetRequestFromJson(data string) SetRarityParameterStatusByStampSheetRequest {

@@ -23,10 +23,11 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
@@ -54,11 +55,12 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	RequestId    *string     `json:"requestId"`
-	ContextStack *string     `json:"contextStack"`
-	Name         *string     `json:"name"`
-	Description  *string     `json:"description"`
-	LogSetting   *LogSetting `json:"logSetting"`
+	SourceRequestId *string     `json:"sourceRequestId"`
+	RequestId       *string     `json:"requestId"`
+	ContextStack    *string     `json:"contextStack"`
+	Name            *string     `json:"name"`
+	Description     *string     `json:"description"`
+	LogSetting      *LogSetting `json:"logSetting"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
@@ -88,9 +90,10 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
@@ -116,9 +119,10 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
@@ -144,11 +148,12 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId     *string     `json:"requestId"`
-	ContextStack  *string     `json:"contextStack"`
-	NamespaceName *string     `json:"namespaceName"`
-	Description   *string     `json:"description"`
-	LogSetting    *LogSetting `json:"logSetting"`
+	SourceRequestId *string     `json:"sourceRequestId"`
+	RequestId       *string     `json:"requestId"`
+	ContextStack    *string     `json:"contextStack"`
+	NamespaceName   *string     `json:"namespaceName"`
+	Description     *string     `json:"description"`
+	LogSetting      *LogSetting `json:"logSetting"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -178,9 +183,10 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
@@ -206,11 +212,12 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DescribeProgressesRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeProgressesRequestFromJson(data string) DescribeProgressesRequest {
@@ -240,10 +247,11 @@ func (p DescribeProgressesRequest) Pointer() *DescribeProgressesRequest {
 }
 
 type GetProgressRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UploadToken   *string `json:"uploadToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UploadToken     *string `json:"uploadToken"`
 }
 
 func NewGetProgressRequestFromJson(data string) GetProgressRequest {
@@ -271,12 +279,13 @@ func (p GetProgressRequest) Pointer() *GetProgressRequest {
 }
 
 type DescribeOutputsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UploadToken   *string `json:"uploadToken"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UploadToken     *string `json:"uploadToken"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeOutputsRequestFromJson(data string) DescribeOutputsRequest {
@@ -308,11 +317,12 @@ func (p DescribeOutputsRequest) Pointer() *DescribeOutputsRequest {
 }
 
 type GetOutputRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UploadToken   *string `json:"uploadToken"`
-	OutputName    *string `json:"outputName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UploadToken     *string `json:"uploadToken"`
+	OutputName      *string `json:"outputName"`
 }
 
 func NewGetOutputRequestFromJson(data string) GetOutputRequest {
@@ -342,9 +352,10 @@ func (p GetOutputRequest) Pointer() *GetOutputRequest {
 }
 
 type PrepareUpdateCurrentNewsMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewPrepareUpdateCurrentNewsMasterRequestFromJson(data string) PrepareUpdateCurrentNewsMasterRequest {
@@ -370,10 +381,11 @@ func (p PrepareUpdateCurrentNewsMasterRequest) Pointer() *PrepareUpdateCurrentNe
 }
 
 type UpdateCurrentNewsMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UploadToken   *string `json:"uploadToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UploadToken     *string `json:"uploadToken"`
 }
 
 func NewUpdateCurrentNewsMasterRequestFromJson(data string) UpdateCurrentNewsMasterRequest {
@@ -401,6 +413,7 @@ func (p UpdateCurrentNewsMasterRequest) Pointer() *UpdateCurrentNewsMasterReques
 }
 
 type PrepareUpdateCurrentNewsMasterFromGitHubRequest struct {
+	SourceRequestId *string                `json:"sourceRequestId"`
 	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
@@ -432,10 +445,11 @@ func (p PrepareUpdateCurrentNewsMasterFromGitHubRequest) Pointer() *PrepareUpdat
 }
 
 type DescribeNewsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AccessToken   *string `json:"accessToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AccessToken     *string `json:"accessToken"`
 }
 
 func NewDescribeNewsRequestFromJson(data string) DescribeNewsRequest {
@@ -463,10 +477,11 @@ func (p DescribeNewsRequest) Pointer() *DescribeNewsRequest {
 }
 
 type DescribeNewsByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
 }
 
 func NewDescribeNewsByUserIdRequestFromJson(data string) DescribeNewsByUserIdRequest {
@@ -494,10 +509,11 @@ func (p DescribeNewsByUserIdRequest) Pointer() *DescribeNewsByUserIdRequest {
 }
 
 type WantGrantRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AccessToken   *string `json:"accessToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AccessToken     *string `json:"accessToken"`
 }
 
 func NewWantGrantRequestFromJson(data string) WantGrantRequest {
@@ -525,10 +541,11 @@ func (p WantGrantRequest) Pointer() *WantGrantRequest {
 }
 
 type WantGrantByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
 }
 
 func NewWantGrantByUserIdRequestFromJson(data string) WantGrantByUserIdRequest {

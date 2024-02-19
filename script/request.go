@@ -23,10 +23,11 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
@@ -54,6 +55,7 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
+	SourceRequestId    *string             `json:"sourceRequestId"`
 	RequestId          *string             `json:"requestId"`
 	ContextStack       *string             `json:"contextStack"`
 	Name               *string             `json:"name"`
@@ -91,9 +93,10 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
@@ -119,9 +122,10 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
@@ -147,6 +151,7 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
+	SourceRequestId    *string             `json:"sourceRequestId"`
 	RequestId          *string             `json:"requestId"`
 	ContextStack       *string             `json:"contextStack"`
 	NamespaceName      *string             `json:"namespaceName"`
@@ -184,9 +189,10 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
@@ -212,11 +218,12 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DescribeScriptsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeScriptsRequestFromJson(data string) DescribeScriptsRequest {
@@ -246,12 +253,13 @@ func (p DescribeScriptsRequest) Pointer() *DescribeScriptsRequest {
 }
 
 type CreateScriptRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Name          *string `json:"name"`
-	Description   *string `json:"description"`
-	Script        *string `json:"script"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
+	Script          *string `json:"script"`
 }
 
 func NewCreateScriptRequestFromJson(data string) CreateScriptRequest {
@@ -283,6 +291,7 @@ func (p CreateScriptRequest) Pointer() *CreateScriptRequest {
 }
 
 type CreateScriptFromGitHubRequest struct {
+	SourceRequestId *string                `json:"sourceRequestId"`
 	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
@@ -320,10 +329,11 @@ func (p CreateScriptFromGitHubRequest) Pointer() *CreateScriptFromGitHubRequest 
 }
 
 type GetScriptRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ScriptName    *string `json:"scriptName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ScriptName      *string `json:"scriptName"`
 }
 
 func NewGetScriptRequestFromJson(data string) GetScriptRequest {
@@ -351,12 +361,13 @@ func (p GetScriptRequest) Pointer() *GetScriptRequest {
 }
 
 type UpdateScriptRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ScriptName    *string `json:"scriptName"`
-	Description   *string `json:"description"`
-	Script        *string `json:"script"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ScriptName      *string `json:"scriptName"`
+	Description     *string `json:"description"`
+	Script          *string `json:"script"`
 }
 
 func NewUpdateScriptRequestFromJson(data string) UpdateScriptRequest {
@@ -388,6 +399,7 @@ func (p UpdateScriptRequest) Pointer() *UpdateScriptRequest {
 }
 
 type UpdateScriptFromGitHubRequest struct {
+	SourceRequestId *string                `json:"sourceRequestId"`
 	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
@@ -425,10 +437,11 @@ func (p UpdateScriptFromGitHubRequest) Pointer() *UpdateScriptFromGitHubRequest 
 }
 
 type DeleteScriptRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ScriptName    *string `json:"scriptName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ScriptName      *string `json:"scriptName"`
 }
 
 func NewDeleteScriptRequestFromJson(data string) DeleteScriptRequest {
@@ -456,12 +469,13 @@ func (p DeleteScriptRequest) Pointer() *DeleteScriptRequest {
 }
 
 type InvokeScriptRequest struct {
-	RequestId    *string       `json:"requestId"`
-	ContextStack *string       `json:"contextStack"`
-	ScriptId     *string       `json:"scriptId"`
-	UserId       *string       `json:"userId"`
-	Args         *string       `json:"args"`
-	RandomStatus *RandomStatus `json:"randomStatus"`
+	SourceRequestId *string       `json:"sourceRequestId"`
+	RequestId       *string       `json:"requestId"`
+	ContextStack    *string       `json:"contextStack"`
+	ScriptId        *string       `json:"scriptId"`
+	UserId          *string       `json:"userId"`
+	Args            *string       `json:"args"`
+	RandomStatus    *RandomStatus `json:"randomStatus"`
 }
 
 func NewInvokeScriptRequestFromJson(data string) InvokeScriptRequest {
@@ -493,11 +507,12 @@ func (p InvokeScriptRequest) Pointer() *InvokeScriptRequest {
 }
 
 type DebugInvokeRequest struct {
-	RequestId    *string       `json:"requestId"`
-	ContextStack *string       `json:"contextStack"`
-	Script       *string       `json:"script"`
-	Args         *string       `json:"args"`
-	RandomStatus *RandomStatus `json:"randomStatus"`
+	SourceRequestId *string       `json:"sourceRequestId"`
+	RequestId       *string       `json:"requestId"`
+	ContextStack    *string       `json:"contextStack"`
+	Script          *string       `json:"script"`
+	Args            *string       `json:"args"`
+	RandomStatus    *RandomStatus `json:"randomStatus"`
 }
 
 func NewDebugInvokeRequestFromJson(data string) DebugInvokeRequest {

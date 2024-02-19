@@ -23,10 +23,11 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
@@ -54,6 +55,7 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
+	SourceRequestId    *string             `json:"sourceRequestId"`
 	RequestId          *string             `json:"requestId"`
 	ContextStack       *string             `json:"contextStack"`
 	Name               *string             `json:"name"`
@@ -94,9 +96,10 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
@@ -122,9 +125,10 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
@@ -150,6 +154,7 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
+	SourceRequestId    *string             `json:"sourceRequestId"`
 	RequestId          *string             `json:"requestId"`
 	ContextStack       *string             `json:"contextStack"`
 	NamespaceName      *string             `json:"namespaceName"`
@@ -190,9 +195,10 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
@@ -218,6 +224,7 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DumpUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -247,6 +254,7 @@ func (p DumpUserDataByUserIdRequest) Pointer() *DumpUserDataByUserIdRequest {
 }
 
 type CheckDumpUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -276,6 +284,7 @@ func (p CheckDumpUserDataByUserIdRequest) Pointer() *CheckDumpUserDataByUserIdRe
 }
 
 type CleanUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -305,6 +314,7 @@ func (p CleanUserDataByUserIdRequest) Pointer() *CleanUserDataByUserIdRequest {
 }
 
 type CheckCleanUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -334,6 +344,7 @@ func (p CheckCleanUserDataByUserIdRequest) Pointer() *CheckCleanUserDataByUserId
 }
 
 type PrepareImportUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -363,6 +374,7 @@ func (p PrepareImportUserDataByUserIdRequest) Pointer() *PrepareImportUserDataBy
 }
 
 type ImportUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -395,6 +407,7 @@ func (p ImportUserDataByUserIdRequest) Pointer() *ImportUserDataByUserIdRequest 
 }
 
 type CheckImportUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -427,11 +440,12 @@ func (p CheckImportUserDataByUserIdRequest) Pointer() *CheckImportUserDataByUser
 }
 
 type DescribeBonusModelMastersRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeBonusModelMastersRequestFromJson(data string) DescribeBonusModelMastersRequest {
@@ -461,6 +475,7 @@ func (p DescribeBonusModelMastersRequest) Pointer() *DescribeBonusModelMastersRe
 }
 
 type CreateBonusModelMasterRequest struct {
+	SourceRequestId                   *string         `json:"sourceRequestId"`
 	RequestId                         *string         `json:"requestId"`
 	ContextStack                      *string         `json:"contextStack"`
 	NamespaceName                     *string         `json:"namespaceName"`
@@ -523,10 +538,11 @@ func (p CreateBonusModelMasterRequest) Pointer() *CreateBonusModelMasterRequest 
 }
 
 type GetBonusModelMasterRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	BonusModelName *string `json:"bonusModelName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	BonusModelName  *string `json:"bonusModelName"`
 }
 
 func NewGetBonusModelMasterRequestFromJson(data string) GetBonusModelMasterRequest {
@@ -554,6 +570,7 @@ func (p GetBonusModelMasterRequest) Pointer() *GetBonusModelMasterRequest {
 }
 
 type UpdateBonusModelMasterRequest struct {
+	SourceRequestId                   *string         `json:"sourceRequestId"`
 	RequestId                         *string         `json:"requestId"`
 	ContextStack                      *string         `json:"contextStack"`
 	NamespaceName                     *string         `json:"namespaceName"`
@@ -616,10 +633,11 @@ func (p UpdateBonusModelMasterRequest) Pointer() *UpdateBonusModelMasterRequest 
 }
 
 type DeleteBonusModelMasterRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	BonusModelName *string `json:"bonusModelName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	BonusModelName  *string `json:"bonusModelName"`
 }
 
 func NewDeleteBonusModelMasterRequestFromJson(data string) DeleteBonusModelMasterRequest {
@@ -647,9 +665,10 @@ func (p DeleteBonusModelMasterRequest) Pointer() *DeleteBonusModelMasterRequest 
 }
 
 type ExportMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
@@ -675,9 +694,10 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 }
 
 type GetCurrentBonusMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetCurrentBonusMasterRequestFromJson(data string) GetCurrentBonusMasterRequest {
@@ -703,10 +723,11 @@ func (p GetCurrentBonusMasterRequest) Pointer() *GetCurrentBonusMasterRequest {
 }
 
 type UpdateCurrentBonusMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Settings      *string `json:"settings"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Settings        *string `json:"settings"`
 }
 
 func NewUpdateCurrentBonusMasterRequestFromJson(data string) UpdateCurrentBonusMasterRequest {
@@ -734,6 +755,7 @@ func (p UpdateCurrentBonusMasterRequest) Pointer() *UpdateCurrentBonusMasterRequ
 }
 
 type UpdateCurrentBonusMasterFromGitHubRequest struct {
+	SourceRequestId *string                `json:"sourceRequestId"`
 	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
@@ -765,9 +787,10 @@ func (p UpdateCurrentBonusMasterFromGitHubRequest) Pointer() *UpdateCurrentBonus
 }
 
 type DescribeBonusModelsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeBonusModelsRequestFromJson(data string) DescribeBonusModelsRequest {
@@ -793,10 +816,11 @@ func (p DescribeBonusModelsRequest) Pointer() *DescribeBonusModelsRequest {
 }
 
 type GetBonusModelRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	BonusModelName *string `json:"bonusModelName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	BonusModelName  *string `json:"bonusModelName"`
 }
 
 func NewGetBonusModelRequestFromJson(data string) GetBonusModelRequest {
@@ -824,6 +848,7 @@ func (p GetBonusModelRequest) Pointer() *GetBonusModelRequest {
 }
 
 type ReceiveRequest struct {
+	SourceRequestId    *string  `json:"sourceRequestId"`
 	RequestId          *string  `json:"requestId"`
 	ContextStack       *string  `json:"contextStack"`
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
@@ -864,6 +889,7 @@ func (p ReceiveRequest) Pointer() *ReceiveRequest {
 }
 
 type ReceiveByUserIdRequest struct {
+	SourceRequestId    *string  `json:"sourceRequestId"`
 	RequestId          *string  `json:"requestId"`
 	ContextStack       *string  `json:"contextStack"`
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
@@ -904,6 +930,7 @@ func (p ReceiveByUserIdRequest) Pointer() *ReceiveByUserIdRequest {
 }
 
 type MissedReceiveRequest struct {
+	SourceRequestId    *string  `json:"sourceRequestId"`
 	RequestId          *string  `json:"requestId"`
 	ContextStack       *string  `json:"contextStack"`
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
@@ -947,6 +974,7 @@ func (p MissedReceiveRequest) Pointer() *MissedReceiveRequest {
 }
 
 type MissedReceiveByUserIdRequest struct {
+	SourceRequestId    *string  `json:"sourceRequestId"`
 	RequestId          *string  `json:"requestId"`
 	ContextStack       *string  `json:"contextStack"`
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
@@ -990,12 +1018,13 @@ func (p MissedReceiveByUserIdRequest) Pointer() *MissedReceiveByUserIdRequest {
 }
 
 type DescribeReceiveStatusesRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AccessToken   *string `json:"accessToken"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AccessToken     *string `json:"accessToken"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeReceiveStatusesRequestFromJson(data string) DescribeReceiveStatusesRequest {
@@ -1027,12 +1056,13 @@ func (p DescribeReceiveStatusesRequest) Pointer() *DescribeReceiveStatusesReques
 }
 
 type DescribeReceiveStatusesByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeReceiveStatusesByUserIdRequestFromJson(data string) DescribeReceiveStatusesByUserIdRequest {
@@ -1064,11 +1094,12 @@ func (p DescribeReceiveStatusesByUserIdRequest) Pointer() *DescribeReceiveStatus
 }
 
 type GetReceiveStatusRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	BonusModelName *string `json:"bonusModelName"`
-	AccessToken    *string `json:"accessToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	BonusModelName  *string `json:"bonusModelName"`
+	AccessToken     *string `json:"accessToken"`
 }
 
 func NewGetReceiveStatusRequestFromJson(data string) GetReceiveStatusRequest {
@@ -1098,11 +1129,12 @@ func (p GetReceiveStatusRequest) Pointer() *GetReceiveStatusRequest {
 }
 
 type GetReceiveStatusByUserIdRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	BonusModelName *string `json:"bonusModelName"`
-	UserId         *string `json:"userId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	BonusModelName  *string `json:"bonusModelName"`
+	UserId          *string `json:"userId"`
 }
 
 func NewGetReceiveStatusByUserIdRequestFromJson(data string) GetReceiveStatusByUserIdRequest {
@@ -1132,6 +1164,7 @@ func (p GetReceiveStatusByUserIdRequest) Pointer() *GetReceiveStatusByUserIdRequ
 }
 
 type DeleteReceiveStatusByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -1167,10 +1200,11 @@ func (p DeleteReceiveStatusByUserIdRequest) Pointer() *DeleteReceiveStatusByUser
 }
 
 type DeleteReceiveStatusByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewDeleteReceiveStatusByStampSheetRequestFromJson(data string) DeleteReceiveStatusByStampSheetRequest {
@@ -1198,6 +1232,7 @@ func (p DeleteReceiveStatusByStampSheetRequest) Pointer() *DeleteReceiveStatusBy
 }
 
 type MarkReceivedRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -1236,6 +1271,7 @@ func (p MarkReceivedRequest) Pointer() *MarkReceivedRequest {
 }
 
 type MarkReceivedByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -1274,6 +1310,7 @@ func (p MarkReceivedByUserIdRequest) Pointer() *MarkReceivedByUserIdRequest {
 }
 
 type UnmarkReceivedByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -1312,10 +1349,11 @@ func (p UnmarkReceivedByUserIdRequest) Pointer() *UnmarkReceivedByUserIdRequest 
 }
 
 type MarkReceivedByStampTaskRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampTask    *string `json:"stampTask"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewMarkReceivedByStampTaskRequestFromJson(data string) MarkReceivedByStampTaskRequest {
@@ -1343,10 +1381,11 @@ func (p MarkReceivedByStampTaskRequest) Pointer() *MarkReceivedByStampTaskReques
 }
 
 type UnmarkReceivedByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewUnmarkReceivedByStampSheetRequestFromJson(data string) UnmarkReceivedByStampSheetRequest {

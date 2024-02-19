@@ -23,10 +23,11 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
@@ -54,11 +55,12 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	RequestId    *string     `json:"requestId"`
-	ContextStack *string     `json:"contextStack"`
-	Name         *string     `json:"name"`
-	Description  *string     `json:"description"`
-	LogSetting   *LogSetting `json:"logSetting"`
+	SourceRequestId *string     `json:"sourceRequestId"`
+	RequestId       *string     `json:"requestId"`
+	ContextStack    *string     `json:"contextStack"`
+	Name            *string     `json:"name"`
+	Description     *string     `json:"description"`
+	LogSetting      *LogSetting `json:"logSetting"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
@@ -88,9 +90,10 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
@@ -116,9 +119,10 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
@@ -144,11 +148,12 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId     *string     `json:"requestId"`
-	ContextStack  *string     `json:"contextStack"`
-	NamespaceName *string     `json:"namespaceName"`
-	Description   *string     `json:"description"`
-	LogSetting    *LogSetting `json:"logSetting"`
+	SourceRequestId *string     `json:"sourceRequestId"`
+	RequestId       *string     `json:"requestId"`
+	ContextStack    *string     `json:"contextStack"`
+	NamespaceName   *string     `json:"namespaceName"`
+	Description     *string     `json:"description"`
+	LogSetting      *LogSetting `json:"logSetting"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -178,9 +183,10 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
@@ -206,11 +212,12 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DescribeKeysRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeKeysRequestFromJson(data string) DescribeKeysRequest {
@@ -240,11 +247,12 @@ func (p DescribeKeysRequest) Pointer() *DescribeKeysRequest {
 }
 
 type CreateKeyRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Name          *string `json:"name"`
-	Description   *string `json:"description"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
 }
 
 func NewCreateKeyRequestFromJson(data string) CreateKeyRequest {
@@ -274,11 +282,12 @@ func (p CreateKeyRequest) Pointer() *CreateKeyRequest {
 }
 
 type UpdateKeyRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	KeyName       *string `json:"keyName"`
-	Description   *string `json:"description"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	KeyName         *string `json:"keyName"`
+	Description     *string `json:"description"`
 }
 
 func NewUpdateKeyRequestFromJson(data string) UpdateKeyRequest {
@@ -308,10 +317,11 @@ func (p UpdateKeyRequest) Pointer() *UpdateKeyRequest {
 }
 
 type GetKeyRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	KeyName       *string `json:"keyName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	KeyName         *string `json:"keyName"`
 }
 
 func NewGetKeyRequestFromJson(data string) GetKeyRequest {
@@ -339,10 +349,11 @@ func (p GetKeyRequest) Pointer() *GetKeyRequest {
 }
 
 type DeleteKeyRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	KeyName       *string `json:"keyName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	KeyName         *string `json:"keyName"`
 }
 
 func NewDeleteKeyRequestFromJson(data string) DeleteKeyRequest {
@@ -370,11 +381,12 @@ func (p DeleteKeyRequest) Pointer() *DeleteKeyRequest {
 }
 
 type EncryptRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	KeyName       *string `json:"keyName"`
-	Data          *string `json:"data"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	KeyName         *string `json:"keyName"`
+	Data            *string `json:"data"`
 }
 
 func NewEncryptRequestFromJson(data string) EncryptRequest {
@@ -404,11 +416,12 @@ func (p EncryptRequest) Pointer() *EncryptRequest {
 }
 
 type DecryptRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	KeyName       *string `json:"keyName"`
-	Data          *string `json:"data"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	KeyName         *string `json:"keyName"`
+	Data            *string `json:"data"`
 }
 
 func NewDecryptRequestFromJson(data string) DecryptRequest {
@@ -438,11 +451,12 @@ func (p DecryptRequest) Pointer() *DecryptRequest {
 }
 
 type DescribeGitHubApiKeysRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeGitHubApiKeysRequestFromJson(data string) DescribeGitHubApiKeysRequest {
@@ -472,6 +486,7 @@ func (p DescribeGitHubApiKeysRequest) Pointer() *DescribeGitHubApiKeysRequest {
 }
 
 type CreateGitHubApiKeyRequest struct {
+	SourceRequestId   *string `json:"sourceRequestId"`
 	RequestId         *string `json:"requestId"`
 	ContextStack      *string `json:"contextStack"`
 	NamespaceName     *string `json:"namespaceName"`
@@ -512,6 +527,7 @@ func (p CreateGitHubApiKeyRequest) Pointer() *CreateGitHubApiKeyRequest {
 }
 
 type UpdateGitHubApiKeyRequest struct {
+	SourceRequestId   *string `json:"sourceRequestId"`
 	RequestId         *string `json:"requestId"`
 	ContextStack      *string `json:"contextStack"`
 	NamespaceName     *string `json:"namespaceName"`
@@ -552,10 +568,11 @@ func (p UpdateGitHubApiKeyRequest) Pointer() *UpdateGitHubApiKeyRequest {
 }
 
 type GetGitHubApiKeyRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ApiKeyName    *string `json:"apiKeyName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ApiKeyName      *string `json:"apiKeyName"`
 }
 
 func NewGetGitHubApiKeyRequestFromJson(data string) GetGitHubApiKeyRequest {
@@ -583,10 +600,11 @@ func (p GetGitHubApiKeyRequest) Pointer() *GetGitHubApiKeyRequest {
 }
 
 type DeleteGitHubApiKeyRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ApiKeyName    *string `json:"apiKeyName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ApiKeyName      *string `json:"apiKeyName"`
 }
 
 func NewDeleteGitHubApiKeyRequestFromJson(data string) DeleteGitHubApiKeyRequest {

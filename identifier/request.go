@@ -23,10 +23,11 @@ import (
 )
 
 type DescribeUsersRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeUsersRequestFromJson(data string) DescribeUsersRequest {
@@ -54,10 +55,11 @@ func (p DescribeUsersRequest) Pointer() *DescribeUsersRequest {
 }
 
 type CreateUserRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	Name         *string `json:"name"`
-	Description  *string `json:"description"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
 }
 
 func NewCreateUserRequestFromJson(data string) CreateUserRequest {
@@ -85,10 +87,11 @@ func (p CreateUserRequest) Pointer() *CreateUserRequest {
 }
 
 type UpdateUserRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserName     *string `json:"userName"`
-	Description  *string `json:"description"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
+	Description     *string `json:"description"`
 }
 
 func NewUpdateUserRequestFromJson(data string) UpdateUserRequest {
@@ -116,9 +119,10 @@ func (p UpdateUserRequest) Pointer() *UpdateUserRequest {
 }
 
 type GetUserRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserName     *string `json:"userName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
 }
 
 func NewGetUserRequestFromJson(data string) GetUserRequest {
@@ -144,9 +148,10 @@ func (p GetUserRequest) Pointer() *GetUserRequest {
 }
 
 type DeleteUserRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserName     *string `json:"userName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
 }
 
 func NewDeleteUserRequestFromJson(data string) DeleteUserRequest {
@@ -172,10 +177,11 @@ func (p DeleteUserRequest) Pointer() *DeleteUserRequest {
 }
 
 type DescribeSecurityPoliciesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeSecurityPoliciesRequestFromJson(data string) DescribeSecurityPoliciesRequest {
@@ -203,10 +209,11 @@ func (p DescribeSecurityPoliciesRequest) Pointer() *DescribeSecurityPoliciesRequ
 }
 
 type DescribeCommonSecurityPoliciesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeCommonSecurityPoliciesRequestFromJson(data string) DescribeCommonSecurityPoliciesRequest {
@@ -234,11 +241,12 @@ func (p DescribeCommonSecurityPoliciesRequest) Pointer() *DescribeCommonSecurity
 }
 
 type CreateSecurityPolicyRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	Name         *string `json:"name"`
-	Description  *string `json:"description"`
-	Policy       *string `json:"policy"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
+	Policy          *string `json:"policy"`
 }
 
 func NewCreateSecurityPolicyRequestFromJson(data string) CreateSecurityPolicyRequest {
@@ -268,6 +276,7 @@ func (p CreateSecurityPolicyRequest) Pointer() *CreateSecurityPolicyRequest {
 }
 
 type UpdateSecurityPolicyRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	SecurityPolicyName *string `json:"securityPolicyName"`
@@ -302,6 +311,7 @@ func (p UpdateSecurityPolicyRequest) Pointer() *UpdateSecurityPolicyRequest {
 }
 
 type GetSecurityPolicyRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	SecurityPolicyName *string `json:"securityPolicyName"`
@@ -330,6 +340,7 @@ func (p GetSecurityPolicyRequest) Pointer() *GetSecurityPolicyRequest {
 }
 
 type DeleteSecurityPolicyRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	SecurityPolicyName *string `json:"securityPolicyName"`
@@ -358,11 +369,12 @@ func (p DeleteSecurityPolicyRequest) Pointer() *DeleteSecurityPolicyRequest {
 }
 
 type DescribeIdentifiersRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserName     *string `json:"userName"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeIdentifiersRequestFromJson(data string) DescribeIdentifiersRequest {
@@ -392,9 +404,10 @@ func (p DescribeIdentifiersRequest) Pointer() *DescribeIdentifiersRequest {
 }
 
 type CreateIdentifierRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserName     *string `json:"userName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
 }
 
 func NewCreateIdentifierRequestFromJson(data string) CreateIdentifierRequest {
@@ -420,10 +433,11 @@ func (p CreateIdentifierRequest) Pointer() *CreateIdentifierRequest {
 }
 
 type GetIdentifierRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserName     *string `json:"userName"`
-	ClientId     *string `json:"clientId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
+	ClientId        *string `json:"clientId"`
 }
 
 func NewGetIdentifierRequestFromJson(data string) GetIdentifierRequest {
@@ -451,10 +465,11 @@ func (p GetIdentifierRequest) Pointer() *GetIdentifierRequest {
 }
 
 type DeleteIdentifierRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserName     *string `json:"userName"`
-	ClientId     *string `json:"clientId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
+	ClientId        *string `json:"clientId"`
 }
 
 func NewDeleteIdentifierRequestFromJson(data string) DeleteIdentifierRequest {
@@ -482,11 +497,12 @@ func (p DeleteIdentifierRequest) Pointer() *DeleteIdentifierRequest {
 }
 
 type DescribePasswordsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserName     *string `json:"userName"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribePasswordsRequestFromJson(data string) DescribePasswordsRequest {
@@ -516,10 +532,11 @@ func (p DescribePasswordsRequest) Pointer() *DescribePasswordsRequest {
 }
 
 type CreatePasswordRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserName     *string `json:"userName"`
-	Password     *string `json:"password"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
+	Password        *string `json:"password"`
 }
 
 func NewCreatePasswordRequestFromJson(data string) CreatePasswordRequest {
@@ -547,9 +564,10 @@ func (p CreatePasswordRequest) Pointer() *CreatePasswordRequest {
 }
 
 type GetPasswordRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserName     *string `json:"userName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
 }
 
 func NewGetPasswordRequestFromJson(data string) GetPasswordRequest {
@@ -575,9 +593,10 @@ func (p GetPasswordRequest) Pointer() *GetPasswordRequest {
 }
 
 type DeletePasswordRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserName     *string `json:"userName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
 }
 
 func NewDeletePasswordRequestFromJson(data string) DeletePasswordRequest {
@@ -603,9 +622,10 @@ func (p DeletePasswordRequest) Pointer() *DeletePasswordRequest {
 }
 
 type GetHasSecurityPolicyRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserName     *string `json:"userName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
 }
 
 func NewGetHasSecurityPolicyRequestFromJson(data string) GetHasSecurityPolicyRequest {
@@ -631,6 +651,7 @@ func (p GetHasSecurityPolicyRequest) Pointer() *GetHasSecurityPolicyRequest {
 }
 
 type AttachSecurityPolicyRequest struct {
+	SourceRequestId  *string `json:"sourceRequestId"`
 	RequestId        *string `json:"requestId"`
 	ContextStack     *string `json:"contextStack"`
 	UserName         *string `json:"userName"`
@@ -662,6 +683,7 @@ func (p AttachSecurityPolicyRequest) Pointer() *AttachSecurityPolicyRequest {
 }
 
 type DetachSecurityPolicyRequest struct {
+	SourceRequestId  *string `json:"sourceRequestId"`
 	RequestId        *string `json:"requestId"`
 	ContextStack     *string `json:"contextStack"`
 	UserName         *string `json:"userName"`
@@ -693,10 +715,11 @@ func (p DetachSecurityPolicyRequest) Pointer() *DetachSecurityPolicyRequest {
 }
 
 type LoginRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	ClientId     *string `json:"clientId"`
-	ClientSecret *string `json:"clientSecret"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	ClientId        *string `json:"clientId"`
+	ClientSecret    *string `json:"clientSecret"`
 }
 
 func NewLoginRequestFromJson(data string) LoginRequest {
@@ -724,10 +747,11 @@ func (p LoginRequest) Pointer() *LoginRequest {
 }
 
 type LoginByUserRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserName     *string `json:"userName"`
-	Password     *string `json:"password"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
+	Password        *string `json:"password"`
 }
 
 func NewLoginByUserRequestFromJson(data string) LoginByUserRequest {

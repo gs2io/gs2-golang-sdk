@@ -23,10 +23,11 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
@@ -54,6 +55,7 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
+	SourceRequestId     *string `json:"sourceRequestId"`
 	RequestId           *string `json:"requestId"`
 	ContextStack        *string `json:"contextStack"`
 	Name                *string `json:"name"`
@@ -109,9 +111,10 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
@@ -137,9 +140,10 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
@@ -165,6 +169,7 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
+	SourceRequestId     *string `json:"sourceRequestId"`
 	RequestId           *string `json:"requestId"`
 	ContextStack        *string `json:"contextStack"`
 	NamespaceName       *string `json:"namespaceName"`
@@ -220,9 +225,10 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
@@ -248,6 +254,7 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type QueryAccessLogRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -301,17 +308,18 @@ func (p QueryAccessLogRequest) Pointer() *QueryAccessLogRequest {
 }
 
 type CountAccessLogRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Service       *bool   `json:"service"`
-	Method        *bool   `json:"method"`
-	UserId        *bool   `json:"userId"`
-	Begin         *int64  `json:"begin"`
-	End           *int64  `json:"end"`
-	LongTerm      *bool   `json:"longTerm"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Service         *bool   `json:"service"`
+	Method          *bool   `json:"method"`
+	UserId          *bool   `json:"userId"`
+	Begin           *int64  `json:"begin"`
+	End             *int64  `json:"end"`
+	LongTerm        *bool   `json:"longTerm"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewCountAccessLogRequestFromJson(data string) CountAccessLogRequest {
@@ -353,6 +361,7 @@ func (p CountAccessLogRequest) Pointer() *CountAccessLogRequest {
 }
 
 type QueryIssueStampSheetLogRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -409,18 +418,19 @@ func (p QueryIssueStampSheetLogRequest) Pointer() *QueryIssueStampSheetLogReques
 }
 
 type CountIssueStampSheetLogRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Service       *bool   `json:"service"`
-	Method        *bool   `json:"method"`
-	UserId        *bool   `json:"userId"`
-	Action        *bool   `json:"action"`
-	Begin         *int64  `json:"begin"`
-	End           *int64  `json:"end"`
-	LongTerm      *bool   `json:"longTerm"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Service         *bool   `json:"service"`
+	Method          *bool   `json:"method"`
+	UserId          *bool   `json:"userId"`
+	Action          *bool   `json:"action"`
+	Begin           *int64  `json:"begin"`
+	End             *int64  `json:"end"`
+	LongTerm        *bool   `json:"longTerm"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewCountIssueStampSheetLogRequestFromJson(data string) CountIssueStampSheetLogRequest {
@@ -464,6 +474,7 @@ func (p CountIssueStampSheetLogRequest) Pointer() *CountIssueStampSheetLogReques
 }
 
 type QueryExecuteStampSheetLogRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -520,18 +531,19 @@ func (p QueryExecuteStampSheetLogRequest) Pointer() *QueryExecuteStampSheetLogRe
 }
 
 type CountExecuteStampSheetLogRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Service       *bool   `json:"service"`
-	Method        *bool   `json:"method"`
-	UserId        *bool   `json:"userId"`
-	Action        *bool   `json:"action"`
-	Begin         *int64  `json:"begin"`
-	End           *int64  `json:"end"`
-	LongTerm      *bool   `json:"longTerm"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Service         *bool   `json:"service"`
+	Method          *bool   `json:"method"`
+	UserId          *bool   `json:"userId"`
+	Action          *bool   `json:"action"`
+	Begin           *int64  `json:"begin"`
+	End             *int64  `json:"end"`
+	LongTerm        *bool   `json:"longTerm"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewCountExecuteStampSheetLogRequestFromJson(data string) CountExecuteStampSheetLogRequest {
@@ -575,6 +587,7 @@ func (p CountExecuteStampSheetLogRequest) Pointer() *CountExecuteStampSheetLogRe
 }
 
 type QueryExecuteStampTaskLogRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -631,18 +644,19 @@ func (p QueryExecuteStampTaskLogRequest) Pointer() *QueryExecuteStampTaskLogRequ
 }
 
 type CountExecuteStampTaskLogRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Service       *bool   `json:"service"`
-	Method        *bool   `json:"method"`
-	UserId        *bool   `json:"userId"`
-	Action        *bool   `json:"action"`
-	Begin         *int64  `json:"begin"`
-	End           *int64  `json:"end"`
-	LongTerm      *bool   `json:"longTerm"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Service         *bool   `json:"service"`
+	Method          *bool   `json:"method"`
+	UserId          *bool   `json:"userId"`
+	Action          *bool   `json:"action"`
+	Begin           *int64  `json:"begin"`
+	End             *int64  `json:"end"`
+	LongTerm        *bool   `json:"longTerm"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewCountExecuteStampTaskLogRequestFromJson(data string) CountExecuteStampTaskLogRequest {
@@ -686,6 +700,7 @@ func (p CountExecuteStampTaskLogRequest) Pointer() *CountExecuteStampTaskLogRequ
 }
 
 type PutLogRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
@@ -720,11 +735,12 @@ func (p PutLogRequest) Pointer() *PutLogRequest {
 }
 
 type DescribeInsightsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeInsightsRequestFromJson(data string) DescribeInsightsRequest {
@@ -754,9 +770,10 @@ func (p DescribeInsightsRequest) Pointer() *DescribeInsightsRequest {
 }
 
 type CreateInsightRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewCreateInsightRequestFromJson(data string) CreateInsightRequest {
@@ -782,10 +799,11 @@ func (p CreateInsightRequest) Pointer() *CreateInsightRequest {
 }
 
 type GetInsightRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InsightName   *string `json:"insightName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InsightName     *string `json:"insightName"`
 }
 
 func NewGetInsightRequestFromJson(data string) GetInsightRequest {
@@ -813,10 +831,11 @@ func (p GetInsightRequest) Pointer() *GetInsightRequest {
 }
 
 type DeleteInsightRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InsightName   *string `json:"insightName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InsightName     *string `json:"insightName"`
 }
 
 func NewDeleteInsightRequestFromJson(data string) DeleteInsightRequest {

@@ -23,10 +23,11 @@ import (
 )
 
 type DescribeStacksRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeStacksRequestFromJson(data string) DescribeStacksRequest {
@@ -54,11 +55,12 @@ func (p DescribeStacksRequest) Pointer() *DescribeStacksRequest {
 }
 
 type CreateStackRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	Name         *string `json:"name"`
-	Description  *string `json:"description"`
-	Template     *string `json:"template"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
+	Template        *string `json:"template"`
 }
 
 func NewCreateStackRequestFromJson(data string) CreateStackRequest {
@@ -88,6 +90,7 @@ func (p CreateStackRequest) Pointer() *CreateStackRequest {
 }
 
 type CreateStackFromGitHubRequest struct {
+	SourceRequestId *string                `json:"sourceRequestId"`
 	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	Name            *string                `json:"name"`
@@ -122,9 +125,10 @@ func (p CreateStackFromGitHubRequest) Pointer() *CreateStackFromGitHubRequest {
 }
 
 type ValidateRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	Template     *string `json:"template"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	Template        *string `json:"template"`
 }
 
 func NewValidateRequestFromJson(data string) ValidateRequest {
@@ -150,9 +154,10 @@ func (p ValidateRequest) Pointer() *ValidateRequest {
 }
 
 type GetStackStatusRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
 }
 
 func NewGetStackStatusRequestFromJson(data string) GetStackStatusRequest {
@@ -178,9 +183,10 @@ func (p GetStackStatusRequest) Pointer() *GetStackStatusRequest {
 }
 
 type GetStackRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
 }
 
 func NewGetStackRequestFromJson(data string) GetStackRequest {
@@ -206,11 +212,12 @@ func (p GetStackRequest) Pointer() *GetStackRequest {
 }
 
 type UpdateStackRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
-	Description  *string `json:"description"`
-	Template     *string `json:"template"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
+	Description     *string `json:"description"`
+	Template        *string `json:"template"`
 }
 
 func NewUpdateStackRequestFromJson(data string) UpdateStackRequest {
@@ -240,10 +247,11 @@ func (p UpdateStackRequest) Pointer() *UpdateStackRequest {
 }
 
 type ChangeSetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
-	Template     *string `json:"template"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
+	Template        *string `json:"template"`
 }
 
 func NewChangeSetRequestFromJson(data string) ChangeSetRequest {
@@ -271,6 +279,7 @@ func (p ChangeSetRequest) Pointer() *ChangeSetRequest {
 }
 
 type UpdateStackFromGitHubRequest struct {
+	SourceRequestId *string                `json:"sourceRequestId"`
 	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	StackName       *string                `json:"stackName"`
@@ -305,9 +314,10 @@ func (p UpdateStackFromGitHubRequest) Pointer() *UpdateStackFromGitHubRequest {
 }
 
 type DeleteStackRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
 }
 
 func NewDeleteStackRequestFromJson(data string) DeleteStackRequest {
@@ -333,9 +343,10 @@ func (p DeleteStackRequest) Pointer() *DeleteStackRequest {
 }
 
 type ForceDeleteStackRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
 }
 
 func NewForceDeleteStackRequestFromJson(data string) ForceDeleteStackRequest {
@@ -361,9 +372,10 @@ func (p ForceDeleteStackRequest) Pointer() *ForceDeleteStackRequest {
 }
 
 type DeleteStackResourcesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
 }
 
 func NewDeleteStackResourcesRequestFromJson(data string) DeleteStackResourcesRequest {
@@ -389,9 +401,10 @@ func (p DeleteStackResourcesRequest) Pointer() *DeleteStackResourcesRequest {
 }
 
 type DeleteStackEntityRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
 }
 
 func NewDeleteStackEntityRequestFromJson(data string) DeleteStackEntityRequest {
@@ -417,11 +430,12 @@ func (p DeleteStackEntityRequest) Pointer() *DeleteStackEntityRequest {
 }
 
 type DescribeResourcesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeResourcesRequestFromJson(data string) DescribeResourcesRequest {
@@ -451,10 +465,11 @@ func (p DescribeResourcesRequest) Pointer() *DescribeResourcesRequest {
 }
 
 type GetResourceRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
-	ResourceName *string `json:"resourceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
+	ResourceName    *string `json:"resourceName"`
 }
 
 func NewGetResourceRequestFromJson(data string) GetResourceRequest {
@@ -482,11 +497,12 @@ func (p GetResourceRequest) Pointer() *GetResourceRequest {
 }
 
 type DescribeEventsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeEventsRequestFromJson(data string) DescribeEventsRequest {
@@ -516,10 +532,11 @@ func (p DescribeEventsRequest) Pointer() *DescribeEventsRequest {
 }
 
 type GetEventRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
-	EventName    *string `json:"eventName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
+	EventName       *string `json:"eventName"`
 }
 
 func NewGetEventRequestFromJson(data string) GetEventRequest {
@@ -547,11 +564,12 @@ func (p GetEventRequest) Pointer() *GetEventRequest {
 }
 
 type DescribeOutputsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeOutputsRequestFromJson(data string) DescribeOutputsRequest {
@@ -581,10 +599,11 @@ func (p DescribeOutputsRequest) Pointer() *DescribeOutputsRequest {
 }
 
 type GetOutputRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StackName    *string `json:"stackName"`
-	OutputName   *string `json:"outputName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StackName       *string `json:"stackName"`
+	OutputName      *string `json:"outputName"`
 }
 
 func NewGetOutputRequestFromJson(data string) GetOutputRequest {

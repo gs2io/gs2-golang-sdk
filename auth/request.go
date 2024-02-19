@@ -23,10 +23,11 @@ import (
 )
 
 type LoginRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	UserId       *string `json:"userId"`
-	TimeOffset   *int32  `json:"timeOffset"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserId          *string `json:"userId"`
+	TimeOffset      *int32  `json:"timeOffset"`
 }
 
 func NewLoginRequestFromJson(data string) LoginRequest {
@@ -54,11 +55,12 @@ func (p LoginRequest) Pointer() *LoginRequest {
 }
 
 type LoginBySignatureRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	KeyId        *string `json:"keyId"`
-	Body         *string `json:"body"`
-	Signature    *string `json:"signature"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	KeyId           *string `json:"keyId"`
+	Body            *string `json:"body"`
+	Signature       *string `json:"signature"`
 }
 
 func NewLoginBySignatureRequestFromJson(data string) LoginBySignatureRequest {

@@ -23,10 +23,11 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
@@ -54,6 +55,7 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
+	SourceRequestId         *string        `json:"sourceRequestId"`
 	RequestId               *string        `json:"requestId"`
 	ContextStack            *string        `json:"contextStack"`
 	Name                    *string        `json:"name"`
@@ -103,9 +105,10 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
@@ -131,9 +134,10 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
@@ -159,6 +163,7 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
+	SourceRequestId         *string        `json:"sourceRequestId"`
 	RequestId               *string        `json:"requestId"`
 	ContextStack            *string        `json:"contextStack"`
 	NamespaceName           *string        `json:"namespaceName"`
@@ -208,9 +213,10 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
@@ -236,6 +242,7 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DumpUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -265,6 +272,7 @@ func (p DumpUserDataByUserIdRequest) Pointer() *DumpUserDataByUserIdRequest {
 }
 
 type CheckDumpUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -294,6 +302,7 @@ func (p CheckDumpUserDataByUserIdRequest) Pointer() *CheckDumpUserDataByUserIdRe
 }
 
 type CleanUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -323,6 +332,7 @@ func (p CleanUserDataByUserIdRequest) Pointer() *CleanUserDataByUserIdRequest {
 }
 
 type CheckCleanUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -352,6 +362,7 @@ func (p CheckCleanUserDataByUserIdRequest) Pointer() *CheckCleanUserDataByUserId
 }
 
 type PrepareImportUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -381,6 +392,7 @@ func (p PrepareImportUserDataByUserIdRequest) Pointer() *PrepareImportUserDataBy
 }
 
 type ImportUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -413,6 +425,7 @@ func (p ImportUserDataByUserIdRequest) Pointer() *ImportUserDataByUserIdRequest 
 }
 
 type CheckImportUserDataByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -445,11 +458,12 @@ func (p CheckImportUserDataByUserIdRequest) Pointer() *CheckImportUserDataByUser
 }
 
 type DescribeInventoryModelMastersRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeInventoryModelMastersRequestFromJson(data string) DescribeInventoryModelMastersRequest {
@@ -479,6 +493,7 @@ func (p DescribeInventoryModelMastersRequest) Pointer() *DescribeInventoryModelM
 }
 
 type CreateInventoryModelMasterRequest struct {
+	SourceRequestId       *string `json:"sourceRequestId"`
 	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
@@ -525,10 +540,11 @@ func (p CreateInventoryModelMasterRequest) Pointer() *CreateInventoryModelMaster
 }
 
 type GetInventoryModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
 }
 
 func NewGetInventoryModelMasterRequestFromJson(data string) GetInventoryModelMasterRequest {
@@ -556,6 +572,7 @@ func (p GetInventoryModelMasterRequest) Pointer() *GetInventoryModelMasterReques
 }
 
 type UpdateInventoryModelMasterRequest struct {
+	SourceRequestId       *string `json:"sourceRequestId"`
 	RequestId             *string `json:"requestId"`
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
@@ -602,10 +619,11 @@ func (p UpdateInventoryModelMasterRequest) Pointer() *UpdateInventoryModelMaster
 }
 
 type DeleteInventoryModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
 }
 
 func NewDeleteInventoryModelMasterRequestFromJson(data string) DeleteInventoryModelMasterRequest {
@@ -633,9 +651,10 @@ func (p DeleteInventoryModelMasterRequest) Pointer() *DeleteInventoryModelMaster
 }
 
 type DescribeInventoryModelsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeInventoryModelsRequestFromJson(data string) DescribeInventoryModelsRequest {
@@ -661,10 +680,11 @@ func (p DescribeInventoryModelsRequest) Pointer() *DescribeInventoryModelsReques
 }
 
 type GetInventoryModelRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
 }
 
 func NewGetInventoryModelRequestFromJson(data string) GetInventoryModelRequest {
@@ -692,12 +712,13 @@ func (p GetInventoryModelRequest) Pointer() *GetInventoryModelRequest {
 }
 
 type DescribeItemModelMastersRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeItemModelMastersRequestFromJson(data string) DescribeItemModelMastersRequest {
@@ -729,6 +750,7 @@ func (p DescribeItemModelMastersRequest) Pointer() *DescribeItemModelMastersRequ
 }
 
 type CreateItemModelMasterRequest struct {
+	SourceRequestId     *string `json:"sourceRequestId"`
 	RequestId           *string `json:"requestId"`
 	ContextStack        *string `json:"contextStack"`
 	NamespaceName       *string `json:"namespaceName"`
@@ -778,11 +800,12 @@ func (p CreateItemModelMasterRequest) Pointer() *CreateItemModelMasterRequest {
 }
 
 type GetItemModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	ItemName      *string `json:"itemName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	ItemName        *string `json:"itemName"`
 }
 
 func NewGetItemModelMasterRequestFromJson(data string) GetItemModelMasterRequest {
@@ -812,6 +835,7 @@ func (p GetItemModelMasterRequest) Pointer() *GetItemModelMasterRequest {
 }
 
 type UpdateItemModelMasterRequest struct {
+	SourceRequestId     *string `json:"sourceRequestId"`
 	RequestId           *string `json:"requestId"`
 	ContextStack        *string `json:"contextStack"`
 	NamespaceName       *string `json:"namespaceName"`
@@ -861,11 +885,12 @@ func (p UpdateItemModelMasterRequest) Pointer() *UpdateItemModelMasterRequest {
 }
 
 type DeleteItemModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	ItemName      *string `json:"itemName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	ItemName        *string `json:"itemName"`
 }
 
 func NewDeleteItemModelMasterRequestFromJson(data string) DeleteItemModelMasterRequest {
@@ -895,10 +920,11 @@ func (p DeleteItemModelMasterRequest) Pointer() *DeleteItemModelMasterRequest {
 }
 
 type DescribeItemModelsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
 }
 
 func NewDescribeItemModelsRequestFromJson(data string) DescribeItemModelsRequest {
@@ -926,11 +952,12 @@ func (p DescribeItemModelsRequest) Pointer() *DescribeItemModelsRequest {
 }
 
 type GetItemModelRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	ItemName      *string `json:"itemName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	ItemName        *string `json:"itemName"`
 }
 
 func NewGetItemModelRequestFromJson(data string) GetItemModelRequest {
@@ -960,11 +987,12 @@ func (p GetItemModelRequest) Pointer() *GetItemModelRequest {
 }
 
 type DescribeSimpleInventoryModelMastersRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeSimpleInventoryModelMastersRequestFromJson(data string) DescribeSimpleInventoryModelMastersRequest {
@@ -994,12 +1022,13 @@ func (p DescribeSimpleInventoryModelMastersRequest) Pointer() *DescribeSimpleInv
 }
 
 type CreateSimpleInventoryModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Name          *string `json:"name"`
-	Description   *string `json:"description"`
-	Metadata      *string `json:"metadata"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
 }
 
 func NewCreateSimpleInventoryModelMasterRequestFromJson(data string) CreateSimpleInventoryModelMasterRequest {
@@ -1031,10 +1060,11 @@ func (p CreateSimpleInventoryModelMasterRequest) Pointer() *CreateSimpleInventor
 }
 
 type GetSimpleInventoryModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
 }
 
 func NewGetSimpleInventoryModelMasterRequestFromJson(data string) GetSimpleInventoryModelMasterRequest {
@@ -1062,12 +1092,13 @@ func (p GetSimpleInventoryModelMasterRequest) Pointer() *GetSimpleInventoryModel
 }
 
 type UpdateSimpleInventoryModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	Description   *string `json:"description"`
-	Metadata      *string `json:"metadata"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
 }
 
 func NewUpdateSimpleInventoryModelMasterRequestFromJson(data string) UpdateSimpleInventoryModelMasterRequest {
@@ -1099,10 +1130,11 @@ func (p UpdateSimpleInventoryModelMasterRequest) Pointer() *UpdateSimpleInventor
 }
 
 type DeleteSimpleInventoryModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
 }
 
 func NewDeleteSimpleInventoryModelMasterRequestFromJson(data string) DeleteSimpleInventoryModelMasterRequest {
@@ -1130,9 +1162,10 @@ func (p DeleteSimpleInventoryModelMasterRequest) Pointer() *DeleteSimpleInventor
 }
 
 type DescribeSimpleInventoryModelsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeSimpleInventoryModelsRequestFromJson(data string) DescribeSimpleInventoryModelsRequest {
@@ -1158,10 +1191,11 @@ func (p DescribeSimpleInventoryModelsRequest) Pointer() *DescribeSimpleInventory
 }
 
 type GetSimpleInventoryModelRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
 }
 
 func NewGetSimpleInventoryModelRequestFromJson(data string) GetSimpleInventoryModelRequest {
@@ -1189,12 +1223,13 @@ func (p GetSimpleInventoryModelRequest) Pointer() *GetSimpleInventoryModelReques
 }
 
 type DescribeSimpleItemModelMastersRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeSimpleItemModelMastersRequestFromJson(data string) DescribeSimpleItemModelMastersRequest {
@@ -1226,13 +1261,14 @@ func (p DescribeSimpleItemModelMastersRequest) Pointer() *DescribeSimpleItemMode
 }
 
 type CreateSimpleItemModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	Name          *string `json:"name"`
-	Description   *string `json:"description"`
-	Metadata      *string `json:"metadata"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
 }
 
 func NewCreateSimpleItemModelMasterRequestFromJson(data string) CreateSimpleItemModelMasterRequest {
@@ -1266,11 +1302,12 @@ func (p CreateSimpleItemModelMasterRequest) Pointer() *CreateSimpleItemModelMast
 }
 
 type GetSimpleItemModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	ItemName      *string `json:"itemName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	ItemName        *string `json:"itemName"`
 }
 
 func NewGetSimpleItemModelMasterRequestFromJson(data string) GetSimpleItemModelMasterRequest {
@@ -1300,13 +1337,14 @@ func (p GetSimpleItemModelMasterRequest) Pointer() *GetSimpleItemModelMasterRequ
 }
 
 type UpdateSimpleItemModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	ItemName      *string `json:"itemName"`
-	Description   *string `json:"description"`
-	Metadata      *string `json:"metadata"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	ItemName        *string `json:"itemName"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
 }
 
 func NewUpdateSimpleItemModelMasterRequestFromJson(data string) UpdateSimpleItemModelMasterRequest {
@@ -1340,11 +1378,12 @@ func (p UpdateSimpleItemModelMasterRequest) Pointer() *UpdateSimpleItemModelMast
 }
 
 type DeleteSimpleItemModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	ItemName      *string `json:"itemName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	ItemName        *string `json:"itemName"`
 }
 
 func NewDeleteSimpleItemModelMasterRequestFromJson(data string) DeleteSimpleItemModelMasterRequest {
@@ -1374,10 +1413,11 @@ func (p DeleteSimpleItemModelMasterRequest) Pointer() *DeleteSimpleItemModelMast
 }
 
 type DescribeSimpleItemModelsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
 }
 
 func NewDescribeSimpleItemModelsRequestFromJson(data string) DescribeSimpleItemModelsRequest {
@@ -1405,11 +1445,12 @@ func (p DescribeSimpleItemModelsRequest) Pointer() *DescribeSimpleItemModelsRequ
 }
 
 type GetSimpleItemModelRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	ItemName      *string `json:"itemName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	ItemName        *string `json:"itemName"`
 }
 
 func NewGetSimpleItemModelRequestFromJson(data string) GetSimpleItemModelRequest {
@@ -1439,11 +1480,12 @@ func (p GetSimpleItemModelRequest) Pointer() *GetSimpleItemModelRequest {
 }
 
 type DescribeBigInventoryModelMastersRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeBigInventoryModelMastersRequestFromJson(data string) DescribeBigInventoryModelMastersRequest {
@@ -1473,12 +1515,13 @@ func (p DescribeBigInventoryModelMastersRequest) Pointer() *DescribeBigInventory
 }
 
 type CreateBigInventoryModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Name          *string `json:"name"`
-	Description   *string `json:"description"`
-	Metadata      *string `json:"metadata"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
 }
 
 func NewCreateBigInventoryModelMasterRequestFromJson(data string) CreateBigInventoryModelMasterRequest {
@@ -1510,10 +1553,11 @@ func (p CreateBigInventoryModelMasterRequest) Pointer() *CreateBigInventoryModel
 }
 
 type GetBigInventoryModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
 }
 
 func NewGetBigInventoryModelMasterRequestFromJson(data string) GetBigInventoryModelMasterRequest {
@@ -1541,12 +1585,13 @@ func (p GetBigInventoryModelMasterRequest) Pointer() *GetBigInventoryModelMaster
 }
 
 type UpdateBigInventoryModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	Description   *string `json:"description"`
-	Metadata      *string `json:"metadata"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
 }
 
 func NewUpdateBigInventoryModelMasterRequestFromJson(data string) UpdateBigInventoryModelMasterRequest {
@@ -1578,10 +1623,11 @@ func (p UpdateBigInventoryModelMasterRequest) Pointer() *UpdateBigInventoryModel
 }
 
 type DeleteBigInventoryModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
 }
 
 func NewDeleteBigInventoryModelMasterRequestFromJson(data string) DeleteBigInventoryModelMasterRequest {
@@ -1609,9 +1655,10 @@ func (p DeleteBigInventoryModelMasterRequest) Pointer() *DeleteBigInventoryModel
 }
 
 type DescribeBigInventoryModelsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeBigInventoryModelsRequestFromJson(data string) DescribeBigInventoryModelsRequest {
@@ -1637,10 +1684,11 @@ func (p DescribeBigInventoryModelsRequest) Pointer() *DescribeBigInventoryModels
 }
 
 type GetBigInventoryModelRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
 }
 
 func NewGetBigInventoryModelRequestFromJson(data string) GetBigInventoryModelRequest {
@@ -1668,12 +1716,13 @@ func (p GetBigInventoryModelRequest) Pointer() *GetBigInventoryModelRequest {
 }
 
 type DescribeBigItemModelMastersRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeBigItemModelMastersRequestFromJson(data string) DescribeBigItemModelMastersRequest {
@@ -1705,13 +1754,14 @@ func (p DescribeBigItemModelMastersRequest) Pointer() *DescribeBigItemModelMaste
 }
 
 type CreateBigItemModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	Name          *string `json:"name"`
-	Description   *string `json:"description"`
-	Metadata      *string `json:"metadata"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
 }
 
 func NewCreateBigItemModelMasterRequestFromJson(data string) CreateBigItemModelMasterRequest {
@@ -1745,11 +1795,12 @@ func (p CreateBigItemModelMasterRequest) Pointer() *CreateBigItemModelMasterRequ
 }
 
 type GetBigItemModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	ItemName      *string `json:"itemName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	ItemName        *string `json:"itemName"`
 }
 
 func NewGetBigItemModelMasterRequestFromJson(data string) GetBigItemModelMasterRequest {
@@ -1779,13 +1830,14 @@ func (p GetBigItemModelMasterRequest) Pointer() *GetBigItemModelMasterRequest {
 }
 
 type UpdateBigItemModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	ItemName      *string `json:"itemName"`
-	Description   *string `json:"description"`
-	Metadata      *string `json:"metadata"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	ItemName        *string `json:"itemName"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
 }
 
 func NewUpdateBigItemModelMasterRequestFromJson(data string) UpdateBigItemModelMasterRequest {
@@ -1819,11 +1871,12 @@ func (p UpdateBigItemModelMasterRequest) Pointer() *UpdateBigItemModelMasterRequ
 }
 
 type DeleteBigItemModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	ItemName      *string `json:"itemName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	ItemName        *string `json:"itemName"`
 }
 
 func NewDeleteBigItemModelMasterRequestFromJson(data string) DeleteBigItemModelMasterRequest {
@@ -1853,10 +1906,11 @@ func (p DeleteBigItemModelMasterRequest) Pointer() *DeleteBigItemModelMasterRequ
 }
 
 type DescribeBigItemModelsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
 }
 
 func NewDescribeBigItemModelsRequestFromJson(data string) DescribeBigItemModelsRequest {
@@ -1884,11 +1938,12 @@ func (p DescribeBigItemModelsRequest) Pointer() *DescribeBigItemModelsRequest {
 }
 
 type GetBigItemModelRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	ItemName      *string `json:"itemName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	ItemName        *string `json:"itemName"`
 }
 
 func NewGetBigItemModelRequestFromJson(data string) GetBigItemModelRequest {
@@ -1918,9 +1973,10 @@ func (p GetBigItemModelRequest) Pointer() *GetBigItemModelRequest {
 }
 
 type ExportMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
@@ -1946,9 +2002,10 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 }
 
 type GetCurrentItemModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetCurrentItemModelMasterRequestFromJson(data string) GetCurrentItemModelMasterRequest {
@@ -1974,10 +2031,11 @@ func (p GetCurrentItemModelMasterRequest) Pointer() *GetCurrentItemModelMasterRe
 }
 
 type UpdateCurrentItemModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Settings      *string `json:"settings"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Settings        *string `json:"settings"`
 }
 
 func NewUpdateCurrentItemModelMasterRequestFromJson(data string) UpdateCurrentItemModelMasterRequest {
@@ -2005,6 +2063,7 @@ func (p UpdateCurrentItemModelMasterRequest) Pointer() *UpdateCurrentItemModelMa
 }
 
 type UpdateCurrentItemModelMasterFromGitHubRequest struct {
+	SourceRequestId *string                `json:"sourceRequestId"`
 	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
@@ -2036,12 +2095,13 @@ func (p UpdateCurrentItemModelMasterFromGitHubRequest) Pointer() *UpdateCurrentI
 }
 
 type DescribeInventoriesRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AccessToken   *string `json:"accessToken"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AccessToken     *string `json:"accessToken"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeInventoriesRequestFromJson(data string) DescribeInventoriesRequest {
@@ -2073,12 +2133,13 @@ func (p DescribeInventoriesRequest) Pointer() *DescribeInventoriesRequest {
 }
 
 type DescribeInventoriesByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	UserId        *string `json:"userId"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeInventoriesByUserIdRequestFromJson(data string) DescribeInventoriesByUserIdRequest {
@@ -2110,11 +2171,12 @@ func (p DescribeInventoriesByUserIdRequest) Pointer() *DescribeInventoriesByUser
 }
 
 type GetInventoryRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	AccessToken   *string `json:"accessToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	AccessToken     *string `json:"accessToken"`
 }
 
 func NewGetInventoryRequestFromJson(data string) GetInventoryRequest {
@@ -2144,11 +2206,12 @@ func (p GetInventoryRequest) Pointer() *GetInventoryRequest {
 }
 
 type GetInventoryByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	UserId        *string `json:"userId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	UserId          *string `json:"userId"`
 }
 
 func NewGetInventoryByUserIdRequestFromJson(data string) GetInventoryByUserIdRequest {
@@ -2178,6 +2241,7 @@ func (p GetInventoryByUserIdRequest) Pointer() *GetInventoryByUserIdRequest {
 }
 
 type AddCapacityByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -2216,6 +2280,7 @@ func (p AddCapacityByUserIdRequest) Pointer() *AddCapacityByUserIdRequest {
 }
 
 type SetCapacityByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -2254,6 +2319,7 @@ func (p SetCapacityByUserIdRequest) Pointer() *SetCapacityByUserIdRequest {
 }
 
 type DeleteInventoryByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -2289,6 +2355,7 @@ func (p DeleteInventoryByUserIdRequest) Pointer() *DeleteInventoryByUserIdReques
 }
 
 type VerifyInventoryCurrentMaxCapacityRequest struct {
+	SourceRequestId             *string `json:"sourceRequestId"`
 	RequestId                   *string `json:"requestId"`
 	ContextStack                *string `json:"contextStack"`
 	DuplicationAvoider          *string `json:"duplicationAvoider"`
@@ -2330,6 +2397,7 @@ func (p VerifyInventoryCurrentMaxCapacityRequest) Pointer() *VerifyInventoryCurr
 }
 
 type VerifyInventoryCurrentMaxCapacityByUserIdRequest struct {
+	SourceRequestId             *string `json:"sourceRequestId"`
 	RequestId                   *string `json:"requestId"`
 	ContextStack                *string `json:"contextStack"`
 	DuplicationAvoider          *string `json:"duplicationAvoider"`
@@ -2371,10 +2439,11 @@ func (p VerifyInventoryCurrentMaxCapacityByUserIdRequest) Pointer() *VerifyInven
 }
 
 type VerifyInventoryCurrentMaxCapacityByStampTaskRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampTask    *string `json:"stampTask"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewVerifyInventoryCurrentMaxCapacityByStampTaskRequestFromJson(data string) VerifyInventoryCurrentMaxCapacityByStampTaskRequest {
@@ -2402,10 +2471,11 @@ func (p VerifyInventoryCurrentMaxCapacityByStampTaskRequest) Pointer() *VerifyIn
 }
 
 type AddCapacityByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewAddCapacityByStampSheetRequestFromJson(data string) AddCapacityByStampSheetRequest {
@@ -2433,10 +2503,11 @@ func (p AddCapacityByStampSheetRequest) Pointer() *AddCapacityByStampSheetReques
 }
 
 type SetCapacityByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewSetCapacityByStampSheetRequestFromJson(data string) SetCapacityByStampSheetRequest {
@@ -2464,13 +2535,14 @@ func (p SetCapacityByStampSheetRequest) Pointer() *SetCapacityByStampSheetReques
 }
 
 type DescribeItemSetsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	AccessToken   *string `json:"accessToken"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	AccessToken     *string `json:"accessToken"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeItemSetsRequestFromJson(data string) DescribeItemSetsRequest {
@@ -2504,13 +2576,14 @@ func (p DescribeItemSetsRequest) Pointer() *DescribeItemSetsRequest {
 }
 
 type DescribeItemSetsByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	UserId        *string `json:"userId"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	UserId          *string `json:"userId"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeItemSetsByUserIdRequestFromJson(data string) DescribeItemSetsByUserIdRequest {
@@ -2544,13 +2617,14 @@ func (p DescribeItemSetsByUserIdRequest) Pointer() *DescribeItemSetsByUserIdRequ
 }
 
 type GetItemSetRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	AccessToken   *string `json:"accessToken"`
-	ItemName      *string `json:"itemName"`
-	ItemSetName   *string `json:"itemSetName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	AccessToken     *string `json:"accessToken"`
+	ItemName        *string `json:"itemName"`
+	ItemSetName     *string `json:"itemSetName"`
 }
 
 func NewGetItemSetRequestFromJson(data string) GetItemSetRequest {
@@ -2584,13 +2658,14 @@ func (p GetItemSetRequest) Pointer() *GetItemSetRequest {
 }
 
 type GetItemSetByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	UserId        *string `json:"userId"`
-	ItemName      *string `json:"itemName"`
-	ItemSetName   *string `json:"itemSetName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	UserId          *string `json:"userId"`
+	ItemName        *string `json:"itemName"`
+	ItemSetName     *string `json:"itemSetName"`
 }
 
 func NewGetItemSetByUserIdRequestFromJson(data string) GetItemSetByUserIdRequest {
@@ -2624,14 +2699,15 @@ func (p GetItemSetByUserIdRequest) Pointer() *GetItemSetByUserIdRequest {
 }
 
 type GetItemWithSignatureRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	AccessToken   *string `json:"accessToken"`
-	ItemName      *string `json:"itemName"`
-	ItemSetName   *string `json:"itemSetName"`
-	KeyId         *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	AccessToken     *string `json:"accessToken"`
+	ItemName        *string `json:"itemName"`
+	ItemSetName     *string `json:"itemSetName"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewGetItemWithSignatureRequestFromJson(data string) GetItemWithSignatureRequest {
@@ -2667,14 +2743,15 @@ func (p GetItemWithSignatureRequest) Pointer() *GetItemWithSignatureRequest {
 }
 
 type GetItemWithSignatureByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	UserId        *string `json:"userId"`
-	ItemName      *string `json:"itemName"`
-	ItemSetName   *string `json:"itemSetName"`
-	KeyId         *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	UserId          *string `json:"userId"`
+	ItemName        *string `json:"itemName"`
+	ItemSetName     *string `json:"itemSetName"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewGetItemWithSignatureByUserIdRequestFromJson(data string) GetItemWithSignatureByUserIdRequest {
@@ -2710,6 +2787,7 @@ func (p GetItemWithSignatureByUserIdRequest) Pointer() *GetItemWithSignatureByUs
 }
 
 type AcquireItemSetByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -2760,6 +2838,7 @@ func (p AcquireItemSetByUserIdRequest) Pointer() *AcquireItemSetByUserIdRequest 
 }
 
 type AcquireItemSetWithGradeByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -2804,6 +2883,7 @@ func (p AcquireItemSetWithGradeByUserIdRequest) Pointer() *AcquireItemSetWithGra
 }
 
 type ConsumeItemSetRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -2848,6 +2928,7 @@ func (p ConsumeItemSetRequest) Pointer() *ConsumeItemSetRequest {
 }
 
 type ConsumeItemSetByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -2892,6 +2973,7 @@ func (p ConsumeItemSetByUserIdRequest) Pointer() *ConsumeItemSetByUserIdRequest 
 }
 
 type DeleteItemSetByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -2933,6 +3015,7 @@ func (p DeleteItemSetByUserIdRequest) Pointer() *DeleteItemSetByUserIdRequest {
 }
 
 type VerifyItemSetRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -2980,6 +3063,7 @@ func (p VerifyItemSetRequest) Pointer() *VerifyItemSetRequest {
 }
 
 type VerifyItemSetByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -3027,10 +3111,11 @@ func (p VerifyItemSetByUserIdRequest) Pointer() *VerifyItemSetByUserIdRequest {
 }
 
 type AcquireItemSetByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewAcquireItemSetByStampSheetRequestFromJson(data string) AcquireItemSetByStampSheetRequest {
@@ -3058,10 +3143,11 @@ func (p AcquireItemSetByStampSheetRequest) Pointer() *AcquireItemSetByStampSheet
 }
 
 type AcquireItemSetWithGradeByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewAcquireItemSetWithGradeByStampSheetRequestFromJson(data string) AcquireItemSetWithGradeByStampSheetRequest {
@@ -3089,10 +3175,11 @@ func (p AcquireItemSetWithGradeByStampSheetRequest) Pointer() *AcquireItemSetWit
 }
 
 type ConsumeItemSetByStampTaskRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampTask    *string `json:"stampTask"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewConsumeItemSetByStampTaskRequestFromJson(data string) ConsumeItemSetByStampTaskRequest {
@@ -3120,10 +3207,11 @@ func (p ConsumeItemSetByStampTaskRequest) Pointer() *ConsumeItemSetByStampTaskRe
 }
 
 type VerifyItemSetByStampTaskRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampTask    *string `json:"stampTask"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewVerifyItemSetByStampTaskRequestFromJson(data string) VerifyItemSetByStampTaskRequest {
@@ -3151,13 +3239,14 @@ func (p VerifyItemSetByStampTaskRequest) Pointer() *VerifyItemSetByStampTaskRequ
 }
 
 type DescribeReferenceOfRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	AccessToken   *string `json:"accessToken"`
-	ItemName      *string `json:"itemName"`
-	ItemSetName   *string `json:"itemSetName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	AccessToken     *string `json:"accessToken"`
+	ItemName        *string `json:"itemName"`
+	ItemSetName     *string `json:"itemSetName"`
 }
 
 func NewDescribeReferenceOfRequestFromJson(data string) DescribeReferenceOfRequest {
@@ -3191,13 +3280,14 @@ func (p DescribeReferenceOfRequest) Pointer() *DescribeReferenceOfRequest {
 }
 
 type DescribeReferenceOfByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	UserId        *string `json:"userId"`
-	ItemName      *string `json:"itemName"`
-	ItemSetName   *string `json:"itemSetName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	UserId          *string `json:"userId"`
+	ItemName        *string `json:"itemName"`
+	ItemSetName     *string `json:"itemSetName"`
 }
 
 func NewDescribeReferenceOfByUserIdRequestFromJson(data string) DescribeReferenceOfByUserIdRequest {
@@ -3231,14 +3321,15 @@ func (p DescribeReferenceOfByUserIdRequest) Pointer() *DescribeReferenceOfByUser
 }
 
 type GetReferenceOfRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	AccessToken   *string `json:"accessToken"`
-	ItemName      *string `json:"itemName"`
-	ItemSetName   *string `json:"itemSetName"`
-	ReferenceOf   *string `json:"referenceOf"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	AccessToken     *string `json:"accessToken"`
+	ItemName        *string `json:"itemName"`
+	ItemSetName     *string `json:"itemSetName"`
+	ReferenceOf     *string `json:"referenceOf"`
 }
 
 func NewGetReferenceOfRequestFromJson(data string) GetReferenceOfRequest {
@@ -3274,14 +3365,15 @@ func (p GetReferenceOfRequest) Pointer() *GetReferenceOfRequest {
 }
 
 type GetReferenceOfByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	UserId        *string `json:"userId"`
-	ItemName      *string `json:"itemName"`
-	ItemSetName   *string `json:"itemSetName"`
-	ReferenceOf   *string `json:"referenceOf"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	UserId          *string `json:"userId"`
+	ItemName        *string `json:"itemName"`
+	ItemSetName     *string `json:"itemSetName"`
+	ReferenceOf     *string `json:"referenceOf"`
 }
 
 func NewGetReferenceOfByUserIdRequestFromJson(data string) GetReferenceOfByUserIdRequest {
@@ -3317,6 +3409,7 @@ func (p GetReferenceOfByUserIdRequest) Pointer() *GetReferenceOfByUserIdRequest 
 }
 
 type VerifyReferenceOfRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -3364,6 +3457,7 @@ func (p VerifyReferenceOfRequest) Pointer() *VerifyReferenceOfRequest {
 }
 
 type VerifyReferenceOfByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -3411,6 +3505,7 @@ func (p VerifyReferenceOfByUserIdRequest) Pointer() *VerifyReferenceOfByUserIdRe
 }
 
 type AddReferenceOfRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -3455,6 +3550,7 @@ func (p AddReferenceOfRequest) Pointer() *AddReferenceOfRequest {
 }
 
 type AddReferenceOfByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -3499,6 +3595,7 @@ func (p AddReferenceOfByUserIdRequest) Pointer() *AddReferenceOfByUserIdRequest 
 }
 
 type DeleteReferenceOfRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -3543,6 +3640,7 @@ func (p DeleteReferenceOfRequest) Pointer() *DeleteReferenceOfRequest {
 }
 
 type DeleteReferenceOfByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -3587,10 +3685,11 @@ func (p DeleteReferenceOfByUserIdRequest) Pointer() *DeleteReferenceOfByUserIdRe
 }
 
 type AddReferenceOfItemSetByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewAddReferenceOfItemSetByStampSheetRequestFromJson(data string) AddReferenceOfItemSetByStampSheetRequest {
@@ -3618,10 +3717,11 @@ func (p AddReferenceOfItemSetByStampSheetRequest) Pointer() *AddReferenceOfItemS
 }
 
 type DeleteReferenceOfItemSetByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewDeleteReferenceOfItemSetByStampSheetRequestFromJson(data string) DeleteReferenceOfItemSetByStampSheetRequest {
@@ -3649,10 +3749,11 @@ func (p DeleteReferenceOfItemSetByStampSheetRequest) Pointer() *DeleteReferenceO
 }
 
 type VerifyReferenceOfByStampTaskRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampTask    *string `json:"stampTask"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewVerifyReferenceOfByStampTaskRequestFromJson(data string) VerifyReferenceOfByStampTaskRequest {
@@ -3680,13 +3781,14 @@ func (p VerifyReferenceOfByStampTaskRequest) Pointer() *VerifyReferenceOfByStamp
 }
 
 type DescribeSimpleItemsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	AccessToken   *string `json:"accessToken"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	AccessToken     *string `json:"accessToken"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeSimpleItemsRequestFromJson(data string) DescribeSimpleItemsRequest {
@@ -3720,13 +3822,14 @@ func (p DescribeSimpleItemsRequest) Pointer() *DescribeSimpleItemsRequest {
 }
 
 type DescribeSimpleItemsByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	UserId        *string `json:"userId"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	UserId          *string `json:"userId"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeSimpleItemsByUserIdRequestFromJson(data string) DescribeSimpleItemsByUserIdRequest {
@@ -3760,12 +3863,13 @@ func (p DescribeSimpleItemsByUserIdRequest) Pointer() *DescribeSimpleItemsByUser
 }
 
 type GetSimpleItemRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	AccessToken   *string `json:"accessToken"`
-	ItemName      *string `json:"itemName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	AccessToken     *string `json:"accessToken"`
+	ItemName        *string `json:"itemName"`
 }
 
 func NewGetSimpleItemRequestFromJson(data string) GetSimpleItemRequest {
@@ -3797,12 +3901,13 @@ func (p GetSimpleItemRequest) Pointer() *GetSimpleItemRequest {
 }
 
 type GetSimpleItemByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	UserId        *string `json:"userId"`
-	ItemName      *string `json:"itemName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	UserId          *string `json:"userId"`
+	ItemName        *string `json:"itemName"`
 }
 
 func NewGetSimpleItemByUserIdRequestFromJson(data string) GetSimpleItemByUserIdRequest {
@@ -3834,13 +3939,14 @@ func (p GetSimpleItemByUserIdRequest) Pointer() *GetSimpleItemByUserIdRequest {
 }
 
 type GetSimpleItemWithSignatureRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	AccessToken   *string `json:"accessToken"`
-	ItemName      *string `json:"itemName"`
-	KeyId         *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	AccessToken     *string `json:"accessToken"`
+	ItemName        *string `json:"itemName"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewGetSimpleItemWithSignatureRequestFromJson(data string) GetSimpleItemWithSignatureRequest {
@@ -3874,13 +3980,14 @@ func (p GetSimpleItemWithSignatureRequest) Pointer() *GetSimpleItemWithSignature
 }
 
 type GetSimpleItemWithSignatureByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	UserId        *string `json:"userId"`
-	ItemName      *string `json:"itemName"`
-	KeyId         *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	UserId          *string `json:"userId"`
+	ItemName        *string `json:"itemName"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewGetSimpleItemWithSignatureByUserIdRequestFromJson(data string) GetSimpleItemWithSignatureByUserIdRequest {
@@ -3914,6 +4021,7 @@ func (p GetSimpleItemWithSignatureByUserIdRequest) Pointer() *GetSimpleItemWithS
 }
 
 type AcquireSimpleItemsByUserIdRequest struct {
+	SourceRequestId    *string        `json:"sourceRequestId"`
 	RequestId          *string        `json:"requestId"`
 	ContextStack       *string        `json:"contextStack"`
 	DuplicationAvoider *string        `json:"duplicationAvoider"`
@@ -3954,6 +4062,7 @@ func (p AcquireSimpleItemsByUserIdRequest) Pointer() *AcquireSimpleItemsByUserId
 }
 
 type ConsumeSimpleItemsRequest struct {
+	SourceRequestId    *string        `json:"sourceRequestId"`
 	RequestId          *string        `json:"requestId"`
 	ContextStack       *string        `json:"contextStack"`
 	DuplicationAvoider *string        `json:"duplicationAvoider"`
@@ -3994,6 +4103,7 @@ func (p ConsumeSimpleItemsRequest) Pointer() *ConsumeSimpleItemsRequest {
 }
 
 type ConsumeSimpleItemsByUserIdRequest struct {
+	SourceRequestId    *string        `json:"sourceRequestId"`
 	RequestId          *string        `json:"requestId"`
 	ContextStack       *string        `json:"contextStack"`
 	DuplicationAvoider *string        `json:"duplicationAvoider"`
@@ -4034,6 +4144,7 @@ func (p ConsumeSimpleItemsByUserIdRequest) Pointer() *ConsumeSimpleItemsByUserId
 }
 
 type SetSimpleItemsByUserIdRequest struct {
+	SourceRequestId    *string     `json:"sourceRequestId"`
 	RequestId          *string     `json:"requestId"`
 	ContextStack       *string     `json:"contextStack"`
 	DuplicationAvoider *string     `json:"duplicationAvoider"`
@@ -4074,6 +4185,7 @@ func (p SetSimpleItemsByUserIdRequest) Pointer() *SetSimpleItemsByUserIdRequest 
 }
 
 type DeleteSimpleItemsByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -4109,6 +4221,7 @@ func (p DeleteSimpleItemsByUserIdRequest) Pointer() *DeleteSimpleItemsByUserIdRe
 }
 
 type VerifySimpleItemRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -4153,6 +4266,7 @@ func (p VerifySimpleItemRequest) Pointer() *VerifySimpleItemRequest {
 }
 
 type VerifySimpleItemByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -4197,10 +4311,11 @@ func (p VerifySimpleItemByUserIdRequest) Pointer() *VerifySimpleItemByUserIdRequ
 }
 
 type AcquireSimpleItemsByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewAcquireSimpleItemsByStampSheetRequestFromJson(data string) AcquireSimpleItemsByStampSheetRequest {
@@ -4228,10 +4343,11 @@ func (p AcquireSimpleItemsByStampSheetRequest) Pointer() *AcquireSimpleItemsBySt
 }
 
 type ConsumeSimpleItemsByStampTaskRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampTask    *string `json:"stampTask"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewConsumeSimpleItemsByStampTaskRequestFromJson(data string) ConsumeSimpleItemsByStampTaskRequest {
@@ -4259,10 +4375,11 @@ func (p ConsumeSimpleItemsByStampTaskRequest) Pointer() *ConsumeSimpleItemsBySta
 }
 
 type SetSimpleItemsByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewSetSimpleItemsByStampSheetRequestFromJson(data string) SetSimpleItemsByStampSheetRequest {
@@ -4290,10 +4407,11 @@ func (p SetSimpleItemsByStampSheetRequest) Pointer() *SetSimpleItemsByStampSheet
 }
 
 type VerifySimpleItemByStampTaskRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampTask    *string `json:"stampTask"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewVerifySimpleItemByStampTaskRequestFromJson(data string) VerifySimpleItemByStampTaskRequest {
@@ -4321,13 +4439,14 @@ func (p VerifySimpleItemByStampTaskRequest) Pointer() *VerifySimpleItemByStampTa
 }
 
 type DescribeBigItemsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	AccessToken   *string `json:"accessToken"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	AccessToken     *string `json:"accessToken"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeBigItemsRequestFromJson(data string) DescribeBigItemsRequest {
@@ -4361,13 +4480,14 @@ func (p DescribeBigItemsRequest) Pointer() *DescribeBigItemsRequest {
 }
 
 type DescribeBigItemsByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	UserId        *string `json:"userId"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	UserId          *string `json:"userId"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeBigItemsByUserIdRequestFromJson(data string) DescribeBigItemsByUserIdRequest {
@@ -4401,12 +4521,13 @@ func (p DescribeBigItemsByUserIdRequest) Pointer() *DescribeBigItemsByUserIdRequ
 }
 
 type GetBigItemRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	AccessToken   *string `json:"accessToken"`
-	ItemName      *string `json:"itemName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	AccessToken     *string `json:"accessToken"`
+	ItemName        *string `json:"itemName"`
 }
 
 func NewGetBigItemRequestFromJson(data string) GetBigItemRequest {
@@ -4438,12 +4559,13 @@ func (p GetBigItemRequest) Pointer() *GetBigItemRequest {
 }
 
 type GetBigItemByUserIdRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
-	UserId        *string `json:"userId"`
-	ItemName      *string `json:"itemName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
+	UserId          *string `json:"userId"`
+	ItemName        *string `json:"itemName"`
 }
 
 func NewGetBigItemByUserIdRequestFromJson(data string) GetBigItemByUserIdRequest {
@@ -4475,6 +4597,7 @@ func (p GetBigItemByUserIdRequest) Pointer() *GetBigItemByUserIdRequest {
 }
 
 type AcquireBigItemByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -4516,6 +4639,7 @@ func (p AcquireBigItemByUserIdRequest) Pointer() *AcquireBigItemByUserIdRequest 
 }
 
 type ConsumeBigItemRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -4557,6 +4681,7 @@ func (p ConsumeBigItemRequest) Pointer() *ConsumeBigItemRequest {
 }
 
 type ConsumeBigItemByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -4598,6 +4723,7 @@ func (p ConsumeBigItemByUserIdRequest) Pointer() *ConsumeBigItemByUserIdRequest 
 }
 
 type SetBigItemByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -4639,6 +4765,7 @@ func (p SetBigItemByUserIdRequest) Pointer() *SetBigItemByUserIdRequest {
 }
 
 type DeleteBigItemByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -4677,6 +4804,7 @@ func (p DeleteBigItemByUserIdRequest) Pointer() *DeleteBigItemByUserIdRequest {
 }
 
 type VerifyBigItemRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -4721,6 +4849,7 @@ func (p VerifyBigItemRequest) Pointer() *VerifyBigItemRequest {
 }
 
 type VerifyBigItemByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
@@ -4765,10 +4894,11 @@ func (p VerifyBigItemByUserIdRequest) Pointer() *VerifyBigItemByUserIdRequest {
 }
 
 type AcquireBigItemByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewAcquireBigItemByStampSheetRequestFromJson(data string) AcquireBigItemByStampSheetRequest {
@@ -4796,10 +4926,11 @@ func (p AcquireBigItemByStampSheetRequest) Pointer() *AcquireBigItemByStampSheet
 }
 
 type ConsumeBigItemByStampTaskRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampTask    *string `json:"stampTask"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewConsumeBigItemByStampTaskRequestFromJson(data string) ConsumeBigItemByStampTaskRequest {
@@ -4827,10 +4958,11 @@ func (p ConsumeBigItemByStampTaskRequest) Pointer() *ConsumeBigItemByStampTaskRe
 }
 
 type SetBigItemByStampSheetRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampSheet   *string `json:"stampSheet"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewSetBigItemByStampSheetRequestFromJson(data string) SetBigItemByStampSheetRequest {
@@ -4858,10 +4990,11 @@ func (p SetBigItemByStampSheetRequest) Pointer() *SetBigItemByStampSheetRequest 
 }
 
 type VerifyBigItemByStampTaskRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	StampTask    *string `json:"stampTask"`
-	KeyId        *string `json:"keyId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
 }
 
 func NewVerifyBigItemByStampTaskRequestFromJson(data string) VerifyBigItemByStampTaskRequest {

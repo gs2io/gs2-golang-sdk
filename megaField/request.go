@@ -23,10 +23,11 @@ import (
 )
 
 type DescribeNamespacesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
@@ -54,11 +55,12 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	RequestId    *string     `json:"requestId"`
-	ContextStack *string     `json:"contextStack"`
-	Name         *string     `json:"name"`
-	Description  *string     `json:"description"`
-	LogSetting   *LogSetting `json:"logSetting"`
+	SourceRequestId *string     `json:"sourceRequestId"`
+	RequestId       *string     `json:"requestId"`
+	ContextStack    *string     `json:"contextStack"`
+	Name            *string     `json:"name"`
+	Description     *string     `json:"description"`
+	LogSetting      *LogSetting `json:"logSetting"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
@@ -88,9 +90,10 @@ func (p CreateNamespaceRequest) Pointer() *CreateNamespaceRequest {
 }
 
 type GetNamespaceStatusRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
@@ -116,9 +119,10 @@ func (p GetNamespaceStatusRequest) Pointer() *GetNamespaceStatusRequest {
 }
 
 type GetNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
@@ -144,11 +148,12 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	RequestId     *string     `json:"requestId"`
-	ContextStack  *string     `json:"contextStack"`
-	NamespaceName *string     `json:"namespaceName"`
-	Description   *string     `json:"description"`
-	LogSetting    *LogSetting `json:"logSetting"`
+	SourceRequestId *string     `json:"sourceRequestId"`
+	RequestId       *string     `json:"requestId"`
+	ContextStack    *string     `json:"contextStack"`
+	NamespaceName   *string     `json:"namespaceName"`
+	Description     *string     `json:"description"`
+	LogSetting      *LogSetting `json:"logSetting"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -178,9 +183,10 @@ func (p UpdateNamespaceRequest) Pointer() *UpdateNamespaceRequest {
 }
 
 type DeleteNamespaceRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
@@ -206,9 +212,10 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DescribeAreaModelsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeAreaModelsRequestFromJson(data string) DescribeAreaModelsRequest {
@@ -234,10 +241,11 @@ func (p DescribeAreaModelsRequest) Pointer() *DescribeAreaModelsRequest {
 }
 
 type GetAreaModelRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AreaModelName *string `json:"areaModelName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AreaModelName   *string `json:"areaModelName"`
 }
 
 func NewGetAreaModelRequestFromJson(data string) GetAreaModelRequest {
@@ -265,11 +273,12 @@ func (p GetAreaModelRequest) Pointer() *GetAreaModelRequest {
 }
 
 type DescribeAreaModelMastersRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeAreaModelMastersRequestFromJson(data string) DescribeAreaModelMastersRequest {
@@ -299,12 +308,13 @@ func (p DescribeAreaModelMastersRequest) Pointer() *DescribeAreaModelMastersRequ
 }
 
 type CreateAreaModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Name          *string `json:"name"`
-	Description   *string `json:"description"`
-	Metadata      *string `json:"metadata"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
 }
 
 func NewCreateAreaModelMasterRequestFromJson(data string) CreateAreaModelMasterRequest {
@@ -336,10 +346,11 @@ func (p CreateAreaModelMasterRequest) Pointer() *CreateAreaModelMasterRequest {
 }
 
 type GetAreaModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AreaModelName *string `json:"areaModelName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AreaModelName   *string `json:"areaModelName"`
 }
 
 func NewGetAreaModelMasterRequestFromJson(data string) GetAreaModelMasterRequest {
@@ -367,12 +378,13 @@ func (p GetAreaModelMasterRequest) Pointer() *GetAreaModelMasterRequest {
 }
 
 type UpdateAreaModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AreaModelName *string `json:"areaModelName"`
-	Description   *string `json:"description"`
-	Metadata      *string `json:"metadata"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AreaModelName   *string `json:"areaModelName"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
 }
 
 func NewUpdateAreaModelMasterRequestFromJson(data string) UpdateAreaModelMasterRequest {
@@ -404,10 +416,11 @@ func (p UpdateAreaModelMasterRequest) Pointer() *UpdateAreaModelMasterRequest {
 }
 
 type DeleteAreaModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AreaModelName *string `json:"areaModelName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AreaModelName   *string `json:"areaModelName"`
 }
 
 func NewDeleteAreaModelMasterRequestFromJson(data string) DeleteAreaModelMasterRequest {
@@ -435,10 +448,11 @@ func (p DeleteAreaModelMasterRequest) Pointer() *DeleteAreaModelMasterRequest {
 }
 
 type DescribeLayerModelsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AreaModelName *string `json:"areaModelName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AreaModelName   *string `json:"areaModelName"`
 }
 
 func NewDescribeLayerModelsRequestFromJson(data string) DescribeLayerModelsRequest {
@@ -466,11 +480,12 @@ func (p DescribeLayerModelsRequest) Pointer() *DescribeLayerModelsRequest {
 }
 
 type GetLayerModelRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	AreaModelName  *string `json:"areaModelName"`
-	LayerModelName *string `json:"layerModelName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AreaModelName   *string `json:"areaModelName"`
+	LayerModelName  *string `json:"layerModelName"`
 }
 
 func NewGetLayerModelRequestFromJson(data string) GetLayerModelRequest {
@@ -500,12 +515,13 @@ func (p GetLayerModelRequest) Pointer() *GetLayerModelRequest {
 }
 
 type DescribeLayerModelMastersRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AreaModelName *string `json:"areaModelName"`
-	PageToken     *string `json:"pageToken"`
-	Limit         *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AreaModelName   *string `json:"areaModelName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeLayerModelMastersRequestFromJson(data string) DescribeLayerModelMastersRequest {
@@ -537,13 +553,14 @@ func (p DescribeLayerModelMastersRequest) Pointer() *DescribeLayerModelMastersRe
 }
 
 type CreateLayerModelMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	AreaModelName *string `json:"areaModelName"`
-	Name          *string `json:"name"`
-	Description   *string `json:"description"`
-	Metadata      *string `json:"metadata"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AreaModelName   *string `json:"areaModelName"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
 }
 
 func NewCreateLayerModelMasterRequestFromJson(data string) CreateLayerModelMasterRequest {
@@ -577,11 +594,12 @@ func (p CreateLayerModelMasterRequest) Pointer() *CreateLayerModelMasterRequest 
 }
 
 type GetLayerModelMasterRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	AreaModelName  *string `json:"areaModelName"`
-	LayerModelName *string `json:"layerModelName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AreaModelName   *string `json:"areaModelName"`
+	LayerModelName  *string `json:"layerModelName"`
 }
 
 func NewGetLayerModelMasterRequestFromJson(data string) GetLayerModelMasterRequest {
@@ -611,13 +629,14 @@ func (p GetLayerModelMasterRequest) Pointer() *GetLayerModelMasterRequest {
 }
 
 type UpdateLayerModelMasterRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	AreaModelName  *string `json:"areaModelName"`
-	LayerModelName *string `json:"layerModelName"`
-	Description    *string `json:"description"`
-	Metadata       *string `json:"metadata"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AreaModelName   *string `json:"areaModelName"`
+	LayerModelName  *string `json:"layerModelName"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
 }
 
 func NewUpdateLayerModelMasterRequestFromJson(data string) UpdateLayerModelMasterRequest {
@@ -651,11 +670,12 @@ func (p UpdateLayerModelMasterRequest) Pointer() *UpdateLayerModelMasterRequest 
 }
 
 type DeleteLayerModelMasterRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	AreaModelName  *string `json:"areaModelName"`
-	LayerModelName *string `json:"layerModelName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AreaModelName   *string `json:"areaModelName"`
+	LayerModelName  *string `json:"layerModelName"`
 }
 
 func NewDeleteLayerModelMasterRequestFromJson(data string) DeleteLayerModelMasterRequest {
@@ -685,9 +705,10 @@ func (p DeleteLayerModelMasterRequest) Pointer() *DeleteLayerModelMasterRequest 
 }
 
 type ExportMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
@@ -713,9 +734,10 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 }
 
 type GetCurrentFieldMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetCurrentFieldMasterRequestFromJson(data string) GetCurrentFieldMasterRequest {
@@ -741,10 +763,11 @@ func (p GetCurrentFieldMasterRequest) Pointer() *GetCurrentFieldMasterRequest {
 }
 
 type UpdateCurrentFieldMasterRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	Settings      *string `json:"settings"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Settings        *string `json:"settings"`
 }
 
 func NewUpdateCurrentFieldMasterRequestFromJson(data string) UpdateCurrentFieldMasterRequest {
@@ -772,6 +795,7 @@ func (p UpdateCurrentFieldMasterRequest) Pointer() *UpdateCurrentFieldMasterRequ
 }
 
 type UpdateCurrentFieldMasterFromGitHubRequest struct {
+	SourceRequestId *string                `json:"sourceRequestId"`
 	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
@@ -803,6 +827,7 @@ func (p UpdateCurrentFieldMasterFromGitHubRequest) Pointer() *UpdateCurrentField
 }
 
 type PutPositionRequest struct {
+	SourceRequestId    *string   `json:"sourceRequestId"`
 	RequestId          *string   `json:"requestId"`
 	ContextStack       *string   `json:"contextStack"`
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
@@ -850,6 +875,7 @@ func (p PutPositionRequest) Pointer() *PutPositionRequest {
 }
 
 type PutPositionByUserIdRequest struct {
+	SourceRequestId    *string   `json:"sourceRequestId"`
 	RequestId          *string   `json:"requestId"`
 	ContextStack       *string   `json:"contextStack"`
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
@@ -897,6 +923,7 @@ func (p PutPositionByUserIdRequest) Pointer() *PutPositionByUserIdRequest {
 }
 
 type FetchPositionRequest struct {
+	SourceRequestId    *string   `json:"sourceRequestId"`
 	RequestId          *string   `json:"requestId"`
 	ContextStack       *string   `json:"contextStack"`
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
@@ -940,6 +967,7 @@ func (p FetchPositionRequest) Pointer() *FetchPositionRequest {
 }
 
 type FetchPositionFromSystemRequest struct {
+	SourceRequestId    *string   `json:"sourceRequestId"`
 	RequestId          *string   `json:"requestId"`
 	ContextStack       *string   `json:"contextStack"`
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
@@ -980,6 +1008,7 @@ func (p FetchPositionFromSystemRequest) Pointer() *FetchPositionFromSystemReques
 }
 
 type NearUserIdsRequest struct {
+	SourceRequestId    *string   `json:"sourceRequestId"`
 	RequestId          *string   `json:"requestId"`
 	ContextStack       *string   `json:"contextStack"`
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
@@ -1027,6 +1056,7 @@ func (p NearUserIdsRequest) Pointer() *NearUserIdsRequest {
 }
 
 type NearUserIdsFromSystemRequest struct {
+	SourceRequestId    *string   `json:"sourceRequestId"`
 	RequestId          *string   `json:"requestId"`
 	ContextStack       *string   `json:"contextStack"`
 	DuplicationAvoider *string   `json:"duplicationAvoider"`
@@ -1071,6 +1101,7 @@ func (p NearUserIdsFromSystemRequest) Pointer() *NearUserIdsFromSystemRequest {
 }
 
 type ActionRequest struct {
+	SourceRequestId    *string     `json:"sourceRequestId"`
 	RequestId          *string     `json:"requestId"`
 	ContextStack       *string     `json:"contextStack"`
 	DuplicationAvoider *string     `json:"duplicationAvoider"`
@@ -1117,6 +1148,7 @@ func (p ActionRequest) Pointer() *ActionRequest {
 }
 
 type ActionByUserIdRequest struct {
+	SourceRequestId    *string     `json:"sourceRequestId"`
 	RequestId          *string     `json:"requestId"`
 	ContextStack       *string     `json:"contextStack"`
 	DuplicationAvoider *string     `json:"duplicationAvoider"`
