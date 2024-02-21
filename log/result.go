@@ -549,6 +549,48 @@ func (p CountExecuteStampTaskLogResult) Pointer() *CountExecuteStampTaskLogResul
 	return &p
 }
 
+type QueryAccessLogWithTelemetryResult struct {
+	Items         []AccessLogWithTelemetry `json:"items"`
+	NextPageToken *string                  `json:"nextPageToken"`
+	TotalCount    *int64                   `json:"totalCount"`
+	ScanSize      *int64                   `json:"scanSize"`
+}
+
+type QueryAccessLogWithTelemetryAsyncResult struct {
+	result *QueryAccessLogWithTelemetryResult
+	err    error
+}
+
+func NewQueryAccessLogWithTelemetryResultFromJson(data string) QueryAccessLogWithTelemetryResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryAccessLogWithTelemetryResultFromDict(dict)
+}
+
+func NewQueryAccessLogWithTelemetryResultFromDict(data map[string]interface{}) QueryAccessLogWithTelemetryResult {
+	return QueryAccessLogWithTelemetryResult{
+		Items:         CastAccessLogWithTelemetries(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+		TotalCount:    core.CastInt64(data["totalCount"]),
+		ScanSize:      core.CastInt64(data["scanSize"]),
+	}
+}
+
+func (p QueryAccessLogWithTelemetryResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastAccessLogWithTelemetriesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"totalCount":    p.TotalCount,
+		"scanSize":      p.ScanSize,
+	}
+}
+
+func (p QueryAccessLogWithTelemetryResult) Pointer() *QueryAccessLogWithTelemetryResult {
+	return &p
+}
+
 type PutLogResult struct {
 }
 

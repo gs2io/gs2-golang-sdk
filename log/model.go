@@ -825,6 +825,116 @@ func CastExecuteStampTaskLogCountsFromDict(data []ExecuteStampTaskLogCount) []in
 	return v
 }
 
+type AccessLogWithTelemetry struct {
+	Timestamp       *int64  `json:"timestamp"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	Duration        *int64  `json:"duration"`
+	Service         *string `json:"service"`
+	Method          *string `json:"method"`
+	UserId          *string `json:"userId"`
+	Request         *string `json:"request"`
+	Result          *string `json:"result"`
+	Status          *string `json:"status"`
+}
+
+func NewAccessLogWithTelemetryFromJson(data string) AccessLogWithTelemetry {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAccessLogWithTelemetryFromDict(dict)
+}
+
+func NewAccessLogWithTelemetryFromDict(data map[string]interface{}) AccessLogWithTelemetry {
+	return AccessLogWithTelemetry{
+		Timestamp:       core.CastInt64(data["timestamp"]),
+		SourceRequestId: core.CastString(data["sourceRequestId"]),
+		RequestId:       core.CastString(data["requestId"]),
+		Duration:        core.CastInt64(data["duration"]),
+		Service:         core.CastString(data["service"]),
+		Method:          core.CastString(data["method"]),
+		UserId:          core.CastString(data["userId"]),
+		Request:         core.CastString(data["request"]),
+		Result:          core.CastString(data["result"]),
+		Status:          core.CastString(data["status"]),
+	}
+}
+
+func (p AccessLogWithTelemetry) ToDict() map[string]interface{} {
+
+	var timestamp *int64
+	if p.Timestamp != nil {
+		timestamp = p.Timestamp
+	}
+	var sourceRequestId *string
+	if p.SourceRequestId != nil {
+		sourceRequestId = p.SourceRequestId
+	}
+	var requestId *string
+	if p.RequestId != nil {
+		requestId = p.RequestId
+	}
+	var duration *int64
+	if p.Duration != nil {
+		duration = p.Duration
+	}
+	var service *string
+	if p.Service != nil {
+		service = p.Service
+	}
+	var method *string
+	if p.Method != nil {
+		method = p.Method
+	}
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var request *string
+	if p.Request != nil {
+		request = p.Request
+	}
+	var result *string
+	if p.Result != nil {
+		result = p.Result
+	}
+	var status *string
+	if p.Status != nil {
+		status = p.Status
+	}
+	return map[string]interface{}{
+		"timestamp":       timestamp,
+		"sourceRequestId": sourceRequestId,
+		"requestId":       requestId,
+		"duration":        duration,
+		"service":         service,
+		"method":          method,
+		"userId":          userId,
+		"request":         request,
+		"result":          result,
+		"status":          status,
+	}
+}
+
+func (p AccessLogWithTelemetry) Pointer() *AccessLogWithTelemetry {
+	return &p
+}
+
+func CastAccessLogWithTelemetries(data []interface{}) []AccessLogWithTelemetry {
+	v := make([]AccessLogWithTelemetry, 0)
+	for _, d := range data {
+		v = append(v, NewAccessLogWithTelemetryFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAccessLogWithTelemetriesFromDict(data []AccessLogWithTelemetry) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type Insight struct {
 	InsightId *string `json:"insightId"`
 	Name      *string `json:"name"`

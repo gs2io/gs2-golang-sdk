@@ -1444,6 +1444,108 @@ func (p Gs2LogWebSocketClient) CountExecuteStampTaskLog(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2LogWebSocketClient) queryAccessLogWithTelemetryAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- QueryAccessLogWithTelemetryAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- QueryAccessLogWithTelemetryAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result QueryAccessLogWithTelemetryResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- QueryAccessLogWithTelemetryAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- QueryAccessLogWithTelemetryAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogWebSocketClient) QueryAccessLogWithTelemetryAsync(
+	request *QueryAccessLogWithTelemetryRequest,
+	callback chan<- QueryAccessLogWithTelemetryAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "log",
+			"component":   "accessLogWithTelemetry",
+			"function":    "queryAccessLogWithTelemetry",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Begin != nil {
+		bodies["begin"] = *request.Begin
+	}
+	if request.End != nil {
+		bodies["end"] = *request.End
+	}
+	if request.LongTerm != nil {
+		bodies["longTerm"] = *request.LongTerm
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.queryAccessLogWithTelemetryAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogWebSocketClient) QueryAccessLogWithTelemetry(
+	request *QueryAccessLogWithTelemetryRequest,
+) (*QueryAccessLogWithTelemetryResult, error) {
+	callback := make(chan QueryAccessLogWithTelemetryAsyncResult, 1)
+	go p.QueryAccessLogWithTelemetryAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2LogWebSocketClient) putLogAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- PutLogAsyncResult,

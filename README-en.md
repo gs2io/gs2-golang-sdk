@@ -21,7 +21,7 @@ Follow the instructions in [GS2 Setup](https://docs.gs2.io/en/get_start/tutorial
 
 ### Requirements
 
-- Go 1.17+
+- Go 1.21+
 
 [⇒Start using GS2 - SDK - Various programming languages](https://docs.gs2.io/en/get_start/#various-programming-languages)
 

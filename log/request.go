@@ -699,6 +699,54 @@ func (p CountExecuteStampTaskLogRequest) Pointer() *CountExecuteStampTaskLogRequ
 	return &p
 }
 
+type QueryAccessLogWithTelemetryRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	Begin              *int64  `json:"begin"`
+	End                *int64  `json:"end"`
+	LongTerm           *bool   `json:"longTerm"`
+	PageToken          *string `json:"pageToken"`
+	Limit              *int32  `json:"limit"`
+}
+
+func NewQueryAccessLogWithTelemetryRequestFromJson(data string) QueryAccessLogWithTelemetryRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryAccessLogWithTelemetryRequestFromDict(dict)
+}
+
+func NewQueryAccessLogWithTelemetryRequestFromDict(data map[string]interface{}) QueryAccessLogWithTelemetryRequest {
+	return QueryAccessLogWithTelemetryRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		UserId:        core.CastString(data["userId"]),
+		Begin:         core.CastInt64(data["begin"]),
+		End:           core.CastInt64(data["end"]),
+		LongTerm:      core.CastBool(data["longTerm"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
+}
+
+func (p QueryAccessLogWithTelemetryRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"begin":         p.Begin,
+		"end":           p.End,
+		"longTerm":      p.LongTerm,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p QueryAccessLogWithTelemetryRequest) Pointer() *QueryAccessLogWithTelemetryRequest {
+	return &p
+}
+
 type PutLogRequest struct {
 	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`

@@ -1530,6 +1530,114 @@ func (p Gs2LogRestClient) CountExecuteStampTaskLog(
 	return asyncResult.result, asyncResult.err
 }
 
+func queryAccessLogWithTelemetryAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- QueryAccessLogWithTelemetryAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- QueryAccessLogWithTelemetryAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result QueryAccessLogWithTelemetryResult
+	if asyncResult.Err != nil {
+		callback <- QueryAccessLogWithTelemetryAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- QueryAccessLogWithTelemetryAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- QueryAccessLogWithTelemetryAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) QueryAccessLogWithTelemetryAsync(
+	request *QueryAccessLogWithTelemetryRequest,
+	callback chan<- QueryAccessLogWithTelemetryAsyncResult,
+) {
+	path := "/{namespaceName}/log/access/telemetry"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.UserId != nil {
+		queryStrings["userId"] = core.ToString(*request.UserId)
+	}
+	if request.Begin != nil {
+		queryStrings["begin"] = core.ToString(*request.Begin)
+	}
+	if request.End != nil {
+		queryStrings["end"] = core.ToString(*request.End)
+	}
+	if request.LongTerm != nil {
+		queryStrings["longTerm"] = core.ToString(*request.LongTerm)
+	}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go queryAccessLogWithTelemetryAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) QueryAccessLogWithTelemetry(
+	request *QueryAccessLogWithTelemetryRequest,
+) (*QueryAccessLogWithTelemetryResult, error) {
+	callback := make(chan QueryAccessLogWithTelemetryAsyncResult, 1)
+	go p.QueryAccessLogWithTelemetryAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func putLogAsyncHandler(
 	client Gs2LogRestClient,
 	job *core.NetworkJob,
