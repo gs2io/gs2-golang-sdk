@@ -1487,6 +1487,37 @@ func (p AddExperienceByStampSheetResult) Pointer() *AddExperienceByStampSheetRes
 	return &p
 }
 
+type SetExperienceByStampSheetResult struct {
+	Item *Status `json:"item"`
+}
+
+type SetExperienceByStampSheetAsyncResult struct {
+	result *SetExperienceByStampSheetResult
+	err    error
+}
+
+func NewSetExperienceByStampSheetResultFromJson(data string) SetExperienceByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetExperienceByStampSheetResultFromDict(dict)
+}
+
+func NewSetExperienceByStampSheetResultFromDict(data map[string]interface{}) SetExperienceByStampSheetResult {
+	return SetExperienceByStampSheetResult{
+		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p SetExperienceByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p SetExperienceByStampSheetResult) Pointer() *SetExperienceByStampSheetResult {
+	return &p
+}
+
 type SubExperienceByStampTaskResult struct {
 	Item            *Status `json:"item"`
 	NewContextStack *string `json:"newContextStack"`

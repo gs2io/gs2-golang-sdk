@@ -1786,6 +1786,38 @@ func (p AddExperienceByStampSheetRequest) Pointer() *AddExperienceByStampSheetRe
 	return &p
 }
 
+type SetExperienceByStampSheetRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
+}
+
+func NewSetExperienceByStampSheetRequestFromJson(data string) SetExperienceByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetExperienceByStampSheetRequestFromDict(dict)
+}
+
+func NewSetExperienceByStampSheetRequestFromDict(data map[string]interface{}) SetExperienceByStampSheetRequest {
+	return SetExperienceByStampSheetRequest{
+		StampSheet: core.CastString(data["stampSheet"]),
+		KeyId:      core.CastString(data["keyId"]),
+	}
+}
+
+func (p SetExperienceByStampSheetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampSheet": p.StampSheet,
+		"keyId":      p.KeyId,
+	}
+}
+
+func (p SetExperienceByStampSheetRequest) Pointer() *SetExperienceByStampSheetRequest {
+	return &p
+}
+
 type SubExperienceByStampTaskRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`

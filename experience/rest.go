@@ -4728,6 +4728,97 @@ func (p Gs2ExperienceRestClient) AddExperienceByStampSheet(
 	return asyncResult.result, asyncResult.err
 }
 
+func setExperienceByStampSheetAsyncHandler(
+	client Gs2ExperienceRestClient,
+	job *core.NetworkJob,
+	callback chan<- SetExperienceByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetExperienceByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetExperienceByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- SetExperienceByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetExperienceByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SetExperienceByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceRestClient) SetExperienceByStampSheetAsync(
+	request *SetExperienceByStampSheetRequest,
+	callback chan<- SetExperienceByStampSheetAsyncResult,
+) {
+	path := "/stamp/experience/set"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go setExperienceByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceRestClient) SetExperienceByStampSheet(
+	request *SetExperienceByStampSheetRequest,
+) (*SetExperienceByStampSheetResult, error) {
+	callback := make(chan SetExperienceByStampSheetAsyncResult, 1)
+	go p.SetExperienceByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func subExperienceByStampTaskAsyncHandler(
 	client Gs2ExperienceRestClient,
 	job *core.NetworkJob,
