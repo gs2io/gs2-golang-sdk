@@ -1281,15 +1281,16 @@ func (p GetStatusWithSignatureByUserIdRequest) Pointer() *GetStatusWithSignature
 }
 
 type AddExperienceByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	ExperienceName     *string `json:"experienceName"`
-	PropertyId         *string `json:"propertyId"`
-	ExperienceValue    *int64  `json:"experienceValue"`
+	SourceRequestId              *string `json:"sourceRequestId"`
+	RequestId                    *string `json:"requestId"`
+	ContextStack                 *string `json:"contextStack"`
+	DuplicationAvoider           *string `json:"duplicationAvoider"`
+	NamespaceName                *string `json:"namespaceName"`
+	UserId                       *string `json:"userId"`
+	ExperienceName               *string `json:"experienceName"`
+	PropertyId                   *string `json:"propertyId"`
+	ExperienceValue              *int64  `json:"experienceValue"`
+	TruncateExperienceWhenRankUp *bool   `json:"truncateExperienceWhenRankUp"`
 }
 
 func NewAddExperienceByUserIdRequestFromJson(data string) AddExperienceByUserIdRequest {
@@ -1300,21 +1301,23 @@ func NewAddExperienceByUserIdRequestFromJson(data string) AddExperienceByUserIdR
 
 func NewAddExperienceByUserIdRequestFromDict(data map[string]interface{}) AddExperienceByUserIdRequest {
 	return AddExperienceByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		ExperienceName:  core.CastString(data["experienceName"]),
-		PropertyId:      core.CastString(data["propertyId"]),
-		ExperienceValue: core.CastInt64(data["experienceValue"]),
+		NamespaceName:                core.CastString(data["namespaceName"]),
+		UserId:                       core.CastString(data["userId"]),
+		ExperienceName:               core.CastString(data["experienceName"]),
+		PropertyId:                   core.CastString(data["propertyId"]),
+		ExperienceValue:              core.CastInt64(data["experienceValue"]),
+		TruncateExperienceWhenRankUp: core.CastBool(data["truncateExperienceWhenRankUp"]),
 	}
 }
 
 func (p AddExperienceByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"userId":          p.UserId,
-		"experienceName":  p.ExperienceName,
-		"propertyId":      p.PropertyId,
-		"experienceValue": p.ExperienceValue,
+		"namespaceName":                p.NamespaceName,
+		"userId":                       p.UserId,
+		"experienceName":               p.ExperienceName,
+		"propertyId":                   p.PropertyId,
+		"experienceValue":              p.ExperienceValue,
+		"truncateExperienceWhenRankUp": p.TruncateExperienceWhenRankUp,
 	}
 }
 

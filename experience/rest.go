@@ -3483,6 +3483,9 @@ func (p Gs2ExperienceRestClient) AddExperienceByUserIdAsync(
 	if request.ExperienceValue != nil {
 		bodies["experienceValue"] = *request.ExperienceValue
 	}
+	if request.TruncateExperienceWhenRankUp != nil {
+		bodies["truncateExperienceWhenRankUp"] = *request.TruncateExperienceWhenRankUp
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
