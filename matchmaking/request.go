@@ -67,6 +67,9 @@ type CreateNamespaceRequest struct {
 	CompleteMatchmakingTriggerType                *string              `json:"completeMatchmakingTriggerType"`
 	CompleteMatchmakingTriggerRealtimeNamespaceId *string              `json:"completeMatchmakingTriggerRealtimeNamespaceId"`
 	CompleteMatchmakingTriggerScriptId            *string              `json:"completeMatchmakingTriggerScriptId"`
+	EnableCollaborateSeasonRating                 *string              `json:"enableCollaborateSeasonRating"`
+	CollaborateSeasonRatingNamespaceId            *string              `json:"collaborateSeasonRatingNamespaceId"`
+	CollaborateSeasonRatingTtl                    *int32               `json:"collaborateSeasonRatingTtl"`
 	ChangeRatingScript                            *ScriptSetting       `json:"changeRatingScript"`
 	JoinNotification                              *NotificationSetting `json:"joinNotification"`
 	LeaveNotification                             *NotificationSetting `json:"leaveNotification"`
@@ -92,6 +95,9 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 		CompleteMatchmakingTriggerType:                core.CastString(data["completeMatchmakingTriggerType"]),
 		CompleteMatchmakingTriggerRealtimeNamespaceId: core.CastString(data["completeMatchmakingTriggerRealtimeNamespaceId"]),
 		CompleteMatchmakingTriggerScriptId:            core.CastString(data["completeMatchmakingTriggerScriptId"]),
+		EnableCollaborateSeasonRating:                 core.CastString(data["enableCollaborateSeasonRating"]),
+		CollaborateSeasonRatingNamespaceId:            core.CastString(data["collaborateSeasonRatingNamespaceId"]),
+		CollaborateSeasonRatingTtl:                    core.CastInt32(data["collaborateSeasonRatingTtl"]),
 		ChangeRatingScript:                            NewScriptSettingFromDict(core.CastMap(data["changeRatingScript"])).Pointer(),
 		JoinNotification:                              NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer(),
 		LeaveNotification:                             NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer(),
@@ -112,6 +118,9 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"completeMatchmakingTriggerType":                p.CompleteMatchmakingTriggerType,
 		"completeMatchmakingTriggerRealtimeNamespaceId": p.CompleteMatchmakingTriggerRealtimeNamespaceId,
 		"completeMatchmakingTriggerScriptId":            p.CompleteMatchmakingTriggerScriptId,
+		"enableCollaborateSeasonRating":                 p.EnableCollaborateSeasonRating,
+		"collaborateSeasonRatingNamespaceId":            p.CollaborateSeasonRatingNamespaceId,
+		"collaborateSeasonRatingTtl":                    p.CollaborateSeasonRatingTtl,
 		"changeRatingScript":                            p.ChangeRatingScript.ToDict(),
 		"joinNotification":                              p.JoinNotification.ToDict(),
 		"leaveNotification":                             p.LeaveNotification.ToDict(),
@@ -196,6 +205,9 @@ type UpdateNamespaceRequest struct {
 	CompleteMatchmakingTriggerType                *string              `json:"completeMatchmakingTriggerType"`
 	CompleteMatchmakingTriggerRealtimeNamespaceId *string              `json:"completeMatchmakingTriggerRealtimeNamespaceId"`
 	CompleteMatchmakingTriggerScriptId            *string              `json:"completeMatchmakingTriggerScriptId"`
+	EnableCollaborateSeasonRating                 *string              `json:"enableCollaborateSeasonRating"`
+	CollaborateSeasonRatingNamespaceId            *string              `json:"collaborateSeasonRatingNamespaceId"`
+	CollaborateSeasonRatingTtl                    *int32               `json:"collaborateSeasonRatingTtl"`
 	ChangeRatingScript                            *ScriptSetting       `json:"changeRatingScript"`
 	JoinNotification                              *NotificationSetting `json:"joinNotification"`
 	LeaveNotification                             *NotificationSetting `json:"leaveNotification"`
@@ -221,6 +233,9 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 		CompleteMatchmakingTriggerType:                core.CastString(data["completeMatchmakingTriggerType"]),
 		CompleteMatchmakingTriggerRealtimeNamespaceId: core.CastString(data["completeMatchmakingTriggerRealtimeNamespaceId"]),
 		CompleteMatchmakingTriggerScriptId:            core.CastString(data["completeMatchmakingTriggerScriptId"]),
+		EnableCollaborateSeasonRating:                 core.CastString(data["enableCollaborateSeasonRating"]),
+		CollaborateSeasonRatingNamespaceId:            core.CastString(data["collaborateSeasonRatingNamespaceId"]),
+		CollaborateSeasonRatingTtl:                    core.CastInt32(data["collaborateSeasonRatingTtl"]),
 		ChangeRatingScript:                            NewScriptSettingFromDict(core.CastMap(data["changeRatingScript"])).Pointer(),
 		JoinNotification:                              NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer(),
 		LeaveNotification:                             NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer(),
@@ -241,6 +256,9 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"completeMatchmakingTriggerType":                p.CompleteMatchmakingTriggerType,
 		"completeMatchmakingTriggerRealtimeNamespaceId": p.CompleteMatchmakingTriggerRealtimeNamespaceId,
 		"completeMatchmakingTriggerScriptId":            p.CompleteMatchmakingTriggerScriptId,
+		"enableCollaborateSeasonRating":                 p.EnableCollaborateSeasonRating,
+		"collaborateSeasonRatingNamespaceId":            p.CollaborateSeasonRatingNamespaceId,
+		"collaborateSeasonRatingTtl":                    p.CollaborateSeasonRatingTtl,
 		"changeRatingScript":                            p.ChangeRatingScript.ToDict(),
 		"joinNotification":                              p.JoinNotification.ToDict(),
 		"leaveNotification":                             p.LeaveNotification.ToDict(),

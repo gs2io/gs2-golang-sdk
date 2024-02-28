@@ -195,6 +195,15 @@ func (p Gs2MatchmakingWebSocketClient) CreateNamespaceAsync(
 	if request.CompleteMatchmakingTriggerScriptId != nil && *request.CompleteMatchmakingTriggerScriptId != "" {
 		bodies["completeMatchmakingTriggerScriptId"] = *request.CompleteMatchmakingTriggerScriptId
 	}
+	if request.EnableCollaborateSeasonRating != nil && *request.EnableCollaborateSeasonRating != "" {
+		bodies["enableCollaborateSeasonRating"] = *request.EnableCollaborateSeasonRating
+	}
+	if request.CollaborateSeasonRatingNamespaceId != nil && *request.CollaborateSeasonRatingNamespaceId != "" {
+		bodies["collaborateSeasonRatingNamespaceId"] = *request.CollaborateSeasonRatingNamespaceId
+	}
+	if request.CollaborateSeasonRatingTtl != nil {
+		bodies["collaborateSeasonRatingTtl"] = *request.CollaborateSeasonRatingTtl
+	}
 	if request.ChangeRatingScript != nil {
 		bodies["changeRatingScript"] = request.ChangeRatingScript.ToDict()
 	}
@@ -479,6 +488,15 @@ func (p Gs2MatchmakingWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.CompleteMatchmakingTriggerScriptId != nil && *request.CompleteMatchmakingTriggerScriptId != "" {
 		bodies["completeMatchmakingTriggerScriptId"] = *request.CompleteMatchmakingTriggerScriptId
+	}
+	if request.EnableCollaborateSeasonRating != nil && *request.EnableCollaborateSeasonRating != "" {
+		bodies["enableCollaborateSeasonRating"] = *request.EnableCollaborateSeasonRating
+	}
+	if request.CollaborateSeasonRatingNamespaceId != nil && *request.CollaborateSeasonRatingNamespaceId != "" {
+		bodies["collaborateSeasonRatingNamespaceId"] = *request.CollaborateSeasonRatingNamespaceId
+	}
+	if request.CollaborateSeasonRatingTtl != nil {
+		bodies["collaborateSeasonRatingTtl"] = *request.CollaborateSeasonRatingTtl
 	}
 	if request.ChangeRatingScript != nil {
 		bodies["changeRatingScript"] = request.ChangeRatingScript.ToDict()
