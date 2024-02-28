@@ -23,13 +23,14 @@ import (
 )
 
 type Namespace struct {
-	NamespaceId *string     `json:"namespaceId"`
-	Name        *string     `json:"name"`
-	Description *string     `json:"description"`
-	LogSetting  *LogSetting `json:"logSetting"`
-	CreatedAt   *int64      `json:"createdAt"`
-	UpdatedAt   *int64      `json:"updatedAt"`
-	Revision    *int64      `json:"revision"`
+	NamespaceId        *string             `json:"namespaceId"`
+	Name               *string             `json:"name"`
+	Description        *string             `json:"description"`
+	TransactionSetting *TransactionSetting `json:"transactionSetting"`
+	LogSetting         *LogSetting         `json:"logSetting"`
+	CreatedAt          *int64              `json:"createdAt"`
+	UpdatedAt          *int64              `json:"updatedAt"`
+	Revision           *int64              `json:"revision"`
 }
 
 func NewNamespaceFromJson(data string) Namespace {
@@ -40,13 +41,14 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		LogSetting:  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-		Revision:    core.CastInt64(data["revision"]),
+		NamespaceId:        core.CastString(data["namespaceId"]),
+		Name:               core.CastString(data["name"]),
+		Description:        core.CastString(data["description"]),
+		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:          core.CastInt64(data["createdAt"]),
+		UpdatedAt:          core.CastInt64(data["updatedAt"]),
+		Revision:           core.CastInt64(data["revision"]),
 	}
 }
 
@@ -63,6 +65,10 @@ func (p Namespace) ToDict() map[string]interface{} {
 	var description *string
 	if p.Description != nil {
 		description = p.Description
+	}
+	var transactionSetting map[string]interface{}
+	if p.TransactionSetting != nil {
+		transactionSetting = p.TransactionSetting.ToDict()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
@@ -81,13 +87,14 @@ func (p Namespace) ToDict() map[string]interface{} {
 		revision = p.Revision
 	}
 	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"name":        name,
-		"description": description,
-		"logSetting":  logSetting,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
+		"namespaceId":        namespaceId,
+		"name":               name,
+		"description":        description,
+		"transactionSetting": transactionSetting,
+		"logSetting":         logSetting,
+		"createdAt":          createdAt,
+		"updatedAt":          updatedAt,
+		"revision":           revision,
 	}
 }
 
@@ -180,15 +187,16 @@ func CastMatchSessionsFromDict(data []MatchSession) []interface{} {
 }
 
 type SeasonModelMaster struct {
-	SeasonModelId     *string     `json:"seasonModelId"`
-	Name              *string     `json:"name"`
-	Metadata          *string     `json:"metadata"`
-	Description       *string     `json:"description"`
-	Tiers             []TierModel `json:"tiers"`
-	ExperienceModelId *string     `json:"experienceModelId"`
-	CreatedAt         *int64      `json:"createdAt"`
-	UpdatedAt         *int64      `json:"updatedAt"`
-	Revision          *int64      `json:"revision"`
+	SeasonModelId          *string     `json:"seasonModelId"`
+	Name                   *string     `json:"name"`
+	Metadata               *string     `json:"metadata"`
+	Description            *string     `json:"description"`
+	Tiers                  []TierModel `json:"tiers"`
+	ExperienceModelId      *string     `json:"experienceModelId"`
+	ChallengePeriodEventId *string     `json:"challengePeriodEventId"`
+	CreatedAt              *int64      `json:"createdAt"`
+	UpdatedAt              *int64      `json:"updatedAt"`
+	Revision               *int64      `json:"revision"`
 }
 
 func NewSeasonModelMasterFromJson(data string) SeasonModelMaster {
@@ -199,15 +207,16 @@ func NewSeasonModelMasterFromJson(data string) SeasonModelMaster {
 
 func NewSeasonModelMasterFromDict(data map[string]interface{}) SeasonModelMaster {
 	return SeasonModelMaster{
-		SeasonModelId:     core.CastString(data["seasonModelId"]),
-		Name:              core.CastString(data["name"]),
-		Metadata:          core.CastString(data["metadata"]),
-		Description:       core.CastString(data["description"]),
-		Tiers:             CastTierModels(core.CastArray(data["tiers"])),
-		ExperienceModelId: core.CastString(data["experienceModelId"]),
-		CreatedAt:         core.CastInt64(data["createdAt"]),
-		UpdatedAt:         core.CastInt64(data["updatedAt"]),
-		Revision:          core.CastInt64(data["revision"]),
+		SeasonModelId:          core.CastString(data["seasonModelId"]),
+		Name:                   core.CastString(data["name"]),
+		Metadata:               core.CastString(data["metadata"]),
+		Description:            core.CastString(data["description"]),
+		Tiers:                  CastTierModels(core.CastArray(data["tiers"])),
+		ExperienceModelId:      core.CastString(data["experienceModelId"]),
+		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+		CreatedAt:              core.CastInt64(data["createdAt"]),
+		UpdatedAt:              core.CastInt64(data["updatedAt"]),
+		Revision:               core.CastInt64(data["revision"]),
 	}
 }
 
@@ -239,6 +248,10 @@ func (p SeasonModelMaster) ToDict() map[string]interface{} {
 	if p.ExperienceModelId != nil {
 		experienceModelId = p.ExperienceModelId
 	}
+	var challengePeriodEventId *string
+	if p.ChallengePeriodEventId != nil {
+		challengePeriodEventId = p.ChallengePeriodEventId
+	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
 		createdAt = p.CreatedAt
@@ -252,15 +265,16 @@ func (p SeasonModelMaster) ToDict() map[string]interface{} {
 		revision = p.Revision
 	}
 	return map[string]interface{}{
-		"seasonModelId":     seasonModelId,
-		"name":              name,
-		"metadata":          metadata,
-		"description":       description,
-		"tiers":             tiers,
-		"experienceModelId": experienceModelId,
-		"createdAt":         createdAt,
-		"updatedAt":         updatedAt,
-		"revision":          revision,
+		"seasonModelId":          seasonModelId,
+		"name":                   name,
+		"metadata":               metadata,
+		"description":            description,
+		"tiers":                  tiers,
+		"experienceModelId":      experienceModelId,
+		"challengePeriodEventId": challengePeriodEventId,
+		"createdAt":              createdAt,
+		"updatedAt":              updatedAt,
+		"revision":               revision,
 	}
 }
 
@@ -285,11 +299,12 @@ func CastSeasonModelMastersFromDict(data []SeasonModelMaster) []interface{} {
 }
 
 type SeasonModel struct {
-	SeasonModelId     *string     `json:"seasonModelId"`
-	Name              *string     `json:"name"`
-	Metadata          *string     `json:"metadata"`
-	Tiers             []TierModel `json:"tiers"`
-	ExperienceModelId *string     `json:"experienceModelId"`
+	SeasonModelId          *string     `json:"seasonModelId"`
+	Name                   *string     `json:"name"`
+	Metadata               *string     `json:"metadata"`
+	Tiers                  []TierModel `json:"tiers"`
+	ExperienceModelId      *string     `json:"experienceModelId"`
+	ChallengePeriodEventId *string     `json:"challengePeriodEventId"`
 }
 
 func NewSeasonModelFromJson(data string) SeasonModel {
@@ -300,11 +315,12 @@ func NewSeasonModelFromJson(data string) SeasonModel {
 
 func NewSeasonModelFromDict(data map[string]interface{}) SeasonModel {
 	return SeasonModel{
-		SeasonModelId:     core.CastString(data["seasonModelId"]),
-		Name:              core.CastString(data["name"]),
-		Metadata:          core.CastString(data["metadata"]),
-		Tiers:             CastTierModels(core.CastArray(data["tiers"])),
-		ExperienceModelId: core.CastString(data["experienceModelId"]),
+		SeasonModelId:          core.CastString(data["seasonModelId"]),
+		Name:                   core.CastString(data["name"]),
+		Metadata:               core.CastString(data["metadata"]),
+		Tiers:                  CastTierModels(core.CastArray(data["tiers"])),
+		ExperienceModelId:      core.CastString(data["experienceModelId"]),
+		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
 	}
 }
 
@@ -332,12 +348,17 @@ func (p SeasonModel) ToDict() map[string]interface{} {
 	if p.ExperienceModelId != nil {
 		experienceModelId = p.ExperienceModelId
 	}
+	var challengePeriodEventId *string
+	if p.ChallengePeriodEventId != nil {
+		challengePeriodEventId = p.ChallengePeriodEventId
+	}
 	return map[string]interface{}{
-		"seasonModelId":     seasonModelId,
-		"name":              name,
-		"metadata":          metadata,
-		"tiers":             tiers,
-		"experienceModelId": experienceModelId,
+		"seasonModelId":          seasonModelId,
+		"name":                   name,
+		"metadata":               metadata,
+		"tiers":                  tiers,
+		"experienceModelId":      experienceModelId,
+		"challengePeriodEventId": challengePeriodEventId,
 	}
 }
 
@@ -491,9 +512,7 @@ func CastCurrentSeasonModelMastersFromDict(data []CurrentSeasonModelMaster) []in
 }
 
 type TransactionSetting struct {
-	EnableAutoRun          *bool   `json:"enableAutoRun"`
 	DistributorNamespaceId *string `json:"distributorNamespaceId"`
-	KeyId                  *string `json:"keyId"`
 	QueueNamespaceId       *string `json:"queueNamespaceId"`
 }
 
@@ -505,35 +524,23 @@ func NewTransactionSettingFromJson(data string) TransactionSetting {
 
 func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
 	return TransactionSetting{
-		EnableAutoRun:          core.CastBool(data["enableAutoRun"]),
 		DistributorNamespaceId: core.CastString(data["distributorNamespaceId"]),
-		KeyId:                  core.CastString(data["keyId"]),
 		QueueNamespaceId:       core.CastString(data["queueNamespaceId"]),
 	}
 }
 
 func (p TransactionSetting) ToDict() map[string]interface{} {
 
-	var enableAutoRun *bool
-	if p.EnableAutoRun != nil {
-		enableAutoRun = p.EnableAutoRun
-	}
 	var distributorNamespaceId *string
 	if p.DistributorNamespaceId != nil {
 		distributorNamespaceId = p.DistributorNamespaceId
-	}
-	var keyId *string
-	if p.KeyId != nil {
-		keyId = p.KeyId
 	}
 	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
 		queueNamespaceId = p.QueueNamespaceId
 	}
 	return map[string]interface{}{
-		"enableAutoRun":          enableAutoRun,
 		"distributorNamespaceId": distributorNamespaceId,
-		"keyId":                  keyId,
 		"queueNamespaceId":       queueNamespaceId,
 	}
 }

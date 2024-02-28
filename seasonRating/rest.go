@@ -174,6 +174,9 @@ func (p Gs2SeasonRatingRestClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -443,6 +446,9 @@ func (p Gs2SeasonRatingRestClient) UpdateNamespaceAsync(
 	var bodies = core.Bodies{}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.TransactionSetting != nil {
+		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
@@ -1759,6 +1765,9 @@ func (p Gs2SeasonRatingRestClient) CreateSeasonModelMasterAsync(
 	if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
 		bodies["experienceModelId"] = *request.ExperienceModelId
 	}
+	if request.ChallengePeriodEventId != nil && *request.ChallengePeriodEventId != "" {
+		bodies["challengePeriodEventId"] = *request.ChallengePeriodEventId
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1961,6 +1970,9 @@ func (p Gs2SeasonRatingRestClient) UpdateSeasonModelMasterAsync(
 	}
 	if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
 		bodies["experienceModelId"] = *request.ExperienceModelId
+	}
+	if request.ChallengePeriodEventId != nil && *request.ChallengePeriodEventId != "" {
+		bodies["challengePeriodEventId"] = *request.ChallengePeriodEventId
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

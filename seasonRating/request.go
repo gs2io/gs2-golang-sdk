@@ -55,12 +55,13 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	SourceRequestId *string     `json:"sourceRequestId"`
-	RequestId       *string     `json:"requestId"`
-	ContextStack    *string     `json:"contextStack"`
-	Name            *string     `json:"name"`
-	Description     *string     `json:"description"`
-	LogSetting      *LogSetting `json:"logSetting"`
+	SourceRequestId    *string             `json:"sourceRequestId"`
+	RequestId          *string             `json:"requestId"`
+	ContextStack       *string             `json:"contextStack"`
+	Name               *string             `json:"name"`
+	Description        *string             `json:"description"`
+	TransactionSetting *TransactionSetting `json:"transactionSetting"`
+	LogSetting         *LogSetting         `json:"logSetting"`
 }
 
 func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
@@ -71,17 +72,19 @@ func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		LogSetting:  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name:               core.CastString(data["name"]),
+		Description:        core.CastString(data["description"]),
+		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":        p.Name,
-		"description": p.Description,
-		"logSetting":  p.LogSetting.ToDict(),
+		"name":               p.Name,
+		"description":        p.Description,
+		"transactionSetting": p.TransactionSetting.ToDict(),
+		"logSetting":         p.LogSetting.ToDict(),
 	}
 }
 
@@ -148,12 +151,13 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	SourceRequestId *string     `json:"sourceRequestId"`
-	RequestId       *string     `json:"requestId"`
-	ContextStack    *string     `json:"contextStack"`
-	NamespaceName   *string     `json:"namespaceName"`
-	Description     *string     `json:"description"`
-	LogSetting      *LogSetting `json:"logSetting"`
+	SourceRequestId    *string             `json:"sourceRequestId"`
+	RequestId          *string             `json:"requestId"`
+	ContextStack       *string             `json:"contextStack"`
+	NamespaceName      *string             `json:"namespaceName"`
+	Description        *string             `json:"description"`
+	TransactionSetting *TransactionSetting `json:"transactionSetting"`
+	LogSetting         *LogSetting         `json:"logSetting"`
 }
 
 func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
@@ -164,17 +168,19 @@ func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Description:   core.CastString(data["description"]),
-		LogSetting:    NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName:      core.CastString(data["namespaceName"]),
+		Description:        core.CastString(data["description"]),
+		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"description":   p.Description,
-		"logSetting":    p.LogSetting.ToDict(),
+		"namespaceName":      p.NamespaceName,
+		"description":        p.Description,
+		"transactionSetting": p.TransactionSetting.ToDict(),
+		"logSetting":         p.LogSetting.ToDict(),
 	}
 }
 
@@ -597,15 +603,16 @@ func (p DescribeSeasonModelMastersRequest) Pointer() *DescribeSeasonModelMasters
 }
 
 type CreateSeasonModelMasterRequest struct {
-	SourceRequestId   *string     `json:"sourceRequestId"`
-	RequestId         *string     `json:"requestId"`
-	ContextStack      *string     `json:"contextStack"`
-	NamespaceName     *string     `json:"namespaceName"`
-	Name              *string     `json:"name"`
-	Description       *string     `json:"description"`
-	Metadata          *string     `json:"metadata"`
-	Tiers             []TierModel `json:"tiers"`
-	ExperienceModelId *string     `json:"experienceModelId"`
+	SourceRequestId        *string     `json:"sourceRequestId"`
+	RequestId              *string     `json:"requestId"`
+	ContextStack           *string     `json:"contextStack"`
+	NamespaceName          *string     `json:"namespaceName"`
+	Name                   *string     `json:"name"`
+	Description            *string     `json:"description"`
+	Metadata               *string     `json:"metadata"`
+	Tiers                  []TierModel `json:"tiers"`
+	ExperienceModelId      *string     `json:"experienceModelId"`
+	ChallengePeriodEventId *string     `json:"challengePeriodEventId"`
 }
 
 func NewCreateSeasonModelMasterRequestFromJson(data string) CreateSeasonModelMasterRequest {
@@ -616,12 +623,13 @@ func NewCreateSeasonModelMasterRequestFromJson(data string) CreateSeasonModelMas
 
 func NewCreateSeasonModelMasterRequestFromDict(data map[string]interface{}) CreateSeasonModelMasterRequest {
 	return CreateSeasonModelMasterRequest{
-		NamespaceName:     core.CastString(data["namespaceName"]),
-		Name:              core.CastString(data["name"]),
-		Description:       core.CastString(data["description"]),
-		Metadata:          core.CastString(data["metadata"]),
-		Tiers:             CastTierModels(core.CastArray(data["tiers"])),
-		ExperienceModelId: core.CastString(data["experienceModelId"]),
+		NamespaceName:          core.CastString(data["namespaceName"]),
+		Name:                   core.CastString(data["name"]),
+		Description:            core.CastString(data["description"]),
+		Metadata:               core.CastString(data["metadata"]),
+		Tiers:                  CastTierModels(core.CastArray(data["tiers"])),
+		ExperienceModelId:      core.CastString(data["experienceModelId"]),
+		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
 	}
 }
 
@@ -634,7 +642,8 @@ func (p CreateSeasonModelMasterRequest) ToDict() map[string]interface{} {
 		"tiers": CastTierModelsFromDict(
 			p.Tiers,
 		),
-		"experienceModelId": p.ExperienceModelId,
+		"experienceModelId":      p.ExperienceModelId,
+		"challengePeriodEventId": p.ChallengePeriodEventId,
 	}
 }
 
@@ -675,15 +684,16 @@ func (p GetSeasonModelMasterRequest) Pointer() *GetSeasonModelMasterRequest {
 }
 
 type UpdateSeasonModelMasterRequest struct {
-	SourceRequestId   *string     `json:"sourceRequestId"`
-	RequestId         *string     `json:"requestId"`
-	ContextStack      *string     `json:"contextStack"`
-	NamespaceName     *string     `json:"namespaceName"`
-	SeasonName        *string     `json:"seasonName"`
-	Description       *string     `json:"description"`
-	Metadata          *string     `json:"metadata"`
-	Tiers             []TierModel `json:"tiers"`
-	ExperienceModelId *string     `json:"experienceModelId"`
+	SourceRequestId        *string     `json:"sourceRequestId"`
+	RequestId              *string     `json:"requestId"`
+	ContextStack           *string     `json:"contextStack"`
+	NamespaceName          *string     `json:"namespaceName"`
+	SeasonName             *string     `json:"seasonName"`
+	Description            *string     `json:"description"`
+	Metadata               *string     `json:"metadata"`
+	Tiers                  []TierModel `json:"tiers"`
+	ExperienceModelId      *string     `json:"experienceModelId"`
+	ChallengePeriodEventId *string     `json:"challengePeriodEventId"`
 }
 
 func NewUpdateSeasonModelMasterRequestFromJson(data string) UpdateSeasonModelMasterRequest {
@@ -694,12 +704,13 @@ func NewUpdateSeasonModelMasterRequestFromJson(data string) UpdateSeasonModelMas
 
 func NewUpdateSeasonModelMasterRequestFromDict(data map[string]interface{}) UpdateSeasonModelMasterRequest {
 	return UpdateSeasonModelMasterRequest{
-		NamespaceName:     core.CastString(data["namespaceName"]),
-		SeasonName:        core.CastString(data["seasonName"]),
-		Description:       core.CastString(data["description"]),
-		Metadata:          core.CastString(data["metadata"]),
-		Tiers:             CastTierModels(core.CastArray(data["tiers"])),
-		ExperienceModelId: core.CastString(data["experienceModelId"]),
+		NamespaceName:          core.CastString(data["namespaceName"]),
+		SeasonName:             core.CastString(data["seasonName"]),
+		Description:            core.CastString(data["description"]),
+		Metadata:               core.CastString(data["metadata"]),
+		Tiers:                  CastTierModels(core.CastArray(data["tiers"])),
+		ExperienceModelId:      core.CastString(data["experienceModelId"]),
+		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
 	}
 }
 
@@ -712,7 +723,8 @@ func (p UpdateSeasonModelMasterRequest) ToDict() map[string]interface{} {
 		"tiers": CastTierModelsFromDict(
 			p.Tiers,
 		),
-		"experienceModelId": p.ExperienceModelId,
+		"experienceModelId":      p.ExperienceModelId,
+		"challengePeriodEventId": p.ChallengePeriodEventId,
 	}
 }
 
