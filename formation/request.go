@@ -2209,6 +2209,38 @@ func (p AcquireActionToFormPropertiesByStampSheetRequest) Pointer() *AcquireActi
 	return &p
 }
 
+type SetFormByStampSheetRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
+}
+
+func NewSetFormByStampSheetRequestFromJson(data string) SetFormByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetFormByStampSheetRequestFromDict(dict)
+}
+
+func NewSetFormByStampSheetRequestFromDict(data map[string]interface{}) SetFormByStampSheetRequest {
+	return SetFormByStampSheetRequest{
+		StampSheet: core.CastString(data["stampSheet"]),
+		KeyId:      core.CastString(data["keyId"]),
+	}
+}
+
+func (p SetFormByStampSheetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampSheet": p.StampSheet,
+		"keyId":      p.KeyId,
+	}
+}
+
+func (p SetFormByStampSheetRequest) Pointer() *SetFormByStampSheetRequest {
+	return &p
+}
+
 type DescribePropertyFormsRequest struct {
 	SourceRequestId       *string `json:"sourceRequestId"`
 	RequestId             *string `json:"requestId"`

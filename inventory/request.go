@@ -2355,15 +2355,16 @@ func (p DeleteInventoryByUserIdRequest) Pointer() *DeleteInventoryByUserIdReques
 }
 
 type VerifyInventoryCurrentMaxCapacityRequest struct {
-	SourceRequestId             *string `json:"sourceRequestId"`
-	RequestId                   *string `json:"requestId"`
-	ContextStack                *string `json:"contextStack"`
-	DuplicationAvoider          *string `json:"duplicationAvoider"`
-	NamespaceName               *string `json:"namespaceName"`
-	AccessToken                 *string `json:"accessToken"`
-	InventoryName               *string `json:"inventoryName"`
-	VerifyType                  *string `json:"verifyType"`
-	CurrentInventoryMaxCapacity *int32  `json:"currentInventoryMaxCapacity"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	InventoryName                   *string `json:"inventoryName"`
+	VerifyType                      *string `json:"verifyType"`
+	CurrentInventoryMaxCapacity     *int32  `json:"currentInventoryMaxCapacity"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyInventoryCurrentMaxCapacityRequestFromJson(data string) VerifyInventoryCurrentMaxCapacityRequest {
@@ -2374,21 +2375,23 @@ func NewVerifyInventoryCurrentMaxCapacityRequestFromJson(data string) VerifyInve
 
 func NewVerifyInventoryCurrentMaxCapacityRequestFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityRequest {
 	return VerifyInventoryCurrentMaxCapacityRequest{
-		NamespaceName:               core.CastString(data["namespaceName"]),
-		AccessToken:                 core.CastString(data["accessToken"]),
-		InventoryName:               core.CastString(data["inventoryName"]),
-		VerifyType:                  core.CastString(data["verifyType"]),
-		CurrentInventoryMaxCapacity: core.CastInt32(data["currentInventoryMaxCapacity"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		AccessToken:                     core.CastString(data["accessToken"]),
+		InventoryName:                   core.CastString(data["inventoryName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		CurrentInventoryMaxCapacity:     core.CastInt32(data["currentInventoryMaxCapacity"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyInventoryCurrentMaxCapacityRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":               p.NamespaceName,
-		"accessToken":                 p.AccessToken,
-		"inventoryName":               p.InventoryName,
-		"verifyType":                  p.VerifyType,
-		"currentInventoryMaxCapacity": p.CurrentInventoryMaxCapacity,
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"inventoryName":                   p.InventoryName,
+		"verifyType":                      p.VerifyType,
+		"currentInventoryMaxCapacity":     p.CurrentInventoryMaxCapacity,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 
@@ -2397,15 +2400,16 @@ func (p VerifyInventoryCurrentMaxCapacityRequest) Pointer() *VerifyInventoryCurr
 }
 
 type VerifyInventoryCurrentMaxCapacityByUserIdRequest struct {
-	SourceRequestId             *string `json:"sourceRequestId"`
-	RequestId                   *string `json:"requestId"`
-	ContextStack                *string `json:"contextStack"`
-	DuplicationAvoider          *string `json:"duplicationAvoider"`
-	NamespaceName               *string `json:"namespaceName"`
-	UserId                      *string `json:"userId"`
-	InventoryName               *string `json:"inventoryName"`
-	VerifyType                  *string `json:"verifyType"`
-	CurrentInventoryMaxCapacity *int32  `json:"currentInventoryMaxCapacity"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	InventoryName                   *string `json:"inventoryName"`
+	VerifyType                      *string `json:"verifyType"`
+	CurrentInventoryMaxCapacity     *int32  `json:"currentInventoryMaxCapacity"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyInventoryCurrentMaxCapacityByUserIdRequestFromJson(data string) VerifyInventoryCurrentMaxCapacityByUserIdRequest {
@@ -2416,21 +2420,23 @@ func NewVerifyInventoryCurrentMaxCapacityByUserIdRequestFromJson(data string) Ve
 
 func NewVerifyInventoryCurrentMaxCapacityByUserIdRequestFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityByUserIdRequest {
 	return VerifyInventoryCurrentMaxCapacityByUserIdRequest{
-		NamespaceName:               core.CastString(data["namespaceName"]),
-		UserId:                      core.CastString(data["userId"]),
-		InventoryName:               core.CastString(data["inventoryName"]),
-		VerifyType:                  core.CastString(data["verifyType"]),
-		CurrentInventoryMaxCapacity: core.CastInt32(data["currentInventoryMaxCapacity"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		UserId:                          core.CastString(data["userId"]),
+		InventoryName:                   core.CastString(data["inventoryName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		CurrentInventoryMaxCapacity:     core.CastInt32(data["currentInventoryMaxCapacity"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyInventoryCurrentMaxCapacityByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":               p.NamespaceName,
-		"userId":                      p.UserId,
-		"inventoryName":               p.InventoryName,
-		"verifyType":                  p.VerifyType,
-		"currentInventoryMaxCapacity": p.CurrentInventoryMaxCapacity,
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"inventoryName":                   p.InventoryName,
+		"verifyType":                      p.VerifyType,
+		"currentInventoryMaxCapacity":     p.CurrentInventoryMaxCapacity,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 
@@ -3015,17 +3021,18 @@ func (p DeleteItemSetByUserIdRequest) Pointer() *DeleteItemSetByUserIdRequest {
 }
 
 type VerifyItemSetRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	InventoryName      *string `json:"inventoryName"`
-	ItemName           *string `json:"itemName"`
-	VerifyType         *string `json:"verifyType"`
-	ItemSetName        *string `json:"itemSetName"`
-	Count              *int64  `json:"count"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	InventoryName                   *string `json:"inventoryName"`
+	ItemName                        *string `json:"itemName"`
+	VerifyType                      *string `json:"verifyType"`
+	ItemSetName                     *string `json:"itemSetName"`
+	Count                           *int64  `json:"count"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyItemSetRequestFromJson(data string) VerifyItemSetRequest {
@@ -3036,25 +3043,27 @@ func NewVerifyItemSetRequestFromJson(data string) VerifyItemSetRequest {
 
 func NewVerifyItemSetRequestFromDict(data map[string]interface{}) VerifyItemSetRequest {
 	return VerifyItemSetRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
-		VerifyType:    core.CastString(data["verifyType"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
-		Count:         core.CastInt64(data["count"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		AccessToken:                     core.CastString(data["accessToken"]),
+		InventoryName:                   core.CastString(data["inventoryName"]),
+		ItemName:                        core.CastString(data["itemName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		ItemSetName:                     core.CastString(data["itemSetName"]),
+		Count:                           core.CastInt64(data["count"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyItemSetRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"accessToken":   p.AccessToken,
-		"inventoryName": p.InventoryName,
-		"itemName":      p.ItemName,
-		"verifyType":    p.VerifyType,
-		"itemSetName":   p.ItemSetName,
-		"count":         p.Count,
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"inventoryName":                   p.InventoryName,
+		"itemName":                        p.ItemName,
+		"verifyType":                      p.VerifyType,
+		"itemSetName":                     p.ItemSetName,
+		"count":                           p.Count,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 
@@ -3063,17 +3072,18 @@ func (p VerifyItemSetRequest) Pointer() *VerifyItemSetRequest {
 }
 
 type VerifyItemSetByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	InventoryName      *string `json:"inventoryName"`
-	ItemName           *string `json:"itemName"`
-	VerifyType         *string `json:"verifyType"`
-	ItemSetName        *string `json:"itemSetName"`
-	Count              *int64  `json:"count"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	InventoryName                   *string `json:"inventoryName"`
+	ItemName                        *string `json:"itemName"`
+	VerifyType                      *string `json:"verifyType"`
+	ItemSetName                     *string `json:"itemSetName"`
+	Count                           *int64  `json:"count"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyItemSetByUserIdRequestFromJson(data string) VerifyItemSetByUserIdRequest {
@@ -3084,25 +3094,27 @@ func NewVerifyItemSetByUserIdRequestFromJson(data string) VerifyItemSetByUserIdR
 
 func NewVerifyItemSetByUserIdRequestFromDict(data map[string]interface{}) VerifyItemSetByUserIdRequest {
 	return VerifyItemSetByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
-		VerifyType:    core.CastString(data["verifyType"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
-		Count:         core.CastInt64(data["count"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		UserId:                          core.CastString(data["userId"]),
+		InventoryName:                   core.CastString(data["inventoryName"]),
+		ItemName:                        core.CastString(data["itemName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		ItemSetName:                     core.CastString(data["itemSetName"]),
+		Count:                           core.CastInt64(data["count"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyItemSetByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"inventoryName": p.InventoryName,
-		"itemName":      p.ItemName,
-		"verifyType":    p.VerifyType,
-		"itemSetName":   p.ItemSetName,
-		"count":         p.Count,
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"inventoryName":                   p.InventoryName,
+		"itemName":                        p.ItemName,
+		"verifyType":                      p.VerifyType,
+		"itemSetName":                     p.ItemSetName,
+		"count":                           p.Count,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 
@@ -4221,16 +4233,17 @@ func (p DeleteSimpleItemsByUserIdRequest) Pointer() *DeleteSimpleItemsByUserIdRe
 }
 
 type VerifySimpleItemRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	InventoryName      *string `json:"inventoryName"`
-	ItemName           *string `json:"itemName"`
-	VerifyType         *string `json:"verifyType"`
-	Count              *int64  `json:"count"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	InventoryName                   *string `json:"inventoryName"`
+	ItemName                        *string `json:"itemName"`
+	VerifyType                      *string `json:"verifyType"`
+	Count                           *int64  `json:"count"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifySimpleItemRequestFromJson(data string) VerifySimpleItemRequest {
@@ -4241,23 +4254,25 @@ func NewVerifySimpleItemRequestFromJson(data string) VerifySimpleItemRequest {
 
 func NewVerifySimpleItemRequestFromDict(data map[string]interface{}) VerifySimpleItemRequest {
 	return VerifySimpleItemRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
-		VerifyType:    core.CastString(data["verifyType"]),
-		Count:         core.CastInt64(data["count"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		AccessToken:                     core.CastString(data["accessToken"]),
+		InventoryName:                   core.CastString(data["inventoryName"]),
+		ItemName:                        core.CastString(data["itemName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		Count:                           core.CastInt64(data["count"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifySimpleItemRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"accessToken":   p.AccessToken,
-		"inventoryName": p.InventoryName,
-		"itemName":      p.ItemName,
-		"verifyType":    p.VerifyType,
-		"count":         p.Count,
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"inventoryName":                   p.InventoryName,
+		"itemName":                        p.ItemName,
+		"verifyType":                      p.VerifyType,
+		"count":                           p.Count,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 
@@ -4266,16 +4281,17 @@ func (p VerifySimpleItemRequest) Pointer() *VerifySimpleItemRequest {
 }
 
 type VerifySimpleItemByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	InventoryName      *string `json:"inventoryName"`
-	ItemName           *string `json:"itemName"`
-	VerifyType         *string `json:"verifyType"`
-	Count              *int64  `json:"count"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	InventoryName                   *string `json:"inventoryName"`
+	ItemName                        *string `json:"itemName"`
+	VerifyType                      *string `json:"verifyType"`
+	Count                           *int64  `json:"count"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifySimpleItemByUserIdRequestFromJson(data string) VerifySimpleItemByUserIdRequest {
@@ -4286,23 +4302,25 @@ func NewVerifySimpleItemByUserIdRequestFromJson(data string) VerifySimpleItemByU
 
 func NewVerifySimpleItemByUserIdRequestFromDict(data map[string]interface{}) VerifySimpleItemByUserIdRequest {
 	return VerifySimpleItemByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
-		VerifyType:    core.CastString(data["verifyType"]),
-		Count:         core.CastInt64(data["count"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		UserId:                          core.CastString(data["userId"]),
+		InventoryName:                   core.CastString(data["inventoryName"]),
+		ItemName:                        core.CastString(data["itemName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		Count:                           core.CastInt64(data["count"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifySimpleItemByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"inventoryName": p.InventoryName,
-		"itemName":      p.ItemName,
-		"verifyType":    p.VerifyType,
-		"count":         p.Count,
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"inventoryName":                   p.InventoryName,
+		"itemName":                        p.ItemName,
+		"verifyType":                      p.VerifyType,
+		"count":                           p.Count,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 
@@ -4804,16 +4822,17 @@ func (p DeleteBigItemByUserIdRequest) Pointer() *DeleteBigItemByUserIdRequest {
 }
 
 type VerifyBigItemRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	InventoryName      *string `json:"inventoryName"`
-	ItemName           *string `json:"itemName"`
-	VerifyType         *string `json:"verifyType"`
-	Count              *string `json:"count"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	InventoryName                   *string `json:"inventoryName"`
+	ItemName                        *string `json:"itemName"`
+	VerifyType                      *string `json:"verifyType"`
+	Count                           *string `json:"count"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyBigItemRequestFromJson(data string) VerifyBigItemRequest {
@@ -4824,23 +4843,25 @@ func NewVerifyBigItemRequestFromJson(data string) VerifyBigItemRequest {
 
 func NewVerifyBigItemRequestFromDict(data map[string]interface{}) VerifyBigItemRequest {
 	return VerifyBigItemRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
-		VerifyType:    core.CastString(data["verifyType"]),
-		Count:         core.CastString(data["count"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		AccessToken:                     core.CastString(data["accessToken"]),
+		InventoryName:                   core.CastString(data["inventoryName"]),
+		ItemName:                        core.CastString(data["itemName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		Count:                           core.CastString(data["count"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyBigItemRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"accessToken":   p.AccessToken,
-		"inventoryName": p.InventoryName,
-		"itemName":      p.ItemName,
-		"verifyType":    p.VerifyType,
-		"count":         p.Count,
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"inventoryName":                   p.InventoryName,
+		"itemName":                        p.ItemName,
+		"verifyType":                      p.VerifyType,
+		"count":                           p.Count,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 
@@ -4849,16 +4870,17 @@ func (p VerifyBigItemRequest) Pointer() *VerifyBigItemRequest {
 }
 
 type VerifyBigItemByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	InventoryName      *string `json:"inventoryName"`
-	ItemName           *string `json:"itemName"`
-	VerifyType         *string `json:"verifyType"`
-	Count              *string `json:"count"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	InventoryName                   *string `json:"inventoryName"`
+	ItemName                        *string `json:"itemName"`
+	VerifyType                      *string `json:"verifyType"`
+	Count                           *string `json:"count"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyBigItemByUserIdRequestFromJson(data string) VerifyBigItemByUserIdRequest {
@@ -4869,23 +4891,25 @@ func NewVerifyBigItemByUserIdRequestFromJson(data string) VerifyBigItemByUserIdR
 
 func NewVerifyBigItemByUserIdRequestFromDict(data map[string]interface{}) VerifyBigItemByUserIdRequest {
 	return VerifyBigItemByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
-		VerifyType:    core.CastString(data["verifyType"]),
-		Count:         core.CastString(data["count"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		UserId:                          core.CastString(data["userId"]),
+		InventoryName:                   core.CastString(data["inventoryName"]),
+		ItemName:                        core.CastString(data["itemName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		Count:                           core.CastString(data["count"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyBigItemByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"inventoryName": p.InventoryName,
-		"itemName":      p.ItemName,
-		"verifyType":    p.VerifyType,
-		"count":         p.Count,
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"inventoryName":                   p.InventoryName,
+		"itemName":                        p.ItemName,
+		"verifyType":                      p.VerifyType,
+		"count":                           p.Count,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 

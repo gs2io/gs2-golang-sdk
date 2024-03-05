@@ -1113,16 +1113,17 @@ func (p DeleteStatusByUserIdRequest) Pointer() *DeleteStatusByUserIdRequest {
 }
 
 type VerifyGradeRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	GradeName          *string `json:"gradeName"`
-	VerifyType         *string `json:"verifyType"`
-	PropertyId         *string `json:"propertyId"`
-	GradeValue         *int64  `json:"gradeValue"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	GradeName                       *string `json:"gradeName"`
+	VerifyType                      *string `json:"verifyType"`
+	PropertyId                      *string `json:"propertyId"`
+	GradeValue                      *int64  `json:"gradeValue"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyGradeRequestFromJson(data string) VerifyGradeRequest {
@@ -1133,23 +1134,25 @@ func NewVerifyGradeRequestFromJson(data string) VerifyGradeRequest {
 
 func NewVerifyGradeRequestFromDict(data map[string]interface{}) VerifyGradeRequest {
 	return VerifyGradeRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		GradeName:     core.CastString(data["gradeName"]),
-		VerifyType:    core.CastString(data["verifyType"]),
-		PropertyId:    core.CastString(data["propertyId"]),
-		GradeValue:    core.CastInt64(data["gradeValue"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		AccessToken:                     core.CastString(data["accessToken"]),
+		GradeName:                       core.CastString(data["gradeName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		PropertyId:                      core.CastString(data["propertyId"]),
+		GradeValue:                      core.CastInt64(data["gradeValue"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyGradeRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"accessToken":   p.AccessToken,
-		"gradeName":     p.GradeName,
-		"verifyType":    p.VerifyType,
-		"propertyId":    p.PropertyId,
-		"gradeValue":    p.GradeValue,
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"gradeName":                       p.GradeName,
+		"verifyType":                      p.VerifyType,
+		"propertyId":                      p.PropertyId,
+		"gradeValue":                      p.GradeValue,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 
@@ -1158,16 +1161,17 @@ func (p VerifyGradeRequest) Pointer() *VerifyGradeRequest {
 }
 
 type VerifyGradeByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	GradeName          *string `json:"gradeName"`
-	VerifyType         *string `json:"verifyType"`
-	PropertyId         *string `json:"propertyId"`
-	GradeValue         *int64  `json:"gradeValue"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	GradeName                       *string `json:"gradeName"`
+	VerifyType                      *string `json:"verifyType"`
+	PropertyId                      *string `json:"propertyId"`
+	GradeValue                      *int64  `json:"gradeValue"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyGradeByUserIdRequestFromJson(data string) VerifyGradeByUserIdRequest {
@@ -1178,23 +1182,25 @@ func NewVerifyGradeByUserIdRequestFromJson(data string) VerifyGradeByUserIdReque
 
 func NewVerifyGradeByUserIdRequestFromDict(data map[string]interface{}) VerifyGradeByUserIdRequest {
 	return VerifyGradeByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		GradeName:     core.CastString(data["gradeName"]),
-		VerifyType:    core.CastString(data["verifyType"]),
-		PropertyId:    core.CastString(data["propertyId"]),
-		GradeValue:    core.CastInt64(data["gradeValue"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		UserId:                          core.CastString(data["userId"]),
+		GradeName:                       core.CastString(data["gradeName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		PropertyId:                      core.CastString(data["propertyId"]),
+		GradeValue:                      core.CastInt64(data["gradeValue"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyGradeByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"gradeName":     p.GradeName,
-		"verifyType":    p.VerifyType,
-		"propertyId":    p.PropertyId,
-		"gradeValue":    p.GradeValue,
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"gradeName":                       p.GradeName,
+		"verifyType":                      p.VerifyType,
+		"propertyId":                      p.PropertyId,
+		"gradeValue":                      p.GradeValue,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 

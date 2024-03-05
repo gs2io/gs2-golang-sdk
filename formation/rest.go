@@ -5968,6 +5968,97 @@ func (p Gs2FormationRestClient) AcquireActionToFormPropertiesByStampSheet(
 	return asyncResult.result, asyncResult.err
 }
 
+func setFormByStampSheetAsyncHandler(
+	client Gs2FormationRestClient,
+	job *core.NetworkJob,
+	callback chan<- SetFormByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetFormByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetFormByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- SetFormByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetFormByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SetFormByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationRestClient) SetFormByStampSheetAsync(
+	request *SetFormByStampSheetRequest,
+	callback chan<- SetFormByStampSheetAsyncResult,
+) {
+	path := "/stamp/form/set"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go setFormByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("formation").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationRestClient) SetFormByStampSheet(
+	request *SetFormByStampSheetRequest,
+) (*SetFormByStampSheetResult, error) {
+	callback := make(chan SetFormByStampSheetAsyncResult, 1)
+	go p.SetFormByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describePropertyFormsAsyncHandler(
 	client Gs2FormationRestClient,
 	job *core.NetworkJob,

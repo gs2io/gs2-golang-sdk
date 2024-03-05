@@ -1772,17 +1772,18 @@ func (p AddRarityParameterStatusByStampSheetRequest) Pointer() *AddRarityParamet
 }
 
 type VerifyRarityParameterStatusRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	ParameterName      *string `json:"parameterName"`
-	AccessToken        *string `json:"accessToken"`
-	PropertyId         *string `json:"propertyId"`
-	VerifyType         *string `json:"verifyType"`
-	ParameterValueName *string `json:"parameterValueName"`
-	ParameterCount     *int32  `json:"parameterCount"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	ParameterName                   *string `json:"parameterName"`
+	AccessToken                     *string `json:"accessToken"`
+	PropertyId                      *string `json:"propertyId"`
+	VerifyType                      *string `json:"verifyType"`
+	ParameterValueName              *string `json:"parameterValueName"`
+	ParameterCount                  *int32  `json:"parameterCount"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyRarityParameterStatusRequestFromJson(data string) VerifyRarityParameterStatusRequest {
@@ -1793,25 +1794,27 @@ func NewVerifyRarityParameterStatusRequestFromJson(data string) VerifyRarityPara
 
 func NewVerifyRarityParameterStatusRequestFromDict(data map[string]interface{}) VerifyRarityParameterStatusRequest {
 	return VerifyRarityParameterStatusRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		ParameterName:      core.CastString(data["parameterName"]),
-		AccessToken:        core.CastString(data["accessToken"]),
-		PropertyId:         core.CastString(data["propertyId"]),
-		VerifyType:         core.CastString(data["verifyType"]),
-		ParameterValueName: core.CastString(data["parameterValueName"]),
-		ParameterCount:     core.CastInt32(data["parameterCount"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		ParameterName:                   core.CastString(data["parameterName"]),
+		AccessToken:                     core.CastString(data["accessToken"]),
+		PropertyId:                      core.CastString(data["propertyId"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		ParameterValueName:              core.CastString(data["parameterValueName"]),
+		ParameterCount:                  core.CastInt32(data["parameterCount"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyRarityParameterStatusRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":      p.NamespaceName,
-		"parameterName":      p.ParameterName,
-		"accessToken":        p.AccessToken,
-		"propertyId":         p.PropertyId,
-		"verifyType":         p.VerifyType,
-		"parameterValueName": p.ParameterValueName,
-		"parameterCount":     p.ParameterCount,
+		"namespaceName":                   p.NamespaceName,
+		"parameterName":                   p.ParameterName,
+		"accessToken":                     p.AccessToken,
+		"propertyId":                      p.PropertyId,
+		"verifyType":                      p.VerifyType,
+		"parameterValueName":              p.ParameterValueName,
+		"parameterCount":                  p.ParameterCount,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 
@@ -1820,17 +1823,18 @@ func (p VerifyRarityParameterStatusRequest) Pointer() *VerifyRarityParameterStat
 }
 
 type VerifyRarityParameterStatusByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	ParameterName      *string `json:"parameterName"`
-	UserId             *string `json:"userId"`
-	PropertyId         *string `json:"propertyId"`
-	VerifyType         *string `json:"verifyType"`
-	ParameterValueName *string `json:"parameterValueName"`
-	ParameterCount     *int32  `json:"parameterCount"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	ParameterName                   *string `json:"parameterName"`
+	UserId                          *string `json:"userId"`
+	PropertyId                      *string `json:"propertyId"`
+	VerifyType                      *string `json:"verifyType"`
+	ParameterValueName              *string `json:"parameterValueName"`
+	ParameterCount                  *int32  `json:"parameterCount"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyRarityParameterStatusByUserIdRequestFromJson(data string) VerifyRarityParameterStatusByUserIdRequest {
@@ -1841,25 +1845,27 @@ func NewVerifyRarityParameterStatusByUserIdRequestFromJson(data string) VerifyRa
 
 func NewVerifyRarityParameterStatusByUserIdRequestFromDict(data map[string]interface{}) VerifyRarityParameterStatusByUserIdRequest {
 	return VerifyRarityParameterStatusByUserIdRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		ParameterName:      core.CastString(data["parameterName"]),
-		UserId:             core.CastString(data["userId"]),
-		PropertyId:         core.CastString(data["propertyId"]),
-		VerifyType:         core.CastString(data["verifyType"]),
-		ParameterValueName: core.CastString(data["parameterValueName"]),
-		ParameterCount:     core.CastInt32(data["parameterCount"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		ParameterName:                   core.CastString(data["parameterName"]),
+		UserId:                          core.CastString(data["userId"]),
+		PropertyId:                      core.CastString(data["propertyId"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		ParameterValueName:              core.CastString(data["parameterValueName"]),
+		ParameterCount:                  core.CastInt32(data["parameterCount"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyRarityParameterStatusByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":      p.NamespaceName,
-		"parameterName":      p.ParameterName,
-		"userId":             p.UserId,
-		"propertyId":         p.PropertyId,
-		"verifyType":         p.VerifyType,
-		"parameterValueName": p.ParameterValueName,
-		"parameterCount":     p.ParameterCount,
+		"namespaceName":                   p.NamespaceName,
+		"parameterName":                   p.ParameterName,
+		"userId":                          p.UserId,
+		"propertyId":                      p.PropertyId,
+		"verifyType":                      p.VerifyType,
+		"parameterValueName":              p.ParameterValueName,
+		"parameterCount":                  p.ParameterCount,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 

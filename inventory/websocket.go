@@ -5889,6 +5889,9 @@ func (p Gs2InventoryWebSocketClient) VerifyInventoryCurrentMaxCapacityAsync(
 	if request.CurrentInventoryMaxCapacity != nil {
 		bodies["currentInventoryMaxCapacity"] = *request.CurrentInventoryMaxCapacity
 	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -5987,6 +5990,9 @@ func (p Gs2InventoryWebSocketClient) VerifyInventoryCurrentMaxCapacityByUserIdAs
 	}
 	if request.CurrentInventoryMaxCapacity != nil {
 		bodies["currentInventoryMaxCapacity"] = *request.CurrentInventoryMaxCapacity
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -7446,6 +7452,9 @@ func (p Gs2InventoryWebSocketClient) VerifyItemSetAsync(
 	if request.Count != nil {
 		bodies["count"] = *request.Count
 	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -7550,6 +7559,9 @@ func (p Gs2InventoryWebSocketClient) VerifyItemSetByUserIdAsync(
 	}
 	if request.Count != nil {
 		bodies["count"] = *request.Count
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -10303,6 +10315,9 @@ func (p Gs2InventoryWebSocketClient) VerifySimpleItemAsync(
 	if request.Count != nil {
 		bodies["count"] = *request.Count
 	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -10404,6 +10419,9 @@ func (p Gs2InventoryWebSocketClient) VerifySimpleItemByUserIdAsync(
 	}
 	if request.Count != nil {
 		bodies["count"] = *request.Count
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -11722,6 +11740,9 @@ func (p Gs2InventoryWebSocketClient) VerifyBigItemAsync(
 	if request.Count != nil && *request.Count != "" {
 		bodies["count"] = *request.Count
 	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -11823,6 +11844,9 @@ func (p Gs2InventoryWebSocketClient) VerifyBigItemByUserIdAsync(
 	}
 	if request.Count != nil && *request.Count != "" {
 		bodies["count"] = *request.Count
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

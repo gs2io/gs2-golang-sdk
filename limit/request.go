@@ -757,16 +757,17 @@ func (p DeleteCounterByUserIdRequest) Pointer() *DeleteCounterByUserIdRequest {
 }
 
 type VerifyCounterRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	LimitName          *string `json:"limitName"`
-	CounterName        *string `json:"counterName"`
-	VerifyType         *string `json:"verifyType"`
-	Count              *int32  `json:"count"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	LimitName                       *string `json:"limitName"`
+	CounterName                     *string `json:"counterName"`
+	VerifyType                      *string `json:"verifyType"`
+	Count                           *int32  `json:"count"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyCounterRequestFromJson(data string) VerifyCounterRequest {
@@ -777,23 +778,25 @@ func NewVerifyCounterRequestFromJson(data string) VerifyCounterRequest {
 
 func NewVerifyCounterRequestFromDict(data map[string]interface{}) VerifyCounterRequest {
 	return VerifyCounterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		LimitName:     core.CastString(data["limitName"]),
-		CounterName:   core.CastString(data["counterName"]),
-		VerifyType:    core.CastString(data["verifyType"]),
-		Count:         core.CastInt32(data["count"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		AccessToken:                     core.CastString(data["accessToken"]),
+		LimitName:                       core.CastString(data["limitName"]),
+		CounterName:                     core.CastString(data["counterName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		Count:                           core.CastInt32(data["count"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyCounterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"accessToken":   p.AccessToken,
-		"limitName":     p.LimitName,
-		"counterName":   p.CounterName,
-		"verifyType":    p.VerifyType,
-		"count":         p.Count,
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"limitName":                       p.LimitName,
+		"counterName":                     p.CounterName,
+		"verifyType":                      p.VerifyType,
+		"count":                           p.Count,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 
@@ -802,16 +805,17 @@ func (p VerifyCounterRequest) Pointer() *VerifyCounterRequest {
 }
 
 type VerifyCounterByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	LimitName          *string `json:"limitName"`
-	CounterName        *string `json:"counterName"`
-	VerifyType         *string `json:"verifyType"`
-	Count              *int32  `json:"count"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	LimitName                       *string `json:"limitName"`
+	CounterName                     *string `json:"counterName"`
+	VerifyType                      *string `json:"verifyType"`
+	Count                           *int32  `json:"count"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyCounterByUserIdRequestFromJson(data string) VerifyCounterByUserIdRequest {
@@ -822,23 +826,25 @@ func NewVerifyCounterByUserIdRequestFromJson(data string) VerifyCounterByUserIdR
 
 func NewVerifyCounterByUserIdRequestFromDict(data map[string]interface{}) VerifyCounterByUserIdRequest {
 	return VerifyCounterByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		LimitName:     core.CastString(data["limitName"]),
-		CounterName:   core.CastString(data["counterName"]),
-		VerifyType:    core.CastString(data["verifyType"]),
-		Count:         core.CastInt32(data["count"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		UserId:                          core.CastString(data["userId"]),
+		LimitName:                       core.CastString(data["limitName"]),
+		CounterName:                     core.CastString(data["counterName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		Count:                           core.CastInt32(data["count"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyCounterByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"limitName":     p.LimitName,
-		"counterName":   p.CounterName,
-		"verifyType":    p.VerifyType,
-		"count":         p.Count,
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"limitName":                       p.LimitName,
+		"counterName":                     p.CounterName,
+		"verifyType":                      p.VerifyType,
+		"count":                           p.Count,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 

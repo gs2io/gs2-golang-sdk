@@ -4255,6 +4255,9 @@ func (p Gs2ExperienceRestClient) VerifyRankAsync(
 	if request.RankValue != nil {
 		bodies["rankValue"] = *request.RankValue
 	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -4372,6 +4375,9 @@ func (p Gs2ExperienceRestClient) VerifyRankByUserIdAsync(
 	if request.RankValue != nil {
 		bodies["rankValue"] = *request.RankValue
 	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -4480,6 +4486,9 @@ func (p Gs2ExperienceRestClient) VerifyRankCapAsync(
 	}
 	if request.RankCapValue != nil {
 		bodies["rankCapValue"] = *request.RankCapValue
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -4597,6 +4606,9 @@ func (p Gs2ExperienceRestClient) VerifyRankCapByUserIdAsync(
 	}
 	if request.RankCapValue != nil {
 		bodies["rankCapValue"] = *request.RankCapValue
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

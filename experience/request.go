@@ -1575,16 +1575,17 @@ func (p DeleteStatusByUserIdRequest) Pointer() *DeleteStatusByUserIdRequest {
 }
 
 type VerifyRankRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	ExperienceName     *string `json:"experienceName"`
-	VerifyType         *string `json:"verifyType"`
-	PropertyId         *string `json:"propertyId"`
-	RankValue          *int64  `json:"rankValue"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	ExperienceName                  *string `json:"experienceName"`
+	VerifyType                      *string `json:"verifyType"`
+	PropertyId                      *string `json:"propertyId"`
+	RankValue                       *int64  `json:"rankValue"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyRankRequestFromJson(data string) VerifyRankRequest {
@@ -1595,23 +1596,25 @@ func NewVerifyRankRequestFromJson(data string) VerifyRankRequest {
 
 func NewVerifyRankRequestFromDict(data map[string]interface{}) VerifyRankRequest {
 	return VerifyRankRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		ExperienceName: core.CastString(data["experienceName"]),
-		VerifyType:     core.CastString(data["verifyType"]),
-		PropertyId:     core.CastString(data["propertyId"]),
-		RankValue:      core.CastInt64(data["rankValue"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		AccessToken:                     core.CastString(data["accessToken"]),
+		ExperienceName:                  core.CastString(data["experienceName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		PropertyId:                      core.CastString(data["propertyId"]),
+		RankValue:                       core.CastInt64(data["rankValue"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyRankRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":  p.NamespaceName,
-		"accessToken":    p.AccessToken,
-		"experienceName": p.ExperienceName,
-		"verifyType":     p.VerifyType,
-		"propertyId":     p.PropertyId,
-		"rankValue":      p.RankValue,
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"experienceName":                  p.ExperienceName,
+		"verifyType":                      p.VerifyType,
+		"propertyId":                      p.PropertyId,
+		"rankValue":                       p.RankValue,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 
@@ -1620,16 +1623,17 @@ func (p VerifyRankRequest) Pointer() *VerifyRankRequest {
 }
 
 type VerifyRankByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	ExperienceName     *string `json:"experienceName"`
-	VerifyType         *string `json:"verifyType"`
-	PropertyId         *string `json:"propertyId"`
-	RankValue          *int64  `json:"rankValue"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	ExperienceName                  *string `json:"experienceName"`
+	VerifyType                      *string `json:"verifyType"`
+	PropertyId                      *string `json:"propertyId"`
+	RankValue                       *int64  `json:"rankValue"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyRankByUserIdRequestFromJson(data string) VerifyRankByUserIdRequest {
@@ -1640,23 +1644,25 @@ func NewVerifyRankByUserIdRequestFromJson(data string) VerifyRankByUserIdRequest
 
 func NewVerifyRankByUserIdRequestFromDict(data map[string]interface{}) VerifyRankByUserIdRequest {
 	return VerifyRankByUserIdRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		UserId:         core.CastString(data["userId"]),
-		ExperienceName: core.CastString(data["experienceName"]),
-		VerifyType:     core.CastString(data["verifyType"]),
-		PropertyId:     core.CastString(data["propertyId"]),
-		RankValue:      core.CastInt64(data["rankValue"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		UserId:                          core.CastString(data["userId"]),
+		ExperienceName:                  core.CastString(data["experienceName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		PropertyId:                      core.CastString(data["propertyId"]),
+		RankValue:                       core.CastInt64(data["rankValue"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyRankByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":  p.NamespaceName,
-		"userId":         p.UserId,
-		"experienceName": p.ExperienceName,
-		"verifyType":     p.VerifyType,
-		"propertyId":     p.PropertyId,
-		"rankValue":      p.RankValue,
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"experienceName":                  p.ExperienceName,
+		"verifyType":                      p.VerifyType,
+		"propertyId":                      p.PropertyId,
+		"rankValue":                       p.RankValue,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 
@@ -1665,16 +1671,17 @@ func (p VerifyRankByUserIdRequest) Pointer() *VerifyRankByUserIdRequest {
 }
 
 type VerifyRankCapRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	AccessToken        *string `json:"accessToken"`
-	ExperienceName     *string `json:"experienceName"`
-	VerifyType         *string `json:"verifyType"`
-	PropertyId         *string `json:"propertyId"`
-	RankCapValue       *int64  `json:"rankCapValue"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	ExperienceName                  *string `json:"experienceName"`
+	VerifyType                      *string `json:"verifyType"`
+	PropertyId                      *string `json:"propertyId"`
+	RankCapValue                    *int64  `json:"rankCapValue"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyRankCapRequestFromJson(data string) VerifyRankCapRequest {
@@ -1685,23 +1692,25 @@ func NewVerifyRankCapRequestFromJson(data string) VerifyRankCapRequest {
 
 func NewVerifyRankCapRequestFromDict(data map[string]interface{}) VerifyRankCapRequest {
 	return VerifyRankCapRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		ExperienceName: core.CastString(data["experienceName"]),
-		VerifyType:     core.CastString(data["verifyType"]),
-		PropertyId:     core.CastString(data["propertyId"]),
-		RankCapValue:   core.CastInt64(data["rankCapValue"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		AccessToken:                     core.CastString(data["accessToken"]),
+		ExperienceName:                  core.CastString(data["experienceName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		PropertyId:                      core.CastString(data["propertyId"]),
+		RankCapValue:                    core.CastInt64(data["rankCapValue"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyRankCapRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":  p.NamespaceName,
-		"accessToken":    p.AccessToken,
-		"experienceName": p.ExperienceName,
-		"verifyType":     p.VerifyType,
-		"propertyId":     p.PropertyId,
-		"rankCapValue":   p.RankCapValue,
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"experienceName":                  p.ExperienceName,
+		"verifyType":                      p.VerifyType,
+		"propertyId":                      p.PropertyId,
+		"rankCapValue":                    p.RankCapValue,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 
@@ -1710,16 +1719,17 @@ func (p VerifyRankCapRequest) Pointer() *VerifyRankCapRequest {
 }
 
 type VerifyRankCapByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	ExperienceName     *string `json:"experienceName"`
-	VerifyType         *string `json:"verifyType"`
-	PropertyId         *string `json:"propertyId"`
-	RankCapValue       *int64  `json:"rankCapValue"`
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	ExperienceName                  *string `json:"experienceName"`
+	VerifyType                      *string `json:"verifyType"`
+	PropertyId                      *string `json:"propertyId"`
+	RankCapValue                    *int64  `json:"rankCapValue"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
 func NewVerifyRankCapByUserIdRequestFromJson(data string) VerifyRankCapByUserIdRequest {
@@ -1730,23 +1740,25 @@ func NewVerifyRankCapByUserIdRequestFromJson(data string) VerifyRankCapByUserIdR
 
 func NewVerifyRankCapByUserIdRequestFromDict(data map[string]interface{}) VerifyRankCapByUserIdRequest {
 	return VerifyRankCapByUserIdRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		UserId:         core.CastString(data["userId"]),
-		ExperienceName: core.CastString(data["experienceName"]),
-		VerifyType:     core.CastString(data["verifyType"]),
-		PropertyId:     core.CastString(data["propertyId"]),
-		RankCapValue:   core.CastInt64(data["rankCapValue"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		UserId:                          core.CastString(data["userId"]),
+		ExperienceName:                  core.CastString(data["experienceName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		PropertyId:                      core.CastString(data["propertyId"]),
+		RankCapValue:                    core.CastInt64(data["rankCapValue"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
 }
 
 func (p VerifyRankCapByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":  p.NamespaceName,
-		"userId":         p.UserId,
-		"experienceName": p.ExperienceName,
-		"verifyType":     p.VerifyType,
-		"propertyId":     p.PropertyId,
-		"rankCapValue":   p.RankCapValue,
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"experienceName":                  p.ExperienceName,
+		"verifyType":                      p.VerifyType,
+		"propertyId":                      p.PropertyId,
+		"rankCapValue":                    p.RankCapValue,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
 }
 

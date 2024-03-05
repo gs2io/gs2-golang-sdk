@@ -2087,6 +2087,46 @@ func (p AcquireActionToFormPropertiesByStampSheetResult) Pointer() *AcquireActio
 	return &p
 }
 
+type SetFormByStampSheetResult struct {
+	Item      *Form      `json:"item"`
+	Mold      *Mold      `json:"mold"`
+	MoldModel *MoldModel `json:"moldModel"`
+	FormModel *FormModel `json:"formModel"`
+}
+
+type SetFormByStampSheetAsyncResult struct {
+	result *SetFormByStampSheetResult
+	err    error
+}
+
+func NewSetFormByStampSheetResultFromJson(data string) SetFormByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetFormByStampSheetResultFromDict(dict)
+}
+
+func NewSetFormByStampSheetResultFromDict(data map[string]interface{}) SetFormByStampSheetResult {
+	return SetFormByStampSheetResult{
+		Item:      NewFormFromDict(core.CastMap(data["item"])).Pointer(),
+		Mold:      NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
+		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
+		FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+	}
+}
+
+func (p SetFormByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":      p.Item.ToDict(),
+		"mold":      p.Mold.ToDict(),
+		"moldModel": p.MoldModel.ToDict(),
+		"formModel": p.FormModel.ToDict(),
+	}
+}
+
+func (p SetFormByStampSheetResult) Pointer() *SetFormByStampSheetResult {
+	return &p
+}
+
 type DescribePropertyFormsResult struct {
 	Items         []PropertyForm `json:"items"`
 	NextPageToken *string        `json:"nextPageToken"`

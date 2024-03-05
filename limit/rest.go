@@ -2148,6 +2148,9 @@ func (p Gs2LimitRestClient) VerifyCounterAsync(
 	if request.Count != nil {
 		bodies["count"] = *request.Count
 	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2266,6 +2269,9 @@ func (p Gs2LimitRestClient) VerifyCounterByUserIdAsync(
 	var bodies = core.Bodies{}
 	if request.Count != nil {
 		bodies["count"] = *request.Count
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

@@ -2799,6 +2799,9 @@ func (p Gs2GradeWebSocketClient) VerifyGradeAsync(
 	if request.GradeValue != nil {
 		bodies["gradeValue"] = *request.GradeValue
 	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2900,6 +2903,9 @@ func (p Gs2GradeWebSocketClient) VerifyGradeByUserIdAsync(
 	}
 	if request.GradeValue != nil {
 		bodies["gradeValue"] = *request.GradeValue
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
