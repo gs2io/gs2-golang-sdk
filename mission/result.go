@@ -1178,7 +1178,8 @@ func (p DescribeCountersByUserIdResult) Pointer() *DescribeCountersByUserIdResul
 }
 
 type IncreaseCounterByUserIdResult struct {
-	Item *Counter `json:"item"`
+	Item             *Counter   `json:"item"`
+	ChangedCompletes []Complete `json:"changedCompletes"`
 }
 
 type IncreaseCounterByUserIdAsyncResult struct {
@@ -1194,13 +1195,17 @@ func NewIncreaseCounterByUserIdResultFromJson(data string) IncreaseCounterByUser
 
 func NewIncreaseCounterByUserIdResultFromDict(data map[string]interface{}) IncreaseCounterByUserIdResult {
 	return IncreaseCounterByUserIdResult{
-		Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item:             NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+		ChangedCompletes: CastCompletes(core.CastArray(data["changedCompletes"])),
 	}
 }
 
 func (p IncreaseCounterByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
+		"changedCompletes": CastCompletesFromDict(
+			p.ChangedCompletes,
+		),
 	}
 }
 
@@ -1333,7 +1338,8 @@ func (p DeleteCounterByUserIdResult) Pointer() *DeleteCounterByUserIdResult {
 }
 
 type IncreaseByStampSheetResult struct {
-	Item *Counter `json:"item"`
+	Item             *Counter   `json:"item"`
+	ChangedCompletes []Complete `json:"changedCompletes"`
 }
 
 type IncreaseByStampSheetAsyncResult struct {
@@ -1349,13 +1355,17 @@ func NewIncreaseByStampSheetResultFromJson(data string) IncreaseByStampSheetResu
 
 func NewIncreaseByStampSheetResultFromDict(data map[string]interface{}) IncreaseByStampSheetResult {
 	return IncreaseByStampSheetResult{
-		Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item:             NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+		ChangedCompletes: CastCompletes(core.CastArray(data["changedCompletes"])),
 	}
 }
 
 func (p IncreaseByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
+		"changedCompletes": CastCompletesFromDict(
+			p.ChangedCompletes,
+		),
 	}
 }
 
