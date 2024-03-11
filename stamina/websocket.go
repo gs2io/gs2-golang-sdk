@@ -594,6 +594,9 @@ func (p Gs2StaminaWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -677,6 +680,9 @@ func (p Gs2StaminaWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -762,6 +768,9 @@ func (p Gs2StaminaWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -846,6 +855,9 @@ func (p Gs2StaminaWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -929,6 +941,9 @@ func (p Gs2StaminaWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1017,6 +1032,9 @@ func (p Gs2StaminaWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1103,6 +1121,9 @@ func (p Gs2StaminaWebSocketClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3633,6 +3654,9 @@ func (p Gs2StaminaWebSocketClient) DescribeStaminasByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3810,6 +3834,9 @@ func (p Gs2StaminaWebSocketClient) GetStaminaByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3908,6 +3935,9 @@ func (p Gs2StaminaWebSocketClient) UpdateStaminaByUserIdAsync(
 	}
 	if request.RecoverValue != nil {
 		bodies["recoverValue"] = *request.RecoverValue
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -4110,6 +4140,9 @@ func (p Gs2StaminaWebSocketClient) ConsumeStaminaByUserIdAsync(
 	if request.ConsumeValue != nil {
 		bodies["consumeValue"] = *request.ConsumeValue
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -4202,6 +4235,9 @@ func (p Gs2StaminaWebSocketClient) RecoverStaminaByUserIdAsync(
 	}
 	if request.RecoverValue != nil {
 		bodies["recoverValue"] = *request.RecoverValue
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -4296,6 +4332,9 @@ func (p Gs2StaminaWebSocketClient) RaiseMaxValueByUserIdAsync(
 	if request.RaiseValue != nil {
 		bodies["raiseValue"] = *request.RaiseValue
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -4388,6 +4427,9 @@ func (p Gs2StaminaWebSocketClient) DecreaseMaxValueByUserIdAsync(
 	}
 	if request.DecreaseValue != nil {
 		bodies["decreaseValue"] = *request.DecreaseValue
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -4482,6 +4524,9 @@ func (p Gs2StaminaWebSocketClient) SetMaxValueByUserIdAsync(
 	if request.MaxValue != nil {
 		bodies["maxValue"] = *request.MaxValue
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -4575,6 +4620,9 @@ func (p Gs2StaminaWebSocketClient) SetRecoverIntervalByUserIdAsync(
 	if request.RecoverIntervalMinutes != nil {
 		bodies["recoverIntervalMinutes"] = *request.RecoverIntervalMinutes
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -4667,6 +4715,9 @@ func (p Gs2StaminaWebSocketClient) SetRecoverValueByUserIdAsync(
 	}
 	if request.RecoverValue != nil {
 		bodies["recoverValue"] = *request.RecoverValue
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -5063,6 +5114,9 @@ func (p Gs2StaminaWebSocketClient) DeleteStaminaByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

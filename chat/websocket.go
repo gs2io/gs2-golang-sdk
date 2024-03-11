@@ -630,6 +630,9 @@ func (p Gs2ChatWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -713,6 +716,9 @@ func (p Gs2ChatWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -798,6 +804,9 @@ func (p Gs2ChatWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -882,6 +891,9 @@ func (p Gs2ChatWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -965,6 +977,9 @@ func (p Gs2ChatWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1053,6 +1068,9 @@ func (p Gs2ChatWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1139,6 +1157,9 @@ func (p Gs2ChatWebSocketClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1442,6 +1463,9 @@ func (p Gs2ChatWebSocketClient) CreateRoomFromBackendAsync(
 		}
 		bodies["whiteListUserIds"] = _whiteListUserIds
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1741,6 +1765,9 @@ func (p Gs2ChatWebSocketClient) UpdateRoomFromBackendAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1929,6 +1956,9 @@ func (p Gs2ChatWebSocketClient) DeleteRoomFromBackendAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2152,6 +2182,9 @@ func (p Gs2ChatWebSocketClient) DescribeMessagesByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2374,6 +2407,9 @@ func (p Gs2ChatWebSocketClient) PostByUserIdAsync(
 	if request.Password != nil && *request.Password != "" {
 		bodies["password"] = *request.Password
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2590,6 +2626,9 @@ func (p Gs2ChatWebSocketClient) GetMessageByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2679,6 +2718,9 @@ func (p Gs2ChatWebSocketClient) DeleteMessageAsync(
 	}
 	if request.MessageName != nil && *request.MessageName != "" {
 		bodies["messageName"] = *request.MessageName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2865,6 +2907,9 @@ func (p Gs2ChatWebSocketClient) DescribeSubscribesByUserIdAsync(
 	}
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3150,6 +3195,9 @@ func (p Gs2ChatWebSocketClient) SubscribeByUserIdAsync(
 		}
 		bodies["notificationTypes"] = _notificationTypes
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3329,6 +3377,9 @@ func (p Gs2ChatWebSocketClient) GetSubscribeByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3524,6 +3575,9 @@ func (p Gs2ChatWebSocketClient) UpdateNotificationTypeByUserIdAsync(
 		}
 		bodies["notificationTypes"] = _notificationTypes
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3706,6 +3760,9 @@ func (p Gs2ChatWebSocketClient) UnsubscribeByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

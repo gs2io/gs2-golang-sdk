@@ -644,6 +644,9 @@ func (p Gs2EnchantRestClient) DumpUserDataByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
@@ -733,6 +736,9 @@ func (p Gs2EnchantRestClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go checkDumpUserDataByUserIdAsyncHandler(
@@ -827,6 +833,9 @@ func (p Gs2EnchantRestClient) CleanUserDataByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
@@ -916,6 +925,9 @@ func (p Gs2EnchantRestClient) CheckCleanUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go checkCleanUserDataByUserIdAsyncHandler(
@@ -1009,6 +1021,9 @@ func (p Gs2EnchantRestClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go prepareImportUserDataByUserIdAsyncHandler(
@@ -1106,6 +1121,9 @@ func (p Gs2EnchantRestClient) ImportUserDataByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go importUserDataByUserIdAsyncHandler(
 		p,
@@ -1200,6 +1218,9 @@ func (p Gs2EnchantRestClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go checkImportUserDataByUserIdAsyncHandler(
@@ -3133,6 +3154,9 @@ func (p Gs2EnchantRestClient) DescribeBalanceParameterStatusesByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go describeBalanceParameterStatusesByUserIdAsyncHandler(
 		p,
@@ -3335,6 +3359,9 @@ func (p Gs2EnchantRestClient) GetBalanceParameterStatusByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go getBalanceParameterStatusByUserIdAsyncHandler(
 		p,
@@ -3439,6 +3466,9 @@ func (p Gs2EnchantRestClient) DeleteBalanceParameterStatusByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go deleteBalanceParameterStatusByUserIdAsyncHandler(
@@ -3554,6 +3584,9 @@ func (p Gs2EnchantRestClient) ReDrawBalanceParameterStatusByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go reDrawBalanceParameterStatusByUserIdAsyncHandler(
@@ -3760,6 +3793,9 @@ func (p Gs2EnchantRestClient) SetBalanceParameterStatusByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go setBalanceParameterStatusByUserIdAsyncHandler(
@@ -4052,6 +4088,9 @@ func (p Gs2EnchantRestClient) DescribeRarityParameterStatusesByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go describeRarityParameterStatusesByUserIdAsyncHandler(
 		p,
@@ -4254,6 +4293,9 @@ func (p Gs2EnchantRestClient) GetRarityParameterStatusByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go getRarityParameterStatusByUserIdAsyncHandler(
 		p,
@@ -4358,6 +4400,9 @@ func (p Gs2EnchantRestClient) DeleteRarityParameterStatusByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go deleteRarityParameterStatusByUserIdAsyncHandler(
@@ -4473,6 +4518,9 @@ func (p Gs2EnchantRestClient) ReDrawRarityParameterStatusByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go reDrawRarityParameterStatusByUserIdAsyncHandler(
@@ -4675,6 +4723,9 @@ func (p Gs2EnchantRestClient) AddRarityParameterStatusByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go addRarityParameterStatusByUserIdAsyncHandler(
@@ -5009,6 +5060,9 @@ func (p Gs2EnchantRestClient) VerifyRarityParameterStatusByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go verifyRarityParameterStatusByUserIdAsyncHandler(
 		p,
@@ -5214,6 +5268,9 @@ func (p Gs2EnchantRestClient) SetRarityParameterStatusByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go setRarityParameterStatusByUserIdAsyncHandler(

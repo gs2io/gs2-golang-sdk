@@ -588,6 +588,9 @@ func (p Gs2LimitWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -671,6 +674,9 @@ func (p Gs2LimitWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -756,6 +762,9 @@ func (p Gs2LimitWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -840,6 +849,9 @@ func (p Gs2LimitWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -923,6 +935,9 @@ func (p Gs2LimitWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1011,6 +1026,9 @@ func (p Gs2LimitWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1097,6 +1115,9 @@ func (p Gs2LimitWebSocketClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1290,6 +1311,9 @@ func (p Gs2LimitWebSocketClient) DescribeCountersByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1472,6 +1496,9 @@ func (p Gs2LimitWebSocketClient) GetCounterByUserIdAsync(
 	}
 	if request.CounterName != nil && *request.CounterName != "" {
 		bodies["counterName"] = *request.CounterName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1683,6 +1710,9 @@ func (p Gs2LimitWebSocketClient) CountUpByUserIdAsync(
 	if request.MaxValue != nil {
 		bodies["maxValue"] = *request.MaxValue
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1779,6 +1809,9 @@ func (p Gs2LimitWebSocketClient) CountDownByUserIdAsync(
 	if request.CountDownValue != nil {
 		bodies["countDownValue"] = *request.CountDownValue
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1871,6 +1904,9 @@ func (p Gs2LimitWebSocketClient) DeleteCounterByUserIdAsync(
 	}
 	if request.CounterName != nil && *request.CounterName != "" {
 		bodies["counterName"] = *request.CounterName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2078,6 +2114,9 @@ func (p Gs2LimitWebSocketClient) VerifyCounterByUserIdAsync(
 	}
 	if request.MultiplyValueSpecifyingQuantity != nil {
 		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

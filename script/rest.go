@@ -1325,6 +1325,9 @@ func (p Gs2ScriptRestClient) InvokeScriptAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go invokeScriptAsyncHandler(
 		p,

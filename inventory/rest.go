@@ -668,6 +668,9 @@ func (p Gs2InventoryRestClient) DumpUserDataByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
@@ -757,6 +760,9 @@ func (p Gs2InventoryRestClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go checkDumpUserDataByUserIdAsyncHandler(
@@ -851,6 +857,9 @@ func (p Gs2InventoryRestClient) CleanUserDataByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
@@ -940,6 +949,9 @@ func (p Gs2InventoryRestClient) CheckCleanUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go checkCleanUserDataByUserIdAsyncHandler(
@@ -1033,6 +1045,9 @@ func (p Gs2InventoryRestClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go prepareImportUserDataByUserIdAsyncHandler(
@@ -1130,6 +1145,9 @@ func (p Gs2InventoryRestClient) ImportUserDataByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go importUserDataByUserIdAsyncHandler(
 		p,
@@ -1224,6 +1242,9 @@ func (p Gs2InventoryRestClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go checkImportUserDataByUserIdAsyncHandler(
@@ -5856,6 +5877,9 @@ func (p Gs2InventoryRestClient) DescribeInventoriesByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go describeInventoriesByUserIdAsyncHandler(
 		p,
@@ -6048,6 +6072,9 @@ func (p Gs2InventoryRestClient) GetInventoryByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go getInventoryByUserIdAsyncHandler(
 		p,
@@ -6153,6 +6180,9 @@ func (p Gs2InventoryRestClient) AddCapacityByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go addCapacityByUserIdAsyncHandler(
@@ -6260,6 +6290,9 @@ func (p Gs2InventoryRestClient) SetCapacityByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go setCapacityByUserIdAsyncHandler(
 		p,
@@ -6359,6 +6392,9 @@ func (p Gs2InventoryRestClient) DeleteInventoryByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go deleteInventoryByUserIdAsyncHandler(
@@ -6585,6 +6621,9 @@ func (p Gs2InventoryRestClient) VerifyInventoryCurrentMaxCapacityByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go verifyInventoryCurrentMaxCapacityByUserIdAsyncHandler(
@@ -7063,6 +7102,9 @@ func (p Gs2InventoryRestClient) DescribeItemSetsByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go describeItemSetsByUserIdAsyncHandler(
 		p,
@@ -7270,6 +7312,9 @@ func (p Gs2InventoryRestClient) GetItemSetByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go getItemSetByUserIdAsyncHandler(
@@ -7485,6 +7530,9 @@ func (p Gs2InventoryRestClient) GetItemWithSignatureByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go getItemWithSignatureByUserIdAsyncHandler(
 		p,
@@ -7611,6 +7659,9 @@ func (p Gs2InventoryRestClient) AcquireItemSetByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go acquireItemSetByUserIdAsyncHandler(
 		p,
@@ -7730,6 +7781,9 @@ func (p Gs2InventoryRestClient) AcquireItemSetWithGradeByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go acquireItemSetWithGradeByUserIdAsyncHandler(
@@ -7975,6 +8029,9 @@ func (p Gs2InventoryRestClient) ConsumeItemSetByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go consumeItemSetByUserIdAsyncHandler(
 		p,
@@ -8082,6 +8139,9 @@ func (p Gs2InventoryRestClient) DeleteItemSetByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go deleteItemSetByUserIdAsyncHandler(
@@ -8324,6 +8384,9 @@ func (p Gs2InventoryRestClient) VerifyItemSetByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go verifyItemSetByUserIdAsyncHandler(
@@ -8901,6 +8964,9 @@ func (p Gs2InventoryRestClient) DescribeReferenceOfByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go describeReferenceOfByUserIdAsyncHandler(
 		p,
@@ -9122,6 +9188,9 @@ func (p Gs2InventoryRestClient) GetReferenceOfByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go getReferenceOfByUserIdAsyncHandler(
@@ -9367,6 +9436,9 @@ func (p Gs2InventoryRestClient) VerifyReferenceOfByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go verifyReferenceOfByUserIdAsyncHandler(
 		p,
@@ -9597,6 +9669,9 @@ func (p Gs2InventoryRestClient) AddReferenceOfByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go addReferenceOfByUserIdAsyncHandler(
 		p,
@@ -9824,6 +9899,9 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go deleteReferenceOfByUserIdAsyncHandler(
@@ -10302,6 +10380,9 @@ func (p Gs2InventoryRestClient) DescribeSimpleItemsByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go describeSimpleItemsByUserIdAsyncHandler(
 		p,
@@ -10503,6 +10584,9 @@ func (p Gs2InventoryRestClient) GetSimpleItemByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go getSimpleItemByUserIdAsyncHandler(
@@ -10712,6 +10796,9 @@ func (p Gs2InventoryRestClient) GetSimpleItemWithSignatureByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go getSimpleItemWithSignatureByUserIdAsyncHandler(
 		p,
@@ -10827,6 +10914,9 @@ func (p Gs2InventoryRestClient) AcquireSimpleItemsByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go acquireSimpleItemsByUserIdAsyncHandler(
@@ -11064,6 +11154,9 @@ func (p Gs2InventoryRestClient) ConsumeSimpleItemsByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go consumeSimpleItemsByUserIdAsyncHandler(
 		p,
@@ -11180,6 +11273,9 @@ func (p Gs2InventoryRestClient) SetSimpleItemsByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go setSimpleItemsByUserIdAsyncHandler(
 		p,
@@ -11279,6 +11375,9 @@ func (p Gs2InventoryRestClient) DeleteSimpleItemsByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go deleteSimpleItemsByUserIdAsyncHandler(
@@ -11515,6 +11614,9 @@ func (p Gs2InventoryRestClient) VerifySimpleItemByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go verifySimpleItemByUserIdAsyncHandler(
@@ -12084,6 +12186,9 @@ func (p Gs2InventoryRestClient) DescribeBigItemsByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go describeBigItemsByUserIdAsyncHandler(
 		p,
@@ -12286,6 +12391,9 @@ func (p Gs2InventoryRestClient) GetBigItemByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go getBigItemByUserIdAsyncHandler(
 		p,
@@ -12402,6 +12510,9 @@ func (p Gs2InventoryRestClient) AcquireBigItemByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go acquireBigItemByUserIdAsyncHandler(
@@ -12641,6 +12752,9 @@ func (p Gs2InventoryRestClient) ConsumeBigItemByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go consumeBigItemByUserIdAsyncHandler(
 		p,
@@ -12758,6 +12872,9 @@ func (p Gs2InventoryRestClient) SetBigItemByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go setBigItemByUserIdAsyncHandler(
 		p,
@@ -12862,6 +12979,9 @@ func (p Gs2InventoryRestClient) DeleteBigItemByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go deleteBigItemByUserIdAsyncHandler(
@@ -13098,6 +13218,9 @@ func (p Gs2InventoryRestClient) VerifyBigItemByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go verifyBigItemByUserIdAsyncHandler(

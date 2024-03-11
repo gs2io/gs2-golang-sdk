@@ -606,6 +606,9 @@ func (p Gs2JobQueueWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -689,6 +692,9 @@ func (p Gs2JobQueueWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -774,6 +780,9 @@ func (p Gs2JobQueueWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -858,6 +867,9 @@ func (p Gs2JobQueueWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -941,6 +953,9 @@ func (p Gs2JobQueueWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1029,6 +1044,9 @@ func (p Gs2JobQueueWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1115,6 +1133,9 @@ func (p Gs2JobQueueWebSocketClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1209,6 +1230,9 @@ func (p Gs2JobQueueWebSocketClient) DescribeJobsByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1295,6 +1319,9 @@ func (p Gs2JobQueueWebSocketClient) GetJobByUserIdAsync(
 	}
 	if request.JobName != nil && *request.JobName != "" {
 		bodies["jobName"] = *request.JobName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1386,6 +1413,9 @@ func (p Gs2JobQueueWebSocketClient) PushByUserIdAsync(
 			_jobs = append(_jobs, item)
 		}
 		bodies["jobs"] = _jobs
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1576,6 +1606,9 @@ func (p Gs2JobQueueWebSocketClient) RunByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1665,6 +1698,9 @@ func (p Gs2JobQueueWebSocketClient) DeleteJobByUserIdAsync(
 	}
 	if request.JobName != nil && *request.JobName != "" {
 		bodies["jobName"] = *request.JobName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2020,6 +2056,9 @@ func (p Gs2JobQueueWebSocketClient) GetJobResultByUserIdAsync(
 	if request.TryNumber != nil {
 		bodies["tryNumber"] = *request.TryNumber
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2110,6 +2149,9 @@ func (p Gs2JobQueueWebSocketClient) DescribeDeadLetterJobsByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2197,6 +2239,9 @@ func (p Gs2JobQueueWebSocketClient) GetDeadLetterJobByUserIdAsync(
 	if request.DeadLetterJobName != nil && *request.DeadLetterJobName != "" {
 		bodies["deadLetterJobName"] = *request.DeadLetterJobName
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2283,6 +2328,9 @@ func (p Gs2JobQueueWebSocketClient) DeleteDeadLetterJobByUserIdAsync(
 	}
 	if request.DeadLetterJobName != nil && *request.DeadLetterJobName != "" {
 		bodies["deadLetterJobName"] = *request.DeadLetterJobName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

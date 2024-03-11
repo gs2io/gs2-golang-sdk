@@ -241,6 +241,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDumpUserDataByUserIdRequestFromJson(data string) DumpUserDataByUserIdRequest {
@@ -251,13 +252,15 @@ func NewDumpUserDataByUserIdRequestFromJson(data string) DumpUserDataByUserIdReq
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
 	return DumpUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DumpUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -271,6 +274,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCheckDumpUserDataByUserIdRequestFromJson(data string) CheckDumpUserDataByUserIdRequest {
@@ -281,13 +285,15 @@ func NewCheckDumpUserDataByUserIdRequestFromJson(data string) CheckDumpUserDataB
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
 	return CheckDumpUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CheckDumpUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -301,6 +307,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCleanUserDataByUserIdRequestFromJson(data string) CleanUserDataByUserIdRequest {
@@ -311,13 +318,15 @@ func NewCleanUserDataByUserIdRequestFromJson(data string) CleanUserDataByUserIdR
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
 	return CleanUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CleanUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -331,6 +340,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCheckCleanUserDataByUserIdRequestFromJson(data string) CheckCleanUserDataByUserIdRequest {
@@ -341,13 +351,15 @@ func NewCheckCleanUserDataByUserIdRequestFromJson(data string) CheckCleanUserDat
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
 	return CheckCleanUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CheckCleanUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -361,6 +373,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewPrepareImportUserDataByUserIdRequestFromJson(data string) PrepareImportUserDataByUserIdRequest {
@@ -371,13 +384,15 @@ func NewPrepareImportUserDataByUserIdRequestFromJson(data string) PrepareImportU
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
 	return PrepareImportUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p PrepareImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -392,6 +407,7 @@ type ImportUserDataByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
 	UploadToken        *string `json:"uploadToken"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewImportUserDataByUserIdRequestFromJson(data string) ImportUserDataByUserIdRequest {
@@ -402,15 +418,17 @@ func NewImportUserDataByUserIdRequestFromJson(data string) ImportUserDataByUserI
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
 	return ImportUserDataByUserIdRequest{
-		UserId:      core.CastString(data["userId"]),
-		UploadToken: core.CastString(data["uploadToken"]),
+		UserId:          core.CastString(data["userId"]),
+		UploadToken:     core.CastString(data["uploadToken"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p ImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId":      p.UserId,
-		"uploadToken": p.UploadToken,
+		"userId":          p.UserId,
+		"uploadToken":     p.UploadToken,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -425,6 +443,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
 	UploadToken        *string `json:"uploadToken"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCheckImportUserDataByUserIdRequestFromJson(data string) CheckImportUserDataByUserIdRequest {
@@ -435,15 +454,17 @@ func NewCheckImportUserDataByUserIdRequestFromJson(data string) CheckImportUserD
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
 	return CheckImportUserDataByUserIdRequest{
-		UserId:      core.CastString(data["userId"]),
-		UploadToken: core.CastString(data["uploadToken"]),
+		UserId:          core.CastString(data["userId"]),
+		UploadToken:     core.CastString(data["uploadToken"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CheckImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId":      p.UserId,
-		"uploadToken": p.UploadToken,
+		"userId":          p.UserId,
+		"uploadToken":     p.UploadToken,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1336,6 +1357,7 @@ type DescribeMoldsByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewDescribeMoldsByUserIdRequestFromJson(data string) DescribeMoldsByUserIdRequest {
@@ -1346,19 +1368,21 @@ func NewDescribeMoldsByUserIdRequestFromJson(data string) DescribeMoldsByUserIdR
 
 func NewDescribeMoldsByUserIdRequestFromDict(data map[string]interface{}) DescribeMoldsByUserIdRequest {
 	return DescribeMoldsByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DescribeMoldsByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1408,6 +1432,7 @@ type GetMoldByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
 	MoldModelName   *string `json:"moldModelName"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetMoldByUserIdRequestFromJson(data string) GetMoldByUserIdRequest {
@@ -1418,17 +1443,19 @@ func NewGetMoldByUserIdRequestFromJson(data string) GetMoldByUserIdRequest {
 
 func NewGetMoldByUserIdRequestFromDict(data map[string]interface{}) GetMoldByUserIdRequest {
 	return GetMoldByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		MoldModelName:   core.CastString(data["moldModelName"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetMoldByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"moldModelName": p.MoldModelName,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"moldModelName":   p.MoldModelName,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1445,6 +1472,7 @@ type SetMoldCapacityByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	MoldModelName      *string `json:"moldModelName"`
 	Capacity           *int32  `json:"capacity"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewSetMoldCapacityByUserIdRequestFromJson(data string) SetMoldCapacityByUserIdRequest {
@@ -1455,19 +1483,21 @@ func NewSetMoldCapacityByUserIdRequestFromJson(data string) SetMoldCapacityByUse
 
 func NewSetMoldCapacityByUserIdRequestFromDict(data map[string]interface{}) SetMoldCapacityByUserIdRequest {
 	return SetMoldCapacityByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Capacity:      core.CastInt32(data["capacity"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		MoldModelName:   core.CastString(data["moldModelName"]),
+		Capacity:        core.CastInt32(data["capacity"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p SetMoldCapacityByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"moldModelName": p.MoldModelName,
-		"capacity":      p.Capacity,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"moldModelName":   p.MoldModelName,
+		"capacity":        p.Capacity,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1484,6 +1514,7 @@ type AddMoldCapacityByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	MoldModelName      *string `json:"moldModelName"`
 	Capacity           *int32  `json:"capacity"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewAddMoldCapacityByUserIdRequestFromJson(data string) AddMoldCapacityByUserIdRequest {
@@ -1494,19 +1525,21 @@ func NewAddMoldCapacityByUserIdRequestFromJson(data string) AddMoldCapacityByUse
 
 func NewAddMoldCapacityByUserIdRequestFromDict(data map[string]interface{}) AddMoldCapacityByUserIdRequest {
 	return AddMoldCapacityByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Capacity:      core.CastInt32(data["capacity"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		MoldModelName:   core.CastString(data["moldModelName"]),
+		Capacity:        core.CastInt32(data["capacity"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p AddMoldCapacityByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"moldModelName": p.MoldModelName,
-		"capacity":      p.Capacity,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"moldModelName":   p.MoldModelName,
+		"capacity":        p.Capacity,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1523,6 +1556,7 @@ type SubMoldCapacityByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	MoldModelName      *string `json:"moldModelName"`
 	Capacity           *int32  `json:"capacity"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewSubMoldCapacityByUserIdRequestFromJson(data string) SubMoldCapacityByUserIdRequest {
@@ -1533,19 +1567,21 @@ func NewSubMoldCapacityByUserIdRequestFromJson(data string) SubMoldCapacityByUse
 
 func NewSubMoldCapacityByUserIdRequestFromDict(data map[string]interface{}) SubMoldCapacityByUserIdRequest {
 	return SubMoldCapacityByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Capacity:      core.CastInt32(data["capacity"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		MoldModelName:   core.CastString(data["moldModelName"]),
+		Capacity:        core.CastInt32(data["capacity"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p SubMoldCapacityByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"moldModelName": p.MoldModelName,
-		"capacity":      p.Capacity,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"moldModelName":   p.MoldModelName,
+		"capacity":        p.Capacity,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1597,6 +1633,7 @@ type DeleteMoldByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	MoldModelName      *string `json:"moldModelName"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDeleteMoldByUserIdRequestFromJson(data string) DeleteMoldByUserIdRequest {
@@ -1607,17 +1644,19 @@ func NewDeleteMoldByUserIdRequestFromJson(data string) DeleteMoldByUserIdRequest
 
 func NewDeleteMoldByUserIdRequestFromDict(data map[string]interface{}) DeleteMoldByUserIdRequest {
 	return DeleteMoldByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		MoldModelName:   core.CastString(data["moldModelName"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DeleteMoldByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"moldModelName": p.MoldModelName,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"moldModelName":   p.MoldModelName,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1771,6 +1810,7 @@ type DescribeFormsByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewDescribeFormsByUserIdRequestFromJson(data string) DescribeFormsByUserIdRequest {
@@ -1781,21 +1821,23 @@ func NewDescribeFormsByUserIdRequestFromJson(data string) DescribeFormsByUserIdR
 
 func NewDescribeFormsByUserIdRequestFromDict(data map[string]interface{}) DescribeFormsByUserIdRequest {
 	return DescribeFormsByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		UserId:        core.CastString(data["userId"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		MoldModelName:   core.CastString(data["moldModelName"]),
+		UserId:          core.CastString(data["userId"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DescribeFormsByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"moldModelName": p.MoldModelName,
-		"userId":        p.UserId,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"moldModelName":   p.MoldModelName,
+		"userId":          p.UserId,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1849,6 +1891,7 @@ type GetFormByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	MoldModelName   *string `json:"moldModelName"`
 	Index           *int32  `json:"index"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetFormByUserIdRequestFromJson(data string) GetFormByUserIdRequest {
@@ -1859,19 +1902,21 @@ func NewGetFormByUserIdRequestFromJson(data string) GetFormByUserIdRequest {
 
 func NewGetFormByUserIdRequestFromDict(data map[string]interface{}) GetFormByUserIdRequest {
 	return GetFormByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Index:         core.CastInt32(data["index"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		MoldModelName:   core.CastString(data["moldModelName"]),
+		Index:           core.CastInt32(data["index"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetFormByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"moldModelName": p.MoldModelName,
-		"index":         p.Index,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"moldModelName":   p.MoldModelName,
+		"index":           p.Index,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1929,6 +1974,7 @@ type GetFormWithSignatureByUserIdRequest struct {
 	MoldModelName   *string `json:"moldModelName"`
 	Index           *int32  `json:"index"`
 	KeyId           *string `json:"keyId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetFormWithSignatureByUserIdRequestFromJson(data string) GetFormWithSignatureByUserIdRequest {
@@ -1939,21 +1985,23 @@ func NewGetFormWithSignatureByUserIdRequestFromJson(data string) GetFormWithSign
 
 func NewGetFormWithSignatureByUserIdRequestFromDict(data map[string]interface{}) GetFormWithSignatureByUserIdRequest {
 	return GetFormWithSignatureByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Index:         core.CastInt32(data["index"]),
-		KeyId:         core.CastString(data["keyId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		MoldModelName:   core.CastString(data["moldModelName"]),
+		Index:           core.CastInt32(data["index"]),
+		KeyId:           core.CastString(data["keyId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetFormWithSignatureByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"moldModelName": p.MoldModelName,
-		"index":         p.Index,
-		"keyId":         p.KeyId,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"moldModelName":   p.MoldModelName,
+		"index":           p.Index,
+		"keyId":           p.KeyId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1971,6 +2019,7 @@ type SetFormByUserIdRequest struct {
 	MoldModelName      *string `json:"moldModelName"`
 	Index              *int32  `json:"index"`
 	Slots              []Slot  `json:"slots"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewSetFormByUserIdRequestFromJson(data string) SetFormByUserIdRequest {
@@ -1981,11 +2030,12 @@ func NewSetFormByUserIdRequestFromJson(data string) SetFormByUserIdRequest {
 
 func NewSetFormByUserIdRequestFromDict(data map[string]interface{}) SetFormByUserIdRequest {
 	return SetFormByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Index:         core.CastInt32(data["index"]),
-		Slots:         CastSlots(core.CastArray(data["slots"])),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		MoldModelName:   core.CastString(data["moldModelName"]),
+		Index:           core.CastInt32(data["index"]),
+		Slots:           CastSlots(core.CastArray(data["slots"])),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -1998,6 +2048,7 @@ func (p SetFormByUserIdRequest) ToDict() map[string]interface{} {
 		"slots": CastSlotsFromDict(
 			p.Slots,
 		),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2063,6 +2114,7 @@ type AcquireActionsToFormPropertiesRequest struct {
 	Index              *int32         `json:"index"`
 	AcquireAction      *AcquireAction `json:"acquireAction"`
 	Config             []Config       `json:"config"`
+	TimeOffsetToken    *string        `json:"timeOffsetToken"`
 }
 
 func NewAcquireActionsToFormPropertiesRequestFromJson(data string) AcquireActionsToFormPropertiesRequest {
@@ -2073,12 +2125,13 @@ func NewAcquireActionsToFormPropertiesRequestFromJson(data string) AcquireAction
 
 func NewAcquireActionsToFormPropertiesRequestFromDict(data map[string]interface{}) AcquireActionsToFormPropertiesRequest {
 	return AcquireActionsToFormPropertiesRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Index:         core.CastInt32(data["index"]),
-		AcquireAction: NewAcquireActionFromDict(core.CastMap(data["acquireAction"])).Pointer(),
-		Config:        CastConfigs(core.CastArray(data["config"])),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		MoldModelName:   core.CastString(data["moldModelName"]),
+		Index:           core.CastInt32(data["index"]),
+		AcquireAction:   NewAcquireActionFromDict(core.CastMap(data["acquireAction"])).Pointer(),
+		Config:          CastConfigs(core.CastArray(data["config"])),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -2092,6 +2145,7 @@ func (p AcquireActionsToFormPropertiesRequest) ToDict() map[string]interface{} {
 		"config": CastConfigsFromDict(
 			p.Config,
 		),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2147,6 +2201,7 @@ type DeleteFormByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	MoldModelName      *string `json:"moldModelName"`
 	Index              *int32  `json:"index"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDeleteFormByUserIdRequestFromJson(data string) DeleteFormByUserIdRequest {
@@ -2157,19 +2212,21 @@ func NewDeleteFormByUserIdRequestFromJson(data string) DeleteFormByUserIdRequest
 
 func NewDeleteFormByUserIdRequestFromDict(data map[string]interface{}) DeleteFormByUserIdRequest {
 	return DeleteFormByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Index:         core.CastInt32(data["index"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		MoldModelName:   core.CastString(data["moldModelName"]),
+		Index:           core.CastInt32(data["index"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DeleteFormByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"moldModelName": p.MoldModelName,
-		"index":         p.Index,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"moldModelName":   p.MoldModelName,
+		"index":           p.Index,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2291,6 +2348,7 @@ type DescribePropertyFormsByUserIdRequest struct {
 	PropertyFormModelName *string `json:"propertyFormModelName"`
 	PageToken             *string `json:"pageToken"`
 	Limit                 *int32  `json:"limit"`
+	TimeOffsetToken       *string `json:"timeOffsetToken"`
 }
 
 func NewDescribePropertyFormsByUserIdRequestFromJson(data string) DescribePropertyFormsByUserIdRequest {
@@ -2306,6 +2364,7 @@ func NewDescribePropertyFormsByUserIdRequestFromDict(data map[string]interface{}
 		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
 		PageToken:             core.CastString(data["pageToken"]),
 		Limit:                 core.CastInt32(data["limit"]),
+		TimeOffsetToken:       core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -2316,6 +2375,7 @@ func (p DescribePropertyFormsByUserIdRequest) ToDict() map[string]interface{} {
 		"propertyFormModelName": p.PropertyFormModelName,
 		"pageToken":             p.PageToken,
 		"limit":                 p.Limit,
+		"timeOffsetToken":       p.TimeOffsetToken,
 	}
 }
 
@@ -2369,6 +2429,7 @@ type GetPropertyFormByUserIdRequest struct {
 	UserId                *string `json:"userId"`
 	PropertyFormModelName *string `json:"propertyFormModelName"`
 	PropertyId            *string `json:"propertyId"`
+	TimeOffsetToken       *string `json:"timeOffsetToken"`
 }
 
 func NewGetPropertyFormByUserIdRequestFromJson(data string) GetPropertyFormByUserIdRequest {
@@ -2383,6 +2444,7 @@ func NewGetPropertyFormByUserIdRequestFromDict(data map[string]interface{}) GetP
 		UserId:                core.CastString(data["userId"]),
 		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
 		PropertyId:            core.CastString(data["propertyId"]),
+		TimeOffsetToken:       core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -2392,6 +2454,7 @@ func (p GetPropertyFormByUserIdRequest) ToDict() map[string]interface{} {
 		"userId":                p.UserId,
 		"propertyFormModelName": p.PropertyFormModelName,
 		"propertyId":            p.PropertyId,
+		"timeOffsetToken":       p.TimeOffsetToken,
 	}
 }
 
@@ -2449,6 +2512,7 @@ type GetPropertyFormWithSignatureByUserIdRequest struct {
 	PropertyFormModelName *string `json:"propertyFormModelName"`
 	PropertyId            *string `json:"propertyId"`
 	KeyId                 *string `json:"keyId"`
+	TimeOffsetToken       *string `json:"timeOffsetToken"`
 }
 
 func NewGetPropertyFormWithSignatureByUserIdRequestFromJson(data string) GetPropertyFormWithSignatureByUserIdRequest {
@@ -2464,6 +2528,7 @@ func NewGetPropertyFormWithSignatureByUserIdRequestFromDict(data map[string]inte
 		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
 		PropertyId:            core.CastString(data["propertyId"]),
 		KeyId:                 core.CastString(data["keyId"]),
+		TimeOffsetToken:       core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -2474,6 +2539,7 @@ func (p GetPropertyFormWithSignatureByUserIdRequest) ToDict() map[string]interfa
 		"propertyFormModelName": p.PropertyFormModelName,
 		"propertyId":            p.PropertyId,
 		"keyId":                 p.KeyId,
+		"timeOffsetToken":       p.TimeOffsetToken,
 	}
 }
 
@@ -2491,6 +2557,7 @@ type SetPropertyFormByUserIdRequest struct {
 	PropertyFormModelName *string `json:"propertyFormModelName"`
 	PropertyId            *string `json:"propertyId"`
 	Slots                 []Slot  `json:"slots"`
+	TimeOffsetToken       *string `json:"timeOffsetToken"`
 }
 
 func NewSetPropertyFormByUserIdRequestFromJson(data string) SetPropertyFormByUserIdRequest {
@@ -2506,6 +2573,7 @@ func NewSetPropertyFormByUserIdRequestFromDict(data map[string]interface{}) SetP
 		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
 		PropertyId:            core.CastString(data["propertyId"]),
 		Slots:                 CastSlots(core.CastArray(data["slots"])),
+		TimeOffsetToken:       core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -2518,6 +2586,7 @@ func (p SetPropertyFormByUserIdRequest) ToDict() map[string]interface{} {
 		"slots": CastSlotsFromDict(
 			p.Slots,
 		),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2583,6 +2652,7 @@ type AcquireActionsToPropertyFormPropertiesRequest struct {
 	PropertyId            *string        `json:"propertyId"`
 	AcquireAction         *AcquireAction `json:"acquireAction"`
 	Config                []Config       `json:"config"`
+	TimeOffsetToken       *string        `json:"timeOffsetToken"`
 }
 
 func NewAcquireActionsToPropertyFormPropertiesRequestFromJson(data string) AcquireActionsToPropertyFormPropertiesRequest {
@@ -2599,6 +2669,7 @@ func NewAcquireActionsToPropertyFormPropertiesRequestFromDict(data map[string]in
 		PropertyId:            core.CastString(data["propertyId"]),
 		AcquireAction:         NewAcquireActionFromDict(core.CastMap(data["acquireAction"])).Pointer(),
 		Config:                CastConfigs(core.CastArray(data["config"])),
+		TimeOffsetToken:       core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -2612,6 +2683,7 @@ func (p AcquireActionsToPropertyFormPropertiesRequest) ToDict() map[string]inter
 		"config": CastConfigsFromDict(
 			p.Config,
 		),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2667,6 +2739,7 @@ type DeletePropertyFormByUserIdRequest struct {
 	UserId                *string `json:"userId"`
 	PropertyFormModelName *string `json:"propertyFormModelName"`
 	PropertyId            *string `json:"propertyId"`
+	TimeOffsetToken       *string `json:"timeOffsetToken"`
 }
 
 func NewDeletePropertyFormByUserIdRequestFromJson(data string) DeletePropertyFormByUserIdRequest {
@@ -2681,6 +2754,7 @@ func NewDeletePropertyFormByUserIdRequestFromDict(data map[string]interface{}) D
 		UserId:                core.CastString(data["userId"]),
 		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
 		PropertyId:            core.CastString(data["propertyId"]),
+		TimeOffsetToken:       core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -2690,6 +2764,7 @@ func (p DeletePropertyFormByUserIdRequest) ToDict() map[string]interface{} {
 		"userId":                p.UserId,
 		"propertyFormModelName": p.PropertyFormModelName,
 		"propertyId":            p.PropertyId,
+		"timeOffsetToken":       p.TimeOffsetToken,
 	}
 }
 

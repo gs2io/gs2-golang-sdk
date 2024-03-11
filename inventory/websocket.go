@@ -618,6 +618,9 @@ func (p Gs2InventoryWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -701,6 +704,9 @@ func (p Gs2InventoryWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -786,6 +792,9 @@ func (p Gs2InventoryWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -870,6 +879,9 @@ func (p Gs2InventoryWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -953,6 +965,9 @@ func (p Gs2InventoryWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1041,6 +1056,9 @@ func (p Gs2InventoryWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1127,6 +1145,9 @@ func (p Gs2InventoryWebSocketClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -5343,6 +5364,9 @@ func (p Gs2InventoryWebSocketClient) DescribeInventoriesByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -5520,6 +5544,9 @@ func (p Gs2InventoryWebSocketClient) GetInventoryByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -5609,6 +5636,9 @@ func (p Gs2InventoryWebSocketClient) AddCapacityByUserIdAsync(
 	}
 	if request.AddCapacityValue != nil {
 		bodies["addCapacityValue"] = *request.AddCapacityValue
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -5703,6 +5733,9 @@ func (p Gs2InventoryWebSocketClient) SetCapacityByUserIdAsync(
 	if request.NewCapacityValue != nil {
 		bodies["newCapacityValue"] = *request.NewCapacityValue
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -5792,6 +5825,9 @@ func (p Gs2InventoryWebSocketClient) DeleteInventoryByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -5993,6 +6029,9 @@ func (p Gs2InventoryWebSocketClient) VerifyInventoryCurrentMaxCapacityByUserIdAs
 	}
 	if request.MultiplyValueSpecifyingQuantity != nil {
 		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -6438,6 +6477,9 @@ func (p Gs2InventoryWebSocketClient) DescribeItemSetsByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -6626,6 +6668,9 @@ func (p Gs2InventoryWebSocketClient) GetItemSetByUserIdAsync(
 	}
 	if request.ItemSetName != nil && *request.ItemSetName != "" {
 		bodies["itemSetName"] = *request.ItemSetName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -6822,6 +6867,9 @@ func (p Gs2InventoryWebSocketClient) GetItemWithSignatureByUserIdAsync(
 	if request.KeyId != nil && *request.KeyId != "" {
 		bodies["keyId"] = *request.KeyId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -6930,6 +6978,9 @@ func (p Gs2InventoryWebSocketClient) AcquireItemSetByUserIdAsync(
 	if request.ItemSetName != nil && *request.ItemSetName != "" {
 		bodies["itemSetName"] = *request.ItemSetName
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -7034,6 +7085,9 @@ func (p Gs2InventoryWebSocketClient) AcquireItemSetWithGradeByUserIdAsync(
 	}
 	if request.GradeValue != nil {
 		bodies["gradeValue"] = *request.GradeValue
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -7254,6 +7308,9 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetByUserIdAsync(
 	if request.ItemSetName != nil && *request.ItemSetName != "" {
 		bodies["itemSetName"] = *request.ItemSetName
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -7349,6 +7406,9 @@ func (p Gs2InventoryWebSocketClient) DeleteItemSetByUserIdAsync(
 	}
 	if request.ItemSetName != nil && *request.ItemSetName != "" {
 		bodies["itemSetName"] = *request.ItemSetName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -7562,6 +7622,9 @@ func (p Gs2InventoryWebSocketClient) VerifyItemSetByUserIdAsync(
 	}
 	if request.MultiplyValueSpecifyingQuantity != nil {
 		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -8091,6 +8154,9 @@ func (p Gs2InventoryWebSocketClient) DescribeReferenceOfByUserIdAsync(
 	if request.ItemSetName != nil && *request.ItemSetName != "" {
 		bodies["itemSetName"] = *request.ItemSetName
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -8285,6 +8351,9 @@ func (p Gs2InventoryWebSocketClient) GetReferenceOfByUserIdAsync(
 	}
 	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
 		bodies["referenceOf"] = *request.ReferenceOf
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -8490,6 +8559,9 @@ func (p Gs2InventoryWebSocketClient) VerifyReferenceOfByUserIdAsync(
 	if request.VerifyType != nil && *request.VerifyType != "" {
 		bodies["verifyType"] = *request.VerifyType
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -8691,6 +8763,9 @@ func (p Gs2InventoryWebSocketClient) AddReferenceOfByUserIdAsync(
 	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
 		bodies["referenceOf"] = *request.ReferenceOf
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -8891,6 +8966,9 @@ func (p Gs2InventoryWebSocketClient) DeleteReferenceOfByUserIdAsync(
 	}
 	if request.ReferenceOf != nil && *request.ReferenceOf != "" {
 		bodies["referenceOf"] = *request.ReferenceOf
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -9336,6 +9414,9 @@ func (p Gs2InventoryWebSocketClient) DescribeSimpleItemsByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -9518,6 +9599,9 @@ func (p Gs2InventoryWebSocketClient) GetSimpleItemByUserIdAsync(
 	}
 	if request.ItemName != nil && *request.ItemName != "" {
 		bodies["itemName"] = *request.ItemName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -9708,6 +9792,9 @@ func (p Gs2InventoryWebSocketClient) GetSimpleItemWithSignatureByUserIdAsync(
 	if request.KeyId != nil && *request.KeyId != "" {
 		bodies["keyId"] = *request.KeyId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -9807,6 +9894,9 @@ func (p Gs2InventoryWebSocketClient) AcquireSimpleItemsByUserIdAsync(
 			_acquireCounts = append(_acquireCounts, item)
 		}
 		bodies["acquireCounts"] = _acquireCounts
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -10023,6 +10113,9 @@ func (p Gs2InventoryWebSocketClient) ConsumeSimpleItemsByUserIdAsync(
 		}
 		bodies["consumeCounts"] = _consumeCounts
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -10126,6 +10219,9 @@ func (p Gs2InventoryWebSocketClient) SetSimpleItemsByUserIdAsync(
 		}
 		bodies["counts"] = _counts
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -10215,6 +10311,9 @@ func (p Gs2InventoryWebSocketClient) DeleteSimpleItemsByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -10422,6 +10521,9 @@ func (p Gs2InventoryWebSocketClient) VerifySimpleItemByUserIdAsync(
 	}
 	if request.MultiplyValueSpecifyingQuantity != nil {
 		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -10951,6 +11053,9 @@ func (p Gs2InventoryWebSocketClient) DescribeBigItemsByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -11134,6 +11239,9 @@ func (p Gs2InventoryWebSocketClient) GetBigItemByUserIdAsync(
 	if request.ItemName != nil && *request.ItemName != "" {
 		bodies["itemName"] = *request.ItemName
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -11232,6 +11340,9 @@ func (p Gs2InventoryWebSocketClient) AcquireBigItemByUserIdAsync(
 	}
 	if request.AcquireCount != nil && *request.AcquireCount != "" {
 		bodies["acquireCount"] = *request.AcquireCount
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -11446,6 +11557,9 @@ func (p Gs2InventoryWebSocketClient) ConsumeBigItemByUserIdAsync(
 	if request.ConsumeCount != nil && *request.ConsumeCount != "" {
 		bodies["consumeCount"] = *request.ConsumeCount
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -11548,6 +11662,9 @@ func (p Gs2InventoryWebSocketClient) SetBigItemByUserIdAsync(
 	if request.Count != nil && *request.Count != "" {
 		bodies["count"] = *request.Count
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -11640,6 +11757,9 @@ func (p Gs2InventoryWebSocketClient) DeleteBigItemByUserIdAsync(
 	}
 	if request.ItemName != nil && *request.ItemName != "" {
 		bodies["itemName"] = *request.ItemName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -11847,6 +11967,9 @@ func (p Gs2InventoryWebSocketClient) VerifyBigItemByUserIdAsync(
 	}
 	if request.MultiplyValueSpecifyingQuantity != nil {
 		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

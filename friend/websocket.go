@@ -654,6 +654,9 @@ func (p Gs2FriendWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -737,6 +740,9 @@ func (p Gs2FriendWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -822,6 +828,9 @@ func (p Gs2FriendWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -906,6 +915,9 @@ func (p Gs2FriendWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -989,6 +1001,9 @@ func (p Gs2FriendWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1077,6 +1092,9 @@ func (p Gs2FriendWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1163,6 +1181,9 @@ func (p Gs2FriendWebSocketClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1337,6 +1358,9 @@ func (p Gs2FriendWebSocketClient) GetProfileByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1530,6 +1554,9 @@ func (p Gs2FriendWebSocketClient) UpdateProfileByUserIdAsync(
 	if request.FriendProfile != nil && *request.FriendProfile != "" {
 		bodies["friendProfile"] = *request.FriendProfile
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1616,6 +1643,9 @@ func (p Gs2FriendWebSocketClient) DeleteProfileByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1809,6 +1839,9 @@ func (p Gs2FriendWebSocketClient) DescribeFriendsByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1992,6 +2025,9 @@ func (p Gs2FriendWebSocketClient) DescribeBlackListByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2171,6 +2207,9 @@ func (p Gs2FriendWebSocketClient) RegisterBlackListByUserIdAsync(
 	}
 	if request.TargetUserId != nil && *request.TargetUserId != "" {
 		bodies["targetUserId"] = *request.TargetUserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2354,6 +2393,9 @@ func (p Gs2FriendWebSocketClient) UnregisterBlackListByUserIdAsync(
 	}
 	if request.TargetUserId != nil && *request.TargetUserId != "" {
 		bodies["targetUserId"] = *request.TargetUserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2547,6 +2589,9 @@ func (p Gs2FriendWebSocketClient) DescribeFollowsByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2730,6 +2775,9 @@ func (p Gs2FriendWebSocketClient) GetFollowByUserIdAsync(
 	if request.WithProfile != nil {
 		bodies["withProfile"] = *request.WithProfile
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2909,6 +2957,9 @@ func (p Gs2FriendWebSocketClient) FollowByUserIdAsync(
 	}
 	if request.TargetUserId != nil && *request.TargetUserId != "" {
 		bodies["targetUserId"] = *request.TargetUserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3092,6 +3143,9 @@ func (p Gs2FriendWebSocketClient) UnfollowByUserIdAsync(
 	}
 	if request.TargetUserId != nil && *request.TargetUserId != "" {
 		bodies["targetUserId"] = *request.TargetUserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3279,6 +3333,9 @@ func (p Gs2FriendWebSocketClient) GetFriendByUserIdAsync(
 	if request.WithProfile != nil {
 		bodies["withProfile"] = *request.WithProfile
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3458,6 +3515,9 @@ func (p Gs2FriendWebSocketClient) DeleteFriendByUserIdAsync(
 	}
 	if request.TargetUserId != nil && *request.TargetUserId != "" {
 		bodies["targetUserId"] = *request.TargetUserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3645,6 +3705,9 @@ func (p Gs2FriendWebSocketClient) DescribeSendRequestsByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3821,6 +3884,9 @@ func (p Gs2FriendWebSocketClient) GetSendRequestByUserIdAsync(
 	}
 	if request.TargetUserId != nil && *request.TargetUserId != "" {
 		bodies["targetUserId"] = *request.TargetUserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -4001,6 +4067,9 @@ func (p Gs2FriendWebSocketClient) SendRequestByUserIdAsync(
 	}
 	if request.TargetUserId != nil && *request.TargetUserId != "" {
 		bodies["targetUserId"] = *request.TargetUserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -4184,6 +4253,9 @@ func (p Gs2FriendWebSocketClient) DeleteRequestByUserIdAsync(
 	}
 	if request.TargetUserId != nil && *request.TargetUserId != "" {
 		bodies["targetUserId"] = *request.TargetUserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -4371,6 +4443,9 @@ func (p Gs2FriendWebSocketClient) DescribeReceiveRequestsByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -4547,6 +4622,9 @@ func (p Gs2FriendWebSocketClient) GetReceiveRequestByUserIdAsync(
 	}
 	if request.FromUserId != nil && *request.FromUserId != "" {
 		bodies["fromUserId"] = *request.FromUserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -4727,6 +4805,9 @@ func (p Gs2FriendWebSocketClient) AcceptRequestByUserIdAsync(
 	}
 	if request.FromUserId != nil && *request.FromUserId != "" {
 		bodies["fromUserId"] = *request.FromUserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -4911,6 +4992,9 @@ func (p Gs2FriendWebSocketClient) RejectRequestByUserIdAsync(
 	if request.FromUserId != nil && *request.FromUserId != "" {
 		bodies["fromUserId"] = *request.FromUserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -4997,6 +5081,9 @@ func (p Gs2FriendWebSocketClient) GetPublicProfileAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

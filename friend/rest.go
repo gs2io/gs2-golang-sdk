@@ -704,6 +704,9 @@ func (p Gs2FriendRestClient) DumpUserDataByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
@@ -793,6 +796,9 @@ func (p Gs2FriendRestClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go checkDumpUserDataByUserIdAsyncHandler(
@@ -887,6 +893,9 @@ func (p Gs2FriendRestClient) CleanUserDataByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
@@ -976,6 +985,9 @@ func (p Gs2FriendRestClient) CheckCleanUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go checkCleanUserDataByUserIdAsyncHandler(
@@ -1069,6 +1081,9 @@ func (p Gs2FriendRestClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go prepareImportUserDataByUserIdAsyncHandler(
@@ -1166,6 +1181,9 @@ func (p Gs2FriendRestClient) ImportUserDataByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go importUserDataByUserIdAsyncHandler(
 		p,
@@ -1260,6 +1278,9 @@ func (p Gs2FriendRestClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go checkImportUserDataByUserIdAsyncHandler(
@@ -1442,6 +1463,9 @@ func (p Gs2FriendRestClient) GetProfileByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go getProfileByUserIdAsyncHandler(
@@ -1655,6 +1679,9 @@ func (p Gs2FriendRestClient) UpdateProfileByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go updateProfileByUserIdAsyncHandler(
 		p,
@@ -1749,6 +1776,9 @@ func (p Gs2FriendRestClient) DeleteProfileByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go deleteProfileByUserIdAsyncHandler(
@@ -1950,6 +1980,9 @@ func (p Gs2FriendRestClient) DescribeFriendsByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go describeFriendsByUserIdAsyncHandler(
 		p,
@@ -2143,6 +2176,9 @@ func (p Gs2FriendRestClient) DescribeBlackListByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go describeBlackListByUserIdAsyncHandler(
@@ -2348,6 +2384,9 @@ func (p Gs2FriendRestClient) RegisterBlackListByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go registerBlackListByUserIdAsyncHandler(
 		p,
@@ -2545,6 +2584,9 @@ func (p Gs2FriendRestClient) UnregisterBlackListByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go unregisterBlackListByUserIdAsyncHandler(
@@ -2746,6 +2788,9 @@ func (p Gs2FriendRestClient) DescribeFollowsByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go describeFollowsByUserIdAsyncHandler(
 		p,
@@ -2943,6 +2988,9 @@ func (p Gs2FriendRestClient) GetFollowByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go getFollowByUserIdAsyncHandler(
@@ -3148,6 +3196,9 @@ func (p Gs2FriendRestClient) FollowByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go followByUserIdAsyncHandler(
 		p,
@@ -3345,6 +3396,9 @@ func (p Gs2FriendRestClient) UnfollowByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go unfollowByUserIdAsyncHandler(
@@ -3544,6 +3598,9 @@ func (p Gs2FriendRestClient) GetFriendByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go getFriendByUserIdAsyncHandler(
 		p,
@@ -3742,6 +3799,9 @@ func (p Gs2FriendRestClient) DeleteFriendByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go deleteFriendByUserIdAsyncHandler(
 		p,
@@ -3936,6 +3996,9 @@ func (p Gs2FriendRestClient) DescribeSendRequestsByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go describeSendRequestsByUserIdAsyncHandler(
 		p,
@@ -4127,6 +4190,9 @@ func (p Gs2FriendRestClient) GetSendRequestByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go getSendRequestByUserIdAsyncHandler(
@@ -4332,6 +4398,9 @@ func (p Gs2FriendRestClient) SendRequestByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go sendRequestByUserIdAsyncHandler(
 		p,
@@ -4530,6 +4599,9 @@ func (p Gs2FriendRestClient) DeleteRequestByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go deleteRequestByUserIdAsyncHandler(
 		p,
@@ -4724,6 +4796,9 @@ func (p Gs2FriendRestClient) DescribeReceiveRequestsByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go describeReceiveRequestsByUserIdAsyncHandler(
 		p,
@@ -4915,6 +4990,9 @@ func (p Gs2FriendRestClient) GetReceiveRequestByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go getReceiveRequestByUserIdAsyncHandler(
@@ -5120,6 +5198,9 @@ func (p Gs2FriendRestClient) AcceptRequestByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go acceptRequestByUserIdAsyncHandler(
 		p,
@@ -5318,6 +5399,9 @@ func (p Gs2FriendRestClient) RejectRequestByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go rejectRequestByUserIdAsyncHandler(
 		p,
@@ -5409,6 +5493,9 @@ func (p Gs2FriendRestClient) GetPublicProfileAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go getPublicProfileAsyncHandler(

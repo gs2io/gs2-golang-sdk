@@ -650,6 +650,9 @@ func (p Gs2IdleRestClient) DumpUserDataByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
@@ -739,6 +742,9 @@ func (p Gs2IdleRestClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go checkDumpUserDataByUserIdAsyncHandler(
@@ -833,6 +839,9 @@ func (p Gs2IdleRestClient) CleanUserDataByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
@@ -922,6 +931,9 @@ func (p Gs2IdleRestClient) CheckCleanUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go checkCleanUserDataByUserIdAsyncHandler(
@@ -1015,6 +1027,9 @@ func (p Gs2IdleRestClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go prepareImportUserDataByUserIdAsyncHandler(
@@ -1112,6 +1127,9 @@ func (p Gs2IdleRestClient) ImportUserDataByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go importUserDataByUserIdAsyncHandler(
 		p,
@@ -1206,6 +1224,9 @@ func (p Gs2IdleRestClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go checkImportUserDataByUserIdAsyncHandler(
@@ -2095,6 +2116,9 @@ func (p Gs2IdleRestClient) DescribeStatusesByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go describeStatusesByUserIdAsyncHandler(
 		p,
@@ -2286,6 +2310,9 @@ func (p Gs2IdleRestClient) GetStatusByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go getStatusByUserIdAsyncHandler(
@@ -2490,6 +2517,9 @@ func (p Gs2IdleRestClient) PredictionByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go predictionByUserIdAsyncHandler(
@@ -2709,6 +2739,9 @@ func (p Gs2IdleRestClient) ReceiveByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go receiveByUserIdAsyncHandler(
 		p,
@@ -2814,6 +2847,9 @@ func (p Gs2IdleRestClient) IncreaseMaximumIdleMinutesByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go increaseMaximumIdleMinutesByUserIdAsyncHandler(
@@ -2921,6 +2957,9 @@ func (p Gs2IdleRestClient) DecreaseMaximumIdleMinutesByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go decreaseMaximumIdleMinutesByUserIdAsyncHandler(
 		p,
@@ -3026,6 +3065,9 @@ func (p Gs2IdleRestClient) SetMaximumIdleMinutesByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go setMaximumIdleMinutesByUserIdAsyncHandler(

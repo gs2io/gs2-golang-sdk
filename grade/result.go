@@ -18,9 +18,9 @@ package grade
 
 import (
 	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/experience"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
-	"github.com/gs2io/gs2-golang-sdk/experience"
 )
 
 type DescribeNamespacesResult struct {

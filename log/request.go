@@ -267,6 +267,7 @@ type QueryAccessLogRequest struct {
 	LongTerm           *bool   `json:"longTerm"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewQueryAccessLogRequestFromJson(data string) QueryAccessLogRequest {
@@ -277,29 +278,31 @@ func NewQueryAccessLogRequestFromJson(data string) QueryAccessLogRequest {
 
 func NewQueryAccessLogRequestFromDict(data map[string]interface{}) QueryAccessLogRequest {
 	return QueryAccessLogRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Service:       core.CastString(data["service"]),
-		Method:        core.CastString(data["method"]),
-		UserId:        core.CastString(data["userId"]),
-		Begin:         core.CastInt64(data["begin"]),
-		End:           core.CastInt64(data["end"]),
-		LongTerm:      core.CastBool(data["longTerm"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		Service:         core.CastString(data["service"]),
+		Method:          core.CastString(data["method"]),
+		UserId:          core.CastString(data["userId"]),
+		Begin:           core.CastInt64(data["begin"]),
+		End:             core.CastInt64(data["end"]),
+		LongTerm:        core.CastBool(data["longTerm"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p QueryAccessLogRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"service":       p.Service,
-		"method":        p.Method,
-		"userId":        p.UserId,
-		"begin":         p.Begin,
-		"end":           p.End,
-		"longTerm":      p.LongTerm,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"service":         p.Service,
+		"method":          p.Method,
+		"userId":          p.UserId,
+		"begin":           p.Begin,
+		"end":             p.End,
+		"longTerm":        p.LongTerm,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -320,6 +323,7 @@ type CountAccessLogRequest struct {
 	LongTerm        *bool   `json:"longTerm"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewCountAccessLogRequestFromJson(data string) CountAccessLogRequest {
@@ -330,29 +334,31 @@ func NewCountAccessLogRequestFromJson(data string) CountAccessLogRequest {
 
 func NewCountAccessLogRequestFromDict(data map[string]interface{}) CountAccessLogRequest {
 	return CountAccessLogRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Service:       core.CastBool(data["service"]),
-		Method:        core.CastBool(data["method"]),
-		UserId:        core.CastBool(data["userId"]),
-		Begin:         core.CastInt64(data["begin"]),
-		End:           core.CastInt64(data["end"]),
-		LongTerm:      core.CastBool(data["longTerm"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		Service:         core.CastBool(data["service"]),
+		Method:          core.CastBool(data["method"]),
+		UserId:          core.CastBool(data["userId"]),
+		Begin:           core.CastInt64(data["begin"]),
+		End:             core.CastInt64(data["end"]),
+		LongTerm:        core.CastBool(data["longTerm"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CountAccessLogRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"service":       p.Service,
-		"method":        p.Method,
-		"userId":        p.UserId,
-		"begin":         p.Begin,
-		"end":           p.End,
-		"longTerm":      p.LongTerm,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"service":         p.Service,
+		"method":          p.Method,
+		"userId":          p.UserId,
+		"begin":           p.Begin,
+		"end":             p.End,
+		"longTerm":        p.LongTerm,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -375,6 +381,7 @@ type QueryIssueStampSheetLogRequest struct {
 	LongTerm           *bool   `json:"longTerm"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewQueryIssueStampSheetLogRequestFromJson(data string) QueryIssueStampSheetLogRequest {
@@ -385,31 +392,33 @@ func NewQueryIssueStampSheetLogRequestFromJson(data string) QueryIssueStampSheet
 
 func NewQueryIssueStampSheetLogRequestFromDict(data map[string]interface{}) QueryIssueStampSheetLogRequest {
 	return QueryIssueStampSheetLogRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Service:       core.CastString(data["service"]),
-		Method:        core.CastString(data["method"]),
-		UserId:        core.CastString(data["userId"]),
-		Action:        core.CastString(data["action"]),
-		Begin:         core.CastInt64(data["begin"]),
-		End:           core.CastInt64(data["end"]),
-		LongTerm:      core.CastBool(data["longTerm"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		Service:         core.CastString(data["service"]),
+		Method:          core.CastString(data["method"]),
+		UserId:          core.CastString(data["userId"]),
+		Action:          core.CastString(data["action"]),
+		Begin:           core.CastInt64(data["begin"]),
+		End:             core.CastInt64(data["end"]),
+		LongTerm:        core.CastBool(data["longTerm"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p QueryIssueStampSheetLogRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"service":       p.Service,
-		"method":        p.Method,
-		"userId":        p.UserId,
-		"action":        p.Action,
-		"begin":         p.Begin,
-		"end":           p.End,
-		"longTerm":      p.LongTerm,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"service":         p.Service,
+		"method":          p.Method,
+		"userId":          p.UserId,
+		"action":          p.Action,
+		"begin":           p.Begin,
+		"end":             p.End,
+		"longTerm":        p.LongTerm,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -431,6 +440,7 @@ type CountIssueStampSheetLogRequest struct {
 	LongTerm        *bool   `json:"longTerm"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewCountIssueStampSheetLogRequestFromJson(data string) CountIssueStampSheetLogRequest {
@@ -441,31 +451,33 @@ func NewCountIssueStampSheetLogRequestFromJson(data string) CountIssueStampSheet
 
 func NewCountIssueStampSheetLogRequestFromDict(data map[string]interface{}) CountIssueStampSheetLogRequest {
 	return CountIssueStampSheetLogRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Service:       core.CastBool(data["service"]),
-		Method:        core.CastBool(data["method"]),
-		UserId:        core.CastBool(data["userId"]),
-		Action:        core.CastBool(data["action"]),
-		Begin:         core.CastInt64(data["begin"]),
-		End:           core.CastInt64(data["end"]),
-		LongTerm:      core.CastBool(data["longTerm"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		Service:         core.CastBool(data["service"]),
+		Method:          core.CastBool(data["method"]),
+		UserId:          core.CastBool(data["userId"]),
+		Action:          core.CastBool(data["action"]),
+		Begin:           core.CastInt64(data["begin"]),
+		End:             core.CastInt64(data["end"]),
+		LongTerm:        core.CastBool(data["longTerm"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CountIssueStampSheetLogRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"service":       p.Service,
-		"method":        p.Method,
-		"userId":        p.UserId,
-		"action":        p.Action,
-		"begin":         p.Begin,
-		"end":           p.End,
-		"longTerm":      p.LongTerm,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"service":         p.Service,
+		"method":          p.Method,
+		"userId":          p.UserId,
+		"action":          p.Action,
+		"begin":           p.Begin,
+		"end":             p.End,
+		"longTerm":        p.LongTerm,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -488,6 +500,7 @@ type QueryExecuteStampSheetLogRequest struct {
 	LongTerm           *bool   `json:"longTerm"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewQueryExecuteStampSheetLogRequestFromJson(data string) QueryExecuteStampSheetLogRequest {
@@ -498,31 +511,33 @@ func NewQueryExecuteStampSheetLogRequestFromJson(data string) QueryExecuteStampS
 
 func NewQueryExecuteStampSheetLogRequestFromDict(data map[string]interface{}) QueryExecuteStampSheetLogRequest {
 	return QueryExecuteStampSheetLogRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Service:       core.CastString(data["service"]),
-		Method:        core.CastString(data["method"]),
-		UserId:        core.CastString(data["userId"]),
-		Action:        core.CastString(data["action"]),
-		Begin:         core.CastInt64(data["begin"]),
-		End:           core.CastInt64(data["end"]),
-		LongTerm:      core.CastBool(data["longTerm"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		Service:         core.CastString(data["service"]),
+		Method:          core.CastString(data["method"]),
+		UserId:          core.CastString(data["userId"]),
+		Action:          core.CastString(data["action"]),
+		Begin:           core.CastInt64(data["begin"]),
+		End:             core.CastInt64(data["end"]),
+		LongTerm:        core.CastBool(data["longTerm"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p QueryExecuteStampSheetLogRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"service":       p.Service,
-		"method":        p.Method,
-		"userId":        p.UserId,
-		"action":        p.Action,
-		"begin":         p.Begin,
-		"end":           p.End,
-		"longTerm":      p.LongTerm,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"service":         p.Service,
+		"method":          p.Method,
+		"userId":          p.UserId,
+		"action":          p.Action,
+		"begin":           p.Begin,
+		"end":             p.End,
+		"longTerm":        p.LongTerm,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -544,6 +559,7 @@ type CountExecuteStampSheetLogRequest struct {
 	LongTerm        *bool   `json:"longTerm"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewCountExecuteStampSheetLogRequestFromJson(data string) CountExecuteStampSheetLogRequest {
@@ -554,31 +570,33 @@ func NewCountExecuteStampSheetLogRequestFromJson(data string) CountExecuteStampS
 
 func NewCountExecuteStampSheetLogRequestFromDict(data map[string]interface{}) CountExecuteStampSheetLogRequest {
 	return CountExecuteStampSheetLogRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Service:       core.CastBool(data["service"]),
-		Method:        core.CastBool(data["method"]),
-		UserId:        core.CastBool(data["userId"]),
-		Action:        core.CastBool(data["action"]),
-		Begin:         core.CastInt64(data["begin"]),
-		End:           core.CastInt64(data["end"]),
-		LongTerm:      core.CastBool(data["longTerm"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		Service:         core.CastBool(data["service"]),
+		Method:          core.CastBool(data["method"]),
+		UserId:          core.CastBool(data["userId"]),
+		Action:          core.CastBool(data["action"]),
+		Begin:           core.CastInt64(data["begin"]),
+		End:             core.CastInt64(data["end"]),
+		LongTerm:        core.CastBool(data["longTerm"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CountExecuteStampSheetLogRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"service":       p.Service,
-		"method":        p.Method,
-		"userId":        p.UserId,
-		"action":        p.Action,
-		"begin":         p.Begin,
-		"end":           p.End,
-		"longTerm":      p.LongTerm,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"service":         p.Service,
+		"method":          p.Method,
+		"userId":          p.UserId,
+		"action":          p.Action,
+		"begin":           p.Begin,
+		"end":             p.End,
+		"longTerm":        p.LongTerm,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -601,6 +619,7 @@ type QueryExecuteStampTaskLogRequest struct {
 	LongTerm           *bool   `json:"longTerm"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewQueryExecuteStampTaskLogRequestFromJson(data string) QueryExecuteStampTaskLogRequest {
@@ -611,31 +630,33 @@ func NewQueryExecuteStampTaskLogRequestFromJson(data string) QueryExecuteStampTa
 
 func NewQueryExecuteStampTaskLogRequestFromDict(data map[string]interface{}) QueryExecuteStampTaskLogRequest {
 	return QueryExecuteStampTaskLogRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Service:       core.CastString(data["service"]),
-		Method:        core.CastString(data["method"]),
-		UserId:        core.CastString(data["userId"]),
-		Action:        core.CastString(data["action"]),
-		Begin:         core.CastInt64(data["begin"]),
-		End:           core.CastInt64(data["end"]),
-		LongTerm:      core.CastBool(data["longTerm"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		Service:         core.CastString(data["service"]),
+		Method:          core.CastString(data["method"]),
+		UserId:          core.CastString(data["userId"]),
+		Action:          core.CastString(data["action"]),
+		Begin:           core.CastInt64(data["begin"]),
+		End:             core.CastInt64(data["end"]),
+		LongTerm:        core.CastBool(data["longTerm"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p QueryExecuteStampTaskLogRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"service":       p.Service,
-		"method":        p.Method,
-		"userId":        p.UserId,
-		"action":        p.Action,
-		"begin":         p.Begin,
-		"end":           p.End,
-		"longTerm":      p.LongTerm,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"service":         p.Service,
+		"method":          p.Method,
+		"userId":          p.UserId,
+		"action":          p.Action,
+		"begin":           p.Begin,
+		"end":             p.End,
+		"longTerm":        p.LongTerm,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -657,6 +678,7 @@ type CountExecuteStampTaskLogRequest struct {
 	LongTerm        *bool   `json:"longTerm"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewCountExecuteStampTaskLogRequestFromJson(data string) CountExecuteStampTaskLogRequest {
@@ -667,31 +689,33 @@ func NewCountExecuteStampTaskLogRequestFromJson(data string) CountExecuteStampTa
 
 func NewCountExecuteStampTaskLogRequestFromDict(data map[string]interface{}) CountExecuteStampTaskLogRequest {
 	return CountExecuteStampTaskLogRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Service:       core.CastBool(data["service"]),
-		Method:        core.CastBool(data["method"]),
-		UserId:        core.CastBool(data["userId"]),
-		Action:        core.CastBool(data["action"]),
-		Begin:         core.CastInt64(data["begin"]),
-		End:           core.CastInt64(data["end"]),
-		LongTerm:      core.CastBool(data["longTerm"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		Service:         core.CastBool(data["service"]),
+		Method:          core.CastBool(data["method"]),
+		UserId:          core.CastBool(data["userId"]),
+		Action:          core.CastBool(data["action"]),
+		Begin:           core.CastInt64(data["begin"]),
+		End:             core.CastInt64(data["end"]),
+		LongTerm:        core.CastBool(data["longTerm"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CountExecuteStampTaskLogRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"service":       p.Service,
-		"method":        p.Method,
-		"userId":        p.UserId,
-		"action":        p.Action,
-		"begin":         p.Begin,
-		"end":           p.End,
-		"longTerm":      p.LongTerm,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"service":         p.Service,
+		"method":          p.Method,
+		"userId":          p.UserId,
+		"action":          p.Action,
+		"begin":           p.Begin,
+		"end":             p.End,
+		"longTerm":        p.LongTerm,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -711,6 +735,7 @@ type QueryAccessLogWithTelemetryRequest struct {
 	LongTerm           *bool   `json:"longTerm"`
 	PageToken          *string `json:"pageToken"`
 	Limit              *int32  `json:"limit"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewQueryAccessLogWithTelemetryRequestFromJson(data string) QueryAccessLogWithTelemetryRequest {
@@ -721,25 +746,27 @@ func NewQueryAccessLogWithTelemetryRequestFromJson(data string) QueryAccessLogWi
 
 func NewQueryAccessLogWithTelemetryRequestFromDict(data map[string]interface{}) QueryAccessLogWithTelemetryRequest {
 	return QueryAccessLogWithTelemetryRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		Begin:         core.CastInt64(data["begin"]),
-		End:           core.CastInt64(data["end"]),
-		LongTerm:      core.CastBool(data["longTerm"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		Begin:           core.CastInt64(data["begin"]),
+		End:             core.CastInt64(data["end"]),
+		LongTerm:        core.CastBool(data["longTerm"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p QueryAccessLogWithTelemetryRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"begin":         p.Begin,
-		"end":           p.End,
-		"longTerm":      p.LongTerm,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"begin":           p.Begin,
+		"end":             p.End,
+		"longTerm":        p.LongTerm,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 

@@ -482,6 +482,7 @@ type DescribeNewsByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewDescribeNewsByUserIdRequestFromJson(data string) DescribeNewsByUserIdRequest {
@@ -492,15 +493,17 @@ func NewDescribeNewsByUserIdRequestFromJson(data string) DescribeNewsByUserIdReq
 
 func NewDescribeNewsByUserIdRequestFromDict(data map[string]interface{}) DescribeNewsByUserIdRequest {
 	return DescribeNewsByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DescribeNewsByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -546,6 +549,7 @@ type WantGrantByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewWantGrantByUserIdRequestFromJson(data string) WantGrantByUserIdRequest {
@@ -556,15 +560,17 @@ func NewWantGrantByUserIdRequestFromJson(data string) WantGrantByUserIdRequest {
 
 func NewWantGrantByUserIdRequestFromDict(data map[string]interface{}) WantGrantByUserIdRequest {
 	return WantGrantByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p WantGrantByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 

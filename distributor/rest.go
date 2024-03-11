@@ -1694,6 +1694,9 @@ func (p Gs2DistributorRestClient) DistributeAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go distributeAsyncHandler(
 		p,
@@ -1784,6 +1787,9 @@ func (p Gs2DistributorRestClient) DistributeWithoutOverflowProcessAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go distributeWithoutOverflowProcessAsyncHandler(
@@ -2537,6 +2543,9 @@ func (p Gs2DistributorRestClient) GetStampSheetResultByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go getStampSheetResultByUserIdAsyncHandler(

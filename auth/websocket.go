@@ -90,6 +90,9 @@ func (p Gs2AuthWebSocketClient) LoginAsync(
 	if request.TimeOffset != nil {
 		bodies["timeOffset"] = *request.TimeOffset
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -195,6 +198,93 @@ func (p Gs2AuthWebSocketClient) LoginBySignature(
 ) (*LoginBySignatureResult, error) {
 	callback := make(chan LoginBySignatureAsyncResult, 1)
 	go p.LoginBySignatureAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2AuthWebSocketClient) issueTimeOffsetTokenByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- IssueTimeOffsetTokenByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IssueTimeOffsetTokenByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IssueTimeOffsetTokenByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- IssueTimeOffsetTokenByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- IssueTimeOffsetTokenByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AuthWebSocketClient) IssueTimeOffsetTokenByUserIdAsync(
+	request *IssueTimeOffsetTokenByUserIdRequest,
+	callback chan<- IssueTimeOffsetTokenByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "auth",
+			"component":   "accessToken",
+			"function":    "issueTimeOffsetTokenByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffset != nil {
+		bodies["timeOffset"] = *request.TimeOffset
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.issueTimeOffsetTokenByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AuthWebSocketClient) IssueTimeOffsetTokenByUserId(
+	request *IssueTimeOffsetTokenByUserIdRequest,
+) (*IssueTimeOffsetTokenByUserIdResult, error) {
+	callback := make(chan IssueTimeOffsetTokenByUserIdAsyncResult, 1)
+	go p.IssueTimeOffsetTokenByUserIdAsync(
 		request,
 		callback,
 	)

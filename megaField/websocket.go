@@ -2262,6 +2262,9 @@ func (p Gs2MegaFieldWebSocketClient) PutPositionByUserIdAsync(
 	if request.R != nil {
 		bodies["r"] = *request.R
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2874,6 +2877,9 @@ func (p Gs2MegaFieldWebSocketClient) ActionByUserIdAsync(
 			_scopes = append(_scopes, item)
 		}
 		bodies["scopes"] = _scopes
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

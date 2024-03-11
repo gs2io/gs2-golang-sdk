@@ -594,6 +594,9 @@ func (p Gs2EnchantWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -677,6 +680,9 @@ func (p Gs2EnchantWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -762,6 +768,9 @@ func (p Gs2EnchantWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -846,6 +855,9 @@ func (p Gs2EnchantWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -929,6 +941,9 @@ func (p Gs2EnchantWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1017,6 +1032,9 @@ func (p Gs2EnchantWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1103,6 +1121,9 @@ func (p Gs2EnchantWebSocketClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2886,6 +2907,9 @@ func (p Gs2EnchantWebSocketClient) DescribeBalanceParameterStatusesByUserIdAsync
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3069,6 +3093,9 @@ func (p Gs2EnchantWebSocketClient) GetBalanceParameterStatusByUserIdAsync(
 	if request.PropertyId != nil && *request.PropertyId != "" {
 		bodies["propertyId"] = *request.PropertyId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3158,6 +3185,9 @@ func (p Gs2EnchantWebSocketClient) DeleteBalanceParameterStatusByUserIdAsync(
 	}
 	if request.PropertyId != nil && *request.PropertyId != "" {
 		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3258,6 +3288,9 @@ func (p Gs2EnchantWebSocketClient) ReDrawBalanceParameterStatusByUserIdAsync(
 			_fixedParameterNames = append(_fixedParameterNames, item)
 		}
 		bodies["fixedParameterNames"] = _fixedParameterNames
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3442,6 +3475,9 @@ func (p Gs2EnchantWebSocketClient) SetBalanceParameterStatusByUserIdAsync(
 			_parameterValues = append(_parameterValues, item)
 		}
 		bodies["parameterValues"] = _parameterValues
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3719,6 +3755,9 @@ func (p Gs2EnchantWebSocketClient) DescribeRarityParameterStatusesByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3902,6 +3941,9 @@ func (p Gs2EnchantWebSocketClient) GetRarityParameterStatusByUserIdAsync(
 	if request.PropertyId != nil && *request.PropertyId != "" {
 		bodies["propertyId"] = *request.PropertyId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3991,6 +4033,9 @@ func (p Gs2EnchantWebSocketClient) DeleteRarityParameterStatusByUserIdAsync(
 	}
 	if request.PropertyId != nil && *request.PropertyId != "" {
 		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -4091,6 +4136,9 @@ func (p Gs2EnchantWebSocketClient) ReDrawRarityParameterStatusByUserIdAsync(
 			_fixedParameterNames = append(_fixedParameterNames, item)
 		}
 		bodies["fixedParameterNames"] = _fixedParameterNames
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -4271,6 +4319,9 @@ func (p Gs2EnchantWebSocketClient) AddRarityParameterStatusByUserIdAsync(
 	}
 	if request.Count != nil {
 		bodies["count"] = *request.Count
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -4569,6 +4620,9 @@ func (p Gs2EnchantWebSocketClient) VerifyRarityParameterStatusByUserIdAsync(
 	if request.MultiplyValueSpecifyingQuantity != nil {
 		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -4752,6 +4806,9 @@ func (p Gs2EnchantWebSocketClient) SetRarityParameterStatusByUserIdAsync(
 			_parameterValues = append(_parameterValues, item)
 		}
 		bodies["parameterValues"] = _parameterValues
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

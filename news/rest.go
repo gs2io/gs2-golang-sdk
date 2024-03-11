@@ -1383,6 +1383,9 @@ func (p Gs2NewsRestClient) DescribeNewsByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go describeNewsByUserIdAsyncHandler(
 		p,
@@ -1564,6 +1567,9 @@ func (p Gs2NewsRestClient) WantGrantByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go wantGrantByUserIdAsyncHandler(

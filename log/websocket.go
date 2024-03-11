@@ -654,6 +654,9 @@ func (p Gs2LogWebSocketClient) QueryAccessLogAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -762,6 +765,9 @@ func (p Gs2LogWebSocketClient) CountAccessLogAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -869,6 +875,9 @@ func (p Gs2LogWebSocketClient) QueryIssueStampSheetLogAsync(
 	}
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -981,6 +990,9 @@ func (p Gs2LogWebSocketClient) CountIssueStampSheetLogAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1088,6 +1100,9 @@ func (p Gs2LogWebSocketClient) QueryExecuteStampSheetLogAsync(
 	}
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1200,6 +1215,9 @@ func (p Gs2LogWebSocketClient) CountExecuteStampSheetLogAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1307,6 +1325,9 @@ func (p Gs2LogWebSocketClient) QueryExecuteStampTaskLogAsync(
 	}
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1419,6 +1440,9 @@ func (p Gs2LogWebSocketClient) CountExecuteStampTaskLogAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1517,6 +1541,9 @@ func (p Gs2LogWebSocketClient) QueryAccessLogWithTelemetryAsync(
 	}
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

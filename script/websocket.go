@@ -1218,6 +1218,9 @@ func (p Gs2ScriptWebSocketClient) InvokeScriptAsync(
 	if request.RandomStatus != nil {
 		bodies["randomStatus"] = request.RandomStatus.ToDict()
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}

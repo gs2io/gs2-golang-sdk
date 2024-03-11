@@ -28,6 +28,7 @@ type LoginRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffset      *int32  `json:"timeOffset"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewLoginRequestFromJson(data string) LoginRequest {
@@ -38,15 +39,17 @@ func NewLoginRequestFromJson(data string) LoginRequest {
 
 func NewLoginRequestFromDict(data map[string]interface{}) LoginRequest {
 	return LoginRequest{
-		UserId:     core.CastString(data["userId"]),
-		TimeOffset: core.CastInt32(data["timeOffset"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffset:      core.CastInt32(data["timeOffset"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p LoginRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId":     p.UserId,
-		"timeOffset": p.TimeOffset,
+		"userId":          p.UserId,
+		"timeOffset":      p.TimeOffset,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -86,5 +89,40 @@ func (p LoginBySignatureRequest) ToDict() map[string]interface{} {
 }
 
 func (p LoginBySignatureRequest) Pointer() *LoginBySignatureRequest {
+	return &p
+}
+
+type IssueTimeOffsetTokenByUserIdRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserId          *string `json:"userId"`
+	TimeOffset      *int32  `json:"timeOffset"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+}
+
+func NewIssueTimeOffsetTokenByUserIdRequestFromJson(data string) IssueTimeOffsetTokenByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIssueTimeOffsetTokenByUserIdRequestFromDict(dict)
+}
+
+func NewIssueTimeOffsetTokenByUserIdRequestFromDict(data map[string]interface{}) IssueTimeOffsetTokenByUserIdRequest {
+	return IssueTimeOffsetTokenByUserIdRequest{
+		UserId:          core.CastString(data["userId"]),
+		TimeOffset:      core.CastInt32(data["timeOffset"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p IssueTimeOffsetTokenByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId":          p.UserId,
+		"timeOffset":      p.TimeOffset,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p IssueTimeOffsetTokenByUserIdRequest) Pointer() *IssueTimeOffsetTokenByUserIdRequest {
 	return &p
 }

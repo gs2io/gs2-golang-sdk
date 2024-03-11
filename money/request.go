@@ -265,6 +265,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDumpUserDataByUserIdRequestFromJson(data string) DumpUserDataByUserIdRequest {
@@ -275,13 +276,15 @@ func NewDumpUserDataByUserIdRequestFromJson(data string) DumpUserDataByUserIdReq
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
 	return DumpUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DumpUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -295,6 +298,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCheckDumpUserDataByUserIdRequestFromJson(data string) CheckDumpUserDataByUserIdRequest {
@@ -305,13 +309,15 @@ func NewCheckDumpUserDataByUserIdRequestFromJson(data string) CheckDumpUserDataB
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
 	return CheckDumpUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CheckDumpUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -325,6 +331,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCleanUserDataByUserIdRequestFromJson(data string) CleanUserDataByUserIdRequest {
@@ -335,13 +342,15 @@ func NewCleanUserDataByUserIdRequestFromJson(data string) CleanUserDataByUserIdR
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
 	return CleanUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CleanUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -355,6 +364,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCheckCleanUserDataByUserIdRequestFromJson(data string) CheckCleanUserDataByUserIdRequest {
@@ -365,13 +375,15 @@ func NewCheckCleanUserDataByUserIdRequestFromJson(data string) CheckCleanUserDat
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
 	return CheckCleanUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CheckCleanUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -385,6 +397,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewPrepareImportUserDataByUserIdRequestFromJson(data string) PrepareImportUserDataByUserIdRequest {
@@ -395,13 +408,15 @@ func NewPrepareImportUserDataByUserIdRequestFromJson(data string) PrepareImportU
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
 	return PrepareImportUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p PrepareImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -416,6 +431,7 @@ type ImportUserDataByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
 	UploadToken        *string `json:"uploadToken"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewImportUserDataByUserIdRequestFromJson(data string) ImportUserDataByUserIdRequest {
@@ -426,15 +442,17 @@ func NewImportUserDataByUserIdRequestFromJson(data string) ImportUserDataByUserI
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
 	return ImportUserDataByUserIdRequest{
-		UserId:      core.CastString(data["userId"]),
-		UploadToken: core.CastString(data["uploadToken"]),
+		UserId:          core.CastString(data["userId"]),
+		UploadToken:     core.CastString(data["uploadToken"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p ImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId":      p.UserId,
-		"uploadToken": p.UploadToken,
+		"userId":          p.UserId,
+		"uploadToken":     p.UploadToken,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -449,6 +467,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
 	UploadToken        *string `json:"uploadToken"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCheckImportUserDataByUserIdRequestFromJson(data string) CheckImportUserDataByUserIdRequest {
@@ -459,15 +478,17 @@ func NewCheckImportUserDataByUserIdRequestFromJson(data string) CheckImportUserD
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
 	return CheckImportUserDataByUserIdRequest{
-		UserId:      core.CastString(data["userId"]),
-		UploadToken: core.CastString(data["uploadToken"]),
+		UserId:          core.CastString(data["userId"]),
+		UploadToken:     core.CastString(data["uploadToken"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CheckImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId":      p.UserId,
-		"uploadToken": p.UploadToken,
+		"userId":          p.UserId,
+		"uploadToken":     p.UploadToken,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -521,6 +542,7 @@ type DescribeWalletsByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewDescribeWalletsByUserIdRequestFromJson(data string) DescribeWalletsByUserIdRequest {
@@ -531,19 +553,21 @@ func NewDescribeWalletsByUserIdRequestFromJson(data string) DescribeWalletsByUse
 
 func NewDescribeWalletsByUserIdRequestFromDict(data map[string]interface{}) DescribeWalletsByUserIdRequest {
 	return DescribeWalletsByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DescribeWalletsByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -593,6 +617,7 @@ type GetWalletByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
 	Slot            *int32  `json:"slot"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetWalletByUserIdRequestFromJson(data string) GetWalletByUserIdRequest {
@@ -603,17 +628,19 @@ func NewGetWalletByUserIdRequestFromJson(data string) GetWalletByUserIdRequest {
 
 func NewGetWalletByUserIdRequestFromDict(data map[string]interface{}) GetWalletByUserIdRequest {
 	return GetWalletByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		Slot:          core.CastInt32(data["slot"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		Slot:            core.CastInt32(data["slot"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetWalletByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"slot":          p.Slot,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"slot":            p.Slot,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -631,6 +658,7 @@ type DepositByUserIdRequest struct {
 	Slot               *int32   `json:"slot"`
 	Price              *float32 `json:"price"`
 	Count              *int32   `json:"count"`
+	TimeOffsetToken    *string  `json:"timeOffsetToken"`
 }
 
 func NewDepositByUserIdRequestFromJson(data string) DepositByUserIdRequest {
@@ -641,21 +669,23 @@ func NewDepositByUserIdRequestFromJson(data string) DepositByUserIdRequest {
 
 func NewDepositByUserIdRequestFromDict(data map[string]interface{}) DepositByUserIdRequest {
 	return DepositByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		Slot:          core.CastInt32(data["slot"]),
-		Price:         core.CastFloat32(data["price"]),
-		Count:         core.CastInt32(data["count"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		Slot:            core.CastInt32(data["slot"]),
+		Price:           core.CastFloat32(data["price"]),
+		Count:           core.CastInt32(data["count"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DepositByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"slot":          p.Slot,
-		"price":         p.Price,
-		"count":         p.Count,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"slot":            p.Slot,
+		"price":           p.Price,
+		"count":           p.Count,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -715,6 +745,7 @@ type WithdrawByUserIdRequest struct {
 	Slot               *int32  `json:"slot"`
 	Count              *int32  `json:"count"`
 	PaidOnly           *bool   `json:"paidOnly"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewWithdrawByUserIdRequestFromJson(data string) WithdrawByUserIdRequest {
@@ -725,21 +756,23 @@ func NewWithdrawByUserIdRequestFromJson(data string) WithdrawByUserIdRequest {
 
 func NewWithdrawByUserIdRequestFromDict(data map[string]interface{}) WithdrawByUserIdRequest {
 	return WithdrawByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		Slot:          core.CastInt32(data["slot"]),
-		Count:         core.CastInt32(data["count"]),
-		PaidOnly:      core.CastBool(data["paidOnly"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		Slot:            core.CastInt32(data["slot"]),
+		Count:           core.CastInt32(data["count"]),
+		PaidOnly:        core.CastBool(data["paidOnly"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p WithdrawByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"slot":          p.Slot,
-		"count":         p.Count,
-		"paidOnly":      p.PaidOnly,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"slot":            p.Slot,
+		"count":           p.Count,
+		"paidOnly":        p.PaidOnly,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -822,6 +855,7 @@ type DescribeReceiptsRequest struct {
 	End             *int64  `json:"end"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewDescribeReceiptsRequestFromJson(data string) DescribeReceiptsRequest {
@@ -832,25 +866,27 @@ func NewDescribeReceiptsRequestFromJson(data string) DescribeReceiptsRequest {
 
 func NewDescribeReceiptsRequestFromDict(data map[string]interface{}) DescribeReceiptsRequest {
 	return DescribeReceiptsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		Slot:          core.CastInt32(data["slot"]),
-		Begin:         core.CastInt64(data["begin"]),
-		End:           core.CastInt64(data["end"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		Slot:            core.CastInt32(data["slot"]),
+		Begin:           core.CastInt64(data["begin"]),
+		End:             core.CastInt64(data["end"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DescribeReceiptsRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"slot":          p.Slot,
-		"begin":         p.Begin,
-		"end":           p.End,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"slot":            p.Slot,
+		"begin":           p.Begin,
+		"end":             p.End,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -865,6 +901,7 @@ type GetByUserIdAndTransactionIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
 	TransactionId   *string `json:"transactionId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetByUserIdAndTransactionIdRequestFromJson(data string) GetByUserIdAndTransactionIdRequest {
@@ -875,17 +912,19 @@ func NewGetByUserIdAndTransactionIdRequestFromJson(data string) GetByUserIdAndTr
 
 func NewGetByUserIdAndTransactionIdRequestFromDict(data map[string]interface{}) GetByUserIdAndTransactionIdRequest {
 	return GetByUserIdAndTransactionIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		TransactionId: core.CastString(data["transactionId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		TransactionId:   core.CastString(data["transactionId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetByUserIdAndTransactionIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"transactionId": p.TransactionId,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"transactionId":   p.TransactionId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -902,6 +941,7 @@ type RecordReceiptRequest struct {
 	UserId             *string `json:"userId"`
 	ContentsId         *string `json:"contentsId"`
 	Receipt            *string `json:"receipt"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewRecordReceiptRequestFromJson(data string) RecordReceiptRequest {
@@ -912,19 +952,21 @@ func NewRecordReceiptRequestFromJson(data string) RecordReceiptRequest {
 
 func NewRecordReceiptRequestFromDict(data map[string]interface{}) RecordReceiptRequest {
 	return RecordReceiptRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		ContentsId:    core.CastString(data["contentsId"]),
-		Receipt:       core.CastString(data["receipt"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		ContentsId:      core.CastString(data["contentsId"]),
+		Receipt:         core.CastString(data["receipt"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p RecordReceiptRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"contentsId":    p.ContentsId,
-		"receipt":       p.Receipt,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"contentsId":      p.ContentsId,
+		"receipt":         p.Receipt,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -940,6 +982,7 @@ type RevertRecordReceiptRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	Receipt            *string `json:"receipt"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewRevertRecordReceiptRequestFromJson(data string) RevertRecordReceiptRequest {
@@ -950,17 +993,19 @@ func NewRevertRecordReceiptRequestFromJson(data string) RevertRecordReceiptReque
 
 func NewRevertRecordReceiptRequestFromDict(data map[string]interface{}) RevertRecordReceiptRequest {
 	return RevertRecordReceiptRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		Receipt:       core.CastString(data["receipt"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		Receipt:         core.CastString(data["receipt"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p RevertRecordReceiptRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"receipt":       p.Receipt,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"receipt":         p.Receipt,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 

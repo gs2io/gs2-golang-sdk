@@ -624,6 +624,9 @@ func (p Gs2ExperienceWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -707,6 +710,9 @@ func (p Gs2ExperienceWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -792,6 +798,9 @@ func (p Gs2ExperienceWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -876,6 +885,9 @@ func (p Gs2ExperienceWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -959,6 +971,9 @@ func (p Gs2ExperienceWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1047,6 +1062,9 @@ func (p Gs2ExperienceWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1133,6 +1151,9 @@ func (p Gs2ExperienceWebSocketClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2743,6 +2764,9 @@ func (p Gs2ExperienceWebSocketClient) DescribeStatusesByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2925,6 +2949,9 @@ func (p Gs2ExperienceWebSocketClient) GetStatusByUserIdAsync(
 	}
 	if request.PropertyId != nil && *request.PropertyId != "" {
 		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3115,6 +3142,9 @@ func (p Gs2ExperienceWebSocketClient) GetStatusWithSignatureByUserIdAsync(
 	if request.KeyId != nil && *request.KeyId != "" {
 		bodies["keyId"] = *request.KeyId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3210,6 +3240,9 @@ func (p Gs2ExperienceWebSocketClient) AddExperienceByUserIdAsync(
 	}
 	if request.TruncateExperienceWhenRankUp != nil {
 		bodies["truncateExperienceWhenRankUp"] = *request.TruncateExperienceWhenRankUp
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3307,6 +3340,9 @@ func (p Gs2ExperienceWebSocketClient) SubExperienceByUserIdAsync(
 	if request.ExperienceValue != nil {
 		bodies["experienceValue"] = *request.ExperienceValue
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3402,6 +3438,9 @@ func (p Gs2ExperienceWebSocketClient) SetExperienceByUserIdAsync(
 	}
 	if request.ExperienceValue != nil {
 		bodies["experienceValue"] = *request.ExperienceValue
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3499,6 +3538,9 @@ func (p Gs2ExperienceWebSocketClient) AddRankCapByUserIdAsync(
 	if request.RankCapValue != nil {
 		bodies["rankCapValue"] = *request.RankCapValue
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3594,6 +3636,9 @@ func (p Gs2ExperienceWebSocketClient) SubRankCapByUserIdAsync(
 	}
 	if request.RankCapValue != nil {
 		bodies["rankCapValue"] = *request.RankCapValue
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3691,6 +3736,9 @@ func (p Gs2ExperienceWebSocketClient) SetRankCapByUserIdAsync(
 	if request.RankCapValue != nil {
 		bodies["rankCapValue"] = *request.RankCapValue
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3783,6 +3831,9 @@ func (p Gs2ExperienceWebSocketClient) DeleteStatusByUserIdAsync(
 	}
 	if request.PropertyId != nil && *request.PropertyId != "" {
 		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3991,6 +4042,9 @@ func (p Gs2ExperienceWebSocketClient) VerifyRankByUserIdAsync(
 	if request.MultiplyValueSpecifyingQuantity != nil {
 		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -4197,6 +4251,9 @@ func (p Gs2ExperienceWebSocketClient) VerifyRankCapByUserIdAsync(
 	}
 	if request.MultiplyValueSpecifyingQuantity != nil {
 		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -4804,6 +4861,9 @@ func (p Gs2ExperienceWebSocketClient) MultiplyAcquireActionsByUserIdAsync(
 			_acquireActions = append(_acquireActions, item)
 		}
 		bodies["acquireActions"] = _acquireActions
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

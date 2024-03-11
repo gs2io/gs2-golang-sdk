@@ -247,6 +247,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDumpUserDataByUserIdRequestFromJson(data string) DumpUserDataByUserIdRequest {
@@ -257,13 +258,15 @@ func NewDumpUserDataByUserIdRequestFromJson(data string) DumpUserDataByUserIdReq
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
 	return DumpUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DumpUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -277,6 +280,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCheckDumpUserDataByUserIdRequestFromJson(data string) CheckDumpUserDataByUserIdRequest {
@@ -287,13 +291,15 @@ func NewCheckDumpUserDataByUserIdRequestFromJson(data string) CheckDumpUserDataB
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
 	return CheckDumpUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CheckDumpUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -307,6 +313,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCleanUserDataByUserIdRequestFromJson(data string) CleanUserDataByUserIdRequest {
@@ -317,13 +324,15 @@ func NewCleanUserDataByUserIdRequestFromJson(data string) CleanUserDataByUserIdR
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
 	return CleanUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CleanUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -337,6 +346,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCheckCleanUserDataByUserIdRequestFromJson(data string) CheckCleanUserDataByUserIdRequest {
@@ -347,13 +357,15 @@ func NewCheckCleanUserDataByUserIdRequestFromJson(data string) CheckCleanUserDat
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
 	return CheckCleanUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CheckCleanUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -367,6 +379,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewPrepareImportUserDataByUserIdRequestFromJson(data string) PrepareImportUserDataByUserIdRequest {
@@ -377,13 +390,15 @@ func NewPrepareImportUserDataByUserIdRequestFromJson(data string) PrepareImportU
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
 	return PrepareImportUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p PrepareImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -398,6 +413,7 @@ type ImportUserDataByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
 	UploadToken        *string `json:"uploadToken"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewImportUserDataByUserIdRequestFromJson(data string) ImportUserDataByUserIdRequest {
@@ -408,15 +424,17 @@ func NewImportUserDataByUserIdRequestFromJson(data string) ImportUserDataByUserI
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
 	return ImportUserDataByUserIdRequest{
-		UserId:      core.CastString(data["userId"]),
-		UploadToken: core.CastString(data["uploadToken"]),
+		UserId:          core.CastString(data["userId"]),
+		UploadToken:     core.CastString(data["uploadToken"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p ImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId":      p.UserId,
-		"uploadToken": p.UploadToken,
+		"userId":          p.UserId,
+		"uploadToken":     p.UploadToken,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -431,6 +449,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
 	UploadToken        *string `json:"uploadToken"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCheckImportUserDataByUserIdRequestFromJson(data string) CheckImportUserDataByUserIdRequest {
@@ -441,15 +460,17 @@ func NewCheckImportUserDataByUserIdRequestFromJson(data string) CheckImportUserD
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
 	return CheckImportUserDataByUserIdRequest{
-		UserId:      core.CastString(data["userId"]),
-		UploadToken: core.CastString(data["uploadToken"]),
+		UserId:          core.CastString(data["userId"]),
+		UploadToken:     core.CastString(data["uploadToken"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CheckImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId":      p.UserId,
-		"uploadToken": p.UploadToken,
+		"userId":          p.UserId,
+		"uploadToken":     p.UploadToken,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2140,6 +2161,7 @@ type DescribeInventoriesByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewDescribeInventoriesByUserIdRequestFromJson(data string) DescribeInventoriesByUserIdRequest {
@@ -2150,19 +2172,21 @@ func NewDescribeInventoriesByUserIdRequestFromJson(data string) DescribeInventor
 
 func NewDescribeInventoriesByUserIdRequestFromDict(data map[string]interface{}) DescribeInventoriesByUserIdRequest {
 	return DescribeInventoriesByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DescribeInventoriesByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2212,6 +2236,7 @@ type GetInventoryByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	InventoryName   *string `json:"inventoryName"`
 	UserId          *string `json:"userId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetInventoryByUserIdRequestFromJson(data string) GetInventoryByUserIdRequest {
@@ -2222,17 +2247,19 @@ func NewGetInventoryByUserIdRequestFromJson(data string) GetInventoryByUserIdReq
 
 func NewGetInventoryByUserIdRequestFromDict(data map[string]interface{}) GetInventoryByUserIdRequest {
 	return GetInventoryByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetInventoryByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2249,6 +2276,7 @@ type AddCapacityByUserIdRequest struct {
 	InventoryName      *string `json:"inventoryName"`
 	UserId             *string `json:"userId"`
 	AddCapacityValue   *int32  `json:"addCapacityValue"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewAddCapacityByUserIdRequestFromJson(data string) AddCapacityByUserIdRequest {
@@ -2263,6 +2291,7 @@ func NewAddCapacityByUserIdRequestFromDict(data map[string]interface{}) AddCapac
 		InventoryName:    core.CastString(data["inventoryName"]),
 		UserId:           core.CastString(data["userId"]),
 		AddCapacityValue: core.CastInt32(data["addCapacityValue"]),
+		TimeOffsetToken:  core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -2272,6 +2301,7 @@ func (p AddCapacityByUserIdRequest) ToDict() map[string]interface{} {
 		"inventoryName":    p.InventoryName,
 		"userId":           p.UserId,
 		"addCapacityValue": p.AddCapacityValue,
+		"timeOffsetToken":  p.TimeOffsetToken,
 	}
 }
 
@@ -2288,6 +2318,7 @@ type SetCapacityByUserIdRequest struct {
 	InventoryName      *string `json:"inventoryName"`
 	UserId             *string `json:"userId"`
 	NewCapacityValue   *int32  `json:"newCapacityValue"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewSetCapacityByUserIdRequestFromJson(data string) SetCapacityByUserIdRequest {
@@ -2302,6 +2333,7 @@ func NewSetCapacityByUserIdRequestFromDict(data map[string]interface{}) SetCapac
 		InventoryName:    core.CastString(data["inventoryName"]),
 		UserId:           core.CastString(data["userId"]),
 		NewCapacityValue: core.CastInt32(data["newCapacityValue"]),
+		TimeOffsetToken:  core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -2311,6 +2343,7 @@ func (p SetCapacityByUserIdRequest) ToDict() map[string]interface{} {
 		"inventoryName":    p.InventoryName,
 		"userId":           p.UserId,
 		"newCapacityValue": p.NewCapacityValue,
+		"timeOffsetToken":  p.TimeOffsetToken,
 	}
 }
 
@@ -2326,6 +2359,7 @@ type DeleteInventoryByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	InventoryName      *string `json:"inventoryName"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDeleteInventoryByUserIdRequestFromJson(data string) DeleteInventoryByUserIdRequest {
@@ -2336,17 +2370,19 @@ func NewDeleteInventoryByUserIdRequestFromJson(data string) DeleteInventoryByUse
 
 func NewDeleteInventoryByUserIdRequestFromDict(data map[string]interface{}) DeleteInventoryByUserIdRequest {
 	return DeleteInventoryByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DeleteInventoryByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2410,6 +2446,7 @@ type VerifyInventoryCurrentMaxCapacityByUserIdRequest struct {
 	VerifyType                      *string `json:"verifyType"`
 	CurrentInventoryMaxCapacity     *int32  `json:"currentInventoryMaxCapacity"`
 	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
 }
 
 func NewVerifyInventoryCurrentMaxCapacityByUserIdRequestFromJson(data string) VerifyInventoryCurrentMaxCapacityByUserIdRequest {
@@ -2426,6 +2463,7 @@ func NewVerifyInventoryCurrentMaxCapacityByUserIdRequestFromDict(data map[string
 		VerifyType:                      core.CastString(data["verifyType"]),
 		CurrentInventoryMaxCapacity:     core.CastInt32(data["currentInventoryMaxCapacity"]),
 		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -2437,6 +2475,7 @@ func (p VerifyInventoryCurrentMaxCapacityByUserIdRequest) ToDict() map[string]in
 		"verifyType":                      p.VerifyType,
 		"currentInventoryMaxCapacity":     p.CurrentInventoryMaxCapacity,
 		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
 	}
 }
 
@@ -2590,6 +2629,7 @@ type DescribeItemSetsByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewDescribeItemSetsByUserIdRequestFromJson(data string) DescribeItemSetsByUserIdRequest {
@@ -2600,21 +2640,23 @@ func NewDescribeItemSetsByUserIdRequestFromJson(data string) DescribeItemSetsByU
 
 func NewDescribeItemSetsByUserIdRequestFromDict(data map[string]interface{}) DescribeItemSetsByUserIdRequest {
 	return DescribeItemSetsByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DescribeItemSetsByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2672,6 +2714,7 @@ type GetItemSetByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	ItemName        *string `json:"itemName"`
 	ItemSetName     *string `json:"itemSetName"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetItemSetByUserIdRequestFromJson(data string) GetItemSetByUserIdRequest {
@@ -2682,21 +2725,23 @@ func NewGetItemSetByUserIdRequestFromJson(data string) GetItemSetByUserIdRequest
 
 func NewGetItemSetByUserIdRequestFromDict(data map[string]interface{}) GetItemSetByUserIdRequest {
 	return GetItemSetByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		ItemSetName:     core.CastString(data["itemSetName"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetItemSetByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
-		"itemSetName":   p.ItemSetName,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"itemSetName":     p.ItemSetName,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2758,6 +2803,7 @@ type GetItemWithSignatureByUserIdRequest struct {
 	ItemName        *string `json:"itemName"`
 	ItemSetName     *string `json:"itemSetName"`
 	KeyId           *string `json:"keyId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetItemWithSignatureByUserIdRequestFromJson(data string) GetItemWithSignatureByUserIdRequest {
@@ -2768,23 +2814,25 @@ func NewGetItemWithSignatureByUserIdRequestFromJson(data string) GetItemWithSign
 
 func NewGetItemWithSignatureByUserIdRequestFromDict(data map[string]interface{}) GetItemWithSignatureByUserIdRequest {
 	return GetItemWithSignatureByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
-		KeyId:         core.CastString(data["keyId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		ItemSetName:     core.CastString(data["itemSetName"]),
+		KeyId:           core.CastString(data["keyId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetItemWithSignatureByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
-		"itemSetName":   p.ItemSetName,
-		"keyId":         p.KeyId,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"itemSetName":     p.ItemSetName,
+		"keyId":           p.KeyId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2805,6 +2853,7 @@ type AcquireItemSetByUserIdRequest struct {
 	ExpiresAt          *int64  `json:"expiresAt"`
 	CreateNewItemSet   *bool   `json:"createNewItemSet"`
 	ItemSetName        *string `json:"itemSetName"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewAcquireItemSetByUserIdRequestFromJson(data string) AcquireItemSetByUserIdRequest {
@@ -2823,6 +2872,7 @@ func NewAcquireItemSetByUserIdRequestFromDict(data map[string]interface{}) Acqui
 		ExpiresAt:        core.CastInt64(data["expiresAt"]),
 		CreateNewItemSet: core.CastBool(data["createNewItemSet"]),
 		ItemSetName:      core.CastString(data["itemSetName"]),
+		TimeOffsetToken:  core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -2836,6 +2886,7 @@ func (p AcquireItemSetByUserIdRequest) ToDict() map[string]interface{} {
 		"expiresAt":        p.ExpiresAt,
 		"createNewItemSet": p.CreateNewItemSet,
 		"itemSetName":      p.ItemSetName,
+		"timeOffsetToken":  p.TimeOffsetToken,
 	}
 }
 
@@ -2854,6 +2905,7 @@ type AcquireItemSetWithGradeByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	GradeModelId       *string `json:"gradeModelId"`
 	GradeValue         *int64  `json:"gradeValue"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewAcquireItemSetWithGradeByUserIdRequestFromJson(data string) AcquireItemSetWithGradeByUserIdRequest {
@@ -2864,23 +2916,25 @@ func NewAcquireItemSetWithGradeByUserIdRequestFromJson(data string) AcquireItemS
 
 func NewAcquireItemSetWithGradeByUserIdRequestFromDict(data map[string]interface{}) AcquireItemSetWithGradeByUserIdRequest {
 	return AcquireItemSetWithGradeByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
-		UserId:        core.CastString(data["userId"]),
-		GradeModelId:  core.CastString(data["gradeModelId"]),
-		GradeValue:    core.CastInt64(data["gradeValue"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		ItemName:        core.CastString(data["itemName"]),
+		UserId:          core.CastString(data["userId"]),
+		GradeModelId:    core.CastString(data["gradeModelId"]),
+		GradeValue:      core.CastInt64(data["gradeValue"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p AcquireItemSetWithGradeByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"itemName":      p.ItemName,
-		"userId":        p.UserId,
-		"gradeModelId":  p.GradeModelId,
-		"gradeValue":    p.GradeValue,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"itemName":        p.ItemName,
+		"userId":          p.UserId,
+		"gradeModelId":    p.GradeModelId,
+		"gradeValue":      p.GradeValue,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2944,6 +2998,7 @@ type ConsumeItemSetByUserIdRequest struct {
 	ItemName           *string `json:"itemName"`
 	ConsumeCount       *int64  `json:"consumeCount"`
 	ItemSetName        *string `json:"itemSetName"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewConsumeItemSetByUserIdRequestFromJson(data string) ConsumeItemSetByUserIdRequest {
@@ -2954,23 +3009,25 @@ func NewConsumeItemSetByUserIdRequestFromJson(data string) ConsumeItemSetByUserI
 
 func NewConsumeItemSetByUserIdRequestFromDict(data map[string]interface{}) ConsumeItemSetByUserIdRequest {
 	return ConsumeItemSetByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ConsumeCount:  core.CastInt64(data["consumeCount"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		ConsumeCount:    core.CastInt64(data["consumeCount"]),
+		ItemSetName:     core.CastString(data["itemSetName"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p ConsumeItemSetByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
-		"consumeCount":  p.ConsumeCount,
-		"itemSetName":   p.ItemSetName,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"consumeCount":    p.ConsumeCount,
+		"itemSetName":     p.ItemSetName,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2988,6 +3045,7 @@ type DeleteItemSetByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	ItemName           *string `json:"itemName"`
 	ItemSetName        *string `json:"itemSetName"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDeleteItemSetByUserIdRequestFromJson(data string) DeleteItemSetByUserIdRequest {
@@ -2998,21 +3056,23 @@ func NewDeleteItemSetByUserIdRequestFromJson(data string) DeleteItemSetByUserIdR
 
 func NewDeleteItemSetByUserIdRequestFromDict(data map[string]interface{}) DeleteItemSetByUserIdRequest {
 	return DeleteItemSetByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		ItemSetName:     core.CastString(data["itemSetName"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DeleteItemSetByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
-		"itemSetName":   p.ItemSetName,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"itemSetName":     p.ItemSetName,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -3084,6 +3144,7 @@ type VerifyItemSetByUserIdRequest struct {
 	ItemSetName                     *string `json:"itemSetName"`
 	Count                           *int64  `json:"count"`
 	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
 }
 
 func NewVerifyItemSetByUserIdRequestFromJson(data string) VerifyItemSetByUserIdRequest {
@@ -3102,6 +3163,7 @@ func NewVerifyItemSetByUserIdRequestFromDict(data map[string]interface{}) Verify
 		ItemSetName:                     core.CastString(data["itemSetName"]),
 		Count:                           core.CastInt64(data["count"]),
 		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -3115,6 +3177,7 @@ func (p VerifyItemSetByUserIdRequest) ToDict() map[string]interface{} {
 		"itemSetName":                     p.ItemSetName,
 		"count":                           p.Count,
 		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
 	}
 }
 
@@ -3300,6 +3363,7 @@ type DescribeReferenceOfByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	ItemName        *string `json:"itemName"`
 	ItemSetName     *string `json:"itemSetName"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewDescribeReferenceOfByUserIdRequestFromJson(data string) DescribeReferenceOfByUserIdRequest {
@@ -3310,21 +3374,23 @@ func NewDescribeReferenceOfByUserIdRequestFromJson(data string) DescribeReferenc
 
 func NewDescribeReferenceOfByUserIdRequestFromDict(data map[string]interface{}) DescribeReferenceOfByUserIdRequest {
 	return DescribeReferenceOfByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		ItemSetName:     core.CastString(data["itemSetName"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DescribeReferenceOfByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
-		"itemSetName":   p.ItemSetName,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"itemSetName":     p.ItemSetName,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -3386,6 +3452,7 @@ type GetReferenceOfByUserIdRequest struct {
 	ItemName        *string `json:"itemName"`
 	ItemSetName     *string `json:"itemSetName"`
 	ReferenceOf     *string `json:"referenceOf"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetReferenceOfByUserIdRequestFromJson(data string) GetReferenceOfByUserIdRequest {
@@ -3396,23 +3463,25 @@ func NewGetReferenceOfByUserIdRequestFromJson(data string) GetReferenceOfByUserI
 
 func NewGetReferenceOfByUserIdRequestFromDict(data map[string]interface{}) GetReferenceOfByUserIdRequest {
 	return GetReferenceOfByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
-		ReferenceOf:   core.CastString(data["referenceOf"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		ItemSetName:     core.CastString(data["itemSetName"]),
+		ReferenceOf:     core.CastString(data["referenceOf"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetReferenceOfByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
-		"itemSetName":   p.ItemSetName,
-		"referenceOf":   p.ReferenceOf,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"itemSetName":     p.ItemSetName,
+		"referenceOf":     p.ReferenceOf,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -3480,6 +3549,7 @@ type VerifyReferenceOfByUserIdRequest struct {
 	ItemSetName        *string `json:"itemSetName"`
 	ReferenceOf        *string `json:"referenceOf"`
 	VerifyType         *string `json:"verifyType"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewVerifyReferenceOfByUserIdRequestFromJson(data string) VerifyReferenceOfByUserIdRequest {
@@ -3490,25 +3560,27 @@ func NewVerifyReferenceOfByUserIdRequestFromJson(data string) VerifyReferenceOfB
 
 func NewVerifyReferenceOfByUserIdRequestFromDict(data map[string]interface{}) VerifyReferenceOfByUserIdRequest {
 	return VerifyReferenceOfByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
-		ReferenceOf:   core.CastString(data["referenceOf"]),
-		VerifyType:    core.CastString(data["verifyType"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		ItemSetName:     core.CastString(data["itemSetName"]),
+		ReferenceOf:     core.CastString(data["referenceOf"]),
+		VerifyType:      core.CastString(data["verifyType"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p VerifyReferenceOfByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
-		"itemSetName":   p.ItemSetName,
-		"referenceOf":   p.ReferenceOf,
-		"verifyType":    p.VerifyType,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"itemSetName":     p.ItemSetName,
+		"referenceOf":     p.ReferenceOf,
+		"verifyType":      p.VerifyType,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -3572,6 +3644,7 @@ type AddReferenceOfByUserIdRequest struct {
 	ItemName           *string `json:"itemName"`
 	ItemSetName        *string `json:"itemSetName"`
 	ReferenceOf        *string `json:"referenceOf"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewAddReferenceOfByUserIdRequestFromJson(data string) AddReferenceOfByUserIdRequest {
@@ -3582,23 +3655,25 @@ func NewAddReferenceOfByUserIdRequestFromJson(data string) AddReferenceOfByUserI
 
 func NewAddReferenceOfByUserIdRequestFromDict(data map[string]interface{}) AddReferenceOfByUserIdRequest {
 	return AddReferenceOfByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
-		ReferenceOf:   core.CastString(data["referenceOf"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		ItemSetName:     core.CastString(data["itemSetName"]),
+		ReferenceOf:     core.CastString(data["referenceOf"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p AddReferenceOfByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
-		"itemSetName":   p.ItemSetName,
-		"referenceOf":   p.ReferenceOf,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"itemSetName":     p.ItemSetName,
+		"referenceOf":     p.ReferenceOf,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -3662,6 +3737,7 @@ type DeleteReferenceOfByUserIdRequest struct {
 	ItemName           *string `json:"itemName"`
 	ItemSetName        *string `json:"itemSetName"`
 	ReferenceOf        *string `json:"referenceOf"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDeleteReferenceOfByUserIdRequestFromJson(data string) DeleteReferenceOfByUserIdRequest {
@@ -3672,23 +3748,25 @@ func NewDeleteReferenceOfByUserIdRequestFromJson(data string) DeleteReferenceOfB
 
 func NewDeleteReferenceOfByUserIdRequestFromDict(data map[string]interface{}) DeleteReferenceOfByUserIdRequest {
 	return DeleteReferenceOfByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
-		ReferenceOf:   core.CastString(data["referenceOf"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		ItemSetName:     core.CastString(data["itemSetName"]),
+		ReferenceOf:     core.CastString(data["referenceOf"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DeleteReferenceOfByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
-		"itemSetName":   p.ItemSetName,
-		"referenceOf":   p.ReferenceOf,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"itemSetName":     p.ItemSetName,
+		"referenceOf":     p.ReferenceOf,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -3842,6 +3920,7 @@ type DescribeSimpleItemsByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewDescribeSimpleItemsByUserIdRequestFromJson(data string) DescribeSimpleItemsByUserIdRequest {
@@ -3852,21 +3931,23 @@ func NewDescribeSimpleItemsByUserIdRequestFromJson(data string) DescribeSimpleIt
 
 func NewDescribeSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) DescribeSimpleItemsByUserIdRequest {
 	return DescribeSimpleItemsByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DescribeSimpleItemsByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -3920,6 +4001,7 @@ type GetSimpleItemByUserIdRequest struct {
 	InventoryName   *string `json:"inventoryName"`
 	UserId          *string `json:"userId"`
 	ItemName        *string `json:"itemName"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetSimpleItemByUserIdRequestFromJson(data string) GetSimpleItemByUserIdRequest {
@@ -3930,19 +4012,21 @@ func NewGetSimpleItemByUserIdRequestFromJson(data string) GetSimpleItemByUserIdR
 
 func NewGetSimpleItemByUserIdRequestFromDict(data map[string]interface{}) GetSimpleItemByUserIdRequest {
 	return GetSimpleItemByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetSimpleItemByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -4000,6 +4084,7 @@ type GetSimpleItemWithSignatureByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	ItemName        *string `json:"itemName"`
 	KeyId           *string `json:"keyId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetSimpleItemWithSignatureByUserIdRequestFromJson(data string) GetSimpleItemWithSignatureByUserIdRequest {
@@ -4010,21 +4095,23 @@ func NewGetSimpleItemWithSignatureByUserIdRequestFromJson(data string) GetSimple
 
 func NewGetSimpleItemWithSignatureByUserIdRequestFromDict(data map[string]interface{}) GetSimpleItemWithSignatureByUserIdRequest {
 	return GetSimpleItemWithSignatureByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		KeyId:         core.CastString(data["keyId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		KeyId:           core.CastString(data["keyId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetSimpleItemWithSignatureByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
-		"keyId":         p.KeyId,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"keyId":           p.KeyId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -4041,6 +4128,7 @@ type AcquireSimpleItemsByUserIdRequest struct {
 	InventoryName      *string        `json:"inventoryName"`
 	UserId             *string        `json:"userId"`
 	AcquireCounts      []AcquireCount `json:"acquireCounts"`
+	TimeOffsetToken    *string        `json:"timeOffsetToken"`
 }
 
 func NewAcquireSimpleItemsByUserIdRequestFromJson(data string) AcquireSimpleItemsByUserIdRequest {
@@ -4051,10 +4139,11 @@ func NewAcquireSimpleItemsByUserIdRequestFromJson(data string) AcquireSimpleItem
 
 func NewAcquireSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) AcquireSimpleItemsByUserIdRequest {
 	return AcquireSimpleItemsByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		AcquireCounts: CastAcquireCounts(core.CastArray(data["acquireCounts"])),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		AcquireCounts:   CastAcquireCounts(core.CastArray(data["acquireCounts"])),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -4066,6 +4155,7 @@ func (p AcquireSimpleItemsByUserIdRequest) ToDict() map[string]interface{} {
 		"acquireCounts": CastAcquireCountsFromDict(
 			p.AcquireCounts,
 		),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -4123,6 +4213,7 @@ type ConsumeSimpleItemsByUserIdRequest struct {
 	InventoryName      *string        `json:"inventoryName"`
 	UserId             *string        `json:"userId"`
 	ConsumeCounts      []ConsumeCount `json:"consumeCounts"`
+	TimeOffsetToken    *string        `json:"timeOffsetToken"`
 }
 
 func NewConsumeSimpleItemsByUserIdRequestFromJson(data string) ConsumeSimpleItemsByUserIdRequest {
@@ -4133,10 +4224,11 @@ func NewConsumeSimpleItemsByUserIdRequestFromJson(data string) ConsumeSimpleItem
 
 func NewConsumeSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) ConsumeSimpleItemsByUserIdRequest {
 	return ConsumeSimpleItemsByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ConsumeCounts: CastConsumeCounts(core.CastArray(data["consumeCounts"])),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ConsumeCounts:   CastConsumeCounts(core.CastArray(data["consumeCounts"])),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -4148,6 +4240,7 @@ func (p ConsumeSimpleItemsByUserIdRequest) ToDict() map[string]interface{} {
 		"consumeCounts": CastConsumeCountsFromDict(
 			p.ConsumeCounts,
 		),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -4164,6 +4257,7 @@ type SetSimpleItemsByUserIdRequest struct {
 	InventoryName      *string     `json:"inventoryName"`
 	UserId             *string     `json:"userId"`
 	Counts             []HeldCount `json:"counts"`
+	TimeOffsetToken    *string     `json:"timeOffsetToken"`
 }
 
 func NewSetSimpleItemsByUserIdRequestFromJson(data string) SetSimpleItemsByUserIdRequest {
@@ -4174,10 +4268,11 @@ func NewSetSimpleItemsByUserIdRequestFromJson(data string) SetSimpleItemsByUserI
 
 func NewSetSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) SetSimpleItemsByUserIdRequest {
 	return SetSimpleItemsByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		Counts:        CastHeldCounts(core.CastArray(data["counts"])),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		Counts:          CastHeldCounts(core.CastArray(data["counts"])),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -4189,6 +4284,7 @@ func (p SetSimpleItemsByUserIdRequest) ToDict() map[string]interface{} {
 		"counts": CastHeldCountsFromDict(
 			p.Counts,
 		),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -4204,6 +4300,7 @@ type DeleteSimpleItemsByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	InventoryName      *string `json:"inventoryName"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDeleteSimpleItemsByUserIdRequestFromJson(data string) DeleteSimpleItemsByUserIdRequest {
@@ -4214,17 +4311,19 @@ func NewDeleteSimpleItemsByUserIdRequestFromJson(data string) DeleteSimpleItemsB
 
 func NewDeleteSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) DeleteSimpleItemsByUserIdRequest {
 	return DeleteSimpleItemsByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DeleteSimpleItemsByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -4292,6 +4391,7 @@ type VerifySimpleItemByUserIdRequest struct {
 	VerifyType                      *string `json:"verifyType"`
 	Count                           *int64  `json:"count"`
 	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
 }
 
 func NewVerifySimpleItemByUserIdRequestFromJson(data string) VerifySimpleItemByUserIdRequest {
@@ -4309,6 +4409,7 @@ func NewVerifySimpleItemByUserIdRequestFromDict(data map[string]interface{}) Ver
 		VerifyType:                      core.CastString(data["verifyType"]),
 		Count:                           core.CastInt64(data["count"]),
 		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -4321,6 +4422,7 @@ func (p VerifySimpleItemByUserIdRequest) ToDict() map[string]interface{} {
 		"verifyType":                      p.VerifyType,
 		"count":                           p.Count,
 		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
 	}
 }
 
@@ -4506,6 +4608,7 @@ type DescribeBigItemsByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewDescribeBigItemsByUserIdRequestFromJson(data string) DescribeBigItemsByUserIdRequest {
@@ -4516,21 +4619,23 @@ func NewDescribeBigItemsByUserIdRequestFromJson(data string) DescribeBigItemsByU
 
 func NewDescribeBigItemsByUserIdRequestFromDict(data map[string]interface{}) DescribeBigItemsByUserIdRequest {
 	return DescribeBigItemsByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DescribeBigItemsByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -4584,6 +4689,7 @@ type GetBigItemByUserIdRequest struct {
 	InventoryName   *string `json:"inventoryName"`
 	UserId          *string `json:"userId"`
 	ItemName        *string `json:"itemName"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetBigItemByUserIdRequestFromJson(data string) GetBigItemByUserIdRequest {
@@ -4594,19 +4700,21 @@ func NewGetBigItemByUserIdRequestFromJson(data string) GetBigItemByUserIdRequest
 
 func NewGetBigItemByUserIdRequestFromDict(data map[string]interface{}) GetBigItemByUserIdRequest {
 	return GetBigItemByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetBigItemByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -4624,6 +4732,7 @@ type AcquireBigItemByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	ItemName           *string `json:"itemName"`
 	AcquireCount       *string `json:"acquireCount"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewAcquireBigItemByUserIdRequestFromJson(data string) AcquireBigItemByUserIdRequest {
@@ -4634,21 +4743,23 @@ func NewAcquireBigItemByUserIdRequestFromJson(data string) AcquireBigItemByUserI
 
 func NewAcquireBigItemByUserIdRequestFromDict(data map[string]interface{}) AcquireBigItemByUserIdRequest {
 	return AcquireBigItemByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		AcquireCount:  core.CastString(data["acquireCount"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		AcquireCount:    core.CastString(data["acquireCount"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p AcquireBigItemByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
-		"acquireCount":  p.AcquireCount,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"acquireCount":    p.AcquireCount,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -4708,6 +4819,7 @@ type ConsumeBigItemByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	ItemName           *string `json:"itemName"`
 	ConsumeCount       *string `json:"consumeCount"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewConsumeBigItemByUserIdRequestFromJson(data string) ConsumeBigItemByUserIdRequest {
@@ -4718,21 +4830,23 @@ func NewConsumeBigItemByUserIdRequestFromJson(data string) ConsumeBigItemByUserI
 
 func NewConsumeBigItemByUserIdRequestFromDict(data map[string]interface{}) ConsumeBigItemByUserIdRequest {
 	return ConsumeBigItemByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ConsumeCount:  core.CastString(data["consumeCount"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		ConsumeCount:    core.CastString(data["consumeCount"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p ConsumeBigItemByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
-		"consumeCount":  p.ConsumeCount,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"consumeCount":    p.ConsumeCount,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -4750,6 +4864,7 @@ type SetBigItemByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	ItemName           *string `json:"itemName"`
 	Count              *string `json:"count"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewSetBigItemByUserIdRequestFromJson(data string) SetBigItemByUserIdRequest {
@@ -4760,21 +4875,23 @@ func NewSetBigItemByUserIdRequestFromJson(data string) SetBigItemByUserIdRequest
 
 func NewSetBigItemByUserIdRequestFromDict(data map[string]interface{}) SetBigItemByUserIdRequest {
 	return SetBigItemByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		Count:         core.CastString(data["count"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		Count:           core.CastString(data["count"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p SetBigItemByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
-		"count":         p.Count,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"count":           p.Count,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -4791,6 +4908,7 @@ type DeleteBigItemByUserIdRequest struct {
 	InventoryName      *string `json:"inventoryName"`
 	UserId             *string `json:"userId"`
 	ItemName           *string `json:"itemName"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDeleteBigItemByUserIdRequestFromJson(data string) DeleteBigItemByUserIdRequest {
@@ -4801,19 +4919,21 @@ func NewDeleteBigItemByUserIdRequestFromJson(data string) DeleteBigItemByUserIdR
 
 func NewDeleteBigItemByUserIdRequestFromDict(data map[string]interface{}) DeleteBigItemByUserIdRequest {
 	return DeleteBigItemByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		InventoryName:   core.CastString(data["inventoryName"]),
+		UserId:          core.CastString(data["userId"]),
+		ItemName:        core.CastString(data["itemName"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DeleteBigItemByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"inventoryName": p.InventoryName,
-		"userId":        p.UserId,
-		"itemName":      p.ItemName,
+		"namespaceName":   p.NamespaceName,
+		"inventoryName":   p.InventoryName,
+		"userId":          p.UserId,
+		"itemName":        p.ItemName,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -4881,6 +5001,7 @@ type VerifyBigItemByUserIdRequest struct {
 	VerifyType                      *string `json:"verifyType"`
 	Count                           *string `json:"count"`
 	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
 }
 
 func NewVerifyBigItemByUserIdRequestFromJson(data string) VerifyBigItemByUserIdRequest {
@@ -4898,6 +5019,7 @@ func NewVerifyBigItemByUserIdRequestFromDict(data map[string]interface{}) Verify
 		VerifyType:                      core.CastString(data["verifyType"]),
 		Count:                           core.CastString(data["count"]),
 		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -4910,6 +5032,7 @@ func (p VerifyBigItemByUserIdRequest) ToDict() map[string]interface{} {
 		"verifyType":                      p.VerifyType,
 		"count":                           p.Count,
 		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
 	}
 }
 

@@ -886,6 +886,7 @@ type PutPositionByUserIdRequest struct {
 	Position           *Position `json:"position"`
 	Vector             *Vector   `json:"vector"`
 	R                  *float32  `json:"r"`
+	TimeOffsetToken    *string   `json:"timeOffsetToken"`
 }
 
 func NewPutPositionByUserIdRequestFromJson(data string) PutPositionByUserIdRequest {
@@ -896,25 +897,27 @@ func NewPutPositionByUserIdRequestFromJson(data string) PutPositionByUserIdReque
 
 func NewPutPositionByUserIdRequestFromDict(data map[string]interface{}) PutPositionByUserIdRequest {
 	return PutPositionByUserIdRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		UserId:         core.CastString(data["userId"]),
-		AreaModelName:  core.CastString(data["areaModelName"]),
-		LayerModelName: core.CastString(data["layerModelName"]),
-		Position:       NewPositionFromDict(core.CastMap(data["position"])).Pointer(),
-		Vector:         NewVectorFromDict(core.CastMap(data["vector"])).Pointer(),
-		R:              core.CastFloat32(data["r"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		AreaModelName:   core.CastString(data["areaModelName"]),
+		LayerModelName:  core.CastString(data["layerModelName"]),
+		Position:        NewPositionFromDict(core.CastMap(data["position"])).Pointer(),
+		Vector:          NewVectorFromDict(core.CastMap(data["vector"])).Pointer(),
+		R:               core.CastFloat32(data["r"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p PutPositionByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":  p.NamespaceName,
-		"userId":         p.UserId,
-		"areaModelName":  p.AreaModelName,
-		"layerModelName": p.LayerModelName,
-		"position":       p.Position.ToDict(),
-		"vector":         p.Vector.ToDict(),
-		"r":              p.R,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"areaModelName":   p.AreaModelName,
+		"layerModelName":  p.LayerModelName,
+		"position":        p.Position.ToDict(),
+		"vector":          p.Vector.ToDict(),
+		"r":               p.R,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1158,6 +1161,7 @@ type ActionByUserIdRequest struct {
 	LayerModelName     *string     `json:"layerModelName"`
 	Position           *MyPosition `json:"position"`
 	Scopes             []Scope     `json:"scopes"`
+	TimeOffsetToken    *string     `json:"timeOffsetToken"`
 }
 
 func NewActionByUserIdRequestFromJson(data string) ActionByUserIdRequest {
@@ -1168,12 +1172,13 @@ func NewActionByUserIdRequestFromJson(data string) ActionByUserIdRequest {
 
 func NewActionByUserIdRequestFromDict(data map[string]interface{}) ActionByUserIdRequest {
 	return ActionByUserIdRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		UserId:         core.CastString(data["userId"]),
-		AreaModelName:  core.CastString(data["areaModelName"]),
-		LayerModelName: core.CastString(data["layerModelName"]),
-		Position:       NewMyPositionFromDict(core.CastMap(data["position"])).Pointer(),
-		Scopes:         CastScopes(core.CastArray(data["scopes"])),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		AreaModelName:   core.CastString(data["areaModelName"]),
+		LayerModelName:  core.CastString(data["layerModelName"]),
+		Position:        NewMyPositionFromDict(core.CastMap(data["position"])).Pointer(),
+		Scopes:          CastScopes(core.CastArray(data["scopes"])),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -1187,6 +1192,7 @@ func (p ActionByUserIdRequest) ToDict() map[string]interface{} {
 		"scopes": CastScopesFromDict(
 			p.Scopes,
 		),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 

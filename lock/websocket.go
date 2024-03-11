@@ -690,6 +690,9 @@ func (p Gs2LockWebSocketClient) DescribeMutexesByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -882,6 +885,9 @@ func (p Gs2LockWebSocketClient) LockByUserIdAsync(
 	if request.Ttl != nil {
 		bodies["ttl"] = *request.Ttl
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1071,6 +1077,9 @@ func (p Gs2LockWebSocketClient) UnlockByUserIdAsync(
 	if request.TransactionId != nil && *request.TransactionId != "" {
 		bodies["transactionId"] = *request.TransactionId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1251,6 +1260,9 @@ func (p Gs2LockWebSocketClient) GetMutexByUserIdAsync(
 	if request.PropertyId != nil && *request.PropertyId != "" {
 		bodies["propertyId"] = *request.PropertyId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1337,6 +1349,9 @@ func (p Gs2LockWebSocketClient) DeleteMutexByUserIdAsync(
 	}
 	if request.PropertyId != nil && *request.PropertyId != "" {
 		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

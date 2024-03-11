@@ -701,6 +701,9 @@ func (p Gs2LogRestClient) QueryAccessLogAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go queryAccessLogAsyncHandler(
 		p,
@@ -811,6 +814,9 @@ func (p Gs2LogRestClient) CountAccessLogAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go countAccessLogAsyncHandler(
@@ -929,6 +935,9 @@ func (p Gs2LogRestClient) QueryIssueStampSheetLogAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go queryIssueStampSheetLogAsyncHandler(
 		p,
@@ -1042,6 +1051,9 @@ func (p Gs2LogRestClient) CountIssueStampSheetLogAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go countIssueStampSheetLogAsyncHandler(
@@ -1160,6 +1172,9 @@ func (p Gs2LogRestClient) QueryExecuteStampSheetLogAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go queryExecuteStampSheetLogAsyncHandler(
 		p,
@@ -1273,6 +1288,9 @@ func (p Gs2LogRestClient) CountExecuteStampSheetLogAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go countExecuteStampSheetLogAsyncHandler(
@@ -1391,6 +1409,9 @@ func (p Gs2LogRestClient) QueryExecuteStampTaskLogAsync(
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go queryExecuteStampTaskLogAsyncHandler(
 		p,
@@ -1505,6 +1526,9 @@ func (p Gs2LogRestClient) CountExecuteStampTaskLogAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go countExecuteStampTaskLogAsyncHandler(
 		p,
@@ -1612,6 +1636,9 @@ func (p Gs2LogRestClient) QueryAccessLogWithTelemetryAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
 
 	go queryAccessLogWithTelemetryAsyncHandler(

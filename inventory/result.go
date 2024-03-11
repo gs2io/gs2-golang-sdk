@@ -18,9 +18,9 @@ package inventory
 
 import (
 	"encoding/json"
+	"github.com/gs2io/gs2-golang-sdk/grade"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
-	"github.com/gs2io/gs2-golang-sdk/grade"
 )
 
 type DescribeNamespacesResult struct {

@@ -476,6 +476,7 @@ type InvokeScriptRequest struct {
 	UserId          *string       `json:"userId"`
 	Args            *string       `json:"args"`
 	RandomStatus    *RandomStatus `json:"randomStatus"`
+	TimeOffsetToken *string       `json:"timeOffsetToken"`
 }
 
 func NewInvokeScriptRequestFromJson(data string) InvokeScriptRequest {
@@ -486,19 +487,21 @@ func NewInvokeScriptRequestFromJson(data string) InvokeScriptRequest {
 
 func NewInvokeScriptRequestFromDict(data map[string]interface{}) InvokeScriptRequest {
 	return InvokeScriptRequest{
-		ScriptId:     core.CastString(data["scriptId"]),
-		UserId:       core.CastString(data["userId"]),
-		Args:         core.CastString(data["args"]),
-		RandomStatus: NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
+		ScriptId:        core.CastString(data["scriptId"]),
+		UserId:          core.CastString(data["userId"]),
+		Args:            core.CastString(data["args"]),
+		RandomStatus:    NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p InvokeScriptRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"scriptId":     p.ScriptId,
-		"userId":       p.UserId,
-		"args":         p.Args,
-		"randomStatus": p.RandomStatus.ToDict(),
+		"scriptId":        p.ScriptId,
+		"userId":          p.UserId,
+		"args":            p.Args,
+		"randomStatus":    p.RandomStatus.ToDict(),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 

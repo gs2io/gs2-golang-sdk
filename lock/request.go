@@ -257,6 +257,7 @@ type DescribeMutexesByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewDescribeMutexesByUserIdRequestFromJson(data string) DescribeMutexesByUserIdRequest {
@@ -267,19 +268,21 @@ func NewDescribeMutexesByUserIdRequestFromJson(data string) DescribeMutexesByUse
 
 func NewDescribeMutexesByUserIdRequestFromDict(data map[string]interface{}) DescribeMutexesByUserIdRequest {
 	return DescribeMutexesByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DescribeMutexesByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -339,6 +342,7 @@ type LockByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	TransactionId      *string `json:"transactionId"`
 	Ttl                *int64  `json:"ttl"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewLockByUserIdRequestFromJson(data string) LockByUserIdRequest {
@@ -349,21 +353,23 @@ func NewLockByUserIdRequestFromJson(data string) LockByUserIdRequest {
 
 func NewLockByUserIdRequestFromDict(data map[string]interface{}) LockByUserIdRequest {
 	return LockByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PropertyId:    core.CastString(data["propertyId"]),
-		UserId:        core.CastString(data["userId"]),
-		TransactionId: core.CastString(data["transactionId"]),
-		Ttl:           core.CastInt64(data["ttl"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		PropertyId:      core.CastString(data["propertyId"]),
+		UserId:          core.CastString(data["userId"]),
+		TransactionId:   core.CastString(data["transactionId"]),
+		Ttl:             core.CastInt64(data["ttl"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p LockByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"propertyId":    p.PropertyId,
-		"userId":        p.UserId,
-		"transactionId": p.TransactionId,
-		"ttl":           p.Ttl,
+		"namespaceName":   p.NamespaceName,
+		"propertyId":      p.PropertyId,
+		"userId":          p.UserId,
+		"transactionId":   p.TransactionId,
+		"ttl":             p.Ttl,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -419,6 +425,7 @@ type UnlockByUserIdRequest struct {
 	PropertyId         *string `json:"propertyId"`
 	UserId             *string `json:"userId"`
 	TransactionId      *string `json:"transactionId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewUnlockByUserIdRequestFromJson(data string) UnlockByUserIdRequest {
@@ -429,19 +436,21 @@ func NewUnlockByUserIdRequestFromJson(data string) UnlockByUserIdRequest {
 
 func NewUnlockByUserIdRequestFromDict(data map[string]interface{}) UnlockByUserIdRequest {
 	return UnlockByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PropertyId:    core.CastString(data["propertyId"]),
-		UserId:        core.CastString(data["userId"]),
-		TransactionId: core.CastString(data["transactionId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		PropertyId:      core.CastString(data["propertyId"]),
+		UserId:          core.CastString(data["userId"]),
+		TransactionId:   core.CastString(data["transactionId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p UnlockByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"propertyId":    p.PropertyId,
-		"userId":        p.UserId,
-		"transactionId": p.TransactionId,
+		"namespaceName":   p.NamespaceName,
+		"propertyId":      p.PropertyId,
+		"userId":          p.UserId,
+		"transactionId":   p.TransactionId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -491,6 +500,7 @@ type GetMutexByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
 	PropertyId      *string `json:"propertyId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetMutexByUserIdRequestFromJson(data string) GetMutexByUserIdRequest {
@@ -501,17 +511,19 @@ func NewGetMutexByUserIdRequestFromJson(data string) GetMutexByUserIdRequest {
 
 func NewGetMutexByUserIdRequestFromDict(data map[string]interface{}) GetMutexByUserIdRequest {
 	return GetMutexByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		PropertyId:    core.CastString(data["propertyId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		PropertyId:      core.CastString(data["propertyId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetMutexByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"propertyId":    p.PropertyId,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"propertyId":      p.PropertyId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -527,6 +539,7 @@ type DeleteMutexByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	PropertyId         *string `json:"propertyId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDeleteMutexByUserIdRequestFromJson(data string) DeleteMutexByUserIdRequest {
@@ -537,17 +550,19 @@ func NewDeleteMutexByUserIdRequestFromJson(data string) DeleteMutexByUserIdReque
 
 func NewDeleteMutexByUserIdRequestFromDict(data map[string]interface{}) DeleteMutexByUserIdRequest {
 	return DeleteMutexByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		PropertyId:    core.CastString(data["propertyId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		PropertyId:      core.CastString(data["propertyId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DeleteMutexByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"propertyId":    p.PropertyId,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"propertyId":      p.PropertyId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 

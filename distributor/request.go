@@ -605,6 +605,7 @@ type DistributeRequest struct {
 	DistributorName    *string             `json:"distributorName"`
 	UserId             *string             `json:"userId"`
 	DistributeResource *DistributeResource `json:"distributeResource"`
+	TimeOffsetToken    *string             `json:"timeOffsetToken"`
 }
 
 func NewDistributeRequestFromJson(data string) DistributeRequest {
@@ -619,6 +620,7 @@ func NewDistributeRequestFromDict(data map[string]interface{}) DistributeRequest
 		DistributorName:    core.CastString(data["distributorName"]),
 		UserId:             core.CastString(data["userId"]),
 		DistributeResource: NewDistributeResourceFromDict(core.CastMap(data["distributeResource"])).Pointer(),
+		TimeOffsetToken:    core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -628,6 +630,7 @@ func (p DistributeRequest) ToDict() map[string]interface{} {
 		"distributorName":    p.DistributorName,
 		"userId":             p.UserId,
 		"distributeResource": p.DistributeResource.ToDict(),
+		"timeOffsetToken":    p.TimeOffsetToken,
 	}
 }
 
@@ -641,6 +644,7 @@ type DistributeWithoutOverflowProcessRequest struct {
 	ContextStack       *string             `json:"contextStack"`
 	UserId             *string             `json:"userId"`
 	DistributeResource *DistributeResource `json:"distributeResource"`
+	TimeOffsetToken    *string             `json:"timeOffsetToken"`
 }
 
 func NewDistributeWithoutOverflowProcessRequestFromJson(data string) DistributeWithoutOverflowProcessRequest {
@@ -653,6 +657,7 @@ func NewDistributeWithoutOverflowProcessRequestFromDict(data map[string]interfac
 	return DistributeWithoutOverflowProcessRequest{
 		UserId:             core.CastString(data["userId"]),
 		DistributeResource: NewDistributeResourceFromDict(core.CastMap(data["distributeResource"])).Pointer(),
+		TimeOffsetToken:    core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -660,6 +665,7 @@ func (p DistributeWithoutOverflowProcessRequest) ToDict() map[string]interface{}
 	return map[string]interface{}{
 		"userId":             p.UserId,
 		"distributeResource": p.DistributeResource.ToDict(),
+		"timeOffsetToken":    p.TimeOffsetToken,
 	}
 }
 
@@ -910,6 +916,7 @@ type GetStampSheetResultByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
 	TransactionId   *string `json:"transactionId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetStampSheetResultByUserIdRequestFromJson(data string) GetStampSheetResultByUserIdRequest {
@@ -920,17 +927,19 @@ func NewGetStampSheetResultByUserIdRequestFromJson(data string) GetStampSheetRes
 
 func NewGetStampSheetResultByUserIdRequestFromDict(data map[string]interface{}) GetStampSheetResultByUserIdRequest {
 	return GetStampSheetResultByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		TransactionId: core.CastString(data["transactionId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		TransactionId:   core.CastString(data["transactionId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetStampSheetResultByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"transactionId": p.TransactionId,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"transactionId":   p.TransactionId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 

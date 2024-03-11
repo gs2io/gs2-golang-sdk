@@ -18,7 +18,11 @@ deny overwrite
 
 package auth
 
-import "github.com/gs2io/gs2-golang-sdk/core"
+import (
+	"encoding/json"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
 
 type LoginResult struct {
 	Token  *core.AccessToken `json:"token"`
@@ -29,6 +33,12 @@ type LoginResult struct {
 type LoginAsyncResult struct {
 	result *LoginResult
 	err    error
+}
+
+func NewLoginResultFromJson(data string) LoginResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLoginResultFromDict(dict)
 }
 
 func NewLoginResultFromDict(data map[string]interface{}) LoginResult {
@@ -62,6 +72,12 @@ type LoginBySignatureAsyncResult struct {
 	err    error
 }
 
+func NewLoginBySignatureResultFromJson(data string) LoginBySignatureResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLoginBySignatureResultFromDict(dict)
+}
+
 func NewLoginBySignatureResultFromDict(data map[string]interface{}) LoginBySignatureResult {
 	return LoginBySignatureResult{
 		Token:  core.CastString(data["token"]),
@@ -79,5 +95,42 @@ func (p LoginBySignatureResult) ToDict() map[string]interface{} {
 }
 
 func (p LoginBySignatureResult) Pointer() *LoginBySignatureResult {
+	return &p
+}
+
+type IssueTimeOffsetTokenByUserIdResult struct {
+	Token  *string `json:"token"`
+	UserId *string `json:"userId"`
+	Expire *int64  `json:"expire"`
+}
+
+type IssueTimeOffsetTokenByUserIdAsyncResult struct {
+	result *IssueTimeOffsetTokenByUserIdResult
+	err    error
+}
+
+func NewIssueTimeOffsetTokenByUserIdResultFromJson(data string) IssueTimeOffsetTokenByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIssueTimeOffsetTokenByUserIdResultFromDict(dict)
+}
+
+func NewIssueTimeOffsetTokenByUserIdResultFromDict(data map[string]interface{}) IssueTimeOffsetTokenByUserIdResult {
+	return IssueTimeOffsetTokenByUserIdResult{
+		Token:  core.CastString(data["token"]),
+		UserId: core.CastString(data["userId"]),
+		Expire: core.CastInt64(data["expire"]),
+	}
+}
+
+func (p IssueTimeOffsetTokenByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"token":  p.Token,
+		"userId": p.UserId,
+		"expire": p.Expire,
+	}
+}
+
+func (p IssueTimeOffsetTokenByUserIdResult) Pointer() *IssueTimeOffsetTokenByUserIdResult {
 	return &p
 }

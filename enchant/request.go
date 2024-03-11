@@ -223,6 +223,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDumpUserDataByUserIdRequestFromJson(data string) DumpUserDataByUserIdRequest {
@@ -233,13 +234,15 @@ func NewDumpUserDataByUserIdRequestFromJson(data string) DumpUserDataByUserIdReq
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
 	return DumpUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DumpUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -253,6 +256,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCheckDumpUserDataByUserIdRequestFromJson(data string) CheckDumpUserDataByUserIdRequest {
@@ -263,13 +267,15 @@ func NewCheckDumpUserDataByUserIdRequestFromJson(data string) CheckDumpUserDataB
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
 	return CheckDumpUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CheckDumpUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -283,6 +289,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCleanUserDataByUserIdRequestFromJson(data string) CleanUserDataByUserIdRequest {
@@ -293,13 +300,15 @@ func NewCleanUserDataByUserIdRequestFromJson(data string) CleanUserDataByUserIdR
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
 	return CleanUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CleanUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -313,6 +322,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCheckCleanUserDataByUserIdRequestFromJson(data string) CheckCleanUserDataByUserIdRequest {
@@ -323,13 +333,15 @@ func NewCheckCleanUserDataByUserIdRequestFromJson(data string) CheckCleanUserDat
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
 	return CheckCleanUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CheckCleanUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -343,6 +355,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewPrepareImportUserDataByUserIdRequestFromJson(data string) PrepareImportUserDataByUserIdRequest {
@@ -353,13 +366,15 @@ func NewPrepareImportUserDataByUserIdRequestFromJson(data string) PrepareImportU
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
 	return PrepareImportUserDataByUserIdRequest{
-		UserId: core.CastString(data["userId"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p PrepareImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId": p.UserId,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -374,6 +389,7 @@ type ImportUserDataByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
 	UploadToken        *string `json:"uploadToken"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewImportUserDataByUserIdRequestFromJson(data string) ImportUserDataByUserIdRequest {
@@ -384,15 +400,17 @@ func NewImportUserDataByUserIdRequestFromJson(data string) ImportUserDataByUserI
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
 	return ImportUserDataByUserIdRequest{
-		UserId:      core.CastString(data["userId"]),
-		UploadToken: core.CastString(data["uploadToken"]),
+		UserId:          core.CastString(data["userId"]),
+		UploadToken:     core.CastString(data["uploadToken"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p ImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId":      p.UserId,
-		"uploadToken": p.UploadToken,
+		"userId":          p.UserId,
+		"uploadToken":     p.UploadToken,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -407,6 +425,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	UserId             *string `json:"userId"`
 	UploadToken        *string `json:"uploadToken"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewCheckImportUserDataByUserIdRequestFromJson(data string) CheckImportUserDataByUserIdRequest {
@@ -417,15 +436,17 @@ func NewCheckImportUserDataByUserIdRequestFromJson(data string) CheckImportUserD
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
 	return CheckImportUserDataByUserIdRequest{
-		UserId:      core.CastString(data["userId"]),
-		UploadToken: core.CastString(data["uploadToken"]),
+		UserId:          core.CastString(data["userId"]),
+		UploadToken:     core.CastString(data["uploadToken"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p CheckImportUserDataByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId":      p.UserId,
-		"uploadToken": p.UploadToken,
+		"userId":          p.UserId,
+		"uploadToken":     p.UploadToken,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1125,6 +1146,7 @@ type DescribeBalanceParameterStatusesByUserIdRequest struct {
 	ParameterName   *string `json:"parameterName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewDescribeBalanceParameterStatusesByUserIdRequestFromJson(data string) DescribeBalanceParameterStatusesByUserIdRequest {
@@ -1135,21 +1157,23 @@ func NewDescribeBalanceParameterStatusesByUserIdRequestFromJson(data string) Des
 
 func NewDescribeBalanceParameterStatusesByUserIdRequestFromDict(data map[string]interface{}) DescribeBalanceParameterStatusesByUserIdRequest {
 	return DescribeBalanceParameterStatusesByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		ParameterName: core.CastString(data["parameterName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		ParameterName:   core.CastString(data["parameterName"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DescribeBalanceParameterStatusesByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"parameterName": p.ParameterName,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"parameterName":   p.ParameterName,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1203,6 +1227,7 @@ type GetBalanceParameterStatusByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	ParameterName   *string `json:"parameterName"`
 	PropertyId      *string `json:"propertyId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetBalanceParameterStatusByUserIdRequestFromJson(data string) GetBalanceParameterStatusByUserIdRequest {
@@ -1213,19 +1238,21 @@ func NewGetBalanceParameterStatusByUserIdRequestFromJson(data string) GetBalance
 
 func NewGetBalanceParameterStatusByUserIdRequestFromDict(data map[string]interface{}) GetBalanceParameterStatusByUserIdRequest {
 	return GetBalanceParameterStatusByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		ParameterName: core.CastString(data["parameterName"]),
-		PropertyId:    core.CastString(data["propertyId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		ParameterName:   core.CastString(data["parameterName"]),
+		PropertyId:      core.CastString(data["propertyId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetBalanceParameterStatusByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"parameterName": p.ParameterName,
-		"propertyId":    p.PropertyId,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"parameterName":   p.ParameterName,
+		"propertyId":      p.PropertyId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1242,6 +1269,7 @@ type DeleteBalanceParameterStatusByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	ParameterName      *string `json:"parameterName"`
 	PropertyId         *string `json:"propertyId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDeleteBalanceParameterStatusByUserIdRequestFromJson(data string) DeleteBalanceParameterStatusByUserIdRequest {
@@ -1252,19 +1280,21 @@ func NewDeleteBalanceParameterStatusByUserIdRequestFromJson(data string) DeleteB
 
 func NewDeleteBalanceParameterStatusByUserIdRequestFromDict(data map[string]interface{}) DeleteBalanceParameterStatusByUserIdRequest {
 	return DeleteBalanceParameterStatusByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		ParameterName: core.CastString(data["parameterName"]),
-		PropertyId:    core.CastString(data["propertyId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		ParameterName:   core.CastString(data["parameterName"]),
+		PropertyId:      core.CastString(data["propertyId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DeleteBalanceParameterStatusByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"parameterName": p.ParameterName,
-		"propertyId":    p.PropertyId,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"parameterName":   p.ParameterName,
+		"propertyId":      p.PropertyId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1282,6 +1312,7 @@ type ReDrawBalanceParameterStatusByUserIdRequest struct {
 	ParameterName       *string   `json:"parameterName"`
 	PropertyId          *string   `json:"propertyId"`
 	FixedParameterNames []*string `json:"fixedParameterNames"`
+	TimeOffsetToken     *string   `json:"timeOffsetToken"`
 }
 
 func NewReDrawBalanceParameterStatusByUserIdRequestFromJson(data string) ReDrawBalanceParameterStatusByUserIdRequest {
@@ -1297,6 +1328,7 @@ func NewReDrawBalanceParameterStatusByUserIdRequestFromDict(data map[string]inte
 		ParameterName:       core.CastString(data["parameterName"]),
 		PropertyId:          core.CastString(data["propertyId"]),
 		FixedParameterNames: core.CastStrings(core.CastArray(data["fixedParameterNames"])),
+		TimeOffsetToken:     core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -1309,6 +1341,7 @@ func (p ReDrawBalanceParameterStatusByUserIdRequest) ToDict() map[string]interfa
 		"fixedParameterNames": core.CastStringsFromDict(
 			p.FixedParameterNames,
 		),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1358,6 +1391,7 @@ type SetBalanceParameterStatusByUserIdRequest struct {
 	ParameterName      *string                 `json:"parameterName"`
 	PropertyId         *string                 `json:"propertyId"`
 	ParameterValues    []BalanceParameterValue `json:"parameterValues"`
+	TimeOffsetToken    *string                 `json:"timeOffsetToken"`
 }
 
 func NewSetBalanceParameterStatusByUserIdRequestFromJson(data string) SetBalanceParameterStatusByUserIdRequest {
@@ -1373,6 +1407,7 @@ func NewSetBalanceParameterStatusByUserIdRequestFromDict(data map[string]interfa
 		ParameterName:   core.CastString(data["parameterName"]),
 		PropertyId:      core.CastString(data["propertyId"]),
 		ParameterValues: CastBalanceParameterValues(core.CastArray(data["parameterValues"])),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -1385,6 +1420,7 @@ func (p SetBalanceParameterStatusByUserIdRequest) ToDict() map[string]interface{
 		"parameterValues": CastBalanceParameterValuesFromDict(
 			p.ParameterValues,
 		),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1474,6 +1510,7 @@ type DescribeRarityParameterStatusesByUserIdRequest struct {
 	ParameterName   *string `json:"parameterName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewDescribeRarityParameterStatusesByUserIdRequestFromJson(data string) DescribeRarityParameterStatusesByUserIdRequest {
@@ -1484,21 +1521,23 @@ func NewDescribeRarityParameterStatusesByUserIdRequestFromJson(data string) Desc
 
 func NewDescribeRarityParameterStatusesByUserIdRequestFromDict(data map[string]interface{}) DescribeRarityParameterStatusesByUserIdRequest {
 	return DescribeRarityParameterStatusesByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		ParameterName: core.CastString(data["parameterName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		ParameterName:   core.CastString(data["parameterName"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DescribeRarityParameterStatusesByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"parameterName": p.ParameterName,
-		"pageToken":     p.PageToken,
-		"limit":         p.Limit,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"parameterName":   p.ParameterName,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1552,6 +1591,7 @@ type GetRarityParameterStatusByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	ParameterName   *string `json:"parameterName"`
 	PropertyId      *string `json:"propertyId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func NewGetRarityParameterStatusByUserIdRequestFromJson(data string) GetRarityParameterStatusByUserIdRequest {
@@ -1562,19 +1602,21 @@ func NewGetRarityParameterStatusByUserIdRequestFromJson(data string) GetRarityPa
 
 func NewGetRarityParameterStatusByUserIdRequestFromDict(data map[string]interface{}) GetRarityParameterStatusByUserIdRequest {
 	return GetRarityParameterStatusByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		ParameterName: core.CastString(data["parameterName"]),
-		PropertyId:    core.CastString(data["propertyId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		ParameterName:   core.CastString(data["parameterName"]),
+		PropertyId:      core.CastString(data["propertyId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p GetRarityParameterStatusByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"parameterName": p.ParameterName,
-		"propertyId":    p.PropertyId,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"parameterName":   p.ParameterName,
+		"propertyId":      p.PropertyId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1591,6 +1633,7 @@ type DeleteRarityParameterStatusByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	ParameterName      *string `json:"parameterName"`
 	PropertyId         *string `json:"propertyId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewDeleteRarityParameterStatusByUserIdRequestFromJson(data string) DeleteRarityParameterStatusByUserIdRequest {
@@ -1601,19 +1644,21 @@ func NewDeleteRarityParameterStatusByUserIdRequestFromJson(data string) DeleteRa
 
 func NewDeleteRarityParameterStatusByUserIdRequestFromDict(data map[string]interface{}) DeleteRarityParameterStatusByUserIdRequest {
 	return DeleteRarityParameterStatusByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		ParameterName: core.CastString(data["parameterName"]),
-		PropertyId:    core.CastString(data["propertyId"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		ParameterName:   core.CastString(data["parameterName"]),
+		PropertyId:      core.CastString(data["propertyId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p DeleteRarityParameterStatusByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"parameterName": p.ParameterName,
-		"propertyId":    p.PropertyId,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"parameterName":   p.ParameterName,
+		"propertyId":      p.PropertyId,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1631,6 +1676,7 @@ type ReDrawRarityParameterStatusByUserIdRequest struct {
 	ParameterName       *string   `json:"parameterName"`
 	PropertyId          *string   `json:"propertyId"`
 	FixedParameterNames []*string `json:"fixedParameterNames"`
+	TimeOffsetToken     *string   `json:"timeOffsetToken"`
 }
 
 func NewReDrawRarityParameterStatusByUserIdRequestFromJson(data string) ReDrawRarityParameterStatusByUserIdRequest {
@@ -1646,6 +1692,7 @@ func NewReDrawRarityParameterStatusByUserIdRequestFromDict(data map[string]inter
 		ParameterName:       core.CastString(data["parameterName"]),
 		PropertyId:          core.CastString(data["propertyId"]),
 		FixedParameterNames: core.CastStrings(core.CastArray(data["fixedParameterNames"])),
+		TimeOffsetToken:     core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -1658,6 +1705,7 @@ func (p ReDrawRarityParameterStatusByUserIdRequest) ToDict() map[string]interfac
 		"fixedParameterNames": core.CastStringsFromDict(
 			p.FixedParameterNames,
 		),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1707,6 +1755,7 @@ type AddRarityParameterStatusByUserIdRequest struct {
 	ParameterName      *string `json:"parameterName"`
 	PropertyId         *string `json:"propertyId"`
 	Count              *int32  `json:"count"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func NewAddRarityParameterStatusByUserIdRequestFromJson(data string) AddRarityParameterStatusByUserIdRequest {
@@ -1717,21 +1766,23 @@ func NewAddRarityParameterStatusByUserIdRequestFromJson(data string) AddRarityPa
 
 func NewAddRarityParameterStatusByUserIdRequestFromDict(data map[string]interface{}) AddRarityParameterStatusByUserIdRequest {
 	return AddRarityParameterStatusByUserIdRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		UserId:        core.CastString(data["userId"]),
-		ParameterName: core.CastString(data["parameterName"]),
-		PropertyId:    core.CastString(data["propertyId"]),
-		Count:         core.CastInt32(data["count"]),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		ParameterName:   core.CastString(data["parameterName"]),
+		PropertyId:      core.CastString(data["propertyId"]),
+		Count:           core.CastInt32(data["count"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p AddRarityParameterStatusByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"parameterName": p.ParameterName,
-		"propertyId":    p.PropertyId,
-		"count":         p.Count,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"parameterName":   p.ParameterName,
+		"propertyId":      p.PropertyId,
+		"count":           p.Count,
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -1835,6 +1886,7 @@ type VerifyRarityParameterStatusByUserIdRequest struct {
 	ParameterValueName              *string `json:"parameterValueName"`
 	ParameterCount                  *int32  `json:"parameterCount"`
 	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
 }
 
 func NewVerifyRarityParameterStatusByUserIdRequestFromJson(data string) VerifyRarityParameterStatusByUserIdRequest {
@@ -1853,6 +1905,7 @@ func NewVerifyRarityParameterStatusByUserIdRequestFromDict(data map[string]inter
 		ParameterValueName:              core.CastString(data["parameterValueName"]),
 		ParameterCount:                  core.CastInt32(data["parameterCount"]),
 		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -1866,6 +1919,7 @@ func (p VerifyRarityParameterStatusByUserIdRequest) ToDict() map[string]interfac
 		"parameterValueName":              p.ParameterValueName,
 		"parameterCount":                  p.ParameterCount,
 		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
 	}
 }
 
@@ -1915,6 +1969,7 @@ type SetRarityParameterStatusByUserIdRequest struct {
 	ParameterName      *string                `json:"parameterName"`
 	PropertyId         *string                `json:"propertyId"`
 	ParameterValues    []RarityParameterValue `json:"parameterValues"`
+	TimeOffsetToken    *string                `json:"timeOffsetToken"`
 }
 
 func NewSetRarityParameterStatusByUserIdRequestFromJson(data string) SetRarityParameterStatusByUserIdRequest {
@@ -1930,6 +1985,7 @@ func NewSetRarityParameterStatusByUserIdRequestFromDict(data map[string]interfac
 		ParameterName:   core.CastString(data["parameterName"]),
 		PropertyId:      core.CastString(data["propertyId"]),
 		ParameterValues: CastRarityParameterValues(core.CastArray(data["parameterValues"])),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -1942,6 +1998,7 @@ func (p SetRarityParameterStatusByUserIdRequest) ToDict() map[string]interface{}
 		"parameterValues": CastRarityParameterValuesFromDict(
 			p.ParameterValues,
 		),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 

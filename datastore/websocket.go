@@ -594,6 +594,9 @@ func (p Gs2DatastoreWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -677,6 +680,9 @@ func (p Gs2DatastoreWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -762,6 +768,9 @@ func (p Gs2DatastoreWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -846,6 +855,9 @@ func (p Gs2DatastoreWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -929,6 +941,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1017,6 +1032,9 @@ func (p Gs2DatastoreWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1103,6 +1121,9 @@ func (p Gs2DatastoreWebSocketClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.UploadToken != nil && *request.UploadToken != "" {
 		bodies["uploadToken"] = *request.UploadToken
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1295,6 +1316,9 @@ func (p Gs2DatastoreWebSocketClient) DescribeDataObjectsByUserIdAsync(
 	}
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1508,6 +1532,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareUploadByUserIdAsync(
 	if request.UpdateIfExists != nil {
 		bodies["updateIfExists"] = *request.UpdateIfExists
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1711,6 +1738,9 @@ func (p Gs2DatastoreWebSocketClient) UpdateDataObjectByUserIdAsync(
 		}
 		bodies["allowUserIds"] = _allowUserIds
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1899,6 +1929,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareReUploadByUserIdAsync(
 	}
 	if request.ContentType != nil && *request.ContentType != "" {
 		bodies["contentType"] = *request.ContentType
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2101,6 +2134,9 @@ func (p Gs2DatastoreWebSocketClient) DoneUploadByUserIdAsync(
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2296,6 +2332,9 @@ func (p Gs2DatastoreWebSocketClient) DeleteDataObjectByUserIdAsync(
 	if request.DataObjectName != nil && *request.DataObjectName != "" {
 		bodies["dataObjectName"] = *request.DataObjectName
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2478,6 +2517,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByUserIdAsync(
 	}
 	if request.DataObjectId != nil && *request.DataObjectId != "" {
 		bodies["dataObjectId"] = *request.DataObjectId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2668,6 +2710,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByGenerationAndUserIdAsync(
 	if request.Generation != nil && *request.Generation != "" {
 		bodies["generation"] = *request.Generation
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2850,6 +2895,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByUserIdAndDataObjectNameAsy
 	}
 	if request.DataObjectName != nil && *request.DataObjectName != "" {
 		bodies["dataObjectName"] = *request.DataObjectName
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3039,6 +3087,9 @@ func (p Gs2DatastoreWebSocketClient) PrepareDownloadByUserIdAndDataObjectNameAnd
 	}
 	if request.Generation != nil && *request.Generation != "" {
 		bodies["generation"] = *request.Generation
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3322,6 +3373,9 @@ func (p Gs2DatastoreWebSocketClient) DescribeDataObjectHistoriesByUserIdAsync(
 	if request.Limit != nil {
 		bodies["limit"] = *request.Limit
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3504,6 +3558,9 @@ func (p Gs2DatastoreWebSocketClient) GetDataObjectHistoryByUserIdAsync(
 	}
 	if request.Generation != nil && *request.Generation != "" {
 		bodies["generation"] = *request.Generation
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

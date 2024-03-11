@@ -1559,6 +1559,9 @@ func (p Gs2DistributorWebSocketClient) DistributeAsync(
 	if request.DistributeResource != nil {
 		bodies["distributeResource"] = request.DistributeResource.ToDict()
 	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1642,6 +1645,9 @@ func (p Gs2DistributorWebSocketClient) DistributeWithoutOverflowProcessAsync(
 	}
 	if request.DistributeResource != nil {
 		bodies["distributeResource"] = request.DistributeResource.ToDict()
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2332,6 +2338,9 @@ func (p Gs2DistributorWebSocketClient) GetStampSheetResultByUserIdAsync(
 	}
 	if request.TransactionId != nil && *request.TransactionId != "" {
 		bodies["transactionId"] = *request.TransactionId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

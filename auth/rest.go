@@ -97,6 +97,9 @@ func (p Gs2AuthRestClient) LoginAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
 
 	go loginAsyncHandler(
 		p,
@@ -209,6 +212,100 @@ func (p Gs2AuthRestClient) LoginBySignature(
 ) (*LoginBySignatureResult, error) {
 	callback := make(chan LoginBySignatureAsyncResult, 1)
 	go p.LoginBySignatureAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func issueTimeOffsetTokenByUserIdAsyncHandler(
+	client Gs2AuthRestClient,
+	job *core.NetworkJob,
+	callback chan<- IssueTimeOffsetTokenByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IssueTimeOffsetTokenByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IssueTimeOffsetTokenByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- IssueTimeOffsetTokenByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- IssueTimeOffsetTokenByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- IssueTimeOffsetTokenByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AuthRestClient) IssueTimeOffsetTokenByUserIdAsync(
+	request *IssueTimeOffsetTokenByUserIdRequest,
+	callback chan<- IssueTimeOffsetTokenByUserIdAsyncResult,
+) {
+	path := "/timeoffset/token"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffset != nil {
+		bodies["timeOffset"] = *request.TimeOffset
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go issueTimeOffsetTokenByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("auth").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AuthRestClient) IssueTimeOffsetTokenByUserId(
+	request *IssueTimeOffsetTokenByUserIdRequest,
+) (*IssueTimeOffsetTokenByUserIdResult, error) {
+	callback := make(chan IssueTimeOffsetTokenByUserIdAsyncResult, 1)
+	go p.IssueTimeOffsetTokenByUserIdAsync(
 		request,
 		callback,
 	)
