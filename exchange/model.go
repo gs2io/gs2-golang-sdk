@@ -23,16 +23,17 @@ import (
 )
 
 type Namespace struct {
-	NamespaceId          *string             `json:"namespaceId"`
-	Name                 *string             `json:"name"`
-	Description          *string             `json:"description"`
-	EnableDirectExchange *bool               `json:"enableDirectExchange"`
-	EnableAwaitExchange  *bool               `json:"enableAwaitExchange"`
-	TransactionSetting   *TransactionSetting `json:"transactionSetting"`
-	ExchangeScript       *ScriptSetting      `json:"exchangeScript"`
-	LogSetting           *LogSetting         `json:"logSetting"`
-	CreatedAt            *int64              `json:"createdAt"`
-	UpdatedAt            *int64              `json:"updatedAt"`
+	NamespaceId               *string             `json:"namespaceId"`
+	Name                      *string             `json:"name"`
+	Description               *string             `json:"description"`
+	EnableDirectExchange      *bool               `json:"enableDirectExchange"`
+	EnableAwaitExchange       *bool               `json:"enableAwaitExchange"`
+	TransactionSetting        *TransactionSetting `json:"transactionSetting"`
+	ExchangeScript            *ScriptSetting      `json:"exchangeScript"`
+	IncrementalExchangeScript *ScriptSetting      `json:"incrementalExchangeScript"`
+	LogSetting                *LogSetting         `json:"logSetting"`
+	CreatedAt                 *int64              `json:"createdAt"`
+	UpdatedAt                 *int64              `json:"updatedAt"`
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	// Deprecated: should not be used
@@ -48,19 +49,20 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:          core.CastString(data["namespaceId"]),
-		Name:                 core.CastString(data["name"]),
-		Description:          core.CastString(data["description"]),
-		EnableDirectExchange: core.CastBool(data["enableDirectExchange"]),
-		EnableAwaitExchange:  core.CastBool(data["enableAwaitExchange"]),
-		TransactionSetting:   NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		ExchangeScript:       NewScriptSettingFromDict(core.CastMap(data["exchangeScript"])).Pointer(),
-		LogSetting:           NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:            core.CastInt64(data["createdAt"]),
-		UpdatedAt:            core.CastInt64(data["updatedAt"]),
-		QueueNamespaceId:     core.CastString(data["queueNamespaceId"]),
-		KeyId:                core.CastString(data["keyId"]),
-		Revision:             core.CastInt64(data["revision"]),
+		NamespaceId:               core.CastString(data["namespaceId"]),
+		Name:                      core.CastString(data["name"]),
+		Description:               core.CastString(data["description"]),
+		EnableDirectExchange:      core.CastBool(data["enableDirectExchange"]),
+		EnableAwaitExchange:       core.CastBool(data["enableAwaitExchange"]),
+		TransactionSetting:        NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+		ExchangeScript:            NewScriptSettingFromDict(core.CastMap(data["exchangeScript"])).Pointer(),
+		IncrementalExchangeScript: NewScriptSettingFromDict(core.CastMap(data["incrementalExchangeScript"])).Pointer(),
+		LogSetting:                NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:                 core.CastInt64(data["createdAt"]),
+		UpdatedAt:                 core.CastInt64(data["updatedAt"]),
+		QueueNamespaceId:          core.CastString(data["queueNamespaceId"]),
+		KeyId:                     core.CastString(data["keyId"]),
+		Revision:                  core.CastInt64(data["revision"]),
 	}
 }
 
@@ -94,6 +96,10 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.ExchangeScript != nil {
 		exchangeScript = p.ExchangeScript.ToDict()
 	}
+	var incrementalExchangeScript map[string]interface{}
+	if p.IncrementalExchangeScript != nil {
+		incrementalExchangeScript = p.IncrementalExchangeScript.ToDict()
+	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
 		logSetting = p.LogSetting.ToDict()
@@ -119,19 +125,20 @@ func (p Namespace) ToDict() map[string]interface{} {
 		revision = p.Revision
 	}
 	return map[string]interface{}{
-		"namespaceId":          namespaceId,
-		"name":                 name,
-		"description":          description,
-		"enableDirectExchange": enableDirectExchange,
-		"enableAwaitExchange":  enableAwaitExchange,
-		"transactionSetting":   transactionSetting,
-		"exchangeScript":       exchangeScript,
-		"logSetting":           logSetting,
-		"createdAt":            createdAt,
-		"updatedAt":            updatedAt,
-		"queueNamespaceId":     queueNamespaceId,
-		"keyId":                keyId,
-		"revision":             revision,
+		"namespaceId":               namespaceId,
+		"name":                      name,
+		"description":               description,
+		"enableDirectExchange":      enableDirectExchange,
+		"enableAwaitExchange":       enableAwaitExchange,
+		"transactionSetting":        transactionSetting,
+		"exchangeScript":            exchangeScript,
+		"incrementalExchangeScript": incrementalExchangeScript,
+		"logSetting":                logSetting,
+		"createdAt":                 createdAt,
+		"updatedAt":                 updatedAt,
+		"queueNamespaceId":          queueNamespaceId,
+		"keyId":                     keyId,
+		"revision":                  revision,
 	}
 }
 

@@ -186,6 +186,9 @@ func (p Gs2ExchangeWebSocketClient) CreateNamespaceAsync(
 	if request.ExchangeScript != nil {
 		bodies["exchangeScript"] = request.ExchangeScript.ToDict()
 	}
+	if request.IncrementalExchangeScript != nil {
+		bodies["incrementalExchangeScript"] = request.IncrementalExchangeScript.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -452,6 +455,9 @@ func (p Gs2ExchangeWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.ExchangeScript != nil {
 		bodies["exchangeScript"] = request.ExchangeScript.ToDict()
+	}
+	if request.IncrementalExchangeScript != nil {
+		bodies["incrementalExchangeScript"] = request.IncrementalExchangeScript.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
