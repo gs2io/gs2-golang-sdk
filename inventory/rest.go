@@ -189,6 +189,12 @@ func (p Gs2InventoryRestClient) CreateNamespaceAsync(
 	if request.SimpleItemConsumeScript != nil {
 		bodies["simpleItemConsumeScript"] = request.SimpleItemConsumeScript.ToDict()
 	}
+	if request.BigItemAcquireScript != nil {
+		bodies["bigItemAcquireScript"] = request.BigItemAcquireScript.ToDict()
+	}
+	if request.BigItemConsumeScript != nil {
+		bodies["bigItemConsumeScript"] = request.BigItemConsumeScript.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -473,6 +479,12 @@ func (p Gs2InventoryRestClient) UpdateNamespaceAsync(
 	}
 	if request.SimpleItemConsumeScript != nil {
 		bodies["simpleItemConsumeScript"] = request.SimpleItemConsumeScript.ToDict()
+	}
+	if request.BigItemAcquireScript != nil {
+		bodies["bigItemAcquireScript"] = request.BigItemAcquireScript.ToDict()
+	}
+	if request.BigItemConsumeScript != nil {
+		bodies["bigItemConsumeScript"] = request.BigItemConsumeScript.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()

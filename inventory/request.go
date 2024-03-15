@@ -65,6 +65,8 @@ type CreateNamespaceRequest struct {
 	ConsumeScript           *ScriptSetting `json:"consumeScript"`
 	SimpleItemAcquireScript *ScriptSetting `json:"simpleItemAcquireScript"`
 	SimpleItemConsumeScript *ScriptSetting `json:"simpleItemConsumeScript"`
+	BigItemAcquireScript    *ScriptSetting `json:"bigItemAcquireScript"`
+	BigItemConsumeScript    *ScriptSetting `json:"bigItemConsumeScript"`
 	LogSetting              *LogSetting    `json:"logSetting"`
 }
 
@@ -83,6 +85,8 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 		ConsumeScript:           NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer(),
 		SimpleItemAcquireScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemAcquireScript"])).Pointer(),
 		SimpleItemConsumeScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemConsumeScript"])).Pointer(),
+		BigItemAcquireScript:    NewScriptSettingFromDict(core.CastMap(data["bigItemAcquireScript"])).Pointer(),
+		BigItemConsumeScript:    NewScriptSettingFromDict(core.CastMap(data["bigItemConsumeScript"])).Pointer(),
 		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
@@ -96,6 +100,8 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"consumeScript":           p.ConsumeScript.ToDict(),
 		"simpleItemAcquireScript": p.SimpleItemAcquireScript.ToDict(),
 		"simpleItemConsumeScript": p.SimpleItemConsumeScript.ToDict(),
+		"bigItemAcquireScript":    p.BigItemAcquireScript.ToDict(),
+		"bigItemConsumeScript":    p.BigItemConsumeScript.ToDict(),
 		"logSetting":              p.LogSetting.ToDict(),
 	}
 }
@@ -173,6 +179,8 @@ type UpdateNamespaceRequest struct {
 	ConsumeScript           *ScriptSetting `json:"consumeScript"`
 	SimpleItemAcquireScript *ScriptSetting `json:"simpleItemAcquireScript"`
 	SimpleItemConsumeScript *ScriptSetting `json:"simpleItemConsumeScript"`
+	BigItemAcquireScript    *ScriptSetting `json:"bigItemAcquireScript"`
+	BigItemConsumeScript    *ScriptSetting `json:"bigItemConsumeScript"`
 	LogSetting              *LogSetting    `json:"logSetting"`
 }
 
@@ -191,6 +199,8 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 		ConsumeScript:           NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer(),
 		SimpleItemAcquireScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemAcquireScript"])).Pointer(),
 		SimpleItemConsumeScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemConsumeScript"])).Pointer(),
+		BigItemAcquireScript:    NewScriptSettingFromDict(core.CastMap(data["bigItemAcquireScript"])).Pointer(),
+		BigItemConsumeScript:    NewScriptSettingFromDict(core.CastMap(data["bigItemConsumeScript"])).Pointer(),
 		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
@@ -204,6 +214,8 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"consumeScript":           p.ConsumeScript.ToDict(),
 		"simpleItemAcquireScript": p.SimpleItemAcquireScript.ToDict(),
 		"simpleItemConsumeScript": p.SimpleItemConsumeScript.ToDict(),
+		"bigItemAcquireScript":    p.BigItemAcquireScript.ToDict(),
+		"bigItemConsumeScript":    p.BigItemConsumeScript.ToDict(),
 		"logSetting":              p.LogSetting.ToDict(),
 	}
 }

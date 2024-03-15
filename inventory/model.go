@@ -31,6 +31,8 @@ type Namespace struct {
 	ConsumeScript           *ScriptSetting `json:"consumeScript"`
 	SimpleItemAcquireScript *ScriptSetting `json:"simpleItemAcquireScript"`
 	SimpleItemConsumeScript *ScriptSetting `json:"simpleItemConsumeScript"`
+	BigItemAcquireScript    *ScriptSetting `json:"bigItemAcquireScript"`
+	BigItemConsumeScript    *ScriptSetting `json:"bigItemConsumeScript"`
 	LogSetting              *LogSetting    `json:"logSetting"`
 	CreatedAt               *int64         `json:"createdAt"`
 	UpdatedAt               *int64         `json:"updatedAt"`
@@ -53,6 +55,8 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 		ConsumeScript:           NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer(),
 		SimpleItemAcquireScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemAcquireScript"])).Pointer(),
 		SimpleItemConsumeScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemConsumeScript"])).Pointer(),
+		BigItemAcquireScript:    NewScriptSettingFromDict(core.CastMap(data["bigItemAcquireScript"])).Pointer(),
+		BigItemConsumeScript:    NewScriptSettingFromDict(core.CastMap(data["bigItemConsumeScript"])).Pointer(),
 		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 		CreatedAt:               core.CastInt64(data["createdAt"]),
 		UpdatedAt:               core.CastInt64(data["updatedAt"]),
@@ -94,6 +98,14 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.SimpleItemConsumeScript != nil {
 		simpleItemConsumeScript = p.SimpleItemConsumeScript.ToDict()
 	}
+	var bigItemAcquireScript map[string]interface{}
+	if p.BigItemAcquireScript != nil {
+		bigItemAcquireScript = p.BigItemAcquireScript.ToDict()
+	}
+	var bigItemConsumeScript map[string]interface{}
+	if p.BigItemConsumeScript != nil {
+		bigItemConsumeScript = p.BigItemConsumeScript.ToDict()
+	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
 		logSetting = p.LogSetting.ToDict()
@@ -119,6 +131,8 @@ func (p Namespace) ToDict() map[string]interface{} {
 		"consumeScript":           consumeScript,
 		"simpleItemAcquireScript": simpleItemAcquireScript,
 		"simpleItemConsumeScript": simpleItemConsumeScript,
+		"bigItemAcquireScript":    bigItemAcquireScript,
+		"bigItemConsumeScript":    bigItemConsumeScript,
 		"logSetting":              logSetting,
 		"createdAt":               createdAt,
 		"updatedAt":               updatedAt,
