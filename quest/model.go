@@ -591,6 +591,7 @@ type Progress struct {
 	QuestModelId  *string  `json:"questModelId"`
 	RandomSeed    *int64   `json:"randomSeed"`
 	Rewards       []Reward `json:"rewards"`
+	FailedRewards []Reward `json:"failedRewards"`
 	Metadata      *string  `json:"metadata"`
 	CreatedAt     *int64   `json:"createdAt"`
 	UpdatedAt     *int64   `json:"updatedAt"`
@@ -611,6 +612,7 @@ func NewProgressFromDict(data map[string]interface{}) Progress {
 		QuestModelId:  core.CastString(data["questModelId"]),
 		RandomSeed:    core.CastInt64(data["randomSeed"]),
 		Rewards:       CastRewards(core.CastArray(data["rewards"])),
+		FailedRewards: CastRewards(core.CastArray(data["failedRewards"])),
 		Metadata:      core.CastString(data["metadata"]),
 		CreatedAt:     core.CastInt64(data["createdAt"]),
 		UpdatedAt:     core.CastInt64(data["updatedAt"]),
@@ -646,6 +648,12 @@ func (p Progress) ToDict() map[string]interface{} {
 			p.Rewards,
 		)
 	}
+	var failedRewards []interface{}
+	if p.FailedRewards != nil {
+		failedRewards = CastRewardsFromDict(
+			p.FailedRewards,
+		)
+	}
 	var metadata *string
 	if p.Metadata != nil {
 		metadata = p.Metadata
@@ -669,6 +677,7 @@ func (p Progress) ToDict() map[string]interface{} {
 		"questModelId":  questModelId,
 		"randomSeed":    randomSeed,
 		"rewards":       rewards,
+		"failedRewards": failedRewards,
 		"metadata":      metadata,
 		"createdAt":     createdAt,
 		"updatedAt":     updatedAt,
