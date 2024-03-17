@@ -1306,8 +1306,7 @@ func (p UpdateCurrentRateMasterFromGitHubResult) Pointer() *UpdateCurrentRateMas
 }
 
 type CreateAwaitByUserIdResult struct {
-	Item     *Await `json:"item"`
-	UnlockAt *int64 `json:"unlockAt"`
+	Item *Await `json:"item"`
 }
 
 type CreateAwaitByUserIdAsyncResult struct {
@@ -1323,15 +1322,13 @@ func NewCreateAwaitByUserIdResultFromJson(data string) CreateAwaitByUserIdResult
 
 func NewCreateAwaitByUserIdResultFromDict(data map[string]interface{}) CreateAwaitByUserIdResult {
 	return CreateAwaitByUserIdResult{
-		Item:     NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
-		UnlockAt: core.CastInt64(data["unlockAt"]),
+		Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
 func (p CreateAwaitByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":     p.Item.ToDict(),
-		"unlockAt": p.UnlockAt,
+		"item": p.Item.ToDict(),
 	}
 }
 
@@ -1602,55 +1599,8 @@ func (p AcquireForceByUserIdResult) Pointer() *AcquireForceByUserIdResult {
 	return &p
 }
 
-type SkipResult struct {
-	Item                      *Await  `json:"item"`
-	TransactionId             *string `json:"transactionId"`
-	StampSheet                *string `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool   `json:"autoRunStampSheet"`
-}
-
-type SkipAsyncResult struct {
-	result *SkipResult
-	err    error
-}
-
-func NewSkipResultFromJson(data string) SkipResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSkipResultFromDict(dict)
-}
-
-func NewSkipResultFromDict(data map[string]interface{}) SkipResult {
-	return SkipResult{
-		Item:                      NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
-	}
-}
-
-func (p SkipResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item":                      p.Item.ToDict(),
-		"transactionId":             p.TransactionId,
-		"stampSheet":                p.StampSheet,
-		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-		"autoRunStampSheet":         p.AutoRunStampSheet,
-	}
-}
-
-func (p SkipResult) Pointer() *SkipResult {
-	return &p
-}
-
 type SkipByUserIdResult struct {
-	Item                      *Await  `json:"item"`
-	TransactionId             *string `json:"transactionId"`
-	StampSheet                *string `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool   `json:"autoRunStampSheet"`
+	Item *Await `json:"item"`
 }
 
 type SkipByUserIdAsyncResult struct {
@@ -1666,21 +1616,13 @@ func NewSkipByUserIdResultFromJson(data string) SkipByUserIdResult {
 
 func NewSkipByUserIdResultFromDict(data map[string]interface{}) SkipByUserIdResult {
 	return SkipByUserIdResult{
-		Item:                      NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+		Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
 func (p SkipByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":                      p.Item.ToDict(),
-		"transactionId":             p.TransactionId,
-		"stampSheet":                p.StampSheet,
-		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
-		"autoRunStampSheet":         p.AutoRunStampSheet,
+		"item": p.Item.ToDict(),
 	}
 }
 
@@ -1751,8 +1693,7 @@ func (p DeleteAwaitByUserIdResult) Pointer() *DeleteAwaitByUserIdResult {
 }
 
 type CreateAwaitByStampSheetResult struct {
-	Item     *Await `json:"item"`
-	UnlockAt *int64 `json:"unlockAt"`
+	Item *Await `json:"item"`
 }
 
 type CreateAwaitByStampSheetAsyncResult struct {
@@ -1768,19 +1709,48 @@ func NewCreateAwaitByStampSheetResultFromJson(data string) CreateAwaitByStampShe
 
 func NewCreateAwaitByStampSheetResultFromDict(data map[string]interface{}) CreateAwaitByStampSheetResult {
 	return CreateAwaitByStampSheetResult{
-		Item:     NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
-		UnlockAt: core.CastInt64(data["unlockAt"]),
+		Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
 func (p CreateAwaitByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":     p.Item.ToDict(),
-		"unlockAt": p.UnlockAt,
+		"item": p.Item.ToDict(),
 	}
 }
 
 func (p CreateAwaitByStampSheetResult) Pointer() *CreateAwaitByStampSheetResult {
+	return &p
+}
+
+type SkipByStampSheetResult struct {
+	Item *Await `json:"item"`
+}
+
+type SkipByStampSheetAsyncResult struct {
+	result *SkipByStampSheetResult
+	err    error
+}
+
+func NewSkipByStampSheetResultFromJson(data string) SkipByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSkipByStampSheetResultFromDict(dict)
+}
+
+func NewSkipByStampSheetResultFromDict(data map[string]interface{}) SkipByStampSheetResult {
+	return SkipByStampSheetResult{
+		Item: NewAwaitFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p SkipByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p SkipByStampSheetResult) Pointer() *SkipByStampSheetResult {
 	return &p
 }
 

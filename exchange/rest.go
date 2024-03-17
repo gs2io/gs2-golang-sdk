@@ -1624,16 +1624,6 @@ func (p Gs2ExchangeRestClient) CreateRateModelMasterAsync(
 	if request.LockTime != nil {
 		bodies["lockTime"] = *request.LockTime
 	}
-	if request.EnableSkip != nil {
-		bodies["enableSkip"] = *request.EnableSkip
-	}
-	if request.SkipConsumeActions != nil {
-		var _skipConsumeActions []interface{}
-		for _, item := range request.SkipConsumeActions {
-			_skipConsumeActions = append(_skipConsumeActions, item)
-		}
-		bodies["skipConsumeActions"] = _skipConsumeActions
-	}
 	if request.AcquireActions != nil {
 		var _acquireActions []interface{}
 		for _, item := range request.AcquireActions {
@@ -1846,16 +1836,6 @@ func (p Gs2ExchangeRestClient) UpdateRateModelMasterAsync(
 	}
 	if request.LockTime != nil {
 		bodies["lockTime"] = *request.LockTime
-	}
-	if request.EnableSkip != nil {
-		bodies["enableSkip"] = *request.EnableSkip
-	}
-	if request.SkipConsumeActions != nil {
-		var _skipConsumeActions []interface{}
-		for _, item := range request.SkipConsumeActions {
-			_skipConsumeActions = append(_skipConsumeActions, item)
-		}
-		bodies["skipConsumeActions"] = _skipConsumeActions
 	}
 	if request.AcquireActions != nil {
 		var _acquireActions []interface{}
@@ -4755,114 +4735,6 @@ func (p Gs2ExchangeRestClient) AcquireForceByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func skipAsyncHandler(
-	client Gs2ExchangeRestClient,
-	job *core.NetworkJob,
-	callback chan<- SkipAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- SkipAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result SkipResult
-	if asyncResult.Err != nil {
-		callback <- SkipAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SkipAsyncResult{
-				err: err,
-			}
-			return
-		}
-	}
-	callback <- SkipAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2ExchangeRestClient) SkipAsync(
-	request *SkipRequest,
-	callback chan<- SkipAsyncResult,
-) {
-	path := "/{namespaceName}/user/me/exchange/await/{awaitName}/skip"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.AwaitName != nil && *request.AwaitName != "" {
-		path = strings.ReplaceAll(path, "{awaitName}", core.ToString(*request.AwaitName))
-	} else {
-		path = strings.ReplaceAll(path, "{awaitName}", "null")
-	}
-
-	replacer := strings.NewReplacer()
-	var bodies = core.Bodies{}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
-	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
-	}
-
-	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
-
-	go skipAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
-			Method:  core.Post,
-			Headers: headers,
-			Bodies:  bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2ExchangeRestClient) Skip(
-	request *SkipRequest,
-) (*SkipResult, error) {
-	callback := make(chan SkipAsyncResult, 1)
-	go p.SkipAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
 func skipByUserIdAsyncHandler(
 	client Gs2ExchangeRestClient,
 	job *core.NetworkJob,
@@ -4927,12 +4799,14 @@ func (p Gs2ExchangeRestClient) SkipByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
+	if request.SkipType != nil && *request.SkipType != "" {
+		bodies["skipType"] = *request.SkipType
+	}
+	if request.Minutes != nil {
+		bodies["minutes"] = *request.Minutes
+	}
+	if request.Rate != nil {
+		bodies["rate"] = *request.Rate
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -5261,6 +5135,97 @@ func (p Gs2ExchangeRestClient) CreateAwaitByStampSheet(
 ) (*CreateAwaitByStampSheetResult, error) {
 	callback := make(chan CreateAwaitByStampSheetAsyncResult, 1)
 	go p.CreateAwaitByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func skipByStampSheetAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- SkipByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SkipByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SkipByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- SkipByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SkipByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SkipByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) SkipByStampSheetAsync(
+	request *SkipByStampSheetRequest,
+	callback chan<- SkipByStampSheetAsyncResult,
+) {
+	path := "/stamp/await/skip"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go skipByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) SkipByStampSheet(
+	request *SkipByStampSheetRequest,
+) (*SkipByStampSheetResult, error) {
+	callback := make(chan SkipByStampSheetAsyncResult, 1)
+	go p.SkipByStampSheetAsync(
 		request,
 		callback,
 	)

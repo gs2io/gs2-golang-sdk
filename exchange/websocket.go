@@ -1512,16 +1512,6 @@ func (p Gs2ExchangeWebSocketClient) CreateRateModelMasterAsync(
 	if request.LockTime != nil {
 		bodies["lockTime"] = *request.LockTime
 	}
-	if request.EnableSkip != nil {
-		bodies["enableSkip"] = *request.EnableSkip
-	}
-	if request.SkipConsumeActions != nil {
-		var _skipConsumeActions []interface{}
-		for _, item := range request.SkipConsumeActions {
-			_skipConsumeActions = append(_skipConsumeActions, item)
-		}
-		bodies["skipConsumeActions"] = _skipConsumeActions
-	}
 	if request.AcquireActions != nil {
 		var _acquireActions []interface{}
 		for _, item := range request.AcquireActions {
@@ -1715,16 +1705,6 @@ func (p Gs2ExchangeWebSocketClient) UpdateRateModelMasterAsync(
 	}
 	if request.LockTime != nil {
 		bodies["lockTime"] = *request.LockTime
-	}
-	if request.EnableSkip != nil {
-		bodies["enableSkip"] = *request.EnableSkip
-	}
-	if request.SkipConsumeActions != nil {
-		var _skipConsumeActions []interface{}
-		for _, item := range request.SkipConsumeActions {
-			_skipConsumeActions = append(_skipConsumeActions, item)
-		}
-		bodies["skipConsumeActions"] = _skipConsumeActions
 	}
 	if request.AcquireActions != nil {
 		var _acquireActions []interface{}
@@ -4370,106 +4350,6 @@ func (p Gs2ExchangeWebSocketClient) AcquireForceByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2ExchangeWebSocketClient) skipAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- SkipAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- SkipAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result SkipResult
-	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- SkipAsyncResult{
-				err: err,
-			}
-			return
-		}
-	}
-	if asyncResult.Err != nil {
-	}
-	callback <- SkipAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2ExchangeWebSocketClient) SkipAsync(
-	request *SkipRequest,
-	callback chan<- SkipAsyncResult,
-) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "exchange",
-			"component":   "await",
-			"function":    "skip",
-			"contentType": "application/json",
-			"requestId":   requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.AwaitName != nil && *request.AwaitName != "" {
-		bodies["awaitName"] = *request.AwaitName
-	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
-	}
-	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
-	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
-
-	go p.skipAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies:    bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2ExchangeWebSocketClient) Skip(
-	request *SkipRequest,
-) (*SkipResult, error) {
-	callback := make(chan SkipAsyncResult, 1)
-	go p.SkipAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
 func (p Gs2ExchangeWebSocketClient) skipByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- SkipByUserIdAsyncResult,
@@ -4532,12 +4412,14 @@ func (p Gs2ExchangeWebSocketClient) SkipByUserIdAsync(
 	if request.AwaitName != nil && *request.AwaitName != "" {
 		bodies["awaitName"] = *request.AwaitName
 	}
-	if request.Config != nil {
-		var _config []interface{}
-		for _, item := range request.Config {
-			_config = append(_config, item)
-		}
-		bodies["config"] = _config
+	if request.SkipType != nil && *request.SkipType != "" {
+		bodies["skipType"] = *request.SkipType
+	}
+	if request.Minutes != nil {
+		bodies["minutes"] = *request.Minutes
+	}
+	if request.Rate != nil {
+		bodies["rate"] = *request.Rate
 	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken
@@ -4833,6 +4715,90 @@ func (p Gs2ExchangeWebSocketClient) CreateAwaitByStampSheet(
 ) (*CreateAwaitByStampSheetResult, error) {
 	callback := make(chan CreateAwaitByStampSheetAsyncResult, 1)
 	go p.CreateAwaitByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExchangeWebSocketClient) skipByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SkipByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SkipByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SkipByStampSheetResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SkipByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SkipByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeWebSocketClient) SkipByStampSheetAsync(
+	request *SkipByStampSheetRequest,
+	callback chan<- SkipByStampSheetAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "exchange",
+			"component":   "await",
+			"function":    "skipByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.skipByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeWebSocketClient) SkipByStampSheet(
+	request *SkipByStampSheetRequest,
+) (*SkipByStampSheetResult, error) {
+	callback := make(chan SkipByStampSheetAsyncResult, 1)
+	go p.SkipByStampSheetAsync(
 		request,
 		callback,
 	)

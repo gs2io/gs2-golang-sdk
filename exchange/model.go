@@ -163,15 +163,13 @@ func CastNamespacesFromDict(data []Namespace) []interface{} {
 }
 
 type RateModel struct {
-	RateModelId        *string         `json:"rateModelId"`
-	Name               *string         `json:"name"`
-	Metadata           *string         `json:"metadata"`
-	ConsumeActions     []ConsumeAction `json:"consumeActions"`
-	TimingType         *string         `json:"timingType"`
-	LockTime           *int32          `json:"lockTime"`
-	EnableSkip         *bool           `json:"enableSkip"`
-	SkipConsumeActions []ConsumeAction `json:"skipConsumeActions"`
-	AcquireActions     []AcquireAction `json:"acquireActions"`
+	RateModelId    *string         `json:"rateModelId"`
+	Name           *string         `json:"name"`
+	Metadata       *string         `json:"metadata"`
+	ConsumeActions []ConsumeAction `json:"consumeActions"`
+	TimingType     *string         `json:"timingType"`
+	LockTime       *int32          `json:"lockTime"`
+	AcquireActions []AcquireAction `json:"acquireActions"`
 }
 
 func NewRateModelFromJson(data string) RateModel {
@@ -182,15 +180,13 @@ func NewRateModelFromJson(data string) RateModel {
 
 func NewRateModelFromDict(data map[string]interface{}) RateModel {
 	return RateModel{
-		RateModelId:        core.CastString(data["rateModelId"]),
-		Name:               core.CastString(data["name"]),
-		Metadata:           core.CastString(data["metadata"]),
-		ConsumeActions:     CastConsumeActions(core.CastArray(data["consumeActions"])),
-		TimingType:         core.CastString(data["timingType"]),
-		LockTime:           core.CastInt32(data["lockTime"]),
-		EnableSkip:         core.CastBool(data["enableSkip"]),
-		SkipConsumeActions: CastConsumeActions(core.CastArray(data["skipConsumeActions"])),
-		AcquireActions:     CastAcquireActions(core.CastArray(data["acquireActions"])),
+		RateModelId:    core.CastString(data["rateModelId"]),
+		Name:           core.CastString(data["name"]),
+		Metadata:       core.CastString(data["metadata"]),
+		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
+		TimingType:     core.CastString(data["timingType"]),
+		LockTime:       core.CastInt32(data["lockTime"]),
+		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
 	}
 }
 
@@ -222,16 +218,6 @@ func (p RateModel) ToDict() map[string]interface{} {
 	if p.LockTime != nil {
 		lockTime = p.LockTime
 	}
-	var enableSkip *bool
-	if p.EnableSkip != nil {
-		enableSkip = p.EnableSkip
-	}
-	var skipConsumeActions []interface{}
-	if p.SkipConsumeActions != nil {
-		skipConsumeActions = CastConsumeActionsFromDict(
-			p.SkipConsumeActions,
-		)
-	}
 	var acquireActions []interface{}
 	if p.AcquireActions != nil {
 		acquireActions = CastAcquireActionsFromDict(
@@ -239,15 +225,13 @@ func (p RateModel) ToDict() map[string]interface{} {
 		)
 	}
 	return map[string]interface{}{
-		"rateModelId":        rateModelId,
-		"name":               name,
-		"metadata":           metadata,
-		"consumeActions":     consumeActions,
-		"timingType":         timingType,
-		"lockTime":           lockTime,
-		"enableSkip":         enableSkip,
-		"skipConsumeActions": skipConsumeActions,
-		"acquireActions":     acquireActions,
+		"rateModelId":    rateModelId,
+		"name":           name,
+		"metadata":       metadata,
+		"consumeActions": consumeActions,
+		"timingType":     timingType,
+		"lockTime":       lockTime,
+		"acquireActions": acquireActions,
 	}
 }
 
@@ -272,19 +256,17 @@ func CastRateModelsFromDict(data []RateModel) []interface{} {
 }
 
 type RateModelMaster struct {
-	RateModelId        *string         `json:"rateModelId"`
-	Name               *string         `json:"name"`
-	Description        *string         `json:"description"`
-	Metadata           *string         `json:"metadata"`
-	ConsumeActions     []ConsumeAction `json:"consumeActions"`
-	TimingType         *string         `json:"timingType"`
-	LockTime           *int32          `json:"lockTime"`
-	EnableSkip         *bool           `json:"enableSkip"`
-	SkipConsumeActions []ConsumeAction `json:"skipConsumeActions"`
-	AcquireActions     []AcquireAction `json:"acquireActions"`
-	CreatedAt          *int64          `json:"createdAt"`
-	UpdatedAt          *int64          `json:"updatedAt"`
-	Revision           *int64          `json:"revision"`
+	RateModelId    *string         `json:"rateModelId"`
+	Name           *string         `json:"name"`
+	Description    *string         `json:"description"`
+	Metadata       *string         `json:"metadata"`
+	ConsumeActions []ConsumeAction `json:"consumeActions"`
+	TimingType     *string         `json:"timingType"`
+	LockTime       *int32          `json:"lockTime"`
+	AcquireActions []AcquireAction `json:"acquireActions"`
+	CreatedAt      *int64          `json:"createdAt"`
+	UpdatedAt      *int64          `json:"updatedAt"`
+	Revision       *int64          `json:"revision"`
 }
 
 func NewRateModelMasterFromJson(data string) RateModelMaster {
@@ -295,19 +277,17 @@ func NewRateModelMasterFromJson(data string) RateModelMaster {
 
 func NewRateModelMasterFromDict(data map[string]interface{}) RateModelMaster {
 	return RateModelMaster{
-		RateModelId:        core.CastString(data["rateModelId"]),
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		Metadata:           core.CastString(data["metadata"]),
-		ConsumeActions:     CastConsumeActions(core.CastArray(data["consumeActions"])),
-		TimingType:         core.CastString(data["timingType"]),
-		LockTime:           core.CastInt32(data["lockTime"]),
-		EnableSkip:         core.CastBool(data["enableSkip"]),
-		SkipConsumeActions: CastConsumeActions(core.CastArray(data["skipConsumeActions"])),
-		AcquireActions:     CastAcquireActions(core.CastArray(data["acquireActions"])),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		UpdatedAt:          core.CastInt64(data["updatedAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		RateModelId:    core.CastString(data["rateModelId"]),
+		Name:           core.CastString(data["name"]),
+		Description:    core.CastString(data["description"]),
+		Metadata:       core.CastString(data["metadata"]),
+		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
+		TimingType:     core.CastString(data["timingType"]),
+		LockTime:       core.CastInt32(data["lockTime"]),
+		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+		CreatedAt:      core.CastInt64(data["createdAt"]),
+		UpdatedAt:      core.CastInt64(data["updatedAt"]),
+		Revision:       core.CastInt64(data["revision"]),
 	}
 }
 
@@ -343,16 +323,6 @@ func (p RateModelMaster) ToDict() map[string]interface{} {
 	if p.LockTime != nil {
 		lockTime = p.LockTime
 	}
-	var enableSkip *bool
-	if p.EnableSkip != nil {
-		enableSkip = p.EnableSkip
-	}
-	var skipConsumeActions []interface{}
-	if p.SkipConsumeActions != nil {
-		skipConsumeActions = CastConsumeActionsFromDict(
-			p.SkipConsumeActions,
-		)
-	}
 	var acquireActions []interface{}
 	if p.AcquireActions != nil {
 		acquireActions = CastAcquireActionsFromDict(
@@ -372,19 +342,17 @@ func (p RateModelMaster) ToDict() map[string]interface{} {
 		revision = p.Revision
 	}
 	return map[string]interface{}{
-		"rateModelId":        rateModelId,
-		"name":               name,
-		"description":        description,
-		"metadata":           metadata,
-		"consumeActions":     consumeActions,
-		"timingType":         timingType,
-		"lockTime":           lockTime,
-		"enableSkip":         enableSkip,
-		"skipConsumeActions": skipConsumeActions,
-		"acquireActions":     acquireActions,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
+		"rateModelId":    rateModelId,
+		"name":           name,
+		"description":    description,
+		"metadata":       metadata,
+		"consumeActions": consumeActions,
+		"timingType":     timingType,
+		"lockTime":       lockTime,
+		"acquireActions": acquireActions,
+		"createdAt":      createdAt,
+		"updatedAt":      updatedAt,
+		"revision":       revision,
 	}
 }
 
@@ -729,14 +697,16 @@ func CastCurrentRateMastersFromDict(data []CurrentRateMaster) []interface{} {
 }
 
 type Await struct {
-	AwaitId     *string  `json:"awaitId"`
-	UserId      *string  `json:"userId"`
-	RateName    *string  `json:"rateName"`
-	Name        *string  `json:"name"`
-	Count       *int32   `json:"count"`
-	Config      []Config `json:"config"`
-	ExchangedAt *int64   `json:"exchangedAt"`
-	Revision    *int64   `json:"revision"`
+	AwaitId      *string  `json:"awaitId"`
+	UserId       *string  `json:"userId"`
+	RateName     *string  `json:"rateName"`
+	Name         *string  `json:"name"`
+	Count        *int32   `json:"count"`
+	SkipSeconds  *int32   `json:"skipSeconds"`
+	Config       []Config `json:"config"`
+	AcquirableAt *int64   `json:"acquirableAt"`
+	ExchangedAt  *int64   `json:"exchangedAt"`
+	Revision     *int64   `json:"revision"`
 }
 
 func NewAwaitFromJson(data string) Await {
@@ -747,14 +717,16 @@ func NewAwaitFromJson(data string) Await {
 
 func NewAwaitFromDict(data map[string]interface{}) Await {
 	return Await{
-		AwaitId:     core.CastString(data["awaitId"]),
-		UserId:      core.CastString(data["userId"]),
-		RateName:    core.CastString(data["rateName"]),
-		Name:        core.CastString(data["name"]),
-		Count:       core.CastInt32(data["count"]),
-		Config:      CastConfigs(core.CastArray(data["config"])),
-		ExchangedAt: core.CastInt64(data["exchangedAt"]),
-		Revision:    core.CastInt64(data["revision"]),
+		AwaitId:      core.CastString(data["awaitId"]),
+		UserId:       core.CastString(data["userId"]),
+		RateName:     core.CastString(data["rateName"]),
+		Name:         core.CastString(data["name"]),
+		Count:        core.CastInt32(data["count"]),
+		SkipSeconds:  core.CastInt32(data["skipSeconds"]),
+		Config:       CastConfigs(core.CastArray(data["config"])),
+		AcquirableAt: core.CastInt64(data["acquirableAt"]),
+		ExchangedAt:  core.CastInt64(data["exchangedAt"]),
+		Revision:     core.CastInt64(data["revision"]),
 	}
 }
 
@@ -780,11 +752,19 @@ func (p Await) ToDict() map[string]interface{} {
 	if p.Count != nil {
 		count = p.Count
 	}
+	var skipSeconds *int32
+	if p.SkipSeconds != nil {
+		skipSeconds = p.SkipSeconds
+	}
 	var config []interface{}
 	if p.Config != nil {
 		config = CastConfigsFromDict(
 			p.Config,
 		)
+	}
+	var acquirableAt *int64
+	if p.AcquirableAt != nil {
+		acquirableAt = p.AcquirableAt
 	}
 	var exchangedAt *int64
 	if p.ExchangedAt != nil {
@@ -795,14 +775,16 @@ func (p Await) ToDict() map[string]interface{} {
 		revision = p.Revision
 	}
 	return map[string]interface{}{
-		"awaitId":     awaitId,
-		"userId":      userId,
-		"rateName":    rateName,
-		"name":        name,
-		"count":       count,
-		"config":      config,
-		"exchangedAt": exchangedAt,
-		"revision":    revision,
+		"awaitId":      awaitId,
+		"userId":       userId,
+		"rateName":     rateName,
+		"name":         name,
+		"count":        count,
+		"skipSeconds":  skipSeconds,
+		"config":       config,
+		"acquirableAt": acquirableAt,
+		"exchangedAt":  exchangedAt,
+		"revision":     revision,
 	}
 }
 

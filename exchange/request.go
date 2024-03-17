@@ -591,19 +591,17 @@ func (p DescribeRateModelMastersRequest) Pointer() *DescribeRateModelMastersRequ
 }
 
 type CreateRateModelMasterRequest struct {
-	SourceRequestId    *string         `json:"sourceRequestId"`
-	RequestId          *string         `json:"requestId"`
-	ContextStack       *string         `json:"contextStack"`
-	NamespaceName      *string         `json:"namespaceName"`
-	Name               *string         `json:"name"`
-	Description        *string         `json:"description"`
-	Metadata           *string         `json:"metadata"`
-	TimingType         *string         `json:"timingType"`
-	LockTime           *int32          `json:"lockTime"`
-	EnableSkip         *bool           `json:"enableSkip"`
-	SkipConsumeActions []ConsumeAction `json:"skipConsumeActions"`
-	AcquireActions     []AcquireAction `json:"acquireActions"`
-	ConsumeActions     []ConsumeAction `json:"consumeActions"`
+	SourceRequestId *string         `json:"sourceRequestId"`
+	RequestId       *string         `json:"requestId"`
+	ContextStack    *string         `json:"contextStack"`
+	NamespaceName   *string         `json:"namespaceName"`
+	Name            *string         `json:"name"`
+	Description     *string         `json:"description"`
+	Metadata        *string         `json:"metadata"`
+	TimingType      *string         `json:"timingType"`
+	LockTime        *int32          `json:"lockTime"`
+	AcquireActions  []AcquireAction `json:"acquireActions"`
+	ConsumeActions  []ConsumeAction `json:"consumeActions"`
 }
 
 func NewCreateRateModelMasterRequestFromJson(data string) CreateRateModelMasterRequest {
@@ -614,16 +612,14 @@ func NewCreateRateModelMasterRequestFromJson(data string) CreateRateModelMasterR
 
 func NewCreateRateModelMasterRequestFromDict(data map[string]interface{}) CreateRateModelMasterRequest {
 	return CreateRateModelMasterRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		Metadata:           core.CastString(data["metadata"]),
-		TimingType:         core.CastString(data["timingType"]),
-		LockTime:           core.CastInt32(data["lockTime"]),
-		EnableSkip:         core.CastBool(data["enableSkip"]),
-		SkipConsumeActions: CastConsumeActions(core.CastArray(data["skipConsumeActions"])),
-		AcquireActions:     CastAcquireActions(core.CastArray(data["acquireActions"])),
-		ConsumeActions:     CastConsumeActions(core.CastArray(data["consumeActions"])),
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		Name:           core.CastString(data["name"]),
+		Description:    core.CastString(data["description"]),
+		Metadata:       core.CastString(data["metadata"]),
+		TimingType:     core.CastString(data["timingType"]),
+		LockTime:       core.CastInt32(data["lockTime"]),
+		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
 	}
 }
 
@@ -635,10 +631,6 @@ func (p CreateRateModelMasterRequest) ToDict() map[string]interface{} {
 		"metadata":      p.Metadata,
 		"timingType":    p.TimingType,
 		"lockTime":      p.LockTime,
-		"enableSkip":    p.EnableSkip,
-		"skipConsumeActions": CastConsumeActionsFromDict(
-			p.SkipConsumeActions,
-		),
 		"acquireActions": CastAcquireActionsFromDict(
 			p.AcquireActions,
 		),
@@ -685,19 +677,17 @@ func (p GetRateModelMasterRequest) Pointer() *GetRateModelMasterRequest {
 }
 
 type UpdateRateModelMasterRequest struct {
-	SourceRequestId    *string         `json:"sourceRequestId"`
-	RequestId          *string         `json:"requestId"`
-	ContextStack       *string         `json:"contextStack"`
-	NamespaceName      *string         `json:"namespaceName"`
-	RateName           *string         `json:"rateName"`
-	Description        *string         `json:"description"`
-	Metadata           *string         `json:"metadata"`
-	TimingType         *string         `json:"timingType"`
-	LockTime           *int32          `json:"lockTime"`
-	EnableSkip         *bool           `json:"enableSkip"`
-	SkipConsumeActions []ConsumeAction `json:"skipConsumeActions"`
-	AcquireActions     []AcquireAction `json:"acquireActions"`
-	ConsumeActions     []ConsumeAction `json:"consumeActions"`
+	SourceRequestId *string         `json:"sourceRequestId"`
+	RequestId       *string         `json:"requestId"`
+	ContextStack    *string         `json:"contextStack"`
+	NamespaceName   *string         `json:"namespaceName"`
+	RateName        *string         `json:"rateName"`
+	Description     *string         `json:"description"`
+	Metadata        *string         `json:"metadata"`
+	TimingType      *string         `json:"timingType"`
+	LockTime        *int32          `json:"lockTime"`
+	AcquireActions  []AcquireAction `json:"acquireActions"`
+	ConsumeActions  []ConsumeAction `json:"consumeActions"`
 }
 
 func NewUpdateRateModelMasterRequestFromJson(data string) UpdateRateModelMasterRequest {
@@ -708,16 +698,14 @@ func NewUpdateRateModelMasterRequestFromJson(data string) UpdateRateModelMasterR
 
 func NewUpdateRateModelMasterRequestFromDict(data map[string]interface{}) UpdateRateModelMasterRequest {
 	return UpdateRateModelMasterRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		RateName:           core.CastString(data["rateName"]),
-		Description:        core.CastString(data["description"]),
-		Metadata:           core.CastString(data["metadata"]),
-		TimingType:         core.CastString(data["timingType"]),
-		LockTime:           core.CastInt32(data["lockTime"]),
-		EnableSkip:         core.CastBool(data["enableSkip"]),
-		SkipConsumeActions: CastConsumeActions(core.CastArray(data["skipConsumeActions"])),
-		AcquireActions:     CastAcquireActions(core.CastArray(data["acquireActions"])),
-		ConsumeActions:     CastConsumeActions(core.CastArray(data["consumeActions"])),
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		RateName:       core.CastString(data["rateName"]),
+		Description:    core.CastString(data["description"]),
+		Metadata:       core.CastString(data["metadata"]),
+		TimingType:     core.CastString(data["timingType"]),
+		LockTime:       core.CastInt32(data["lockTime"]),
+		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
 	}
 }
 
@@ -729,10 +717,6 @@ func (p UpdateRateModelMasterRequest) ToDict() map[string]interface{} {
 		"metadata":      p.Metadata,
 		"timingType":    p.TimingType,
 		"lockTime":      p.LockTime,
-		"enableSkip":    p.EnableSkip,
-		"skipConsumeActions": CastConsumeActionsFromDict(
-			p.SkipConsumeActions,
-		),
 		"acquireActions": CastAcquireActionsFromDict(
 			p.AcquireActions,
 		),
@@ -1842,47 +1826,6 @@ func (p AcquireForceByUserIdRequest) Pointer() *AcquireForceByUserIdRequest {
 	return &p
 }
 
-type SkipRequest struct {
-	SourceRequestId    *string  `json:"sourceRequestId"`
-	RequestId          *string  `json:"requestId"`
-	ContextStack       *string  `json:"contextStack"`
-	DuplicationAvoider *string  `json:"duplicationAvoider"`
-	NamespaceName      *string  `json:"namespaceName"`
-	AccessToken        *string  `json:"accessToken"`
-	AwaitName          *string  `json:"awaitName"`
-	Config             []Config `json:"config"`
-}
-
-func NewSkipRequestFromJson(data string) SkipRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSkipRequestFromDict(dict)
-}
-
-func NewSkipRequestFromDict(data map[string]interface{}) SkipRequest {
-	return SkipRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		AwaitName:     core.CastString(data["awaitName"]),
-		Config:        CastConfigs(core.CastArray(data["config"])),
-	}
-}
-
-func (p SkipRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"accessToken":   p.AccessToken,
-		"awaitName":     p.AwaitName,
-		"config": CastConfigsFromDict(
-			p.Config,
-		),
-	}
-}
-
-func (p SkipRequest) Pointer() *SkipRequest {
-	return &p
-}
-
 type SkipByUserIdRequest struct {
 	SourceRequestId    *string  `json:"sourceRequestId"`
 	RequestId          *string  `json:"requestId"`
@@ -1891,7 +1834,9 @@ type SkipByUserIdRequest struct {
 	NamespaceName      *string  `json:"namespaceName"`
 	UserId             *string  `json:"userId"`
 	AwaitName          *string  `json:"awaitName"`
-	Config             []Config `json:"config"`
+	SkipType           *string  `json:"skipType"`
+	Minutes            *int32   `json:"minutes"`
+	Rate               *float32 `json:"rate"`
 	TimeOffsetToken    *string  `json:"timeOffsetToken"`
 }
 
@@ -1906,19 +1851,21 @@ func NewSkipByUserIdRequestFromDict(data map[string]interface{}) SkipByUserIdReq
 		NamespaceName:   core.CastString(data["namespaceName"]),
 		UserId:          core.CastString(data["userId"]),
 		AwaitName:       core.CastString(data["awaitName"]),
-		Config:          CastConfigs(core.CastArray(data["config"])),
+		SkipType:        core.CastString(data["skipType"]),
+		Minutes:         core.CastInt32(data["minutes"]),
+		Rate:            core.CastFloat32(data["rate"]),
 		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
 
 func (p SkipByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"userId":        p.UserId,
-		"awaitName":     p.AwaitName,
-		"config": CastConfigsFromDict(
-			p.Config,
-		),
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"awaitName":       p.AwaitName,
+		"skipType":        p.SkipType,
+		"minutes":         p.Minutes,
+		"rate":            p.Rate,
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
@@ -2031,6 +1978,38 @@ func (p CreateAwaitByStampSheetRequest) ToDict() map[string]interface{} {
 }
 
 func (p CreateAwaitByStampSheetRequest) Pointer() *CreateAwaitByStampSheetRequest {
+	return &p
+}
+
+type SkipByStampSheetRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
+}
+
+func NewSkipByStampSheetRequestFromJson(data string) SkipByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSkipByStampSheetRequestFromDict(dict)
+}
+
+func NewSkipByStampSheetRequestFromDict(data map[string]interface{}) SkipByStampSheetRequest {
+	return SkipByStampSheetRequest{
+		StampSheet: core.CastString(data["stampSheet"]),
+		KeyId:      core.CastString(data["keyId"]),
+	}
+}
+
+func (p SkipByStampSheetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampSheet": p.StampSheet,
+		"keyId":      p.KeyId,
+	}
+}
+
+func (p SkipByStampSheetRequest) Pointer() *SkipByStampSheetRequest {
 	return &p
 }
 
