@@ -768,6 +768,68 @@ func (p CancelMatchmakingByUserIdResult) Pointer() *CancelMatchmakingByUserIdRes
 	return &p
 }
 
+type EarlyCompleteResult struct {
+	Item *Gathering `json:"item"`
+}
+
+type EarlyCompleteAsyncResult struct {
+	result *EarlyCompleteResult
+	err    error
+}
+
+func NewEarlyCompleteResultFromJson(data string) EarlyCompleteResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEarlyCompleteResultFromDict(dict)
+}
+
+func NewEarlyCompleteResultFromDict(data map[string]interface{}) EarlyCompleteResult {
+	return EarlyCompleteResult{
+		Item: NewGatheringFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p EarlyCompleteResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p EarlyCompleteResult) Pointer() *EarlyCompleteResult {
+	return &p
+}
+
+type EarlyCompleteByUserIdResult struct {
+	Item *Gathering `json:"item"`
+}
+
+type EarlyCompleteByUserIdAsyncResult struct {
+	result *EarlyCompleteByUserIdResult
+	err    error
+}
+
+func NewEarlyCompleteByUserIdResultFromJson(data string) EarlyCompleteByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEarlyCompleteByUserIdResultFromDict(dict)
+}
+
+func NewEarlyCompleteByUserIdResultFromDict(data map[string]interface{}) EarlyCompleteByUserIdResult {
+	return EarlyCompleteByUserIdResult{
+		Item: NewGatheringFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p EarlyCompleteByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p EarlyCompleteByUserIdResult) Pointer() *EarlyCompleteByUserIdResult {
+	return &p
+}
+
 type DeleteGatheringResult struct {
 	Item *Gathering `json:"item"`
 }

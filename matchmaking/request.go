@@ -998,6 +998,81 @@ func (p CancelMatchmakingByUserIdRequest) Pointer() *CancelMatchmakingByUserIdRe
 	return &p
 }
 
+type EarlyCompleteRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	GatheringName      *string `json:"gatheringName"`
+	AccessToken        *string `json:"accessToken"`
+}
+
+func NewEarlyCompleteRequestFromJson(data string) EarlyCompleteRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEarlyCompleteRequestFromDict(dict)
+}
+
+func NewEarlyCompleteRequestFromDict(data map[string]interface{}) EarlyCompleteRequest {
+	return EarlyCompleteRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		GatheringName: core.CastString(data["gatheringName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+	}
+}
+
+func (p EarlyCompleteRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"gatheringName": p.GatheringName,
+		"accessToken":   p.AccessToken,
+	}
+}
+
+func (p EarlyCompleteRequest) Pointer() *EarlyCompleteRequest {
+	return &p
+}
+
+type EarlyCompleteByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	GatheringName      *string `json:"gatheringName"`
+	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+}
+
+func NewEarlyCompleteByUserIdRequestFromJson(data string) EarlyCompleteByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEarlyCompleteByUserIdRequestFromDict(dict)
+}
+
+func NewEarlyCompleteByUserIdRequestFromDict(data map[string]interface{}) EarlyCompleteByUserIdRequest {
+	return EarlyCompleteByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		GatheringName:   core.CastString(data["gatheringName"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p EarlyCompleteByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"gatheringName":   p.GatheringName,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p EarlyCompleteByUserIdRequest) Pointer() *EarlyCompleteByUserIdRequest {
+	return &p
+}
+
 type DeleteGatheringRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`

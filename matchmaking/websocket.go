@@ -2313,6 +2313,192 @@ func (p Gs2MatchmakingWebSocketClient) CancelMatchmakingByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2MatchmakingWebSocketClient) earlyCompleteAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- EarlyCompleteAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- EarlyCompleteAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result EarlyCompleteResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- EarlyCompleteAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- EarlyCompleteAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) EarlyCompleteAsync(
+	request *EarlyCompleteRequest,
+	callback chan<- EarlyCompleteAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "gathering",
+			"function":    "earlyComplete",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		bodies["gatheringName"] = *request.GatheringName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.earlyCompleteAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) EarlyComplete(
+	request *EarlyCompleteRequest,
+) (*EarlyCompleteResult, error) {
+	callback := make(chan EarlyCompleteAsyncResult, 1)
+	go p.EarlyCompleteAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) earlyCompleteByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- EarlyCompleteByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- EarlyCompleteByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result EarlyCompleteByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- EarlyCompleteByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- EarlyCompleteByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) EarlyCompleteByUserIdAsync(
+	request *EarlyCompleteByUserIdRequest,
+	callback chan<- EarlyCompleteByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "gathering",
+			"function":    "earlyCompleteByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		bodies["gatheringName"] = *request.GatheringName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.earlyCompleteByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) EarlyCompleteByUserId(
+	request *EarlyCompleteByUserIdRequest,
+) (*EarlyCompleteByUserIdResult, error) {
+	callback := make(chan EarlyCompleteByUserIdAsyncResult, 1)
+	go p.EarlyCompleteByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2MatchmakingWebSocketClient) deleteGatheringAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DeleteGatheringAsyncResult,

@@ -2500,6 +2500,207 @@ func (p Gs2MatchmakingRestClient) CancelMatchmakingByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func earlyCompleteAsyncHandler(
+	client Gs2MatchmakingRestClient,
+	job *core.NetworkJob,
+	callback chan<- EarlyCompleteAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- EarlyCompleteAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result EarlyCompleteResult
+	if asyncResult.Err != nil {
+		callback <- EarlyCompleteAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- EarlyCompleteAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- EarlyCompleteAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingRestClient) EarlyCompleteAsync(
+	request *EarlyCompleteRequest,
+	callback chan<- EarlyCompleteAsyncResult,
+) {
+	path := "/{namespaceName}/gathering/{gatheringName}/user/me/early"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
+	} else {
+		path = strings.ReplaceAll(path, "{gatheringName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go earlyCompleteAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingRestClient) EarlyComplete(
+	request *EarlyCompleteRequest,
+) (*EarlyCompleteResult, error) {
+	callback := make(chan EarlyCompleteAsyncResult, 1)
+	go p.EarlyCompleteAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func earlyCompleteByUserIdAsyncHandler(
+	client Gs2MatchmakingRestClient,
+	job *core.NetworkJob,
+	callback chan<- EarlyCompleteByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- EarlyCompleteByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result EarlyCompleteByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- EarlyCompleteByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- EarlyCompleteByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- EarlyCompleteByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingRestClient) EarlyCompleteByUserIdAsync(
+	request *EarlyCompleteByUserIdRequest,
+	callback chan<- EarlyCompleteByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/gathering/{gatheringName}/user/{userId}/early"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		path = strings.ReplaceAll(path, "{gatheringName}", core.ToString(*request.GatheringName))
+	} else {
+		path = strings.ReplaceAll(path, "{gatheringName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go earlyCompleteByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingRestClient) EarlyCompleteByUserId(
+	request *EarlyCompleteByUserIdRequest,
+) (*EarlyCompleteByUserIdResult, error) {
+	callback := make(chan EarlyCompleteByUserIdAsyncResult, 1)
+	go p.EarlyCompleteByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteGatheringAsyncHandler(
 	client Gs2MatchmakingRestClient,
 	job *core.NetworkJob,
