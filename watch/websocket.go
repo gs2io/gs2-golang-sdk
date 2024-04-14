@@ -2026,8 +2026,8 @@ func (p Gs2WatchWebSocketClient) DescribeFormationFormMetricsAsync(
 	if request.NamespaceName != nil && *request.NamespaceName != "" {
 		bodies["namespaceName"] = *request.NamespaceName
 	}
-	if request.MoldName != nil && *request.MoldName != "" {
-		bodies["moldName"] = *request.MoldName
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		bodies["moldModelName"] = *request.MoldModelName
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

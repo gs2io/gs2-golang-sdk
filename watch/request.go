@@ -23,18 +23,19 @@ import (
 )
 
 type GetChartRequest struct {
-	RequestId    *string   `json:"requestId"`
-	ContextStack *string   `json:"contextStack"`
-	Measure      *string   `json:"measure"`
-	Grn          *string   `json:"grn"`
-	Round        *string   `json:"round"`
-	Filters      []Filter  `json:"filters"`
-	GroupBys     []*string `json:"groupBys"`
-	CountBy      *string   `json:"countBy"`
-	Begin        *int64    `json:"begin"`
-	End          *int64    `json:"end"`
-	PageToken    *string   `json:"pageToken"`
-	Limit        *int32    `json:"limit"`
+	SourceRequestId *string   `json:"sourceRequestId"`
+	RequestId       *string   `json:"requestId"`
+	ContextStack    *string   `json:"contextStack"`
+	Measure         *string   `json:"measure"`
+	Grn             *string   `json:"grn"`
+	Round           *string   `json:"round"`
+	Filters         []Filter  `json:"filters"`
+	GroupBys        []*string `json:"groupBys"`
+	CountBy         *string   `json:"countBy"`
+	Begin           *int64    `json:"begin"`
+	End             *int64    `json:"end"`
+	PageToken       *string   `json:"pageToken"`
+	Limit           *int32    `json:"limit"`
 }
 
 func NewGetChartRequestFromJson(data string) GetChartRequest {
@@ -82,16 +83,17 @@ func (p GetChartRequest) Pointer() *GetChartRequest {
 }
 
 type GetDistributionRequest struct {
-	RequestId    *string   `json:"requestId"`
-	ContextStack *string   `json:"contextStack"`
-	Measure      *string   `json:"measure"`
-	Grn          *string   `json:"grn"`
-	Filters      []Filter  `json:"filters"`
-	GroupBys     []*string `json:"groupBys"`
-	Begin        *int64    `json:"begin"`
-	End          *int64    `json:"end"`
-	PageToken    *string   `json:"pageToken"`
-	Limit        *int32    `json:"limit"`
+	SourceRequestId *string   `json:"sourceRequestId"`
+	RequestId       *string   `json:"requestId"`
+	ContextStack    *string   `json:"contextStack"`
+	Measure         *string   `json:"measure"`
+	Grn             *string   `json:"grn"`
+	Filters         []Filter  `json:"filters"`
+	GroupBys        []*string `json:"groupBys"`
+	Begin           *int64    `json:"begin"`
+	End             *int64    `json:"end"`
+	PageToken       *string   `json:"pageToken"`
+	Limit           *int32    `json:"limit"`
 }
 
 func NewGetDistributionRequestFromJson(data string) GetDistributionRequest {
@@ -135,10 +137,11 @@ func (p GetDistributionRequest) Pointer() *GetDistributionRequest {
 }
 
 type GetCumulativeRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	Name         *string `json:"name"`
-	ResourceGrn  *string `json:"resourceGrn"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	Name            *string `json:"name"`
+	ResourceGrn     *string `json:"resourceGrn"`
 }
 
 func NewGetCumulativeRequestFromJson(data string) GetCumulativeRequest {
@@ -166,13 +169,14 @@ func (p GetCumulativeRequest) Pointer() *GetCumulativeRequest {
 }
 
 type DescribeBillingActivitiesRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	Year         *int32  `json:"year"`
-	Month        *int32  `json:"month"`
-	Service      *string `json:"service"`
-	PageToken    *string `json:"pageToken"`
-	Limit        *int32  `json:"limit"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	Year            *int32  `json:"year"`
+	Month           *int32  `json:"month"`
+	Service         *string `json:"service"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
 }
 
 func NewDescribeBillingActivitiesRequestFromJson(data string) DescribeBillingActivitiesRequest {
@@ -206,12 +210,13 @@ func (p DescribeBillingActivitiesRequest) Pointer() *DescribeBillingActivitiesRe
 }
 
 type GetBillingActivityRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
-	Year         *int32  `json:"year"`
-	Month        *int32  `json:"month"`
-	Service      *string `json:"service"`
-	ActivityType *string `json:"activityType"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	Year            *int32  `json:"year"`
+	Month           *int32  `json:"month"`
+	Service         *string `json:"service"`
+	ActivityType    *string `json:"activityType"`
 }
 
 func NewGetBillingActivityRequestFromJson(data string) GetBillingActivityRequest {
@@ -243,8 +248,9 @@ func (p GetBillingActivityRequest) Pointer() *GetBillingActivityRequest {
 }
 
 type GetGeneralMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewGetGeneralMetricsRequestFromJson(data string) GetGeneralMetricsRequest {
@@ -266,8 +272,9 @@ func (p GetGeneralMetricsRequest) Pointer() *GetGeneralMetricsRequest {
 }
 
 type DescribeAccountNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeAccountNamespaceMetricsRequestFromJson(data string) DescribeAccountNamespaceMetricsRequest {
@@ -289,9 +296,10 @@ func (p DescribeAccountNamespaceMetricsRequest) Pointer() *DescribeAccountNamesp
 }
 
 type GetAccountNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetAccountNamespaceMetricsRequestFromJson(data string) GetAccountNamespaceMetricsRequest {
@@ -317,8 +325,9 @@ func (p GetAccountNamespaceMetricsRequest) Pointer() *GetAccountNamespaceMetrics
 }
 
 type DescribeChatNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeChatNamespaceMetricsRequestFromJson(data string) DescribeChatNamespaceMetricsRequest {
@@ -340,9 +349,10 @@ func (p DescribeChatNamespaceMetricsRequest) Pointer() *DescribeChatNamespaceMet
 }
 
 type GetChatNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetChatNamespaceMetricsRequestFromJson(data string) GetChatNamespaceMetricsRequest {
@@ -368,8 +378,9 @@ func (p GetChatNamespaceMetricsRequest) Pointer() *GetChatNamespaceMetricsReques
 }
 
 type DescribeDatastoreNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeDatastoreNamespaceMetricsRequestFromJson(data string) DescribeDatastoreNamespaceMetricsRequest {
@@ -391,9 +402,10 @@ func (p DescribeDatastoreNamespaceMetricsRequest) Pointer() *DescribeDatastoreNa
 }
 
 type GetDatastoreNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetDatastoreNamespaceMetricsRequestFromJson(data string) GetDatastoreNamespaceMetricsRequest {
@@ -419,8 +431,9 @@ func (p GetDatastoreNamespaceMetricsRequest) Pointer() *GetDatastoreNamespaceMet
 }
 
 type DescribeDictionaryNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeDictionaryNamespaceMetricsRequestFromJson(data string) DescribeDictionaryNamespaceMetricsRequest {
@@ -442,9 +455,10 @@ func (p DescribeDictionaryNamespaceMetricsRequest) Pointer() *DescribeDictionary
 }
 
 type GetDictionaryNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetDictionaryNamespaceMetricsRequestFromJson(data string) GetDictionaryNamespaceMetricsRequest {
@@ -470,9 +484,10 @@ func (p GetDictionaryNamespaceMetricsRequest) Pointer() *GetDictionaryNamespaceM
 }
 
 type DescribeExchangeRateModelMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeExchangeRateModelMetricsRequestFromJson(data string) DescribeExchangeRateModelMetricsRequest {
@@ -498,10 +513,11 @@ func (p DescribeExchangeRateModelMetricsRequest) Pointer() *DescribeExchangeRate
 }
 
 type GetExchangeRateModelMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	RateName      *string `json:"rateName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	RateName        *string `json:"rateName"`
 }
 
 func NewGetExchangeRateModelMetricsRequestFromJson(data string) GetExchangeRateModelMetricsRequest {
@@ -529,8 +545,9 @@ func (p GetExchangeRateModelMetricsRequest) Pointer() *GetExchangeRateModelMetri
 }
 
 type DescribeExchangeNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeExchangeNamespaceMetricsRequestFromJson(data string) DescribeExchangeNamespaceMetricsRequest {
@@ -552,9 +569,10 @@ func (p DescribeExchangeNamespaceMetricsRequest) Pointer() *DescribeExchangeName
 }
 
 type GetExchangeNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetExchangeNamespaceMetricsRequestFromJson(data string) GetExchangeNamespaceMetricsRequest {
@@ -580,10 +598,11 @@ func (p GetExchangeNamespaceMetricsRequest) Pointer() *GetExchangeNamespaceMetri
 }
 
 type DescribeExperienceStatusMetricsRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	ExperienceName *string `json:"experienceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ExperienceName  *string `json:"experienceName"`
 }
 
 func NewDescribeExperienceStatusMetricsRequestFromJson(data string) DescribeExperienceStatusMetricsRequest {
@@ -611,9 +630,10 @@ func (p DescribeExperienceStatusMetricsRequest) Pointer() *DescribeExperienceSta
 }
 
 type DescribeExperienceExperienceModelMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeExperienceExperienceModelMetricsRequestFromJson(data string) DescribeExperienceExperienceModelMetricsRequest {
@@ -639,10 +659,11 @@ func (p DescribeExperienceExperienceModelMetricsRequest) Pointer() *DescribeExpe
 }
 
 type GetExperienceExperienceModelMetricsRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	ExperienceName *string `json:"experienceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ExperienceName  *string `json:"experienceName"`
 }
 
 func NewGetExperienceExperienceModelMetricsRequestFromJson(data string) GetExperienceExperienceModelMetricsRequest {
@@ -670,8 +691,9 @@ func (p GetExperienceExperienceModelMetricsRequest) Pointer() *GetExperienceExpe
 }
 
 type DescribeExperienceNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeExperienceNamespaceMetricsRequestFromJson(data string) DescribeExperienceNamespaceMetricsRequest {
@@ -693,9 +715,10 @@ func (p DescribeExperienceNamespaceMetricsRequest) Pointer() *DescribeExperience
 }
 
 type GetExperienceNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetExperienceNamespaceMetricsRequestFromJson(data string) GetExperienceNamespaceMetricsRequest {
@@ -721,10 +744,11 @@ func (p GetExperienceNamespaceMetricsRequest) Pointer() *GetExperienceNamespaceM
 }
 
 type DescribeFormationFormMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	MoldName      *string `json:"moldName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	MoldModelName   *string `json:"moldModelName"`
 }
 
 func NewDescribeFormationFormMetricsRequestFromJson(data string) DescribeFormationFormMetricsRequest {
@@ -736,14 +760,14 @@ func NewDescribeFormationFormMetricsRequestFromJson(data string) DescribeFormati
 func NewDescribeFormationFormMetricsRequestFromDict(data map[string]interface{}) DescribeFormationFormMetricsRequest {
 	return DescribeFormationFormMetricsRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
-		MoldName:      core.CastString(data["moldName"]),
+		MoldModelName: core.CastString(data["moldModelName"]),
 	}
 }
 
 func (p DescribeFormationFormMetricsRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
-		"moldName":      p.MoldName,
+		"moldModelName": p.MoldModelName,
 	}
 }
 
@@ -752,9 +776,10 @@ func (p DescribeFormationFormMetricsRequest) Pointer() *DescribeFormationFormMet
 }
 
 type DescribeFormationMoldMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeFormationMoldMetricsRequestFromJson(data string) DescribeFormationMoldMetricsRequest {
@@ -780,8 +805,9 @@ func (p DescribeFormationMoldMetricsRequest) Pointer() *DescribeFormationMoldMet
 }
 
 type DescribeFormationNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeFormationNamespaceMetricsRequestFromJson(data string) DescribeFormationNamespaceMetricsRequest {
@@ -803,9 +829,10 @@ func (p DescribeFormationNamespaceMetricsRequest) Pointer() *DescribeFormationNa
 }
 
 type GetFormationNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetFormationNamespaceMetricsRequestFromJson(data string) GetFormationNamespaceMetricsRequest {
@@ -831,8 +858,9 @@ func (p GetFormationNamespaceMetricsRequest) Pointer() *GetFormationNamespaceMet
 }
 
 type DescribeFriendNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeFriendNamespaceMetricsRequestFromJson(data string) DescribeFriendNamespaceMetricsRequest {
@@ -854,9 +882,10 @@ func (p DescribeFriendNamespaceMetricsRequest) Pointer() *DescribeFriendNamespac
 }
 
 type GetFriendNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetFriendNamespaceMetricsRequestFromJson(data string) GetFriendNamespaceMetricsRequest {
@@ -882,8 +911,9 @@ func (p GetFriendNamespaceMetricsRequest) Pointer() *GetFriendNamespaceMetricsRe
 }
 
 type DescribeInboxNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeInboxNamespaceMetricsRequestFromJson(data string) DescribeInboxNamespaceMetricsRequest {
@@ -905,9 +935,10 @@ func (p DescribeInboxNamespaceMetricsRequest) Pointer() *DescribeInboxNamespaceM
 }
 
 type GetInboxNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetInboxNamespaceMetricsRequestFromJson(data string) GetInboxNamespaceMetricsRequest {
@@ -933,10 +964,11 @@ func (p GetInboxNamespaceMetricsRequest) Pointer() *GetInboxNamespaceMetricsRequ
 }
 
 type DescribeInventoryItemSetMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	InventoryName *string `json:"inventoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	InventoryName   *string `json:"inventoryName"`
 }
 
 func NewDescribeInventoryItemSetMetricsRequestFromJson(data string) DescribeInventoryItemSetMetricsRequest {
@@ -964,9 +996,10 @@ func (p DescribeInventoryItemSetMetricsRequest) Pointer() *DescribeInventoryItem
 }
 
 type DescribeInventoryInventoryMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeInventoryInventoryMetricsRequestFromJson(data string) DescribeInventoryInventoryMetricsRequest {
@@ -992,8 +1025,9 @@ func (p DescribeInventoryInventoryMetricsRequest) Pointer() *DescribeInventoryIn
 }
 
 type DescribeInventoryNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeInventoryNamespaceMetricsRequestFromJson(data string) DescribeInventoryNamespaceMetricsRequest {
@@ -1015,9 +1049,10 @@ func (p DescribeInventoryNamespaceMetricsRequest) Pointer() *DescribeInventoryNa
 }
 
 type GetInventoryNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetInventoryNamespaceMetricsRequestFromJson(data string) GetInventoryNamespaceMetricsRequest {
@@ -1043,8 +1078,9 @@ func (p GetInventoryNamespaceMetricsRequest) Pointer() *GetInventoryNamespaceMet
 }
 
 type DescribeKeyNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeKeyNamespaceMetricsRequestFromJson(data string) DescribeKeyNamespaceMetricsRequest {
@@ -1066,9 +1102,10 @@ func (p DescribeKeyNamespaceMetricsRequest) Pointer() *DescribeKeyNamespaceMetri
 }
 
 type GetKeyNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetKeyNamespaceMetricsRequestFromJson(data string) GetKeyNamespaceMetricsRequest {
@@ -1094,10 +1131,11 @@ func (p GetKeyNamespaceMetricsRequest) Pointer() *GetKeyNamespaceMetricsRequest 
 }
 
 type DescribeLimitCounterMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	LimitName     *string `json:"limitName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	LimitName       *string `json:"limitName"`
 }
 
 func NewDescribeLimitCounterMetricsRequestFromJson(data string) DescribeLimitCounterMetricsRequest {
@@ -1125,9 +1163,10 @@ func (p DescribeLimitCounterMetricsRequest) Pointer() *DescribeLimitCounterMetri
 }
 
 type DescribeLimitLimitModelMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeLimitLimitModelMetricsRequestFromJson(data string) DescribeLimitLimitModelMetricsRequest {
@@ -1153,10 +1192,11 @@ func (p DescribeLimitLimitModelMetricsRequest) Pointer() *DescribeLimitLimitMode
 }
 
 type GetLimitLimitModelMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	LimitName     *string `json:"limitName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	LimitName       *string `json:"limitName"`
 }
 
 func NewGetLimitLimitModelMetricsRequestFromJson(data string) GetLimitLimitModelMetricsRequest {
@@ -1184,8 +1224,9 @@ func (p GetLimitLimitModelMetricsRequest) Pointer() *GetLimitLimitModelMetricsRe
 }
 
 type DescribeLimitNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeLimitNamespaceMetricsRequestFromJson(data string) DescribeLimitNamespaceMetricsRequest {
@@ -1207,9 +1248,10 @@ func (p DescribeLimitNamespaceMetricsRequest) Pointer() *DescribeLimitNamespaceM
 }
 
 type GetLimitNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetLimitNamespaceMetricsRequestFromJson(data string) GetLimitNamespaceMetricsRequest {
@@ -1235,9 +1277,10 @@ func (p GetLimitNamespaceMetricsRequest) Pointer() *GetLimitNamespaceMetricsRequ
 }
 
 type DescribeLotteryLotteryMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeLotteryLotteryMetricsRequestFromJson(data string) DescribeLotteryLotteryMetricsRequest {
@@ -1263,10 +1306,11 @@ func (p DescribeLotteryLotteryMetricsRequest) Pointer() *DescribeLotteryLotteryM
 }
 
 type GetLotteryLotteryMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	LotteryName   *string `json:"lotteryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	LotteryName     *string `json:"lotteryName"`
 }
 
 func NewGetLotteryLotteryMetricsRequestFromJson(data string) GetLotteryLotteryMetricsRequest {
@@ -1294,8 +1338,9 @@ func (p GetLotteryLotteryMetricsRequest) Pointer() *GetLotteryLotteryMetricsRequ
 }
 
 type DescribeLotteryNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeLotteryNamespaceMetricsRequestFromJson(data string) DescribeLotteryNamespaceMetricsRequest {
@@ -1317,9 +1362,10 @@ func (p DescribeLotteryNamespaceMetricsRequest) Pointer() *DescribeLotteryNamesp
 }
 
 type GetLotteryNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetLotteryNamespaceMetricsRequestFromJson(data string) GetLotteryNamespaceMetricsRequest {
@@ -1345,8 +1391,9 @@ func (p GetLotteryNamespaceMetricsRequest) Pointer() *GetLotteryNamespaceMetrics
 }
 
 type DescribeMatchmakingNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeMatchmakingNamespaceMetricsRequestFromJson(data string) DescribeMatchmakingNamespaceMetricsRequest {
@@ -1368,9 +1415,10 @@ func (p DescribeMatchmakingNamespaceMetricsRequest) Pointer() *DescribeMatchmaki
 }
 
 type GetMatchmakingNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetMatchmakingNamespaceMetricsRequestFromJson(data string) GetMatchmakingNamespaceMetricsRequest {
@@ -1396,9 +1444,10 @@ func (p GetMatchmakingNamespaceMetricsRequest) Pointer() *GetMatchmakingNamespac
 }
 
 type DescribeMissionCounterMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeMissionCounterMetricsRequestFromJson(data string) DescribeMissionCounterMetricsRequest {
@@ -1424,9 +1473,10 @@ func (p DescribeMissionCounterMetricsRequest) Pointer() *DescribeMissionCounterM
 }
 
 type DescribeMissionMissionGroupModelMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeMissionMissionGroupModelMetricsRequestFromJson(data string) DescribeMissionMissionGroupModelMetricsRequest {
@@ -1452,6 +1502,7 @@ func (p DescribeMissionMissionGroupModelMetricsRequest) Pointer() *DescribeMissi
 }
 
 type GetMissionMissionGroupModelMetricsRequest struct {
+	SourceRequestId  *string `json:"sourceRequestId"`
 	RequestId        *string `json:"requestId"`
 	ContextStack     *string `json:"contextStack"`
 	NamespaceName    *string `json:"namespaceName"`
@@ -1483,8 +1534,9 @@ func (p GetMissionMissionGroupModelMetricsRequest) Pointer() *GetMissionMissionG
 }
 
 type DescribeMissionNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeMissionNamespaceMetricsRequestFromJson(data string) DescribeMissionNamespaceMetricsRequest {
@@ -1506,9 +1558,10 @@ func (p DescribeMissionNamespaceMetricsRequest) Pointer() *DescribeMissionNamesp
 }
 
 type GetMissionNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetMissionNamespaceMetricsRequestFromJson(data string) GetMissionNamespaceMetricsRequest {
@@ -1534,9 +1587,10 @@ func (p GetMissionNamespaceMetricsRequest) Pointer() *GetMissionNamespaceMetrics
 }
 
 type DescribeMoneyWalletMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeMoneyWalletMetricsRequestFromJson(data string) DescribeMoneyWalletMetricsRequest {
@@ -1562,9 +1616,10 @@ func (p DescribeMoneyWalletMetricsRequest) Pointer() *DescribeMoneyWalletMetrics
 }
 
 type DescribeMoneyReceiptMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeMoneyReceiptMetricsRequestFromJson(data string) DescribeMoneyReceiptMetricsRequest {
@@ -1590,8 +1645,9 @@ func (p DescribeMoneyReceiptMetricsRequest) Pointer() *DescribeMoneyReceiptMetri
 }
 
 type DescribeMoneyNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeMoneyNamespaceMetricsRequestFromJson(data string) DescribeMoneyNamespaceMetricsRequest {
@@ -1613,9 +1669,10 @@ func (p DescribeMoneyNamespaceMetricsRequest) Pointer() *DescribeMoneyNamespaceM
 }
 
 type GetMoneyNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetMoneyNamespaceMetricsRequestFromJson(data string) GetMoneyNamespaceMetricsRequest {
@@ -1641,10 +1698,11 @@ func (p GetMoneyNamespaceMetricsRequest) Pointer() *GetMoneyNamespaceMetricsRequ
 }
 
 type DescribeQuestQuestModelMetricsRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	QuestGroupName *string `json:"questGroupName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	QuestGroupName  *string `json:"questGroupName"`
 }
 
 func NewDescribeQuestQuestModelMetricsRequestFromJson(data string) DescribeQuestQuestModelMetricsRequest {
@@ -1672,11 +1730,12 @@ func (p DescribeQuestQuestModelMetricsRequest) Pointer() *DescribeQuestQuestMode
 }
 
 type GetQuestQuestModelMetricsRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	QuestGroupName *string `json:"questGroupName"`
-	QuestName      *string `json:"questName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	QuestGroupName  *string `json:"questGroupName"`
+	QuestName       *string `json:"questName"`
 }
 
 func NewGetQuestQuestModelMetricsRequestFromJson(data string) GetQuestQuestModelMetricsRequest {
@@ -1706,9 +1765,10 @@ func (p GetQuestQuestModelMetricsRequest) Pointer() *GetQuestQuestModelMetricsRe
 }
 
 type DescribeQuestQuestGroupModelMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeQuestQuestGroupModelMetricsRequestFromJson(data string) DescribeQuestQuestGroupModelMetricsRequest {
@@ -1734,10 +1794,11 @@ func (p DescribeQuestQuestGroupModelMetricsRequest) Pointer() *DescribeQuestQues
 }
 
 type GetQuestQuestGroupModelMetricsRequest struct {
-	RequestId      *string `json:"requestId"`
-	ContextStack   *string `json:"contextStack"`
-	NamespaceName  *string `json:"namespaceName"`
-	QuestGroupName *string `json:"questGroupName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	QuestGroupName  *string `json:"questGroupName"`
 }
 
 func NewGetQuestQuestGroupModelMetricsRequestFromJson(data string) GetQuestQuestGroupModelMetricsRequest {
@@ -1765,8 +1826,9 @@ func (p GetQuestQuestGroupModelMetricsRequest) Pointer() *GetQuestQuestGroupMode
 }
 
 type DescribeQuestNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeQuestNamespaceMetricsRequestFromJson(data string) DescribeQuestNamespaceMetricsRequest {
@@ -1788,9 +1850,10 @@ func (p DescribeQuestNamespaceMetricsRequest) Pointer() *DescribeQuestNamespaceM
 }
 
 type GetQuestNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetQuestNamespaceMetricsRequestFromJson(data string) GetQuestNamespaceMetricsRequest {
@@ -1816,9 +1879,10 @@ func (p GetQuestNamespaceMetricsRequest) Pointer() *GetQuestNamespaceMetricsRequ
 }
 
 type DescribeRankingCategoryModelMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeRankingCategoryModelMetricsRequestFromJson(data string) DescribeRankingCategoryModelMetricsRequest {
@@ -1844,10 +1908,11 @@ func (p DescribeRankingCategoryModelMetricsRequest) Pointer() *DescribeRankingCa
 }
 
 type GetRankingCategoryModelMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	CategoryName  *string `json:"categoryName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	CategoryName    *string `json:"categoryName"`
 }
 
 func NewGetRankingCategoryModelMetricsRequestFromJson(data string) GetRankingCategoryModelMetricsRequest {
@@ -1875,8 +1940,9 @@ func (p GetRankingCategoryModelMetricsRequest) Pointer() *GetRankingCategoryMode
 }
 
 type DescribeRankingNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeRankingNamespaceMetricsRequestFromJson(data string) DescribeRankingNamespaceMetricsRequest {
@@ -1898,9 +1964,10 @@ func (p DescribeRankingNamespaceMetricsRequest) Pointer() *DescribeRankingNamesp
 }
 
 type GetRankingNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetRankingNamespaceMetricsRequestFromJson(data string) GetRankingNamespaceMetricsRequest {
@@ -1926,10 +1993,11 @@ func (p GetRankingNamespaceMetricsRequest) Pointer() *GetRankingNamespaceMetrics
 }
 
 type DescribeShowcaseDisplayItemMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ShowcaseName  *string `json:"showcaseName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ShowcaseName    *string `json:"showcaseName"`
 }
 
 func NewDescribeShowcaseDisplayItemMetricsRequestFromJson(data string) DescribeShowcaseDisplayItemMetricsRequest {
@@ -1957,11 +2025,12 @@ func (p DescribeShowcaseDisplayItemMetricsRequest) Pointer() *DescribeShowcaseDi
 }
 
 type GetShowcaseDisplayItemMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ShowcaseName  *string `json:"showcaseName"`
-	DisplayItemId *string `json:"displayItemId"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ShowcaseName    *string `json:"showcaseName"`
+	DisplayItemId   *string `json:"displayItemId"`
 }
 
 func NewGetShowcaseDisplayItemMetricsRequestFromJson(data string) GetShowcaseDisplayItemMetricsRequest {
@@ -1991,9 +2060,10 @@ func (p GetShowcaseDisplayItemMetricsRequest) Pointer() *GetShowcaseDisplayItemM
 }
 
 type DescribeShowcaseShowcaseMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeShowcaseShowcaseMetricsRequestFromJson(data string) DescribeShowcaseShowcaseMetricsRequest {
@@ -2019,10 +2089,11 @@ func (p DescribeShowcaseShowcaseMetricsRequest) Pointer() *DescribeShowcaseShowc
 }
 
 type GetShowcaseShowcaseMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	ShowcaseName  *string `json:"showcaseName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	ShowcaseName    *string `json:"showcaseName"`
 }
 
 func NewGetShowcaseShowcaseMetricsRequestFromJson(data string) GetShowcaseShowcaseMetricsRequest {
@@ -2050,8 +2121,9 @@ func (p GetShowcaseShowcaseMetricsRequest) Pointer() *GetShowcaseShowcaseMetrics
 }
 
 type DescribeShowcaseNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeShowcaseNamespaceMetricsRequestFromJson(data string) DescribeShowcaseNamespaceMetricsRequest {
@@ -2073,9 +2145,10 @@ func (p DescribeShowcaseNamespaceMetricsRequest) Pointer() *DescribeShowcaseName
 }
 
 type GetShowcaseNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetShowcaseNamespaceMetricsRequestFromJson(data string) GetShowcaseNamespaceMetricsRequest {
@@ -2101,9 +2174,10 @@ func (p GetShowcaseNamespaceMetricsRequest) Pointer() *GetShowcaseNamespaceMetri
 }
 
 type DescribeStaminaStaminaModelMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewDescribeStaminaStaminaModelMetricsRequestFromJson(data string) DescribeStaminaStaminaModelMetricsRequest {
@@ -2129,10 +2203,11 @@ func (p DescribeStaminaStaminaModelMetricsRequest) Pointer() *DescribeStaminaSta
 }
 
 type GetStaminaStaminaModelMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
-	StaminaName   *string `json:"staminaName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	StaminaName     *string `json:"staminaName"`
 }
 
 func NewGetStaminaStaminaModelMetricsRequestFromJson(data string) GetStaminaStaminaModelMetricsRequest {
@@ -2160,8 +2235,9 @@ func (p GetStaminaStaminaModelMetricsRequest) Pointer() *GetStaminaStaminaModelM
 }
 
 type DescribeStaminaNamespaceMetricsRequest struct {
-	RequestId    *string `json:"requestId"`
-	ContextStack *string `json:"contextStack"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
 }
 
 func NewDescribeStaminaNamespaceMetricsRequestFromJson(data string) DescribeStaminaNamespaceMetricsRequest {
@@ -2183,9 +2259,10 @@ func (p DescribeStaminaNamespaceMetricsRequest) Pointer() *DescribeStaminaNamesp
 }
 
 type GetStaminaNamespaceMetricsRequest struct {
-	RequestId     *string `json:"requestId"`
-	ContextStack  *string `json:"contextStack"`
-	NamespaceName *string `json:"namespaceName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
 }
 
 func NewGetStaminaNamespaceMetricsRequestFromJson(data string) GetStaminaNamespaceMetricsRequest {

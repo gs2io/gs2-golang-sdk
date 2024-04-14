@@ -2994,7 +2994,7 @@ func (p DescribeReferenceOfByUserIdResult) Pointer() *DescribeReferenceOfByUserI
 }
 
 type GetReferenceOfResult struct {
-	Item      []*string  `json:"item"`
+	Item      *string    `json:"item"`
 	ItemSet   *ItemSet   `json:"itemSet"`
 	ItemModel *ItemModel `json:"itemModel"`
 	Inventory *Inventory `json:"inventory"`
@@ -3013,7 +3013,7 @@ func NewGetReferenceOfResultFromJson(data string) GetReferenceOfResult {
 
 func NewGetReferenceOfResultFromDict(data map[string]interface{}) GetReferenceOfResult {
 	return GetReferenceOfResult{
-		Item:      core.CastStrings(core.CastArray(data["item"])),
+		Item:      core.CastString(data["item"]),
 		ItemSet:   NewItemSetFromDict(core.CastMap(data["itemSet"])).Pointer(),
 		ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
 		Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
@@ -3022,9 +3022,7 @@ func NewGetReferenceOfResultFromDict(data map[string]interface{}) GetReferenceOf
 
 func (p GetReferenceOfResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": core.CastStringsFromDict(
-			p.Item,
-		),
+		"item":      p.Item,
 		"itemSet":   p.ItemSet.ToDict(),
 		"itemModel": p.ItemModel.ToDict(),
 		"inventory": p.Inventory.ToDict(),
@@ -3036,7 +3034,7 @@ func (p GetReferenceOfResult) Pointer() *GetReferenceOfResult {
 }
 
 type GetReferenceOfByUserIdResult struct {
-	Item      []*string  `json:"item"`
+	Item      *string    `json:"item"`
 	ItemSet   *ItemSet   `json:"itemSet"`
 	ItemModel *ItemModel `json:"itemModel"`
 	Inventory *Inventory `json:"inventory"`
@@ -3055,7 +3053,7 @@ func NewGetReferenceOfByUserIdResultFromJson(data string) GetReferenceOfByUserId
 
 func NewGetReferenceOfByUserIdResultFromDict(data map[string]interface{}) GetReferenceOfByUserIdResult {
 	return GetReferenceOfByUserIdResult{
-		Item:      core.CastStrings(core.CastArray(data["item"])),
+		Item:      core.CastString(data["item"]),
 		ItemSet:   NewItemSetFromDict(core.CastMap(data["itemSet"])).Pointer(),
 		ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
 		Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
@@ -3064,9 +3062,7 @@ func NewGetReferenceOfByUserIdResultFromDict(data map[string]interface{}) GetRef
 
 func (p GetReferenceOfByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": core.CastStringsFromDict(
-			p.Item,
-		),
+		"item":      p.Item,
 		"itemSet":   p.ItemSet.ToDict(),
 		"itemModel": p.ItemModel.ToDict(),
 		"inventory": p.Inventory.ToDict(),
@@ -3078,7 +3074,7 @@ func (p GetReferenceOfByUserIdResult) Pointer() *GetReferenceOfByUserIdResult {
 }
 
 type VerifyReferenceOfResult struct {
-	Item      []*string  `json:"item"`
+	Item      *string    `json:"item"`
 	ItemSet   *ItemSet   `json:"itemSet"`
 	ItemModel *ItemModel `json:"itemModel"`
 	Inventory *Inventory `json:"inventory"`
@@ -3097,7 +3093,7 @@ func NewVerifyReferenceOfResultFromJson(data string) VerifyReferenceOfResult {
 
 func NewVerifyReferenceOfResultFromDict(data map[string]interface{}) VerifyReferenceOfResult {
 	return VerifyReferenceOfResult{
-		Item:      core.CastStrings(core.CastArray(data["item"])),
+		Item:      core.CastString(data["item"]),
 		ItemSet:   NewItemSetFromDict(core.CastMap(data["itemSet"])).Pointer(),
 		ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
 		Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
@@ -3106,9 +3102,7 @@ func NewVerifyReferenceOfResultFromDict(data map[string]interface{}) VerifyRefer
 
 func (p VerifyReferenceOfResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": core.CastStringsFromDict(
-			p.Item,
-		),
+		"item":      p.Item,
 		"itemSet":   p.ItemSet.ToDict(),
 		"itemModel": p.ItemModel.ToDict(),
 		"inventory": p.Inventory.ToDict(),
@@ -3120,7 +3114,7 @@ func (p VerifyReferenceOfResult) Pointer() *VerifyReferenceOfResult {
 }
 
 type VerifyReferenceOfByUserIdResult struct {
-	Item      []*string  `json:"item"`
+	Item      *string    `json:"item"`
 	ItemSet   *ItemSet   `json:"itemSet"`
 	ItemModel *ItemModel `json:"itemModel"`
 	Inventory *Inventory `json:"inventory"`
@@ -3139,7 +3133,7 @@ func NewVerifyReferenceOfByUserIdResultFromJson(data string) VerifyReferenceOfBy
 
 func NewVerifyReferenceOfByUserIdResultFromDict(data map[string]interface{}) VerifyReferenceOfByUserIdResult {
 	return VerifyReferenceOfByUserIdResult{
-		Item:      core.CastStrings(core.CastArray(data["item"])),
+		Item:      core.CastString(data["item"]),
 		ItemSet:   NewItemSetFromDict(core.CastMap(data["itemSet"])).Pointer(),
 		ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
 		Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
@@ -3148,9 +3142,7 @@ func NewVerifyReferenceOfByUserIdResultFromDict(data map[string]interface{}) Ver
 
 func (p VerifyReferenceOfByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": core.CastStringsFromDict(
-			p.Item,
-		),
+		"item":      p.Item,
 		"itemSet":   p.ItemSet.ToDict(),
 		"itemModel": p.ItemModel.ToDict(),
 		"inventory": p.Inventory.ToDict(),
@@ -3162,7 +3154,7 @@ func (p VerifyReferenceOfByUserIdResult) Pointer() *VerifyReferenceOfByUserIdRes
 }
 
 type AddReferenceOfResult struct {
-	Item      []*string  `json:"item"`
+	Item      *string    `json:"item"`
 	ItemSet   *ItemSet   `json:"itemSet"`
 	ItemModel *ItemModel `json:"itemModel"`
 	Inventory *Inventory `json:"inventory"`
@@ -3181,7 +3173,7 @@ func NewAddReferenceOfResultFromJson(data string) AddReferenceOfResult {
 
 func NewAddReferenceOfResultFromDict(data map[string]interface{}) AddReferenceOfResult {
 	return AddReferenceOfResult{
-		Item:      core.CastStrings(core.CastArray(data["item"])),
+		Item:      core.CastString(data["item"]),
 		ItemSet:   NewItemSetFromDict(core.CastMap(data["itemSet"])).Pointer(),
 		ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
 		Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
@@ -3190,9 +3182,7 @@ func NewAddReferenceOfResultFromDict(data map[string]interface{}) AddReferenceOf
 
 func (p AddReferenceOfResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": core.CastStringsFromDict(
-			p.Item,
-		),
+		"item":      p.Item,
 		"itemSet":   p.ItemSet.ToDict(),
 		"itemModel": p.ItemModel.ToDict(),
 		"inventory": p.Inventory.ToDict(),
@@ -3204,7 +3194,7 @@ func (p AddReferenceOfResult) Pointer() *AddReferenceOfResult {
 }
 
 type AddReferenceOfByUserIdResult struct {
-	Item      []*string  `json:"item"`
+	Item      *string    `json:"item"`
 	ItemSet   *ItemSet   `json:"itemSet"`
 	ItemModel *ItemModel `json:"itemModel"`
 	Inventory *Inventory `json:"inventory"`
@@ -3223,7 +3213,7 @@ func NewAddReferenceOfByUserIdResultFromJson(data string) AddReferenceOfByUserId
 
 func NewAddReferenceOfByUserIdResultFromDict(data map[string]interface{}) AddReferenceOfByUserIdResult {
 	return AddReferenceOfByUserIdResult{
-		Item:      core.CastStrings(core.CastArray(data["item"])),
+		Item:      core.CastString(data["item"]),
 		ItemSet:   NewItemSetFromDict(core.CastMap(data["itemSet"])).Pointer(),
 		ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
 		Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
@@ -3232,9 +3222,7 @@ func NewAddReferenceOfByUserIdResultFromDict(data map[string]interface{}) AddRef
 
 func (p AddReferenceOfByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": core.CastStringsFromDict(
-			p.Item,
-		),
+		"item":      p.Item,
 		"itemSet":   p.ItemSet.ToDict(),
 		"itemModel": p.ItemModel.ToDict(),
 		"inventory": p.Inventory.ToDict(),
@@ -3246,7 +3234,7 @@ func (p AddReferenceOfByUserIdResult) Pointer() *AddReferenceOfByUserIdResult {
 }
 
 type DeleteReferenceOfResult struct {
-	Item      []*string  `json:"item"`
+	Item      *string    `json:"item"`
 	ItemSet   *ItemSet   `json:"itemSet"`
 	ItemModel *ItemModel `json:"itemModel"`
 	Inventory *Inventory `json:"inventory"`
@@ -3265,7 +3253,7 @@ func NewDeleteReferenceOfResultFromJson(data string) DeleteReferenceOfResult {
 
 func NewDeleteReferenceOfResultFromDict(data map[string]interface{}) DeleteReferenceOfResult {
 	return DeleteReferenceOfResult{
-		Item:      core.CastStrings(core.CastArray(data["item"])),
+		Item:      core.CastString(data["item"]),
 		ItemSet:   NewItemSetFromDict(core.CastMap(data["itemSet"])).Pointer(),
 		ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
 		Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
@@ -3274,9 +3262,7 @@ func NewDeleteReferenceOfResultFromDict(data map[string]interface{}) DeleteRefer
 
 func (p DeleteReferenceOfResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": core.CastStringsFromDict(
-			p.Item,
-		),
+		"item":      p.Item,
 		"itemSet":   p.ItemSet.ToDict(),
 		"itemModel": p.ItemModel.ToDict(),
 		"inventory": p.Inventory.ToDict(),
@@ -3288,7 +3274,7 @@ func (p DeleteReferenceOfResult) Pointer() *DeleteReferenceOfResult {
 }
 
 type DeleteReferenceOfByUserIdResult struct {
-	Item      []*string  `json:"item"`
+	Item      *string    `json:"item"`
 	ItemSet   *ItemSet   `json:"itemSet"`
 	ItemModel *ItemModel `json:"itemModel"`
 	Inventory *Inventory `json:"inventory"`
@@ -3307,7 +3293,7 @@ func NewDeleteReferenceOfByUserIdResultFromJson(data string) DeleteReferenceOfBy
 
 func NewDeleteReferenceOfByUserIdResultFromDict(data map[string]interface{}) DeleteReferenceOfByUserIdResult {
 	return DeleteReferenceOfByUserIdResult{
-		Item:      core.CastStrings(core.CastArray(data["item"])),
+		Item:      core.CastString(data["item"]),
 		ItemSet:   NewItemSetFromDict(core.CastMap(data["itemSet"])).Pointer(),
 		ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
 		Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
@@ -3316,9 +3302,7 @@ func NewDeleteReferenceOfByUserIdResultFromDict(data map[string]interface{}) Del
 
 func (p DeleteReferenceOfByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": core.CastStringsFromDict(
-			p.Item,
-		),
+		"item":      p.Item,
 		"itemSet":   p.ItemSet.ToDict(),
 		"itemModel": p.ItemModel.ToDict(),
 		"inventory": p.Inventory.ToDict(),
@@ -3330,7 +3314,7 @@ func (p DeleteReferenceOfByUserIdResult) Pointer() *DeleteReferenceOfByUserIdRes
 }
 
 type AddReferenceOfItemSetByStampSheetResult struct {
-	Item      []*string  `json:"item"`
+	Item      *string    `json:"item"`
 	ItemSet   *ItemSet   `json:"itemSet"`
 	ItemModel *ItemModel `json:"itemModel"`
 	Inventory *Inventory `json:"inventory"`
@@ -3349,7 +3333,7 @@ func NewAddReferenceOfItemSetByStampSheetResultFromJson(data string) AddReferenc
 
 func NewAddReferenceOfItemSetByStampSheetResultFromDict(data map[string]interface{}) AddReferenceOfItemSetByStampSheetResult {
 	return AddReferenceOfItemSetByStampSheetResult{
-		Item:      core.CastStrings(core.CastArray(data["item"])),
+		Item:      core.CastString(data["item"]),
 		ItemSet:   NewItemSetFromDict(core.CastMap(data["itemSet"])).Pointer(),
 		ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
 		Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
@@ -3358,9 +3342,7 @@ func NewAddReferenceOfItemSetByStampSheetResultFromDict(data map[string]interfac
 
 func (p AddReferenceOfItemSetByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": core.CastStringsFromDict(
-			p.Item,
-		),
+		"item":      p.Item,
 		"itemSet":   p.ItemSet.ToDict(),
 		"itemModel": p.ItemModel.ToDict(),
 		"inventory": p.Inventory.ToDict(),
@@ -3372,7 +3354,7 @@ func (p AddReferenceOfItemSetByStampSheetResult) Pointer() *AddReferenceOfItemSe
 }
 
 type DeleteReferenceOfItemSetByStampSheetResult struct {
-	Item      []*string  `json:"item"`
+	Item      *string    `json:"item"`
 	ItemSet   *ItemSet   `json:"itemSet"`
 	ItemModel *ItemModel `json:"itemModel"`
 	Inventory *Inventory `json:"inventory"`
@@ -3391,7 +3373,7 @@ func NewDeleteReferenceOfItemSetByStampSheetResultFromJson(data string) DeleteRe
 
 func NewDeleteReferenceOfItemSetByStampSheetResultFromDict(data map[string]interface{}) DeleteReferenceOfItemSetByStampSheetResult {
 	return DeleteReferenceOfItemSetByStampSheetResult{
-		Item:      core.CastStrings(core.CastArray(data["item"])),
+		Item:      core.CastString(data["item"]),
 		ItemSet:   NewItemSetFromDict(core.CastMap(data["itemSet"])).Pointer(),
 		ItemModel: NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
 		Inventory: NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
@@ -3400,9 +3382,7 @@ func NewDeleteReferenceOfItemSetByStampSheetResultFromDict(data map[string]inter
 
 func (p DeleteReferenceOfItemSetByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": core.CastStringsFromDict(
-			p.Item,
-		),
+		"item":      p.Item,
 		"itemSet":   p.ItemSet.ToDict(),
 		"itemModel": p.ItemModel.ToDict(),
 		"inventory": p.Inventory.ToDict(),
@@ -3414,7 +3394,7 @@ func (p DeleteReferenceOfItemSetByStampSheetResult) Pointer() *DeleteReferenceOf
 }
 
 type VerifyReferenceOfByStampTaskResult struct {
-	Item            []*string  `json:"item"`
+	Item            *string    `json:"item"`
 	ItemSet         *ItemSet   `json:"itemSet"`
 	ItemModel       *ItemModel `json:"itemModel"`
 	Inventory       *Inventory `json:"inventory"`
@@ -3434,7 +3414,7 @@ func NewVerifyReferenceOfByStampTaskResultFromJson(data string) VerifyReferenceO
 
 func NewVerifyReferenceOfByStampTaskResultFromDict(data map[string]interface{}) VerifyReferenceOfByStampTaskResult {
 	return VerifyReferenceOfByStampTaskResult{
-		Item:            core.CastStrings(core.CastArray(data["item"])),
+		Item:            core.CastString(data["item"]),
 		ItemSet:         NewItemSetFromDict(core.CastMap(data["itemSet"])).Pointer(),
 		ItemModel:       NewItemModelFromDict(core.CastMap(data["itemModel"])).Pointer(),
 		Inventory:       NewInventoryFromDict(core.CastMap(data["inventory"])).Pointer(),
@@ -3444,9 +3424,7 @@ func NewVerifyReferenceOfByStampTaskResultFromDict(data map[string]interface{}) 
 
 func (p VerifyReferenceOfByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": core.CastStringsFromDict(
-			p.Item,
-		),
+		"item":            p.Item,
 		"itemSet":         p.ItemSet.ToDict(),
 		"itemModel":       p.ItemModel.ToDict(),
 		"inventory":       p.Inventory.ToDict(),

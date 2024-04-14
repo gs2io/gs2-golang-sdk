@@ -154,6 +154,7 @@ type Cumulative struct {
 	Name         *string `json:"name"`
 	Value        *int64  `json:"value"`
 	UpdatedAt    *int64  `json:"updatedAt"`
+	Revision     *int64  `json:"revision"`
 }
 
 func NewCumulativeFromJson(data string) Cumulative {
@@ -169,6 +170,7 @@ func NewCumulativeFromDict(data map[string]interface{}) Cumulative {
 		Name:         core.CastString(data["name"]),
 		Value:        core.CastInt64(data["value"]),
 		UpdatedAt:    core.CastInt64(data["updatedAt"]),
+		Revision:     core.CastInt64(data["revision"]),
 	}
 }
 
@@ -194,12 +196,17 @@ func (p Cumulative) ToDict() map[string]interface{} {
 	if p.UpdatedAt != nil {
 		updatedAt = p.UpdatedAt
 	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
 	return map[string]interface{}{
 		"cumulativeId": cumulativeId,
 		"resourceGrn":  resourceGrn,
 		"name":         name,
 		"value":        value,
 		"updatedAt":    updatedAt,
+		"revision":     revision,
 	}
 }
 
@@ -230,6 +237,7 @@ type BillingActivity struct {
 	Service           *string `json:"service"`
 	ActivityType      *string `json:"activityType"`
 	Value             *int64  `json:"value"`
+	Revision          *int64  `json:"revision"`
 }
 
 func NewBillingActivityFromJson(data string) BillingActivity {
@@ -246,6 +254,7 @@ func NewBillingActivityFromDict(data map[string]interface{}) BillingActivity {
 		Service:           core.CastString(data["service"]),
 		ActivityType:      core.CastString(data["activityType"]),
 		Value:             core.CastInt64(data["value"]),
+		Revision:          core.CastInt64(data["revision"]),
 	}
 }
 
@@ -275,6 +284,10 @@ func (p BillingActivity) ToDict() map[string]interface{} {
 	if p.Value != nil {
 		value = p.Value
 	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
 	return map[string]interface{}{
 		"billingActivityId": billingActivityId,
 		"year":              year,
@@ -282,6 +295,7 @@ func (p BillingActivity) ToDict() map[string]interface{} {
 		"service":           service,
 		"activityType":      activityType,
 		"value":             value,
+		"revision":          revision,
 	}
 }
 
@@ -4298,6 +4312,60 @@ func CastDictionaryNamespacesFromDict(data []DictionaryNamespace) []interface{} 
 	return v
 }
 
+type DictionaryEntryModel struct {
+	EntryModelModelId *string `json:"entryModelModelId"`
+	EntryName         *string `json:"entryName"`
+}
+
+func NewDictionaryEntryModelFromJson(data string) DictionaryEntryModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDictionaryEntryModelFromDict(dict)
+}
+
+func NewDictionaryEntryModelFromDict(data map[string]interface{}) DictionaryEntryModel {
+	return DictionaryEntryModel{
+		EntryModelModelId: core.CastString(data["entryModelModelId"]),
+		EntryName:         core.CastString(data["entryName"]),
+	}
+}
+
+func (p DictionaryEntryModel) ToDict() map[string]interface{} {
+
+	var entryModelModelId *string
+	if p.EntryModelModelId != nil {
+		entryModelModelId = p.EntryModelModelId
+	}
+	var entryName *string
+	if p.EntryName != nil {
+		entryName = p.EntryName
+	}
+	return map[string]interface{}{
+		"entryModelModelId": entryModelModelId,
+		"entryName":         entryName,
+	}
+}
+
+func (p DictionaryEntryModel) Pointer() *DictionaryEntryModel {
+	return &p
+}
+
+func CastDictionaryEntryModels(data []interface{}) []DictionaryEntryModel {
+	v := make([]DictionaryEntryModel, 0)
+	for _, d := range data {
+		v = append(v, NewDictionaryEntryModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastDictionaryEntryModelsFromDict(data []DictionaryEntryModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type ExchangeRateModelStatistics struct {
 	Exchange *int64 `json:"exchange"`
 	Amount   *int64 `json:"amount"`
@@ -8288,7 +8356,7 @@ func CastFormationFormDistributionsesFromDict(data []FormationFormDistributions)
 
 type FormationForm struct {
 	FormId        *string                     `json:"formId"`
-	Index         *string                     `json:"index"`
+	Index         *int32                      `json:"index"`
 	Statistics    *FormationFormStatistics    `json:"statistics"`
 	Distributions *FormationFormDistributions `json:"distributions"`
 }
@@ -8302,7 +8370,7 @@ func NewFormationFormFromJson(data string) FormationForm {
 func NewFormationFormFromDict(data map[string]interface{}) FormationForm {
 	return FormationForm{
 		FormId:        core.CastString(data["formId"]),
-		Index:         core.CastString(data["index"]),
+		Index:         core.CastInt32(data["index"]),
 		Statistics:    NewFormationFormStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
 		Distributions: NewFormationFormDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
 	}
@@ -8314,7 +8382,7 @@ func (p FormationForm) ToDict() map[string]interface{} {
 	if p.FormId != nil {
 		formId = p.FormId
 	}
-	var index *string
+	var index *int32
 	if p.Index != nil {
 		index = p.Index
 	}
@@ -8855,7 +8923,7 @@ func CastFormationMoldDistributionsesFromDict(data []FormationMoldDistributions)
 
 type FormationMold struct {
 	MoldId        *string                     `json:"moldId"`
-	MoldName      *string                     `json:"moldName"`
+	MoldModelName *string                     `json:"moldModelName"`
 	Statistics    *FormationMoldStatistics    `json:"statistics"`
 	Distributions *FormationMoldDistributions `json:"distributions"`
 	Forms         []FormationForm             `json:"forms"`
@@ -8870,7 +8938,7 @@ func NewFormationMoldFromJson(data string) FormationMold {
 func NewFormationMoldFromDict(data map[string]interface{}) FormationMold {
 	return FormationMold{
 		MoldId:        core.CastString(data["moldId"]),
-		MoldName:      core.CastString(data["moldName"]),
+		MoldModelName: core.CastString(data["moldModelName"]),
 		Statistics:    NewFormationMoldStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
 		Distributions: NewFormationMoldDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
 		Forms:         CastFormationForms(core.CastArray(data["forms"])),
@@ -8883,9 +8951,9 @@ func (p FormationMold) ToDict() map[string]interface{} {
 	if p.MoldId != nil {
 		moldId = p.MoldId
 	}
-	var moldName *string
-	if p.MoldName != nil {
-		moldName = p.MoldName
+	var moldModelName *string
+	if p.MoldModelName != nil {
+		moldModelName = p.MoldModelName
 	}
 	var statistics map[string]interface{}
 	if p.Statistics != nil {
@@ -8903,7 +8971,7 @@ func (p FormationMold) ToDict() map[string]interface{} {
 	}
 	return map[string]interface{}{
 		"moldId":        moldId,
-		"moldName":      moldName,
+		"moldModelName": moldModelName,
 		"statistics":    statistics,
 		"distributions": distributions,
 		"forms":         forms,
@@ -9067,8 +9135,8 @@ func CastFormationNamespaceUpdateByMoldDistributionStatisticsesFromDict(data []F
 }
 
 type FormationNamespaceUpdateByMoldDistributionSegment struct {
-	MoldName *string `json:"moldName"`
-	Count    *int64  `json:"count"`
+	MoldModelName *string `json:"moldModelName"`
+	Count         *int64  `json:"count"`
 }
 
 func NewFormationNamespaceUpdateByMoldDistributionSegmentFromJson(data string) FormationNamespaceUpdateByMoldDistributionSegment {
@@ -9079,24 +9147,24 @@ func NewFormationNamespaceUpdateByMoldDistributionSegmentFromJson(data string) F
 
 func NewFormationNamespaceUpdateByMoldDistributionSegmentFromDict(data map[string]interface{}) FormationNamespaceUpdateByMoldDistributionSegment {
 	return FormationNamespaceUpdateByMoldDistributionSegment{
-		MoldName: core.CastString(data["moldName"]),
-		Count:    core.CastInt64(data["count"]),
+		MoldModelName: core.CastString(data["moldModelName"]),
+		Count:         core.CastInt64(data["count"]),
 	}
 }
 
 func (p FormationNamespaceUpdateByMoldDistributionSegment) ToDict() map[string]interface{} {
 
-	var moldName *string
-	if p.MoldName != nil {
-		moldName = p.MoldName
+	var moldModelName *string
+	if p.MoldModelName != nil {
+		moldModelName = p.MoldModelName
 	}
 	var count *int64
 	if p.Count != nil {
 		count = p.Count
 	}
 	return map[string]interface{}{
-		"moldName": moldName,
-		"count":    count,
+		"moldModelName": moldModelName,
+		"count":         count,
 	}
 }
 
@@ -9259,8 +9327,8 @@ func CastFormationNamespaceIncreaseCapacityByMoldDistributionStatisticsesFromDic
 }
 
 type FormationNamespaceIncreaseCapacityByMoldDistributionSegment struct {
-	MoldName *string `json:"moldName"`
-	Count    *int64  `json:"count"`
+	MoldModelName *string `json:"moldModelName"`
+	Count         *int64  `json:"count"`
 }
 
 func NewFormationNamespaceIncreaseCapacityByMoldDistributionSegmentFromJson(data string) FormationNamespaceIncreaseCapacityByMoldDistributionSegment {
@@ -9271,24 +9339,24 @@ func NewFormationNamespaceIncreaseCapacityByMoldDistributionSegmentFromJson(data
 
 func NewFormationNamespaceIncreaseCapacityByMoldDistributionSegmentFromDict(data map[string]interface{}) FormationNamespaceIncreaseCapacityByMoldDistributionSegment {
 	return FormationNamespaceIncreaseCapacityByMoldDistributionSegment{
-		MoldName: core.CastString(data["moldName"]),
-		Count:    core.CastInt64(data["count"]),
+		MoldModelName: core.CastString(data["moldModelName"]),
+		Count:         core.CastInt64(data["count"]),
 	}
 }
 
 func (p FormationNamespaceIncreaseCapacityByMoldDistributionSegment) ToDict() map[string]interface{} {
 
-	var moldName *string
-	if p.MoldName != nil {
-		moldName = p.MoldName
+	var moldModelName *string
+	if p.MoldModelName != nil {
+		moldModelName = p.MoldModelName
 	}
 	var count *int64
 	if p.Count != nil {
 		count = p.Count
 	}
 	return map[string]interface{}{
-		"moldName": moldName,
-		"count":    count,
+		"moldModelName": moldModelName,
+		"count":         count,
 	}
 }
 
@@ -14700,6 +14768,60 @@ func CastKeyNamespacesFromDict(data []KeyNamespace) []interface{} {
 	return v
 }
 
+type KeyKey struct {
+	KeyId   *string `json:"keyId"`
+	KeyName *string `json:"keyName"`
+}
+
+func NewKeyKeyFromJson(data string) KeyKey {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewKeyKeyFromDict(dict)
+}
+
+func NewKeyKeyFromDict(data map[string]interface{}) KeyKey {
+	return KeyKey{
+		KeyId:   core.CastString(data["keyId"]),
+		KeyName: core.CastString(data["keyName"]),
+	}
+}
+
+func (p KeyKey) ToDict() map[string]interface{} {
+
+	var keyId *string
+	if p.KeyId != nil {
+		keyId = p.KeyId
+	}
+	var keyName *string
+	if p.KeyName != nil {
+		keyName = p.KeyName
+	}
+	return map[string]interface{}{
+		"keyId":   keyId,
+		"keyName": keyName,
+	}
+}
+
+func (p KeyKey) Pointer() *KeyKey {
+	return &p
+}
+
+func CastKeyKeys(data []interface{}) []KeyKey {
+	v := make([]KeyKey, 0)
+	for _, d := range data {
+		v = append(v, NewKeyKeyFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastKeyKeysFromDict(data []KeyKey) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type LimitCounterStatistics struct {
 	Increase       *int64 `json:"increase"`
 	IncreaseAmount *int64 `json:"increaseAmount"`
@@ -17803,6 +17925,60 @@ func CastLotteryNamespacesFromDict(data []LotteryNamespace) []interface{} {
 	return v
 }
 
+type LotteryLotteryModel struct {
+	LotteryModelId *string `json:"lotteryModelId"`
+	LotteryName    *string `json:"lotteryName"`
+}
+
+func NewLotteryLotteryModelFromJson(data string) LotteryLotteryModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewLotteryLotteryModelFromDict(dict)
+}
+
+func NewLotteryLotteryModelFromDict(data map[string]interface{}) LotteryLotteryModel {
+	return LotteryLotteryModel{
+		LotteryModelId: core.CastString(data["lotteryModelId"]),
+		LotteryName:    core.CastString(data["lotteryName"]),
+	}
+}
+
+func (p LotteryLotteryModel) ToDict() map[string]interface{} {
+
+	var lotteryModelId *string
+	if p.LotteryModelId != nil {
+		lotteryModelId = p.LotteryModelId
+	}
+	var lotteryName *string
+	if p.LotteryName != nil {
+		lotteryName = p.LotteryName
+	}
+	return map[string]interface{}{
+		"lotteryModelId": lotteryModelId,
+		"lotteryName":    lotteryName,
+	}
+}
+
+func (p LotteryLotteryModel) Pointer() *LotteryLotteryModel {
+	return &p
+}
+
+func CastLotteryLotteryModels(data []interface{}) []LotteryLotteryModel {
+	v := make([]LotteryLotteryModel, 0)
+	for _, d := range data {
+		v = append(v, NewLotteryLotteryModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLotteryLotteryModelsFromDict(data []LotteryLotteryModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type MatchmakingNamespaceStatistics struct {
 	CreateGathering *int64   `json:"createGathering"`
 	Matchmaking     *int64   `json:"matchmaking"`
@@ -19052,6 +19228,60 @@ func CastMissionMissionGroupModels(data []interface{}) []MissionMissionGroupMode
 }
 
 func CastMissionMissionGroupModelsFromDict(data []MissionMissionGroupModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type MissionMissionTaskModel struct {
+	MissionTaskModelId *string `json:"missionTaskModelId"`
+	MissionTaskName    *string `json:"missionTaskName"`
+}
+
+func NewMissionMissionTaskModelFromJson(data string) MissionMissionTaskModel {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMissionMissionTaskModelFromDict(dict)
+}
+
+func NewMissionMissionTaskModelFromDict(data map[string]interface{}) MissionMissionTaskModel {
+	return MissionMissionTaskModel{
+		MissionTaskModelId: core.CastString(data["missionTaskModelId"]),
+		MissionTaskName:    core.CastString(data["missionTaskName"]),
+	}
+}
+
+func (p MissionMissionTaskModel) ToDict() map[string]interface{} {
+
+	var missionTaskModelId *string
+	if p.MissionTaskModelId != nil {
+		missionTaskModelId = p.MissionTaskModelId
+	}
+	var missionTaskName *string
+	if p.MissionTaskName != nil {
+		missionTaskName = p.MissionTaskName
+	}
+	return map[string]interface{}{
+		"missionTaskModelId": missionTaskModelId,
+		"missionTaskName":    missionTaskName,
+	}
+}
+
+func (p MissionMissionTaskModel) Pointer() *MissionMissionTaskModel {
+	return &p
+}
+
+func CastMissionMissionTaskModels(data []interface{}) []MissionMissionTaskModel {
+	v := make([]MissionMissionTaskModel, 0)
+	for _, d := range data {
+		v = append(v, NewMissionMissionTaskModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastMissionMissionTaskModelsFromDict(data []MissionMissionTaskModel) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -20393,7 +20623,7 @@ func CastMoneyWalletDistributionsesFromDict(data []MoneyWalletDistributions) []i
 
 type MoneyWallet struct {
 	WalletId      *string                   `json:"walletId"`
-	Slot          *string                   `json:"slot"`
+	Slot          *int32                    `json:"slot"`
 	Statistics    *MoneyWalletStatistics    `json:"statistics"`
 	Distributions *MoneyWalletDistributions `json:"distributions"`
 }
@@ -20407,7 +20637,7 @@ func NewMoneyWalletFromJson(data string) MoneyWallet {
 func NewMoneyWalletFromDict(data map[string]interface{}) MoneyWallet {
 	return MoneyWallet{
 		WalletId:      core.CastString(data["walletId"]),
-		Slot:          core.CastString(data["slot"]),
+		Slot:          core.CastInt32(data["slot"]),
 		Statistics:    NewMoneyWalletStatisticsFromDict(core.CastMap(data["statistics"])).Pointer(),
 		Distributions: NewMoneyWalletDistributionsFromDict(core.CastMap(data["distributions"])).Pointer(),
 	}
@@ -20419,7 +20649,7 @@ func (p MoneyWallet) ToDict() map[string]interface{} {
 	if p.WalletId != nil {
 		walletId = p.WalletId
 	}
-	var slot *string
+	var slot *int32
 	if p.Slot != nil {
 		slot = p.Slot
 	}
@@ -21163,7 +21393,7 @@ func CastMoneyNamespaceDepositDistributionStatisticsesFromDict(data []MoneyNames
 }
 
 type MoneyNamespaceDepositDistributionSegment struct {
-	Slot  *int64 `json:"slot"`
+	Slot  *int32 `json:"slot"`
 	Count *int64 `json:"count"`
 }
 
@@ -21175,14 +21405,14 @@ func NewMoneyNamespaceDepositDistributionSegmentFromJson(data string) MoneyNames
 
 func NewMoneyNamespaceDepositDistributionSegmentFromDict(data map[string]interface{}) MoneyNamespaceDepositDistributionSegment {
 	return MoneyNamespaceDepositDistributionSegment{
-		Slot:  core.CastInt64(data["slot"]),
+		Slot:  core.CastInt32(data["slot"]),
 		Count: core.CastInt64(data["count"]),
 	}
 }
 
 func (p MoneyNamespaceDepositDistributionSegment) ToDict() map[string]interface{} {
 
-	var slot *int64
+	var slot *int32
 	if p.Slot != nil {
 		slot = p.Slot
 	}
@@ -21355,7 +21585,7 @@ func CastMoneyNamespaceWithdrawDistributionStatisticsesFromDict(data []MoneyName
 }
 
 type MoneyNamespaceWithdrawDistributionSegment struct {
-	Slot  *int64 `json:"slot"`
+	Slot  *int32 `json:"slot"`
 	Count *int64 `json:"count"`
 }
 
@@ -21367,14 +21597,14 @@ func NewMoneyNamespaceWithdrawDistributionSegmentFromJson(data string) MoneyName
 
 func NewMoneyNamespaceWithdrawDistributionSegmentFromDict(data map[string]interface{}) MoneyNamespaceWithdrawDistributionSegment {
 	return MoneyNamespaceWithdrawDistributionSegment{
-		Slot:  core.CastInt64(data["slot"]),
+		Slot:  core.CastInt32(data["slot"]),
 		Count: core.CastInt64(data["count"]),
 	}
 }
 
 func (p MoneyNamespaceWithdrawDistributionSegment) ToDict() map[string]interface{} {
 
-	var slot *int64
+	var slot *int32
 	if p.Slot != nil {
 		slot = p.Slot
 	}
@@ -21547,7 +21777,7 @@ func CastMoneyNamespaceRevenueDistributionStatisticsesFromDict(data []MoneyNames
 }
 
 type MoneyNamespaceRevenueDistributionSegment struct {
-	Slot *int64 `json:"slot"`
+	Slot *int32 `json:"slot"`
 	Sum  *int64 `json:"sum"`
 }
 
@@ -21559,14 +21789,14 @@ func NewMoneyNamespaceRevenueDistributionSegmentFromJson(data string) MoneyNames
 
 func NewMoneyNamespaceRevenueDistributionSegmentFromDict(data map[string]interface{}) MoneyNamespaceRevenueDistributionSegment {
 	return MoneyNamespaceRevenueDistributionSegment{
-		Slot: core.CastInt64(data["slot"]),
+		Slot: core.CastInt32(data["slot"]),
 		Sum:  core.CastInt64(data["sum"]),
 	}
 }
 
 func (p MoneyNamespaceRevenueDistributionSegment) ToDict() map[string]interface{} {
 
-	var slot *int64
+	var slot *int32
 	if p.Slot != nil {
 		slot = p.Slot
 	}

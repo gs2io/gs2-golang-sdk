@@ -469,14 +469,15 @@ func (p DeleteScriptRequest) Pointer() *DeleteScriptRequest {
 }
 
 type InvokeScriptRequest struct {
-	SourceRequestId *string       `json:"sourceRequestId"`
-	RequestId       *string       `json:"requestId"`
-	ContextStack    *string       `json:"contextStack"`
-	ScriptId        *string       `json:"scriptId"`
-	UserId          *string       `json:"userId"`
-	Args            *string       `json:"args"`
-	RandomStatus    *RandomStatus `json:"randomStatus"`
-	TimeOffsetToken *string       `json:"timeOffsetToken"`
+	SourceRequestId    *string       `json:"sourceRequestId"`
+	RequestId          *string       `json:"requestId"`
+	ContextStack       *string       `json:"contextStack"`
+	DuplicationAvoider *string       `json:"duplicationAvoider"`
+	ScriptId           *string       `json:"scriptId"`
+	UserId             *string       `json:"userId"`
+	Args               *string       `json:"args"`
+	RandomStatus       *RandomStatus `json:"randomStatus"`
+	TimeOffsetToken    *string       `json:"timeOffsetToken"`
 }
 
 func NewInvokeScriptRequestFromJson(data string) InvokeScriptRequest {
