@@ -86,6 +86,9 @@ func (p Gs2LogRestClient) DescribeNamespacesAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -288,6 +291,9 @@ func (p Gs2LogRestClient) GetNamespaceStatusAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -375,6 +381,9 @@ func (p Gs2LogRestClient) GetNamespaceAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -579,6 +588,9 @@ func (p Gs2LogRestClient) DeleteNamespaceAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -689,6 +701,9 @@ func (p Gs2LogRestClient) QueryAccessLogAsync(
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -807,6 +822,9 @@ func (p Gs2LogRestClient) CountAccessLogAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -923,6 +941,9 @@ func (p Gs2LogRestClient) QueryIssueStampSheetLogAsync(
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -1044,6 +1065,9 @@ func (p Gs2LogRestClient) CountIssueStampSheetLogAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1160,6 +1184,9 @@ func (p Gs2LogRestClient) QueryExecuteStampSheetLogAsync(
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -1281,6 +1308,9 @@ func (p Gs2LogRestClient) CountExecuteStampSheetLogAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1397,6 +1427,9 @@ func (p Gs2LogRestClient) QueryExecuteStampTaskLogAsync(
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -1518,6 +1551,9 @@ func (p Gs2LogRestClient) CountExecuteStampTaskLogAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1625,6 +1661,9 @@ func (p Gs2LogRestClient) QueryAccessLogWithTelemetryAsync(
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -1819,6 +1858,9 @@ func (p Gs2LogRestClient) DescribeInsightsAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -2001,6 +2043,9 @@ func (p Gs2LogRestClient) GetInsightAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -2093,6 +2138,9 @@ func (p Gs2LogRestClient) DeleteInsightAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {

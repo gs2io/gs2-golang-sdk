@@ -86,6 +86,9 @@ func (p Gs2ScriptRestClient) DescribeNamespacesAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -270,6 +273,9 @@ func (p Gs2ScriptRestClient) GetNamespaceStatusAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -357,6 +363,9 @@ func (p Gs2ScriptRestClient) GetNamespaceAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -543,6 +552,9 @@ func (p Gs2ScriptRestClient) DeleteNamespaceAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -635,6 +647,9 @@ func (p Gs2ScriptRestClient) DescribeScriptsAsync(
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -926,6 +941,9 @@ func (p Gs2ScriptRestClient) GetScriptAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1220,6 +1238,9 @@ func (p Gs2ScriptRestClient) DeleteScriptAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {

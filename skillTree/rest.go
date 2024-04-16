@@ -86,6 +86,9 @@ func (p Gs2SkillTreeRestClient) DescribeNamespacesAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -276,6 +279,9 @@ func (p Gs2SkillTreeRestClient) GetNamespaceStatusAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -363,6 +369,9 @@ func (p Gs2SkillTreeRestClient) GetNamespaceAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -555,6 +564,9 @@ func (p Gs2SkillTreeRestClient) DeleteNamespaceAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -738,6 +750,9 @@ func (p Gs2SkillTreeRestClient) CheckDumpUserDataByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -927,6 +942,9 @@ func (p Gs2SkillTreeRestClient) CheckCleanUserDataByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1220,6 +1238,9 @@ func (p Gs2SkillTreeRestClient) CheckImportUserDataByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1313,6 +1334,9 @@ func (p Gs2SkillTreeRestClient) DescribeNodeModelsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1405,6 +1429,9 @@ func (p Gs2SkillTreeRestClient) GetNodeModelAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1497,6 +1524,9 @@ func (p Gs2SkillTreeRestClient) DescribeNodeModelMastersAsync(
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -1706,6 +1736,9 @@ func (p Gs2SkillTreeRestClient) GetNodeModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1916,6 +1949,9 @@ func (p Gs2SkillTreeRestClient) DeleteNodeModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -2705,6 +2741,9 @@ func (p Gs2SkillTreeRestClient) DescribeStatusesAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -2806,6 +2845,9 @@ func (p Gs2SkillTreeRestClient) DescribeStatusesByUserIdAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -2901,6 +2943,9 @@ func (p Gs2SkillTreeRestClient) GetStatusAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -3001,6 +3046,9 @@ func (p Gs2SkillTreeRestClient) GetStatusByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -3209,6 +3257,9 @@ func (p Gs2SkillTreeRestClient) ResetByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -3484,6 +3535,9 @@ func (p Gs2SkillTreeRestClient) ExportMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -3571,6 +3625,9 @@ func (p Gs2SkillTreeRestClient) GetCurrentTreeMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {

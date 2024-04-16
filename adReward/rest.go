@@ -86,6 +86,9 @@ func (p Gs2AdRewardRestClient) DescribeNamespacesAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -276,6 +279,9 @@ func (p Gs2AdRewardRestClient) GetNamespaceStatusAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -363,6 +369,9 @@ func (p Gs2AdRewardRestClient) GetNamespaceAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -555,6 +564,9 @@ func (p Gs2AdRewardRestClient) DeleteNamespaceAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -738,6 +750,9 @@ func (p Gs2AdRewardRestClient) CheckDumpUserDataByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -927,6 +942,9 @@ func (p Gs2AdRewardRestClient) CheckCleanUserDataByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1220,6 +1238,9 @@ func (p Gs2AdRewardRestClient) CheckImportUserDataByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1313,6 +1334,9 @@ func (p Gs2AdRewardRestClient) GetPointAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1408,6 +1432,9 @@ func (p Gs2AdRewardRestClient) GetPointByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {

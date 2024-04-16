@@ -86,6 +86,9 @@ func (p Gs2NewsRestClient) DescribeNamespacesAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -267,6 +270,9 @@ func (p Gs2NewsRestClient) GetNamespaceStatusAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -354,6 +360,9 @@ func (p Gs2NewsRestClient) GetNamespaceAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -537,6 +546,9 @@ func (p Gs2NewsRestClient) DeleteNamespaceAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -630,6 +642,9 @@ func (p Gs2NewsRestClient) DescribeProgressesAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -722,6 +737,9 @@ func (p Gs2NewsRestClient) GetProgressAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -820,6 +838,9 @@ func (p Gs2NewsRestClient) DescribeOutputsAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -917,6 +938,9 @@ func (p Gs2NewsRestClient) GetOutputAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1280,6 +1304,9 @@ func (p Gs2NewsRestClient) DescribeNewsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1375,6 +1402,9 @@ func (p Gs2NewsRestClient) DescribeNewsByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1465,6 +1495,9 @@ func (p Gs2NewsRestClient) WantGrantAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1560,6 +1593,9 @@ func (p Gs2NewsRestClient) WantGrantByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {

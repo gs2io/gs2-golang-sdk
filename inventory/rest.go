@@ -86,6 +86,9 @@ func (p Gs2InventoryRestClient) DescribeNamespacesAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -288,6 +291,9 @@ func (p Gs2InventoryRestClient) GetNamespaceStatusAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -375,6 +381,9 @@ func (p Gs2InventoryRestClient) GetNamespaceAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -579,6 +588,9 @@ func (p Gs2InventoryRestClient) DeleteNamespaceAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -762,6 +774,9 @@ func (p Gs2InventoryRestClient) CheckDumpUserDataByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -951,6 +966,9 @@ func (p Gs2InventoryRestClient) CheckCleanUserDataByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1244,6 +1262,9 @@ func (p Gs2InventoryRestClient) CheckImportUserDataByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1342,6 +1363,9 @@ func (p Gs2InventoryRestClient) DescribeInventoryModelMastersAsync(
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -1543,6 +1567,9 @@ func (p Gs2InventoryRestClient) GetInventoryModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1745,6 +1772,9 @@ func (p Gs2InventoryRestClient) DeleteInventoryModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1832,6 +1862,9 @@ func (p Gs2InventoryRestClient) DescribeInventoryModelsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -1924,6 +1957,9 @@ func (p Gs2InventoryRestClient) GetInventoryModelAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -2021,6 +2057,9 @@ func (p Gs2InventoryRestClient) DescribeItemModelMastersAsync(
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -2232,6 +2271,9 @@ func (p Gs2InventoryRestClient) GetItemModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -2444,6 +2486,9 @@ func (p Gs2InventoryRestClient) DeleteItemModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -2536,6 +2581,9 @@ func (p Gs2InventoryRestClient) DescribeItemModelsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -2633,6 +2681,9 @@ func (p Gs2InventoryRestClient) GetItemModelAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -2725,6 +2776,9 @@ func (p Gs2InventoryRestClient) DescribeSimpleInventoryModelMastersAsync(
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -2917,6 +2971,9 @@ func (p Gs2InventoryRestClient) GetSimpleInventoryModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -3110,6 +3167,9 @@ func (p Gs2InventoryRestClient) DeleteSimpleInventoryModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -3197,6 +3257,9 @@ func (p Gs2InventoryRestClient) DescribeSimpleInventoryModelsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -3289,6 +3352,9 @@ func (p Gs2InventoryRestClient) GetSimpleInventoryModelAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -3386,6 +3452,9 @@ func (p Gs2InventoryRestClient) DescribeSimpleItemModelMastersAsync(
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -3588,6 +3657,9 @@ func (p Gs2InventoryRestClient) GetSimpleItemModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -3791,6 +3863,9 @@ func (p Gs2InventoryRestClient) DeleteSimpleItemModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -3883,6 +3958,9 @@ func (p Gs2InventoryRestClient) DescribeSimpleItemModelsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -3980,6 +4058,9 @@ func (p Gs2InventoryRestClient) GetSimpleItemModelAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -4072,6 +4153,9 @@ func (p Gs2InventoryRestClient) DescribeBigInventoryModelMastersAsync(
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -4264,6 +4348,9 @@ func (p Gs2InventoryRestClient) GetBigInventoryModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -4457,6 +4544,9 @@ func (p Gs2InventoryRestClient) DeleteBigInventoryModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -4544,6 +4634,9 @@ func (p Gs2InventoryRestClient) DescribeBigInventoryModelsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -4636,6 +4729,9 @@ func (p Gs2InventoryRestClient) GetBigInventoryModelAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -4733,6 +4829,9 @@ func (p Gs2InventoryRestClient) DescribeBigItemModelMastersAsync(
 	}
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -4935,6 +5034,9 @@ func (p Gs2InventoryRestClient) GetBigItemModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -5138,6 +5240,9 @@ func (p Gs2InventoryRestClient) DeleteBigItemModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -5230,6 +5335,9 @@ func (p Gs2InventoryRestClient) DescribeBigItemModelsAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -5327,6 +5435,9 @@ func (p Gs2InventoryRestClient) GetBigItemModelAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -5414,6 +5525,9 @@ func (p Gs2InventoryRestClient) ExportMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -5501,6 +5615,9 @@ func (p Gs2InventoryRestClient) GetCurrentItemModelMasterAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -5780,6 +5897,9 @@ func (p Gs2InventoryRestClient) DescribeInventoriesAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -5881,6 +6001,9 @@ func (p Gs2InventoryRestClient) DescribeInventoriesByUserIdAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -5976,6 +6099,9 @@ func (p Gs2InventoryRestClient) GetInventoryAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -6076,6 +6202,9 @@ func (p Gs2InventoryRestClient) GetInventoryByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -6394,6 +6523,9 @@ func (p Gs2InventoryRestClient) DeleteInventoryByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -7000,6 +7132,9 @@ func (p Gs2InventoryRestClient) DescribeItemSetsAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -7106,6 +7241,9 @@ func (p Gs2InventoryRestClient) DescribeItemSetsByUserIdAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -7208,6 +7346,9 @@ func (p Gs2InventoryRestClient) GetItemSetAsync(
 	queryStrings := core.QueryStrings{}
 	if request.ItemSetName != nil {
 		queryStrings["itemSetName"] = core.ToString(*request.ItemSetName)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -7317,6 +7458,9 @@ func (p Gs2InventoryRestClient) GetItemSetByUserIdAsync(
 	if request.ItemSetName != nil {
 		queryStrings["itemSetName"] = core.ToString(*request.ItemSetName)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -7422,6 +7566,9 @@ func (p Gs2InventoryRestClient) GetItemWithSignatureAsync(
 	}
 	if request.KeyId != nil {
 		queryStrings["keyId"] = core.ToString(*request.KeyId)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -7533,6 +7680,9 @@ func (p Gs2InventoryRestClient) GetItemWithSignatureByUserIdAsync(
 	}
 	if request.KeyId != nil {
 		queryStrings["keyId"] = core.ToString(*request.KeyId)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -8140,6 +8290,9 @@ func (p Gs2InventoryRestClient) DeleteItemSetByUserIdAsync(
 	queryStrings := core.QueryStrings{}
 	if request.ItemSetName != nil {
 		queryStrings["itemSetName"] = core.ToString(*request.ItemSetName)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -8858,6 +9011,9 @@ func (p Gs2InventoryRestClient) DescribeReferenceOfAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -8968,6 +9124,9 @@ func (p Gs2InventoryRestClient) DescribeReferenceOfByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -9078,6 +9237,9 @@ func (p Gs2InventoryRestClient) GetReferenceOfAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -9193,6 +9355,9 @@ func (p Gs2InventoryRestClient) GetReferenceOfByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -9783,6 +9948,9 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -9901,6 +10069,9 @@ func (p Gs2InventoryRestClient) DeleteReferenceOfByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -10278,6 +10449,9 @@ func (p Gs2InventoryRestClient) DescribeSimpleItemsAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -10384,6 +10558,9 @@ func (p Gs2InventoryRestClient) DescribeSimpleItemsByUserIdAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -10484,6 +10661,9 @@ func (p Gs2InventoryRestClient) GetSimpleItemAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -10589,6 +10769,9 @@ func (p Gs2InventoryRestClient) GetSimpleItemByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -10691,6 +10874,9 @@ func (p Gs2InventoryRestClient) GetSimpleItemWithSignatureAsync(
 	queryStrings := core.QueryStrings{}
 	if request.KeyId != nil {
 		queryStrings["keyId"] = core.ToString(*request.KeyId)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -10799,6 +10985,9 @@ func (p Gs2InventoryRestClient) GetSimpleItemWithSignatureByUserIdAsync(
 	queryStrings := core.QueryStrings{}
 	if request.KeyId != nil {
 		queryStrings["keyId"] = core.ToString(*request.KeyId)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
 	}
 
 	headers := p.CreateAuthorizedHeaders()
@@ -11377,6 +11566,9 @@ func (p Gs2InventoryRestClient) DeleteSimpleItemsByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -12084,6 +12276,9 @@ func (p Gs2InventoryRestClient) DescribeBigItemsAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -12190,6 +12385,9 @@ func (p Gs2InventoryRestClient) DescribeBigItemsByUserIdAsync(
 	if request.Limit != nil {
 		queryStrings["limit"] = core.ToString(*request.Limit)
 	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -12290,6 +12488,9 @@ func (p Gs2InventoryRestClient) GetBigItemAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -12395,6 +12596,9 @@ func (p Gs2InventoryRestClient) GetBigItemByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
@@ -12981,6 +13185,9 @@ func (p Gs2InventoryRestClient) DeleteBigItemByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
 
 	headers := p.CreateAuthorizedHeaders()
 	if request.SourceRequestId != nil {
