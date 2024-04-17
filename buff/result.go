@@ -1,0 +1,834 @@
+/*
+Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
+Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License").
+You may not use this file except in compliance with the License.
+A copy of the License is located at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+or in the "license" file accompanying this file. This file is distributed
+on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+express or implied. See the License for the specific language governing
+permissions and limitations under the License.
+*/
+
+package buff
+
+import (
+	"encoding/json"
+
+	"github.com/gs2io/gs2-golang-sdk/core"
+)
+
+type DescribeNamespacesResult struct {
+	Items         []Namespace `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
+}
+
+type DescribeNamespacesAsyncResult struct {
+	result *DescribeNamespacesResult
+	err    error
+}
+
+func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeNamespacesResultFromDict(dict)
+}
+
+func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
+	return DescribeNamespacesResult{
+		Items:         CastNamespaces(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastNamespacesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
+	return &p
+}
+
+type CreateNamespaceResult struct {
+	Item *Namespace `json:"item"`
+}
+
+type CreateNamespaceAsyncResult struct {
+	result *CreateNamespaceResult
+	err    error
+}
+
+func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateNamespaceResultFromDict(dict)
+}
+
+func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
+	return CreateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p CreateNamespaceResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
+	return &p
+}
+
+type GetNamespaceStatusResult struct {
+	Status *string `json:"status"`
+}
+
+type GetNamespaceStatusAsyncResult struct {
+	result *GetNamespaceStatusResult
+	err    error
+}
+
+func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceStatusResultFromDict(dict)
+}
+
+func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
+	return GetNamespaceStatusResult{
+		Status: core.CastString(data["status"]),
+	}
+}
+
+func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"status": p.Status,
+	}
+}
+
+func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
+	return &p
+}
+
+type GetNamespaceResult struct {
+	Item *Namespace `json:"item"`
+}
+
+type GetNamespaceAsyncResult struct {
+	result *GetNamespaceResult
+	err    error
+}
+
+func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetNamespaceResultFromDict(dict)
+}
+
+func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
+	return GetNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetNamespaceResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
+	return &p
+}
+
+type UpdateNamespaceResult struct {
+	Item *Namespace `json:"item"`
+}
+
+type UpdateNamespaceAsyncResult struct {
+	result *UpdateNamespaceResult
+	err    error
+}
+
+func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateNamespaceResultFromDict(dict)
+}
+
+func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
+	return UpdateNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
+	return &p
+}
+
+type DeleteNamespaceResult struct {
+	Item *Namespace `json:"item"`
+}
+
+type DeleteNamespaceAsyncResult struct {
+	result *DeleteNamespaceResult
+	err    error
+}
+
+func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteNamespaceResultFromDict(dict)
+}
+
+func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
+	return DeleteNamespaceResult{
+		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
+	return &p
+}
+
+type DumpUserDataByUserIdResult struct {
+}
+
+type DumpUserDataByUserIdAsyncResult struct {
+	result *DumpUserDataByUserIdResult
+	err    error
+}
+
+func NewDumpUserDataByUserIdResultFromJson(data string) DumpUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDumpUserDataByUserIdResultFromDict(dict)
+}
+
+func NewDumpUserDataByUserIdResultFromDict(data map[string]interface{}) DumpUserDataByUserIdResult {
+	return DumpUserDataByUserIdResult{}
+}
+
+func (p DumpUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
+	return &p
+}
+
+type CheckDumpUserDataByUserIdResult struct {
+	Url *string `json:"url"`
+}
+
+type CheckDumpUserDataByUserIdAsyncResult struct {
+	result *CheckDumpUserDataByUserIdResult
+	err    error
+}
+
+func NewCheckDumpUserDataByUserIdResultFromJson(data string) CheckDumpUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCheckDumpUserDataByUserIdResultFromDict(dict)
+}
+
+func NewCheckDumpUserDataByUserIdResultFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdResult {
+	return CheckDumpUserDataByUserIdResult{
+		Url: core.CastString(data["url"]),
+	}
+}
+
+func (p CheckDumpUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"url": p.Url,
+	}
+}
+
+func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdResult {
+	return &p
+}
+
+type CleanUserDataByUserIdResult struct {
+}
+
+type CleanUserDataByUserIdAsyncResult struct {
+	result *CleanUserDataByUserIdResult
+	err    error
+}
+
+func NewCleanUserDataByUserIdResultFromJson(data string) CleanUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCleanUserDataByUserIdResultFromDict(dict)
+}
+
+func NewCleanUserDataByUserIdResultFromDict(data map[string]interface{}) CleanUserDataByUserIdResult {
+	return CleanUserDataByUserIdResult{}
+}
+
+func (p CleanUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
+	return &p
+}
+
+type CheckCleanUserDataByUserIdResult struct {
+}
+
+type CheckCleanUserDataByUserIdAsyncResult struct {
+	result *CheckCleanUserDataByUserIdResult
+	err    error
+}
+
+func NewCheckCleanUserDataByUserIdResultFromJson(data string) CheckCleanUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCheckCleanUserDataByUserIdResultFromDict(dict)
+}
+
+func NewCheckCleanUserDataByUserIdResultFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdResult {
+	return CheckCleanUserDataByUserIdResult{}
+}
+
+func (p CheckCleanUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdResult {
+	return &p
+}
+
+type PrepareImportUserDataByUserIdResult struct {
+	UploadToken *string `json:"uploadToken"`
+	UploadUrl   *string `json:"uploadUrl"`
+}
+
+type PrepareImportUserDataByUserIdAsyncResult struct {
+	result *PrepareImportUserDataByUserIdResult
+	err    error
+}
+
+func NewPrepareImportUserDataByUserIdResultFromJson(data string) PrepareImportUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPrepareImportUserDataByUserIdResultFromDict(dict)
+}
+
+func NewPrepareImportUserDataByUserIdResultFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdResult {
+	return PrepareImportUserDataByUserIdResult{
+		UploadToken: core.CastString(data["uploadToken"]),
+		UploadUrl:   core.CastString(data["uploadUrl"]),
+	}
+}
+
+func (p PrepareImportUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"uploadToken": p.UploadToken,
+		"uploadUrl":   p.UploadUrl,
+	}
+}
+
+func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByUserIdResult {
+	return &p
+}
+
+type ImportUserDataByUserIdResult struct {
+}
+
+type ImportUserDataByUserIdAsyncResult struct {
+	result *ImportUserDataByUserIdResult
+	err    error
+}
+
+func NewImportUserDataByUserIdResultFromJson(data string) ImportUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewImportUserDataByUserIdResultFromDict(dict)
+}
+
+func NewImportUserDataByUserIdResultFromDict(data map[string]interface{}) ImportUserDataByUserIdResult {
+	return ImportUserDataByUserIdResult{}
+}
+
+func (p ImportUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
+	return &p
+}
+
+type CheckImportUserDataByUserIdResult struct {
+	Url *string `json:"url"`
+}
+
+type CheckImportUserDataByUserIdAsyncResult struct {
+	result *CheckImportUserDataByUserIdResult
+	err    error
+}
+
+func NewCheckImportUserDataByUserIdResultFromJson(data string) CheckImportUserDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCheckImportUserDataByUserIdResultFromDict(dict)
+}
+
+func NewCheckImportUserDataByUserIdResultFromDict(data map[string]interface{}) CheckImportUserDataByUserIdResult {
+	return CheckImportUserDataByUserIdResult{
+		Url: core.CastString(data["url"]),
+	}
+}
+
+func (p CheckImportUserDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"url": p.Url,
+	}
+}
+
+func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserIdResult {
+	return &p
+}
+
+type DescribeBuffEntryModelsResult struct {
+	Items []BuffEntryModel `json:"items"`
+}
+
+type DescribeBuffEntryModelsAsyncResult struct {
+	result *DescribeBuffEntryModelsResult
+	err    error
+}
+
+func NewDescribeBuffEntryModelsResultFromJson(data string) DescribeBuffEntryModelsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeBuffEntryModelsResultFromDict(dict)
+}
+
+func NewDescribeBuffEntryModelsResultFromDict(data map[string]interface{}) DescribeBuffEntryModelsResult {
+	return DescribeBuffEntryModelsResult{
+		Items: CastBuffEntryModels(core.CastArray(data["items"])),
+	}
+}
+
+func (p DescribeBuffEntryModelsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastBuffEntryModelsFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p DescribeBuffEntryModelsResult) Pointer() *DescribeBuffEntryModelsResult {
+	return &p
+}
+
+type GetBuffEntryModelResult struct {
+	Item *BuffEntryModel `json:"item"`
+}
+
+type GetBuffEntryModelAsyncResult struct {
+	result *GetBuffEntryModelResult
+	err    error
+}
+
+func NewGetBuffEntryModelResultFromJson(data string) GetBuffEntryModelResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetBuffEntryModelResultFromDict(dict)
+}
+
+func NewGetBuffEntryModelResultFromDict(data map[string]interface{}) GetBuffEntryModelResult {
+	return GetBuffEntryModelResult{
+		Item: NewBuffEntryModelFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetBuffEntryModelResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetBuffEntryModelResult) Pointer() *GetBuffEntryModelResult {
+	return &p
+}
+
+type DescribeBuffEntryModelMastersResult struct {
+	Items         []BuffEntryModelMaster `json:"items"`
+	NextPageToken *string                `json:"nextPageToken"`
+}
+
+type DescribeBuffEntryModelMastersAsyncResult struct {
+	result *DescribeBuffEntryModelMastersResult
+	err    error
+}
+
+func NewDescribeBuffEntryModelMastersResultFromJson(data string) DescribeBuffEntryModelMastersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeBuffEntryModelMastersResultFromDict(dict)
+}
+
+func NewDescribeBuffEntryModelMastersResultFromDict(data map[string]interface{}) DescribeBuffEntryModelMastersResult {
+	return DescribeBuffEntryModelMastersResult{
+		Items:         CastBuffEntryModelMasters(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeBuffEntryModelMastersResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastBuffEntryModelMastersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeBuffEntryModelMastersResult) Pointer() *DescribeBuffEntryModelMastersResult {
+	return &p
+}
+
+type CreateBuffEntryModelMasterResult struct {
+	Item *BuffEntryModelMaster `json:"item"`
+}
+
+type CreateBuffEntryModelMasterAsyncResult struct {
+	result *CreateBuffEntryModelMasterResult
+	err    error
+}
+
+func NewCreateBuffEntryModelMasterResultFromJson(data string) CreateBuffEntryModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateBuffEntryModelMasterResultFromDict(dict)
+}
+
+func NewCreateBuffEntryModelMasterResultFromDict(data map[string]interface{}) CreateBuffEntryModelMasterResult {
+	return CreateBuffEntryModelMasterResult{
+		Item: NewBuffEntryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p CreateBuffEntryModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p CreateBuffEntryModelMasterResult) Pointer() *CreateBuffEntryModelMasterResult {
+	return &p
+}
+
+type GetBuffEntryModelMasterResult struct {
+	Item *BuffEntryModelMaster `json:"item"`
+}
+
+type GetBuffEntryModelMasterAsyncResult struct {
+	result *GetBuffEntryModelMasterResult
+	err    error
+}
+
+func NewGetBuffEntryModelMasterResultFromJson(data string) GetBuffEntryModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetBuffEntryModelMasterResultFromDict(dict)
+}
+
+func NewGetBuffEntryModelMasterResultFromDict(data map[string]interface{}) GetBuffEntryModelMasterResult {
+	return GetBuffEntryModelMasterResult{
+		Item: NewBuffEntryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetBuffEntryModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetBuffEntryModelMasterResult) Pointer() *GetBuffEntryModelMasterResult {
+	return &p
+}
+
+type UpdateBuffEntryModelMasterResult struct {
+	Item *BuffEntryModelMaster `json:"item"`
+}
+
+type UpdateBuffEntryModelMasterAsyncResult struct {
+	result *UpdateBuffEntryModelMasterResult
+	err    error
+}
+
+func NewUpdateBuffEntryModelMasterResultFromJson(data string) UpdateBuffEntryModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateBuffEntryModelMasterResultFromDict(dict)
+}
+
+func NewUpdateBuffEntryModelMasterResultFromDict(data map[string]interface{}) UpdateBuffEntryModelMasterResult {
+	return UpdateBuffEntryModelMasterResult{
+		Item: NewBuffEntryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p UpdateBuffEntryModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p UpdateBuffEntryModelMasterResult) Pointer() *UpdateBuffEntryModelMasterResult {
+	return &p
+}
+
+type DeleteBuffEntryModelMasterResult struct {
+	Item *BuffEntryModelMaster `json:"item"`
+}
+
+type DeleteBuffEntryModelMasterAsyncResult struct {
+	result *DeleteBuffEntryModelMasterResult
+	err    error
+}
+
+func NewDeleteBuffEntryModelMasterResultFromJson(data string) DeleteBuffEntryModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteBuffEntryModelMasterResultFromDict(dict)
+}
+
+func NewDeleteBuffEntryModelMasterResultFromDict(data map[string]interface{}) DeleteBuffEntryModelMasterResult {
+	return DeleteBuffEntryModelMasterResult{
+		Item: NewBuffEntryModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeleteBuffEntryModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeleteBuffEntryModelMasterResult) Pointer() *DeleteBuffEntryModelMasterResult {
+	return &p
+}
+
+type ApplyBuffResult struct {
+	Items           []BuffEntryModel `json:"items"`
+	NewContextStack *string          `json:"newContextStack"`
+}
+
+type ApplyBuffAsyncResult struct {
+	result *ApplyBuffResult
+	err    error
+}
+
+func NewApplyBuffResultFromJson(data string) ApplyBuffResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewApplyBuffResultFromDict(dict)
+}
+
+func NewApplyBuffResultFromDict(data map[string]interface{}) ApplyBuffResult {
+	return ApplyBuffResult{
+		Items:           CastBuffEntryModels(core.CastArray(data["items"])),
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p ApplyBuffResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastBuffEntryModelsFromDict(
+			p.Items,
+		),
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p ApplyBuffResult) Pointer() *ApplyBuffResult {
+	return &p
+}
+
+type ApplyBuffByUserIdResult struct {
+	Items           []BuffEntryModel `json:"items"`
+	NewContextStack *string          `json:"newContextStack"`
+}
+
+type ApplyBuffByUserIdAsyncResult struct {
+	result *ApplyBuffByUserIdResult
+	err    error
+}
+
+func NewApplyBuffByUserIdResultFromJson(data string) ApplyBuffByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewApplyBuffByUserIdResultFromDict(dict)
+}
+
+func NewApplyBuffByUserIdResultFromDict(data map[string]interface{}) ApplyBuffByUserIdResult {
+	return ApplyBuffByUserIdResult{
+		Items:           CastBuffEntryModels(core.CastArray(data["items"])),
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p ApplyBuffByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastBuffEntryModelsFromDict(
+			p.Items,
+		),
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p ApplyBuffByUserIdResult) Pointer() *ApplyBuffByUserIdResult {
+	return &p
+}
+
+type ExportMasterResult struct {
+	Item *CurrentBuffMaster `json:"item"`
+}
+
+type ExportMasterAsyncResult struct {
+	result *ExportMasterResult
+	err    error
+}
+
+func NewExportMasterResultFromJson(data string) ExportMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterResultFromDict(dict)
+}
+
+func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
+	return ExportMasterResult{
+		Item: NewCurrentBuffMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p ExportMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p ExportMasterResult) Pointer() *ExportMasterResult {
+	return &p
+}
+
+type GetCurrentBuffMasterResult struct {
+	Item *CurrentBuffMaster `json:"item"`
+}
+
+type GetCurrentBuffMasterAsyncResult struct {
+	result *GetCurrentBuffMasterResult
+	err    error
+}
+
+func NewGetCurrentBuffMasterResultFromJson(data string) GetCurrentBuffMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentBuffMasterResultFromDict(dict)
+}
+
+func NewGetCurrentBuffMasterResultFromDict(data map[string]interface{}) GetCurrentBuffMasterResult {
+	return GetCurrentBuffMasterResult{
+		Item: NewCurrentBuffMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetCurrentBuffMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetCurrentBuffMasterResult) Pointer() *GetCurrentBuffMasterResult {
+	return &p
+}
+
+type UpdateCurrentBuffMasterResult struct {
+	Item *CurrentBuffMaster `json:"item"`
+}
+
+type UpdateCurrentBuffMasterAsyncResult struct {
+	result *UpdateCurrentBuffMasterResult
+	err    error
+}
+
+func NewUpdateCurrentBuffMasterResultFromJson(data string) UpdateCurrentBuffMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentBuffMasterResultFromDict(dict)
+}
+
+func NewUpdateCurrentBuffMasterResultFromDict(data map[string]interface{}) UpdateCurrentBuffMasterResult {
+	return UpdateCurrentBuffMasterResult{
+		Item: NewCurrentBuffMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p UpdateCurrentBuffMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p UpdateCurrentBuffMasterResult) Pointer() *UpdateCurrentBuffMasterResult {
+	return &p
+}
+
+type UpdateCurrentBuffMasterFromGitHubResult struct {
+	Item *CurrentBuffMaster `json:"item"`
+}
+
+type UpdateCurrentBuffMasterFromGitHubAsyncResult struct {
+	result *UpdateCurrentBuffMasterFromGitHubResult
+	err    error
+}
+
+func NewUpdateCurrentBuffMasterFromGitHubResultFromJson(data string) UpdateCurrentBuffMasterFromGitHubResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentBuffMasterFromGitHubResultFromDict(dict)
+}
+
+func NewUpdateCurrentBuffMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentBuffMasterFromGitHubResult {
+	return UpdateCurrentBuffMasterFromGitHubResult{
+		Item: NewCurrentBuffMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p UpdateCurrentBuffMasterFromGitHubResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p UpdateCurrentBuffMasterFromGitHubResult) Pointer() *UpdateCurrentBuffMasterFromGitHubResult {
+	return &p
+}
