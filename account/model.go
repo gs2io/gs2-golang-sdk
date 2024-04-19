@@ -154,14 +154,15 @@ func CastNamespacesFromDict(data []Namespace) []interface{} {
 }
 
 type Account struct {
-	AccountId   *string     `json:"accountId"`
-	UserId      *string     `json:"userId"`
-	Password    *string     `json:"password"`
-	TimeOffset  *int32      `json:"timeOffset"`
-	BanStatuses []BanStatus `json:"banStatuses"`
-	Banned      *bool       `json:"banned"`
-	CreatedAt   *int64      `json:"createdAt"`
-	Revision    *int64      `json:"revision"`
+	AccountId           *string     `json:"accountId"`
+	UserId              *string     `json:"userId"`
+	Password            *string     `json:"password"`
+	TimeOffset          *int32      `json:"timeOffset"`
+	BanStatuses         []BanStatus `json:"banStatuses"`
+	Banned              *bool       `json:"banned"`
+	LastAuthenticatedAt *int64      `json:"lastAuthenticatedAt"`
+	CreatedAt           *int64      `json:"createdAt"`
+	Revision            *int64      `json:"revision"`
 }
 
 func NewAccountFromJson(data string) Account {
@@ -172,14 +173,15 @@ func NewAccountFromJson(data string) Account {
 
 func NewAccountFromDict(data map[string]interface{}) Account {
 	return Account{
-		AccountId:   core.CastString(data["accountId"]),
-		UserId:      core.CastString(data["userId"]),
-		Password:    core.CastString(data["password"]),
-		TimeOffset:  core.CastInt32(data["timeOffset"]),
-		BanStatuses: CastBanStatuses(core.CastArray(data["banStatuses"])),
-		Banned:      core.CastBool(data["banned"]),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		Revision:    core.CastInt64(data["revision"]),
+		AccountId:           core.CastString(data["accountId"]),
+		UserId:              core.CastString(data["userId"]),
+		Password:            core.CastString(data["password"]),
+		TimeOffset:          core.CastInt32(data["timeOffset"]),
+		BanStatuses:         CastBanStatuses(core.CastArray(data["banStatuses"])),
+		Banned:              core.CastBool(data["banned"]),
+		LastAuthenticatedAt: core.CastInt64(data["lastAuthenticatedAt"]),
+		CreatedAt:           core.CastInt64(data["createdAt"]),
+		Revision:            core.CastInt64(data["revision"]),
 	}
 }
 
@@ -211,6 +213,10 @@ func (p Account) ToDict() map[string]interface{} {
 	if p.Banned != nil {
 		banned = p.Banned
 	}
+	var lastAuthenticatedAt *int64
+	if p.LastAuthenticatedAt != nil {
+		lastAuthenticatedAt = p.LastAuthenticatedAt
+	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
 		createdAt = p.CreatedAt
@@ -220,14 +226,15 @@ func (p Account) ToDict() map[string]interface{} {
 		revision = p.Revision
 	}
 	return map[string]interface{}{
-		"accountId":   accountId,
-		"userId":      userId,
-		"password":    password,
-		"timeOffset":  timeOffset,
-		"banStatuses": banStatuses,
-		"banned":      banned,
-		"createdAt":   createdAt,
-		"revision":    revision,
+		"accountId":           accountId,
+		"userId":              userId,
+		"password":            password,
+		"timeOffset":          timeOffset,
+		"banStatuses":         banStatuses,
+		"banned":              banned,
+		"lastAuthenticatedAt": lastAuthenticatedAt,
+		"createdAt":           createdAt,
+		"revision":            revision,
 	}
 }
 
