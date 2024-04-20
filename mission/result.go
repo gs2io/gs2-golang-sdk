@@ -1213,8 +1213,48 @@ func (p IncreaseCounterByUserIdResult) Pointer() *IncreaseCounterByUserIdResult 
 	return &p
 }
 
+type SetCounterByUserIdResult struct {
+	Item             *Counter   `json:"item"`
+	Old              *Counter   `json:"old"`
+	ChangedCompletes []Complete `json:"changedCompletes"`
+}
+
+type SetCounterByUserIdAsyncResult struct {
+	result *SetCounterByUserIdResult
+	err    error
+}
+
+func NewSetCounterByUserIdResultFromJson(data string) SetCounterByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetCounterByUserIdResultFromDict(dict)
+}
+
+func NewSetCounterByUserIdResultFromDict(data map[string]interface{}) SetCounterByUserIdResult {
+	return SetCounterByUserIdResult{
+		Item:             NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+		Old:              NewCounterFromDict(core.CastMap(data["old"])).Pointer(),
+		ChangedCompletes: CastCompletes(core.CastArray(data["changedCompletes"])),
+	}
+}
+
+func (p SetCounterByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+		"old":  p.Old.ToDict(),
+		"changedCompletes": CastCompletesFromDict(
+			p.ChangedCompletes,
+		),
+	}
+}
+
+func (p SetCounterByUserIdResult) Pointer() *SetCounterByUserIdResult {
+	return &p
+}
+
 type DecreaseCounterByUserIdResult struct {
-	Item *Counter `json:"item"`
+	Item             *Counter   `json:"item"`
+	ChangedCompletes []Complete `json:"changedCompletes"`
 }
 
 type DecreaseCounterByUserIdAsyncResult struct {
@@ -1230,13 +1270,17 @@ func NewDecreaseCounterByUserIdResultFromJson(data string) DecreaseCounterByUser
 
 func NewDecreaseCounterByUserIdResultFromDict(data map[string]interface{}) DecreaseCounterByUserIdResult {
 	return DecreaseCounterByUserIdResult{
-		Item: NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item:             NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+		ChangedCompletes: CastCompletes(core.CastArray(data["changedCompletes"])),
 	}
 }
 
 func (p DecreaseCounterByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
+		"changedCompletes": CastCompletesFromDict(
+			p.ChangedCompletes,
+		),
 	}
 }
 
@@ -1373,9 +1417,49 @@ func (p IncreaseByStampSheetResult) Pointer() *IncreaseByStampSheetResult {
 	return &p
 }
 
+type SetByStampSheetResult struct {
+	Item             *Counter   `json:"item"`
+	Old              *Counter   `json:"old"`
+	ChangedCompletes []Complete `json:"changedCompletes"`
+}
+
+type SetByStampSheetAsyncResult struct {
+	result *SetByStampSheetResult
+	err    error
+}
+
+func NewSetByStampSheetResultFromJson(data string) SetByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetByStampSheetResultFromDict(dict)
+}
+
+func NewSetByStampSheetResultFromDict(data map[string]interface{}) SetByStampSheetResult {
+	return SetByStampSheetResult{
+		Item:             NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+		Old:              NewCounterFromDict(core.CastMap(data["old"])).Pointer(),
+		ChangedCompletes: CastCompletes(core.CastArray(data["changedCompletes"])),
+	}
+}
+
+func (p SetByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+		"old":  p.Old.ToDict(),
+		"changedCompletes": CastCompletesFromDict(
+			p.ChangedCompletes,
+		),
+	}
+}
+
+func (p SetByStampSheetResult) Pointer() *SetByStampSheetResult {
+	return &p
+}
+
 type DecreaseByStampTaskResult struct {
-	Item            *Counter `json:"item"`
-	NewContextStack *string  `json:"newContextStack"`
+	Item             *Counter   `json:"item"`
+	ChangedCompletes []Complete `json:"changedCompletes"`
+	NewContextStack  *string    `json:"newContextStack"`
 }
 
 type DecreaseByStampTaskAsyncResult struct {
@@ -1391,14 +1475,18 @@ func NewDecreaseByStampTaskResultFromJson(data string) DecreaseByStampTaskResult
 
 func NewDecreaseByStampTaskResultFromDict(data map[string]interface{}) DecreaseByStampTaskResult {
 	return DecreaseByStampTaskResult{
-		Item:            NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
+		Item:             NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+		ChangedCompletes: CastCompletes(core.CastArray(data["changedCompletes"])),
+		NewContextStack:  core.CastString(data["newContextStack"]),
 	}
 }
 
 func (p DecreaseByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
+		"item": p.Item.ToDict(),
+		"changedCompletes": CastCompletesFromDict(
+			p.ChangedCompletes,
+		),
 		"newContextStack": p.NewContextStack,
 	}
 }

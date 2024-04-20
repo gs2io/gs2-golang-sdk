@@ -1441,6 +1441,50 @@ func (p IncreaseCounterByUserIdRequest) Pointer() *IncreaseCounterByUserIdReques
 	return &p
 }
 
+type SetCounterByUserIdRequest struct {
+	SourceRequestId    *string       `json:"sourceRequestId"`
+	RequestId          *string       `json:"requestId"`
+	ContextStack       *string       `json:"contextStack"`
+	DuplicationAvoider *string       `json:"duplicationAvoider"`
+	NamespaceName      *string       `json:"namespaceName"`
+	CounterName        *string       `json:"counterName"`
+	UserId             *string       `json:"userId"`
+	Values             []ScopedValue `json:"values"`
+	TimeOffsetToken    *string       `json:"timeOffsetToken"`
+}
+
+func NewSetCounterByUserIdRequestFromJson(data string) SetCounterByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetCounterByUserIdRequestFromDict(dict)
+}
+
+func NewSetCounterByUserIdRequestFromDict(data map[string]interface{}) SetCounterByUserIdRequest {
+	return SetCounterByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		CounterName:     core.CastString(data["counterName"]),
+		UserId:          core.CastString(data["userId"]),
+		Values:          CastScopedValues(core.CastArray(data["values"])),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p SetCounterByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"counterName":   p.CounterName,
+		"userId":        p.UserId,
+		"values": CastScopedValuesFromDict(
+			p.Values,
+		),
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p SetCounterByUserIdRequest) Pointer() *SetCounterByUserIdRequest {
+	return &p
+}
+
 type DecreaseCounterByUserIdRequest struct {
 	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
@@ -1624,6 +1668,38 @@ func (p IncreaseByStampSheetRequest) ToDict() map[string]interface{} {
 }
 
 func (p IncreaseByStampSheetRequest) Pointer() *IncreaseByStampSheetRequest {
+	return &p
+}
+
+type SetByStampSheetRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
+}
+
+func NewSetByStampSheetRequestFromJson(data string) SetByStampSheetRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetByStampSheetRequestFromDict(dict)
+}
+
+func NewSetByStampSheetRequestFromDict(data map[string]interface{}) SetByStampSheetRequest {
+	return SetByStampSheetRequest{
+		StampSheet: core.CastString(data["stampSheet"]),
+		KeyId:      core.CastString(data["keyId"]),
+	}
+}
+
+func (p SetByStampSheetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampSheet": p.StampSheet,
+		"keyId":      p.KeyId,
+	}
+}
+
+func (p SetByStampSheetRequest) Pointer() *SetByStampSheetRequest {
 	return &p
 }
 

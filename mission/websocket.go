@@ -3422,6 +3422,112 @@ func (p Gs2MissionWebSocketClient) IncreaseCounterByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2MissionWebSocketClient) setCounterByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SetCounterByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetCounterByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetCounterByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetCounterByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "counter.increase.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+			}
+		}
+	}
+	callback <- SetCounterByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionWebSocketClient) SetCounterByUserIdAsync(
+	request *SetCounterByUserIdRequest,
+	callback chan<- SetCounterByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "mission",
+			"component":   "counter",
+			"function":    "setCounterByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.CounterName != nil && *request.CounterName != "" {
+		bodies["counterName"] = *request.CounterName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Values != nil {
+		var _values []interface{}
+		for _, item := range request.Values {
+			_values = append(_values, item)
+		}
+		bodies["values"] = _values
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.setCounterByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionWebSocketClient) SetCounterByUserId(
+	request *SetCounterByUserIdRequest,
+) (*SetCounterByUserIdResult, error) {
+	callback := make(chan SetCounterByUserIdAsyncResult, 1)
+	go p.SetCounterByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2MissionWebSocketClient) decreaseCounterByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DecreaseCounterByUserIdAsyncResult,
@@ -3874,6 +3980,90 @@ func (p Gs2MissionWebSocketClient) IncreaseByStampSheet(
 ) (*IncreaseByStampSheetResult, error) {
 	callback := make(chan IncreaseByStampSheetAsyncResult, 1)
 	go p.IncreaseByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MissionWebSocketClient) setByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SetByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetByStampSheetResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SetByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionWebSocketClient) SetByStampSheetAsync(
+	request *SetByStampSheetRequest,
+	callback chan<- SetByStampSheetAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "mission",
+			"component":   "counter",
+			"function":    "setByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.setByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionWebSocketClient) SetByStampSheet(
+	request *SetByStampSheetRequest,
+) (*SetByStampSheetResult, error) {
+	callback := make(chan SetByStampSheetAsyncResult, 1)
+	go p.SetByStampSheetAsync(
 		request,
 		callback,
 	)
