@@ -2035,6 +2035,12 @@ func (p Gs2VersionWebSocketClient) acceptAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "version.accept.version.invalid" {
+				asyncResult.Err = gs2err.SetClientError(AcceptVersionInvalid{})
+			}
+		}
 	}
 	callback <- AcceptAsyncResult{
 		result: &result,
@@ -2068,6 +2074,9 @@ func (p Gs2VersionWebSocketClient) AcceptAsync(
 	}
 	if request.AccessToken != nil && *request.AccessToken != "" {
 		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.Version != nil {
+		bodies["version"] = request.Version.ToDict()
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2128,6 +2137,12 @@ func (p Gs2VersionWebSocketClient) acceptByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "version.accept.version.invalid" {
+				asyncResult.Err = gs2err.SetClientError(AcceptVersionInvalid{})
+			}
+		}
 	}
 	callback <- AcceptByUserIdAsyncResult{
 		result: &result,
@@ -2161,6 +2176,9 @@ func (p Gs2VersionWebSocketClient) AcceptByUserIdAsync(
 	}
 	if request.UserId != nil && *request.UserId != "" {
 		bodies["userId"] = *request.UserId
+	}
+	if request.Version != nil {
+		bodies["version"] = request.Version.ToDict()
 	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken

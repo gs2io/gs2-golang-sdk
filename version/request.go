@@ -834,13 +834,14 @@ func (p DescribeAcceptVersionsByUserIdRequest) Pointer() *DescribeAcceptVersions
 }
 
 type AcceptRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	VersionName        *string `json:"versionName"`
-	AccessToken        *string `json:"accessToken"`
+	SourceRequestId    *string  `json:"sourceRequestId"`
+	RequestId          *string  `json:"requestId"`
+	ContextStack       *string  `json:"contextStack"`
+	DuplicationAvoider *string  `json:"duplicationAvoider"`
+	NamespaceName      *string  `json:"namespaceName"`
+	VersionName        *string  `json:"versionName"`
+	AccessToken        *string  `json:"accessToken"`
+	Version            *Version `json:"version"`
 }
 
 func NewAcceptRequestFromJson(data string) AcceptRequest {
@@ -854,6 +855,7 @@ func NewAcceptRequestFromDict(data map[string]interface{}) AcceptRequest {
 		NamespaceName: core.CastString(data["namespaceName"]),
 		VersionName:   core.CastString(data["versionName"]),
 		AccessToken:   core.CastString(data["accessToken"]),
+		Version:       NewVersionFromDict(core.CastMap(data["version"])).Pointer(),
 	}
 }
 
@@ -862,6 +864,7 @@ func (p AcceptRequest) ToDict() map[string]interface{} {
 		"namespaceName": p.NamespaceName,
 		"versionName":   p.VersionName,
 		"accessToken":   p.AccessToken,
+		"version":       p.Version.ToDict(),
 	}
 }
 
@@ -870,14 +873,15 @@ func (p AcceptRequest) Pointer() *AcceptRequest {
 }
 
 type AcceptByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	VersionName        *string `json:"versionName"`
-	UserId             *string `json:"userId"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	SourceRequestId    *string  `json:"sourceRequestId"`
+	RequestId          *string  `json:"requestId"`
+	ContextStack       *string  `json:"contextStack"`
+	DuplicationAvoider *string  `json:"duplicationAvoider"`
+	NamespaceName      *string  `json:"namespaceName"`
+	VersionName        *string  `json:"versionName"`
+	UserId             *string  `json:"userId"`
+	Version            *Version `json:"version"`
+	TimeOffsetToken    *string  `json:"timeOffsetToken"`
 }
 
 func NewAcceptByUserIdRequestFromJson(data string) AcceptByUserIdRequest {
@@ -891,6 +895,7 @@ func NewAcceptByUserIdRequestFromDict(data map[string]interface{}) AcceptByUserI
 		NamespaceName:   core.CastString(data["namespaceName"]),
 		VersionName:     core.CastString(data["versionName"]),
 		UserId:          core.CastString(data["userId"]),
+		Version:         NewVersionFromDict(core.CastMap(data["version"])).Pointer(),
 		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
 	}
 }
@@ -900,6 +905,7 @@ func (p AcceptByUserIdRequest) ToDict() map[string]interface{} {
 		"namespaceName":   p.NamespaceName,
 		"versionName":     p.VersionName,
 		"userId":          p.UserId,
+		"version":         p.Version.ToDict(),
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }

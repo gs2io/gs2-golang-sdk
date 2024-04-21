@@ -2228,6 +2228,12 @@ func acceptAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AcceptResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "version.accept.version.invalid" {
+				asyncResult.Err = gs2err.SetClientError(AcceptVersionInvalid{})
+			}
+		}
 		callback <- AcceptAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -2264,6 +2270,9 @@ func (p Gs2VersionRestClient) AcceptAsync(
 	var bodies = core.Bodies{}
 	if request.VersionName != nil && *request.VersionName != "" {
 		bodies["versionName"] = *request.VersionName
+	}
+	if request.Version != nil {
+		bodies["version"] = request.Version.ToDict()
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -2327,6 +2336,12 @@ func acceptByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result AcceptByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "version.accept.version.invalid" {
+				asyncResult.Err = gs2err.SetClientError(AcceptVersionInvalid{})
+			}
+		}
 		callback <- AcceptByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -2368,6 +2383,9 @@ func (p Gs2VersionRestClient) AcceptByUserIdAsync(
 	var bodies = core.Bodies{}
 	if request.VersionName != nil && *request.VersionName != "" {
 		bodies["versionName"] = *request.VersionName
+	}
+	if request.Version != nil {
+		bodies["version"] = request.Version.ToDict()
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
