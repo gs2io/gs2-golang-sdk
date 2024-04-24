@@ -92,6 +92,47 @@ func (p LoginBySignatureRequest) Pointer() *LoginBySignatureRequest {
 	return &p
 }
 
+type FederationRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	OriginalUserId  *string `json:"originalUserId"`
+	UserId          *string `json:"userId"`
+	PolicyDocument  *string `json:"policyDocument"`
+	TimeOffset      *int32  `json:"timeOffset"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+}
+
+func NewFederationRequestFromJson(data string) FederationRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFederationRequestFromDict(dict)
+}
+
+func NewFederationRequestFromDict(data map[string]interface{}) FederationRequest {
+	return FederationRequest{
+		OriginalUserId:  core.CastString(data["originalUserId"]),
+		UserId:          core.CastString(data["userId"]),
+		PolicyDocument:  core.CastString(data["policyDocument"]),
+		TimeOffset:      core.CastInt32(data["timeOffset"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p FederationRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"originalUserId":  p.OriginalUserId,
+		"userId":          p.UserId,
+		"policyDocument":  p.PolicyDocument,
+		"timeOffset":      p.TimeOffset,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p FederationRequest) Pointer() *FederationRequest {
+	return &p
+}
+
 type IssueTimeOffsetTokenByUserIdRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`

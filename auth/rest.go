@@ -219,6 +219,106 @@ func (p Gs2AuthRestClient) LoginBySignature(
 	return asyncResult.result, asyncResult.err
 }
 
+func federationAsyncHandler(
+	client Gs2AuthRestClient,
+	job *core.NetworkJob,
+	callback chan<- FederationAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- FederationAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result FederationResult
+	if asyncResult.Err != nil {
+		callback <- FederationAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- FederationAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- FederationAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AuthRestClient) FederationAsync(
+	request *FederationRequest,
+	callback chan<- FederationAsyncResult,
+) {
+	path := "/federation"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.OriginalUserId != nil && *request.OriginalUserId != "" {
+		bodies["originalUserId"] = *request.OriginalUserId
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.PolicyDocument != nil && *request.PolicyDocument != "" {
+		bodies["policyDocument"] = *request.PolicyDocument
+	}
+	if request.TimeOffset != nil {
+		bodies["timeOffset"] = *request.TimeOffset
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go federationAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("auth").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AuthRestClient) Federation(
+	request *FederationRequest,
+) (*FederationResult, error) {
+	callback := make(chan FederationAsyncResult, 1)
+	go p.FederationAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func issueTimeOffsetTokenByUserIdAsyncHandler(
 	client Gs2AuthRestClient,
 	job *core.NetworkJob,

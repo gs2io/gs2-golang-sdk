@@ -23,10 +23,11 @@ import (
 )
 
 type AccessToken struct {
-	Token      *string `json:"token"`
-	UserId     *string `json:"userId"`
-	Expire     *int64  `json:"expire"`
-	TimeOffset *int32  `json:"timeOffset"`
+	Token                *string `json:"token"`
+	UserId               *string `json:"userId"`
+	FederationFromUserId *string `json:"federationFromUserId"`
+	Expire               *int64  `json:"expire"`
+	TimeOffset           *int32  `json:"timeOffset"`
 }
 
 func NewAccessTokenFromJson(data string) AccessToken {
@@ -37,10 +38,11 @@ func NewAccessTokenFromJson(data string) AccessToken {
 
 func NewAccessTokenFromDict(data map[string]interface{}) AccessToken {
 	return AccessToken{
-		Token:      core.CastString(data["token"]),
-		UserId:     core.CastString(data["userId"]),
-		Expire:     core.CastInt64(data["expire"]),
-		TimeOffset: core.CastInt32(data["timeOffset"]),
+		Token:                core.CastString(data["token"]),
+		UserId:               core.CastString(data["userId"]),
+		FederationFromUserId: core.CastString(data["federationFromUserId"]),
+		Expire:               core.CastInt64(data["expire"]),
+		TimeOffset:           core.CastInt32(data["timeOffset"]),
 	}
 }
 
@@ -54,6 +56,10 @@ func (p AccessToken) ToDict() map[string]interface{} {
 	if p.UserId != nil {
 		userId = p.UserId
 	}
+	var federationFromUserId *string
+	if p.FederationFromUserId != nil {
+		federationFromUserId = p.FederationFromUserId
+	}
 	var expire *int64
 	if p.Expire != nil {
 		expire = p.Expire
@@ -63,10 +69,11 @@ func (p AccessToken) ToDict() map[string]interface{} {
 		timeOffset = p.TimeOffset
 	}
 	return map[string]interface{}{
-		"token":      token,
-		"userId":     userId,
-		"expire":     expire,
-		"timeOffset": timeOffset,
+		"token":                token,
+		"userId":               userId,
+		"federationFromUserId": federationFromUserId,
+		"expire":               expire,
+		"timeOffset":           timeOffset,
 	}
 }
 

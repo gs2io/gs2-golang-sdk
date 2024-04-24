@@ -98,6 +98,43 @@ func (p LoginBySignatureResult) Pointer() *LoginBySignatureResult {
 	return &p
 }
 
+type FederationResult struct {
+	Token  *core.AccessToken `json:"token"`
+	UserId *string           `json:"userId"`
+	Expire *int64            `json:"expire"`
+}
+
+type FederationAsyncResult struct {
+	result *FederationResult
+	err    error
+}
+
+func NewFederationResultFromJson(data string) FederationResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFederationResultFromDict(dict)
+}
+
+func NewFederationResultFromDict(data map[string]interface{}) FederationResult {
+	return FederationResult{
+		Token:  core.CastString(data["token"]),
+		UserId: core.CastString(data["userId"]),
+		Expire: core.CastInt64(data["expire"]),
+	}
+}
+
+func (p FederationResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"token":  p.Token,
+		"userId": p.UserId,
+		"expire": p.Expire,
+	}
+}
+
+func (p FederationResult) Pointer() *FederationResult {
+	return &p
+}
+
 type IssueTimeOffsetTokenByUserIdResult struct {
 	Token  *string `json:"token"`
 	UserId *string `json:"userId"`
