@@ -564,7 +564,11 @@ type Guild struct {
 	GuildModelName            *string     `json:"guildModelName"`
 	Name                      *string     `json:"name"`
 	DisplayName               *string     `json:"displayName"`
-	OperationPolicy           *int32      `json:"operationPolicy"`
+	Attribute1                *int32      `json:"attribute1"`
+	Attribute2                *int32      `json:"attribute2"`
+	Attribute3                *int32      `json:"attribute3"`
+	Attribute4                *int32      `json:"attribute4"`
+	Attribute5                *int32      `json:"attribute5"`
 	JoinPolicy                *string     `json:"joinPolicy"`
 	CustomRoles               []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole    *string     `json:"guildMemberDefaultRole"`
@@ -587,7 +591,11 @@ func NewGuildFromDict(data map[string]interface{}) Guild {
 		GuildModelName:            core.CastString(data["guildModelName"]),
 		Name:                      core.CastString(data["name"]),
 		DisplayName:               core.CastString(data["displayName"]),
-		OperationPolicy:           core.CastInt32(data["operationPolicy"]),
+		Attribute1:                core.CastInt32(data["attribute1"]),
+		Attribute2:                core.CastInt32(data["attribute2"]),
+		Attribute3:                core.CastInt32(data["attribute3"]),
+		Attribute4:                core.CastInt32(data["attribute4"]),
+		Attribute5:                core.CastInt32(data["attribute5"]),
 		JoinPolicy:                core.CastString(data["joinPolicy"]),
 		CustomRoles:               CastRoleModels(core.CastArray(data["customRoles"])),
 		GuildMemberDefaultRole:    core.CastString(data["guildMemberDefaultRole"]),
@@ -617,9 +625,25 @@ func (p Guild) ToDict() map[string]interface{} {
 	if p.DisplayName != nil {
 		displayName = p.DisplayName
 	}
-	var operationPolicy *int32
-	if p.OperationPolicy != nil {
-		operationPolicy = p.OperationPolicy
+	var attribute1 *int32
+	if p.Attribute1 != nil {
+		attribute1 = p.Attribute1
+	}
+	var attribute2 *int32
+	if p.Attribute2 != nil {
+		attribute2 = p.Attribute2
+	}
+	var attribute3 *int32
+	if p.Attribute3 != nil {
+		attribute3 = p.Attribute3
+	}
+	var attribute4 *int32
+	if p.Attribute4 != nil {
+		attribute4 = p.Attribute4
+	}
+	var attribute5 *int32
+	if p.Attribute5 != nil {
+		attribute5 = p.Attribute5
 	}
 	var joinPolicy *string
 	if p.JoinPolicy != nil {
@@ -662,7 +686,11 @@ func (p Guild) ToDict() map[string]interface{} {
 		"guildModelName":            guildModelName,
 		"name":                      name,
 		"displayName":               displayName,
-		"operationPolicy":           operationPolicy,
+		"attribute1":                attribute1,
+		"attribute2":                attribute2,
+		"attribute3":                attribute3,
+		"attribute4":                attribute4,
+		"attribute5":                attribute5,
 		"joinPolicy":                joinPolicy,
 		"customRoles":               customRoles,
 		"guildMemberDefaultRole":    guildMemberDefaultRole,

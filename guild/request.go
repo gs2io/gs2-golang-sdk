@@ -763,7 +763,11 @@ type SearchGuildsRequest struct {
 	GuildModelName          *string   `json:"guildModelName"`
 	AccessToken             *string   `json:"accessToken"`
 	DisplayName             *string   `json:"displayName"`
-	OperationPolicies       []*int32  `json:"operationPolicies"`
+	Attributes1             []*int32  `json:"attributes1"`
+	Attributes2             []*int32  `json:"attributes2"`
+	Attributes3             []*int32  `json:"attributes3"`
+	Attributes4             []*int32  `json:"attributes4"`
+	Attributes5             []*int32  `json:"attributes5"`
 	JoinPolicies            []*string `json:"joinPolicies"`
 	IncludeFullMembersGuild *bool     `json:"includeFullMembersGuild"`
 	PageToken               *string   `json:"pageToken"`
@@ -782,7 +786,11 @@ func NewSearchGuildsRequestFromDict(data map[string]interface{}) SearchGuildsReq
 		GuildModelName:          core.CastString(data["guildModelName"]),
 		AccessToken:             core.CastString(data["accessToken"]),
 		DisplayName:             core.CastString(data["displayName"]),
-		OperationPolicies:       core.CastInt32s(core.CastArray(data["operationPolicies"])),
+		Attributes1:             core.CastInt32s(core.CastArray(data["attributes1"])),
+		Attributes2:             core.CastInt32s(core.CastArray(data["attributes2"])),
+		Attributes3:             core.CastInt32s(core.CastArray(data["attributes3"])),
+		Attributes4:             core.CastInt32s(core.CastArray(data["attributes4"])),
+		Attributes5:             core.CastInt32s(core.CastArray(data["attributes5"])),
 		JoinPolicies:            core.CastStrings(core.CastArray(data["joinPolicies"])),
 		IncludeFullMembersGuild: core.CastBool(data["includeFullMembersGuild"]),
 		PageToken:               core.CastString(data["pageToken"]),
@@ -796,8 +804,20 @@ func (p SearchGuildsRequest) ToDict() map[string]interface{} {
 		"guildModelName": p.GuildModelName,
 		"accessToken":    p.AccessToken,
 		"displayName":    p.DisplayName,
-		"operationPolicies": core.CastInt32sFromDict(
-			p.OperationPolicies,
+		"attributes1": core.CastInt32sFromDict(
+			p.Attributes1,
+		),
+		"attributes2": core.CastInt32sFromDict(
+			p.Attributes2,
+		),
+		"attributes3": core.CastInt32sFromDict(
+			p.Attributes3,
+		),
+		"attributes4": core.CastInt32sFromDict(
+			p.Attributes4,
+		),
+		"attributes5": core.CastInt32sFromDict(
+			p.Attributes5,
 		),
 		"joinPolicies": core.CastStringsFromDict(
 			p.JoinPolicies,
@@ -821,7 +841,11 @@ type SearchGuildsByUserIdRequest struct {
 	GuildModelName          *string   `json:"guildModelName"`
 	UserId                  *string   `json:"userId"`
 	DisplayName             *string   `json:"displayName"`
-	OperationPolicies       []*int32  `json:"operationPolicies"`
+	Attributes1             []*int32  `json:"attributes1"`
+	Attributes2             []*int32  `json:"attributes2"`
+	Attributes3             []*int32  `json:"attributes3"`
+	Attributes4             []*int32  `json:"attributes4"`
+	Attributes5             []*int32  `json:"attributes5"`
 	JoinPolicies            []*string `json:"joinPolicies"`
 	IncludeFullMembersGuild *bool     `json:"includeFullMembersGuild"`
 	PageToken               *string   `json:"pageToken"`
@@ -841,7 +865,11 @@ func NewSearchGuildsByUserIdRequestFromDict(data map[string]interface{}) SearchG
 		GuildModelName:          core.CastString(data["guildModelName"]),
 		UserId:                  core.CastString(data["userId"]),
 		DisplayName:             core.CastString(data["displayName"]),
-		OperationPolicies:       core.CastInt32s(core.CastArray(data["operationPolicies"])),
+		Attributes1:             core.CastInt32s(core.CastArray(data["attributes1"])),
+		Attributes2:             core.CastInt32s(core.CastArray(data["attributes2"])),
+		Attributes3:             core.CastInt32s(core.CastArray(data["attributes3"])),
+		Attributes4:             core.CastInt32s(core.CastArray(data["attributes4"])),
+		Attributes5:             core.CastInt32s(core.CastArray(data["attributes5"])),
 		JoinPolicies:            core.CastStrings(core.CastArray(data["joinPolicies"])),
 		IncludeFullMembersGuild: core.CastBool(data["includeFullMembersGuild"]),
 		PageToken:               core.CastString(data["pageToken"]),
@@ -856,8 +884,20 @@ func (p SearchGuildsByUserIdRequest) ToDict() map[string]interface{} {
 		"guildModelName": p.GuildModelName,
 		"userId":         p.UserId,
 		"displayName":    p.DisplayName,
-		"operationPolicies": core.CastInt32sFromDict(
-			p.OperationPolicies,
+		"attributes1": core.CastInt32sFromDict(
+			p.Attributes1,
+		),
+		"attributes2": core.CastInt32sFromDict(
+			p.Attributes2,
+		),
+		"attributes3": core.CastInt32sFromDict(
+			p.Attributes3,
+		),
+		"attributes4": core.CastInt32sFromDict(
+			p.Attributes4,
+		),
+		"attributes5": core.CastInt32sFromDict(
+			p.Attributes5,
 		),
 		"joinPolicies": core.CastStringsFromDict(
 			p.JoinPolicies,
@@ -882,7 +922,11 @@ type CreateGuildRequest struct {
 	AccessToken            *string     `json:"accessToken"`
 	GuildModelName         *string     `json:"guildModelName"`
 	DisplayName            *string     `json:"displayName"`
-	OperationPolicy        *int32      `json:"operationPolicy"`
+	Attribute1             *int32      `json:"attribute1"`
+	Attribute2             *int32      `json:"attribute2"`
+	Attribute3             *int32      `json:"attribute3"`
+	Attribute4             *int32      `json:"attribute4"`
+	Attribute5             *int32      `json:"attribute5"`
 	JoinPolicy             *string     `json:"joinPolicy"`
 	CustomRoles            []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole *string     `json:"guildMemberDefaultRole"`
@@ -900,7 +944,11 @@ func NewCreateGuildRequestFromDict(data map[string]interface{}) CreateGuildReque
 		AccessToken:            core.CastString(data["accessToken"]),
 		GuildModelName:         core.CastString(data["guildModelName"]),
 		DisplayName:            core.CastString(data["displayName"]),
-		OperationPolicy:        core.CastInt32(data["operationPolicy"]),
+		Attribute1:             core.CastInt32(data["attribute1"]),
+		Attribute2:             core.CastInt32(data["attribute2"]),
+		Attribute3:             core.CastInt32(data["attribute3"]),
+		Attribute4:             core.CastInt32(data["attribute4"]),
+		Attribute5:             core.CastInt32(data["attribute5"]),
 		JoinPolicy:             core.CastString(data["joinPolicy"]),
 		CustomRoles:            CastRoleModels(core.CastArray(data["customRoles"])),
 		GuildMemberDefaultRole: core.CastString(data["guildMemberDefaultRole"]),
@@ -909,12 +957,16 @@ func NewCreateGuildRequestFromDict(data map[string]interface{}) CreateGuildReque
 
 func (p CreateGuildRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"accessToken":     p.AccessToken,
-		"guildModelName":  p.GuildModelName,
-		"displayName":     p.DisplayName,
-		"operationPolicy": p.OperationPolicy,
-		"joinPolicy":      p.JoinPolicy,
+		"namespaceName":  p.NamespaceName,
+		"accessToken":    p.AccessToken,
+		"guildModelName": p.GuildModelName,
+		"displayName":    p.DisplayName,
+		"attribute1":     p.Attribute1,
+		"attribute2":     p.Attribute2,
+		"attribute3":     p.Attribute3,
+		"attribute4":     p.Attribute4,
+		"attribute5":     p.Attribute5,
+		"joinPolicy":     p.JoinPolicy,
 		"customRoles": CastRoleModelsFromDict(
 			p.CustomRoles,
 		),
@@ -935,7 +987,11 @@ type CreateGuildByUserIdRequest struct {
 	UserId                 *string     `json:"userId"`
 	GuildModelName         *string     `json:"guildModelName"`
 	DisplayName            *string     `json:"displayName"`
-	OperationPolicy        *int32      `json:"operationPolicy"`
+	Attribute1             *int32      `json:"attribute1"`
+	Attribute2             *int32      `json:"attribute2"`
+	Attribute3             *int32      `json:"attribute3"`
+	Attribute4             *int32      `json:"attribute4"`
+	Attribute5             *int32      `json:"attribute5"`
 	JoinPolicy             *string     `json:"joinPolicy"`
 	CustomRoles            []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole *string     `json:"guildMemberDefaultRole"`
@@ -954,7 +1010,11 @@ func NewCreateGuildByUserIdRequestFromDict(data map[string]interface{}) CreateGu
 		UserId:                 core.CastString(data["userId"]),
 		GuildModelName:         core.CastString(data["guildModelName"]),
 		DisplayName:            core.CastString(data["displayName"]),
-		OperationPolicy:        core.CastInt32(data["operationPolicy"]),
+		Attribute1:             core.CastInt32(data["attribute1"]),
+		Attribute2:             core.CastInt32(data["attribute2"]),
+		Attribute3:             core.CastInt32(data["attribute3"]),
+		Attribute4:             core.CastInt32(data["attribute4"]),
+		Attribute5:             core.CastInt32(data["attribute5"]),
 		JoinPolicy:             core.CastString(data["joinPolicy"]),
 		CustomRoles:            CastRoleModels(core.CastArray(data["customRoles"])),
 		GuildMemberDefaultRole: core.CastString(data["guildMemberDefaultRole"]),
@@ -964,12 +1024,16 @@ func NewCreateGuildByUserIdRequestFromDict(data map[string]interface{}) CreateGu
 
 func (p CreateGuildByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"userId":          p.UserId,
-		"guildModelName":  p.GuildModelName,
-		"displayName":     p.DisplayName,
-		"operationPolicy": p.OperationPolicy,
-		"joinPolicy":      p.JoinPolicy,
+		"namespaceName":  p.NamespaceName,
+		"userId":         p.UserId,
+		"guildModelName": p.GuildModelName,
+		"displayName":    p.DisplayName,
+		"attribute1":     p.Attribute1,
+		"attribute2":     p.Attribute2,
+		"attribute3":     p.Attribute3,
+		"attribute4":     p.Attribute4,
+		"attribute5":     p.Attribute5,
+		"joinPolicy":     p.JoinPolicy,
 		"customRoles": CastRoleModelsFromDict(
 			p.CustomRoles,
 		),
@@ -1070,7 +1134,11 @@ type UpdateGuildRequest struct {
 	AccessToken            *string     `json:"accessToken"`
 	GuildModelName         *string     `json:"guildModelName"`
 	DisplayName            *string     `json:"displayName"`
-	OperationPolicy        *int32      `json:"operationPolicy"`
+	Attribute1             *int32      `json:"attribute1"`
+	Attribute2             *int32      `json:"attribute2"`
+	Attribute3             *int32      `json:"attribute3"`
+	Attribute4             *int32      `json:"attribute4"`
+	Attribute5             *int32      `json:"attribute5"`
 	JoinPolicy             *string     `json:"joinPolicy"`
 	CustomRoles            []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole *string     `json:"guildMemberDefaultRole"`
@@ -1088,7 +1156,11 @@ func NewUpdateGuildRequestFromDict(data map[string]interface{}) UpdateGuildReque
 		AccessToken:            core.CastString(data["accessToken"]),
 		GuildModelName:         core.CastString(data["guildModelName"]),
 		DisplayName:            core.CastString(data["displayName"]),
-		OperationPolicy:        core.CastInt32(data["operationPolicy"]),
+		Attribute1:             core.CastInt32(data["attribute1"]),
+		Attribute2:             core.CastInt32(data["attribute2"]),
+		Attribute3:             core.CastInt32(data["attribute3"]),
+		Attribute4:             core.CastInt32(data["attribute4"]),
+		Attribute5:             core.CastInt32(data["attribute5"]),
 		JoinPolicy:             core.CastString(data["joinPolicy"]),
 		CustomRoles:            CastRoleModels(core.CastArray(data["customRoles"])),
 		GuildMemberDefaultRole: core.CastString(data["guildMemberDefaultRole"]),
@@ -1097,12 +1169,16 @@ func NewUpdateGuildRequestFromDict(data map[string]interface{}) UpdateGuildReque
 
 func (p UpdateGuildRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"accessToken":     p.AccessToken,
-		"guildModelName":  p.GuildModelName,
-		"displayName":     p.DisplayName,
-		"operationPolicy": p.OperationPolicy,
-		"joinPolicy":      p.JoinPolicy,
+		"namespaceName":  p.NamespaceName,
+		"accessToken":    p.AccessToken,
+		"guildModelName": p.GuildModelName,
+		"displayName":    p.DisplayName,
+		"attribute1":     p.Attribute1,
+		"attribute2":     p.Attribute2,
+		"attribute3":     p.Attribute3,
+		"attribute4":     p.Attribute4,
+		"attribute5":     p.Attribute5,
+		"joinPolicy":     p.JoinPolicy,
 		"customRoles": CastRoleModelsFromDict(
 			p.CustomRoles,
 		),
@@ -1123,7 +1199,11 @@ type UpdateGuildByGuildNameRequest struct {
 	GuildName              *string     `json:"guildName"`
 	GuildModelName         *string     `json:"guildModelName"`
 	DisplayName            *string     `json:"displayName"`
-	OperationPolicy        *int32      `json:"operationPolicy"`
+	Attribute1             *int32      `json:"attribute1"`
+	Attribute2             *int32      `json:"attribute2"`
+	Attribute3             *int32      `json:"attribute3"`
+	Attribute4             *int32      `json:"attribute4"`
+	Attribute5             *int32      `json:"attribute5"`
 	JoinPolicy             *string     `json:"joinPolicy"`
 	CustomRoles            []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole *string     `json:"guildMemberDefaultRole"`
@@ -1141,7 +1221,11 @@ func NewUpdateGuildByGuildNameRequestFromDict(data map[string]interface{}) Updat
 		GuildName:              core.CastString(data["guildName"]),
 		GuildModelName:         core.CastString(data["guildModelName"]),
 		DisplayName:            core.CastString(data["displayName"]),
-		OperationPolicy:        core.CastInt32(data["operationPolicy"]),
+		Attribute1:             core.CastInt32(data["attribute1"]),
+		Attribute2:             core.CastInt32(data["attribute2"]),
+		Attribute3:             core.CastInt32(data["attribute3"]),
+		Attribute4:             core.CastInt32(data["attribute4"]),
+		Attribute5:             core.CastInt32(data["attribute5"]),
 		JoinPolicy:             core.CastString(data["joinPolicy"]),
 		CustomRoles:            CastRoleModels(core.CastArray(data["customRoles"])),
 		GuildMemberDefaultRole: core.CastString(data["guildMemberDefaultRole"]),
@@ -1150,12 +1234,16 @@ func NewUpdateGuildByGuildNameRequestFromDict(data map[string]interface{}) Updat
 
 func (p UpdateGuildByGuildNameRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"guildName":       p.GuildName,
-		"guildModelName":  p.GuildModelName,
-		"displayName":     p.DisplayName,
-		"operationPolicy": p.OperationPolicy,
-		"joinPolicy":      p.JoinPolicy,
+		"namespaceName":  p.NamespaceName,
+		"guildName":      p.GuildName,
+		"guildModelName": p.GuildModelName,
+		"displayName":    p.DisplayName,
+		"attribute1":     p.Attribute1,
+		"attribute2":     p.Attribute2,
+		"attribute3":     p.Attribute3,
+		"attribute4":     p.Attribute4,
+		"attribute5":     p.Attribute5,
+		"joinPolicy":     p.JoinPolicy,
 		"customRoles": CastRoleModelsFromDict(
 			p.CustomRoles,
 		),

@@ -2069,12 +2069,40 @@ func (p Gs2GuildRestClient) SearchGuildsAsync(
 	if request.DisplayName != nil && *request.DisplayName != "" {
 		bodies["displayName"] = *request.DisplayName
 	}
-	if request.OperationPolicies != nil {
-		var _operationPolicies []interface{}
-		for _, item := range request.OperationPolicies {
-			_operationPolicies = append(_operationPolicies, item)
+	if request.Attributes1 != nil {
+		var _attributes1 []interface{}
+		for _, item := range request.Attributes1 {
+			_attributes1 = append(_attributes1, item)
 		}
-		bodies["operationPolicies"] = _operationPolicies
+		bodies["attributes1"] = _attributes1
+	}
+	if request.Attributes2 != nil {
+		var _attributes2 []interface{}
+		for _, item := range request.Attributes2 {
+			_attributes2 = append(_attributes2, item)
+		}
+		bodies["attributes2"] = _attributes2
+	}
+	if request.Attributes3 != nil {
+		var _attributes3 []interface{}
+		for _, item := range request.Attributes3 {
+			_attributes3 = append(_attributes3, item)
+		}
+		bodies["attributes3"] = _attributes3
+	}
+	if request.Attributes4 != nil {
+		var _attributes4 []interface{}
+		for _, item := range request.Attributes4 {
+			_attributes4 = append(_attributes4, item)
+		}
+		bodies["attributes4"] = _attributes4
+	}
+	if request.Attributes5 != nil {
+		var _attributes5 []interface{}
+		for _, item := range request.Attributes5 {
+			_attributes5 = append(_attributes5, item)
+		}
+		bodies["attributes5"] = _attributes5
 	}
 	if request.JoinPolicies != nil {
 		var _joinPolicies []interface{}
@@ -2201,12 +2229,40 @@ func (p Gs2GuildRestClient) SearchGuildsByUserIdAsync(
 	if request.DisplayName != nil && *request.DisplayName != "" {
 		bodies["displayName"] = *request.DisplayName
 	}
-	if request.OperationPolicies != nil {
-		var _operationPolicies []interface{}
-		for _, item := range request.OperationPolicies {
-			_operationPolicies = append(_operationPolicies, item)
+	if request.Attributes1 != nil {
+		var _attributes1 []interface{}
+		for _, item := range request.Attributes1 {
+			_attributes1 = append(_attributes1, item)
 		}
-		bodies["operationPolicies"] = _operationPolicies
+		bodies["attributes1"] = _attributes1
+	}
+	if request.Attributes2 != nil {
+		var _attributes2 []interface{}
+		for _, item := range request.Attributes2 {
+			_attributes2 = append(_attributes2, item)
+		}
+		bodies["attributes2"] = _attributes2
+	}
+	if request.Attributes3 != nil {
+		var _attributes3 []interface{}
+		for _, item := range request.Attributes3 {
+			_attributes3 = append(_attributes3, item)
+		}
+		bodies["attributes3"] = _attributes3
+	}
+	if request.Attributes4 != nil {
+		var _attributes4 []interface{}
+		for _, item := range request.Attributes4 {
+			_attributes4 = append(_attributes4, item)
+		}
+		bodies["attributes4"] = _attributes4
+	}
+	if request.Attributes5 != nil {
+		var _attributes5 []interface{}
+		for _, item := range request.Attributes5 {
+			_attributes5 = append(_attributes5, item)
+		}
+		bodies["attributes5"] = _attributes5
 	}
 	if request.JoinPolicies != nil {
 		var _joinPolicies []interface{}
@@ -2328,8 +2384,20 @@ func (p Gs2GuildRestClient) CreateGuildAsync(
 	if request.DisplayName != nil && *request.DisplayName != "" {
 		bodies["displayName"] = *request.DisplayName
 	}
-	if request.OperationPolicy != nil {
-		bodies["operationPolicy"] = *request.OperationPolicy
+	if request.Attribute1 != nil {
+		bodies["attribute1"] = *request.Attribute1
+	}
+	if request.Attribute2 != nil {
+		bodies["attribute2"] = *request.Attribute2
+	}
+	if request.Attribute3 != nil {
+		bodies["attribute3"] = *request.Attribute3
+	}
+	if request.Attribute4 != nil {
+		bodies["attribute4"] = *request.Attribute4
+	}
+	if request.Attribute5 != nil {
+		bodies["attribute5"] = *request.Attribute5
 	}
 	if request.JoinPolicy != nil && *request.JoinPolicy != "" {
 		bodies["joinPolicy"] = *request.JoinPolicy
@@ -2453,8 +2521,20 @@ func (p Gs2GuildRestClient) CreateGuildByUserIdAsync(
 	if request.DisplayName != nil && *request.DisplayName != "" {
 		bodies["displayName"] = *request.DisplayName
 	}
-	if request.OperationPolicy != nil {
-		bodies["operationPolicy"] = *request.OperationPolicy
+	if request.Attribute1 != nil {
+		bodies["attribute1"] = *request.Attribute1
+	}
+	if request.Attribute2 != nil {
+		bodies["attribute2"] = *request.Attribute2
+	}
+	if request.Attribute3 != nil {
+		bodies["attribute3"] = *request.Attribute3
+	}
+	if request.Attribute4 != nil {
+		bodies["attribute4"] = *request.Attribute4
+	}
+	if request.Attribute5 != nil {
+		bodies["attribute5"] = *request.Attribute5
 	}
 	if request.JoinPolicy != nil && *request.JoinPolicy != "" {
 		bodies["joinPolicy"] = *request.JoinPolicy
@@ -2784,8 +2864,20 @@ func (p Gs2GuildRestClient) UpdateGuildAsync(
 	if request.DisplayName != nil && *request.DisplayName != "" {
 		bodies["displayName"] = *request.DisplayName
 	}
-	if request.OperationPolicy != nil {
-		bodies["operationPolicy"] = *request.OperationPolicy
+	if request.Attribute1 != nil {
+		bodies["attribute1"] = *request.Attribute1
+	}
+	if request.Attribute2 != nil {
+		bodies["attribute2"] = *request.Attribute2
+	}
+	if request.Attribute3 != nil {
+		bodies["attribute3"] = *request.Attribute3
+	}
+	if request.Attribute4 != nil {
+		bodies["attribute4"] = *request.Attribute4
+	}
+	if request.Attribute5 != nil {
+		bodies["attribute5"] = *request.Attribute5
 	}
 	if request.JoinPolicy != nil && *request.JoinPolicy != "" {
 		bodies["joinPolicy"] = *request.JoinPolicy
@@ -2909,8 +3001,20 @@ func (p Gs2GuildRestClient) UpdateGuildByGuildNameAsync(
 	if request.DisplayName != nil && *request.DisplayName != "" {
 		bodies["displayName"] = *request.DisplayName
 	}
-	if request.OperationPolicy != nil {
-		bodies["operationPolicy"] = *request.OperationPolicy
+	if request.Attribute1 != nil {
+		bodies["attribute1"] = *request.Attribute1
+	}
+	if request.Attribute2 != nil {
+		bodies["attribute2"] = *request.Attribute2
+	}
+	if request.Attribute3 != nil {
+		bodies["attribute3"] = *request.Attribute3
+	}
+	if request.Attribute4 != nil {
+		bodies["attribute4"] = *request.Attribute4
+	}
+	if request.Attribute5 != nil {
+		bodies["attribute5"] = *request.Attribute5
 	}
 	if request.JoinPolicy != nil && *request.JoinPolicy != "" {
 		bodies["joinPolicy"] = *request.JoinPolicy
