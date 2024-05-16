@@ -180,6 +180,13 @@ func (p Gs2AdRewardRestClient) CreateNamespaceAsync(
 	if request.UnityAd != nil {
 		bodies["unityAd"] = request.UnityAd.ToDict()
 	}
+	if request.AppLovinMaxes != nil {
+		var _appLovinMaxes []interface{}
+		for _, item := range request.AppLovinMaxes {
+			_appLovinMaxes = append(_appLovinMaxes, item)
+		}
+		bodies["appLovinMaxes"] = _appLovinMaxes
+	}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
@@ -467,6 +474,13 @@ func (p Gs2AdRewardRestClient) UpdateNamespaceAsync(
 	}
 	if request.UnityAd != nil {
 		bodies["unityAd"] = request.UnityAd.ToDict()
+	}
+	if request.AppLovinMaxes != nil {
+		var _appLovinMaxes []interface{}
+		for _, item := range request.AppLovinMaxes {
+			_appLovinMaxes = append(_appLovinMaxes, item)
+		}
+		bodies["appLovinMaxes"] = _appLovinMaxes
 	}
 	if request.ChangePointNotification != nil {
 		bodies["changePointNotification"] = request.ChangePointNotification.ToDict()

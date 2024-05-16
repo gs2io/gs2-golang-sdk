@@ -61,6 +61,7 @@ type CreateNamespaceRequest struct {
 	Name                    *string              `json:"name"`
 	Admob                   *AdMob               `json:"admob"`
 	UnityAd                 *UnityAd             `json:"unityAd"`
+	AppLovinMaxes           []AppLovinMax        `json:"appLovinMaxes"`
 	Description             *string              `json:"description"`
 	ChangePointNotification *NotificationSetting `json:"changePointNotification"`
 	LogSetting              *LogSetting          `json:"logSetting"`
@@ -77,6 +78,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 		Name:                    core.CastString(data["name"]),
 		Admob:                   NewAdMobFromDict(core.CastMap(data["admob"])).Pointer(),
 		UnityAd:                 NewUnityAdFromDict(core.CastMap(data["unityAd"])).Pointer(),
+		AppLovinMaxes:           CastAppLovinMaxes(core.CastArray(data["appLovinMaxes"])),
 		Description:             core.CastString(data["description"]),
 		ChangePointNotification: NewNotificationSettingFromDict(core.CastMap(data["changePointNotification"])).Pointer(),
 		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
@@ -85,9 +87,12 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                    p.Name,
-		"admob":                   p.Admob.ToDict(),
-		"unityAd":                 p.UnityAd.ToDict(),
+		"name":    p.Name,
+		"admob":   p.Admob.ToDict(),
+		"unityAd": p.UnityAd.ToDict(),
+		"appLovinMaxes": CastAppLovinMaxesFromDict(
+			p.AppLovinMaxes,
+		),
 		"description":             p.Description,
 		"changePointNotification": p.ChangePointNotification.ToDict(),
 		"logSetting":              p.LogSetting.ToDict(),
@@ -164,6 +169,7 @@ type UpdateNamespaceRequest struct {
 	Description             *string              `json:"description"`
 	Admob                   *AdMob               `json:"admob"`
 	UnityAd                 *UnityAd             `json:"unityAd"`
+	AppLovinMaxes           []AppLovinMax        `json:"appLovinMaxes"`
 	ChangePointNotification *NotificationSetting `json:"changePointNotification"`
 	LogSetting              *LogSetting          `json:"logSetting"`
 }
@@ -180,6 +186,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 		Description:             core.CastString(data["description"]),
 		Admob:                   NewAdMobFromDict(core.CastMap(data["admob"])).Pointer(),
 		UnityAd:                 NewUnityAdFromDict(core.CastMap(data["unityAd"])).Pointer(),
+		AppLovinMaxes:           CastAppLovinMaxes(core.CastArray(data["appLovinMaxes"])),
 		ChangePointNotification: NewNotificationSettingFromDict(core.CastMap(data["changePointNotification"])).Pointer(),
 		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
@@ -187,10 +194,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":           p.NamespaceName,
-		"description":             p.Description,
-		"admob":                   p.Admob.ToDict(),
-		"unityAd":                 p.UnityAd.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"admob":         p.Admob.ToDict(),
+		"unityAd":       p.UnityAd.ToDict(),
+		"appLovinMaxes": CastAppLovinMaxesFromDict(
+			p.AppLovinMaxes,
+		),
 		"changePointNotification": p.ChangePointNotification.ToDict(),
 		"logSetting":              p.LogSetting.ToDict(),
 	}

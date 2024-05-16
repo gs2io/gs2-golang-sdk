@@ -28,6 +28,7 @@ type Namespace struct {
 	Description             *string              `json:"description"`
 	Admob                   *AdMob               `json:"admob"`
 	UnityAd                 *UnityAd             `json:"unityAd"`
+	AppLovinMaxes           []AppLovinMax        `json:"appLovinMaxes"`
 	ChangePointNotification *NotificationSetting `json:"changePointNotification"`
 	LogSetting              *LogSetting          `json:"logSetting"`
 	CreatedAt               *int64               `json:"createdAt"`
@@ -48,6 +49,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 		Description:             core.CastString(data["description"]),
 		Admob:                   NewAdMobFromDict(core.CastMap(data["admob"])).Pointer(),
 		UnityAd:                 NewUnityAdFromDict(core.CastMap(data["unityAd"])).Pointer(),
+		AppLovinMaxes:           CastAppLovinMaxes(core.CastArray(data["appLovinMaxes"])),
 		ChangePointNotification: NewNotificationSettingFromDict(core.CastMap(data["changePointNotification"])).Pointer(),
 		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 		CreatedAt:               core.CastInt64(data["createdAt"]),
@@ -78,6 +80,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.UnityAd != nil {
 		unityAd = p.UnityAd.ToDict()
 	}
+	var appLovinMaxes []interface{}
+	if p.AppLovinMaxes != nil {
+		appLovinMaxes = CastAppLovinMaxesFromDict(
+			p.AppLovinMaxes,
+		)
+	}
 	var changePointNotification map[string]interface{}
 	if p.ChangePointNotification != nil {
 		changePointNotification = p.ChangePointNotification.ToDict()
@@ -104,6 +112,7 @@ func (p Namespace) ToDict() map[string]interface{} {
 		"description":             description,
 		"admob":                   admob,
 		"unityAd":                 unityAd,
+		"appLovinMaxes":           appLovinMaxes,
 		"changePointNotification": changePointNotification,
 		"logSetting":              logSetting,
 		"createdAt":               createdAt,
@@ -305,6 +314,60 @@ func CastUnityAds(data []interface{}) []UnityAd {
 }
 
 func CastUnityAdsFromDict(data []UnityAd) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type AppLovinMax struct {
+	AllowAdUnitId *string `json:"allowAdUnitId"`
+	EventKey      *string `json:"eventKey"`
+}
+
+func NewAppLovinMaxFromJson(data string) AppLovinMax {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAppLovinMaxFromDict(dict)
+}
+
+func NewAppLovinMaxFromDict(data map[string]interface{}) AppLovinMax {
+	return AppLovinMax{
+		AllowAdUnitId: core.CastString(data["allowAdUnitId"]),
+		EventKey:      core.CastString(data["eventKey"]),
+	}
+}
+
+func (p AppLovinMax) ToDict() map[string]interface{} {
+
+	var allowAdUnitId *string
+	if p.AllowAdUnitId != nil {
+		allowAdUnitId = p.AllowAdUnitId
+	}
+	var eventKey *string
+	if p.EventKey != nil {
+		eventKey = p.EventKey
+	}
+	return map[string]interface{}{
+		"allowAdUnitId": allowAdUnitId,
+		"eventKey":      eventKey,
+	}
+}
+
+func (p AppLovinMax) Pointer() *AppLovinMax {
+	return &p
+}
+
+func CastAppLovinMaxes(data []interface{}) []AppLovinMax {
+	v := make([]AppLovinMax, 0)
+	for _, d := range data {
+		v = append(v, NewAppLovinMaxFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAppLovinMaxesFromDict(data []AppLovinMax) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
