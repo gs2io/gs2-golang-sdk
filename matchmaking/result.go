@@ -675,6 +675,68 @@ func (p DoMatchmakingByUserIdResult) Pointer() *DoMatchmakingByUserIdResult {
 	return &p
 }
 
+type PingResult struct {
+	Item *Gathering `json:"item"`
+}
+
+type PingAsyncResult struct {
+	result *PingResult
+	err    error
+}
+
+func NewPingResultFromJson(data string) PingResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPingResultFromDict(dict)
+}
+
+func NewPingResultFromDict(data map[string]interface{}) PingResult {
+	return PingResult{
+		Item: NewGatheringFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p PingResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p PingResult) Pointer() *PingResult {
+	return &p
+}
+
+type PingByUserIdResult struct {
+	Item *Gathering `json:"item"`
+}
+
+type PingByUserIdAsyncResult struct {
+	result *PingByUserIdResult
+	err    error
+}
+
+func NewPingByUserIdResultFromJson(data string) PingByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPingByUserIdResultFromDict(dict)
+}
+
+func NewPingByUserIdResultFromDict(data map[string]interface{}) PingByUserIdResult {
+	return PingByUserIdResult{
+		Item: NewGatheringFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p PingByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p PingByUserIdResult) Pointer() *PingByUserIdResult {
+	return &p
+}
+
 type GetGatheringResult struct {
 	Item *Gathering `json:"item"`
 }

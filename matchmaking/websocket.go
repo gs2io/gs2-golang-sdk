@@ -177,6 +177,12 @@ func (p Gs2MatchmakingWebSocketClient) CreateNamespaceAsync(
 	if request.EnableRating != nil {
 		bodies["enableRating"] = *request.EnableRating
 	}
+	if request.EnableDisconnectDetection != nil && *request.EnableDisconnectDetection != "" {
+		bodies["enableDisconnectDetection"] = *request.EnableDisconnectDetection
+	}
+	if request.DisconnectDetectionTimeoutSeconds != nil {
+		bodies["disconnectDetectionTimeoutSeconds"] = *request.DisconnectDetectionTimeoutSeconds
+	}
 	if request.CreateGatheringTriggerType != nil && *request.CreateGatheringTriggerType != "" {
 		bodies["createGatheringTriggerType"] = *request.CreateGatheringTriggerType
 	}
@@ -470,6 +476,12 @@ func (p Gs2MatchmakingWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.EnableRating != nil {
 		bodies["enableRating"] = *request.EnableRating
+	}
+	if request.EnableDisconnectDetection != nil && *request.EnableDisconnectDetection != "" {
+		bodies["enableDisconnectDetection"] = *request.EnableDisconnectDetection
+	}
+	if request.DisconnectDetectionTimeoutSeconds != nil {
+		bodies["disconnectDetectionTimeoutSeconds"] = *request.DisconnectDetectionTimeoutSeconds
 	}
 	if request.CreateGatheringTriggerType != nil && *request.CreateGatheringTriggerType != "" {
 		bodies["createGatheringTriggerType"] = *request.CreateGatheringTriggerType
@@ -2036,6 +2048,192 @@ func (p Gs2MatchmakingWebSocketClient) DoMatchmakingByUserId(
 ) (*DoMatchmakingByUserIdResult, error) {
 	callback := make(chan DoMatchmakingByUserIdAsyncResult, 1)
 	go p.DoMatchmakingByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) pingAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PingAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PingAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PingResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PingAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PingAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) PingAsync(
+	request *PingRequest,
+	callback chan<- PingAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "gathering",
+			"function":    "ping",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		bodies["gatheringName"] = *request.GatheringName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.pingAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) Ping(
+	request *PingRequest,
+) (*PingResult, error) {
+	callback := make(chan PingAsyncResult, 1)
+	go p.PingAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) pingByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PingByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PingByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PingByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PingByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PingByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) PingByUserIdAsync(
+	request *PingByUserIdRequest,
+	callback chan<- PingByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "gathering",
+			"function":    "pingByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GatheringName != nil && *request.GatheringName != "" {
+		bodies["gatheringName"] = *request.GatheringName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.pingByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) PingByUserId(
+	request *PingByUserIdRequest,
+) (*PingByUserIdResult, error) {
+	callback := make(chan PingByUserIdAsyncResult, 1)
+	go p.PingByUserIdAsync(
 		request,
 		callback,
 	)

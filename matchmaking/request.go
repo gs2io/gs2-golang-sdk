@@ -61,6 +61,8 @@ type CreateNamespaceRequest struct {
 	Name                                          *string              `json:"name"`
 	Description                                   *string              `json:"description"`
 	EnableRating                                  *bool                `json:"enableRating"`
+	EnableDisconnectDetection                     *string              `json:"enableDisconnectDetection"`
+	DisconnectDetectionTimeoutSeconds             *int32               `json:"disconnectDetectionTimeoutSeconds"`
 	CreateGatheringTriggerType                    *string              `json:"createGatheringTriggerType"`
 	CreateGatheringTriggerRealtimeNamespaceId     *string              `json:"createGatheringTriggerRealtimeNamespaceId"`
 	CreateGatheringTriggerScriptId                *string              `json:"createGatheringTriggerScriptId"`
@@ -86,10 +88,12 @@ func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:                       core.CastString(data["name"]),
-		Description:                core.CastString(data["description"]),
-		EnableRating:               core.CastBool(data["enableRating"]),
-		CreateGatheringTriggerType: core.CastString(data["createGatheringTriggerType"]),
+		Name:                              core.CastString(data["name"]),
+		Description:                       core.CastString(data["description"]),
+		EnableRating:                      core.CastBool(data["enableRating"]),
+		EnableDisconnectDetection:         core.CastString(data["enableDisconnectDetection"]),
+		DisconnectDetectionTimeoutSeconds: core.CastInt32(data["disconnectDetectionTimeoutSeconds"]),
+		CreateGatheringTriggerType:        core.CastString(data["createGatheringTriggerType"]),
 		CreateGatheringTriggerRealtimeNamespaceId:     core.CastString(data["createGatheringTriggerRealtimeNamespaceId"]),
 		CreateGatheringTriggerScriptId:                core.CastString(data["createGatheringTriggerScriptId"]),
 		CompleteMatchmakingTriggerType:                core.CastString(data["completeMatchmakingTriggerType"]),
@@ -109,10 +113,12 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                       p.Name,
-		"description":                p.Description,
-		"enableRating":               p.EnableRating,
-		"createGatheringTriggerType": p.CreateGatheringTriggerType,
+		"name":                                          p.Name,
+		"description":                                   p.Description,
+		"enableRating":                                  p.EnableRating,
+		"enableDisconnectDetection":                     p.EnableDisconnectDetection,
+		"disconnectDetectionTimeoutSeconds":             p.DisconnectDetectionTimeoutSeconds,
+		"createGatheringTriggerType":                    p.CreateGatheringTriggerType,
 		"createGatheringTriggerRealtimeNamespaceId":     p.CreateGatheringTriggerRealtimeNamespaceId,
 		"createGatheringTriggerScriptId":                p.CreateGatheringTriggerScriptId,
 		"completeMatchmakingTriggerType":                p.CompleteMatchmakingTriggerType,
@@ -199,6 +205,8 @@ type UpdateNamespaceRequest struct {
 	NamespaceName                                 *string              `json:"namespaceName"`
 	Description                                   *string              `json:"description"`
 	EnableRating                                  *bool                `json:"enableRating"`
+	EnableDisconnectDetection                     *string              `json:"enableDisconnectDetection"`
+	DisconnectDetectionTimeoutSeconds             *int32               `json:"disconnectDetectionTimeoutSeconds"`
 	CreateGatheringTriggerType                    *string              `json:"createGatheringTriggerType"`
 	CreateGatheringTriggerRealtimeNamespaceId     *string              `json:"createGatheringTriggerRealtimeNamespaceId"`
 	CreateGatheringTriggerScriptId                *string              `json:"createGatheringTriggerScriptId"`
@@ -224,10 +232,12 @@ func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:              core.CastString(data["namespaceName"]),
-		Description:                core.CastString(data["description"]),
-		EnableRating:               core.CastBool(data["enableRating"]),
-		CreateGatheringTriggerType: core.CastString(data["createGatheringTriggerType"]),
+		NamespaceName:                                 core.CastString(data["namespaceName"]),
+		Description:                                   core.CastString(data["description"]),
+		EnableRating:                                  core.CastBool(data["enableRating"]),
+		EnableDisconnectDetection:                     core.CastString(data["enableDisconnectDetection"]),
+		DisconnectDetectionTimeoutSeconds:             core.CastInt32(data["disconnectDetectionTimeoutSeconds"]),
+		CreateGatheringTriggerType:                    core.CastString(data["createGatheringTriggerType"]),
 		CreateGatheringTriggerRealtimeNamespaceId:     core.CastString(data["createGatheringTriggerRealtimeNamespaceId"]),
 		CreateGatheringTriggerScriptId:                core.CastString(data["createGatheringTriggerScriptId"]),
 		CompleteMatchmakingTriggerType:                core.CastString(data["completeMatchmakingTriggerType"]),
@@ -247,10 +257,12 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":              p.NamespaceName,
-		"description":                p.Description,
-		"enableRating":               p.EnableRating,
-		"createGatheringTriggerType": p.CreateGatheringTriggerType,
+		"namespaceName":                                 p.NamespaceName,
+		"description":                                   p.Description,
+		"enableRating":                                  p.EnableRating,
+		"enableDisconnectDetection":                     p.EnableDisconnectDetection,
+		"disconnectDetectionTimeoutSeconds":             p.DisconnectDetectionTimeoutSeconds,
+		"createGatheringTriggerType":                    p.CreateGatheringTriggerType,
 		"createGatheringTriggerRealtimeNamespaceId":     p.CreateGatheringTriggerRealtimeNamespaceId,
 		"createGatheringTriggerScriptId":                p.CreateGatheringTriggerScriptId,
 		"completeMatchmakingTriggerType":                p.CompleteMatchmakingTriggerType,
@@ -888,6 +900,81 @@ func (p DoMatchmakingByUserIdRequest) ToDict() map[string]interface{} {
 }
 
 func (p DoMatchmakingByUserIdRequest) Pointer() *DoMatchmakingByUserIdRequest {
+	return &p
+}
+
+type PingRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	GatheringName      *string `json:"gatheringName"`
+	AccessToken        *string `json:"accessToken"`
+}
+
+func NewPingRequestFromJson(data string) PingRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPingRequestFromDict(dict)
+}
+
+func NewPingRequestFromDict(data map[string]interface{}) PingRequest {
+	return PingRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		GatheringName: core.CastString(data["gatheringName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+	}
+}
+
+func (p PingRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"gatheringName": p.GatheringName,
+		"accessToken":   p.AccessToken,
+	}
+}
+
+func (p PingRequest) Pointer() *PingRequest {
+	return &p
+}
+
+type PingByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	GatheringName      *string `json:"gatheringName"`
+	UserId             *string `json:"userId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+}
+
+func NewPingByUserIdRequestFromJson(data string) PingByUserIdRequest {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPingByUserIdRequestFromDict(dict)
+}
+
+func NewPingByUserIdRequestFromDict(data map[string]interface{}) PingByUserIdRequest {
+	return PingByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		GatheringName:   core.CastString(data["gatheringName"]),
+		UserId:          core.CastString(data["userId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p PingByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"gatheringName":   p.GatheringName,
+		"userId":          p.UserId,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p PingByUserIdRequest) Pointer() *PingByUserIdRequest {
 	return &p
 }
 

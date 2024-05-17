@@ -27,6 +27,8 @@ type Namespace struct {
 	Name                                          *string              `json:"name"`
 	Description                                   *string              `json:"description"`
 	EnableRating                                  *bool                `json:"enableRating"`
+	EnableDisconnectDetection                     *string              `json:"enableDisconnectDetection"`
+	DisconnectDetectionTimeoutSeconds             *int32               `json:"disconnectDetectionTimeoutSeconds"`
 	CreateGatheringTriggerType                    *string              `json:"createGatheringTriggerType"`
 	CreateGatheringTriggerRealtimeNamespaceId     *string              `json:"createGatheringTriggerRealtimeNamespaceId"`
 	CreateGatheringTriggerScriptId                *string              `json:"createGatheringTriggerScriptId"`
@@ -55,11 +57,13 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:                core.CastString(data["namespaceId"]),
-		Name:                       core.CastString(data["name"]),
-		Description:                core.CastString(data["description"]),
-		EnableRating:               core.CastBool(data["enableRating"]),
-		CreateGatheringTriggerType: core.CastString(data["createGatheringTriggerType"]),
+		NamespaceId:                       core.CastString(data["namespaceId"]),
+		Name:                              core.CastString(data["name"]),
+		Description:                       core.CastString(data["description"]),
+		EnableRating:                      core.CastBool(data["enableRating"]),
+		EnableDisconnectDetection:         core.CastString(data["enableDisconnectDetection"]),
+		DisconnectDetectionTimeoutSeconds: core.CastInt32(data["disconnectDetectionTimeoutSeconds"]),
+		CreateGatheringTriggerType:        core.CastString(data["createGatheringTriggerType"]),
 		CreateGatheringTriggerRealtimeNamespaceId:     core.CastString(data["createGatheringTriggerRealtimeNamespaceId"]),
 		CreateGatheringTriggerScriptId:                core.CastString(data["createGatheringTriggerScriptId"]),
 		CompleteMatchmakingTriggerType:                core.CastString(data["completeMatchmakingTriggerType"]),
@@ -97,6 +101,14 @@ func (p Namespace) ToDict() map[string]interface{} {
 	var enableRating *bool
 	if p.EnableRating != nil {
 		enableRating = p.EnableRating
+	}
+	var enableDisconnectDetection *string
+	if p.EnableDisconnectDetection != nil {
+		enableDisconnectDetection = p.EnableDisconnectDetection
+	}
+	var disconnectDetectionTimeoutSeconds *int32
+	if p.DisconnectDetectionTimeoutSeconds != nil {
+		disconnectDetectionTimeoutSeconds = p.DisconnectDetectionTimeoutSeconds
 	}
 	var createGatheringTriggerType *string
 	if p.CreateGatheringTriggerType != nil {
@@ -171,11 +183,13 @@ func (p Namespace) ToDict() map[string]interface{} {
 		revision = p.Revision
 	}
 	return map[string]interface{}{
-		"namespaceId":                namespaceId,
-		"name":                       name,
-		"description":                description,
-		"enableRating":               enableRating,
-		"createGatheringTriggerType": createGatheringTriggerType,
+		"namespaceId":                       namespaceId,
+		"name":                              name,
+		"description":                       description,
+		"enableRating":                      enableRating,
+		"enableDisconnectDetection":         enableDisconnectDetection,
+		"disconnectDetectionTimeoutSeconds": disconnectDetectionTimeoutSeconds,
+		"createGatheringTriggerType":        createGatheringTriggerType,
 		"createGatheringTriggerRealtimeNamespaceId":     createGatheringTriggerRealtimeNamespaceId,
 		"createGatheringTriggerScriptId":                createGatheringTriggerScriptId,
 		"completeMatchmakingTriggerType":                completeMatchmakingTriggerType,
@@ -1021,6 +1035,7 @@ type Player struct {
 	Attributes  []Attribute `json:"attributes"`
 	RoleName    *string     `json:"roleName"`
 	DenyUserIds []*string   `json:"denyUserIds"`
+	CreatedAt   *int64      `json:"createdAt"`
 }
 
 func NewPlayerFromJson(data string) Player {
@@ -1035,6 +1050,7 @@ func NewPlayerFromDict(data map[string]interface{}) Player {
 		Attributes:  CastAttributes(core.CastArray(data["attributes"])),
 		RoleName:    core.CastString(data["roleName"]),
 		DenyUserIds: core.CastStrings(core.CastArray(data["denyUserIds"])),
+		CreatedAt:   core.CastInt64(data["createdAt"]),
 	}
 }
 
@@ -1060,11 +1076,16 @@ func (p Player) ToDict() map[string]interface{} {
 			p.DenyUserIds,
 		)
 	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
 	return map[string]interface{}{
 		"userId":      userId,
 		"attributes":  attributes,
 		"roleName":    roleName,
 		"denyUserIds": denyUserIds,
+		"createdAt":   createdAt,
 	}
 }
 
