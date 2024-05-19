@@ -18,6 +18,7 @@ package quest
 
 import (
 	"encoding/json"
+	"strconv"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -30,10 +31,74 @@ type DescribeNamespacesRequest struct {
 	Limit           *int32  `json:"limit"`
 }
 
-func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeNamespacesRequestFromDict(dict)
+func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeNamespacesRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeNamespacesRequest{}
+	} else {
+		*p = DescribeNamespacesRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesRequest, error) {
+	req := DescribeNamespacesRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeNamespacesRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -71,10 +136,136 @@ type CreateNamespaceRequest struct {
 	KeyId *string `json:"keyId"`
 }
 
-func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateNamespaceRequestFromDict(dict)
+func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateNamespaceRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateNamespaceRequest{}
+	} else {
+		*p = CreateNamespaceRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Name = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Name = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Name = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Name); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.TransactionSetting); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["startQuestScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.StartQuestScript); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["completeQuestScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.CompleteQuestScript); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["failedQuestScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.FailedQuestScript); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["logSetting"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, error) {
+	req := CreateNamespaceRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateNamespaceRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -116,10 +307,65 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceStatusRequestFromDict(dict)
+func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetNamespaceStatusRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetNamespaceStatusRequest{}
+	} else {
+		*p = GetNamespaceStatusRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusRequest, error) {
+	req := GetNamespaceStatusRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetNamespaceStatusRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
@@ -145,10 +391,65 @@ type GetNamespaceRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceRequestFromDict(dict)
+func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetNamespaceRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetNamespaceRequest{}
+	} else {
+		*p = GetNamespaceRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
+	req := GetNamespaceRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetNamespaceRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -184,10 +485,136 @@ type UpdateNamespaceRequest struct {
 	KeyId *string `json:"keyId"`
 }
 
-func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateNamespaceRequestFromDict(dict)
+func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateNamespaceRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateNamespaceRequest{}
+	} else {
+		*p = UpdateNamespaceRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.TransactionSetting); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["startQuestScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.StartQuestScript); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["completeQuestScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.CompleteQuestScript); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["failedQuestScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.FailedQuestScript); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["logSetting"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, error) {
+	req := UpdateNamespaceRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateNamespaceRequest{}, err
+	}
+	return req, nil
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -229,10 +656,65 @@ type DeleteNamespaceRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteNamespaceRequestFromDict(dict)
+func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteNamespaceRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteNamespaceRequest{}
+	} else {
+		*p = DeleteNamespaceRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, error) {
+	req := DeleteNamespaceRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteNamespaceRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
@@ -260,10 +742,91 @@ type DumpUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewDumpUserDataByUserIdRequestFromJson(data string) DumpUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDumpUserDataByUserIdRequestFromDict(dict)
+func (p *DumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DumpUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DumpUserDataByUserIdRequest{}
+	} else {
+		*p = DumpUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDumpUserDataByUserIdRequestFromJson(data string) (DumpUserDataByUserIdRequest, error) {
+	req := DumpUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DumpUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
@@ -293,10 +856,91 @@ type CheckDumpUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewCheckDumpUserDataByUserIdRequestFromJson(data string) CheckDumpUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCheckDumpUserDataByUserIdRequestFromDict(dict)
+func (p *CheckDumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CheckDumpUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CheckDumpUserDataByUserIdRequest{}
+	} else {
+		*p = CheckDumpUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCheckDumpUserDataByUserIdRequestFromJson(data string) (CheckDumpUserDataByUserIdRequest, error) {
+	req := CheckDumpUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CheckDumpUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
@@ -326,10 +970,91 @@ type CleanUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewCleanUserDataByUserIdRequestFromJson(data string) CleanUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCleanUserDataByUserIdRequestFromDict(dict)
+func (p *CleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CleanUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CleanUserDataByUserIdRequest{}
+	} else {
+		*p = CleanUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCleanUserDataByUserIdRequestFromJson(data string) (CleanUserDataByUserIdRequest, error) {
+	req := CleanUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CleanUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
@@ -359,10 +1084,91 @@ type CheckCleanUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewCheckCleanUserDataByUserIdRequestFromJson(data string) CheckCleanUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCheckCleanUserDataByUserIdRequestFromDict(dict)
+func (p *CheckCleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CheckCleanUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CheckCleanUserDataByUserIdRequest{}
+	} else {
+		*p = CheckCleanUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCheckCleanUserDataByUserIdRequestFromJson(data string) (CheckCleanUserDataByUserIdRequest, error) {
+	req := CheckCleanUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CheckCleanUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
@@ -392,10 +1198,91 @@ type PrepareImportUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewPrepareImportUserDataByUserIdRequestFromJson(data string) PrepareImportUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareImportUserDataByUserIdRequestFromDict(dict)
+func (p *PrepareImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = PrepareImportUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = PrepareImportUserDataByUserIdRequest{}
+	} else {
+		*p = PrepareImportUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewPrepareImportUserDataByUserIdRequestFromJson(data string) (PrepareImportUserDataByUserIdRequest, error) {
+	req := PrepareImportUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return PrepareImportUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
@@ -426,10 +1313,117 @@ type ImportUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewImportUserDataByUserIdRequestFromJson(data string) ImportUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewImportUserDataByUserIdRequestFromDict(dict)
+func (p *ImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ImportUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ImportUserDataByUserIdRequest{}
+	} else {
+		*p = ImportUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["uploadToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UploadToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UploadToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UploadToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UploadToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UploadToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UploadToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewImportUserDataByUserIdRequestFromJson(data string) (ImportUserDataByUserIdRequest, error) {
+	req := ImportUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ImportUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
@@ -462,10 +1456,117 @@ type CheckImportUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewCheckImportUserDataByUserIdRequestFromJson(data string) CheckImportUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCheckImportUserDataByUserIdRequestFromDict(dict)
+func (p *CheckImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CheckImportUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CheckImportUserDataByUserIdRequest{}
+	} else {
+		*p = CheckImportUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["uploadToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UploadToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UploadToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UploadToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UploadToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UploadToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UploadToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCheckImportUserDataByUserIdRequestFromJson(data string) (CheckImportUserDataByUserIdRequest, error) {
+	req := CheckImportUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CheckImportUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
@@ -497,10 +1598,100 @@ type DescribeQuestGroupModelMastersRequest struct {
 	Limit           *int32  `json:"limit"`
 }
 
-func NewDescribeQuestGroupModelMastersRequestFromJson(data string) DescribeQuestGroupModelMastersRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeQuestGroupModelMastersRequestFromDict(dict)
+func (p *DescribeQuestGroupModelMastersRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeQuestGroupModelMastersRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeQuestGroupModelMastersRequest{}
+	} else {
+		*p = DescribeQuestGroupModelMastersRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeQuestGroupModelMastersRequestFromJson(data string) (DescribeQuestGroupModelMastersRequest, error) {
+	req := DescribeQuestGroupModelMastersRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeQuestGroupModelMastersRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeQuestGroupModelMastersRequestFromDict(data map[string]interface{}) DescribeQuestGroupModelMastersRequest {
@@ -534,10 +1725,169 @@ type CreateQuestGroupModelMasterRequest struct {
 	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
 }
 
-func NewCreateQuestGroupModelMasterRequestFromJson(data string) CreateQuestGroupModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateQuestGroupModelMasterRequestFromDict(dict)
+func (p *CreateQuestGroupModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateQuestGroupModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateQuestGroupModelMasterRequest{}
+	} else {
+		*p = CreateQuestGroupModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Name = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Name = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Name = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Name); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Metadata = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Metadata = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Metadata = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Metadata = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Metadata = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Metadata); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["challengePeriodEventId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.ChallengePeriodEventId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.ChallengePeriodEventId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.ChallengePeriodEventId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.ChallengePeriodEventId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.ChallengePeriodEventId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.ChallengePeriodEventId); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCreateQuestGroupModelMasterRequestFromJson(data string) (CreateQuestGroupModelMasterRequest, error) {
+	req := CreateQuestGroupModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateQuestGroupModelMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCreateQuestGroupModelMasterRequestFromDict(data map[string]interface{}) CreateQuestGroupModelMasterRequest {
@@ -572,10 +1922,91 @@ type GetQuestGroupModelMasterRequest struct {
 	QuestGroupName  *string `json:"questGroupName"`
 }
 
-func NewGetQuestGroupModelMasterRequestFromJson(data string) GetQuestGroupModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetQuestGroupModelMasterRequestFromDict(dict)
+func (p *GetQuestGroupModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetQuestGroupModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetQuestGroupModelMasterRequest{}
+	} else {
+		*p = GetQuestGroupModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetQuestGroupModelMasterRequestFromJson(data string) (GetQuestGroupModelMasterRequest, error) {
+	req := GetQuestGroupModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetQuestGroupModelMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetQuestGroupModelMasterRequestFromDict(data map[string]interface{}) GetQuestGroupModelMasterRequest {
@@ -607,10 +2038,169 @@ type UpdateQuestGroupModelMasterRequest struct {
 	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
 }
 
-func NewUpdateQuestGroupModelMasterRequestFromJson(data string) UpdateQuestGroupModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateQuestGroupModelMasterRequestFromDict(dict)
+func (p *UpdateQuestGroupModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateQuestGroupModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateQuestGroupModelMasterRequest{}
+	} else {
+		*p = UpdateQuestGroupModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Metadata = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Metadata = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Metadata = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Metadata = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Metadata = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Metadata); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["challengePeriodEventId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.ChallengePeriodEventId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.ChallengePeriodEventId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.ChallengePeriodEventId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.ChallengePeriodEventId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.ChallengePeriodEventId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.ChallengePeriodEventId); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateQuestGroupModelMasterRequestFromJson(data string) (UpdateQuestGroupModelMasterRequest, error) {
+	req := UpdateQuestGroupModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateQuestGroupModelMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewUpdateQuestGroupModelMasterRequestFromDict(data map[string]interface{}) UpdateQuestGroupModelMasterRequest {
@@ -645,10 +2235,91 @@ type DeleteQuestGroupModelMasterRequest struct {
 	QuestGroupName  *string `json:"questGroupName"`
 }
 
-func NewDeleteQuestGroupModelMasterRequestFromJson(data string) DeleteQuestGroupModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteQuestGroupModelMasterRequestFromDict(dict)
+func (p *DeleteQuestGroupModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteQuestGroupModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteQuestGroupModelMasterRequest{}
+	} else {
+		*p = DeleteQuestGroupModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteQuestGroupModelMasterRequestFromJson(data string) (DeleteQuestGroupModelMasterRequest, error) {
+	req := DeleteQuestGroupModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteQuestGroupModelMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDeleteQuestGroupModelMasterRequestFromDict(data map[string]interface{}) DeleteQuestGroupModelMasterRequest {
@@ -679,10 +2350,126 @@ type DescribeQuestModelMastersRequest struct {
 	Limit           *int32  `json:"limit"`
 }
 
-func NewDescribeQuestModelMastersRequestFromJson(data string) DescribeQuestModelMastersRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeQuestModelMastersRequestFromDict(dict)
+func (p *DescribeQuestModelMastersRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeQuestModelMastersRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeQuestModelMastersRequest{}
+	} else {
+		*p = DescribeQuestModelMastersRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeQuestModelMastersRequestFromJson(data string) (DescribeQuestModelMastersRequest, error) {
+	req := DescribeQuestModelMastersRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeQuestModelMastersRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeQuestModelMastersRequestFromDict(data map[string]interface{}) DescribeQuestModelMastersRequest {
@@ -724,10 +2511,240 @@ type CreateQuestModelMasterRequest struct {
 	PremiseQuestNames           []*string       `json:"premiseQuestNames"`
 }
 
-func NewCreateQuestModelMasterRequestFromJson(data string) CreateQuestModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateQuestModelMasterRequestFromDict(dict)
+func (p *CreateQuestModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateQuestModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateQuestModelMasterRequest{}
+	} else {
+		*p = CreateQuestModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Name = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Name = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Name = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Name); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Metadata = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Metadata = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Metadata = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Metadata = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Metadata = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Metadata); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["contents"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Contents); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["challengePeriodEventId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.ChallengePeriodEventId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.ChallengePeriodEventId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.ChallengePeriodEventId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.ChallengePeriodEventId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.ChallengePeriodEventId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.ChallengePeriodEventId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["firstCompleteAcquireActions"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.FirstCompleteAcquireActions); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["consumeActions"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.ConsumeActions); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["failedAcquireActions"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.FailedAcquireActions); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["premiseQuestNames"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.PremiseQuestNames); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewCreateQuestModelMasterRequestFromJson(data string) (CreateQuestModelMasterRequest, error) {
+	req := CreateQuestModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateQuestModelMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCreateQuestModelMasterRequestFromDict(data map[string]interface{}) CreateQuestModelMasterRequest {
@@ -785,10 +2802,117 @@ type GetQuestModelMasterRequest struct {
 	QuestName       *string `json:"questName"`
 }
 
-func NewGetQuestModelMasterRequestFromJson(data string) GetQuestModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetQuestModelMasterRequestFromDict(dict)
+func (p *GetQuestModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetQuestModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetQuestModelMasterRequest{}
+	} else {
+		*p = GetQuestModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetQuestModelMasterRequestFromJson(data string) (GetQuestModelMasterRequest, error) {
+	req := GetQuestModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetQuestModelMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetQuestModelMasterRequestFromDict(data map[string]interface{}) GetQuestModelMasterRequest {
@@ -828,10 +2952,240 @@ type UpdateQuestModelMasterRequest struct {
 	PremiseQuestNames           []*string       `json:"premiseQuestNames"`
 }
 
-func NewUpdateQuestModelMasterRequestFromJson(data string) UpdateQuestModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateQuestModelMasterRequestFromDict(dict)
+func (p *UpdateQuestModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateQuestModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateQuestModelMasterRequest{}
+	} else {
+		*p = UpdateQuestModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Metadata = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Metadata = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Metadata = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Metadata = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Metadata = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Metadata); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["contents"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Contents); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["challengePeriodEventId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.ChallengePeriodEventId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.ChallengePeriodEventId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.ChallengePeriodEventId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.ChallengePeriodEventId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.ChallengePeriodEventId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.ChallengePeriodEventId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["firstCompleteAcquireActions"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.FirstCompleteAcquireActions); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["consumeActions"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.ConsumeActions); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["failedAcquireActions"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.FailedAcquireActions); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["premiseQuestNames"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.PremiseQuestNames); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateQuestModelMasterRequestFromJson(data string) (UpdateQuestModelMasterRequest, error) {
+	req := UpdateQuestModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateQuestModelMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewUpdateQuestModelMasterRequestFromDict(data map[string]interface{}) UpdateQuestModelMasterRequest {
@@ -889,10 +3243,117 @@ type DeleteQuestModelMasterRequest struct {
 	QuestName       *string `json:"questName"`
 }
 
-func NewDeleteQuestModelMasterRequestFromJson(data string) DeleteQuestModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteQuestModelMasterRequestFromDict(dict)
+func (p *DeleteQuestModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteQuestModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteQuestModelMasterRequest{}
+	} else {
+		*p = DeleteQuestModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteQuestModelMasterRequestFromJson(data string) (DeleteQuestModelMasterRequest, error) {
+	req := DeleteQuestModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteQuestModelMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDeleteQuestModelMasterRequestFromDict(data map[string]interface{}) DeleteQuestModelMasterRequest {
@@ -922,10 +3383,65 @@ type ExportMasterRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExportMasterRequestFromDict(dict)
+func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExportMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExportMasterRequest{}
+	} else {
+		*p = ExportMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewExportMasterRequestFromJson(data string) (ExportMasterRequest, error) {
+	req := ExportMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ExportMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
@@ -951,10 +3467,65 @@ type GetCurrentQuestMasterRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetCurrentQuestMasterRequestFromJson(data string) GetCurrentQuestMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetCurrentQuestMasterRequestFromDict(dict)
+func (p *GetCurrentQuestMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetCurrentQuestMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetCurrentQuestMasterRequest{}
+	} else {
+		*p = GetCurrentQuestMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetCurrentQuestMasterRequestFromJson(data string) (GetCurrentQuestMasterRequest, error) {
+	req := GetCurrentQuestMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetCurrentQuestMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetCurrentQuestMasterRequestFromDict(data map[string]interface{}) GetCurrentQuestMasterRequest {
@@ -981,10 +3552,91 @@ type UpdateCurrentQuestMasterRequest struct {
 	Settings        *string `json:"settings"`
 }
 
-func NewUpdateCurrentQuestMasterRequestFromJson(data string) UpdateCurrentQuestMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentQuestMasterRequestFromDict(dict)
+func (p *UpdateCurrentQuestMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateCurrentQuestMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateCurrentQuestMasterRequest{}
+	} else {
+		*p = UpdateCurrentQuestMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["settings"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Settings = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Settings = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Settings = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Settings = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Settings = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Settings); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateCurrentQuestMasterRequestFromJson(data string) (UpdateCurrentQuestMasterRequest, error) {
+	req := UpdateCurrentQuestMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateCurrentQuestMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewUpdateCurrentQuestMasterRequestFromDict(data map[string]interface{}) UpdateCurrentQuestMasterRequest {
@@ -1013,10 +3665,74 @@ type UpdateCurrentQuestMasterFromGitHubRequest struct {
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
-func NewUpdateCurrentQuestMasterFromGitHubRequestFromJson(data string) UpdateCurrentQuestMasterFromGitHubRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentQuestMasterFromGitHubRequestFromDict(dict)
+func (p *UpdateCurrentQuestMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateCurrentQuestMasterFromGitHubRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateCurrentQuestMasterFromGitHubRequest{}
+	} else {
+		*p = UpdateCurrentQuestMasterFromGitHubRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["checkoutSetting"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateCurrentQuestMasterFromGitHubRequestFromJson(data string) (UpdateCurrentQuestMasterFromGitHubRequest, error) {
+	req := UpdateCurrentQuestMasterFromGitHubRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateCurrentQuestMasterFromGitHubRequest{}, err
+	}
+	return req, nil
 }
 
 func NewUpdateCurrentQuestMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentQuestMasterFromGitHubRequest {
@@ -1048,10 +3764,152 @@ type DescribeProgressesByUserIdRequest struct {
 	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
-func NewDescribeProgressesByUserIdRequestFromJson(data string) DescribeProgressesByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeProgressesByUserIdRequestFromDict(dict)
+func (p *DescribeProgressesByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeProgressesByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeProgressesByUserIdRequest{}
+	} else {
+		*p = DescribeProgressesByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeProgressesByUserIdRequestFromJson(data string) (DescribeProgressesByUserIdRequest, error) {
+	req := DescribeProgressesByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeProgressesByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeProgressesByUserIdRequestFromDict(data map[string]interface{}) DescribeProgressesByUserIdRequest {
@@ -1091,10 +3949,161 @@ type CreateProgressByUserIdRequest struct {
 	TimeOffsetToken    *string  `json:"timeOffsetToken"`
 }
 
-func NewCreateProgressByUserIdRequestFromJson(data string) CreateProgressByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateProgressByUserIdRequestFromDict(dict)
+func (p *CreateProgressByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateProgressByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateProgressByUserIdRequest{}
+	} else {
+		*p = CreateProgressByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestModelId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestModelId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestModelId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestModelId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestModelId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestModelId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["force"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Force); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["config"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Config); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCreateProgressByUserIdRequestFromJson(data string) (CreateProgressByUserIdRequest, error) {
+	req := CreateProgressByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateProgressByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCreateProgressByUserIdRequestFromDict(data map[string]interface{}) CreateProgressByUserIdRequest {
@@ -1133,10 +4142,91 @@ type GetProgressRequest struct {
 	AccessToken     *string `json:"accessToken"`
 }
 
-func NewGetProgressRequestFromJson(data string) GetProgressRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetProgressRequestFromDict(dict)
+func (p *GetProgressRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetProgressRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetProgressRequest{}
+	} else {
+		*p = GetProgressRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.AccessToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.AccessToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.AccessToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.AccessToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetProgressRequestFromJson(data string) (GetProgressRequest, error) {
+	req := GetProgressRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetProgressRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetProgressRequestFromDict(data map[string]interface{}) GetProgressRequest {
@@ -1166,10 +4256,117 @@ type GetProgressByUserIdRequest struct {
 	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
-func NewGetProgressByUserIdRequestFromJson(data string) GetProgressByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetProgressByUserIdRequestFromDict(dict)
+func (p *GetProgressByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetProgressByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetProgressByUserIdRequest{}
+	} else {
+		*p = GetProgressByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetProgressByUserIdRequestFromJson(data string) (GetProgressByUserIdRequest, error) {
+	req := GetProgressByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetProgressByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetProgressByUserIdRequestFromDict(data map[string]interface{}) GetProgressByUserIdRequest {
@@ -1205,10 +4402,161 @@ type StartRequest struct {
 	Config             []Config `json:"config"`
 }
 
-func NewStartRequestFromJson(data string) StartRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStartRequestFromDict(dict)
+func (p *StartRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StartRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StartRequest{}
+	} else {
+		*p = StartRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.AccessToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.AccessToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.AccessToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.AccessToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["force"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Force); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["config"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Config); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewStartRequestFromJson(data string) (StartRequest, error) {
+	req := StartRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return StartRequest{}, err
+	}
+	return req, nil
 }
 
 func NewStartRequestFromDict(data map[string]interface{}) StartRequest {
@@ -1253,10 +4601,187 @@ type StartByUserIdRequest struct {
 	TimeOffsetToken    *string  `json:"timeOffsetToken"`
 }
 
-func NewStartByUserIdRequestFromJson(data string) StartByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStartByUserIdRequestFromDict(dict)
+func (p *StartByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StartByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StartByUserIdRequest{}
+	} else {
+		*p = StartByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["force"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Force); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["config"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Config); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewStartByUserIdRequestFromJson(data string) (StartByUserIdRequest, error) {
+	req := StartByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return StartByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewStartByUserIdRequestFromDict(data map[string]interface{}) StartByUserIdRequest {
@@ -1301,10 +4826,118 @@ type EndRequest struct {
 	Config             []Config `json:"config"`
 }
 
-func NewEndRequestFromJson(data string) EndRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewEndRequestFromDict(dict)
+func (p *EndRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = EndRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = EndRequest{}
+	} else {
+		*p = EndRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.AccessToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.AccessToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.AccessToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.AccessToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["rewards"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Rewards); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["isComplete"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.IsComplete); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["config"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Config); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewEndRequestFromJson(data string) (EndRequest, error) {
+	req := EndRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return EndRequest{}, err
+	}
+	return req, nil
 }
 
 func NewEndRequestFromDict(data map[string]interface{}) EndRequest {
@@ -1348,10 +4981,144 @@ type EndByUserIdRequest struct {
 	TimeOffsetToken    *string  `json:"timeOffsetToken"`
 }
 
-func NewEndByUserIdRequestFromJson(data string) EndByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewEndByUserIdRequestFromDict(dict)
+func (p *EndByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = EndByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = EndByUserIdRequest{}
+	} else {
+		*p = EndByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["rewards"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Rewards); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["isComplete"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.IsComplete); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["config"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Config); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewEndByUserIdRequestFromJson(data string) (EndByUserIdRequest, error) {
+	req := EndByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return EndByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewEndByUserIdRequestFromDict(data map[string]interface{}) EndByUserIdRequest {
@@ -1393,10 +5160,91 @@ type DeleteProgressRequest struct {
 	AccessToken        *string `json:"accessToken"`
 }
 
-func NewDeleteProgressRequestFromJson(data string) DeleteProgressRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteProgressRequestFromDict(dict)
+func (p *DeleteProgressRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteProgressRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteProgressRequest{}
+	} else {
+		*p = DeleteProgressRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.AccessToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.AccessToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.AccessToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.AccessToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteProgressRequestFromJson(data string) (DeleteProgressRequest, error) {
+	req := DeleteProgressRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteProgressRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDeleteProgressRequestFromDict(data map[string]interface{}) DeleteProgressRequest {
@@ -1427,10 +5275,117 @@ type DeleteProgressByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewDeleteProgressByUserIdRequestFromJson(data string) DeleteProgressByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteProgressByUserIdRequestFromDict(dict)
+func (p *DeleteProgressByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteProgressByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteProgressByUserIdRequest{}
+	} else {
+		*p = DeleteProgressByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteProgressByUserIdRequestFromJson(data string) (DeleteProgressByUserIdRequest, error) {
+	req := DeleteProgressByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteProgressByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDeleteProgressByUserIdRequestFromDict(data map[string]interface{}) DeleteProgressByUserIdRequest {
@@ -1461,10 +5416,91 @@ type CreateProgressByStampSheetRequest struct {
 	KeyId           *string `json:"keyId"`
 }
 
-func NewCreateProgressByStampSheetRequestFromJson(data string) CreateProgressByStampSheetRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateProgressByStampSheetRequestFromDict(dict)
+func (p *CreateProgressByStampSheetRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateProgressByStampSheetRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateProgressByStampSheetRequest{}
+	} else {
+		*p = CreateProgressByStampSheetRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampSheet"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StampSheet = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StampSheet = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StampSheet = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StampSheet = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StampSheet = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StampSheet); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.KeyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.KeyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.KeyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.KeyId); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCreateProgressByStampSheetRequestFromJson(data string) (CreateProgressByStampSheetRequest, error) {
+	req := CreateProgressByStampSheetRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateProgressByStampSheetRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCreateProgressByStampSheetRequestFromDict(data map[string]interface{}) CreateProgressByStampSheetRequest {
@@ -1493,10 +5529,91 @@ type DeleteProgressByStampTaskRequest struct {
 	KeyId           *string `json:"keyId"`
 }
 
-func NewDeleteProgressByStampTaskRequestFromJson(data string) DeleteProgressByStampTaskRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteProgressByStampTaskRequestFromDict(dict)
+func (p *DeleteProgressByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteProgressByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteProgressByStampTaskRequest{}
+	} else {
+		*p = DeleteProgressByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StampTask = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StampTask = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StampTask = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StampTask = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StampTask = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StampTask); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.KeyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.KeyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.KeyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.KeyId); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteProgressByStampTaskRequestFromJson(data string) (DeleteProgressByStampTaskRequest, error) {
+	req := DeleteProgressByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteProgressByStampTaskRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDeleteProgressByStampTaskRequestFromDict(data map[string]interface{}) DeleteProgressByStampTaskRequest {
@@ -1527,10 +5644,126 @@ type DescribeCompletedQuestListsRequest struct {
 	Limit           *int32  `json:"limit"`
 }
 
-func NewDescribeCompletedQuestListsRequestFromJson(data string) DescribeCompletedQuestListsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeCompletedQuestListsRequestFromDict(dict)
+func (p *DescribeCompletedQuestListsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeCompletedQuestListsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeCompletedQuestListsRequest{}
+	} else {
+		*p = DescribeCompletedQuestListsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.AccessToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.AccessToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.AccessToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.AccessToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeCompletedQuestListsRequestFromJson(data string) (DescribeCompletedQuestListsRequest, error) {
+	req := DescribeCompletedQuestListsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeCompletedQuestListsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeCompletedQuestListsRequestFromDict(data map[string]interface{}) DescribeCompletedQuestListsRequest {
@@ -1566,10 +5799,152 @@ type DescribeCompletedQuestListsByUserIdRequest struct {
 	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
-func NewDescribeCompletedQuestListsByUserIdRequestFromJson(data string) DescribeCompletedQuestListsByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeCompletedQuestListsByUserIdRequestFromDict(dict)
+func (p *DescribeCompletedQuestListsByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeCompletedQuestListsByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeCompletedQuestListsByUserIdRequest{}
+	} else {
+		*p = DescribeCompletedQuestListsByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeCompletedQuestListsByUserIdRequestFromJson(data string) (DescribeCompletedQuestListsByUserIdRequest, error) {
+	req := DescribeCompletedQuestListsByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeCompletedQuestListsByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeCompletedQuestListsByUserIdRequestFromDict(data map[string]interface{}) DescribeCompletedQuestListsByUserIdRequest {
@@ -1605,10 +5980,117 @@ type GetCompletedQuestListRequest struct {
 	AccessToken     *string `json:"accessToken"`
 }
 
-func NewGetCompletedQuestListRequestFromJson(data string) GetCompletedQuestListRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetCompletedQuestListRequestFromDict(dict)
+func (p *GetCompletedQuestListRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetCompletedQuestListRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetCompletedQuestListRequest{}
+	} else {
+		*p = GetCompletedQuestListRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.AccessToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.AccessToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.AccessToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.AccessToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetCompletedQuestListRequestFromJson(data string) (GetCompletedQuestListRequest, error) {
+	req := GetCompletedQuestListRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetCompletedQuestListRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetCompletedQuestListRequestFromDict(data map[string]interface{}) GetCompletedQuestListRequest {
@@ -1641,10 +6123,143 @@ type GetCompletedQuestListByUserIdRequest struct {
 	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
-func NewGetCompletedQuestListByUserIdRequestFromJson(data string) GetCompletedQuestListByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetCompletedQuestListByUserIdRequestFromDict(dict)
+func (p *GetCompletedQuestListByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetCompletedQuestListByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetCompletedQuestListByUserIdRequest{}
+	} else {
+		*p = GetCompletedQuestListByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetCompletedQuestListByUserIdRequestFromJson(data string) (GetCompletedQuestListByUserIdRequest, error) {
+	req := GetCompletedQuestListByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetCompletedQuestListByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetCompletedQuestListByUserIdRequestFromDict(data map[string]interface{}) GetCompletedQuestListByUserIdRequest {
@@ -1680,10 +6295,143 @@ type DeleteCompletedQuestListByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewDeleteCompletedQuestListByUserIdRequestFromJson(data string) DeleteCompletedQuestListByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteCompletedQuestListByUserIdRequestFromDict(dict)
+func (p *DeleteCompletedQuestListByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteCompletedQuestListByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteCompletedQuestListByUserIdRequest{}
+	} else {
+		*p = DeleteCompletedQuestListByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteCompletedQuestListByUserIdRequestFromJson(data string) (DeleteCompletedQuestListByUserIdRequest, error) {
+	req := DeleteCompletedQuestListByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteCompletedQuestListByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDeleteCompletedQuestListByUserIdRequestFromDict(data map[string]interface{}) DeleteCompletedQuestListByUserIdRequest {
@@ -1715,10 +6463,65 @@ type DescribeQuestGroupModelsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeQuestGroupModelsRequestFromJson(data string) DescribeQuestGroupModelsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeQuestGroupModelsRequestFromDict(dict)
+func (p *DescribeQuestGroupModelsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeQuestGroupModelsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeQuestGroupModelsRequest{}
+	} else {
+		*p = DescribeQuestGroupModelsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeQuestGroupModelsRequestFromJson(data string) (DescribeQuestGroupModelsRequest, error) {
+	req := DescribeQuestGroupModelsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeQuestGroupModelsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeQuestGroupModelsRequestFromDict(data map[string]interface{}) DescribeQuestGroupModelsRequest {
@@ -1745,10 +6548,91 @@ type GetQuestGroupModelRequest struct {
 	QuestGroupName  *string `json:"questGroupName"`
 }
 
-func NewGetQuestGroupModelRequestFromJson(data string) GetQuestGroupModelRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetQuestGroupModelRequestFromDict(dict)
+func (p *GetQuestGroupModelRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetQuestGroupModelRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetQuestGroupModelRequest{}
+	} else {
+		*p = GetQuestGroupModelRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetQuestGroupModelRequestFromJson(data string) (GetQuestGroupModelRequest, error) {
+	req := GetQuestGroupModelRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetQuestGroupModelRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetQuestGroupModelRequestFromDict(data map[string]interface{}) GetQuestGroupModelRequest {
@@ -1777,10 +6661,91 @@ type DescribeQuestModelsRequest struct {
 	QuestGroupName  *string `json:"questGroupName"`
 }
 
-func NewDescribeQuestModelsRequestFromJson(data string) DescribeQuestModelsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeQuestModelsRequestFromDict(dict)
+func (p *DescribeQuestModelsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeQuestModelsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeQuestModelsRequest{}
+	} else {
+		*p = DescribeQuestModelsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeQuestModelsRequestFromJson(data string) (DescribeQuestModelsRequest, error) {
+	req := DescribeQuestModelsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeQuestModelsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeQuestModelsRequestFromDict(data map[string]interface{}) DescribeQuestModelsRequest {
@@ -1810,10 +6775,117 @@ type GetQuestModelRequest struct {
 	QuestName       *string `json:"questName"`
 }
 
-func NewGetQuestModelRequestFromJson(data string) GetQuestModelRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetQuestModelRequestFromDict(dict)
+func (p *GetQuestModelRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetQuestModelRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetQuestModelRequest{}
+	} else {
+		*p = GetQuestModelRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestGroupName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestGroupName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestGroupName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestGroupName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestGroupName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["questName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.QuestName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.QuestName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.QuestName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.QuestName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.QuestName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetQuestModelRequestFromJson(data string) (GetQuestModelRequest, error) {
+	req := GetQuestModelRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetQuestModelRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetQuestModelRequestFromDict(data map[string]interface{}) GetQuestModelRequest {

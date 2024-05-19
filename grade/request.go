@@ -18,6 +18,7 @@ package grade
 
 import (
 	"encoding/json"
+	"strconv"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -30,10 +31,74 @@ type DescribeNamespacesRequest struct {
 	Limit           *int32  `json:"limit"`
 }
 
-func NewDescribeNamespacesRequestFromJson(data string) DescribeNamespacesRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeNamespacesRequestFromDict(dict)
+func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeNamespacesRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeNamespacesRequest{}
+	} else {
+		*p = DescribeNamespacesRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesRequest, error) {
+	req := DescribeNamespacesRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeNamespacesRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
@@ -65,10 +130,118 @@ type CreateNamespaceRequest struct {
 	LogSetting         *LogSetting         `json:"logSetting"`
 }
 
-func NewCreateNamespaceRequestFromJson(data string) CreateNamespaceRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateNamespaceRequestFromDict(dict)
+func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateNamespaceRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateNamespaceRequest{}
+	} else {
+		*p = CreateNamespaceRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Name = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Name = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Name = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Name); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.TransactionSetting); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["changeGradeScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.ChangeGradeScript); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["logSetting"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, error) {
+	req := CreateNamespaceRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateNamespaceRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
@@ -102,10 +275,65 @@ type GetNamespaceStatusRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetNamespaceStatusRequestFromJson(data string) GetNamespaceStatusRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceStatusRequestFromDict(dict)
+func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetNamespaceStatusRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetNamespaceStatusRequest{}
+	} else {
+		*p = GetNamespaceStatusRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusRequest, error) {
+	req := GetNamespaceStatusRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetNamespaceStatusRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
@@ -131,10 +359,65 @@ type GetNamespaceRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetNamespaceRequestFromJson(data string) GetNamespaceRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetNamespaceRequestFromDict(dict)
+func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetNamespaceRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetNamespaceRequest{}
+	} else {
+		*p = GetNamespaceRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
+	req := GetNamespaceRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetNamespaceRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
@@ -164,10 +447,118 @@ type UpdateNamespaceRequest struct {
 	LogSetting         *LogSetting         `json:"logSetting"`
 }
 
-func NewUpdateNamespaceRequestFromJson(data string) UpdateNamespaceRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateNamespaceRequestFromDict(dict)
+func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateNamespaceRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateNamespaceRequest{}
+	} else {
+		*p = UpdateNamespaceRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.TransactionSetting); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["changeGradeScript"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.ChangeGradeScript); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["logSetting"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, error) {
+	req := UpdateNamespaceRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateNamespaceRequest{}, err
+	}
+	return req, nil
 }
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
@@ -201,10 +592,65 @@ type DeleteNamespaceRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDeleteNamespaceRequestFromJson(data string) DeleteNamespaceRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteNamespaceRequestFromDict(dict)
+func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteNamespaceRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteNamespaceRequest{}
+	} else {
+		*p = DeleteNamespaceRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, error) {
+	req := DeleteNamespaceRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteNamespaceRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
@@ -232,10 +678,91 @@ type DumpUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewDumpUserDataByUserIdRequestFromJson(data string) DumpUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDumpUserDataByUserIdRequestFromDict(dict)
+func (p *DumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DumpUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DumpUserDataByUserIdRequest{}
+	} else {
+		*p = DumpUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDumpUserDataByUserIdRequestFromJson(data string) (DumpUserDataByUserIdRequest, error) {
+	req := DumpUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DumpUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
@@ -265,10 +792,91 @@ type CheckDumpUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewCheckDumpUserDataByUserIdRequestFromJson(data string) CheckDumpUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCheckDumpUserDataByUserIdRequestFromDict(dict)
+func (p *CheckDumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CheckDumpUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CheckDumpUserDataByUserIdRequest{}
+	} else {
+		*p = CheckDumpUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCheckDumpUserDataByUserIdRequestFromJson(data string) (CheckDumpUserDataByUserIdRequest, error) {
+	req := CheckDumpUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CheckDumpUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
@@ -298,10 +906,91 @@ type CleanUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewCleanUserDataByUserIdRequestFromJson(data string) CleanUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCleanUserDataByUserIdRequestFromDict(dict)
+func (p *CleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CleanUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CleanUserDataByUserIdRequest{}
+	} else {
+		*p = CleanUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCleanUserDataByUserIdRequestFromJson(data string) (CleanUserDataByUserIdRequest, error) {
+	req := CleanUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CleanUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
@@ -331,10 +1020,91 @@ type CheckCleanUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewCheckCleanUserDataByUserIdRequestFromJson(data string) CheckCleanUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCheckCleanUserDataByUserIdRequestFromDict(dict)
+func (p *CheckCleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CheckCleanUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CheckCleanUserDataByUserIdRequest{}
+	} else {
+		*p = CheckCleanUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCheckCleanUserDataByUserIdRequestFromJson(data string) (CheckCleanUserDataByUserIdRequest, error) {
+	req := CheckCleanUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CheckCleanUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
@@ -364,10 +1134,91 @@ type PrepareImportUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewPrepareImportUserDataByUserIdRequestFromJson(data string) PrepareImportUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPrepareImportUserDataByUserIdRequestFromDict(dict)
+func (p *PrepareImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = PrepareImportUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = PrepareImportUserDataByUserIdRequest{}
+	} else {
+		*p = PrepareImportUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewPrepareImportUserDataByUserIdRequestFromJson(data string) (PrepareImportUserDataByUserIdRequest, error) {
+	req := PrepareImportUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return PrepareImportUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
@@ -398,10 +1249,117 @@ type ImportUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewImportUserDataByUserIdRequestFromJson(data string) ImportUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewImportUserDataByUserIdRequestFromDict(dict)
+func (p *ImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ImportUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ImportUserDataByUserIdRequest{}
+	} else {
+		*p = ImportUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["uploadToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UploadToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UploadToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UploadToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UploadToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UploadToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UploadToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewImportUserDataByUserIdRequestFromJson(data string) (ImportUserDataByUserIdRequest, error) {
+	req := ImportUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ImportUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
@@ -434,10 +1392,117 @@ type CheckImportUserDataByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewCheckImportUserDataByUserIdRequestFromJson(data string) CheckImportUserDataByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCheckImportUserDataByUserIdRequestFromDict(dict)
+func (p *CheckImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CheckImportUserDataByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CheckImportUserDataByUserIdRequest{}
+	} else {
+		*p = CheckImportUserDataByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["uploadToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UploadToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UploadToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UploadToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UploadToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UploadToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UploadToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCheckImportUserDataByUserIdRequestFromJson(data string) (CheckImportUserDataByUserIdRequest, error) {
+	req := CheckImportUserDataByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CheckImportUserDataByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
@@ -469,10 +1534,100 @@ type DescribeGradeModelMastersRequest struct {
 	Limit           *int32  `json:"limit"`
 }
 
-func NewDescribeGradeModelMastersRequestFromJson(data string) DescribeGradeModelMastersRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeGradeModelMastersRequestFromDict(dict)
+func (p *DescribeGradeModelMastersRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeGradeModelMastersRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeGradeModelMastersRequest{}
+	} else {
+		*p = DescribeGradeModelMastersRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeGradeModelMastersRequestFromJson(data string) (DescribeGradeModelMastersRequest, error) {
+	req := DescribeGradeModelMastersRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeGradeModelMastersRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeGradeModelMastersRequestFromDict(data map[string]interface{}) DescribeGradeModelMastersRequest {
@@ -509,10 +1664,196 @@ type CreateGradeModelMasterRequest struct {
 	AcquireActionRates []AcquireActionRate `json:"acquireActionRates"`
 }
 
-func NewCreateGradeModelMasterRequestFromJson(data string) CreateGradeModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateGradeModelMasterRequestFromDict(dict)
+func (p *CreateGradeModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateGradeModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateGradeModelMasterRequest{}
+	} else {
+		*p = CreateGradeModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Name = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Name = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Name = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Name); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Metadata = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Metadata = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Metadata = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Metadata = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Metadata = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Metadata); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["defaultGrades"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.DefaultGrades); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["experienceModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.ExperienceModelId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.ExperienceModelId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.ExperienceModelId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.ExperienceModelId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.ExperienceModelId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.ExperienceModelId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeEntries"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.GradeEntries); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["acquireActionRates"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.AcquireActionRates); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewCreateGradeModelMasterRequestFromJson(data string) (CreateGradeModelMasterRequest, error) {
+	req := CreateGradeModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateGradeModelMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCreateGradeModelMasterRequestFromDict(data map[string]interface{}) CreateGradeModelMasterRequest {
@@ -559,10 +1900,91 @@ type GetGradeModelMasterRequest struct {
 	GradeName       *string `json:"gradeName"`
 }
 
-func NewGetGradeModelMasterRequestFromJson(data string) GetGradeModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetGradeModelMasterRequestFromDict(dict)
+func (p *GetGradeModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetGradeModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetGradeModelMasterRequest{}
+	} else {
+		*p = GetGradeModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetGradeModelMasterRequestFromJson(data string) (GetGradeModelMasterRequest, error) {
+	req := GetGradeModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetGradeModelMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetGradeModelMasterRequestFromDict(data map[string]interface{}) GetGradeModelMasterRequest {
@@ -597,10 +2019,196 @@ type UpdateGradeModelMasterRequest struct {
 	AcquireActionRates []AcquireActionRate `json:"acquireActionRates"`
 }
 
-func NewUpdateGradeModelMasterRequestFromJson(data string) UpdateGradeModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateGradeModelMasterRequestFromDict(dict)
+func (p *UpdateGradeModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateGradeModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateGradeModelMasterRequest{}
+	} else {
+		*p = UpdateGradeModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Metadata = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Metadata = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Metadata = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Metadata = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Metadata = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Metadata); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["defaultGrades"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.DefaultGrades); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["experienceModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.ExperienceModelId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.ExperienceModelId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.ExperienceModelId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.ExperienceModelId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.ExperienceModelId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.ExperienceModelId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeEntries"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.GradeEntries); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["acquireActionRates"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.AcquireActionRates); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateGradeModelMasterRequestFromJson(data string) (UpdateGradeModelMasterRequest, error) {
+	req := UpdateGradeModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateGradeModelMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewUpdateGradeModelMasterRequestFromDict(data map[string]interface{}) UpdateGradeModelMasterRequest {
@@ -647,10 +2255,91 @@ type DeleteGradeModelMasterRequest struct {
 	GradeName       *string `json:"gradeName"`
 }
 
-func NewDeleteGradeModelMasterRequestFromJson(data string) DeleteGradeModelMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteGradeModelMasterRequestFromDict(dict)
+func (p *DeleteGradeModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteGradeModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteGradeModelMasterRequest{}
+	} else {
+		*p = DeleteGradeModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteGradeModelMasterRequestFromJson(data string) (DeleteGradeModelMasterRequest, error) {
+	req := DeleteGradeModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteGradeModelMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDeleteGradeModelMasterRequestFromDict(data map[string]interface{}) DeleteGradeModelMasterRequest {
@@ -678,10 +2367,65 @@ type DescribeGradeModelsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeGradeModelsRequestFromJson(data string) DescribeGradeModelsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeGradeModelsRequestFromDict(dict)
+func (p *DescribeGradeModelsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeGradeModelsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeGradeModelsRequest{}
+	} else {
+		*p = DescribeGradeModelsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeGradeModelsRequestFromJson(data string) (DescribeGradeModelsRequest, error) {
+	req := DescribeGradeModelsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeGradeModelsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeGradeModelsRequestFromDict(data map[string]interface{}) DescribeGradeModelsRequest {
@@ -708,10 +2452,91 @@ type GetGradeModelRequest struct {
 	GradeName       *string `json:"gradeName"`
 }
 
-func NewGetGradeModelRequestFromJson(data string) GetGradeModelRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetGradeModelRequestFromDict(dict)
+func (p *GetGradeModelRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetGradeModelRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetGradeModelRequest{}
+	} else {
+		*p = GetGradeModelRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetGradeModelRequestFromJson(data string) (GetGradeModelRequest, error) {
+	req := GetGradeModelRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetGradeModelRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetGradeModelRequestFromDict(data map[string]interface{}) GetGradeModelRequest {
@@ -743,10 +2568,152 @@ type DescribeStatusesRequest struct {
 	Limit           *int32  `json:"limit"`
 }
 
-func NewDescribeStatusesRequestFromJson(data string) DescribeStatusesRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeStatusesRequestFromDict(dict)
+func (p *DescribeStatusesRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeStatusesRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeStatusesRequest{}
+	} else {
+		*p = DescribeStatusesRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.AccessToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.AccessToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.AccessToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.AccessToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeStatusesRequestFromJson(data string) (DescribeStatusesRequest, error) {
+	req := DescribeStatusesRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeStatusesRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeStatusesRequestFromDict(data map[string]interface{}) DescribeStatusesRequest {
@@ -785,10 +2752,178 @@ type DescribeStatusesByUserIdRequest struct {
 	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
-func NewDescribeStatusesByUserIdRequestFromJson(data string) DescribeStatusesByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeStatusesByUserIdRequestFromDict(dict)
+func (p *DescribeStatusesByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeStatusesByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeStatusesByUserIdRequest{}
+	} else {
+		*p = DescribeStatusesByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeStatusesByUserIdRequestFromJson(data string) (DescribeStatusesByUserIdRequest, error) {
+	req := DescribeStatusesByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeStatusesByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeStatusesByUserIdRequestFromDict(data map[string]interface{}) DescribeStatusesByUserIdRequest {
@@ -827,10 +2962,143 @@ type GetStatusRequest struct {
 	PropertyId      *string `json:"propertyId"`
 }
 
-func NewGetStatusRequestFromJson(data string) GetStatusRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStatusRequestFromDict(dict)
+func (p *GetStatusRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetStatusRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetStatusRequest{}
+	} else {
+		*p = GetStatusRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.AccessToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.AccessToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.AccessToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.AccessToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PropertyId); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetStatusRequestFromJson(data string) (GetStatusRequest, error) {
+	req := GetStatusRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetStatusRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetStatusRequestFromDict(data map[string]interface{}) GetStatusRequest {
@@ -866,10 +3134,169 @@ type GetStatusByUserIdRequest struct {
 	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
-func NewGetStatusByUserIdRequestFromJson(data string) GetStatusByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStatusByUserIdRequestFromDict(dict)
+func (p *GetStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetStatusByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetStatusByUserIdRequest{}
+	} else {
+		*p = GetStatusByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PropertyId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetStatusByUserIdRequestFromJson(data string) (GetStatusByUserIdRequest, error) {
+	req := GetStatusByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetStatusByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetStatusByUserIdRequestFromDict(data map[string]interface{}) GetStatusByUserIdRequest {
@@ -909,10 +3336,178 @@ type AddGradeByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewAddGradeByUserIdRequestFromJson(data string) AddGradeByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAddGradeByUserIdRequestFromDict(dict)
+func (p *AddGradeByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AddGradeByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AddGradeByUserIdRequest{}
+	} else {
+		*p = AddGradeByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PropertyId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeValue"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.GradeValue); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewAddGradeByUserIdRequestFromJson(data string) (AddGradeByUserIdRequest, error) {
+	req := AddGradeByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return AddGradeByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewAddGradeByUserIdRequestFromDict(data map[string]interface{}) AddGradeByUserIdRequest {
@@ -954,10 +3549,178 @@ type SubGradeByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewSubGradeByUserIdRequestFromJson(data string) SubGradeByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSubGradeByUserIdRequestFromDict(dict)
+func (p *SubGradeByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SubGradeByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SubGradeByUserIdRequest{}
+	} else {
+		*p = SubGradeByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PropertyId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeValue"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.GradeValue); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewSubGradeByUserIdRequestFromJson(data string) (SubGradeByUserIdRequest, error) {
+	req := SubGradeByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return SubGradeByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewSubGradeByUserIdRequestFromDict(data map[string]interface{}) SubGradeByUserIdRequest {
@@ -999,10 +3762,178 @@ type SetGradeByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewSetGradeByUserIdRequestFromJson(data string) SetGradeByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSetGradeByUserIdRequestFromDict(dict)
+func (p *SetGradeByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SetGradeByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SetGradeByUserIdRequest{}
+	} else {
+		*p = SetGradeByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PropertyId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeValue"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.GradeValue); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewSetGradeByUserIdRequestFromJson(data string) (SetGradeByUserIdRequest, error) {
+	req := SetGradeByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return SetGradeByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewSetGradeByUserIdRequestFromDict(data map[string]interface{}) SetGradeByUserIdRequest {
@@ -1042,10 +3973,143 @@ type ApplyRankCapRequest struct {
 	PropertyId         *string `json:"propertyId"`
 }
 
-func NewApplyRankCapRequestFromJson(data string) ApplyRankCapRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewApplyRankCapRequestFromDict(dict)
+func (p *ApplyRankCapRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ApplyRankCapRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ApplyRankCapRequest{}
+	} else {
+		*p = ApplyRankCapRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.AccessToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.AccessToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.AccessToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.AccessToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PropertyId); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewApplyRankCapRequestFromJson(data string) (ApplyRankCapRequest, error) {
+	req := ApplyRankCapRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ApplyRankCapRequest{}, err
+	}
+	return req, nil
 }
 
 func NewApplyRankCapRequestFromDict(data map[string]interface{}) ApplyRankCapRequest {
@@ -1082,10 +4146,169 @@ type ApplyRankCapByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewApplyRankCapByUserIdRequestFromJson(data string) ApplyRankCapByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewApplyRankCapByUserIdRequestFromDict(dict)
+func (p *ApplyRankCapByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ApplyRankCapByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ApplyRankCapByUserIdRequest{}
+	} else {
+		*p = ApplyRankCapByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PropertyId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewApplyRankCapByUserIdRequestFromJson(data string) (ApplyRankCapByUserIdRequest, error) {
+	req := ApplyRankCapByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ApplyRankCapByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewApplyRankCapByUserIdRequestFromDict(data map[string]interface{}) ApplyRankCapByUserIdRequest {
@@ -1124,10 +4347,169 @@ type DeleteStatusByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewDeleteStatusByUserIdRequestFromJson(data string) DeleteStatusByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteStatusByUserIdRequestFromDict(dict)
+func (p *DeleteStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteStatusByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteStatusByUserIdRequest{}
+	} else {
+		*p = DeleteStatusByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PropertyId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteStatusByUserIdRequestFromJson(data string) (DeleteStatusByUserIdRequest, error) {
+	req := DeleteStatusByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteStatusByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDeleteStatusByUserIdRequestFromDict(data map[string]interface{}) DeleteStatusByUserIdRequest {
@@ -1168,10 +4550,187 @@ type VerifyGradeRequest struct {
 	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
 
-func NewVerifyGradeRequestFromJson(data string) VerifyGradeRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewVerifyGradeRequestFromDict(dict)
+func (p *VerifyGradeRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyGradeRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyGradeRequest{}
+	} else {
+		*p = VerifyGradeRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.AccessToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.AccessToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.AccessToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.AccessToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.VerifyType = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.VerifyType = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.VerifyType = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.VerifyType = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.VerifyType = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.VerifyType); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PropertyId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeValue"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.GradeValue); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyGradeRequestFromJson(data string) (VerifyGradeRequest, error) {
+	req := VerifyGradeRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyGradeRequest{}, err
+	}
+	return req, nil
 }
 
 func NewVerifyGradeRequestFromDict(data map[string]interface{}) VerifyGradeRequest {
@@ -1217,10 +4776,213 @@ type VerifyGradeByUserIdRequest struct {
 	TimeOffsetToken                 *string `json:"timeOffsetToken"`
 }
 
-func NewVerifyGradeByUserIdRequestFromJson(data string) VerifyGradeByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewVerifyGradeByUserIdRequestFromDict(dict)
+func (p *VerifyGradeByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyGradeByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyGradeByUserIdRequest{}
+	} else {
+		*p = VerifyGradeByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.VerifyType = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.VerifyType = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.VerifyType = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.VerifyType = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.VerifyType = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.VerifyType); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PropertyId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeValue"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.GradeValue); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyGradeByUserIdRequestFromJson(data string) (VerifyGradeByUserIdRequest, error) {
+	req := VerifyGradeByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyGradeByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewVerifyGradeByUserIdRequestFromDict(data map[string]interface{}) VerifyGradeByUserIdRequest {
@@ -1266,10 +5028,195 @@ type VerifyGradeUpMaterialRequest struct {
 	MaterialPropertyId *string `json:"materialPropertyId"`
 }
 
-func NewVerifyGradeUpMaterialRequestFromJson(data string) VerifyGradeUpMaterialRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewVerifyGradeUpMaterialRequestFromDict(dict)
+func (p *VerifyGradeUpMaterialRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyGradeUpMaterialRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyGradeUpMaterialRequest{}
+	} else {
+		*p = VerifyGradeUpMaterialRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.AccessToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.AccessToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.AccessToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.AccessToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.AccessToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.VerifyType = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.VerifyType = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.VerifyType = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.VerifyType = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.VerifyType = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.VerifyType); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PropertyId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["materialPropertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.MaterialPropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.MaterialPropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.MaterialPropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.MaterialPropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.MaterialPropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.MaterialPropertyId); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyGradeUpMaterialRequestFromJson(data string) (VerifyGradeUpMaterialRequest, error) {
+	req := VerifyGradeUpMaterialRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyGradeUpMaterialRequest{}, err
+	}
+	return req, nil
 }
 
 func NewVerifyGradeUpMaterialRequestFromDict(data map[string]interface{}) VerifyGradeUpMaterialRequest {
@@ -1312,10 +5259,221 @@ type VerifyGradeUpMaterialByUserIdRequest struct {
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
-func NewVerifyGradeUpMaterialByUserIdRequestFromJson(data string) VerifyGradeUpMaterialByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewVerifyGradeUpMaterialByUserIdRequestFromDict(dict)
+func (p *VerifyGradeUpMaterialByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyGradeUpMaterialByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyGradeUpMaterialByUserIdRequest{}
+	} else {
+		*p = VerifyGradeUpMaterialByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.VerifyType = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.VerifyType = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.VerifyType = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.VerifyType = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.VerifyType = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.VerifyType); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PropertyId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["materialPropertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.MaterialPropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.MaterialPropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.MaterialPropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.MaterialPropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.MaterialPropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.MaterialPropertyId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyGradeUpMaterialByUserIdRequestFromJson(data string) (VerifyGradeUpMaterialByUserIdRequest, error) {
+	req := VerifyGradeUpMaterialByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyGradeUpMaterialByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewVerifyGradeUpMaterialByUserIdRequestFromDict(data map[string]interface{}) VerifyGradeUpMaterialByUserIdRequest {
@@ -1354,10 +5512,91 @@ type AddGradeByStampSheetRequest struct {
 	KeyId           *string `json:"keyId"`
 }
 
-func NewAddGradeByStampSheetRequestFromJson(data string) AddGradeByStampSheetRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAddGradeByStampSheetRequestFromDict(dict)
+func (p *AddGradeByStampSheetRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AddGradeByStampSheetRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AddGradeByStampSheetRequest{}
+	} else {
+		*p = AddGradeByStampSheetRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampSheet"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StampSheet = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StampSheet = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StampSheet = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StampSheet = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StampSheet = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StampSheet); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.KeyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.KeyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.KeyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.KeyId); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewAddGradeByStampSheetRequestFromJson(data string) (AddGradeByStampSheetRequest, error) {
+	req := AddGradeByStampSheetRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return AddGradeByStampSheetRequest{}, err
+	}
+	return req, nil
 }
 
 func NewAddGradeByStampSheetRequestFromDict(data map[string]interface{}) AddGradeByStampSheetRequest {
@@ -1386,10 +5625,91 @@ type ApplyRankCapByStampSheetRequest struct {
 	KeyId           *string `json:"keyId"`
 }
 
-func NewApplyRankCapByStampSheetRequestFromJson(data string) ApplyRankCapByStampSheetRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewApplyRankCapByStampSheetRequestFromDict(dict)
+func (p *ApplyRankCapByStampSheetRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ApplyRankCapByStampSheetRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ApplyRankCapByStampSheetRequest{}
+	} else {
+		*p = ApplyRankCapByStampSheetRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampSheet"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StampSheet = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StampSheet = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StampSheet = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StampSheet = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StampSheet = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StampSheet); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.KeyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.KeyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.KeyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.KeyId); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewApplyRankCapByStampSheetRequestFromJson(data string) (ApplyRankCapByStampSheetRequest, error) {
+	req := ApplyRankCapByStampSheetRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ApplyRankCapByStampSheetRequest{}, err
+	}
+	return req, nil
 }
 
 func NewApplyRankCapByStampSheetRequestFromDict(data map[string]interface{}) ApplyRankCapByStampSheetRequest {
@@ -1418,10 +5738,91 @@ type SubGradeByStampTaskRequest struct {
 	KeyId           *string `json:"keyId"`
 }
 
-func NewSubGradeByStampTaskRequestFromJson(data string) SubGradeByStampTaskRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSubGradeByStampTaskRequestFromDict(dict)
+func (p *SubGradeByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SubGradeByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SubGradeByStampTaskRequest{}
+	} else {
+		*p = SubGradeByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StampTask = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StampTask = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StampTask = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StampTask = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StampTask = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StampTask); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.KeyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.KeyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.KeyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.KeyId); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewSubGradeByStampTaskRequestFromJson(data string) (SubGradeByStampTaskRequest, error) {
+	req := SubGradeByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return SubGradeByStampTaskRequest{}, err
+	}
+	return req, nil
 }
 
 func NewSubGradeByStampTaskRequestFromDict(data map[string]interface{}) SubGradeByStampTaskRequest {
@@ -1456,10 +5857,204 @@ type MultiplyAcquireActionsByUserIdRequest struct {
 	TimeOffsetToken    *string         `json:"timeOffsetToken"`
 }
 
-func NewMultiplyAcquireActionsByUserIdRequestFromJson(data string) MultiplyAcquireActionsByUserIdRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMultiplyAcquireActionsByUserIdRequestFromDict(dict)
+func (p *MultiplyAcquireActionsByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MultiplyAcquireActionsByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MultiplyAcquireActionsByUserIdRequest{}
+	} else {
+		*p = MultiplyAcquireActionsByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.UserId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.UserId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.UserId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.UserId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.UserId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["gradeName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.GradeName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.GradeName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.GradeName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.GradeName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.GradeName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PropertyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PropertyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PropertyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PropertyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PropertyId); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["rateName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.RateName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.RateName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.RateName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.RateName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.RateName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.RateName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["acquireActions"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.AcquireActions); err != nil {
+				return err
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.TimeOffsetToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.TimeOffsetToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.TimeOffsetToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.TimeOffsetToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewMultiplyAcquireActionsByUserIdRequestFromJson(data string) (MultiplyAcquireActionsByUserIdRequest, error) {
+	req := MultiplyAcquireActionsByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return MultiplyAcquireActionsByUserIdRequest{}, err
+	}
+	return req, nil
 }
 
 func NewMultiplyAcquireActionsByUserIdRequestFromDict(data map[string]interface{}) MultiplyAcquireActionsByUserIdRequest {
@@ -1500,10 +6095,91 @@ type MultiplyAcquireActionsByStampSheetRequest struct {
 	KeyId           *string `json:"keyId"`
 }
 
-func NewMultiplyAcquireActionsByStampSheetRequestFromJson(data string) MultiplyAcquireActionsByStampSheetRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMultiplyAcquireActionsByStampSheetRequestFromDict(dict)
+func (p *MultiplyAcquireActionsByStampSheetRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MultiplyAcquireActionsByStampSheetRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MultiplyAcquireActionsByStampSheetRequest{}
+	} else {
+		*p = MultiplyAcquireActionsByStampSheetRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampSheet"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StampSheet = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StampSheet = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StampSheet = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StampSheet = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StampSheet = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StampSheet); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.KeyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.KeyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.KeyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.KeyId); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewMultiplyAcquireActionsByStampSheetRequestFromJson(data string) (MultiplyAcquireActionsByStampSheetRequest, error) {
+	req := MultiplyAcquireActionsByStampSheetRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return MultiplyAcquireActionsByStampSheetRequest{}, err
+	}
+	return req, nil
 }
 
 func NewMultiplyAcquireActionsByStampSheetRequestFromDict(data map[string]interface{}) MultiplyAcquireActionsByStampSheetRequest {
@@ -1532,10 +6208,91 @@ type VerifyGradeByStampTaskRequest struct {
 	KeyId           *string `json:"keyId"`
 }
 
-func NewVerifyGradeByStampTaskRequestFromJson(data string) VerifyGradeByStampTaskRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewVerifyGradeByStampTaskRequestFromDict(dict)
+func (p *VerifyGradeByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyGradeByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyGradeByStampTaskRequest{}
+	} else {
+		*p = VerifyGradeByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StampTask = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StampTask = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StampTask = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StampTask = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StampTask = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StampTask); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.KeyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.KeyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.KeyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.KeyId); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyGradeByStampTaskRequestFromJson(data string) (VerifyGradeByStampTaskRequest, error) {
+	req := VerifyGradeByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyGradeByStampTaskRequest{}, err
+	}
+	return req, nil
 }
 
 func NewVerifyGradeByStampTaskRequestFromDict(data map[string]interface{}) VerifyGradeByStampTaskRequest {
@@ -1564,10 +6321,91 @@ type VerifyGradeUpMaterialByStampTaskRequest struct {
 	KeyId           *string `json:"keyId"`
 }
 
-func NewVerifyGradeUpMaterialByStampTaskRequestFromJson(data string) VerifyGradeUpMaterialByStampTaskRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewVerifyGradeUpMaterialByStampTaskRequestFromDict(dict)
+func (p *VerifyGradeUpMaterialByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyGradeUpMaterialByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyGradeUpMaterialByStampTaskRequest{}
+	} else {
+		*p = VerifyGradeUpMaterialByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StampTask = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StampTask = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StampTask = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StampTask = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StampTask = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StampTask); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.KeyId = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.KeyId = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.KeyId = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.KeyId = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.KeyId); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyGradeUpMaterialByStampTaskRequestFromJson(data string) (VerifyGradeUpMaterialByStampTaskRequest, error) {
+	req := VerifyGradeUpMaterialByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyGradeUpMaterialByStampTaskRequest{}, err
+	}
+	return req, nil
 }
 
 func NewVerifyGradeUpMaterialByStampTaskRequestFromDict(data map[string]interface{}) VerifyGradeUpMaterialByStampTaskRequest {
@@ -1595,10 +6433,65 @@ type ExportMasterRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewExportMasterRequestFromJson(data string) ExportMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExportMasterRequestFromDict(dict)
+func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExportMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExportMasterRequest{}
+	} else {
+		*p = ExportMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewExportMasterRequestFromJson(data string) (ExportMasterRequest, error) {
+	req := ExportMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ExportMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
@@ -1624,10 +6517,65 @@ type GetCurrentGradeMasterRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetCurrentGradeMasterRequestFromJson(data string) GetCurrentGradeMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetCurrentGradeMasterRequestFromDict(dict)
+func (p *GetCurrentGradeMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetCurrentGradeMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetCurrentGradeMasterRequest{}
+	} else {
+		*p = GetCurrentGradeMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetCurrentGradeMasterRequestFromJson(data string) (GetCurrentGradeMasterRequest, error) {
+	req := GetCurrentGradeMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetCurrentGradeMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetCurrentGradeMasterRequestFromDict(data map[string]interface{}) GetCurrentGradeMasterRequest {
@@ -1654,10 +6602,91 @@ type UpdateCurrentGradeMasterRequest struct {
 	Settings        *string `json:"settings"`
 }
 
-func NewUpdateCurrentGradeMasterRequestFromJson(data string) UpdateCurrentGradeMasterRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentGradeMasterRequestFromDict(dict)
+func (p *UpdateCurrentGradeMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateCurrentGradeMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateCurrentGradeMasterRequest{}
+	} else {
+		*p = UpdateCurrentGradeMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["settings"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Settings = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Settings = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Settings = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Settings = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Settings = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Settings); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateCurrentGradeMasterRequestFromJson(data string) (UpdateCurrentGradeMasterRequest, error) {
+	req := UpdateCurrentGradeMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateCurrentGradeMasterRequest{}, err
+	}
+	return req, nil
 }
 
 func NewUpdateCurrentGradeMasterRequestFromDict(data map[string]interface{}) UpdateCurrentGradeMasterRequest {
@@ -1686,10 +6715,74 @@ type UpdateCurrentGradeMasterFromGitHubRequest struct {
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
-func NewUpdateCurrentGradeMasterFromGitHubRequestFromJson(data string) UpdateCurrentGradeMasterFromGitHubRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentGradeMasterFromGitHubRequestFromDict(dict)
+func (p *UpdateCurrentGradeMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateCurrentGradeMasterFromGitHubRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateCurrentGradeMasterFromGitHubRequest{}
+	} else {
+		*p = UpdateCurrentGradeMasterFromGitHubRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.NamespaceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.NamespaceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.NamespaceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.NamespaceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.NamespaceName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["checkoutSetting"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateCurrentGradeMasterFromGitHubRequestFromJson(data string) (UpdateCurrentGradeMasterFromGitHubRequest, error) {
+	req := UpdateCurrentGradeMasterFromGitHubRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateCurrentGradeMasterFromGitHubRequest{}, err
+	}
+	return req, nil
 }
 
 func NewUpdateCurrentGradeMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentGradeMasterFromGitHubRequest {

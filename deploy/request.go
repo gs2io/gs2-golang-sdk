@@ -18,6 +18,7 @@ package deploy
 
 import (
 	"encoding/json"
+	"strconv"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -30,10 +31,74 @@ type DescribeStacksRequest struct {
 	Limit           *int32  `json:"limit"`
 }
 
-func NewDescribeStacksRequestFromJson(data string) DescribeStacksRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeStacksRequestFromDict(dict)
+func (p *DescribeStacksRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeStacksRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeStacksRequest{}
+	} else {
+		*p = DescribeStacksRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeStacksRequestFromJson(data string) (DescribeStacksRequest, error) {
+	req := DescribeStacksRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeStacksRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeStacksRequestFromDict(data map[string]interface{}) DescribeStacksRequest {
@@ -63,10 +128,117 @@ type CreateStackRequest struct {
 	Template        *string `json:"template"`
 }
 
-func NewCreateStackRequestFromJson(data string) CreateStackRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateStackRequestFromDict(dict)
+func (p *CreateStackRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateStackRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateStackRequest{}
+	} else {
+		*p = CreateStackRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Name = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Name = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Name = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Name); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["template"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Template = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Template = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Template = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Template = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Template = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Template); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCreateStackRequestFromJson(data string) (CreateStackRequest, error) {
+	req := CreateStackRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateStackRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCreateStackRequestFromDict(data map[string]interface{}) CreateStackRequest {
@@ -98,10 +270,100 @@ type CreateStackFromGitHubRequest struct {
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
-func NewCreateStackFromGitHubRequestFromJson(data string) CreateStackFromGitHubRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCreateStackFromGitHubRequestFromDict(dict)
+func (p *CreateStackFromGitHubRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateStackFromGitHubRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateStackFromGitHubRequest{}
+	} else {
+		*p = CreateStackFromGitHubRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Name = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Name = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Name = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Name = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Name); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["checkoutSetting"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewCreateStackFromGitHubRequestFromJson(data string) (CreateStackFromGitHubRequest, error) {
+	req := CreateStackFromGitHubRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateStackFromGitHubRequest{}, err
+	}
+	return req, nil
 }
 
 func NewCreateStackFromGitHubRequestFromDict(data map[string]interface{}) CreateStackFromGitHubRequest {
@@ -131,10 +393,65 @@ type ValidateRequest struct {
 	Template        *string `json:"template"`
 }
 
-func NewValidateRequestFromJson(data string) ValidateRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewValidateRequestFromDict(dict)
+func (p *ValidateRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ValidateRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ValidateRequest{}
+	} else {
+		*p = ValidateRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["template"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Template = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Template = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Template = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Template = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Template = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Template); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewValidateRequestFromJson(data string) (ValidateRequest, error) {
+	req := ValidateRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ValidateRequest{}, err
+	}
+	return req, nil
 }
 
 func NewValidateRequestFromDict(data map[string]interface{}) ValidateRequest {
@@ -160,10 +477,65 @@ type GetStackStatusRequest struct {
 	StackName       *string `json:"stackName"`
 }
 
-func NewGetStackStatusRequestFromJson(data string) GetStackStatusRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStackStatusRequestFromDict(dict)
+func (p *GetStackStatusRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetStackStatusRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetStackStatusRequest{}
+	} else {
+		*p = GetStackStatusRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetStackStatusRequestFromJson(data string) (GetStackStatusRequest, error) {
+	req := GetStackStatusRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetStackStatusRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetStackStatusRequestFromDict(data map[string]interface{}) GetStackStatusRequest {
@@ -189,10 +561,65 @@ type GetStackRequest struct {
 	StackName       *string `json:"stackName"`
 }
 
-func NewGetStackRequestFromJson(data string) GetStackRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStackRequestFromDict(dict)
+func (p *GetStackRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetStackRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetStackRequest{}
+	} else {
+		*p = GetStackRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetStackRequestFromJson(data string) (GetStackRequest, error) {
+	req := GetStackRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetStackRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetStackRequestFromDict(data map[string]interface{}) GetStackRequest {
@@ -220,10 +647,117 @@ type UpdateStackRequest struct {
 	Template        *string `json:"template"`
 }
 
-func NewUpdateStackRequestFromJson(data string) UpdateStackRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateStackRequestFromDict(dict)
+func (p *UpdateStackRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateStackRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateStackRequest{}
+	} else {
+		*p = UpdateStackRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["template"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Template = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Template = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Template = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Template = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Template = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Template); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateStackRequestFromJson(data string) (UpdateStackRequest, error) {
+	req := UpdateStackRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateStackRequest{}, err
+	}
+	return req, nil
 }
 
 func NewUpdateStackRequestFromDict(data map[string]interface{}) UpdateStackRequest {
@@ -254,10 +788,91 @@ type ChangeSetRequest struct {
 	Template        *string `json:"template"`
 }
 
-func NewChangeSetRequestFromJson(data string) ChangeSetRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChangeSetRequestFromDict(dict)
+func (p *ChangeSetRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChangeSetRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChangeSetRequest{}
+	} else {
+		*p = ChangeSetRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["template"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Template = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Template = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Template = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Template = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Template = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Template); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewChangeSetRequestFromJson(data string) (ChangeSetRequest, error) {
+	req := ChangeSetRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ChangeSetRequest{}, err
+	}
+	return req, nil
 }
 
 func NewChangeSetRequestFromDict(data map[string]interface{}) ChangeSetRequest {
@@ -287,10 +902,100 @@ type UpdateStackFromGitHubRequest struct {
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
-func NewUpdateStackFromGitHubRequestFromJson(data string) UpdateStackFromGitHubRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateStackFromGitHubRequestFromDict(dict)
+func (p *UpdateStackFromGitHubRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateStackFromGitHubRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateStackFromGitHubRequest{}
+	} else {
+		*p = UpdateStackFromGitHubRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.Description = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.Description = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.Description = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.Description = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.Description); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["checkoutSetting"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateStackFromGitHubRequestFromJson(data string) (UpdateStackFromGitHubRequest, error) {
+	req := UpdateStackFromGitHubRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateStackFromGitHubRequest{}, err
+	}
+	return req, nil
 }
 
 func NewUpdateStackFromGitHubRequestFromDict(data map[string]interface{}) UpdateStackFromGitHubRequest {
@@ -320,10 +1025,65 @@ type DeleteStackRequest struct {
 	StackName       *string `json:"stackName"`
 }
 
-func NewDeleteStackRequestFromJson(data string) DeleteStackRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteStackRequestFromDict(dict)
+func (p *DeleteStackRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteStackRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteStackRequest{}
+	} else {
+		*p = DeleteStackRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteStackRequestFromJson(data string) (DeleteStackRequest, error) {
+	req := DeleteStackRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteStackRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDeleteStackRequestFromDict(data map[string]interface{}) DeleteStackRequest {
@@ -349,10 +1109,65 @@ type ForceDeleteStackRequest struct {
 	StackName       *string `json:"stackName"`
 }
 
-func NewForceDeleteStackRequestFromJson(data string) ForceDeleteStackRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewForceDeleteStackRequestFromDict(dict)
+func (p *ForceDeleteStackRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ForceDeleteStackRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ForceDeleteStackRequest{}
+	} else {
+		*p = ForceDeleteStackRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewForceDeleteStackRequestFromJson(data string) (ForceDeleteStackRequest, error) {
+	req := ForceDeleteStackRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ForceDeleteStackRequest{}, err
+	}
+	return req, nil
 }
 
 func NewForceDeleteStackRequestFromDict(data map[string]interface{}) ForceDeleteStackRequest {
@@ -378,10 +1193,65 @@ type DeleteStackResourcesRequest struct {
 	StackName       *string `json:"stackName"`
 }
 
-func NewDeleteStackResourcesRequestFromJson(data string) DeleteStackResourcesRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteStackResourcesRequestFromDict(dict)
+func (p *DeleteStackResourcesRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteStackResourcesRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteStackResourcesRequest{}
+	} else {
+		*p = DeleteStackResourcesRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteStackResourcesRequestFromJson(data string) (DeleteStackResourcesRequest, error) {
+	req := DeleteStackResourcesRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteStackResourcesRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDeleteStackResourcesRequestFromDict(data map[string]interface{}) DeleteStackResourcesRequest {
@@ -407,10 +1277,65 @@ type DeleteStackEntityRequest struct {
 	StackName       *string `json:"stackName"`
 }
 
-func NewDeleteStackEntityRequestFromJson(data string) DeleteStackEntityRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteStackEntityRequestFromDict(dict)
+func (p *DeleteStackEntityRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteStackEntityRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteStackEntityRequest{}
+	} else {
+		*p = DeleteStackEntityRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteStackEntityRequestFromJson(data string) (DeleteStackEntityRequest, error) {
+	req := DeleteStackEntityRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteStackEntityRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDeleteStackEntityRequestFromDict(data map[string]interface{}) DeleteStackEntityRequest {
@@ -438,10 +1363,100 @@ type DescribeResourcesRequest struct {
 	Limit           *int32  `json:"limit"`
 }
 
-func NewDescribeResourcesRequestFromJson(data string) DescribeResourcesRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeResourcesRequestFromDict(dict)
+func (p *DescribeResourcesRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeResourcesRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeResourcesRequest{}
+	} else {
+		*p = DescribeResourcesRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeResourcesRequestFromJson(data string) (DescribeResourcesRequest, error) {
+	req := DescribeResourcesRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeResourcesRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeResourcesRequestFromDict(data map[string]interface{}) DescribeResourcesRequest {
@@ -472,10 +1487,91 @@ type GetResourceRequest struct {
 	ResourceName    *string `json:"resourceName"`
 }
 
-func NewGetResourceRequestFromJson(data string) GetResourceRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetResourceRequestFromDict(dict)
+func (p *GetResourceRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetResourceRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetResourceRequest{}
+	} else {
+		*p = GetResourceRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["resourceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.ResourceName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.ResourceName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.ResourceName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.ResourceName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.ResourceName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.ResourceName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetResourceRequestFromJson(data string) (GetResourceRequest, error) {
+	req := GetResourceRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetResourceRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetResourceRequestFromDict(data map[string]interface{}) GetResourceRequest {
@@ -505,10 +1601,100 @@ type DescribeEventsRequest struct {
 	Limit           *int32  `json:"limit"`
 }
 
-func NewDescribeEventsRequestFromJson(data string) DescribeEventsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeEventsRequestFromDict(dict)
+func (p *DescribeEventsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeEventsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeEventsRequest{}
+	} else {
+		*p = DescribeEventsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeEventsRequestFromJson(data string) (DescribeEventsRequest, error) {
+	req := DescribeEventsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeEventsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeEventsRequestFromDict(data map[string]interface{}) DescribeEventsRequest {
@@ -539,10 +1725,91 @@ type GetEventRequest struct {
 	EventName       *string `json:"eventName"`
 }
 
-func NewGetEventRequestFromJson(data string) GetEventRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetEventRequestFromDict(dict)
+func (p *GetEventRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetEventRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetEventRequest{}
+	} else {
+		*p = GetEventRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["eventName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.EventName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.EventName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.EventName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.EventName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.EventName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.EventName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetEventRequestFromJson(data string) (GetEventRequest, error) {
+	req := GetEventRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetEventRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetEventRequestFromDict(data map[string]interface{}) GetEventRequest {
@@ -572,10 +1839,100 @@ type DescribeOutputsRequest struct {
 	Limit           *int32  `json:"limit"`
 }
 
-func NewDescribeOutputsRequestFromJson(data string) DescribeOutputsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeOutputsRequestFromDict(dict)
+func (p *DescribeOutputsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeOutputsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeOutputsRequest{}
+	} else {
+		*p = DescribeOutputsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.PageToken = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.PageToken = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.PageToken = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.PageToken = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			if err := json.Unmarshal(*v, &p.Limit); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeOutputsRequestFromJson(data string) (DescribeOutputsRequest, error) {
+	req := DescribeOutputsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeOutputsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeOutputsRequestFromDict(data map[string]interface{}) DescribeOutputsRequest {
@@ -606,10 +1963,91 @@ type GetOutputRequest struct {
 	OutputName      *string `json:"outputName"`
 }
 
-func NewGetOutputRequestFromJson(data string) GetOutputRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetOutputRequestFromDict(dict)
+func (p *GetOutputRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetOutputRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetOutputRequest{}
+	} else {
+		*p = GetOutputRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stackName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.StackName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.StackName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.StackName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.StackName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.StackName); err != nil {
+					return err
+				}
+			}
+		}
+		if v, ok := d["outputName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err != nil {
+				return err
+			}
+			switch v2 := temp.(type) {
+			case string:
+				p.OutputName = &v2
+			case float64:
+				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+				p.OutputName = &strValue
+			case int:
+				strValue := strconv.Itoa(v2)
+				p.OutputName = &strValue
+			case int32:
+				strValue := strconv.Itoa(int(v2))
+				p.OutputName = &strValue
+			case int64:
+				strValue := strconv.Itoa(int(v2))
+				p.OutputName = &strValue
+			default:
+				if err := json.Unmarshal(*v, &p.OutputName); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetOutputRequestFromJson(data string) (GetOutputRequest, error) {
+	req := GetOutputRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetOutputRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetOutputRequestFromDict(data map[string]interface{}) GetOutputRequest {
