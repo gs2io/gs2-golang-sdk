@@ -134,10 +134,6 @@ func (p *DescribeCompletesRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -289,10 +285,6 @@ func (p *DescribeCompletesByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -499,7 +491,7 @@ func (p *CompleteRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["config"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -686,7 +678,7 @@ func (p *CompleteByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["config"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -1958,10 +1950,6 @@ func (p *DescribeCounterModelMastersRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -2138,7 +2126,7 @@ func (p *CreateCounterModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["scopes"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2465,7 +2453,7 @@ func (p *UpdateCounterModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["scopes"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2737,10 +2725,6 @@ func (p *DescribeMissionGroupModelMastersRequest) UnmarshalJSON(data []byte) err
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -2946,10 +2930,6 @@ func (p *CreateMissionGroupModelMasterRequest) UnmarshalJSON(data []byte) error 
 			}
 		}
 		if v, ok := d["resetDayOfMonth"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ResetDayOfMonth); err != nil {
 				return err
 			}
@@ -2981,10 +2961,6 @@ func (p *CreateMissionGroupModelMasterRequest) UnmarshalJSON(data []byte) error 
 			}
 		}
 		if v, ok := d["resetHour"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ResetHour); err != nil {
 				return err
 			}
@@ -3341,10 +3317,6 @@ func (p *UpdateMissionGroupModelMasterRequest) UnmarshalJSON(data []byte) error 
 			}
 		}
 		if v, ok := d["resetDayOfMonth"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ResetDayOfMonth); err != nil {
 				return err
 			}
@@ -3376,10 +3348,6 @@ func (p *UpdateMissionGroupModelMasterRequest) UnmarshalJSON(data []byte) error 
 			}
 		}
 		if v, ok := d["resetHour"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ResetHour); err != nil {
 				return err
 			}
@@ -3625,10 +3593,6 @@ func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -3757,55 +3721,31 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TransactionSetting); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["missionCompleteScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MissionCompleteScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["counterIncrementScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CounterIncrementScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["receiveRewardsScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ReceiveRewardsScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["completeNotification"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CompleteNotification); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -4118,55 +4058,31 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TransactionSetting); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["missionCompleteScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MissionCompleteScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["counterIncrementScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CounterIncrementScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["receiveRewardsScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ReceiveRewardsScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["completeNotification"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CompleteNotification); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -5269,10 +5185,6 @@ func (p *DescribeCountersRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -5424,10 +5336,6 @@ func (p *DescribeCountersByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -5608,10 +5516,6 @@ func (p *IncreaseCounterByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["value"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Value); err != nil {
 				return err
 			}
@@ -5792,7 +5696,7 @@ func (p *SetCounterByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["values"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -5978,10 +5882,6 @@ func (p *DecreaseCounterByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["value"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Value); err != nil {
 				return err
 			}
@@ -7211,10 +7111,6 @@ func (p *UpdateCurrentMissionMasterFromGitHubRequest) UnmarshalJSON(data []byte)
 			}
 		}
 		if v, ok := d["checkoutSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
 				return err
 			}
@@ -8010,10 +7906,6 @@ func (p *DescribeMissionTaskModelMastersRequest) UnmarshalJSON(data []byte) erro
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -8275,16 +8167,12 @@ func (p *CreateMissionTaskModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["targetValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TargetValue); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["completeAcquireActions"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -8759,16 +8647,12 @@ func (p *UpdateMissionTaskModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["targetValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TargetValue); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["completeAcquireActions"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}

@@ -80,10 +80,6 @@ func (p *DescribeStacksRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -345,10 +341,6 @@ func (p *CreateStackFromGitHubRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["checkoutSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
 				return err
 			}
@@ -977,10 +969,6 @@ func (p *UpdateStackFromGitHubRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["checkoutSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
 				return err
 			}
@@ -1438,10 +1426,6 @@ func (p *DescribeResourcesRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -1676,10 +1660,6 @@ func (p *DescribeEventsRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -1914,10 +1894,6 @@ func (p *DescribeOutputsRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}

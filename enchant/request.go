@@ -80,10 +80,6 @@ func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -204,19 +200,11 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TransactionSetting); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -509,19 +497,11 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TransactionSetting); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -1782,10 +1762,6 @@ func (p *DescribeBalanceParameterModelMastersRequest) UnmarshalJSON(data []byte)
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -1963,10 +1939,6 @@ func (p *CreateBalanceParameterModelMasterRequest) UnmarshalJSON(data []byte) er
 			}
 		}
 		if v, ok := d["totalValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TotalValue); err != nil {
 				return err
 			}
@@ -1998,7 +1970,7 @@ func (p *CreateBalanceParameterModelMasterRequest) UnmarshalJSON(data []byte) er
 			}
 		}
 		if v, ok := d["parameters"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2302,10 +2274,6 @@ func (p *UpdateBalanceParameterModelMasterRequest) UnmarshalJSON(data []byte) er
 			}
 		}
 		if v, ok := d["totalValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TotalValue); err != nil {
 				return err
 			}
@@ -2337,7 +2305,7 @@ func (p *UpdateBalanceParameterModelMasterRequest) UnmarshalJSON(data []byte) er
 			}
 		}
 		if v, ok := d["parameters"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2782,10 +2750,6 @@ func (p *DescribeRarityParameterModelMastersRequest) UnmarshalJSON(data []byte) 
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -2963,16 +2927,12 @@ func (p *CreateRarityParameterModelMasterRequest) UnmarshalJSON(data []byte) err
 			}
 		}
 		if v, ok := d["maximumParameterCount"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MaximumParameterCount); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["parameterCounts"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2981,7 +2941,7 @@ func (p *CreateRarityParameterModelMasterRequest) UnmarshalJSON(data []byte) err
 			}
 		}
 		if v, ok := d["parameters"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -3287,16 +3247,12 @@ func (p *UpdateRarityParameterModelMasterRequest) UnmarshalJSON(data []byte) err
 			}
 		}
 		if v, ok := d["maximumParameterCount"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MaximumParameterCount); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["parameterCounts"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -3305,7 +3261,7 @@ func (p *UpdateRarityParameterModelMasterRequest) UnmarshalJSON(data []byte) err
 			}
 		}
 		if v, ok := d["parameters"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -3809,10 +3765,6 @@ func (p *UpdateCurrentParameterMasterFromGitHubRequest) UnmarshalJSON(data []byt
 			}
 		}
 		if v, ok := d["checkoutSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
 				return err
 			}
@@ -3986,10 +3938,6 @@ func (p *DescribeBalanceParameterStatusesRequest) UnmarshalJSON(data []byte) err
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -4170,10 +4118,6 @@ func (p *DescribeBalanceParameterStatusesByUserIdRequest) UnmarshalJSON(data []b
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -4955,7 +4899,7 @@ func (p *ReDrawBalanceParameterStatusByUserIdRequest) UnmarshalJSON(data []byte)
 			}
 		}
 		if v, ok := d["fixedParameterNames"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -5283,7 +5227,7 @@ func (p *SetBalanceParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) er
 			}
 		}
 		if v, ok := d["parameterValues"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -5609,10 +5553,6 @@ func (p *DescribeRarityParameterStatusesRequest) UnmarshalJSON(data []byte) erro
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -5793,10 +5733,6 @@ func (p *DescribeRarityParameterStatusesByUserIdRequest) UnmarshalJSON(data []by
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -6578,7 +6514,7 @@ func (p *ReDrawRarityParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) 
 			}
 		}
 		if v, ok := d["fixedParameterNames"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -6906,10 +6842,6 @@ func (p *AddRarityParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) err
 			}
 		}
 		if v, ok := d["count"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Count); err != nil {
 				return err
 			}
@@ -7286,19 +7218,11 @@ func (p *VerifyRarityParameterStatusRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["parameterCount"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ParameterCount); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity); err != nil {
 				return err
 			}
@@ -7541,19 +7465,11 @@ func (p *VerifyRarityParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) 
 			}
 		}
 		if v, ok := d["parameterCount"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ParameterCount); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity); err != nil {
 				return err
 			}
@@ -7882,7 +7798,7 @@ func (p *SetRarityParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) err
 			}
 		}
 		if v, ok := d["parameterValues"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}

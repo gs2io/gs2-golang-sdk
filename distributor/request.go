@@ -80,10 +80,6 @@ func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -231,19 +227,11 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["autoRunStampSheetNotification"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AutoRunStampSheetNotification); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -565,19 +553,11 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["autoRunStampSheetNotification"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AutoRunStampSheetNotification); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -787,10 +767,6 @@ func (p *DescribeDistributorModelMastersRequest) UnmarshalJSON(data []byte) erro
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -993,7 +969,7 @@ func (p *CreateDistributorModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["whiteListTargetIds"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -1320,7 +1296,7 @@ func (p *UpdateDistributorModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["whiteListTargetIds"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2017,10 +1993,6 @@ func (p *UpdateCurrentDistributorMasterFromGitHubRequest) UnmarshalJSON(data []b
 			}
 		}
 		if v, ok := d["checkoutSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
 				return err
 			}
@@ -2168,10 +2140,6 @@ func (p *DistributeRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["distributeResource"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.DistributeResource); err != nil {
 				return err
 			}
@@ -2297,10 +2265,6 @@ func (p *DistributeWithoutOverflowProcessRequest) UnmarshalJSON(data []byte) err
 			}
 		}
 		if v, ok := d["distributeResource"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.DistributeResource); err != nil {
 				return err
 			}

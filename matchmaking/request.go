@@ -80,10 +80,6 @@ func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -220,10 +216,6 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["enableRating"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.EnableRating); err != nil {
 				return err
 			}
@@ -255,10 +247,6 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["disconnectDetectionTimeoutSeconds"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.DisconnectDetectionTimeoutSeconds); err != nil {
 				return err
 			}
@@ -472,64 +460,36 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["collaborateSeasonRatingTtl"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CollaborateSeasonRatingTtl); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["changeRatingScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ChangeRatingScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["joinNotification"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.JoinNotification); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["leaveNotification"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LeaveNotification); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["completeNotification"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CompleteNotification); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["changeRatingNotification"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ChangeRatingNotification); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -870,10 +830,6 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["enableRating"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.EnableRating); err != nil {
 				return err
 			}
@@ -905,10 +861,6 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["disconnectDetectionTimeoutSeconds"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.DisconnectDetectionTimeoutSeconds); err != nil {
 				return err
 			}
@@ -1122,64 +1074,36 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["collaborateSeasonRatingTtl"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CollaborateSeasonRatingTtl); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["changeRatingScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ChangeRatingScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["joinNotification"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.JoinNotification); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["leaveNotification"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LeaveNotification); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["completeNotification"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CompleteNotification); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["changeRatingNotification"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ChangeRatingNotification); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -2275,10 +2199,6 @@ func (p *DescribeGatheringsRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -2406,16 +2326,12 @@ func (p *CreateGatheringRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["player"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Player); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["attributeRanges"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2424,7 +2340,7 @@ func (p *CreateGatheringRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["capacityOfRoles"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2433,7 +2349,7 @@ func (p *CreateGatheringRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["allowUserIds"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2442,19 +2358,11 @@ func (p *CreateGatheringRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["expiresAt"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ExpiresAt); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["expiresAtTimeSpan"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ExpiresAtTimeSpan); err != nil {
 				return err
 			}
@@ -2599,16 +2507,12 @@ func (p *CreateGatheringByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["player"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Player); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["attributeRanges"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2617,7 +2521,7 @@ func (p *CreateGatheringByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["capacityOfRoles"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2626,7 +2530,7 @@ func (p *CreateGatheringByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["allowUserIds"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2635,19 +2539,11 @@ func (p *CreateGatheringByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["expiresAt"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ExpiresAt); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["expiresAtTimeSpan"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ExpiresAtTimeSpan); err != nil {
 				return err
 			}
@@ -2841,7 +2737,7 @@ func (p *UpdateGatheringRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["attributeRanges"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2999,7 +2895,7 @@ func (p *UpdateGatheringByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["attributeRanges"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -3130,10 +3026,6 @@ func (p *DoMatchmakingByPlayerRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["player"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Player); err != nil {
 				return err
 			}
@@ -3283,10 +3175,6 @@ func (p *DoMatchmakingRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["player"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Player); err != nil {
 				return err
 			}
@@ -3439,10 +3327,6 @@ func (p *DoMatchmakingByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["player"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Player); err != nil {
 				return err
 			}
@@ -4791,10 +4675,6 @@ func (p *DescribeRatingModelMastersRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -4971,19 +4851,11 @@ func (p *CreateRatingModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["initialValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.InitialValue); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["volatility"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Volatility); err != nil {
 				return err
 			}
@@ -5279,19 +5151,11 @@ func (p *UpdateRatingModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["initialValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.InitialValue); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["volatility"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Volatility); err != nil {
 				return err
 			}
@@ -5983,10 +5847,6 @@ func (p *UpdateCurrentRatingModelMasterFromGitHubRequest) UnmarshalJSON(data []b
 			}
 		}
 		if v, ok := d["checkoutSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
 				return err
 			}
@@ -6133,10 +5993,6 @@ func (p *DescribeRatingsRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -6288,10 +6144,6 @@ func (p *DescribeRatingsByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -6756,7 +6608,7 @@ func (p *PutResultRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["gameResults"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -7110,10 +6962,6 @@ func (p *GetBallotRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["numberOfPlayer"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.NumberOfPlayer); err != nil {
 				return err
 			}
@@ -7323,10 +7171,6 @@ func (p *GetBallotByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["numberOfPlayer"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.NumberOfPlayer); err != nil {
 				return err
 			}
@@ -7536,7 +7380,7 @@ func (p *VoteRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["gameResults"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -7668,7 +7512,7 @@ func (p *VoteMultipleRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["signedBallots"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -7677,7 +7521,7 @@ func (p *VoteMultipleRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["gameResults"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}

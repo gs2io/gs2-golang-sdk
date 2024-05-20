@@ -80,10 +80,6 @@ func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -210,73 +206,41 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["acquireScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AcquireScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["overflowScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.OverflowScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["consumeScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ConsumeScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["simpleItemAcquireScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.SimpleItemAcquireScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["simpleItemConsumeScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.SimpleItemConsumeScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["bigItemAcquireScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.BigItemAcquireScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["bigItemConsumeScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.BigItemConsumeScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -587,73 +551,41 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["acquireScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AcquireScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["overflowScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.OverflowScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["consumeScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ConsumeScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["simpleItemAcquireScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.SimpleItemAcquireScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["simpleItemConsumeScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.SimpleItemConsumeScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["bigItemAcquireScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.BigItemAcquireScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["bigItemConsumeScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.BigItemConsumeScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -1729,10 +1661,6 @@ func (p *DescribeInventoryModelMastersRequest) UnmarshalJSON(data []byte) error 
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -1910,28 +1838,16 @@ func (p *CreateInventoryModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["initialCapacity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.InitialCapacity); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["maxCapacity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MaxCapacity); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["protectReferencedItem"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ProtectReferencedItem); err != nil {
 				return err
 			}
@@ -2230,28 +2146,16 @@ func (p *UpdateInventoryModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["initialCapacity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.InitialCapacity); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["maxCapacity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MaxCapacity); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["protectReferencedItem"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ProtectReferencedItem); err != nil {
 				return err
 			}
@@ -2718,10 +2622,6 @@ func (p *DescribeItemModelMastersRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -2928,28 +2828,16 @@ func (p *CreateItemModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["stackingLimit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.StackingLimit); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["allowMultipleStacks"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AllowMultipleStacks); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["sortValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.SortValue); err != nil {
 				return err
 			}
@@ -3306,28 +3194,16 @@ func (p *UpdateItemModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["stackingLimit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.StackingLimit); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["allowMultipleStacks"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AllowMultipleStacks); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["sortValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.SortValue); err != nil {
 				return err
 			}
@@ -3856,10 +3732,6 @@ func (p *DescribeSimpleInventoryModelMastersRequest) UnmarshalJSON(data []byte) 
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -4773,10 +4645,6 @@ func (p *DescribeSimpleItemModelMastersRequest) UnmarshalJSON(data []byte) error
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -5839,10 +5707,6 @@ func (p *DescribeBigInventoryModelMastersRequest) UnmarshalJSON(data []byte) err
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -6756,10 +6620,6 @@ func (p *DescribeBigItemModelMastersRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -8076,10 +7936,6 @@ func (p *UpdateCurrentItemModelMasterFromGitHubRequest) UnmarshalJSON(data []byt
 			}
 		}
 		if v, ok := d["checkoutSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
 				return err
 			}
@@ -8226,10 +8082,6 @@ func (p *DescribeInventoriesRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -8381,10 +8233,6 @@ func (p *DescribeInventoriesByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -8878,10 +8726,6 @@ func (p *AddCapacityByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["addCapacityValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AddCapacityValue); err != nil {
 				return err
 			}
@@ -9062,10 +8906,6 @@ func (p *SetCapacityByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["newCapacityValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.NewCapacityValue); err != nil {
 				return err
 			}
@@ -9445,19 +9285,11 @@ func (p *VerifyInventoryCurrentMaxCapacityRequest) UnmarshalJSON(data []byte) er
 			}
 		}
 		if v, ok := d["currentInventoryMaxCapacity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CurrentInventoryMaxCapacity); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity); err != nil {
 				return err
 			}
@@ -9642,19 +9474,11 @@ func (p *VerifyInventoryCurrentMaxCapacityByUserIdRequest) UnmarshalJSON(data []
 			}
 		}
 		if v, ok := d["currentInventoryMaxCapacity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CurrentInventoryMaxCapacity); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity); err != nil {
 				return err
 			}
@@ -10203,10 +10027,6 @@ func (p *DescribeItemSetsRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -10387,10 +10207,6 @@ func (p *DescribeItemSetsByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -11519,28 +11335,16 @@ func (p *AcquireItemSetByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["acquireCount"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AcquireCount); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["expiresAt"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ExpiresAt); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["createNewItemSet"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CreateNewItemSet); err != nil {
 				return err
 			}
@@ -11809,10 +11613,6 @@ func (p *AcquireItemSetWithGradeByUserIdRequest) UnmarshalJSON(data []byte) erro
 			}
 		}
 		if v, ok := d["gradeValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.GradeValue); err != nil {
 				return err
 			}
@@ -12024,10 +11824,6 @@ func (p *ConsumeItemSetRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["consumeCount"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ConsumeCount); err != nil {
 				return err
 			}
@@ -12238,10 +12034,6 @@ func (p *ConsumeItemSetByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["consumeCount"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ConsumeCount); err != nil {
 				return err
 			}
@@ -12763,19 +12555,11 @@ func (p *VerifyItemSetRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["count"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Count); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity); err != nil {
 				return err
 			}
@@ -13018,19 +12802,11 @@ func (p *VerifyItemSetByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["count"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Count); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity); err != nil {
 				return err
 			}
@@ -16476,10 +16252,6 @@ func (p *DescribeSimpleItemsRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -16660,10 +16432,6 @@ func (p *DescribeSimpleItemsByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -17646,7 +17414,7 @@ func (p *AcquireSimpleItemsByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["acquireCounts"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -17831,7 +17599,7 @@ func (p *ConsumeSimpleItemsRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["consumeCounts"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -17989,7 +17757,7 @@ func (p *ConsumeSimpleItemsByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["consumeCounts"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -18175,7 +17943,7 @@ func (p *SetSimpleItemsByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["counts"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -18587,19 +18355,11 @@ func (p *VerifySimpleItemRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["count"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Count); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity); err != nil {
 				return err
 			}
@@ -18813,19 +18573,11 @@ func (p *VerifySimpleItemByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["count"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Count); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity); err != nil {
 				return err
 			}
@@ -19489,10 +19241,6 @@ func (p *DescribeBigItemsRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -19673,10 +19421,6 @@ func (p *DescribeBigItemsByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -21402,10 +21146,6 @@ func (p *VerifyBigItemRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity); err != nil {
 				return err
 			}
@@ -21645,10 +21385,6 @@ func (p *VerifyBigItemByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity); err != nil {
 				return err
 			}

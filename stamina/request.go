@@ -80,10 +80,6 @@ func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -230,10 +226,6 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -552,10 +544,6 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -1619,10 +1607,6 @@ func (p *DescribeStaminaModelMastersRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -1805,46 +1789,26 @@ func (p *CreateStaminaModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["recoverIntervalMinutes"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.RecoverIntervalMinutes); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["recoverValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.RecoverValue); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["initialCapacity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.InitialCapacity); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["isOverflow"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.IsOverflow); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["maxCapacity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MaxCapacity); err != nil {
 				return err
 			}
@@ -2236,46 +2200,26 @@ func (p *UpdateStaminaModelMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["recoverIntervalMinutes"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.RecoverIntervalMinutes); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["recoverValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.RecoverValue); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["initialCapacity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.InitialCapacity); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["isOverflow"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.IsOverflow); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["maxCapacity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MaxCapacity); err != nil {
 				return err
 			}
@@ -2606,10 +2550,6 @@ func (p *DescribeMaxStaminaTableMastersRequest) UnmarshalJSON(data []byte) error
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -2812,7 +2752,7 @@ func (p *CreateMaxStaminaTableMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["values"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -3139,7 +3079,7 @@ func (p *UpdateMaxStaminaTableMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["values"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -3385,10 +3325,6 @@ func (p *DescribeRecoverIntervalTableMastersRequest) UnmarshalJSON(data []byte) 
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -3591,7 +3527,7 @@ func (p *CreateRecoverIntervalTableMasterRequest) UnmarshalJSON(data []byte) err
 			}
 		}
 		if v, ok := d["values"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -3918,7 +3854,7 @@ func (p *UpdateRecoverIntervalTableMasterRequest) UnmarshalJSON(data []byte) err
 			}
 		}
 		if v, ok := d["values"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -4164,10 +4100,6 @@ func (p *DescribeRecoverValueTableMastersRequest) UnmarshalJSON(data []byte) err
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -4370,7 +4302,7 @@ func (p *CreateRecoverValueTableMasterRequest) UnmarshalJSON(data []byte) error 
 			}
 		}
 		if v, ok := d["values"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -4697,7 +4629,7 @@ func (p *UpdateRecoverValueTableMasterRequest) UnmarshalJSON(data []byte) error 
 			}
 		}
 		if v, ok := d["values"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -5197,10 +5129,6 @@ func (p *UpdateCurrentStaminaMasterFromGitHubRequest) UnmarshalJSON(data []byte)
 			}
 		}
 		if v, ok := d["checkoutSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
 				return err
 			}
@@ -5544,10 +5472,6 @@ func (p *DescribeStaminasRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -5699,10 +5623,6 @@ func (p *DescribeStaminasByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -6199,37 +6119,21 @@ func (p *UpdateStaminaByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["value"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Value); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["maxValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MaxValue); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["recoverIntervalMinutes"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.RecoverIntervalMinutes); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["recoverValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.RecoverValue); err != nil {
 				return err
 			}
@@ -6415,10 +6319,6 @@ func (p *ConsumeStaminaRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["consumeValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ConsumeValue); err != nil {
 				return err
 			}
@@ -6571,10 +6471,6 @@ func (p *ConsumeStaminaByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["consumeValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ConsumeValue); err != nil {
 				return err
 			}
@@ -6755,10 +6651,6 @@ func (p *RecoverStaminaByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["recoverValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.RecoverValue); err != nil {
 				return err
 			}
@@ -6939,10 +6831,6 @@ func (p *RaiseMaxValueByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["raiseValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.RaiseValue); err != nil {
 				return err
 			}
@@ -7123,10 +7011,6 @@ func (p *DecreaseMaxValueByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["decreaseValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.DecreaseValue); err != nil {
 				return err
 			}
@@ -7307,10 +7191,6 @@ func (p *SetMaxValueByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["maxValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MaxValue); err != nil {
 				return err
 			}
@@ -7491,10 +7371,6 @@ func (p *SetRecoverIntervalByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["recoverIntervalMinutes"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.RecoverIntervalMinutes); err != nil {
 				return err
 			}
@@ -7675,10 +7551,6 @@ func (p *SetRecoverValueByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["recoverValue"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.RecoverValue); err != nil {
 				return err
 			}

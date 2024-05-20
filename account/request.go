@@ -80,10 +80,6 @@ func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -209,64 +205,36 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["changePasswordIfTakeOver"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ChangePasswordIfTakeOver); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["differentUserIdForLoginAndDataRetention"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.DifferentUserIdForLoginAndDataRetention); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["createAccountScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CreateAccountScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["authenticationScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AuthenticationScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["createTakeOverScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CreateTakeOverScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["doTakeOverScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.DoTakeOverScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -573,55 +541,31 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["changePasswordIfTakeOver"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ChangePasswordIfTakeOver); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["createAccountScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CreateAccountScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["authenticationScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AuthenticationScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["createTakeOverScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CreateTakeOverScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["doTakeOverScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.DoTakeOverScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -1693,10 +1637,6 @@ func (p *DescribeAccountsRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -1904,10 +1844,6 @@ func (p *UpdateTimeOffsetRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["timeOffset"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TimeOffset); err != nil {
 				return err
 			}
@@ -2059,10 +1995,6 @@ func (p *UpdateBannedRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["banned"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Banned); err != nil {
 				return err
 			}
@@ -2214,10 +2146,6 @@ func (p *AddBanRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["banStatus"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.BanStatus); err != nil {
 				return err
 			}
@@ -3052,10 +2980,6 @@ func (p *DescribeTakeOversRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -3207,10 +3131,6 @@ func (p *DescribeTakeOversByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -3365,10 +3285,6 @@ func (p *CreateTakeOverRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["type"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Type); err != nil {
 				return err
 			}
@@ -3550,10 +3466,6 @@ func (p *CreateTakeOverByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["type"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Type); err != nil {
 				return err
 			}
@@ -3759,10 +3671,6 @@ func (p *GetTakeOverRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["type"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Type); err != nil {
 				return err
 			}
@@ -3885,10 +3793,6 @@ func (p *GetTakeOverByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["type"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Type); err != nil {
 				return err
 			}
@@ -4041,10 +3945,6 @@ func (p *UpdateTakeOverRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["type"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Type); err != nil {
 				return err
 			}
@@ -4226,10 +4126,6 @@ func (p *UpdateTakeOverByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["type"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Type); err != nil {
 				return err
 			}
@@ -4437,10 +4333,6 @@ func (p *DeleteTakeOverRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["type"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Type); err != nil {
 				return err
 			}
@@ -4565,10 +4457,6 @@ func (p *DeleteTakeOverByUserIdentifierRequest) UnmarshalJSON(data []byte) error
 			}
 		}
 		if v, ok := d["type"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Type); err != nil {
 				return err
 			}
@@ -4718,10 +4606,6 @@ func (p *DeleteTakeOverByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["type"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Type); err != nil {
 				return err
 			}
@@ -4846,10 +4730,6 @@ func (p *DoTakeOverRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["type"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Type); err != nil {
 				return err
 			}

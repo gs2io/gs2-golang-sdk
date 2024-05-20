@@ -80,10 +80,6 @@ func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -209,28 +205,16 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TransactionSetting); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["buyScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.BuyScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -534,28 +518,16 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TransactionSetting); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["buyScript"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.BuyScript); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -1625,10 +1597,6 @@ func (p *DescribeSalesItemMastersRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -1805,7 +1773,7 @@ func (p *CreateSalesItemMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -1814,7 +1782,7 @@ func (p *CreateSalesItemMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["acquireActions"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2117,7 +2085,7 @@ func (p *UpdateSalesItemMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2126,7 +2094,7 @@ func (p *UpdateSalesItemMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["acquireActions"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2374,10 +2342,6 @@ func (p *DescribeSalesItemGroupMastersRequest) UnmarshalJSON(data []byte) error 
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -2553,7 +2517,7 @@ func (p *CreateSalesItemGroupMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["salesItemNames"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -2851,7 +2815,7 @@ func (p *UpdateSalesItemGroupMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["salesItemNames"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -3095,10 +3059,6 @@ func (p *DescribeShowcaseMastersRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -3275,7 +3235,7 @@ func (p *CreateShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["displayItems"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -3602,7 +3562,7 @@ func (p *UpdateShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["displayItems"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -4128,10 +4088,6 @@ func (p *UpdateCurrentShowcaseMasterFromGitHubRequest) UnmarshalJSON(data []byte
 			}
 		}
 		if v, ok := d["checkoutSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
 				return err
 			}
@@ -4875,16 +4831,12 @@ func (p *BuyRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["quantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Quantity); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["config"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -5074,16 +5026,12 @@ func (p *BuyByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["quantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Quantity); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["config"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -5244,10 +5192,6 @@ func (p *DescribeRandomShowcaseMastersRequest) UnmarshalJSON(data []byte) error 
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -5427,16 +5371,12 @@ func (p *CreateRandomShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["maximumNumberOfChoice"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MaximumNumberOfChoice); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["displayItems"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -5445,19 +5385,11 @@ func (p *CreateRandomShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["baseTimestamp"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.BaseTimestamp); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["resetIntervalHours"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ResetIntervalHours); err != nil {
 				return err
 			}
@@ -5790,16 +5722,12 @@ func (p *UpdateRandomShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["maximumNumberOfChoice"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.MaximumNumberOfChoice); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["displayItems"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -5808,19 +5736,11 @@ func (p *UpdateRandomShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["baseTimestamp"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.BaseTimestamp); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["resetIntervalHours"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.ResetIntervalHours); err != nil {
 				return err
 			}
@@ -6151,10 +6071,6 @@ func (p *IncrementPurchaseCountByUserIdRequest) UnmarshalJSON(data []byte) error
 			}
 		}
 		if v, ok := d["count"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Count); err != nil {
 				return err
 			}
@@ -6364,10 +6280,6 @@ func (p *DecrementPurchaseCountByUserIdRequest) UnmarshalJSON(data []byte) error
 			}
 		}
 		if v, ok := d["count"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Count); err != nil {
 				return err
 			}
@@ -7772,16 +7684,12 @@ func (p *RandomShowcaseBuyRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["quantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Quantity); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["config"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}
@@ -7971,16 +7879,12 @@ func (p *RandomShowcaseBuyByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["quantity"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Quantity); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["config"]; ok && v != nil {
-			var temp interface{}
+			var temp []interface{}
 			if err := json.Unmarshal(*v, &temp); err != nil {
 				return err
 			}

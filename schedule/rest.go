@@ -1454,6 +1454,9 @@ func (p Gs2ScheduleRestClient) CreateEventMasterAsync(
 	if request.RelativeTriggerName != nil && *request.RelativeTriggerName != "" {
 		bodies["relativeTriggerName"] = *request.RelativeTriggerName
 	}
+	if request.RepeatSetting != nil {
+		bodies["repeatSetting"] = request.RepeatSetting.ToDict()
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1682,6 +1685,9 @@ func (p Gs2ScheduleRestClient) UpdateEventMasterAsync(
 	}
 	if request.RelativeTriggerName != nil && *request.RelativeTriggerName != "" {
 		bodies["relativeTriggerName"] = *request.RelativeTriggerName
+	}
+	if request.RepeatSetting != nil {
+		bodies["repeatSetting"] = request.RepeatSetting.ToDict()
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

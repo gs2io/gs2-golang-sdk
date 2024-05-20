@@ -81,10 +81,6 @@ func (p *LoginRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["timeOffset"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TimeOffset); err != nil {
 				return err
 			}
@@ -402,10 +398,6 @@ func (p *FederationRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["timeOffset"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TimeOffset); err != nil {
 				return err
 			}
@@ -531,10 +523,6 @@ func (p *IssueTimeOffsetTokenByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["timeOffset"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.TimeOffset); err != nil {
 				return err
 			}

@@ -80,10 +80,6 @@ func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -288,10 +284,6 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["logExpireDays"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogExpireDays); err != nil {
 				return err
 			}
@@ -784,10 +776,6 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["logExpireDays"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogExpireDays); err != nil {
 				return err
 			}
@@ -1171,28 +1159,16 @@ func (p *QueryAccessLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["begin"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Begin); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["end"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.End); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["longTerm"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LongTerm); err != nil {
 				return err
 			}
@@ -1224,10 +1200,6 @@ func (p *QueryAccessLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -1370,55 +1342,31 @@ func (p *CountAccessLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["service"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Service); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["method"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Method); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["userId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.UserId); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["begin"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Begin); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["end"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.End); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["longTerm"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LongTerm); err != nil {
 				return err
 			}
@@ -1450,10 +1398,6 @@ func (p *CountAccessLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -1702,28 +1646,16 @@ func (p *QueryIssueStampSheetLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["begin"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Begin); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["end"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.End); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["longTerm"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LongTerm); err != nil {
 				return err
 			}
@@ -1755,10 +1687,6 @@ func (p *QueryIssueStampSheetLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -1904,64 +1832,36 @@ func (p *CountIssueStampSheetLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["service"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Service); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["method"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Method); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["userId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.UserId); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["action"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Action); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["begin"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Begin); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["end"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.End); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["longTerm"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LongTerm); err != nil {
 				return err
 			}
@@ -1993,10 +1893,6 @@ func (p *CountIssueStampSheetLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -2247,28 +2143,16 @@ func (p *QueryExecuteStampSheetLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["begin"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Begin); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["end"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.End); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["longTerm"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LongTerm); err != nil {
 				return err
 			}
@@ -2300,10 +2184,6 @@ func (p *QueryExecuteStampSheetLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -2449,64 +2329,36 @@ func (p *CountExecuteStampSheetLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["service"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Service); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["method"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Method); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["userId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.UserId); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["action"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Action); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["begin"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Begin); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["end"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.End); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["longTerm"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LongTerm); err != nil {
 				return err
 			}
@@ -2538,10 +2390,6 @@ func (p *CountExecuteStampSheetLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -2792,28 +2640,16 @@ func (p *QueryExecuteStampTaskLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["begin"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Begin); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["end"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.End); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["longTerm"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LongTerm); err != nil {
 				return err
 			}
@@ -2845,10 +2681,6 @@ func (p *QueryExecuteStampTaskLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -2994,64 +2826,36 @@ func (p *CountExecuteStampTaskLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["service"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Service); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["method"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Method); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["userId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.UserId); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["action"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Action); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["begin"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Begin); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["end"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.End); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["longTerm"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LongTerm); err != nil {
 				return err
 			}
@@ -3083,10 +2887,6 @@ func (p *CountExecuteStampTaskLogRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -3256,28 +3056,16 @@ func (p *QueryAccessLogWithTelemetryRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["begin"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Begin); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["end"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.End); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["longTerm"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LongTerm); err != nil {
 				return err
 			}
@@ -3309,10 +3097,6 @@ func (p *QueryAccessLogWithTelemetryRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -3612,10 +3396,6 @@ func (p *DescribeInsightsRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}

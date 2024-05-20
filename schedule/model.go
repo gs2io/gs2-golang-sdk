@@ -112,24 +112,32 @@ func CastNamespacesFromDict(data []Namespace) []interface{} {
 }
 
 type EventMaster struct {
-	EventId               *string `json:"eventId"`
-	Name                  *string `json:"name"`
-	Description           *string `json:"description"`
-	Metadata              *string `json:"metadata"`
-	ScheduleType          *string `json:"scheduleType"`
-	RepeatType            *string `json:"repeatType"`
-	AbsoluteBegin         *int64  `json:"absoluteBegin"`
-	AbsoluteEnd           *int64  `json:"absoluteEnd"`
-	RepeatBeginDayOfMonth *int32  `json:"repeatBeginDayOfMonth"`
-	RepeatEndDayOfMonth   *int32  `json:"repeatEndDayOfMonth"`
-	RepeatBeginDayOfWeek  *string `json:"repeatBeginDayOfWeek"`
-	RepeatEndDayOfWeek    *string `json:"repeatEndDayOfWeek"`
-	RepeatBeginHour       *int32  `json:"repeatBeginHour"`
-	RepeatEndHour         *int32  `json:"repeatEndHour"`
-	RelativeTriggerName   *string `json:"relativeTriggerName"`
-	CreatedAt             *int64  `json:"createdAt"`
-	UpdatedAt             *int64  `json:"updatedAt"`
-	Revision              *int64  `json:"revision"`
+	EventId             *string        `json:"eventId"`
+	Name                *string        `json:"name"`
+	Description         *string        `json:"description"`
+	Metadata            *string        `json:"metadata"`
+	ScheduleType        *string        `json:"scheduleType"`
+	AbsoluteBegin       *int64         `json:"absoluteBegin"`
+	AbsoluteEnd         *int64         `json:"absoluteEnd"`
+	RelativeTriggerName *string        `json:"relativeTriggerName"`
+	RepeatSetting       *RepeatSetting `json:"repeatSetting"`
+	CreatedAt           *int64         `json:"createdAt"`
+	UpdatedAt           *int64         `json:"updatedAt"`
+	Revision            *int64         `json:"revision"`
+	// Deprecated: should not be used
+	RepeatType *string `json:"repeatType"`
+	// Deprecated: should not be used
+	RepeatBeginDayOfMonth *int32 `json:"repeatBeginDayOfMonth"`
+	// Deprecated: should not be used
+	RepeatEndDayOfMonth *int32 `json:"repeatEndDayOfMonth"`
+	// Deprecated: should not be used
+	RepeatBeginDayOfWeek *string `json:"repeatBeginDayOfWeek"`
+	// Deprecated: should not be used
+	RepeatEndDayOfWeek *string `json:"repeatEndDayOfWeek"`
+	// Deprecated: should not be used
+	RepeatBeginHour *int32 `json:"repeatBeginHour"`
+	// Deprecated: should not be used
+	RepeatEndHour *int32 `json:"repeatEndHour"`
 }
 
 func NewEventMasterFromJson(data string) EventMaster {
@@ -145,19 +153,20 @@ func NewEventMasterFromDict(data map[string]interface{}) EventMaster {
 		Description:           core.CastString(data["description"]),
 		Metadata:              core.CastString(data["metadata"]),
 		ScheduleType:          core.CastString(data["scheduleType"]),
-		RepeatType:            core.CastString(data["repeatType"]),
 		AbsoluteBegin:         core.CastInt64(data["absoluteBegin"]),
 		AbsoluteEnd:           core.CastInt64(data["absoluteEnd"]),
+		RelativeTriggerName:   core.CastString(data["relativeTriggerName"]),
+		RepeatSetting:         NewRepeatSettingFromDict(core.CastMap(data["repeatSetting"])).Pointer(),
+		CreatedAt:             core.CastInt64(data["createdAt"]),
+		UpdatedAt:             core.CastInt64(data["updatedAt"]),
+		Revision:              core.CastInt64(data["revision"]),
+		RepeatType:            core.CastString(data["repeatType"]),
 		RepeatBeginDayOfMonth: core.CastInt32(data["repeatBeginDayOfMonth"]),
 		RepeatEndDayOfMonth:   core.CastInt32(data["repeatEndDayOfMonth"]),
 		RepeatBeginDayOfWeek:  core.CastString(data["repeatBeginDayOfWeek"]),
 		RepeatEndDayOfWeek:    core.CastString(data["repeatEndDayOfWeek"]),
 		RepeatBeginHour:       core.CastInt32(data["repeatBeginHour"]),
 		RepeatEndHour:         core.CastInt32(data["repeatEndHour"]),
-		RelativeTriggerName:   core.CastString(data["relativeTriggerName"]),
-		CreatedAt:             core.CastInt64(data["createdAt"]),
-		UpdatedAt:             core.CastInt64(data["updatedAt"]),
-		Revision:              core.CastInt64(data["revision"]),
 	}
 }
 
@@ -183,10 +192,6 @@ func (p EventMaster) ToDict() map[string]interface{} {
 	if p.ScheduleType != nil {
 		scheduleType = p.ScheduleType
 	}
-	var repeatType *string
-	if p.RepeatType != nil {
-		repeatType = p.RepeatType
-	}
 	var absoluteBegin *int64
 	if p.AbsoluteBegin != nil {
 		absoluteBegin = p.AbsoluteBegin
@@ -194,6 +199,30 @@ func (p EventMaster) ToDict() map[string]interface{} {
 	var absoluteEnd *int64
 	if p.AbsoluteEnd != nil {
 		absoluteEnd = p.AbsoluteEnd
+	}
+	var relativeTriggerName *string
+	if p.RelativeTriggerName != nil {
+		relativeTriggerName = p.RelativeTriggerName
+	}
+	var repeatSetting map[string]interface{}
+	if p.RepeatSetting != nil {
+		repeatSetting = p.RepeatSetting.ToDict()
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	var repeatType *string
+	if p.RepeatType != nil {
+		repeatType = p.RepeatType
 	}
 	var repeatBeginDayOfMonth *int32
 	if p.RepeatBeginDayOfMonth != nil {
@@ -219,41 +248,26 @@ func (p EventMaster) ToDict() map[string]interface{} {
 	if p.RepeatEndHour != nil {
 		repeatEndHour = p.RepeatEndHour
 	}
-	var relativeTriggerName *string
-	if p.RelativeTriggerName != nil {
-		relativeTriggerName = p.RelativeTriggerName
-	}
-	var createdAt *int64
-	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
-	}
-	var updatedAt *int64
-	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
-	}
-	var revision *int64
-	if p.Revision != nil {
-		revision = p.Revision
-	}
 	return map[string]interface{}{
 		"eventId":               eventId,
 		"name":                  name,
 		"description":           description,
 		"metadata":              metadata,
 		"scheduleType":          scheduleType,
-		"repeatType":            repeatType,
 		"absoluteBegin":         absoluteBegin,
 		"absoluteEnd":           absoluteEnd,
+		"relativeTriggerName":   relativeTriggerName,
+		"repeatSetting":         repeatSetting,
+		"createdAt":             createdAt,
+		"updatedAt":             updatedAt,
+		"revision":              revision,
+		"repeatType":            repeatType,
 		"repeatBeginDayOfMonth": repeatBeginDayOfMonth,
 		"repeatEndDayOfMonth":   repeatEndDayOfMonth,
 		"repeatBeginDayOfWeek":  repeatBeginDayOfWeek,
 		"repeatEndDayOfWeek":    repeatEndDayOfWeek,
 		"repeatBeginHour":       repeatBeginHour,
 		"repeatEndHour":         repeatEndHour,
-		"relativeTriggerName":   relativeTriggerName,
-		"createdAt":             createdAt,
-		"updatedAt":             updatedAt,
-		"revision":              revision,
 	}
 }
 
@@ -360,20 +374,28 @@ func CastTriggersFromDict(data []Trigger) []interface{} {
 }
 
 type Event struct {
-	EventId               *string `json:"eventId"`
-	Name                  *string `json:"name"`
-	Metadata              *string `json:"metadata"`
-	ScheduleType          *string `json:"scheduleType"`
-	RepeatType            *string `json:"repeatType"`
-	AbsoluteBegin         *int64  `json:"absoluteBegin"`
-	AbsoluteEnd           *int64  `json:"absoluteEnd"`
-	RepeatBeginDayOfMonth *int32  `json:"repeatBeginDayOfMonth"`
-	RepeatEndDayOfMonth   *int32  `json:"repeatEndDayOfMonth"`
-	RepeatBeginDayOfWeek  *string `json:"repeatBeginDayOfWeek"`
-	RepeatEndDayOfWeek    *string `json:"repeatEndDayOfWeek"`
-	RepeatBeginHour       *int32  `json:"repeatBeginHour"`
-	RepeatEndHour         *int32  `json:"repeatEndHour"`
-	RelativeTriggerName   *string `json:"relativeTriggerName"`
+	EventId             *string        `json:"eventId"`
+	Name                *string        `json:"name"`
+	Metadata            *string        `json:"metadata"`
+	ScheduleType        *string        `json:"scheduleType"`
+	AbsoluteBegin       *int64         `json:"absoluteBegin"`
+	AbsoluteEnd         *int64         `json:"absoluteEnd"`
+	RelativeTriggerName *string        `json:"relativeTriggerName"`
+	RepeatSetting       *RepeatSetting `json:"repeatSetting"`
+	// Deprecated: should not be used
+	RepeatType *string `json:"repeatType"`
+	// Deprecated: should not be used
+	RepeatBeginDayOfMonth *int32 `json:"repeatBeginDayOfMonth"`
+	// Deprecated: should not be used
+	RepeatEndDayOfMonth *int32 `json:"repeatEndDayOfMonth"`
+	// Deprecated: should not be used
+	RepeatBeginDayOfWeek *string `json:"repeatBeginDayOfWeek"`
+	// Deprecated: should not be used
+	RepeatEndDayOfWeek *string `json:"repeatEndDayOfWeek"`
+	// Deprecated: should not be used
+	RepeatBeginHour *int32 `json:"repeatBeginHour"`
+	// Deprecated: should not be used
+	RepeatEndHour *int32 `json:"repeatEndHour"`
 }
 
 func NewEventFromJson(data string) Event {
@@ -388,16 +410,17 @@ func NewEventFromDict(data map[string]interface{}) Event {
 		Name:                  core.CastString(data["name"]),
 		Metadata:              core.CastString(data["metadata"]),
 		ScheduleType:          core.CastString(data["scheduleType"]),
-		RepeatType:            core.CastString(data["repeatType"]),
 		AbsoluteBegin:         core.CastInt64(data["absoluteBegin"]),
 		AbsoluteEnd:           core.CastInt64(data["absoluteEnd"]),
+		RelativeTriggerName:   core.CastString(data["relativeTriggerName"]),
+		RepeatSetting:         NewRepeatSettingFromDict(core.CastMap(data["repeatSetting"])).Pointer(),
+		RepeatType:            core.CastString(data["repeatType"]),
 		RepeatBeginDayOfMonth: core.CastInt32(data["repeatBeginDayOfMonth"]),
 		RepeatEndDayOfMonth:   core.CastInt32(data["repeatEndDayOfMonth"]),
 		RepeatBeginDayOfWeek:  core.CastString(data["repeatBeginDayOfWeek"]),
 		RepeatEndDayOfWeek:    core.CastString(data["repeatEndDayOfWeek"]),
 		RepeatBeginHour:       core.CastInt32(data["repeatBeginHour"]),
 		RepeatEndHour:         core.CastInt32(data["repeatEndHour"]),
-		RelativeTriggerName:   core.CastString(data["relativeTriggerName"]),
 	}
 }
 
@@ -419,10 +442,6 @@ func (p Event) ToDict() map[string]interface{} {
 	if p.ScheduleType != nil {
 		scheduleType = p.ScheduleType
 	}
-	var repeatType *string
-	if p.RepeatType != nil {
-		repeatType = p.RepeatType
-	}
 	var absoluteBegin *int64
 	if p.AbsoluteBegin != nil {
 		absoluteBegin = p.AbsoluteBegin
@@ -430,6 +449,18 @@ func (p Event) ToDict() map[string]interface{} {
 	var absoluteEnd *int64
 	if p.AbsoluteEnd != nil {
 		absoluteEnd = p.AbsoluteEnd
+	}
+	var relativeTriggerName *string
+	if p.RelativeTriggerName != nil {
+		relativeTriggerName = p.RelativeTriggerName
+	}
+	var repeatSetting map[string]interface{}
+	if p.RepeatSetting != nil {
+		repeatSetting = p.RepeatSetting.ToDict()
+	}
+	var repeatType *string
+	if p.RepeatType != nil {
+		repeatType = p.RepeatType
 	}
 	var repeatBeginDayOfMonth *int32
 	if p.RepeatBeginDayOfMonth != nil {
@@ -455,25 +486,22 @@ func (p Event) ToDict() map[string]interface{} {
 	if p.RepeatEndHour != nil {
 		repeatEndHour = p.RepeatEndHour
 	}
-	var relativeTriggerName *string
-	if p.RelativeTriggerName != nil {
-		relativeTriggerName = p.RelativeTriggerName
-	}
 	return map[string]interface{}{
 		"eventId":               eventId,
 		"name":                  name,
 		"metadata":              metadata,
 		"scheduleType":          scheduleType,
-		"repeatType":            repeatType,
 		"absoluteBegin":         absoluteBegin,
 		"absoluteEnd":           absoluteEnd,
+		"relativeTriggerName":   relativeTriggerName,
+		"repeatSetting":         repeatSetting,
+		"repeatType":            repeatType,
 		"repeatBeginDayOfMonth": repeatBeginDayOfMonth,
 		"repeatEndDayOfMonth":   repeatEndDayOfMonth,
 		"repeatBeginDayOfWeek":  repeatBeginDayOfWeek,
 		"repeatEndDayOfWeek":    repeatEndDayOfWeek,
 		"repeatBeginHour":       repeatBeginHour,
 		"repeatEndHour":         repeatEndHour,
-		"relativeTriggerName":   relativeTriggerName,
 	}
 }
 
@@ -490,6 +518,170 @@ func CastEvents(data []interface{}) []Event {
 }
 
 func CastEventsFromDict(data []Event) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type RepeatSetting struct {
+	RepeatType      *string `json:"repeatType"`
+	BeginDayOfMonth *int32  `json:"beginDayOfMonth"`
+	EndDayOfMonth   *int32  `json:"endDayOfMonth"`
+	BeginDayOfWeek  *string `json:"beginDayOfWeek"`
+	EndDayOfWeek    *string `json:"endDayOfWeek"`
+	BeginHour       *int32  `json:"beginHour"`
+	EndHour         *int32  `json:"endHour"`
+}
+
+func NewRepeatSettingFromJson(data string) RepeatSetting {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRepeatSettingFromDict(dict)
+}
+
+func NewRepeatSettingFromDict(data map[string]interface{}) RepeatSetting {
+	return RepeatSetting{
+		RepeatType:      core.CastString(data["repeatType"]),
+		BeginDayOfMonth: core.CastInt32(data["beginDayOfMonth"]),
+		EndDayOfMonth:   core.CastInt32(data["endDayOfMonth"]),
+		BeginDayOfWeek:  core.CastString(data["beginDayOfWeek"]),
+		EndDayOfWeek:    core.CastString(data["endDayOfWeek"]),
+		BeginHour:       core.CastInt32(data["beginHour"]),
+		EndHour:         core.CastInt32(data["endHour"]),
+	}
+}
+
+func (p RepeatSetting) ToDict() map[string]interface{} {
+
+	var repeatType *string
+	if p.RepeatType != nil {
+		repeatType = p.RepeatType
+	}
+	var beginDayOfMonth *int32
+	if p.BeginDayOfMonth != nil {
+		beginDayOfMonth = p.BeginDayOfMonth
+	}
+	var endDayOfMonth *int32
+	if p.EndDayOfMonth != nil {
+		endDayOfMonth = p.EndDayOfMonth
+	}
+	var beginDayOfWeek *string
+	if p.BeginDayOfWeek != nil {
+		beginDayOfWeek = p.BeginDayOfWeek
+	}
+	var endDayOfWeek *string
+	if p.EndDayOfWeek != nil {
+		endDayOfWeek = p.EndDayOfWeek
+	}
+	var beginHour *int32
+	if p.BeginHour != nil {
+		beginHour = p.BeginHour
+	}
+	var endHour *int32
+	if p.EndHour != nil {
+		endHour = p.EndHour
+	}
+	return map[string]interface{}{
+		"repeatType":      repeatType,
+		"beginDayOfMonth": beginDayOfMonth,
+		"endDayOfMonth":   endDayOfMonth,
+		"beginDayOfWeek":  beginDayOfWeek,
+		"endDayOfWeek":    endDayOfWeek,
+		"beginHour":       beginHour,
+		"endHour":         endHour,
+	}
+}
+
+func (p RepeatSetting) Pointer() *RepeatSetting {
+	return &p
+}
+
+func CastRepeatSettings(data []interface{}) []RepeatSetting {
+	v := make([]RepeatSetting, 0)
+	for _, d := range data {
+		v = append(v, NewRepeatSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRepeatSettingsFromDict(data []RepeatSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type RepeatSchedule struct {
+	RepeatCount          *int32 `json:"repeatCount"`
+	CurrentRepeatStartAt *int64 `json:"currentRepeatStartAt"`
+	CurrentRepeatEndAt   *int64 `json:"currentRepeatEndAt"`
+	LastRepeatEndAt      *int64 `json:"lastRepeatEndAt"`
+	NextRepeatStartAt    *int64 `json:"nextRepeatStartAt"`
+}
+
+func NewRepeatScheduleFromJson(data string) RepeatSchedule {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRepeatScheduleFromDict(dict)
+}
+
+func NewRepeatScheduleFromDict(data map[string]interface{}) RepeatSchedule {
+	return RepeatSchedule{
+		RepeatCount:          core.CastInt32(data["repeatCount"]),
+		CurrentRepeatStartAt: core.CastInt64(data["currentRepeatStartAt"]),
+		CurrentRepeatEndAt:   core.CastInt64(data["currentRepeatEndAt"]),
+		LastRepeatEndAt:      core.CastInt64(data["lastRepeatEndAt"]),
+		NextRepeatStartAt:    core.CastInt64(data["nextRepeatStartAt"]),
+	}
+}
+
+func (p RepeatSchedule) ToDict() map[string]interface{} {
+
+	var repeatCount *int32
+	if p.RepeatCount != nil {
+		repeatCount = p.RepeatCount
+	}
+	var currentRepeatStartAt *int64
+	if p.CurrentRepeatStartAt != nil {
+		currentRepeatStartAt = p.CurrentRepeatStartAt
+	}
+	var currentRepeatEndAt *int64
+	if p.CurrentRepeatEndAt != nil {
+		currentRepeatEndAt = p.CurrentRepeatEndAt
+	}
+	var lastRepeatEndAt *int64
+	if p.LastRepeatEndAt != nil {
+		lastRepeatEndAt = p.LastRepeatEndAt
+	}
+	var nextRepeatStartAt *int64
+	if p.NextRepeatStartAt != nil {
+		nextRepeatStartAt = p.NextRepeatStartAt
+	}
+	return map[string]interface{}{
+		"repeatCount":          repeatCount,
+		"currentRepeatStartAt": currentRepeatStartAt,
+		"currentRepeatEndAt":   currentRepeatEndAt,
+		"lastRepeatEndAt":      lastRepeatEndAt,
+		"nextRepeatStartAt":    nextRepeatStartAt,
+	}
+}
+
+func (p RepeatSchedule) Pointer() *RepeatSchedule {
+	return &p
+}
+
+func CastRepeatSchedules(data []interface{}) []RepeatSchedule {
+	v := make([]RepeatSchedule, 0)
+	for _, d := range data {
+		v = append(v, NewRepeatScheduleFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastRepeatSchedulesFromDict(data []RepeatSchedule) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -680,81 +872,6 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
-}
-
-type RepeatSchedule struct {
-	RepeatCount          *int32 `json:"repeatCount"`
-	CurrentRepeatStartAt *int64 `json:"currentRepeatStartAt"`
-	CurrentRepeatEndAt   *int64 `json:"currentRepeatEndAt"`
-	LastRepeatEndAt      *int64 `json:"lastRepeatEndAt"`
-	NextRepeatStartAt    *int64 `json:"nextRepeatStartAt"`
-}
-
-func NewRepeatScheduleFromJson(data string) RepeatSchedule {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRepeatScheduleFromDict(dict)
-}
-
-func NewRepeatScheduleFromDict(data map[string]interface{}) RepeatSchedule {
-	return RepeatSchedule{
-		RepeatCount:          core.CastInt32(data["repeatCount"]),
-		CurrentRepeatStartAt: core.CastInt64(data["currentRepeatStartAt"]),
-		CurrentRepeatEndAt:   core.CastInt64(data["currentRepeatEndAt"]),
-		LastRepeatEndAt:      core.CastInt64(data["lastRepeatEndAt"]),
-		NextRepeatStartAt:    core.CastInt64(data["nextRepeatStartAt"]),
-	}
-}
-
-func (p RepeatSchedule) ToDict() map[string]interface{} {
-
-	var repeatCount *int32
-	if p.RepeatCount != nil {
-		repeatCount = p.RepeatCount
-	}
-	var currentRepeatStartAt *int64
-	if p.CurrentRepeatStartAt != nil {
-		currentRepeatStartAt = p.CurrentRepeatStartAt
-	}
-	var currentRepeatEndAt *int64
-	if p.CurrentRepeatEndAt != nil {
-		currentRepeatEndAt = p.CurrentRepeatEndAt
-	}
-	var lastRepeatEndAt *int64
-	if p.LastRepeatEndAt != nil {
-		lastRepeatEndAt = p.LastRepeatEndAt
-	}
-	var nextRepeatStartAt *int64
-	if p.NextRepeatStartAt != nil {
-		nextRepeatStartAt = p.NextRepeatStartAt
-	}
-	return map[string]interface{}{
-		"repeatCount":          repeatCount,
-		"currentRepeatStartAt": currentRepeatStartAt,
-		"currentRepeatEndAt":   currentRepeatEndAt,
-		"lastRepeatEndAt":      lastRepeatEndAt,
-		"nextRepeatStartAt":    nextRepeatStartAt,
-	}
-}
-
-func (p RepeatSchedule) Pointer() *RepeatSchedule {
-	return &p
-}
-
-func CastRepeatSchedules(data []interface{}) []RepeatSchedule {
-	v := make([]RepeatSchedule, 0)
-	for _, d := range data {
-		v = append(v, NewRepeatScheduleFromDict(d.(map[string]interface{})))
-	}
-	return v
-}
-
-func CastRepeatSchedulesFromDict(data []RepeatSchedule) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

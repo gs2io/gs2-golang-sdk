@@ -80,10 +80,6 @@ func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -203,10 +199,6 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -496,10 +488,6 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.LogSetting); err != nil {
 				return err
 			}
@@ -1561,10 +1549,6 @@ func (p *DescribeEventMastersRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -1603,24 +1587,32 @@ func (p DescribeEventMastersRequest) Pointer() *DescribeEventMastersRequest {
 }
 
 type CreateEventMasterRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
-	ContextStack          *string `json:"contextStack"`
-	NamespaceName         *string `json:"namespaceName"`
-	Name                  *string `json:"name"`
-	Description           *string `json:"description"`
-	Metadata              *string `json:"metadata"`
-	ScheduleType          *string `json:"scheduleType"`
-	AbsoluteBegin         *int64  `json:"absoluteBegin"`
-	AbsoluteEnd           *int64  `json:"absoluteEnd"`
-	RepeatType            *string `json:"repeatType"`
-	RepeatBeginDayOfMonth *int32  `json:"repeatBeginDayOfMonth"`
-	RepeatEndDayOfMonth   *int32  `json:"repeatEndDayOfMonth"`
-	RepeatBeginDayOfWeek  *string `json:"repeatBeginDayOfWeek"`
-	RepeatEndDayOfWeek    *string `json:"repeatEndDayOfWeek"`
-	RepeatBeginHour       *int32  `json:"repeatBeginHour"`
-	RepeatEndHour         *int32  `json:"repeatEndHour"`
-	RelativeTriggerName   *string `json:"relativeTriggerName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Name            *string `json:"name"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
+	ScheduleType    *string `json:"scheduleType"`
+	AbsoluteBegin   *int64  `json:"absoluteBegin"`
+	AbsoluteEnd     *int64  `json:"absoluteEnd"`
+	// Deprecated: should not be used
+	RepeatType *string `json:"repeatType"`
+	// Deprecated: should not be used
+	RepeatBeginDayOfMonth *int32 `json:"repeatBeginDayOfMonth"`
+	// Deprecated: should not be used
+	RepeatEndDayOfMonth *int32 `json:"repeatEndDayOfMonth"`
+	// Deprecated: should not be used
+	RepeatBeginDayOfWeek *string `json:"repeatBeginDayOfWeek"`
+	// Deprecated: should not be used
+	RepeatEndDayOfWeek *string `json:"repeatEndDayOfWeek"`
+	// Deprecated: should not be used
+	RepeatBeginHour *int32 `json:"repeatBeginHour"`
+	// Deprecated: should not be used
+	RepeatEndHour       *int32         `json:"repeatEndHour"`
+	RelativeTriggerName *string        `json:"relativeTriggerName"`
+	RepeatSetting       *RepeatSetting `json:"repeatSetting"`
 }
 
 func (p *CreateEventMasterRequest) UnmarshalJSON(data []byte) error {
@@ -1776,134 +1768,12 @@ func (p *CreateEventMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["absoluteBegin"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AbsoluteBegin); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["absoluteEnd"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AbsoluteEnd); err != nil {
-				return err
-			}
-		}
-		if v, ok := d["repeatType"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.RepeatType = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.RepeatType = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.RepeatType = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.RepeatType = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.RepeatType = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.RepeatType); err != nil {
-					return err
-				}
-			}
-		}
-		if v, ok := d["repeatBeginDayOfMonth"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			if err := json.Unmarshal(*v, &p.RepeatBeginDayOfMonth); err != nil {
-				return err
-			}
-		}
-		if v, ok := d["repeatEndDayOfMonth"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			if err := json.Unmarshal(*v, &p.RepeatEndDayOfMonth); err != nil {
-				return err
-			}
-		}
-		if v, ok := d["repeatBeginDayOfWeek"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.RepeatBeginDayOfWeek = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.RepeatBeginDayOfWeek = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.RepeatBeginDayOfWeek = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.RepeatBeginDayOfWeek = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.RepeatBeginDayOfWeek = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.RepeatBeginDayOfWeek); err != nil {
-					return err
-				}
-			}
-		}
-		if v, ok := d["repeatEndDayOfWeek"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.RepeatEndDayOfWeek = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.RepeatEndDayOfWeek = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.RepeatEndDayOfWeek = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.RepeatEndDayOfWeek = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.RepeatEndDayOfWeek = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.RepeatEndDayOfWeek); err != nil {
-					return err
-				}
-			}
-		}
-		if v, ok := d["repeatBeginHour"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			if err := json.Unmarshal(*v, &p.RepeatBeginHour); err != nil {
-				return err
-			}
-		}
-		if v, ok := d["repeatEndHour"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			if err := json.Unmarshal(*v, &p.RepeatEndHour); err != nil {
 				return err
 			}
 		}
@@ -1931,6 +1801,11 @@ func (p *CreateEventMasterRequest) UnmarshalJSON(data []byte) error {
 				if err := json.Unmarshal(*v, &p.RelativeTriggerName); err != nil {
 					return err
 				}
+			}
+		}
+		if v, ok := d["repeatSetting"]; ok && v != nil {
+			if err := json.Unmarshal(*v, &p.RepeatSetting); err != nil {
+				return err
 			}
 		}
 	}
@@ -1963,6 +1838,7 @@ func NewCreateEventMasterRequestFromDict(data map[string]interface{}) CreateEven
 		RepeatBeginHour:       core.CastInt32(data["repeatBeginHour"]),
 		RepeatEndHour:         core.CastInt32(data["repeatEndHour"]),
 		RelativeTriggerName:   core.CastString(data["relativeTriggerName"]),
+		RepeatSetting:         NewRepeatSettingFromDict(core.CastMap(data["repeatSetting"])).Pointer(),
 	}
 }
 
@@ -1983,6 +1859,7 @@ func (p CreateEventMasterRequest) ToDict() map[string]interface{} {
 		"repeatBeginHour":       p.RepeatBeginHour,
 		"repeatEndHour":         p.RepeatEndHour,
 		"relativeTriggerName":   p.RelativeTriggerName,
+		"repeatSetting":         p.RepeatSetting.ToDict(),
 	}
 }
 
@@ -2104,24 +1981,32 @@ func (p GetEventMasterRequest) Pointer() *GetEventMasterRequest {
 }
 
 type UpdateEventMasterRequest struct {
-	SourceRequestId       *string `json:"sourceRequestId"`
-	RequestId             *string `json:"requestId"`
-	ContextStack          *string `json:"contextStack"`
-	NamespaceName         *string `json:"namespaceName"`
-	EventName             *string `json:"eventName"`
-	Description           *string `json:"description"`
-	Metadata              *string `json:"metadata"`
-	ScheduleType          *string `json:"scheduleType"`
-	AbsoluteBegin         *int64  `json:"absoluteBegin"`
-	AbsoluteEnd           *int64  `json:"absoluteEnd"`
-	RepeatType            *string `json:"repeatType"`
-	RepeatBeginDayOfMonth *int32  `json:"repeatBeginDayOfMonth"`
-	RepeatEndDayOfMonth   *int32  `json:"repeatEndDayOfMonth"`
-	RepeatBeginDayOfWeek  *string `json:"repeatBeginDayOfWeek"`
-	RepeatEndDayOfWeek    *string `json:"repeatEndDayOfWeek"`
-	RepeatBeginHour       *int32  `json:"repeatBeginHour"`
-	RepeatEndHour         *int32  `json:"repeatEndHour"`
-	RelativeTriggerName   *string `json:"relativeTriggerName"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	EventName       *string `json:"eventName"`
+	Description     *string `json:"description"`
+	Metadata        *string `json:"metadata"`
+	ScheduleType    *string `json:"scheduleType"`
+	AbsoluteBegin   *int64  `json:"absoluteBegin"`
+	AbsoluteEnd     *int64  `json:"absoluteEnd"`
+	// Deprecated: should not be used
+	RepeatType *string `json:"repeatType"`
+	// Deprecated: should not be used
+	RepeatBeginDayOfMonth *int32 `json:"repeatBeginDayOfMonth"`
+	// Deprecated: should not be used
+	RepeatEndDayOfMonth *int32 `json:"repeatEndDayOfMonth"`
+	// Deprecated: should not be used
+	RepeatBeginDayOfWeek *string `json:"repeatBeginDayOfWeek"`
+	// Deprecated: should not be used
+	RepeatEndDayOfWeek *string `json:"repeatEndDayOfWeek"`
+	// Deprecated: should not be used
+	RepeatBeginHour *int32 `json:"repeatBeginHour"`
+	// Deprecated: should not be used
+	RepeatEndHour       *int32         `json:"repeatEndHour"`
+	RelativeTriggerName *string        `json:"relativeTriggerName"`
+	RepeatSetting       *RepeatSetting `json:"repeatSetting"`
 }
 
 func (p *UpdateEventMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2277,134 +2162,12 @@ func (p *UpdateEventMasterRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["absoluteBegin"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AbsoluteBegin); err != nil {
 				return err
 			}
 		}
 		if v, ok := d["absoluteEnd"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.AbsoluteEnd); err != nil {
-				return err
-			}
-		}
-		if v, ok := d["repeatType"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.RepeatType = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.RepeatType = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.RepeatType = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.RepeatType = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.RepeatType = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.RepeatType); err != nil {
-					return err
-				}
-			}
-		}
-		if v, ok := d["repeatBeginDayOfMonth"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			if err := json.Unmarshal(*v, &p.RepeatBeginDayOfMonth); err != nil {
-				return err
-			}
-		}
-		if v, ok := d["repeatEndDayOfMonth"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			if err := json.Unmarshal(*v, &p.RepeatEndDayOfMonth); err != nil {
-				return err
-			}
-		}
-		if v, ok := d["repeatBeginDayOfWeek"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.RepeatBeginDayOfWeek = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.RepeatBeginDayOfWeek = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.RepeatBeginDayOfWeek = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.RepeatBeginDayOfWeek = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.RepeatBeginDayOfWeek = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.RepeatBeginDayOfWeek); err != nil {
-					return err
-				}
-			}
-		}
-		if v, ok := d["repeatEndDayOfWeek"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.RepeatEndDayOfWeek = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.RepeatEndDayOfWeek = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.RepeatEndDayOfWeek = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.RepeatEndDayOfWeek = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.RepeatEndDayOfWeek = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.RepeatEndDayOfWeek); err != nil {
-					return err
-				}
-			}
-		}
-		if v, ok := d["repeatBeginHour"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			if err := json.Unmarshal(*v, &p.RepeatBeginHour); err != nil {
-				return err
-			}
-		}
-		if v, ok := d["repeatEndHour"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			if err := json.Unmarshal(*v, &p.RepeatEndHour); err != nil {
 				return err
 			}
 		}
@@ -2432,6 +2195,11 @@ func (p *UpdateEventMasterRequest) UnmarshalJSON(data []byte) error {
 				if err := json.Unmarshal(*v, &p.RelativeTriggerName); err != nil {
 					return err
 				}
+			}
+		}
+		if v, ok := d["repeatSetting"]; ok && v != nil {
+			if err := json.Unmarshal(*v, &p.RepeatSetting); err != nil {
+				return err
 			}
 		}
 	}
@@ -2464,6 +2232,7 @@ func NewUpdateEventMasterRequestFromDict(data map[string]interface{}) UpdateEven
 		RepeatBeginHour:       core.CastInt32(data["repeatBeginHour"]),
 		RepeatEndHour:         core.CastInt32(data["repeatEndHour"]),
 		RelativeTriggerName:   core.CastString(data["relativeTriggerName"]),
+		RepeatSetting:         NewRepeatSettingFromDict(core.CastMap(data["repeatSetting"])).Pointer(),
 	}
 }
 
@@ -2484,6 +2253,7 @@ func (p UpdateEventMasterRequest) ToDict() map[string]interface{} {
 		"repeatBeginHour":       p.RepeatBeginHour,
 		"repeatEndHour":         p.RepeatEndHour,
 		"relativeTriggerName":   p.RelativeTriggerName,
+		"repeatSetting":         p.RepeatSetting.ToDict(),
 	}
 }
 
@@ -2715,10 +2485,6 @@ func (p *DescribeTriggersRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -2870,10 +2636,6 @@ func (p *DescribeTriggersByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Limit); err != nil {
 				return err
 			}
@@ -3394,10 +3156,6 @@ func (p *TriggerByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["ttl"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.Ttl); err != nil {
 				return err
 			}
@@ -4458,10 +4216,6 @@ func (p *GetEventRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["isInSchedule"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.IsInSchedule); err != nil {
 				return err
 			}
@@ -4613,10 +4367,6 @@ func (p *GetEventByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["isInSchedule"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.IsInSchedule); err != nil {
 				return err
 			}
@@ -5621,10 +5371,6 @@ func (p *UpdateCurrentEventMasterFromGitHubRequest) UnmarshalJSON(data []byte) e
 			}
 		}
 		if v, ok := d["checkoutSetting"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
 			if err := json.Unmarshal(*v, &p.CheckoutSetting); err != nil {
 				return err
 			}
