@@ -58,131 +58,116 @@ func (p *CreateAccountRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["email"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Email = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Email = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Email = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Email = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Email = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Email); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Email = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Email = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Email = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Email = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Email = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Email)
 				}
 			}
 		}
 		if v, ok := d["fullName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.FullName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.FullName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.FullName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.FullName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.FullName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.FullName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.FullName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.FullName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.FullName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.FullName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.FullName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.FullName)
 				}
 			}
 		}
 		if v, ok := d["companyName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.CompanyName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.CompanyName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.CompanyName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.CompanyName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.CompanyName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.CompanyName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CompanyName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CompanyName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CompanyName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CompanyName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CompanyName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CompanyName)
 				}
 			}
 		}
 		if v, ok := d["password"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Password = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Password = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Password = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Password = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Password = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Password); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Password = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Password = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Password = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Password)
 				}
 			}
 		}
 		if v, ok := d["lang"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Lang = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Lang = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Lang = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Lang = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Lang = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Lang); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Lang = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Lang = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Lang = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Lang = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Lang = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Lang)
 				}
 			}
 		}
@@ -254,27 +239,24 @@ func (p *VerifyRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["verifyToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.VerifyToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.VerifyToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.VerifyToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.VerifyToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.VerifyToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.VerifyToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyToken)
 				}
 			}
 		}
@@ -339,53 +321,47 @@ func (p *SignInRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["email"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Email = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Email = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Email = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Email = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Email = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Email); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Email = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Email = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Email = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Email = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Email = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Email)
 				}
 			}
 		}
 		if v, ok := d["password"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Password = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Password = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Password = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Password = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Password = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Password); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Password = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Password = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Password = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Password)
 				}
 			}
 		}
@@ -452,53 +428,47 @@ func (p *ForgetRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["email"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Email = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Email = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Email = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Email = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Email = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Email); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Email = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Email = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Email = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Email = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Email = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Email)
 				}
 			}
 		}
 		if v, ok := d["lang"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Lang = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Lang = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Lang = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Lang = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Lang = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Lang); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Lang = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Lang = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Lang = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Lang = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Lang = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Lang)
 				}
 			}
 		}
@@ -564,27 +534,24 @@ func (p *IssuePasswordRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["issuePasswordToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.IssuePasswordToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.IssuePasswordToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.IssuePasswordToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.IssuePasswordToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.IssuePasswordToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.IssuePasswordToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.IssuePasswordToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.IssuePasswordToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.IssuePasswordToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.IssuePasswordToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.IssuePasswordToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.IssuePasswordToken)
 				}
 			}
 		}
@@ -652,131 +619,116 @@ func (p *UpdateAccountRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["email"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Email = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Email = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Email = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Email = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Email = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Email); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Email = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Email = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Email = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Email = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Email = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Email)
 				}
 			}
 		}
 		if v, ok := d["fullName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.FullName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.FullName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.FullName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.FullName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.FullName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.FullName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.FullName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.FullName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.FullName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.FullName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.FullName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.FullName)
 				}
 			}
 		}
 		if v, ok := d["companyName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.CompanyName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.CompanyName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.CompanyName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.CompanyName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.CompanyName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.CompanyName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CompanyName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CompanyName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CompanyName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CompanyName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CompanyName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CompanyName)
 				}
 			}
 		}
 		if v, ok := d["password"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Password = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Password = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Password = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Password = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Password = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Password); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Password = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Password = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Password = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Password)
 				}
 			}
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
@@ -848,27 +800,24 @@ func (p *DeleteAccountRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
@@ -934,60 +883,52 @@ func (p *DescribeProjectsRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.PageToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.PageToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.PageToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
 				}
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			if err := json.Unmarshal(*v, &p.Limit); err != nil {
-				return err
-			}
+			_ = json.Unmarshal(*v, &p.Limit)
 		}
 	}
 	return nil
@@ -1062,261 +1003,231 @@ func (p *CreateProjectRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
 		if v, ok := d["name"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Name = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Name = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Name = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Name = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Name = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Name); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
 				}
 			}
 		}
 		if v, ok := d["description"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Description = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Description = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Description = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Description = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Description = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Description); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
 				}
 			}
 		}
 		if v, ok := d["plan"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Plan = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Plan = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Plan = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Plan = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Plan = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Plan); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Plan = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Plan = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Plan = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Plan = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Plan = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Plan)
 				}
 			}
 		}
 		if v, ok := d["currency"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Currency = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Currency = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Currency = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Currency = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Currency = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Currency); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Currency = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Currency = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Currency = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Currency = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Currency = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Currency)
 				}
 			}
 		}
 		if v, ok := d["activateRegionName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.ActivateRegionName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.ActivateRegionName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.ActivateRegionName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.ActivateRegionName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.ActivateRegionName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.ActivateRegionName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ActivateRegionName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ActivateRegionName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ActivateRegionName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ActivateRegionName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ActivateRegionName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ActivateRegionName)
 				}
 			}
 		}
 		if v, ok := d["billingMethodName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.BillingMethodName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.BillingMethodName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.BillingMethodName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.BillingMethodName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.BillingMethodName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.BillingMethodName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.BillingMethodName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.BillingMethodName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.BillingMethodName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.BillingMethodName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.BillingMethodName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.BillingMethodName)
 				}
 			}
 		}
 		if v, ok := d["enableEventBridge"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.EnableEventBridge = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.EnableEventBridge = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.EnableEventBridge = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.EnableEventBridge = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.EnableEventBridge = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.EnableEventBridge); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EnableEventBridge = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EnableEventBridge = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EnableEventBridge = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EnableEventBridge = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EnableEventBridge = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EnableEventBridge)
 				}
 			}
 		}
 		if v, ok := d["eventBridgeAwsAccountId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.EventBridgeAwsAccountId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.EventBridgeAwsAccountId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.EventBridgeAwsAccountId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.EventBridgeAwsAccountId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.EventBridgeAwsAccountId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.EventBridgeAwsAccountId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EventBridgeAwsAccountId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EventBridgeAwsAccountId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EventBridgeAwsAccountId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EventBridgeAwsAccountId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EventBridgeAwsAccountId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EventBridgeAwsAccountId)
 				}
 			}
 		}
 		if v, ok := d["eventBridgeAwsRegion"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.EventBridgeAwsRegion = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.EventBridgeAwsRegion = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.EventBridgeAwsRegion = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.EventBridgeAwsRegion = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.EventBridgeAwsRegion = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.EventBridgeAwsRegion); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EventBridgeAwsRegion = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EventBridgeAwsRegion = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EventBridgeAwsRegion = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EventBridgeAwsRegion = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EventBridgeAwsRegion = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EventBridgeAwsRegion)
 				}
 			}
 		}
@@ -1399,53 +1310,47 @@ func (p *GetProjectRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
 		if v, ok := d["projectName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.ProjectName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.ProjectName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.ProjectName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.ProjectName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ProjectName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ProjectName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ProjectName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ProjectName)
 				}
 			}
 		}
@@ -1512,53 +1417,47 @@ func (p *GetProjectTokenRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["projectName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.ProjectName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.ProjectName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.ProjectName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.ProjectName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ProjectName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ProjectName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ProjectName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ProjectName)
 				}
 			}
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
@@ -1627,105 +1526,93 @@ func (p *GetProjectTokenByIdentifierRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountName)
 				}
 			}
 		}
 		if v, ok := d["projectName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.ProjectName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.ProjectName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.ProjectName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.ProjectName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ProjectName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ProjectName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ProjectName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ProjectName)
 				}
 			}
 		}
 		if v, ok := d["userName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.UserName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.UserName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.UserName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.UserName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.UserName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.UserName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserName)
 				}
 			}
 		}
 		if v, ok := d["password"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Password = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Password = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Password = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Password = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Password = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Password); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Password = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Password = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Password = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Password)
 				}
 			}
 		}
@@ -1802,209 +1689,185 @@ func (p *UpdateProjectRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
 		if v, ok := d["projectName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.ProjectName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.ProjectName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.ProjectName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.ProjectName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ProjectName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ProjectName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ProjectName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ProjectName)
 				}
 			}
 		}
 		if v, ok := d["description"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Description = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Description = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Description = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Description = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Description = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Description); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
 				}
 			}
 		}
 		if v, ok := d["plan"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Plan = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Plan = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Plan = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Plan = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Plan = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Plan); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Plan = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Plan = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Plan = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Plan = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Plan = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Plan)
 				}
 			}
 		}
 		if v, ok := d["billingMethodName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.BillingMethodName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.BillingMethodName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.BillingMethodName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.BillingMethodName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.BillingMethodName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.BillingMethodName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.BillingMethodName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.BillingMethodName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.BillingMethodName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.BillingMethodName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.BillingMethodName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.BillingMethodName)
 				}
 			}
 		}
 		if v, ok := d["enableEventBridge"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.EnableEventBridge = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.EnableEventBridge = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.EnableEventBridge = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.EnableEventBridge = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.EnableEventBridge = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.EnableEventBridge); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EnableEventBridge = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EnableEventBridge = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EnableEventBridge = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EnableEventBridge = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EnableEventBridge = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EnableEventBridge)
 				}
 			}
 		}
 		if v, ok := d["eventBridgeAwsAccountId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.EventBridgeAwsAccountId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.EventBridgeAwsAccountId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.EventBridgeAwsAccountId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.EventBridgeAwsAccountId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.EventBridgeAwsAccountId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.EventBridgeAwsAccountId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EventBridgeAwsAccountId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EventBridgeAwsAccountId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EventBridgeAwsAccountId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EventBridgeAwsAccountId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EventBridgeAwsAccountId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EventBridgeAwsAccountId)
 				}
 			}
 		}
 		if v, ok := d["eventBridgeAwsRegion"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.EventBridgeAwsRegion = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.EventBridgeAwsRegion = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.EventBridgeAwsRegion = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.EventBridgeAwsRegion = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.EventBridgeAwsRegion = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.EventBridgeAwsRegion); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EventBridgeAwsRegion = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EventBridgeAwsRegion = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EventBridgeAwsRegion = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EventBridgeAwsRegion = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EventBridgeAwsRegion = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EventBridgeAwsRegion)
 				}
 			}
 		}
@@ -2084,79 +1947,70 @@ func (p *ActivateRegionRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
 		if v, ok := d["projectName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.ProjectName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.ProjectName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.ProjectName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.ProjectName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ProjectName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ProjectName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ProjectName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ProjectName)
 				}
 			}
 		}
 		if v, ok := d["regionName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.RegionName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.RegionName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.RegionName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.RegionName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.RegionName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.RegionName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RegionName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RegionName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RegionName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RegionName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RegionName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RegionName)
 				}
 			}
 		}
@@ -2225,53 +2079,47 @@ func (p *WaitActivateRegionRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["projectName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.ProjectName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.ProjectName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.ProjectName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.ProjectName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ProjectName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ProjectName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ProjectName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ProjectName)
 				}
 			}
 		}
 		if v, ok := d["regionName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.RegionName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.RegionName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.RegionName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.RegionName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.RegionName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.RegionName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RegionName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RegionName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RegionName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RegionName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RegionName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RegionName)
 				}
 			}
 		}
@@ -2338,53 +2186,47 @@ func (p *DeleteProjectRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
 		if v, ok := d["projectName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.ProjectName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.ProjectName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.ProjectName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.ProjectName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ProjectName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ProjectName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ProjectName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ProjectName)
 				}
 			}
 		}
@@ -2452,60 +2294,52 @@ func (p *DescribeBillingMethodsRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.PageToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.PageToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.PageToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
 				}
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			if err := json.Unmarshal(*v, &p.Limit); err != nil {
-				return err
-			}
+			_ = json.Unmarshal(*v, &p.Limit)
 		}
 	}
 	return nil
@@ -2575,131 +2409,116 @@ func (p *CreateBillingMethodRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
 		if v, ok := d["description"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Description = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Description = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Description = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Description = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Description = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Description); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
 				}
 			}
 		}
 		if v, ok := d["methodType"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.MethodType = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.MethodType = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.MethodType = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.MethodType = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.MethodType = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.MethodType); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MethodType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MethodType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MethodType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MethodType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MethodType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MethodType)
 				}
 			}
 		}
 		if v, ok := d["cardCustomerId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.CardCustomerId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.CardCustomerId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.CardCustomerId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.CardCustomerId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.CardCustomerId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.CardCustomerId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CardCustomerId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CardCustomerId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CardCustomerId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CardCustomerId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CardCustomerId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CardCustomerId)
 				}
 			}
 		}
 		if v, ok := d["partnerId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.PartnerId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.PartnerId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.PartnerId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.PartnerId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.PartnerId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.PartnerId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PartnerId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PartnerId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PartnerId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PartnerId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PartnerId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PartnerId)
 				}
 			}
 		}
@@ -2772,53 +2591,47 @@ func (p *GetBillingMethodRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
 		if v, ok := d["billingMethodName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.BillingMethodName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.BillingMethodName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.BillingMethodName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.BillingMethodName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.BillingMethodName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.BillingMethodName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.BillingMethodName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.BillingMethodName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.BillingMethodName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.BillingMethodName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.BillingMethodName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.BillingMethodName)
 				}
 			}
 		}
@@ -2886,79 +2699,70 @@ func (p *UpdateBillingMethodRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
 		if v, ok := d["billingMethodName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.BillingMethodName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.BillingMethodName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.BillingMethodName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.BillingMethodName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.BillingMethodName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.BillingMethodName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.BillingMethodName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.BillingMethodName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.BillingMethodName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.BillingMethodName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.BillingMethodName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.BillingMethodName)
 				}
 			}
 		}
 		if v, ok := d["description"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Description = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Description = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Description = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Description = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Description = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Description); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
 				}
 			}
 		}
@@ -3027,53 +2831,47 @@ func (p *DeleteBillingMethodRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
 		if v, ok := d["billingMethodName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.BillingMethodName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.BillingMethodName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.BillingMethodName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.BillingMethodName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.BillingMethodName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.BillingMethodName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.BillingMethodName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.BillingMethodName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.BillingMethodName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.BillingMethodName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.BillingMethodName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.BillingMethodName)
 				}
 			}
 		}
@@ -3141,60 +2939,52 @@ func (p *DescribeReceiptsRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.PageToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.PageToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.PageToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
 				}
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			if err := json.Unmarshal(*v, &p.Limit); err != nil {
-				return err
-			}
+			_ = json.Unmarshal(*v, &p.Limit)
 		}
 	}
 	return nil
@@ -3265,115 +3055,99 @@ func (p *DescribeBillingsRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["accountToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.AccountToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.AccountToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.AccountToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.AccountToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.AccountToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccountToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccountToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccountToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccountToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccountToken)
 				}
 			}
 		}
 		if v, ok := d["projectName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.ProjectName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.ProjectName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.ProjectName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.ProjectName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.ProjectName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ProjectName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ProjectName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ProjectName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ProjectName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ProjectName)
 				}
 			}
 		}
 		if v, ok := d["year"]; ok && v != nil {
-			if err := json.Unmarshal(*v, &p.Year); err != nil {
-				return err
-			}
+			_ = json.Unmarshal(*v, &p.Year)
 		}
 		if v, ok := d["month"]; ok && v != nil {
-			if err := json.Unmarshal(*v, &p.Month); err != nil {
-				return err
-			}
+			_ = json.Unmarshal(*v, &p.Month)
 		}
 		if v, ok := d["region"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Region = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Region = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Region = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Region = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Region = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Region); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Region = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Region = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Region = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Region = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Region = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Region)
 				}
 			}
 		}
 		if v, ok := d["service"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.Service = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.Service = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.Service = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.Service = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.Service = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.Service); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Service = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Service = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Service = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Service)
 				}
 			}
 		}
@@ -3448,34 +3222,29 @@ func (p *DescribeDumpProgressesRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.PageToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.PageToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.PageToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
 				}
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			if err := json.Unmarshal(*v, &p.Limit); err != nil {
-				return err
-			}
+			_ = json.Unmarshal(*v, &p.Limit)
 		}
 	}
 	return nil
@@ -3539,27 +3308,24 @@ func (p *GetDumpProgressRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TransactionId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TransactionId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TransactionId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TransactionId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
 				}
 			}
 		}
@@ -3627,105 +3393,93 @@ func (p *WaitDumpUserDataRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TransactionId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TransactionId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TransactionId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TransactionId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
 				}
 			}
 		}
 		if v, ok := d["userId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.UserId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.UserId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.UserId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.UserId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
 				}
 			}
 		}
 		if v, ok := d["microserviceName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.MicroserviceName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.MicroserviceName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.MicroserviceName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.MicroserviceName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.MicroserviceName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.MicroserviceName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MicroserviceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MicroserviceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MicroserviceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MicroserviceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MicroserviceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MicroserviceName)
 				}
 			}
 		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TimeOffsetToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TimeOffsetToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TimeOffsetToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
 				}
 			}
 		}
@@ -3795,27 +3549,24 @@ func (p *ArchiveDumpUserDataRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TransactionId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TransactionId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TransactionId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TransactionId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
 				}
 			}
 		}
@@ -3881,53 +3632,47 @@ func (p *DumpUserDataRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["userId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.UserId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.UserId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.UserId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.UserId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
 				}
 			}
 		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TimeOffsetToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TimeOffsetToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TimeOffsetToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
 				}
 			}
 		}
@@ -3993,27 +3738,24 @@ func (p *GetDumpUserDataRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TransactionId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TransactionId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TransactionId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TransactionId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
 				}
 			}
 		}
@@ -4078,34 +3820,29 @@ func (p *DescribeCleanProgressesRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.PageToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.PageToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.PageToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
 				}
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			if err := json.Unmarshal(*v, &p.Limit); err != nil {
-				return err
-			}
+			_ = json.Unmarshal(*v, &p.Limit)
 		}
 	}
 	return nil
@@ -4169,27 +3906,24 @@ func (p *GetCleanProgressRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TransactionId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TransactionId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TransactionId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TransactionId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
 				}
 			}
 		}
@@ -4257,105 +3991,93 @@ func (p *WaitCleanUserDataRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TransactionId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TransactionId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TransactionId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TransactionId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
 				}
 			}
 		}
 		if v, ok := d["userId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.UserId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.UserId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.UserId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.UserId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
 				}
 			}
 		}
 		if v, ok := d["microserviceName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.MicroserviceName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.MicroserviceName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.MicroserviceName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.MicroserviceName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.MicroserviceName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.MicroserviceName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MicroserviceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MicroserviceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MicroserviceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MicroserviceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MicroserviceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MicroserviceName)
 				}
 			}
 		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TimeOffsetToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TimeOffsetToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TimeOffsetToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
 				}
 			}
 		}
@@ -4427,53 +4149,47 @@ func (p *CleanUserDataRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["userId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.UserId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.UserId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.UserId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.UserId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
 				}
 			}
 		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TimeOffsetToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TimeOffsetToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TimeOffsetToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
 				}
 			}
 		}
@@ -4540,34 +4256,29 @@ func (p *DescribeImportProgressesRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.PageToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.PageToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.PageToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
 				}
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			if err := json.Unmarshal(*v, &p.Limit); err != nil {
-				return err
-			}
+			_ = json.Unmarshal(*v, &p.Limit)
 		}
 	}
 	return nil
@@ -4631,27 +4342,24 @@ func (p *GetImportProgressRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TransactionId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TransactionId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TransactionId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TransactionId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
 				}
 			}
 		}
@@ -4719,105 +4427,93 @@ func (p *WaitImportUserDataRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TransactionId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TransactionId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TransactionId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TransactionId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
 				}
 			}
 		}
 		if v, ok := d["userId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.UserId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.UserId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.UserId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.UserId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
 				}
 			}
 		}
 		if v, ok := d["microserviceName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.MicroserviceName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.MicroserviceName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.MicroserviceName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.MicroserviceName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.MicroserviceName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.MicroserviceName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MicroserviceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MicroserviceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MicroserviceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MicroserviceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MicroserviceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MicroserviceName)
 				}
 			}
 		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TimeOffsetToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TimeOffsetToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TimeOffsetToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
 				}
 			}
 		}
@@ -4889,53 +4585,47 @@ func (p *PrepareImportUserDataRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["userId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.UserId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.UserId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.UserId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.UserId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
 				}
 			}
 		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TimeOffsetToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TimeOffsetToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TimeOffsetToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
 				}
 			}
 		}
@@ -5004,79 +4694,70 @@ func (p *ImportUserDataRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["userId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.UserId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.UserId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.UserId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.UserId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.UserId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
 				}
 			}
 		}
 		if v, ok := d["uploadToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.UploadToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.UploadToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.UploadToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.UploadToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.UploadToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.UploadToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UploadToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UploadToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UploadToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UploadToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UploadToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UploadToken)
 				}
 			}
 		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TimeOffsetToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TimeOffsetToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TimeOffsetToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TimeOffsetToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TimeOffsetToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
 				}
 			}
 		}
@@ -5146,60 +4827,52 @@ func (p *DescribeImportErrorLogsRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TransactionId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TransactionId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TransactionId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TransactionId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
 				}
 			}
 		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.PageToken = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.PageToken = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.PageToken = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.PageToken = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.PageToken); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
 				}
 			}
 		}
 		if v, ok := d["limit"]; ok && v != nil {
-			if err := json.Unmarshal(*v, &p.Limit); err != nil {
-				return err
-			}
+			_ = json.Unmarshal(*v, &p.Limit)
 		}
 	}
 	return nil
@@ -5266,53 +4939,47 @@ func (p *GetImportErrorLogRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["transactionId"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.TransactionId = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.TransactionId = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.TransactionId = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.TransactionId = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.TransactionId); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
 				}
 			}
 		}
 		if v, ok := d["errorLogName"]; ok && v != nil {
 			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err != nil {
-				return err
-			}
-			switch v2 := temp.(type) {
-			case string:
-				p.ErrorLogName = &v2
-			case float64:
-				strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-				p.ErrorLogName = &strValue
-			case int:
-				strValue := strconv.Itoa(v2)
-				p.ErrorLogName = &strValue
-			case int32:
-				strValue := strconv.Itoa(int(v2))
-				p.ErrorLogName = &strValue
-			case int64:
-				strValue := strconv.Itoa(int(v2))
-				p.ErrorLogName = &strValue
-			default:
-				if err := json.Unmarshal(*v, &p.ErrorLogName); err != nil {
-					return err
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ErrorLogName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ErrorLogName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ErrorLogName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ErrorLogName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ErrorLogName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ErrorLogName)
 				}
 			}
 		}
