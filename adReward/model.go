@@ -18,6 +18,7 @@ package adReward
 
 import (
 	"encoding/json"
+	"strconv"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -36,10 +37,129 @@ type Namespace struct {
 	Revision                *int64               `json:"revision"`
 }
 
+func (p *Namespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Namespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Namespace{}
+	} else {
+		*p = Namespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["admob"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Admob)
+		}
+		if v, ok := d["unityAd"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UnityAd)
+		}
+		if v, ok := d["appLovinMaxes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AppLovinMaxes)
+		}
+		if v, ok := d["changePointNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangePointNotification)
+		}
+		if v, ok := d["logSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.LogSetting)
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
 func NewNamespaceFromJson(data string) Namespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewNamespaceFromDict(dict)
+	req := Namespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -150,10 +270,94 @@ type Point struct {
 	Revision  *int64  `json:"revision"`
 }
 
+func (p *Point) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Point{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Point{}
+	} else {
+		*p = Point{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["pointId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PointId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PointId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PointId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PointId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PointId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PointId)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["point"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Point)
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
 func NewPointFromJson(data string) Point {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPointFromDict(dict)
+	req := Point{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewPointFromDict(data map[string]interface{}) Point {
@@ -227,10 +431,39 @@ type AdMob struct {
 	AllowAdUnitIds []*string `json:"allowAdUnitIds"`
 }
 
+func (p *AdMob) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AdMob{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AdMob{}
+	} else {
+		*p = AdMob{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["allowAdUnitIds"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AllowAdUnitIds)
+		}
+	}
+	return nil
+}
+
 func NewAdMobFromJson(data string) AdMob {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAdMobFromDict(dict)
+	req := AdMob{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewAdMobFromDict(data map[string]interface{}) AdMob {
@@ -276,10 +509,39 @@ type UnityAd struct {
 	Keys []*string `json:"keys"`
 }
 
+func (p *UnityAd) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UnityAd{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UnityAd{}
+	} else {
+		*p = UnityAd{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["keys"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Keys)
+		}
+	}
+	return nil
+}
+
 func NewUnityAdFromJson(data string) UnityAd {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUnityAdFromDict(dict)
+	req := UnityAd{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewUnityAdFromDict(data map[string]interface{}) UnityAd {
@@ -326,10 +588,82 @@ type AppLovinMax struct {
 	EventKey      *string `json:"eventKey"`
 }
 
+func (p *AppLovinMax) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AppLovinMax{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AppLovinMax{}
+	} else {
+		*p = AppLovinMax{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["allowAdUnitId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AllowAdUnitId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AllowAdUnitId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AllowAdUnitId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AllowAdUnitId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AllowAdUnitId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AllowAdUnitId)
+				}
+			}
+		}
+		if v, ok := d["eventKey"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EventKey = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EventKey = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EventKey = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EventKey = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EventKey = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EventKey)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewAppLovinMaxFromJson(data string) AppLovinMax {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAppLovinMaxFromDict(dict)
+	req := AppLovinMax{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewAppLovinMaxFromDict(data map[string]interface{}) AppLovinMax {
@@ -381,10 +715,85 @@ type NotificationSetting struct {
 	Sound                            *string `json:"sound"`
 }
 
+func (p *NotificationSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = NotificationSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = NotificationSetting{}
+	} else {
+		*p = NotificationSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["gatewayNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GatewayNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GatewayNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GatewayNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GatewayNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GatewayNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GatewayNamespaceId)
+				}
+			}
+		}
+		if v, ok := d["enableTransferMobileNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EnableTransferMobileNotification)
+		}
+		if v, ok := d["sound"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Sound = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Sound = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Sound = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Sound = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Sound = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Sound)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewNotificationSettingFromJson(data string) NotificationSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewNotificationSettingFromDict(dict)
+	req := NotificationSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
@@ -440,10 +849,59 @@ type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
+func (p *LogSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LogSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LogSetting{}
+	} else {
+		*p = LogSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["loggingNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LoggingNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LoggingNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LoggingNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LoggingNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LoggingNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LoggingNamespaceId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewLogSettingFromJson(data string) LogSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLogSettingFromDict(dict)
+	req := LogSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {

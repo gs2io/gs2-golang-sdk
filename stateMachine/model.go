@@ -18,6 +18,7 @@ package stateMachine
 
 import (
 	"encoding/json"
+	"strconv"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -38,10 +39,155 @@ type Namespace struct {
 	Revision                    *int64              `json:"revision"`
 }
 
+func (p *Namespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Namespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Namespace{}
+	} else {
+		*p = Namespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["supportSpeculativeExecution"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SupportSpeculativeExecution = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SupportSpeculativeExecution = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SupportSpeculativeExecution = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SupportSpeculativeExecution = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SupportSpeculativeExecution = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SupportSpeculativeExecution)
+				}
+			}
+		}
+		if v, ok := d["transactionSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionSetting)
+		}
+		if v, ok := d["startScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.StartScript)
+		}
+		if v, ok := d["passScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.PassScript)
+		}
+		if v, ok := d["errorScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ErrorScript)
+		}
+		if v, ok := d["lowestStateMachineVersion"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.LowestStateMachineVersion)
+		}
+		if v, ok := d["logSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.LogSetting)
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
 func NewNamespaceFromJson(data string) Namespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewNamespaceFromDict(dict)
+	req := Namespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
@@ -163,10 +309,117 @@ type StateMachineMaster struct {
 	Revision             *int64  `json:"revision"`
 }
 
+func (p *StateMachineMaster) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StateMachineMaster{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StateMachineMaster{}
+	} else {
+		*p = StateMachineMaster{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stateMachineId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StateMachineId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StateMachineId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StateMachineId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StateMachineId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StateMachineId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StateMachineId)
+				}
+			}
+		}
+		if v, ok := d["mainStateMachineName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MainStateMachineName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MainStateMachineName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MainStateMachineName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MainStateMachineName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MainStateMachineName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MainStateMachineName)
+				}
+			}
+		}
+		if v, ok := d["payload"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Payload = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Payload = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Payload = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Payload)
+				}
+			}
+		}
+		if v, ok := d["version"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Version)
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
 func NewStateMachineMasterFromJson(data string) StateMachineMaster {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStateMachineMasterFromDict(dict)
+	req := StateMachineMaster{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStateMachineMasterFromDict(data map[string]interface{}) StateMachineMaster {
@@ -259,10 +512,218 @@ type Status struct {
 	UpdatedAt                  *int64        `json:"updatedAt"`
 }
 
+func (p *Status) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Status{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Status{}
+	} else {
+		*p = Status{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statusId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StatusId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StatusId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StatusId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StatusId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StatusId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StatusId)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["stateMachineVersion"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.StateMachineVersion)
+		}
+		if v, ok := d["enableSpeculativeExecution"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EnableSpeculativeExecution = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EnableSpeculativeExecution = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EnableSpeculativeExecution = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EnableSpeculativeExecution = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EnableSpeculativeExecution = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EnableSpeculativeExecution)
+				}
+			}
+		}
+		if v, ok := d["stateMachineDefinition"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StateMachineDefinition = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StateMachineDefinition = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StateMachineDefinition = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StateMachineDefinition = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StateMachineDefinition = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StateMachineDefinition)
+				}
+			}
+		}
+		if v, ok := d["randomStatus"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RandomStatus)
+		}
+		if v, ok := d["stacks"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stacks)
+		}
+		if v, ok := d["variables"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Variables)
+		}
+		if v, ok := d["status"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Status = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Status = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Status = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Status = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Status = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Status)
+				}
+			}
+		}
+		if v, ok := d["lastError"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LastError = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LastError = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LastError = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LastError = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LastError = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LastError)
+				}
+			}
+		}
+		if v, ok := d["transitionCount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransitionCount)
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+	}
+	return nil
+}
+
 func NewStatusFromJson(data string) Status {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStatusFromDict(dict)
+	req := Status{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStatusFromDict(data map[string]interface{}) Status {
@@ -389,10 +850,82 @@ type StackEntry struct {
 	TaskName         *string `json:"taskName"`
 }
 
+func (p *StackEntry) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StackEntry{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StackEntry{}
+	} else {
+		*p = StackEntry{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stateMachineName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StateMachineName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StateMachineName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StateMachineName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StateMachineName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StateMachineName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StateMachineName)
+				}
+			}
+		}
+		if v, ok := d["taskName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TaskName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TaskName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TaskName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TaskName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TaskName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TaskName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewStackEntryFromJson(data string) StackEntry {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStackEntryFromDict(dict)
+	req := StackEntry{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStackEntryFromDict(data map[string]interface{}) StackEntry {
@@ -443,10 +976,82 @@ type Variable struct {
 	Value            *string `json:"value"`
 }
 
+func (p *Variable) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Variable{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Variable{}
+	} else {
+		*p = Variable{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stateMachineName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StateMachineName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StateMachineName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StateMachineName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StateMachineName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StateMachineName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StateMachineName)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Value = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Value = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Value = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Value)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewVariableFromJson(data string) Variable {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewVariableFromDict(dict)
+	req := Variable{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewVariableFromDict(data map[string]interface{}) Variable {
@@ -500,10 +1105,108 @@ type TransactionSetting struct {
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 }
 
+func (p *TransactionSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = TransactionSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = TransactionSetting{}
+	} else {
+		*p = TransactionSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["enableAutoRun"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EnableAutoRun)
+		}
+		if v, ok := d["distributorNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DistributorNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DistributorNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DistributorNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DistributorNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DistributorNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DistributorNamespaceId)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+		if v, ok := d["queueNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.QueueNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.QueueNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.QueueNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.QueueNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.QueueNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.QueueNamespaceId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewTransactionSettingFromJson(data string) TransactionSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewTransactionSettingFromDict(dict)
+	req := TransactionSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
@@ -567,10 +1270,65 @@ type Event struct {
 	EmitEvent        *EmitEvent        `json:"emitEvent"`
 }
 
+func (p *Event) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Event{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Event{}
+	} else {
+		*p = Event{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["eventType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EventType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EventType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EventType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EventType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EventType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EventType)
+				}
+			}
+		}
+		if v, ok := d["changeStateEvent"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangeStateEvent)
+		}
+		if v, ok := d["emitEvent"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EmitEvent)
+		}
+	}
+	return nil
+}
+
 func NewEventFromJson(data string) Event {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewEventFromDict(dict)
+	req := Event{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewEventFromDict(data map[string]interface{}) Event {
@@ -628,10 +1386,85 @@ type ChangeStateEvent struct {
 	Timestamp *int64  `json:"timestamp"`
 }
 
+func (p *ChangeStateEvent) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChangeStateEvent{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChangeStateEvent{}
+	} else {
+		*p = ChangeStateEvent{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["taskName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TaskName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TaskName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TaskName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TaskName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TaskName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TaskName)
+				}
+			}
+		}
+		if v, ok := d["hash"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Hash = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Hash = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Hash = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Hash = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Hash = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Hash)
+				}
+			}
+		}
+		if v, ok := d["timestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Timestamp)
+		}
+	}
+	return nil
+}
+
 func NewChangeStateEventFromJson(data string) ChangeStateEvent {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChangeStateEventFromDict(dict)
+	req := ChangeStateEvent{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChangeStateEventFromDict(data map[string]interface{}) ChangeStateEvent {
@@ -689,10 +1522,85 @@ type EmitEvent struct {
 	Timestamp  *int64  `json:"timestamp"`
 }
 
+func (p *EmitEvent) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = EmitEvent{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = EmitEvent{}
+	} else {
+		*p = EmitEvent{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["event"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Event = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Event = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Event = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Event = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Event = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Event)
+				}
+			}
+		}
+		if v, ok := d["parameters"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Parameters = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Parameters = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Parameters = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Parameters = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Parameters = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Parameters)
+				}
+			}
+		}
+		if v, ok := d["timestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Timestamp)
+		}
+	}
+	return nil
+}
+
 func NewEmitEventFromJson(data string) EmitEvent {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewEmitEventFromDict(dict)
+	req := EmitEvent{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewEmitEventFromDict(data map[string]interface{}) EmitEvent {
@@ -749,10 +1657,42 @@ type RandomStatus struct {
 	Used []RandomUsed `json:"used"`
 }
 
+func (p *RandomStatus) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RandomStatus{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RandomStatus{}
+	} else {
+		*p = RandomStatus{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["seed"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Seed)
+		}
+		if v, ok := d["used"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Used)
+		}
+	}
+	return nil
+}
+
 func NewRandomStatusFromJson(data string) RandomStatus {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRandomStatusFromDict(dict)
+	req := RandomStatus{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRandomStatusFromDict(data map[string]interface{}) RandomStatus {
@@ -805,10 +1745,42 @@ type RandomUsed struct {
 	Used     *int64 `json:"used"`
 }
 
+func (p *RandomUsed) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RandomUsed{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RandomUsed{}
+	} else {
+		*p = RandomUsed{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["category"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Category)
+		}
+		if v, ok := d["used"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Used)
+		}
+	}
+	return nil
+}
+
 func NewRandomUsedFromJson(data string) RandomUsed {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRandomUsedFromDict(dict)
+	req := RandomUsed{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRandomUsedFromDict(data map[string]interface{}) RandomUsed {
@@ -858,10 +1830,59 @@ type LogSetting struct {
 	LoggingNamespaceId *string `json:"loggingNamespaceId"`
 }
 
+func (p *LogSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LogSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LogSetting{}
+	} else {
+		*p = LogSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["loggingNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LoggingNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LoggingNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LoggingNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LoggingNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LoggingNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LoggingNamespaceId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewLogSettingFromJson(data string) LogSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLogSettingFromDict(dict)
+	req := LogSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
@@ -908,10 +1929,128 @@ type ScriptSetting struct {
 	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
 }
 
+func (p *ScriptSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ScriptSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ScriptSetting{}
+	} else {
+		*p = ScriptSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["triggerScriptId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TriggerScriptId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TriggerScriptId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TriggerScriptId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerScriptId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerScriptId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TriggerScriptId)
+				}
+			}
+		}
+		if v, ok := d["doneTriggerTargetType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DoneTriggerTargetType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DoneTriggerTargetType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DoneTriggerTargetType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneTriggerTargetType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneTriggerTargetType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DoneTriggerTargetType)
+				}
+			}
+		}
+		if v, ok := d["doneTriggerScriptId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DoneTriggerScriptId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DoneTriggerScriptId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DoneTriggerScriptId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneTriggerScriptId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneTriggerScriptId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DoneTriggerScriptId)
+				}
+			}
+		}
+		if v, ok := d["doneTriggerQueueNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DoneTriggerQueueNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DoneTriggerQueueNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DoneTriggerQueueNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneTriggerQueueNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneTriggerQueueNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DoneTriggerQueueNamespaceId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewScriptSettingFromJson(data string) ScriptSetting {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewScriptSettingFromDict(dict)
+	req := ScriptSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {

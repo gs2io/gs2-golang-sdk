@@ -18,6 +18,7 @@ package identifier
 
 import (
 	"encoding/json"
+	"strconv"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -31,10 +32,114 @@ type User struct {
 	Revision    *int64  `json:"revision"`
 }
 
+func (p *User) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = User{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = User{}
+	} else {
+		*p = User{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
 func NewUserFromJson(data string) User {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUserFromDict(dict)
+	req := User{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewUserFromDict(data map[string]interface{}) User {
@@ -113,10 +218,134 @@ type SecurityPolicy struct {
 	UpdatedAt        *int64  `json:"updatedAt"`
 }
 
+func (p *SecurityPolicy) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SecurityPolicy{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SecurityPolicy{}
+	} else {
+		*p = SecurityPolicy{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["securityPolicyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SecurityPolicyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SecurityPolicyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SecurityPolicyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SecurityPolicyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SecurityPolicyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SecurityPolicyId)
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["policy"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Policy = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Policy = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Policy = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Policy = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Policy = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Policy)
+				}
+			}
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+	}
+	return nil
+}
+
 func NewSecurityPolicyFromJson(data string) SecurityPolicy {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSecurityPolicyFromDict(dict)
+	req := SecurityPolicy{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewSecurityPolicyFromDict(data map[string]interface{}) SecurityPolicy {
@@ -194,10 +423,111 @@ type Identifier struct {
 	Revision     *int64  `json:"revision"`
 }
 
+func (p *Identifier) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Identifier{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Identifier{}
+	} else {
+		*p = Identifier{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["clientId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ClientId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ClientId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ClientId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ClientId)
+				}
+			}
+		}
+		if v, ok := d["userName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserName)
+				}
+			}
+		}
+		if v, ok := d["clientSecret"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ClientSecret = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ClientSecret = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ClientSecret = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientSecret = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientSecret = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ClientSecret)
+				}
+			}
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
 func NewIdentifierFromJson(data string) Identifier {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewIdentifierFromDict(dict)
+	req := Identifier{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewIdentifierFromDict(data map[string]interface{}) Identifier {
@@ -269,10 +599,111 @@ type Password struct {
 	Revision   *int64  `json:"revision"`
 }
 
+func (p *Password) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Password{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Password{}
+	} else {
+		*p = Password{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["passwordId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PasswordId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PasswordId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PasswordId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PasswordId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PasswordId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PasswordId)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["userName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserName)
+				}
+			}
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
 func NewPasswordFromJson(data string) Password {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPasswordFromDict(dict)
+	req := Password{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewPasswordFromDict(data map[string]interface{}) Password {
@@ -343,10 +774,68 @@ type AttachSecurityPolicy struct {
 	Revision          *int64    `json:"revision"`
 }
 
+func (p *AttachSecurityPolicy) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AttachSecurityPolicy{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AttachSecurityPolicy{}
+	} else {
+		*p = AttachSecurityPolicy{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["securityPolicyIds"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.SecurityPolicyIds)
+		}
+		if v, ok := d["attachedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AttachedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
 func NewAttachSecurityPolicyFromJson(data string) AttachSecurityPolicy {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAttachSecurityPolicyFromDict(dict)
+	req := AttachSecurityPolicy{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewAttachSecurityPolicyFromDict(data map[string]interface{}) AttachSecurityPolicy {
@@ -410,10 +899,59 @@ type ProjectToken struct {
 	Token *string `json:"token"`
 }
 
+func (p *ProjectToken) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ProjectToken{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ProjectToken{}
+	} else {
+		*p = ProjectToken{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["token"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Token = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Token = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Token = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Token = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Token = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Token)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewProjectTokenFromJson(data string) ProjectToken {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewProjectTokenFromDict(dict)
+	req := ProjectToken{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewProjectTokenFromDict(data map[string]interface{}) ProjectToken {

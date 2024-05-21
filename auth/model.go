@@ -18,6 +18,7 @@ package auth
 
 import (
 	"encoding/json"
+	"strconv"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -30,10 +31,111 @@ type AccessToken struct {
 	TimeOffset           *int32  `json:"timeOffset"`
 }
 
+func (p *AccessToken) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AccessToken{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AccessToken{}
+	} else {
+		*p = AccessToken{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["token"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Token = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Token = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Token = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Token = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Token = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Token)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["federationFromUserId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.FederationFromUserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.FederationFromUserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.FederationFromUserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.FederationFromUserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.FederationFromUserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.FederationFromUserId)
+				}
+			}
+		}
+		if v, ok := d["expire"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Expire)
+		}
+		if v, ok := d["timeOffset"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TimeOffset)
+		}
+	}
+	return nil
+}
+
 func NewAccessTokenFromJson(data string) AccessToken {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAccessTokenFromDict(dict)
+	req := AccessToken{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewAccessTokenFromDict(data map[string]interface{}) AccessToken {
