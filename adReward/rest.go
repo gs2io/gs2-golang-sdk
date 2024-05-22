@@ -190,6 +190,12 @@ func (p Gs2AdRewardRestClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.AcquirePointScript != nil {
+		bodies["acquirePointScript"] = request.AcquirePointScript.ToDict()
+	}
+	if request.ConsumePointScript != nil {
+		bodies["consumePointScript"] = request.ConsumePointScript.ToDict()
+	}
 	if request.ChangePointNotification != nil {
 		bodies["changePointNotification"] = request.ChangePointNotification.ToDict()
 	}
@@ -481,6 +487,12 @@ func (p Gs2AdRewardRestClient) UpdateNamespaceAsync(
 			_appLovinMaxes = append(_appLovinMaxes, item)
 		}
 		bodies["appLovinMaxes"] = _appLovinMaxes
+	}
+	if request.AcquirePointScript != nil {
+		bodies["acquirePointScript"] = request.AcquirePointScript.ToDict()
+	}
+	if request.ConsumePointScript != nil {
+		bodies["consumePointScript"] = request.ConsumePointScript.ToDict()
 	}
 	if request.ChangePointNotification != nil {
 		bodies["changePointNotification"] = request.ChangePointNotification.ToDict()

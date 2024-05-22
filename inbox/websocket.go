@@ -3169,6 +3169,9 @@ func (p Gs2InboxWebSocketClient) CreateGlobalMessageMasterAsync(
 	if request.ExpiresAt != nil {
 		bodies["expiresAt"] = *request.ExpiresAt
 	}
+	if request.MessageReceptionPeriodEventId != nil && *request.MessageReceptionPeriodEventId != "" {
+		bodies["messageReceptionPeriodEventId"] = *request.MessageReceptionPeriodEventId
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3352,6 +3355,9 @@ func (p Gs2InboxWebSocketClient) UpdateGlobalMessageMasterAsync(
 	}
 	if request.ExpiresAt != nil {
 		bodies["expiresAt"] = *request.ExpiresAt
+	}
+	if request.MessageReceptionPeriodEventId != nil && *request.MessageReceptionPeriodEventId != "" {
+		bodies["messageReceptionPeriodEventId"] = *request.MessageReceptionPeriodEventId
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

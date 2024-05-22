@@ -4286,15 +4286,16 @@ func (p DescribeGlobalMessageMastersRequest) Pointer() *DescribeGlobalMessageMas
 }
 
 type CreateGlobalMessageMasterRequest struct {
-	SourceRequestId    *string         `json:"sourceRequestId"`
-	RequestId          *string         `json:"requestId"`
-	ContextStack       *string         `json:"contextStack"`
-	NamespaceName      *string         `json:"namespaceName"`
-	Name               *string         `json:"name"`
-	Metadata           *string         `json:"metadata"`
-	ReadAcquireActions []AcquireAction `json:"readAcquireActions"`
-	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
-	ExpiresAt          *int64          `json:"expiresAt"`
+	SourceRequestId               *string         `json:"sourceRequestId"`
+	RequestId                     *string         `json:"requestId"`
+	ContextStack                  *string         `json:"contextStack"`
+	NamespaceName                 *string         `json:"namespaceName"`
+	Name                          *string         `json:"name"`
+	Metadata                      *string         `json:"metadata"`
+	ReadAcquireActions            []AcquireAction `json:"readAcquireActions"`
+	ExpiresTimeSpan               *TimeSpan       `json:"expiresTimeSpan"`
+	ExpiresAt                     *int64          `json:"expiresAt"`
+	MessageReceptionPeriodEventId *string         `json:"messageReceptionPeriodEventId"`
 }
 
 func (p *CreateGlobalMessageMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4397,6 +4398,29 @@ func (p *CreateGlobalMessageMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["expiresAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ExpiresAt)
 		}
+		if v, ok := d["messageReceptionPeriodEventId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MessageReceptionPeriodEventId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MessageReceptionPeriodEventId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MessageReceptionPeriodEventId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MessageReceptionPeriodEventId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MessageReceptionPeriodEventId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MessageReceptionPeriodEventId)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -4412,12 +4436,13 @@ func NewCreateGlobalMessageMasterRequestFromJson(data string) (CreateGlobalMessa
 
 func NewCreateGlobalMessageMasterRequestFromDict(data map[string]interface{}) CreateGlobalMessageMasterRequest {
 	return CreateGlobalMessageMasterRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		Name:               core.CastString(data["name"]),
-		Metadata:           core.CastString(data["metadata"]),
-		ReadAcquireActions: CastAcquireActions(core.CastArray(data["readAcquireActions"])),
-		ExpiresTimeSpan:    NewTimeSpanFromDict(core.CastMap(data["expiresTimeSpan"])).Pointer(),
-		ExpiresAt:          core.CastInt64(data["expiresAt"]),
+		NamespaceName:                 core.CastString(data["namespaceName"]),
+		Name:                          core.CastString(data["name"]),
+		Metadata:                      core.CastString(data["metadata"]),
+		ReadAcquireActions:            CastAcquireActions(core.CastArray(data["readAcquireActions"])),
+		ExpiresTimeSpan:               NewTimeSpanFromDict(core.CastMap(data["expiresTimeSpan"])).Pointer(),
+		ExpiresAt:                     core.CastInt64(data["expiresAt"]),
+		MessageReceptionPeriodEventId: core.CastString(data["messageReceptionPeriodEventId"]),
 	}
 }
 
@@ -4429,8 +4454,9 @@ func (p CreateGlobalMessageMasterRequest) ToDict() map[string]interface{} {
 		"readAcquireActions": CastAcquireActionsFromDict(
 			p.ReadAcquireActions,
 		),
-		"expiresTimeSpan": p.ExpiresTimeSpan.ToDict(),
-		"expiresAt":       p.ExpiresAt,
+		"expiresTimeSpan":               p.ExpiresTimeSpan.ToDict(),
+		"expiresAt":                     p.ExpiresAt,
+		"messageReceptionPeriodEventId": p.MessageReceptionPeriodEventId,
 	}
 }
 
@@ -4546,15 +4572,16 @@ func (p GetGlobalMessageMasterRequest) Pointer() *GetGlobalMessageMasterRequest 
 }
 
 type UpdateGlobalMessageMasterRequest struct {
-	SourceRequestId    *string         `json:"sourceRequestId"`
-	RequestId          *string         `json:"requestId"`
-	ContextStack       *string         `json:"contextStack"`
-	NamespaceName      *string         `json:"namespaceName"`
-	GlobalMessageName  *string         `json:"globalMessageName"`
-	Metadata           *string         `json:"metadata"`
-	ReadAcquireActions []AcquireAction `json:"readAcquireActions"`
-	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
-	ExpiresAt          *int64          `json:"expiresAt"`
+	SourceRequestId               *string         `json:"sourceRequestId"`
+	RequestId                     *string         `json:"requestId"`
+	ContextStack                  *string         `json:"contextStack"`
+	NamespaceName                 *string         `json:"namespaceName"`
+	GlobalMessageName             *string         `json:"globalMessageName"`
+	Metadata                      *string         `json:"metadata"`
+	ReadAcquireActions            []AcquireAction `json:"readAcquireActions"`
+	ExpiresTimeSpan               *TimeSpan       `json:"expiresTimeSpan"`
+	ExpiresAt                     *int64          `json:"expiresAt"`
+	MessageReceptionPeriodEventId *string         `json:"messageReceptionPeriodEventId"`
 }
 
 func (p *UpdateGlobalMessageMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4657,6 +4684,29 @@ func (p *UpdateGlobalMessageMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["expiresAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ExpiresAt)
 		}
+		if v, ok := d["messageReceptionPeriodEventId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MessageReceptionPeriodEventId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MessageReceptionPeriodEventId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MessageReceptionPeriodEventId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MessageReceptionPeriodEventId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MessageReceptionPeriodEventId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MessageReceptionPeriodEventId)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -4672,12 +4722,13 @@ func NewUpdateGlobalMessageMasterRequestFromJson(data string) (UpdateGlobalMessa
 
 func NewUpdateGlobalMessageMasterRequestFromDict(data map[string]interface{}) UpdateGlobalMessageMasterRequest {
 	return UpdateGlobalMessageMasterRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		GlobalMessageName:  core.CastString(data["globalMessageName"]),
-		Metadata:           core.CastString(data["metadata"]),
-		ReadAcquireActions: CastAcquireActions(core.CastArray(data["readAcquireActions"])),
-		ExpiresTimeSpan:    NewTimeSpanFromDict(core.CastMap(data["expiresTimeSpan"])).Pointer(),
-		ExpiresAt:          core.CastInt64(data["expiresAt"]),
+		NamespaceName:                 core.CastString(data["namespaceName"]),
+		GlobalMessageName:             core.CastString(data["globalMessageName"]),
+		Metadata:                      core.CastString(data["metadata"]),
+		ReadAcquireActions:            CastAcquireActions(core.CastArray(data["readAcquireActions"])),
+		ExpiresTimeSpan:               NewTimeSpanFromDict(core.CastMap(data["expiresTimeSpan"])).Pointer(),
+		ExpiresAt:                     core.CastInt64(data["expiresAt"]),
+		MessageReceptionPeriodEventId: core.CastString(data["messageReceptionPeriodEventId"]),
 	}
 }
 
@@ -4689,8 +4740,9 @@ func (p UpdateGlobalMessageMasterRequest) ToDict() map[string]interface{} {
 		"readAcquireActions": CastAcquireActionsFromDict(
 			p.ReadAcquireActions,
 		),
-		"expiresTimeSpan": p.ExpiresTimeSpan.ToDict(),
-		"expiresAt":       p.ExpiresAt,
+		"expiresTimeSpan":               p.ExpiresTimeSpan.ToDict(),
+		"expiresAt":                     p.ExpiresAt,
+		"messageReceptionPeriodEventId": p.MessageReceptionPeriodEventId,
 	}
 }
 

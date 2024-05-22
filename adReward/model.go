@@ -30,6 +30,8 @@ type Namespace struct {
 	Admob                   *AdMob               `json:"admob"`
 	UnityAd                 *UnityAd             `json:"unityAd"`
 	AppLovinMaxes           []AppLovinMax        `json:"appLovinMaxes"`
+	AcquirePointScript      *ScriptSetting       `json:"acquirePointScript"`
+	ConsumePointScript      *ScriptSetting       `json:"consumePointScript"`
 	ChangePointNotification *NotificationSetting `json:"changePointNotification"`
 	LogSetting              *LogSetting          `json:"logSetting"`
 	CreatedAt               *int64               `json:"createdAt"`
@@ -137,6 +139,12 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		if v, ok := d["appLovinMaxes"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AppLovinMaxes)
 		}
+		if v, ok := d["acquirePointScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AcquirePointScript)
+		}
+		if v, ok := d["consumePointScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ConsumePointScript)
+		}
 		if v, ok := d["changePointNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ChangePointNotification)
 		}
@@ -170,6 +178,8 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 		Admob:                   NewAdMobFromDict(core.CastMap(data["admob"])).Pointer(),
 		UnityAd:                 NewUnityAdFromDict(core.CastMap(data["unityAd"])).Pointer(),
 		AppLovinMaxes:           CastAppLovinMaxes(core.CastArray(data["appLovinMaxes"])),
+		AcquirePointScript:      NewScriptSettingFromDict(core.CastMap(data["acquirePointScript"])).Pointer(),
+		ConsumePointScript:      NewScriptSettingFromDict(core.CastMap(data["consumePointScript"])).Pointer(),
 		ChangePointNotification: NewNotificationSettingFromDict(core.CastMap(data["changePointNotification"])).Pointer(),
 		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 		CreatedAt:               core.CastInt64(data["createdAt"]),
@@ -206,6 +216,14 @@ func (p Namespace) ToDict() map[string]interface{} {
 			p.AppLovinMaxes,
 		)
 	}
+	var acquirePointScript map[string]interface{}
+	if p.AcquirePointScript != nil {
+		acquirePointScript = p.AcquirePointScript.ToDict()
+	}
+	var consumePointScript map[string]interface{}
+	if p.ConsumePointScript != nil {
+		consumePointScript = p.ConsumePointScript.ToDict()
+	}
 	var changePointNotification map[string]interface{}
 	if p.ChangePointNotification != nil {
 		changePointNotification = p.ChangePointNotification.ToDict()
@@ -233,6 +251,8 @@ func (p Namespace) ToDict() map[string]interface{} {
 		"admob":                   admob,
 		"unityAd":                 unityAd,
 		"appLovinMaxes":           appLovinMaxes,
+		"acquirePointScript":      acquirePointScript,
+		"consumePointScript":      consumePointScript,
 		"changePointNotification": changePointNotification,
 		"logSetting":              logSetting,
 		"createdAt":               createdAt,
@@ -702,6 +722,192 @@ func CastAppLovinMaxes(data []interface{}) []AppLovinMax {
 }
 
 func CastAppLovinMaxesFromDict(data []AppLovinMax) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type ScriptSetting struct {
+	TriggerScriptId             *string `json:"triggerScriptId"`
+	DoneTriggerTargetType       *string `json:"doneTriggerTargetType"`
+	DoneTriggerScriptId         *string `json:"doneTriggerScriptId"`
+	DoneTriggerQueueNamespaceId *string `json:"doneTriggerQueueNamespaceId"`
+}
+
+func (p *ScriptSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ScriptSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ScriptSetting{}
+	} else {
+		*p = ScriptSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["triggerScriptId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TriggerScriptId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TriggerScriptId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TriggerScriptId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerScriptId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerScriptId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TriggerScriptId)
+				}
+			}
+		}
+		if v, ok := d["doneTriggerTargetType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DoneTriggerTargetType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DoneTriggerTargetType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DoneTriggerTargetType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneTriggerTargetType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneTriggerTargetType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DoneTriggerTargetType)
+				}
+			}
+		}
+		if v, ok := d["doneTriggerScriptId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DoneTriggerScriptId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DoneTriggerScriptId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DoneTriggerScriptId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneTriggerScriptId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneTriggerScriptId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DoneTriggerScriptId)
+				}
+			}
+		}
+		if v, ok := d["doneTriggerQueueNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DoneTriggerQueueNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DoneTriggerQueueNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DoneTriggerQueueNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneTriggerQueueNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneTriggerQueueNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DoneTriggerQueueNamespaceId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewScriptSettingFromJson(data string) ScriptSetting {
+	req := ScriptSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
+	return ScriptSetting{
+		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
+		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
+		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
+		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+	}
+}
+
+func (p ScriptSetting) ToDict() map[string]interface{} {
+
+	var triggerScriptId *string
+	if p.TriggerScriptId != nil {
+		triggerScriptId = p.TriggerScriptId
+	}
+	var doneTriggerTargetType *string
+	if p.DoneTriggerTargetType != nil {
+		doneTriggerTargetType = p.DoneTriggerTargetType
+	}
+	var doneTriggerScriptId *string
+	if p.DoneTriggerScriptId != nil {
+		doneTriggerScriptId = p.DoneTriggerScriptId
+	}
+	var doneTriggerQueueNamespaceId *string
+	if p.DoneTriggerQueueNamespaceId != nil {
+		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+	}
+	return map[string]interface{}{
+		"triggerScriptId":             triggerScriptId,
+		"doneTriggerTargetType":       doneTriggerTargetType,
+		"doneTriggerScriptId":         doneTriggerScriptId,
+		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
+	}
+}
+
+func (p ScriptSetting) Pointer() *ScriptSetting {
+	return &p
+}
+
+func CastScriptSettings(data []interface{}) []ScriptSetting {
+	v := make([]ScriptSetting, 0)
+	for _, d := range data {
+		v = append(v, NewScriptSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

@@ -119,6 +119,8 @@ type CreateNamespaceRequest struct {
 	UnityAd                 *UnityAd             `json:"unityAd"`
 	AppLovinMaxes           []AppLovinMax        `json:"appLovinMaxes"`
 	Description             *string              `json:"description"`
+	AcquirePointScript      *ScriptSetting       `json:"acquirePointScript"`
+	ConsumePointScript      *ScriptSetting       `json:"consumePointScript"`
 	ChangePointNotification *NotificationSetting `json:"changePointNotification"`
 	LogSetting              *LogSetting          `json:"logSetting"`
 }
@@ -200,6 +202,12 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["acquirePointScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AcquirePointScript)
+		}
+		if v, ok := d["consumePointScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ConsumePointScript)
+		}
 		if v, ok := d["changePointNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ChangePointNotification)
 		}
@@ -226,6 +234,8 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 		UnityAd:                 NewUnityAdFromDict(core.CastMap(data["unityAd"])).Pointer(),
 		AppLovinMaxes:           CastAppLovinMaxes(core.CastArray(data["appLovinMaxes"])),
 		Description:             core.CastString(data["description"]),
+		AcquirePointScript:      NewScriptSettingFromDict(core.CastMap(data["acquirePointScript"])).Pointer(),
+		ConsumePointScript:      NewScriptSettingFromDict(core.CastMap(data["consumePointScript"])).Pointer(),
 		ChangePointNotification: NewNotificationSettingFromDict(core.CastMap(data["changePointNotification"])).Pointer(),
 		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
@@ -240,6 +250,8 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 			p.AppLovinMaxes,
 		),
 		"description":             p.Description,
+		"acquirePointScript":      p.AcquirePointScript.ToDict(),
+		"consumePointScript":      p.ConsumePointScript.ToDict(),
 		"changePointNotification": p.ChangePointNotification.ToDict(),
 		"logSetting":              p.LogSetting.ToDict(),
 	}
@@ -420,6 +432,8 @@ type UpdateNamespaceRequest struct {
 	Admob                   *AdMob               `json:"admob"`
 	UnityAd                 *UnityAd             `json:"unityAd"`
 	AppLovinMaxes           []AppLovinMax        `json:"appLovinMaxes"`
+	AcquirePointScript      *ScriptSetting       `json:"acquirePointScript"`
+	ConsumePointScript      *ScriptSetting       `json:"consumePointScript"`
 	ChangePointNotification *NotificationSetting `json:"changePointNotification"`
 	LogSetting              *LogSetting          `json:"logSetting"`
 }
@@ -501,6 +515,12 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["appLovinMaxes"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AppLovinMaxes)
 		}
+		if v, ok := d["acquirePointScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AcquirePointScript)
+		}
+		if v, ok := d["consumePointScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ConsumePointScript)
+		}
 		if v, ok := d["changePointNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ChangePointNotification)
 		}
@@ -527,6 +547,8 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 		Admob:                   NewAdMobFromDict(core.CastMap(data["admob"])).Pointer(),
 		UnityAd:                 NewUnityAdFromDict(core.CastMap(data["unityAd"])).Pointer(),
 		AppLovinMaxes:           CastAppLovinMaxes(core.CastArray(data["appLovinMaxes"])),
+		AcquirePointScript:      NewScriptSettingFromDict(core.CastMap(data["acquirePointScript"])).Pointer(),
+		ConsumePointScript:      NewScriptSettingFromDict(core.CastMap(data["consumePointScript"])).Pointer(),
 		ChangePointNotification: NewNotificationSettingFromDict(core.CastMap(data["changePointNotification"])).Pointer(),
 		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
@@ -541,6 +563,8 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"appLovinMaxes": CastAppLovinMaxesFromDict(
 			p.AppLovinMaxes,
 		),
+		"acquirePointScript":      p.AcquirePointScript.ToDict(),
+		"consumePointScript":      p.ConsumePointScript.ToDict(),
 		"changePointNotification": p.ChangePointNotification.ToDict(),
 		"logSetting":              p.LogSetting.ToDict(),
 	}
