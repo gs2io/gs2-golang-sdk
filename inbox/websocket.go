@@ -1881,6 +1881,12 @@ func (p Gs2InboxWebSocketClient) openMessageAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
+				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
+			}
+		}
 	}
 	callback <- OpenMessageAsyncResult{
 		result: &result,
@@ -1974,6 +1980,12 @@ func (p Gs2InboxWebSocketClient) openMessageByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
+				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
+			}
+		}
 	}
 	callback <- OpenMessageByUserIdAsyncResult{
 		result: &result,
@@ -2067,6 +2079,12 @@ func (p Gs2InboxWebSocketClient) readMessageAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
+				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
+			}
+		}
 	}
 	callback <- ReadMessageAsyncResult{
 		result: &result,
@@ -2167,6 +2185,12 @@ func (p Gs2InboxWebSocketClient) readMessageByUserIdAsyncHandler(
 		}
 	}
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
+				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
+			}
+		}
 	}
 	callback <- ReadMessageByUserIdAsyncResult{
 		result: &result,

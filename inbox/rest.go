@@ -2052,6 +2052,12 @@ func openMessageAsyncHandler(
 	asyncResult := <-internalCallback
 	var result OpenMessageResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
+				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
+			}
+		}
 		callback <- OpenMessageAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -2153,6 +2159,12 @@ func openMessageByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result OpenMessageByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
+				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
+			}
+		}
 		callback <- OpenMessageByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -2259,6 +2271,12 @@ func readMessageAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ReadMessageResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
+				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
+			}
+		}
 		callback <- ReadMessageAsyncResult{
 			err: asyncResult.Err,
 		}
@@ -2367,6 +2385,12 @@ func readMessageByUserIdAsyncHandler(
 	asyncResult := <-internalCallback
 	var result ReadMessageByUserIdResult
 	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "inbox.message.expired" {
+				asyncResult.Err = gs2err.SetClientError(MessageExpired{})
+			}
+		}
 		callback <- ReadMessageByUserIdAsyncResult{
 			err: asyncResult.Err,
 		}
