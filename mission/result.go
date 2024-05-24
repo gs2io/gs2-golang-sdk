@@ -1350,6 +1350,58 @@ func (p GetCounterByUserIdResult) Pointer() *GetCounterByUserIdResult {
 	return &p
 }
 
+type VerifyCounterValueResult struct {
+}
+
+type VerifyCounterValueAsyncResult struct {
+	result *VerifyCounterValueResult
+	err    error
+}
+
+func NewVerifyCounterValueResultFromJson(data string) VerifyCounterValueResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCounterValueResultFromDict(dict)
+}
+
+func NewVerifyCounterValueResultFromDict(data map[string]interface{}) VerifyCounterValueResult {
+	return VerifyCounterValueResult{}
+}
+
+func (p VerifyCounterValueResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyCounterValueResult) Pointer() *VerifyCounterValueResult {
+	return &p
+}
+
+type VerifyCounterValueByUserIdResult struct {
+}
+
+type VerifyCounterValueByUserIdAsyncResult struct {
+	result *VerifyCounterValueByUserIdResult
+	err    error
+}
+
+func NewVerifyCounterValueByUserIdResultFromJson(data string) VerifyCounterValueByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCounterValueByUserIdResultFromDict(dict)
+}
+
+func NewVerifyCounterValueByUserIdResultFromDict(data map[string]interface{}) VerifyCounterValueByUserIdResult {
+	return VerifyCounterValueByUserIdResult{}
+}
+
+func (p VerifyCounterValueByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyCounterValueByUserIdResult) Pointer() *VerifyCounterValueByUserIdResult {
+	return &p
+}
+
 type DeleteCounterByUserIdResult struct {
 	Item *Counter `json:"item"`
 }
@@ -1492,6 +1544,37 @@ func (p DecreaseByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p DecreaseByStampTaskResult) Pointer() *DecreaseByStampTaskResult {
+	return &p
+}
+
+type VerifyCounterValueByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifyCounterValueByStampTaskAsyncResult struct {
+	result *VerifyCounterValueByStampTaskResult
+	err    error
+}
+
+func NewVerifyCounterValueByStampTaskResultFromJson(data string) VerifyCounterValueByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCounterValueByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyCounterValueByStampTaskResultFromDict(data map[string]interface{}) VerifyCounterValueByStampTaskResult {
+	return VerifyCounterValueByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyCounterValueByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyCounterValueByStampTaskResult) Pointer() *VerifyCounterValueByStampTaskResult {
 	return &p
 }
 

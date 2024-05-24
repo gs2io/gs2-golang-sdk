@@ -1735,7 +1735,30 @@ func (p *CreateRoomRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["whiteListUserIds"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.WhiteListUserIds)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.WhiteListUserIds = l
+			}
 		}
 	}
 	return nil
@@ -1930,7 +1953,30 @@ func (p *CreateRoomFromBackendRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["whiteListUserIds"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.WhiteListUserIds)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.WhiteListUserIds = l
+			}
 		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
@@ -2233,7 +2279,30 @@ func (p *UpdateRoomRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["whiteListUserIds"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.WhiteListUserIds)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.WhiteListUserIds = l
+			}
 		}
 		if v, ok := d["accessToken"]; ok && v != nil {
 			var temp interface{}
@@ -2428,7 +2497,30 @@ func (p *UpdateRoomFromBackendRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["whiteListUserIds"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.WhiteListUserIds)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.WhiteListUserIds = l
+			}
 		}
 		if v, ok := d["userId"]; ok && v != nil {
 			var temp interface{}

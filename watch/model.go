@@ -18,6 +18,7 @@ package watch
 
 import (
 	"encoding/json"
+	"strconv"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -28,10 +29,68 @@ type Chart struct {
 	GroupBys  []*string `json:"groupBys"`
 }
 
+func (p *Chart) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Chart{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Chart{}
+	} else {
+		*p = Chart{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["timestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Timestamp)
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["groupBys"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.GroupBys = l
+			}
+		}
+	}
+	return nil
+}
+
 func NewChartFromJson(data string) Chart {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChartFromDict(dict)
+	req := Chart{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChartFromDict(data map[string]interface{}) Chart {
@@ -91,10 +150,68 @@ type Distribution struct {
 	GroupBys []*string `json:"groupBys"`
 }
 
+func (p *Distribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Distribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Distribution{}
+	} else {
+		*p = Distribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["groupBys"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.GroupBys = l
+			}
+		}
+	}
+	return nil
+}
+
 func NewDistributionFromJson(data string) Distribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDistributionFromDict(dict)
+	req := Distribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDistributionFromDict(data map[string]interface{}) Distribution {
@@ -157,10 +274,114 @@ type Cumulative struct {
 	Revision     *int64  `json:"revision"`
 }
 
+func (p *Cumulative) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Cumulative{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Cumulative{}
+	} else {
+		*p = Cumulative{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["cumulativeId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CumulativeId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CumulativeId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CumulativeId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CumulativeId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CumulativeId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CumulativeId)
+				}
+			}
+		}
+		if v, ok := d["resourceGrn"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ResourceGrn = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ResourceGrn = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ResourceGrn = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ResourceGrn = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ResourceGrn = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ResourceGrn)
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
 func NewCumulativeFromJson(data string) Cumulative {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewCumulativeFromDict(dict)
+	req := Cumulative{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewCumulativeFromDict(data map[string]interface{}) Cumulative {
@@ -240,10 +461,117 @@ type BillingActivity struct {
 	Revision          *int64  `json:"revision"`
 }
 
+func (p *BillingActivity) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = BillingActivity{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = BillingActivity{}
+	} else {
+		*p = BillingActivity{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["billingActivityId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.BillingActivityId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.BillingActivityId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.BillingActivityId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.BillingActivityId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.BillingActivityId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.BillingActivityId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["service"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Service = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Service = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Service = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Service)
+				}
+			}
+		}
+		if v, ok := d["activityType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ActivityType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ActivityType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ActivityType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ActivityType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ActivityType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ActivityType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
 func NewBillingActivityFromJson(data string) BillingActivity {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewBillingActivityFromDict(dict)
+	req := BillingActivity{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewBillingActivityFromDict(data map[string]interface{}) BillingActivity {
@@ -330,10 +658,163 @@ type StatsEvent struct {
 	CallAt     *int64    `json:"callAt"`
 }
 
+func (p *StatsEvent) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StatsEvent{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StatsEvent{}
+	} else {
+		*p = StatsEvent{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["grn"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Grn = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Grn = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Grn = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Grn = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Grn = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Grn)
+				}
+			}
+		}
+		if v, ok := d["service"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Service = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Service = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Service = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Service)
+				}
+			}
+		}
+		if v, ok := d["method"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Method = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Method = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Method = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Method = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Method = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Method)
+				}
+			}
+		}
+		if v, ok := d["metric"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metric = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metric = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metric = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metric = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metric = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metric)
+				}
+			}
+		}
+		if v, ok := d["cumulative"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Cumulative)
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["tags"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.Tags = l
+			}
+		}
+		if v, ok := d["callAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CallAt)
+		}
+	}
+	return nil
+}
+
 func NewStatsEventFromJson(data string) StatsEvent {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStatsEventFromDict(dict)
+	req := StatsEvent{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStatsEventFromDict(data map[string]interface{}) StatsEvent {
@@ -422,10 +903,82 @@ type Filter struct {
 	Value *string `json:"value"`
 }
 
+func (p *Filter) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Filter{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Filter{}
+	} else {
+		*p = Filter{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["key"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Key = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Key = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Key = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Key = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Key = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Key)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Value = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Value = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Value = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Value)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewFilterFromJson(data string) Filter {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFilterFromDict(dict)
+	req := Filter{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFilterFromDict(data map[string]interface{}) Filter {
@@ -481,10 +1034,77 @@ type GeneralDauWauMauHistory struct {
 	MauTargetMonth      *int64  `json:"mauTargetMonth"`
 }
 
+func (p *GeneralDauWauMauHistory) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GeneralDauWauMauHistory{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GeneralDauWauMauHistory{}
+	} else {
+		*p = GeneralDauWauMauHistory{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["date"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Date = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Date = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Date = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Date = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Date = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Date)
+				}
+			}
+		}
+		if v, ok := d["dau"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Dau)
+		}
+		if v, ok := d["wauLast7Days"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WauLast7Days)
+		}
+		if v, ok := d["wauTargetWeekSunday"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WauTargetWeekSunday)
+		}
+		if v, ok := d["wauTargetWeekMonday"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WauTargetWeekMonday)
+		}
+		if v, ok := d["mauLast30Days"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MauLast30Days)
+		}
+		if v, ok := d["mauTargetMonth"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MauTargetMonth)
+		}
+	}
+	return nil
+}
+
 func NewGeneralDauWauMauHistoryFromJson(data string) GeneralDauWauMauHistory {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGeneralDauWauMauHistoryFromDict(dict)
+	req := GeneralDauWauMauHistory{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewGeneralDauWauMauHistoryFromDict(data map[string]interface{}) GeneralDauWauMauHistory {
@@ -566,10 +1186,45 @@ type GeneralDauWauMauAverage struct {
 	Mau *float32 `json:"mau"`
 }
 
+func (p *GeneralDauWauMauAverage) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GeneralDauWauMauAverage{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GeneralDauWauMauAverage{}
+	} else {
+		*p = GeneralDauWauMauAverage{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["dau"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Dau)
+		}
+		if v, ok := d["wau"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Wau)
+		}
+		if v, ok := d["mau"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Mau)
+		}
+	}
+	return nil
+}
+
 func NewGeneralDauWauMauAverageFromJson(data string) GeneralDauWauMauAverage {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGeneralDauWauMauAverageFromDict(dict)
+	req := GeneralDauWauMauAverage{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewGeneralDauWauMauAverageFromDict(data map[string]interface{}) GeneralDauWauMauAverage {
@@ -626,10 +1281,42 @@ type GeneralDauWauMau struct {
 	Avg     *GeneralDauWauMauAverage  `json:"avg"`
 }
 
+func (p *GeneralDauWauMau) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GeneralDauWauMau{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GeneralDauWauMau{}
+	} else {
+		*p = GeneralDauWauMau{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["history"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.History)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+	}
+	return nil
+}
+
 func NewGeneralDauWauMauFromJson(data string) GeneralDauWauMau {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGeneralDauWauMauFromDict(dict)
+	req := GeneralDauWauMau{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewGeneralDauWauMauFromDict(data map[string]interface{}) GeneralDauWauMau {
@@ -685,10 +1372,51 @@ type FirstEngagementStatisticsLoginDays struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *FirstEngagementStatisticsLoginDays) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FirstEngagementStatisticsLoginDays{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FirstEngagementStatisticsLoginDays{}
+	} else {
+		*p = FirstEngagementStatisticsLoginDays{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewFirstEngagementStatisticsLoginDaysFromJson(data string) FirstEngagementStatisticsLoginDays {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFirstEngagementStatisticsLoginDaysFromDict(dict)
+	req := FirstEngagementStatisticsLoginDays{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFirstEngagementStatisticsLoginDaysFromDict(data map[string]interface{}) FirstEngagementStatisticsLoginDays {
@@ -756,10 +1484,39 @@ type FirstEngagementStatistics struct {
 	LoginDays *FirstEngagementStatisticsLoginDays `json:"loginDays"`
 }
 
+func (p *FirstEngagementStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FirstEngagementStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FirstEngagementStatistics{}
+	} else {
+		*p = FirstEngagementStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["loginDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.LoginDays)
+		}
+	}
+	return nil
+}
+
 func NewFirstEngagementStatisticsFromJson(data string) FirstEngagementStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFirstEngagementStatisticsFromDict(dict)
+	req := FirstEngagementStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFirstEngagementStatisticsFromDict(data map[string]interface{}) FirstEngagementStatistics {
@@ -805,10 +1562,45 @@ type FirstEngagementDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *FirstEngagementDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FirstEngagementDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FirstEngagementDistributionSegment{}
+	} else {
+		*p = FirstEngagementDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewFirstEngagementDistributionSegmentFromJson(data string) FirstEngagementDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFirstEngagementDistributionSegmentFromDict(dict)
+	req := FirstEngagementDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFirstEngagementDistributionSegmentFromDict(data map[string]interface{}) FirstEngagementDistributionSegment {
@@ -865,10 +1657,42 @@ type FirstEngagement struct {
 	Distribution []FirstEngagementDistributionSegment `json:"distribution"`
 }
 
+func (p *FirstEngagement) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FirstEngagement{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FirstEngagement{}
+	} else {
+		*p = FirstEngagement{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewFirstEngagementFromJson(data string) FirstEngagement {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFirstEngagementFromDict(dict)
+	req := FirstEngagement{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFirstEngagementFromDict(data map[string]interface{}) FirstEngagement {
@@ -924,10 +1748,51 @@ type SessionDurationStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *SessionDurationStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SessionDurationStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SessionDurationStatistics{}
+	} else {
+		*p = SessionDurationStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewSessionDurationStatisticsFromJson(data string) SessionDurationStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSessionDurationStatisticsFromDict(dict)
+	req := SessionDurationStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewSessionDurationStatisticsFromDict(data map[string]interface{}) SessionDurationStatistics {
@@ -997,10 +1862,45 @@ type SessionDurationDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *SessionDurationDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SessionDurationDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SessionDurationDistributionSegment{}
+	} else {
+		*p = SessionDurationDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewSessionDurationDistributionSegmentFromJson(data string) SessionDurationDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSessionDurationDistributionSegmentFromDict(dict)
+	req := SessionDurationDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewSessionDurationDistributionSegmentFromDict(data map[string]interface{}) SessionDurationDistributionSegment {
@@ -1059,10 +1959,68 @@ type EngagementHistory struct {
 	EngagedUserRate *float32 `json:"engagedUserRate"`
 }
 
+func (p *EngagementHistory) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = EngagementHistory{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = EngagementHistory{}
+	} else {
+		*p = EngagementHistory{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["date"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Date = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Date = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Date = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Date = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Date = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Date)
+				}
+			}
+		}
+		if v, ok := d["newUserRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.NewUserRate)
+		}
+		if v, ok := d["returnUserRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ReturnUserRate)
+		}
+		if v, ok := d["engagedUserRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EngagedUserRate)
+		}
+	}
+	return nil
+}
+
 func NewEngagementHistoryFromJson(data string) EngagementHistory {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewEngagementHistoryFromDict(dict)
+	req := EngagementHistory{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewEngagementHistoryFromDict(data map[string]interface{}) EngagementHistory {
@@ -1126,10 +2084,45 @@ type EngagementAverage struct {
 	EngagedUserRate *float32 `json:"engagedUserRate"`
 }
 
+func (p *EngagementAverage) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = EngagementAverage{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = EngagementAverage{}
+	} else {
+		*p = EngagementAverage{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["newUserRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.NewUserRate)
+		}
+		if v, ok := d["returnUserRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ReturnUserRate)
+		}
+		if v, ok := d["engagedUserRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EngagedUserRate)
+		}
+	}
+	return nil
+}
+
 func NewEngagementAverageFromJson(data string) EngagementAverage {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewEngagementAverageFromDict(dict)
+	req := EngagementAverage{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewEngagementAverageFromDict(data map[string]interface{}) EngagementAverage {
@@ -1186,10 +2179,42 @@ type Engagements struct {
 	Avg     *EngagementAverage  `json:"avg"`
 }
 
+func (p *Engagements) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Engagements{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Engagements{}
+	} else {
+		*p = Engagements{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["history"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.History)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+	}
+	return nil
+}
+
 func NewEngagementsFromJson(data string) Engagements {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewEngagementsFromDict(dict)
+	req := Engagements{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewEngagementsFromDict(data map[string]interface{}) Engagements {
@@ -1242,10 +2267,62 @@ type ChurnRateHistory struct {
 	ChurnRate *float32 `json:"churnRate"`
 }
 
+func (p *ChurnRateHistory) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChurnRateHistory{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChurnRateHistory{}
+	} else {
+		*p = ChurnRateHistory{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["date"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Date = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Date = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Date = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Date = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Date = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Date)
+				}
+			}
+		}
+		if v, ok := d["churnRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChurnRate)
+		}
+	}
+	return nil
+}
+
 func NewChurnRateHistoryFromJson(data string) ChurnRateHistory {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChurnRateHistoryFromDict(dict)
+	req := ChurnRateHistory{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChurnRateHistoryFromDict(data map[string]interface{}) ChurnRateHistory {
@@ -1295,10 +2372,39 @@ type ChurnRateAverage struct {
 	ChurnRate *float32 `json:"churnRate"`
 }
 
+func (p *ChurnRateAverage) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChurnRateAverage{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChurnRateAverage{}
+	} else {
+		*p = ChurnRateAverage{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["churnRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChurnRate)
+		}
+	}
+	return nil
+}
+
 func NewChurnRateAverageFromJson(data string) ChurnRateAverage {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChurnRateAverageFromDict(dict)
+	req := ChurnRateAverage{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChurnRateAverageFromDict(data map[string]interface{}) ChurnRateAverage {
@@ -1343,10 +2449,42 @@ type ChurnRateAggregate struct {
 	Avg     *ChurnRateAverage  `json:"avg"`
 }
 
+func (p *ChurnRateAggregate) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChurnRateAggregate{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChurnRateAggregate{}
+	} else {
+		*p = ChurnRateAggregate{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["history"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.History)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+	}
+	return nil
+}
+
 func NewChurnRateAggregateFromJson(data string) ChurnRateAggregate {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChurnRateAggregateFromDict(dict)
+	req := ChurnRateAggregate{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChurnRateAggregateFromDict(data map[string]interface{}) ChurnRateAggregate {
@@ -1399,10 +2537,42 @@ type SessionDuration struct {
 	Distribution []SessionDurationDistributionSegment `json:"distribution"`
 }
 
+func (p *SessionDuration) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SessionDuration{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SessionDuration{}
+	} else {
+		*p = SessionDuration{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewSessionDurationFromJson(data string) SessionDuration {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewSessionDurationFromDict(dict)
+	req := SessionDuration{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewSessionDurationFromDict(data map[string]interface{}) SessionDuration {
@@ -1473,10 +2643,96 @@ type UseServices struct {
 	Stamina     *bool `json:"stamina"`
 }
 
+func (p *UseServices) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UseServices{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UseServices{}
+	} else {
+		*p = UseServices{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["account"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Account)
+		}
+		if v, ok := d["chat"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Chat)
+		}
+		if v, ok := d["datastore"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Datastore)
+		}
+		if v, ok := d["dictionary"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Dictionary)
+		}
+		if v, ok := d["exchange"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Exchange)
+		}
+		if v, ok := d["experience"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Experience)
+		}
+		if v, ok := d["formation"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Formation)
+		}
+		if v, ok := d["friend"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Friend)
+		}
+		if v, ok := d["inbox"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Inbox)
+		}
+		if v, ok := d["inventory"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Inventory)
+		}
+		if v, ok := d["key"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Key)
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+		if v, ok := d["lottery"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Lottery)
+		}
+		if v, ok := d["matchmaking"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Matchmaking)
+		}
+		if v, ok := d["mission"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Mission)
+		}
+		if v, ok := d["money"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Money)
+		}
+		if v, ok := d["quest"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Quest)
+		}
+		if v, ok := d["ranking"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Ranking)
+		}
+		if v, ok := d["showcase"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Showcase)
+		}
+		if v, ok := d["stamina"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stamina)
+		}
+	}
+	return nil
+}
+
 func NewUseServicesFromJson(data string) UseServices {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUseServicesFromDict(dict)
+	req := UseServices{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewUseServicesFromDict(data map[string]interface{}) UseServices {
@@ -1639,10 +2895,54 @@ type GeneralMetrics struct {
 	UseServices     *UseServices        `json:"useServices"`
 }
 
+func (p *GeneralMetrics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GeneralMetrics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GeneralMetrics{}
+	} else {
+		*p = GeneralMetrics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["dauWauMau"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DauWauMau)
+		}
+		if v, ok := d["sessionDuration"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.SessionDuration)
+		}
+		if v, ok := d["firstEngagement"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.FirstEngagement)
+		}
+		if v, ok := d["engagements"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Engagements)
+		}
+		if v, ok := d["churnRates"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChurnRates)
+		}
+		if v, ok := d["useServices"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UseServices)
+		}
+	}
+	return nil
+}
+
 func NewGeneralMetricsFromJson(data string) GeneralMetrics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGeneralMetricsFromDict(dict)
+	req := GeneralMetrics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewGeneralMetricsFromDict(data map[string]interface{}) GeneralMetrics {
@@ -1720,10 +3020,51 @@ type AccountNamespaceStatistics struct {
 	ExecuteTakeOver    *int64 `json:"executeTakeOver"`
 }
 
+func (p *AccountNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AccountNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AccountNamespaceStatistics{}
+	} else {
+		*p = AccountNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["signup"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Signup)
+		}
+		if v, ok := d["authentication"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Authentication)
+		}
+		if v, ok := d["registeredTakeOver"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RegisteredTakeOver)
+		}
+		if v, ok := d["removeTakeOver"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RemoveTakeOver)
+		}
+		if v, ok := d["executeTakeOver"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExecuteTakeOver)
+		}
+	}
+	return nil
+}
+
 func NewAccountNamespaceStatisticsFromJson(data string) AccountNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAccountNamespaceStatisticsFromDict(dict)
+	req := AccountNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewAccountNamespaceStatisticsFromDict(data map[string]interface{}) AccountNamespaceStatistics {
@@ -1796,10 +3137,54 @@ type AccountNamespaceTypeDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *AccountNamespaceTypeDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AccountNamespaceTypeDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AccountNamespaceTypeDistributionStatistics{}
+	} else {
+		*p = AccountNamespaceTypeDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewAccountNamespaceTypeDistributionStatisticsFromJson(data string) AccountNamespaceTypeDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAccountNamespaceTypeDistributionStatisticsFromDict(dict)
+	req := AccountNamespaceTypeDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewAccountNamespaceTypeDistributionStatisticsFromDict(data map[string]interface{}) AccountNamespaceTypeDistributionStatistics {
@@ -1874,10 +3259,42 @@ type AccountNamespaceTypeDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *AccountNamespaceTypeDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AccountNamespaceTypeDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AccountNamespaceTypeDistributionSegment{}
+	} else {
+		*p = AccountNamespaceTypeDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewAccountNamespaceTypeDistributionSegmentFromJson(data string) AccountNamespaceTypeDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAccountNamespaceTypeDistributionSegmentFromDict(dict)
+	req := AccountNamespaceTypeDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewAccountNamespaceTypeDistributionSegmentFromDict(data map[string]interface{}) AccountNamespaceTypeDistributionSegment {
@@ -1928,10 +3345,42 @@ type AccountNamespaceTypeDistribution struct {
 	Distribution []AccountNamespaceTypeDistributionSegment   `json:"distribution"`
 }
 
+func (p *AccountNamespaceTypeDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AccountNamespaceTypeDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AccountNamespaceTypeDistribution{}
+	} else {
+		*p = AccountNamespaceTypeDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewAccountNamespaceTypeDistributionFromJson(data string) AccountNamespaceTypeDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAccountNamespaceTypeDistributionFromDict(dict)
+	req := AccountNamespaceTypeDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewAccountNamespaceTypeDistributionFromDict(data map[string]interface{}) AccountNamespaceTypeDistribution {
@@ -1983,10 +3432,39 @@ type AccountNamespaceDistributions struct {
 	Type *AccountNamespaceTypeDistribution `json:"type"`
 }
 
+func (p *AccountNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AccountNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AccountNamespaceDistributions{}
+	} else {
+		*p = AccountNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+	}
+	return nil
+}
+
 func NewAccountNamespaceDistributionsFromJson(data string) AccountNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAccountNamespaceDistributionsFromDict(dict)
+	req := AccountNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewAccountNamespaceDistributionsFromDict(data map[string]interface{}) AccountNamespaceDistributions {
@@ -2036,10 +3514,97 @@ type AccountNamespace struct {
 	Distributions *AccountNamespaceDistributions `json:"distributions"`
 }
 
+func (p *AccountNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AccountNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AccountNamespace{}
+	} else {
+		*p = AccountNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewAccountNamespaceFromJson(data string) AccountNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAccountNamespaceFromDict(dict)
+	req := AccountNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewAccountNamespaceFromDict(data map[string]interface{}) AccountNamespace {
@@ -2123,10 +3688,51 @@ type ChatNamespaceStatistics struct {
 	DeleteSubscribe *int64 `json:"deleteSubscribe"`
 }
 
+func (p *ChatNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChatNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChatNamespaceStatistics{}
+	} else {
+		*p = ChatNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["post"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Post)
+		}
+		if v, ok := d["createRoom"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreateRoom)
+		}
+		if v, ok := d["deleteRoom"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DeleteRoom)
+		}
+		if v, ok := d["createSubscribe"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreateSubscribe)
+		}
+		if v, ok := d["deleteSubscribe"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DeleteSubscribe)
+		}
+	}
+	return nil
+}
+
 func NewChatNamespaceStatisticsFromJson(data string) ChatNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChatNamespaceStatisticsFromDict(dict)
+	req := ChatNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChatNamespaceStatisticsFromDict(data map[string]interface{}) ChatNamespaceStatistics {
@@ -2199,10 +3805,54 @@ type ChatNamespacePostByRoomDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ChatNamespacePostByRoomDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChatNamespacePostByRoomDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChatNamespacePostByRoomDistributionStatistics{}
+	} else {
+		*p = ChatNamespacePostByRoomDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewChatNamespacePostByRoomDistributionStatisticsFromJson(data string) ChatNamespacePostByRoomDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChatNamespacePostByRoomDistributionStatisticsFromDict(dict)
+	req := ChatNamespacePostByRoomDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChatNamespacePostByRoomDistributionStatisticsFromDict(data map[string]interface{}) ChatNamespacePostByRoomDistributionStatistics {
@@ -2278,10 +3928,45 @@ type ChatNamespacePostByRoomDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *ChatNamespacePostByRoomDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChatNamespacePostByRoomDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChatNamespacePostByRoomDistributionSegment{}
+	} else {
+		*p = ChatNamespacePostByRoomDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewChatNamespacePostByRoomDistributionSegmentFromJson(data string) ChatNamespacePostByRoomDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChatNamespacePostByRoomDistributionSegmentFromDict(dict)
+	req := ChatNamespacePostByRoomDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChatNamespacePostByRoomDistributionSegmentFromDict(data map[string]interface{}) ChatNamespacePostByRoomDistributionSegment {
@@ -2338,10 +4023,42 @@ type ChatNamespacePostByRoomDistribution struct {
 	Distribution []ChatNamespacePostByRoomDistributionSegment   `json:"distribution"`
 }
 
+func (p *ChatNamespacePostByRoomDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChatNamespacePostByRoomDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChatNamespacePostByRoomDistribution{}
+	} else {
+		*p = ChatNamespacePostByRoomDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewChatNamespacePostByRoomDistributionFromJson(data string) ChatNamespacePostByRoomDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChatNamespacePostByRoomDistributionFromDict(dict)
+	req := ChatNamespacePostByRoomDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChatNamespacePostByRoomDistributionFromDict(data map[string]interface{}) ChatNamespacePostByRoomDistribution {
@@ -2398,10 +4115,54 @@ type ChatNamespacePostByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ChatNamespacePostByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChatNamespacePostByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChatNamespacePostByUserDistributionStatistics{}
+	} else {
+		*p = ChatNamespacePostByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewChatNamespacePostByUserDistributionStatisticsFromJson(data string) ChatNamespacePostByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChatNamespacePostByUserDistributionStatisticsFromDict(dict)
+	req := ChatNamespacePostByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChatNamespacePostByUserDistributionStatisticsFromDict(data map[string]interface{}) ChatNamespacePostByUserDistributionStatistics {
@@ -2477,10 +4238,45 @@ type ChatNamespacePostByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *ChatNamespacePostByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChatNamespacePostByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChatNamespacePostByUserDistributionSegment{}
+	} else {
+		*p = ChatNamespacePostByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewChatNamespacePostByUserDistributionSegmentFromJson(data string) ChatNamespacePostByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChatNamespacePostByUserDistributionSegmentFromDict(dict)
+	req := ChatNamespacePostByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChatNamespacePostByUserDistributionSegmentFromDict(data map[string]interface{}) ChatNamespacePostByUserDistributionSegment {
@@ -2537,10 +4333,42 @@ type ChatNamespacePostByUserDistribution struct {
 	Distribution []ChatNamespacePostByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *ChatNamespacePostByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChatNamespacePostByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChatNamespacePostByUserDistribution{}
+	} else {
+		*p = ChatNamespacePostByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewChatNamespacePostByUserDistributionFromJson(data string) ChatNamespacePostByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChatNamespacePostByUserDistributionFromDict(dict)
+	req := ChatNamespacePostByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChatNamespacePostByUserDistributionFromDict(data map[string]interface{}) ChatNamespacePostByUserDistribution {
@@ -2597,10 +4425,54 @@ type ChatNamespacePostByCategoryDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ChatNamespacePostByCategoryDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChatNamespacePostByCategoryDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChatNamespacePostByCategoryDistributionStatistics{}
+	} else {
+		*p = ChatNamespacePostByCategoryDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewChatNamespacePostByCategoryDistributionStatisticsFromJson(data string) ChatNamespacePostByCategoryDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChatNamespacePostByCategoryDistributionStatisticsFromDict(dict)
+	req := ChatNamespacePostByCategoryDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChatNamespacePostByCategoryDistributionStatisticsFromDict(data map[string]interface{}) ChatNamespacePostByCategoryDistributionStatistics {
@@ -2675,10 +4547,42 @@ type ChatNamespacePostByCategoryDistributionSegment struct {
 	Count    *int64 `json:"count"`
 }
 
+func (p *ChatNamespacePostByCategoryDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChatNamespacePostByCategoryDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChatNamespacePostByCategoryDistributionSegment{}
+	} else {
+		*p = ChatNamespacePostByCategoryDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["category"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Category)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewChatNamespacePostByCategoryDistributionSegmentFromJson(data string) ChatNamespacePostByCategoryDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChatNamespacePostByCategoryDistributionSegmentFromDict(dict)
+	req := ChatNamespacePostByCategoryDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChatNamespacePostByCategoryDistributionSegmentFromDict(data map[string]interface{}) ChatNamespacePostByCategoryDistributionSegment {
@@ -2729,10 +4633,42 @@ type ChatNamespacePostByCategoryDistribution struct {
 	Distribution []ChatNamespacePostByCategoryDistributionSegment   `json:"distribution"`
 }
 
+func (p *ChatNamespacePostByCategoryDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChatNamespacePostByCategoryDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChatNamespacePostByCategoryDistribution{}
+	} else {
+		*p = ChatNamespacePostByCategoryDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewChatNamespacePostByCategoryDistributionFromJson(data string) ChatNamespacePostByCategoryDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChatNamespacePostByCategoryDistributionFromDict(dict)
+	req := ChatNamespacePostByCategoryDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChatNamespacePostByCategoryDistributionFromDict(data map[string]interface{}) ChatNamespacePostByCategoryDistribution {
@@ -2786,10 +4722,45 @@ type ChatNamespaceDistributions struct {
 	PostByCategory *ChatNamespacePostByCategoryDistribution `json:"postByCategory"`
 }
 
+func (p *ChatNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChatNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChatNamespaceDistributions{}
+	} else {
+		*p = ChatNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["postByRoom"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.PostByRoom)
+		}
+		if v, ok := d["postByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.PostByUser)
+		}
+		if v, ok := d["postByCategory"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.PostByCategory)
+		}
+	}
+	return nil
+}
+
 func NewChatNamespaceDistributionsFromJson(data string) ChatNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChatNamespaceDistributionsFromDict(dict)
+	req := ChatNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChatNamespaceDistributionsFromDict(data map[string]interface{}) ChatNamespaceDistributions {
@@ -2851,10 +4822,97 @@ type ChatNamespace struct {
 	Distributions *ChatNamespaceDistributions `json:"distributions"`
 }
 
+func (p *ChatNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChatNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChatNamespace{}
+	} else {
+		*p = ChatNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewChatNamespaceFromJson(data string) ChatNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewChatNamespaceFromDict(dict)
+	req := ChatNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewChatNamespaceFromDict(data map[string]interface{}) ChatNamespace {
@@ -2935,10 +4993,42 @@ type DatastoreNamespaceStatistics struct {
 	Download *int64 `json:"download"`
 }
 
+func (p *DatastoreNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DatastoreNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DatastoreNamespaceStatistics{}
+	} else {
+		*p = DatastoreNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["upload"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Upload)
+		}
+		if v, ok := d["download"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Download)
+		}
+	}
+	return nil
+}
+
 func NewDatastoreNamespaceStatisticsFromJson(data string) DatastoreNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDatastoreNamespaceStatisticsFromDict(dict)
+	req := DatastoreNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDatastoreNamespaceStatisticsFromDict(data map[string]interface{}) DatastoreNamespaceStatistics {
@@ -2993,10 +5083,54 @@ type DatastoreNamespaceDownloadByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *DatastoreNamespaceDownloadByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DatastoreNamespaceDownloadByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DatastoreNamespaceDownloadByUserDistributionStatistics{}
+	} else {
+		*p = DatastoreNamespaceDownloadByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewDatastoreNamespaceDownloadByUserDistributionStatisticsFromJson(data string) DatastoreNamespaceDownloadByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDatastoreNamespaceDownloadByUserDistributionStatisticsFromDict(dict)
+	req := DatastoreNamespaceDownloadByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDatastoreNamespaceDownloadByUserDistributionStatisticsFromDict(data map[string]interface{}) DatastoreNamespaceDownloadByUserDistributionStatistics {
@@ -3072,10 +5206,45 @@ type DatastoreNamespaceDownloadByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *DatastoreNamespaceDownloadByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DatastoreNamespaceDownloadByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DatastoreNamespaceDownloadByUserDistributionSegment{}
+	} else {
+		*p = DatastoreNamespaceDownloadByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewDatastoreNamespaceDownloadByUserDistributionSegmentFromJson(data string) DatastoreNamespaceDownloadByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDatastoreNamespaceDownloadByUserDistributionSegmentFromDict(dict)
+	req := DatastoreNamespaceDownloadByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDatastoreNamespaceDownloadByUserDistributionSegmentFromDict(data map[string]interface{}) DatastoreNamespaceDownloadByUserDistributionSegment {
@@ -3132,10 +5301,42 @@ type DatastoreNamespaceDownloadByUserDistribution struct {
 	Distribution []DatastoreNamespaceDownloadByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *DatastoreNamespaceDownloadByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DatastoreNamespaceDownloadByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DatastoreNamespaceDownloadByUserDistribution{}
+	} else {
+		*p = DatastoreNamespaceDownloadByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewDatastoreNamespaceDownloadByUserDistributionFromJson(data string) DatastoreNamespaceDownloadByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDatastoreNamespaceDownloadByUserDistributionFromDict(dict)
+	req := DatastoreNamespaceDownloadByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDatastoreNamespaceDownloadByUserDistributionFromDict(data map[string]interface{}) DatastoreNamespaceDownloadByUserDistribution {
@@ -3192,10 +5393,54 @@ type DatastoreNamespaceUploadByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *DatastoreNamespaceUploadByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DatastoreNamespaceUploadByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DatastoreNamespaceUploadByUserDistributionStatistics{}
+	} else {
+		*p = DatastoreNamespaceUploadByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewDatastoreNamespaceUploadByUserDistributionStatisticsFromJson(data string) DatastoreNamespaceUploadByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDatastoreNamespaceUploadByUserDistributionStatisticsFromDict(dict)
+	req := DatastoreNamespaceUploadByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDatastoreNamespaceUploadByUserDistributionStatisticsFromDict(data map[string]interface{}) DatastoreNamespaceUploadByUserDistributionStatistics {
@@ -3271,10 +5516,45 @@ type DatastoreNamespaceUploadByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *DatastoreNamespaceUploadByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DatastoreNamespaceUploadByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DatastoreNamespaceUploadByUserDistributionSegment{}
+	} else {
+		*p = DatastoreNamespaceUploadByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewDatastoreNamespaceUploadByUserDistributionSegmentFromJson(data string) DatastoreNamespaceUploadByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDatastoreNamespaceUploadByUserDistributionSegmentFromDict(dict)
+	req := DatastoreNamespaceUploadByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDatastoreNamespaceUploadByUserDistributionSegmentFromDict(data map[string]interface{}) DatastoreNamespaceUploadByUserDistributionSegment {
@@ -3331,10 +5611,42 @@ type DatastoreNamespaceUploadByUserDistribution struct {
 	Distribution []DatastoreNamespaceUploadByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *DatastoreNamespaceUploadByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DatastoreNamespaceUploadByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DatastoreNamespaceUploadByUserDistribution{}
+	} else {
+		*p = DatastoreNamespaceUploadByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewDatastoreNamespaceUploadByUserDistributionFromJson(data string) DatastoreNamespaceUploadByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDatastoreNamespaceUploadByUserDistributionFromDict(dict)
+	req := DatastoreNamespaceUploadByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDatastoreNamespaceUploadByUserDistributionFromDict(data map[string]interface{}) DatastoreNamespaceUploadByUserDistribution {
@@ -3391,10 +5703,54 @@ type DatastoreNamespaceDataSizeDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *DatastoreNamespaceDataSizeDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DatastoreNamespaceDataSizeDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DatastoreNamespaceDataSizeDistributionStatistics{}
+	} else {
+		*p = DatastoreNamespaceDataSizeDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewDatastoreNamespaceDataSizeDistributionStatisticsFromJson(data string) DatastoreNamespaceDataSizeDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDatastoreNamespaceDataSizeDistributionStatisticsFromDict(dict)
+	req := DatastoreNamespaceDataSizeDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDatastoreNamespaceDataSizeDistributionStatisticsFromDict(data map[string]interface{}) DatastoreNamespaceDataSizeDistributionStatistics {
@@ -3470,10 +5826,45 @@ type DatastoreNamespaceDataSizeDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *DatastoreNamespaceDataSizeDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DatastoreNamespaceDataSizeDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DatastoreNamespaceDataSizeDistributionSegment{}
+	} else {
+		*p = DatastoreNamespaceDataSizeDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewDatastoreNamespaceDataSizeDistributionSegmentFromJson(data string) DatastoreNamespaceDataSizeDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDatastoreNamespaceDataSizeDistributionSegmentFromDict(dict)
+	req := DatastoreNamespaceDataSizeDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDatastoreNamespaceDataSizeDistributionSegmentFromDict(data map[string]interface{}) DatastoreNamespaceDataSizeDistributionSegment {
@@ -3530,10 +5921,42 @@ type DatastoreNamespaceDataSizeDistribution struct {
 	Distribution []DatastoreNamespaceDataSizeDistributionSegment   `json:"distribution"`
 }
 
+func (p *DatastoreNamespaceDataSizeDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DatastoreNamespaceDataSizeDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DatastoreNamespaceDataSizeDistribution{}
+	} else {
+		*p = DatastoreNamespaceDataSizeDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewDatastoreNamespaceDataSizeDistributionFromJson(data string) DatastoreNamespaceDataSizeDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDatastoreNamespaceDataSizeDistributionFromDict(dict)
+	req := DatastoreNamespaceDataSizeDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDatastoreNamespaceDataSizeDistributionFromDict(data map[string]interface{}) DatastoreNamespaceDataSizeDistribution {
@@ -3587,10 +6010,45 @@ type DatastoreNamespaceDistributions struct {
 	DataSize       *DatastoreNamespaceDataSizeDistribution       `json:"dataSize"`
 }
 
+func (p *DatastoreNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DatastoreNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DatastoreNamespaceDistributions{}
+	} else {
+		*p = DatastoreNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["downloadByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DownloadByUser)
+		}
+		if v, ok := d["uploadByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UploadByUser)
+		}
+		if v, ok := d["dataSize"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DataSize)
+		}
+	}
+	return nil
+}
+
 func NewDatastoreNamespaceDistributionsFromJson(data string) DatastoreNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDatastoreNamespaceDistributionsFromDict(dict)
+	req := DatastoreNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDatastoreNamespaceDistributionsFromDict(data map[string]interface{}) DatastoreNamespaceDistributions {
@@ -3652,10 +6110,97 @@ type DatastoreNamespace struct {
 	Distributions *DatastoreNamespaceDistributions `json:"distributions"`
 }
 
+func (p *DatastoreNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DatastoreNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DatastoreNamespace{}
+	} else {
+		*p = DatastoreNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewDatastoreNamespaceFromJson(data string) DatastoreNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDatastoreNamespaceFromDict(dict)
+	req := DatastoreNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDatastoreNamespaceFromDict(data map[string]interface{}) DatastoreNamespace {
@@ -3735,10 +6280,39 @@ type DictionaryNamespaceStatistics struct {
 	Register *int64 `json:"register"`
 }
 
+func (p *DictionaryNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DictionaryNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DictionaryNamespaceStatistics{}
+	} else {
+		*p = DictionaryNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["register"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Register)
+		}
+	}
+	return nil
+}
+
 func NewDictionaryNamespaceStatisticsFromJson(data string) DictionaryNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDictionaryNamespaceStatisticsFromDict(dict)
+	req := DictionaryNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDictionaryNamespaceStatisticsFromDict(data map[string]interface{}) DictionaryNamespaceStatistics {
@@ -3787,10 +6361,54 @@ type DictionaryNamespaceEntryByNameDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *DictionaryNamespaceEntryByNameDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DictionaryNamespaceEntryByNameDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DictionaryNamespaceEntryByNameDistributionStatistics{}
+	} else {
+		*p = DictionaryNamespaceEntryByNameDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewDictionaryNamespaceEntryByNameDistributionStatisticsFromJson(data string) DictionaryNamespaceEntryByNameDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDictionaryNamespaceEntryByNameDistributionStatisticsFromDict(dict)
+	req := DictionaryNamespaceEntryByNameDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDictionaryNamespaceEntryByNameDistributionStatisticsFromDict(data map[string]interface{}) DictionaryNamespaceEntryByNameDistributionStatistics {
@@ -3865,10 +6483,62 @@ type DictionaryNamespaceEntryByNameDistributionSegment struct {
 	Count          *int64  `json:"count"`
 }
 
+func (p *DictionaryNamespaceEntryByNameDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DictionaryNamespaceEntryByNameDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DictionaryNamespaceEntryByNameDistributionSegment{}
+	} else {
+		*p = DictionaryNamespaceEntryByNameDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["entryModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EntryModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EntryModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EntryModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EntryModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EntryModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EntryModelName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewDictionaryNamespaceEntryByNameDistributionSegmentFromJson(data string) DictionaryNamespaceEntryByNameDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDictionaryNamespaceEntryByNameDistributionSegmentFromDict(dict)
+	req := DictionaryNamespaceEntryByNameDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDictionaryNamespaceEntryByNameDistributionSegmentFromDict(data map[string]interface{}) DictionaryNamespaceEntryByNameDistributionSegment {
@@ -3919,10 +6589,42 @@ type DictionaryNamespaceEntryByNameDistribution struct {
 	Distribution []DictionaryNamespaceEntryByNameDistributionSegment   `json:"distribution"`
 }
 
+func (p *DictionaryNamespaceEntryByNameDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DictionaryNamespaceEntryByNameDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DictionaryNamespaceEntryByNameDistribution{}
+	} else {
+		*p = DictionaryNamespaceEntryByNameDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewDictionaryNamespaceEntryByNameDistributionFromJson(data string) DictionaryNamespaceEntryByNameDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDictionaryNamespaceEntryByNameDistributionFromDict(dict)
+	req := DictionaryNamespaceEntryByNameDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDictionaryNamespaceEntryByNameDistributionFromDict(data map[string]interface{}) DictionaryNamespaceEntryByNameDistribution {
@@ -3979,10 +6681,54 @@ type DictionaryNamespaceEntryByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *DictionaryNamespaceEntryByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DictionaryNamespaceEntryByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DictionaryNamespaceEntryByUserDistributionStatistics{}
+	} else {
+		*p = DictionaryNamespaceEntryByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewDictionaryNamespaceEntryByUserDistributionStatisticsFromJson(data string) DictionaryNamespaceEntryByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDictionaryNamespaceEntryByUserDistributionStatisticsFromDict(dict)
+	req := DictionaryNamespaceEntryByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDictionaryNamespaceEntryByUserDistributionStatisticsFromDict(data map[string]interface{}) DictionaryNamespaceEntryByUserDistributionStatistics {
@@ -4058,10 +6804,45 @@ type DictionaryNamespaceEntryByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *DictionaryNamespaceEntryByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DictionaryNamespaceEntryByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DictionaryNamespaceEntryByUserDistributionSegment{}
+	} else {
+		*p = DictionaryNamespaceEntryByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewDictionaryNamespaceEntryByUserDistributionSegmentFromJson(data string) DictionaryNamespaceEntryByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDictionaryNamespaceEntryByUserDistributionSegmentFromDict(dict)
+	req := DictionaryNamespaceEntryByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDictionaryNamespaceEntryByUserDistributionSegmentFromDict(data map[string]interface{}) DictionaryNamespaceEntryByUserDistributionSegment {
@@ -4118,10 +6899,42 @@ type DictionaryNamespaceEntryByUserDistribution struct {
 	Distribution []DictionaryNamespaceEntryByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *DictionaryNamespaceEntryByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DictionaryNamespaceEntryByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DictionaryNamespaceEntryByUserDistribution{}
+	} else {
+		*p = DictionaryNamespaceEntryByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewDictionaryNamespaceEntryByUserDistributionFromJson(data string) DictionaryNamespaceEntryByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDictionaryNamespaceEntryByUserDistributionFromDict(dict)
+	req := DictionaryNamespaceEntryByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDictionaryNamespaceEntryByUserDistributionFromDict(data map[string]interface{}) DictionaryNamespaceEntryByUserDistribution {
@@ -4174,10 +6987,42 @@ type DictionaryNamespaceDistributions struct {
 	EntryByUser *DictionaryNamespaceEntryByUserDistribution `json:"entryByUser"`
 }
 
+func (p *DictionaryNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DictionaryNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DictionaryNamespaceDistributions{}
+	} else {
+		*p = DictionaryNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["entryByName"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EntryByName)
+		}
+		if v, ok := d["entryByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EntryByUser)
+		}
+	}
+	return nil
+}
+
 func NewDictionaryNamespaceDistributionsFromJson(data string) DictionaryNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDictionaryNamespaceDistributionsFromDict(dict)
+	req := DictionaryNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDictionaryNamespaceDistributionsFromDict(data map[string]interface{}) DictionaryNamespaceDistributions {
@@ -4233,10 +7078,97 @@ type DictionaryNamespace struct {
 	Distributions *DictionaryNamespaceDistributions `json:"distributions"`
 }
 
+func (p *DictionaryNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DictionaryNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DictionaryNamespace{}
+	} else {
+		*p = DictionaryNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewDictionaryNamespaceFromJson(data string) DictionaryNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDictionaryNamespaceFromDict(dict)
+	req := DictionaryNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDictionaryNamespaceFromDict(data map[string]interface{}) DictionaryNamespace {
@@ -4317,10 +7249,82 @@ type DictionaryEntryModel struct {
 	EntryName         *string `json:"entryName"`
 }
 
+func (p *DictionaryEntryModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DictionaryEntryModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DictionaryEntryModel{}
+	} else {
+		*p = DictionaryEntryModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["entryModelModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EntryModelModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EntryModelModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EntryModelModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EntryModelModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EntryModelModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EntryModelModelId)
+				}
+			}
+		}
+		if v, ok := d["entryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EntryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EntryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EntryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EntryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EntryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EntryName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewDictionaryEntryModelFromJson(data string) DictionaryEntryModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDictionaryEntryModelFromDict(dict)
+	req := DictionaryEntryModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewDictionaryEntryModelFromDict(data map[string]interface{}) DictionaryEntryModel {
@@ -4371,10 +7375,42 @@ type ExchangeRateModelStatistics struct {
 	Amount   *int64 `json:"amount"`
 }
 
+func (p *ExchangeRateModelStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeRateModelStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeRateModelStatistics{}
+	} else {
+		*p = ExchangeRateModelStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["exchange"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Exchange)
+		}
+		if v, ok := d["amount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Amount)
+		}
+	}
+	return nil
+}
+
 func NewExchangeRateModelStatisticsFromJson(data string) ExchangeRateModelStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeRateModelStatisticsFromDict(dict)
+	req := ExchangeRateModelStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeRateModelStatisticsFromDict(data map[string]interface{}) ExchangeRateModelStatistics {
@@ -4429,10 +7465,54 @@ type ExchangeRateModelAmountDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ExchangeRateModelAmountDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeRateModelAmountDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeRateModelAmountDistributionStatistics{}
+	} else {
+		*p = ExchangeRateModelAmountDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewExchangeRateModelAmountDistributionStatisticsFromJson(data string) ExchangeRateModelAmountDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeRateModelAmountDistributionStatisticsFromDict(dict)
+	req := ExchangeRateModelAmountDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeRateModelAmountDistributionStatisticsFromDict(data map[string]interface{}) ExchangeRateModelAmountDistributionStatistics {
@@ -4508,10 +7588,45 @@ type ExchangeRateModelAmountDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *ExchangeRateModelAmountDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeRateModelAmountDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeRateModelAmountDistributionSegment{}
+	} else {
+		*p = ExchangeRateModelAmountDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewExchangeRateModelAmountDistributionSegmentFromJson(data string) ExchangeRateModelAmountDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeRateModelAmountDistributionSegmentFromDict(dict)
+	req := ExchangeRateModelAmountDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeRateModelAmountDistributionSegmentFromDict(data map[string]interface{}) ExchangeRateModelAmountDistributionSegment {
@@ -4568,10 +7683,42 @@ type ExchangeRateModelAmountDistribution struct {
 	Distribution []ExchangeRateModelAmountDistributionSegment   `json:"distribution"`
 }
 
+func (p *ExchangeRateModelAmountDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeRateModelAmountDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeRateModelAmountDistribution{}
+	} else {
+		*p = ExchangeRateModelAmountDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewExchangeRateModelAmountDistributionFromJson(data string) ExchangeRateModelAmountDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeRateModelAmountDistributionFromDict(dict)
+	req := ExchangeRateModelAmountDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeRateModelAmountDistributionFromDict(data map[string]interface{}) ExchangeRateModelAmountDistribution {
@@ -4623,10 +7770,39 @@ type ExchangeRateModelDistributions struct {
 	Amount *ExchangeRateModelAmountDistribution `json:"amount"`
 }
 
+func (p *ExchangeRateModelDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeRateModelDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeRateModelDistributions{}
+	} else {
+		*p = ExchangeRateModelDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["amount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Amount)
+		}
+	}
+	return nil
+}
+
 func NewExchangeRateModelDistributionsFromJson(data string) ExchangeRateModelDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeRateModelDistributionsFromDict(dict)
+	req := ExchangeRateModelDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeRateModelDistributionsFromDict(data map[string]interface{}) ExchangeRateModelDistributions {
@@ -4673,10 +7849,88 @@ type ExchangeRateModel struct {
 	Distributions *ExchangeRateModelDistributions `json:"distributions"`
 }
 
+func (p *ExchangeRateModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeRateModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeRateModel{}
+	} else {
+		*p = ExchangeRateModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["rateModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RateModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RateModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RateModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RateModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RateModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RateModelId)
+				}
+			}
+		}
+		if v, ok := d["rateName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RateName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RateName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RateName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RateName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RateName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RateName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewExchangeRateModelFromJson(data string) ExchangeRateModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeRateModelFromDict(dict)
+	req := ExchangeRateModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeRateModelFromDict(data map[string]interface{}) ExchangeRateModel {
@@ -4739,10 +7993,42 @@ type ExchangeNamespaceStatistics struct {
 	Amount   *int64 `json:"amount"`
 }
 
+func (p *ExchangeNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceStatistics{}
+	} else {
+		*p = ExchangeNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["exchange"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Exchange)
+		}
+		if v, ok := d["amount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Amount)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceStatisticsFromJson(data string) ExchangeNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceStatisticsFromDict(dict)
+	req := ExchangeNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceStatisticsFromDict(data map[string]interface{}) ExchangeNamespaceStatistics {
@@ -4797,10 +8083,54 @@ type ExchangeNamespaceExchangeDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ExchangeNamespaceExchangeDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceExchangeDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceExchangeDistributionStatistics{}
+	} else {
+		*p = ExchangeNamespaceExchangeDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceExchangeDistributionStatisticsFromJson(data string) ExchangeNamespaceExchangeDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceExchangeDistributionStatisticsFromDict(dict)
+	req := ExchangeNamespaceExchangeDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceExchangeDistributionStatisticsFromDict(data map[string]interface{}) ExchangeNamespaceExchangeDistributionStatistics {
@@ -4875,10 +8205,62 @@ type ExchangeNamespaceExchangeDistributionSegment struct {
 	Count    *int64  `json:"count"`
 }
 
+func (p *ExchangeNamespaceExchangeDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceExchangeDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceExchangeDistributionSegment{}
+	} else {
+		*p = ExchangeNamespaceExchangeDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["rateName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RateName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RateName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RateName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RateName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RateName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RateName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceExchangeDistributionSegmentFromJson(data string) ExchangeNamespaceExchangeDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceExchangeDistributionSegmentFromDict(dict)
+	req := ExchangeNamespaceExchangeDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceExchangeDistributionSegmentFromDict(data map[string]interface{}) ExchangeNamespaceExchangeDistributionSegment {
@@ -4929,10 +8311,42 @@ type ExchangeNamespaceExchangeDistribution struct {
 	Distribution []ExchangeNamespaceExchangeDistributionSegment   `json:"distribution"`
 }
 
+func (p *ExchangeNamespaceExchangeDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceExchangeDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceExchangeDistribution{}
+	} else {
+		*p = ExchangeNamespaceExchangeDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceExchangeDistributionFromJson(data string) ExchangeNamespaceExchangeDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceExchangeDistributionFromDict(dict)
+	req := ExchangeNamespaceExchangeDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceExchangeDistributionFromDict(data map[string]interface{}) ExchangeNamespaceExchangeDistribution {
@@ -4989,10 +8403,54 @@ type ExchangeNamespaceExchangeAmountDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ExchangeNamespaceExchangeAmountDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceExchangeAmountDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceExchangeAmountDistributionStatistics{}
+	} else {
+		*p = ExchangeNamespaceExchangeAmountDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceExchangeAmountDistributionStatisticsFromJson(data string) ExchangeNamespaceExchangeAmountDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceExchangeAmountDistributionStatisticsFromDict(dict)
+	req := ExchangeNamespaceExchangeAmountDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceExchangeAmountDistributionStatisticsFromDict(data map[string]interface{}) ExchangeNamespaceExchangeAmountDistributionStatistics {
@@ -5067,10 +8525,62 @@ type ExchangeNamespaceExchangeAmountDistributionSegment struct {
 	Sum      *int64  `json:"sum"`
 }
 
+func (p *ExchangeNamespaceExchangeAmountDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceExchangeAmountDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceExchangeAmountDistributionSegment{}
+	} else {
+		*p = ExchangeNamespaceExchangeAmountDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["rateName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RateName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RateName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RateName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RateName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RateName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RateName)
+				}
+			}
+		}
+		if v, ok := d["sum"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Sum)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceExchangeAmountDistributionSegmentFromJson(data string) ExchangeNamespaceExchangeAmountDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceExchangeAmountDistributionSegmentFromDict(dict)
+	req := ExchangeNamespaceExchangeAmountDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceExchangeAmountDistributionSegmentFromDict(data map[string]interface{}) ExchangeNamespaceExchangeAmountDistributionSegment {
@@ -5121,10 +8631,42 @@ type ExchangeNamespaceExchangeAmountDistribution struct {
 	Distribution []ExchangeNamespaceExchangeAmountDistributionSegment   `json:"distribution"`
 }
 
+func (p *ExchangeNamespaceExchangeAmountDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceExchangeAmountDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceExchangeAmountDistribution{}
+	} else {
+		*p = ExchangeNamespaceExchangeAmountDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceExchangeAmountDistributionFromJson(data string) ExchangeNamespaceExchangeAmountDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceExchangeAmountDistributionFromDict(dict)
+	req := ExchangeNamespaceExchangeAmountDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceExchangeAmountDistributionFromDict(data map[string]interface{}) ExchangeNamespaceExchangeAmountDistribution {
@@ -5181,10 +8723,54 @@ type ExchangeNamespaceExchangeByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ExchangeNamespaceExchangeByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceExchangeByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceExchangeByUserDistributionStatistics{}
+	} else {
+		*p = ExchangeNamespaceExchangeByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceExchangeByUserDistributionStatisticsFromJson(data string) ExchangeNamespaceExchangeByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceExchangeByUserDistributionStatisticsFromDict(dict)
+	req := ExchangeNamespaceExchangeByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceExchangeByUserDistributionStatisticsFromDict(data map[string]interface{}) ExchangeNamespaceExchangeByUserDistributionStatistics {
@@ -5260,10 +8846,45 @@ type ExchangeNamespaceExchangeByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *ExchangeNamespaceExchangeByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceExchangeByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceExchangeByUserDistributionSegment{}
+	} else {
+		*p = ExchangeNamespaceExchangeByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceExchangeByUserDistributionSegmentFromJson(data string) ExchangeNamespaceExchangeByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceExchangeByUserDistributionSegmentFromDict(dict)
+	req := ExchangeNamespaceExchangeByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceExchangeByUserDistributionSegmentFromDict(data map[string]interface{}) ExchangeNamespaceExchangeByUserDistributionSegment {
@@ -5320,10 +8941,42 @@ type ExchangeNamespaceExchangeByUserDistribution struct {
 	Distribution []ExchangeNamespaceExchangeByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *ExchangeNamespaceExchangeByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceExchangeByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceExchangeByUserDistribution{}
+	} else {
+		*p = ExchangeNamespaceExchangeByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceExchangeByUserDistributionFromJson(data string) ExchangeNamespaceExchangeByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceExchangeByUserDistributionFromDict(dict)
+	req := ExchangeNamespaceExchangeByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceExchangeByUserDistributionFromDict(data map[string]interface{}) ExchangeNamespaceExchangeByUserDistribution {
@@ -5380,10 +9033,54 @@ type ExchangeNamespaceExchangeAmountByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ExchangeNamespaceExchangeAmountByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceExchangeAmountByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceExchangeAmountByUserDistributionStatistics{}
+	} else {
+		*p = ExchangeNamespaceExchangeAmountByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceExchangeAmountByUserDistributionStatisticsFromJson(data string) ExchangeNamespaceExchangeAmountByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceExchangeAmountByUserDistributionStatisticsFromDict(dict)
+	req := ExchangeNamespaceExchangeAmountByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceExchangeAmountByUserDistributionStatisticsFromDict(data map[string]interface{}) ExchangeNamespaceExchangeAmountByUserDistributionStatistics {
@@ -5459,10 +9156,45 @@ type ExchangeNamespaceExchangeAmountByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *ExchangeNamespaceExchangeAmountByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceExchangeAmountByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceExchangeAmountByUserDistributionSegment{}
+	} else {
+		*p = ExchangeNamespaceExchangeAmountByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceExchangeAmountByUserDistributionSegmentFromJson(data string) ExchangeNamespaceExchangeAmountByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceExchangeAmountByUserDistributionSegmentFromDict(dict)
+	req := ExchangeNamespaceExchangeAmountByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceExchangeAmountByUserDistributionSegmentFromDict(data map[string]interface{}) ExchangeNamespaceExchangeAmountByUserDistributionSegment {
@@ -5519,10 +9251,42 @@ type ExchangeNamespaceExchangeAmountByUserDistribution struct {
 	Distribution []ExchangeNamespaceExchangeAmountByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *ExchangeNamespaceExchangeAmountByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceExchangeAmountByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceExchangeAmountByUserDistribution{}
+	} else {
+		*p = ExchangeNamespaceExchangeAmountByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceExchangeAmountByUserDistributionFromJson(data string) ExchangeNamespaceExchangeAmountByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceExchangeAmountByUserDistributionFromDict(dict)
+	req := ExchangeNamespaceExchangeAmountByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceExchangeAmountByUserDistributionFromDict(data map[string]interface{}) ExchangeNamespaceExchangeAmountByUserDistribution {
@@ -5577,10 +9341,48 @@ type ExchangeNamespaceDistributions struct {
 	ExchangeAmountByUser *ExchangeNamespaceExchangeAmountByUserDistribution `json:"exchangeAmountByUser"`
 }
 
+func (p *ExchangeNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespaceDistributions{}
+	} else {
+		*p = ExchangeNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["exchange"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Exchange)
+		}
+		if v, ok := d["exchangeAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExchangeAmount)
+		}
+		if v, ok := d["exchangeByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExchangeByUser)
+		}
+		if v, ok := d["exchangeAmountByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExchangeAmountByUser)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceDistributionsFromJson(data string) ExchangeNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceDistributionsFromDict(dict)
+	req := ExchangeNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceDistributionsFromDict(data map[string]interface{}) ExchangeNamespaceDistributions {
@@ -5649,10 +9451,100 @@ type ExchangeNamespace struct {
 	RateModels    []ExchangeRateModel             `json:"rateModels"`
 }
 
+func (p *ExchangeNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExchangeNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExchangeNamespace{}
+	} else {
+		*p = ExchangeNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["rateModels"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RateModels)
+		}
+	}
+	return nil
+}
+
 func NewExchangeNamespaceFromJson(data string) ExchangeNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExchangeNamespaceFromDict(dict)
+	req := ExchangeNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExchangeNamespaceFromDict(data map[string]interface{}) ExchangeNamespace {
@@ -5745,10 +9637,54 @@ type ExperienceStatusRankDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ExperienceStatusRankDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceStatusRankDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceStatusRankDistributionStatistics{}
+	} else {
+		*p = ExperienceStatusRankDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewExperienceStatusRankDistributionStatisticsFromJson(data string) ExperienceStatusRankDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceStatusRankDistributionStatisticsFromDict(dict)
+	req := ExperienceStatusRankDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceStatusRankDistributionStatisticsFromDict(data map[string]interface{}) ExperienceStatusRankDistributionStatistics {
@@ -5824,10 +9760,45 @@ type ExperienceStatusRankDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *ExperienceStatusRankDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceStatusRankDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceStatusRankDistributionSegment{}
+	} else {
+		*p = ExperienceStatusRankDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewExperienceStatusRankDistributionSegmentFromJson(data string) ExperienceStatusRankDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceStatusRankDistributionSegmentFromDict(dict)
+	req := ExperienceStatusRankDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceStatusRankDistributionSegmentFromDict(data map[string]interface{}) ExperienceStatusRankDistributionSegment {
@@ -5884,10 +9855,42 @@ type ExperienceStatusRankDistribution struct {
 	Distribution []ExperienceStatusRankDistributionSegment   `json:"distribution"`
 }
 
+func (p *ExperienceStatusRankDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceStatusRankDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceStatusRankDistribution{}
+	} else {
+		*p = ExperienceStatusRankDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewExperienceStatusRankDistributionFromJson(data string) ExperienceStatusRankDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceStatusRankDistributionFromDict(dict)
+	req := ExperienceStatusRankDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceStatusRankDistributionFromDict(data map[string]interface{}) ExperienceStatusRankDistribution {
@@ -5944,10 +9947,54 @@ type ExperienceStatusRankCapDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ExperienceStatusRankCapDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceStatusRankCapDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceStatusRankCapDistributionStatistics{}
+	} else {
+		*p = ExperienceStatusRankCapDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewExperienceStatusRankCapDistributionStatisticsFromJson(data string) ExperienceStatusRankCapDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceStatusRankCapDistributionStatisticsFromDict(dict)
+	req := ExperienceStatusRankCapDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceStatusRankCapDistributionStatisticsFromDict(data map[string]interface{}) ExperienceStatusRankCapDistributionStatistics {
@@ -6023,10 +10070,45 @@ type ExperienceStatusRankCapDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *ExperienceStatusRankCapDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceStatusRankCapDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceStatusRankCapDistributionSegment{}
+	} else {
+		*p = ExperienceStatusRankCapDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewExperienceStatusRankCapDistributionSegmentFromJson(data string) ExperienceStatusRankCapDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceStatusRankCapDistributionSegmentFromDict(dict)
+	req := ExperienceStatusRankCapDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceStatusRankCapDistributionSegmentFromDict(data map[string]interface{}) ExperienceStatusRankCapDistributionSegment {
@@ -6083,10 +10165,42 @@ type ExperienceStatusRankCapDistribution struct {
 	Distribution []ExperienceStatusRankCapDistributionSegment   `json:"distribution"`
 }
 
+func (p *ExperienceStatusRankCapDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceStatusRankCapDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceStatusRankCapDistribution{}
+	} else {
+		*p = ExperienceStatusRankCapDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewExperienceStatusRankCapDistributionFromJson(data string) ExperienceStatusRankCapDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceStatusRankCapDistributionFromDict(dict)
+	req := ExperienceStatusRankCapDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceStatusRankCapDistributionFromDict(data map[string]interface{}) ExperienceStatusRankCapDistribution {
@@ -6139,10 +10253,42 @@ type ExperienceStatusDistributions struct {
 	RankCap *ExperienceStatusRankCapDistribution `json:"rankCap"`
 }
 
+func (p *ExperienceStatusDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceStatusDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceStatusDistributions{}
+	} else {
+		*p = ExperienceStatusDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["rank"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Rank)
+		}
+		if v, ok := d["rankCap"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RankCap)
+		}
+	}
+	return nil
+}
+
 func NewExperienceStatusDistributionsFromJson(data string) ExperienceStatusDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceStatusDistributionsFromDict(dict)
+	req := ExperienceStatusDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceStatusDistributionsFromDict(data map[string]interface{}) ExperienceStatusDistributions {
@@ -6195,10 +10341,108 @@ type ExperienceStatus struct {
 	Distributions  *ExperienceStatusDistributions `json:"distributions"`
 }
 
+func (p *ExperienceStatus) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceStatus{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceStatus{}
+	} else {
+		*p = ExperienceStatus{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statusId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StatusId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StatusId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StatusId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StatusId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StatusId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StatusId)
+				}
+			}
+		}
+		if v, ok := d["experienceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ExperienceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ExperienceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ExperienceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ExperienceName)
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PropertyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PropertyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PropertyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PropertyId)
+				}
+			}
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewExperienceStatusFromJson(data string) ExperienceStatus {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceStatusFromDict(dict)
+	req := ExperienceStatus{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceStatusFromDict(data map[string]interface{}) ExperienceStatus {
@@ -6263,10 +10507,48 @@ type ExperienceExperienceModelStatistics struct {
 	RankCapAmount    *int64 `json:"rankCapAmount"`
 }
 
+func (p *ExperienceExperienceModelStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelStatistics{}
+	} else {
+		*p = ExperienceExperienceModelStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["experience"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Experience)
+		}
+		if v, ok := d["experienceAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExperienceAmount)
+		}
+		if v, ok := d["rankCap"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RankCap)
+		}
+		if v, ok := d["rankCapAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RankCapAmount)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelStatisticsFromJson(data string) ExperienceExperienceModelStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelStatisticsFromDict(dict)
+	req := ExperienceExperienceModelStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelStatisticsFromDict(data map[string]interface{}) ExperienceExperienceModelStatistics {
@@ -6333,10 +10615,54 @@ type ExperienceExperienceModelAddExperienceByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ExperienceExperienceModelAddExperienceByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelAddExperienceByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelAddExperienceByUserDistributionStatistics{}
+	} else {
+		*p = ExperienceExperienceModelAddExperienceByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelAddExperienceByUserDistributionStatisticsFromJson(data string) ExperienceExperienceModelAddExperienceByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelAddExperienceByUserDistributionStatisticsFromDict(dict)
+	req := ExperienceExperienceModelAddExperienceByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelAddExperienceByUserDistributionStatisticsFromDict(data map[string]interface{}) ExperienceExperienceModelAddExperienceByUserDistributionStatistics {
@@ -6412,10 +10738,45 @@ type ExperienceExperienceModelAddExperienceByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *ExperienceExperienceModelAddExperienceByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelAddExperienceByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelAddExperienceByUserDistributionSegment{}
+	} else {
+		*p = ExperienceExperienceModelAddExperienceByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelAddExperienceByUserDistributionSegmentFromJson(data string) ExperienceExperienceModelAddExperienceByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelAddExperienceByUserDistributionSegmentFromDict(dict)
+	req := ExperienceExperienceModelAddExperienceByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelAddExperienceByUserDistributionSegmentFromDict(data map[string]interface{}) ExperienceExperienceModelAddExperienceByUserDistributionSegment {
@@ -6472,10 +10833,42 @@ type ExperienceExperienceModelAddExperienceByUserDistribution struct {
 	Distribution []ExperienceExperienceModelAddExperienceByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *ExperienceExperienceModelAddExperienceByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelAddExperienceByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelAddExperienceByUserDistribution{}
+	} else {
+		*p = ExperienceExperienceModelAddExperienceByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelAddExperienceByUserDistributionFromJson(data string) ExperienceExperienceModelAddExperienceByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelAddExperienceByUserDistributionFromDict(dict)
+	req := ExperienceExperienceModelAddExperienceByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelAddExperienceByUserDistributionFromDict(data map[string]interface{}) ExperienceExperienceModelAddExperienceByUserDistribution {
@@ -6532,10 +10925,54 @@ type ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics st
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics{}
+	} else {
+		*p = ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelAddExperienceAmountByUserDistributionStatisticsFromJson(data string) ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelAddExperienceAmountByUserDistributionStatisticsFromDict(dict)
+	req := ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelAddExperienceAmountByUserDistributionStatisticsFromDict(data map[string]interface{}) ExperienceExperienceModelAddExperienceAmountByUserDistributionStatistics {
@@ -6611,10 +11048,45 @@ type ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment struc
 	Count *int64 `json:"count"`
 }
 
+func (p *ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment{}
+	} else {
+		*p = ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelAddExperienceAmountByUserDistributionSegmentFromJson(data string) ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelAddExperienceAmountByUserDistributionSegmentFromDict(dict)
+	req := ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelAddExperienceAmountByUserDistributionSegmentFromDict(data map[string]interface{}) ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment {
@@ -6671,10 +11143,42 @@ type ExperienceExperienceModelAddExperienceAmountByUserDistribution struct {
 	Distribution []ExperienceExperienceModelAddExperienceAmountByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *ExperienceExperienceModelAddExperienceAmountByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelAddExperienceAmountByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelAddExperienceAmountByUserDistribution{}
+	} else {
+		*p = ExperienceExperienceModelAddExperienceAmountByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelAddExperienceAmountByUserDistributionFromJson(data string) ExperienceExperienceModelAddExperienceAmountByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelAddExperienceAmountByUserDistributionFromDict(dict)
+	req := ExperienceExperienceModelAddExperienceAmountByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelAddExperienceAmountByUserDistributionFromDict(data map[string]interface{}) ExperienceExperienceModelAddExperienceAmountByUserDistribution {
@@ -6731,10 +11235,54 @@ type ExperienceExperienceModelAddRankCapByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ExperienceExperienceModelAddRankCapByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelAddRankCapByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelAddRankCapByUserDistributionStatistics{}
+	} else {
+		*p = ExperienceExperienceModelAddRankCapByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelAddRankCapByUserDistributionStatisticsFromJson(data string) ExperienceExperienceModelAddRankCapByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelAddRankCapByUserDistributionStatisticsFromDict(dict)
+	req := ExperienceExperienceModelAddRankCapByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelAddRankCapByUserDistributionStatisticsFromDict(data map[string]interface{}) ExperienceExperienceModelAddRankCapByUserDistributionStatistics {
@@ -6810,10 +11358,45 @@ type ExperienceExperienceModelAddRankCapByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *ExperienceExperienceModelAddRankCapByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelAddRankCapByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelAddRankCapByUserDistributionSegment{}
+	} else {
+		*p = ExperienceExperienceModelAddRankCapByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelAddRankCapByUserDistributionSegmentFromJson(data string) ExperienceExperienceModelAddRankCapByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelAddRankCapByUserDistributionSegmentFromDict(dict)
+	req := ExperienceExperienceModelAddRankCapByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelAddRankCapByUserDistributionSegmentFromDict(data map[string]interface{}) ExperienceExperienceModelAddRankCapByUserDistributionSegment {
@@ -6870,10 +11453,42 @@ type ExperienceExperienceModelAddRankCapByUserDistribution struct {
 	Distribution []ExperienceExperienceModelAddRankCapByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *ExperienceExperienceModelAddRankCapByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelAddRankCapByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelAddRankCapByUserDistribution{}
+	} else {
+		*p = ExperienceExperienceModelAddRankCapByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelAddRankCapByUserDistributionFromJson(data string) ExperienceExperienceModelAddRankCapByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelAddRankCapByUserDistributionFromDict(dict)
+	req := ExperienceExperienceModelAddRankCapByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelAddRankCapByUserDistributionFromDict(data map[string]interface{}) ExperienceExperienceModelAddRankCapByUserDistribution {
@@ -6930,10 +11545,54 @@ type ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics struc
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics{}
+	} else {
+		*p = ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelAddRankCapAmountByUserDistributionStatisticsFromJson(data string) ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelAddRankCapAmountByUserDistributionStatisticsFromDict(dict)
+	req := ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelAddRankCapAmountByUserDistributionStatisticsFromDict(data map[string]interface{}) ExperienceExperienceModelAddRankCapAmountByUserDistributionStatistics {
@@ -7009,10 +11668,45 @@ type ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment{}
+	} else {
+		*p = ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelAddRankCapAmountByUserDistributionSegmentFromJson(data string) ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelAddRankCapAmountByUserDistributionSegmentFromDict(dict)
+	req := ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelAddRankCapAmountByUserDistributionSegmentFromDict(data map[string]interface{}) ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment {
@@ -7069,10 +11763,42 @@ type ExperienceExperienceModelAddRankCapAmountByUserDistribution struct {
 	Distribution []ExperienceExperienceModelAddRankCapAmountByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *ExperienceExperienceModelAddRankCapAmountByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelAddRankCapAmountByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelAddRankCapAmountByUserDistribution{}
+	} else {
+		*p = ExperienceExperienceModelAddRankCapAmountByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelAddRankCapAmountByUserDistributionFromJson(data string) ExperienceExperienceModelAddRankCapAmountByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelAddRankCapAmountByUserDistributionFromDict(dict)
+	req := ExperienceExperienceModelAddRankCapAmountByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelAddRankCapAmountByUserDistributionFromDict(data map[string]interface{}) ExperienceExperienceModelAddRankCapAmountByUserDistribution {
@@ -7127,10 +11853,48 @@ type ExperienceExperienceModelDistributions struct {
 	AddRankCapAmountByUser    *ExperienceExperienceModelAddRankCapAmountByUserDistribution    `json:"addRankCapAmountByUser"`
 }
 
+func (p *ExperienceExperienceModelDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModelDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModelDistributions{}
+	} else {
+		*p = ExperienceExperienceModelDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["addExperienceByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AddExperienceByUser)
+		}
+		if v, ok := d["addExperienceAmountByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AddExperienceAmountByUser)
+		}
+		if v, ok := d["addRankCapByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AddRankCapByUser)
+		}
+		if v, ok := d["addRankCapAmountByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AddRankCapAmountByUser)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelDistributionsFromJson(data string) ExperienceExperienceModelDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelDistributionsFromDict(dict)
+	req := ExperienceExperienceModelDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelDistributionsFromDict(data map[string]interface{}) ExperienceExperienceModelDistributions {
@@ -7196,10 +11960,91 @@ type ExperienceExperienceModel struct {
 	Statuses          []ExperienceStatus                      `json:"statuses"`
 }
 
+func (p *ExperienceExperienceModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceExperienceModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceExperienceModel{}
+	} else {
+		*p = ExperienceExperienceModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["experienceModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ExperienceModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ExperienceModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ExperienceModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ExperienceModelId)
+				}
+			}
+		}
+		if v, ok := d["experienceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ExperienceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ExperienceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ExperienceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ExperienceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["statuses"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statuses)
+		}
+	}
+	return nil
+}
+
 func NewExperienceExperienceModelFromJson(data string) ExperienceExperienceModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceExperienceModelFromDict(dict)
+	req := ExperienceExperienceModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceExperienceModelFromDict(data map[string]interface{}) ExperienceExperienceModel {
@@ -7270,10 +12115,42 @@ type ExperienceNamespaceStatistics struct {
 	RankCap    *int64 `json:"rankCap"`
 }
 
+func (p *ExperienceNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceNamespaceStatistics{}
+	} else {
+		*p = ExperienceNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["experience"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Experience)
+		}
+		if v, ok := d["rankCap"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RankCap)
+		}
+	}
+	return nil
+}
+
 func NewExperienceNamespaceStatisticsFromJson(data string) ExperienceNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceNamespaceStatisticsFromDict(dict)
+	req := ExperienceNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceNamespaceStatisticsFromDict(data map[string]interface{}) ExperienceNamespaceStatistics {
@@ -7328,10 +12205,54 @@ type ExperienceNamespaceAddExperienceByExperienceDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ExperienceNamespaceAddExperienceByExperienceDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceNamespaceAddExperienceByExperienceDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceNamespaceAddExperienceByExperienceDistributionStatistics{}
+	} else {
+		*p = ExperienceNamespaceAddExperienceByExperienceDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewExperienceNamespaceAddExperienceByExperienceDistributionStatisticsFromJson(data string) ExperienceNamespaceAddExperienceByExperienceDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceNamespaceAddExperienceByExperienceDistributionStatisticsFromDict(dict)
+	req := ExperienceNamespaceAddExperienceByExperienceDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceNamespaceAddExperienceByExperienceDistributionStatisticsFromDict(data map[string]interface{}) ExperienceNamespaceAddExperienceByExperienceDistributionStatistics {
@@ -7406,10 +12327,62 @@ type ExperienceNamespaceAddExperienceByExperienceDistributionSegment struct {
 	Count          *int64  `json:"count"`
 }
 
+func (p *ExperienceNamespaceAddExperienceByExperienceDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceNamespaceAddExperienceByExperienceDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceNamespaceAddExperienceByExperienceDistributionSegment{}
+	} else {
+		*p = ExperienceNamespaceAddExperienceByExperienceDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["experienceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ExperienceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ExperienceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ExperienceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ExperienceName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewExperienceNamespaceAddExperienceByExperienceDistributionSegmentFromJson(data string) ExperienceNamespaceAddExperienceByExperienceDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceNamespaceAddExperienceByExperienceDistributionSegmentFromDict(dict)
+	req := ExperienceNamespaceAddExperienceByExperienceDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceNamespaceAddExperienceByExperienceDistributionSegmentFromDict(data map[string]interface{}) ExperienceNamespaceAddExperienceByExperienceDistributionSegment {
@@ -7460,10 +12433,42 @@ type ExperienceNamespaceAddExperienceByExperienceDistribution struct {
 	Distribution []ExperienceNamespaceAddExperienceByExperienceDistributionSegment   `json:"distribution"`
 }
 
+func (p *ExperienceNamespaceAddExperienceByExperienceDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceNamespaceAddExperienceByExperienceDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceNamespaceAddExperienceByExperienceDistribution{}
+	} else {
+		*p = ExperienceNamespaceAddExperienceByExperienceDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewExperienceNamespaceAddExperienceByExperienceDistributionFromJson(data string) ExperienceNamespaceAddExperienceByExperienceDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceNamespaceAddExperienceByExperienceDistributionFromDict(dict)
+	req := ExperienceNamespaceAddExperienceByExperienceDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceNamespaceAddExperienceByExperienceDistributionFromDict(data map[string]interface{}) ExperienceNamespaceAddExperienceByExperienceDistribution {
@@ -7520,10 +12525,54 @@ type ExperienceNamespaceAddRankCapByExperienceDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ExperienceNamespaceAddRankCapByExperienceDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceNamespaceAddRankCapByExperienceDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceNamespaceAddRankCapByExperienceDistributionStatistics{}
+	} else {
+		*p = ExperienceNamespaceAddRankCapByExperienceDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewExperienceNamespaceAddRankCapByExperienceDistributionStatisticsFromJson(data string) ExperienceNamespaceAddRankCapByExperienceDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceNamespaceAddRankCapByExperienceDistributionStatisticsFromDict(dict)
+	req := ExperienceNamespaceAddRankCapByExperienceDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceNamespaceAddRankCapByExperienceDistributionStatisticsFromDict(data map[string]interface{}) ExperienceNamespaceAddRankCapByExperienceDistributionStatistics {
@@ -7598,10 +12647,62 @@ type ExperienceNamespaceAddRankCapByExperienceDistributionSegment struct {
 	Count          *int64  `json:"count"`
 }
 
+func (p *ExperienceNamespaceAddRankCapByExperienceDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceNamespaceAddRankCapByExperienceDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceNamespaceAddRankCapByExperienceDistributionSegment{}
+	} else {
+		*p = ExperienceNamespaceAddRankCapByExperienceDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["experienceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ExperienceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ExperienceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ExperienceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ExperienceName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewExperienceNamespaceAddRankCapByExperienceDistributionSegmentFromJson(data string) ExperienceNamespaceAddRankCapByExperienceDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceNamespaceAddRankCapByExperienceDistributionSegmentFromDict(dict)
+	req := ExperienceNamespaceAddRankCapByExperienceDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceNamespaceAddRankCapByExperienceDistributionSegmentFromDict(data map[string]interface{}) ExperienceNamespaceAddRankCapByExperienceDistributionSegment {
@@ -7652,10 +12753,42 @@ type ExperienceNamespaceAddRankCapByExperienceDistribution struct {
 	Distribution []ExperienceNamespaceAddRankCapByExperienceDistributionSegment   `json:"distribution"`
 }
 
+func (p *ExperienceNamespaceAddRankCapByExperienceDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceNamespaceAddRankCapByExperienceDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceNamespaceAddRankCapByExperienceDistribution{}
+	} else {
+		*p = ExperienceNamespaceAddRankCapByExperienceDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewExperienceNamespaceAddRankCapByExperienceDistributionFromJson(data string) ExperienceNamespaceAddRankCapByExperienceDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceNamespaceAddRankCapByExperienceDistributionFromDict(dict)
+	req := ExperienceNamespaceAddRankCapByExperienceDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceNamespaceAddRankCapByExperienceDistributionFromDict(data map[string]interface{}) ExperienceNamespaceAddRankCapByExperienceDistribution {
@@ -7708,10 +12841,42 @@ type ExperienceNamespaceDistributions struct {
 	AddRankCapByExperience    *ExperienceNamespaceAddRankCapByExperienceDistribution    `json:"addRankCapByExperience"`
 }
 
+func (p *ExperienceNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceNamespaceDistributions{}
+	} else {
+		*p = ExperienceNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["addExperienceByExperience"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AddExperienceByExperience)
+		}
+		if v, ok := d["addRankCapByExperience"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AddRankCapByExperience)
+		}
+	}
+	return nil
+}
+
 func NewExperienceNamespaceDistributionsFromJson(data string) ExperienceNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceNamespaceDistributionsFromDict(dict)
+	req := ExperienceNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceNamespaceDistributionsFromDict(data map[string]interface{}) ExperienceNamespaceDistributions {
@@ -7768,10 +12933,100 @@ type ExperienceNamespace struct {
 	ExperienceModels []ExperienceExperienceModel       `json:"experienceModels"`
 }
 
+func (p *ExperienceNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExperienceNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExperienceNamespace{}
+	} else {
+		*p = ExperienceNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["experienceModels"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExperienceModels)
+		}
+	}
+	return nil
+}
+
 func NewExperienceNamespaceFromJson(data string) ExperienceNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewExperienceNamespaceFromDict(dict)
+	req := ExperienceNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewExperienceNamespaceFromDict(data map[string]interface{}) ExperienceNamespace {
@@ -7859,10 +13114,39 @@ type FormationFormStatistics struct {
 	Update *int64 `json:"update"`
 }
 
+func (p *FormationFormStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationFormStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationFormStatistics{}
+	} else {
+		*p = FormationFormStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["update"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Update)
+		}
+	}
+	return nil
+}
+
 func NewFormationFormStatisticsFromJson(data string) FormationFormStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationFormStatisticsFromDict(dict)
+	req := FormationFormStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationFormStatisticsFromDict(data map[string]interface{}) FormationFormStatistics {
@@ -7911,10 +13195,54 @@ type FormationFormSlotDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *FormationFormSlotDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationFormSlotDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationFormSlotDistributionStatistics{}
+	} else {
+		*p = FormationFormSlotDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewFormationFormSlotDistributionStatisticsFromJson(data string) FormationFormSlotDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationFormSlotDistributionStatisticsFromDict(dict)
+	req := FormationFormSlotDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationFormSlotDistributionStatisticsFromDict(data map[string]interface{}) FormationFormSlotDistributionStatistics {
@@ -7990,10 +13318,45 @@ type FormationFormSlotDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *FormationFormSlotDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationFormSlotDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationFormSlotDistributionSegment{}
+	} else {
+		*p = FormationFormSlotDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewFormationFormSlotDistributionSegmentFromJson(data string) FormationFormSlotDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationFormSlotDistributionSegmentFromDict(dict)
+	req := FormationFormSlotDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationFormSlotDistributionSegmentFromDict(data map[string]interface{}) FormationFormSlotDistributionSegment {
@@ -8050,10 +13413,42 @@ type FormationFormSlotDistribution struct {
 	Distribution []FormationFormSlotDistributionSegment   `json:"distribution"`
 }
 
+func (p *FormationFormSlotDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationFormSlotDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationFormSlotDistribution{}
+	} else {
+		*p = FormationFormSlotDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewFormationFormSlotDistributionFromJson(data string) FormationFormSlotDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationFormSlotDistributionFromDict(dict)
+	req := FormationFormSlotDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationFormSlotDistributionFromDict(data map[string]interface{}) FormationFormSlotDistribution {
@@ -8110,10 +13505,54 @@ type FormationFormUsageDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *FormationFormUsageDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationFormUsageDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationFormUsageDistributionStatistics{}
+	} else {
+		*p = FormationFormUsageDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewFormationFormUsageDistributionStatisticsFromJson(data string) FormationFormUsageDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationFormUsageDistributionStatisticsFromDict(dict)
+	req := FormationFormUsageDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationFormUsageDistributionStatisticsFromDict(data map[string]interface{}) FormationFormUsageDistributionStatistics {
@@ -8189,10 +13628,45 @@ type FormationFormUsageDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *FormationFormUsageDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationFormUsageDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationFormUsageDistributionSegment{}
+	} else {
+		*p = FormationFormUsageDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewFormationFormUsageDistributionSegmentFromJson(data string) FormationFormUsageDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationFormUsageDistributionSegmentFromDict(dict)
+	req := FormationFormUsageDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationFormUsageDistributionSegmentFromDict(data map[string]interface{}) FormationFormUsageDistributionSegment {
@@ -8249,10 +13723,42 @@ type FormationFormUsageDistribution struct {
 	Distribution []FormationFormUsageDistributionSegment   `json:"distribution"`
 }
 
+func (p *FormationFormUsageDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationFormUsageDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationFormUsageDistribution{}
+	} else {
+		*p = FormationFormUsageDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewFormationFormUsageDistributionFromJson(data string) FormationFormUsageDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationFormUsageDistributionFromDict(dict)
+	req := FormationFormUsageDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationFormUsageDistributionFromDict(data map[string]interface{}) FormationFormUsageDistribution {
@@ -8305,10 +13811,42 @@ type FormationFormDistributions struct {
 	Usage *FormationFormUsageDistribution `json:"usage"`
 }
 
+func (p *FormationFormDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationFormDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationFormDistributions{}
+	} else {
+		*p = FormationFormDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["slot"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Slot)
+		}
+		if v, ok := d["usage"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Usage)
+		}
+	}
+	return nil
+}
+
 func NewFormationFormDistributionsFromJson(data string) FormationFormDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationFormDistributionsFromDict(dict)
+	req := FormationFormDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationFormDistributionsFromDict(data map[string]interface{}) FormationFormDistributions {
@@ -8361,10 +13899,68 @@ type FormationForm struct {
 	Distributions *FormationFormDistributions `json:"distributions"`
 }
 
+func (p *FormationForm) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationForm{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationForm{}
+	} else {
+		*p = FormationForm{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["formId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.FormId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.FormId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.FormId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.FormId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.FormId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.FormId)
+				}
+			}
+		}
+		if v, ok := d["index"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Index)
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewFormationFormFromJson(data string) FormationForm {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationFormFromDict(dict)
+	req := FormationForm{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationFormFromDict(data map[string]interface{}) FormationForm {
@@ -8427,10 +14023,42 @@ type FormationMoldStatistics struct {
 	IncreaseCapacityAmount *int64 `json:"increaseCapacityAmount"`
 }
 
+func (p *FormationMoldStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationMoldStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationMoldStatistics{}
+	} else {
+		*p = FormationMoldStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["increaseCapacity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseCapacity)
+		}
+		if v, ok := d["increaseCapacityAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseCapacityAmount)
+		}
+	}
+	return nil
+}
+
 func NewFormationMoldStatisticsFromJson(data string) FormationMoldStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationMoldStatisticsFromDict(dict)
+	req := FormationMoldStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationMoldStatisticsFromDict(data map[string]interface{}) FormationMoldStatistics {
@@ -8485,10 +14113,54 @@ type FormationMoldCapacityDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *FormationMoldCapacityDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationMoldCapacityDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationMoldCapacityDistributionStatistics{}
+	} else {
+		*p = FormationMoldCapacityDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewFormationMoldCapacityDistributionStatisticsFromJson(data string) FormationMoldCapacityDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationMoldCapacityDistributionStatisticsFromDict(dict)
+	req := FormationMoldCapacityDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationMoldCapacityDistributionStatisticsFromDict(data map[string]interface{}) FormationMoldCapacityDistributionStatistics {
@@ -8564,10 +14236,45 @@ type FormationMoldCapacityDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *FormationMoldCapacityDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationMoldCapacityDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationMoldCapacityDistributionSegment{}
+	} else {
+		*p = FormationMoldCapacityDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewFormationMoldCapacityDistributionSegmentFromJson(data string) FormationMoldCapacityDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationMoldCapacityDistributionSegmentFromDict(dict)
+	req := FormationMoldCapacityDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationMoldCapacityDistributionSegmentFromDict(data map[string]interface{}) FormationMoldCapacityDistributionSegment {
@@ -8624,10 +14331,42 @@ type FormationMoldCapacityDistribution struct {
 	Distribution []FormationMoldCapacityDistributionSegment   `json:"distribution"`
 }
 
+func (p *FormationMoldCapacityDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationMoldCapacityDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationMoldCapacityDistribution{}
+	} else {
+		*p = FormationMoldCapacityDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewFormationMoldCapacityDistributionFromJson(data string) FormationMoldCapacityDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationMoldCapacityDistributionFromDict(dict)
+	req := FormationMoldCapacityDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationMoldCapacityDistributionFromDict(data map[string]interface{}) FormationMoldCapacityDistribution {
@@ -8684,10 +14423,54 @@ type FormationMoldUpdateByIndexDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *FormationMoldUpdateByIndexDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationMoldUpdateByIndexDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationMoldUpdateByIndexDistributionStatistics{}
+	} else {
+		*p = FormationMoldUpdateByIndexDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewFormationMoldUpdateByIndexDistributionStatisticsFromJson(data string) FormationMoldUpdateByIndexDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationMoldUpdateByIndexDistributionStatisticsFromDict(dict)
+	req := FormationMoldUpdateByIndexDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationMoldUpdateByIndexDistributionStatisticsFromDict(data map[string]interface{}) FormationMoldUpdateByIndexDistributionStatistics {
@@ -8762,10 +14545,42 @@ type FormationMoldUpdateByIndexDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *FormationMoldUpdateByIndexDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationMoldUpdateByIndexDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationMoldUpdateByIndexDistributionSegment{}
+	} else {
+		*p = FormationMoldUpdateByIndexDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["index"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Index)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewFormationMoldUpdateByIndexDistributionSegmentFromJson(data string) FormationMoldUpdateByIndexDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationMoldUpdateByIndexDistributionSegmentFromDict(dict)
+	req := FormationMoldUpdateByIndexDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationMoldUpdateByIndexDistributionSegmentFromDict(data map[string]interface{}) FormationMoldUpdateByIndexDistributionSegment {
@@ -8816,10 +14631,42 @@ type FormationMoldUpdateByIndexDistribution struct {
 	Distribution []FormationMoldUpdateByIndexDistributionSegment   `json:"distribution"`
 }
 
+func (p *FormationMoldUpdateByIndexDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationMoldUpdateByIndexDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationMoldUpdateByIndexDistribution{}
+	} else {
+		*p = FormationMoldUpdateByIndexDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewFormationMoldUpdateByIndexDistributionFromJson(data string) FormationMoldUpdateByIndexDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationMoldUpdateByIndexDistributionFromDict(dict)
+	req := FormationMoldUpdateByIndexDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationMoldUpdateByIndexDistributionFromDict(data map[string]interface{}) FormationMoldUpdateByIndexDistribution {
@@ -8872,10 +14719,42 @@ type FormationMoldDistributions struct {
 	UpdateByIndex *FormationMoldUpdateByIndexDistribution `json:"updateByIndex"`
 }
 
+func (p *FormationMoldDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationMoldDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationMoldDistributions{}
+	} else {
+		*p = FormationMoldDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["capacity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Capacity)
+		}
+		if v, ok := d["updateByIndex"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdateByIndex)
+		}
+	}
+	return nil
+}
+
 func NewFormationMoldDistributionsFromJson(data string) FormationMoldDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationMoldDistributionsFromDict(dict)
+	req := FormationMoldDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationMoldDistributionsFromDict(data map[string]interface{}) FormationMoldDistributions {
@@ -8929,10 +14808,91 @@ type FormationMold struct {
 	Forms         []FormationForm             `json:"forms"`
 }
 
+func (p *FormationMold) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationMold{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationMold{}
+	} else {
+		*p = FormationMold{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["moldId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MoldId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MoldId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MoldId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MoldId)
+				}
+			}
+		}
+		if v, ok := d["moldModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MoldModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MoldModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MoldModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MoldModelName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["forms"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Forms)
+		}
+	}
+	return nil
+}
+
 func NewFormationMoldFromJson(data string) FormationMold {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationMoldFromDict(dict)
+	req := FormationMold{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationMoldFromDict(data map[string]interface{}) FormationMold {
@@ -9003,10 +14963,42 @@ type FormationNamespaceStatistics struct {
 	Increase *int64 `json:"increase"`
 }
 
+func (p *FormationNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationNamespaceStatistics{}
+	} else {
+		*p = FormationNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["update"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Update)
+		}
+		if v, ok := d["increase"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Increase)
+		}
+	}
+	return nil
+}
+
 func NewFormationNamespaceStatisticsFromJson(data string) FormationNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationNamespaceStatisticsFromDict(dict)
+	req := FormationNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationNamespaceStatisticsFromDict(data map[string]interface{}) FormationNamespaceStatistics {
@@ -9061,10 +15053,54 @@ type FormationNamespaceUpdateByMoldDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *FormationNamespaceUpdateByMoldDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationNamespaceUpdateByMoldDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationNamespaceUpdateByMoldDistributionStatistics{}
+	} else {
+		*p = FormationNamespaceUpdateByMoldDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewFormationNamespaceUpdateByMoldDistributionStatisticsFromJson(data string) FormationNamespaceUpdateByMoldDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationNamespaceUpdateByMoldDistributionStatisticsFromDict(dict)
+	req := FormationNamespaceUpdateByMoldDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationNamespaceUpdateByMoldDistributionStatisticsFromDict(data map[string]interface{}) FormationNamespaceUpdateByMoldDistributionStatistics {
@@ -9139,10 +15175,62 @@ type FormationNamespaceUpdateByMoldDistributionSegment struct {
 	Count         *int64  `json:"count"`
 }
 
+func (p *FormationNamespaceUpdateByMoldDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationNamespaceUpdateByMoldDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationNamespaceUpdateByMoldDistributionSegment{}
+	} else {
+		*p = FormationNamespaceUpdateByMoldDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["moldModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MoldModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MoldModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MoldModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MoldModelName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewFormationNamespaceUpdateByMoldDistributionSegmentFromJson(data string) FormationNamespaceUpdateByMoldDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationNamespaceUpdateByMoldDistributionSegmentFromDict(dict)
+	req := FormationNamespaceUpdateByMoldDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationNamespaceUpdateByMoldDistributionSegmentFromDict(data map[string]interface{}) FormationNamespaceUpdateByMoldDistributionSegment {
@@ -9193,10 +15281,42 @@ type FormationNamespaceUpdateByMoldDistribution struct {
 	Distribution []FormationNamespaceUpdateByMoldDistributionSegment   `json:"distribution"`
 }
 
+func (p *FormationNamespaceUpdateByMoldDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationNamespaceUpdateByMoldDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationNamespaceUpdateByMoldDistribution{}
+	} else {
+		*p = FormationNamespaceUpdateByMoldDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewFormationNamespaceUpdateByMoldDistributionFromJson(data string) FormationNamespaceUpdateByMoldDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationNamespaceUpdateByMoldDistributionFromDict(dict)
+	req := FormationNamespaceUpdateByMoldDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationNamespaceUpdateByMoldDistributionFromDict(data map[string]interface{}) FormationNamespaceUpdateByMoldDistribution {
@@ -9253,10 +15373,54 @@ type FormationNamespaceIncreaseCapacityByMoldDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *FormationNamespaceIncreaseCapacityByMoldDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationNamespaceIncreaseCapacityByMoldDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationNamespaceIncreaseCapacityByMoldDistributionStatistics{}
+	} else {
+		*p = FormationNamespaceIncreaseCapacityByMoldDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewFormationNamespaceIncreaseCapacityByMoldDistributionStatisticsFromJson(data string) FormationNamespaceIncreaseCapacityByMoldDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationNamespaceIncreaseCapacityByMoldDistributionStatisticsFromDict(dict)
+	req := FormationNamespaceIncreaseCapacityByMoldDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationNamespaceIncreaseCapacityByMoldDistributionStatisticsFromDict(data map[string]interface{}) FormationNamespaceIncreaseCapacityByMoldDistributionStatistics {
@@ -9331,10 +15495,62 @@ type FormationNamespaceIncreaseCapacityByMoldDistributionSegment struct {
 	Count         *int64  `json:"count"`
 }
 
+func (p *FormationNamespaceIncreaseCapacityByMoldDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationNamespaceIncreaseCapacityByMoldDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationNamespaceIncreaseCapacityByMoldDistributionSegment{}
+	} else {
+		*p = FormationNamespaceIncreaseCapacityByMoldDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["moldModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MoldModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MoldModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MoldModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MoldModelName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewFormationNamespaceIncreaseCapacityByMoldDistributionSegmentFromJson(data string) FormationNamespaceIncreaseCapacityByMoldDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationNamespaceIncreaseCapacityByMoldDistributionSegmentFromDict(dict)
+	req := FormationNamespaceIncreaseCapacityByMoldDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationNamespaceIncreaseCapacityByMoldDistributionSegmentFromDict(data map[string]interface{}) FormationNamespaceIncreaseCapacityByMoldDistributionSegment {
@@ -9385,10 +15601,42 @@ type FormationNamespaceIncreaseCapacityByMoldDistribution struct {
 	Distribution []FormationNamespaceIncreaseCapacityByMoldDistributionSegment   `json:"distribution"`
 }
 
+func (p *FormationNamespaceIncreaseCapacityByMoldDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationNamespaceIncreaseCapacityByMoldDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationNamespaceIncreaseCapacityByMoldDistribution{}
+	} else {
+		*p = FormationNamespaceIncreaseCapacityByMoldDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewFormationNamespaceIncreaseCapacityByMoldDistributionFromJson(data string) FormationNamespaceIncreaseCapacityByMoldDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationNamespaceIncreaseCapacityByMoldDistributionFromDict(dict)
+	req := FormationNamespaceIncreaseCapacityByMoldDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationNamespaceIncreaseCapacityByMoldDistributionFromDict(data map[string]interface{}) FormationNamespaceIncreaseCapacityByMoldDistribution {
@@ -9441,10 +15689,42 @@ type FormationNamespaceDistributions struct {
 	IncreaseCapacityByMold *FormationNamespaceIncreaseCapacityByMoldDistribution `json:"increaseCapacityByMold"`
 }
 
+func (p *FormationNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationNamespaceDistributions{}
+	} else {
+		*p = FormationNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["updateByMold"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdateByMold)
+		}
+		if v, ok := d["increaseCapacityByMold"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseCapacityByMold)
+		}
+	}
+	return nil
+}
+
 func NewFormationNamespaceDistributionsFromJson(data string) FormationNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationNamespaceDistributionsFromDict(dict)
+	req := FormationNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationNamespaceDistributionsFromDict(data map[string]interface{}) FormationNamespaceDistributions {
@@ -9501,10 +15781,100 @@ type FormationNamespace struct {
 	Molds         []FormationMold                  `json:"molds"`
 }
 
+func (p *FormationNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FormationNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FormationNamespace{}
+	} else {
+		*p = FormationNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["molds"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Molds)
+		}
+	}
+	return nil
+}
+
 func NewFormationNamespaceFromJson(data string) FormationNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFormationNamespaceFromDict(dict)
+	req := FormationNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFormationNamespaceFromDict(data map[string]interface{}) FormationNamespace {
@@ -9595,10 +15965,48 @@ type FriendNamespaceStatistics struct {
 	Follow      *int64 `json:"follow"`
 }
 
+func (p *FriendNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceStatistics{}
+	} else {
+		*p = FriendNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["accept"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Accept)
+		}
+		if v, ok := d["reject"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Reject)
+		}
+		if v, ok := d["sendRequest"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.SendRequest)
+		}
+		if v, ok := d["follow"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Follow)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceStatisticsFromJson(data string) FriendNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceStatisticsFromDict(dict)
+	req := FriendNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceStatisticsFromDict(data map[string]interface{}) FriendNamespaceStatistics {
@@ -9665,10 +16073,54 @@ type FriendNamespaceAcceptByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *FriendNamespaceAcceptByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceAcceptByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceAcceptByUserDistributionStatistics{}
+	} else {
+		*p = FriendNamespaceAcceptByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceAcceptByUserDistributionStatisticsFromJson(data string) FriendNamespaceAcceptByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceAcceptByUserDistributionStatisticsFromDict(dict)
+	req := FriendNamespaceAcceptByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceAcceptByUserDistributionStatisticsFromDict(data map[string]interface{}) FriendNamespaceAcceptByUserDistributionStatistics {
@@ -9744,10 +16196,45 @@ type FriendNamespaceAcceptByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *FriendNamespaceAcceptByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceAcceptByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceAcceptByUserDistributionSegment{}
+	} else {
+		*p = FriendNamespaceAcceptByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceAcceptByUserDistributionSegmentFromJson(data string) FriendNamespaceAcceptByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceAcceptByUserDistributionSegmentFromDict(dict)
+	req := FriendNamespaceAcceptByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceAcceptByUserDistributionSegmentFromDict(data map[string]interface{}) FriendNamespaceAcceptByUserDistributionSegment {
@@ -9804,10 +16291,42 @@ type FriendNamespaceAcceptByUserDistribution struct {
 	Distribution []FriendNamespaceAcceptByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *FriendNamespaceAcceptByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceAcceptByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceAcceptByUserDistribution{}
+	} else {
+		*p = FriendNamespaceAcceptByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceAcceptByUserDistributionFromJson(data string) FriendNamespaceAcceptByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceAcceptByUserDistributionFromDict(dict)
+	req := FriendNamespaceAcceptByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceAcceptByUserDistributionFromDict(data map[string]interface{}) FriendNamespaceAcceptByUserDistribution {
@@ -9864,10 +16383,54 @@ type FriendNamespaceRejectByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *FriendNamespaceRejectByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceRejectByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceRejectByUserDistributionStatistics{}
+	} else {
+		*p = FriendNamespaceRejectByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceRejectByUserDistributionStatisticsFromJson(data string) FriendNamespaceRejectByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceRejectByUserDistributionStatisticsFromDict(dict)
+	req := FriendNamespaceRejectByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceRejectByUserDistributionStatisticsFromDict(data map[string]interface{}) FriendNamespaceRejectByUserDistributionStatistics {
@@ -9943,10 +16506,45 @@ type FriendNamespaceRejectByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *FriendNamespaceRejectByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceRejectByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceRejectByUserDistributionSegment{}
+	} else {
+		*p = FriendNamespaceRejectByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceRejectByUserDistributionSegmentFromJson(data string) FriendNamespaceRejectByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceRejectByUserDistributionSegmentFromDict(dict)
+	req := FriendNamespaceRejectByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceRejectByUserDistributionSegmentFromDict(data map[string]interface{}) FriendNamespaceRejectByUserDistributionSegment {
@@ -10003,10 +16601,42 @@ type FriendNamespaceRejectByUserDistribution struct {
 	Distribution []FriendNamespaceRejectByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *FriendNamespaceRejectByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceRejectByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceRejectByUserDistribution{}
+	} else {
+		*p = FriendNamespaceRejectByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceRejectByUserDistributionFromJson(data string) FriendNamespaceRejectByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceRejectByUserDistributionFromDict(dict)
+	req := FriendNamespaceRejectByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceRejectByUserDistributionFromDict(data map[string]interface{}) FriendNamespaceRejectByUserDistribution {
@@ -10063,10 +16693,54 @@ type FriendNamespaceSendRequestByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *FriendNamespaceSendRequestByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceSendRequestByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceSendRequestByUserDistributionStatistics{}
+	} else {
+		*p = FriendNamespaceSendRequestByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceSendRequestByUserDistributionStatisticsFromJson(data string) FriendNamespaceSendRequestByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceSendRequestByUserDistributionStatisticsFromDict(dict)
+	req := FriendNamespaceSendRequestByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceSendRequestByUserDistributionStatisticsFromDict(data map[string]interface{}) FriendNamespaceSendRequestByUserDistributionStatistics {
@@ -10142,10 +16816,45 @@ type FriendNamespaceSendRequestByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *FriendNamespaceSendRequestByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceSendRequestByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceSendRequestByUserDistributionSegment{}
+	} else {
+		*p = FriendNamespaceSendRequestByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceSendRequestByUserDistributionSegmentFromJson(data string) FriendNamespaceSendRequestByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceSendRequestByUserDistributionSegmentFromDict(dict)
+	req := FriendNamespaceSendRequestByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceSendRequestByUserDistributionSegmentFromDict(data map[string]interface{}) FriendNamespaceSendRequestByUserDistributionSegment {
@@ -10202,10 +16911,42 @@ type FriendNamespaceSendRequestByUserDistribution struct {
 	Distribution []FriendNamespaceSendRequestByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *FriendNamespaceSendRequestByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceSendRequestByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceSendRequestByUserDistribution{}
+	} else {
+		*p = FriendNamespaceSendRequestByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceSendRequestByUserDistributionFromJson(data string) FriendNamespaceSendRequestByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceSendRequestByUserDistributionFromDict(dict)
+	req := FriendNamespaceSendRequestByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceSendRequestByUserDistributionFromDict(data map[string]interface{}) FriendNamespaceSendRequestByUserDistribution {
@@ -10262,10 +17003,54 @@ type FriendNamespaceNewFollowByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *FriendNamespaceNewFollowByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceNewFollowByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceNewFollowByUserDistributionStatistics{}
+	} else {
+		*p = FriendNamespaceNewFollowByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceNewFollowByUserDistributionStatisticsFromJson(data string) FriendNamespaceNewFollowByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceNewFollowByUserDistributionStatisticsFromDict(dict)
+	req := FriendNamespaceNewFollowByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceNewFollowByUserDistributionStatisticsFromDict(data map[string]interface{}) FriendNamespaceNewFollowByUserDistributionStatistics {
@@ -10341,10 +17126,45 @@ type FriendNamespaceNewFollowByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *FriendNamespaceNewFollowByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceNewFollowByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceNewFollowByUserDistributionSegment{}
+	} else {
+		*p = FriendNamespaceNewFollowByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceNewFollowByUserDistributionSegmentFromJson(data string) FriendNamespaceNewFollowByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceNewFollowByUserDistributionSegmentFromDict(dict)
+	req := FriendNamespaceNewFollowByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceNewFollowByUserDistributionSegmentFromDict(data map[string]interface{}) FriendNamespaceNewFollowByUserDistributionSegment {
@@ -10401,10 +17221,42 @@ type FriendNamespaceNewFollowByUserDistribution struct {
 	Distribution []FriendNamespaceNewFollowByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *FriendNamespaceNewFollowByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceNewFollowByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceNewFollowByUserDistribution{}
+	} else {
+		*p = FriendNamespaceNewFollowByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceNewFollowByUserDistributionFromJson(data string) FriendNamespaceNewFollowByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceNewFollowByUserDistributionFromDict(dict)
+	req := FriendNamespaceNewFollowByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceNewFollowByUserDistributionFromDict(data map[string]interface{}) FriendNamespaceNewFollowByUserDistribution {
@@ -10459,10 +17311,48 @@ type FriendNamespaceDistributions struct {
 	NewFollowByUser   *FriendNamespaceNewFollowByUserDistribution   `json:"newFollowByUser"`
 }
 
+func (p *FriendNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespaceDistributions{}
+	} else {
+		*p = FriendNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["acceptByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AcceptByUser)
+		}
+		if v, ok := d["rejectByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RejectByUser)
+		}
+		if v, ok := d["sendRequestByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.SendRequestByUser)
+		}
+		if v, ok := d["newFollowByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.NewFollowByUser)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceDistributionsFromJson(data string) FriendNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceDistributionsFromDict(dict)
+	req := FriendNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceDistributionsFromDict(data map[string]interface{}) FriendNamespaceDistributions {
@@ -10530,10 +17420,97 @@ type FriendNamespace struct {
 	Distributions *FriendNamespaceDistributions `json:"distributions"`
 }
 
+func (p *FriendNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = FriendNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = FriendNamespace{}
+	} else {
+		*p = FriendNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewFriendNamespaceFromJson(data string) FriendNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewFriendNamespaceFromDict(dict)
+	req := FriendNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewFriendNamespaceFromDict(data map[string]interface{}) FriendNamespace {
@@ -10615,10 +17592,45 @@ type InboxNamespaceStatistics struct {
 	OpenRate *float32 `json:"openRate"`
 }
 
+func (p *InboxNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InboxNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InboxNamespaceStatistics{}
+	} else {
+		*p = InboxNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["sent"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Sent)
+		}
+		if v, ok := d["open"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Open)
+		}
+		if v, ok := d["openRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.OpenRate)
+		}
+	}
+	return nil
+}
+
 func NewInboxNamespaceStatisticsFromJson(data string) InboxNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInboxNamespaceStatisticsFromDict(dict)
+	req := InboxNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInboxNamespaceStatisticsFromDict(data map[string]interface{}) InboxNamespaceStatistics {
@@ -10679,10 +17691,54 @@ type InboxNamespaceSendByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InboxNamespaceSendByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InboxNamespaceSendByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InboxNamespaceSendByUserDistributionStatistics{}
+	} else {
+		*p = InboxNamespaceSendByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInboxNamespaceSendByUserDistributionStatisticsFromJson(data string) InboxNamespaceSendByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInboxNamespaceSendByUserDistributionStatisticsFromDict(dict)
+	req := InboxNamespaceSendByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInboxNamespaceSendByUserDistributionStatisticsFromDict(data map[string]interface{}) InboxNamespaceSendByUserDistributionStatistics {
@@ -10758,10 +17814,45 @@ type InboxNamespaceSendByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *InboxNamespaceSendByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InboxNamespaceSendByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InboxNamespaceSendByUserDistributionSegment{}
+	} else {
+		*p = InboxNamespaceSendByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewInboxNamespaceSendByUserDistributionSegmentFromJson(data string) InboxNamespaceSendByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInboxNamespaceSendByUserDistributionSegmentFromDict(dict)
+	req := InboxNamespaceSendByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInboxNamespaceSendByUserDistributionSegmentFromDict(data map[string]interface{}) InboxNamespaceSendByUserDistributionSegment {
@@ -10818,10 +17909,42 @@ type InboxNamespaceSendByUserDistribution struct {
 	Distribution []InboxNamespaceSendByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *InboxNamespaceSendByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InboxNamespaceSendByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InboxNamespaceSendByUserDistribution{}
+	} else {
+		*p = InboxNamespaceSendByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInboxNamespaceSendByUserDistributionFromJson(data string) InboxNamespaceSendByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInboxNamespaceSendByUserDistributionFromDict(dict)
+	req := InboxNamespaceSendByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInboxNamespaceSendByUserDistributionFromDict(data map[string]interface{}) InboxNamespaceSendByUserDistribution {
@@ -10878,10 +18001,54 @@ type InboxNamespaceReadElapsedMinutesDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InboxNamespaceReadElapsedMinutesDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InboxNamespaceReadElapsedMinutesDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InboxNamespaceReadElapsedMinutesDistributionStatistics{}
+	} else {
+		*p = InboxNamespaceReadElapsedMinutesDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInboxNamespaceReadElapsedMinutesDistributionStatisticsFromJson(data string) InboxNamespaceReadElapsedMinutesDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInboxNamespaceReadElapsedMinutesDistributionStatisticsFromDict(dict)
+	req := InboxNamespaceReadElapsedMinutesDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInboxNamespaceReadElapsedMinutesDistributionStatisticsFromDict(data map[string]interface{}) InboxNamespaceReadElapsedMinutesDistributionStatistics {
@@ -10957,10 +18124,45 @@ type InboxNamespaceReadElapsedMinutesDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *InboxNamespaceReadElapsedMinutesDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InboxNamespaceReadElapsedMinutesDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InboxNamespaceReadElapsedMinutesDistributionSegment{}
+	} else {
+		*p = InboxNamespaceReadElapsedMinutesDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewInboxNamespaceReadElapsedMinutesDistributionSegmentFromJson(data string) InboxNamespaceReadElapsedMinutesDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInboxNamespaceReadElapsedMinutesDistributionSegmentFromDict(dict)
+	req := InboxNamespaceReadElapsedMinutesDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInboxNamespaceReadElapsedMinutesDistributionSegmentFromDict(data map[string]interface{}) InboxNamespaceReadElapsedMinutesDistributionSegment {
@@ -11017,10 +18219,42 @@ type InboxNamespaceReadElapsedMinutesDistribution struct {
 	Distribution []InboxNamespaceReadElapsedMinutesDistributionSegment   `json:"distribution"`
 }
 
+func (p *InboxNamespaceReadElapsedMinutesDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InboxNamespaceReadElapsedMinutesDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InboxNamespaceReadElapsedMinutesDistribution{}
+	} else {
+		*p = InboxNamespaceReadElapsedMinutesDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInboxNamespaceReadElapsedMinutesDistributionFromJson(data string) InboxNamespaceReadElapsedMinutesDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInboxNamespaceReadElapsedMinutesDistributionFromDict(dict)
+	req := InboxNamespaceReadElapsedMinutesDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInboxNamespaceReadElapsedMinutesDistributionFromDict(data map[string]interface{}) InboxNamespaceReadElapsedMinutesDistribution {
@@ -11073,10 +18307,42 @@ type InboxNamespaceDistributions struct {
 	ReadElapsedMinutes *InboxNamespaceReadElapsedMinutesDistribution `json:"readElapsedMinutes"`
 }
 
+func (p *InboxNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InboxNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InboxNamespaceDistributions{}
+	} else {
+		*p = InboxNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["sendByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.SendByUser)
+		}
+		if v, ok := d["readElapsedMinutes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ReadElapsedMinutes)
+		}
+	}
+	return nil
+}
+
 func NewInboxNamespaceDistributionsFromJson(data string) InboxNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInboxNamespaceDistributionsFromDict(dict)
+	req := InboxNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInboxNamespaceDistributionsFromDict(data map[string]interface{}) InboxNamespaceDistributions {
@@ -11132,10 +18398,97 @@ type InboxNamespace struct {
 	Distributions *InboxNamespaceDistributions `json:"distributions"`
 }
 
+func (p *InboxNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InboxNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InboxNamespace{}
+	} else {
+		*p = InboxNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewInboxNamespaceFromJson(data string) InboxNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInboxNamespaceFromDict(dict)
+	req := InboxNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInboxNamespaceFromDict(data map[string]interface{}) InboxNamespace {
@@ -11219,10 +18572,51 @@ type InventoryItemSetStatistics struct {
 	ConsumedRate   *float32 `json:"consumedRate"`
 }
 
+func (p *InventoryItemSetStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryItemSetStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryItemSetStatistics{}
+	} else {
+		*p = InventoryItemSetStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["acquired"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Acquired)
+		}
+		if v, ok := d["acquiredAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AcquiredAmount)
+		}
+		if v, ok := d["consumed"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Consumed)
+		}
+		if v, ok := d["consumedAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ConsumedAmount)
+		}
+		if v, ok := d["consumedRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ConsumedRate)
+		}
+	}
+	return nil
+}
+
 func NewInventoryItemSetStatisticsFromJson(data string) InventoryItemSetStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryItemSetStatisticsFromDict(dict)
+	req := InventoryItemSetStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryItemSetStatisticsFromDict(data map[string]interface{}) InventoryItemSetStatistics {
@@ -11295,10 +18689,54 @@ type InventoryItemSetCountDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InventoryItemSetCountDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryItemSetCountDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryItemSetCountDistributionStatistics{}
+	} else {
+		*p = InventoryItemSetCountDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInventoryItemSetCountDistributionStatisticsFromJson(data string) InventoryItemSetCountDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryItemSetCountDistributionStatisticsFromDict(dict)
+	req := InventoryItemSetCountDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryItemSetCountDistributionStatisticsFromDict(data map[string]interface{}) InventoryItemSetCountDistributionStatistics {
@@ -11374,10 +18812,45 @@ type InventoryItemSetCountDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *InventoryItemSetCountDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryItemSetCountDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryItemSetCountDistributionSegment{}
+	} else {
+		*p = InventoryItemSetCountDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewInventoryItemSetCountDistributionSegmentFromJson(data string) InventoryItemSetCountDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryItemSetCountDistributionSegmentFromDict(dict)
+	req := InventoryItemSetCountDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryItemSetCountDistributionSegmentFromDict(data map[string]interface{}) InventoryItemSetCountDistributionSegment {
@@ -11434,10 +18907,42 @@ type InventoryItemSetCountDistribution struct {
 	Distribution []InventoryItemSetCountDistributionSegment   `json:"distribution"`
 }
 
+func (p *InventoryItemSetCountDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryItemSetCountDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryItemSetCountDistribution{}
+	} else {
+		*p = InventoryItemSetCountDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInventoryItemSetCountDistributionFromJson(data string) InventoryItemSetCountDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryItemSetCountDistributionFromDict(dict)
+	req := InventoryItemSetCountDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryItemSetCountDistributionFromDict(data map[string]interface{}) InventoryItemSetCountDistribution {
@@ -11489,10 +18994,39 @@ type InventoryItemSetDistributions struct {
 	Count *InventoryItemSetCountDistribution `json:"count"`
 }
 
+func (p *InventoryItemSetDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryItemSetDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryItemSetDistributions{}
+	} else {
+		*p = InventoryItemSetDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewInventoryItemSetDistributionsFromJson(data string) InventoryItemSetDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryItemSetDistributionsFromDict(dict)
+	req := InventoryItemSetDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryItemSetDistributionsFromDict(data map[string]interface{}) InventoryItemSetDistributions {
@@ -11540,10 +19074,111 @@ type InventoryItemSet struct {
 	Distributions *InventoryItemSetDistributions `json:"distributions"`
 }
 
+func (p *InventoryItemSet) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryItemSet{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryItemSet{}
+	} else {
+		*p = InventoryItemSet{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["itemSetId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ItemSetId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ItemSetId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ItemSetId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemSetId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemSetId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ItemSetId)
+				}
+			}
+		}
+		if v, ok := d["itemName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ItemName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ItemName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ItemName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ItemName)
+				}
+			}
+		}
+		if v, ok := d["itemSetName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ItemSetName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ItemSetName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ItemSetName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemSetName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemSetName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ItemSetName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewInventoryItemSetFromJson(data string) InventoryItemSet {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryItemSetFromDict(dict)
+	req := InventoryItemSet{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryItemSetFromDict(data map[string]interface{}) InventoryItemSet {
@@ -11614,10 +19249,48 @@ type InventoryInventoryStatistics struct {
 	IncreaseCapacityAmount *int64 `json:"increaseCapacityAmount"`
 }
 
+func (p *InventoryInventoryStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryStatistics{}
+	} else {
+		*p = InventoryInventoryStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["acquired"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Acquired)
+		}
+		if v, ok := d["consume"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Consume)
+		}
+		if v, ok := d["increaseCapacity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseCapacity)
+		}
+		if v, ok := d["increaseCapacityAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseCapacityAmount)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryStatisticsFromJson(data string) InventoryInventoryStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryStatisticsFromDict(dict)
+	req := InventoryInventoryStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryStatisticsFromDict(data map[string]interface{}) InventoryInventoryStatistics {
@@ -11684,10 +19357,54 @@ type InventoryInventoryCapacityDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InventoryInventoryCapacityDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryCapacityDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryCapacityDistributionStatistics{}
+	} else {
+		*p = InventoryInventoryCapacityDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryCapacityDistributionStatisticsFromJson(data string) InventoryInventoryCapacityDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryCapacityDistributionStatisticsFromDict(dict)
+	req := InventoryInventoryCapacityDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryCapacityDistributionStatisticsFromDict(data map[string]interface{}) InventoryInventoryCapacityDistributionStatistics {
@@ -11763,10 +19480,45 @@ type InventoryInventoryCapacityDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *InventoryInventoryCapacityDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryCapacityDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryCapacityDistributionSegment{}
+	} else {
+		*p = InventoryInventoryCapacityDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryCapacityDistributionSegmentFromJson(data string) InventoryInventoryCapacityDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryCapacityDistributionSegmentFromDict(dict)
+	req := InventoryInventoryCapacityDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryCapacityDistributionSegmentFromDict(data map[string]interface{}) InventoryInventoryCapacityDistributionSegment {
@@ -11823,10 +19575,42 @@ type InventoryInventoryCapacityDistribution struct {
 	Distribution []InventoryInventoryCapacityDistributionSegment   `json:"distribution"`
 }
 
+func (p *InventoryInventoryCapacityDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryCapacityDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryCapacityDistribution{}
+	} else {
+		*p = InventoryInventoryCapacityDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryCapacityDistributionFromJson(data string) InventoryInventoryCapacityDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryCapacityDistributionFromDict(dict)
+	req := InventoryInventoryCapacityDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryCapacityDistributionFromDict(data map[string]interface{}) InventoryInventoryCapacityDistribution {
@@ -11883,10 +19667,54 @@ type InventoryInventoryAcquireDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InventoryInventoryAcquireDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryAcquireDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryAcquireDistributionStatistics{}
+	} else {
+		*p = InventoryInventoryAcquireDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryAcquireDistributionStatisticsFromJson(data string) InventoryInventoryAcquireDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryAcquireDistributionStatisticsFromDict(dict)
+	req := InventoryInventoryAcquireDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryAcquireDistributionStatisticsFromDict(data map[string]interface{}) InventoryInventoryAcquireDistributionStatistics {
@@ -11961,10 +19789,62 @@ type InventoryInventoryAcquireDistributionSegment struct {
 	Count    *int64  `json:"count"`
 }
 
+func (p *InventoryInventoryAcquireDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryAcquireDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryAcquireDistributionSegment{}
+	} else {
+		*p = InventoryInventoryAcquireDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["itemName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ItemName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ItemName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ItemName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ItemName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryAcquireDistributionSegmentFromJson(data string) InventoryInventoryAcquireDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryAcquireDistributionSegmentFromDict(dict)
+	req := InventoryInventoryAcquireDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryAcquireDistributionSegmentFromDict(data map[string]interface{}) InventoryInventoryAcquireDistributionSegment {
@@ -12015,10 +19895,42 @@ type InventoryInventoryAcquireDistribution struct {
 	Distribution []InventoryInventoryAcquireDistributionSegment   `json:"distribution"`
 }
 
+func (p *InventoryInventoryAcquireDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryAcquireDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryAcquireDistribution{}
+	} else {
+		*p = InventoryInventoryAcquireDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryAcquireDistributionFromJson(data string) InventoryInventoryAcquireDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryAcquireDistributionFromDict(dict)
+	req := InventoryInventoryAcquireDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryAcquireDistributionFromDict(data map[string]interface{}) InventoryInventoryAcquireDistribution {
@@ -12075,10 +19987,54 @@ type InventoryInventoryAcquireAmountDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InventoryInventoryAcquireAmountDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryAcquireAmountDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryAcquireAmountDistributionStatistics{}
+	} else {
+		*p = InventoryInventoryAcquireAmountDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryAcquireAmountDistributionStatisticsFromJson(data string) InventoryInventoryAcquireAmountDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryAcquireAmountDistributionStatisticsFromDict(dict)
+	req := InventoryInventoryAcquireAmountDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryAcquireAmountDistributionStatisticsFromDict(data map[string]interface{}) InventoryInventoryAcquireAmountDistributionStatistics {
@@ -12153,10 +20109,62 @@ type InventoryInventoryAcquireAmountDistributionSegment struct {
 	Sum      *int64  `json:"sum"`
 }
 
+func (p *InventoryInventoryAcquireAmountDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryAcquireAmountDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryAcquireAmountDistributionSegment{}
+	} else {
+		*p = InventoryInventoryAcquireAmountDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["itemName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ItemName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ItemName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ItemName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ItemName)
+				}
+			}
+		}
+		if v, ok := d["sum"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Sum)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryAcquireAmountDistributionSegmentFromJson(data string) InventoryInventoryAcquireAmountDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryAcquireAmountDistributionSegmentFromDict(dict)
+	req := InventoryInventoryAcquireAmountDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryAcquireAmountDistributionSegmentFromDict(data map[string]interface{}) InventoryInventoryAcquireAmountDistributionSegment {
@@ -12207,10 +20215,42 @@ type InventoryInventoryAcquireAmountDistribution struct {
 	Distribution []InventoryInventoryAcquireAmountDistributionSegment   `json:"distribution"`
 }
 
+func (p *InventoryInventoryAcquireAmountDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryAcquireAmountDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryAcquireAmountDistribution{}
+	} else {
+		*p = InventoryInventoryAcquireAmountDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryAcquireAmountDistributionFromJson(data string) InventoryInventoryAcquireAmountDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryAcquireAmountDistributionFromDict(dict)
+	req := InventoryInventoryAcquireAmountDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryAcquireAmountDistributionFromDict(data map[string]interface{}) InventoryInventoryAcquireAmountDistribution {
@@ -12267,10 +20307,54 @@ type InventoryInventoryConsumeDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InventoryInventoryConsumeDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryConsumeDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryConsumeDistributionStatistics{}
+	} else {
+		*p = InventoryInventoryConsumeDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryConsumeDistributionStatisticsFromJson(data string) InventoryInventoryConsumeDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryConsumeDistributionStatisticsFromDict(dict)
+	req := InventoryInventoryConsumeDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryConsumeDistributionStatisticsFromDict(data map[string]interface{}) InventoryInventoryConsumeDistributionStatistics {
@@ -12345,10 +20429,62 @@ type InventoryInventoryConsumeDistributionSegment struct {
 	Count    *int64  `json:"count"`
 }
 
+func (p *InventoryInventoryConsumeDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryConsumeDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryConsumeDistributionSegment{}
+	} else {
+		*p = InventoryInventoryConsumeDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["itemName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ItemName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ItemName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ItemName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ItemName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryConsumeDistributionSegmentFromJson(data string) InventoryInventoryConsumeDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryConsumeDistributionSegmentFromDict(dict)
+	req := InventoryInventoryConsumeDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryConsumeDistributionSegmentFromDict(data map[string]interface{}) InventoryInventoryConsumeDistributionSegment {
@@ -12399,10 +20535,42 @@ type InventoryInventoryConsumeDistribution struct {
 	Distribution []InventoryInventoryConsumeDistributionSegment   `json:"distribution"`
 }
 
+func (p *InventoryInventoryConsumeDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryConsumeDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryConsumeDistribution{}
+	} else {
+		*p = InventoryInventoryConsumeDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryConsumeDistributionFromJson(data string) InventoryInventoryConsumeDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryConsumeDistributionFromDict(dict)
+	req := InventoryInventoryConsumeDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryConsumeDistributionFromDict(data map[string]interface{}) InventoryInventoryConsumeDistribution {
@@ -12459,10 +20627,54 @@ type InventoryInventoryConsumeAmountDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InventoryInventoryConsumeAmountDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryConsumeAmountDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryConsumeAmountDistributionStatistics{}
+	} else {
+		*p = InventoryInventoryConsumeAmountDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryConsumeAmountDistributionStatisticsFromJson(data string) InventoryInventoryConsumeAmountDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryConsumeAmountDistributionStatisticsFromDict(dict)
+	req := InventoryInventoryConsumeAmountDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryConsumeAmountDistributionStatisticsFromDict(data map[string]interface{}) InventoryInventoryConsumeAmountDistributionStatistics {
@@ -12537,10 +20749,62 @@ type InventoryInventoryConsumeAmountDistributionSegment struct {
 	Sum      *int64  `json:"sum"`
 }
 
+func (p *InventoryInventoryConsumeAmountDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryConsumeAmountDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryConsumeAmountDistributionSegment{}
+	} else {
+		*p = InventoryInventoryConsumeAmountDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["itemName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ItemName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ItemName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ItemName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ItemName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ItemName)
+				}
+			}
+		}
+		if v, ok := d["sum"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Sum)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryConsumeAmountDistributionSegmentFromJson(data string) InventoryInventoryConsumeAmountDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryConsumeAmountDistributionSegmentFromDict(dict)
+	req := InventoryInventoryConsumeAmountDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryConsumeAmountDistributionSegmentFromDict(data map[string]interface{}) InventoryInventoryConsumeAmountDistributionSegment {
@@ -12591,10 +20855,42 @@ type InventoryInventoryConsumeAmountDistribution struct {
 	Distribution []InventoryInventoryConsumeAmountDistributionSegment   `json:"distribution"`
 }
 
+func (p *InventoryInventoryConsumeAmountDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryConsumeAmountDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryConsumeAmountDistribution{}
+	} else {
+		*p = InventoryInventoryConsumeAmountDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryConsumeAmountDistributionFromJson(data string) InventoryInventoryConsumeAmountDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryConsumeAmountDistributionFromDict(dict)
+	req := InventoryInventoryConsumeAmountDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryConsumeAmountDistributionFromDict(data map[string]interface{}) InventoryInventoryConsumeAmountDistribution {
@@ -12650,10 +20946,51 @@ type InventoryInventoryDistributions struct {
 	ConsumeAmount *InventoryInventoryConsumeAmountDistribution `json:"consumeAmount"`
 }
 
+func (p *InventoryInventoryDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventoryDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventoryDistributions{}
+	} else {
+		*p = InventoryInventoryDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["capacity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Capacity)
+		}
+		if v, ok := d["acquire"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Acquire)
+		}
+		if v, ok := d["acquireAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AcquireAmount)
+		}
+		if v, ok := d["consume"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Consume)
+		}
+		if v, ok := d["consumeAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ConsumeAmount)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryDistributionsFromJson(data string) InventoryInventoryDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryDistributionsFromDict(dict)
+	req := InventoryInventoryDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryDistributionsFromDict(data map[string]interface{}) InventoryInventoryDistributions {
@@ -12725,10 +21062,91 @@ type InventoryInventory struct {
 	ItemSets      []InventoryItemSet               `json:"itemSets"`
 }
 
+func (p *InventoryInventory) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryInventory{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryInventory{}
+	} else {
+		*p = InventoryInventory{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["inventoryId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.InventoryId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.InventoryId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.InventoryId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.InventoryId)
+				}
+			}
+		}
+		if v, ok := d["inventoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.InventoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.InventoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.InventoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.InventoryName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["itemSets"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ItemSets)
+		}
+	}
+	return nil
+}
+
 func NewInventoryInventoryFromJson(data string) InventoryInventory {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryInventoryFromDict(dict)
+	req := InventoryInventory{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryInventoryFromDict(data map[string]interface{}) InventoryInventory {
@@ -12800,10 +21218,45 @@ type InventoryNamespaceStatistics struct {
 	IncreaseCapacity *int64 `json:"increaseCapacity"`
 }
 
+func (p *InventoryNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceStatistics{}
+	} else {
+		*p = InventoryNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["acquire"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Acquire)
+		}
+		if v, ok := d["consume"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Consume)
+		}
+		if v, ok := d["increaseCapacity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseCapacity)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceStatisticsFromJson(data string) InventoryNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceStatisticsFromDict(dict)
+	req := InventoryNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceStatisticsFromDict(data map[string]interface{}) InventoryNamespaceStatistics {
@@ -12864,10 +21317,54 @@ type InventoryNamespaceAcquireDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InventoryNamespaceAcquireDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceAcquireDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceAcquireDistributionStatistics{}
+	} else {
+		*p = InventoryNamespaceAcquireDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceAcquireDistributionStatisticsFromJson(data string) InventoryNamespaceAcquireDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceAcquireDistributionStatisticsFromDict(dict)
+	req := InventoryNamespaceAcquireDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceAcquireDistributionStatisticsFromDict(data map[string]interface{}) InventoryNamespaceAcquireDistributionStatistics {
@@ -12942,10 +21439,62 @@ type InventoryNamespaceAcquireDistributionSegment struct {
 	Count         *int64  `json:"count"`
 }
 
+func (p *InventoryNamespaceAcquireDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceAcquireDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceAcquireDistributionSegment{}
+	} else {
+		*p = InventoryNamespaceAcquireDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["inventoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.InventoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.InventoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.InventoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.InventoryName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceAcquireDistributionSegmentFromJson(data string) InventoryNamespaceAcquireDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceAcquireDistributionSegmentFromDict(dict)
+	req := InventoryNamespaceAcquireDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceAcquireDistributionSegmentFromDict(data map[string]interface{}) InventoryNamespaceAcquireDistributionSegment {
@@ -12996,10 +21545,42 @@ type InventoryNamespaceAcquireDistribution struct {
 	Distribution []InventoryNamespaceAcquireDistributionSegment   `json:"distribution"`
 }
 
+func (p *InventoryNamespaceAcquireDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceAcquireDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceAcquireDistribution{}
+	} else {
+		*p = InventoryNamespaceAcquireDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceAcquireDistributionFromJson(data string) InventoryNamespaceAcquireDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceAcquireDistributionFromDict(dict)
+	req := InventoryNamespaceAcquireDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceAcquireDistributionFromDict(data map[string]interface{}) InventoryNamespaceAcquireDistribution {
@@ -13056,10 +21637,54 @@ type InventoryNamespaceAcquireAmountDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InventoryNamespaceAcquireAmountDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceAcquireAmountDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceAcquireAmountDistributionStatistics{}
+	} else {
+		*p = InventoryNamespaceAcquireAmountDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceAcquireAmountDistributionStatisticsFromJson(data string) InventoryNamespaceAcquireAmountDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceAcquireAmountDistributionStatisticsFromDict(dict)
+	req := InventoryNamespaceAcquireAmountDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceAcquireAmountDistributionStatisticsFromDict(data map[string]interface{}) InventoryNamespaceAcquireAmountDistributionStatistics {
@@ -13134,10 +21759,62 @@ type InventoryNamespaceAcquireAmountDistributionSegment struct {
 	Sum           *int64  `json:"sum"`
 }
 
+func (p *InventoryNamespaceAcquireAmountDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceAcquireAmountDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceAcquireAmountDistributionSegment{}
+	} else {
+		*p = InventoryNamespaceAcquireAmountDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["inventoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.InventoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.InventoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.InventoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.InventoryName)
+				}
+			}
+		}
+		if v, ok := d["sum"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Sum)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceAcquireAmountDistributionSegmentFromJson(data string) InventoryNamespaceAcquireAmountDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceAcquireAmountDistributionSegmentFromDict(dict)
+	req := InventoryNamespaceAcquireAmountDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceAcquireAmountDistributionSegmentFromDict(data map[string]interface{}) InventoryNamespaceAcquireAmountDistributionSegment {
@@ -13188,10 +21865,42 @@ type InventoryNamespaceAcquireAmountDistribution struct {
 	Distribution []InventoryNamespaceAcquireAmountDistributionSegment   `json:"distribution"`
 }
 
+func (p *InventoryNamespaceAcquireAmountDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceAcquireAmountDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceAcquireAmountDistribution{}
+	} else {
+		*p = InventoryNamespaceAcquireAmountDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceAcquireAmountDistributionFromJson(data string) InventoryNamespaceAcquireAmountDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceAcquireAmountDistributionFromDict(dict)
+	req := InventoryNamespaceAcquireAmountDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceAcquireAmountDistributionFromDict(data map[string]interface{}) InventoryNamespaceAcquireAmountDistribution {
@@ -13248,10 +21957,54 @@ type InventoryNamespaceConsumeDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InventoryNamespaceConsumeDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceConsumeDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceConsumeDistributionStatistics{}
+	} else {
+		*p = InventoryNamespaceConsumeDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceConsumeDistributionStatisticsFromJson(data string) InventoryNamespaceConsumeDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceConsumeDistributionStatisticsFromDict(dict)
+	req := InventoryNamespaceConsumeDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceConsumeDistributionStatisticsFromDict(data map[string]interface{}) InventoryNamespaceConsumeDistributionStatistics {
@@ -13326,10 +22079,62 @@ type InventoryNamespaceConsumeDistributionSegment struct {
 	Count         *int64  `json:"count"`
 }
 
+func (p *InventoryNamespaceConsumeDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceConsumeDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceConsumeDistributionSegment{}
+	} else {
+		*p = InventoryNamespaceConsumeDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["inventoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.InventoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.InventoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.InventoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.InventoryName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceConsumeDistributionSegmentFromJson(data string) InventoryNamespaceConsumeDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceConsumeDistributionSegmentFromDict(dict)
+	req := InventoryNamespaceConsumeDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceConsumeDistributionSegmentFromDict(data map[string]interface{}) InventoryNamespaceConsumeDistributionSegment {
@@ -13380,10 +22185,42 @@ type InventoryNamespaceConsumeDistribution struct {
 	Distribution []InventoryNamespaceConsumeDistributionSegment   `json:"distribution"`
 }
 
+func (p *InventoryNamespaceConsumeDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceConsumeDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceConsumeDistribution{}
+	} else {
+		*p = InventoryNamespaceConsumeDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceConsumeDistributionFromJson(data string) InventoryNamespaceConsumeDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceConsumeDistributionFromDict(dict)
+	req := InventoryNamespaceConsumeDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceConsumeDistributionFromDict(data map[string]interface{}) InventoryNamespaceConsumeDistribution {
@@ -13440,10 +22277,54 @@ type InventoryNamespaceConsumeAmountDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InventoryNamespaceConsumeAmountDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceConsumeAmountDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceConsumeAmountDistributionStatistics{}
+	} else {
+		*p = InventoryNamespaceConsumeAmountDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceConsumeAmountDistributionStatisticsFromJson(data string) InventoryNamespaceConsumeAmountDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceConsumeAmountDistributionStatisticsFromDict(dict)
+	req := InventoryNamespaceConsumeAmountDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceConsumeAmountDistributionStatisticsFromDict(data map[string]interface{}) InventoryNamespaceConsumeAmountDistributionStatistics {
@@ -13518,10 +22399,62 @@ type InventoryNamespaceConsumeAmountDistributionSegment struct {
 	Sum           *int64  `json:"sum"`
 }
 
+func (p *InventoryNamespaceConsumeAmountDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceConsumeAmountDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceConsumeAmountDistributionSegment{}
+	} else {
+		*p = InventoryNamespaceConsumeAmountDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["inventoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.InventoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.InventoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.InventoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.InventoryName)
+				}
+			}
+		}
+		if v, ok := d["sum"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Sum)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceConsumeAmountDistributionSegmentFromJson(data string) InventoryNamespaceConsumeAmountDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceConsumeAmountDistributionSegmentFromDict(dict)
+	req := InventoryNamespaceConsumeAmountDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceConsumeAmountDistributionSegmentFromDict(data map[string]interface{}) InventoryNamespaceConsumeAmountDistributionSegment {
@@ -13572,10 +22505,42 @@ type InventoryNamespaceConsumeAmountDistribution struct {
 	Distribution []InventoryNamespaceConsumeAmountDistributionSegment   `json:"distribution"`
 }
 
+func (p *InventoryNamespaceConsumeAmountDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceConsumeAmountDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceConsumeAmountDistribution{}
+	} else {
+		*p = InventoryNamespaceConsumeAmountDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceConsumeAmountDistributionFromJson(data string) InventoryNamespaceConsumeAmountDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceConsumeAmountDistributionFromDict(dict)
+	req := InventoryNamespaceConsumeAmountDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceConsumeAmountDistributionFromDict(data map[string]interface{}) InventoryNamespaceConsumeAmountDistribution {
@@ -13632,10 +22597,54 @@ type InventoryNamespaceIncreaseCapacityDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InventoryNamespaceIncreaseCapacityDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceIncreaseCapacityDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceIncreaseCapacityDistributionStatistics{}
+	} else {
+		*p = InventoryNamespaceIncreaseCapacityDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceIncreaseCapacityDistributionStatisticsFromJson(data string) InventoryNamespaceIncreaseCapacityDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceIncreaseCapacityDistributionStatisticsFromDict(dict)
+	req := InventoryNamespaceIncreaseCapacityDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceIncreaseCapacityDistributionStatisticsFromDict(data map[string]interface{}) InventoryNamespaceIncreaseCapacityDistributionStatistics {
@@ -13710,10 +22719,62 @@ type InventoryNamespaceIncreaseCapacityDistributionSegment struct {
 	Count         *int64  `json:"count"`
 }
 
+func (p *InventoryNamespaceIncreaseCapacityDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceIncreaseCapacityDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceIncreaseCapacityDistributionSegment{}
+	} else {
+		*p = InventoryNamespaceIncreaseCapacityDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["inventoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.InventoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.InventoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.InventoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.InventoryName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceIncreaseCapacityDistributionSegmentFromJson(data string) InventoryNamespaceIncreaseCapacityDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceIncreaseCapacityDistributionSegmentFromDict(dict)
+	req := InventoryNamespaceIncreaseCapacityDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceIncreaseCapacityDistributionSegmentFromDict(data map[string]interface{}) InventoryNamespaceIncreaseCapacityDistributionSegment {
@@ -13764,10 +22825,42 @@ type InventoryNamespaceIncreaseCapacityDistribution struct {
 	Distribution []InventoryNamespaceIncreaseCapacityDistributionSegment   `json:"distribution"`
 }
 
+func (p *InventoryNamespaceIncreaseCapacityDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceIncreaseCapacityDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceIncreaseCapacityDistribution{}
+	} else {
+		*p = InventoryNamespaceIncreaseCapacityDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceIncreaseCapacityDistributionFromJson(data string) InventoryNamespaceIncreaseCapacityDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceIncreaseCapacityDistributionFromDict(dict)
+	req := InventoryNamespaceIncreaseCapacityDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceIncreaseCapacityDistributionFromDict(data map[string]interface{}) InventoryNamespaceIncreaseCapacityDistribution {
@@ -13824,10 +22917,54 @@ type InventoryNamespaceIncreaseCapacityAmountDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *InventoryNamespaceIncreaseCapacityAmountDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceIncreaseCapacityAmountDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceIncreaseCapacityAmountDistributionStatistics{}
+	} else {
+		*p = InventoryNamespaceIncreaseCapacityAmountDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceIncreaseCapacityAmountDistributionStatisticsFromJson(data string) InventoryNamespaceIncreaseCapacityAmountDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceIncreaseCapacityAmountDistributionStatisticsFromDict(dict)
+	req := InventoryNamespaceIncreaseCapacityAmountDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceIncreaseCapacityAmountDistributionStatisticsFromDict(data map[string]interface{}) InventoryNamespaceIncreaseCapacityAmountDistributionStatistics {
@@ -13902,10 +23039,62 @@ type InventoryNamespaceIncreaseCapacityAmountDistributionSegment struct {
 	Sum           *int64  `json:"sum"`
 }
 
+func (p *InventoryNamespaceIncreaseCapacityAmountDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceIncreaseCapacityAmountDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceIncreaseCapacityAmountDistributionSegment{}
+	} else {
+		*p = InventoryNamespaceIncreaseCapacityAmountDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["inventoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.InventoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.InventoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.InventoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.InventoryName)
+				}
+			}
+		}
+		if v, ok := d["sum"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Sum)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceIncreaseCapacityAmountDistributionSegmentFromJson(data string) InventoryNamespaceIncreaseCapacityAmountDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceIncreaseCapacityAmountDistributionSegmentFromDict(dict)
+	req := InventoryNamespaceIncreaseCapacityAmountDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceIncreaseCapacityAmountDistributionSegmentFromDict(data map[string]interface{}) InventoryNamespaceIncreaseCapacityAmountDistributionSegment {
@@ -13956,10 +23145,42 @@ type InventoryNamespaceIncreaseCapacityAmountDistribution struct {
 	Distribution []InventoryNamespaceIncreaseCapacityAmountDistributionSegment   `json:"distribution"`
 }
 
+func (p *InventoryNamespaceIncreaseCapacityAmountDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceIncreaseCapacityAmountDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceIncreaseCapacityAmountDistribution{}
+	} else {
+		*p = InventoryNamespaceIncreaseCapacityAmountDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceIncreaseCapacityAmountDistributionFromJson(data string) InventoryNamespaceIncreaseCapacityAmountDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceIncreaseCapacityAmountDistributionFromDict(dict)
+	req := InventoryNamespaceIncreaseCapacityAmountDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceIncreaseCapacityAmountDistributionFromDict(data map[string]interface{}) InventoryNamespaceIncreaseCapacityAmountDistribution {
@@ -14016,10 +23237,54 @@ type InventoryNamespaceDistributions struct {
 	IncreaseCapacityAmount *InventoryNamespaceIncreaseCapacityAmountDistribution `json:"increaseCapacityAmount"`
 }
 
+func (p *InventoryNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespaceDistributions{}
+	} else {
+		*p = InventoryNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["acquire"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Acquire)
+		}
+		if v, ok := d["acquireAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AcquireAmount)
+		}
+		if v, ok := d["consume"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Consume)
+		}
+		if v, ok := d["consumeAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ConsumeAmount)
+		}
+		if v, ok := d["increaseCapacity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseCapacity)
+		}
+		if v, ok := d["increaseCapacityAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseCapacityAmount)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceDistributionsFromJson(data string) InventoryNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceDistributionsFromDict(dict)
+	req := InventoryNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceDistributionsFromDict(data map[string]interface{}) InventoryNamespaceDistributions {
@@ -14100,10 +23365,100 @@ type InventoryNamespace struct {
 	Inventories   []InventoryInventory             `json:"inventories"`
 }
 
+func (p *InventoryNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InventoryNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InventoryNamespace{}
+	} else {
+		*p = InventoryNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["inventories"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Inventories)
+		}
+	}
+	return nil
+}
+
 func NewInventoryNamespaceFromJson(data string) InventoryNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewInventoryNamespaceFromDict(dict)
+	req := InventoryNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewInventoryNamespaceFromDict(data map[string]interface{}) InventoryNamespace {
@@ -14192,10 +23547,42 @@ type KeyNamespaceStatistics struct {
 	Decrypt *int64 `json:"decrypt"`
 }
 
+func (p *KeyNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = KeyNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = KeyNamespaceStatistics{}
+	} else {
+		*p = KeyNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["encrypt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Encrypt)
+		}
+		if v, ok := d["decrypt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Decrypt)
+		}
+	}
+	return nil
+}
+
 func NewKeyNamespaceStatisticsFromJson(data string) KeyNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewKeyNamespaceStatisticsFromDict(dict)
+	req := KeyNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewKeyNamespaceStatisticsFromDict(data map[string]interface{}) KeyNamespaceStatistics {
@@ -14250,10 +23637,54 @@ type KeyNamespaceEncryptDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *KeyNamespaceEncryptDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = KeyNamespaceEncryptDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = KeyNamespaceEncryptDistributionStatistics{}
+	} else {
+		*p = KeyNamespaceEncryptDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewKeyNamespaceEncryptDistributionStatisticsFromJson(data string) KeyNamespaceEncryptDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewKeyNamespaceEncryptDistributionStatisticsFromDict(dict)
+	req := KeyNamespaceEncryptDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewKeyNamespaceEncryptDistributionStatisticsFromDict(data map[string]interface{}) KeyNamespaceEncryptDistributionStatistics {
@@ -14328,10 +23759,62 @@ type KeyNamespaceEncryptDistributionSegment struct {
 	Count   *int64  `json:"count"`
 }
 
+func (p *KeyNamespaceEncryptDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = KeyNamespaceEncryptDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = KeyNamespaceEncryptDistributionSegment{}
+	} else {
+		*p = KeyNamespaceEncryptDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["keyName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewKeyNamespaceEncryptDistributionSegmentFromJson(data string) KeyNamespaceEncryptDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewKeyNamespaceEncryptDistributionSegmentFromDict(dict)
+	req := KeyNamespaceEncryptDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewKeyNamespaceEncryptDistributionSegmentFromDict(data map[string]interface{}) KeyNamespaceEncryptDistributionSegment {
@@ -14382,10 +23865,42 @@ type KeyNamespaceEncryptDistribution struct {
 	Distribution []KeyNamespaceEncryptDistributionSegment   `json:"distribution"`
 }
 
+func (p *KeyNamespaceEncryptDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = KeyNamespaceEncryptDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = KeyNamespaceEncryptDistribution{}
+	} else {
+		*p = KeyNamespaceEncryptDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewKeyNamespaceEncryptDistributionFromJson(data string) KeyNamespaceEncryptDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewKeyNamespaceEncryptDistributionFromDict(dict)
+	req := KeyNamespaceEncryptDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewKeyNamespaceEncryptDistributionFromDict(data map[string]interface{}) KeyNamespaceEncryptDistribution {
@@ -14442,10 +23957,54 @@ type KeyNamespaceDecryptDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *KeyNamespaceDecryptDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = KeyNamespaceDecryptDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = KeyNamespaceDecryptDistributionStatistics{}
+	} else {
+		*p = KeyNamespaceDecryptDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewKeyNamespaceDecryptDistributionStatisticsFromJson(data string) KeyNamespaceDecryptDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewKeyNamespaceDecryptDistributionStatisticsFromDict(dict)
+	req := KeyNamespaceDecryptDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewKeyNamespaceDecryptDistributionStatisticsFromDict(data map[string]interface{}) KeyNamespaceDecryptDistributionStatistics {
@@ -14520,10 +24079,62 @@ type KeyNamespaceDecryptDistributionSegment struct {
 	Count   *int64  `json:"count"`
 }
 
+func (p *KeyNamespaceDecryptDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = KeyNamespaceDecryptDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = KeyNamespaceDecryptDistributionSegment{}
+	} else {
+		*p = KeyNamespaceDecryptDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["keyName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewKeyNamespaceDecryptDistributionSegmentFromJson(data string) KeyNamespaceDecryptDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewKeyNamespaceDecryptDistributionSegmentFromDict(dict)
+	req := KeyNamespaceDecryptDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewKeyNamespaceDecryptDistributionSegmentFromDict(data map[string]interface{}) KeyNamespaceDecryptDistributionSegment {
@@ -14574,10 +24185,42 @@ type KeyNamespaceDecryptDistribution struct {
 	Distribution []KeyNamespaceDecryptDistributionSegment   `json:"distribution"`
 }
 
+func (p *KeyNamespaceDecryptDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = KeyNamespaceDecryptDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = KeyNamespaceDecryptDistribution{}
+	} else {
+		*p = KeyNamespaceDecryptDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewKeyNamespaceDecryptDistributionFromJson(data string) KeyNamespaceDecryptDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewKeyNamespaceDecryptDistributionFromDict(dict)
+	req := KeyNamespaceDecryptDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewKeyNamespaceDecryptDistributionFromDict(data map[string]interface{}) KeyNamespaceDecryptDistribution {
@@ -14630,10 +24273,42 @@ type KeyNamespaceDistributions struct {
 	Decrypt *KeyNamespaceDecryptDistribution `json:"decrypt"`
 }
 
+func (p *KeyNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = KeyNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = KeyNamespaceDistributions{}
+	} else {
+		*p = KeyNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["encrypt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Encrypt)
+		}
+		if v, ok := d["decrypt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Decrypt)
+		}
+	}
+	return nil
+}
+
 func NewKeyNamespaceDistributionsFromJson(data string) KeyNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewKeyNamespaceDistributionsFromDict(dict)
+	req := KeyNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewKeyNamespaceDistributionsFromDict(data map[string]interface{}) KeyNamespaceDistributions {
@@ -14689,10 +24364,97 @@ type KeyNamespace struct {
 	Distributions *KeyNamespaceDistributions `json:"distributions"`
 }
 
+func (p *KeyNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = KeyNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = KeyNamespace{}
+	} else {
+		*p = KeyNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewKeyNamespaceFromJson(data string) KeyNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewKeyNamespaceFromDict(dict)
+	req := KeyNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewKeyNamespaceFromDict(data map[string]interface{}) KeyNamespace {
@@ -14773,10 +24535,82 @@ type KeyKey struct {
 	KeyName *string `json:"keyName"`
 }
 
+func (p *KeyKey) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = KeyKey{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = KeyKey{}
+	} else {
+		*p = KeyKey{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+		if v, ok := d["keyName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewKeyKeyFromJson(data string) KeyKey {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewKeyKeyFromDict(dict)
+	req := KeyKey{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewKeyKeyFromDict(data map[string]interface{}) KeyKey {
@@ -14827,10 +24661,42 @@ type LimitCounterStatistics struct {
 	IncreaseAmount *int64 `json:"increaseAmount"`
 }
 
+func (p *LimitCounterStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitCounterStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitCounterStatistics{}
+	} else {
+		*p = LimitCounterStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["increase"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Increase)
+		}
+		if v, ok := d["increaseAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseAmount)
+		}
+	}
+	return nil
+}
+
 func NewLimitCounterStatisticsFromJson(data string) LimitCounterStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitCounterStatisticsFromDict(dict)
+	req := LimitCounterStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitCounterStatisticsFromDict(data map[string]interface{}) LimitCounterStatistics {
@@ -14885,10 +24751,54 @@ type LimitCounterCounterDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *LimitCounterCounterDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitCounterCounterDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitCounterCounterDistributionStatistics{}
+	} else {
+		*p = LimitCounterCounterDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewLimitCounterCounterDistributionStatisticsFromJson(data string) LimitCounterCounterDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitCounterCounterDistributionStatisticsFromDict(dict)
+	req := LimitCounterCounterDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitCounterCounterDistributionStatisticsFromDict(data map[string]interface{}) LimitCounterCounterDistributionStatistics {
@@ -14964,10 +24874,45 @@ type LimitCounterCounterDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *LimitCounterCounterDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitCounterCounterDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitCounterCounterDistributionSegment{}
+	} else {
+		*p = LimitCounterCounterDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewLimitCounterCounterDistributionSegmentFromJson(data string) LimitCounterCounterDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitCounterCounterDistributionSegmentFromDict(dict)
+	req := LimitCounterCounterDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitCounterCounterDistributionSegmentFromDict(data map[string]interface{}) LimitCounterCounterDistributionSegment {
@@ -15024,10 +24969,42 @@ type LimitCounterCounterDistribution struct {
 	Distribution []LimitCounterCounterDistributionSegment   `json:"distribution"`
 }
 
+func (p *LimitCounterCounterDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitCounterCounterDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitCounterCounterDistribution{}
+	} else {
+		*p = LimitCounterCounterDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewLimitCounterCounterDistributionFromJson(data string) LimitCounterCounterDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitCounterCounterDistributionFromDict(dict)
+	req := LimitCounterCounterDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitCounterCounterDistributionFromDict(data map[string]interface{}) LimitCounterCounterDistribution {
@@ -15079,10 +25056,39 @@ type LimitCounterDistributions struct {
 	Counter *LimitCounterCounterDistribution `json:"counter"`
 }
 
+func (p *LimitCounterDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitCounterDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitCounterDistributions{}
+	} else {
+		*p = LimitCounterDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["counter"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Counter)
+		}
+	}
+	return nil
+}
+
 func NewLimitCounterDistributionsFromJson(data string) LimitCounterDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitCounterDistributionsFromDict(dict)
+	req := LimitCounterDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitCounterDistributionsFromDict(data map[string]interface{}) LimitCounterDistributions {
@@ -15130,10 +25136,111 @@ type LimitCounter struct {
 	Distributions *LimitCounterDistributions `json:"distributions"`
 }
 
+func (p *LimitCounter) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitCounter{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitCounter{}
+	} else {
+		*p = LimitCounter{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["counterId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterId)
+				}
+			}
+		}
+		if v, ok := d["limitName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LimitName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LimitName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LimitName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LimitName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LimitName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LimitName)
+				}
+			}
+		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewLimitCounterFromJson(data string) LimitCounter {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitCounterFromDict(dict)
+	req := LimitCounter{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitCounterFromDict(data map[string]interface{}) LimitCounter {
@@ -15202,10 +25309,42 @@ type LimitLimitModelStatistics struct {
 	IncreaseAmount *int64 `json:"increaseAmount"`
 }
 
+func (p *LimitLimitModelStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelStatistics{}
+	} else {
+		*p = LimitLimitModelStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["increase"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Increase)
+		}
+		if v, ok := d["increaseAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseAmount)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelStatisticsFromJson(data string) LimitLimitModelStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelStatisticsFromDict(dict)
+	req := LimitLimitModelStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelStatisticsFromDict(data map[string]interface{}) LimitLimitModelStatistics {
@@ -15260,10 +25399,54 @@ type LimitLimitModelIncreaseDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *LimitLimitModelIncreaseDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelIncreaseDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelIncreaseDistributionStatistics{}
+	} else {
+		*p = LimitLimitModelIncreaseDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelIncreaseDistributionStatisticsFromJson(data string) LimitLimitModelIncreaseDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelIncreaseDistributionStatisticsFromDict(dict)
+	req := LimitLimitModelIncreaseDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelIncreaseDistributionStatisticsFromDict(data map[string]interface{}) LimitLimitModelIncreaseDistributionStatistics {
@@ -15338,10 +25521,62 @@ type LimitLimitModelIncreaseDistributionSegment struct {
 	Count       *int64  `json:"count"`
 }
 
+func (p *LimitLimitModelIncreaseDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelIncreaseDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelIncreaseDistributionSegment{}
+	} else {
+		*p = LimitLimitModelIncreaseDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelIncreaseDistributionSegmentFromJson(data string) LimitLimitModelIncreaseDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelIncreaseDistributionSegmentFromDict(dict)
+	req := LimitLimitModelIncreaseDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelIncreaseDistributionSegmentFromDict(data map[string]interface{}) LimitLimitModelIncreaseDistributionSegment {
@@ -15392,10 +25627,42 @@ type LimitLimitModelIncreaseDistribution struct {
 	Distribution []LimitLimitModelIncreaseDistributionSegment   `json:"distribution"`
 }
 
+func (p *LimitLimitModelIncreaseDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelIncreaseDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelIncreaseDistribution{}
+	} else {
+		*p = LimitLimitModelIncreaseDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelIncreaseDistributionFromJson(data string) LimitLimitModelIncreaseDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelIncreaseDistributionFromDict(dict)
+	req := LimitLimitModelIncreaseDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelIncreaseDistributionFromDict(data map[string]interface{}) LimitLimitModelIncreaseDistribution {
@@ -15452,10 +25719,54 @@ type LimitLimitModelIncreaseAmountDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *LimitLimitModelIncreaseAmountDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelIncreaseAmountDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelIncreaseAmountDistributionStatistics{}
+	} else {
+		*p = LimitLimitModelIncreaseAmountDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelIncreaseAmountDistributionStatisticsFromJson(data string) LimitLimitModelIncreaseAmountDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelIncreaseAmountDistributionStatisticsFromDict(dict)
+	req := LimitLimitModelIncreaseAmountDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelIncreaseAmountDistributionStatisticsFromDict(data map[string]interface{}) LimitLimitModelIncreaseAmountDistributionStatistics {
@@ -15530,10 +25841,62 @@ type LimitLimitModelIncreaseAmountDistributionSegment struct {
 	Sum         *int64  `json:"sum"`
 }
 
+func (p *LimitLimitModelIncreaseAmountDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelIncreaseAmountDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelIncreaseAmountDistributionSegment{}
+	} else {
+		*p = LimitLimitModelIncreaseAmountDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["sum"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Sum)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelIncreaseAmountDistributionSegmentFromJson(data string) LimitLimitModelIncreaseAmountDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelIncreaseAmountDistributionSegmentFromDict(dict)
+	req := LimitLimitModelIncreaseAmountDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelIncreaseAmountDistributionSegmentFromDict(data map[string]interface{}) LimitLimitModelIncreaseAmountDistributionSegment {
@@ -15584,10 +25947,42 @@ type LimitLimitModelIncreaseAmountDistribution struct {
 	Distribution []LimitLimitModelIncreaseAmountDistributionSegment   `json:"distribution"`
 }
 
+func (p *LimitLimitModelIncreaseAmountDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelIncreaseAmountDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelIncreaseAmountDistribution{}
+	} else {
+		*p = LimitLimitModelIncreaseAmountDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelIncreaseAmountDistributionFromJson(data string) LimitLimitModelIncreaseAmountDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelIncreaseAmountDistributionFromDict(dict)
+	req := LimitLimitModelIncreaseAmountDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelIncreaseAmountDistributionFromDict(data map[string]interface{}) LimitLimitModelIncreaseAmountDistribution {
@@ -15644,10 +26039,54 @@ type LimitLimitModelIncreaseByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *LimitLimitModelIncreaseByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelIncreaseByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelIncreaseByUserDistributionStatistics{}
+	} else {
+		*p = LimitLimitModelIncreaseByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelIncreaseByUserDistributionStatisticsFromJson(data string) LimitLimitModelIncreaseByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelIncreaseByUserDistributionStatisticsFromDict(dict)
+	req := LimitLimitModelIncreaseByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelIncreaseByUserDistributionStatisticsFromDict(data map[string]interface{}) LimitLimitModelIncreaseByUserDistributionStatistics {
@@ -15723,10 +26162,45 @@ type LimitLimitModelIncreaseByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *LimitLimitModelIncreaseByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelIncreaseByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelIncreaseByUserDistributionSegment{}
+	} else {
+		*p = LimitLimitModelIncreaseByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelIncreaseByUserDistributionSegmentFromJson(data string) LimitLimitModelIncreaseByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelIncreaseByUserDistributionSegmentFromDict(dict)
+	req := LimitLimitModelIncreaseByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelIncreaseByUserDistributionSegmentFromDict(data map[string]interface{}) LimitLimitModelIncreaseByUserDistributionSegment {
@@ -15783,10 +26257,42 @@ type LimitLimitModelIncreaseByUserDistribution struct {
 	Distribution []LimitLimitModelIncreaseByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *LimitLimitModelIncreaseByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelIncreaseByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelIncreaseByUserDistribution{}
+	} else {
+		*p = LimitLimitModelIncreaseByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelIncreaseByUserDistributionFromJson(data string) LimitLimitModelIncreaseByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelIncreaseByUserDistributionFromDict(dict)
+	req := LimitLimitModelIncreaseByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelIncreaseByUserDistributionFromDict(data map[string]interface{}) LimitLimitModelIncreaseByUserDistribution {
@@ -15843,10 +26349,54 @@ type LimitLimitModelIncreaseAmountByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *LimitLimitModelIncreaseAmountByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelIncreaseAmountByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelIncreaseAmountByUserDistributionStatistics{}
+	} else {
+		*p = LimitLimitModelIncreaseAmountByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelIncreaseAmountByUserDistributionStatisticsFromJson(data string) LimitLimitModelIncreaseAmountByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelIncreaseAmountByUserDistributionStatisticsFromDict(dict)
+	req := LimitLimitModelIncreaseAmountByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelIncreaseAmountByUserDistributionStatisticsFromDict(data map[string]interface{}) LimitLimitModelIncreaseAmountByUserDistributionStatistics {
@@ -15922,10 +26472,45 @@ type LimitLimitModelIncreaseAmountByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *LimitLimitModelIncreaseAmountByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelIncreaseAmountByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelIncreaseAmountByUserDistributionSegment{}
+	} else {
+		*p = LimitLimitModelIncreaseAmountByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelIncreaseAmountByUserDistributionSegmentFromJson(data string) LimitLimitModelIncreaseAmountByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelIncreaseAmountByUserDistributionSegmentFromDict(dict)
+	req := LimitLimitModelIncreaseAmountByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelIncreaseAmountByUserDistributionSegmentFromDict(data map[string]interface{}) LimitLimitModelIncreaseAmountByUserDistributionSegment {
@@ -15982,10 +26567,42 @@ type LimitLimitModelIncreaseAmountByUserDistribution struct {
 	Distribution []LimitLimitModelIncreaseAmountByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *LimitLimitModelIncreaseAmountByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelIncreaseAmountByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelIncreaseAmountByUserDistribution{}
+	} else {
+		*p = LimitLimitModelIncreaseAmountByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelIncreaseAmountByUserDistributionFromJson(data string) LimitLimitModelIncreaseAmountByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelIncreaseAmountByUserDistributionFromDict(dict)
+	req := LimitLimitModelIncreaseAmountByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelIncreaseAmountByUserDistributionFromDict(data map[string]interface{}) LimitLimitModelIncreaseAmountByUserDistribution {
@@ -16040,10 +26657,48 @@ type LimitLimitModelDistributions struct {
 	IncreaseAmountByUser *LimitLimitModelIncreaseAmountByUserDistribution `json:"increaseAmountByUser"`
 }
 
+func (p *LimitLimitModelDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModelDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModelDistributions{}
+	} else {
+		*p = LimitLimitModelDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["increase"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Increase)
+		}
+		if v, ok := d["increaseAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseAmount)
+		}
+		if v, ok := d["increaseByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseByUser)
+		}
+		if v, ok := d["increaseAmountByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseAmountByUser)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelDistributionsFromJson(data string) LimitLimitModelDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelDistributionsFromDict(dict)
+	req := LimitLimitModelDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelDistributionsFromDict(data map[string]interface{}) LimitLimitModelDistributions {
@@ -16109,10 +26764,91 @@ type LimitLimitModel struct {
 	Counters      []LimitCounter                `json:"counters"`
 }
 
+func (p *LimitLimitModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitLimitModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitLimitModel{}
+	} else {
+		*p = LimitLimitModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["limitModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LimitModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LimitModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LimitModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LimitModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LimitModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LimitModelId)
+				}
+			}
+		}
+		if v, ok := d["limitName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LimitName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LimitName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LimitName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LimitName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LimitName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LimitName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["counters"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Counters)
+		}
+	}
+	return nil
+}
+
 func NewLimitLimitModelFromJson(data string) LimitLimitModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitLimitModelFromDict(dict)
+	req := LimitLimitModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitLimitModelFromDict(data map[string]interface{}) LimitLimitModel {
@@ -16182,10 +26918,39 @@ type LimitNamespaceStatistics struct {
 	Increase *int64 `json:"increase"`
 }
 
+func (p *LimitNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitNamespaceStatistics{}
+	} else {
+		*p = LimitNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["increase"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Increase)
+		}
+	}
+	return nil
+}
+
 func NewLimitNamespaceStatisticsFromJson(data string) LimitNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitNamespaceStatisticsFromDict(dict)
+	req := LimitNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitNamespaceStatisticsFromDict(data map[string]interface{}) LimitNamespaceStatistics {
@@ -16234,10 +26999,54 @@ type LimitNamespaceIncreaseDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *LimitNamespaceIncreaseDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitNamespaceIncreaseDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitNamespaceIncreaseDistributionStatistics{}
+	} else {
+		*p = LimitNamespaceIncreaseDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewLimitNamespaceIncreaseDistributionStatisticsFromJson(data string) LimitNamespaceIncreaseDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitNamespaceIncreaseDistributionStatisticsFromDict(dict)
+	req := LimitNamespaceIncreaseDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitNamespaceIncreaseDistributionStatisticsFromDict(data map[string]interface{}) LimitNamespaceIncreaseDistributionStatistics {
@@ -16312,10 +27121,62 @@ type LimitNamespaceIncreaseDistributionSegment struct {
 	Count     *int64  `json:"count"`
 }
 
+func (p *LimitNamespaceIncreaseDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitNamespaceIncreaseDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitNamespaceIncreaseDistributionSegment{}
+	} else {
+		*p = LimitNamespaceIncreaseDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["limitName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LimitName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LimitName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LimitName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LimitName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LimitName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LimitName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewLimitNamespaceIncreaseDistributionSegmentFromJson(data string) LimitNamespaceIncreaseDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitNamespaceIncreaseDistributionSegmentFromDict(dict)
+	req := LimitNamespaceIncreaseDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitNamespaceIncreaseDistributionSegmentFromDict(data map[string]interface{}) LimitNamespaceIncreaseDistributionSegment {
@@ -16366,10 +27227,42 @@ type LimitNamespaceIncreaseDistribution struct {
 	Distribution []LimitNamespaceIncreaseDistributionSegment   `json:"distribution"`
 }
 
+func (p *LimitNamespaceIncreaseDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitNamespaceIncreaseDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitNamespaceIncreaseDistribution{}
+	} else {
+		*p = LimitNamespaceIncreaseDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewLimitNamespaceIncreaseDistributionFromJson(data string) LimitNamespaceIncreaseDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitNamespaceIncreaseDistributionFromDict(dict)
+	req := LimitNamespaceIncreaseDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitNamespaceIncreaseDistributionFromDict(data map[string]interface{}) LimitNamespaceIncreaseDistribution {
@@ -16421,10 +27314,39 @@ type LimitNamespaceDistributions struct {
 	Increase *LimitNamespaceIncreaseDistribution `json:"increase"`
 }
 
+func (p *LimitNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitNamespaceDistributions{}
+	} else {
+		*p = LimitNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["increase"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Increase)
+		}
+	}
+	return nil
+}
+
 func NewLimitNamespaceDistributionsFromJson(data string) LimitNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitNamespaceDistributionsFromDict(dict)
+	req := LimitNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitNamespaceDistributionsFromDict(data map[string]interface{}) LimitNamespaceDistributions {
@@ -16475,10 +27397,100 @@ type LimitNamespace struct {
 	LimitModels   []LimitLimitModel            `json:"limitModels"`
 }
 
+func (p *LimitNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LimitNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LimitNamespace{}
+	} else {
+		*p = LimitNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["limitModels"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.LimitModels)
+		}
+	}
+	return nil
+}
+
 func NewLimitNamespaceFromJson(data string) LimitNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLimitNamespaceFromDict(dict)
+	req := LimitNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLimitNamespaceFromDict(data map[string]interface{}) LimitNamespace {
@@ -16567,10 +27579,42 @@ type LotteryLotteryStatistics struct {
 	DrawAmount *int64 `json:"drawAmount"`
 }
 
+func (p *LotteryLotteryStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryLotteryStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryLotteryStatistics{}
+	} else {
+		*p = LotteryLotteryStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["draw"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Draw)
+		}
+		if v, ok := d["drawAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DrawAmount)
+		}
+	}
+	return nil
+}
+
 func NewLotteryLotteryStatisticsFromJson(data string) LotteryLotteryStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryLotteryStatisticsFromDict(dict)
+	req := LotteryLotteryStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryLotteryStatisticsFromDict(data map[string]interface{}) LotteryLotteryStatistics {
@@ -16625,10 +27669,54 @@ type LotteryLotteryDrawResultDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *LotteryLotteryDrawResultDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryLotteryDrawResultDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryLotteryDrawResultDistributionStatistics{}
+	} else {
+		*p = LotteryLotteryDrawResultDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewLotteryLotteryDrawResultDistributionStatisticsFromJson(data string) LotteryLotteryDrawResultDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryLotteryDrawResultDistributionStatisticsFromDict(dict)
+	req := LotteryLotteryDrawResultDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryLotteryDrawResultDistributionStatisticsFromDict(data map[string]interface{}) LotteryLotteryDrawResultDistributionStatistics {
@@ -16703,10 +27791,62 @@ type LotteryLotteryDrawResultDistributionSegment struct {
 	Count   *int64  `json:"count"`
 }
 
+func (p *LotteryLotteryDrawResultDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryLotteryDrawResultDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryLotteryDrawResultDistributionSegment{}
+	} else {
+		*p = LotteryLotteryDrawResultDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["prizeId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PrizeId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PrizeId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PrizeId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PrizeId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PrizeId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PrizeId)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewLotteryLotteryDrawResultDistributionSegmentFromJson(data string) LotteryLotteryDrawResultDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryLotteryDrawResultDistributionSegmentFromDict(dict)
+	req := LotteryLotteryDrawResultDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryLotteryDrawResultDistributionSegmentFromDict(data map[string]interface{}) LotteryLotteryDrawResultDistributionSegment {
@@ -16757,10 +27897,42 @@ type LotteryLotteryDrawResultDistribution struct {
 	Distribution []LotteryLotteryDrawResultDistributionSegment   `json:"distribution"`
 }
 
+func (p *LotteryLotteryDrawResultDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryLotteryDrawResultDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryLotteryDrawResultDistribution{}
+	} else {
+		*p = LotteryLotteryDrawResultDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewLotteryLotteryDrawResultDistributionFromJson(data string) LotteryLotteryDrawResultDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryLotteryDrawResultDistributionFromDict(dict)
+	req := LotteryLotteryDrawResultDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryLotteryDrawResultDistributionFromDict(data map[string]interface{}) LotteryLotteryDrawResultDistribution {
@@ -16812,10 +27984,39 @@ type LotteryLotteryDistributions struct {
 	DrawResult *LotteryLotteryDrawResultDistribution `json:"drawResult"`
 }
 
+func (p *LotteryLotteryDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryLotteryDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryLotteryDistributions{}
+	} else {
+		*p = LotteryLotteryDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["drawResult"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DrawResult)
+		}
+	}
+	return nil
+}
+
 func NewLotteryLotteryDistributionsFromJson(data string) LotteryLotteryDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryLotteryDistributionsFromDict(dict)
+	req := LotteryLotteryDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryLotteryDistributionsFromDict(data map[string]interface{}) LotteryLotteryDistributions {
@@ -16862,10 +28063,88 @@ type LotteryLottery struct {
 	Distributions *LotteryLotteryDistributions `json:"distributions"`
 }
 
+func (p *LotteryLottery) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryLottery{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryLottery{}
+	} else {
+		*p = LotteryLottery{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["lotteryId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LotteryId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LotteryId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LotteryId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LotteryId)
+				}
+			}
+		}
+		if v, ok := d["lotteryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LotteryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LotteryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LotteryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LotteryName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewLotteryLotteryFromJson(data string) LotteryLottery {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryLotteryFromDict(dict)
+	req := LotteryLottery{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryLotteryFromDict(data map[string]interface{}) LotteryLottery {
@@ -16928,10 +28207,42 @@ type LotteryNamespaceStatistics struct {
 	DrawAmount *int64 `json:"drawAmount"`
 }
 
+func (p *LotteryNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceStatistics{}
+	} else {
+		*p = LotteryNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["draw"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Draw)
+		}
+		if v, ok := d["drawAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DrawAmount)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceStatisticsFromJson(data string) LotteryNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceStatisticsFromDict(dict)
+	req := LotteryNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceStatisticsFromDict(data map[string]interface{}) LotteryNamespaceStatistics {
@@ -16986,10 +28297,54 @@ type LotteryNamespaceDrawDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *LotteryNamespaceDrawDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceDrawDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceDrawDistributionStatistics{}
+	} else {
+		*p = LotteryNamespaceDrawDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceDrawDistributionStatisticsFromJson(data string) LotteryNamespaceDrawDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceDrawDistributionStatisticsFromDict(dict)
+	req := LotteryNamespaceDrawDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceDrawDistributionStatisticsFromDict(data map[string]interface{}) LotteryNamespaceDrawDistributionStatistics {
@@ -17064,10 +28419,62 @@ type LotteryNamespaceDrawDistributionSegment struct {
 	Count       *int64  `json:"count"`
 }
 
+func (p *LotteryNamespaceDrawDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceDrawDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceDrawDistributionSegment{}
+	} else {
+		*p = LotteryNamespaceDrawDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["lotteryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LotteryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LotteryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LotteryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LotteryName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceDrawDistributionSegmentFromJson(data string) LotteryNamespaceDrawDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceDrawDistributionSegmentFromDict(dict)
+	req := LotteryNamespaceDrawDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceDrawDistributionSegmentFromDict(data map[string]interface{}) LotteryNamespaceDrawDistributionSegment {
@@ -17118,10 +28525,42 @@ type LotteryNamespaceDrawDistribution struct {
 	Distribution []LotteryNamespaceDrawDistributionSegment   `json:"distribution"`
 }
 
+func (p *LotteryNamespaceDrawDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceDrawDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceDrawDistribution{}
+	} else {
+		*p = LotteryNamespaceDrawDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceDrawDistributionFromJson(data string) LotteryNamespaceDrawDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceDrawDistributionFromDict(dict)
+	req := LotteryNamespaceDrawDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceDrawDistributionFromDict(data map[string]interface{}) LotteryNamespaceDrawDistribution {
@@ -17178,10 +28617,54 @@ type LotteryNamespaceDrawAmountDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *LotteryNamespaceDrawAmountDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceDrawAmountDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceDrawAmountDistributionStatistics{}
+	} else {
+		*p = LotteryNamespaceDrawAmountDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceDrawAmountDistributionStatisticsFromJson(data string) LotteryNamespaceDrawAmountDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceDrawAmountDistributionStatisticsFromDict(dict)
+	req := LotteryNamespaceDrawAmountDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceDrawAmountDistributionStatisticsFromDict(data map[string]interface{}) LotteryNamespaceDrawAmountDistributionStatistics {
@@ -17256,10 +28739,62 @@ type LotteryNamespaceDrawAmountDistributionSegment struct {
 	Sum         *int64  `json:"sum"`
 }
 
+func (p *LotteryNamespaceDrawAmountDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceDrawAmountDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceDrawAmountDistributionSegment{}
+	} else {
+		*p = LotteryNamespaceDrawAmountDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["lotteryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LotteryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LotteryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LotteryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LotteryName)
+				}
+			}
+		}
+		if v, ok := d["sum"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Sum)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceDrawAmountDistributionSegmentFromJson(data string) LotteryNamespaceDrawAmountDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceDrawAmountDistributionSegmentFromDict(dict)
+	req := LotteryNamespaceDrawAmountDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceDrawAmountDistributionSegmentFromDict(data map[string]interface{}) LotteryNamespaceDrawAmountDistributionSegment {
@@ -17310,10 +28845,42 @@ type LotteryNamespaceDrawAmountDistribution struct {
 	Distribution []LotteryNamespaceDrawAmountDistributionSegment   `json:"distribution"`
 }
 
+func (p *LotteryNamespaceDrawAmountDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceDrawAmountDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceDrawAmountDistribution{}
+	} else {
+		*p = LotteryNamespaceDrawAmountDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceDrawAmountDistributionFromJson(data string) LotteryNamespaceDrawAmountDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceDrawAmountDistributionFromDict(dict)
+	req := LotteryNamespaceDrawAmountDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceDrawAmountDistributionFromDict(data map[string]interface{}) LotteryNamespaceDrawAmountDistribution {
@@ -17370,10 +28937,54 @@ type LotteryNamespaceDrawByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *LotteryNamespaceDrawByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceDrawByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceDrawByUserDistributionStatistics{}
+	} else {
+		*p = LotteryNamespaceDrawByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceDrawByUserDistributionStatisticsFromJson(data string) LotteryNamespaceDrawByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceDrawByUserDistributionStatisticsFromDict(dict)
+	req := LotteryNamespaceDrawByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceDrawByUserDistributionStatisticsFromDict(data map[string]interface{}) LotteryNamespaceDrawByUserDistributionStatistics {
@@ -17449,10 +29060,45 @@ type LotteryNamespaceDrawByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *LotteryNamespaceDrawByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceDrawByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceDrawByUserDistributionSegment{}
+	} else {
+		*p = LotteryNamespaceDrawByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceDrawByUserDistributionSegmentFromJson(data string) LotteryNamespaceDrawByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceDrawByUserDistributionSegmentFromDict(dict)
+	req := LotteryNamespaceDrawByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceDrawByUserDistributionSegmentFromDict(data map[string]interface{}) LotteryNamespaceDrawByUserDistributionSegment {
@@ -17509,10 +29155,42 @@ type LotteryNamespaceDrawByUserDistribution struct {
 	Distribution []LotteryNamespaceDrawByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *LotteryNamespaceDrawByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceDrawByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceDrawByUserDistribution{}
+	} else {
+		*p = LotteryNamespaceDrawByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceDrawByUserDistributionFromJson(data string) LotteryNamespaceDrawByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceDrawByUserDistributionFromDict(dict)
+	req := LotteryNamespaceDrawByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceDrawByUserDistributionFromDict(data map[string]interface{}) LotteryNamespaceDrawByUserDistribution {
@@ -17569,10 +29247,54 @@ type LotteryNamespaceDrawAmountByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *LotteryNamespaceDrawAmountByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceDrawAmountByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceDrawAmountByUserDistributionStatistics{}
+	} else {
+		*p = LotteryNamespaceDrawAmountByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceDrawAmountByUserDistributionStatisticsFromJson(data string) LotteryNamespaceDrawAmountByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceDrawAmountByUserDistributionStatisticsFromDict(dict)
+	req := LotteryNamespaceDrawAmountByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceDrawAmountByUserDistributionStatisticsFromDict(data map[string]interface{}) LotteryNamespaceDrawAmountByUserDistributionStatistics {
@@ -17648,10 +29370,45 @@ type LotteryNamespaceDrawAmountByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *LotteryNamespaceDrawAmountByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceDrawAmountByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceDrawAmountByUserDistributionSegment{}
+	} else {
+		*p = LotteryNamespaceDrawAmountByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceDrawAmountByUserDistributionSegmentFromJson(data string) LotteryNamespaceDrawAmountByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceDrawAmountByUserDistributionSegmentFromDict(dict)
+	req := LotteryNamespaceDrawAmountByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceDrawAmountByUserDistributionSegmentFromDict(data map[string]interface{}) LotteryNamespaceDrawAmountByUserDistributionSegment {
@@ -17708,10 +29465,42 @@ type LotteryNamespaceDrawAmountByUserDistribution struct {
 	Distribution []LotteryNamespaceDrawAmountByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *LotteryNamespaceDrawAmountByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceDrawAmountByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceDrawAmountByUserDistribution{}
+	} else {
+		*p = LotteryNamespaceDrawAmountByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceDrawAmountByUserDistributionFromJson(data string) LotteryNamespaceDrawAmountByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceDrawAmountByUserDistributionFromDict(dict)
+	req := LotteryNamespaceDrawAmountByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceDrawAmountByUserDistributionFromDict(data map[string]interface{}) LotteryNamespaceDrawAmountByUserDistribution {
@@ -17766,10 +29555,48 @@ type LotteryNamespaceDistributions struct {
 	DrawAmountByUser *LotteryNamespaceDrawAmountByUserDistribution `json:"drawAmountByUser"`
 }
 
+func (p *LotteryNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespaceDistributions{}
+	} else {
+		*p = LotteryNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["draw"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Draw)
+		}
+		if v, ok := d["drawAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DrawAmount)
+		}
+		if v, ok := d["drawByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DrawByUser)
+		}
+		if v, ok := d["drawAmountByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DrawAmountByUser)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceDistributionsFromJson(data string) LotteryNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceDistributionsFromDict(dict)
+	req := LotteryNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceDistributionsFromDict(data map[string]interface{}) LotteryNamespaceDistributions {
@@ -17838,10 +29665,100 @@ type LotteryNamespace struct {
 	Lotteries     []LotteryLottery               `json:"lotteries"`
 }
 
+func (p *LotteryNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryNamespace{}
+	} else {
+		*p = LotteryNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["lotteries"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Lotteries)
+		}
+	}
+	return nil
+}
+
 func NewLotteryNamespaceFromJson(data string) LotteryNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryNamespaceFromDict(dict)
+	req := LotteryNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryNamespaceFromDict(data map[string]interface{}) LotteryNamespace {
@@ -17930,10 +29847,82 @@ type LotteryLotteryModel struct {
 	LotteryName    *string `json:"lotteryName"`
 }
 
+func (p *LotteryLotteryModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LotteryLotteryModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LotteryLotteryModel{}
+	} else {
+		*p = LotteryLotteryModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["lotteryModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LotteryModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LotteryModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LotteryModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LotteryModelId)
+				}
+			}
+		}
+		if v, ok := d["lotteryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LotteryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LotteryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LotteryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LotteryName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewLotteryLotteryModelFromJson(data string) LotteryLotteryModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewLotteryLotteryModelFromDict(dict)
+	req := LotteryLotteryModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewLotteryLotteryModelFromDict(data map[string]interface{}) LotteryLotteryModel {
@@ -17985,10 +29974,45 @@ type MatchmakingNamespaceStatistics struct {
 	CompleteRate    *float32 `json:"completeRate"`
 }
 
+func (p *MatchmakingNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MatchmakingNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MatchmakingNamespaceStatistics{}
+	} else {
+		*p = MatchmakingNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["createGathering"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreateGathering)
+		}
+		if v, ok := d["matchmaking"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Matchmaking)
+		}
+		if v, ok := d["completeRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CompleteRate)
+		}
+	}
+	return nil
+}
+
 func NewMatchmakingNamespaceStatisticsFromJson(data string) MatchmakingNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMatchmakingNamespaceStatisticsFromDict(dict)
+	req := MatchmakingNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMatchmakingNamespaceStatisticsFromDict(data map[string]interface{}) MatchmakingNamespaceStatistics {
@@ -18049,10 +30073,54 @@ type MatchmakingNamespaceResultDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MatchmakingNamespaceResultDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MatchmakingNamespaceResultDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MatchmakingNamespaceResultDistributionStatistics{}
+	} else {
+		*p = MatchmakingNamespaceResultDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMatchmakingNamespaceResultDistributionStatisticsFromJson(data string) MatchmakingNamespaceResultDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMatchmakingNamespaceResultDistributionStatisticsFromDict(dict)
+	req := MatchmakingNamespaceResultDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMatchmakingNamespaceResultDistributionStatisticsFromDict(data map[string]interface{}) MatchmakingNamespaceResultDistributionStatistics {
@@ -18127,10 +30195,62 @@ type MatchmakingNamespaceResultDistributionSegment struct {
 	Count  *int64  `json:"count"`
 }
 
+func (p *MatchmakingNamespaceResultDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MatchmakingNamespaceResultDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MatchmakingNamespaceResultDistributionSegment{}
+	} else {
+		*p = MatchmakingNamespaceResultDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["result"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Result = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Result = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Result = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Result = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Result = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Result)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewMatchmakingNamespaceResultDistributionSegmentFromJson(data string) MatchmakingNamespaceResultDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMatchmakingNamespaceResultDistributionSegmentFromDict(dict)
+	req := MatchmakingNamespaceResultDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMatchmakingNamespaceResultDistributionSegmentFromDict(data map[string]interface{}) MatchmakingNamespaceResultDistributionSegment {
@@ -18181,10 +30301,42 @@ type MatchmakingNamespaceResultDistribution struct {
 	Distribution []MatchmakingNamespaceResultDistributionSegment   `json:"distribution"`
 }
 
+func (p *MatchmakingNamespaceResultDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MatchmakingNamespaceResultDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MatchmakingNamespaceResultDistribution{}
+	} else {
+		*p = MatchmakingNamespaceResultDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMatchmakingNamespaceResultDistributionFromJson(data string) MatchmakingNamespaceResultDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMatchmakingNamespaceResultDistributionFromDict(dict)
+	req := MatchmakingNamespaceResultDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMatchmakingNamespaceResultDistributionFromDict(data map[string]interface{}) MatchmakingNamespaceResultDistribution {
@@ -18241,10 +30393,54 @@ type MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics{}
+	} else {
+		*p = MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMatchmakingNamespaceWaitElapsedSecondsDistributionStatisticsFromJson(data string) MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMatchmakingNamespaceWaitElapsedSecondsDistributionStatisticsFromDict(dict)
+	req := MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMatchmakingNamespaceWaitElapsedSecondsDistributionStatisticsFromDict(data map[string]interface{}) MatchmakingNamespaceWaitElapsedSecondsDistributionStatistics {
@@ -18320,10 +30516,45 @@ type MatchmakingNamespaceWaitElapsedSecondsDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *MatchmakingNamespaceWaitElapsedSecondsDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MatchmakingNamespaceWaitElapsedSecondsDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MatchmakingNamespaceWaitElapsedSecondsDistributionSegment{}
+	} else {
+		*p = MatchmakingNamespaceWaitElapsedSecondsDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewMatchmakingNamespaceWaitElapsedSecondsDistributionSegmentFromJson(data string) MatchmakingNamespaceWaitElapsedSecondsDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMatchmakingNamespaceWaitElapsedSecondsDistributionSegmentFromDict(dict)
+	req := MatchmakingNamespaceWaitElapsedSecondsDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMatchmakingNamespaceWaitElapsedSecondsDistributionSegmentFromDict(data map[string]interface{}) MatchmakingNamespaceWaitElapsedSecondsDistributionSegment {
@@ -18380,10 +30611,42 @@ type MatchmakingNamespaceWaitElapsedSecondsDistribution struct {
 	Distribution []MatchmakingNamespaceWaitElapsedSecondsDistributionSegment   `json:"distribution"`
 }
 
+func (p *MatchmakingNamespaceWaitElapsedSecondsDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MatchmakingNamespaceWaitElapsedSecondsDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MatchmakingNamespaceWaitElapsedSecondsDistribution{}
+	} else {
+		*p = MatchmakingNamespaceWaitElapsedSecondsDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMatchmakingNamespaceWaitElapsedSecondsDistributionFromJson(data string) MatchmakingNamespaceWaitElapsedSecondsDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMatchmakingNamespaceWaitElapsedSecondsDistributionFromDict(dict)
+	req := MatchmakingNamespaceWaitElapsedSecondsDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMatchmakingNamespaceWaitElapsedSecondsDistributionFromDict(data map[string]interface{}) MatchmakingNamespaceWaitElapsedSecondsDistribution {
@@ -18436,10 +30699,42 @@ type MatchmakingNamespaceDistributions struct {
 	WaitElapsedSeconds *MatchmakingNamespaceWaitElapsedSecondsDistribution `json:"waitElapsedSeconds"`
 }
 
+func (p *MatchmakingNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MatchmakingNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MatchmakingNamespaceDistributions{}
+	} else {
+		*p = MatchmakingNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["result"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Result)
+		}
+		if v, ok := d["waitElapsedSeconds"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WaitElapsedSeconds)
+		}
+	}
+	return nil
+}
+
 func NewMatchmakingNamespaceDistributionsFromJson(data string) MatchmakingNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMatchmakingNamespaceDistributionsFromDict(dict)
+	req := MatchmakingNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMatchmakingNamespaceDistributionsFromDict(data map[string]interface{}) MatchmakingNamespaceDistributions {
@@ -18495,10 +30790,97 @@ type MatchmakingNamespace struct {
 	Distributions *MatchmakingNamespaceDistributions `json:"distributions"`
 }
 
+func (p *MatchmakingNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MatchmakingNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MatchmakingNamespace{}
+	} else {
+		*p = MatchmakingNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewMatchmakingNamespaceFromJson(data string) MatchmakingNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMatchmakingNamespaceFromDict(dict)
+	req := MatchmakingNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMatchmakingNamespaceFromDict(data map[string]interface{}) MatchmakingNamespace {
@@ -18583,10 +30965,54 @@ type MissionCounterCounterDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MissionCounterCounterDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionCounterCounterDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionCounterCounterDistributionStatistics{}
+	} else {
+		*p = MissionCounterCounterDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMissionCounterCounterDistributionStatisticsFromJson(data string) MissionCounterCounterDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionCounterCounterDistributionStatisticsFromDict(dict)
+	req := MissionCounterCounterDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionCounterCounterDistributionStatisticsFromDict(data map[string]interface{}) MissionCounterCounterDistributionStatistics {
@@ -18662,10 +31088,45 @@ type MissionCounterCounterDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *MissionCounterCounterDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionCounterCounterDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionCounterCounterDistributionSegment{}
+	} else {
+		*p = MissionCounterCounterDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewMissionCounterCounterDistributionSegmentFromJson(data string) MissionCounterCounterDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionCounterCounterDistributionSegmentFromDict(dict)
+	req := MissionCounterCounterDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionCounterCounterDistributionSegmentFromDict(data map[string]interface{}) MissionCounterCounterDistributionSegment {
@@ -18722,10 +31183,42 @@ type MissionCounterCounterDistribution struct {
 	Distribution []MissionCounterCounterDistributionSegment   `json:"distribution"`
 }
 
+func (p *MissionCounterCounterDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionCounterCounterDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionCounterCounterDistribution{}
+	} else {
+		*p = MissionCounterCounterDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMissionCounterCounterDistributionFromJson(data string) MissionCounterCounterDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionCounterCounterDistributionFromDict(dict)
+	req := MissionCounterCounterDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionCounterCounterDistributionFromDict(data map[string]interface{}) MissionCounterCounterDistribution {
@@ -18777,10 +31270,39 @@ type MissionCounterDistributions struct {
 	Counter *MissionCounterCounterDistribution `json:"counter"`
 }
 
+func (p *MissionCounterDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionCounterDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionCounterDistributions{}
+	} else {
+		*p = MissionCounterDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["counter"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Counter)
+		}
+	}
+	return nil
+}
+
 func NewMissionCounterDistributionsFromJson(data string) MissionCounterDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionCounterDistributionsFromDict(dict)
+	req := MissionCounterDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionCounterDistributionsFromDict(data map[string]interface{}) MissionCounterDistributions {
@@ -18826,10 +31348,85 @@ type MissionCounter struct {
 	Distributions *MissionCounterDistributions `json:"distributions"`
 }
 
+func (p *MissionCounter) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionCounter{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionCounter{}
+	} else {
+		*p = MissionCounter{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["counterId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterId)
+				}
+			}
+		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewMissionCounterFromJson(data string) MissionCounter {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionCounterFromDict(dict)
+	req := MissionCounter{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionCounterFromDict(data map[string]interface{}) MissionCounter {
@@ -18885,10 +31482,39 @@ type MissionMissionGroupModelStatistics struct {
 	Receive *int64 `json:"receive"`
 }
 
+func (p *MissionMissionGroupModelStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionMissionGroupModelStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionMissionGroupModelStatistics{}
+	} else {
+		*p = MissionMissionGroupModelStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["receive"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Receive)
+		}
+	}
+	return nil
+}
+
 func NewMissionMissionGroupModelStatisticsFromJson(data string) MissionMissionGroupModelStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionMissionGroupModelStatisticsFromDict(dict)
+	req := MissionMissionGroupModelStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionMissionGroupModelStatisticsFromDict(data map[string]interface{}) MissionMissionGroupModelStatistics {
@@ -18937,10 +31563,54 @@ type MissionMissionGroupModelReceiveDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MissionMissionGroupModelReceiveDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionMissionGroupModelReceiveDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionMissionGroupModelReceiveDistributionStatistics{}
+	} else {
+		*p = MissionMissionGroupModelReceiveDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMissionMissionGroupModelReceiveDistributionStatisticsFromJson(data string) MissionMissionGroupModelReceiveDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionMissionGroupModelReceiveDistributionStatisticsFromDict(dict)
+	req := MissionMissionGroupModelReceiveDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionMissionGroupModelReceiveDistributionStatisticsFromDict(data map[string]interface{}) MissionMissionGroupModelReceiveDistributionStatistics {
@@ -19015,10 +31685,62 @@ type MissionMissionGroupModelReceiveDistributionSegment struct {
 	Count           *int64  `json:"count"`
 }
 
+func (p *MissionMissionGroupModelReceiveDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionMissionGroupModelReceiveDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionMissionGroupModelReceiveDistributionSegment{}
+	} else {
+		*p = MissionMissionGroupModelReceiveDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["missionTaskName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionTaskName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionTaskName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionTaskName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionTaskName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionTaskName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionTaskName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewMissionMissionGroupModelReceiveDistributionSegmentFromJson(data string) MissionMissionGroupModelReceiveDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionMissionGroupModelReceiveDistributionSegmentFromDict(dict)
+	req := MissionMissionGroupModelReceiveDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionMissionGroupModelReceiveDistributionSegmentFromDict(data map[string]interface{}) MissionMissionGroupModelReceiveDistributionSegment {
@@ -19069,10 +31791,42 @@ type MissionMissionGroupModelReceiveDistribution struct {
 	Distribution []MissionMissionGroupModelReceiveDistributionSegment   `json:"distribution"`
 }
 
+func (p *MissionMissionGroupModelReceiveDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionMissionGroupModelReceiveDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionMissionGroupModelReceiveDistribution{}
+	} else {
+		*p = MissionMissionGroupModelReceiveDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMissionMissionGroupModelReceiveDistributionFromJson(data string) MissionMissionGroupModelReceiveDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionMissionGroupModelReceiveDistributionFromDict(dict)
+	req := MissionMissionGroupModelReceiveDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionMissionGroupModelReceiveDistributionFromDict(data map[string]interface{}) MissionMissionGroupModelReceiveDistribution {
@@ -19124,10 +31878,39 @@ type MissionMissionGroupModelDistributions struct {
 	Receive *MissionMissionGroupModelReceiveDistribution `json:"receive"`
 }
 
+func (p *MissionMissionGroupModelDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionMissionGroupModelDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionMissionGroupModelDistributions{}
+	} else {
+		*p = MissionMissionGroupModelDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["receive"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Receive)
+		}
+	}
+	return nil
+}
+
 func NewMissionMissionGroupModelDistributionsFromJson(data string) MissionMissionGroupModelDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionMissionGroupModelDistributionsFromDict(dict)
+	req := MissionMissionGroupModelDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionMissionGroupModelDistributionsFromDict(data map[string]interface{}) MissionMissionGroupModelDistributions {
@@ -19174,10 +31957,88 @@ type MissionMissionGroupModel struct {
 	Distributions       *MissionMissionGroupModelDistributions `json:"distributions"`
 }
 
+func (p *MissionMissionGroupModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionMissionGroupModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionMissionGroupModel{}
+	} else {
+		*p = MissionMissionGroupModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["missionGroupModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionGroupModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionGroupModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionGroupModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionGroupModelId)
+				}
+			}
+		}
+		if v, ok := d["missionGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionGroupName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewMissionMissionGroupModelFromJson(data string) MissionMissionGroupModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionMissionGroupModelFromDict(dict)
+	req := MissionMissionGroupModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionMissionGroupModelFromDict(data map[string]interface{}) MissionMissionGroupModel {
@@ -19240,10 +32101,82 @@ type MissionMissionTaskModel struct {
 	MissionTaskName    *string `json:"missionTaskName"`
 }
 
+func (p *MissionMissionTaskModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionMissionTaskModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionMissionTaskModel{}
+	} else {
+		*p = MissionMissionTaskModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["missionTaskModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionTaskModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionTaskModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionTaskModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionTaskModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionTaskModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionTaskModelId)
+				}
+			}
+		}
+		if v, ok := d["missionTaskName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionTaskName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionTaskName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionTaskName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionTaskName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionTaskName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionTaskName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
 func NewMissionMissionTaskModelFromJson(data string) MissionMissionTaskModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionMissionTaskModelFromDict(dict)
+	req := MissionMissionTaskModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionMissionTaskModelFromDict(data map[string]interface{}) MissionMissionTaskModel {
@@ -19295,10 +32228,45 @@ type MissionNamespaceStatistics struct {
 	Receive        *int64 `json:"receive"`
 }
 
+func (p *MissionNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionNamespaceStatistics{}
+	} else {
+		*p = MissionNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["increase"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Increase)
+		}
+		if v, ok := d["increaseAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseAmount)
+		}
+		if v, ok := d["receive"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Receive)
+		}
+	}
+	return nil
+}
+
 func NewMissionNamespaceStatisticsFromJson(data string) MissionNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionNamespaceStatisticsFromDict(dict)
+	req := MissionNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionNamespaceStatisticsFromDict(data map[string]interface{}) MissionNamespaceStatistics {
@@ -19359,10 +32327,54 @@ type MissionNamespaceIncreaseDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MissionNamespaceIncreaseDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionNamespaceIncreaseDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionNamespaceIncreaseDistributionStatistics{}
+	} else {
+		*p = MissionNamespaceIncreaseDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMissionNamespaceIncreaseDistributionStatisticsFromJson(data string) MissionNamespaceIncreaseDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionNamespaceIncreaseDistributionStatisticsFromDict(dict)
+	req := MissionNamespaceIncreaseDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionNamespaceIncreaseDistributionStatisticsFromDict(data map[string]interface{}) MissionNamespaceIncreaseDistributionStatistics {
@@ -19437,10 +32449,62 @@ type MissionNamespaceIncreaseDistributionSegment struct {
 	Count       *int64  `json:"count"`
 }
 
+func (p *MissionNamespaceIncreaseDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionNamespaceIncreaseDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionNamespaceIncreaseDistributionSegment{}
+	} else {
+		*p = MissionNamespaceIncreaseDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewMissionNamespaceIncreaseDistributionSegmentFromJson(data string) MissionNamespaceIncreaseDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionNamespaceIncreaseDistributionSegmentFromDict(dict)
+	req := MissionNamespaceIncreaseDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionNamespaceIncreaseDistributionSegmentFromDict(data map[string]interface{}) MissionNamespaceIncreaseDistributionSegment {
@@ -19491,10 +32555,42 @@ type MissionNamespaceIncreaseDistribution struct {
 	Distribution []MissionNamespaceIncreaseDistributionSegment   `json:"distribution"`
 }
 
+func (p *MissionNamespaceIncreaseDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionNamespaceIncreaseDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionNamespaceIncreaseDistribution{}
+	} else {
+		*p = MissionNamespaceIncreaseDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMissionNamespaceIncreaseDistributionFromJson(data string) MissionNamespaceIncreaseDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionNamespaceIncreaseDistributionFromDict(dict)
+	req := MissionNamespaceIncreaseDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionNamespaceIncreaseDistributionFromDict(data map[string]interface{}) MissionNamespaceIncreaseDistribution {
@@ -19551,10 +32647,54 @@ type MissionNamespaceIncreaseAmountDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MissionNamespaceIncreaseAmountDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionNamespaceIncreaseAmountDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionNamespaceIncreaseAmountDistributionStatistics{}
+	} else {
+		*p = MissionNamespaceIncreaseAmountDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMissionNamespaceIncreaseAmountDistributionStatisticsFromJson(data string) MissionNamespaceIncreaseAmountDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionNamespaceIncreaseAmountDistributionStatisticsFromDict(dict)
+	req := MissionNamespaceIncreaseAmountDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionNamespaceIncreaseAmountDistributionStatisticsFromDict(data map[string]interface{}) MissionNamespaceIncreaseAmountDistributionStatistics {
@@ -19629,10 +32769,62 @@ type MissionNamespaceIncreaseAmountDistributionSegment struct {
 	Sum         *int64  `json:"sum"`
 }
 
+func (p *MissionNamespaceIncreaseAmountDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionNamespaceIncreaseAmountDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionNamespaceIncreaseAmountDistributionSegment{}
+	} else {
+		*p = MissionNamespaceIncreaseAmountDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["sum"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Sum)
+		}
+	}
+	return nil
+}
+
 func NewMissionNamespaceIncreaseAmountDistributionSegmentFromJson(data string) MissionNamespaceIncreaseAmountDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionNamespaceIncreaseAmountDistributionSegmentFromDict(dict)
+	req := MissionNamespaceIncreaseAmountDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionNamespaceIncreaseAmountDistributionSegmentFromDict(data map[string]interface{}) MissionNamespaceIncreaseAmountDistributionSegment {
@@ -19683,10 +32875,42 @@ type MissionNamespaceIncreaseAmountDistribution struct {
 	Distribution []MissionNamespaceIncreaseAmountDistributionSegment   `json:"distribution"`
 }
 
+func (p *MissionNamespaceIncreaseAmountDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionNamespaceIncreaseAmountDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionNamespaceIncreaseAmountDistribution{}
+	} else {
+		*p = MissionNamespaceIncreaseAmountDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMissionNamespaceIncreaseAmountDistributionFromJson(data string) MissionNamespaceIncreaseAmountDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionNamespaceIncreaseAmountDistributionFromDict(dict)
+	req := MissionNamespaceIncreaseAmountDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionNamespaceIncreaseAmountDistributionFromDict(data map[string]interface{}) MissionNamespaceIncreaseAmountDistribution {
@@ -19743,10 +32967,54 @@ type MissionNamespaceReceiveDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MissionNamespaceReceiveDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionNamespaceReceiveDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionNamespaceReceiveDistributionStatistics{}
+	} else {
+		*p = MissionNamespaceReceiveDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMissionNamespaceReceiveDistributionStatisticsFromJson(data string) MissionNamespaceReceiveDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionNamespaceReceiveDistributionStatisticsFromDict(dict)
+	req := MissionNamespaceReceiveDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionNamespaceReceiveDistributionStatisticsFromDict(data map[string]interface{}) MissionNamespaceReceiveDistributionStatistics {
@@ -19821,10 +33089,62 @@ type MissionNamespaceReceiveDistributionSegment struct {
 	Count            *int64  `json:"count"`
 }
 
+func (p *MissionNamespaceReceiveDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionNamespaceReceiveDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionNamespaceReceiveDistributionSegment{}
+	} else {
+		*p = MissionNamespaceReceiveDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["missionGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionGroupName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewMissionNamespaceReceiveDistributionSegmentFromJson(data string) MissionNamespaceReceiveDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionNamespaceReceiveDistributionSegmentFromDict(dict)
+	req := MissionNamespaceReceiveDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionNamespaceReceiveDistributionSegmentFromDict(data map[string]interface{}) MissionNamespaceReceiveDistributionSegment {
@@ -19875,10 +33195,42 @@ type MissionNamespaceReceiveDistribution struct {
 	Distribution []MissionNamespaceReceiveDistributionSegment   `json:"distribution"`
 }
 
+func (p *MissionNamespaceReceiveDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionNamespaceReceiveDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionNamespaceReceiveDistribution{}
+	} else {
+		*p = MissionNamespaceReceiveDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMissionNamespaceReceiveDistributionFromJson(data string) MissionNamespaceReceiveDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionNamespaceReceiveDistributionFromDict(dict)
+	req := MissionNamespaceReceiveDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionNamespaceReceiveDistributionFromDict(data map[string]interface{}) MissionNamespaceReceiveDistribution {
@@ -19932,10 +33284,45 @@ type MissionNamespaceDistributions struct {
 	Receive        *MissionNamespaceReceiveDistribution        `json:"receive"`
 }
 
+func (p *MissionNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionNamespaceDistributions{}
+	} else {
+		*p = MissionNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["increase"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Increase)
+		}
+		if v, ok := d["increaseAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.IncreaseAmount)
+		}
+		if v, ok := d["receive"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Receive)
+		}
+	}
+	return nil
+}
+
 func NewMissionNamespaceDistributionsFromJson(data string) MissionNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionNamespaceDistributionsFromDict(dict)
+	req := MissionNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionNamespaceDistributionsFromDict(data map[string]interface{}) MissionNamespaceDistributions {
@@ -19999,10 +33386,103 @@ type MissionNamespace struct {
 	Counters           []MissionCounter               `json:"counters"`
 }
 
+func (p *MissionNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionNamespace{}
+	} else {
+		*p = MissionNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["missionGroupModels"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MissionGroupModels)
+		}
+		if v, ok := d["counters"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Counters)
+		}
+	}
+	return nil
+}
+
 func NewMissionNamespaceFromJson(data string) MissionNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMissionNamespaceFromDict(dict)
+	req := MissionNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMissionNamespaceFromDict(data map[string]interface{}) MissionNamespace {
@@ -20102,10 +33582,51 @@ type MoneyWalletStatistics struct {
 	Revenue        *int64 `json:"revenue"`
 }
 
+func (p *MoneyWalletStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyWalletStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyWalletStatistics{}
+	} else {
+		*p = MoneyWalletStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["deposit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Deposit)
+		}
+		if v, ok := d["depositAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DepositAmount)
+		}
+		if v, ok := d["withdraw"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Withdraw)
+		}
+		if v, ok := d["withdrawAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WithdrawAmount)
+		}
+		if v, ok := d["revenue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revenue)
+		}
+	}
+	return nil
+}
+
 func NewMoneyWalletStatisticsFromJson(data string) MoneyWalletStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyWalletStatisticsFromDict(dict)
+	req := MoneyWalletStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyWalletStatisticsFromDict(data map[string]interface{}) MoneyWalletStatistics {
@@ -20178,10 +33699,54 @@ type MoneyWalletFreeDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MoneyWalletFreeDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyWalletFreeDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyWalletFreeDistributionStatistics{}
+	} else {
+		*p = MoneyWalletFreeDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMoneyWalletFreeDistributionStatisticsFromJson(data string) MoneyWalletFreeDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyWalletFreeDistributionStatisticsFromDict(dict)
+	req := MoneyWalletFreeDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyWalletFreeDistributionStatisticsFromDict(data map[string]interface{}) MoneyWalletFreeDistributionStatistics {
@@ -20257,10 +33822,45 @@ type MoneyWalletFreeDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *MoneyWalletFreeDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyWalletFreeDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyWalletFreeDistributionSegment{}
+	} else {
+		*p = MoneyWalletFreeDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewMoneyWalletFreeDistributionSegmentFromJson(data string) MoneyWalletFreeDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyWalletFreeDistributionSegmentFromDict(dict)
+	req := MoneyWalletFreeDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyWalletFreeDistributionSegmentFromDict(data map[string]interface{}) MoneyWalletFreeDistributionSegment {
@@ -20317,10 +33917,42 @@ type MoneyWalletFreeDistribution struct {
 	Distribution []MoneyWalletFreeDistributionSegment   `json:"distribution"`
 }
 
+func (p *MoneyWalletFreeDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyWalletFreeDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyWalletFreeDistribution{}
+	} else {
+		*p = MoneyWalletFreeDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMoneyWalletFreeDistributionFromJson(data string) MoneyWalletFreeDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyWalletFreeDistributionFromDict(dict)
+	req := MoneyWalletFreeDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyWalletFreeDistributionFromDict(data map[string]interface{}) MoneyWalletFreeDistribution {
@@ -20377,10 +34009,54 @@ type MoneyWalletPaidDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MoneyWalletPaidDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyWalletPaidDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyWalletPaidDistributionStatistics{}
+	} else {
+		*p = MoneyWalletPaidDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMoneyWalletPaidDistributionStatisticsFromJson(data string) MoneyWalletPaidDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyWalletPaidDistributionStatisticsFromDict(dict)
+	req := MoneyWalletPaidDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyWalletPaidDistributionStatisticsFromDict(data map[string]interface{}) MoneyWalletPaidDistributionStatistics {
@@ -20456,10 +34132,45 @@ type MoneyWalletPaidDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *MoneyWalletPaidDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyWalletPaidDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyWalletPaidDistributionSegment{}
+	} else {
+		*p = MoneyWalletPaidDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewMoneyWalletPaidDistributionSegmentFromJson(data string) MoneyWalletPaidDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyWalletPaidDistributionSegmentFromDict(dict)
+	req := MoneyWalletPaidDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyWalletPaidDistributionSegmentFromDict(data map[string]interface{}) MoneyWalletPaidDistributionSegment {
@@ -20516,10 +34227,42 @@ type MoneyWalletPaidDistribution struct {
 	Distribution []MoneyWalletPaidDistributionSegment   `json:"distribution"`
 }
 
+func (p *MoneyWalletPaidDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyWalletPaidDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyWalletPaidDistribution{}
+	} else {
+		*p = MoneyWalletPaidDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMoneyWalletPaidDistributionFromJson(data string) MoneyWalletPaidDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyWalletPaidDistributionFromDict(dict)
+	req := MoneyWalletPaidDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyWalletPaidDistributionFromDict(data map[string]interface{}) MoneyWalletPaidDistribution {
@@ -20572,10 +34315,42 @@ type MoneyWalletDistributions struct {
 	Paid *MoneyWalletPaidDistribution `json:"paid"`
 }
 
+func (p *MoneyWalletDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyWalletDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyWalletDistributions{}
+	} else {
+		*p = MoneyWalletDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["free"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Free)
+		}
+		if v, ok := d["paid"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Paid)
+		}
+	}
+	return nil
+}
+
 func NewMoneyWalletDistributionsFromJson(data string) MoneyWalletDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyWalletDistributionsFromDict(dict)
+	req := MoneyWalletDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyWalletDistributionsFromDict(data map[string]interface{}) MoneyWalletDistributions {
@@ -20628,10 +34403,68 @@ type MoneyWallet struct {
 	Distributions *MoneyWalletDistributions `json:"distributions"`
 }
 
+func (p *MoneyWallet) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyWallet{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyWallet{}
+	} else {
+		*p = MoneyWallet{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["walletId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.WalletId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.WalletId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.WalletId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.WalletId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.WalletId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.WalletId)
+				}
+			}
+		}
+		if v, ok := d["slot"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Slot)
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewMoneyWalletFromJson(data string) MoneyWallet {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyWalletFromDict(dict)
+	req := MoneyWallet{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyWalletFromDict(data map[string]interface{}) MoneyWallet {
@@ -20693,10 +34526,39 @@ type MoneyReceiptStatistics struct {
 	Verification *int64 `json:"verification"`
 }
 
+func (p *MoneyReceiptStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyReceiptStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyReceiptStatistics{}
+	} else {
+		*p = MoneyReceiptStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["verification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Verification)
+		}
+	}
+	return nil
+}
+
 func NewMoneyReceiptStatisticsFromJson(data string) MoneyReceiptStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyReceiptStatisticsFromDict(dict)
+	req := MoneyReceiptStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyReceiptStatisticsFromDict(data map[string]interface{}) MoneyReceiptStatistics {
@@ -20745,10 +34607,54 @@ type MoneyReceiptVerificationByUserDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MoneyReceiptVerificationByUserDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyReceiptVerificationByUserDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyReceiptVerificationByUserDistributionStatistics{}
+	} else {
+		*p = MoneyReceiptVerificationByUserDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMoneyReceiptVerificationByUserDistributionStatisticsFromJson(data string) MoneyReceiptVerificationByUserDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyReceiptVerificationByUserDistributionStatisticsFromDict(dict)
+	req := MoneyReceiptVerificationByUserDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyReceiptVerificationByUserDistributionStatisticsFromDict(data map[string]interface{}) MoneyReceiptVerificationByUserDistributionStatistics {
@@ -20824,10 +34730,45 @@ type MoneyReceiptVerificationByUserDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *MoneyReceiptVerificationByUserDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyReceiptVerificationByUserDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyReceiptVerificationByUserDistributionSegment{}
+	} else {
+		*p = MoneyReceiptVerificationByUserDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewMoneyReceiptVerificationByUserDistributionSegmentFromJson(data string) MoneyReceiptVerificationByUserDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyReceiptVerificationByUserDistributionSegmentFromDict(dict)
+	req := MoneyReceiptVerificationByUserDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyReceiptVerificationByUserDistributionSegmentFromDict(data map[string]interface{}) MoneyReceiptVerificationByUserDistributionSegment {
@@ -20884,10 +34825,42 @@ type MoneyReceiptVerificationByUserDistribution struct {
 	Distribution []MoneyReceiptVerificationByUserDistributionSegment   `json:"distribution"`
 }
 
+func (p *MoneyReceiptVerificationByUserDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyReceiptVerificationByUserDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyReceiptVerificationByUserDistribution{}
+	} else {
+		*p = MoneyReceiptVerificationByUserDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMoneyReceiptVerificationByUserDistributionFromJson(data string) MoneyReceiptVerificationByUserDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyReceiptVerificationByUserDistributionFromDict(dict)
+	req := MoneyReceiptVerificationByUserDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyReceiptVerificationByUserDistributionFromDict(data map[string]interface{}) MoneyReceiptVerificationByUserDistribution {
@@ -20939,10 +34912,39 @@ type MoneyReceiptDistributions struct {
 	VerificationByUser *MoneyReceiptVerificationByUserDistribution `json:"verificationByUser"`
 }
 
+func (p *MoneyReceiptDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyReceiptDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyReceiptDistributions{}
+	} else {
+		*p = MoneyReceiptDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["verificationByUser"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerificationByUser)
+		}
+	}
+	return nil
+}
+
 func NewMoneyReceiptDistributionsFromJson(data string) MoneyReceiptDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyReceiptDistributionsFromDict(dict)
+	req := MoneyReceiptDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyReceiptDistributionsFromDict(data map[string]interface{}) MoneyReceiptDistributions {
@@ -20989,10 +34991,88 @@ type MoneyReceipt struct {
 	Distributions *MoneyReceiptDistributions `json:"distributions"`
 }
 
+func (p *MoneyReceipt) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyReceipt{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyReceipt{}
+	} else {
+		*p = MoneyReceipt{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["receiptId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ReceiptId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ReceiptId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ReceiptId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ReceiptId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ReceiptId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ReceiptId)
+				}
+			}
+		}
+		if v, ok := d["contentsId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ContentsId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ContentsId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ContentsId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentsId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentsId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ContentsId)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewMoneyReceiptFromJson(data string) MoneyReceipt {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyReceiptFromDict(dict)
+	req := MoneyReceipt{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyReceiptFromDict(data map[string]interface{}) MoneyReceipt {
@@ -21057,10 +35137,48 @@ type MoneyNamespaceStatistics struct {
 	Revenue      *int64 `json:"revenue"`
 }
 
+func (p *MoneyNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceStatistics{}
+	} else {
+		*p = MoneyNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["verification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Verification)
+		}
+		if v, ok := d["deposit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Deposit)
+		}
+		if v, ok := d["withdraw"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Withdraw)
+		}
+		if v, ok := d["revenue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revenue)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceStatisticsFromJson(data string) MoneyNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceStatisticsFromDict(dict)
+	req := MoneyNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceStatisticsFromDict(data map[string]interface{}) MoneyNamespaceStatistics {
@@ -21127,10 +35245,54 @@ type MoneyNamespaceVerificationDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MoneyNamespaceVerificationDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceVerificationDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceVerificationDistributionStatistics{}
+	} else {
+		*p = MoneyNamespaceVerificationDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceVerificationDistributionStatisticsFromJson(data string) MoneyNamespaceVerificationDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceVerificationDistributionStatisticsFromDict(dict)
+	req := MoneyNamespaceVerificationDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceVerificationDistributionStatisticsFromDict(data map[string]interface{}) MoneyNamespaceVerificationDistributionStatistics {
@@ -21205,10 +35367,62 @@ type MoneyNamespaceVerificationDistributionSegment struct {
 	Count      *int64  `json:"count"`
 }
 
+func (p *MoneyNamespaceVerificationDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceVerificationDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceVerificationDistributionSegment{}
+	} else {
+		*p = MoneyNamespaceVerificationDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["contentsId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ContentsId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ContentsId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ContentsId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentsId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ContentsId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ContentsId)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceVerificationDistributionSegmentFromJson(data string) MoneyNamespaceVerificationDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceVerificationDistributionSegmentFromDict(dict)
+	req := MoneyNamespaceVerificationDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceVerificationDistributionSegmentFromDict(data map[string]interface{}) MoneyNamespaceVerificationDistributionSegment {
@@ -21259,10 +35473,42 @@ type MoneyNamespaceVerificationDistribution struct {
 	Distribution []MoneyNamespaceVerificationDistributionSegment   `json:"distribution"`
 }
 
+func (p *MoneyNamespaceVerificationDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceVerificationDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceVerificationDistribution{}
+	} else {
+		*p = MoneyNamespaceVerificationDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceVerificationDistributionFromJson(data string) MoneyNamespaceVerificationDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceVerificationDistributionFromDict(dict)
+	req := MoneyNamespaceVerificationDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceVerificationDistributionFromDict(data map[string]interface{}) MoneyNamespaceVerificationDistribution {
@@ -21319,10 +35565,54 @@ type MoneyNamespaceDepositDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MoneyNamespaceDepositDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceDepositDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceDepositDistributionStatistics{}
+	} else {
+		*p = MoneyNamespaceDepositDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceDepositDistributionStatisticsFromJson(data string) MoneyNamespaceDepositDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceDepositDistributionStatisticsFromDict(dict)
+	req := MoneyNamespaceDepositDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceDepositDistributionStatisticsFromDict(data map[string]interface{}) MoneyNamespaceDepositDistributionStatistics {
@@ -21397,10 +35687,42 @@ type MoneyNamespaceDepositDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *MoneyNamespaceDepositDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceDepositDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceDepositDistributionSegment{}
+	} else {
+		*p = MoneyNamespaceDepositDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["slot"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Slot)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceDepositDistributionSegmentFromJson(data string) MoneyNamespaceDepositDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceDepositDistributionSegmentFromDict(dict)
+	req := MoneyNamespaceDepositDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceDepositDistributionSegmentFromDict(data map[string]interface{}) MoneyNamespaceDepositDistributionSegment {
@@ -21451,10 +35773,42 @@ type MoneyNamespaceDepositDistribution struct {
 	Distribution []MoneyNamespaceDepositDistributionSegment   `json:"distribution"`
 }
 
+func (p *MoneyNamespaceDepositDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceDepositDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceDepositDistribution{}
+	} else {
+		*p = MoneyNamespaceDepositDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceDepositDistributionFromJson(data string) MoneyNamespaceDepositDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceDepositDistributionFromDict(dict)
+	req := MoneyNamespaceDepositDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceDepositDistributionFromDict(data map[string]interface{}) MoneyNamespaceDepositDistribution {
@@ -21511,10 +35865,54 @@ type MoneyNamespaceWithdrawDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MoneyNamespaceWithdrawDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceWithdrawDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceWithdrawDistributionStatistics{}
+	} else {
+		*p = MoneyNamespaceWithdrawDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceWithdrawDistributionStatisticsFromJson(data string) MoneyNamespaceWithdrawDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceWithdrawDistributionStatisticsFromDict(dict)
+	req := MoneyNamespaceWithdrawDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceWithdrawDistributionStatisticsFromDict(data map[string]interface{}) MoneyNamespaceWithdrawDistributionStatistics {
@@ -21589,10 +35987,42 @@ type MoneyNamespaceWithdrawDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *MoneyNamespaceWithdrawDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceWithdrawDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceWithdrawDistributionSegment{}
+	} else {
+		*p = MoneyNamespaceWithdrawDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["slot"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Slot)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceWithdrawDistributionSegmentFromJson(data string) MoneyNamespaceWithdrawDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceWithdrawDistributionSegmentFromDict(dict)
+	req := MoneyNamespaceWithdrawDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceWithdrawDistributionSegmentFromDict(data map[string]interface{}) MoneyNamespaceWithdrawDistributionSegment {
@@ -21643,10 +36073,42 @@ type MoneyNamespaceWithdrawDistribution struct {
 	Distribution []MoneyNamespaceWithdrawDistributionSegment   `json:"distribution"`
 }
 
+func (p *MoneyNamespaceWithdrawDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceWithdrawDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceWithdrawDistribution{}
+	} else {
+		*p = MoneyNamespaceWithdrawDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceWithdrawDistributionFromJson(data string) MoneyNamespaceWithdrawDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceWithdrawDistributionFromDict(dict)
+	req := MoneyNamespaceWithdrawDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceWithdrawDistributionFromDict(data map[string]interface{}) MoneyNamespaceWithdrawDistribution {
@@ -21703,10 +36165,54 @@ type MoneyNamespaceRevenueDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *MoneyNamespaceRevenueDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceRevenueDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceRevenueDistributionStatistics{}
+	} else {
+		*p = MoneyNamespaceRevenueDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceRevenueDistributionStatisticsFromJson(data string) MoneyNamespaceRevenueDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceRevenueDistributionStatisticsFromDict(dict)
+	req := MoneyNamespaceRevenueDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceRevenueDistributionStatisticsFromDict(data map[string]interface{}) MoneyNamespaceRevenueDistributionStatistics {
@@ -21781,10 +36287,42 @@ type MoneyNamespaceRevenueDistributionSegment struct {
 	Sum  *int64 `json:"sum"`
 }
 
+func (p *MoneyNamespaceRevenueDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceRevenueDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceRevenueDistributionSegment{}
+	} else {
+		*p = MoneyNamespaceRevenueDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["slot"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Slot)
+		}
+		if v, ok := d["sum"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Sum)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceRevenueDistributionSegmentFromJson(data string) MoneyNamespaceRevenueDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceRevenueDistributionSegmentFromDict(dict)
+	req := MoneyNamespaceRevenueDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceRevenueDistributionSegmentFromDict(data map[string]interface{}) MoneyNamespaceRevenueDistributionSegment {
@@ -21835,10 +36373,42 @@ type MoneyNamespaceRevenueDistribution struct {
 	Distribution []MoneyNamespaceRevenueDistributionSegment   `json:"distribution"`
 }
 
+func (p *MoneyNamespaceRevenueDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceRevenueDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceRevenueDistribution{}
+	} else {
+		*p = MoneyNamespaceRevenueDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceRevenueDistributionFromJson(data string) MoneyNamespaceRevenueDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceRevenueDistributionFromDict(dict)
+	req := MoneyNamespaceRevenueDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceRevenueDistributionFromDict(data map[string]interface{}) MoneyNamespaceRevenueDistribution {
@@ -21893,10 +36463,48 @@ type MoneyNamespaceDistributions struct {
 	Revenue      *MoneyNamespaceRevenueDistribution      `json:"revenue"`
 }
 
+func (p *MoneyNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespaceDistributions{}
+	} else {
+		*p = MoneyNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["verification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Verification)
+		}
+		if v, ok := d["deposit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Deposit)
+		}
+		if v, ok := d["withdraw"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Withdraw)
+		}
+		if v, ok := d["revenue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revenue)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceDistributionsFromJson(data string) MoneyNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceDistributionsFromDict(dict)
+	req := MoneyNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceDistributionsFromDict(data map[string]interface{}) MoneyNamespaceDistributions {
@@ -21966,10 +36574,103 @@ type MoneyNamespace struct {
 	Receipts      []MoneyReceipt               `json:"receipts"`
 }
 
+func (p *MoneyNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MoneyNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MoneyNamespace{}
+	} else {
+		*p = MoneyNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["wallets"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Wallets)
+		}
+		if v, ok := d["receipts"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Receipts)
+		}
+	}
+	return nil
+}
+
 func NewMoneyNamespaceFromJson(data string) MoneyNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewMoneyNamespaceFromDict(dict)
+	req := MoneyNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewMoneyNamespaceFromDict(data map[string]interface{}) MoneyNamespace {
@@ -22068,10 +36769,48 @@ type QuestQuestModelStatistics struct {
 	SuccessfulRate *float32 `json:"successfulRate"`
 }
 
+func (p *QuestQuestModelStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestQuestModelStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestQuestModelStatistics{}
+	} else {
+		*p = QuestQuestModelStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["startQuest"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.StartQuest)
+		}
+		if v, ok := d["endQuest"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EndQuest)
+		}
+		if v, ok := d["successful"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Successful)
+		}
+		if v, ok := d["successfulRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.SuccessfulRate)
+		}
+	}
+	return nil
+}
+
 func NewQuestQuestModelStatisticsFromJson(data string) QuestQuestModelStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestQuestModelStatisticsFromDict(dict)
+	req := QuestQuestModelStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestQuestModelStatisticsFromDict(data map[string]interface{}) QuestQuestModelStatistics {
@@ -22138,10 +36877,54 @@ type QuestQuestModelPlayTimeSecondsDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *QuestQuestModelPlayTimeSecondsDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestQuestModelPlayTimeSecondsDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestQuestModelPlayTimeSecondsDistributionStatistics{}
+	} else {
+		*p = QuestQuestModelPlayTimeSecondsDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewQuestQuestModelPlayTimeSecondsDistributionStatisticsFromJson(data string) QuestQuestModelPlayTimeSecondsDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestQuestModelPlayTimeSecondsDistributionStatisticsFromDict(dict)
+	req := QuestQuestModelPlayTimeSecondsDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestQuestModelPlayTimeSecondsDistributionStatisticsFromDict(data map[string]interface{}) QuestQuestModelPlayTimeSecondsDistributionStatistics {
@@ -22217,10 +37000,45 @@ type QuestQuestModelPlayTimeSecondsDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *QuestQuestModelPlayTimeSecondsDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestQuestModelPlayTimeSecondsDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestQuestModelPlayTimeSecondsDistributionSegment{}
+	} else {
+		*p = QuestQuestModelPlayTimeSecondsDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewQuestQuestModelPlayTimeSecondsDistributionSegmentFromJson(data string) QuestQuestModelPlayTimeSecondsDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestQuestModelPlayTimeSecondsDistributionSegmentFromDict(dict)
+	req := QuestQuestModelPlayTimeSecondsDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestQuestModelPlayTimeSecondsDistributionSegmentFromDict(data map[string]interface{}) QuestQuestModelPlayTimeSecondsDistributionSegment {
@@ -22277,10 +37095,42 @@ type QuestQuestModelPlayTimeSecondsDistribution struct {
 	Distribution []QuestQuestModelPlayTimeSecondsDistributionSegment   `json:"distribution"`
 }
 
+func (p *QuestQuestModelPlayTimeSecondsDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestQuestModelPlayTimeSecondsDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestQuestModelPlayTimeSecondsDistribution{}
+	} else {
+		*p = QuestQuestModelPlayTimeSecondsDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewQuestQuestModelPlayTimeSecondsDistributionFromJson(data string) QuestQuestModelPlayTimeSecondsDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestQuestModelPlayTimeSecondsDistributionFromDict(dict)
+	req := QuestQuestModelPlayTimeSecondsDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestQuestModelPlayTimeSecondsDistributionFromDict(data map[string]interface{}) QuestQuestModelPlayTimeSecondsDistribution {
@@ -22332,10 +37182,39 @@ type QuestQuestModelDistributions struct {
 	PlayTimeSeconds *QuestQuestModelPlayTimeSecondsDistribution `json:"playTimeSeconds"`
 }
 
+func (p *QuestQuestModelDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestQuestModelDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestQuestModelDistributions{}
+	} else {
+		*p = QuestQuestModelDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["playTimeSeconds"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.PlayTimeSeconds)
+		}
+	}
+	return nil
+}
+
 func NewQuestQuestModelDistributionsFromJson(data string) QuestQuestModelDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestQuestModelDistributionsFromDict(dict)
+	req := QuestQuestModelDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestQuestModelDistributionsFromDict(data map[string]interface{}) QuestQuestModelDistributions {
@@ -22382,10 +37261,88 @@ type QuestQuestModel struct {
 	Distributions *QuestQuestModelDistributions `json:"distributions"`
 }
 
+func (p *QuestQuestModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestQuestModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestQuestModel{}
+	} else {
+		*p = QuestQuestModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["questModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.QuestModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.QuestModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.QuestModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.QuestModelId)
+				}
+			}
+		}
+		if v, ok := d["questName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.QuestName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.QuestName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.QuestName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.QuestName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewQuestQuestModelFromJson(data string) QuestQuestModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestQuestModelFromDict(dict)
+	req := QuestQuestModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestQuestModelFromDict(data map[string]interface{}) QuestQuestModel {
@@ -22450,10 +37407,48 @@ type QuestQuestGroupModelStatistics struct {
 	SuccessfulRate *float32 `json:"successfulRate"`
 }
 
+func (p *QuestQuestGroupModelStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestQuestGroupModelStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestQuestGroupModelStatistics{}
+	} else {
+		*p = QuestQuestGroupModelStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["startQuest"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.StartQuest)
+		}
+		if v, ok := d["endQuest"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EndQuest)
+		}
+		if v, ok := d["successful"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Successful)
+		}
+		if v, ok := d["successfulRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.SuccessfulRate)
+		}
+	}
+	return nil
+}
+
 func NewQuestQuestGroupModelStatisticsFromJson(data string) QuestQuestGroupModelStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestQuestGroupModelStatisticsFromDict(dict)
+	req := QuestQuestGroupModelStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestQuestGroupModelStatisticsFromDict(data map[string]interface{}) QuestQuestGroupModelStatistics {
@@ -22520,10 +37515,54 @@ type QuestQuestGroupModelQuestDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *QuestQuestGroupModelQuestDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestQuestGroupModelQuestDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestQuestGroupModelQuestDistributionStatistics{}
+	} else {
+		*p = QuestQuestGroupModelQuestDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewQuestQuestGroupModelQuestDistributionStatisticsFromJson(data string) QuestQuestGroupModelQuestDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestQuestGroupModelQuestDistributionStatisticsFromDict(dict)
+	req := QuestQuestGroupModelQuestDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestQuestGroupModelQuestDistributionStatisticsFromDict(data map[string]interface{}) QuestQuestGroupModelQuestDistributionStatistics {
@@ -22598,10 +37637,62 @@ type QuestQuestGroupModelQuestDistributionSegment struct {
 	Count     *int64  `json:"count"`
 }
 
+func (p *QuestQuestGroupModelQuestDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestQuestGroupModelQuestDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestQuestGroupModelQuestDistributionSegment{}
+	} else {
+		*p = QuestQuestGroupModelQuestDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["questName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.QuestName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.QuestName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.QuestName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.QuestName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewQuestQuestGroupModelQuestDistributionSegmentFromJson(data string) QuestQuestGroupModelQuestDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestQuestGroupModelQuestDistributionSegmentFromDict(dict)
+	req := QuestQuestGroupModelQuestDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestQuestGroupModelQuestDistributionSegmentFromDict(data map[string]interface{}) QuestQuestGroupModelQuestDistributionSegment {
@@ -22652,10 +37743,42 @@ type QuestQuestGroupModelQuestDistribution struct {
 	Distribution []QuestQuestGroupModelQuestDistributionSegment   `json:"distribution"`
 }
 
+func (p *QuestQuestGroupModelQuestDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestQuestGroupModelQuestDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestQuestGroupModelQuestDistribution{}
+	} else {
+		*p = QuestQuestGroupModelQuestDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewQuestQuestGroupModelQuestDistributionFromJson(data string) QuestQuestGroupModelQuestDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestQuestGroupModelQuestDistributionFromDict(dict)
+	req := QuestQuestGroupModelQuestDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestQuestGroupModelQuestDistributionFromDict(data map[string]interface{}) QuestQuestGroupModelQuestDistribution {
@@ -22707,10 +37830,39 @@ type QuestQuestGroupModelDistributions struct {
 	Quest *QuestQuestGroupModelQuestDistribution `json:"quest"`
 }
 
+func (p *QuestQuestGroupModelDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestQuestGroupModelDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestQuestGroupModelDistributions{}
+	} else {
+		*p = QuestQuestGroupModelDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["quest"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Quest)
+		}
+	}
+	return nil
+}
+
 func NewQuestQuestGroupModelDistributionsFromJson(data string) QuestQuestGroupModelDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestQuestGroupModelDistributionsFromDict(dict)
+	req := QuestQuestGroupModelDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestQuestGroupModelDistributionsFromDict(data map[string]interface{}) QuestQuestGroupModelDistributions {
@@ -22758,10 +37910,91 @@ type QuestQuestGroupModel struct {
 	QuestModels       []QuestQuestModel                  `json:"questModels"`
 }
 
+func (p *QuestQuestGroupModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestQuestGroupModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestQuestGroupModel{}
+	} else {
+		*p = QuestQuestGroupModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["questGroupModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.QuestGroupModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.QuestGroupModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.QuestGroupModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestGroupModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestGroupModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.QuestGroupModelId)
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.QuestGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.QuestGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.QuestGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.QuestGroupName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["questModels"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.QuestModels)
+		}
+	}
+	return nil
+}
+
 func NewQuestQuestGroupModelFromJson(data string) QuestQuestGroupModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestQuestGroupModelFromDict(dict)
+	req := QuestQuestGroupModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestQuestGroupModelFromDict(data map[string]interface{}) QuestQuestGroupModel {
@@ -22834,10 +38067,48 @@ type QuestNamespaceStatistics struct {
 	SuccessfulRate *float32 `json:"successfulRate"`
 }
 
+func (p *QuestNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestNamespaceStatistics{}
+	} else {
+		*p = QuestNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["startQuest"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.StartQuest)
+		}
+		if v, ok := d["endQuest"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EndQuest)
+		}
+		if v, ok := d["successful"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Successful)
+		}
+		if v, ok := d["successfulRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.SuccessfulRate)
+		}
+	}
+	return nil
+}
+
 func NewQuestNamespaceStatisticsFromJson(data string) QuestNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestNamespaceStatisticsFromDict(dict)
+	req := QuestNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestNamespaceStatisticsFromDict(data map[string]interface{}) QuestNamespaceStatistics {
@@ -22904,10 +38175,54 @@ type QuestNamespaceQuestDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *QuestNamespaceQuestDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestNamespaceQuestDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestNamespaceQuestDistributionStatistics{}
+	} else {
+		*p = QuestNamespaceQuestDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewQuestNamespaceQuestDistributionStatisticsFromJson(data string) QuestNamespaceQuestDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestNamespaceQuestDistributionStatisticsFromDict(dict)
+	req := QuestNamespaceQuestDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestNamespaceQuestDistributionStatisticsFromDict(data map[string]interface{}) QuestNamespaceQuestDistributionStatistics {
@@ -22982,10 +38297,62 @@ type QuestNamespaceQuestDistributionSegment struct {
 	Count          *int64  `json:"count"`
 }
 
+func (p *QuestNamespaceQuestDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestNamespaceQuestDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestNamespaceQuestDistributionSegment{}
+	} else {
+		*p = QuestNamespaceQuestDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.QuestGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.QuestGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.QuestGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.QuestGroupName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewQuestNamespaceQuestDistributionSegmentFromJson(data string) QuestNamespaceQuestDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestNamespaceQuestDistributionSegmentFromDict(dict)
+	req := QuestNamespaceQuestDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestNamespaceQuestDistributionSegmentFromDict(data map[string]interface{}) QuestNamespaceQuestDistributionSegment {
@@ -23036,10 +38403,42 @@ type QuestNamespaceQuestDistribution struct {
 	Distribution []QuestNamespaceQuestDistributionSegment   `json:"distribution"`
 }
 
+func (p *QuestNamespaceQuestDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestNamespaceQuestDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestNamespaceQuestDistribution{}
+	} else {
+		*p = QuestNamespaceQuestDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewQuestNamespaceQuestDistributionFromJson(data string) QuestNamespaceQuestDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestNamespaceQuestDistributionFromDict(dict)
+	req := QuestNamespaceQuestDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestNamespaceQuestDistributionFromDict(data map[string]interface{}) QuestNamespaceQuestDistribution {
@@ -23091,10 +38490,39 @@ type QuestNamespaceDistributions struct {
 	Quest *QuestNamespaceQuestDistribution `json:"quest"`
 }
 
+func (p *QuestNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestNamespaceDistributions{}
+	} else {
+		*p = QuestNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["quest"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Quest)
+		}
+	}
+	return nil
+}
+
 func NewQuestNamespaceDistributionsFromJson(data string) QuestNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestNamespaceDistributionsFromDict(dict)
+	req := QuestNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestNamespaceDistributionsFromDict(data map[string]interface{}) QuestNamespaceDistributions {
@@ -23145,10 +38573,100 @@ type QuestNamespace struct {
 	QuestGroupModels []QuestQuestGroupModel       `json:"questGroupModels"`
 }
 
+func (p *QuestNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QuestNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QuestNamespace{}
+	} else {
+		*p = QuestNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["questGroupModels"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.QuestGroupModels)
+		}
+	}
+	return nil
+}
+
 func NewQuestNamespaceFromJson(data string) QuestNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewQuestNamespaceFromDict(dict)
+	req := QuestNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewQuestNamespaceFromDict(data map[string]interface{}) QuestNamespace {
@@ -23236,10 +38754,39 @@ type RankingCategoryModelStatistics struct {
 	Put *int64 `json:"put"`
 }
 
+func (p *RankingCategoryModelStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RankingCategoryModelStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RankingCategoryModelStatistics{}
+	} else {
+		*p = RankingCategoryModelStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["put"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Put)
+		}
+	}
+	return nil
+}
+
 func NewRankingCategoryModelStatisticsFromJson(data string) RankingCategoryModelStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRankingCategoryModelStatisticsFromDict(dict)
+	req := RankingCategoryModelStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRankingCategoryModelStatisticsFromDict(data map[string]interface{}) RankingCategoryModelStatistics {
@@ -23288,10 +38835,54 @@ type RankingCategoryModelScoreDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *RankingCategoryModelScoreDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RankingCategoryModelScoreDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RankingCategoryModelScoreDistributionStatistics{}
+	} else {
+		*p = RankingCategoryModelScoreDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewRankingCategoryModelScoreDistributionStatisticsFromJson(data string) RankingCategoryModelScoreDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRankingCategoryModelScoreDistributionStatisticsFromDict(dict)
+	req := RankingCategoryModelScoreDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRankingCategoryModelScoreDistributionStatisticsFromDict(data map[string]interface{}) RankingCategoryModelScoreDistributionStatistics {
@@ -23367,10 +38958,45 @@ type RankingCategoryModelScoreDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *RankingCategoryModelScoreDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RankingCategoryModelScoreDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RankingCategoryModelScoreDistributionSegment{}
+	} else {
+		*p = RankingCategoryModelScoreDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewRankingCategoryModelScoreDistributionSegmentFromJson(data string) RankingCategoryModelScoreDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRankingCategoryModelScoreDistributionSegmentFromDict(dict)
+	req := RankingCategoryModelScoreDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRankingCategoryModelScoreDistributionSegmentFromDict(data map[string]interface{}) RankingCategoryModelScoreDistributionSegment {
@@ -23427,10 +39053,42 @@ type RankingCategoryModelScoreDistribution struct {
 	Distribution []RankingCategoryModelScoreDistributionSegment   `json:"distribution"`
 }
 
+func (p *RankingCategoryModelScoreDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RankingCategoryModelScoreDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RankingCategoryModelScoreDistribution{}
+	} else {
+		*p = RankingCategoryModelScoreDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewRankingCategoryModelScoreDistributionFromJson(data string) RankingCategoryModelScoreDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRankingCategoryModelScoreDistributionFromDict(dict)
+	req := RankingCategoryModelScoreDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRankingCategoryModelScoreDistributionFromDict(data map[string]interface{}) RankingCategoryModelScoreDistribution {
@@ -23482,10 +39140,39 @@ type RankingCategoryModelDistributions struct {
 	Score *RankingCategoryModelScoreDistribution `json:"score"`
 }
 
+func (p *RankingCategoryModelDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RankingCategoryModelDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RankingCategoryModelDistributions{}
+	} else {
+		*p = RankingCategoryModelDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["score"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Score)
+		}
+	}
+	return nil
+}
+
 func NewRankingCategoryModelDistributionsFromJson(data string) RankingCategoryModelDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRankingCategoryModelDistributionsFromDict(dict)
+	req := RankingCategoryModelDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRankingCategoryModelDistributionsFromDict(data map[string]interface{}) RankingCategoryModelDistributions {
@@ -23532,10 +39219,88 @@ type RankingCategoryModel struct {
 	Distributions   *RankingCategoryModelDistributions `json:"distributions"`
 }
 
+func (p *RankingCategoryModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RankingCategoryModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RankingCategoryModel{}
+	} else {
+		*p = RankingCategoryModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["categoryModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CategoryModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CategoryModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CategoryModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CategoryModelId)
+				}
+			}
+		}
+		if v, ok := d["categoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CategoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CategoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CategoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CategoryName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewRankingCategoryModelFromJson(data string) RankingCategoryModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRankingCategoryModelFromDict(dict)
+	req := RankingCategoryModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRankingCategoryModelFromDict(data map[string]interface{}) RankingCategoryModel {
@@ -23597,10 +39362,39 @@ type RankingNamespaceStatistics struct {
 	Put *int64 `json:"put"`
 }
 
+func (p *RankingNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RankingNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RankingNamespaceStatistics{}
+	} else {
+		*p = RankingNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["put"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Put)
+		}
+	}
+	return nil
+}
+
 func NewRankingNamespaceStatisticsFromJson(data string) RankingNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRankingNamespaceStatisticsFromDict(dict)
+	req := RankingNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRankingNamespaceStatisticsFromDict(data map[string]interface{}) RankingNamespaceStatistics {
@@ -23649,10 +39443,54 @@ type RankingNamespacePutDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *RankingNamespacePutDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RankingNamespacePutDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RankingNamespacePutDistributionStatistics{}
+	} else {
+		*p = RankingNamespacePutDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewRankingNamespacePutDistributionStatisticsFromJson(data string) RankingNamespacePutDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRankingNamespacePutDistributionStatisticsFromDict(dict)
+	req := RankingNamespacePutDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRankingNamespacePutDistributionStatisticsFromDict(data map[string]interface{}) RankingNamespacePutDistributionStatistics {
@@ -23727,10 +39565,62 @@ type RankingNamespacePutDistributionSegment struct {
 	Count        *int64  `json:"count"`
 }
 
+func (p *RankingNamespacePutDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RankingNamespacePutDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RankingNamespacePutDistributionSegment{}
+	} else {
+		*p = RankingNamespacePutDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["categoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CategoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CategoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CategoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CategoryName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewRankingNamespacePutDistributionSegmentFromJson(data string) RankingNamespacePutDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRankingNamespacePutDistributionSegmentFromDict(dict)
+	req := RankingNamespacePutDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRankingNamespacePutDistributionSegmentFromDict(data map[string]interface{}) RankingNamespacePutDistributionSegment {
@@ -23781,10 +39671,42 @@ type RankingNamespacePutDistribution struct {
 	Distribution []RankingNamespacePutDistributionSegment   `json:"distribution"`
 }
 
+func (p *RankingNamespacePutDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RankingNamespacePutDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RankingNamespacePutDistribution{}
+	} else {
+		*p = RankingNamespacePutDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewRankingNamespacePutDistributionFromJson(data string) RankingNamespacePutDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRankingNamespacePutDistributionFromDict(dict)
+	req := RankingNamespacePutDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRankingNamespacePutDistributionFromDict(data map[string]interface{}) RankingNamespacePutDistribution {
@@ -23836,10 +39758,39 @@ type RankingNamespaceDistributions struct {
 	Put *RankingNamespacePutDistribution `json:"put"`
 }
 
+func (p *RankingNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RankingNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RankingNamespaceDistributions{}
+	} else {
+		*p = RankingNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["put"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Put)
+		}
+	}
+	return nil
+}
+
 func NewRankingNamespaceDistributionsFromJson(data string) RankingNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRankingNamespaceDistributionsFromDict(dict)
+	req := RankingNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRankingNamespaceDistributionsFromDict(data map[string]interface{}) RankingNamespaceDistributions {
@@ -23890,10 +39841,100 @@ type RankingNamespace struct {
 	CategoryModels []RankingCategoryModel         `json:"categoryModels"`
 }
 
+func (p *RankingNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RankingNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RankingNamespace{}
+	} else {
+		*p = RankingNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["categoryModels"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CategoryModels)
+		}
+	}
+	return nil
+}
+
 func NewRankingNamespaceFromJson(data string) RankingNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewRankingNamespaceFromDict(dict)
+	req := RankingNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewRankingNamespaceFromDict(data map[string]interface{}) RankingNamespace {
@@ -23981,10 +40022,39 @@ type ShowcaseDisplayItemStatistics struct {
 	Buy *int64 `json:"buy"`
 }
 
+func (p *ShowcaseDisplayItemStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseDisplayItemStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseDisplayItemStatistics{}
+	} else {
+		*p = ShowcaseDisplayItemStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["buy"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Buy)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseDisplayItemStatisticsFromJson(data string) ShowcaseDisplayItemStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseDisplayItemStatisticsFromDict(dict)
+	req := ShowcaseDisplayItemStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseDisplayItemStatisticsFromDict(data map[string]interface{}) ShowcaseDisplayItemStatistics {
@@ -24033,10 +40103,54 @@ type ShowcaseDisplayItemQuantityDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ShowcaseDisplayItemQuantityDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseDisplayItemQuantityDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseDisplayItemQuantityDistributionStatistics{}
+	} else {
+		*p = ShowcaseDisplayItemQuantityDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseDisplayItemQuantityDistributionStatisticsFromJson(data string) ShowcaseDisplayItemQuantityDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseDisplayItemQuantityDistributionStatisticsFromDict(dict)
+	req := ShowcaseDisplayItemQuantityDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseDisplayItemQuantityDistributionStatisticsFromDict(data map[string]interface{}) ShowcaseDisplayItemQuantityDistributionStatistics {
@@ -24112,10 +40226,45 @@ type ShowcaseDisplayItemQuantityDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *ShowcaseDisplayItemQuantityDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseDisplayItemQuantityDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseDisplayItemQuantityDistributionSegment{}
+	} else {
+		*p = ShowcaseDisplayItemQuantityDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseDisplayItemQuantityDistributionSegmentFromJson(data string) ShowcaseDisplayItemQuantityDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseDisplayItemQuantityDistributionSegmentFromDict(dict)
+	req := ShowcaseDisplayItemQuantityDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseDisplayItemQuantityDistributionSegmentFromDict(data map[string]interface{}) ShowcaseDisplayItemQuantityDistributionSegment {
@@ -24172,10 +40321,42 @@ type ShowcaseDisplayItemQuantityDistribution struct {
 	Distribution []ShowcaseDisplayItemQuantityDistributionSegment   `json:"distribution"`
 }
 
+func (p *ShowcaseDisplayItemQuantityDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseDisplayItemQuantityDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseDisplayItemQuantityDistribution{}
+	} else {
+		*p = ShowcaseDisplayItemQuantityDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseDisplayItemQuantityDistributionFromJson(data string) ShowcaseDisplayItemQuantityDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseDisplayItemQuantityDistributionFromDict(dict)
+	req := ShowcaseDisplayItemQuantityDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseDisplayItemQuantityDistributionFromDict(data map[string]interface{}) ShowcaseDisplayItemQuantityDistribution {
@@ -24227,10 +40408,39 @@ type ShowcaseDisplayItemDistributions struct {
 	Quantity *ShowcaseDisplayItemQuantityDistribution `json:"quantity"`
 }
 
+func (p *ShowcaseDisplayItemDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseDisplayItemDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseDisplayItemDistributions{}
+	} else {
+		*p = ShowcaseDisplayItemDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["quantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Quantity)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseDisplayItemDistributionsFromJson(data string) ShowcaseDisplayItemDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseDisplayItemDistributionsFromDict(dict)
+	req := ShowcaseDisplayItemDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseDisplayItemDistributionsFromDict(data map[string]interface{}) ShowcaseDisplayItemDistributions {
@@ -24276,10 +40486,65 @@ type ShowcaseDisplayItem struct {
 	Distributions *ShowcaseDisplayItemDistributions `json:"distributions"`
 }
 
+func (p *ShowcaseDisplayItem) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseDisplayItem{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseDisplayItem{}
+	} else {
+		*p = ShowcaseDisplayItem{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["displayItemId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DisplayItemId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DisplayItemId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DisplayItemId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DisplayItemId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DisplayItemId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DisplayItemId)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseDisplayItemFromJson(data string) ShowcaseDisplayItem {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseDisplayItemFromDict(dict)
+	req := ShowcaseDisplayItem{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseDisplayItemFromDict(data map[string]interface{}) ShowcaseDisplayItem {
@@ -24335,10 +40600,39 @@ type ShowcaseShowcaseStatistics struct {
 	Buy *int64 `json:"buy"`
 }
 
+func (p *ShowcaseShowcaseStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseShowcaseStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseShowcaseStatistics{}
+	} else {
+		*p = ShowcaseShowcaseStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["buy"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Buy)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseShowcaseStatisticsFromJson(data string) ShowcaseShowcaseStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseShowcaseStatisticsFromDict(dict)
+	req := ShowcaseShowcaseStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseShowcaseStatisticsFromDict(data map[string]interface{}) ShowcaseShowcaseStatistics {
@@ -24387,10 +40681,54 @@ type ShowcaseShowcaseBuyDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ShowcaseShowcaseBuyDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseShowcaseBuyDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseShowcaseBuyDistributionStatistics{}
+	} else {
+		*p = ShowcaseShowcaseBuyDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseShowcaseBuyDistributionStatisticsFromJson(data string) ShowcaseShowcaseBuyDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseShowcaseBuyDistributionStatisticsFromDict(dict)
+	req := ShowcaseShowcaseBuyDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseShowcaseBuyDistributionStatisticsFromDict(data map[string]interface{}) ShowcaseShowcaseBuyDistributionStatistics {
@@ -24465,10 +40803,62 @@ type ShowcaseShowcaseBuyDistributionSegment struct {
 	Count         *int64  `json:"count"`
 }
 
+func (p *ShowcaseShowcaseBuyDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseShowcaseBuyDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseShowcaseBuyDistributionSegment{}
+	} else {
+		*p = ShowcaseShowcaseBuyDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["displayItemId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DisplayItemId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DisplayItemId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DisplayItemId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DisplayItemId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DisplayItemId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DisplayItemId)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseShowcaseBuyDistributionSegmentFromJson(data string) ShowcaseShowcaseBuyDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseShowcaseBuyDistributionSegmentFromDict(dict)
+	req := ShowcaseShowcaseBuyDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseShowcaseBuyDistributionSegmentFromDict(data map[string]interface{}) ShowcaseShowcaseBuyDistributionSegment {
@@ -24519,10 +40909,42 @@ type ShowcaseShowcaseBuyDistribution struct {
 	Distribution []ShowcaseShowcaseBuyDistributionSegment   `json:"distribution"`
 }
 
+func (p *ShowcaseShowcaseBuyDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseShowcaseBuyDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseShowcaseBuyDistribution{}
+	} else {
+		*p = ShowcaseShowcaseBuyDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseShowcaseBuyDistributionFromJson(data string) ShowcaseShowcaseBuyDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseShowcaseBuyDistributionFromDict(dict)
+	req := ShowcaseShowcaseBuyDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseShowcaseBuyDistributionFromDict(data map[string]interface{}) ShowcaseShowcaseBuyDistribution {
@@ -24574,10 +40996,39 @@ type ShowcaseShowcaseDistributions struct {
 	Buy *ShowcaseShowcaseBuyDistribution `json:"buy"`
 }
 
+func (p *ShowcaseShowcaseDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseShowcaseDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseShowcaseDistributions{}
+	} else {
+		*p = ShowcaseShowcaseDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["buy"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Buy)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseShowcaseDistributionsFromJson(data string) ShowcaseShowcaseDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseShowcaseDistributionsFromDict(dict)
+	req := ShowcaseShowcaseDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseShowcaseDistributionsFromDict(data map[string]interface{}) ShowcaseShowcaseDistributions {
@@ -24625,10 +41076,91 @@ type ShowcaseShowcase struct {
 	DisplayItems  []ShowcaseDisplayItem          `json:"displayItems"`
 }
 
+func (p *ShowcaseShowcase) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseShowcase{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseShowcase{}
+	} else {
+		*p = ShowcaseShowcase{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["showcaseId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ShowcaseId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ShowcaseId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ShowcaseId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ShowcaseId)
+				}
+			}
+		}
+		if v, ok := d["showcaseName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ShowcaseName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ShowcaseName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ShowcaseName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ShowcaseName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["displayItems"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DisplayItems)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseShowcaseFromJson(data string) ShowcaseShowcase {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseShowcaseFromDict(dict)
+	req := ShowcaseShowcase{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseShowcaseFromDict(data map[string]interface{}) ShowcaseShowcase {
@@ -24698,10 +41230,39 @@ type ShowcaseNamespaceStatistics struct {
 	Buy *int64 `json:"buy"`
 }
 
+func (p *ShowcaseNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseNamespaceStatistics{}
+	} else {
+		*p = ShowcaseNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["buy"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Buy)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseNamespaceStatisticsFromJson(data string) ShowcaseNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseNamespaceStatisticsFromDict(dict)
+	req := ShowcaseNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseNamespaceStatisticsFromDict(data map[string]interface{}) ShowcaseNamespaceStatistics {
@@ -24750,10 +41311,54 @@ type ShowcaseNamespaceBuyDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *ShowcaseNamespaceBuyDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseNamespaceBuyDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseNamespaceBuyDistributionStatistics{}
+	} else {
+		*p = ShowcaseNamespaceBuyDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseNamespaceBuyDistributionStatisticsFromJson(data string) ShowcaseNamespaceBuyDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseNamespaceBuyDistributionStatisticsFromDict(dict)
+	req := ShowcaseNamespaceBuyDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseNamespaceBuyDistributionStatisticsFromDict(data map[string]interface{}) ShowcaseNamespaceBuyDistributionStatistics {
@@ -24828,10 +41433,62 @@ type ShowcaseNamespaceBuyDistributionSegment struct {
 	Count        *int64  `json:"count"`
 }
 
+func (p *ShowcaseNamespaceBuyDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseNamespaceBuyDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseNamespaceBuyDistributionSegment{}
+	} else {
+		*p = ShowcaseNamespaceBuyDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["showcaseName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ShowcaseName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ShowcaseName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ShowcaseName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ShowcaseName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseNamespaceBuyDistributionSegmentFromJson(data string) ShowcaseNamespaceBuyDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseNamespaceBuyDistributionSegmentFromDict(dict)
+	req := ShowcaseNamespaceBuyDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseNamespaceBuyDistributionSegmentFromDict(data map[string]interface{}) ShowcaseNamespaceBuyDistributionSegment {
@@ -24882,10 +41539,42 @@ type ShowcaseNamespaceBuyDistribution struct {
 	Distribution []ShowcaseNamespaceBuyDistributionSegment   `json:"distribution"`
 }
 
+func (p *ShowcaseNamespaceBuyDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseNamespaceBuyDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseNamespaceBuyDistribution{}
+	} else {
+		*p = ShowcaseNamespaceBuyDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseNamespaceBuyDistributionFromJson(data string) ShowcaseNamespaceBuyDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseNamespaceBuyDistributionFromDict(dict)
+	req := ShowcaseNamespaceBuyDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseNamespaceBuyDistributionFromDict(data map[string]interface{}) ShowcaseNamespaceBuyDistribution {
@@ -24937,10 +41626,39 @@ type ShowcaseNamespaceDistributions struct {
 	Buy *ShowcaseNamespaceBuyDistribution `json:"buy"`
 }
 
+func (p *ShowcaseNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseNamespaceDistributions{}
+	} else {
+		*p = ShowcaseNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["buy"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Buy)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseNamespaceDistributionsFromJson(data string) ShowcaseNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseNamespaceDistributionsFromDict(dict)
+	req := ShowcaseNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseNamespaceDistributionsFromDict(data map[string]interface{}) ShowcaseNamespaceDistributions {
@@ -24991,10 +41709,100 @@ type ShowcaseNamespace struct {
 	Showcases     []ShowcaseShowcase              `json:"showcases"`
 }
 
+func (p *ShowcaseNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ShowcaseNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ShowcaseNamespace{}
+	} else {
+		*p = ShowcaseNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["showcases"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Showcases)
+		}
+	}
+	return nil
+}
+
 func NewShowcaseNamespaceFromJson(data string) ShowcaseNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewShowcaseNamespaceFromDict(dict)
+	req := ShowcaseNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewShowcaseNamespaceFromDict(data map[string]interface{}) ShowcaseNamespace {
@@ -25085,10 +41893,48 @@ type StaminaStaminaModelStatistics struct {
 	RecoverAmount *int64 `json:"recoverAmount"`
 }
 
+func (p *StaminaStaminaModelStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaStaminaModelStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaStaminaModelStatistics{}
+	} else {
+		*p = StaminaStaminaModelStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["consume"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Consume)
+		}
+		if v, ok := d["consumeAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ConsumeAmount)
+		}
+		if v, ok := d["recover"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Recover)
+		}
+		if v, ok := d["recoverAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RecoverAmount)
+		}
+	}
+	return nil
+}
+
 func NewStaminaStaminaModelStatisticsFromJson(data string) StaminaStaminaModelStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaStaminaModelStatisticsFromDict(dict)
+	req := StaminaStaminaModelStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaStaminaModelStatisticsFromDict(data map[string]interface{}) StaminaStaminaModelStatistics {
@@ -25155,10 +42001,54 @@ type StaminaStaminaModelConsumeDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *StaminaStaminaModelConsumeDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaStaminaModelConsumeDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaStaminaModelConsumeDistributionStatistics{}
+	} else {
+		*p = StaminaStaminaModelConsumeDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewStaminaStaminaModelConsumeDistributionStatisticsFromJson(data string) StaminaStaminaModelConsumeDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaStaminaModelConsumeDistributionStatisticsFromDict(dict)
+	req := StaminaStaminaModelConsumeDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaStaminaModelConsumeDistributionStatisticsFromDict(data map[string]interface{}) StaminaStaminaModelConsumeDistributionStatistics {
@@ -25234,10 +42124,45 @@ type StaminaStaminaModelConsumeDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *StaminaStaminaModelConsumeDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaStaminaModelConsumeDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaStaminaModelConsumeDistributionSegment{}
+	} else {
+		*p = StaminaStaminaModelConsumeDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewStaminaStaminaModelConsumeDistributionSegmentFromJson(data string) StaminaStaminaModelConsumeDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaStaminaModelConsumeDistributionSegmentFromDict(dict)
+	req := StaminaStaminaModelConsumeDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaStaminaModelConsumeDistributionSegmentFromDict(data map[string]interface{}) StaminaStaminaModelConsumeDistributionSegment {
@@ -25294,10 +42219,42 @@ type StaminaStaminaModelConsumeDistribution struct {
 	Distribution []StaminaStaminaModelConsumeDistributionSegment   `json:"distribution"`
 }
 
+func (p *StaminaStaminaModelConsumeDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaStaminaModelConsumeDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaStaminaModelConsumeDistribution{}
+	} else {
+		*p = StaminaStaminaModelConsumeDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewStaminaStaminaModelConsumeDistributionFromJson(data string) StaminaStaminaModelConsumeDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaStaminaModelConsumeDistributionFromDict(dict)
+	req := StaminaStaminaModelConsumeDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaStaminaModelConsumeDistributionFromDict(data map[string]interface{}) StaminaStaminaModelConsumeDistribution {
@@ -25354,10 +42311,54 @@ type StaminaStaminaModelRecoverDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *StaminaStaminaModelRecoverDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaStaminaModelRecoverDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaStaminaModelRecoverDistributionStatistics{}
+	} else {
+		*p = StaminaStaminaModelRecoverDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewStaminaStaminaModelRecoverDistributionStatisticsFromJson(data string) StaminaStaminaModelRecoverDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaStaminaModelRecoverDistributionStatisticsFromDict(dict)
+	req := StaminaStaminaModelRecoverDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaStaminaModelRecoverDistributionStatisticsFromDict(data map[string]interface{}) StaminaStaminaModelRecoverDistributionStatistics {
@@ -25433,10 +42434,45 @@ type StaminaStaminaModelRecoverDistributionSegment struct {
 	Count *int64 `json:"count"`
 }
 
+func (p *StaminaStaminaModelRecoverDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaStaminaModelRecoverDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaStaminaModelRecoverDistributionSegment{}
+	} else {
+		*p = StaminaStaminaModelRecoverDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewStaminaStaminaModelRecoverDistributionSegmentFromJson(data string) StaminaStaminaModelRecoverDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaStaminaModelRecoverDistributionSegmentFromDict(dict)
+	req := StaminaStaminaModelRecoverDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaStaminaModelRecoverDistributionSegmentFromDict(data map[string]interface{}) StaminaStaminaModelRecoverDistributionSegment {
@@ -25493,10 +42529,42 @@ type StaminaStaminaModelRecoverDistribution struct {
 	Distribution []StaminaStaminaModelRecoverDistributionSegment   `json:"distribution"`
 }
 
+func (p *StaminaStaminaModelRecoverDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaStaminaModelRecoverDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaStaminaModelRecoverDistribution{}
+	} else {
+		*p = StaminaStaminaModelRecoverDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewStaminaStaminaModelRecoverDistributionFromJson(data string) StaminaStaminaModelRecoverDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaStaminaModelRecoverDistributionFromDict(dict)
+	req := StaminaStaminaModelRecoverDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaStaminaModelRecoverDistributionFromDict(data map[string]interface{}) StaminaStaminaModelRecoverDistribution {
@@ -25549,10 +42617,42 @@ type StaminaStaminaModelDistributions struct {
 	Recover *StaminaStaminaModelRecoverDistribution `json:"recover"`
 }
 
+func (p *StaminaStaminaModelDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaStaminaModelDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaStaminaModelDistributions{}
+	} else {
+		*p = StaminaStaminaModelDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["consume"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Consume)
+		}
+		if v, ok := d["recover"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Recover)
+		}
+	}
+	return nil
+}
+
 func NewStaminaStaminaModelDistributionsFromJson(data string) StaminaStaminaModelDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaStaminaModelDistributionsFromDict(dict)
+	req := StaminaStaminaModelDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaStaminaModelDistributionsFromDict(data map[string]interface{}) StaminaStaminaModelDistributions {
@@ -25605,10 +42705,88 @@ type StaminaStaminaModel struct {
 	Distributions  *StaminaStaminaModelDistributions `json:"distributions"`
 }
 
+func (p *StaminaStaminaModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaStaminaModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaStaminaModel{}
+	} else {
+		*p = StaminaStaminaModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["staminaModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaModelId)
+				}
+			}
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+	}
+	return nil
+}
+
 func NewStaminaStaminaModelFromJson(data string) StaminaStaminaModel {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaStaminaModelFromDict(dict)
+	req := StaminaStaminaModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaStaminaModelFromDict(data map[string]interface{}) StaminaStaminaModel {
@@ -25671,10 +42849,42 @@ type StaminaNamespaceStatistics struct {
 	Recover *int64 `json:"recover"`
 }
 
+func (p *StaminaNamespaceStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaNamespaceStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaNamespaceStatistics{}
+	} else {
+		*p = StaminaNamespaceStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["consume"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Consume)
+		}
+		if v, ok := d["recover"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Recover)
+		}
+	}
+	return nil
+}
+
 func NewStaminaNamespaceStatisticsFromJson(data string) StaminaNamespaceStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaNamespaceStatisticsFromDict(dict)
+	req := StaminaNamespaceStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaNamespaceStatisticsFromDict(data map[string]interface{}) StaminaNamespaceStatistics {
@@ -25729,10 +42939,54 @@ type StaminaNamespaceConsumeDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *StaminaNamespaceConsumeDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaNamespaceConsumeDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaNamespaceConsumeDistributionStatistics{}
+	} else {
+		*p = StaminaNamespaceConsumeDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewStaminaNamespaceConsumeDistributionStatisticsFromJson(data string) StaminaNamespaceConsumeDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaNamespaceConsumeDistributionStatisticsFromDict(dict)
+	req := StaminaNamespaceConsumeDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaNamespaceConsumeDistributionStatisticsFromDict(data map[string]interface{}) StaminaNamespaceConsumeDistributionStatistics {
@@ -25807,10 +43061,62 @@ type StaminaNamespaceConsumeDistributionSegment struct {
 	Count       *int64  `json:"count"`
 }
 
+func (p *StaminaNamespaceConsumeDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaNamespaceConsumeDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaNamespaceConsumeDistributionSegment{}
+	} else {
+		*p = StaminaNamespaceConsumeDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewStaminaNamespaceConsumeDistributionSegmentFromJson(data string) StaminaNamespaceConsumeDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaNamespaceConsumeDistributionSegmentFromDict(dict)
+	req := StaminaNamespaceConsumeDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaNamespaceConsumeDistributionSegmentFromDict(data map[string]interface{}) StaminaNamespaceConsumeDistributionSegment {
@@ -25861,10 +43167,42 @@ type StaminaNamespaceConsumeDistribution struct {
 	Distribution []StaminaNamespaceConsumeDistributionSegment   `json:"distribution"`
 }
 
+func (p *StaminaNamespaceConsumeDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaNamespaceConsumeDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaNamespaceConsumeDistribution{}
+	} else {
+		*p = StaminaNamespaceConsumeDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewStaminaNamespaceConsumeDistributionFromJson(data string) StaminaNamespaceConsumeDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaNamespaceConsumeDistributionFromDict(dict)
+	req := StaminaNamespaceConsumeDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaNamespaceConsumeDistributionFromDict(data map[string]interface{}) StaminaNamespaceConsumeDistribution {
@@ -25921,10 +43259,54 @@ type StaminaNamespaceRecoverDistributionStatistics struct {
 	Stddev *float32 `json:"stddev"`
 }
 
+func (p *StaminaNamespaceRecoverDistributionStatistics) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaNamespaceRecoverDistributionStatistics{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaNamespaceRecoverDistributionStatistics{}
+	} else {
+		*p = StaminaNamespaceRecoverDistributionStatistics{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+		if v, ok := d["min"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Min)
+		}
+		if v, ok := d["max"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Max)
+		}
+		if v, ok := d["avg"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Avg)
+		}
+		if v, ok := d["median"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Median)
+		}
+		if v, ok := d["stddev"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Stddev)
+		}
+	}
+	return nil
+}
+
 func NewStaminaNamespaceRecoverDistributionStatisticsFromJson(data string) StaminaNamespaceRecoverDistributionStatistics {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaNamespaceRecoverDistributionStatisticsFromDict(dict)
+	req := StaminaNamespaceRecoverDistributionStatistics{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaNamespaceRecoverDistributionStatisticsFromDict(data map[string]interface{}) StaminaNamespaceRecoverDistributionStatistics {
@@ -25999,10 +43381,62 @@ type StaminaNamespaceRecoverDistributionSegment struct {
 	Count       *int64  `json:"count"`
 }
 
+func (p *StaminaNamespaceRecoverDistributionSegment) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaNamespaceRecoverDistributionSegment{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaNamespaceRecoverDistributionSegment{}
+	} else {
+		*p = StaminaNamespaceRecoverDistributionSegment{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
 func NewStaminaNamespaceRecoverDistributionSegmentFromJson(data string) StaminaNamespaceRecoverDistributionSegment {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaNamespaceRecoverDistributionSegmentFromDict(dict)
+	req := StaminaNamespaceRecoverDistributionSegment{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaNamespaceRecoverDistributionSegmentFromDict(data map[string]interface{}) StaminaNamespaceRecoverDistributionSegment {
@@ -26053,10 +43487,42 @@ type StaminaNamespaceRecoverDistribution struct {
 	Distribution []StaminaNamespaceRecoverDistributionSegment   `json:"distribution"`
 }
 
+func (p *StaminaNamespaceRecoverDistribution) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaNamespaceRecoverDistribution{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaNamespaceRecoverDistribution{}
+	} else {
+		*p = StaminaNamespaceRecoverDistribution{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distribution"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distribution)
+		}
+	}
+	return nil
+}
+
 func NewStaminaNamespaceRecoverDistributionFromJson(data string) StaminaNamespaceRecoverDistribution {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaNamespaceRecoverDistributionFromDict(dict)
+	req := StaminaNamespaceRecoverDistribution{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaNamespaceRecoverDistributionFromDict(data map[string]interface{}) StaminaNamespaceRecoverDistribution {
@@ -26109,10 +43575,42 @@ type StaminaNamespaceDistributions struct {
 	Recover *StaminaNamespaceRecoverDistribution `json:"recover"`
 }
 
+func (p *StaminaNamespaceDistributions) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaNamespaceDistributions{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaNamespaceDistributions{}
+	} else {
+		*p = StaminaNamespaceDistributions{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["consume"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Consume)
+		}
+		if v, ok := d["recover"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Recover)
+		}
+	}
+	return nil
+}
+
 func NewStaminaNamespaceDistributionsFromJson(data string) StaminaNamespaceDistributions {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaNamespaceDistributionsFromDict(dict)
+	req := StaminaNamespaceDistributions{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaNamespaceDistributionsFromDict(data map[string]interface{}) StaminaNamespaceDistributions {
@@ -26169,10 +43667,100 @@ type StaminaNamespace struct {
 	StaminaModels []StaminaStaminaModel          `json:"staminaModels"`
 }
 
+func (p *StaminaNamespace) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = StaminaNamespace{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = StaminaNamespace{}
+	} else {
+		*p = StaminaNamespace{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["statistics"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Statistics)
+		}
+		if v, ok := d["distributions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Distributions)
+		}
+		if v, ok := d["staminaModels"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.StaminaModels)
+		}
+	}
+	return nil
+}
+
 func NewStaminaNamespaceFromJson(data string) StaminaNamespace {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewStaminaNamespaceFromDict(dict)
+	req := StaminaNamespace{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
 }
 
 func NewStaminaNamespaceFromDict(data map[string]interface{}) StaminaNamespace {

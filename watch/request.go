@@ -18,6 +18,7 @@ package watch
 
 import (
 	"encoding/json"
+	"strconv"
 
 	"github.com/gs2io/gs2-golang-sdk/core"
 )
@@ -38,10 +39,192 @@ type GetChartRequest struct {
 	Limit           *int32    `json:"limit"`
 }
 
-func NewGetChartRequestFromJson(data string) GetChartRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetChartRequestFromDict(dict)
+func (p *GetChartRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetChartRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetChartRequest{}
+	} else {
+		*p = GetChartRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["measure"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Measure = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Measure = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Measure = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Measure = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Measure = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Measure)
+				}
+			}
+		}
+		if v, ok := d["grn"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Grn = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Grn = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Grn = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Grn = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Grn = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Grn)
+				}
+			}
+		}
+		if v, ok := d["round"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Round = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Round = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Round = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Round = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Round = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Round)
+				}
+			}
+		}
+		if v, ok := d["filters"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Filters)
+		}
+		if v, ok := d["groupBys"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.GroupBys = l
+			}
+		}
+		if v, ok := d["countBy"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CountBy = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CountBy = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CountBy = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CountBy = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CountBy = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CountBy)
+				}
+			}
+		}
+		if v, ok := d["begin"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Begin)
+		}
+		if v, ok := d["end"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.End)
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewGetChartRequestFromJson(data string) (GetChartRequest, error) {
+	req := GetChartRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetChartRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetChartRequestFromDict(data map[string]interface{}) GetChartRequest {
@@ -96,10 +279,146 @@ type GetDistributionRequest struct {
 	Limit           *int32    `json:"limit"`
 }
 
-func NewGetDistributionRequestFromJson(data string) GetDistributionRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetDistributionRequestFromDict(dict)
+func (p *GetDistributionRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetDistributionRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetDistributionRequest{}
+	} else {
+		*p = GetDistributionRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["measure"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Measure = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Measure = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Measure = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Measure = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Measure = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Measure)
+				}
+			}
+		}
+		if v, ok := d["grn"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Grn = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Grn = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Grn = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Grn = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Grn = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Grn)
+				}
+			}
+		}
+		if v, ok := d["filters"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Filters)
+		}
+		if v, ok := d["groupBys"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.GroupBys = l
+			}
+		}
+		if v, ok := d["begin"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Begin)
+		}
+		if v, ok := d["end"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.End)
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewGetDistributionRequestFromJson(data string) (GetDistributionRequest, error) {
+	req := GetDistributionRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetDistributionRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetDistributionRequestFromDict(data map[string]interface{}) GetDistributionRequest {
@@ -144,10 +463,85 @@ type GetCumulativeRequest struct {
 	ResourceGrn     *string `json:"resourceGrn"`
 }
 
-func NewGetCumulativeRequestFromJson(data string) GetCumulativeRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetCumulativeRequestFromDict(dict)
+func (p *GetCumulativeRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetCumulativeRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetCumulativeRequest{}
+	} else {
+		*p = GetCumulativeRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["resourceGrn"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ResourceGrn = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ResourceGrn = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ResourceGrn = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ResourceGrn = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ResourceGrn = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ResourceGrn)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetCumulativeRequestFromJson(data string) (GetCumulativeRequest, error) {
+	req := GetCumulativeRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetCumulativeRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetCumulativeRequestFromDict(data map[string]interface{}) GetCumulativeRequest {
@@ -179,10 +573,94 @@ type DescribeBillingActivitiesRequest struct {
 	Limit           *int32  `json:"limit"`
 }
 
-func NewDescribeBillingActivitiesRequestFromJson(data string) DescribeBillingActivitiesRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeBillingActivitiesRequestFromDict(dict)
+func (p *DescribeBillingActivitiesRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeBillingActivitiesRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeBillingActivitiesRequest{}
+	} else {
+		*p = DescribeBillingActivitiesRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["service"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Service = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Service = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Service = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Service)
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewDescribeBillingActivitiesRequestFromJson(data string) (DescribeBillingActivitiesRequest, error) {
+	req := DescribeBillingActivitiesRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeBillingActivitiesRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeBillingActivitiesRequestFromDict(data map[string]interface{}) DescribeBillingActivitiesRequest {
@@ -219,10 +697,91 @@ type GetBillingActivityRequest struct {
 	ActivityType    *string `json:"activityType"`
 }
 
-func NewGetBillingActivityRequestFromJson(data string) GetBillingActivityRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetBillingActivityRequestFromDict(dict)
+func (p *GetBillingActivityRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetBillingActivityRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetBillingActivityRequest{}
+	} else {
+		*p = GetBillingActivityRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["service"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Service = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Service = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Service = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Service = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Service)
+				}
+			}
+		}
+		if v, ok := d["activityType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ActivityType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ActivityType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ActivityType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ActivityType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ActivityType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ActivityType)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetBillingActivityRequestFromJson(data string) (GetBillingActivityRequest, error) {
+	req := GetBillingActivityRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetBillingActivityRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetBillingActivityRequestFromDict(data map[string]interface{}) GetBillingActivityRequest {
@@ -253,10 +812,39 @@ type GetGeneralMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewGetGeneralMetricsRequestFromJson(data string) GetGeneralMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetGeneralMetricsRequestFromDict(dict)
+func (p *GetGeneralMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetGeneralMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetGeneralMetricsRequest{}
+	} else {
+		*p = GetGeneralMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewGetGeneralMetricsRequestFromJson(data string) (GetGeneralMetricsRequest, error) {
+	req := GetGeneralMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetGeneralMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetGeneralMetricsRequestFromDict(data map[string]interface{}) GetGeneralMetricsRequest {
@@ -277,10 +865,39 @@ type DescribeAccountNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeAccountNamespaceMetricsRequestFromJson(data string) DescribeAccountNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeAccountNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeAccountNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeAccountNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeAccountNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeAccountNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeAccountNamespaceMetricsRequestFromJson(data string) (DescribeAccountNamespaceMetricsRequest, error) {
+	req := DescribeAccountNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeAccountNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeAccountNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeAccountNamespaceMetricsRequest {
@@ -302,10 +919,62 @@ type GetAccountNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetAccountNamespaceMetricsRequestFromJson(data string) GetAccountNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetAccountNamespaceMetricsRequestFromDict(dict)
+func (p *GetAccountNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetAccountNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetAccountNamespaceMetricsRequest{}
+	} else {
+		*p = GetAccountNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetAccountNamespaceMetricsRequestFromJson(data string) (GetAccountNamespaceMetricsRequest, error) {
+	req := GetAccountNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetAccountNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetAccountNamespaceMetricsRequestFromDict(data map[string]interface{}) GetAccountNamespaceMetricsRequest {
@@ -330,10 +999,39 @@ type DescribeChatNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeChatNamespaceMetricsRequestFromJson(data string) DescribeChatNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeChatNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeChatNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeChatNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeChatNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeChatNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeChatNamespaceMetricsRequestFromJson(data string) (DescribeChatNamespaceMetricsRequest, error) {
+	req := DescribeChatNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeChatNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeChatNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeChatNamespaceMetricsRequest {
@@ -355,10 +1053,62 @@ type GetChatNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetChatNamespaceMetricsRequestFromJson(data string) GetChatNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetChatNamespaceMetricsRequestFromDict(dict)
+func (p *GetChatNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetChatNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetChatNamespaceMetricsRequest{}
+	} else {
+		*p = GetChatNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetChatNamespaceMetricsRequestFromJson(data string) (GetChatNamespaceMetricsRequest, error) {
+	req := GetChatNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetChatNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetChatNamespaceMetricsRequestFromDict(data map[string]interface{}) GetChatNamespaceMetricsRequest {
@@ -383,10 +1133,39 @@ type DescribeDatastoreNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeDatastoreNamespaceMetricsRequestFromJson(data string) DescribeDatastoreNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeDatastoreNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeDatastoreNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeDatastoreNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeDatastoreNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeDatastoreNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeDatastoreNamespaceMetricsRequestFromJson(data string) (DescribeDatastoreNamespaceMetricsRequest, error) {
+	req := DescribeDatastoreNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeDatastoreNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeDatastoreNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeDatastoreNamespaceMetricsRequest {
@@ -408,10 +1187,62 @@ type GetDatastoreNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetDatastoreNamespaceMetricsRequestFromJson(data string) GetDatastoreNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetDatastoreNamespaceMetricsRequestFromDict(dict)
+func (p *GetDatastoreNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetDatastoreNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetDatastoreNamespaceMetricsRequest{}
+	} else {
+		*p = GetDatastoreNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetDatastoreNamespaceMetricsRequestFromJson(data string) (GetDatastoreNamespaceMetricsRequest, error) {
+	req := GetDatastoreNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetDatastoreNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetDatastoreNamespaceMetricsRequestFromDict(data map[string]interface{}) GetDatastoreNamespaceMetricsRequest {
@@ -436,10 +1267,39 @@ type DescribeDictionaryNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeDictionaryNamespaceMetricsRequestFromJson(data string) DescribeDictionaryNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeDictionaryNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeDictionaryNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeDictionaryNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeDictionaryNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeDictionaryNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeDictionaryNamespaceMetricsRequestFromJson(data string) (DescribeDictionaryNamespaceMetricsRequest, error) {
+	req := DescribeDictionaryNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeDictionaryNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeDictionaryNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeDictionaryNamespaceMetricsRequest {
@@ -461,10 +1321,62 @@ type GetDictionaryNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetDictionaryNamespaceMetricsRequestFromJson(data string) GetDictionaryNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetDictionaryNamespaceMetricsRequestFromDict(dict)
+func (p *GetDictionaryNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetDictionaryNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetDictionaryNamespaceMetricsRequest{}
+	} else {
+		*p = GetDictionaryNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetDictionaryNamespaceMetricsRequestFromJson(data string) (GetDictionaryNamespaceMetricsRequest, error) {
+	req := GetDictionaryNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetDictionaryNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetDictionaryNamespaceMetricsRequestFromDict(data map[string]interface{}) GetDictionaryNamespaceMetricsRequest {
@@ -490,10 +1402,62 @@ type DescribeExchangeRateModelMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeExchangeRateModelMetricsRequestFromJson(data string) DescribeExchangeRateModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeExchangeRateModelMetricsRequestFromDict(dict)
+func (p *DescribeExchangeRateModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeExchangeRateModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeExchangeRateModelMetricsRequest{}
+	} else {
+		*p = DescribeExchangeRateModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeExchangeRateModelMetricsRequestFromJson(data string) (DescribeExchangeRateModelMetricsRequest, error) {
+	req := DescribeExchangeRateModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeExchangeRateModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeExchangeRateModelMetricsRequestFromDict(data map[string]interface{}) DescribeExchangeRateModelMetricsRequest {
@@ -520,10 +1484,85 @@ type GetExchangeRateModelMetricsRequest struct {
 	RateName        *string `json:"rateName"`
 }
 
-func NewGetExchangeRateModelMetricsRequestFromJson(data string) GetExchangeRateModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetExchangeRateModelMetricsRequestFromDict(dict)
+func (p *GetExchangeRateModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetExchangeRateModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetExchangeRateModelMetricsRequest{}
+	} else {
+		*p = GetExchangeRateModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["rateName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RateName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RateName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RateName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RateName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RateName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RateName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetExchangeRateModelMetricsRequestFromJson(data string) (GetExchangeRateModelMetricsRequest, error) {
+	req := GetExchangeRateModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetExchangeRateModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetExchangeRateModelMetricsRequestFromDict(data map[string]interface{}) GetExchangeRateModelMetricsRequest {
@@ -550,10 +1589,39 @@ type DescribeExchangeNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeExchangeNamespaceMetricsRequestFromJson(data string) DescribeExchangeNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeExchangeNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeExchangeNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeExchangeNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeExchangeNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeExchangeNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeExchangeNamespaceMetricsRequestFromJson(data string) (DescribeExchangeNamespaceMetricsRequest, error) {
+	req := DescribeExchangeNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeExchangeNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeExchangeNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeExchangeNamespaceMetricsRequest {
@@ -575,10 +1643,62 @@ type GetExchangeNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetExchangeNamespaceMetricsRequestFromJson(data string) GetExchangeNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetExchangeNamespaceMetricsRequestFromDict(dict)
+func (p *GetExchangeNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetExchangeNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetExchangeNamespaceMetricsRequest{}
+	} else {
+		*p = GetExchangeNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetExchangeNamespaceMetricsRequestFromJson(data string) (GetExchangeNamespaceMetricsRequest, error) {
+	req := GetExchangeNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetExchangeNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetExchangeNamespaceMetricsRequestFromDict(data map[string]interface{}) GetExchangeNamespaceMetricsRequest {
@@ -605,10 +1725,85 @@ type DescribeExperienceStatusMetricsRequest struct {
 	ExperienceName  *string `json:"experienceName"`
 }
 
-func NewDescribeExperienceStatusMetricsRequestFromJson(data string) DescribeExperienceStatusMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeExperienceStatusMetricsRequestFromDict(dict)
+func (p *DescribeExperienceStatusMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeExperienceStatusMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeExperienceStatusMetricsRequest{}
+	} else {
+		*p = DescribeExperienceStatusMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["experienceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ExperienceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ExperienceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ExperienceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ExperienceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeExperienceStatusMetricsRequestFromJson(data string) (DescribeExperienceStatusMetricsRequest, error) {
+	req := DescribeExperienceStatusMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeExperienceStatusMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeExperienceStatusMetricsRequestFromDict(data map[string]interface{}) DescribeExperienceStatusMetricsRequest {
@@ -636,10 +1831,62 @@ type DescribeExperienceExperienceModelMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeExperienceExperienceModelMetricsRequestFromJson(data string) DescribeExperienceExperienceModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeExperienceExperienceModelMetricsRequestFromDict(dict)
+func (p *DescribeExperienceExperienceModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeExperienceExperienceModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeExperienceExperienceModelMetricsRequest{}
+	} else {
+		*p = DescribeExperienceExperienceModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeExperienceExperienceModelMetricsRequestFromJson(data string) (DescribeExperienceExperienceModelMetricsRequest, error) {
+	req := DescribeExperienceExperienceModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeExperienceExperienceModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeExperienceExperienceModelMetricsRequestFromDict(data map[string]interface{}) DescribeExperienceExperienceModelMetricsRequest {
@@ -666,10 +1913,85 @@ type GetExperienceExperienceModelMetricsRequest struct {
 	ExperienceName  *string `json:"experienceName"`
 }
 
-func NewGetExperienceExperienceModelMetricsRequestFromJson(data string) GetExperienceExperienceModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetExperienceExperienceModelMetricsRequestFromDict(dict)
+func (p *GetExperienceExperienceModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetExperienceExperienceModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetExperienceExperienceModelMetricsRequest{}
+	} else {
+		*p = GetExperienceExperienceModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["experienceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ExperienceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ExperienceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ExperienceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ExperienceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetExperienceExperienceModelMetricsRequestFromJson(data string) (GetExperienceExperienceModelMetricsRequest, error) {
+	req := GetExperienceExperienceModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetExperienceExperienceModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetExperienceExperienceModelMetricsRequestFromDict(data map[string]interface{}) GetExperienceExperienceModelMetricsRequest {
@@ -696,10 +2018,39 @@ type DescribeExperienceNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeExperienceNamespaceMetricsRequestFromJson(data string) DescribeExperienceNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeExperienceNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeExperienceNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeExperienceNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeExperienceNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeExperienceNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeExperienceNamespaceMetricsRequestFromJson(data string) (DescribeExperienceNamespaceMetricsRequest, error) {
+	req := DescribeExperienceNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeExperienceNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeExperienceNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeExperienceNamespaceMetricsRequest {
@@ -721,10 +2072,62 @@ type GetExperienceNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetExperienceNamespaceMetricsRequestFromJson(data string) GetExperienceNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetExperienceNamespaceMetricsRequestFromDict(dict)
+func (p *GetExperienceNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetExperienceNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetExperienceNamespaceMetricsRequest{}
+	} else {
+		*p = GetExperienceNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetExperienceNamespaceMetricsRequestFromJson(data string) (GetExperienceNamespaceMetricsRequest, error) {
+	req := GetExperienceNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetExperienceNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetExperienceNamespaceMetricsRequestFromDict(data map[string]interface{}) GetExperienceNamespaceMetricsRequest {
@@ -751,10 +2154,85 @@ type DescribeFormationFormMetricsRequest struct {
 	MoldModelName   *string `json:"moldModelName"`
 }
 
-func NewDescribeFormationFormMetricsRequestFromJson(data string) DescribeFormationFormMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeFormationFormMetricsRequestFromDict(dict)
+func (p *DescribeFormationFormMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeFormationFormMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeFormationFormMetricsRequest{}
+	} else {
+		*p = DescribeFormationFormMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["moldModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MoldModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MoldModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MoldModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MoldModelName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeFormationFormMetricsRequestFromJson(data string) (DescribeFormationFormMetricsRequest, error) {
+	req := DescribeFormationFormMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeFormationFormMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeFormationFormMetricsRequestFromDict(data map[string]interface{}) DescribeFormationFormMetricsRequest {
@@ -782,10 +2260,62 @@ type DescribeFormationMoldMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeFormationMoldMetricsRequestFromJson(data string) DescribeFormationMoldMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeFormationMoldMetricsRequestFromDict(dict)
+func (p *DescribeFormationMoldMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeFormationMoldMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeFormationMoldMetricsRequest{}
+	} else {
+		*p = DescribeFormationMoldMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeFormationMoldMetricsRequestFromJson(data string) (DescribeFormationMoldMetricsRequest, error) {
+	req := DescribeFormationMoldMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeFormationMoldMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeFormationMoldMetricsRequestFromDict(data map[string]interface{}) DescribeFormationMoldMetricsRequest {
@@ -810,10 +2340,39 @@ type DescribeFormationNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeFormationNamespaceMetricsRequestFromJson(data string) DescribeFormationNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeFormationNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeFormationNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeFormationNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeFormationNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeFormationNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeFormationNamespaceMetricsRequestFromJson(data string) (DescribeFormationNamespaceMetricsRequest, error) {
+	req := DescribeFormationNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeFormationNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeFormationNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeFormationNamespaceMetricsRequest {
@@ -835,10 +2394,62 @@ type GetFormationNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetFormationNamespaceMetricsRequestFromJson(data string) GetFormationNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetFormationNamespaceMetricsRequestFromDict(dict)
+func (p *GetFormationNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetFormationNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetFormationNamespaceMetricsRequest{}
+	} else {
+		*p = GetFormationNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetFormationNamespaceMetricsRequestFromJson(data string) (GetFormationNamespaceMetricsRequest, error) {
+	req := GetFormationNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetFormationNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetFormationNamespaceMetricsRequestFromDict(data map[string]interface{}) GetFormationNamespaceMetricsRequest {
@@ -863,10 +2474,39 @@ type DescribeFriendNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeFriendNamespaceMetricsRequestFromJson(data string) DescribeFriendNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeFriendNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeFriendNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeFriendNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeFriendNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeFriendNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeFriendNamespaceMetricsRequestFromJson(data string) (DescribeFriendNamespaceMetricsRequest, error) {
+	req := DescribeFriendNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeFriendNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeFriendNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeFriendNamespaceMetricsRequest {
@@ -888,10 +2528,62 @@ type GetFriendNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetFriendNamespaceMetricsRequestFromJson(data string) GetFriendNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetFriendNamespaceMetricsRequestFromDict(dict)
+func (p *GetFriendNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetFriendNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetFriendNamespaceMetricsRequest{}
+	} else {
+		*p = GetFriendNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetFriendNamespaceMetricsRequestFromJson(data string) (GetFriendNamespaceMetricsRequest, error) {
+	req := GetFriendNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetFriendNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetFriendNamespaceMetricsRequestFromDict(data map[string]interface{}) GetFriendNamespaceMetricsRequest {
@@ -916,10 +2608,39 @@ type DescribeInboxNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeInboxNamespaceMetricsRequestFromJson(data string) DescribeInboxNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeInboxNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeInboxNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeInboxNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeInboxNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeInboxNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeInboxNamespaceMetricsRequestFromJson(data string) (DescribeInboxNamespaceMetricsRequest, error) {
+	req := DescribeInboxNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeInboxNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeInboxNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeInboxNamespaceMetricsRequest {
@@ -941,10 +2662,62 @@ type GetInboxNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetInboxNamespaceMetricsRequestFromJson(data string) GetInboxNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetInboxNamespaceMetricsRequestFromDict(dict)
+func (p *GetInboxNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetInboxNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetInboxNamespaceMetricsRequest{}
+	} else {
+		*p = GetInboxNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetInboxNamespaceMetricsRequestFromJson(data string) (GetInboxNamespaceMetricsRequest, error) {
+	req := GetInboxNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetInboxNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetInboxNamespaceMetricsRequestFromDict(data map[string]interface{}) GetInboxNamespaceMetricsRequest {
@@ -971,10 +2744,85 @@ type DescribeInventoryItemSetMetricsRequest struct {
 	InventoryName   *string `json:"inventoryName"`
 }
 
-func NewDescribeInventoryItemSetMetricsRequestFromJson(data string) DescribeInventoryItemSetMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeInventoryItemSetMetricsRequestFromDict(dict)
+func (p *DescribeInventoryItemSetMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeInventoryItemSetMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeInventoryItemSetMetricsRequest{}
+	} else {
+		*p = DescribeInventoryItemSetMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["inventoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.InventoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.InventoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.InventoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.InventoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.InventoryName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeInventoryItemSetMetricsRequestFromJson(data string) (DescribeInventoryItemSetMetricsRequest, error) {
+	req := DescribeInventoryItemSetMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeInventoryItemSetMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeInventoryItemSetMetricsRequestFromDict(data map[string]interface{}) DescribeInventoryItemSetMetricsRequest {
@@ -1002,10 +2850,62 @@ type DescribeInventoryInventoryMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeInventoryInventoryMetricsRequestFromJson(data string) DescribeInventoryInventoryMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeInventoryInventoryMetricsRequestFromDict(dict)
+func (p *DescribeInventoryInventoryMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeInventoryInventoryMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeInventoryInventoryMetricsRequest{}
+	} else {
+		*p = DescribeInventoryInventoryMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeInventoryInventoryMetricsRequestFromJson(data string) (DescribeInventoryInventoryMetricsRequest, error) {
+	req := DescribeInventoryInventoryMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeInventoryInventoryMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeInventoryInventoryMetricsRequestFromDict(data map[string]interface{}) DescribeInventoryInventoryMetricsRequest {
@@ -1030,10 +2930,39 @@ type DescribeInventoryNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeInventoryNamespaceMetricsRequestFromJson(data string) DescribeInventoryNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeInventoryNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeInventoryNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeInventoryNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeInventoryNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeInventoryNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeInventoryNamespaceMetricsRequestFromJson(data string) (DescribeInventoryNamespaceMetricsRequest, error) {
+	req := DescribeInventoryNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeInventoryNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeInventoryNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeInventoryNamespaceMetricsRequest {
@@ -1055,10 +2984,62 @@ type GetInventoryNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetInventoryNamespaceMetricsRequestFromJson(data string) GetInventoryNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetInventoryNamespaceMetricsRequestFromDict(dict)
+func (p *GetInventoryNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetInventoryNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetInventoryNamespaceMetricsRequest{}
+	} else {
+		*p = GetInventoryNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetInventoryNamespaceMetricsRequestFromJson(data string) (GetInventoryNamespaceMetricsRequest, error) {
+	req := GetInventoryNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetInventoryNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetInventoryNamespaceMetricsRequestFromDict(data map[string]interface{}) GetInventoryNamespaceMetricsRequest {
@@ -1083,10 +3064,39 @@ type DescribeKeyNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeKeyNamespaceMetricsRequestFromJson(data string) DescribeKeyNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeKeyNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeKeyNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeKeyNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeKeyNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeKeyNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeKeyNamespaceMetricsRequestFromJson(data string) (DescribeKeyNamespaceMetricsRequest, error) {
+	req := DescribeKeyNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeKeyNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeKeyNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeKeyNamespaceMetricsRequest {
@@ -1108,10 +3118,62 @@ type GetKeyNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetKeyNamespaceMetricsRequestFromJson(data string) GetKeyNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetKeyNamespaceMetricsRequestFromDict(dict)
+func (p *GetKeyNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetKeyNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetKeyNamespaceMetricsRequest{}
+	} else {
+		*p = GetKeyNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetKeyNamespaceMetricsRequestFromJson(data string) (GetKeyNamespaceMetricsRequest, error) {
+	req := GetKeyNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetKeyNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetKeyNamespaceMetricsRequestFromDict(data map[string]interface{}) GetKeyNamespaceMetricsRequest {
@@ -1138,10 +3200,85 @@ type DescribeLimitCounterMetricsRequest struct {
 	LimitName       *string `json:"limitName"`
 }
 
-func NewDescribeLimitCounterMetricsRequestFromJson(data string) DescribeLimitCounterMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeLimitCounterMetricsRequestFromDict(dict)
+func (p *DescribeLimitCounterMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeLimitCounterMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeLimitCounterMetricsRequest{}
+	} else {
+		*p = DescribeLimitCounterMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["limitName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LimitName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LimitName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LimitName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LimitName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LimitName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LimitName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeLimitCounterMetricsRequestFromJson(data string) (DescribeLimitCounterMetricsRequest, error) {
+	req := DescribeLimitCounterMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeLimitCounterMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeLimitCounterMetricsRequestFromDict(data map[string]interface{}) DescribeLimitCounterMetricsRequest {
@@ -1169,10 +3306,62 @@ type DescribeLimitLimitModelMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeLimitLimitModelMetricsRequestFromJson(data string) DescribeLimitLimitModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeLimitLimitModelMetricsRequestFromDict(dict)
+func (p *DescribeLimitLimitModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeLimitLimitModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeLimitLimitModelMetricsRequest{}
+	} else {
+		*p = DescribeLimitLimitModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeLimitLimitModelMetricsRequestFromJson(data string) (DescribeLimitLimitModelMetricsRequest, error) {
+	req := DescribeLimitLimitModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeLimitLimitModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeLimitLimitModelMetricsRequestFromDict(data map[string]interface{}) DescribeLimitLimitModelMetricsRequest {
@@ -1199,10 +3388,85 @@ type GetLimitLimitModelMetricsRequest struct {
 	LimitName       *string `json:"limitName"`
 }
 
-func NewGetLimitLimitModelMetricsRequestFromJson(data string) GetLimitLimitModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetLimitLimitModelMetricsRequestFromDict(dict)
+func (p *GetLimitLimitModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetLimitLimitModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetLimitLimitModelMetricsRequest{}
+	} else {
+		*p = GetLimitLimitModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["limitName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LimitName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LimitName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LimitName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LimitName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LimitName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LimitName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetLimitLimitModelMetricsRequestFromJson(data string) (GetLimitLimitModelMetricsRequest, error) {
+	req := GetLimitLimitModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetLimitLimitModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetLimitLimitModelMetricsRequestFromDict(data map[string]interface{}) GetLimitLimitModelMetricsRequest {
@@ -1229,10 +3493,39 @@ type DescribeLimitNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeLimitNamespaceMetricsRequestFromJson(data string) DescribeLimitNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeLimitNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeLimitNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeLimitNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeLimitNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeLimitNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeLimitNamespaceMetricsRequestFromJson(data string) (DescribeLimitNamespaceMetricsRequest, error) {
+	req := DescribeLimitNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeLimitNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeLimitNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeLimitNamespaceMetricsRequest {
@@ -1254,10 +3547,62 @@ type GetLimitNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetLimitNamespaceMetricsRequestFromJson(data string) GetLimitNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetLimitNamespaceMetricsRequestFromDict(dict)
+func (p *GetLimitNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetLimitNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetLimitNamespaceMetricsRequest{}
+	} else {
+		*p = GetLimitNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetLimitNamespaceMetricsRequestFromJson(data string) (GetLimitNamespaceMetricsRequest, error) {
+	req := GetLimitNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetLimitNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetLimitNamespaceMetricsRequestFromDict(data map[string]interface{}) GetLimitNamespaceMetricsRequest {
@@ -1283,10 +3628,62 @@ type DescribeLotteryLotteryMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeLotteryLotteryMetricsRequestFromJson(data string) DescribeLotteryLotteryMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeLotteryLotteryMetricsRequestFromDict(dict)
+func (p *DescribeLotteryLotteryMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeLotteryLotteryMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeLotteryLotteryMetricsRequest{}
+	} else {
+		*p = DescribeLotteryLotteryMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeLotteryLotteryMetricsRequestFromJson(data string) (DescribeLotteryLotteryMetricsRequest, error) {
+	req := DescribeLotteryLotteryMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeLotteryLotteryMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeLotteryLotteryMetricsRequestFromDict(data map[string]interface{}) DescribeLotteryLotteryMetricsRequest {
@@ -1313,10 +3710,85 @@ type GetLotteryLotteryMetricsRequest struct {
 	LotteryName     *string `json:"lotteryName"`
 }
 
-func NewGetLotteryLotteryMetricsRequestFromJson(data string) GetLotteryLotteryMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetLotteryLotteryMetricsRequestFromDict(dict)
+func (p *GetLotteryLotteryMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetLotteryLotteryMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetLotteryLotteryMetricsRequest{}
+	} else {
+		*p = GetLotteryLotteryMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["lotteryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.LotteryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.LotteryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.LotteryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.LotteryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.LotteryName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetLotteryLotteryMetricsRequestFromJson(data string) (GetLotteryLotteryMetricsRequest, error) {
+	req := GetLotteryLotteryMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetLotteryLotteryMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetLotteryLotteryMetricsRequestFromDict(data map[string]interface{}) GetLotteryLotteryMetricsRequest {
@@ -1343,10 +3815,39 @@ type DescribeLotteryNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeLotteryNamespaceMetricsRequestFromJson(data string) DescribeLotteryNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeLotteryNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeLotteryNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeLotteryNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeLotteryNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeLotteryNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeLotteryNamespaceMetricsRequestFromJson(data string) (DescribeLotteryNamespaceMetricsRequest, error) {
+	req := DescribeLotteryNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeLotteryNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeLotteryNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeLotteryNamespaceMetricsRequest {
@@ -1368,10 +3869,62 @@ type GetLotteryNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetLotteryNamespaceMetricsRequestFromJson(data string) GetLotteryNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetLotteryNamespaceMetricsRequestFromDict(dict)
+func (p *GetLotteryNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetLotteryNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetLotteryNamespaceMetricsRequest{}
+	} else {
+		*p = GetLotteryNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetLotteryNamespaceMetricsRequestFromJson(data string) (GetLotteryNamespaceMetricsRequest, error) {
+	req := GetLotteryNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetLotteryNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetLotteryNamespaceMetricsRequestFromDict(data map[string]interface{}) GetLotteryNamespaceMetricsRequest {
@@ -1396,10 +3949,39 @@ type DescribeMatchmakingNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeMatchmakingNamespaceMetricsRequestFromJson(data string) DescribeMatchmakingNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeMatchmakingNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeMatchmakingNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeMatchmakingNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeMatchmakingNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeMatchmakingNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeMatchmakingNamespaceMetricsRequestFromJson(data string) (DescribeMatchmakingNamespaceMetricsRequest, error) {
+	req := DescribeMatchmakingNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeMatchmakingNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeMatchmakingNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeMatchmakingNamespaceMetricsRequest {
@@ -1421,10 +4003,62 @@ type GetMatchmakingNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetMatchmakingNamespaceMetricsRequestFromJson(data string) GetMatchmakingNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetMatchmakingNamespaceMetricsRequestFromDict(dict)
+func (p *GetMatchmakingNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetMatchmakingNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetMatchmakingNamespaceMetricsRequest{}
+	} else {
+		*p = GetMatchmakingNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetMatchmakingNamespaceMetricsRequestFromJson(data string) (GetMatchmakingNamespaceMetricsRequest, error) {
+	req := GetMatchmakingNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetMatchmakingNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetMatchmakingNamespaceMetricsRequestFromDict(data map[string]interface{}) GetMatchmakingNamespaceMetricsRequest {
@@ -1450,10 +4084,62 @@ type DescribeMissionCounterMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeMissionCounterMetricsRequestFromJson(data string) DescribeMissionCounterMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeMissionCounterMetricsRequestFromDict(dict)
+func (p *DescribeMissionCounterMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeMissionCounterMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeMissionCounterMetricsRequest{}
+	} else {
+		*p = DescribeMissionCounterMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeMissionCounterMetricsRequestFromJson(data string) (DescribeMissionCounterMetricsRequest, error) {
+	req := DescribeMissionCounterMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeMissionCounterMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeMissionCounterMetricsRequestFromDict(data map[string]interface{}) DescribeMissionCounterMetricsRequest {
@@ -1479,10 +4165,62 @@ type DescribeMissionMissionGroupModelMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeMissionMissionGroupModelMetricsRequestFromJson(data string) DescribeMissionMissionGroupModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeMissionMissionGroupModelMetricsRequestFromDict(dict)
+func (p *DescribeMissionMissionGroupModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeMissionMissionGroupModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeMissionMissionGroupModelMetricsRequest{}
+	} else {
+		*p = DescribeMissionMissionGroupModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeMissionMissionGroupModelMetricsRequestFromJson(data string) (DescribeMissionMissionGroupModelMetricsRequest, error) {
+	req := DescribeMissionMissionGroupModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeMissionMissionGroupModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeMissionMissionGroupModelMetricsRequestFromDict(data map[string]interface{}) DescribeMissionMissionGroupModelMetricsRequest {
@@ -1509,10 +4247,85 @@ type GetMissionMissionGroupModelMetricsRequest struct {
 	MissionGroupName *string `json:"missionGroupName"`
 }
 
-func NewGetMissionMissionGroupModelMetricsRequestFromJson(data string) GetMissionMissionGroupModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetMissionMissionGroupModelMetricsRequestFromDict(dict)
+func (p *GetMissionMissionGroupModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetMissionMissionGroupModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetMissionMissionGroupModelMetricsRequest{}
+	} else {
+		*p = GetMissionMissionGroupModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["missionGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionGroupName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetMissionMissionGroupModelMetricsRequestFromJson(data string) (GetMissionMissionGroupModelMetricsRequest, error) {
+	req := GetMissionMissionGroupModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetMissionMissionGroupModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetMissionMissionGroupModelMetricsRequestFromDict(data map[string]interface{}) GetMissionMissionGroupModelMetricsRequest {
@@ -1539,10 +4352,39 @@ type DescribeMissionNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeMissionNamespaceMetricsRequestFromJson(data string) DescribeMissionNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeMissionNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeMissionNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeMissionNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeMissionNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeMissionNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeMissionNamespaceMetricsRequestFromJson(data string) (DescribeMissionNamespaceMetricsRequest, error) {
+	req := DescribeMissionNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeMissionNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeMissionNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeMissionNamespaceMetricsRequest {
@@ -1564,10 +4406,62 @@ type GetMissionNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetMissionNamespaceMetricsRequestFromJson(data string) GetMissionNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetMissionNamespaceMetricsRequestFromDict(dict)
+func (p *GetMissionNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetMissionNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetMissionNamespaceMetricsRequest{}
+	} else {
+		*p = GetMissionNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetMissionNamespaceMetricsRequestFromJson(data string) (GetMissionNamespaceMetricsRequest, error) {
+	req := GetMissionNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetMissionNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetMissionNamespaceMetricsRequestFromDict(data map[string]interface{}) GetMissionNamespaceMetricsRequest {
@@ -1593,10 +4487,62 @@ type DescribeMoneyWalletMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeMoneyWalletMetricsRequestFromJson(data string) DescribeMoneyWalletMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeMoneyWalletMetricsRequestFromDict(dict)
+func (p *DescribeMoneyWalletMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeMoneyWalletMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeMoneyWalletMetricsRequest{}
+	} else {
+		*p = DescribeMoneyWalletMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeMoneyWalletMetricsRequestFromJson(data string) (DescribeMoneyWalletMetricsRequest, error) {
+	req := DescribeMoneyWalletMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeMoneyWalletMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeMoneyWalletMetricsRequestFromDict(data map[string]interface{}) DescribeMoneyWalletMetricsRequest {
@@ -1622,10 +4568,62 @@ type DescribeMoneyReceiptMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeMoneyReceiptMetricsRequestFromJson(data string) DescribeMoneyReceiptMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeMoneyReceiptMetricsRequestFromDict(dict)
+func (p *DescribeMoneyReceiptMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeMoneyReceiptMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeMoneyReceiptMetricsRequest{}
+	} else {
+		*p = DescribeMoneyReceiptMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeMoneyReceiptMetricsRequestFromJson(data string) (DescribeMoneyReceiptMetricsRequest, error) {
+	req := DescribeMoneyReceiptMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeMoneyReceiptMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeMoneyReceiptMetricsRequestFromDict(data map[string]interface{}) DescribeMoneyReceiptMetricsRequest {
@@ -1650,10 +4648,39 @@ type DescribeMoneyNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeMoneyNamespaceMetricsRequestFromJson(data string) DescribeMoneyNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeMoneyNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeMoneyNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeMoneyNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeMoneyNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeMoneyNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeMoneyNamespaceMetricsRequestFromJson(data string) (DescribeMoneyNamespaceMetricsRequest, error) {
+	req := DescribeMoneyNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeMoneyNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeMoneyNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeMoneyNamespaceMetricsRequest {
@@ -1675,10 +4702,62 @@ type GetMoneyNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetMoneyNamespaceMetricsRequestFromJson(data string) GetMoneyNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetMoneyNamespaceMetricsRequestFromDict(dict)
+func (p *GetMoneyNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetMoneyNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetMoneyNamespaceMetricsRequest{}
+	} else {
+		*p = GetMoneyNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetMoneyNamespaceMetricsRequestFromJson(data string) (GetMoneyNamespaceMetricsRequest, error) {
+	req := GetMoneyNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetMoneyNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetMoneyNamespaceMetricsRequestFromDict(data map[string]interface{}) GetMoneyNamespaceMetricsRequest {
@@ -1705,10 +4784,85 @@ type DescribeQuestQuestModelMetricsRequest struct {
 	QuestGroupName  *string `json:"questGroupName"`
 }
 
-func NewDescribeQuestQuestModelMetricsRequestFromJson(data string) DescribeQuestQuestModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeQuestQuestModelMetricsRequestFromDict(dict)
+func (p *DescribeQuestQuestModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeQuestQuestModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeQuestQuestModelMetricsRequest{}
+	} else {
+		*p = DescribeQuestQuestModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.QuestGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.QuestGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.QuestGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.QuestGroupName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeQuestQuestModelMetricsRequestFromJson(data string) (DescribeQuestQuestModelMetricsRequest, error) {
+	req := DescribeQuestQuestModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeQuestQuestModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeQuestQuestModelMetricsRequestFromDict(data map[string]interface{}) DescribeQuestQuestModelMetricsRequest {
@@ -1738,10 +4892,108 @@ type GetQuestQuestModelMetricsRequest struct {
 	QuestName       *string `json:"questName"`
 }
 
-func NewGetQuestQuestModelMetricsRequestFromJson(data string) GetQuestQuestModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetQuestQuestModelMetricsRequestFromDict(dict)
+func (p *GetQuestQuestModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetQuestQuestModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetQuestQuestModelMetricsRequest{}
+	} else {
+		*p = GetQuestQuestModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.QuestGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.QuestGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.QuestGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.QuestGroupName)
+				}
+			}
+		}
+		if v, ok := d["questName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.QuestName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.QuestName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.QuestName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.QuestName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetQuestQuestModelMetricsRequestFromJson(data string) (GetQuestQuestModelMetricsRequest, error) {
+	req := GetQuestQuestModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetQuestQuestModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetQuestQuestModelMetricsRequestFromDict(data map[string]interface{}) GetQuestQuestModelMetricsRequest {
@@ -1771,10 +5023,62 @@ type DescribeQuestQuestGroupModelMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeQuestQuestGroupModelMetricsRequestFromJson(data string) DescribeQuestQuestGroupModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeQuestQuestGroupModelMetricsRequestFromDict(dict)
+func (p *DescribeQuestQuestGroupModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeQuestQuestGroupModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeQuestQuestGroupModelMetricsRequest{}
+	} else {
+		*p = DescribeQuestQuestGroupModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeQuestQuestGroupModelMetricsRequestFromJson(data string) (DescribeQuestQuestGroupModelMetricsRequest, error) {
+	req := DescribeQuestQuestGroupModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeQuestQuestGroupModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeQuestQuestGroupModelMetricsRequestFromDict(data map[string]interface{}) DescribeQuestQuestGroupModelMetricsRequest {
@@ -1801,10 +5105,85 @@ type GetQuestQuestGroupModelMetricsRequest struct {
 	QuestGroupName  *string `json:"questGroupName"`
 }
 
-func NewGetQuestQuestGroupModelMetricsRequestFromJson(data string) GetQuestQuestGroupModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetQuestQuestGroupModelMetricsRequestFromDict(dict)
+func (p *GetQuestQuestGroupModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetQuestQuestGroupModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetQuestQuestGroupModelMetricsRequest{}
+	} else {
+		*p = GetQuestQuestGroupModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["questGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.QuestGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.QuestGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.QuestGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.QuestGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.QuestGroupName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetQuestQuestGroupModelMetricsRequestFromJson(data string) (GetQuestQuestGroupModelMetricsRequest, error) {
+	req := GetQuestQuestGroupModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetQuestQuestGroupModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetQuestQuestGroupModelMetricsRequestFromDict(data map[string]interface{}) GetQuestQuestGroupModelMetricsRequest {
@@ -1831,10 +5210,39 @@ type DescribeQuestNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeQuestNamespaceMetricsRequestFromJson(data string) DescribeQuestNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeQuestNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeQuestNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeQuestNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeQuestNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeQuestNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeQuestNamespaceMetricsRequestFromJson(data string) (DescribeQuestNamespaceMetricsRequest, error) {
+	req := DescribeQuestNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeQuestNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeQuestNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeQuestNamespaceMetricsRequest {
@@ -1856,10 +5264,62 @@ type GetQuestNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetQuestNamespaceMetricsRequestFromJson(data string) GetQuestNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetQuestNamespaceMetricsRequestFromDict(dict)
+func (p *GetQuestNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetQuestNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetQuestNamespaceMetricsRequest{}
+	} else {
+		*p = GetQuestNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetQuestNamespaceMetricsRequestFromJson(data string) (GetQuestNamespaceMetricsRequest, error) {
+	req := GetQuestNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetQuestNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetQuestNamespaceMetricsRequestFromDict(data map[string]interface{}) GetQuestNamespaceMetricsRequest {
@@ -1885,10 +5345,62 @@ type DescribeRankingCategoryModelMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeRankingCategoryModelMetricsRequestFromJson(data string) DescribeRankingCategoryModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRankingCategoryModelMetricsRequestFromDict(dict)
+func (p *DescribeRankingCategoryModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeRankingCategoryModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeRankingCategoryModelMetricsRequest{}
+	} else {
+		*p = DescribeRankingCategoryModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeRankingCategoryModelMetricsRequestFromJson(data string) (DescribeRankingCategoryModelMetricsRequest, error) {
+	req := DescribeRankingCategoryModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeRankingCategoryModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeRankingCategoryModelMetricsRequestFromDict(data map[string]interface{}) DescribeRankingCategoryModelMetricsRequest {
@@ -1915,10 +5427,85 @@ type GetRankingCategoryModelMetricsRequest struct {
 	CategoryName    *string `json:"categoryName"`
 }
 
-func NewGetRankingCategoryModelMetricsRequestFromJson(data string) GetRankingCategoryModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRankingCategoryModelMetricsRequestFromDict(dict)
+func (p *GetRankingCategoryModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetRankingCategoryModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetRankingCategoryModelMetricsRequest{}
+	} else {
+		*p = GetRankingCategoryModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["categoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CategoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CategoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CategoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CategoryName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetRankingCategoryModelMetricsRequestFromJson(data string) (GetRankingCategoryModelMetricsRequest, error) {
+	req := GetRankingCategoryModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetRankingCategoryModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetRankingCategoryModelMetricsRequestFromDict(data map[string]interface{}) GetRankingCategoryModelMetricsRequest {
@@ -1945,10 +5532,39 @@ type DescribeRankingNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeRankingNamespaceMetricsRequestFromJson(data string) DescribeRankingNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeRankingNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeRankingNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeRankingNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeRankingNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeRankingNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeRankingNamespaceMetricsRequestFromJson(data string) (DescribeRankingNamespaceMetricsRequest, error) {
+	req := DescribeRankingNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeRankingNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeRankingNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeRankingNamespaceMetricsRequest {
@@ -1970,10 +5586,62 @@ type GetRankingNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetRankingNamespaceMetricsRequestFromJson(data string) GetRankingNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetRankingNamespaceMetricsRequestFromDict(dict)
+func (p *GetRankingNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetRankingNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetRankingNamespaceMetricsRequest{}
+	} else {
+		*p = GetRankingNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetRankingNamespaceMetricsRequestFromJson(data string) (GetRankingNamespaceMetricsRequest, error) {
+	req := GetRankingNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetRankingNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetRankingNamespaceMetricsRequestFromDict(data map[string]interface{}) GetRankingNamespaceMetricsRequest {
@@ -2000,10 +5668,85 @@ type DescribeShowcaseDisplayItemMetricsRequest struct {
 	ShowcaseName    *string `json:"showcaseName"`
 }
 
-func NewDescribeShowcaseDisplayItemMetricsRequestFromJson(data string) DescribeShowcaseDisplayItemMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeShowcaseDisplayItemMetricsRequestFromDict(dict)
+func (p *DescribeShowcaseDisplayItemMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeShowcaseDisplayItemMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeShowcaseDisplayItemMetricsRequest{}
+	} else {
+		*p = DescribeShowcaseDisplayItemMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["showcaseName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ShowcaseName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ShowcaseName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ShowcaseName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ShowcaseName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeShowcaseDisplayItemMetricsRequestFromJson(data string) (DescribeShowcaseDisplayItemMetricsRequest, error) {
+	req := DescribeShowcaseDisplayItemMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeShowcaseDisplayItemMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeShowcaseDisplayItemMetricsRequestFromDict(data map[string]interface{}) DescribeShowcaseDisplayItemMetricsRequest {
@@ -2033,10 +5776,108 @@ type GetShowcaseDisplayItemMetricsRequest struct {
 	DisplayItemId   *string `json:"displayItemId"`
 }
 
-func NewGetShowcaseDisplayItemMetricsRequestFromJson(data string) GetShowcaseDisplayItemMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetShowcaseDisplayItemMetricsRequestFromDict(dict)
+func (p *GetShowcaseDisplayItemMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetShowcaseDisplayItemMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetShowcaseDisplayItemMetricsRequest{}
+	} else {
+		*p = GetShowcaseDisplayItemMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["showcaseName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ShowcaseName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ShowcaseName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ShowcaseName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ShowcaseName)
+				}
+			}
+		}
+		if v, ok := d["displayItemId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DisplayItemId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DisplayItemId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DisplayItemId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DisplayItemId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DisplayItemId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DisplayItemId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetShowcaseDisplayItemMetricsRequestFromJson(data string) (GetShowcaseDisplayItemMetricsRequest, error) {
+	req := GetShowcaseDisplayItemMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetShowcaseDisplayItemMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetShowcaseDisplayItemMetricsRequestFromDict(data map[string]interface{}) GetShowcaseDisplayItemMetricsRequest {
@@ -2066,10 +5907,62 @@ type DescribeShowcaseShowcaseMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeShowcaseShowcaseMetricsRequestFromJson(data string) DescribeShowcaseShowcaseMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeShowcaseShowcaseMetricsRequestFromDict(dict)
+func (p *DescribeShowcaseShowcaseMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeShowcaseShowcaseMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeShowcaseShowcaseMetricsRequest{}
+	} else {
+		*p = DescribeShowcaseShowcaseMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeShowcaseShowcaseMetricsRequestFromJson(data string) (DescribeShowcaseShowcaseMetricsRequest, error) {
+	req := DescribeShowcaseShowcaseMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeShowcaseShowcaseMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeShowcaseShowcaseMetricsRequestFromDict(data map[string]interface{}) DescribeShowcaseShowcaseMetricsRequest {
@@ -2096,10 +5989,85 @@ type GetShowcaseShowcaseMetricsRequest struct {
 	ShowcaseName    *string `json:"showcaseName"`
 }
 
-func NewGetShowcaseShowcaseMetricsRequestFromJson(data string) GetShowcaseShowcaseMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetShowcaseShowcaseMetricsRequestFromDict(dict)
+func (p *GetShowcaseShowcaseMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetShowcaseShowcaseMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetShowcaseShowcaseMetricsRequest{}
+	} else {
+		*p = GetShowcaseShowcaseMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["showcaseName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ShowcaseName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ShowcaseName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ShowcaseName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ShowcaseName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetShowcaseShowcaseMetricsRequestFromJson(data string) (GetShowcaseShowcaseMetricsRequest, error) {
+	req := GetShowcaseShowcaseMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetShowcaseShowcaseMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetShowcaseShowcaseMetricsRequestFromDict(data map[string]interface{}) GetShowcaseShowcaseMetricsRequest {
@@ -2126,10 +6094,39 @@ type DescribeShowcaseNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeShowcaseNamespaceMetricsRequestFromJson(data string) DescribeShowcaseNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeShowcaseNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeShowcaseNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeShowcaseNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeShowcaseNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeShowcaseNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeShowcaseNamespaceMetricsRequestFromJson(data string) (DescribeShowcaseNamespaceMetricsRequest, error) {
+	req := DescribeShowcaseNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeShowcaseNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeShowcaseNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeShowcaseNamespaceMetricsRequest {
@@ -2151,10 +6148,62 @@ type GetShowcaseNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetShowcaseNamespaceMetricsRequestFromJson(data string) GetShowcaseNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetShowcaseNamespaceMetricsRequestFromDict(dict)
+func (p *GetShowcaseNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetShowcaseNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetShowcaseNamespaceMetricsRequest{}
+	} else {
+		*p = GetShowcaseNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetShowcaseNamespaceMetricsRequestFromJson(data string) (GetShowcaseNamespaceMetricsRequest, error) {
+	req := GetShowcaseNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetShowcaseNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetShowcaseNamespaceMetricsRequestFromDict(data map[string]interface{}) GetShowcaseNamespaceMetricsRequest {
@@ -2180,10 +6229,62 @@ type DescribeStaminaStaminaModelMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewDescribeStaminaStaminaModelMetricsRequestFromJson(data string) DescribeStaminaStaminaModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeStaminaStaminaModelMetricsRequestFromDict(dict)
+func (p *DescribeStaminaStaminaModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeStaminaStaminaModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeStaminaStaminaModelMetricsRequest{}
+	} else {
+		*p = DescribeStaminaStaminaModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeStaminaStaminaModelMetricsRequestFromJson(data string) (DescribeStaminaStaminaModelMetricsRequest, error) {
+	req := DescribeStaminaStaminaModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeStaminaStaminaModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeStaminaStaminaModelMetricsRequestFromDict(data map[string]interface{}) DescribeStaminaStaminaModelMetricsRequest {
@@ -2210,10 +6311,85 @@ type GetStaminaStaminaModelMetricsRequest struct {
 	StaminaName     *string `json:"staminaName"`
 }
 
-func NewGetStaminaStaminaModelMetricsRequestFromJson(data string) GetStaminaStaminaModelMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStaminaStaminaModelMetricsRequestFromDict(dict)
+func (p *GetStaminaStaminaModelMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetStaminaStaminaModelMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetStaminaStaminaModelMetricsRequest{}
+	} else {
+		*p = GetStaminaStaminaModelMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["staminaName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StaminaName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StaminaName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StaminaName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StaminaName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StaminaName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetStaminaStaminaModelMetricsRequestFromJson(data string) (GetStaminaStaminaModelMetricsRequest, error) {
+	req := GetStaminaStaminaModelMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetStaminaStaminaModelMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetStaminaStaminaModelMetricsRequestFromDict(data map[string]interface{}) GetStaminaStaminaModelMetricsRequest {
@@ -2240,10 +6416,39 @@ type DescribeStaminaNamespaceMetricsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 }
 
-func NewDescribeStaminaNamespaceMetricsRequestFromJson(data string) DescribeStaminaNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDescribeStaminaNamespaceMetricsRequestFromDict(dict)
+func (p *DescribeStaminaNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeStaminaNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeStaminaNamespaceMetricsRequest{}
+	} else {
+		*p = DescribeStaminaNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func NewDescribeStaminaNamespaceMetricsRequestFromJson(data string) (DescribeStaminaNamespaceMetricsRequest, error) {
+	req := DescribeStaminaNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeStaminaNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewDescribeStaminaNamespaceMetricsRequestFromDict(data map[string]interface{}) DescribeStaminaNamespaceMetricsRequest {
@@ -2265,10 +6470,62 @@ type GetStaminaNamespaceMetricsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func NewGetStaminaNamespaceMetricsRequestFromJson(data string) GetStaminaNamespaceMetricsRequest {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetStaminaNamespaceMetricsRequestFromDict(dict)
+func (p *GetStaminaNamespaceMetricsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetStaminaNamespaceMetricsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetStaminaNamespaceMetricsRequest{}
+	} else {
+		*p = GetStaminaNamespaceMetricsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetStaminaNamespaceMetricsRequestFromJson(data string) (GetStaminaNamespaceMetricsRequest, error) {
+	req := GetStaminaNamespaceMetricsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetStaminaNamespaceMetricsRequest{}, err
+	}
+	return req, nil
 }
 
 func NewGetStaminaNamespaceMetricsRequestFromDict(data map[string]interface{}) GetStaminaNamespaceMetricsRequest {

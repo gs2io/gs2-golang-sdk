@@ -127,10 +127,56 @@ func (p *Complete) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["completedMissionTaskNames"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CompletedMissionTaskNames)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.CompletedMissionTaskNames = l
+			}
 		}
 		if v, ok := d["receivedMissionTaskNames"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.ReceivedMissionTaskNames)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.ReceivedMissionTaskNames = l
+			}
 		}
 		if v, ok := d["nextResetAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.NextResetAt)
@@ -2218,15 +2264,21 @@ func CastMissionGroupModelsFromDict(data []MissionGroupModel) []interface{} {
 }
 
 type MissionTaskModel struct {
-	MissionTaskId          *string         `json:"missionTaskId"`
-	Name                   *string         `json:"name"`
-	Metadata               *string         `json:"metadata"`
-	CounterName            *string         `json:"counterName"`
-	TargetResetType        *string         `json:"targetResetType"`
-	TargetValue            *int64          `json:"targetValue"`
-	CompleteAcquireActions []AcquireAction `json:"completeAcquireActions"`
-	ChallengePeriodEventId *string         `json:"challengePeriodEventId"`
-	PremiseMissionTaskName *string         `json:"premiseMissionTaskName"`
+	MissionTaskId                *string             `json:"missionTaskId"`
+	Name                         *string             `json:"name"`
+	Metadata                     *string             `json:"metadata"`
+	VerifyCompleteType           *string             `json:"verifyCompleteType"`
+	TargetCounter                *TargetCounterModel `json:"targetCounter"`
+	VerifyCompleteConsumeActions []ConsumeAction     `json:"verifyCompleteConsumeActions"`
+	CompleteAcquireActions       []AcquireAction     `json:"completeAcquireActions"`
+	ChallengePeriodEventId       *string             `json:"challengePeriodEventId"`
+	PremiseMissionTaskName       *string             `json:"premiseMissionTaskName"`
+	// Deprecated: should not be used
+	CounterName *string `json:"counterName"`
+	// Deprecated: should not be used
+	TargetResetType *string `json:"targetResetType"`
+	// Deprecated: should not be used
+	TargetValue *int64 `json:"targetValue"`
 }
 
 func (p *MissionTaskModel) UnmarshalJSON(data []byte) error {
@@ -2320,54 +2372,34 @@ func (p *MissionTaskModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["counterName"]; ok && v != nil {
+		if v, ok := d["verifyCompleteType"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
 				switch v2 := temp.(type) {
 				case string:
-					p.CounterName = &v2
+					p.VerifyCompleteType = &v2
 				case float64:
 					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.CounterName = &strValue
+					p.VerifyCompleteType = &strValue
 				case int:
 					strValue := strconv.Itoa(v2)
-					p.CounterName = &strValue
+					p.VerifyCompleteType = &strValue
 				case int32:
 					strValue := strconv.Itoa(int(v2))
-					p.CounterName = &strValue
+					p.VerifyCompleteType = &strValue
 				case int64:
 					strValue := strconv.Itoa(int(v2))
-					p.CounterName = &strValue
+					p.VerifyCompleteType = &strValue
 				default:
-					_ = json.Unmarshal(*v, &p.CounterName)
+					_ = json.Unmarshal(*v, &p.VerifyCompleteType)
 				}
 			}
 		}
-		if v, ok := d["targetResetType"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.TargetResetType = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.TargetResetType = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.TargetResetType = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetResetType = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetResetType = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.TargetResetType)
-				}
-			}
+		if v, ok := d["targetCounter"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TargetCounter)
 		}
-		if v, ok := d["targetValue"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.TargetValue)
+		if v, ok := d["verifyCompleteConsumeActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyCompleteConsumeActions)
 		}
 		if v, ok := d["completeAcquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CompleteAcquireActions)
@@ -2418,6 +2450,55 @@ func (p *MissionTaskModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["targetResetType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TargetResetType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TargetResetType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TargetResetType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetResetType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetResetType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TargetResetType)
+				}
+			}
+		}
+		if v, ok := d["targetValue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TargetValue)
+		}
 	}
 	return nil
 }
@@ -2430,15 +2511,18 @@ func NewMissionTaskModelFromJson(data string) MissionTaskModel {
 
 func NewMissionTaskModelFromDict(data map[string]interface{}) MissionTaskModel {
 	return MissionTaskModel{
-		MissionTaskId:          core.CastString(data["missionTaskId"]),
-		Name:                   core.CastString(data["name"]),
-		Metadata:               core.CastString(data["metadata"]),
-		CounterName:            core.CastString(data["counterName"]),
-		TargetResetType:        core.CastString(data["targetResetType"]),
-		TargetValue:            core.CastInt64(data["targetValue"]),
-		CompleteAcquireActions: CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
-		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
-		PremiseMissionTaskName: core.CastString(data["premiseMissionTaskName"]),
+		MissionTaskId:                core.CastString(data["missionTaskId"]),
+		Name:                         core.CastString(data["name"]),
+		Metadata:                     core.CastString(data["metadata"]),
+		VerifyCompleteType:           core.CastString(data["verifyCompleteType"]),
+		TargetCounter:                NewTargetCounterModelFromDict(core.CastMap(data["targetCounter"])).Pointer(),
+		VerifyCompleteConsumeActions: CastConsumeActions(core.CastArray(data["verifyCompleteConsumeActions"])),
+		CompleteAcquireActions:       CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
+		ChallengePeriodEventId:       core.CastString(data["challengePeriodEventId"]),
+		PremiseMissionTaskName:       core.CastString(data["premiseMissionTaskName"]),
+		CounterName:                  core.CastString(data["counterName"]),
+		TargetResetType:              core.CastString(data["targetResetType"]),
+		TargetValue:                  core.CastInt64(data["targetValue"]),
 	}
 }
 
@@ -2456,17 +2540,19 @@ func (p MissionTaskModel) ToDict() map[string]interface{} {
 	if p.Metadata != nil {
 		metadata = p.Metadata
 	}
-	var counterName *string
-	if p.CounterName != nil {
-		counterName = p.CounterName
+	var verifyCompleteType *string
+	if p.VerifyCompleteType != nil {
+		verifyCompleteType = p.VerifyCompleteType
 	}
-	var targetResetType *string
-	if p.TargetResetType != nil {
-		targetResetType = p.TargetResetType
+	var targetCounter map[string]interface{}
+	if p.TargetCounter != nil {
+		targetCounter = p.TargetCounter.ToDict()
 	}
-	var targetValue *int64
-	if p.TargetValue != nil {
-		targetValue = p.TargetValue
+	var verifyCompleteConsumeActions []interface{}
+	if p.VerifyCompleteConsumeActions != nil {
+		verifyCompleteConsumeActions = CastConsumeActionsFromDict(
+			p.VerifyCompleteConsumeActions,
+		)
 	}
 	var completeAcquireActions []interface{}
 	if p.CompleteAcquireActions != nil {
@@ -2482,16 +2568,31 @@ func (p MissionTaskModel) ToDict() map[string]interface{} {
 	if p.PremiseMissionTaskName != nil {
 		premiseMissionTaskName = p.PremiseMissionTaskName
 	}
+	var counterName *string
+	if p.CounterName != nil {
+		counterName = p.CounterName
+	}
+	var targetResetType *string
+	if p.TargetResetType != nil {
+		targetResetType = p.TargetResetType
+	}
+	var targetValue *int64
+	if p.TargetValue != nil {
+		targetValue = p.TargetValue
+	}
 	return map[string]interface{}{
-		"missionTaskId":          missionTaskId,
-		"name":                   name,
-		"metadata":               metadata,
-		"counterName":            counterName,
-		"targetResetType":        targetResetType,
-		"targetValue":            targetValue,
-		"completeAcquireActions": completeAcquireActions,
-		"challengePeriodEventId": challengePeriodEventId,
-		"premiseMissionTaskName": premiseMissionTaskName,
+		"missionTaskId":                missionTaskId,
+		"name":                         name,
+		"metadata":                     metadata,
+		"verifyCompleteType":           verifyCompleteType,
+		"targetCounter":                targetCounter,
+		"verifyCompleteConsumeActions": verifyCompleteConsumeActions,
+		"completeAcquireActions":       completeAcquireActions,
+		"challengePeriodEventId":       challengePeriodEventId,
+		"premiseMissionTaskName":       premiseMissionTaskName,
+		"counterName":                  counterName,
+		"targetResetType":              targetResetType,
+		"targetValue":                  targetValue,
 	}
 }
 
@@ -2508,6 +2609,419 @@ func CastMissionTaskModels(data []interface{}) []MissionTaskModel {
 }
 
 func CastMissionTaskModelsFromDict(data []MissionTaskModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type MissionTaskModelMaster struct {
+	MissionTaskId                *string             `json:"missionTaskId"`
+	Name                         *string             `json:"name"`
+	Metadata                     *string             `json:"metadata"`
+	Description                  *string             `json:"description"`
+	VerifyCompleteType           *string             `json:"verifyCompleteType"`
+	TargetCounter                *TargetCounterModel `json:"targetCounter"`
+	VerifyCompleteConsumeActions []ConsumeAction     `json:"verifyCompleteConsumeActions"`
+	CompleteAcquireActions       []AcquireAction     `json:"completeAcquireActions"`
+	ChallengePeriodEventId       *string             `json:"challengePeriodEventId"`
+	PremiseMissionTaskName       *string             `json:"premiseMissionTaskName"`
+	CreatedAt                    *int64              `json:"createdAt"`
+	UpdatedAt                    *int64              `json:"updatedAt"`
+	Revision                     *int64              `json:"revision"`
+	// Deprecated: should not be used
+	CounterName *string `json:"counterName"`
+	// Deprecated: should not be used
+	TargetResetType *string `json:"targetResetType"`
+	// Deprecated: should not be used
+	TargetValue *int64 `json:"targetValue"`
+}
+
+func (p *MissionTaskModelMaster) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MissionTaskModelMaster{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MissionTaskModelMaster{}
+	} else {
+		*p = MissionTaskModelMaster{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["missionTaskId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionTaskId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionTaskId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionTaskId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionTaskId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionTaskId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionTaskId)
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["verifyCompleteType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyCompleteType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyCompleteType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyCompleteType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyCompleteType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyCompleteType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyCompleteType)
+				}
+			}
+		}
+		if v, ok := d["targetCounter"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TargetCounter)
+		}
+		if v, ok := d["verifyCompleteConsumeActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyCompleteConsumeActions)
+		}
+		if v, ok := d["completeAcquireActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CompleteAcquireActions)
+		}
+		if v, ok := d["challengePeriodEventId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ChallengePeriodEventId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ChallengePeriodEventId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ChallengePeriodEventId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ChallengePeriodEventId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ChallengePeriodEventId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ChallengePeriodEventId)
+				}
+			}
+		}
+		if v, ok := d["premiseMissionTaskName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PremiseMissionTaskName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PremiseMissionTaskName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PremiseMissionTaskName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PremiseMissionTaskName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PremiseMissionTaskName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PremiseMissionTaskName)
+				}
+			}
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["targetResetType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TargetResetType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TargetResetType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TargetResetType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetResetType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetResetType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TargetResetType)
+				}
+			}
+		}
+		if v, ok := d["targetValue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TargetValue)
+		}
+	}
+	return nil
+}
+
+func NewMissionTaskModelMasterFromJson(data string) MissionTaskModelMaster {
+	req := MissionTaskModelMaster{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewMissionTaskModelMasterFromDict(data map[string]interface{}) MissionTaskModelMaster {
+	return MissionTaskModelMaster{
+		MissionTaskId:                core.CastString(data["missionTaskId"]),
+		Name:                         core.CastString(data["name"]),
+		Metadata:                     core.CastString(data["metadata"]),
+		Description:                  core.CastString(data["description"]),
+		VerifyCompleteType:           core.CastString(data["verifyCompleteType"]),
+		TargetCounter:                NewTargetCounterModelFromDict(core.CastMap(data["targetCounter"])).Pointer(),
+		VerifyCompleteConsumeActions: CastConsumeActions(core.CastArray(data["verifyCompleteConsumeActions"])),
+		CompleteAcquireActions:       CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
+		ChallengePeriodEventId:       core.CastString(data["challengePeriodEventId"]),
+		PremiseMissionTaskName:       core.CastString(data["premiseMissionTaskName"]),
+		CreatedAt:                    core.CastInt64(data["createdAt"]),
+		UpdatedAt:                    core.CastInt64(data["updatedAt"]),
+		Revision:                     core.CastInt64(data["revision"]),
+		CounterName:                  core.CastString(data["counterName"]),
+		TargetResetType:              core.CastString(data["targetResetType"]),
+		TargetValue:                  core.CastInt64(data["targetValue"]),
+	}
+}
+
+func (p MissionTaskModelMaster) ToDict() map[string]interface{} {
+
+	var missionTaskId *string
+	if p.MissionTaskId != nil {
+		missionTaskId = p.MissionTaskId
+	}
+	var name *string
+	if p.Name != nil {
+		name = p.Name
+	}
+	var metadata *string
+	if p.Metadata != nil {
+		metadata = p.Metadata
+	}
+	var description *string
+	if p.Description != nil {
+		description = p.Description
+	}
+	var verifyCompleteType *string
+	if p.VerifyCompleteType != nil {
+		verifyCompleteType = p.VerifyCompleteType
+	}
+	var targetCounter map[string]interface{}
+	if p.TargetCounter != nil {
+		targetCounter = p.TargetCounter.ToDict()
+	}
+	var verifyCompleteConsumeActions []interface{}
+	if p.VerifyCompleteConsumeActions != nil {
+		verifyCompleteConsumeActions = CastConsumeActionsFromDict(
+			p.VerifyCompleteConsumeActions,
+		)
+	}
+	var completeAcquireActions []interface{}
+	if p.CompleteAcquireActions != nil {
+		completeAcquireActions = CastAcquireActionsFromDict(
+			p.CompleteAcquireActions,
+		)
+	}
+	var challengePeriodEventId *string
+	if p.ChallengePeriodEventId != nil {
+		challengePeriodEventId = p.ChallengePeriodEventId
+	}
+	var premiseMissionTaskName *string
+	if p.PremiseMissionTaskName != nil {
+		premiseMissionTaskName = p.PremiseMissionTaskName
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	var counterName *string
+	if p.CounterName != nil {
+		counterName = p.CounterName
+	}
+	var targetResetType *string
+	if p.TargetResetType != nil {
+		targetResetType = p.TargetResetType
+	}
+	var targetValue *int64
+	if p.TargetValue != nil {
+		targetValue = p.TargetValue
+	}
+	return map[string]interface{}{
+		"missionTaskId":                missionTaskId,
+		"name":                         name,
+		"metadata":                     metadata,
+		"description":                  description,
+		"verifyCompleteType":           verifyCompleteType,
+		"targetCounter":                targetCounter,
+		"verifyCompleteConsumeActions": verifyCompleteConsumeActions,
+		"completeAcquireActions":       completeAcquireActions,
+		"challengePeriodEventId":       challengePeriodEventId,
+		"premiseMissionTaskName":       premiseMissionTaskName,
+		"createdAt":                    createdAt,
+		"updatedAt":                    updatedAt,
+		"revision":                     revision,
+		"counterName":                  counterName,
+		"targetResetType":              targetResetType,
+		"targetValue":                  targetValue,
+	}
+}
+
+func (p MissionTaskModelMaster) Pointer() *MissionTaskModelMaster {
+	return &p
+}
+
+func CastMissionTaskModelMasters(data []interface{}) []MissionTaskModelMaster {
+	v := make([]MissionTaskModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewMissionTaskModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastMissionTaskModelMastersFromDict(data []MissionTaskModelMaster) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -2641,26 +3155,16 @@ func CastScopedValuesFromDict(data []ScopedValue) []interface{} {
 	return v
 }
 
-type MissionTaskModelMaster struct {
-	MissionTaskId          *string         `json:"missionTaskId"`
-	Name                   *string         `json:"name"`
-	Metadata               *string         `json:"metadata"`
-	Description            *string         `json:"description"`
-	CounterName            *string         `json:"counterName"`
-	TargetResetType        *string         `json:"targetResetType"`
-	TargetValue            *int64          `json:"targetValue"`
-	CompleteAcquireActions []AcquireAction `json:"completeAcquireActions"`
-	ChallengePeriodEventId *string         `json:"challengePeriodEventId"`
-	PremiseMissionTaskName *string         `json:"premiseMissionTaskName"`
-	CreatedAt              *int64          `json:"createdAt"`
-	UpdatedAt              *int64          `json:"updatedAt"`
-	Revision               *int64          `json:"revision"`
+type TargetCounterModel struct {
+	CounterName *string `json:"counterName"`
+	ResetType   *string `json:"resetType"`
+	Value       *int64  `json:"value"`
 }
 
-func (p *MissionTaskModelMaster) UnmarshalJSON(data []byte) error {
+func (p *TargetCounterModel) UnmarshalJSON(data []byte) error {
 	str := string(data)
 	if len(str) == 0 {
-		*p = MissionTaskModelMaster{}
+		*p = TargetCounterModel{}
 		return nil
 	}
 	if str[0] == '"' {
@@ -2672,104 +3176,12 @@ func (p *MissionTaskModelMaster) UnmarshalJSON(data []byte) error {
 		str = strVal
 	}
 	if str == "null" {
-		*p = MissionTaskModelMaster{}
+		*p = TargetCounterModel{}
 	} else {
-		*p = MissionTaskModelMaster{}
+		*p = TargetCounterModel{}
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
-		}
-		if v, ok := d["missionTaskId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.MissionTaskId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.MissionTaskId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.MissionTaskId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.MissionTaskId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.MissionTaskId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.MissionTaskId)
-				}
-			}
-		}
-		if v, ok := d["name"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.Name = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.Name = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.Name = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.Name = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.Name = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.Name)
-				}
-			}
-		}
-		if v, ok := d["metadata"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.Metadata = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.Metadata = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.Metadata = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.Metadata = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.Metadata = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.Metadata)
-				}
-			}
-		}
-		if v, ok := d["description"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.Description = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.Description = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.Description = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.Description = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.Description = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.Description)
-				}
-			}
 		}
 		if v, ok := d["counterName"]; ok && v != nil {
 			var temp interface{}
@@ -2794,204 +3206,84 @@ func (p *MissionTaskModelMaster) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["targetResetType"]; ok && v != nil {
+		if v, ok := d["resetType"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
 				switch v2 := temp.(type) {
 				case string:
-					p.TargetResetType = &v2
+					p.ResetType = &v2
 				case float64:
 					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.TargetResetType = &strValue
+					p.ResetType = &strValue
 				case int:
 					strValue := strconv.Itoa(v2)
-					p.TargetResetType = &strValue
+					p.ResetType = &strValue
 				case int32:
 					strValue := strconv.Itoa(int(v2))
-					p.TargetResetType = &strValue
+					p.ResetType = &strValue
 				case int64:
 					strValue := strconv.Itoa(int(v2))
-					p.TargetResetType = &strValue
+					p.ResetType = &strValue
 				default:
-					_ = json.Unmarshal(*v, &p.TargetResetType)
+					_ = json.Unmarshal(*v, &p.ResetType)
 				}
 			}
 		}
-		if v, ok := d["targetValue"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.TargetValue)
-		}
-		if v, ok := d["completeAcquireActions"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CompleteAcquireActions)
-		}
-		if v, ok := d["challengePeriodEventId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.ChallengePeriodEventId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.ChallengePeriodEventId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.ChallengePeriodEventId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.ChallengePeriodEventId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.ChallengePeriodEventId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.ChallengePeriodEventId)
-				}
-			}
-		}
-		if v, ok := d["premiseMissionTaskName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.PremiseMissionTaskName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.PremiseMissionTaskName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.PremiseMissionTaskName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.PremiseMissionTaskName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.PremiseMissionTaskName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.PremiseMissionTaskName)
-				}
-			}
-		}
-		if v, ok := d["createdAt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CreatedAt)
-		}
-		if v, ok := d["updatedAt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.UpdatedAt)
-		}
-		if v, ok := d["revision"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Revision)
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
 		}
 	}
 	return nil
 }
 
-func NewMissionTaskModelMasterFromJson(data string) MissionTaskModelMaster {
-	req := MissionTaskModelMaster{}
+func NewTargetCounterModelFromJson(data string) TargetCounterModel {
+	req := TargetCounterModel{}
 	_ = json.Unmarshal([]byte(data), &req)
 	return req
 }
 
-func NewMissionTaskModelMasterFromDict(data map[string]interface{}) MissionTaskModelMaster {
-	return MissionTaskModelMaster{
-		MissionTaskId:          core.CastString(data["missionTaskId"]),
-		Name:                   core.CastString(data["name"]),
-		Metadata:               core.CastString(data["metadata"]),
-		Description:            core.CastString(data["description"]),
-		CounterName:            core.CastString(data["counterName"]),
-		TargetResetType:        core.CastString(data["targetResetType"]),
-		TargetValue:            core.CastInt64(data["targetValue"]),
-		CompleteAcquireActions: CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
-		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
-		PremiseMissionTaskName: core.CastString(data["premiseMissionTaskName"]),
-		CreatedAt:              core.CastInt64(data["createdAt"]),
-		UpdatedAt:              core.CastInt64(data["updatedAt"]),
-		Revision:               core.CastInt64(data["revision"]),
+func NewTargetCounterModelFromDict(data map[string]interface{}) TargetCounterModel {
+	return TargetCounterModel{
+		CounterName: core.CastString(data["counterName"]),
+		ResetType:   core.CastString(data["resetType"]),
+		Value:       core.CastInt64(data["value"]),
 	}
 }
 
-func (p MissionTaskModelMaster) ToDict() map[string]interface{} {
+func (p TargetCounterModel) ToDict() map[string]interface{} {
 
-	var missionTaskId *string
-	if p.MissionTaskId != nil {
-		missionTaskId = p.MissionTaskId
-	}
-	var name *string
-	if p.Name != nil {
-		name = p.Name
-	}
-	var metadata *string
-	if p.Metadata != nil {
-		metadata = p.Metadata
-	}
-	var description *string
-	if p.Description != nil {
-		description = p.Description
-	}
 	var counterName *string
 	if p.CounterName != nil {
 		counterName = p.CounterName
 	}
-	var targetResetType *string
-	if p.TargetResetType != nil {
-		targetResetType = p.TargetResetType
+	var resetType *string
+	if p.ResetType != nil {
+		resetType = p.ResetType
 	}
-	var targetValue *int64
-	if p.TargetValue != nil {
-		targetValue = p.TargetValue
-	}
-	var completeAcquireActions []interface{}
-	if p.CompleteAcquireActions != nil {
-		completeAcquireActions = CastAcquireActionsFromDict(
-			p.CompleteAcquireActions,
-		)
-	}
-	var challengePeriodEventId *string
-	if p.ChallengePeriodEventId != nil {
-		challengePeriodEventId = p.ChallengePeriodEventId
-	}
-	var premiseMissionTaskName *string
-	if p.PremiseMissionTaskName != nil {
-		premiseMissionTaskName = p.PremiseMissionTaskName
-	}
-	var createdAt *int64
-	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
-	}
-	var updatedAt *int64
-	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
-	}
-	var revision *int64
-	if p.Revision != nil {
-		revision = p.Revision
+	var value *int64
+	if p.Value != nil {
+		value = p.Value
 	}
 	return map[string]interface{}{
-		"missionTaskId":          missionTaskId,
-		"name":                   name,
-		"metadata":               metadata,
-		"description":            description,
-		"counterName":            counterName,
-		"targetResetType":        targetResetType,
-		"targetValue":            targetValue,
-		"completeAcquireActions": completeAcquireActions,
-		"challengePeriodEventId": challengePeriodEventId,
-		"premiseMissionTaskName": premiseMissionTaskName,
-		"createdAt":              createdAt,
-		"updatedAt":              updatedAt,
-		"revision":               revision,
+		"counterName": counterName,
+		"resetType":   resetType,
+		"value":       value,
 	}
 }
 
-func (p MissionTaskModelMaster) Pointer() *MissionTaskModelMaster {
+func (p TargetCounterModel) Pointer() *TargetCounterModel {
 	return &p
 }
 
-func CastMissionTaskModelMasters(data []interface{}) []MissionTaskModelMaster {
-	v := make([]MissionTaskModelMaster, 0)
+func CastTargetCounterModels(data []interface{}) []TargetCounterModel {
+	v := make([]TargetCounterModel, 0)
 	for _, d := range data {
-		v = append(v, NewMissionTaskModelMasterFromDict(d.(map[string]interface{})))
+		v = append(v, NewTargetCounterModelFromDict(d.(map[string]interface{})))
 	}
 	return v
 }
 
-func CastMissionTaskModelMastersFromDict(data []MissionTaskModelMaster) []interface{} {
+func CastTargetCounterModelsFromDict(data []TargetCounterModel) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -3118,6 +3410,132 @@ func CastAcquireActions(data []interface{}) []AcquireAction {
 }
 
 func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type ConsumeAction struct {
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func (p *ConsumeAction) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ConsumeAction{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ConsumeAction{}
+	} else {
+		*p = ConsumeAction{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["action"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Action = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Action = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Action = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Action)
+				}
+			}
+		}
+		if v, ok := d["request"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Request = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Request = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Request = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Request)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewConsumeActionFromJson(data string) ConsumeAction {
+	req := ConsumeAction{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewConsumeActionFromDict(data map[string]interface{}) ConsumeAction {
+	return ConsumeAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p ConsumeAction) ToDict() map[string]interface{} {
+
+	var action *string
+	if p.Action != nil {
+		action = p.Action
+	}
+	var request *string
+	if p.Request != nil {
+		request = p.Request
+	}
+	return map[string]interface{}{
+		"action":  action,
+		"request": request,
+	}
+}
+
+func (p ConsumeAction) Pointer() *ConsumeAction {
+	return &p
+}
+
+func CastConsumeActions(data []interface{}) []ConsumeAction {
+	v := make([]ConsumeAction, 0)
+	for _, d := range data {
+		v = append(v, NewConsumeActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastConsumeActionsFromDict(data []ConsumeAction) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

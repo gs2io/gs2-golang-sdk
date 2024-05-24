@@ -1858,7 +1858,30 @@ func (p *CreateNodeModelMasterRequest) UnmarshalJSON(data []byte) error {
 			_ = json.Unmarshal(*v, &p.RestrainReturnRate)
 		}
 		if v, ok := d["premiseNodeNames"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.PremiseNodeNames)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.PremiseNodeNames = l
+			}
 		}
 	}
 	return nil
@@ -2146,7 +2169,30 @@ func (p *UpdateNodeModelMasterRequest) UnmarshalJSON(data []byte) error {
 			_ = json.Unmarshal(*v, &p.RestrainReturnRate)
 		}
 		if v, ok := d["premiseNodeNames"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.PremiseNodeNames)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.PremiseNodeNames = l
+			}
 		}
 	}
 	return nil
@@ -2404,7 +2450,30 @@ func (p *MarkReleaseByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["nodeModelNames"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.NodeModelNames)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.NodeModelNames = l
+			}
 		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
@@ -2572,7 +2641,30 @@ func (p *ReleaseRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["nodeModelNames"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.NodeModelNames)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.NodeModelNames = l
+			}
 		}
 		if v, ok := d["config"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Config)
@@ -2723,7 +2815,30 @@ func (p *ReleaseByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["nodeModelNames"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.NodeModelNames)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.NodeModelNames = l
+			}
 		}
 		if v, ok := d["config"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Config)
@@ -2898,7 +3013,30 @@ func (p *MarkRestrainByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["nodeModelNames"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.NodeModelNames)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.NodeModelNames = l
+			}
 		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
@@ -3066,7 +3204,30 @@ func (p *RestrainRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["nodeModelNames"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.NodeModelNames)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.NodeModelNames = l
+			}
 		}
 		if v, ok := d["config"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Config)
@@ -3217,7 +3378,30 @@ func (p *RestrainByUserIdRequest) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["nodeModelNames"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.NodeModelNames)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.NodeModelNames = l
+			}
 		}
 		if v, ok := d["config"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Config)

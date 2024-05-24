@@ -459,7 +459,30 @@ func (p *CategoryModel) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["ignoreUserIds"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.IgnoreUserIds)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.IgnoreUserIds = l
+			}
 		}
 		if v, ok := d["generation"]; ok && v != nil {
 			var temp interface{}
@@ -886,7 +909,30 @@ func (p *CategoryModelMaster) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["ignoreUserIds"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.IgnoreUserIds)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.IgnoreUserIds = l
+			}
 		}
 		if v, ok := d["generation"]; ok && v != nil {
 			var temp interface{}
@@ -1193,10 +1239,56 @@ func (p *Subscribe) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["targetUserIds"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.TargetUserIds)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.TargetUserIds = l
+			}
 		}
 		if v, ok := d["subscribedUserIds"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.SubscribedUserIds)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.SubscribedUserIds = l
+			}
 		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)

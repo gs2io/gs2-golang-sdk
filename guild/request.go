@@ -2586,7 +2586,30 @@ func (p *SearchGuildsRequest) UnmarshalJSON(data []byte) error {
 			_ = json.Unmarshal(*v, &p.Attributes5)
 		}
 		if v, ok := d["joinPolicies"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.JoinPolicies)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.JoinPolicies = l
+			}
 		}
 		if v, ok := d["includeFullMembersGuild"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.IncludeFullMembersGuild)
@@ -2833,7 +2856,30 @@ func (p *SearchGuildsByUserIdRequest) UnmarshalJSON(data []byte) error {
 			_ = json.Unmarshal(*v, &p.Attributes5)
 		}
 		if v, ok := d["joinPolicies"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.JoinPolicies)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.JoinPolicies = l
+			}
 		}
 		if v, ok := d["includeFullMembersGuild"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.IncludeFullMembersGuild)

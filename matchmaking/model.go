@@ -657,7 +657,30 @@ func (p *Gathering) UnmarshalJSON(data []byte) error {
 			_ = json.Unmarshal(*v, &p.CapacityOfRoles)
 		}
 		if v, ok := d["allowUserIds"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.AllowUserIds)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.AllowUserIds = l
+			}
 		}
 		if v, ok := d["metadata"]; ok && v != nil {
 			var temp interface{}
@@ -2202,7 +2225,30 @@ func (p *CapacityOfRole) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["roleAliases"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.RoleAliases)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.RoleAliases = l
+			}
 		}
 		if v, ok := d["capacity"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Capacity)
@@ -2465,7 +2511,30 @@ func (p *Player) UnmarshalJSON(data []byte) error {
 			}
 		}
 		if v, ok := d["denyUserIds"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.DenyUserIds)
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.DenyUserIds = l
+			}
 		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)

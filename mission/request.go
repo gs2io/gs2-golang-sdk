@@ -5893,6 +5893,428 @@ func (p GetCounterByUserIdRequest) Pointer() *GetCounterByUserIdRequest {
 	return &p
 }
 
+type VerifyCounterValueRequest struct {
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	CounterName                     *string `json:"counterName"`
+	VerifyType                      *string `json:"verifyType"`
+	ResetType                       *string `json:"resetType"`
+	Value                           *int64  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+}
+
+func (p *VerifyCounterValueRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyCounterValueRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyCounterValueRequest{}
+	} else {
+		*p = VerifyCounterValueRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["resetType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ResetType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ResetType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ResetType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ResetType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ResetType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ResetType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+	}
+	return nil
+}
+
+func NewVerifyCounterValueRequestFromJson(data string) (VerifyCounterValueRequest, error) {
+	req := VerifyCounterValueRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyCounterValueRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyCounterValueRequestFromDict(data map[string]interface{}) VerifyCounterValueRequest {
+	return VerifyCounterValueRequest{
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		AccessToken:                     core.CastString(data["accessToken"]),
+		CounterName:                     core.CastString(data["counterName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		ResetType:                       core.CastString(data["resetType"]),
+		Value:                           core.CastInt64(data["value"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+	}
+}
+
+func (p VerifyCounterValueRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"counterName":                     p.CounterName,
+		"verifyType":                      p.VerifyType,
+		"resetType":                       p.ResetType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+	}
+}
+
+func (p VerifyCounterValueRequest) Pointer() *VerifyCounterValueRequest {
+	return &p
+}
+
+type VerifyCounterValueByUserIdRequest struct {
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	CounterName                     *string `json:"counterName"`
+	VerifyType                      *string `json:"verifyType"`
+	ResetType                       *string `json:"resetType"`
+	Value                           *int64  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
+}
+
+func (p *VerifyCounterValueByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyCounterValueByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyCounterValueByUserIdRequest{}
+	} else {
+		*p = VerifyCounterValueByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["resetType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ResetType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ResetType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ResetType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ResetType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ResetType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ResetType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyCounterValueByUserIdRequestFromJson(data string) (VerifyCounterValueByUserIdRequest, error) {
+	req := VerifyCounterValueByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyCounterValueByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyCounterValueByUserIdRequestFromDict(data map[string]interface{}) VerifyCounterValueByUserIdRequest {
+	return VerifyCounterValueByUserIdRequest{
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		UserId:                          core.CastString(data["userId"]),
+		CounterName:                     core.CastString(data["counterName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		ResetType:                       core.CastString(data["resetType"]),
+		Value:                           core.CastInt64(data["value"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p VerifyCounterValueByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"counterName":                     p.CounterName,
+		"verifyType":                      p.VerifyType,
+		"resetType":                       p.ResetType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
+	}
+}
+
+func (p VerifyCounterValueByUserIdRequest) Pointer() *VerifyCounterValueByUserIdRequest {
+	return &p
+}
+
 type DeleteCounterByUserIdRequest struct {
 	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
@@ -6371,6 +6793,113 @@ func (p DecreaseByStampTaskRequest) ToDict() map[string]interface{} {
 }
 
 func (p DecreaseByStampTaskRequest) Pointer() *DecreaseByStampTaskRequest {
+	return &p
+}
+
+type VerifyCounterValueByStampTaskRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *VerifyCounterValueByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyCounterValueByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyCounterValueByStampTaskRequest{}
+	} else {
+		*p = VerifyCounterValueByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyCounterValueByStampTaskRequestFromJson(data string) (VerifyCounterValueByStampTaskRequest, error) {
+	req := VerifyCounterValueByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyCounterValueByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyCounterValueByStampTaskRequestFromDict(data map[string]interface{}) VerifyCounterValueByStampTaskRequest {
+	return VerifyCounterValueByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifyCounterValueByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyCounterValueByStampTaskRequest) Pointer() *VerifyCounterValueByStampTaskRequest {
 	return &p
 }
 
@@ -7486,20 +8015,26 @@ func (p DescribeMissionTaskModelMastersRequest) Pointer() *DescribeMissionTaskMo
 }
 
 type CreateMissionTaskModelMasterRequest struct {
-	SourceRequestId        *string         `json:"sourceRequestId"`
-	RequestId              *string         `json:"requestId"`
-	ContextStack           *string         `json:"contextStack"`
-	NamespaceName          *string         `json:"namespaceName"`
-	MissionGroupName       *string         `json:"missionGroupName"`
-	Name                   *string         `json:"name"`
-	Metadata               *string         `json:"metadata"`
-	Description            *string         `json:"description"`
-	CounterName            *string         `json:"counterName"`
-	TargetResetType        *string         `json:"targetResetType"`
-	TargetValue            *int64          `json:"targetValue"`
-	CompleteAcquireActions []AcquireAction `json:"completeAcquireActions"`
-	ChallengePeriodEventId *string         `json:"challengePeriodEventId"`
-	PremiseMissionTaskName *string         `json:"premiseMissionTaskName"`
+	SourceRequestId              *string             `json:"sourceRequestId"`
+	RequestId                    *string             `json:"requestId"`
+	ContextStack                 *string             `json:"contextStack"`
+	NamespaceName                *string             `json:"namespaceName"`
+	MissionGroupName             *string             `json:"missionGroupName"`
+	Name                         *string             `json:"name"`
+	Metadata                     *string             `json:"metadata"`
+	Description                  *string             `json:"description"`
+	VerifyCompleteType           *string             `json:"verifyCompleteType"`
+	TargetCounter                *TargetCounterModel `json:"targetCounter"`
+	VerifyCompleteConsumeActions []ConsumeAction     `json:"verifyCompleteConsumeActions"`
+	CompleteAcquireActions       []AcquireAction     `json:"completeAcquireActions"`
+	ChallengePeriodEventId       *string             `json:"challengePeriodEventId"`
+	PremiseMissionTaskName       *string             `json:"premiseMissionTaskName"`
+	// Deprecated: should not be used
+	CounterName *string `json:"counterName"`
+	// Deprecated: should not be used
+	TargetResetType *string `json:"targetResetType"`
+	// Deprecated: should not be used
+	TargetValue *int64 `json:"targetValue"`
 }
 
 func (p *CreateMissionTaskModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -7639,54 +8174,34 @@ func (p *CreateMissionTaskModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["counterName"]; ok && v != nil {
+		if v, ok := d["verifyCompleteType"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
 				switch v2 := temp.(type) {
 				case string:
-					p.CounterName = &v2
+					p.VerifyCompleteType = &v2
 				case float64:
 					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.CounterName = &strValue
+					p.VerifyCompleteType = &strValue
 				case int:
 					strValue := strconv.Itoa(v2)
-					p.CounterName = &strValue
+					p.VerifyCompleteType = &strValue
 				case int32:
 					strValue := strconv.Itoa(int(v2))
-					p.CounterName = &strValue
+					p.VerifyCompleteType = &strValue
 				case int64:
 					strValue := strconv.Itoa(int(v2))
-					p.CounterName = &strValue
+					p.VerifyCompleteType = &strValue
 				default:
-					_ = json.Unmarshal(*v, &p.CounterName)
+					_ = json.Unmarshal(*v, &p.VerifyCompleteType)
 				}
 			}
 		}
-		if v, ok := d["targetResetType"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.TargetResetType = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.TargetResetType = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.TargetResetType = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetResetType = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetResetType = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.TargetResetType)
-				}
-			}
+		if v, ok := d["targetCounter"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TargetCounter)
 		}
-		if v, ok := d["targetValue"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.TargetValue)
+		if v, ok := d["verifyCompleteConsumeActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyCompleteConsumeActions)
 		}
 		if v, ok := d["completeAcquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CompleteAcquireActions)
@@ -7737,6 +8252,55 @@ func (p *CreateMissionTaskModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["targetResetType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TargetResetType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TargetResetType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TargetResetType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetResetType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetResetType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TargetResetType)
+				}
+			}
+		}
+		if v, ok := d["targetValue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TargetValue)
+		}
 	}
 	return nil
 }
@@ -7752,35 +8316,43 @@ func NewCreateMissionTaskModelMasterRequestFromJson(data string) (CreateMissionT
 
 func NewCreateMissionTaskModelMasterRequestFromDict(data map[string]interface{}) CreateMissionTaskModelMasterRequest {
 	return CreateMissionTaskModelMasterRequest{
-		NamespaceName:          core.CastString(data["namespaceName"]),
-		MissionGroupName:       core.CastString(data["missionGroupName"]),
-		Name:                   core.CastString(data["name"]),
-		Metadata:               core.CastString(data["metadata"]),
-		Description:            core.CastString(data["description"]),
-		CounterName:            core.CastString(data["counterName"]),
-		TargetResetType:        core.CastString(data["targetResetType"]),
-		TargetValue:            core.CastInt64(data["targetValue"]),
-		CompleteAcquireActions: CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
-		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
-		PremiseMissionTaskName: core.CastString(data["premiseMissionTaskName"]),
+		NamespaceName:                core.CastString(data["namespaceName"]),
+		MissionGroupName:             core.CastString(data["missionGroupName"]),
+		Name:                         core.CastString(data["name"]),
+		Metadata:                     core.CastString(data["metadata"]),
+		Description:                  core.CastString(data["description"]),
+		VerifyCompleteType:           core.CastString(data["verifyCompleteType"]),
+		TargetCounter:                NewTargetCounterModelFromDict(core.CastMap(data["targetCounter"])).Pointer(),
+		VerifyCompleteConsumeActions: CastConsumeActions(core.CastArray(data["verifyCompleteConsumeActions"])),
+		CompleteAcquireActions:       CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
+		ChallengePeriodEventId:       core.CastString(data["challengePeriodEventId"]),
+		PremiseMissionTaskName:       core.CastString(data["premiseMissionTaskName"]),
+		CounterName:                  core.CastString(data["counterName"]),
+		TargetResetType:              core.CastString(data["targetResetType"]),
+		TargetValue:                  core.CastInt64(data["targetValue"]),
 	}
 }
 
 func (p CreateMissionTaskModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":    p.NamespaceName,
-		"missionGroupName": p.MissionGroupName,
-		"name":             p.Name,
-		"metadata":         p.Metadata,
-		"description":      p.Description,
-		"counterName":      p.CounterName,
-		"targetResetType":  p.TargetResetType,
-		"targetValue":      p.TargetValue,
+		"namespaceName":      p.NamespaceName,
+		"missionGroupName":   p.MissionGroupName,
+		"name":               p.Name,
+		"metadata":           p.Metadata,
+		"description":        p.Description,
+		"verifyCompleteType": p.VerifyCompleteType,
+		"targetCounter":      p.TargetCounter.ToDict(),
+		"verifyCompleteConsumeActions": CastConsumeActionsFromDict(
+			p.VerifyCompleteConsumeActions,
+		),
 		"completeAcquireActions": CastAcquireActionsFromDict(
 			p.CompleteAcquireActions,
 		),
 		"challengePeriodEventId": p.ChallengePeriodEventId,
 		"premiseMissionTaskName": p.PremiseMissionTaskName,
+		"counterName":            p.CounterName,
+		"targetResetType":        p.TargetResetType,
+		"targetValue":            p.TargetValue,
 	}
 }
 
@@ -7922,20 +8494,26 @@ func (p GetMissionTaskModelMasterRequest) Pointer() *GetMissionTaskModelMasterRe
 }
 
 type UpdateMissionTaskModelMasterRequest struct {
-	SourceRequestId        *string         `json:"sourceRequestId"`
-	RequestId              *string         `json:"requestId"`
-	ContextStack           *string         `json:"contextStack"`
-	NamespaceName          *string         `json:"namespaceName"`
-	MissionGroupName       *string         `json:"missionGroupName"`
-	MissionTaskName        *string         `json:"missionTaskName"`
-	Metadata               *string         `json:"metadata"`
-	Description            *string         `json:"description"`
-	CounterName            *string         `json:"counterName"`
-	TargetResetType        *string         `json:"targetResetType"`
-	TargetValue            *int64          `json:"targetValue"`
-	CompleteAcquireActions []AcquireAction `json:"completeAcquireActions"`
-	ChallengePeriodEventId *string         `json:"challengePeriodEventId"`
-	PremiseMissionTaskName *string         `json:"premiseMissionTaskName"`
+	SourceRequestId              *string             `json:"sourceRequestId"`
+	RequestId                    *string             `json:"requestId"`
+	ContextStack                 *string             `json:"contextStack"`
+	NamespaceName                *string             `json:"namespaceName"`
+	MissionGroupName             *string             `json:"missionGroupName"`
+	MissionTaskName              *string             `json:"missionTaskName"`
+	Metadata                     *string             `json:"metadata"`
+	Description                  *string             `json:"description"`
+	VerifyCompleteType           *string             `json:"verifyCompleteType"`
+	TargetCounter                *TargetCounterModel `json:"targetCounter"`
+	VerifyCompleteConsumeActions []ConsumeAction     `json:"verifyCompleteConsumeActions"`
+	CompleteAcquireActions       []AcquireAction     `json:"completeAcquireActions"`
+	ChallengePeriodEventId       *string             `json:"challengePeriodEventId"`
+	PremiseMissionTaskName       *string             `json:"premiseMissionTaskName"`
+	// Deprecated: should not be used
+	CounterName *string `json:"counterName"`
+	// Deprecated: should not be used
+	TargetResetType *string `json:"targetResetType"`
+	// Deprecated: should not be used
+	TargetValue *int64 `json:"targetValue"`
 }
 
 func (p *UpdateMissionTaskModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -8075,54 +8653,34 @@ func (p *UpdateMissionTaskModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["counterName"]; ok && v != nil {
+		if v, ok := d["verifyCompleteType"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
 				switch v2 := temp.(type) {
 				case string:
-					p.CounterName = &v2
+					p.VerifyCompleteType = &v2
 				case float64:
 					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.CounterName = &strValue
+					p.VerifyCompleteType = &strValue
 				case int:
 					strValue := strconv.Itoa(v2)
-					p.CounterName = &strValue
+					p.VerifyCompleteType = &strValue
 				case int32:
 					strValue := strconv.Itoa(int(v2))
-					p.CounterName = &strValue
+					p.VerifyCompleteType = &strValue
 				case int64:
 					strValue := strconv.Itoa(int(v2))
-					p.CounterName = &strValue
+					p.VerifyCompleteType = &strValue
 				default:
-					_ = json.Unmarshal(*v, &p.CounterName)
+					_ = json.Unmarshal(*v, &p.VerifyCompleteType)
 				}
 			}
 		}
-		if v, ok := d["targetResetType"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.TargetResetType = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.TargetResetType = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.TargetResetType = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetResetType = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetResetType = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.TargetResetType)
-				}
-			}
+		if v, ok := d["targetCounter"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TargetCounter)
 		}
-		if v, ok := d["targetValue"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.TargetValue)
+		if v, ok := d["verifyCompleteConsumeActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyCompleteConsumeActions)
 		}
 		if v, ok := d["completeAcquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CompleteAcquireActions)
@@ -8173,6 +8731,55 @@ func (p *UpdateMissionTaskModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["targetResetType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TargetResetType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TargetResetType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TargetResetType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetResetType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetResetType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TargetResetType)
+				}
+			}
+		}
+		if v, ok := d["targetValue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TargetValue)
+		}
 	}
 	return nil
 }
@@ -8188,35 +8795,43 @@ func NewUpdateMissionTaskModelMasterRequestFromJson(data string) (UpdateMissionT
 
 func NewUpdateMissionTaskModelMasterRequestFromDict(data map[string]interface{}) UpdateMissionTaskModelMasterRequest {
 	return UpdateMissionTaskModelMasterRequest{
-		NamespaceName:          core.CastString(data["namespaceName"]),
-		MissionGroupName:       core.CastString(data["missionGroupName"]),
-		MissionTaskName:        core.CastString(data["missionTaskName"]),
-		Metadata:               core.CastString(data["metadata"]),
-		Description:            core.CastString(data["description"]),
-		CounterName:            core.CastString(data["counterName"]),
-		TargetResetType:        core.CastString(data["targetResetType"]),
-		TargetValue:            core.CastInt64(data["targetValue"]),
-		CompleteAcquireActions: CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
-		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
-		PremiseMissionTaskName: core.CastString(data["premiseMissionTaskName"]),
+		NamespaceName:                core.CastString(data["namespaceName"]),
+		MissionGroupName:             core.CastString(data["missionGroupName"]),
+		MissionTaskName:              core.CastString(data["missionTaskName"]),
+		Metadata:                     core.CastString(data["metadata"]),
+		Description:                  core.CastString(data["description"]),
+		VerifyCompleteType:           core.CastString(data["verifyCompleteType"]),
+		TargetCounter:                NewTargetCounterModelFromDict(core.CastMap(data["targetCounter"])).Pointer(),
+		VerifyCompleteConsumeActions: CastConsumeActions(core.CastArray(data["verifyCompleteConsumeActions"])),
+		CompleteAcquireActions:       CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
+		ChallengePeriodEventId:       core.CastString(data["challengePeriodEventId"]),
+		PremiseMissionTaskName:       core.CastString(data["premiseMissionTaskName"]),
+		CounterName:                  core.CastString(data["counterName"]),
+		TargetResetType:              core.CastString(data["targetResetType"]),
+		TargetValue:                  core.CastInt64(data["targetValue"]),
 	}
 }
 
 func (p UpdateMissionTaskModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":    p.NamespaceName,
-		"missionGroupName": p.MissionGroupName,
-		"missionTaskName":  p.MissionTaskName,
-		"metadata":         p.Metadata,
-		"description":      p.Description,
-		"counterName":      p.CounterName,
-		"targetResetType":  p.TargetResetType,
-		"targetValue":      p.TargetValue,
+		"namespaceName":      p.NamespaceName,
+		"missionGroupName":   p.MissionGroupName,
+		"missionTaskName":    p.MissionTaskName,
+		"metadata":           p.Metadata,
+		"description":        p.Description,
+		"verifyCompleteType": p.VerifyCompleteType,
+		"targetCounter":      p.TargetCounter.ToDict(),
+		"verifyCompleteConsumeActions": CastConsumeActionsFromDict(
+			p.VerifyCompleteConsumeActions,
+		),
 		"completeAcquireActions": CastAcquireActionsFromDict(
 			p.CompleteAcquireActions,
 		),
 		"challengePeriodEventId": p.ChallengePeriodEventId,
 		"premiseMissionTaskName": p.PremiseMissionTaskName,
+		"counterName":            p.CounterName,
+		"targetResetType":        p.TargetResetType,
+		"targetValue":            p.TargetValue,
 	}
 }
 
