@@ -1476,6 +1476,15 @@ func (p Gs2RankingWebSocketClient) CreateCategoryModelMasterAsync(
 	if request.Scope != nil && *request.Scope != "" {
 		bodies["scope"] = *request.Scope
 	}
+	if request.GlobalRankingSetting != nil {
+		bodies["globalRankingSetting"] = request.GlobalRankingSetting.ToDict()
+	}
+	if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
+		bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
+	}
+	if request.AccessPeriodEventId != nil && *request.AccessPeriodEventId != "" {
+		bodies["accessPeriodEventId"] = *request.AccessPeriodEventId
+	}
 	if request.UniqueByUserId != nil {
 		bodies["uniqueByUserId"] = *request.UniqueByUserId
 	}
@@ -1497,12 +1506,6 @@ func (p Gs2RankingWebSocketClient) CreateCategoryModelMasterAsync(
 			_additionalScopes = append(_additionalScopes, item)
 		}
 		bodies["additionalScopes"] = _additionalScopes
-	}
-	if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
-		bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
-	}
-	if request.AccessPeriodEventId != nil && *request.AccessPeriodEventId != "" {
-		bodies["accessPeriodEventId"] = *request.AccessPeriodEventId
 	}
 	if request.IgnoreUserIds != nil {
 		var _ignoreUserIds []interface{}
@@ -1700,6 +1703,15 @@ func (p Gs2RankingWebSocketClient) UpdateCategoryModelMasterAsync(
 	if request.Scope != nil && *request.Scope != "" {
 		bodies["scope"] = *request.Scope
 	}
+	if request.GlobalRankingSetting != nil {
+		bodies["globalRankingSetting"] = request.GlobalRankingSetting.ToDict()
+	}
+	if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
+		bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
+	}
+	if request.AccessPeriodEventId != nil && *request.AccessPeriodEventId != "" {
+		bodies["accessPeriodEventId"] = *request.AccessPeriodEventId
+	}
 	if request.UniqueByUserId != nil {
 		bodies["uniqueByUserId"] = *request.UniqueByUserId
 	}
@@ -1721,12 +1733,6 @@ func (p Gs2RankingWebSocketClient) UpdateCategoryModelMasterAsync(
 			_additionalScopes = append(_additionalScopes, item)
 		}
 		bodies["additionalScopes"] = _additionalScopes
-	}
-	if request.EntryPeriodEventId != nil && *request.EntryPeriodEventId != "" {
-		bodies["entryPeriodEventId"] = *request.EntryPeriodEventId
-	}
-	if request.AccessPeriodEventId != nil && *request.AccessPeriodEventId != "" {
-		bodies["accessPeriodEventId"] = *request.AccessPeriodEventId
 	}
 	if request.IgnoreUserIds != nil {
 		var _ignoreUserIds []interface{}

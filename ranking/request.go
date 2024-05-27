@@ -1689,27 +1689,35 @@ func (p DescribeCategoryModelMastersRequest) Pointer() *DescribeCategoryModelMas
 }
 
 type CreateCategoryModelMasterRequest struct {
-	SourceRequestId            *string   `json:"sourceRequestId"`
-	RequestId                  *string   `json:"requestId"`
-	ContextStack               *string   `json:"contextStack"`
-	NamespaceName              *string   `json:"namespaceName"`
-	Name                       *string   `json:"name"`
-	Description                *string   `json:"description"`
-	Metadata                   *string   `json:"metadata"`
-	MinimumValue               *int64    `json:"minimumValue"`
-	MaximumValue               *int64    `json:"maximumValue"`
-	OrderDirection             *string   `json:"orderDirection"`
-	Scope                      *string   `json:"scope"`
-	UniqueByUserId             *bool     `json:"uniqueByUserId"`
-	Sum                        *bool     `json:"sum"`
-	CalculateFixedTimingHour   *int32    `json:"calculateFixedTimingHour"`
-	CalculateFixedTimingMinute *int32    `json:"calculateFixedTimingMinute"`
-	CalculateIntervalMinutes   *int32    `json:"calculateIntervalMinutes"`
-	AdditionalScopes           []Scope   `json:"additionalScopes"`
-	EntryPeriodEventId         *string   `json:"entryPeriodEventId"`
-	AccessPeriodEventId        *string   `json:"accessPeriodEventId"`
-	IgnoreUserIds              []*string `json:"ignoreUserIds"`
-	Generation                 *string   `json:"generation"`
+	SourceRequestId      *string               `json:"sourceRequestId"`
+	RequestId            *string               `json:"requestId"`
+	ContextStack         *string               `json:"contextStack"`
+	NamespaceName        *string               `json:"namespaceName"`
+	Name                 *string               `json:"name"`
+	Description          *string               `json:"description"`
+	Metadata             *string               `json:"metadata"`
+	MinimumValue         *int64                `json:"minimumValue"`
+	MaximumValue         *int64                `json:"maximumValue"`
+	OrderDirection       *string               `json:"orderDirection"`
+	Scope                *string               `json:"scope"`
+	GlobalRankingSetting *GlobalRankingSetting `json:"globalRankingSetting"`
+	EntryPeriodEventId   *string               `json:"entryPeriodEventId"`
+	AccessPeriodEventId  *string               `json:"accessPeriodEventId"`
+	// Deprecated: should not be used
+	UniqueByUserId *bool `json:"uniqueByUserId"`
+	Sum            *bool `json:"sum"`
+	// Deprecated: should not be used
+	CalculateFixedTimingHour *int32 `json:"calculateFixedTimingHour"`
+	// Deprecated: should not be used
+	CalculateFixedTimingMinute *int32 `json:"calculateFixedTimingMinute"`
+	// Deprecated: should not be used
+	CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
+	// Deprecated: should not be used
+	AdditionalScopes []Scope `json:"additionalScopes"`
+	// Deprecated: should not be used
+	IgnoreUserIds []*string `json:"ignoreUserIds"`
+	// Deprecated: should not be used
+	Generation *string `json:"generation"`
 }
 
 func (p *CreateCategoryModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -1878,23 +1886,8 @@ func (p *CreateCategoryModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["uniqueByUserId"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.UniqueByUserId)
-		}
-		if v, ok := d["sum"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Sum)
-		}
-		if v, ok := d["calculateFixedTimingHour"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CalculateFixedTimingHour)
-		}
-		if v, ok := d["calculateFixedTimingMinute"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CalculateFixedTimingMinute)
-		}
-		if v, ok := d["calculateIntervalMinutes"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CalculateIntervalMinutes)
-		}
-		if v, ok := d["additionalScopes"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.AdditionalScopes)
+		if v, ok := d["globalRankingSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.GlobalRankingSetting)
 		}
 		if v, ok := d["entryPeriodEventId"]; ok && v != nil {
 			var temp interface{}
@@ -1941,6 +1934,24 @@ func (p *CreateCategoryModelMasterRequest) UnmarshalJSON(data []byte) error {
 					_ = json.Unmarshal(*v, &p.AccessPeriodEventId)
 				}
 			}
+		}
+		if v, ok := d["uniqueByUserId"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UniqueByUserId)
+		}
+		if v, ok := d["sum"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Sum)
+		}
+		if v, ok := d["calculateFixedTimingHour"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CalculateFixedTimingHour)
+		}
+		if v, ok := d["calculateFixedTimingMinute"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CalculateFixedTimingMinute)
+		}
+		if v, ok := d["calculateIntervalMinutes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CalculateIntervalMinutes)
+		}
+		if v, ok := d["additionalScopes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AdditionalScopes)
 		}
 		if v, ok := d["ignoreUserIds"]; ok && v != nil {
 			var v2 []interface{}
@@ -2014,14 +2025,15 @@ func NewCreateCategoryModelMasterRequestFromDict(data map[string]interface{}) Cr
 		MaximumValue:               core.CastInt64(data["maximumValue"]),
 		OrderDirection:             core.CastString(data["orderDirection"]),
 		Scope:                      core.CastString(data["scope"]),
+		GlobalRankingSetting:       NewGlobalRankingSettingFromDict(core.CastMap(data["globalRankingSetting"])).Pointer(),
+		EntryPeriodEventId:         core.CastString(data["entryPeriodEventId"]),
+		AccessPeriodEventId:        core.CastString(data["accessPeriodEventId"]),
 		UniqueByUserId:             core.CastBool(data["uniqueByUserId"]),
 		Sum:                        core.CastBool(data["sum"]),
 		CalculateFixedTimingHour:   core.CastInt32(data["calculateFixedTimingHour"]),
 		CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
 		CalculateIntervalMinutes:   core.CastInt32(data["calculateIntervalMinutes"]),
 		AdditionalScopes:           CastScopes(core.CastArray(data["additionalScopes"])),
-		EntryPeriodEventId:         core.CastString(data["entryPeriodEventId"]),
-		AccessPeriodEventId:        core.CastString(data["accessPeriodEventId"]),
 		IgnoreUserIds:              core.CastStrings(core.CastArray(data["ignoreUserIds"])),
 		Generation:                 core.CastString(data["generation"]),
 	}
@@ -2037,6 +2049,9 @@ func (p CreateCategoryModelMasterRequest) ToDict() map[string]interface{} {
 		"maximumValue":               p.MaximumValue,
 		"orderDirection":             p.OrderDirection,
 		"scope":                      p.Scope,
+		"globalRankingSetting":       p.GlobalRankingSetting.ToDict(),
+		"entryPeriodEventId":         p.EntryPeriodEventId,
+		"accessPeriodEventId":        p.AccessPeriodEventId,
 		"uniqueByUserId":             p.UniqueByUserId,
 		"sum":                        p.Sum,
 		"calculateFixedTimingHour":   p.CalculateFixedTimingHour,
@@ -2045,8 +2060,6 @@ func (p CreateCategoryModelMasterRequest) ToDict() map[string]interface{} {
 		"additionalScopes": CastScopesFromDict(
 			p.AdditionalScopes,
 		),
-		"entryPeriodEventId":  p.EntryPeriodEventId,
-		"accessPeriodEventId": p.AccessPeriodEventId,
 		"ignoreUserIds": core.CastStringsFromDict(
 			p.IgnoreUserIds,
 		),
@@ -2166,27 +2179,35 @@ func (p GetCategoryModelMasterRequest) Pointer() *GetCategoryModelMasterRequest 
 }
 
 type UpdateCategoryModelMasterRequest struct {
-	SourceRequestId            *string   `json:"sourceRequestId"`
-	RequestId                  *string   `json:"requestId"`
-	ContextStack               *string   `json:"contextStack"`
-	NamespaceName              *string   `json:"namespaceName"`
-	CategoryName               *string   `json:"categoryName"`
-	Description                *string   `json:"description"`
-	Metadata                   *string   `json:"metadata"`
-	MinimumValue               *int64    `json:"minimumValue"`
-	MaximumValue               *int64    `json:"maximumValue"`
-	OrderDirection             *string   `json:"orderDirection"`
-	Scope                      *string   `json:"scope"`
-	UniqueByUserId             *bool     `json:"uniqueByUserId"`
-	Sum                        *bool     `json:"sum"`
-	CalculateFixedTimingHour   *int32    `json:"calculateFixedTimingHour"`
-	CalculateFixedTimingMinute *int32    `json:"calculateFixedTimingMinute"`
-	CalculateIntervalMinutes   *int32    `json:"calculateIntervalMinutes"`
-	AdditionalScopes           []Scope   `json:"additionalScopes"`
-	EntryPeriodEventId         *string   `json:"entryPeriodEventId"`
-	AccessPeriodEventId        *string   `json:"accessPeriodEventId"`
-	IgnoreUserIds              []*string `json:"ignoreUserIds"`
-	Generation                 *string   `json:"generation"`
+	SourceRequestId      *string               `json:"sourceRequestId"`
+	RequestId            *string               `json:"requestId"`
+	ContextStack         *string               `json:"contextStack"`
+	NamespaceName        *string               `json:"namespaceName"`
+	CategoryName         *string               `json:"categoryName"`
+	Description          *string               `json:"description"`
+	Metadata             *string               `json:"metadata"`
+	MinimumValue         *int64                `json:"minimumValue"`
+	MaximumValue         *int64                `json:"maximumValue"`
+	OrderDirection       *string               `json:"orderDirection"`
+	Scope                *string               `json:"scope"`
+	GlobalRankingSetting *GlobalRankingSetting `json:"globalRankingSetting"`
+	EntryPeriodEventId   *string               `json:"entryPeriodEventId"`
+	AccessPeriodEventId  *string               `json:"accessPeriodEventId"`
+	// Deprecated: should not be used
+	UniqueByUserId *bool `json:"uniqueByUserId"`
+	Sum            *bool `json:"sum"`
+	// Deprecated: should not be used
+	CalculateFixedTimingHour *int32 `json:"calculateFixedTimingHour"`
+	// Deprecated: should not be used
+	CalculateFixedTimingMinute *int32 `json:"calculateFixedTimingMinute"`
+	// Deprecated: should not be used
+	CalculateIntervalMinutes *int32 `json:"calculateIntervalMinutes"`
+	// Deprecated: should not be used
+	AdditionalScopes []Scope `json:"additionalScopes"`
+	// Deprecated: should not be used
+	IgnoreUserIds []*string `json:"ignoreUserIds"`
+	// Deprecated: should not be used
+	Generation *string `json:"generation"`
 }
 
 func (p *UpdateCategoryModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2355,23 +2376,8 @@ func (p *UpdateCategoryModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["uniqueByUserId"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.UniqueByUserId)
-		}
-		if v, ok := d["sum"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Sum)
-		}
-		if v, ok := d["calculateFixedTimingHour"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CalculateFixedTimingHour)
-		}
-		if v, ok := d["calculateFixedTimingMinute"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CalculateFixedTimingMinute)
-		}
-		if v, ok := d["calculateIntervalMinutes"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CalculateIntervalMinutes)
-		}
-		if v, ok := d["additionalScopes"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.AdditionalScopes)
+		if v, ok := d["globalRankingSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.GlobalRankingSetting)
 		}
 		if v, ok := d["entryPeriodEventId"]; ok && v != nil {
 			var temp interface{}
@@ -2418,6 +2424,24 @@ func (p *UpdateCategoryModelMasterRequest) UnmarshalJSON(data []byte) error {
 					_ = json.Unmarshal(*v, &p.AccessPeriodEventId)
 				}
 			}
+		}
+		if v, ok := d["uniqueByUserId"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UniqueByUserId)
+		}
+		if v, ok := d["sum"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Sum)
+		}
+		if v, ok := d["calculateFixedTimingHour"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CalculateFixedTimingHour)
+		}
+		if v, ok := d["calculateFixedTimingMinute"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CalculateFixedTimingMinute)
+		}
+		if v, ok := d["calculateIntervalMinutes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CalculateIntervalMinutes)
+		}
+		if v, ok := d["additionalScopes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AdditionalScopes)
 		}
 		if v, ok := d["ignoreUserIds"]; ok && v != nil {
 			var v2 []interface{}
@@ -2491,14 +2515,15 @@ func NewUpdateCategoryModelMasterRequestFromDict(data map[string]interface{}) Up
 		MaximumValue:               core.CastInt64(data["maximumValue"]),
 		OrderDirection:             core.CastString(data["orderDirection"]),
 		Scope:                      core.CastString(data["scope"]),
+		GlobalRankingSetting:       NewGlobalRankingSettingFromDict(core.CastMap(data["globalRankingSetting"])).Pointer(),
+		EntryPeriodEventId:         core.CastString(data["entryPeriodEventId"]),
+		AccessPeriodEventId:        core.CastString(data["accessPeriodEventId"]),
 		UniqueByUserId:             core.CastBool(data["uniqueByUserId"]),
 		Sum:                        core.CastBool(data["sum"]),
 		CalculateFixedTimingHour:   core.CastInt32(data["calculateFixedTimingHour"]),
 		CalculateFixedTimingMinute: core.CastInt32(data["calculateFixedTimingMinute"]),
 		CalculateIntervalMinutes:   core.CastInt32(data["calculateIntervalMinutes"]),
 		AdditionalScopes:           CastScopes(core.CastArray(data["additionalScopes"])),
-		EntryPeriodEventId:         core.CastString(data["entryPeriodEventId"]),
-		AccessPeriodEventId:        core.CastString(data["accessPeriodEventId"]),
 		IgnoreUserIds:              core.CastStrings(core.CastArray(data["ignoreUserIds"])),
 		Generation:                 core.CastString(data["generation"]),
 	}
@@ -2514,6 +2539,9 @@ func (p UpdateCategoryModelMasterRequest) ToDict() map[string]interface{} {
 		"maximumValue":               p.MaximumValue,
 		"orderDirection":             p.OrderDirection,
 		"scope":                      p.Scope,
+		"globalRankingSetting":       p.GlobalRankingSetting.ToDict(),
+		"entryPeriodEventId":         p.EntryPeriodEventId,
+		"accessPeriodEventId":        p.AccessPeriodEventId,
 		"uniqueByUserId":             p.UniqueByUserId,
 		"sum":                        p.Sum,
 		"calculateFixedTimingHour":   p.CalculateFixedTimingHour,
@@ -2522,8 +2550,6 @@ func (p UpdateCategoryModelMasterRequest) ToDict() map[string]interface{} {
 		"additionalScopes": CastScopesFromDict(
 			p.AdditionalScopes,
 		),
-		"entryPeriodEventId":  p.EntryPeriodEventId,
-		"accessPeriodEventId": p.AccessPeriodEventId,
 		"ignoreUserIds": core.CastStringsFromDict(
 			p.IgnoreUserIds,
 		),
