@@ -4286,16 +4286,17 @@ func (p DescribeGlobalMessageMastersRequest) Pointer() *DescribeGlobalMessageMas
 }
 
 type CreateGlobalMessageMasterRequest struct {
-	SourceRequestId               *string         `json:"sourceRequestId"`
-	RequestId                     *string         `json:"requestId"`
-	ContextStack                  *string         `json:"contextStack"`
-	NamespaceName                 *string         `json:"namespaceName"`
-	Name                          *string         `json:"name"`
-	Metadata                      *string         `json:"metadata"`
-	ReadAcquireActions            []AcquireAction `json:"readAcquireActions"`
-	ExpiresTimeSpan               *TimeSpan       `json:"expiresTimeSpan"`
-	ExpiresAt                     *int64          `json:"expiresAt"`
-	MessageReceptionPeriodEventId *string         `json:"messageReceptionPeriodEventId"`
+	SourceRequestId    *string         `json:"sourceRequestId"`
+	RequestId          *string         `json:"requestId"`
+	ContextStack       *string         `json:"contextStack"`
+	NamespaceName      *string         `json:"namespaceName"`
+	Name               *string         `json:"name"`
+	Metadata           *string         `json:"metadata"`
+	ReadAcquireActions []AcquireAction `json:"readAcquireActions"`
+	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
+	// Deprecated: should not be used
+	ExpiresAt                     *int64  `json:"expiresAt"`
+	MessageReceptionPeriodEventId *string `json:"messageReceptionPeriodEventId"`
 }
 
 func (p *CreateGlobalMessageMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4572,16 +4573,17 @@ func (p GetGlobalMessageMasterRequest) Pointer() *GetGlobalMessageMasterRequest 
 }
 
 type UpdateGlobalMessageMasterRequest struct {
-	SourceRequestId               *string         `json:"sourceRequestId"`
-	RequestId                     *string         `json:"requestId"`
-	ContextStack                  *string         `json:"contextStack"`
-	NamespaceName                 *string         `json:"namespaceName"`
-	GlobalMessageName             *string         `json:"globalMessageName"`
-	Metadata                      *string         `json:"metadata"`
-	ReadAcquireActions            []AcquireAction `json:"readAcquireActions"`
-	ExpiresTimeSpan               *TimeSpan       `json:"expiresTimeSpan"`
-	ExpiresAt                     *int64          `json:"expiresAt"`
-	MessageReceptionPeriodEventId *string         `json:"messageReceptionPeriodEventId"`
+	SourceRequestId    *string         `json:"sourceRequestId"`
+	RequestId          *string         `json:"requestId"`
+	ContextStack       *string         `json:"contextStack"`
+	NamespaceName      *string         `json:"namespaceName"`
+	GlobalMessageName  *string         `json:"globalMessageName"`
+	Metadata           *string         `json:"metadata"`
+	ReadAcquireActions []AcquireAction `json:"readAcquireActions"`
+	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
+	// Deprecated: should not be used
+	ExpiresAt                     *int64  `json:"expiresAt"`
+	MessageReceptionPeriodEventId *string `json:"messageReceptionPeriodEventId"`
 }
 
 func (p *UpdateGlobalMessageMasterRequest) UnmarshalJSON(data []byte) error {

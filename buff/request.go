@@ -111,12 +111,13 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	SourceRequestId *string     `json:"sourceRequestId"`
-	RequestId       *string     `json:"requestId"`
-	ContextStack    *string     `json:"contextStack"`
-	Name            *string     `json:"name"`
-	Description     *string     `json:"description"`
-	LogSetting      *LogSetting `json:"logSetting"`
+	SourceRequestId *string        `json:"sourceRequestId"`
+	RequestId       *string        `json:"requestId"`
+	ContextStack    *string        `json:"contextStack"`
+	Name            *string        `json:"name"`
+	Description     *string        `json:"description"`
+	ApplyBuffScript *ScriptSetting `json:"applyBuffScript"`
+	LogSetting      *LogSetting    `json:"logSetting"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -187,6 +188,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["applyBuffScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ApplyBuffScript)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -205,17 +209,19 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		LogSetting:  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name:            core.CastString(data["name"]),
+		Description:     core.CastString(data["description"]),
+		ApplyBuffScript: NewScriptSettingFromDict(core.CastMap(data["applyBuffScript"])).Pointer(),
+		LogSetting:      NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":        p.Name,
-		"description": p.Description,
-		"logSetting":  p.LogSetting.ToDict(),
+		"name":            p.Name,
+		"description":     p.Description,
+		"applyBuffScript": p.ApplyBuffScript.ToDict(),
+		"logSetting":      p.LogSetting.ToDict(),
 	}
 }
 
@@ -386,12 +392,13 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	SourceRequestId *string     `json:"sourceRequestId"`
-	RequestId       *string     `json:"requestId"`
-	ContextStack    *string     `json:"contextStack"`
-	NamespaceName   *string     `json:"namespaceName"`
-	Description     *string     `json:"description"`
-	LogSetting      *LogSetting `json:"logSetting"`
+	SourceRequestId *string        `json:"sourceRequestId"`
+	RequestId       *string        `json:"requestId"`
+	ContextStack    *string        `json:"contextStack"`
+	NamespaceName   *string        `json:"namespaceName"`
+	Description     *string        `json:"description"`
+	ApplyBuffScript *ScriptSetting `json:"applyBuffScript"`
+	LogSetting      *LogSetting    `json:"logSetting"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -462,6 +469,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["applyBuffScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ApplyBuffScript)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -480,17 +490,19 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Description:   core.CastString(data["description"]),
-		LogSetting:    NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		Description:     core.CastString(data["description"]),
+		ApplyBuffScript: NewScriptSettingFromDict(core.CastMap(data["applyBuffScript"])).Pointer(),
+		LogSetting:      NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"description":   p.Description,
-		"logSetting":    p.LogSetting.ToDict(),
+		"namespaceName":   p.NamespaceName,
+		"description":     p.Description,
+		"applyBuffScript": p.ApplyBuffScript.ToDict(),
+		"logSetting":      p.LogSetting.ToDict(),
 	}
 }
 

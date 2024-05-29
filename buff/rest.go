@@ -177,6 +177,9 @@ func (p Gs2BuffRestClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.ApplyBuffScript != nil {
+		bodies["applyBuffScript"] = request.ApplyBuffScript.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -452,6 +455,9 @@ func (p Gs2BuffRestClient) UpdateNamespaceAsync(
 	var bodies = core.Bodies{}
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
+	}
+	if request.ApplyBuffScript != nil {
+		bodies["applyBuffScript"] = request.ApplyBuffScript.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()

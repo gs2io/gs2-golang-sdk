@@ -716,15 +716,16 @@ func CastCurrentMessageMastersFromDict(data []CurrentMessageMaster) []interface{
 }
 
 type GlobalMessageMaster struct {
-	GlobalMessageId               *string         `json:"globalMessageId"`
-	Name                          *string         `json:"name"`
-	Metadata                      *string         `json:"metadata"`
-	ReadAcquireActions            []AcquireAction `json:"readAcquireActions"`
-	ExpiresTimeSpan               *TimeSpan       `json:"expiresTimeSpan"`
-	ExpiresAt                     *int64          `json:"expiresAt"`
-	MessageReceptionPeriodEventId *string         `json:"messageReceptionPeriodEventId"`
-	CreatedAt                     *int64          `json:"createdAt"`
-	Revision                      *int64          `json:"revision"`
+	GlobalMessageId    *string         `json:"globalMessageId"`
+	Name               *string         `json:"name"`
+	Metadata           *string         `json:"metadata"`
+	ReadAcquireActions []AcquireAction `json:"readAcquireActions"`
+	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
+	// Deprecated: should not be used
+	ExpiresAt                     *int64  `json:"expiresAt"`
+	MessageReceptionPeriodEventId *string `json:"messageReceptionPeriodEventId"`
+	CreatedAt                     *int64  `json:"createdAt"`
+	Revision                      *int64  `json:"revision"`
 }
 
 func (p *GlobalMessageMaster) UnmarshalJSON(data []byte) error {
@@ -954,13 +955,14 @@ func CastGlobalMessageMastersFromDict(data []GlobalMessageMaster) []interface{} 
 }
 
 type GlobalMessage struct {
-	GlobalMessageId               *string         `json:"globalMessageId"`
-	Name                          *string         `json:"name"`
-	Metadata                      *string         `json:"metadata"`
-	ReadAcquireActions            []AcquireAction `json:"readAcquireActions"`
-	ExpiresTimeSpan               *TimeSpan       `json:"expiresTimeSpan"`
-	ExpiresAt                     *int64          `json:"expiresAt"`
-	MessageReceptionPeriodEventId *string         `json:"messageReceptionPeriodEventId"`
+	GlobalMessageId    *string         `json:"globalMessageId"`
+	Name               *string         `json:"name"`
+	Metadata           *string         `json:"metadata"`
+	ReadAcquireActions []AcquireAction `json:"readAcquireActions"`
+	ExpiresTimeSpan    *TimeSpan       `json:"expiresTimeSpan"`
+	// Deprecated: should not be used
+	ExpiresAt                     *int64  `json:"expiresAt"`
+	MessageReceptionPeriodEventId *string `json:"messageReceptionPeriodEventId"`
 }
 
 func (p *GlobalMessage) UnmarshalJSON(data []byte) error {
