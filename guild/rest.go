@@ -3918,6 +3918,451 @@ func (p Gs2GuildRestClient) DecreaseMaximumCurrentMaximumMemberCountByGuildName(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyCurrentMaximumMemberCountAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCurrentMaximumMemberCountAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCurrentMaximumMemberCountAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCurrentMaximumMemberCountResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCurrentMaximumMemberCountAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCurrentMaximumMemberCountAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCurrentMaximumMemberCountAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) VerifyCurrentMaximumMemberCountAsync(
+	request *VerifyCurrentMaximumMemberCountRequest,
+	callback chan<- VerifyCurrentMaximumMemberCountAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/me/currentMaximumMemberCount/verify"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyCurrentMaximumMemberCountAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) VerifyCurrentMaximumMemberCount(
+	request *VerifyCurrentMaximumMemberCountRequest,
+) (*VerifyCurrentMaximumMemberCountResult, error) {
+	callback := make(chan VerifyCurrentMaximumMemberCountAsyncResult, 1)
+	go p.VerifyCurrentMaximumMemberCountAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyCurrentMaximumMemberCountByGuildNameAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCurrentMaximumMemberCountByGuildNameAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCurrentMaximumMemberCountByGuildNameAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCurrentMaximumMemberCountByGuildNameResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCurrentMaximumMemberCountByGuildNameAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCurrentMaximumMemberCountByGuildNameAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCurrentMaximumMemberCountByGuildNameAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) VerifyCurrentMaximumMemberCountByGuildNameAsync(
+	request *VerifyCurrentMaximumMemberCountByGuildNameRequest,
+	callback chan<- VerifyCurrentMaximumMemberCountByGuildNameAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/{guildName}/currentMaximumMemberCount/verify"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyCurrentMaximumMemberCountByGuildNameAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) VerifyCurrentMaximumMemberCountByGuildName(
+	request *VerifyCurrentMaximumMemberCountByGuildNameRequest,
+) (*VerifyCurrentMaximumMemberCountByGuildNameResult, error) {
+	callback := make(chan VerifyCurrentMaximumMemberCountByGuildNameAsyncResult, 1)
+	go p.VerifyCurrentMaximumMemberCountByGuildNameAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyIncludeMemberAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyIncludeMemberAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyIncludeMemberAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyIncludeMemberResult
+	if asyncResult.Err != nil {
+		callback <- VerifyIncludeMemberAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyIncludeMemberAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyIncludeMemberAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) VerifyIncludeMemberAsync(
+	request *VerifyIncludeMemberRequest,
+	callback chan<- VerifyIncludeMemberAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/{guildName}/member/me/verify"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyIncludeMemberAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) VerifyIncludeMember(
+	request *VerifyIncludeMemberRequest,
+) (*VerifyIncludeMemberResult, error) {
+	callback := make(chan VerifyIncludeMemberAsyncResult, 1)
+	go p.VerifyIncludeMemberAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyIncludeMemberByUserIdAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyIncludeMemberByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyIncludeMemberByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyIncludeMemberByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyIncludeMemberByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyIncludeMemberByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyIncludeMemberByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) VerifyIncludeMemberByUserIdAsync(
+	request *VerifyIncludeMemberByUserIdRequest,
+	callback chan<- VerifyIncludeMemberByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/{guildName}/member/{userId}/verify"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go verifyIncludeMemberByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) VerifyIncludeMemberByUserId(
+	request *VerifyIncludeMemberByUserIdRequest,
+) (*VerifyIncludeMemberByUserIdResult, error) {
+	callback := make(chan VerifyIncludeMemberByUserIdAsyncResult, 1)
+	go p.VerifyIncludeMemberByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func setMaximumCurrentMaximumMemberCountByGuildNameAsyncHandler(
 	client Gs2GuildRestClient,
 	job *core.NetworkJob,
@@ -4507,6 +4952,188 @@ func (p Gs2GuildRestClient) SetMaximumCurrentMaximumMemberCountByStampSheet(
 ) (*SetMaximumCurrentMaximumMemberCountByStampSheetResult, error) {
 	callback := make(chan SetMaximumCurrentMaximumMemberCountByStampSheetAsyncResult, 1)
 	go p.SetMaximumCurrentMaximumMemberCountByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyCurrentMaximumMemberCountByStampTaskAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCurrentMaximumMemberCountByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCurrentMaximumMemberCountByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCurrentMaximumMemberCountByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCurrentMaximumMemberCountByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCurrentMaximumMemberCountByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCurrentMaximumMemberCountByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) VerifyCurrentMaximumMemberCountByStampTaskAsync(
+	request *VerifyCurrentMaximumMemberCountByStampTaskRequest,
+	callback chan<- VerifyCurrentMaximumMemberCountByStampTaskAsyncResult,
+) {
+	path := "/stamp/guild/currentMaximumMemberCount/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifyCurrentMaximumMemberCountByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) VerifyCurrentMaximumMemberCountByStampTask(
+	request *VerifyCurrentMaximumMemberCountByStampTaskRequest,
+) (*VerifyCurrentMaximumMemberCountByStampTaskResult, error) {
+	callback := make(chan VerifyCurrentMaximumMemberCountByStampTaskAsyncResult, 1)
+	go p.VerifyCurrentMaximumMemberCountByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyIncludeMemberByStampTaskAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyIncludeMemberByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyIncludeMemberByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyIncludeMemberByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyIncludeMemberByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyIncludeMemberByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyIncludeMemberByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) VerifyIncludeMemberByStampTaskAsync(
+	request *VerifyIncludeMemberByStampTaskRequest,
+	callback chan<- VerifyIncludeMemberByStampTaskAsyncResult,
+) {
+	path := "/stamp/guild/member/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifyIncludeMemberByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) VerifyIncludeMemberByStampTask(
+	request *VerifyIncludeMemberByStampTaskRequest,
+) (*VerifyIncludeMemberByStampTaskResult, error) {
+	callback := make(chan VerifyIncludeMemberByStampTaskAsyncResult, 1)
+	go p.VerifyIncludeMemberByStampTaskAsync(
 		request,
 		callback,
 	)

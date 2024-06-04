@@ -5610,6 +5610,748 @@ func (p DecreaseMaximumCurrentMaximumMemberCountByGuildNameRequest) Pointer() *D
 	return &p
 }
 
+type VerifyCurrentMaximumMemberCountRequest struct {
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	GuildModelName                  *string `json:"guildModelName"`
+	AccessToken                     *string `json:"accessToken"`
+	VerifyType                      *string `json:"verifyType"`
+	Value                           *int32  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+}
+
+func (p *VerifyCurrentMaximumMemberCountRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyCurrentMaximumMemberCountRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyCurrentMaximumMemberCountRequest{}
+	} else {
+		*p = VerifyCurrentMaximumMemberCountRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["guildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildModelName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+	}
+	return nil
+}
+
+func NewVerifyCurrentMaximumMemberCountRequestFromJson(data string) (VerifyCurrentMaximumMemberCountRequest, error) {
+	req := VerifyCurrentMaximumMemberCountRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyCurrentMaximumMemberCountRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyCurrentMaximumMemberCountRequestFromDict(data map[string]interface{}) VerifyCurrentMaximumMemberCountRequest {
+	return VerifyCurrentMaximumMemberCountRequest{
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		GuildModelName:                  core.CastString(data["guildModelName"]),
+		AccessToken:                     core.CastString(data["accessToken"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		Value:                           core.CastInt32(data["value"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+	}
+}
+
+func (p VerifyCurrentMaximumMemberCountRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"guildModelName":                  p.GuildModelName,
+		"accessToken":                     p.AccessToken,
+		"verifyType":                      p.VerifyType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+	}
+}
+
+func (p VerifyCurrentMaximumMemberCountRequest) Pointer() *VerifyCurrentMaximumMemberCountRequest {
+	return &p
+}
+
+type VerifyCurrentMaximumMemberCountByGuildNameRequest struct {
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	GuildModelName                  *string `json:"guildModelName"`
+	GuildName                       *string `json:"guildName"`
+	VerifyType                      *string `json:"verifyType"`
+	Value                           *int32  `json:"value"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+}
+
+func (p *VerifyCurrentMaximumMemberCountByGuildNameRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyCurrentMaximumMemberCountByGuildNameRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyCurrentMaximumMemberCountByGuildNameRequest{}
+	} else {
+		*p = VerifyCurrentMaximumMemberCountByGuildNameRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["guildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildModelName)
+				}
+			}
+		}
+		if v, ok := d["guildName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+	}
+	return nil
+}
+
+func NewVerifyCurrentMaximumMemberCountByGuildNameRequestFromJson(data string) (VerifyCurrentMaximumMemberCountByGuildNameRequest, error) {
+	req := VerifyCurrentMaximumMemberCountByGuildNameRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyCurrentMaximumMemberCountByGuildNameRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyCurrentMaximumMemberCountByGuildNameRequestFromDict(data map[string]interface{}) VerifyCurrentMaximumMemberCountByGuildNameRequest {
+	return VerifyCurrentMaximumMemberCountByGuildNameRequest{
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		GuildModelName:                  core.CastString(data["guildModelName"]),
+		GuildName:                       core.CastString(data["guildName"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		Value:                           core.CastInt32(data["value"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+	}
+}
+
+func (p VerifyCurrentMaximumMemberCountByGuildNameRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"guildModelName":                  p.GuildModelName,
+		"guildName":                       p.GuildName,
+		"verifyType":                      p.VerifyType,
+		"value":                           p.Value,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+	}
+}
+
+func (p VerifyCurrentMaximumMemberCountByGuildNameRequest) Pointer() *VerifyCurrentMaximumMemberCountByGuildNameRequest {
+	return &p
+}
+
+type VerifyIncludeMemberRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	GuildModelName     *string `json:"guildModelName"`
+	GuildName          *string `json:"guildName"`
+	AccessToken        *string `json:"accessToken"`
+	VerifyType         *string `json:"verifyType"`
+}
+
+func (p *VerifyIncludeMemberRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyIncludeMemberRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyIncludeMemberRequest{}
+	} else {
+		*p = VerifyIncludeMemberRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["guildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildModelName)
+				}
+			}
+		}
+		if v, ok := d["guildName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyIncludeMemberRequestFromJson(data string) (VerifyIncludeMemberRequest, error) {
+	req := VerifyIncludeMemberRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyIncludeMemberRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyIncludeMemberRequestFromDict(data map[string]interface{}) VerifyIncludeMemberRequest {
+	return VerifyIncludeMemberRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		GuildModelName: core.CastString(data["guildModelName"]),
+		GuildName:      core.CastString(data["guildName"]),
+		AccessToken:    core.CastString(data["accessToken"]),
+		VerifyType:     core.CastString(data["verifyType"]),
+	}
+}
+
+func (p VerifyIncludeMemberRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"guildModelName": p.GuildModelName,
+		"guildName":      p.GuildName,
+		"accessToken":    p.AccessToken,
+		"verifyType":     p.VerifyType,
+	}
+}
+
+func (p VerifyIncludeMemberRequest) Pointer() *VerifyIncludeMemberRequest {
+	return &p
+}
+
+type VerifyIncludeMemberByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	GuildModelName     *string `json:"guildModelName"`
+	GuildName          *string `json:"guildName"`
+	UserId             *string `json:"userId"`
+	VerifyType         *string `json:"verifyType"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+}
+
+func (p *VerifyIncludeMemberByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyIncludeMemberByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyIncludeMemberByUserIdRequest{}
+	} else {
+		*p = VerifyIncludeMemberByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["guildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildModelName)
+				}
+			}
+		}
+		if v, ok := d["guildName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyIncludeMemberByUserIdRequestFromJson(data string) (VerifyIncludeMemberByUserIdRequest, error) {
+	req := VerifyIncludeMemberByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyIncludeMemberByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyIncludeMemberByUserIdRequestFromDict(data map[string]interface{}) VerifyIncludeMemberByUserIdRequest {
+	return VerifyIncludeMemberByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		GuildModelName:  core.CastString(data["guildModelName"]),
+		GuildName:       core.CastString(data["guildName"]),
+		UserId:          core.CastString(data["userId"]),
+		VerifyType:      core.CastString(data["verifyType"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p VerifyIncludeMemberByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"guildModelName":  p.GuildModelName,
+		"guildName":       p.GuildName,
+		"userId":          p.UserId,
+		"verifyType":      p.VerifyType,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p VerifyIncludeMemberByUserIdRequest) Pointer() *VerifyIncludeMemberByUserIdRequest {
+	return &p
+}
+
 type SetMaximumCurrentMaximumMemberCountByGuildNameRequest struct {
 	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
@@ -6414,6 +7156,220 @@ func (p SetMaximumCurrentMaximumMemberCountByStampSheetRequest) ToDict() map[str
 }
 
 func (p SetMaximumCurrentMaximumMemberCountByStampSheetRequest) Pointer() *SetMaximumCurrentMaximumMemberCountByStampSheetRequest {
+	return &p
+}
+
+type VerifyCurrentMaximumMemberCountByStampTaskRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *VerifyCurrentMaximumMemberCountByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyCurrentMaximumMemberCountByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyCurrentMaximumMemberCountByStampTaskRequest{}
+	} else {
+		*p = VerifyCurrentMaximumMemberCountByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyCurrentMaximumMemberCountByStampTaskRequestFromJson(data string) (VerifyCurrentMaximumMemberCountByStampTaskRequest, error) {
+	req := VerifyCurrentMaximumMemberCountByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyCurrentMaximumMemberCountByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyCurrentMaximumMemberCountByStampTaskRequestFromDict(data map[string]interface{}) VerifyCurrentMaximumMemberCountByStampTaskRequest {
+	return VerifyCurrentMaximumMemberCountByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifyCurrentMaximumMemberCountByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyCurrentMaximumMemberCountByStampTaskRequest) Pointer() *VerifyCurrentMaximumMemberCountByStampTaskRequest {
+	return &p
+}
+
+type VerifyIncludeMemberByStampTaskRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *VerifyIncludeMemberByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyIncludeMemberByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyIncludeMemberByStampTaskRequest{}
+	} else {
+		*p = VerifyIncludeMemberByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyIncludeMemberByStampTaskRequestFromJson(data string) (VerifyIncludeMemberByStampTaskRequest, error) {
+	req := VerifyIncludeMemberByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyIncludeMemberByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyIncludeMemberByStampTaskRequestFromDict(data map[string]interface{}) VerifyIncludeMemberByStampTaskRequest {
+	return VerifyIncludeMemberByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifyIncludeMemberByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyIncludeMemberByStampTaskRequest) Pointer() *VerifyIncludeMemberByStampTaskRequest {
 	return &p
 }
 

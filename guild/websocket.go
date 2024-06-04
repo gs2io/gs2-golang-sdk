@@ -3547,6 +3547,405 @@ func (p Gs2GuildWebSocketClient) DecreaseMaximumCurrentMaximumMemberCountByGuild
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2GuildWebSocketClient) verifyCurrentMaximumMemberCountAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyCurrentMaximumMemberCountAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCurrentMaximumMemberCountAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCurrentMaximumMemberCountResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCurrentMaximumMemberCountAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyCurrentMaximumMemberCountAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) VerifyCurrentMaximumMemberCountAsync(
+	request *VerifyCurrentMaximumMemberCountRequest,
+	callback chan<- VerifyCurrentMaximumMemberCountAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "guild",
+			"function":    "verifyCurrentMaximumMemberCount",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		bodies["guildModelName"] = *request.GuildModelName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyCurrentMaximumMemberCountAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) VerifyCurrentMaximumMemberCount(
+	request *VerifyCurrentMaximumMemberCountRequest,
+) (*VerifyCurrentMaximumMemberCountResult, error) {
+	callback := make(chan VerifyCurrentMaximumMemberCountAsyncResult, 1)
+	go p.VerifyCurrentMaximumMemberCountAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2GuildWebSocketClient) verifyCurrentMaximumMemberCountByGuildNameAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyCurrentMaximumMemberCountByGuildNameAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCurrentMaximumMemberCountByGuildNameAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCurrentMaximumMemberCountByGuildNameResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCurrentMaximumMemberCountByGuildNameAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyCurrentMaximumMemberCountByGuildNameAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) VerifyCurrentMaximumMemberCountByGuildNameAsync(
+	request *VerifyCurrentMaximumMemberCountByGuildNameRequest,
+	callback chan<- VerifyCurrentMaximumMemberCountByGuildNameAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "guild",
+			"function":    "verifyCurrentMaximumMemberCountByGuildName",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		bodies["guildModelName"] = *request.GuildModelName
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		bodies["guildName"] = *request.GuildName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyCurrentMaximumMemberCountByGuildNameAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) VerifyCurrentMaximumMemberCountByGuildName(
+	request *VerifyCurrentMaximumMemberCountByGuildNameRequest,
+) (*VerifyCurrentMaximumMemberCountByGuildNameResult, error) {
+	callback := make(chan VerifyCurrentMaximumMemberCountByGuildNameAsyncResult, 1)
+	go p.VerifyCurrentMaximumMemberCountByGuildNameAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2GuildWebSocketClient) verifyIncludeMemberAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyIncludeMemberAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyIncludeMemberAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyIncludeMemberResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyIncludeMemberAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyIncludeMemberAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) VerifyIncludeMemberAsync(
+	request *VerifyIncludeMemberRequest,
+	callback chan<- VerifyIncludeMemberAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "guild",
+			"function":    "verifyIncludeMember",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		bodies["guildModelName"] = *request.GuildModelName
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		bodies["guildName"] = *request.GuildName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyIncludeMemberAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) VerifyIncludeMember(
+	request *VerifyIncludeMemberRequest,
+) (*VerifyIncludeMemberResult, error) {
+	callback := make(chan VerifyIncludeMemberAsyncResult, 1)
+	go p.VerifyIncludeMemberAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2GuildWebSocketClient) verifyIncludeMemberByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyIncludeMemberByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyIncludeMemberByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyIncludeMemberByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyIncludeMemberByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyIncludeMemberByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) VerifyIncludeMemberByUserIdAsync(
+	request *VerifyIncludeMemberByUserIdRequest,
+	callback chan<- VerifyIncludeMemberByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "guild",
+			"function":    "verifyIncludeMemberByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		bodies["guildModelName"] = *request.GuildModelName
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		bodies["guildName"] = *request.GuildName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyIncludeMemberByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) VerifyIncludeMemberByUserId(
+	request *VerifyIncludeMemberByUserIdRequest,
+) (*VerifyIncludeMemberByUserIdResult, error) {
+	callback := make(chan VerifyIncludeMemberByUserIdAsyncResult, 1)
+	go p.VerifyIncludeMemberByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2GuildWebSocketClient) setMaximumCurrentMaximumMemberCountByGuildNameAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- SetMaximumCurrentMaximumMemberCountByGuildNameAsyncResult,
@@ -4077,6 +4476,174 @@ func (p Gs2GuildWebSocketClient) SetMaximumCurrentMaximumMemberCountByStampSheet
 ) (*SetMaximumCurrentMaximumMemberCountByStampSheetResult, error) {
 	callback := make(chan SetMaximumCurrentMaximumMemberCountByStampSheetAsyncResult, 1)
 	go p.SetMaximumCurrentMaximumMemberCountByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2GuildWebSocketClient) verifyCurrentMaximumMemberCountByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyCurrentMaximumMemberCountByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCurrentMaximumMemberCountByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCurrentMaximumMemberCountByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCurrentMaximumMemberCountByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyCurrentMaximumMemberCountByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) VerifyCurrentMaximumMemberCountByStampTaskAsync(
+	request *VerifyCurrentMaximumMemberCountByStampTaskRequest,
+	callback chan<- VerifyCurrentMaximumMemberCountByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "guild",
+			"function":    "verifyCurrentMaximumMemberCountByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.verifyCurrentMaximumMemberCountByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) VerifyCurrentMaximumMemberCountByStampTask(
+	request *VerifyCurrentMaximumMemberCountByStampTaskRequest,
+) (*VerifyCurrentMaximumMemberCountByStampTaskResult, error) {
+	callback := make(chan VerifyCurrentMaximumMemberCountByStampTaskAsyncResult, 1)
+	go p.VerifyCurrentMaximumMemberCountByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2GuildWebSocketClient) verifyIncludeMemberByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyIncludeMemberByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyIncludeMemberByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyIncludeMemberByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyIncludeMemberByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyIncludeMemberByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) VerifyIncludeMemberByStampTaskAsync(
+	request *VerifyIncludeMemberByStampTaskRequest,
+	callback chan<- VerifyIncludeMemberByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "guild",
+			"function":    "verifyIncludeMemberByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.verifyIncludeMemberByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) VerifyIncludeMemberByStampTask(
+	request *VerifyIncludeMemberByStampTaskRequest,
+) (*VerifyIncludeMemberByStampTaskResult, error) {
+	callback := make(chan VerifyIncludeMemberByStampTaskAsyncResult, 1)
+	go p.VerifyIncludeMemberByStampTaskAsync(
 		request,
 		callback,
 	)

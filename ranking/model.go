@@ -1426,6 +1426,7 @@ type Score struct {
 	Score        *int64  `json:"score"`
 	Metadata     *string `json:"metadata"`
 	CreatedAt    *int64  `json:"createdAt"`
+	Revision     *int64  `json:"revision"`
 }
 
 func (p *Score) UnmarshalJSON(data []byte) error {
@@ -1594,6 +1595,9 @@ func (p *Score) UnmarshalJSON(data []byte) error {
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
 	}
 	return nil
 }
@@ -1614,6 +1618,7 @@ func NewScoreFromDict(data map[string]interface{}) Score {
 		Score:        core.CastInt64(data["score"]),
 		Metadata:     core.CastString(data["metadata"]),
 		CreatedAt:    core.CastInt64(data["createdAt"]),
+		Revision:     core.CastInt64(data["revision"]),
 	}
 }
 
@@ -1651,6 +1656,10 @@ func (p Score) ToDict() map[string]interface{} {
 	if p.CreatedAt != nil {
 		createdAt = p.CreatedAt
 	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
 	return map[string]interface{}{
 		"scoreId":      scoreId,
 		"categoryName": categoryName,
@@ -1660,6 +1669,7 @@ func (p Score) ToDict() map[string]interface{} {
 		"score":        score,
 		"metadata":     metadata,
 		"createdAt":    createdAt,
+		"revision":     revision,
 	}
 }
 

@@ -1143,6 +1143,110 @@ func (p DecreaseMaximumCurrentMaximumMemberCountByGuildNameResult) Pointer() *De
 	return &p
 }
 
+type VerifyCurrentMaximumMemberCountResult struct {
+}
+
+type VerifyCurrentMaximumMemberCountAsyncResult struct {
+	result *VerifyCurrentMaximumMemberCountResult
+	err    error
+}
+
+func NewVerifyCurrentMaximumMemberCountResultFromJson(data string) VerifyCurrentMaximumMemberCountResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCurrentMaximumMemberCountResultFromDict(dict)
+}
+
+func NewVerifyCurrentMaximumMemberCountResultFromDict(data map[string]interface{}) VerifyCurrentMaximumMemberCountResult {
+	return VerifyCurrentMaximumMemberCountResult{}
+}
+
+func (p VerifyCurrentMaximumMemberCountResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyCurrentMaximumMemberCountResult) Pointer() *VerifyCurrentMaximumMemberCountResult {
+	return &p
+}
+
+type VerifyCurrentMaximumMemberCountByGuildNameResult struct {
+}
+
+type VerifyCurrentMaximumMemberCountByGuildNameAsyncResult struct {
+	result *VerifyCurrentMaximumMemberCountByGuildNameResult
+	err    error
+}
+
+func NewVerifyCurrentMaximumMemberCountByGuildNameResultFromJson(data string) VerifyCurrentMaximumMemberCountByGuildNameResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCurrentMaximumMemberCountByGuildNameResultFromDict(dict)
+}
+
+func NewVerifyCurrentMaximumMemberCountByGuildNameResultFromDict(data map[string]interface{}) VerifyCurrentMaximumMemberCountByGuildNameResult {
+	return VerifyCurrentMaximumMemberCountByGuildNameResult{}
+}
+
+func (p VerifyCurrentMaximumMemberCountByGuildNameResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyCurrentMaximumMemberCountByGuildNameResult) Pointer() *VerifyCurrentMaximumMemberCountByGuildNameResult {
+	return &p
+}
+
+type VerifyIncludeMemberResult struct {
+}
+
+type VerifyIncludeMemberAsyncResult struct {
+	result *VerifyIncludeMemberResult
+	err    error
+}
+
+func NewVerifyIncludeMemberResultFromJson(data string) VerifyIncludeMemberResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyIncludeMemberResultFromDict(dict)
+}
+
+func NewVerifyIncludeMemberResultFromDict(data map[string]interface{}) VerifyIncludeMemberResult {
+	return VerifyIncludeMemberResult{}
+}
+
+func (p VerifyIncludeMemberResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyIncludeMemberResult) Pointer() *VerifyIncludeMemberResult {
+	return &p
+}
+
+type VerifyIncludeMemberByUserIdResult struct {
+}
+
+type VerifyIncludeMemberByUserIdAsyncResult struct {
+	result *VerifyIncludeMemberByUserIdResult
+	err    error
+}
+
+func NewVerifyIncludeMemberByUserIdResultFromJson(data string) VerifyIncludeMemberByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyIncludeMemberByUserIdResultFromDict(dict)
+}
+
+func NewVerifyIncludeMemberByUserIdResultFromDict(data map[string]interface{}) VerifyIncludeMemberByUserIdResult {
+	return VerifyIncludeMemberByUserIdResult{}
+}
+
+func (p VerifyIncludeMemberByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyIncludeMemberByUserIdResult) Pointer() *VerifyIncludeMemberByUserIdResult {
+	return &p
+}
+
 type SetMaximumCurrentMaximumMemberCountByGuildNameResult struct {
 	Item *Guild `json:"item"`
 	Old  *Guild `json:"old"`
@@ -1347,6 +1451,68 @@ func (p SetMaximumCurrentMaximumMemberCountByStampSheetResult) ToDict() map[stri
 }
 
 func (p SetMaximumCurrentMaximumMemberCountByStampSheetResult) Pointer() *SetMaximumCurrentMaximumMemberCountByStampSheetResult {
+	return &p
+}
+
+type VerifyCurrentMaximumMemberCountByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifyCurrentMaximumMemberCountByStampTaskAsyncResult struct {
+	result *VerifyCurrentMaximumMemberCountByStampTaskResult
+	err    error
+}
+
+func NewVerifyCurrentMaximumMemberCountByStampTaskResultFromJson(data string) VerifyCurrentMaximumMemberCountByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCurrentMaximumMemberCountByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyCurrentMaximumMemberCountByStampTaskResultFromDict(data map[string]interface{}) VerifyCurrentMaximumMemberCountByStampTaskResult {
+	return VerifyCurrentMaximumMemberCountByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyCurrentMaximumMemberCountByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyCurrentMaximumMemberCountByStampTaskResult) Pointer() *VerifyCurrentMaximumMemberCountByStampTaskResult {
+	return &p
+}
+
+type VerifyIncludeMemberByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifyIncludeMemberByStampTaskAsyncResult struct {
+	result *VerifyIncludeMemberByStampTaskResult
+	err    error
+}
+
+func NewVerifyIncludeMemberByStampTaskResultFromJson(data string) VerifyIncludeMemberByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyIncludeMemberByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyIncludeMemberByStampTaskResultFromDict(data map[string]interface{}) VerifyIncludeMemberByStampTaskResult {
+	return VerifyIncludeMemberByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyIncludeMemberByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyIncludeMemberByStampTaskResult) Pointer() *VerifyIncludeMemberByStampTaskResult {
 	return &p
 }
 
