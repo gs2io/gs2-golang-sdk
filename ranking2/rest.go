@@ -3007,6 +3007,9 @@ func (p Gs2Ranking2RestClient) CreateGlobalRankingReceivedRewardAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3113,6 +3116,9 @@ func (p Gs2Ranking2RestClient) CreateGlobalRankingReceivedRewardByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -6018,6 +6024,9 @@ func (p Gs2Ranking2RestClient) CreateClusterRankingReceivedRewardAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -6129,6 +6138,9 @@ func (p Gs2Ranking2RestClient) CreateClusterRankingReceivedRewardByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}

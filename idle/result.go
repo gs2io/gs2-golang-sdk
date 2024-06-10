@@ -1131,6 +1131,54 @@ func (p SetMaximumIdleMinutesByStampSheetResult) Pointer() *SetMaximumIdleMinute
 	return &p
 }
 
+type ReceiveByStampSheetResult struct {
+	Items                     []AcquireAction `json:"items"`
+	Status                    *Status         `json:"status"`
+	TransactionId             *string         `json:"transactionId"`
+	StampSheet                *string         `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string         `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool           `json:"autoRunStampSheet"`
+}
+
+type ReceiveByStampSheetAsyncResult struct {
+	result *ReceiveByStampSheetResult
+	err    error
+}
+
+func NewReceiveByStampSheetResultFromJson(data string) ReceiveByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewReceiveByStampSheetResultFromDict(dict)
+}
+
+func NewReceiveByStampSheetResultFromDict(data map[string]interface{}) ReceiveByStampSheetResult {
+	return ReceiveByStampSheetResult{
+		Items:                     CastAcquireActions(core.CastArray(data["items"])),
+		Status:                    NewStatusFromDict(core.CastMap(data["status"])).Pointer(),
+		TransactionId:             core.CastString(data["transactionId"]),
+		StampSheet:                core.CastString(data["stampSheet"]),
+		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+	}
+}
+
+func (p ReceiveByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastAcquireActionsFromDict(
+			p.Items,
+		),
+		"status":                    p.Status.ToDict(),
+		"transactionId":             p.TransactionId,
+		"stampSheet":                p.StampSheet,
+		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+		"autoRunStampSheet":         p.AutoRunStampSheet,
+	}
+}
+
+func (p ReceiveByStampSheetResult) Pointer() *ReceiveByStampSheetResult {
+	return &p
+}
+
 type ExportMasterResult struct {
 	Item *CurrentCategoryMaster `json:"item"`
 }
