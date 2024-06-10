@@ -1479,9 +1479,6 @@ func (p Gs2Ranking2WebSocketClient) CreateGlobalRankingModelMasterAsync(
 	if request.Sum != nil {
 		bodies["sum"] = *request.Sum
 	}
-	if request.ScoreTtlDays != nil {
-		bodies["scoreTtlDays"] = *request.ScoreTtlDays
-	}
 	if request.OrderDirection != nil && *request.OrderDirection != "" {
 		bodies["orderDirection"] = *request.OrderDirection
 	}
@@ -1680,9 +1677,6 @@ func (p Gs2Ranking2WebSocketClient) UpdateGlobalRankingModelMasterAsync(
 	}
 	if request.Sum != nil {
 		bodies["sum"] = *request.Sum
-	}
-	if request.ScoreTtlDays != nil {
-		bodies["scoreTtlDays"] = *request.ScoreTtlDays
 	}
 	if request.OrderDirection != nil && *request.OrderDirection != "" {
 		bodies["orderDirection"] = *request.OrderDirection
@@ -7599,384 +7593,6 @@ func (p Gs2Ranking2WebSocketClient) AddSubscribeByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2Ranking2WebSocketClient) getSubscribeAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetSubscribeAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetSubscribeAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetSubscribeResult
-	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSubscribeAsyncResult{
-				err: err,
-			}
-			return
-		}
-	}
-	if asyncResult.Err != nil {
-	}
-	callback <- GetSubscribeAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2Ranking2WebSocketClient) GetSubscribeAsync(
-	request *GetSubscribeRequest,
-	callback chan<- GetSubscribeAsyncResult,
-) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking2",
-			"component":   "subscribe",
-			"function":    "getSubscribe",
-			"contentType": "application/json",
-			"requestId":   requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.RankingName != nil && *request.RankingName != "" {
-		bodies["rankingName"] = *request.RankingName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		bodies["targetUserId"] = *request.TargetUserId
-	}
-	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
-	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
-
-	go p.getSubscribeAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies:    bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2Ranking2WebSocketClient) GetSubscribe(
-	request *GetSubscribeRequest,
-) (*GetSubscribeResult, error) {
-	callback := make(chan GetSubscribeAsyncResult, 1)
-	go p.GetSubscribeAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2Ranking2WebSocketClient) getSubscribeByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- GetSubscribeByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetSubscribeByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetSubscribeByUserIdResult
-	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSubscribeByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
-	}
-	if asyncResult.Err != nil {
-	}
-	callback <- GetSubscribeByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2Ranking2WebSocketClient) GetSubscribeByUserIdAsync(
-	request *GetSubscribeByUserIdRequest,
-	callback chan<- GetSubscribeByUserIdAsyncResult,
-) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking2",
-			"component":   "subscribe",
-			"function":    "getSubscribeByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.RankingName != nil && *request.RankingName != "" {
-		bodies["rankingName"] = *request.RankingName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		bodies["targetUserId"] = *request.TargetUserId
-	}
-	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
-		bodies["timeOffsetToken"] = *request.TimeOffsetToken
-	}
-	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
-	}
-
-	go p.getSubscribeByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies:    bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2Ranking2WebSocketClient) GetSubscribeByUserId(
-	request *GetSubscribeByUserIdRequest,
-) (*GetSubscribeByUserIdResult, error) {
-	callback := make(chan GetSubscribeByUserIdAsyncResult, 1)
-	go p.GetSubscribeByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2Ranking2WebSocketClient) deleteSubscribeAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DeleteSubscribeAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DeleteSubscribeAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DeleteSubscribeResult
-	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteSubscribeAsyncResult{
-				err: err,
-			}
-			return
-		}
-	}
-	if asyncResult.Err != nil {
-	}
-	callback <- DeleteSubscribeAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2Ranking2WebSocketClient) DeleteSubscribeAsync(
-	request *DeleteSubscribeRequest,
-	callback chan<- DeleteSubscribeAsyncResult,
-) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking2",
-			"component":   "subscribe",
-			"function":    "deleteSubscribe",
-			"contentType": "application/json",
-			"requestId":   requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.RankingName != nil && *request.RankingName != "" {
-		bodies["rankingName"] = *request.RankingName
-	}
-	if request.AccessToken != nil && *request.AccessToken != "" {
-		bodies["accessToken"] = *request.AccessToken
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		bodies["targetUserId"] = *request.TargetUserId
-	}
-	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
-	}
-	if request.AccessToken != nil {
-		bodies["xGs2AccessToken"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
-
-	go p.deleteSubscribeAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies:    bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2Ranking2WebSocketClient) DeleteSubscribe(
-	request *DeleteSubscribeRequest,
-) (*DeleteSubscribeResult, error) {
-	callback := make(chan DeleteSubscribeAsyncResult, 1)
-	go p.DeleteSubscribeAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func (p Gs2Ranking2WebSocketClient) deleteSubscribeByUserIdAsyncHandler(
-	job *core.WebSocketNetworkJob,
-	callback chan<- DeleteSubscribeByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := p.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DeleteSubscribeByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DeleteSubscribeByUserIdResult
-	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteSubscribeByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
-	}
-	if asyncResult.Err != nil {
-	}
-	callback <- DeleteSubscribeByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2Ranking2WebSocketClient) DeleteSubscribeByUserIdAsync(
-	request *DeleteSubscribeByUserIdRequest,
-	callback chan<- DeleteSubscribeByUserIdAsyncResult,
-) {
-	requestId := core.WebSocketRequestId(uuid.New().String())
-	var bodies = core.WebSocketBodies{
-		"x_gs2": map[string]interface{}{
-			"service":     "ranking2",
-			"component":   "subscribe",
-			"function":    "deleteSubscribeByUserId",
-			"contentType": "application/json",
-			"requestId":   requestId,
-		},
-	}
-	for k, v := range p.Session.CreateAuthorizationHeader() {
-		bodies[k] = v
-	}
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		bodies["namespaceName"] = *request.NamespaceName
-	}
-	if request.RankingName != nil && *request.RankingName != "" {
-		bodies["rankingName"] = *request.RankingName
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		bodies["userId"] = *request.UserId
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		bodies["targetUserId"] = *request.TargetUserId
-	}
-	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
-		bodies["timeOffsetToken"] = *request.TimeOffsetToken
-	}
-	if request.ContextStack != nil {
-		bodies["contextStack"] = *request.ContextStack
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
-
-	go p.deleteSubscribeByUserIdAsyncHandler(
-		&core.WebSocketNetworkJob{
-			RequestId: requestId,
-			Bodies:    bodies,
-		},
-		callback,
-	)
-}
-
-func (p Gs2Ranking2WebSocketClient) DeleteSubscribeByUserId(
-	request *DeleteSubscribeByUserIdRequest,
-) (*DeleteSubscribeByUserIdResult, error) {
-	callback := make(chan DeleteSubscribeByUserIdAsyncResult, 1)
-	go p.DeleteSubscribeByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
 func (p Gs2Ranking2WebSocketClient) describeSubscribeRankingScoresAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribeSubscribeRankingScoresAsyncResult,
@@ -9362,6 +8978,384 @@ func (p Gs2Ranking2WebSocketClient) UpdateCurrentRankingMasterFromGitHub(
 ) (*UpdateCurrentRankingMasterFromGitHubResult, error) {
 	callback := make(chan UpdateCurrentRankingMasterFromGitHubAsyncResult, 1)
 	go p.UpdateCurrentRankingMasterFromGitHubAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Ranking2WebSocketClient) getSubscribeAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetSubscribeAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSubscribeAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSubscribeResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetSubscribeAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetSubscribeAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2WebSocketClient) GetSubscribeAsync(
+	request *GetSubscribeRequest,
+	callback chan<- GetSubscribeAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ranking2",
+			"component":   "subscribeUser",
+			"function":    "getSubscribe",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		bodies["rankingName"] = *request.RankingName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.TargetUserId != nil && *request.TargetUserId != "" {
+		bodies["targetUserId"] = *request.TargetUserId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+
+	go p.getSubscribeAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2WebSocketClient) GetSubscribe(
+	request *GetSubscribeRequest,
+) (*GetSubscribeResult, error) {
+	callback := make(chan GetSubscribeAsyncResult, 1)
+	go p.GetSubscribeAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Ranking2WebSocketClient) getSubscribeByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetSubscribeByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSubscribeByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSubscribeByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetSubscribeByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetSubscribeByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2WebSocketClient) GetSubscribeByUserIdAsync(
+	request *GetSubscribeByUserIdRequest,
+	callback chan<- GetSubscribeByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ranking2",
+			"component":   "subscribeUser",
+			"function":    "getSubscribeByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		bodies["rankingName"] = *request.RankingName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.TargetUserId != nil && *request.TargetUserId != "" {
+		bodies["targetUserId"] = *request.TargetUserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.getSubscribeByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2WebSocketClient) GetSubscribeByUserId(
+	request *GetSubscribeByUserIdRequest,
+) (*GetSubscribeByUserIdResult, error) {
+	callback := make(chan GetSubscribeByUserIdAsyncResult, 1)
+	go p.GetSubscribeByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Ranking2WebSocketClient) deleteSubscribeAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteSubscribeAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteSubscribeAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteSubscribeResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteSubscribeAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DeleteSubscribeAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2WebSocketClient) DeleteSubscribeAsync(
+	request *DeleteSubscribeRequest,
+	callback chan<- DeleteSubscribeAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ranking2",
+			"component":   "subscribeUser",
+			"function":    "deleteSubscribe",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		bodies["rankingName"] = *request.RankingName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.TargetUserId != nil && *request.TargetUserId != "" {
+		bodies["targetUserId"] = *request.TargetUserId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.deleteSubscribeAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2WebSocketClient) DeleteSubscribe(
+	request *DeleteSubscribeRequest,
+) (*DeleteSubscribeResult, error) {
+	callback := make(chan DeleteSubscribeAsyncResult, 1)
+	go p.DeleteSubscribeAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Ranking2WebSocketClient) deleteSubscribeByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteSubscribeByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteSubscribeByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteSubscribeByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteSubscribeByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DeleteSubscribeByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2WebSocketClient) DeleteSubscribeByUserIdAsync(
+	request *DeleteSubscribeByUserIdRequest,
+	callback chan<- DeleteSubscribeByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ranking2",
+			"component":   "subscribeUser",
+			"function":    "deleteSubscribeByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		bodies["rankingName"] = *request.RankingName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.TargetUserId != nil && *request.TargetUserId != "" {
+		bodies["targetUserId"] = *request.TargetUserId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.deleteSubscribeByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2WebSocketClient) DeleteSubscribeByUserId(
+	request *DeleteSubscribeByUserIdRequest,
+) (*DeleteSubscribeByUserIdResult, error) {
+	callback := make(chan DeleteSubscribeByUserIdAsyncResult, 1)
+	go p.DeleteSubscribeByUserIdAsync(
 		request,
 		callback,
 	)

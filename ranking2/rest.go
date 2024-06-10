@@ -1621,9 +1621,6 @@ func (p Gs2Ranking2RestClient) CreateGlobalRankingModelMasterAsync(
 	if request.Sum != nil {
 		bodies["sum"] = *request.Sum
 	}
-	if request.ScoreTtlDays != nil {
-		bodies["scoreTtlDays"] = *request.ScoreTtlDays
-	}
 	if request.OrderDirection != nil && *request.OrderDirection != "" {
 		bodies["orderDirection"] = *request.OrderDirection
 	}
@@ -1844,9 +1841,6 @@ func (p Gs2Ranking2RestClient) UpdateGlobalRankingModelMasterAsync(
 	}
 	if request.Sum != nil {
 		bodies["sum"] = *request.Sum
-	}
-	if request.ScoreTtlDays != nil {
-		bodies["scoreTtlDays"] = *request.ScoreTtlDays
 	}
 	if request.OrderDirection != nil && *request.OrderDirection != "" {
 		bodies["orderDirection"] = *request.OrderDirection
@@ -8425,434 +8419,6 @@ func (p Gs2Ranking2RestClient) AddSubscribeByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func getSubscribeAsyncHandler(
-	client Gs2Ranking2RestClient,
-	job *core.NetworkJob,
-	callback chan<- GetSubscribeAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetSubscribeAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetSubscribeResult
-	if asyncResult.Err != nil {
-		callback <- GetSubscribeAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSubscribeAsyncResult{
-				err: err,
-			}
-			return
-		}
-	}
-	callback <- GetSubscribeAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2Ranking2RestClient) GetSubscribeAsync(
-	request *GetSubscribeRequest,
-	callback chan<- GetSubscribeAsyncResult,
-) {
-	path := "/{namespaceName}/user/me/subscribe/{rankingName}/target/{targetUserId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RankingName != nil && *request.RankingName != "" {
-		path = strings.ReplaceAll(path, "{rankingName}", core.ToString(*request.RankingName))
-	} else {
-		path = strings.ReplaceAll(path, "{rankingName}", "null")
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-	if request.ContextStack != nil {
-		queryStrings["contextStack"] = *request.ContextStack
-	}
-
-	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
-
-	go getSubscribeAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
-			Method:       core.Get,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2Ranking2RestClient) GetSubscribe(
-	request *GetSubscribeRequest,
-) (*GetSubscribeResult, error) {
-	callback := make(chan GetSubscribeAsyncResult, 1)
-	go p.GetSubscribeAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func getSubscribeByUserIdAsyncHandler(
-	client Gs2Ranking2RestClient,
-	job *core.NetworkJob,
-	callback chan<- GetSubscribeByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- GetSubscribeByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result GetSubscribeByUserIdResult
-	if asyncResult.Err != nil {
-		callback <- GetSubscribeByUserIdAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- GetSubscribeByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
-	}
-	callback <- GetSubscribeByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2Ranking2RestClient) GetSubscribeByUserIdAsync(
-	request *GetSubscribeByUserIdRequest,
-	callback chan<- GetSubscribeByUserIdAsyncResult,
-) {
-	path := "/{namespaceName}/user/{userId}/subscribe/{rankingName}/target/{targetUserId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RankingName != nil && *request.RankingName != "" {
-		path = strings.ReplaceAll(path, "{rankingName}", core.ToString(*request.RankingName))
-	} else {
-		path = strings.ReplaceAll(path, "{rankingName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-	if request.ContextStack != nil {
-		queryStrings["contextStack"] = *request.ContextStack
-	}
-
-	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.TimeOffsetToken != nil {
-		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
-	}
-
-	go getSubscribeByUserIdAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
-			Method:       core.Get,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2Ranking2RestClient) GetSubscribeByUserId(
-	request *GetSubscribeByUserIdRequest,
-) (*GetSubscribeByUserIdResult, error) {
-	callback := make(chan GetSubscribeByUserIdAsyncResult, 1)
-	go p.GetSubscribeByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func deleteSubscribeAsyncHandler(
-	client Gs2Ranking2RestClient,
-	job *core.NetworkJob,
-	callback chan<- DeleteSubscribeAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DeleteSubscribeAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DeleteSubscribeResult
-	if asyncResult.Err != nil {
-		callback <- DeleteSubscribeAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteSubscribeAsyncResult{
-				err: err,
-			}
-			return
-		}
-	}
-	callback <- DeleteSubscribeAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2Ranking2RestClient) DeleteSubscribeAsync(
-	request *DeleteSubscribeRequest,
-	callback chan<- DeleteSubscribeAsyncResult,
-) {
-	path := "/{namespaceName}/user/me/subscribe/{rankingName}/target/{targetUserId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RankingName != nil && *request.RankingName != "" {
-		path = strings.ReplaceAll(path, "{rankingName}", core.ToString(*request.RankingName))
-	} else {
-		path = strings.ReplaceAll(path, "{rankingName}", "null")
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-	if request.ContextStack != nil {
-		queryStrings["contextStack"] = *request.ContextStack
-	}
-
-	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.AccessToken != nil {
-		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
-
-	go deleteSubscribeAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
-			Method:       core.Delete,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2Ranking2RestClient) DeleteSubscribe(
-	request *DeleteSubscribeRequest,
-) (*DeleteSubscribeResult, error) {
-	callback := make(chan DeleteSubscribeAsyncResult, 1)
-	go p.DeleteSubscribeAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
-func deleteSubscribeByUserIdAsyncHandler(
-	client Gs2Ranking2RestClient,
-	job *core.NetworkJob,
-	callback chan<- DeleteSubscribeByUserIdAsyncResult,
-) {
-	internalCallback := make(chan core.AsyncResult, 1)
-	job.Callback = internalCallback
-	err := client.Session.Send(
-		job,
-		false,
-	)
-	if err != nil {
-		callback <- DeleteSubscribeByUserIdAsyncResult{
-			err: err,
-		}
-		return
-	}
-	asyncResult := <-internalCallback
-	var result DeleteSubscribeByUserIdResult
-	if asyncResult.Err != nil {
-		callback <- DeleteSubscribeByUserIdAsyncResult{
-			err: asyncResult.Err,
-		}
-		return
-	}
-	if asyncResult.Payload != "" {
-		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
-		if err != nil {
-			callback <- DeleteSubscribeByUserIdAsyncResult{
-				err: err,
-			}
-			return
-		}
-	}
-	callback <- DeleteSubscribeByUserIdAsyncResult{
-		result: &result,
-		err:    asyncResult.Err,
-	}
-
-}
-
-func (p Gs2Ranking2RestClient) DeleteSubscribeByUserIdAsync(
-	request *DeleteSubscribeByUserIdRequest,
-	callback chan<- DeleteSubscribeByUserIdAsyncResult,
-) {
-	path := "/{namespaceName}/user/{userId}/subscribe/{rankingName}/target/{targetUserId}"
-	if request.NamespaceName != nil && *request.NamespaceName != "" {
-		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
-	} else {
-		path = strings.ReplaceAll(path, "{namespaceName}", "null")
-	}
-	if request.RankingName != nil && *request.RankingName != "" {
-		path = strings.ReplaceAll(path, "{rankingName}", core.ToString(*request.RankingName))
-	} else {
-		path = strings.ReplaceAll(path, "{rankingName}", "null")
-	}
-	if request.UserId != nil && *request.UserId != "" {
-		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
-	} else {
-		path = strings.ReplaceAll(path, "{userId}", "null")
-	}
-	if request.TargetUserId != nil && *request.TargetUserId != "" {
-		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
-	} else {
-		path = strings.ReplaceAll(path, "{targetUserId}", "null")
-	}
-
-	replacer := strings.NewReplacer()
-	queryStrings := core.QueryStrings{}
-	if request.ContextStack != nil {
-		queryStrings["contextStack"] = *request.ContextStack
-	}
-
-	headers := p.CreateAuthorizedHeaders()
-	if request.SourceRequestId != nil {
-		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
-	}
-	if request.RequestId != nil {
-		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
-	if request.TimeOffsetToken != nil {
-		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
-	}
-
-	go deleteSubscribeByUserIdAsyncHandler(
-		p,
-		&core.NetworkJob{
-			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
-			Method:       core.Delete,
-			Headers:      headers,
-			QueryStrings: queryStrings,
-		},
-		callback,
-	)
-}
-
-func (p Gs2Ranking2RestClient) DeleteSubscribeByUserId(
-	request *DeleteSubscribeByUserIdRequest,
-) (*DeleteSubscribeByUserIdResult, error) {
-	callback := make(chan DeleteSubscribeByUserIdAsyncResult, 1)
-	go p.DeleteSubscribeByUserIdAsync(
-		request,
-		callback,
-	)
-	asyncResult := <-callback
-	return asyncResult.result, asyncResult.err
-}
-
 func describeSubscribeRankingScoresAsyncHandler(
 	client Gs2Ranking2RestClient,
 	job *core.NetworkJob,
@@ -10388,6 +9954,434 @@ func (p Gs2Ranking2RestClient) UpdateCurrentRankingMasterFromGitHub(
 ) (*UpdateCurrentRankingMasterFromGitHubResult, error) {
 	callback := make(chan UpdateCurrentRankingMasterFromGitHubAsyncResult, 1)
 	go p.UpdateCurrentRankingMasterFromGitHubAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getSubscribeAsyncHandler(
+	client Gs2Ranking2RestClient,
+	job *core.NetworkJob,
+	callback chan<- GetSubscribeAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSubscribeAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSubscribeResult
+	if asyncResult.Err != nil {
+		callback <- GetSubscribeAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetSubscribeAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetSubscribeAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2RestClient) GetSubscribeAsync(
+	request *GetSubscribeRequest,
+	callback chan<- GetSubscribeAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/subscribe/{rankingName}/target/{targetUserId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		path = strings.ReplaceAll(path, "{rankingName}", core.ToString(*request.RankingName))
+	} else {
+		path = strings.ReplaceAll(path, "{rankingName}", "null")
+	}
+	if request.TargetUserId != nil && *request.TargetUserId != "" {
+		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+	} else {
+		path = strings.ReplaceAll(path, "{targetUserId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+
+	go getSubscribeAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2RestClient) GetSubscribe(
+	request *GetSubscribeRequest,
+) (*GetSubscribeResult, error) {
+	callback := make(chan GetSubscribeAsyncResult, 1)
+	go p.GetSubscribeAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getSubscribeByUserIdAsyncHandler(
+	client Gs2Ranking2RestClient,
+	job *core.NetworkJob,
+	callback chan<- GetSubscribeByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSubscribeByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSubscribeByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- GetSubscribeByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetSubscribeByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetSubscribeByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2RestClient) GetSubscribeByUserIdAsync(
+	request *GetSubscribeByUserIdRequest,
+	callback chan<- GetSubscribeByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/subscribe/{rankingName}/target/{targetUserId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		path = strings.ReplaceAll(path, "{rankingName}", core.ToString(*request.RankingName))
+	} else {
+		path = strings.ReplaceAll(path, "{rankingName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.TargetUserId != nil && *request.TargetUserId != "" {
+		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+	} else {
+		path = strings.ReplaceAll(path, "{targetUserId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go getSubscribeByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2RestClient) GetSubscribeByUserId(
+	request *GetSubscribeByUserIdRequest,
+) (*GetSubscribeByUserIdResult, error) {
+	callback := make(chan GetSubscribeByUserIdAsyncResult, 1)
+	go p.GetSubscribeByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteSubscribeAsyncHandler(
+	client Gs2Ranking2RestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteSubscribeAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteSubscribeAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteSubscribeResult
+	if asyncResult.Err != nil {
+		callback <- DeleteSubscribeAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteSubscribeAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DeleteSubscribeAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2RestClient) DeleteSubscribeAsync(
+	request *DeleteSubscribeRequest,
+	callback chan<- DeleteSubscribeAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/subscribe/{rankingName}/target/{targetUserId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		path = strings.ReplaceAll(path, "{rankingName}", core.ToString(*request.RankingName))
+	} else {
+		path = strings.ReplaceAll(path, "{rankingName}", "null")
+	}
+	if request.TargetUserId != nil && *request.TargetUserId != "" {
+		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+	} else {
+		path = strings.ReplaceAll(path, "{targetUserId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go deleteSubscribeAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2RestClient) DeleteSubscribe(
+	request *DeleteSubscribeRequest,
+) (*DeleteSubscribeResult, error) {
+	callback := make(chan DeleteSubscribeAsyncResult, 1)
+	go p.DeleteSubscribeAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteSubscribeByUserIdAsyncHandler(
+	client Gs2Ranking2RestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteSubscribeByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteSubscribeByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteSubscribeByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- DeleteSubscribeByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteSubscribeByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DeleteSubscribeByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2RestClient) DeleteSubscribeByUserIdAsync(
+	request *DeleteSubscribeByUserIdRequest,
+	callback chan<- DeleteSubscribeByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/subscribe/{rankingName}/target/{targetUserId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		path = strings.ReplaceAll(path, "{rankingName}", core.ToString(*request.RankingName))
+	} else {
+		path = strings.ReplaceAll(path, "{rankingName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.TargetUserId != nil && *request.TargetUserId != "" {
+		path = strings.ReplaceAll(path, "{targetUserId}", core.ToString(*request.TargetUserId))
+	} else {
+		path = strings.ReplaceAll(path, "{targetUserId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go deleteSubscribeByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("ranking2").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2RestClient) DeleteSubscribeByUserId(
+	request *DeleteSubscribeByUserIdRequest,
+) (*DeleteSubscribeByUserIdResult, error) {
+	callback := make(chan DeleteSubscribeByUserIdAsyncResult, 1)
+	go p.DeleteSubscribeByUserIdAsync(
 		request,
 		callback,
 	)

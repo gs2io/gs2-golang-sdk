@@ -2655,130 +2655,6 @@ func (p AddSubscribeByUserIdResult) Pointer() *AddSubscribeByUserIdResult {
 	return &p
 }
 
-type GetSubscribeResult struct {
-	Item *SubscribeUser `json:"item"`
-}
-
-type GetSubscribeAsyncResult struct {
-	result *GetSubscribeResult
-	err    error
-}
-
-func NewGetSubscribeResultFromJson(data string) GetSubscribeResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetSubscribeResultFromDict(dict)
-}
-
-func NewGetSubscribeResultFromDict(data map[string]interface{}) GetSubscribeResult {
-	return GetSubscribeResult{
-		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
-	}
-}
-
-func (p GetSubscribeResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
-}
-
-func (p GetSubscribeResult) Pointer() *GetSubscribeResult {
-	return &p
-}
-
-type GetSubscribeByUserIdResult struct {
-	Item *SubscribeUser `json:"item"`
-}
-
-type GetSubscribeByUserIdAsyncResult struct {
-	result *GetSubscribeByUserIdResult
-	err    error
-}
-
-func NewGetSubscribeByUserIdResultFromJson(data string) GetSubscribeByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetSubscribeByUserIdResultFromDict(dict)
-}
-
-func NewGetSubscribeByUserIdResultFromDict(data map[string]interface{}) GetSubscribeByUserIdResult {
-	return GetSubscribeByUserIdResult{
-		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
-	}
-}
-
-func (p GetSubscribeByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
-}
-
-func (p GetSubscribeByUserIdResult) Pointer() *GetSubscribeByUserIdResult {
-	return &p
-}
-
-type DeleteSubscribeResult struct {
-	Item *SubscribeUser `json:"item"`
-}
-
-type DeleteSubscribeAsyncResult struct {
-	result *DeleteSubscribeResult
-	err    error
-}
-
-func NewDeleteSubscribeResultFromJson(data string) DeleteSubscribeResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteSubscribeResultFromDict(dict)
-}
-
-func NewDeleteSubscribeResultFromDict(data map[string]interface{}) DeleteSubscribeResult {
-	return DeleteSubscribeResult{
-		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
-	}
-}
-
-func (p DeleteSubscribeResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
-}
-
-func (p DeleteSubscribeResult) Pointer() *DeleteSubscribeResult {
-	return &p
-}
-
-type DeleteSubscribeByUserIdResult struct {
-	Item *SubscribeUser `json:"item"`
-}
-
-type DeleteSubscribeByUserIdAsyncResult struct {
-	result *DeleteSubscribeByUserIdResult
-	err    error
-}
-
-func NewDeleteSubscribeByUserIdResultFromJson(data string) DeleteSubscribeByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewDeleteSubscribeByUserIdResultFromDict(dict)
-}
-
-func NewDeleteSubscribeByUserIdResultFromDict(data map[string]interface{}) DeleteSubscribeByUserIdResult {
-	return DeleteSubscribeByUserIdResult{
-		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
-	}
-}
-
-func (p DeleteSubscribeByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
-}
-
-func (p DeleteSubscribeByUserIdResult) Pointer() *DeleteSubscribeByUserIdResult {
-	return &p
-}
-
 type DescribeSubscribeRankingScoresResult struct {
 	Items         []SubscribeRankingScore `json:"items"`
 	NextPageToken *string                 `json:"nextPageToken"`
@@ -3261,5 +3137,129 @@ func (p UpdateCurrentRankingMasterFromGitHubResult) ToDict() map[string]interfac
 }
 
 func (p UpdateCurrentRankingMasterFromGitHubResult) Pointer() *UpdateCurrentRankingMasterFromGitHubResult {
+	return &p
+}
+
+type GetSubscribeResult struct {
+	Item *SubscribeUser `json:"item"`
+}
+
+type GetSubscribeAsyncResult struct {
+	result *GetSubscribeResult
+	err    error
+}
+
+func NewGetSubscribeResultFromJson(data string) GetSubscribeResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSubscribeResultFromDict(dict)
+}
+
+func NewGetSubscribeResultFromDict(data map[string]interface{}) GetSubscribeResult {
+	return GetSubscribeResult{
+		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetSubscribeResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetSubscribeResult) Pointer() *GetSubscribeResult {
+	return &p
+}
+
+type GetSubscribeByUserIdResult struct {
+	Item *SubscribeUser `json:"item"`
+}
+
+type GetSubscribeByUserIdAsyncResult struct {
+	result *GetSubscribeByUserIdResult
+	err    error
+}
+
+func NewGetSubscribeByUserIdResultFromJson(data string) GetSubscribeByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSubscribeByUserIdResultFromDict(dict)
+}
+
+func NewGetSubscribeByUserIdResultFromDict(data map[string]interface{}) GetSubscribeByUserIdResult {
+	return GetSubscribeByUserIdResult{
+		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetSubscribeByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetSubscribeByUserIdResult) Pointer() *GetSubscribeByUserIdResult {
+	return &p
+}
+
+type DeleteSubscribeResult struct {
+	Item *SubscribeUser `json:"item"`
+}
+
+type DeleteSubscribeAsyncResult struct {
+	result *DeleteSubscribeResult
+	err    error
+}
+
+func NewDeleteSubscribeResultFromJson(data string) DeleteSubscribeResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteSubscribeResultFromDict(dict)
+}
+
+func NewDeleteSubscribeResultFromDict(data map[string]interface{}) DeleteSubscribeResult {
+	return DeleteSubscribeResult{
+		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeleteSubscribeResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeleteSubscribeResult) Pointer() *DeleteSubscribeResult {
+	return &p
+}
+
+type DeleteSubscribeByUserIdResult struct {
+	Item *SubscribeUser `json:"item"`
+}
+
+type DeleteSubscribeByUserIdAsyncResult struct {
+	result *DeleteSubscribeByUserIdResult
+	err    error
+}
+
+func NewDeleteSubscribeByUserIdResultFromJson(data string) DeleteSubscribeByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteSubscribeByUserIdResultFromDict(dict)
+}
+
+func NewDeleteSubscribeByUserIdResultFromDict(data map[string]interface{}) DeleteSubscribeByUserIdResult {
+	return DeleteSubscribeByUserIdResult{
+		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeleteSubscribeByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeleteSubscribeByUserIdResult) Pointer() *DeleteSubscribeByUserIdResult {
 	return &p
 }

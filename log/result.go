@@ -591,32 +591,6 @@ func (p QueryAccessLogWithTelemetryResult) Pointer() *QueryAccessLogWithTelemetr
 	return &p
 }
 
-type PutLogResult struct {
-}
-
-type PutLogAsyncResult struct {
-	result *PutLogResult
-	err    error
-}
-
-func NewPutLogResultFromJson(data string) PutLogResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewPutLogResultFromDict(dict)
-}
-
-func NewPutLogResultFromDict(data map[string]interface{}) PutLogResult {
-	return PutLogResult{}
-}
-
-func (p PutLogResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
-}
-
-func (p PutLogResult) Pointer() *PutLogResult {
-	return &p
-}
-
 type DescribeInsightsResult struct {
 	Items         []Insight `json:"items"`
 	NextPageToken *string   `json:"nextPageToken"`

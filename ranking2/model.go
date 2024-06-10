@@ -525,7 +525,6 @@ type GlobalRankingModelMaster struct {
 	MinimumValue         *int64          `json:"minimumValue"`
 	MaximumValue         *int64          `json:"maximumValue"`
 	Sum                  *bool           `json:"sum"`
-	ScoreTtlDays         *int32          `json:"scoreTtlDays"`
 	OrderDirection       *string         `json:"orderDirection"`
 	EntryPeriodEventId   *string         `json:"entryPeriodEventId"`
 	RankingRewards       []RankingReward `json:"rankingRewards"`
@@ -658,9 +657,6 @@ func (p *GlobalRankingModelMaster) UnmarshalJSON(data []byte) error {
 		if v, ok := d["sum"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Sum)
 		}
-		if v, ok := d["scoreTtlDays"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.ScoreTtlDays)
-		}
 		if v, ok := d["orderDirection"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -761,7 +757,6 @@ func NewGlobalRankingModelMasterFromDict(data map[string]interface{}) GlobalRank
 		MinimumValue:         core.CastInt64(data["minimumValue"]),
 		MaximumValue:         core.CastInt64(data["maximumValue"]),
 		Sum:                  core.CastBool(data["sum"]),
-		ScoreTtlDays:         core.CastInt32(data["scoreTtlDays"]),
 		OrderDirection:       core.CastString(data["orderDirection"]),
 		EntryPeriodEventId:   core.CastString(data["entryPeriodEventId"]),
 		RankingRewards:       CastRankingRewards(core.CastArray(data["rankingRewards"])),
@@ -802,10 +797,6 @@ func (p GlobalRankingModelMaster) ToDict() map[string]interface{} {
 	if p.Sum != nil {
 		sum = p.Sum
 	}
-	var scoreTtlDays *int32
-	if p.ScoreTtlDays != nil {
-		scoreTtlDays = p.ScoreTtlDays
-	}
 	var orderDirection *string
 	if p.OrderDirection != nil {
 		orderDirection = p.OrderDirection
@@ -844,7 +835,6 @@ func (p GlobalRankingModelMaster) ToDict() map[string]interface{} {
 		"minimumValue":         minimumValue,
 		"maximumValue":         maximumValue,
 		"sum":                  sum,
-		"scoreTtlDays":         scoreTtlDays,
 		"orderDirection":       orderDirection,
 		"entryPeriodEventId":   entryPeriodEventId,
 		"rankingRewards":       rankingRewards,
@@ -1546,162 +1536,6 @@ func CastGlobalRankingDatas(data []interface{}) []GlobalRankingData {
 }
 
 func CastGlobalRankingDatasFromDict(data []GlobalRankingData) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
-}
-
-type GlobalRankingBorder struct {
-	GlobalRankingBoarderId *string `json:"globalRankingBoarderId"`
-	RankingName            *string `json:"rankingName"`
-	Season                 *int64  `json:"season"`
-	Score                  *int64  `json:"score"`
-	CreatedAt              *int64  `json:"createdAt"`
-}
-
-func (p *GlobalRankingBorder) UnmarshalJSON(data []byte) error {
-	str := string(data)
-	if len(str) == 0 {
-		*p = GlobalRankingBorder{}
-		return nil
-	}
-	if str[0] == '"' {
-		var strVal string
-		err := json.Unmarshal(data, &strVal)
-		if err != nil {
-			return err
-		}
-		str = strVal
-	}
-	if str == "null" {
-		*p = GlobalRankingBorder{}
-	} else {
-		*p = GlobalRankingBorder{}
-		d := map[string]*json.RawMessage{}
-		if err := json.Unmarshal([]byte(str), &d); err != nil {
-			return err
-		}
-		if v, ok := d["globalRankingBoarderId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.GlobalRankingBoarderId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.GlobalRankingBoarderId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.GlobalRankingBoarderId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.GlobalRankingBoarderId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.GlobalRankingBoarderId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.GlobalRankingBoarderId)
-				}
-			}
-		}
-		if v, ok := d["rankingName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.RankingName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.RankingName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.RankingName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.RankingName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.RankingName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.RankingName)
-				}
-			}
-		}
-		if v, ok := d["season"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Season)
-		}
-		if v, ok := d["score"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Score)
-		}
-		if v, ok := d["createdAt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CreatedAt)
-		}
-	}
-	return nil
-}
-
-func NewGlobalRankingBorderFromJson(data string) GlobalRankingBorder {
-	req := GlobalRankingBorder{}
-	_ = json.Unmarshal([]byte(data), &req)
-	return req
-}
-
-func NewGlobalRankingBorderFromDict(data map[string]interface{}) GlobalRankingBorder {
-	return GlobalRankingBorder{
-		GlobalRankingBoarderId: core.CastString(data["globalRankingBoarderId"]),
-		RankingName:            core.CastString(data["rankingName"]),
-		Season:                 core.CastInt64(data["season"]),
-		Score:                  core.CastInt64(data["score"]),
-		CreatedAt:              core.CastInt64(data["createdAt"]),
-	}
-}
-
-func (p GlobalRankingBorder) ToDict() map[string]interface{} {
-
-	var globalRankingBoarderId *string
-	if p.GlobalRankingBoarderId != nil {
-		globalRankingBoarderId = p.GlobalRankingBoarderId
-	}
-	var rankingName *string
-	if p.RankingName != nil {
-		rankingName = p.RankingName
-	}
-	var season *int64
-	if p.Season != nil {
-		season = p.Season
-	}
-	var score *int64
-	if p.Score != nil {
-		score = p.Score
-	}
-	var createdAt *int64
-	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
-	}
-	return map[string]interface{}{
-		"globalRankingBoarderId": globalRankingBoarderId,
-		"rankingName":            rankingName,
-		"season":                 season,
-		"score":                  score,
-		"createdAt":              createdAt,
-	}
-}
-
-func (p GlobalRankingBorder) Pointer() *GlobalRankingBorder {
-	return &p
-}
-
-func CastGlobalRankingBorders(data []interface{}) []GlobalRankingBorder {
-	v := make([]GlobalRankingBorder, 0)
-	for _, d := range data {
-		v = append(v, NewGlobalRankingBorderFromDict(d.(map[string]interface{})))
-	}
-	return v
-}
-
-func CastGlobalRankingBordersFromDict(data []GlobalRankingBorder) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -3176,192 +3010,6 @@ func CastClusterRankingDatas(data []interface{}) []ClusterRankingData {
 }
 
 func CastClusterRankingDatasFromDict(data []ClusterRankingData) []interface{} {
-	v := make([]interface{}, 0)
-	for _, d := range data {
-		v = append(v, d.ToDict())
-	}
-	return v
-}
-
-type ClusterRankingBorder struct {
-	ClusterRankingBoarderId *string `json:"clusterRankingBoarderId"`
-	RankingName             *string `json:"rankingName"`
-	ClusterName             *string `json:"clusterName"`
-	Season                  *int64  `json:"season"`
-	Score                   *int64  `json:"score"`
-	CreatedAt               *int64  `json:"createdAt"`
-}
-
-func (p *ClusterRankingBorder) UnmarshalJSON(data []byte) error {
-	str := string(data)
-	if len(str) == 0 {
-		*p = ClusterRankingBorder{}
-		return nil
-	}
-	if str[0] == '"' {
-		var strVal string
-		err := json.Unmarshal(data, &strVal)
-		if err != nil {
-			return err
-		}
-		str = strVal
-	}
-	if str == "null" {
-		*p = ClusterRankingBorder{}
-	} else {
-		*p = ClusterRankingBorder{}
-		d := map[string]*json.RawMessage{}
-		if err := json.Unmarshal([]byte(str), &d); err != nil {
-			return err
-		}
-		if v, ok := d["clusterRankingBoarderId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.ClusterRankingBoarderId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.ClusterRankingBoarderId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.ClusterRankingBoarderId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.ClusterRankingBoarderId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.ClusterRankingBoarderId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.ClusterRankingBoarderId)
-				}
-			}
-		}
-		if v, ok := d["rankingName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.RankingName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.RankingName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.RankingName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.RankingName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.RankingName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.RankingName)
-				}
-			}
-		}
-		if v, ok := d["clusterName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.ClusterName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.ClusterName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.ClusterName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.ClusterName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.ClusterName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.ClusterName)
-				}
-			}
-		}
-		if v, ok := d["season"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Season)
-		}
-		if v, ok := d["score"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.Score)
-		}
-		if v, ok := d["createdAt"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.CreatedAt)
-		}
-	}
-	return nil
-}
-
-func NewClusterRankingBorderFromJson(data string) ClusterRankingBorder {
-	req := ClusterRankingBorder{}
-	_ = json.Unmarshal([]byte(data), &req)
-	return req
-}
-
-func NewClusterRankingBorderFromDict(data map[string]interface{}) ClusterRankingBorder {
-	return ClusterRankingBorder{
-		ClusterRankingBoarderId: core.CastString(data["clusterRankingBoarderId"]),
-		RankingName:             core.CastString(data["rankingName"]),
-		ClusterName:             core.CastString(data["clusterName"]),
-		Season:                  core.CastInt64(data["season"]),
-		Score:                   core.CastInt64(data["score"]),
-		CreatedAt:               core.CastInt64(data["createdAt"]),
-	}
-}
-
-func (p ClusterRankingBorder) ToDict() map[string]interface{} {
-
-	var clusterRankingBoarderId *string
-	if p.ClusterRankingBoarderId != nil {
-		clusterRankingBoarderId = p.ClusterRankingBoarderId
-	}
-	var rankingName *string
-	if p.RankingName != nil {
-		rankingName = p.RankingName
-	}
-	var clusterName *string
-	if p.ClusterName != nil {
-		clusterName = p.ClusterName
-	}
-	var season *int64
-	if p.Season != nil {
-		season = p.Season
-	}
-	var score *int64
-	if p.Score != nil {
-		score = p.Score
-	}
-	var createdAt *int64
-	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
-	}
-	return map[string]interface{}{
-		"clusterRankingBoarderId": clusterRankingBoarderId,
-		"rankingName":             rankingName,
-		"clusterName":             clusterName,
-		"season":                  season,
-		"score":                   score,
-		"createdAt":               createdAt,
-	}
-}
-
-func (p ClusterRankingBorder) Pointer() *ClusterRankingBorder {
-	return &p
-}
-
-func CastClusterRankingBorders(data []interface{}) []ClusterRankingBorder {
-	v := make([]ClusterRankingBorder, 0)
-	for _, d := range data {
-		v = append(v, NewClusterRankingBorderFromDict(d.(map[string]interface{})))
-	}
-	return v
-}
-
-func CastClusterRankingBordersFromDict(data []ClusterRankingBorder) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

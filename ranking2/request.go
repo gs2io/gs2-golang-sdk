@@ -1711,7 +1711,6 @@ type CreateGlobalRankingModelMasterRequest struct {
 	MinimumValue        *int64          `json:"minimumValue"`
 	MaximumValue        *int64          `json:"maximumValue"`
 	Sum                 *bool           `json:"sum"`
-	ScoreTtlDays        *int32          `json:"scoreTtlDays"`
 	OrderDirection      *string         `json:"orderDirection"`
 	RankingRewards      []RankingReward `json:"rankingRewards"`
 	EntryPeriodEventId  *string         `json:"entryPeriodEventId"`
@@ -1841,9 +1840,6 @@ func (p *CreateGlobalRankingModelMasterRequest) UnmarshalJSON(data []byte) error
 		if v, ok := d["sum"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Sum)
 		}
-		if v, ok := d["scoreTtlDays"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.ScoreTtlDays)
-		}
 		if v, ok := d["orderDirection"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -1938,7 +1934,6 @@ func NewCreateGlobalRankingModelMasterRequestFromDict(data map[string]interface{
 		MinimumValue:        core.CastInt64(data["minimumValue"]),
 		MaximumValue:        core.CastInt64(data["maximumValue"]),
 		Sum:                 core.CastBool(data["sum"]),
-		ScoreTtlDays:        core.CastInt32(data["scoreTtlDays"]),
 		OrderDirection:      core.CastString(data["orderDirection"]),
 		RankingRewards:      CastRankingRewards(core.CastArray(data["rankingRewards"])),
 		EntryPeriodEventId:  core.CastString(data["entryPeriodEventId"]),
@@ -1955,7 +1950,6 @@ func (p CreateGlobalRankingModelMasterRequest) ToDict() map[string]interface{} {
 		"minimumValue":   p.MinimumValue,
 		"maximumValue":   p.MaximumValue,
 		"sum":            p.Sum,
-		"scoreTtlDays":   p.ScoreTtlDays,
 		"orderDirection": p.OrderDirection,
 		"rankingRewards": CastRankingRewardsFromDict(
 			p.RankingRewards,
@@ -2087,7 +2081,6 @@ type UpdateGlobalRankingModelMasterRequest struct {
 	MinimumValue        *int64          `json:"minimumValue"`
 	MaximumValue        *int64          `json:"maximumValue"`
 	Sum                 *bool           `json:"sum"`
-	ScoreTtlDays        *int32          `json:"scoreTtlDays"`
 	OrderDirection      *string         `json:"orderDirection"`
 	RankingRewards      []RankingReward `json:"rankingRewards"`
 	EntryPeriodEventId  *string         `json:"entryPeriodEventId"`
@@ -2217,9 +2210,6 @@ func (p *UpdateGlobalRankingModelMasterRequest) UnmarshalJSON(data []byte) error
 		if v, ok := d["sum"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Sum)
 		}
-		if v, ok := d["scoreTtlDays"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.ScoreTtlDays)
-		}
 		if v, ok := d["orderDirection"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -2314,7 +2304,6 @@ func NewUpdateGlobalRankingModelMasterRequestFromDict(data map[string]interface{
 		MinimumValue:        core.CastInt64(data["minimumValue"]),
 		MaximumValue:        core.CastInt64(data["maximumValue"]),
 		Sum:                 core.CastBool(data["sum"]),
-		ScoreTtlDays:        core.CastInt32(data["scoreTtlDays"]),
 		OrderDirection:      core.CastString(data["orderDirection"]),
 		RankingRewards:      CastRankingRewards(core.CastArray(data["rankingRewards"])),
 		EntryPeriodEventId:  core.CastString(data["entryPeriodEventId"]),
@@ -2331,7 +2320,6 @@ func (p UpdateGlobalRankingModelMasterRequest) ToDict() map[string]interface{} {
 		"minimumValue":   p.MinimumValue,
 		"maximumValue":   p.MaximumValue,
 		"sum":            p.Sum,
-		"scoreTtlDays":   p.ScoreTtlDays,
 		"orderDirection": p.OrderDirection,
 		"rankingRewards": CastRankingRewardsFromDict(
 			p.RankingRewards,
@@ -12686,696 +12674,6 @@ func (p AddSubscribeByUserIdRequest) Pointer() *AddSubscribeByUserIdRequest {
 	return &p
 }
 
-type GetSubscribeRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	RankingName     *string `json:"rankingName"`
-	AccessToken     *string `json:"accessToken"`
-	TargetUserId    *string `json:"targetUserId"`
-}
-
-func (p *GetSubscribeRequest) UnmarshalJSON(data []byte) error {
-	str := string(data)
-	if len(str) == 0 {
-		*p = GetSubscribeRequest{}
-		return nil
-	}
-	if str[0] == '"' {
-		var strVal string
-		err := json.Unmarshal(data, &strVal)
-		if err != nil {
-			return err
-		}
-		str = strVal
-	}
-	if str == "null" {
-		*p = GetSubscribeRequest{}
-	} else {
-		*p = GetSubscribeRequest{}
-		d := map[string]*json.RawMessage{}
-		if err := json.Unmarshal([]byte(str), &d); err != nil {
-			return err
-		}
-		if v, ok := d["namespaceName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.NamespaceName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.NamespaceName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.NamespaceName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.NamespaceName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.NamespaceName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.NamespaceName)
-				}
-			}
-		}
-		if v, ok := d["rankingName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.RankingName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.RankingName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.RankingName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.RankingName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.RankingName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.RankingName)
-				}
-			}
-		}
-		if v, ok := d["accessToken"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.AccessToken = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.AccessToken = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.AccessToken = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.AccessToken = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.AccessToken = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.AccessToken)
-				}
-			}
-		}
-		if v, ok := d["targetUserId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.TargetUserId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.TargetUserId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.TargetUserId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetUserId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetUserId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.TargetUserId)
-				}
-			}
-		}
-	}
-	return nil
-}
-
-func NewGetSubscribeRequestFromJson(data string) (GetSubscribeRequest, error) {
-	req := GetSubscribeRequest{}
-	err := json.Unmarshal([]byte(data), &req)
-	if err != nil {
-		return GetSubscribeRequest{}, err
-	}
-	return req, nil
-}
-
-func NewGetSubscribeRequestFromDict(data map[string]interface{}) GetSubscribeRequest {
-	return GetSubscribeRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RankingName:   core.CastString(data["rankingName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		TargetUserId:  core.CastString(data["targetUserId"]),
-	}
-}
-
-func (p GetSubscribeRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"rankingName":   p.RankingName,
-		"accessToken":   p.AccessToken,
-		"targetUserId":  p.TargetUserId,
-	}
-}
-
-func (p GetSubscribeRequest) Pointer() *GetSubscribeRequest {
-	return &p
-}
-
-type GetSubscribeByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	RankingName     *string `json:"rankingName"`
-	UserId          *string `json:"userId"`
-	TargetUserId    *string `json:"targetUserId"`
-	TimeOffsetToken *string `json:"timeOffsetToken"`
-}
-
-func (p *GetSubscribeByUserIdRequest) UnmarshalJSON(data []byte) error {
-	str := string(data)
-	if len(str) == 0 {
-		*p = GetSubscribeByUserIdRequest{}
-		return nil
-	}
-	if str[0] == '"' {
-		var strVal string
-		err := json.Unmarshal(data, &strVal)
-		if err != nil {
-			return err
-		}
-		str = strVal
-	}
-	if str == "null" {
-		*p = GetSubscribeByUserIdRequest{}
-	} else {
-		*p = GetSubscribeByUserIdRequest{}
-		d := map[string]*json.RawMessage{}
-		if err := json.Unmarshal([]byte(str), &d); err != nil {
-			return err
-		}
-		if v, ok := d["namespaceName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.NamespaceName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.NamespaceName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.NamespaceName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.NamespaceName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.NamespaceName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.NamespaceName)
-				}
-			}
-		}
-		if v, ok := d["rankingName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.RankingName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.RankingName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.RankingName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.RankingName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.RankingName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.RankingName)
-				}
-			}
-		}
-		if v, ok := d["userId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.UserId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.UserId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.UserId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.UserId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.UserId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.UserId)
-				}
-			}
-		}
-		if v, ok := d["targetUserId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.TargetUserId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.TargetUserId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.TargetUserId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetUserId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetUserId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.TargetUserId)
-				}
-			}
-		}
-		if v, ok := d["timeOffsetToken"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.TimeOffsetToken = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.TimeOffsetToken = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.TimeOffsetToken = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.TimeOffsetToken = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.TimeOffsetToken = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
-				}
-			}
-		}
-	}
-	return nil
-}
-
-func NewGetSubscribeByUserIdRequestFromJson(data string) (GetSubscribeByUserIdRequest, error) {
-	req := GetSubscribeByUserIdRequest{}
-	err := json.Unmarshal([]byte(data), &req)
-	if err != nil {
-		return GetSubscribeByUserIdRequest{}, err
-	}
-	return req, nil
-}
-
-func NewGetSubscribeByUserIdRequestFromDict(data map[string]interface{}) GetSubscribeByUserIdRequest {
-	return GetSubscribeByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		RankingName:     core.CastString(data["rankingName"]),
-		UserId:          core.CastString(data["userId"]),
-		TargetUserId:    core.CastString(data["targetUserId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
-	}
-}
-
-func (p GetSubscribeByUserIdRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"rankingName":     p.RankingName,
-		"userId":          p.UserId,
-		"targetUserId":    p.TargetUserId,
-		"timeOffsetToken": p.TimeOffsetToken,
-	}
-}
-
-func (p GetSubscribeByUserIdRequest) Pointer() *GetSubscribeByUserIdRequest {
-	return &p
-}
-
-type DeleteSubscribeRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	RankingName        *string `json:"rankingName"`
-	AccessToken        *string `json:"accessToken"`
-	TargetUserId       *string `json:"targetUserId"`
-}
-
-func (p *DeleteSubscribeRequest) UnmarshalJSON(data []byte) error {
-	str := string(data)
-	if len(str) == 0 {
-		*p = DeleteSubscribeRequest{}
-		return nil
-	}
-	if str[0] == '"' {
-		var strVal string
-		err := json.Unmarshal(data, &strVal)
-		if err != nil {
-			return err
-		}
-		str = strVal
-	}
-	if str == "null" {
-		*p = DeleteSubscribeRequest{}
-	} else {
-		*p = DeleteSubscribeRequest{}
-		d := map[string]*json.RawMessage{}
-		if err := json.Unmarshal([]byte(str), &d); err != nil {
-			return err
-		}
-		if v, ok := d["namespaceName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.NamespaceName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.NamespaceName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.NamespaceName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.NamespaceName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.NamespaceName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.NamespaceName)
-				}
-			}
-		}
-		if v, ok := d["rankingName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.RankingName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.RankingName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.RankingName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.RankingName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.RankingName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.RankingName)
-				}
-			}
-		}
-		if v, ok := d["accessToken"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.AccessToken = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.AccessToken = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.AccessToken = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.AccessToken = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.AccessToken = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.AccessToken)
-				}
-			}
-		}
-		if v, ok := d["targetUserId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.TargetUserId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.TargetUserId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.TargetUserId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetUserId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetUserId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.TargetUserId)
-				}
-			}
-		}
-	}
-	return nil
-}
-
-func NewDeleteSubscribeRequestFromJson(data string) (DeleteSubscribeRequest, error) {
-	req := DeleteSubscribeRequest{}
-	err := json.Unmarshal([]byte(data), &req)
-	if err != nil {
-		return DeleteSubscribeRequest{}, err
-	}
-	return req, nil
-}
-
-func NewDeleteSubscribeRequestFromDict(data map[string]interface{}) DeleteSubscribeRequest {
-	return DeleteSubscribeRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RankingName:   core.CastString(data["rankingName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		TargetUserId:  core.CastString(data["targetUserId"]),
-	}
-}
-
-func (p DeleteSubscribeRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"rankingName":   p.RankingName,
-		"accessToken":   p.AccessToken,
-		"targetUserId":  p.TargetUserId,
-	}
-}
-
-func (p DeleteSubscribeRequest) Pointer() *DeleteSubscribeRequest {
-	return &p
-}
-
-type DeleteSubscribeByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	RankingName        *string `json:"rankingName"`
-	UserId             *string `json:"userId"`
-	TargetUserId       *string `json:"targetUserId"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
-}
-
-func (p *DeleteSubscribeByUserIdRequest) UnmarshalJSON(data []byte) error {
-	str := string(data)
-	if len(str) == 0 {
-		*p = DeleteSubscribeByUserIdRequest{}
-		return nil
-	}
-	if str[0] == '"' {
-		var strVal string
-		err := json.Unmarshal(data, &strVal)
-		if err != nil {
-			return err
-		}
-		str = strVal
-	}
-	if str == "null" {
-		*p = DeleteSubscribeByUserIdRequest{}
-	} else {
-		*p = DeleteSubscribeByUserIdRequest{}
-		d := map[string]*json.RawMessage{}
-		if err := json.Unmarshal([]byte(str), &d); err != nil {
-			return err
-		}
-		if v, ok := d["namespaceName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.NamespaceName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.NamespaceName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.NamespaceName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.NamespaceName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.NamespaceName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.NamespaceName)
-				}
-			}
-		}
-		if v, ok := d["rankingName"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.RankingName = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.RankingName = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.RankingName = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.RankingName = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.RankingName = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.RankingName)
-				}
-			}
-		}
-		if v, ok := d["userId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.UserId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.UserId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.UserId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.UserId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.UserId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.UserId)
-				}
-			}
-		}
-		if v, ok := d["targetUserId"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.TargetUserId = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.TargetUserId = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.TargetUserId = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetUserId = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.TargetUserId = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.TargetUserId)
-				}
-			}
-		}
-		if v, ok := d["timeOffsetToken"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.TimeOffsetToken = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.TimeOffsetToken = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.TimeOffsetToken = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.TimeOffsetToken = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.TimeOffsetToken = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
-				}
-			}
-		}
-	}
-	return nil
-}
-
-func NewDeleteSubscribeByUserIdRequestFromJson(data string) (DeleteSubscribeByUserIdRequest, error) {
-	req := DeleteSubscribeByUserIdRequest{}
-	err := json.Unmarshal([]byte(data), &req)
-	if err != nil {
-		return DeleteSubscribeByUserIdRequest{}, err
-	}
-	return req, nil
-}
-
-func NewDeleteSubscribeByUserIdRequestFromDict(data map[string]interface{}) DeleteSubscribeByUserIdRequest {
-	return DeleteSubscribeByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		RankingName:     core.CastString(data["rankingName"]),
-		UserId:          core.CastString(data["userId"]),
-		TargetUserId:    core.CastString(data["targetUserId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
-	}
-}
-
-func (p DeleteSubscribeByUserIdRequest) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"rankingName":     p.RankingName,
-		"userId":          p.UserId,
-		"targetUserId":    p.TargetUserId,
-		"timeOffsetToken": p.TimeOffsetToken,
-	}
-}
-
-func (p DeleteSubscribeByUserIdRequest) Pointer() *DeleteSubscribeByUserIdRequest {
-	return &p
-}
-
 type DescribeSubscribeRankingScoresRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`
@@ -15637,5 +14935,695 @@ func (p UpdateCurrentRankingMasterFromGitHubRequest) ToDict() map[string]interfa
 }
 
 func (p UpdateCurrentRankingMasterFromGitHubRequest) Pointer() *UpdateCurrentRankingMasterFromGitHubRequest {
+	return &p
+}
+
+type GetSubscribeRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	RankingName     *string `json:"rankingName"`
+	AccessToken     *string `json:"accessToken"`
+	TargetUserId    *string `json:"targetUserId"`
+}
+
+func (p *GetSubscribeRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetSubscribeRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetSubscribeRequest{}
+	} else {
+		*p = GetSubscribeRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["rankingName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RankingName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RankingName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RankingName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RankingName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["targetUserId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TargetUserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TargetUserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TargetUserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetUserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetUserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TargetUserId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetSubscribeRequestFromJson(data string) (GetSubscribeRequest, error) {
+	req := GetSubscribeRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetSubscribeRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetSubscribeRequestFromDict(data map[string]interface{}) GetSubscribeRequest {
+	return GetSubscribeRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RankingName:   core.CastString(data["rankingName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		TargetUserId:  core.CastString(data["targetUserId"]),
+	}
+}
+
+func (p GetSubscribeRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"rankingName":   p.RankingName,
+		"accessToken":   p.AccessToken,
+		"targetUserId":  p.TargetUserId,
+	}
+}
+
+func (p GetSubscribeRequest) Pointer() *GetSubscribeRequest {
+	return &p
+}
+
+type GetSubscribeByUserIdRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	RankingName     *string `json:"rankingName"`
+	UserId          *string `json:"userId"`
+	TargetUserId    *string `json:"targetUserId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+}
+
+func (p *GetSubscribeByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetSubscribeByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetSubscribeByUserIdRequest{}
+	} else {
+		*p = GetSubscribeByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["rankingName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RankingName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RankingName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RankingName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RankingName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["targetUserId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TargetUserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TargetUserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TargetUserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetUserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetUserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TargetUserId)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetSubscribeByUserIdRequestFromJson(data string) (GetSubscribeByUserIdRequest, error) {
+	req := GetSubscribeByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetSubscribeByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetSubscribeByUserIdRequestFromDict(data map[string]interface{}) GetSubscribeByUserIdRequest {
+	return GetSubscribeByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		RankingName:     core.CastString(data["rankingName"]),
+		UserId:          core.CastString(data["userId"]),
+		TargetUserId:    core.CastString(data["targetUserId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p GetSubscribeByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"rankingName":     p.RankingName,
+		"userId":          p.UserId,
+		"targetUserId":    p.TargetUserId,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p GetSubscribeByUserIdRequest) Pointer() *GetSubscribeByUserIdRequest {
+	return &p
+}
+
+type DeleteSubscribeRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	RankingName        *string `json:"rankingName"`
+	AccessToken        *string `json:"accessToken"`
+	TargetUserId       *string `json:"targetUserId"`
+}
+
+func (p *DeleteSubscribeRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteSubscribeRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteSubscribeRequest{}
+	} else {
+		*p = DeleteSubscribeRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["rankingName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RankingName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RankingName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RankingName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RankingName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["targetUserId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TargetUserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TargetUserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TargetUserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetUserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetUserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TargetUserId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteSubscribeRequestFromJson(data string) (DeleteSubscribeRequest, error) {
+	req := DeleteSubscribeRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteSubscribeRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDeleteSubscribeRequestFromDict(data map[string]interface{}) DeleteSubscribeRequest {
+	return DeleteSubscribeRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RankingName:   core.CastString(data["rankingName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		TargetUserId:  core.CastString(data["targetUserId"]),
+	}
+}
+
+func (p DeleteSubscribeRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"rankingName":   p.RankingName,
+		"accessToken":   p.AccessToken,
+		"targetUserId":  p.TargetUserId,
+	}
+}
+
+func (p DeleteSubscribeRequest) Pointer() *DeleteSubscribeRequest {
+	return &p
+}
+
+type DeleteSubscribeByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	RankingName        *string `json:"rankingName"`
+	UserId             *string `json:"userId"`
+	TargetUserId       *string `json:"targetUserId"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+}
+
+func (p *DeleteSubscribeByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteSubscribeByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteSubscribeByUserIdRequest{}
+	} else {
+		*p = DeleteSubscribeByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["rankingName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RankingName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RankingName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RankingName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RankingName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["targetUserId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TargetUserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TargetUserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TargetUserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetUserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TargetUserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TargetUserId)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteSubscribeByUserIdRequestFromJson(data string) (DeleteSubscribeByUserIdRequest, error) {
+	req := DeleteSubscribeByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteSubscribeByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDeleteSubscribeByUserIdRequestFromDict(data map[string]interface{}) DeleteSubscribeByUserIdRequest {
+	return DeleteSubscribeByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		RankingName:     core.CastString(data["rankingName"]),
+		UserId:          core.CastString(data["userId"]),
+		TargetUserId:    core.CastString(data["targetUserId"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p DeleteSubscribeByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"rankingName":     p.RankingName,
+		"userId":          p.UserId,
+		"targetUserId":    p.TargetUserId,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p DeleteSubscribeByUserIdRequest) Pointer() *DeleteSubscribeByUserIdRequest {
 	return &p
 }
