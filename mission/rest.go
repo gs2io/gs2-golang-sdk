@@ -994,6 +994,127 @@ func (p Gs2MissionRestClient) DeleteCompleteByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyCompleteByUserIdAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCompleteByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCompleteByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCompleteByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCompleteByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCompleteByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCompleteByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) VerifyCompleteByUserIdAsync(
+	request *VerifyCompleteByUserIdRequest,
+	callback chan<- VerifyCompleteByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/complete/group/{missionGroupName}/task/{missionTaskName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		path = strings.ReplaceAll(path, "{missionGroupName}", core.ToString(*request.MissionGroupName))
+	} else {
+		path = strings.ReplaceAll(path, "{missionGroupName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+	if request.MissionTaskName != nil && *request.MissionTaskName != "" {
+		path = strings.ReplaceAll(path, "{missionTaskName}", core.ToString(*request.MissionTaskName))
+	} else {
+		path = strings.ReplaceAll(path, "{missionTaskName}", "null")
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		path = strings.ReplaceAll(path, "{multiplyValueSpecifyingQuantity}", core.ToString(*request.MultiplyValueSpecifyingQuantity))
+	} else {
+		path = strings.ReplaceAll(path, "{multiplyValueSpecifyingQuantity}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go verifyCompleteByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) VerifyCompleteByUserId(
+	request *VerifyCompleteByUserIdRequest,
+) (*VerifyCompleteByUserIdResult, error) {
+	callback := make(chan VerifyCompleteByUserIdAsyncResult, 1)
+	go p.VerifyCompleteByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func receiveByStampTaskAsyncHandler(
 	client Gs2MissionRestClient,
 	job *core.NetworkJob,
@@ -1169,6 +1290,97 @@ func (p Gs2MissionRestClient) RevertReceiveByStampSheet(
 ) (*RevertReceiveByStampSheetResult, error) {
 	callback := make(chan RevertReceiveByStampSheetAsyncResult, 1)
 	go p.RevertReceiveByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyCompleteByStampTaskAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCompleteByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCompleteByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCompleteByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCompleteByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCompleteByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCompleteByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) VerifyCompleteByStampTaskAsync(
+	request *VerifyCompleteByStampTaskRequest,
+	callback chan<- VerifyCompleteByStampTaskAsyncResult,
+) {
+	path := "/stamp/complete/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifyCompleteByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) VerifyCompleteByStampTask(
+	request *VerifyCompleteByStampTaskRequest,
+) (*VerifyCompleteByStampTaskResult, error) {
+	callback := make(chan VerifyCompleteByStampTaskAsyncResult, 1)
+	go p.VerifyCompleteByStampTaskAsync(
 		request,
 		callback,
 	)

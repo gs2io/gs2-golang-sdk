@@ -1513,6 +1513,224 @@ func (p DeleteCompleteByUserIdRequest) Pointer() *DeleteCompleteByUserIdRequest 
 	return &p
 }
 
+type VerifyCompleteByUserIdRequest struct {
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	MissionGroupName                *string `json:"missionGroupName"`
+	UserId                          *string `json:"userId"`
+	VerifyType                      *string `json:"verifyType"`
+	MissionTaskName                 *string `json:"missionTaskName"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
+}
+
+func (p *VerifyCompleteByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyCompleteByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyCompleteByUserIdRequest{}
+	} else {
+		*p = VerifyCompleteByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["missionGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionGroupName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["missionTaskName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionTaskName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionTaskName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionTaskName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionTaskName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionTaskName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionTaskName)
+				}
+			}
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyCompleteByUserIdRequestFromJson(data string) (VerifyCompleteByUserIdRequest, error) {
+	req := VerifyCompleteByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyCompleteByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyCompleteByUserIdRequestFromDict(data map[string]interface{}) VerifyCompleteByUserIdRequest {
+	return VerifyCompleteByUserIdRequest{
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		MissionGroupName:                core.CastString(data["missionGroupName"]),
+		UserId:                          core.CastString(data["userId"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		MissionTaskName:                 core.CastString(data["missionTaskName"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p VerifyCompleteByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"missionGroupName":                p.MissionGroupName,
+		"userId":                          p.UserId,
+		"verifyType":                      p.VerifyType,
+		"missionTaskName":                 p.MissionTaskName,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
+	}
+}
+
+func (p VerifyCompleteByUserIdRequest) Pointer() *VerifyCompleteByUserIdRequest {
+	return &p
+}
+
 type ReceiveByStampTaskRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`
@@ -1724,6 +1942,113 @@ func (p RevertReceiveByStampSheetRequest) ToDict() map[string]interface{} {
 }
 
 func (p RevertReceiveByStampSheetRequest) Pointer() *RevertReceiveByStampSheetRequest {
+	return &p
+}
+
+type VerifyCompleteByStampTaskRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *VerifyCompleteByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyCompleteByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyCompleteByStampTaskRequest{}
+	} else {
+		*p = VerifyCompleteByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyCompleteByStampTaskRequestFromJson(data string) (VerifyCompleteByStampTaskRequest, error) {
+	req := VerifyCompleteByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyCompleteByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyCompleteByStampTaskRequestFromDict(data map[string]interface{}) VerifyCompleteByStampTaskRequest {
+	return VerifyCompleteByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifyCompleteByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyCompleteByStampTaskRequest) Pointer() *VerifyCompleteByStampTaskRequest {
 	return &p
 }
 

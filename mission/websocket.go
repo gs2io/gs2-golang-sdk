@@ -888,6 +888,108 @@ func (p Gs2MissionWebSocketClient) DeleteCompleteByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2MissionWebSocketClient) verifyCompleteByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyCompleteByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCompleteByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCompleteByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCompleteByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyCompleteByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionWebSocketClient) VerifyCompleteByUserIdAsync(
+	request *VerifyCompleteByUserIdRequest,
+	callback chan<- VerifyCompleteByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "mission",
+			"component":   "complete",
+			"function":    "verifyCompleteByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		bodies["missionGroupName"] = *request.MissionGroupName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.MissionTaskName != nil && *request.MissionTaskName != "" {
+		bodies["missionTaskName"] = *request.MissionTaskName
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyCompleteByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionWebSocketClient) VerifyCompleteByUserId(
+	request *VerifyCompleteByUserIdRequest,
+) (*VerifyCompleteByUserIdResult, error) {
+	callback := make(chan VerifyCompleteByUserIdAsyncResult, 1)
+	go p.VerifyCompleteByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2MissionWebSocketClient) receiveByStampTaskAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- ReceiveByStampTaskAsyncResult,
@@ -1049,6 +1151,90 @@ func (p Gs2MissionWebSocketClient) RevertReceiveByStampSheet(
 ) (*RevertReceiveByStampSheetResult, error) {
 	callback := make(chan RevertReceiveByStampSheetAsyncResult, 1)
 	go p.RevertReceiveByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MissionWebSocketClient) verifyCompleteByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyCompleteByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCompleteByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCompleteByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCompleteByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyCompleteByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionWebSocketClient) VerifyCompleteByStampTaskAsync(
+	request *VerifyCompleteByStampTaskRequest,
+	callback chan<- VerifyCompleteByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "mission",
+			"component":   "complete",
+			"function":    "verifyCompleteByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.verifyCompleteByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionWebSocketClient) VerifyCompleteByStampTask(
+	request *VerifyCompleteByStampTaskRequest,
+) (*VerifyCompleteByStampTaskResult, error) {
+	callback := make(chan VerifyCompleteByStampTaskAsyncResult, 1)
+	go p.VerifyCompleteByStampTaskAsync(
 		request,
 		callback,
 	)

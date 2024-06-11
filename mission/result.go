@@ -329,6 +329,32 @@ func (p DeleteCompleteByUserIdResult) Pointer() *DeleteCompleteByUserIdResult {
 	return &p
 }
 
+type VerifyCompleteByUserIdResult struct {
+}
+
+type VerifyCompleteByUserIdAsyncResult struct {
+	result *VerifyCompleteByUserIdResult
+	err    error
+}
+
+func NewVerifyCompleteByUserIdResultFromJson(data string) VerifyCompleteByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCompleteByUserIdResultFromDict(dict)
+}
+
+func NewVerifyCompleteByUserIdResultFromDict(data map[string]interface{}) VerifyCompleteByUserIdResult {
+	return VerifyCompleteByUserIdResult{}
+}
+
+func (p VerifyCompleteByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyCompleteByUserIdResult) Pointer() *VerifyCompleteByUserIdResult {
+	return &p
+}
+
 type ReceiveByStampTaskResult struct {
 	Item            *Complete `json:"item"`
 	NewContextStack *string   `json:"newContextStack"`
@@ -391,6 +417,37 @@ func (p RevertReceiveByStampSheetResult) ToDict() map[string]interface{} {
 }
 
 func (p RevertReceiveByStampSheetResult) Pointer() *RevertReceiveByStampSheetResult {
+	return &p
+}
+
+type VerifyCompleteByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifyCompleteByStampTaskAsyncResult struct {
+	result *VerifyCompleteByStampTaskResult
+	err    error
+}
+
+func NewVerifyCompleteByStampTaskResultFromJson(data string) VerifyCompleteByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCompleteByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyCompleteByStampTaskResultFromDict(data map[string]interface{}) VerifyCompleteByStampTaskResult {
+	return VerifyCompleteByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyCompleteByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyCompleteByStampTaskResult) Pointer() *VerifyCompleteByStampTaskResult {
 	return &p
 }
 
