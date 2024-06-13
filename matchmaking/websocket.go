@@ -3437,7 +3437,7 @@ func (p Gs2MatchmakingWebSocketClient) ExportMasterAsync(
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "matchmaking",
-			"component":   "currentRatingModelMaster",
+			"component":   "currentModelMaster",
 			"function":    "exportMaster",
 			"contentType": "application/json",
 			"requestId":   requestId,
@@ -3474,9 +3474,9 @@ func (p Gs2MatchmakingWebSocketClient) ExportMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2MatchmakingWebSocketClient) getCurrentRatingModelMasterAsyncHandler(
+func (p Gs2MatchmakingWebSocketClient) getCurrentModelMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- GetCurrentRatingModelMasterAsyncResult,
+	callback chan<- GetCurrentModelMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -3485,17 +3485,17 @@ func (p Gs2MatchmakingWebSocketClient) getCurrentRatingModelMasterAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- GetCurrentRatingModelMasterAsyncResult{
+		callback <- GetCurrentModelMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result GetCurrentRatingModelMasterResult
+	var result GetCurrentModelMasterResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- GetCurrentRatingModelMasterAsyncResult{
+			callback <- GetCurrentModelMasterAsyncResult{
 				err: err,
 			}
 			return
@@ -3503,23 +3503,23 @@ func (p Gs2MatchmakingWebSocketClient) getCurrentRatingModelMasterAsyncHandler(
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- GetCurrentRatingModelMasterAsyncResult{
+	callback <- GetCurrentModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2MatchmakingWebSocketClient) GetCurrentRatingModelMasterAsync(
-	request *GetCurrentRatingModelMasterRequest,
-	callback chan<- GetCurrentRatingModelMasterAsyncResult,
+func (p Gs2MatchmakingWebSocketClient) GetCurrentModelMasterAsync(
+	request *GetCurrentModelMasterRequest,
+	callback chan<- GetCurrentModelMasterAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "matchmaking",
-			"component":   "currentRatingModelMaster",
-			"function":    "getCurrentRatingModelMaster",
+			"component":   "currentModelMaster",
+			"function":    "getCurrentModelMaster",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -3534,7 +3534,7 @@ func (p Gs2MatchmakingWebSocketClient) GetCurrentRatingModelMasterAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.getCurrentRatingModelMasterAsyncHandler(
+	go p.getCurrentModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -3543,11 +3543,11 @@ func (p Gs2MatchmakingWebSocketClient) GetCurrentRatingModelMasterAsync(
 	)
 }
 
-func (p Gs2MatchmakingWebSocketClient) GetCurrentRatingModelMaster(
-	request *GetCurrentRatingModelMasterRequest,
-) (*GetCurrentRatingModelMasterResult, error) {
-	callback := make(chan GetCurrentRatingModelMasterAsyncResult, 1)
-	go p.GetCurrentRatingModelMasterAsync(
+func (p Gs2MatchmakingWebSocketClient) GetCurrentModelMaster(
+	request *GetCurrentModelMasterRequest,
+) (*GetCurrentModelMasterResult, error) {
+	callback := make(chan GetCurrentModelMasterAsyncResult, 1)
+	go p.GetCurrentModelMasterAsync(
 		request,
 		callback,
 	)
@@ -3555,9 +3555,9 @@ func (p Gs2MatchmakingWebSocketClient) GetCurrentRatingModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2MatchmakingWebSocketClient) updateCurrentRatingModelMasterAsyncHandler(
+func (p Gs2MatchmakingWebSocketClient) updateCurrentModelMasterAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- UpdateCurrentRatingModelMasterAsyncResult,
+	callback chan<- UpdateCurrentModelMasterAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -3566,17 +3566,17 @@ func (p Gs2MatchmakingWebSocketClient) updateCurrentRatingModelMasterAsyncHandle
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentRatingModelMasterAsyncResult{
+		callback <- UpdateCurrentModelMasterAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentRatingModelMasterResult
+	var result UpdateCurrentModelMasterResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- UpdateCurrentRatingModelMasterAsyncResult{
+			callback <- UpdateCurrentModelMasterAsyncResult{
 				err: err,
 			}
 			return
@@ -3584,23 +3584,23 @@ func (p Gs2MatchmakingWebSocketClient) updateCurrentRatingModelMasterAsyncHandle
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- UpdateCurrentRatingModelMasterAsyncResult{
+	callback <- UpdateCurrentModelMasterAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2MatchmakingWebSocketClient) UpdateCurrentRatingModelMasterAsync(
-	request *UpdateCurrentRatingModelMasterRequest,
-	callback chan<- UpdateCurrentRatingModelMasterAsyncResult,
+func (p Gs2MatchmakingWebSocketClient) UpdateCurrentModelMasterAsync(
+	request *UpdateCurrentModelMasterRequest,
+	callback chan<- UpdateCurrentModelMasterAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "matchmaking",
-			"component":   "currentRatingModelMaster",
-			"function":    "updateCurrentRatingModelMaster",
+			"component":   "currentModelMaster",
+			"function":    "updateCurrentModelMaster",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -3618,7 +3618,7 @@ func (p Gs2MatchmakingWebSocketClient) UpdateCurrentRatingModelMasterAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.updateCurrentRatingModelMasterAsyncHandler(
+	go p.updateCurrentModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -3627,11 +3627,11 @@ func (p Gs2MatchmakingWebSocketClient) UpdateCurrentRatingModelMasterAsync(
 	)
 }
 
-func (p Gs2MatchmakingWebSocketClient) UpdateCurrentRatingModelMaster(
-	request *UpdateCurrentRatingModelMasterRequest,
-) (*UpdateCurrentRatingModelMasterResult, error) {
-	callback := make(chan UpdateCurrentRatingModelMasterAsyncResult, 1)
-	go p.UpdateCurrentRatingModelMasterAsync(
+func (p Gs2MatchmakingWebSocketClient) UpdateCurrentModelMaster(
+	request *UpdateCurrentModelMasterRequest,
+) (*UpdateCurrentModelMasterResult, error) {
+	callback := make(chan UpdateCurrentModelMasterAsyncResult, 1)
+	go p.UpdateCurrentModelMasterAsync(
 		request,
 		callback,
 	)
@@ -3639,9 +3639,9 @@ func (p Gs2MatchmakingWebSocketClient) UpdateCurrentRatingModelMaster(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2MatchmakingWebSocketClient) updateCurrentRatingModelMasterFromGitHubAsyncHandler(
+func (p Gs2MatchmakingWebSocketClient) updateCurrentModelMasterFromGitHubAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- UpdateCurrentRatingModelMasterFromGitHubAsyncResult,
+	callback chan<- UpdateCurrentModelMasterFromGitHubAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -3650,17 +3650,17 @@ func (p Gs2MatchmakingWebSocketClient) updateCurrentRatingModelMasterFromGitHubA
 		false,
 	)
 	if err != nil {
-		callback <- UpdateCurrentRatingModelMasterFromGitHubAsyncResult{
+		callback <- UpdateCurrentModelMasterFromGitHubAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result UpdateCurrentRatingModelMasterFromGitHubResult
+	var result UpdateCurrentModelMasterFromGitHubResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- UpdateCurrentRatingModelMasterFromGitHubAsyncResult{
+			callback <- UpdateCurrentModelMasterFromGitHubAsyncResult{
 				err: err,
 			}
 			return
@@ -3668,23 +3668,23 @@ func (p Gs2MatchmakingWebSocketClient) updateCurrentRatingModelMasterFromGitHubA
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- UpdateCurrentRatingModelMasterFromGitHubAsyncResult{
+	callback <- UpdateCurrentModelMasterFromGitHubAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2MatchmakingWebSocketClient) UpdateCurrentRatingModelMasterFromGitHubAsync(
-	request *UpdateCurrentRatingModelMasterFromGitHubRequest,
-	callback chan<- UpdateCurrentRatingModelMasterFromGitHubAsyncResult,
+func (p Gs2MatchmakingWebSocketClient) UpdateCurrentModelMasterFromGitHubAsync(
+	request *UpdateCurrentModelMasterFromGitHubRequest,
+	callback chan<- UpdateCurrentModelMasterFromGitHubAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "matchmaking",
-			"component":   "currentRatingModelMaster",
-			"function":    "updateCurrentRatingModelMasterFromGitHub",
+			"component":   "currentModelMaster",
+			"function":    "updateCurrentModelMasterFromGitHub",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -3702,7 +3702,7 @@ func (p Gs2MatchmakingWebSocketClient) UpdateCurrentRatingModelMasterFromGitHubA
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.updateCurrentRatingModelMasterFromGitHubAsyncHandler(
+	go p.updateCurrentModelMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -3711,11 +3711,1577 @@ func (p Gs2MatchmakingWebSocketClient) UpdateCurrentRatingModelMasterFromGitHubA
 	)
 }
 
-func (p Gs2MatchmakingWebSocketClient) UpdateCurrentRatingModelMasterFromGitHub(
-	request *UpdateCurrentRatingModelMasterFromGitHubRequest,
-) (*UpdateCurrentRatingModelMasterFromGitHubResult, error) {
-	callback := make(chan UpdateCurrentRatingModelMasterFromGitHubAsyncResult, 1)
-	go p.UpdateCurrentRatingModelMasterFromGitHubAsync(
+func (p Gs2MatchmakingWebSocketClient) UpdateCurrentModelMasterFromGitHub(
+	request *UpdateCurrentModelMasterFromGitHubRequest,
+) (*UpdateCurrentModelMasterFromGitHubResult, error) {
+	callback := make(chan UpdateCurrentModelMasterFromGitHubAsyncResult, 1)
+	go p.UpdateCurrentModelMasterFromGitHubAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) describeSeasonModelsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeSeasonModelsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeSeasonModelsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeSeasonModelsResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeSeasonModelsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeSeasonModelsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) DescribeSeasonModelsAsync(
+	request *DescribeSeasonModelsRequest,
+	callback chan<- DescribeSeasonModelsAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonModel",
+			"function":    "describeSeasonModels",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.describeSeasonModelsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) DescribeSeasonModels(
+	request *DescribeSeasonModelsRequest,
+) (*DescribeSeasonModelsResult, error) {
+	callback := make(chan DescribeSeasonModelsAsyncResult, 1)
+	go p.DescribeSeasonModelsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) getSeasonModelAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetSeasonModelAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSeasonModelAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSeasonModelResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetSeasonModelAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetSeasonModelAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) GetSeasonModelAsync(
+	request *GetSeasonModelRequest,
+	callback chan<- GetSeasonModelAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonModel",
+			"function":    "getSeasonModel",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.getSeasonModelAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) GetSeasonModel(
+	request *GetSeasonModelRequest,
+) (*GetSeasonModelResult, error) {
+	callback := make(chan GetSeasonModelAsyncResult, 1)
+	go p.GetSeasonModelAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) describeSeasonModelMastersAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeSeasonModelMastersAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeSeasonModelMastersAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeSeasonModelMastersResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeSeasonModelMastersAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeSeasonModelMastersAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) DescribeSeasonModelMastersAsync(
+	request *DescribeSeasonModelMastersRequest,
+	callback chan<- DescribeSeasonModelMastersAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonModelMaster",
+			"function":    "describeSeasonModelMasters",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.describeSeasonModelMastersAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) DescribeSeasonModelMasters(
+	request *DescribeSeasonModelMastersRequest,
+) (*DescribeSeasonModelMastersResult, error) {
+	callback := make(chan DescribeSeasonModelMastersAsyncResult, 1)
+	go p.DescribeSeasonModelMastersAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) createSeasonModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- CreateSeasonModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- CreateSeasonModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result CreateSeasonModelMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- CreateSeasonModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- CreateSeasonModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) CreateSeasonModelMasterAsync(
+	request *CreateSeasonModelMasterRequest,
+	callback chan<- CreateSeasonModelMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonModelMaster",
+			"function":    "createSeasonModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Name != nil && *request.Name != "" {
+		bodies["name"] = *request.Name
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.MaximumParticipants != nil {
+		bodies["maximumParticipants"] = *request.MaximumParticipants
+	}
+	if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
+		bodies["experienceModelId"] = *request.ExperienceModelId
+	}
+	if request.ChallengePeriodEventId != nil && *request.ChallengePeriodEventId != "" {
+		bodies["challengePeriodEventId"] = *request.ChallengePeriodEventId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.createSeasonModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) CreateSeasonModelMaster(
+	request *CreateSeasonModelMasterRequest,
+) (*CreateSeasonModelMasterResult, error) {
+	callback := make(chan CreateSeasonModelMasterAsyncResult, 1)
+	go p.CreateSeasonModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) getSeasonModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetSeasonModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSeasonModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSeasonModelMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetSeasonModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetSeasonModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) GetSeasonModelMasterAsync(
+	request *GetSeasonModelMasterRequest,
+	callback chan<- GetSeasonModelMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonModelMaster",
+			"function":    "getSeasonModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.getSeasonModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) GetSeasonModelMaster(
+	request *GetSeasonModelMasterRequest,
+) (*GetSeasonModelMasterResult, error) {
+	callback := make(chan GetSeasonModelMasterAsyncResult, 1)
+	go p.GetSeasonModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) updateSeasonModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UpdateSeasonModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateSeasonModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateSeasonModelMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateSeasonModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- UpdateSeasonModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) UpdateSeasonModelMasterAsync(
+	request *UpdateSeasonModelMasterRequest,
+	callback chan<- UpdateSeasonModelMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonModelMaster",
+			"function":    "updateSeasonModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.Description != nil && *request.Description != "" {
+		bodies["description"] = *request.Description
+	}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.MaximumParticipants != nil {
+		bodies["maximumParticipants"] = *request.MaximumParticipants
+	}
+	if request.ExperienceModelId != nil && *request.ExperienceModelId != "" {
+		bodies["experienceModelId"] = *request.ExperienceModelId
+	}
+	if request.ChallengePeriodEventId != nil && *request.ChallengePeriodEventId != "" {
+		bodies["challengePeriodEventId"] = *request.ChallengePeriodEventId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.updateSeasonModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) UpdateSeasonModelMaster(
+	request *UpdateSeasonModelMasterRequest,
+) (*UpdateSeasonModelMasterResult, error) {
+	callback := make(chan UpdateSeasonModelMasterAsyncResult, 1)
+	go p.UpdateSeasonModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) deleteSeasonModelMasterAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteSeasonModelMasterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteSeasonModelMasterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteSeasonModelMasterResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteSeasonModelMasterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DeleteSeasonModelMasterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) DeleteSeasonModelMasterAsync(
+	request *DeleteSeasonModelMasterRequest,
+	callback chan<- DeleteSeasonModelMasterAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonModelMaster",
+			"function":    "deleteSeasonModelMaster",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.deleteSeasonModelMasterAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) DeleteSeasonModelMaster(
+	request *DeleteSeasonModelMasterRequest,
+) (*DeleteSeasonModelMasterResult, error) {
+	callback := make(chan DeleteSeasonModelMasterAsyncResult, 1)
+	go p.DeleteSeasonModelMasterAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) describeSeasonGatheringsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeSeasonGatheringsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeSeasonGatheringsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeSeasonGatheringsResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeSeasonGatheringsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeSeasonGatheringsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) DescribeSeasonGatheringsAsync(
+	request *DescribeSeasonGatheringsRequest,
+	callback chan<- DescribeSeasonGatheringsAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonGathering",
+			"function":    "describeSeasonGatherings",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.Tier != nil {
+		bodies["tier"] = *request.Tier
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.describeSeasonGatheringsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) DescribeSeasonGatherings(
+	request *DescribeSeasonGatheringsRequest,
+) (*DescribeSeasonGatheringsResult, error) {
+	callback := make(chan DescribeSeasonGatheringsAsyncResult, 1)
+	go p.DescribeSeasonGatheringsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) describeMatchmakingSeasonGatheringsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeMatchmakingSeasonGatheringsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeMatchmakingSeasonGatheringsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeMatchmakingSeasonGatheringsResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeMatchmakingSeasonGatheringsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeMatchmakingSeasonGatheringsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) DescribeMatchmakingSeasonGatheringsAsync(
+	request *DescribeMatchmakingSeasonGatheringsRequest,
+	callback chan<- DescribeMatchmakingSeasonGatheringsAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonGathering",
+			"function":    "describeMatchmakingSeasonGatherings",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.Tier != nil {
+		bodies["tier"] = *request.Tier
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.describeMatchmakingSeasonGatheringsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) DescribeMatchmakingSeasonGatherings(
+	request *DescribeMatchmakingSeasonGatheringsRequest,
+) (*DescribeMatchmakingSeasonGatheringsResult, error) {
+	callback := make(chan DescribeMatchmakingSeasonGatheringsAsyncResult, 1)
+	go p.DescribeMatchmakingSeasonGatheringsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) doSeasonMatchmakingAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DoSeasonMatchmakingAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DoSeasonMatchmakingAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DoSeasonMatchmakingResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DoSeasonMatchmakingAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DoSeasonMatchmakingAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) DoSeasonMatchmakingAsync(
+	request *DoSeasonMatchmakingRequest,
+	callback chan<- DoSeasonMatchmakingAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonGathering",
+			"function":    "doSeasonMatchmaking",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.MatchmakingContextToken != nil && *request.MatchmakingContextToken != "" {
+		bodies["matchmakingContextToken"] = *request.MatchmakingContextToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.doSeasonMatchmakingAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) DoSeasonMatchmaking(
+	request *DoSeasonMatchmakingRequest,
+) (*DoSeasonMatchmakingResult, error) {
+	callback := make(chan DoSeasonMatchmakingAsyncResult, 1)
+	go p.DoSeasonMatchmakingAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) doSeasonMatchmakingByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DoSeasonMatchmakingByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DoSeasonMatchmakingByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DoSeasonMatchmakingByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DoSeasonMatchmakingByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DoSeasonMatchmakingByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) DoSeasonMatchmakingByUserIdAsync(
+	request *DoSeasonMatchmakingByUserIdRequest,
+	callback chan<- DoSeasonMatchmakingByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonGathering",
+			"function":    "doSeasonMatchmakingByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.MatchmakingContextToken != nil && *request.MatchmakingContextToken != "" {
+		bodies["matchmakingContextToken"] = *request.MatchmakingContextToken
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.doSeasonMatchmakingByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) DoSeasonMatchmakingByUserId(
+	request *DoSeasonMatchmakingByUserIdRequest,
+) (*DoSeasonMatchmakingByUserIdResult, error) {
+	callback := make(chan DoSeasonMatchmakingByUserIdAsyncResult, 1)
+	go p.DoSeasonMatchmakingByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) getSeasonGatheringAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetSeasonGatheringAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetSeasonGatheringAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetSeasonGatheringResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetSeasonGatheringAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetSeasonGatheringAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) GetSeasonGatheringAsync(
+	request *GetSeasonGatheringRequest,
+	callback chan<- GetSeasonGatheringAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonGathering",
+			"function":    "getSeasonGathering",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.Tier != nil {
+		bodies["tier"] = *request.Tier
+	}
+	if request.SeasonGatheringName != nil && *request.SeasonGatheringName != "" {
+		bodies["seasonGatheringName"] = *request.SeasonGatheringName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.getSeasonGatheringAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) GetSeasonGathering(
+	request *GetSeasonGatheringRequest,
+) (*GetSeasonGatheringResult, error) {
+	callback := make(chan GetSeasonGatheringAsyncResult, 1)
+	go p.GetSeasonGatheringAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) deleteSeasonGatheringAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DeleteSeasonGatheringAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteSeasonGatheringAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteSeasonGatheringResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteSeasonGatheringAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DeleteSeasonGatheringAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) DeleteSeasonGatheringAsync(
+	request *DeleteSeasonGatheringRequest,
+	callback chan<- DeleteSeasonGatheringAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonGathering",
+			"function":    "deleteSeasonGathering",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.Tier != nil {
+		bodies["tier"] = *request.Tier
+	}
+	if request.SeasonGatheringName != nil && *request.SeasonGatheringName != "" {
+		bodies["seasonGatheringName"] = *request.SeasonGatheringName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.deleteSeasonGatheringAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) DeleteSeasonGathering(
+	request *DeleteSeasonGatheringRequest,
+) (*DeleteSeasonGatheringResult, error) {
+	callback := make(chan DeleteSeasonGatheringAsyncResult, 1)
+	go p.DeleteSeasonGatheringAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) describeJoinedSeasonGatheringsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeJoinedSeasonGatheringsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeJoinedSeasonGatheringsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeJoinedSeasonGatheringsResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeJoinedSeasonGatheringsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeJoinedSeasonGatheringsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) DescribeJoinedSeasonGatheringsAsync(
+	request *DescribeJoinedSeasonGatheringsRequest,
+	callback chan<- DescribeJoinedSeasonGatheringsAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "joinedSeasonGathering",
+			"function":    "describeJoinedSeasonGatherings",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+
+	go p.describeJoinedSeasonGatheringsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) DescribeJoinedSeasonGatherings(
+	request *DescribeJoinedSeasonGatheringsRequest,
+) (*DescribeJoinedSeasonGatheringsResult, error) {
+	callback := make(chan DescribeJoinedSeasonGatheringsAsyncResult, 1)
+	go p.DescribeJoinedSeasonGatheringsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) describeJoinedSeasonGatheringsByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeJoinedSeasonGatheringsByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeJoinedSeasonGatheringsByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeJoinedSeasonGatheringsByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeJoinedSeasonGatheringsByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeJoinedSeasonGatheringsByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) DescribeJoinedSeasonGatheringsByUserIdAsync(
+	request *DescribeJoinedSeasonGatheringsByUserIdRequest,
+	callback chan<- DescribeJoinedSeasonGatheringsByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "joinedSeasonGathering",
+			"function":    "describeJoinedSeasonGatheringsByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.describeJoinedSeasonGatheringsByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) DescribeJoinedSeasonGatheringsByUserId(
+	request *DescribeJoinedSeasonGatheringsByUserIdRequest,
+) (*DescribeJoinedSeasonGatheringsByUserIdResult, error) {
+	callback := make(chan DescribeJoinedSeasonGatheringsByUserIdAsyncResult, 1)
+	go p.DescribeJoinedSeasonGatheringsByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) getJoinedSeasonGatheringAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetJoinedSeasonGatheringAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetJoinedSeasonGatheringAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetJoinedSeasonGatheringResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetJoinedSeasonGatheringAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetJoinedSeasonGatheringAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) GetJoinedSeasonGatheringAsync(
+	request *GetJoinedSeasonGatheringRequest,
+	callback chan<- GetJoinedSeasonGatheringAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "joinedSeasonGathering",
+			"function":    "getJoinedSeasonGathering",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+
+	go p.getJoinedSeasonGatheringAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) GetJoinedSeasonGathering(
+	request *GetJoinedSeasonGatheringRequest,
+) (*GetJoinedSeasonGatheringResult, error) {
+	callback := make(chan GetJoinedSeasonGatheringAsyncResult, 1)
+	go p.GetJoinedSeasonGatheringAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) getJoinedSeasonGatheringByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetJoinedSeasonGatheringByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetJoinedSeasonGatheringByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetJoinedSeasonGatheringByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetJoinedSeasonGatheringByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetJoinedSeasonGatheringByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) GetJoinedSeasonGatheringByUserIdAsync(
+	request *GetJoinedSeasonGatheringByUserIdRequest,
+	callback chan<- GetJoinedSeasonGatheringByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "joinedSeasonGathering",
+			"function":    "getJoinedSeasonGatheringByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.getJoinedSeasonGatheringByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) GetJoinedSeasonGatheringByUserId(
+	request *GetJoinedSeasonGatheringByUserIdRequest,
+) (*GetJoinedSeasonGatheringByUserIdResult, error) {
+	callback := make(chan GetJoinedSeasonGatheringByUserIdAsyncResult, 1)
+	go p.GetJoinedSeasonGatheringByUserIdAsync(
 		request,
 		callback,
 	)

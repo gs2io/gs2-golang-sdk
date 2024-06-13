@@ -5199,17 +5199,17 @@ func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
 	return &p
 }
 
-type GetCurrentRatingModelMasterRequest struct {
+type GetCurrentModelMasterRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 }
 
-func (p *GetCurrentRatingModelMasterRequest) UnmarshalJSON(data []byte) error {
+func (p *GetCurrentModelMasterRequest) UnmarshalJSON(data []byte) error {
 	str := string(data)
 	if len(str) == 0 {
-		*p = GetCurrentRatingModelMasterRequest{}
+		*p = GetCurrentModelMasterRequest{}
 		return nil
 	}
 	if str[0] == '"' {
@@ -5221,9 +5221,9 @@ func (p *GetCurrentRatingModelMasterRequest) UnmarshalJSON(data []byte) error {
 		str = strVal
 	}
 	if str == "null" {
-		*p = GetCurrentRatingModelMasterRequest{}
+		*p = GetCurrentModelMasterRequest{}
 	} else {
-		*p = GetCurrentRatingModelMasterRequest{}
+		*p = GetCurrentModelMasterRequest{}
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
@@ -5255,32 +5255,32 @@ func (p *GetCurrentRatingModelMasterRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func NewGetCurrentRatingModelMasterRequestFromJson(data string) (GetCurrentRatingModelMasterRequest, error) {
-	req := GetCurrentRatingModelMasterRequest{}
+func NewGetCurrentModelMasterRequestFromJson(data string) (GetCurrentModelMasterRequest, error) {
+	req := GetCurrentModelMasterRequest{}
 	err := json.Unmarshal([]byte(data), &req)
 	if err != nil {
-		return GetCurrentRatingModelMasterRequest{}, err
+		return GetCurrentModelMasterRequest{}, err
 	}
 	return req, nil
 }
 
-func NewGetCurrentRatingModelMasterRequestFromDict(data map[string]interface{}) GetCurrentRatingModelMasterRequest {
-	return GetCurrentRatingModelMasterRequest{
+func NewGetCurrentModelMasterRequestFromDict(data map[string]interface{}) GetCurrentModelMasterRequest {
+	return GetCurrentModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 	}
 }
 
-func (p GetCurrentRatingModelMasterRequest) ToDict() map[string]interface{} {
+func (p GetCurrentModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 	}
 }
 
-func (p GetCurrentRatingModelMasterRequest) Pointer() *GetCurrentRatingModelMasterRequest {
+func (p GetCurrentModelMasterRequest) Pointer() *GetCurrentModelMasterRequest {
 	return &p
 }
 
-type UpdateCurrentRatingModelMasterRequest struct {
+type UpdateCurrentModelMasterRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
@@ -5288,10 +5288,10 @@ type UpdateCurrentRatingModelMasterRequest struct {
 	Settings        *string `json:"settings"`
 }
 
-func (p *UpdateCurrentRatingModelMasterRequest) UnmarshalJSON(data []byte) error {
+func (p *UpdateCurrentModelMasterRequest) UnmarshalJSON(data []byte) error {
 	str := string(data)
 	if len(str) == 0 {
-		*p = UpdateCurrentRatingModelMasterRequest{}
+		*p = UpdateCurrentModelMasterRequest{}
 		return nil
 	}
 	if str[0] == '"' {
@@ -5303,9 +5303,9 @@ func (p *UpdateCurrentRatingModelMasterRequest) UnmarshalJSON(data []byte) error
 		str = strVal
 	}
 	if str == "null" {
-		*p = UpdateCurrentRatingModelMasterRequest{}
+		*p = UpdateCurrentModelMasterRequest{}
 	} else {
-		*p = UpdateCurrentRatingModelMasterRequest{}
+		*p = UpdateCurrentModelMasterRequest{}
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
@@ -5360,34 +5360,34 @@ func (p *UpdateCurrentRatingModelMasterRequest) UnmarshalJSON(data []byte) error
 	return nil
 }
 
-func NewUpdateCurrentRatingModelMasterRequestFromJson(data string) (UpdateCurrentRatingModelMasterRequest, error) {
-	req := UpdateCurrentRatingModelMasterRequest{}
+func NewUpdateCurrentModelMasterRequestFromJson(data string) (UpdateCurrentModelMasterRequest, error) {
+	req := UpdateCurrentModelMasterRequest{}
 	err := json.Unmarshal([]byte(data), &req)
 	if err != nil {
-		return UpdateCurrentRatingModelMasterRequest{}, err
+		return UpdateCurrentModelMasterRequest{}, err
 	}
 	return req, nil
 }
 
-func NewUpdateCurrentRatingModelMasterRequestFromDict(data map[string]interface{}) UpdateCurrentRatingModelMasterRequest {
-	return UpdateCurrentRatingModelMasterRequest{
+func NewUpdateCurrentModelMasterRequestFromDict(data map[string]interface{}) UpdateCurrentModelMasterRequest {
+	return UpdateCurrentModelMasterRequest{
 		NamespaceName: core.CastString(data["namespaceName"]),
 		Settings:      core.CastString(data["settings"]),
 	}
 }
 
-func (p UpdateCurrentRatingModelMasterRequest) ToDict() map[string]interface{} {
+func (p UpdateCurrentModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"settings":      p.Settings,
 	}
 }
 
-func (p UpdateCurrentRatingModelMasterRequest) Pointer() *UpdateCurrentRatingModelMasterRequest {
+func (p UpdateCurrentModelMasterRequest) Pointer() *UpdateCurrentModelMasterRequest {
 	return &p
 }
 
-type UpdateCurrentRatingModelMasterFromGitHubRequest struct {
+type UpdateCurrentModelMasterFromGitHubRequest struct {
 	SourceRequestId *string                `json:"sourceRequestId"`
 	RequestId       *string                `json:"requestId"`
 	ContextStack    *string                `json:"contextStack"`
@@ -5395,10 +5395,10 @@ type UpdateCurrentRatingModelMasterFromGitHubRequest struct {
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
 }
 
-func (p *UpdateCurrentRatingModelMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
+func (p *UpdateCurrentModelMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
 	str := string(data)
 	if len(str) == 0 {
-		*p = UpdateCurrentRatingModelMasterFromGitHubRequest{}
+		*p = UpdateCurrentModelMasterFromGitHubRequest{}
 		return nil
 	}
 	if str[0] == '"' {
@@ -5410,9 +5410,9 @@ func (p *UpdateCurrentRatingModelMasterFromGitHubRequest) UnmarshalJSON(data []b
 		str = strVal
 	}
 	if str == "null" {
-		*p = UpdateCurrentRatingModelMasterFromGitHubRequest{}
+		*p = UpdateCurrentModelMasterFromGitHubRequest{}
 	} else {
-		*p = UpdateCurrentRatingModelMasterFromGitHubRequest{}
+		*p = UpdateCurrentModelMasterFromGitHubRequest{}
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
@@ -5447,30 +5447,2577 @@ func (p *UpdateCurrentRatingModelMasterFromGitHubRequest) UnmarshalJSON(data []b
 	return nil
 }
 
-func NewUpdateCurrentRatingModelMasterFromGitHubRequestFromJson(data string) (UpdateCurrentRatingModelMasterFromGitHubRequest, error) {
-	req := UpdateCurrentRatingModelMasterFromGitHubRequest{}
+func NewUpdateCurrentModelMasterFromGitHubRequestFromJson(data string) (UpdateCurrentModelMasterFromGitHubRequest, error) {
+	req := UpdateCurrentModelMasterFromGitHubRequest{}
 	err := json.Unmarshal([]byte(data), &req)
 	if err != nil {
-		return UpdateCurrentRatingModelMasterFromGitHubRequest{}, err
+		return UpdateCurrentModelMasterFromGitHubRequest{}, err
 	}
 	return req, nil
 }
 
-func NewUpdateCurrentRatingModelMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentRatingModelMasterFromGitHubRequest {
-	return UpdateCurrentRatingModelMasterFromGitHubRequest{
+func NewUpdateCurrentModelMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentModelMasterFromGitHubRequest {
+	return UpdateCurrentModelMasterFromGitHubRequest{
 		NamespaceName:   core.CastString(data["namespaceName"]),
 		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
 	}
 }
 
-func (p UpdateCurrentRatingModelMasterFromGitHubRequest) ToDict() map[string]interface{} {
+func (p UpdateCurrentModelMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName":   p.NamespaceName,
 		"checkoutSetting": p.CheckoutSetting.ToDict(),
 	}
 }
 
-func (p UpdateCurrentRatingModelMasterFromGitHubRequest) Pointer() *UpdateCurrentRatingModelMasterFromGitHubRequest {
+func (p UpdateCurrentModelMasterFromGitHubRequest) Pointer() *UpdateCurrentModelMasterFromGitHubRequest {
+	return &p
+}
+
+type DescribeSeasonModelsRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+}
+
+func (p *DescribeSeasonModelsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeSeasonModelsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeSeasonModelsRequest{}
+	} else {
+		*p = DescribeSeasonModelsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeSeasonModelsRequestFromJson(data string) (DescribeSeasonModelsRequest, error) {
+	req := DescribeSeasonModelsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeSeasonModelsRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeSeasonModelsRequestFromDict(data map[string]interface{}) DescribeSeasonModelsRequest {
+	return DescribeSeasonModelsRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+	}
+}
+
+func (p DescribeSeasonModelsRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+	}
+}
+
+func (p DescribeSeasonModelsRequest) Pointer() *DescribeSeasonModelsRequest {
+	return &p
+}
+
+type GetSeasonModelRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	SeasonName      *string `json:"seasonName"`
+}
+
+func (p *GetSeasonModelRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetSeasonModelRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetSeasonModelRequest{}
+	} else {
+		*p = GetSeasonModelRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetSeasonModelRequestFromJson(data string) (GetSeasonModelRequest, error) {
+	req := GetSeasonModelRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetSeasonModelRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetSeasonModelRequestFromDict(data map[string]interface{}) GetSeasonModelRequest {
+	return GetSeasonModelRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		SeasonName:    core.CastString(data["seasonName"]),
+	}
+}
+
+func (p GetSeasonModelRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"seasonName":    p.SeasonName,
+	}
+}
+
+func (p GetSeasonModelRequest) Pointer() *GetSeasonModelRequest {
+	return &p
+}
+
+type DescribeSeasonModelMastersRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+}
+
+func (p *DescribeSeasonModelMastersRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeSeasonModelMastersRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeSeasonModelMastersRequest{}
+	} else {
+		*p = DescribeSeasonModelMastersRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewDescribeSeasonModelMastersRequestFromJson(data string) (DescribeSeasonModelMastersRequest, error) {
+	req := DescribeSeasonModelMastersRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeSeasonModelMastersRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeSeasonModelMastersRequestFromDict(data map[string]interface{}) DescribeSeasonModelMastersRequest {
+	return DescribeSeasonModelMastersRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
+}
+
+func (p DescribeSeasonModelMastersRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p DescribeSeasonModelMastersRequest) Pointer() *DescribeSeasonModelMastersRequest {
+	return &p
+}
+
+type CreateSeasonModelMasterRequest struct {
+	SourceRequestId        *string `json:"sourceRequestId"`
+	RequestId              *string `json:"requestId"`
+	ContextStack           *string `json:"contextStack"`
+	NamespaceName          *string `json:"namespaceName"`
+	Name                   *string `json:"name"`
+	Description            *string `json:"description"`
+	Metadata               *string `json:"metadata"`
+	MaximumParticipants    *int32  `json:"maximumParticipants"`
+	ExperienceModelId      *string `json:"experienceModelId"`
+	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
+}
+
+func (p *CreateSeasonModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateSeasonModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateSeasonModelMasterRequest{}
+	} else {
+		*p = CreateSeasonModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["name"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Name = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Name = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Name = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Name = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Name)
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["maximumParticipants"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MaximumParticipants)
+		}
+		if v, ok := d["experienceModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ExperienceModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ExperienceModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ExperienceModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ExperienceModelId)
+				}
+			}
+		}
+		if v, ok := d["challengePeriodEventId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ChallengePeriodEventId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ChallengePeriodEventId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ChallengePeriodEventId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ChallengePeriodEventId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ChallengePeriodEventId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ChallengePeriodEventId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCreateSeasonModelMasterRequestFromJson(data string) (CreateSeasonModelMasterRequest, error) {
+	req := CreateSeasonModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateSeasonModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewCreateSeasonModelMasterRequestFromDict(data map[string]interface{}) CreateSeasonModelMasterRequest {
+	return CreateSeasonModelMasterRequest{
+		NamespaceName:          core.CastString(data["namespaceName"]),
+		Name:                   core.CastString(data["name"]),
+		Description:            core.CastString(data["description"]),
+		Metadata:               core.CastString(data["metadata"]),
+		MaximumParticipants:    core.CastInt32(data["maximumParticipants"]),
+		ExperienceModelId:      core.CastString(data["experienceModelId"]),
+		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+	}
+}
+
+func (p CreateSeasonModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":          p.NamespaceName,
+		"name":                   p.Name,
+		"description":            p.Description,
+		"metadata":               p.Metadata,
+		"maximumParticipants":    p.MaximumParticipants,
+		"experienceModelId":      p.ExperienceModelId,
+		"challengePeriodEventId": p.ChallengePeriodEventId,
+	}
+}
+
+func (p CreateSeasonModelMasterRequest) Pointer() *CreateSeasonModelMasterRequest {
+	return &p
+}
+
+type GetSeasonModelMasterRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	SeasonName      *string `json:"seasonName"`
+}
+
+func (p *GetSeasonModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetSeasonModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetSeasonModelMasterRequest{}
+	} else {
+		*p = GetSeasonModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetSeasonModelMasterRequestFromJson(data string) (GetSeasonModelMasterRequest, error) {
+	req := GetSeasonModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetSeasonModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetSeasonModelMasterRequestFromDict(data map[string]interface{}) GetSeasonModelMasterRequest {
+	return GetSeasonModelMasterRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		SeasonName:    core.CastString(data["seasonName"]),
+	}
+}
+
+func (p GetSeasonModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"seasonName":    p.SeasonName,
+	}
+}
+
+func (p GetSeasonModelMasterRequest) Pointer() *GetSeasonModelMasterRequest {
+	return &p
+}
+
+type UpdateSeasonModelMasterRequest struct {
+	SourceRequestId        *string `json:"sourceRequestId"`
+	RequestId              *string `json:"requestId"`
+	ContextStack           *string `json:"contextStack"`
+	NamespaceName          *string `json:"namespaceName"`
+	SeasonName             *string `json:"seasonName"`
+	Description            *string `json:"description"`
+	Metadata               *string `json:"metadata"`
+	MaximumParticipants    *int32  `json:"maximumParticipants"`
+	ExperienceModelId      *string `json:"experienceModelId"`
+	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
+}
+
+func (p *UpdateSeasonModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateSeasonModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateSeasonModelMasterRequest{}
+	} else {
+		*p = UpdateSeasonModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["maximumParticipants"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MaximumParticipants)
+		}
+		if v, ok := d["experienceModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ExperienceModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ExperienceModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ExperienceModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ExperienceModelId)
+				}
+			}
+		}
+		if v, ok := d["challengePeriodEventId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ChallengePeriodEventId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ChallengePeriodEventId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ChallengePeriodEventId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ChallengePeriodEventId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ChallengePeriodEventId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ChallengePeriodEventId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateSeasonModelMasterRequestFromJson(data string) (UpdateSeasonModelMasterRequest, error) {
+	req := UpdateSeasonModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateSeasonModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewUpdateSeasonModelMasterRequestFromDict(data map[string]interface{}) UpdateSeasonModelMasterRequest {
+	return UpdateSeasonModelMasterRequest{
+		NamespaceName:          core.CastString(data["namespaceName"]),
+		SeasonName:             core.CastString(data["seasonName"]),
+		Description:            core.CastString(data["description"]),
+		Metadata:               core.CastString(data["metadata"]),
+		MaximumParticipants:    core.CastInt32(data["maximumParticipants"]),
+		ExperienceModelId:      core.CastString(data["experienceModelId"]),
+		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+	}
+}
+
+func (p UpdateSeasonModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":          p.NamespaceName,
+		"seasonName":             p.SeasonName,
+		"description":            p.Description,
+		"metadata":               p.Metadata,
+		"maximumParticipants":    p.MaximumParticipants,
+		"experienceModelId":      p.ExperienceModelId,
+		"challengePeriodEventId": p.ChallengePeriodEventId,
+	}
+}
+
+func (p UpdateSeasonModelMasterRequest) Pointer() *UpdateSeasonModelMasterRequest {
+	return &p
+}
+
+type DeleteSeasonModelMasterRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	SeasonName      *string `json:"seasonName"`
+}
+
+func (p *DeleteSeasonModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteSeasonModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteSeasonModelMasterRequest{}
+	} else {
+		*p = DeleteSeasonModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteSeasonModelMasterRequestFromJson(data string) (DeleteSeasonModelMasterRequest, error) {
+	req := DeleteSeasonModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteSeasonModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDeleteSeasonModelMasterRequestFromDict(data map[string]interface{}) DeleteSeasonModelMasterRequest {
+	return DeleteSeasonModelMasterRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		SeasonName:    core.CastString(data["seasonName"]),
+	}
+}
+
+func (p DeleteSeasonModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"seasonName":    p.SeasonName,
+	}
+}
+
+func (p DeleteSeasonModelMasterRequest) Pointer() *DeleteSeasonModelMasterRequest {
+	return &p
+}
+
+type DescribeSeasonGatheringsRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	SeasonName      *string `json:"seasonName"`
+	Season          *int64  `json:"season"`
+	Tier            *int64  `json:"tier"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+}
+
+func (p *DescribeSeasonGatheringsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeSeasonGatheringsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeSeasonGatheringsRequest{}
+	} else {
+		*p = DescribeSeasonGatheringsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+		if v, ok := d["season"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Season)
+		}
+		if v, ok := d["tier"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Tier)
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewDescribeSeasonGatheringsRequestFromJson(data string) (DescribeSeasonGatheringsRequest, error) {
+	req := DescribeSeasonGatheringsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeSeasonGatheringsRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeSeasonGatheringsRequestFromDict(data map[string]interface{}) DescribeSeasonGatheringsRequest {
+	return DescribeSeasonGatheringsRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		SeasonName:    core.CastString(data["seasonName"]),
+		Season:        core.CastInt64(data["season"]),
+		Tier:          core.CastInt64(data["tier"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
+}
+
+func (p DescribeSeasonGatheringsRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"seasonName":    p.SeasonName,
+		"season":        p.Season,
+		"tier":          p.Tier,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p DescribeSeasonGatheringsRequest) Pointer() *DescribeSeasonGatheringsRequest {
+	return &p
+}
+
+type DescribeMatchmakingSeasonGatheringsRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	SeasonName      *string `json:"seasonName"`
+	Season          *int64  `json:"season"`
+	Tier            *int64  `json:"tier"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+}
+
+func (p *DescribeMatchmakingSeasonGatheringsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeMatchmakingSeasonGatheringsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeMatchmakingSeasonGatheringsRequest{}
+	} else {
+		*p = DescribeMatchmakingSeasonGatheringsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+		if v, ok := d["season"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Season)
+		}
+		if v, ok := d["tier"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Tier)
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewDescribeMatchmakingSeasonGatheringsRequestFromJson(data string) (DescribeMatchmakingSeasonGatheringsRequest, error) {
+	req := DescribeMatchmakingSeasonGatheringsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeMatchmakingSeasonGatheringsRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeMatchmakingSeasonGatheringsRequestFromDict(data map[string]interface{}) DescribeMatchmakingSeasonGatheringsRequest {
+	return DescribeMatchmakingSeasonGatheringsRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		SeasonName:    core.CastString(data["seasonName"]),
+		Season:        core.CastInt64(data["season"]),
+		Tier:          core.CastInt64(data["tier"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
+}
+
+func (p DescribeMatchmakingSeasonGatheringsRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"seasonName":    p.SeasonName,
+		"season":        p.Season,
+		"tier":          p.Tier,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p DescribeMatchmakingSeasonGatheringsRequest) Pointer() *DescribeMatchmakingSeasonGatheringsRequest {
+	return &p
+}
+
+type DoSeasonMatchmakingRequest struct {
+	SourceRequestId         *string `json:"sourceRequestId"`
+	RequestId               *string `json:"requestId"`
+	ContextStack            *string `json:"contextStack"`
+	DuplicationAvoider      *string `json:"duplicationAvoider"`
+	NamespaceName           *string `json:"namespaceName"`
+	SeasonName              *string `json:"seasonName"`
+	AccessToken             *string `json:"accessToken"`
+	MatchmakingContextToken *string `json:"matchmakingContextToken"`
+}
+
+func (p *DoSeasonMatchmakingRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DoSeasonMatchmakingRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DoSeasonMatchmakingRequest{}
+	} else {
+		*p = DoSeasonMatchmakingRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["matchmakingContextToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MatchmakingContextToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MatchmakingContextToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MatchmakingContextToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MatchmakingContextToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MatchmakingContextToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MatchmakingContextToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDoSeasonMatchmakingRequestFromJson(data string) (DoSeasonMatchmakingRequest, error) {
+	req := DoSeasonMatchmakingRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DoSeasonMatchmakingRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDoSeasonMatchmakingRequestFromDict(data map[string]interface{}) DoSeasonMatchmakingRequest {
+	return DoSeasonMatchmakingRequest{
+		NamespaceName:           core.CastString(data["namespaceName"]),
+		SeasonName:              core.CastString(data["seasonName"]),
+		AccessToken:             core.CastString(data["accessToken"]),
+		MatchmakingContextToken: core.CastString(data["matchmakingContextToken"]),
+	}
+}
+
+func (p DoSeasonMatchmakingRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":           p.NamespaceName,
+		"seasonName":              p.SeasonName,
+		"accessToken":             p.AccessToken,
+		"matchmakingContextToken": p.MatchmakingContextToken,
+	}
+}
+
+func (p DoSeasonMatchmakingRequest) Pointer() *DoSeasonMatchmakingRequest {
+	return &p
+}
+
+type DoSeasonMatchmakingByUserIdRequest struct {
+	SourceRequestId         *string `json:"sourceRequestId"`
+	RequestId               *string `json:"requestId"`
+	ContextStack            *string `json:"contextStack"`
+	DuplicationAvoider      *string `json:"duplicationAvoider"`
+	NamespaceName           *string `json:"namespaceName"`
+	SeasonName              *string `json:"seasonName"`
+	UserId                  *string `json:"userId"`
+	MatchmakingContextToken *string `json:"matchmakingContextToken"`
+	TimeOffsetToken         *string `json:"timeOffsetToken"`
+}
+
+func (p *DoSeasonMatchmakingByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DoSeasonMatchmakingByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DoSeasonMatchmakingByUserIdRequest{}
+	} else {
+		*p = DoSeasonMatchmakingByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["matchmakingContextToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MatchmakingContextToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MatchmakingContextToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MatchmakingContextToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MatchmakingContextToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MatchmakingContextToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MatchmakingContextToken)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDoSeasonMatchmakingByUserIdRequestFromJson(data string) (DoSeasonMatchmakingByUserIdRequest, error) {
+	req := DoSeasonMatchmakingByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DoSeasonMatchmakingByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDoSeasonMatchmakingByUserIdRequestFromDict(data map[string]interface{}) DoSeasonMatchmakingByUserIdRequest {
+	return DoSeasonMatchmakingByUserIdRequest{
+		NamespaceName:           core.CastString(data["namespaceName"]),
+		SeasonName:              core.CastString(data["seasonName"]),
+		UserId:                  core.CastString(data["userId"]),
+		MatchmakingContextToken: core.CastString(data["matchmakingContextToken"]),
+		TimeOffsetToken:         core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p DoSeasonMatchmakingByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":           p.NamespaceName,
+		"seasonName":              p.SeasonName,
+		"userId":                  p.UserId,
+		"matchmakingContextToken": p.MatchmakingContextToken,
+		"timeOffsetToken":         p.TimeOffsetToken,
+	}
+}
+
+func (p DoSeasonMatchmakingByUserIdRequest) Pointer() *DoSeasonMatchmakingByUserIdRequest {
+	return &p
+}
+
+type GetSeasonGatheringRequest struct {
+	SourceRequestId     *string `json:"sourceRequestId"`
+	RequestId           *string `json:"requestId"`
+	ContextStack        *string `json:"contextStack"`
+	NamespaceName       *string `json:"namespaceName"`
+	SeasonName          *string `json:"seasonName"`
+	Season              *int64  `json:"season"`
+	Tier                *int64  `json:"tier"`
+	SeasonGatheringName *string `json:"seasonGatheringName"`
+}
+
+func (p *GetSeasonGatheringRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetSeasonGatheringRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetSeasonGatheringRequest{}
+	} else {
+		*p = GetSeasonGatheringRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+		if v, ok := d["season"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Season)
+		}
+		if v, ok := d["tier"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Tier)
+		}
+		if v, ok := d["seasonGatheringName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonGatheringName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonGatheringName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonGatheringName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonGatheringName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonGatheringName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonGatheringName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetSeasonGatheringRequestFromJson(data string) (GetSeasonGatheringRequest, error) {
+	req := GetSeasonGatheringRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetSeasonGatheringRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetSeasonGatheringRequestFromDict(data map[string]interface{}) GetSeasonGatheringRequest {
+	return GetSeasonGatheringRequest{
+		NamespaceName:       core.CastString(data["namespaceName"]),
+		SeasonName:          core.CastString(data["seasonName"]),
+		Season:              core.CastInt64(data["season"]),
+		Tier:                core.CastInt64(data["tier"]),
+		SeasonGatheringName: core.CastString(data["seasonGatheringName"]),
+	}
+}
+
+func (p GetSeasonGatheringRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":       p.NamespaceName,
+		"seasonName":          p.SeasonName,
+		"season":              p.Season,
+		"tier":                p.Tier,
+		"seasonGatheringName": p.SeasonGatheringName,
+	}
+}
+
+func (p GetSeasonGatheringRequest) Pointer() *GetSeasonGatheringRequest {
+	return &p
+}
+
+type DeleteSeasonGatheringRequest struct {
+	SourceRequestId     *string `json:"sourceRequestId"`
+	RequestId           *string `json:"requestId"`
+	ContextStack        *string `json:"contextStack"`
+	NamespaceName       *string `json:"namespaceName"`
+	SeasonName          *string `json:"seasonName"`
+	Season              *int64  `json:"season"`
+	Tier                *int64  `json:"tier"`
+	SeasonGatheringName *string `json:"seasonGatheringName"`
+}
+
+func (p *DeleteSeasonGatheringRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteSeasonGatheringRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteSeasonGatheringRequest{}
+	} else {
+		*p = DeleteSeasonGatheringRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+		if v, ok := d["season"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Season)
+		}
+		if v, ok := d["tier"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Tier)
+		}
+		if v, ok := d["seasonGatheringName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonGatheringName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonGatheringName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonGatheringName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonGatheringName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonGatheringName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonGatheringName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDeleteSeasonGatheringRequestFromJson(data string) (DeleteSeasonGatheringRequest, error) {
+	req := DeleteSeasonGatheringRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteSeasonGatheringRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDeleteSeasonGatheringRequestFromDict(data map[string]interface{}) DeleteSeasonGatheringRequest {
+	return DeleteSeasonGatheringRequest{
+		NamespaceName:       core.CastString(data["namespaceName"]),
+		SeasonName:          core.CastString(data["seasonName"]),
+		Season:              core.CastInt64(data["season"]),
+		Tier:                core.CastInt64(data["tier"]),
+		SeasonGatheringName: core.CastString(data["seasonGatheringName"]),
+	}
+}
+
+func (p DeleteSeasonGatheringRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":       p.NamespaceName,
+		"seasonName":          p.SeasonName,
+		"season":              p.Season,
+		"tier":                p.Tier,
+		"seasonGatheringName": p.SeasonGatheringName,
+	}
+}
+
+func (p DeleteSeasonGatheringRequest) Pointer() *DeleteSeasonGatheringRequest {
+	return &p
+}
+
+type DescribeJoinedSeasonGatheringsRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AccessToken     *string `json:"accessToken"`
+	SeasonName      *string `json:"seasonName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+}
+
+func (p *DescribeJoinedSeasonGatheringsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeJoinedSeasonGatheringsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeJoinedSeasonGatheringsRequest{}
+	} else {
+		*p = DescribeJoinedSeasonGatheringsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewDescribeJoinedSeasonGatheringsRequestFromJson(data string) (DescribeJoinedSeasonGatheringsRequest, error) {
+	req := DescribeJoinedSeasonGatheringsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeJoinedSeasonGatheringsRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeJoinedSeasonGatheringsRequestFromDict(data map[string]interface{}) DescribeJoinedSeasonGatheringsRequest {
+	return DescribeJoinedSeasonGatheringsRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		SeasonName:    core.CastString(data["seasonName"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
+}
+
+func (p DescribeJoinedSeasonGatheringsRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"seasonName":    p.SeasonName,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p DescribeJoinedSeasonGatheringsRequest) Pointer() *DescribeJoinedSeasonGatheringsRequest {
+	return &p
+}
+
+type DescribeJoinedSeasonGatheringsByUserIdRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	SeasonName      *string `json:"seasonName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+}
+
+func (p *DescribeJoinedSeasonGatheringsByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeJoinedSeasonGatheringsByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeJoinedSeasonGatheringsByUserIdRequest{}
+	} else {
+		*p = DescribeJoinedSeasonGatheringsByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeJoinedSeasonGatheringsByUserIdRequestFromJson(data string) (DescribeJoinedSeasonGatheringsByUserIdRequest, error) {
+	req := DescribeJoinedSeasonGatheringsByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeJoinedSeasonGatheringsByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeJoinedSeasonGatheringsByUserIdRequestFromDict(data map[string]interface{}) DescribeJoinedSeasonGatheringsByUserIdRequest {
+	return DescribeJoinedSeasonGatheringsByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		SeasonName:      core.CastString(data["seasonName"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p DescribeJoinedSeasonGatheringsByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"seasonName":      p.SeasonName,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p DescribeJoinedSeasonGatheringsByUserIdRequest) Pointer() *DescribeJoinedSeasonGatheringsByUserIdRequest {
+	return &p
+}
+
+type GetJoinedSeasonGatheringRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AccessToken     *string `json:"accessToken"`
+	SeasonName      *string `json:"seasonName"`
+	Season          *int64  `json:"season"`
+}
+
+func (p *GetJoinedSeasonGatheringRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetJoinedSeasonGatheringRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetJoinedSeasonGatheringRequest{}
+	} else {
+		*p = GetJoinedSeasonGatheringRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+		if v, ok := d["season"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Season)
+		}
+	}
+	return nil
+}
+
+func NewGetJoinedSeasonGatheringRequestFromJson(data string) (GetJoinedSeasonGatheringRequest, error) {
+	req := GetJoinedSeasonGatheringRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetJoinedSeasonGatheringRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetJoinedSeasonGatheringRequestFromDict(data map[string]interface{}) GetJoinedSeasonGatheringRequest {
+	return GetJoinedSeasonGatheringRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		SeasonName:    core.CastString(data["seasonName"]),
+		Season:        core.CastInt64(data["season"]),
+	}
+}
+
+func (p GetJoinedSeasonGatheringRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"seasonName":    p.SeasonName,
+		"season":        p.Season,
+	}
+}
+
+func (p GetJoinedSeasonGatheringRequest) Pointer() *GetJoinedSeasonGatheringRequest {
+	return &p
+}
+
+type GetJoinedSeasonGatheringByUserIdRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	SeasonName      *string `json:"seasonName"`
+	Season          *int64  `json:"season"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+}
+
+func (p *GetJoinedSeasonGatheringByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetJoinedSeasonGatheringByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetJoinedSeasonGatheringByUserIdRequest{}
+	} else {
+		*p = GetJoinedSeasonGatheringByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["seasonName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SeasonName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SeasonName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SeasonName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SeasonName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SeasonName)
+				}
+			}
+		}
+		if v, ok := d["season"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Season)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetJoinedSeasonGatheringByUserIdRequestFromJson(data string) (GetJoinedSeasonGatheringByUserIdRequest, error) {
+	req := GetJoinedSeasonGatheringByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetJoinedSeasonGatheringByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetJoinedSeasonGatheringByUserIdRequestFromDict(data map[string]interface{}) GetJoinedSeasonGatheringByUserIdRequest {
+	return GetJoinedSeasonGatheringByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		SeasonName:      core.CastString(data["seasonName"]),
+		Season:          core.CastInt64(data["season"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p GetJoinedSeasonGatheringByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"seasonName":      p.SeasonName,
+		"season":          p.Season,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p GetJoinedSeasonGatheringByUserIdRequest) Pointer() *GetJoinedSeasonGatheringByUserIdRequest {
 	return &p
 }
 

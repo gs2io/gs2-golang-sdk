@@ -1148,7 +1148,7 @@ func (p GetRatingModelResult) Pointer() *GetRatingModelResult {
 }
 
 type ExportMasterResult struct {
-	Item *CurrentRatingModelMaster `json:"item"`
+	Item *CurrentModelMaster `json:"item"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -1164,7 +1164,7 @@ func NewExportMasterResultFromJson(data string) ExportMasterResult {
 
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
 	return ExportMasterResult{
-		Item: NewCurrentRatingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
@@ -1178,96 +1178,656 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
 	return &p
 }
 
-type GetCurrentRatingModelMasterResult struct {
-	Item *CurrentRatingModelMaster `json:"item"`
+type GetCurrentModelMasterResult struct {
+	Item *CurrentModelMaster `json:"item"`
 }
 
-type GetCurrentRatingModelMasterAsyncResult struct {
-	result *GetCurrentRatingModelMasterResult
+type GetCurrentModelMasterAsyncResult struct {
+	result *GetCurrentModelMasterResult
 	err    error
 }
 
-func NewGetCurrentRatingModelMasterResultFromJson(data string) GetCurrentRatingModelMasterResult {
+func NewGetCurrentModelMasterResultFromJson(data string) GetCurrentModelMasterResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewGetCurrentRatingModelMasterResultFromDict(dict)
+	return NewGetCurrentModelMasterResultFromDict(dict)
 }
 
-func NewGetCurrentRatingModelMasterResultFromDict(data map[string]interface{}) GetCurrentRatingModelMasterResult {
-	return GetCurrentRatingModelMasterResult{
-		Item: NewCurrentRatingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+func NewGetCurrentModelMasterResultFromDict(data map[string]interface{}) GetCurrentModelMasterResult {
+	return GetCurrentModelMasterResult{
+		Item: NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
-func (p GetCurrentRatingModelMasterResult) ToDict() map[string]interface{} {
+func (p GetCurrentModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
 	}
 }
 
-func (p GetCurrentRatingModelMasterResult) Pointer() *GetCurrentRatingModelMasterResult {
+func (p GetCurrentModelMasterResult) Pointer() *GetCurrentModelMasterResult {
 	return &p
 }
 
-type UpdateCurrentRatingModelMasterResult struct {
-	Item *CurrentRatingModelMaster `json:"item"`
+type UpdateCurrentModelMasterResult struct {
+	Item *CurrentModelMaster `json:"item"`
 }
 
-type UpdateCurrentRatingModelMasterAsyncResult struct {
-	result *UpdateCurrentRatingModelMasterResult
+type UpdateCurrentModelMasterAsyncResult struct {
+	result *UpdateCurrentModelMasterResult
 	err    error
 }
 
-func NewUpdateCurrentRatingModelMasterResultFromJson(data string) UpdateCurrentRatingModelMasterResult {
+func NewUpdateCurrentModelMasterResultFromJson(data string) UpdateCurrentModelMasterResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentRatingModelMasterResultFromDict(dict)
+	return NewUpdateCurrentModelMasterResultFromDict(dict)
 }
 
-func NewUpdateCurrentRatingModelMasterResultFromDict(data map[string]interface{}) UpdateCurrentRatingModelMasterResult {
-	return UpdateCurrentRatingModelMasterResult{
-		Item: NewCurrentRatingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+func NewUpdateCurrentModelMasterResultFromDict(data map[string]interface{}) UpdateCurrentModelMasterResult {
+	return UpdateCurrentModelMasterResult{
+		Item: NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
-func (p UpdateCurrentRatingModelMasterResult) ToDict() map[string]interface{} {
+func (p UpdateCurrentModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
 	}
 }
 
-func (p UpdateCurrentRatingModelMasterResult) Pointer() *UpdateCurrentRatingModelMasterResult {
+func (p UpdateCurrentModelMasterResult) Pointer() *UpdateCurrentModelMasterResult {
 	return &p
 }
 
-type UpdateCurrentRatingModelMasterFromGitHubResult struct {
-	Item *CurrentRatingModelMaster `json:"item"`
+type UpdateCurrentModelMasterFromGitHubResult struct {
+	Item *CurrentModelMaster `json:"item"`
 }
 
-type UpdateCurrentRatingModelMasterFromGitHubAsyncResult struct {
-	result *UpdateCurrentRatingModelMasterFromGitHubResult
+type UpdateCurrentModelMasterFromGitHubAsyncResult struct {
+	result *UpdateCurrentModelMasterFromGitHubResult
 	err    error
 }
 
-func NewUpdateCurrentRatingModelMasterFromGitHubResultFromJson(data string) UpdateCurrentRatingModelMasterFromGitHubResult {
+func NewUpdateCurrentModelMasterFromGitHubResultFromJson(data string) UpdateCurrentModelMasterFromGitHubResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUpdateCurrentRatingModelMasterFromGitHubResultFromDict(dict)
+	return NewUpdateCurrentModelMasterFromGitHubResultFromDict(dict)
 }
 
-func NewUpdateCurrentRatingModelMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentRatingModelMasterFromGitHubResult {
-	return UpdateCurrentRatingModelMasterFromGitHubResult{
-		Item: NewCurrentRatingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+func NewUpdateCurrentModelMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentModelMasterFromGitHubResult {
+	return UpdateCurrentModelMasterFromGitHubResult{
+		Item: NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
 	}
 }
 
-func (p UpdateCurrentRatingModelMasterFromGitHubResult) ToDict() map[string]interface{} {
+func (p UpdateCurrentModelMasterFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"item": p.Item.ToDict(),
 	}
 }
 
-func (p UpdateCurrentRatingModelMasterFromGitHubResult) Pointer() *UpdateCurrentRatingModelMasterFromGitHubResult {
+func (p UpdateCurrentModelMasterFromGitHubResult) Pointer() *UpdateCurrentModelMasterFromGitHubResult {
+	return &p
+}
+
+type DescribeSeasonModelsResult struct {
+	Items []SeasonModel `json:"items"`
+}
+
+type DescribeSeasonModelsAsyncResult struct {
+	result *DescribeSeasonModelsResult
+	err    error
+}
+
+func NewDescribeSeasonModelsResultFromJson(data string) DescribeSeasonModelsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSeasonModelsResultFromDict(dict)
+}
+
+func NewDescribeSeasonModelsResultFromDict(data map[string]interface{}) DescribeSeasonModelsResult {
+	return DescribeSeasonModelsResult{
+		Items: CastSeasonModels(core.CastArray(data["items"])),
+	}
+}
+
+func (p DescribeSeasonModelsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastSeasonModelsFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p DescribeSeasonModelsResult) Pointer() *DescribeSeasonModelsResult {
+	return &p
+}
+
+type GetSeasonModelResult struct {
+	Item *SeasonModel `json:"item"`
+}
+
+type GetSeasonModelAsyncResult struct {
+	result *GetSeasonModelResult
+	err    error
+}
+
+func NewGetSeasonModelResultFromJson(data string) GetSeasonModelResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSeasonModelResultFromDict(dict)
+}
+
+func NewGetSeasonModelResultFromDict(data map[string]interface{}) GetSeasonModelResult {
+	return GetSeasonModelResult{
+		Item: NewSeasonModelFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetSeasonModelResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetSeasonModelResult) Pointer() *GetSeasonModelResult {
+	return &p
+}
+
+type DescribeSeasonModelMastersResult struct {
+	Items         []SeasonModelMaster `json:"items"`
+	NextPageToken *string             `json:"nextPageToken"`
+}
+
+type DescribeSeasonModelMastersAsyncResult struct {
+	result *DescribeSeasonModelMastersResult
+	err    error
+}
+
+func NewDescribeSeasonModelMastersResultFromJson(data string) DescribeSeasonModelMastersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSeasonModelMastersResultFromDict(dict)
+}
+
+func NewDescribeSeasonModelMastersResultFromDict(data map[string]interface{}) DescribeSeasonModelMastersResult {
+	return DescribeSeasonModelMastersResult{
+		Items:         CastSeasonModelMasters(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeSeasonModelMastersResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastSeasonModelMastersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeSeasonModelMastersResult) Pointer() *DescribeSeasonModelMastersResult {
+	return &p
+}
+
+type CreateSeasonModelMasterResult struct {
+	Item *SeasonModelMaster `json:"item"`
+}
+
+type CreateSeasonModelMasterAsyncResult struct {
+	result *CreateSeasonModelMasterResult
+	err    error
+}
+
+func NewCreateSeasonModelMasterResultFromJson(data string) CreateSeasonModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateSeasonModelMasterResultFromDict(dict)
+}
+
+func NewCreateSeasonModelMasterResultFromDict(data map[string]interface{}) CreateSeasonModelMasterResult {
+	return CreateSeasonModelMasterResult{
+		Item: NewSeasonModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p CreateSeasonModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p CreateSeasonModelMasterResult) Pointer() *CreateSeasonModelMasterResult {
+	return &p
+}
+
+type GetSeasonModelMasterResult struct {
+	Item *SeasonModelMaster `json:"item"`
+}
+
+type GetSeasonModelMasterAsyncResult struct {
+	result *GetSeasonModelMasterResult
+	err    error
+}
+
+func NewGetSeasonModelMasterResultFromJson(data string) GetSeasonModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSeasonModelMasterResultFromDict(dict)
+}
+
+func NewGetSeasonModelMasterResultFromDict(data map[string]interface{}) GetSeasonModelMasterResult {
+	return GetSeasonModelMasterResult{
+		Item: NewSeasonModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetSeasonModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetSeasonModelMasterResult) Pointer() *GetSeasonModelMasterResult {
+	return &p
+}
+
+type UpdateSeasonModelMasterResult struct {
+	Item *SeasonModelMaster `json:"item"`
+}
+
+type UpdateSeasonModelMasterAsyncResult struct {
+	result *UpdateSeasonModelMasterResult
+	err    error
+}
+
+func NewUpdateSeasonModelMasterResultFromJson(data string) UpdateSeasonModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateSeasonModelMasterResultFromDict(dict)
+}
+
+func NewUpdateSeasonModelMasterResultFromDict(data map[string]interface{}) UpdateSeasonModelMasterResult {
+	return UpdateSeasonModelMasterResult{
+		Item: NewSeasonModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p UpdateSeasonModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p UpdateSeasonModelMasterResult) Pointer() *UpdateSeasonModelMasterResult {
+	return &p
+}
+
+type DeleteSeasonModelMasterResult struct {
+	Item *SeasonModelMaster `json:"item"`
+}
+
+type DeleteSeasonModelMasterAsyncResult struct {
+	result *DeleteSeasonModelMasterResult
+	err    error
+}
+
+func NewDeleteSeasonModelMasterResultFromJson(data string) DeleteSeasonModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteSeasonModelMasterResultFromDict(dict)
+}
+
+func NewDeleteSeasonModelMasterResultFromDict(data map[string]interface{}) DeleteSeasonModelMasterResult {
+	return DeleteSeasonModelMasterResult{
+		Item: NewSeasonModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeleteSeasonModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeleteSeasonModelMasterResult) Pointer() *DeleteSeasonModelMasterResult {
+	return &p
+}
+
+type DescribeSeasonGatheringsResult struct {
+	Items         []SeasonGathering `json:"items"`
+	NextPageToken *string           `json:"nextPageToken"`
+}
+
+type DescribeSeasonGatheringsAsyncResult struct {
+	result *DescribeSeasonGatheringsResult
+	err    error
+}
+
+func NewDescribeSeasonGatheringsResultFromJson(data string) DescribeSeasonGatheringsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeSeasonGatheringsResultFromDict(dict)
+}
+
+func NewDescribeSeasonGatheringsResultFromDict(data map[string]interface{}) DescribeSeasonGatheringsResult {
+	return DescribeSeasonGatheringsResult{
+		Items:         CastSeasonGatherings(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeSeasonGatheringsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastSeasonGatheringsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeSeasonGatheringsResult) Pointer() *DescribeSeasonGatheringsResult {
+	return &p
+}
+
+type DescribeMatchmakingSeasonGatheringsResult struct {
+	Items         []SeasonGathering `json:"items"`
+	NextPageToken *string           `json:"nextPageToken"`
+}
+
+type DescribeMatchmakingSeasonGatheringsAsyncResult struct {
+	result *DescribeMatchmakingSeasonGatheringsResult
+	err    error
+}
+
+func NewDescribeMatchmakingSeasonGatheringsResultFromJson(data string) DescribeMatchmakingSeasonGatheringsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeMatchmakingSeasonGatheringsResultFromDict(dict)
+}
+
+func NewDescribeMatchmakingSeasonGatheringsResultFromDict(data map[string]interface{}) DescribeMatchmakingSeasonGatheringsResult {
+	return DescribeMatchmakingSeasonGatheringsResult{
+		Items:         CastSeasonGatherings(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeMatchmakingSeasonGatheringsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastSeasonGatheringsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeMatchmakingSeasonGatheringsResult) Pointer() *DescribeMatchmakingSeasonGatheringsResult {
+	return &p
+}
+
+type DoSeasonMatchmakingResult struct {
+	Item                    *SeasonGathering `json:"item"`
+	MatchmakingContextToken *string          `json:"matchmakingContextToken"`
+}
+
+type DoSeasonMatchmakingAsyncResult struct {
+	result *DoSeasonMatchmakingResult
+	err    error
+}
+
+func NewDoSeasonMatchmakingResultFromJson(data string) DoSeasonMatchmakingResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDoSeasonMatchmakingResultFromDict(dict)
+}
+
+func NewDoSeasonMatchmakingResultFromDict(data map[string]interface{}) DoSeasonMatchmakingResult {
+	return DoSeasonMatchmakingResult{
+		Item:                    NewSeasonGatheringFromDict(core.CastMap(data["item"])).Pointer(),
+		MatchmakingContextToken: core.CastString(data["matchmakingContextToken"]),
+	}
+}
+
+func (p DoSeasonMatchmakingResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":                    p.Item.ToDict(),
+		"matchmakingContextToken": p.MatchmakingContextToken,
+	}
+}
+
+func (p DoSeasonMatchmakingResult) Pointer() *DoSeasonMatchmakingResult {
+	return &p
+}
+
+type DoSeasonMatchmakingByUserIdResult struct {
+	Item                    *SeasonGathering `json:"item"`
+	MatchmakingContextToken *string          `json:"matchmakingContextToken"`
+}
+
+type DoSeasonMatchmakingByUserIdAsyncResult struct {
+	result *DoSeasonMatchmakingByUserIdResult
+	err    error
+}
+
+func NewDoSeasonMatchmakingByUserIdResultFromJson(data string) DoSeasonMatchmakingByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDoSeasonMatchmakingByUserIdResultFromDict(dict)
+}
+
+func NewDoSeasonMatchmakingByUserIdResultFromDict(data map[string]interface{}) DoSeasonMatchmakingByUserIdResult {
+	return DoSeasonMatchmakingByUserIdResult{
+		Item:                    NewSeasonGatheringFromDict(core.CastMap(data["item"])).Pointer(),
+		MatchmakingContextToken: core.CastString(data["matchmakingContextToken"]),
+	}
+}
+
+func (p DoSeasonMatchmakingByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":                    p.Item.ToDict(),
+		"matchmakingContextToken": p.MatchmakingContextToken,
+	}
+}
+
+func (p DoSeasonMatchmakingByUserIdResult) Pointer() *DoSeasonMatchmakingByUserIdResult {
+	return &p
+}
+
+type GetSeasonGatheringResult struct {
+	Item *SeasonGathering `json:"item"`
+}
+
+type GetSeasonGatheringAsyncResult struct {
+	result *GetSeasonGatheringResult
+	err    error
+}
+
+func NewGetSeasonGatheringResultFromJson(data string) GetSeasonGatheringResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetSeasonGatheringResultFromDict(dict)
+}
+
+func NewGetSeasonGatheringResultFromDict(data map[string]interface{}) GetSeasonGatheringResult {
+	return GetSeasonGatheringResult{
+		Item: NewSeasonGatheringFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetSeasonGatheringResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetSeasonGatheringResult) Pointer() *GetSeasonGatheringResult {
+	return &p
+}
+
+type DeleteSeasonGatheringResult struct {
+	Item *SeasonGathering `json:"item"`
+}
+
+type DeleteSeasonGatheringAsyncResult struct {
+	result *DeleteSeasonGatheringResult
+	err    error
+}
+
+func NewDeleteSeasonGatheringResultFromJson(data string) DeleteSeasonGatheringResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteSeasonGatheringResultFromDict(dict)
+}
+
+func NewDeleteSeasonGatheringResultFromDict(data map[string]interface{}) DeleteSeasonGatheringResult {
+	return DeleteSeasonGatheringResult{
+		Item: NewSeasonGatheringFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeleteSeasonGatheringResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeleteSeasonGatheringResult) Pointer() *DeleteSeasonGatheringResult {
+	return &p
+}
+
+type DescribeJoinedSeasonGatheringsResult struct {
+	Items         []JoinedSeasonGathering `json:"items"`
+	NextPageToken *string                 `json:"nextPageToken"`
+}
+
+type DescribeJoinedSeasonGatheringsAsyncResult struct {
+	result *DescribeJoinedSeasonGatheringsResult
+	err    error
+}
+
+func NewDescribeJoinedSeasonGatheringsResultFromJson(data string) DescribeJoinedSeasonGatheringsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeJoinedSeasonGatheringsResultFromDict(dict)
+}
+
+func NewDescribeJoinedSeasonGatheringsResultFromDict(data map[string]interface{}) DescribeJoinedSeasonGatheringsResult {
+	return DescribeJoinedSeasonGatheringsResult{
+		Items:         CastJoinedSeasonGatherings(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeJoinedSeasonGatheringsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastJoinedSeasonGatheringsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeJoinedSeasonGatheringsResult) Pointer() *DescribeJoinedSeasonGatheringsResult {
+	return &p
+}
+
+type DescribeJoinedSeasonGatheringsByUserIdResult struct {
+	Items         []JoinedSeasonGathering `json:"items"`
+	NextPageToken *string                 `json:"nextPageToken"`
+}
+
+type DescribeJoinedSeasonGatheringsByUserIdAsyncResult struct {
+	result *DescribeJoinedSeasonGatheringsByUserIdResult
+	err    error
+}
+
+func NewDescribeJoinedSeasonGatheringsByUserIdResultFromJson(data string) DescribeJoinedSeasonGatheringsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeJoinedSeasonGatheringsByUserIdResultFromDict(dict)
+}
+
+func NewDescribeJoinedSeasonGatheringsByUserIdResultFromDict(data map[string]interface{}) DescribeJoinedSeasonGatheringsByUserIdResult {
+	return DescribeJoinedSeasonGatheringsByUserIdResult{
+		Items:         CastJoinedSeasonGatherings(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeJoinedSeasonGatheringsByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastJoinedSeasonGatheringsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeJoinedSeasonGatheringsByUserIdResult) Pointer() *DescribeJoinedSeasonGatheringsByUserIdResult {
+	return &p
+}
+
+type GetJoinedSeasonGatheringResult struct {
+	Item *JoinedSeasonGathering `json:"item"`
+}
+
+type GetJoinedSeasonGatheringAsyncResult struct {
+	result *GetJoinedSeasonGatheringResult
+	err    error
+}
+
+func NewGetJoinedSeasonGatheringResultFromJson(data string) GetJoinedSeasonGatheringResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetJoinedSeasonGatheringResultFromDict(dict)
+}
+
+func NewGetJoinedSeasonGatheringResultFromDict(data map[string]interface{}) GetJoinedSeasonGatheringResult {
+	return GetJoinedSeasonGatheringResult{
+		Item: NewJoinedSeasonGatheringFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetJoinedSeasonGatheringResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetJoinedSeasonGatheringResult) Pointer() *GetJoinedSeasonGatheringResult {
+	return &p
+}
+
+type GetJoinedSeasonGatheringByUserIdResult struct {
+	Item *JoinedSeasonGathering `json:"item"`
+}
+
+type GetJoinedSeasonGatheringByUserIdAsyncResult struct {
+	result *GetJoinedSeasonGatheringByUserIdResult
+	err    error
+}
+
+func NewGetJoinedSeasonGatheringByUserIdResultFromJson(data string) GetJoinedSeasonGatheringByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetJoinedSeasonGatheringByUserIdResultFromDict(dict)
+}
+
+func NewGetJoinedSeasonGatheringByUserIdResultFromDict(data map[string]interface{}) GetJoinedSeasonGatheringByUserIdResult {
+	return GetJoinedSeasonGatheringByUserIdResult{
+		Item: NewJoinedSeasonGatheringFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetJoinedSeasonGatheringByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetJoinedSeasonGatheringByUserIdResult) Pointer() *GetJoinedSeasonGatheringByUserIdResult {
 	return &p
 }
 
