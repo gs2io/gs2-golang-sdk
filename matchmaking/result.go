@@ -1666,6 +1666,58 @@ func (p GetSeasonGatheringResult) Pointer() *GetSeasonGatheringResult {
 	return &p
 }
 
+type VerifyIncludeParticipantResult struct {
+}
+
+type VerifyIncludeParticipantAsyncResult struct {
+	result *VerifyIncludeParticipantResult
+	err    error
+}
+
+func NewVerifyIncludeParticipantResultFromJson(data string) VerifyIncludeParticipantResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyIncludeParticipantResultFromDict(dict)
+}
+
+func NewVerifyIncludeParticipantResultFromDict(data map[string]interface{}) VerifyIncludeParticipantResult {
+	return VerifyIncludeParticipantResult{}
+}
+
+func (p VerifyIncludeParticipantResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyIncludeParticipantResult) Pointer() *VerifyIncludeParticipantResult {
+	return &p
+}
+
+type VerifyIncludeParticipantByUserIdResult struct {
+}
+
+type VerifyIncludeParticipantByUserIdAsyncResult struct {
+	result *VerifyIncludeParticipantByUserIdResult
+	err    error
+}
+
+func NewVerifyIncludeParticipantByUserIdResultFromJson(data string) VerifyIncludeParticipantByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyIncludeParticipantByUserIdResultFromDict(dict)
+}
+
+func NewVerifyIncludeParticipantByUserIdResultFromDict(data map[string]interface{}) VerifyIncludeParticipantByUserIdResult {
+	return VerifyIncludeParticipantByUserIdResult{}
+}
+
+func (p VerifyIncludeParticipantByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyIncludeParticipantByUserIdResult) Pointer() *VerifyIncludeParticipantByUserIdResult {
+	return &p
+}
+
 type DeleteSeasonGatheringResult struct {
 	Item *SeasonGathering `json:"item"`
 }
@@ -1694,6 +1746,37 @@ func (p DeleteSeasonGatheringResult) ToDict() map[string]interface{} {
 }
 
 func (p DeleteSeasonGatheringResult) Pointer() *DeleteSeasonGatheringResult {
+	return &p
+}
+
+type VerifyIncludeParticipantByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifyIncludeParticipantByStampTaskAsyncResult struct {
+	result *VerifyIncludeParticipantByStampTaskResult
+	err    error
+}
+
+func NewVerifyIncludeParticipantByStampTaskResultFromJson(data string) VerifyIncludeParticipantByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyIncludeParticipantByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyIncludeParticipantByStampTaskResultFromDict(data map[string]interface{}) VerifyIncludeParticipantByStampTaskResult {
+	return VerifyIncludeParticipantByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyIncludeParticipantByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyIncludeParticipantByStampTaskResult) Pointer() *VerifyIncludeParticipantByStampTaskResult {
 	return &p
 }
 

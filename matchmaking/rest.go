@@ -5335,6 +5335,249 @@ func (p Gs2MatchmakingRestClient) GetSeasonGathering(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyIncludeParticipantAsyncHandler(
+	client Gs2MatchmakingRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyIncludeParticipantAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyIncludeParticipantAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyIncludeParticipantResult
+	if asyncResult.Err != nil {
+		callback <- VerifyIncludeParticipantAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyIncludeParticipantAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyIncludeParticipantAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingRestClient) VerifyIncludeParticipantAsync(
+	request *VerifyIncludeParticipantRequest,
+	callback chan<- VerifyIncludeParticipantAsyncResult,
+) {
+	path := "/{namespaceName}/season/{seasonName}/{season}/{tier}/gathering/{seasonGatheringName}/participant/me/verify"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		path = strings.ReplaceAll(path, "{seasonName}", core.ToString(*request.SeasonName))
+	} else {
+		path = strings.ReplaceAll(path, "{seasonName}", "null")
+	}
+	if request.Season != nil {
+		path = strings.ReplaceAll(path, "{season}", core.ToString(*request.Season))
+	} else {
+		path = strings.ReplaceAll(path, "{season}", "null")
+	}
+	if request.Tier != nil {
+		path = strings.ReplaceAll(path, "{tier}", core.ToString(*request.Tier))
+	} else {
+		path = strings.ReplaceAll(path, "{tier}", "null")
+	}
+	if request.SeasonGatheringName != nil && *request.SeasonGatheringName != "" {
+		path = strings.ReplaceAll(path, "{seasonGatheringName}", core.ToString(*request.SeasonGatheringName))
+	} else {
+		path = strings.ReplaceAll(path, "{seasonGatheringName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyIncludeParticipantAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingRestClient) VerifyIncludeParticipant(
+	request *VerifyIncludeParticipantRequest,
+) (*VerifyIncludeParticipantResult, error) {
+	callback := make(chan VerifyIncludeParticipantAsyncResult, 1)
+	go p.VerifyIncludeParticipantAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyIncludeParticipantByUserIdAsyncHandler(
+	client Gs2MatchmakingRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyIncludeParticipantByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyIncludeParticipantByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyIncludeParticipantByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyIncludeParticipantByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyIncludeParticipantByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyIncludeParticipantByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingRestClient) VerifyIncludeParticipantByUserIdAsync(
+	request *VerifyIncludeParticipantByUserIdRequest,
+	callback chan<- VerifyIncludeParticipantByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/season/{seasonName}/{season}/{tier}/gathering/{seasonGatheringName}/participant/{userId}/verify"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		path = strings.ReplaceAll(path, "{seasonName}", core.ToString(*request.SeasonName))
+	} else {
+		path = strings.ReplaceAll(path, "{seasonName}", "null")
+	}
+	if request.Season != nil {
+		path = strings.ReplaceAll(path, "{season}", core.ToString(*request.Season))
+	} else {
+		path = strings.ReplaceAll(path, "{season}", "null")
+	}
+	if request.Tier != nil {
+		path = strings.ReplaceAll(path, "{tier}", core.ToString(*request.Tier))
+	} else {
+		path = strings.ReplaceAll(path, "{tier}", "null")
+	}
+	if request.SeasonGatheringName != nil && *request.SeasonGatheringName != "" {
+		path = strings.ReplaceAll(path, "{seasonGatheringName}", core.ToString(*request.SeasonGatheringName))
+	} else {
+		path = strings.ReplaceAll(path, "{seasonGatheringName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go verifyIncludeParticipantByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingRestClient) VerifyIncludeParticipantByUserId(
+	request *VerifyIncludeParticipantByUserIdRequest,
+) (*VerifyIncludeParticipantByUserIdResult, error) {
+	callback := make(chan VerifyIncludeParticipantByUserIdAsyncResult, 1)
+	go p.VerifyIncludeParticipantByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteSeasonGatheringAsyncHandler(
 	client Gs2MatchmakingRestClient,
 	job *core.NetworkJob,
@@ -5438,6 +5681,97 @@ func (p Gs2MatchmakingRestClient) DeleteSeasonGathering(
 ) (*DeleteSeasonGatheringResult, error) {
 	callback := make(chan DeleteSeasonGatheringAsyncResult, 1)
 	go p.DeleteSeasonGatheringAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyIncludeParticipantByStampTaskAsyncHandler(
+	client Gs2MatchmakingRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyIncludeParticipantByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyIncludeParticipantByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyIncludeParticipantByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyIncludeParticipantByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyIncludeParticipantByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyIncludeParticipantByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingRestClient) VerifyIncludeParticipantByStampTaskAsync(
+	request *VerifyIncludeParticipantByStampTaskRequest,
+	callback chan<- VerifyIncludeParticipantByStampTaskAsyncResult,
+) {
+	path := "/stamp/season/gathering/participant/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifyIncludeParticipantByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("matchmaking").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingRestClient) VerifyIncludeParticipantByStampTask(
+	request *VerifyIncludeParticipantByStampTaskRequest,
+) (*VerifyIncludeParticipantByStampTaskResult, error) {
+	callback := make(chan VerifyIncludeParticipantByStampTaskAsyncResult, 1)
+	go p.VerifyIncludeParticipantByStampTaskAsync(
 		request,
 		callback,
 	)

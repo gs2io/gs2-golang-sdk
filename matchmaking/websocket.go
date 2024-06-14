@@ -4818,6 +4818,216 @@ func (p Gs2MatchmakingWebSocketClient) GetSeasonGathering(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2MatchmakingWebSocketClient) verifyIncludeParticipantAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyIncludeParticipantAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyIncludeParticipantAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyIncludeParticipantResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyIncludeParticipantAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyIncludeParticipantAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) VerifyIncludeParticipantAsync(
+	request *VerifyIncludeParticipantRequest,
+	callback chan<- VerifyIncludeParticipantAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonGathering",
+			"function":    "verifyIncludeParticipant",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.Tier != nil {
+		bodies["tier"] = *request.Tier
+	}
+	if request.SeasonGatheringName != nil && *request.SeasonGatheringName != "" {
+		bodies["seasonGatheringName"] = *request.SeasonGatheringName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyIncludeParticipantAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) VerifyIncludeParticipant(
+	request *VerifyIncludeParticipantRequest,
+) (*VerifyIncludeParticipantResult, error) {
+	callback := make(chan VerifyIncludeParticipantAsyncResult, 1)
+	go p.VerifyIncludeParticipantAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) verifyIncludeParticipantByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyIncludeParticipantByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyIncludeParticipantByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyIncludeParticipantByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyIncludeParticipantByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyIncludeParticipantByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) VerifyIncludeParticipantByUserIdAsync(
+	request *VerifyIncludeParticipantByUserIdRequest,
+	callback chan<- VerifyIncludeParticipantByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonGathering",
+			"function":    "verifyIncludeParticipantByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.SeasonName != nil && *request.SeasonName != "" {
+		bodies["seasonName"] = *request.SeasonName
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.Tier != nil {
+		bodies["tier"] = *request.Tier
+	}
+	if request.SeasonGatheringName != nil && *request.SeasonGatheringName != "" {
+		bodies["seasonGatheringName"] = *request.SeasonGatheringName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyIncludeParticipantByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) VerifyIncludeParticipantByUserId(
+	request *VerifyIncludeParticipantByUserIdRequest,
+) (*VerifyIncludeParticipantByUserIdResult, error) {
+	callback := make(chan VerifyIncludeParticipantByUserIdAsyncResult, 1)
+	go p.VerifyIncludeParticipantByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2MatchmakingWebSocketClient) deleteSeasonGatheringAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DeleteSeasonGatheringAsyncResult,
@@ -4904,6 +5114,90 @@ func (p Gs2MatchmakingWebSocketClient) DeleteSeasonGathering(
 ) (*DeleteSeasonGatheringResult, error) {
 	callback := make(chan DeleteSeasonGatheringAsyncResult, 1)
 	go p.DeleteSeasonGatheringAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MatchmakingWebSocketClient) verifyIncludeParticipantByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyIncludeParticipantByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyIncludeParticipantByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyIncludeParticipantByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyIncludeParticipantByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyIncludeParticipantByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MatchmakingWebSocketClient) VerifyIncludeParticipantByStampTaskAsync(
+	request *VerifyIncludeParticipantByStampTaskRequest,
+	callback chan<- VerifyIncludeParticipantByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "matchmaking",
+			"component":   "seasonGathering",
+			"function":    "verifyIncludeParticipantByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.verifyIncludeParticipantByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MatchmakingWebSocketClient) VerifyIncludeParticipantByStampTask(
+	request *VerifyIncludeParticipantByStampTaskRequest,
+) (*VerifyIncludeParticipantByStampTaskResult, error) {
+	callback := make(chan VerifyIncludeParticipantByStampTaskAsyncResult, 1)
+	go p.VerifyIncludeParticipantByStampTaskAsync(
 		request,
 		callback,
 	)
