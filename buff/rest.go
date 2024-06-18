@@ -1612,6 +1612,9 @@ func (p Gs2BuffRestClient) CreateBuffEntryModelMasterAsync(
 	if request.Metadata != nil && *request.Metadata != "" {
 		bodies["metadata"] = *request.Metadata
 	}
+	if request.Expression != nil && *request.Expression != "" {
+		bodies["expression"] = *request.Expression
+	}
 	if request.TargetType != nil && *request.TargetType != "" {
 		bodies["targetType"] = *request.TargetType
 	}
@@ -1620,9 +1623,6 @@ func (p Gs2BuffRestClient) CreateBuffEntryModelMasterAsync(
 	}
 	if request.TargetAction != nil {
 		bodies["targetAction"] = request.TargetAction.ToDict()
-	}
-	if request.Expression != nil && *request.Expression != "" {
-		bodies["expression"] = *request.Expression
 	}
 	if request.Priority != nil {
 		bodies["priority"] = *request.Priority
@@ -1826,6 +1826,9 @@ func (p Gs2BuffRestClient) UpdateBuffEntryModelMasterAsync(
 	if request.Metadata != nil && *request.Metadata != "" {
 		bodies["metadata"] = *request.Metadata
 	}
+	if request.Expression != nil && *request.Expression != "" {
+		bodies["expression"] = *request.Expression
+	}
 	if request.TargetType != nil && *request.TargetType != "" {
 		bodies["targetType"] = *request.TargetType
 	}
@@ -1834,9 +1837,6 @@ func (p Gs2BuffRestClient) UpdateBuffEntryModelMasterAsync(
 	}
 	if request.TargetAction != nil {
 		bodies["targetAction"] = request.TargetAction.ToDict()
-	}
-	if request.Expression != nil && *request.Expression != "" {
-		bodies["expression"] = *request.Expression
 	}
 	if request.Priority != nil {
 		bodies["priority"] = *request.Priority

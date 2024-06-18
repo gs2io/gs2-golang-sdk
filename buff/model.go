@@ -655,10 +655,10 @@ type BuffEntryModel struct {
 	BuffEntryModelId           *string           `json:"buffEntryModelId"`
 	Name                       *string           `json:"name"`
 	Metadata                   *string           `json:"metadata"`
+	Expression                 *string           `json:"expression"`
 	TargetType                 *string           `json:"targetType"`
 	TargetModel                *BuffTargetModel  `json:"targetModel"`
 	TargetAction               *BuffTargetAction `json:"targetAction"`
-	Expression                 *string           `json:"expression"`
 	Priority                   *int32            `json:"priority"`
 	ApplyPeriodScheduleEventId *string           `json:"applyPeriodScheduleEventId"`
 }
@@ -754,6 +754,29 @@ func (p *BuffEntryModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["expression"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Expression = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Expression = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Expression = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Expression = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Expression = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Expression)
+				}
+			}
+		}
 		if v, ok := d["targetType"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -782,29 +805,6 @@ func (p *BuffEntryModel) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["targetAction"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TargetAction)
-		}
-		if v, ok := d["expression"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.Expression = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.Expression = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.Expression = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.Expression = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.Expression = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.Expression)
-				}
-			}
 		}
 		if v, ok := d["priority"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Priority)
@@ -847,10 +847,10 @@ func NewBuffEntryModelFromDict(data map[string]interface{}) BuffEntryModel {
 		BuffEntryModelId:           core.CastString(data["buffEntryModelId"]),
 		Name:                       core.CastString(data["name"]),
 		Metadata:                   core.CastString(data["metadata"]),
+		Expression:                 core.CastString(data["expression"]),
 		TargetType:                 core.CastString(data["targetType"]),
 		TargetModel:                NewBuffTargetModelFromDict(core.CastMap(data["targetModel"])).Pointer(),
 		TargetAction:               NewBuffTargetActionFromDict(core.CastMap(data["targetAction"])).Pointer(),
-		Expression:                 core.CastString(data["expression"]),
 		Priority:                   core.CastInt32(data["priority"]),
 		ApplyPeriodScheduleEventId: core.CastString(data["applyPeriodScheduleEventId"]),
 	}
@@ -870,6 +870,10 @@ func (p BuffEntryModel) ToDict() map[string]interface{} {
 	if p.Metadata != nil {
 		metadata = p.Metadata
 	}
+	var expression *string
+	if p.Expression != nil {
+		expression = p.Expression
+	}
 	var targetType *string
 	if p.TargetType != nil {
 		targetType = p.TargetType
@@ -881,10 +885,6 @@ func (p BuffEntryModel) ToDict() map[string]interface{} {
 	var targetAction map[string]interface{}
 	if p.TargetAction != nil {
 		targetAction = p.TargetAction.ToDict()
-	}
-	var expression *string
-	if p.Expression != nil {
-		expression = p.Expression
 	}
 	var priority *int32
 	if p.Priority != nil {
@@ -898,10 +898,10 @@ func (p BuffEntryModel) ToDict() map[string]interface{} {
 		"buffEntryModelId":           buffEntryModelId,
 		"name":                       name,
 		"metadata":                   metadata,
+		"expression":                 expression,
 		"targetType":                 targetType,
 		"targetModel":                targetModel,
 		"targetAction":               targetAction,
-		"expression":                 expression,
 		"priority":                   priority,
 		"applyPeriodScheduleEventId": applyPeriodScheduleEventId,
 	}
@@ -932,10 +932,10 @@ type BuffEntryModelMaster struct {
 	Name                       *string           `json:"name"`
 	Description                *string           `json:"description"`
 	Metadata                   *string           `json:"metadata"`
+	Expression                 *string           `json:"expression"`
 	TargetType                 *string           `json:"targetType"`
 	TargetModel                *BuffTargetModel  `json:"targetModel"`
 	TargetAction               *BuffTargetAction `json:"targetAction"`
-	Expression                 *string           `json:"expression"`
 	Priority                   *int32            `json:"priority"`
 	ApplyPeriodScheduleEventId *string           `json:"applyPeriodScheduleEventId"`
 	CreatedAt                  *int64            `json:"createdAt"`
@@ -1057,6 +1057,29 @@ func (p *BuffEntryModelMaster) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["expression"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Expression = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Expression = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Expression = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Expression = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Expression = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Expression)
+				}
+			}
+		}
 		if v, ok := d["targetType"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -1085,29 +1108,6 @@ func (p *BuffEntryModelMaster) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["targetAction"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TargetAction)
-		}
-		if v, ok := d["expression"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.Expression = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.Expression = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.Expression = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.Expression = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.Expression = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.Expression)
-				}
-			}
 		}
 		if v, ok := d["priority"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Priority)
@@ -1160,10 +1160,10 @@ func NewBuffEntryModelMasterFromDict(data map[string]interface{}) BuffEntryModel
 		Name:                       core.CastString(data["name"]),
 		Description:                core.CastString(data["description"]),
 		Metadata:                   core.CastString(data["metadata"]),
+		Expression:                 core.CastString(data["expression"]),
 		TargetType:                 core.CastString(data["targetType"]),
 		TargetModel:                NewBuffTargetModelFromDict(core.CastMap(data["targetModel"])).Pointer(),
 		TargetAction:               NewBuffTargetActionFromDict(core.CastMap(data["targetAction"])).Pointer(),
-		Expression:                 core.CastString(data["expression"]),
 		Priority:                   core.CastInt32(data["priority"]),
 		ApplyPeriodScheduleEventId: core.CastString(data["applyPeriodScheduleEventId"]),
 		CreatedAt:                  core.CastInt64(data["createdAt"]),
@@ -1190,6 +1190,10 @@ func (p BuffEntryModelMaster) ToDict() map[string]interface{} {
 	if p.Metadata != nil {
 		metadata = p.Metadata
 	}
+	var expression *string
+	if p.Expression != nil {
+		expression = p.Expression
+	}
 	var targetType *string
 	if p.TargetType != nil {
 		targetType = p.TargetType
@@ -1201,10 +1205,6 @@ func (p BuffEntryModelMaster) ToDict() map[string]interface{} {
 	var targetAction map[string]interface{}
 	if p.TargetAction != nil {
 		targetAction = p.TargetAction.ToDict()
-	}
-	var expression *string
-	if p.Expression != nil {
-		expression = p.Expression
 	}
 	var priority *int32
 	if p.Priority != nil {
@@ -1231,10 +1231,10 @@ func (p BuffEntryModelMaster) ToDict() map[string]interface{} {
 		"name":                       name,
 		"description":                description,
 		"metadata":                   metadata,
+		"expression":                 expression,
 		"targetType":                 targetType,
 		"targetModel":                targetModel,
 		"targetAction":               targetAction,
-		"expression":                 expression,
 		"priority":                   priority,
 		"applyPeriodScheduleEventId": applyPeriodScheduleEventId,
 		"createdAt":                  createdAt,
