@@ -2187,6 +2187,188 @@ func (p Gs2DistributorWebSocketClient) RunStampSheetExpressWithoutNamespace(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2DistributorWebSocketClient) setTransactionDefaultConfigAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SetTransactionDefaultConfigAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetTransactionDefaultConfigAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetTransactionDefaultConfigResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetTransactionDefaultConfigAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SetTransactionDefaultConfigAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorWebSocketClient) SetTransactionDefaultConfigAsync(
+	request *SetTransactionDefaultConfigRequest,
+	callback chan<- SetTransactionDefaultConfigAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "distributor",
+			"component":   "distribute",
+			"function":    "setTransactionDefaultConfig",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+
+	go p.setTransactionDefaultConfigAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorWebSocketClient) SetTransactionDefaultConfig(
+	request *SetTransactionDefaultConfigRequest,
+) (*SetTransactionDefaultConfigResult, error) {
+	callback := make(chan SetTransactionDefaultConfigAsyncResult, 1)
+	go p.SetTransactionDefaultConfigAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2DistributorWebSocketClient) setTransactionDefaultConfigByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SetTransactionDefaultConfigByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetTransactionDefaultConfigByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetTransactionDefaultConfigByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetTransactionDefaultConfigByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SetTransactionDefaultConfigByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorWebSocketClient) SetTransactionDefaultConfigByUserIdAsync(
+	request *SetTransactionDefaultConfigByUserIdRequest,
+	callback chan<- SetTransactionDefaultConfigByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "distributor",
+			"component":   "distribute",
+			"function":    "setTransactionDefaultConfigByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.setTransactionDefaultConfigByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorWebSocketClient) SetTransactionDefaultConfigByUserId(
+	request *SetTransactionDefaultConfigByUserIdRequest,
+) (*SetTransactionDefaultConfigByUserIdResult, error) {
+	callback := make(chan SetTransactionDefaultConfigByUserIdAsyncResult, 1)
+	go p.SetTransactionDefaultConfigByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2DistributorWebSocketClient) getStampSheetResultAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- GetStampSheetResultAsyncResult,

@@ -2410,6 +2410,201 @@ func (p Gs2DistributorRestClient) RunStampSheetExpressWithoutNamespace(
 	return asyncResult.result, asyncResult.err
 }
 
+func setTransactionDefaultConfigAsyncHandler(
+	client Gs2DistributorRestClient,
+	job *core.NetworkJob,
+	callback chan<- SetTransactionDefaultConfigAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetTransactionDefaultConfigAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetTransactionDefaultConfigResult
+	if asyncResult.Err != nil {
+		callback <- SetTransactionDefaultConfigAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetTransactionDefaultConfigAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SetTransactionDefaultConfigAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorRestClient) SetTransactionDefaultConfigAsync(
+	request *SetTransactionDefaultConfigRequest,
+	callback chan<- SetTransactionDefaultConfigAsyncResult,
+) {
+	path := "/transaction/user/me/config"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+
+	go setTransactionDefaultConfigAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorRestClient) SetTransactionDefaultConfig(
+	request *SetTransactionDefaultConfigRequest,
+) (*SetTransactionDefaultConfigResult, error) {
+	callback := make(chan SetTransactionDefaultConfigAsyncResult, 1)
+	go p.SetTransactionDefaultConfigAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func setTransactionDefaultConfigByUserIdAsyncHandler(
+	client Gs2DistributorRestClient,
+	job *core.NetworkJob,
+	callback chan<- SetTransactionDefaultConfigByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SetTransactionDefaultConfigByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SetTransactionDefaultConfigByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- SetTransactionDefaultConfigByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SetTransactionDefaultConfigByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SetTransactionDefaultConfigByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorRestClient) SetTransactionDefaultConfigByUserIdAsync(
+	request *SetTransactionDefaultConfigByUserIdRequest,
+	callback chan<- SetTransactionDefaultConfigByUserIdAsyncResult,
+) {
+	path := "/transaction/user/{userId}/config"
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go setTransactionDefaultConfigByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorRestClient) SetTransactionDefaultConfigByUserId(
+	request *SetTransactionDefaultConfigByUserIdRequest,
+) (*SetTransactionDefaultConfigByUserIdResult, error) {
+	callback := make(chan SetTransactionDefaultConfigByUserIdAsyncResult, 1)
+	go p.SetTransactionDefaultConfigByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func getStampSheetResultAsyncHandler(
 	client Gs2DistributorRestClient,
 	job *core.NetworkJob,

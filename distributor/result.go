@@ -862,6 +862,68 @@ func (p RunStampSheetExpressWithoutNamespaceResult) Pointer() *RunStampSheetExpr
 	return &p
 }
 
+type SetTransactionDefaultConfigResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type SetTransactionDefaultConfigAsyncResult struct {
+	result *SetTransactionDefaultConfigResult
+	err    error
+}
+
+func NewSetTransactionDefaultConfigResultFromJson(data string) SetTransactionDefaultConfigResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetTransactionDefaultConfigResultFromDict(dict)
+}
+
+func NewSetTransactionDefaultConfigResultFromDict(data map[string]interface{}) SetTransactionDefaultConfigResult {
+	return SetTransactionDefaultConfigResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p SetTransactionDefaultConfigResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p SetTransactionDefaultConfigResult) Pointer() *SetTransactionDefaultConfigResult {
+	return &p
+}
+
+type SetTransactionDefaultConfigByUserIdResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type SetTransactionDefaultConfigByUserIdAsyncResult struct {
+	result *SetTransactionDefaultConfigByUserIdResult
+	err    error
+}
+
+func NewSetTransactionDefaultConfigByUserIdResultFromJson(data string) SetTransactionDefaultConfigByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSetTransactionDefaultConfigByUserIdResultFromDict(dict)
+}
+
+func NewSetTransactionDefaultConfigByUserIdResultFromDict(data map[string]interface{}) SetTransactionDefaultConfigByUserIdResult {
+	return SetTransactionDefaultConfigByUserIdResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p SetTransactionDefaultConfigByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p SetTransactionDefaultConfigByUserIdResult) Pointer() *SetTransactionDefaultConfigByUserIdResult {
+	return &p
+}
+
 type GetStampSheetResultResult struct {
 	Item *StampSheetResult `json:"item"`
 }

@@ -2944,6 +2944,210 @@ func (p RunStampSheetExpressWithoutNamespaceRequest) Pointer() *RunStampSheetExp
 	return &p
 }
 
+type SetTransactionDefaultConfigRequest struct {
+	SourceRequestId *string  `json:"sourceRequestId"`
+	RequestId       *string  `json:"requestId"`
+	ContextStack    *string  `json:"contextStack"`
+	AccessToken     *string  `json:"accessToken"`
+	Config          []Config `json:"config"`
+}
+
+func (p *SetTransactionDefaultConfigRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SetTransactionDefaultConfigRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SetTransactionDefaultConfigRequest{}
+	} else {
+		*p = SetTransactionDefaultConfigRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["config"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Config)
+		}
+	}
+	return nil
+}
+
+func NewSetTransactionDefaultConfigRequestFromJson(data string) (SetTransactionDefaultConfigRequest, error) {
+	req := SetTransactionDefaultConfigRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return SetTransactionDefaultConfigRequest{}, err
+	}
+	return req, nil
+}
+
+func NewSetTransactionDefaultConfigRequestFromDict(data map[string]interface{}) SetTransactionDefaultConfigRequest {
+	return SetTransactionDefaultConfigRequest{
+		AccessToken: core.CastString(data["accessToken"]),
+		Config:      CastConfigs(core.CastArray(data["config"])),
+	}
+}
+
+func (p SetTransactionDefaultConfigRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"accessToken": p.AccessToken,
+		"config": CastConfigsFromDict(
+			p.Config,
+		),
+	}
+}
+
+func (p SetTransactionDefaultConfigRequest) Pointer() *SetTransactionDefaultConfigRequest {
+	return &p
+}
+
+type SetTransactionDefaultConfigByUserIdRequest struct {
+	SourceRequestId *string  `json:"sourceRequestId"`
+	RequestId       *string  `json:"requestId"`
+	ContextStack    *string  `json:"contextStack"`
+	UserId          *string  `json:"userId"`
+	Config          []Config `json:"config"`
+	TimeOffsetToken *string  `json:"timeOffsetToken"`
+}
+
+func (p *SetTransactionDefaultConfigByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SetTransactionDefaultConfigByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SetTransactionDefaultConfigByUserIdRequest{}
+	} else {
+		*p = SetTransactionDefaultConfigByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["config"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Config)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewSetTransactionDefaultConfigByUserIdRequestFromJson(data string) (SetTransactionDefaultConfigByUserIdRequest, error) {
+	req := SetTransactionDefaultConfigByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return SetTransactionDefaultConfigByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewSetTransactionDefaultConfigByUserIdRequestFromDict(data map[string]interface{}) SetTransactionDefaultConfigByUserIdRequest {
+	return SetTransactionDefaultConfigByUserIdRequest{
+		UserId:          core.CastString(data["userId"]),
+		Config:          CastConfigs(core.CastArray(data["config"])),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p SetTransactionDefaultConfigByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userId": p.UserId,
+		"config": CastConfigsFromDict(
+			p.Config,
+		),
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p SetTransactionDefaultConfigByUserIdRequest) Pointer() *SetTransactionDefaultConfigByUserIdRequest {
+	return &p
+}
+
 type GetStampSheetResultRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`

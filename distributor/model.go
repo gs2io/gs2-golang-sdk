@@ -1454,6 +1454,132 @@ func CastConsumeActionsFromDict(data []ConsumeAction) []interface{} {
 	return v
 }
 
+type Config struct {
+	Key   *string `json:"key"`
+	Value *string `json:"value"`
+}
+
+func (p *Config) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = Config{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = Config{}
+	} else {
+		*p = Config{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["key"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Key = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Key = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Key = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Key = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Key = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Key)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Value = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Value = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Value = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Value)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewConfigFromJson(data string) Config {
+	req := Config{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewConfigFromDict(data map[string]interface{}) Config {
+	return Config{
+		Key:   core.CastString(data["key"]),
+		Value: core.CastString(data["value"]),
+	}
+}
+
+func (p Config) ToDict() map[string]interface{} {
+
+	var key *string
+	if p.Key != nil {
+		key = p.Key
+	}
+	var value *string
+	if p.Value != nil {
+		value = p.Value
+	}
+	return map[string]interface{}{
+		"key":   key,
+		"value": value,
+	}
+}
+
+func (p Config) Pointer() *Config {
+	return &p
+}
+
+func CastConfigs(data []interface{}) []Config {
+	v := make([]Config, 0)
+	for _, d := range data {
+		v = append(v, NewConfigFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastConfigsFromDict(data []Config) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type GitHubCheckoutSetting struct {
 	ApiKeyId       *string `json:"apiKeyId"`
 	RepositoryName *string `json:"repositoryName"`
