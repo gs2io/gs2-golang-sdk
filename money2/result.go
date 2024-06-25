@@ -788,6 +788,7 @@ func (p GetEventByTransactionIdResult) Pointer() *GetEventByTransactionIdResult 
 }
 
 type VerifyReceiptResult struct {
+	Item *Event `json:"item"`
 }
 
 type VerifyReceiptAsyncResult struct {
@@ -802,11 +803,15 @@ func NewVerifyReceiptResultFromJson(data string) VerifyReceiptResult {
 }
 
 func NewVerifyReceiptResultFromDict(data map[string]interface{}) VerifyReceiptResult {
-	return VerifyReceiptResult{}
+	return VerifyReceiptResult{
+		Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p VerifyReceiptResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p VerifyReceiptResult) Pointer() *VerifyReceiptResult {
@@ -814,6 +819,7 @@ func (p VerifyReceiptResult) Pointer() *VerifyReceiptResult {
 }
 
 type VerifyReceiptByUserIdResult struct {
+	Item *Event `json:"item"`
 }
 
 type VerifyReceiptByUserIdAsyncResult struct {
@@ -828,11 +834,15 @@ func NewVerifyReceiptByUserIdResultFromJson(data string) VerifyReceiptByUserIdRe
 }
 
 func NewVerifyReceiptByUserIdResultFromDict(data map[string]interface{}) VerifyReceiptByUserIdResult {
-	return VerifyReceiptByUserIdResult{}
+	return VerifyReceiptByUserIdResult{
+		Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p VerifyReceiptByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p VerifyReceiptByUserIdResult) Pointer() *VerifyReceiptByUserIdResult {
@@ -840,6 +850,7 @@ func (p VerifyReceiptByUserIdResult) Pointer() *VerifyReceiptByUserIdResult {
 }
 
 type VerifyReceiptByStampTaskResult struct {
+	Item            *Event  `json:"item"`
 	NewContextStack *string `json:"newContextStack"`
 }
 
@@ -856,12 +867,14 @@ func NewVerifyReceiptByStampTaskResultFromJson(data string) VerifyReceiptByStamp
 
 func NewVerifyReceiptByStampTaskResultFromDict(data map[string]interface{}) VerifyReceiptByStampTaskResult {
 	return VerifyReceiptByStampTaskResult{
+		Item:            NewEventFromDict(core.CastMap(data["item"])).Pointer(),
 		NewContextStack: core.CastString(data["newContextStack"]),
 	}
 }
 
 func (p VerifyReceiptByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"item":            p.Item.ToDict(),
 		"newContextStack": p.NewContextStack,
 	}
 }
