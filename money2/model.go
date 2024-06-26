@@ -3326,3 +3326,355 @@ func CastLogSettingsFromDict(data []LogSetting) []interface{} {
 	}
 	return v
 }
+
+type DailyTransactionHistory struct {
+	DailyTransactionHistoryId *string  `json:"dailyTransactionHistoryId"`
+	Year                      *int32   `json:"year"`
+	Month                     *int32   `json:"month"`
+	Day                       *int32   `json:"day"`
+	Currency                  *string  `json:"currency"`
+	DepositAmount             *float32 `json:"depositAmount"`
+	WithdrawAmount            *float32 `json:"withdrawAmount"`
+	UpdatedAt                 *int64   `json:"updatedAt"`
+	Revision                  *int64   `json:"revision"`
+}
+
+func (p *DailyTransactionHistory) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DailyTransactionHistory{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DailyTransactionHistory{}
+	} else {
+		*p = DailyTransactionHistory{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["dailyTransactionHistoryId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DailyTransactionHistoryId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DailyTransactionHistoryId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DailyTransactionHistoryId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DailyTransactionHistoryId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DailyTransactionHistoryId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DailyTransactionHistoryId)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["currency"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Currency = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Currency = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Currency = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Currency = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Currency = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Currency)
+				}
+			}
+		}
+		if v, ok := d["depositAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DepositAmount)
+		}
+		if v, ok := d["withdrawAmount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WithdrawAmount)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
+func NewDailyTransactionHistoryFromJson(data string) DailyTransactionHistory {
+	req := DailyTransactionHistory{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewDailyTransactionHistoryFromDict(data map[string]interface{}) DailyTransactionHistory {
+	return DailyTransactionHistory{
+		DailyTransactionHistoryId: core.CastString(data["dailyTransactionHistoryId"]),
+		Year:                      core.CastInt32(data["year"]),
+		Month:                     core.CastInt32(data["month"]),
+		Day:                       core.CastInt32(data["day"]),
+		Currency:                  core.CastString(data["currency"]),
+		DepositAmount:             core.CastFloat32(data["depositAmount"]),
+		WithdrawAmount:            core.CastFloat32(data["withdrawAmount"]),
+		UpdatedAt:                 core.CastInt64(data["updatedAt"]),
+		Revision:                  core.CastInt64(data["revision"]),
+	}
+}
+
+func (p DailyTransactionHistory) ToDict() map[string]interface{} {
+
+	var dailyTransactionHistoryId *string
+	if p.DailyTransactionHistoryId != nil {
+		dailyTransactionHistoryId = p.DailyTransactionHistoryId
+	}
+	var year *int32
+	if p.Year != nil {
+		year = p.Year
+	}
+	var month *int32
+	if p.Month != nil {
+		month = p.Month
+	}
+	var day *int32
+	if p.Day != nil {
+		day = p.Day
+	}
+	var currency *string
+	if p.Currency != nil {
+		currency = p.Currency
+	}
+	var depositAmount *float32
+	if p.DepositAmount != nil {
+		depositAmount = p.DepositAmount
+	}
+	var withdrawAmount *float32
+	if p.WithdrawAmount != nil {
+		withdrawAmount = p.WithdrawAmount
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	return map[string]interface{}{
+		"dailyTransactionHistoryId": dailyTransactionHistoryId,
+		"year":                      year,
+		"month":                     month,
+		"day":                       day,
+		"currency":                  currency,
+		"depositAmount":             depositAmount,
+		"withdrawAmount":            withdrawAmount,
+		"updatedAt":                 updatedAt,
+		"revision":                  revision,
+	}
+}
+
+func (p DailyTransactionHistory) Pointer() *DailyTransactionHistory {
+	return &p
+}
+
+func CastDailyTransactionHistories(data []interface{}) []DailyTransactionHistory {
+	v := make([]DailyTransactionHistory, 0)
+	for _, d := range data {
+		v = append(v, NewDailyTransactionHistoryFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastDailyTransactionHistoriesFromDict(data []DailyTransactionHistory) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type UnusedBalance struct {
+	UnusedBalanceId *string  `json:"unusedBalanceId"`
+	Currency        *string  `json:"currency"`
+	Balance         *float32 `json:"balance"`
+	UpdatedAt       *int64   `json:"updatedAt"`
+	Revision        *int64   `json:"revision"`
+}
+
+func (p *UnusedBalance) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UnusedBalance{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UnusedBalance{}
+	} else {
+		*p = UnusedBalance{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["unusedBalanceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UnusedBalanceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UnusedBalanceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UnusedBalanceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UnusedBalanceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UnusedBalanceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UnusedBalanceId)
+				}
+			}
+		}
+		if v, ok := d["currency"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Currency = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Currency = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Currency = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Currency = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Currency = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Currency)
+				}
+			}
+		}
+		if v, ok := d["balance"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Balance)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
+func NewUnusedBalanceFromJson(data string) UnusedBalance {
+	req := UnusedBalance{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewUnusedBalanceFromDict(data map[string]interface{}) UnusedBalance {
+	return UnusedBalance{
+		UnusedBalanceId: core.CastString(data["unusedBalanceId"]),
+		Currency:        core.CastString(data["currency"]),
+		Balance:         core.CastFloat32(data["balance"]),
+		UpdatedAt:       core.CastInt64(data["updatedAt"]),
+		Revision:        core.CastInt64(data["revision"]),
+	}
+}
+
+func (p UnusedBalance) ToDict() map[string]interface{} {
+
+	var unusedBalanceId *string
+	if p.UnusedBalanceId != nil {
+		unusedBalanceId = p.UnusedBalanceId
+	}
+	var currency *string
+	if p.Currency != nil {
+		currency = p.Currency
+	}
+	var balance *float32
+	if p.Balance != nil {
+		balance = p.Balance
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	return map[string]interface{}{
+		"unusedBalanceId": unusedBalanceId,
+		"currency":        currency,
+		"balance":         balance,
+		"updatedAt":       updatedAt,
+		"revision":        revision,
+	}
+}
+
+func (p UnusedBalance) Pointer() *UnusedBalance {
+	return &p
+}
+
+func CastUnusedBalances(data []interface{}) []UnusedBalance {
+	v := make([]UnusedBalance, 0)
+	for _, d := range data {
+		v = append(v, NewUnusedBalanceFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastUnusedBalancesFromDict(data []UnusedBalance) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}

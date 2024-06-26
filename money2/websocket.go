@@ -3436,3 +3436,459 @@ func (p Gs2Money2WebSocketClient) UpdateCurrentModelMasterFromGitHub(
 	asyncResult := <-callback
 	return asyncResult.result, asyncResult.err
 }
+
+func (p Gs2Money2WebSocketClient) describeDailyTransactionHistoriesByCurrencyAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeDailyTransactionHistoriesByCurrencyAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeDailyTransactionHistoriesByCurrencyAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeDailyTransactionHistoriesByCurrencyResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeDailyTransactionHistoriesByCurrencyAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeDailyTransactionHistoriesByCurrencyAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) DescribeDailyTransactionHistoriesByCurrencyAsync(
+	request *DescribeDailyTransactionHistoriesByCurrencyRequest,
+	callback chan<- DescribeDailyTransactionHistoriesByCurrencyAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "dailyTransactionHistory",
+			"function":    "describeDailyTransactionHistoriesByCurrency",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Currency != nil && *request.Currency != "" {
+		bodies["currency"] = *request.Currency
+	}
+	if request.Year != nil {
+		bodies["year"] = *request.Year
+	}
+	if request.Month != nil {
+		bodies["month"] = *request.Month
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.describeDailyTransactionHistoriesByCurrencyAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) DescribeDailyTransactionHistoriesByCurrency(
+	request *DescribeDailyTransactionHistoriesByCurrencyRequest,
+) (*DescribeDailyTransactionHistoriesByCurrencyResult, error) {
+	callback := make(chan DescribeDailyTransactionHistoriesByCurrencyAsyncResult, 1)
+	go p.DescribeDailyTransactionHistoriesByCurrencyAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) describeDailyTransactionHistoriesAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeDailyTransactionHistoriesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeDailyTransactionHistoriesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeDailyTransactionHistoriesResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeDailyTransactionHistoriesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeDailyTransactionHistoriesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) DescribeDailyTransactionHistoriesAsync(
+	request *DescribeDailyTransactionHistoriesRequest,
+	callback chan<- DescribeDailyTransactionHistoriesAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "dailyTransactionHistory",
+			"function":    "describeDailyTransactionHistories",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Year != nil {
+		bodies["year"] = *request.Year
+	}
+	if request.Month != nil {
+		bodies["month"] = *request.Month
+	}
+	if request.Day != nil {
+		bodies["day"] = *request.Day
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.describeDailyTransactionHistoriesAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) DescribeDailyTransactionHistories(
+	request *DescribeDailyTransactionHistoriesRequest,
+) (*DescribeDailyTransactionHistoriesResult, error) {
+	callback := make(chan DescribeDailyTransactionHistoriesAsyncResult, 1)
+	go p.DescribeDailyTransactionHistoriesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) getDailyTransactionHistoryAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetDailyTransactionHistoryAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetDailyTransactionHistoryAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetDailyTransactionHistoryResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetDailyTransactionHistoryAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetDailyTransactionHistoryAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) GetDailyTransactionHistoryAsync(
+	request *GetDailyTransactionHistoryRequest,
+	callback chan<- GetDailyTransactionHistoryAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "dailyTransactionHistory",
+			"function":    "getDailyTransactionHistory",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Year != nil {
+		bodies["year"] = *request.Year
+	}
+	if request.Month != nil {
+		bodies["month"] = *request.Month
+	}
+	if request.Day != nil {
+		bodies["day"] = *request.Day
+	}
+	if request.Currency != nil && *request.Currency != "" {
+		bodies["currency"] = *request.Currency
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.getDailyTransactionHistoryAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) GetDailyTransactionHistory(
+	request *GetDailyTransactionHistoryRequest,
+) (*GetDailyTransactionHistoryResult, error) {
+	callback := make(chan GetDailyTransactionHistoryAsyncResult, 1)
+	go p.GetDailyTransactionHistoryAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) describeUnusedBalancesAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeUnusedBalancesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeUnusedBalancesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeUnusedBalancesResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeUnusedBalancesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeUnusedBalancesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) DescribeUnusedBalancesAsync(
+	request *DescribeUnusedBalancesRequest,
+	callback chan<- DescribeUnusedBalancesAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "unusedBalance",
+			"function":    "describeUnusedBalances",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.describeUnusedBalancesAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) DescribeUnusedBalances(
+	request *DescribeUnusedBalancesRequest,
+) (*DescribeUnusedBalancesResult, error) {
+	callback := make(chan DescribeUnusedBalancesAsyncResult, 1)
+	go p.DescribeUnusedBalancesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Money2WebSocketClient) getUnusedBalanceAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetUnusedBalanceAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetUnusedBalanceAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetUnusedBalanceResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetUnusedBalanceAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetUnusedBalanceAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2WebSocketClient) GetUnusedBalanceAsync(
+	request *GetUnusedBalanceRequest,
+	callback chan<- GetUnusedBalanceAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "money2",
+			"component":   "unusedBalance",
+			"function":    "getUnusedBalance",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.Currency != nil && *request.Currency != "" {
+		bodies["currency"] = *request.Currency
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.getUnusedBalanceAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2WebSocketClient) GetUnusedBalance(
+	request *GetUnusedBalanceRequest,
+) (*GetUnusedBalanceResult, error) {
+	callback := make(chan GetUnusedBalanceAsyncResult, 1)
+	go p.GetUnusedBalanceAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}

@@ -1230,3 +1230,173 @@ func (p UpdateCurrentModelMasterFromGitHubResult) ToDict() map[string]interface{
 func (p UpdateCurrentModelMasterFromGitHubResult) Pointer() *UpdateCurrentModelMasterFromGitHubResult {
 	return &p
 }
+
+type DescribeDailyTransactionHistoriesByCurrencyResult struct {
+	Items         []DailyTransactionHistory `json:"items"`
+	NextPageToken *string                   `json:"nextPageToken"`
+}
+
+type DescribeDailyTransactionHistoriesByCurrencyAsyncResult struct {
+	result *DescribeDailyTransactionHistoriesByCurrencyResult
+	err    error
+}
+
+func NewDescribeDailyTransactionHistoriesByCurrencyResultFromJson(data string) DescribeDailyTransactionHistoriesByCurrencyResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDailyTransactionHistoriesByCurrencyResultFromDict(dict)
+}
+
+func NewDescribeDailyTransactionHistoriesByCurrencyResultFromDict(data map[string]interface{}) DescribeDailyTransactionHistoriesByCurrencyResult {
+	return DescribeDailyTransactionHistoriesByCurrencyResult{
+		Items:         CastDailyTransactionHistories(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeDailyTransactionHistoriesByCurrencyResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastDailyTransactionHistoriesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeDailyTransactionHistoriesByCurrencyResult) Pointer() *DescribeDailyTransactionHistoriesByCurrencyResult {
+	return &p
+}
+
+type DescribeDailyTransactionHistoriesResult struct {
+	Items         []DailyTransactionHistory `json:"items"`
+	NextPageToken *string                   `json:"nextPageToken"`
+}
+
+type DescribeDailyTransactionHistoriesAsyncResult struct {
+	result *DescribeDailyTransactionHistoriesResult
+	err    error
+}
+
+func NewDescribeDailyTransactionHistoriesResultFromJson(data string) DescribeDailyTransactionHistoriesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeDailyTransactionHistoriesResultFromDict(dict)
+}
+
+func NewDescribeDailyTransactionHistoriesResultFromDict(data map[string]interface{}) DescribeDailyTransactionHistoriesResult {
+	return DescribeDailyTransactionHistoriesResult{
+		Items:         CastDailyTransactionHistories(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeDailyTransactionHistoriesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastDailyTransactionHistoriesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeDailyTransactionHistoriesResult) Pointer() *DescribeDailyTransactionHistoriesResult {
+	return &p
+}
+
+type GetDailyTransactionHistoryResult struct {
+	Item *DailyTransactionHistory `json:"item"`
+}
+
+type GetDailyTransactionHistoryAsyncResult struct {
+	result *GetDailyTransactionHistoryResult
+	err    error
+}
+
+func NewGetDailyTransactionHistoryResultFromJson(data string) GetDailyTransactionHistoryResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetDailyTransactionHistoryResultFromDict(dict)
+}
+
+func NewGetDailyTransactionHistoryResultFromDict(data map[string]interface{}) GetDailyTransactionHistoryResult {
+	return GetDailyTransactionHistoryResult{
+		Item: NewDailyTransactionHistoryFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetDailyTransactionHistoryResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetDailyTransactionHistoryResult) Pointer() *GetDailyTransactionHistoryResult {
+	return &p
+}
+
+type DescribeUnusedBalancesResult struct {
+	Items         []UnusedBalance `json:"items"`
+	NextPageToken *string         `json:"nextPageToken"`
+}
+
+type DescribeUnusedBalancesAsyncResult struct {
+	result *DescribeUnusedBalancesResult
+	err    error
+}
+
+func NewDescribeUnusedBalancesResultFromJson(data string) DescribeUnusedBalancesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeUnusedBalancesResultFromDict(dict)
+}
+
+func NewDescribeUnusedBalancesResultFromDict(data map[string]interface{}) DescribeUnusedBalancesResult {
+	return DescribeUnusedBalancesResult{
+		Items:         CastUnusedBalances(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeUnusedBalancesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastUnusedBalancesFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeUnusedBalancesResult) Pointer() *DescribeUnusedBalancesResult {
+	return &p
+}
+
+type GetUnusedBalanceResult struct {
+	Item *UnusedBalance `json:"item"`
+}
+
+type GetUnusedBalanceAsyncResult struct {
+	result *GetUnusedBalanceResult
+	err    error
+}
+
+func NewGetUnusedBalanceResultFromJson(data string) GetUnusedBalanceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetUnusedBalanceResultFromDict(dict)
+}
+
+func NewGetUnusedBalanceResultFromDict(data map[string]interface{}) GetUnusedBalanceResult {
+	return GetUnusedBalanceResult{
+		Item: NewUnusedBalanceFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetUnusedBalanceResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetUnusedBalanceResult) Pointer() *GetUnusedBalanceResult {
+	return &p
+}

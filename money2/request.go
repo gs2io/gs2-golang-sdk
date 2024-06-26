@@ -4574,3 +4574,630 @@ func (p UpdateCurrentModelMasterFromGitHubRequest) ToDict() map[string]interface
 func (p UpdateCurrentModelMasterFromGitHubRequest) Pointer() *UpdateCurrentModelMasterFromGitHubRequest {
 	return &p
 }
+
+type DescribeDailyTransactionHistoriesByCurrencyRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Currency        *string `json:"currency"`
+	Year            *int32  `json:"year"`
+	Month           *int32  `json:"month"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+}
+
+func (p *DescribeDailyTransactionHistoriesByCurrencyRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeDailyTransactionHistoriesByCurrencyRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeDailyTransactionHistoriesByCurrencyRequest{}
+	} else {
+		*p = DescribeDailyTransactionHistoriesByCurrencyRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["currency"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Currency = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Currency = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Currency = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Currency = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Currency = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Currency)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewDescribeDailyTransactionHistoriesByCurrencyRequestFromJson(data string) (DescribeDailyTransactionHistoriesByCurrencyRequest, error) {
+	req := DescribeDailyTransactionHistoriesByCurrencyRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeDailyTransactionHistoriesByCurrencyRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeDailyTransactionHistoriesByCurrencyRequestFromDict(data map[string]interface{}) DescribeDailyTransactionHistoriesByCurrencyRequest {
+	return DescribeDailyTransactionHistoriesByCurrencyRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		Currency:      core.CastString(data["currency"]),
+		Year:          core.CastInt32(data["year"]),
+		Month:         core.CastInt32(data["month"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
+}
+
+func (p DescribeDailyTransactionHistoriesByCurrencyRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"currency":      p.Currency,
+		"year":          p.Year,
+		"month":         p.Month,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p DescribeDailyTransactionHistoriesByCurrencyRequest) Pointer() *DescribeDailyTransactionHistoriesByCurrencyRequest {
+	return &p
+}
+
+type DescribeDailyTransactionHistoriesRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Year            *int32  `json:"year"`
+	Month           *int32  `json:"month"`
+	Day             *int32  `json:"day"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+}
+
+func (p *DescribeDailyTransactionHistoriesRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeDailyTransactionHistoriesRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeDailyTransactionHistoriesRequest{}
+	} else {
+		*p = DescribeDailyTransactionHistoriesRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewDescribeDailyTransactionHistoriesRequestFromJson(data string) (DescribeDailyTransactionHistoriesRequest, error) {
+	req := DescribeDailyTransactionHistoriesRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeDailyTransactionHistoriesRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeDailyTransactionHistoriesRequestFromDict(data map[string]interface{}) DescribeDailyTransactionHistoriesRequest {
+	return DescribeDailyTransactionHistoriesRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		Year:          core.CastInt32(data["year"]),
+		Month:         core.CastInt32(data["month"]),
+		Day:           core.CastInt32(data["day"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
+}
+
+func (p DescribeDailyTransactionHistoriesRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"year":          p.Year,
+		"month":         p.Month,
+		"day":           p.Day,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p DescribeDailyTransactionHistoriesRequest) Pointer() *DescribeDailyTransactionHistoriesRequest {
+	return &p
+}
+
+type GetDailyTransactionHistoryRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Year            *int32  `json:"year"`
+	Month           *int32  `json:"month"`
+	Day             *int32  `json:"day"`
+	Currency        *string `json:"currency"`
+}
+
+func (p *GetDailyTransactionHistoryRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetDailyTransactionHistoryRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetDailyTransactionHistoryRequest{}
+	} else {
+		*p = GetDailyTransactionHistoryRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["year"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Year)
+		}
+		if v, ok := d["month"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Month)
+		}
+		if v, ok := d["day"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Day)
+		}
+		if v, ok := d["currency"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Currency = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Currency = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Currency = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Currency = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Currency = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Currency)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetDailyTransactionHistoryRequestFromJson(data string) (GetDailyTransactionHistoryRequest, error) {
+	req := GetDailyTransactionHistoryRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetDailyTransactionHistoryRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetDailyTransactionHistoryRequestFromDict(data map[string]interface{}) GetDailyTransactionHistoryRequest {
+	return GetDailyTransactionHistoryRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		Year:          core.CastInt32(data["year"]),
+		Month:         core.CastInt32(data["month"]),
+		Day:           core.CastInt32(data["day"]),
+		Currency:      core.CastString(data["currency"]),
+	}
+}
+
+func (p GetDailyTransactionHistoryRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"year":          p.Year,
+		"month":         p.Month,
+		"day":           p.Day,
+		"currency":      p.Currency,
+	}
+}
+
+func (p GetDailyTransactionHistoryRequest) Pointer() *GetDailyTransactionHistoryRequest {
+	return &p
+}
+
+type DescribeUnusedBalancesRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+}
+
+func (p *DescribeUnusedBalancesRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeUnusedBalancesRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeUnusedBalancesRequest{}
+	} else {
+		*p = DescribeUnusedBalancesRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewDescribeUnusedBalancesRequestFromJson(data string) (DescribeUnusedBalancesRequest, error) {
+	req := DescribeUnusedBalancesRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeUnusedBalancesRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeUnusedBalancesRequestFromDict(data map[string]interface{}) DescribeUnusedBalancesRequest {
+	return DescribeUnusedBalancesRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
+}
+
+func (p DescribeUnusedBalancesRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p DescribeUnusedBalancesRequest) Pointer() *DescribeUnusedBalancesRequest {
+	return &p
+}
+
+type GetUnusedBalanceRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Currency        *string `json:"currency"`
+}
+
+func (p *GetUnusedBalanceRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetUnusedBalanceRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetUnusedBalanceRequest{}
+	} else {
+		*p = GetUnusedBalanceRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["currency"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Currency = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Currency = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Currency = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Currency = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Currency = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Currency)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetUnusedBalanceRequestFromJson(data string) (GetUnusedBalanceRequest, error) {
+	req := GetUnusedBalanceRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetUnusedBalanceRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetUnusedBalanceRequestFromDict(data map[string]interface{}) GetUnusedBalanceRequest {
+	return GetUnusedBalanceRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		Currency:      core.CastString(data["currency"]),
+	}
+}
+
+func (p GetUnusedBalanceRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"currency":      p.Currency,
+	}
+}
+
+func (p GetUnusedBalanceRequest) Pointer() *GetUnusedBalanceRequest {
+	return &p
+}

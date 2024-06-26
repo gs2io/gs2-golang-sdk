@@ -3794,3 +3794,520 @@ func (p Gs2Money2RestClient) UpdateCurrentModelMasterFromGitHub(
 	asyncResult := <-callback
 	return asyncResult.result, asyncResult.err
 }
+
+func describeDailyTransactionHistoriesByCurrencyAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeDailyTransactionHistoriesByCurrencyAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeDailyTransactionHistoriesByCurrencyAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeDailyTransactionHistoriesByCurrencyResult
+	if asyncResult.Err != nil {
+		callback <- DescribeDailyTransactionHistoriesByCurrencyAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeDailyTransactionHistoriesByCurrencyAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeDailyTransactionHistoriesByCurrencyAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) DescribeDailyTransactionHistoriesByCurrencyAsync(
+	request *DescribeDailyTransactionHistoriesByCurrencyRequest,
+	callback chan<- DescribeDailyTransactionHistoriesByCurrencyAsyncResult,
+) {
+	path := "/{namespaceName}/transaction/daily/currency/{currency}/date/{year}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Currency != nil && *request.Currency != "" {
+		path = strings.ReplaceAll(path, "{currency}", core.ToString(*request.Currency))
+	} else {
+		path = strings.ReplaceAll(path, "{currency}", "null")
+	}
+	if request.Year != nil {
+		path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
+	} else {
+		path = strings.ReplaceAll(path, "{year}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.Month != nil {
+		queryStrings["month"] = core.ToString(*request.Month)
+	}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go describeDailyTransactionHistoriesByCurrencyAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) DescribeDailyTransactionHistoriesByCurrency(
+	request *DescribeDailyTransactionHistoriesByCurrencyRequest,
+) (*DescribeDailyTransactionHistoriesByCurrencyResult, error) {
+	callback := make(chan DescribeDailyTransactionHistoriesByCurrencyAsyncResult, 1)
+	go p.DescribeDailyTransactionHistoriesByCurrencyAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeDailyTransactionHistoriesAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeDailyTransactionHistoriesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeDailyTransactionHistoriesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeDailyTransactionHistoriesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeDailyTransactionHistoriesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeDailyTransactionHistoriesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeDailyTransactionHistoriesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) DescribeDailyTransactionHistoriesAsync(
+	request *DescribeDailyTransactionHistoriesRequest,
+	callback chan<- DescribeDailyTransactionHistoriesAsyncResult,
+) {
+	path := "/{namespaceName}/transaction/daily/{year}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Year != nil {
+		path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
+	} else {
+		path = strings.ReplaceAll(path, "{year}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.Month != nil {
+		queryStrings["month"] = core.ToString(*request.Month)
+	}
+	if request.Day != nil {
+		queryStrings["day"] = core.ToString(*request.Day)
+	}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go describeDailyTransactionHistoriesAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) DescribeDailyTransactionHistories(
+	request *DescribeDailyTransactionHistoriesRequest,
+) (*DescribeDailyTransactionHistoriesResult, error) {
+	callback := make(chan DescribeDailyTransactionHistoriesAsyncResult, 1)
+	go p.DescribeDailyTransactionHistoriesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getDailyTransactionHistoryAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- GetDailyTransactionHistoryAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetDailyTransactionHistoryAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetDailyTransactionHistoryResult
+	if asyncResult.Err != nil {
+		callback <- GetDailyTransactionHistoryAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetDailyTransactionHistoryAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetDailyTransactionHistoryAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) GetDailyTransactionHistoryAsync(
+	request *GetDailyTransactionHistoryRequest,
+	callback chan<- GetDailyTransactionHistoryAsyncResult,
+) {
+	path := "/{namespaceName}/transaction/daily/{year}/{month}/{day}/currency/{currency}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Year != nil {
+		path = strings.ReplaceAll(path, "{year}", core.ToString(*request.Year))
+	} else {
+		path = strings.ReplaceAll(path, "{year}", "null")
+	}
+	if request.Month != nil {
+		path = strings.ReplaceAll(path, "{month}", core.ToString(*request.Month))
+	} else {
+		path = strings.ReplaceAll(path, "{month}", "null")
+	}
+	if request.Day != nil {
+		path = strings.ReplaceAll(path, "{day}", core.ToString(*request.Day))
+	} else {
+		path = strings.ReplaceAll(path, "{day}", "null")
+	}
+	if request.Currency != nil && *request.Currency != "" {
+		path = strings.ReplaceAll(path, "{currency}", core.ToString(*request.Currency))
+	} else {
+		path = strings.ReplaceAll(path, "{currency}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go getDailyTransactionHistoryAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) GetDailyTransactionHistory(
+	request *GetDailyTransactionHistoryRequest,
+) (*GetDailyTransactionHistoryResult, error) {
+	callback := make(chan GetDailyTransactionHistoryAsyncResult, 1)
+	go p.GetDailyTransactionHistoryAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeUnusedBalancesAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeUnusedBalancesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeUnusedBalancesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeUnusedBalancesResult
+	if asyncResult.Err != nil {
+		callback <- DescribeUnusedBalancesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeUnusedBalancesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeUnusedBalancesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) DescribeUnusedBalancesAsync(
+	request *DescribeUnusedBalancesRequest,
+	callback chan<- DescribeUnusedBalancesAsyncResult,
+) {
+	path := "/{namespaceName}/balance/unused"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go describeUnusedBalancesAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) DescribeUnusedBalances(
+	request *DescribeUnusedBalancesRequest,
+) (*DescribeUnusedBalancesResult, error) {
+	callback := make(chan DescribeUnusedBalancesAsyncResult, 1)
+	go p.DescribeUnusedBalancesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getUnusedBalanceAsyncHandler(
+	client Gs2Money2RestClient,
+	job *core.NetworkJob,
+	callback chan<- GetUnusedBalanceAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetUnusedBalanceAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetUnusedBalanceResult
+	if asyncResult.Err != nil {
+		callback <- GetUnusedBalanceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetUnusedBalanceAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetUnusedBalanceAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Money2RestClient) GetUnusedBalanceAsync(
+	request *GetUnusedBalanceRequest,
+	callback chan<- GetUnusedBalanceAsyncResult,
+) {
+	path := "/{namespaceName}/balance/unused/{currency}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Currency != nil && *request.Currency != "" {
+		path = strings.ReplaceAll(path, "{currency}", core.ToString(*request.Currency))
+	} else {
+		path = strings.ReplaceAll(path, "{currency}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go getUnusedBalanceAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("money2").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Money2RestClient) GetUnusedBalance(
+	request *GetUnusedBalanceRequest,
+) (*GetUnusedBalanceResult, error) {
+	callback := make(chan GetUnusedBalanceAsyncResult, 1)
+	go p.GetUnusedBalanceAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
