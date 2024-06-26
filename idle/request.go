@@ -111,14 +111,15 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	SourceRequestId    *string             `json:"sourceRequestId"`
-	RequestId          *string             `json:"requestId"`
-	ContextStack       *string             `json:"contextStack"`
-	Name               *string             `json:"name"`
-	Description        *string             `json:"description"`
-	TransactionSetting *TransactionSetting `json:"transactionSetting"`
-	ReceiveScript      *ScriptSetting      `json:"receiveScript"`
-	LogSetting         *LogSetting         `json:"logSetting"`
+	SourceRequestId                *string             `json:"sourceRequestId"`
+	RequestId                      *string             `json:"requestId"`
+	ContextStack                   *string             `json:"contextStack"`
+	Name                           *string             `json:"name"`
+	Description                    *string             `json:"description"`
+	TransactionSetting             *TransactionSetting `json:"transactionSetting"`
+	ReceiveScript                  *ScriptSetting      `json:"receiveScript"`
+	OverrideAcquireActionsScriptId *string             `json:"overrideAcquireActionsScriptId"`
+	LogSetting                     *LogSetting         `json:"logSetting"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -195,6 +196,29 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["receiveScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReceiveScript)
 		}
+		if v, ok := d["overrideAcquireActionsScriptId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.OverrideAcquireActionsScriptId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.OverrideAcquireActionsScriptId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.OverrideAcquireActionsScriptId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.OverrideAcquireActionsScriptId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.OverrideAcquireActionsScriptId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.OverrideAcquireActionsScriptId)
+				}
+			}
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -213,21 +237,23 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		ReceiveScript:      NewScriptSettingFromDict(core.CastMap(data["receiveScript"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name:                           core.CastString(data["name"]),
+		Description:                    core.CastString(data["description"]),
+		TransactionSetting:             NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+		ReceiveScript:                  NewScriptSettingFromDict(core.CastMap(data["receiveScript"])).Pointer(),
+		OverrideAcquireActionsScriptId: core.CastString(data["overrideAcquireActionsScriptId"]),
+		LogSetting:                     NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":               p.Name,
-		"description":        p.Description,
-		"transactionSetting": p.TransactionSetting.ToDict(),
-		"receiveScript":      p.ReceiveScript.ToDict(),
-		"logSetting":         p.LogSetting.ToDict(),
+		"name":                           p.Name,
+		"description":                    p.Description,
+		"transactionSetting":             p.TransactionSetting.ToDict(),
+		"receiveScript":                  p.ReceiveScript.ToDict(),
+		"overrideAcquireActionsScriptId": p.OverrideAcquireActionsScriptId,
+		"logSetting":                     p.LogSetting.ToDict(),
 	}
 }
 
@@ -398,14 +424,15 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	SourceRequestId    *string             `json:"sourceRequestId"`
-	RequestId          *string             `json:"requestId"`
-	ContextStack       *string             `json:"contextStack"`
-	NamespaceName      *string             `json:"namespaceName"`
-	Description        *string             `json:"description"`
-	TransactionSetting *TransactionSetting `json:"transactionSetting"`
-	ReceiveScript      *ScriptSetting      `json:"receiveScript"`
-	LogSetting         *LogSetting         `json:"logSetting"`
+	SourceRequestId                *string             `json:"sourceRequestId"`
+	RequestId                      *string             `json:"requestId"`
+	ContextStack                   *string             `json:"contextStack"`
+	NamespaceName                  *string             `json:"namespaceName"`
+	Description                    *string             `json:"description"`
+	TransactionSetting             *TransactionSetting `json:"transactionSetting"`
+	ReceiveScript                  *ScriptSetting      `json:"receiveScript"`
+	OverrideAcquireActionsScriptId *string             `json:"overrideAcquireActionsScriptId"`
+	LogSetting                     *LogSetting         `json:"logSetting"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -482,6 +509,29 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["receiveScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReceiveScript)
 		}
+		if v, ok := d["overrideAcquireActionsScriptId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.OverrideAcquireActionsScriptId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.OverrideAcquireActionsScriptId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.OverrideAcquireActionsScriptId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.OverrideAcquireActionsScriptId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.OverrideAcquireActionsScriptId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.OverrideAcquireActionsScriptId)
+				}
+			}
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -500,21 +550,23 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		Description:        core.CastString(data["description"]),
-		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		ReceiveScript:      NewScriptSettingFromDict(core.CastMap(data["receiveScript"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName:                  core.CastString(data["namespaceName"]),
+		Description:                    core.CastString(data["description"]),
+		TransactionSetting:             NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+		ReceiveScript:                  NewScriptSettingFromDict(core.CastMap(data["receiveScript"])).Pointer(),
+		OverrideAcquireActionsScriptId: core.CastString(data["overrideAcquireActionsScriptId"]),
+		LogSetting:                     NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":      p.NamespaceName,
-		"description":        p.Description,
-		"transactionSetting": p.TransactionSetting.ToDict(),
-		"receiveScript":      p.ReceiveScript.ToDict(),
-		"logSetting":         p.LogSetting.ToDict(),
+		"namespaceName":                  p.NamespaceName,
+		"description":                    p.Description,
+		"transactionSetting":             p.TransactionSetting.ToDict(),
+		"receiveScript":                  p.ReceiveScript.ToDict(),
+		"overrideAcquireActionsScriptId": p.OverrideAcquireActionsScriptId,
+		"logSetting":                     p.LogSetting.ToDict(),
 	}
 }
 

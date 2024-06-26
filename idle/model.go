@@ -24,15 +24,16 @@ import (
 )
 
 type Namespace struct {
-	NamespaceId        *string             `json:"namespaceId"`
-	Name               *string             `json:"name"`
-	Description        *string             `json:"description"`
-	TransactionSetting *TransactionSetting `json:"transactionSetting"`
-	ReceiveScript      *ScriptSetting      `json:"receiveScript"`
-	LogSetting         *LogSetting         `json:"logSetting"`
-	CreatedAt          *int64              `json:"createdAt"`
-	UpdatedAt          *int64              `json:"updatedAt"`
-	Revision           *int64              `json:"revision"`
+	NamespaceId                    *string             `json:"namespaceId"`
+	Name                           *string             `json:"name"`
+	Description                    *string             `json:"description"`
+	TransactionSetting             *TransactionSetting `json:"transactionSetting"`
+	ReceiveScript                  *ScriptSetting      `json:"receiveScript"`
+	OverrideAcquireActionsScriptId *string             `json:"overrideAcquireActionsScriptId"`
+	LogSetting                     *LogSetting         `json:"logSetting"`
+	CreatedAt                      *int64              `json:"createdAt"`
+	UpdatedAt                      *int64              `json:"updatedAt"`
+	Revision                       *int64              `json:"revision"`
 }
 
 func (p *Namespace) UnmarshalJSON(data []byte) error {
@@ -132,6 +133,29 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		if v, ok := d["receiveScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReceiveScript)
 		}
+		if v, ok := d["overrideAcquireActionsScriptId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.OverrideAcquireActionsScriptId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.OverrideAcquireActionsScriptId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.OverrideAcquireActionsScriptId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.OverrideAcquireActionsScriptId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.OverrideAcquireActionsScriptId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.OverrideAcquireActionsScriptId)
+				}
+			}
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -156,15 +180,16 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:        core.CastString(data["namespaceId"]),
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		ReceiveScript:      NewScriptSettingFromDict(core.CastMap(data["receiveScript"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		UpdatedAt:          core.CastInt64(data["updatedAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		NamespaceId:                    core.CastString(data["namespaceId"]),
+		Name:                           core.CastString(data["name"]),
+		Description:                    core.CastString(data["description"]),
+		TransactionSetting:             NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
+		ReceiveScript:                  NewScriptSettingFromDict(core.CastMap(data["receiveScript"])).Pointer(),
+		OverrideAcquireActionsScriptId: core.CastString(data["overrideAcquireActionsScriptId"]),
+		LogSetting:                     NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		CreatedAt:                      core.CastInt64(data["createdAt"]),
+		UpdatedAt:                      core.CastInt64(data["updatedAt"]),
+		Revision:                       core.CastInt64(data["revision"]),
 	}
 }
 
@@ -190,6 +215,10 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.ReceiveScript != nil {
 		receiveScript = p.ReceiveScript.ToDict()
 	}
+	var overrideAcquireActionsScriptId *string
+	if p.OverrideAcquireActionsScriptId != nil {
+		overrideAcquireActionsScriptId = p.OverrideAcquireActionsScriptId
+	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
 		logSetting = p.LogSetting.ToDict()
@@ -207,15 +236,16 @@ func (p Namespace) ToDict() map[string]interface{} {
 		revision = p.Revision
 	}
 	return map[string]interface{}{
-		"namespaceId":        namespaceId,
-		"name":               name,
-		"description":        description,
-		"transactionSetting": transactionSetting,
-		"receiveScript":      receiveScript,
-		"logSetting":         logSetting,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
+		"namespaceId":                    namespaceId,
+		"name":                           name,
+		"description":                    description,
+		"transactionSetting":             transactionSetting,
+		"receiveScript":                  receiveScript,
+		"overrideAcquireActionsScriptId": overrideAcquireActionsScriptId,
+		"logSetting":                     logSetting,
+		"createdAt":                      createdAt,
+		"updatedAt":                      updatedAt,
+		"revision":                       revision,
 	}
 }
 

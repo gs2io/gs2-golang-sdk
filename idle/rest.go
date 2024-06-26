@@ -183,6 +183,9 @@ func (p Gs2IdleRestClient) CreateNamespaceAsync(
 	if request.ReceiveScript != nil {
 		bodies["receiveScript"] = request.ReceiveScript.ToDict()
 	}
+	if request.OverrideAcquireActionsScriptId != nil && *request.OverrideAcquireActionsScriptId != "" {
+		bodies["overrideAcquireActionsScriptId"] = *request.OverrideAcquireActionsScriptId
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -464,6 +467,9 @@ func (p Gs2IdleRestClient) UpdateNamespaceAsync(
 	}
 	if request.ReceiveScript != nil {
 		bodies["receiveScript"] = request.ReceiveScript.ToDict()
+	}
+	if request.OverrideAcquireActionsScriptId != nil && *request.OverrideAcquireActionsScriptId != "" {
+		bodies["overrideAcquireActionsScriptId"] = *request.OverrideAcquireActionsScriptId
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
