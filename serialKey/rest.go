@@ -2317,7 +2317,7 @@ func (p Gs2SerialKeyRestClient) RevertUseByStampSheetAsync(
 	request *RevertUseByStampSheetRequest,
 	callback chan<- RevertUseByStampSheetAsyncResult,
 ) {
-	path := "/serialKey/use"
+	path := "/serialKey/revert"
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
