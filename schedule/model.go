@@ -1239,6 +1239,9 @@ type RepeatSetting struct {
 	EndDayOfWeek    *string `json:"endDayOfWeek"`
 	BeginHour       *int32  `json:"beginHour"`
 	EndHour         *int32  `json:"endHour"`
+	AnchorTimestamp *int64  `json:"anchorTimestamp"`
+	ActiveDays      *int32  `json:"activeDays"`
+	InactiveDays    *int32  `json:"inactiveDays"`
 }
 
 func (p *RepeatSetting) UnmarshalJSON(data []byte) error {
@@ -1344,6 +1347,15 @@ func (p *RepeatSetting) UnmarshalJSON(data []byte) error {
 		if v, ok := d["endHour"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.EndHour)
 		}
+		if v, ok := d["anchorTimestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AnchorTimestamp)
+		}
+		if v, ok := d["activeDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ActiveDays)
+		}
+		if v, ok := d["inactiveDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.InactiveDays)
+		}
 	}
 	return nil
 }
@@ -1363,6 +1375,9 @@ func NewRepeatSettingFromDict(data map[string]interface{}) RepeatSetting {
 		EndDayOfWeek:    core.CastString(data["endDayOfWeek"]),
 		BeginHour:       core.CastInt32(data["beginHour"]),
 		EndHour:         core.CastInt32(data["endHour"]),
+		AnchorTimestamp: core.CastInt64(data["anchorTimestamp"]),
+		ActiveDays:      core.CastInt32(data["activeDays"]),
+		InactiveDays:    core.CastInt32(data["inactiveDays"]),
 	}
 }
 
@@ -1396,6 +1411,18 @@ func (p RepeatSetting) ToDict() map[string]interface{} {
 	if p.EndHour != nil {
 		endHour = p.EndHour
 	}
+	var anchorTimestamp *int64
+	if p.AnchorTimestamp != nil {
+		anchorTimestamp = p.AnchorTimestamp
+	}
+	var activeDays *int32
+	if p.ActiveDays != nil {
+		activeDays = p.ActiveDays
+	}
+	var inactiveDays *int32
+	if p.InactiveDays != nil {
+		inactiveDays = p.InactiveDays
+	}
 	return map[string]interface{}{
 		"repeatType":      repeatType,
 		"beginDayOfMonth": beginDayOfMonth,
@@ -1404,6 +1431,9 @@ func (p RepeatSetting) ToDict() map[string]interface{} {
 		"endDayOfWeek":    endDayOfWeek,
 		"beginHour":       beginHour,
 		"endHour":         endHour,
+		"anchorTimestamp": anchorTimestamp,
+		"activeDays":      activeDays,
+		"inactiveDays":    inactiveDays,
 	}
 }
 
