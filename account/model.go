@@ -713,6 +713,192 @@ func CastTakeOversFromDict(data []TakeOver) []interface{} {
 	return v
 }
 
+type PlatformId struct {
+	PlatformId     *string `json:"platformId"`
+	UserId         *string `json:"userId"`
+	Type           *int32  `json:"type"`
+	UserIdentifier *string `json:"userIdentifier"`
+	CreatedAt      *int64  `json:"createdAt"`
+	Revision       *int64  `json:"revision"`
+}
+
+func (p *PlatformId) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = PlatformId{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = PlatformId{}
+	} else {
+		*p = PlatformId{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["platformId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PlatformId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PlatformId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PlatformId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PlatformId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PlatformId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PlatformId)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+		if v, ok := d["userIdentifier"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserIdentifier = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserIdentifier = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserIdentifier = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserIdentifier = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserIdentifier = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserIdentifier)
+				}
+			}
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
+func NewPlatformIdFromJson(data string) PlatformId {
+	req := PlatformId{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewPlatformIdFromDict(data map[string]interface{}) PlatformId {
+	return PlatformId{
+		PlatformId:     core.CastString(data["platformId"]),
+		UserId:         core.CastString(data["userId"]),
+		Type:           core.CastInt32(data["type"]),
+		UserIdentifier: core.CastString(data["userIdentifier"]),
+		CreatedAt:      core.CastInt64(data["createdAt"]),
+		Revision:       core.CastInt64(data["revision"]),
+	}
+}
+
+func (p PlatformId) ToDict() map[string]interface{} {
+
+	var platformId *string
+	if p.PlatformId != nil {
+		platformId = p.PlatformId
+	}
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var _type *int32
+	if p.Type != nil {
+		_type = p.Type
+	}
+	var userIdentifier *string
+	if p.UserIdentifier != nil {
+		userIdentifier = p.UserIdentifier
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	return map[string]interface{}{
+		"platformId":     platformId,
+		"userId":         userId,
+		"type":           _type,
+		"userIdentifier": userIdentifier,
+		"createdAt":      createdAt,
+		"revision":       revision,
+	}
+}
+
+func (p PlatformId) Pointer() *PlatformId {
+	return &p
+}
+
+func CastPlatformIds(data []interface{}) []PlatformId {
+	v := make([]PlatformId, 0)
+	for _, d := range data {
+		v = append(v, NewPlatformIdFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastPlatformIdsFromDict(data []PlatformId) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type DataOwner struct {
 	DataOwnerId *string `json:"dataOwnerId"`
 	UserId      *string `json:"userId"`
@@ -882,6 +1068,142 @@ func CastDataOwners(data []interface{}) []DataOwner {
 }
 
 func CastDataOwnersFromDict(data []DataOwner) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type PlatformUser struct {
+	Type           *int32  `json:"type"`
+	UserIdentifier *string `json:"userIdentifier"`
+	UserId         *string `json:"userId"`
+}
+
+func (p *PlatformUser) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = PlatformUser{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = PlatformUser{}
+	} else {
+		*p = PlatformUser{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+		if v, ok := d["userIdentifier"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserIdentifier = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserIdentifier = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserIdentifier = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserIdentifier = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserIdentifier = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserIdentifier)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewPlatformUserFromJson(data string) PlatformUser {
+	req := PlatformUser{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewPlatformUserFromDict(data map[string]interface{}) PlatformUser {
+	return PlatformUser{
+		Type:           core.CastInt32(data["type"]),
+		UserIdentifier: core.CastString(data["userIdentifier"]),
+		UserId:         core.CastString(data["userId"]),
+	}
+}
+
+func (p PlatformUser) ToDict() map[string]interface{} {
+
+	var _type *int32
+	if p.Type != nil {
+		_type = p.Type
+	}
+	var userIdentifier *string
+	if p.UserIdentifier != nil {
+		userIdentifier = p.UserIdentifier
+	}
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	return map[string]interface{}{
+		"type":           _type,
+		"userIdentifier": userIdentifier,
+		"userId":         userId,
+	}
+}
+
+func (p PlatformUser) Pointer() *PlatformUser {
+	return &p
+}
+
+func CastPlatformUsers(data []interface{}) []PlatformUser {
+	v := make([]PlatformUser, 0)
+	for _, d := range data {
+		v = append(v, NewPlatformUserFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastPlatformUsersFromDict(data []PlatformUser) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

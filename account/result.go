@@ -1090,6 +1090,357 @@ func (p DoTakeOverResult) Pointer() *DoTakeOverResult {
 	return &p
 }
 
+type DescribePlatformIdsResult struct {
+	Items         []PlatformId `json:"items"`
+	NextPageToken *string      `json:"nextPageToken"`
+}
+
+type DescribePlatformIdsAsyncResult struct {
+	result *DescribePlatformIdsResult
+	err    error
+}
+
+func NewDescribePlatformIdsResultFromJson(data string) DescribePlatformIdsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribePlatformIdsResultFromDict(dict)
+}
+
+func NewDescribePlatformIdsResultFromDict(data map[string]interface{}) DescribePlatformIdsResult {
+	return DescribePlatformIdsResult{
+		Items:         CastPlatformIds(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribePlatformIdsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastPlatformIdsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribePlatformIdsResult) Pointer() *DescribePlatformIdsResult {
+	return &p
+}
+
+type DescribePlatformIdsByUserIdResult struct {
+	Items         []PlatformId `json:"items"`
+	NextPageToken *string      `json:"nextPageToken"`
+}
+
+type DescribePlatformIdsByUserIdAsyncResult struct {
+	result *DescribePlatformIdsByUserIdResult
+	err    error
+}
+
+func NewDescribePlatformIdsByUserIdResultFromJson(data string) DescribePlatformIdsByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribePlatformIdsByUserIdResultFromDict(dict)
+}
+
+func NewDescribePlatformIdsByUserIdResultFromDict(data map[string]interface{}) DescribePlatformIdsByUserIdResult {
+	return DescribePlatformIdsByUserIdResult{
+		Items:         CastPlatformIds(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribePlatformIdsByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastPlatformIdsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribePlatformIdsByUserIdResult) Pointer() *DescribePlatformIdsByUserIdResult {
+	return &p
+}
+
+type CreatePlatformIdResult struct {
+	Item *PlatformId `json:"item"`
+}
+
+type CreatePlatformIdAsyncResult struct {
+	result *CreatePlatformIdResult
+	err    error
+}
+
+func NewCreatePlatformIdResultFromJson(data string) CreatePlatformIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreatePlatformIdResultFromDict(dict)
+}
+
+func NewCreatePlatformIdResultFromDict(data map[string]interface{}) CreatePlatformIdResult {
+	return CreatePlatformIdResult{
+		Item: NewPlatformIdFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p CreatePlatformIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p CreatePlatformIdResult) Pointer() *CreatePlatformIdResult {
+	return &p
+}
+
+type CreatePlatformIdByUserIdResult struct {
+	Item *PlatformId `json:"item"`
+}
+
+type CreatePlatformIdByUserIdAsyncResult struct {
+	result *CreatePlatformIdByUserIdResult
+	err    error
+}
+
+func NewCreatePlatformIdByUserIdResultFromJson(data string) CreatePlatformIdByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreatePlatformIdByUserIdResultFromDict(dict)
+}
+
+func NewCreatePlatformIdByUserIdResultFromDict(data map[string]interface{}) CreatePlatformIdByUserIdResult {
+	return CreatePlatformIdByUserIdResult{
+		Item: NewPlatformIdFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p CreatePlatformIdByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p CreatePlatformIdByUserIdResult) Pointer() *CreatePlatformIdByUserIdResult {
+	return &p
+}
+
+type GetPlatformIdResult struct {
+	Item *PlatformId `json:"item"`
+}
+
+type GetPlatformIdAsyncResult struct {
+	result *GetPlatformIdResult
+	err    error
+}
+
+func NewGetPlatformIdResultFromJson(data string) GetPlatformIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetPlatformIdResultFromDict(dict)
+}
+
+func NewGetPlatformIdResultFromDict(data map[string]interface{}) GetPlatformIdResult {
+	return GetPlatformIdResult{
+		Item: NewPlatformIdFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetPlatformIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetPlatformIdResult) Pointer() *GetPlatformIdResult {
+	return &p
+}
+
+type GetPlatformIdByUserIdResult struct {
+	Item *PlatformId `json:"item"`
+}
+
+type GetPlatformIdByUserIdAsyncResult struct {
+	result *GetPlatformIdByUserIdResult
+	err    error
+}
+
+func NewGetPlatformIdByUserIdResultFromJson(data string) GetPlatformIdByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetPlatformIdByUserIdResultFromDict(dict)
+}
+
+func NewGetPlatformIdByUserIdResultFromDict(data map[string]interface{}) GetPlatformIdByUserIdResult {
+	return GetPlatformIdByUserIdResult{
+		Item: NewPlatformIdFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetPlatformIdByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetPlatformIdByUserIdResult) Pointer() *GetPlatformIdByUserIdResult {
+	return &p
+}
+
+type FindPlatformIdResult struct {
+	Item *PlatformUser `json:"item"`
+}
+
+type FindPlatformIdAsyncResult struct {
+	result *FindPlatformIdResult
+	err    error
+}
+
+func NewFindPlatformIdResultFromJson(data string) FindPlatformIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFindPlatformIdResultFromDict(dict)
+}
+
+func NewFindPlatformIdResultFromDict(data map[string]interface{}) FindPlatformIdResult {
+	return FindPlatformIdResult{
+		Item: NewPlatformUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p FindPlatformIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p FindPlatformIdResult) Pointer() *FindPlatformIdResult {
+	return &p
+}
+
+type FindPlatformIdByUserIdResult struct {
+	Item *PlatformUser `json:"item"`
+}
+
+type FindPlatformIdByUserIdAsyncResult struct {
+	result *FindPlatformIdByUserIdResult
+	err    error
+}
+
+func NewFindPlatformIdByUserIdResultFromJson(data string) FindPlatformIdByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFindPlatformIdByUserIdResultFromDict(dict)
+}
+
+func NewFindPlatformIdByUserIdResultFromDict(data map[string]interface{}) FindPlatformIdByUserIdResult {
+	return FindPlatformIdByUserIdResult{
+		Item: NewPlatformUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p FindPlatformIdByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p FindPlatformIdByUserIdResult) Pointer() *FindPlatformIdByUserIdResult {
+	return &p
+}
+
+type DeletePlatformIdResult struct {
+	Item *PlatformId `json:"item"`
+}
+
+type DeletePlatformIdAsyncResult struct {
+	result *DeletePlatformIdResult
+	err    error
+}
+
+func NewDeletePlatformIdResultFromJson(data string) DeletePlatformIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeletePlatformIdResultFromDict(dict)
+}
+
+func NewDeletePlatformIdResultFromDict(data map[string]interface{}) DeletePlatformIdResult {
+	return DeletePlatformIdResult{
+		Item: NewPlatformIdFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeletePlatformIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeletePlatformIdResult) Pointer() *DeletePlatformIdResult {
+	return &p
+}
+
+type DeletePlatformIdByUserIdentifierResult struct {
+	Item *PlatformId `json:"item"`
+}
+
+type DeletePlatformIdByUserIdentifierAsyncResult struct {
+	result *DeletePlatformIdByUserIdentifierResult
+	err    error
+}
+
+func NewDeletePlatformIdByUserIdentifierResultFromJson(data string) DeletePlatformIdByUserIdentifierResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeletePlatformIdByUserIdentifierResultFromDict(dict)
+}
+
+func NewDeletePlatformIdByUserIdentifierResultFromDict(data map[string]interface{}) DeletePlatformIdByUserIdentifierResult {
+	return DeletePlatformIdByUserIdentifierResult{
+		Item: NewPlatformIdFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeletePlatformIdByUserIdentifierResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeletePlatformIdByUserIdentifierResult) Pointer() *DeletePlatformIdByUserIdentifierResult {
+	return &p
+}
+
+type DeletePlatformIdByUserIdResult struct {
+	Item *PlatformId `json:"item"`
+}
+
+type DeletePlatformIdByUserIdAsyncResult struct {
+	result *DeletePlatformIdByUserIdResult
+	err    error
+}
+
+func NewDeletePlatformIdByUserIdResultFromJson(data string) DeletePlatformIdByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeletePlatformIdByUserIdResultFromDict(dict)
+}
+
+func NewDeletePlatformIdByUserIdResultFromDict(data map[string]interface{}) DeletePlatformIdByUserIdResult {
+	return DeletePlatformIdByUserIdResult{
+		Item: NewPlatformIdFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeletePlatformIdByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeletePlatformIdByUserIdResult) Pointer() *DeletePlatformIdByUserIdResult {
+	return &p
+}
+
 type GetDataOwnerByUserIdResult struct {
 	Item *DataOwner `json:"item"`
 }
