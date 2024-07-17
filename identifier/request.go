@@ -1797,6 +1797,275 @@ func (p GetPasswordRequest) Pointer() *GetPasswordRequest {
 	return &p
 }
 
+type EnableMfaRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
+}
+
+func (p *EnableMfaRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = EnableMfaRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = EnableMfaRequest{}
+	} else {
+		*p = EnableMfaRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewEnableMfaRequestFromJson(data string) (EnableMfaRequest, error) {
+	req := EnableMfaRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return EnableMfaRequest{}, err
+	}
+	return req, nil
+}
+
+func NewEnableMfaRequestFromDict(data map[string]interface{}) EnableMfaRequest {
+	return EnableMfaRequest{
+		UserName: core.CastString(data["userName"]),
+	}
+}
+
+func (p EnableMfaRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userName": p.UserName,
+	}
+}
+
+func (p EnableMfaRequest) Pointer() *EnableMfaRequest {
+	return &p
+}
+
+type ChallengeMfaRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
+	Passcode        *string `json:"passcode"`
+}
+
+func (p *ChallengeMfaRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ChallengeMfaRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ChallengeMfaRequest{}
+	} else {
+		*p = ChallengeMfaRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserName)
+				}
+			}
+		}
+		if v, ok := d["passcode"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Passcode = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Passcode = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Passcode = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Passcode = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Passcode = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Passcode)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewChallengeMfaRequestFromJson(data string) (ChallengeMfaRequest, error) {
+	req := ChallengeMfaRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ChallengeMfaRequest{}, err
+	}
+	return req, nil
+}
+
+func NewChallengeMfaRequestFromDict(data map[string]interface{}) ChallengeMfaRequest {
+	return ChallengeMfaRequest{
+		UserName: core.CastString(data["userName"]),
+		Passcode: core.CastString(data["passcode"]),
+	}
+}
+
+func (p ChallengeMfaRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userName": p.UserName,
+		"passcode": p.Passcode,
+	}
+}
+
+func (p ChallengeMfaRequest) Pointer() *ChallengeMfaRequest {
+	return &p
+}
+
+type DisableMfaRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserName        *string `json:"userName"`
+}
+
+func (p *DisableMfaRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DisableMfaRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DisableMfaRequest{}
+	} else {
+		*p = DisableMfaRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDisableMfaRequestFromJson(data string) (DisableMfaRequest, error) {
+	req := DisableMfaRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DisableMfaRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDisableMfaRequestFromDict(data map[string]interface{}) DisableMfaRequest {
+	return DisableMfaRequest{
+		UserName: core.CastString(data["userName"]),
+	}
+}
+
+func (p DisableMfaRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userName": p.UserName,
+	}
+}
+
+func (p DisableMfaRequest) Pointer() *DisableMfaRequest {
+	return &p
+}
+
 type DeletePasswordRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`
@@ -2286,6 +2555,7 @@ type LoginByUserRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserName        *string `json:"userName"`
 	Password        *string `json:"password"`
+	Otp             *string `json:"otp"`
 }
 
 func (p *LoginByUserRequest) UnmarshalJSON(data []byte) error {
@@ -2356,6 +2626,29 @@ func (p *LoginByUserRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["otp"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Otp = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Otp = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Otp = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Otp = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Otp = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Otp)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -2373,6 +2666,7 @@ func NewLoginByUserRequestFromDict(data map[string]interface{}) LoginByUserReque
 	return LoginByUserRequest{
 		UserName: core.CastString(data["userName"]),
 		Password: core.CastString(data["password"]),
+		Otp:      core.CastString(data["otp"]),
 	}
 }
 
@@ -2380,6 +2674,7 @@ func (p LoginByUserRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"userName": p.UserName,
 		"password": p.Password,
+		"otp":      p.Otp,
 	}
 }
 
