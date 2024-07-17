@@ -154,6 +154,7 @@ func (p GetUserResult) Pointer() *GetUserResult {
 }
 
 type DeleteUserResult struct {
+	Item *User `json:"item"`
 }
 
 type DeleteUserAsyncResult struct {
@@ -168,11 +169,15 @@ func NewDeleteUserResultFromJson(data string) DeleteUserResult {
 }
 
 func NewDeleteUserResultFromDict(data map[string]interface{}) DeleteUserResult {
-	return DeleteUserResult{}
+	return DeleteUserResult{
+		Item: NewUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteUserResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteUserResult) Pointer() *DeleteUserResult {
@@ -345,6 +350,7 @@ func (p GetSecurityPolicyResult) Pointer() *GetSecurityPolicyResult {
 }
 
 type DeleteSecurityPolicyResult struct {
+	Item *SecurityPolicy `json:"item"`
 }
 
 type DeleteSecurityPolicyAsyncResult struct {
@@ -359,11 +365,15 @@ func NewDeleteSecurityPolicyResultFromJson(data string) DeleteSecurityPolicyResu
 }
 
 func NewDeleteSecurityPolicyResultFromDict(data map[string]interface{}) DeleteSecurityPolicyResult {
-	return DeleteSecurityPolicyResult{}
+	return DeleteSecurityPolicyResult{
+		Item: NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteSecurityPolicyResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteSecurityPolicyResult) Pointer() *DeleteSecurityPolicyResult {
@@ -472,6 +482,7 @@ func (p GetIdentifierResult) Pointer() *GetIdentifierResult {
 }
 
 type DeleteIdentifierResult struct {
+	Item *Identifier `json:"item"`
 }
 
 type DeleteIdentifierAsyncResult struct {
@@ -486,11 +497,15 @@ func NewDeleteIdentifierResultFromJson(data string) DeleteIdentifierResult {
 }
 
 func NewDeleteIdentifierResultFromDict(data map[string]interface{}) DeleteIdentifierResult {
-	return DeleteIdentifierResult{}
+	return DeleteIdentifierResult{
+		Item: NewIdentifierFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeleteIdentifierResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeleteIdentifierResult) Pointer() *DeleteIdentifierResult {
@@ -595,7 +610,104 @@ func (p GetPasswordResult) Pointer() *GetPasswordResult {
 	return &p
 }
 
+type EnableMfaResult struct {
+	Item           *Password `json:"item"`
+	ChallengeToken *string   `json:"challengeToken"`
+}
+
+type EnableMfaAsyncResult struct {
+	result *EnableMfaResult
+	err    error
+}
+
+func NewEnableMfaResultFromJson(data string) EnableMfaResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEnableMfaResultFromDict(dict)
+}
+
+func NewEnableMfaResultFromDict(data map[string]interface{}) EnableMfaResult {
+	return EnableMfaResult{
+		Item:           NewPasswordFromDict(core.CastMap(data["item"])).Pointer(),
+		ChallengeToken: core.CastString(data["challengeToken"]),
+	}
+}
+
+func (p EnableMfaResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":           p.Item.ToDict(),
+		"challengeToken": p.ChallengeToken,
+	}
+}
+
+func (p EnableMfaResult) Pointer() *EnableMfaResult {
+	return &p
+}
+
+type ChallengeMfaResult struct {
+	Item *Password `json:"item"`
+}
+
+type ChallengeMfaAsyncResult struct {
+	result *ChallengeMfaResult
+	err    error
+}
+
+func NewChallengeMfaResultFromJson(data string) ChallengeMfaResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewChallengeMfaResultFromDict(dict)
+}
+
+func NewChallengeMfaResultFromDict(data map[string]interface{}) ChallengeMfaResult {
+	return ChallengeMfaResult{
+		Item: NewPasswordFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p ChallengeMfaResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p ChallengeMfaResult) Pointer() *ChallengeMfaResult {
+	return &p
+}
+
+type DisableMfaResult struct {
+	Item *Password `json:"item"`
+}
+
+type DisableMfaAsyncResult struct {
+	result *DisableMfaResult
+	err    error
+}
+
+func NewDisableMfaResultFromJson(data string) DisableMfaResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDisableMfaResultFromDict(dict)
+}
+
+func NewDisableMfaResultFromDict(data map[string]interface{}) DisableMfaResult {
+	return DisableMfaResult{
+		Item: NewPasswordFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DisableMfaResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DisableMfaResult) Pointer() *DisableMfaResult {
+	return &p
+}
+
 type DeletePasswordResult struct {
+	Item *Password `json:"item"`
 }
 
 type DeletePasswordAsyncResult struct {
@@ -610,11 +722,15 @@ func NewDeletePasswordResultFromJson(data string) DeletePasswordResult {
 }
 
 func NewDeletePasswordResultFromDict(data map[string]interface{}) DeletePasswordResult {
-	return DeletePasswordResult{}
+	return DeletePasswordResult{
+		Item: NewPasswordFromDict(core.CastMap(data["item"])).Pointer(),
+	}
 }
 
 func (p DeletePasswordResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
 }
 
 func (p DeletePasswordResult) Pointer() *DeletePasswordResult {
