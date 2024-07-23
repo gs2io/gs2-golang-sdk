@@ -2483,6 +2483,112 @@ func CastSendMemberRequestsFromDict(data []SendMemberRequest) []interface{} {
 	return v
 }
 
+type IgnoreUser struct {
+	UserId    *string `json:"userId"`
+	CreatedAt *int64  `json:"createdAt"`
+}
+
+func (p *IgnoreUser) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = IgnoreUser{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = IgnoreUser{}
+	} else {
+		*p = IgnoreUser{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+	}
+	return nil
+}
+
+func NewIgnoreUserFromJson(data string) IgnoreUser {
+	req := IgnoreUser{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewIgnoreUserFromDict(data map[string]interface{}) IgnoreUser {
+	return IgnoreUser{
+		UserId:    core.CastString(data["userId"]),
+		CreatedAt: core.CastInt64(data["createdAt"]),
+	}
+}
+
+func (p IgnoreUser) ToDict() map[string]interface{} {
+
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	return map[string]interface{}{
+		"userId":    userId,
+		"createdAt": createdAt,
+	}
+}
+
+func (p IgnoreUser) Pointer() *IgnoreUser {
+	return &p
+}
+
+func CastIgnoreUsers(data []interface{}) []IgnoreUser {
+	v := make([]IgnoreUser, 0)
+	for _, d := range data {
+		v = append(v, NewIgnoreUserFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastIgnoreUsersFromDict(data []IgnoreUser) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type TransactionSetting struct {
 	EnableAutoRun          *bool   `json:"enableAutoRun"`
 	DistributorNamespaceId *string `json:"distributorNamespaceId"`

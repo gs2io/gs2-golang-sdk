@@ -7847,3 +7847,858 @@ func (p Gs2GuildRestClient) DeleteRequestByUserId(
 	asyncResult := <-callback
 	return asyncResult.result, asyncResult.err
 }
+
+func describeIgnoreUsersAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeIgnoreUsersAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeIgnoreUsersAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeIgnoreUsersResult
+	if asyncResult.Err != nil {
+		callback <- DescribeIgnoreUsersAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeIgnoreUsersAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeIgnoreUsersAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) DescribeIgnoreUsersAsync(
+	request *DescribeIgnoreUsersRequest,
+	callback chan<- DescribeIgnoreUsersAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/me/ignore/user"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+
+	go describeIgnoreUsersAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) DescribeIgnoreUsers(
+	request *DescribeIgnoreUsersRequest,
+) (*DescribeIgnoreUsersResult, error) {
+	callback := make(chan DescribeIgnoreUsersAsyncResult, 1)
+	go p.DescribeIgnoreUsersAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func describeIgnoreUsersByGuildNameAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeIgnoreUsersByGuildNameAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeIgnoreUsersByGuildNameAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeIgnoreUsersByGuildNameResult
+	if asyncResult.Err != nil {
+		callback <- DescribeIgnoreUsersByGuildNameAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeIgnoreUsersByGuildNameAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeIgnoreUsersByGuildNameAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) DescribeIgnoreUsersByGuildNameAsync(
+	request *DescribeIgnoreUsersByGuildNameRequest,
+	callback chan<- DescribeIgnoreUsersByGuildNameAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/{guildName}/ignore/user"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.PageToken != nil {
+		queryStrings["pageToken"] = core.ToString(*request.PageToken)
+	}
+	if request.Limit != nil {
+		queryStrings["limit"] = core.ToString(*request.Limit)
+	}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go describeIgnoreUsersByGuildNameAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) DescribeIgnoreUsersByGuildName(
+	request *DescribeIgnoreUsersByGuildNameRequest,
+) (*DescribeIgnoreUsersByGuildNameResult, error) {
+	callback := make(chan DescribeIgnoreUsersByGuildNameAsyncResult, 1)
+	go p.DescribeIgnoreUsersByGuildNameAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getIgnoreUserAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetIgnoreUserAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetIgnoreUserAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetIgnoreUserResult
+	if asyncResult.Err != nil {
+		callback <- GetIgnoreUserAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetIgnoreUserAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetIgnoreUserAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) GetIgnoreUserAsync(
+	request *GetIgnoreUserRequest,
+	callback chan<- GetIgnoreUserAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/me/ignore/user/{userId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+
+	go getIgnoreUserAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) GetIgnoreUser(
+	request *GetIgnoreUserRequest,
+) (*GetIgnoreUserResult, error) {
+	callback := make(chan GetIgnoreUserAsyncResult, 1)
+	go p.GetIgnoreUserAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getIgnoreUserByGuildNameAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetIgnoreUserByGuildNameAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetIgnoreUserByGuildNameAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetIgnoreUserByGuildNameResult
+	if asyncResult.Err != nil {
+		callback <- GetIgnoreUserByGuildNameAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetIgnoreUserByGuildNameAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetIgnoreUserByGuildNameAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) GetIgnoreUserByGuildNameAsync(
+	request *GetIgnoreUserByGuildNameRequest,
+	callback chan<- GetIgnoreUserByGuildNameAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/{guildName}/ignore/user/{userId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go getIgnoreUserByGuildNameAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) GetIgnoreUserByGuildName(
+	request *GetIgnoreUserByGuildNameRequest,
+) (*GetIgnoreUserByGuildNameResult, error) {
+	callback := make(chan GetIgnoreUserByGuildNameAsyncResult, 1)
+	go p.GetIgnoreUserByGuildNameAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func addIgnoreUserAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- AddIgnoreUserAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AddIgnoreUserAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AddIgnoreUserResult
+	if asyncResult.Err != nil {
+		callback <- AddIgnoreUserAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AddIgnoreUserAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- AddIgnoreUserAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) AddIgnoreUserAsync(
+	request *AddIgnoreUserRequest,
+	callback chan<- AddIgnoreUserAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/me/ignore/user/{userId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go addIgnoreUserAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) AddIgnoreUser(
+	request *AddIgnoreUserRequest,
+) (*AddIgnoreUserResult, error) {
+	callback := make(chan AddIgnoreUserAsyncResult, 1)
+	go p.AddIgnoreUserAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func addIgnoreUserByGuildNameAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- AddIgnoreUserByGuildNameAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AddIgnoreUserByGuildNameAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AddIgnoreUserByGuildNameResult
+	if asyncResult.Err != nil {
+		callback <- AddIgnoreUserByGuildNameAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AddIgnoreUserByGuildNameAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- AddIgnoreUserByGuildNameAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) AddIgnoreUserByGuildNameAsync(
+	request *AddIgnoreUserByGuildNameRequest,
+	callback chan<- AddIgnoreUserByGuildNameAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/{guildName}/ignore/user/{userId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go addIgnoreUserByGuildNameAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) AddIgnoreUserByGuildName(
+	request *AddIgnoreUserByGuildNameRequest,
+) (*AddIgnoreUserByGuildNameResult, error) {
+	callback := make(chan AddIgnoreUserByGuildNameAsyncResult, 1)
+	go p.AddIgnoreUserByGuildNameAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteIgnoreUserAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteIgnoreUserAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteIgnoreUserAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteIgnoreUserResult
+	if asyncResult.Err != nil {
+		callback <- DeleteIgnoreUserAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteIgnoreUserAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DeleteIgnoreUserAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) DeleteIgnoreUserAsync(
+	request *DeleteIgnoreUserRequest,
+	callback chan<- DeleteIgnoreUserAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/me/ignore/user/{userId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go deleteIgnoreUserAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) DeleteIgnoreUser(
+	request *DeleteIgnoreUserRequest,
+) (*DeleteIgnoreUserResult, error) {
+	callback := make(chan DeleteIgnoreUserAsyncResult, 1)
+	go p.DeleteIgnoreUserAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func deleteIgnoreUserByGuildNameAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteIgnoreUserByGuildNameAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteIgnoreUserByGuildNameAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteIgnoreUserByGuildNameResult
+	if asyncResult.Err != nil {
+		callback <- DeleteIgnoreUserByGuildNameAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteIgnoreUserByGuildNameAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DeleteIgnoreUserByGuildNameAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) DeleteIgnoreUserByGuildNameAsync(
+	request *DeleteIgnoreUserByGuildNameRequest,
+	callback chan<- DeleteIgnoreUserByGuildNameAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/{guildName}/ignore/user/{userId}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go deleteIgnoreUserByGuildNameAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) DeleteIgnoreUserByGuildName(
+	request *DeleteIgnoreUserByGuildNameRequest,
+) (*DeleteIgnoreUserByGuildNameResult, error) {
+	callback := make(chan DeleteIgnoreUserByGuildNameAsyncResult, 1)
+	go p.DeleteIgnoreUserByGuildNameAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}

@@ -2369,3 +2369,267 @@ func (p DeleteRequestByUserIdResult) ToDict() map[string]interface{} {
 func (p DeleteRequestByUserIdResult) Pointer() *DeleteRequestByUserIdResult {
 	return &p
 }
+
+type DescribeIgnoreUsersResult struct {
+	Items         []IgnoreUser `json:"items"`
+	NextPageToken *string      `json:"nextPageToken"`
+}
+
+type DescribeIgnoreUsersAsyncResult struct {
+	result *DescribeIgnoreUsersResult
+	err    error
+}
+
+func NewDescribeIgnoreUsersResultFromJson(data string) DescribeIgnoreUsersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeIgnoreUsersResultFromDict(dict)
+}
+
+func NewDescribeIgnoreUsersResultFromDict(data map[string]interface{}) DescribeIgnoreUsersResult {
+	return DescribeIgnoreUsersResult{
+		Items:         CastIgnoreUsers(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeIgnoreUsersResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastIgnoreUsersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeIgnoreUsersResult) Pointer() *DescribeIgnoreUsersResult {
+	return &p
+}
+
+type DescribeIgnoreUsersByGuildNameResult struct {
+	Items         []IgnoreUser `json:"items"`
+	NextPageToken *string      `json:"nextPageToken"`
+}
+
+type DescribeIgnoreUsersByGuildNameAsyncResult struct {
+	result *DescribeIgnoreUsersByGuildNameResult
+	err    error
+}
+
+func NewDescribeIgnoreUsersByGuildNameResultFromJson(data string) DescribeIgnoreUsersByGuildNameResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeIgnoreUsersByGuildNameResultFromDict(dict)
+}
+
+func NewDescribeIgnoreUsersByGuildNameResultFromDict(data map[string]interface{}) DescribeIgnoreUsersByGuildNameResult {
+	return DescribeIgnoreUsersByGuildNameResult{
+		Items:         CastIgnoreUsers(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeIgnoreUsersByGuildNameResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastIgnoreUsersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeIgnoreUsersByGuildNameResult) Pointer() *DescribeIgnoreUsersByGuildNameResult {
+	return &p
+}
+
+type GetIgnoreUserResult struct {
+	Item *IgnoreUser `json:"item"`
+}
+
+type GetIgnoreUserAsyncResult struct {
+	result *GetIgnoreUserResult
+	err    error
+}
+
+func NewGetIgnoreUserResultFromJson(data string) GetIgnoreUserResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetIgnoreUserResultFromDict(dict)
+}
+
+func NewGetIgnoreUserResultFromDict(data map[string]interface{}) GetIgnoreUserResult {
+	return GetIgnoreUserResult{
+		Item: NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetIgnoreUserResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetIgnoreUserResult) Pointer() *GetIgnoreUserResult {
+	return &p
+}
+
+type GetIgnoreUserByGuildNameResult struct {
+	Item *IgnoreUser `json:"item"`
+}
+
+type GetIgnoreUserByGuildNameAsyncResult struct {
+	result *GetIgnoreUserByGuildNameResult
+	err    error
+}
+
+func NewGetIgnoreUserByGuildNameResultFromJson(data string) GetIgnoreUserByGuildNameResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetIgnoreUserByGuildNameResultFromDict(dict)
+}
+
+func NewGetIgnoreUserByGuildNameResultFromDict(data map[string]interface{}) GetIgnoreUserByGuildNameResult {
+	return GetIgnoreUserByGuildNameResult{
+		Item: NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetIgnoreUserByGuildNameResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetIgnoreUserByGuildNameResult) Pointer() *GetIgnoreUserByGuildNameResult {
+	return &p
+}
+
+type AddIgnoreUserResult struct {
+	Item  *IgnoreUser `json:"item"`
+	Guild *Guild      `json:"guild"`
+}
+
+type AddIgnoreUserAsyncResult struct {
+	result *AddIgnoreUserResult
+	err    error
+}
+
+func NewAddIgnoreUserResultFromJson(data string) AddIgnoreUserResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddIgnoreUserResultFromDict(dict)
+}
+
+func NewAddIgnoreUserResultFromDict(data map[string]interface{}) AddIgnoreUserResult {
+	return AddIgnoreUserResult{
+		Item:  NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+	}
+}
+
+func (p AddIgnoreUserResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":  p.Item.ToDict(),
+		"guild": p.Guild.ToDict(),
+	}
+}
+
+func (p AddIgnoreUserResult) Pointer() *AddIgnoreUserResult {
+	return &p
+}
+
+type AddIgnoreUserByGuildNameResult struct {
+	Item  *IgnoreUser `json:"item"`
+	Guild *Guild      `json:"guild"`
+}
+
+type AddIgnoreUserByGuildNameAsyncResult struct {
+	result *AddIgnoreUserByGuildNameResult
+	err    error
+}
+
+func NewAddIgnoreUserByGuildNameResultFromJson(data string) AddIgnoreUserByGuildNameResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAddIgnoreUserByGuildNameResultFromDict(dict)
+}
+
+func NewAddIgnoreUserByGuildNameResultFromDict(data map[string]interface{}) AddIgnoreUserByGuildNameResult {
+	return AddIgnoreUserByGuildNameResult{
+		Item:  NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+	}
+}
+
+func (p AddIgnoreUserByGuildNameResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":  p.Item.ToDict(),
+		"guild": p.Guild.ToDict(),
+	}
+}
+
+func (p AddIgnoreUserByGuildNameResult) Pointer() *AddIgnoreUserByGuildNameResult {
+	return &p
+}
+
+type DeleteIgnoreUserResult struct {
+	Item *IgnoreUser `json:"item"`
+}
+
+type DeleteIgnoreUserAsyncResult struct {
+	result *DeleteIgnoreUserResult
+	err    error
+}
+
+func NewDeleteIgnoreUserResultFromJson(data string) DeleteIgnoreUserResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteIgnoreUserResultFromDict(dict)
+}
+
+func NewDeleteIgnoreUserResultFromDict(data map[string]interface{}) DeleteIgnoreUserResult {
+	return DeleteIgnoreUserResult{
+		Item: NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeleteIgnoreUserResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeleteIgnoreUserResult) Pointer() *DeleteIgnoreUserResult {
+	return &p
+}
+
+type DeleteIgnoreUserByGuildNameResult struct {
+	Item *IgnoreUser `json:"item"`
+}
+
+type DeleteIgnoreUserByGuildNameAsyncResult struct {
+	result *DeleteIgnoreUserByGuildNameResult
+	err    error
+}
+
+func NewDeleteIgnoreUserByGuildNameResultFromJson(data string) DeleteIgnoreUserByGuildNameResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteIgnoreUserByGuildNameResultFromDict(dict)
+}
+
+func NewDeleteIgnoreUserByGuildNameResultFromDict(data map[string]interface{}) DeleteIgnoreUserByGuildNameResult {
+	return DeleteIgnoreUserByGuildNameResult{
+		Item: NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeleteIgnoreUserByGuildNameResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeleteIgnoreUserByGuildNameResult) Pointer() *DeleteIgnoreUserByGuildNameResult {
+	return &p
+}
