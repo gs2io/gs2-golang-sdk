@@ -695,9 +695,6 @@ func (p Gs2InboxRestClient) DumpUserDataByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -790,9 +787,6 @@ func (p Gs2InboxRestClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
@@ -887,9 +881,6 @@ func (p Gs2InboxRestClient) CleanUserDataByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -983,9 +974,6 @@ func (p Gs2InboxRestClient) CheckCleanUserDataByUserIdAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
-	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1078,9 +1066,6 @@ func (p Gs2InboxRestClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
@@ -1177,9 +1162,6 @@ func (p Gs2InboxRestClient) ImportUserDataByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
@@ -1278,9 +1260,6 @@ func (p Gs2InboxRestClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
-	}
-	if request.DuplicationAvoider != nil {
-		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
 	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)

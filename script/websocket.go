@@ -1224,9 +1224,6 @@ func (p Gs2ScriptWebSocketClient) InvokeScriptAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
 
 	go p.invokeScriptAsyncHandler(
 		&core.WebSocketNetworkJob{

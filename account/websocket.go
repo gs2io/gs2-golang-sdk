@@ -627,9 +627,6 @@ func (p Gs2AccountWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
 
 	go p.dumpUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -713,9 +710,6 @@ func (p Gs2AccountWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
 
 	go p.checkDumpUserDataByUserIdAsyncHandler(
@@ -801,9 +795,6 @@ func (p Gs2AccountWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
 
 	go p.cleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -888,9 +879,6 @@ func (p Gs2AccountWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
 
 	go p.checkCleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -974,9 +962,6 @@ func (p Gs2AccountWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
 
 	go p.prepareImportUserDataByUserIdAsyncHandler(
@@ -1065,9 +1050,6 @@ func (p Gs2AccountWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
-	}
 
 	go p.importUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1154,9 +1136,6 @@ func (p Gs2AccountWebSocketClient) CheckImportUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
-	}
-	if request.DuplicationAvoider != nil {
-		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
 
 	go p.checkImportUserDataByUserIdAsyncHandler(

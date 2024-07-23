@@ -696,12 +696,11 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type DumpUserDataByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	UserId             *string `json:"userId"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserId          *string `json:"userId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func (p *DumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -804,12 +803,11 @@ func (p DumpUserDataByUserIdRequest) Pointer() *DumpUserDataByUserIdRequest {
 }
 
 type CheckDumpUserDataByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	UserId             *string `json:"userId"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserId          *string `json:"userId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func (p *CheckDumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -912,12 +910,11 @@ func (p CheckDumpUserDataByUserIdRequest) Pointer() *CheckDumpUserDataByUserIdRe
 }
 
 type CleanUserDataByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	UserId             *string `json:"userId"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserId          *string `json:"userId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func (p *CleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1020,12 +1017,11 @@ func (p CleanUserDataByUserIdRequest) Pointer() *CleanUserDataByUserIdRequest {
 }
 
 type CheckCleanUserDataByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	UserId             *string `json:"userId"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserId          *string `json:"userId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func (p *CheckCleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1128,12 +1124,11 @@ func (p CheckCleanUserDataByUserIdRequest) Pointer() *CheckCleanUserDataByUserId
 }
 
 type PrepareImportUserDataByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	UserId             *string `json:"userId"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserId          *string `json:"userId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func (p *PrepareImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1236,13 +1231,12 @@ func (p PrepareImportUserDataByUserIdRequest) Pointer() *PrepareImportUserDataBy
 }
 
 type ImportUserDataByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	UserId             *string `json:"userId"`
-	UploadToken        *string `json:"uploadToken"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserId          *string `json:"userId"`
+	UploadToken     *string `json:"uploadToken"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func (p *ImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1370,13 +1364,12 @@ func (p ImportUserDataByUserIdRequest) Pointer() *ImportUserDataByUserIdRequest 
 }
 
 type CheckImportUserDataByUserIdRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	UserId             *string `json:"userId"`
-	UploadToken        *string `json:"uploadToken"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	UserId          *string `json:"userId"`
+	UploadToken     *string `json:"uploadToken"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func (p *CheckImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
