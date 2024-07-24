@@ -4985,15 +4985,16 @@ func (p PutScoreRequest) Pointer() *PutScoreRequest {
 }
 
 type PutScoreByUserIdRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	CategoryName    *string `json:"categoryName"`
-	UserId          *string `json:"userId"`
-	Score           *int64  `json:"score"`
-	Metadata        *string `json:"metadata"`
-	TimeOffsetToken *string `json:"timeOffsetToken"`
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	CategoryName       *string `json:"categoryName"`
+	UserId             *string `json:"userId"`
+	Score              *int64  `json:"score"`
+	Metadata           *string `json:"metadata"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func (p *PutScoreByUserIdRequest) UnmarshalJSON(data []byte) error {

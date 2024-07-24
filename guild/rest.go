@@ -192,6 +192,18 @@ func (p Gs2GuildRestClient) CreateNamespaceAsync(
 	if request.RemoveRequestNotification != nil {
 		bodies["removeRequestNotification"] = request.RemoveRequestNotification.ToDict()
 	}
+	if request.CreateGuildScript != nil {
+		bodies["createGuildScript"] = request.CreateGuildScript.ToDict()
+	}
+	if request.JoinGuildScript != nil {
+		bodies["joinGuildScript"] = request.JoinGuildScript.ToDict()
+	}
+	if request.LeaveGuildScript != nil {
+		bodies["leaveGuildScript"] = request.LeaveGuildScript.ToDict()
+	}
+	if request.ChangeRoleScript != nil {
+		bodies["changeRoleScript"] = request.ChangeRoleScript.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -482,6 +494,18 @@ func (p Gs2GuildRestClient) UpdateNamespaceAsync(
 	}
 	if request.RemoveRequestNotification != nil {
 		bodies["removeRequestNotification"] = request.RemoveRequestNotification.ToDict()
+	}
+	if request.CreateGuildScript != nil {
+		bodies["createGuildScript"] = request.CreateGuildScript.ToDict()
+	}
+	if request.JoinGuildScript != nil {
+		bodies["joinGuildScript"] = request.JoinGuildScript.ToDict()
+	}
+	if request.LeaveGuildScript != nil {
+		bodies["leaveGuildScript"] = request.LeaveGuildScript.ToDict()
+	}
+	if request.ChangeRoleScript != nil {
+		bodies["changeRoleScript"] = request.ChangeRoleScript.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
@@ -1436,6 +1460,9 @@ func (p Gs2GuildRestClient) CreateGuildModelMasterAsync(
 	if request.MaximumMemberCount != nil {
 		bodies["maximumMemberCount"] = *request.MaximumMemberCount
 	}
+	if request.InactivityPeriodDays != nil {
+		bodies["inactivityPeriodDays"] = *request.InactivityPeriodDays
+	}
 	if request.Roles != nil {
 		var _roles []interface{}
 		for _, item := range request.Roles {
@@ -1653,6 +1680,9 @@ func (p Gs2GuildRestClient) UpdateGuildModelMasterAsync(
 	}
 	if request.MaximumMemberCount != nil {
 		bodies["maximumMemberCount"] = *request.MaximumMemberCount
+	}
+	if request.InactivityPeriodDays != nil {
+		bodies["inactivityPeriodDays"] = *request.InactivityPeriodDays
 	}
 	if request.Roles != nil {
 		var _roles []interface{}
@@ -5750,6 +5780,408 @@ func (p Gs2GuildRestClient) WithdrawalByUserId(
 ) (*WithdrawalByUserIdResult, error) {
 	callback := make(chan WithdrawalByUserIdAsyncResult, 1)
 	go p.WithdrawalByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getLastGuildMasterActivityAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetLastGuildMasterActivityAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetLastGuildMasterActivityAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetLastGuildMasterActivityResult
+	if asyncResult.Err != nil {
+		callback <- GetLastGuildMasterActivityAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetLastGuildMasterActivityAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetLastGuildMasterActivityAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) GetLastGuildMasterActivityAsync(
+	request *GetLastGuildMasterActivityRequest,
+	callback chan<- GetLastGuildMasterActivityAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/me/activity/guildMaster/last"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+
+	go getLastGuildMasterActivityAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) GetLastGuildMasterActivity(
+	request *GetLastGuildMasterActivityRequest,
+) (*GetLastGuildMasterActivityResult, error) {
+	callback := make(chan GetLastGuildMasterActivityAsyncResult, 1)
+	go p.GetLastGuildMasterActivityAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getLastGuildMasterActivityByGuildNameAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetLastGuildMasterActivityByGuildNameAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetLastGuildMasterActivityByGuildNameAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetLastGuildMasterActivityByGuildNameResult
+	if asyncResult.Err != nil {
+		callback <- GetLastGuildMasterActivityByGuildNameAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetLastGuildMasterActivityByGuildNameAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetLastGuildMasterActivityByGuildNameAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) GetLastGuildMasterActivityByGuildNameAsync(
+	request *GetLastGuildMasterActivityByGuildNameRequest,
+	callback chan<- GetLastGuildMasterActivityByGuildNameAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/{guildName}/activity/guildMaster/last"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go getLastGuildMasterActivityByGuildNameAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) GetLastGuildMasterActivityByGuildName(
+	request *GetLastGuildMasterActivityByGuildNameRequest,
+) (*GetLastGuildMasterActivityByGuildNameResult, error) {
+	callback := make(chan GetLastGuildMasterActivityByGuildNameAsyncResult, 1)
+	go p.GetLastGuildMasterActivityByGuildNameAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func promoteSeniorMemberAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- PromoteSeniorMemberAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PromoteSeniorMemberAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PromoteSeniorMemberResult
+	if asyncResult.Err != nil {
+		callback <- PromoteSeniorMemberAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PromoteSeniorMemberAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- PromoteSeniorMemberAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) PromoteSeniorMemberAsync(
+	request *PromoteSeniorMemberRequest,
+	callback chan<- PromoteSeniorMemberAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/me/promote"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go promoteSeniorMemberAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) PromoteSeniorMember(
+	request *PromoteSeniorMemberRequest,
+) (*PromoteSeniorMemberResult, error) {
+	callback := make(chan PromoteSeniorMemberAsyncResult, 1)
+	go p.PromoteSeniorMemberAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func promoteSeniorMemberByGuildNameAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- PromoteSeniorMemberByGuildNameAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PromoteSeniorMemberByGuildNameAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PromoteSeniorMemberByGuildNameResult
+	if asyncResult.Err != nil {
+		callback <- PromoteSeniorMemberByGuildNameAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PromoteSeniorMemberByGuildNameAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- PromoteSeniorMemberByGuildNameAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) PromoteSeniorMemberByGuildNameAsync(
+	request *PromoteSeniorMemberByGuildNameRequest,
+	callback chan<- PromoteSeniorMemberByGuildNameAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/{guildName}/promote"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go promoteSeniorMemberByGuildNameAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) PromoteSeniorMemberByGuildName(
+	request *PromoteSeniorMemberByGuildNameRequest,
+) (*PromoteSeniorMemberByGuildNameResult, error) {
+	callback := make(chan PromoteSeniorMemberByGuildNameAsyncResult, 1)
+	go p.PromoteSeniorMemberByGuildNameAsync(
 		request,
 		callback,
 	)

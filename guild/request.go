@@ -121,6 +121,10 @@ type CreateNamespaceRequest struct {
 	ChangeMemberNotification   *NotificationSetting `json:"changeMemberNotification"`
 	ReceiveRequestNotification *NotificationSetting `json:"receiveRequestNotification"`
 	RemoveRequestNotification  *NotificationSetting `json:"removeRequestNotification"`
+	CreateGuildScript          *ScriptSetting       `json:"createGuildScript"`
+	JoinGuildScript            *ScriptSetting       `json:"joinGuildScript"`
+	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
+	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
 	LogSetting                 *LogSetting          `json:"logSetting"`
 }
 
@@ -207,6 +211,18 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["removeRequestNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RemoveRequestNotification)
 		}
+		if v, ok := d["createGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreateGuildScript)
+		}
+		if v, ok := d["joinGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.JoinGuildScript)
+		}
+		if v, ok := d["leaveGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.LeaveGuildScript)
+		}
+		if v, ok := d["changeRoleScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangeRoleScript)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -232,6 +248,10 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 		ChangeMemberNotification:   NewNotificationSettingFromDict(core.CastMap(data["changeMemberNotification"])).Pointer(),
 		ReceiveRequestNotification: NewNotificationSettingFromDict(core.CastMap(data["receiveRequestNotification"])).Pointer(),
 		RemoveRequestNotification:  NewNotificationSettingFromDict(core.CastMap(data["removeRequestNotification"])).Pointer(),
+		CreateGuildScript:          NewScriptSettingFromDict(core.CastMap(data["createGuildScript"])).Pointer(),
+		JoinGuildScript:            NewScriptSettingFromDict(core.CastMap(data["joinGuildScript"])).Pointer(),
+		LeaveGuildScript:           NewScriptSettingFromDict(core.CastMap(data["leaveGuildScript"])).Pointer(),
+		ChangeRoleScript:           NewScriptSettingFromDict(core.CastMap(data["changeRoleScript"])).Pointer(),
 		LogSetting:                 NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
@@ -245,6 +265,10 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"changeMemberNotification":   p.ChangeMemberNotification.ToDict(),
 		"receiveRequestNotification": p.ReceiveRequestNotification.ToDict(),
 		"removeRequestNotification":  p.RemoveRequestNotification.ToDict(),
+		"createGuildScript":          p.CreateGuildScript.ToDict(),
+		"joinGuildScript":            p.JoinGuildScript.ToDict(),
+		"leaveGuildScript":           p.LeaveGuildScript.ToDict(),
+		"changeRoleScript":           p.ChangeRoleScript.ToDict(),
 		"logSetting":                 p.LogSetting.ToDict(),
 	}
 }
@@ -426,6 +450,10 @@ type UpdateNamespaceRequest struct {
 	ChangeMemberNotification   *NotificationSetting `json:"changeMemberNotification"`
 	ReceiveRequestNotification *NotificationSetting `json:"receiveRequestNotification"`
 	RemoveRequestNotification  *NotificationSetting `json:"removeRequestNotification"`
+	CreateGuildScript          *ScriptSetting       `json:"createGuildScript"`
+	JoinGuildScript            *ScriptSetting       `json:"joinGuildScript"`
+	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
+	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
 	LogSetting                 *LogSetting          `json:"logSetting"`
 }
 
@@ -512,6 +540,18 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["removeRequestNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RemoveRequestNotification)
 		}
+		if v, ok := d["createGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreateGuildScript)
+		}
+		if v, ok := d["joinGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.JoinGuildScript)
+		}
+		if v, ok := d["leaveGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.LeaveGuildScript)
+		}
+		if v, ok := d["changeRoleScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangeRoleScript)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -537,6 +577,10 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 		ChangeMemberNotification:   NewNotificationSettingFromDict(core.CastMap(data["changeMemberNotification"])).Pointer(),
 		ReceiveRequestNotification: NewNotificationSettingFromDict(core.CastMap(data["receiveRequestNotification"])).Pointer(),
 		RemoveRequestNotification:  NewNotificationSettingFromDict(core.CastMap(data["removeRequestNotification"])).Pointer(),
+		CreateGuildScript:          NewScriptSettingFromDict(core.CastMap(data["createGuildScript"])).Pointer(),
+		JoinGuildScript:            NewScriptSettingFromDict(core.CastMap(data["joinGuildScript"])).Pointer(),
+		LeaveGuildScript:           NewScriptSettingFromDict(core.CastMap(data["leaveGuildScript"])).Pointer(),
+		ChangeRoleScript:           NewScriptSettingFromDict(core.CastMap(data["changeRoleScript"])).Pointer(),
 		LogSetting:                 NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 	}
 }
@@ -550,6 +594,10 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"changeMemberNotification":   p.ChangeMemberNotification.ToDict(),
 		"receiveRequestNotification": p.ReceiveRequestNotification.ToDict(),
 		"removeRequestNotification":  p.RemoveRequestNotification.ToDict(),
+		"createGuildScript":          p.CreateGuildScript.ToDict(),
+		"joinGuildScript":            p.JoinGuildScript.ToDict(),
+		"leaveGuildScript":           p.LeaveGuildScript.ToDict(),
+		"changeRoleScript":           p.ChangeRoleScript.ToDict(),
 		"logSetting":                 p.LogSetting.ToDict(),
 	}
 }
@@ -1563,6 +1611,7 @@ type CreateGuildModelMasterRequest struct {
 	Metadata                  *string     `json:"metadata"`
 	DefaultMaximumMemberCount *int32      `json:"defaultMaximumMemberCount"`
 	MaximumMemberCount        *int32      `json:"maximumMemberCount"`
+	InactivityPeriodDays      *int32      `json:"inactivityPeriodDays"`
 	Roles                     []RoleModel `json:"roles"`
 	GuildMasterRole           *string     `json:"guildMasterRole"`
 	GuildMemberDefaultRole    *string     `json:"guildMemberDefaultRole"`
@@ -1689,6 +1738,9 @@ func (p *CreateGuildModelMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["maximumMemberCount"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.MaximumMemberCount)
 		}
+		if v, ok := d["inactivityPeriodDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.InactivityPeriodDays)
+		}
 		if v, ok := d["roles"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Roles)
 		}
@@ -1762,6 +1814,7 @@ func NewCreateGuildModelMasterRequestFromDict(data map[string]interface{}) Creat
 		Metadata:                  core.CastString(data["metadata"]),
 		DefaultMaximumMemberCount: core.CastInt32(data["defaultMaximumMemberCount"]),
 		MaximumMemberCount:        core.CastInt32(data["maximumMemberCount"]),
+		InactivityPeriodDays:      core.CastInt32(data["inactivityPeriodDays"]),
 		Roles:                     CastRoleModels(core.CastArray(data["roles"])),
 		GuildMasterRole:           core.CastString(data["guildMasterRole"]),
 		GuildMemberDefaultRole:    core.CastString(data["guildMemberDefaultRole"]),
@@ -1777,6 +1830,7 @@ func (p CreateGuildModelMasterRequest) ToDict() map[string]interface{} {
 		"metadata":                  p.Metadata,
 		"defaultMaximumMemberCount": p.DefaultMaximumMemberCount,
 		"maximumMemberCount":        p.MaximumMemberCount,
+		"inactivityPeriodDays":      p.InactivityPeriodDays,
 		"roles": CastRoleModelsFromDict(
 			p.Roles,
 		),
@@ -1907,6 +1961,7 @@ type UpdateGuildModelMasterRequest struct {
 	Metadata                  *string     `json:"metadata"`
 	DefaultMaximumMemberCount *int32      `json:"defaultMaximumMemberCount"`
 	MaximumMemberCount        *int32      `json:"maximumMemberCount"`
+	InactivityPeriodDays      *int32      `json:"inactivityPeriodDays"`
 	Roles                     []RoleModel `json:"roles"`
 	GuildMasterRole           *string     `json:"guildMasterRole"`
 	GuildMemberDefaultRole    *string     `json:"guildMemberDefaultRole"`
@@ -2033,6 +2088,9 @@ func (p *UpdateGuildModelMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["maximumMemberCount"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.MaximumMemberCount)
 		}
+		if v, ok := d["inactivityPeriodDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.InactivityPeriodDays)
+		}
 		if v, ok := d["roles"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Roles)
 		}
@@ -2106,6 +2164,7 @@ func NewUpdateGuildModelMasterRequestFromDict(data map[string]interface{}) Updat
 		Metadata:                  core.CastString(data["metadata"]),
 		DefaultMaximumMemberCount: core.CastInt32(data["defaultMaximumMemberCount"]),
 		MaximumMemberCount:        core.CastInt32(data["maximumMemberCount"]),
+		InactivityPeriodDays:      core.CastInt32(data["inactivityPeriodDays"]),
 		Roles:                     CastRoleModels(core.CastArray(data["roles"])),
 		GuildMasterRole:           core.CastString(data["guildMasterRole"]),
 		GuildMemberDefaultRole:    core.CastString(data["guildMemberDefaultRole"]),
@@ -2121,6 +2180,7 @@ func (p UpdateGuildModelMasterRequest) ToDict() map[string]interface{} {
 		"metadata":                  p.Metadata,
 		"defaultMaximumMemberCount": p.DefaultMaximumMemberCount,
 		"maximumMemberCount":        p.MaximumMemberCount,
+		"inactivityPeriodDays":      p.InactivityPeriodDays,
 		"roles": CastRoleModelsFromDict(
 			p.Roles,
 		),
@@ -8409,6 +8469,540 @@ func (p WithdrawalByUserIdRequest) ToDict() map[string]interface{} {
 }
 
 func (p WithdrawalByUserIdRequest) Pointer() *WithdrawalByUserIdRequest {
+	return &p
+}
+
+type GetLastGuildMasterActivityRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	GuildModelName  *string `json:"guildModelName"`
+	AccessToken     *string `json:"accessToken"`
+}
+
+func (p *GetLastGuildMasterActivityRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetLastGuildMasterActivityRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetLastGuildMasterActivityRequest{}
+	} else {
+		*p = GetLastGuildMasterActivityRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["guildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildModelName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetLastGuildMasterActivityRequestFromJson(data string) (GetLastGuildMasterActivityRequest, error) {
+	req := GetLastGuildMasterActivityRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetLastGuildMasterActivityRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetLastGuildMasterActivityRequestFromDict(data map[string]interface{}) GetLastGuildMasterActivityRequest {
+	return GetLastGuildMasterActivityRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		GuildModelName: core.CastString(data["guildModelName"]),
+		AccessToken:    core.CastString(data["accessToken"]),
+	}
+}
+
+func (p GetLastGuildMasterActivityRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"guildModelName": p.GuildModelName,
+		"accessToken":    p.AccessToken,
+	}
+}
+
+func (p GetLastGuildMasterActivityRequest) Pointer() *GetLastGuildMasterActivityRequest {
+	return &p
+}
+
+type GetLastGuildMasterActivityByGuildNameRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	GuildModelName  *string `json:"guildModelName"`
+	GuildName       *string `json:"guildName"`
+}
+
+func (p *GetLastGuildMasterActivityByGuildNameRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetLastGuildMasterActivityByGuildNameRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetLastGuildMasterActivityByGuildNameRequest{}
+	} else {
+		*p = GetLastGuildMasterActivityByGuildNameRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["guildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildModelName)
+				}
+			}
+		}
+		if v, ok := d["guildName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetLastGuildMasterActivityByGuildNameRequestFromJson(data string) (GetLastGuildMasterActivityByGuildNameRequest, error) {
+	req := GetLastGuildMasterActivityByGuildNameRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetLastGuildMasterActivityByGuildNameRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetLastGuildMasterActivityByGuildNameRequestFromDict(data map[string]interface{}) GetLastGuildMasterActivityByGuildNameRequest {
+	return GetLastGuildMasterActivityByGuildNameRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		GuildModelName: core.CastString(data["guildModelName"]),
+		GuildName:      core.CastString(data["guildName"]),
+	}
+}
+
+func (p GetLastGuildMasterActivityByGuildNameRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"guildModelName": p.GuildModelName,
+		"guildName":      p.GuildName,
+	}
+}
+
+func (p GetLastGuildMasterActivityByGuildNameRequest) Pointer() *GetLastGuildMasterActivityByGuildNameRequest {
+	return &p
+}
+
+type PromoteSeniorMemberRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	GuildModelName     *string `json:"guildModelName"`
+	AccessToken        *string `json:"accessToken"`
+}
+
+func (p *PromoteSeniorMemberRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = PromoteSeniorMemberRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = PromoteSeniorMemberRequest{}
+	} else {
+		*p = PromoteSeniorMemberRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["guildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildModelName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewPromoteSeniorMemberRequestFromJson(data string) (PromoteSeniorMemberRequest, error) {
+	req := PromoteSeniorMemberRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return PromoteSeniorMemberRequest{}, err
+	}
+	return req, nil
+}
+
+func NewPromoteSeniorMemberRequestFromDict(data map[string]interface{}) PromoteSeniorMemberRequest {
+	return PromoteSeniorMemberRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		GuildModelName: core.CastString(data["guildModelName"]),
+		AccessToken:    core.CastString(data["accessToken"]),
+	}
+}
+
+func (p PromoteSeniorMemberRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"guildModelName": p.GuildModelName,
+		"accessToken":    p.AccessToken,
+	}
+}
+
+func (p PromoteSeniorMemberRequest) Pointer() *PromoteSeniorMemberRequest {
+	return &p
+}
+
+type PromoteSeniorMemberByGuildNameRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	GuildModelName     *string `json:"guildModelName"`
+	GuildName          *string `json:"guildName"`
+}
+
+func (p *PromoteSeniorMemberByGuildNameRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = PromoteSeniorMemberByGuildNameRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = PromoteSeniorMemberByGuildNameRequest{}
+	} else {
+		*p = PromoteSeniorMemberByGuildNameRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["guildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildModelName)
+				}
+			}
+		}
+		if v, ok := d["guildName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewPromoteSeniorMemberByGuildNameRequestFromJson(data string) (PromoteSeniorMemberByGuildNameRequest, error) {
+	req := PromoteSeniorMemberByGuildNameRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return PromoteSeniorMemberByGuildNameRequest{}, err
+	}
+	return req, nil
+}
+
+func NewPromoteSeniorMemberByGuildNameRequestFromDict(data map[string]interface{}) PromoteSeniorMemberByGuildNameRequest {
+	return PromoteSeniorMemberByGuildNameRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		GuildModelName: core.CastString(data["guildModelName"]),
+		GuildName:      core.CastString(data["guildName"]),
+	}
+}
+
+func (p PromoteSeniorMemberByGuildNameRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"guildModelName": p.GuildModelName,
+		"guildName":      p.GuildName,
+	}
+}
+
+func (p PromoteSeniorMemberByGuildNameRequest) Pointer() *PromoteSeniorMemberByGuildNameRequest {
 	return &p
 }
 

@@ -189,6 +189,18 @@ func (p Gs2GuildWebSocketClient) CreateNamespaceAsync(
 	if request.RemoveRequestNotification != nil {
 		bodies["removeRequestNotification"] = request.RemoveRequestNotification.ToDict()
 	}
+	if request.CreateGuildScript != nil {
+		bodies["createGuildScript"] = request.CreateGuildScript.ToDict()
+	}
+	if request.JoinGuildScript != nil {
+		bodies["joinGuildScript"] = request.JoinGuildScript.ToDict()
+	}
+	if request.LeaveGuildScript != nil {
+		bodies["leaveGuildScript"] = request.LeaveGuildScript.ToDict()
+	}
+	if request.ChangeRoleScript != nil {
+		bodies["changeRoleScript"] = request.ChangeRoleScript.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -452,6 +464,18 @@ func (p Gs2GuildWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.RemoveRequestNotification != nil {
 		bodies["removeRequestNotification"] = request.RemoveRequestNotification.ToDict()
+	}
+	if request.CreateGuildScript != nil {
+		bodies["createGuildScript"] = request.CreateGuildScript.ToDict()
+	}
+	if request.JoinGuildScript != nil {
+		bodies["joinGuildScript"] = request.JoinGuildScript.ToDict()
+	}
+	if request.LeaveGuildScript != nil {
+		bodies["leaveGuildScript"] = request.LeaveGuildScript.ToDict()
+	}
+	if request.ChangeRoleScript != nil {
+		bodies["changeRoleScript"] = request.ChangeRoleScript.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
@@ -1314,6 +1338,9 @@ func (p Gs2GuildWebSocketClient) CreateGuildModelMasterAsync(
 	if request.MaximumMemberCount != nil {
 		bodies["maximumMemberCount"] = *request.MaximumMemberCount
 	}
+	if request.InactivityPeriodDays != nil {
+		bodies["inactivityPeriodDays"] = *request.InactivityPeriodDays
+	}
 	if request.Roles != nil {
 		var _roles []interface{}
 		for _, item := range request.Roles {
@@ -1509,6 +1536,9 @@ func (p Gs2GuildWebSocketClient) UpdateGuildModelMasterAsync(
 	}
 	if request.MaximumMemberCount != nil {
 		bodies["maximumMemberCount"] = *request.MaximumMemberCount
+	}
+	if request.InactivityPeriodDays != nil {
+		bodies["inactivityPeriodDays"] = *request.InactivityPeriodDays
 	}
 	if request.Roles != nil {
 		var _roles []interface{}
@@ -5193,6 +5223,366 @@ func (p Gs2GuildWebSocketClient) WithdrawalByUserId(
 ) (*WithdrawalByUserIdResult, error) {
 	callback := make(chan WithdrawalByUserIdAsyncResult, 1)
 	go p.WithdrawalByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2GuildWebSocketClient) getLastGuildMasterActivityAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetLastGuildMasterActivityAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetLastGuildMasterActivityAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetLastGuildMasterActivityResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetLastGuildMasterActivityAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetLastGuildMasterActivityAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) GetLastGuildMasterActivityAsync(
+	request *GetLastGuildMasterActivityRequest,
+	callback chan<- GetLastGuildMasterActivityAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "lastGuildMasterActivity",
+			"function":    "getLastGuildMasterActivity",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		bodies["guildModelName"] = *request.GuildModelName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+
+	go p.getLastGuildMasterActivityAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) GetLastGuildMasterActivity(
+	request *GetLastGuildMasterActivityRequest,
+) (*GetLastGuildMasterActivityResult, error) {
+	callback := make(chan GetLastGuildMasterActivityAsyncResult, 1)
+	go p.GetLastGuildMasterActivityAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2GuildWebSocketClient) getLastGuildMasterActivityByGuildNameAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetLastGuildMasterActivityByGuildNameAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetLastGuildMasterActivityByGuildNameAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetLastGuildMasterActivityByGuildNameResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetLastGuildMasterActivityByGuildNameAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetLastGuildMasterActivityByGuildNameAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) GetLastGuildMasterActivityByGuildNameAsync(
+	request *GetLastGuildMasterActivityByGuildNameRequest,
+	callback chan<- GetLastGuildMasterActivityByGuildNameAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "lastGuildMasterActivity",
+			"function":    "getLastGuildMasterActivityByGuildName",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		bodies["guildModelName"] = *request.GuildModelName
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		bodies["guildName"] = *request.GuildName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.getLastGuildMasterActivityByGuildNameAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) GetLastGuildMasterActivityByGuildName(
+	request *GetLastGuildMasterActivityByGuildNameRequest,
+) (*GetLastGuildMasterActivityByGuildNameResult, error) {
+	callback := make(chan GetLastGuildMasterActivityByGuildNameAsyncResult, 1)
+	go p.GetLastGuildMasterActivityByGuildNameAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2GuildWebSocketClient) promoteSeniorMemberAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PromoteSeniorMemberAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PromoteSeniorMemberAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PromoteSeniorMemberResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PromoteSeniorMemberAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PromoteSeniorMemberAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) PromoteSeniorMemberAsync(
+	request *PromoteSeniorMemberRequest,
+	callback chan<- PromoteSeniorMemberAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "lastGuildMasterActivity",
+			"function":    "promoteSeniorMember",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		bodies["guildModelName"] = *request.GuildModelName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.promoteSeniorMemberAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) PromoteSeniorMember(
+	request *PromoteSeniorMemberRequest,
+) (*PromoteSeniorMemberResult, error) {
+	callback := make(chan PromoteSeniorMemberAsyncResult, 1)
+	go p.PromoteSeniorMemberAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2GuildWebSocketClient) promoteSeniorMemberByGuildNameAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- PromoteSeniorMemberByGuildNameAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- PromoteSeniorMemberByGuildNameAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result PromoteSeniorMemberByGuildNameResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- PromoteSeniorMemberByGuildNameAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- PromoteSeniorMemberByGuildNameAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) PromoteSeniorMemberByGuildNameAsync(
+	request *PromoteSeniorMemberByGuildNameRequest,
+	callback chan<- PromoteSeniorMemberByGuildNameAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "lastGuildMasterActivity",
+			"function":    "promoteSeniorMemberByGuildName",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		bodies["guildModelName"] = *request.GuildModelName
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		bodies["guildName"] = *request.GuildName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.promoteSeniorMemberByGuildNameAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) PromoteSeniorMemberByGuildName(
+	request *PromoteSeniorMemberByGuildNameRequest,
+) (*PromoteSeniorMemberByGuildNameResult, error) {
+	callback := make(chan PromoteSeniorMemberByGuildNameAsyncResult, 1)
+	go p.PromoteSeniorMemberByGuildNameAsync(
 		request,
 		callback,
 	)

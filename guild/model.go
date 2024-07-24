@@ -32,6 +32,10 @@ type Namespace struct {
 	ChangeMemberNotification   *NotificationSetting `json:"changeMemberNotification"`
 	ReceiveRequestNotification *NotificationSetting `json:"receiveRequestNotification"`
 	RemoveRequestNotification  *NotificationSetting `json:"removeRequestNotification"`
+	CreateGuildScript          *ScriptSetting       `json:"createGuildScript"`
+	JoinGuildScript            *ScriptSetting       `json:"joinGuildScript"`
+	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
+	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
 	LogSetting                 *LogSetting          `json:"logSetting"`
 	CreatedAt                  *int64               `json:"createdAt"`
 	UpdatedAt                  *int64               `json:"updatedAt"`
@@ -144,6 +148,18 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		if v, ok := d["removeRequestNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RemoveRequestNotification)
 		}
+		if v, ok := d["createGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreateGuildScript)
+		}
+		if v, ok := d["joinGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.JoinGuildScript)
+		}
+		if v, ok := d["leaveGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.LeaveGuildScript)
+		}
+		if v, ok := d["changeRoleScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangeRoleScript)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -176,6 +192,10 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 		ChangeMemberNotification:   NewNotificationSettingFromDict(core.CastMap(data["changeMemberNotification"])).Pointer(),
 		ReceiveRequestNotification: NewNotificationSettingFromDict(core.CastMap(data["receiveRequestNotification"])).Pointer(),
 		RemoveRequestNotification:  NewNotificationSettingFromDict(core.CastMap(data["removeRequestNotification"])).Pointer(),
+		CreateGuildScript:          NewScriptSettingFromDict(core.CastMap(data["createGuildScript"])).Pointer(),
+		JoinGuildScript:            NewScriptSettingFromDict(core.CastMap(data["joinGuildScript"])).Pointer(),
+		LeaveGuildScript:           NewScriptSettingFromDict(core.CastMap(data["leaveGuildScript"])).Pointer(),
+		ChangeRoleScript:           NewScriptSettingFromDict(core.CastMap(data["changeRoleScript"])).Pointer(),
 		LogSetting:                 NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 		CreatedAt:                  core.CastInt64(data["createdAt"]),
 		UpdatedAt:                  core.CastInt64(data["updatedAt"]),
@@ -217,6 +237,22 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.RemoveRequestNotification != nil {
 		removeRequestNotification = p.RemoveRequestNotification.ToDict()
 	}
+	var createGuildScript map[string]interface{}
+	if p.CreateGuildScript != nil {
+		createGuildScript = p.CreateGuildScript.ToDict()
+	}
+	var joinGuildScript map[string]interface{}
+	if p.JoinGuildScript != nil {
+		joinGuildScript = p.JoinGuildScript.ToDict()
+	}
+	var leaveGuildScript map[string]interface{}
+	if p.LeaveGuildScript != nil {
+		leaveGuildScript = p.LeaveGuildScript.ToDict()
+	}
+	var changeRoleScript map[string]interface{}
+	if p.ChangeRoleScript != nil {
+		changeRoleScript = p.ChangeRoleScript.ToDict()
+	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
 		logSetting = p.LogSetting.ToDict()
@@ -242,6 +278,10 @@ func (p Namespace) ToDict() map[string]interface{} {
 		"changeMemberNotification":   changeMemberNotification,
 		"receiveRequestNotification": receiveRequestNotification,
 		"removeRequestNotification":  removeRequestNotification,
+		"createGuildScript":          createGuildScript,
+		"joinGuildScript":            joinGuildScript,
+		"leaveGuildScript":           leaveGuildScript,
+		"changeRoleScript":           changeRoleScript,
 		"logSetting":                 logSetting,
 		"createdAt":                  createdAt,
 		"updatedAt":                  updatedAt,
@@ -276,6 +316,7 @@ type GuildModelMaster struct {
 	Metadata                  *string     `json:"metadata"`
 	DefaultMaximumMemberCount *int32      `json:"defaultMaximumMemberCount"`
 	MaximumMemberCount        *int32      `json:"maximumMemberCount"`
+	InactivityPeriodDays      *int32      `json:"inactivityPeriodDays"`
 	Roles                     []RoleModel `json:"roles"`
 	GuildMasterRole           *string     `json:"guildMasterRole"`
 	GuildMemberDefaultRole    *string     `json:"guildMemberDefaultRole"`
@@ -405,6 +446,9 @@ func (p *GuildModelMaster) UnmarshalJSON(data []byte) error {
 		if v, ok := d["maximumMemberCount"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.MaximumMemberCount)
 		}
+		if v, ok := d["inactivityPeriodDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.InactivityPeriodDays)
+		}
 		if v, ok := d["roles"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Roles)
 		}
@@ -484,6 +528,7 @@ func NewGuildModelMasterFromDict(data map[string]interface{}) GuildModelMaster {
 		Metadata:                  core.CastString(data["metadata"]),
 		DefaultMaximumMemberCount: core.CastInt32(data["defaultMaximumMemberCount"]),
 		MaximumMemberCount:        core.CastInt32(data["maximumMemberCount"]),
+		InactivityPeriodDays:      core.CastInt32(data["inactivityPeriodDays"]),
 		Roles:                     CastRoleModels(core.CastArray(data["roles"])),
 		GuildMasterRole:           core.CastString(data["guildMasterRole"]),
 		GuildMemberDefaultRole:    core.CastString(data["guildMemberDefaultRole"]),
@@ -519,6 +564,10 @@ func (p GuildModelMaster) ToDict() map[string]interface{} {
 	var maximumMemberCount *int32
 	if p.MaximumMemberCount != nil {
 		maximumMemberCount = p.MaximumMemberCount
+	}
+	var inactivityPeriodDays *int32
+	if p.InactivityPeriodDays != nil {
+		inactivityPeriodDays = p.InactivityPeriodDays
 	}
 	var roles []interface{}
 	if p.Roles != nil {
@@ -557,6 +606,7 @@ func (p GuildModelMaster) ToDict() map[string]interface{} {
 		"metadata":                  metadata,
 		"defaultMaximumMemberCount": defaultMaximumMemberCount,
 		"maximumMemberCount":        maximumMemberCount,
+		"inactivityPeriodDays":      inactivityPeriodDays,
 		"roles":                     roles,
 		"guildMasterRole":           guildMasterRole,
 		"guildMemberDefaultRole":    guildMemberDefaultRole,
@@ -593,6 +643,7 @@ type GuildModel struct {
 	Metadata                  *string     `json:"metadata"`
 	DefaultMaximumMemberCount *int32      `json:"defaultMaximumMemberCount"`
 	MaximumMemberCount        *int32      `json:"maximumMemberCount"`
+	InactivityPeriodDays      *int32      `json:"inactivityPeriodDays"`
 	Roles                     []RoleModel `json:"roles"`
 	GuildMasterRole           *string     `json:"guildMasterRole"`
 	GuildMemberDefaultRole    *string     `json:"guildMemberDefaultRole"`
@@ -696,6 +747,9 @@ func (p *GuildModel) UnmarshalJSON(data []byte) error {
 		if v, ok := d["maximumMemberCount"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.MaximumMemberCount)
 		}
+		if v, ok := d["inactivityPeriodDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.InactivityPeriodDays)
+		}
 		if v, ok := d["roles"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Roles)
 		}
@@ -765,6 +819,7 @@ func NewGuildModelFromDict(data map[string]interface{}) GuildModel {
 		Metadata:                  core.CastString(data["metadata"]),
 		DefaultMaximumMemberCount: core.CastInt32(data["defaultMaximumMemberCount"]),
 		MaximumMemberCount:        core.CastInt32(data["maximumMemberCount"]),
+		InactivityPeriodDays:      core.CastInt32(data["inactivityPeriodDays"]),
 		Roles:                     CastRoleModels(core.CastArray(data["roles"])),
 		GuildMasterRole:           core.CastString(data["guildMasterRole"]),
 		GuildMemberDefaultRole:    core.CastString(data["guildMemberDefaultRole"]),
@@ -794,6 +849,10 @@ func (p GuildModel) ToDict() map[string]interface{} {
 	if p.MaximumMemberCount != nil {
 		maximumMemberCount = p.MaximumMemberCount
 	}
+	var inactivityPeriodDays *int32
+	if p.InactivityPeriodDays != nil {
+		inactivityPeriodDays = p.InactivityPeriodDays
+	}
 	var roles []interface{}
 	if p.Roles != nil {
 		roles = CastRoleModelsFromDict(
@@ -818,6 +877,7 @@ func (p GuildModel) ToDict() map[string]interface{} {
 		"metadata":                  metadata,
 		"defaultMaximumMemberCount": defaultMaximumMemberCount,
 		"maximumMemberCount":        maximumMemberCount,
+		"inactivityPeriodDays":      inactivityPeriodDays,
 		"roles":                     roles,
 		"guildMasterRole":           guildMasterRole,
 		"guildMemberDefaultRole":    guildMemberDefaultRole,
@@ -1806,6 +1866,112 @@ func CastJoinedGuilds(data []interface{}) []JoinedGuild {
 }
 
 func CastJoinedGuildsFromDict(data []JoinedGuild) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type LastGuildMasterActivity struct {
+	UserId    *string `json:"userId"`
+	UpdatedAt *int64  `json:"updatedAt"`
+}
+
+func (p *LastGuildMasterActivity) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LastGuildMasterActivity{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LastGuildMasterActivity{}
+	} else {
+		*p = LastGuildMasterActivity{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+	}
+	return nil
+}
+
+func NewLastGuildMasterActivityFromJson(data string) LastGuildMasterActivity {
+	req := LastGuildMasterActivity{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewLastGuildMasterActivityFromDict(data map[string]interface{}) LastGuildMasterActivity {
+	return LastGuildMasterActivity{
+		UserId:    core.CastString(data["userId"]),
+		UpdatedAt: core.CastInt64(data["updatedAt"]),
+	}
+}
+
+func (p LastGuildMasterActivity) ToDict() map[string]interface{} {
+
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	return map[string]interface{}{
+		"userId":    userId,
+		"updatedAt": updatedAt,
+	}
+}
+
+func (p LastGuildMasterActivity) Pointer() *LastGuildMasterActivity {
+	return &p
+}
+
+func CastLastGuildMasterActivities(data []interface{}) []LastGuildMasterActivity {
+	v := make([]LastGuildMasterActivity, 0)
+	for _, d := range data {
+		v = append(v, NewLastGuildMasterActivityFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLastGuildMasterActivitiesFromDict(data []LastGuildMasterActivity) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

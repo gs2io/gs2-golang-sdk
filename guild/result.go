@@ -1718,6 +1718,142 @@ func (p WithdrawalByUserIdResult) Pointer() *WithdrawalByUserIdResult {
 	return &p
 }
 
+type GetLastGuildMasterActivityResult struct {
+	Item  *LastGuildMasterActivity `json:"item"`
+	Guild *Guild                   `json:"guild"`
+}
+
+type GetLastGuildMasterActivityAsyncResult struct {
+	result *GetLastGuildMasterActivityResult
+	err    error
+}
+
+func NewGetLastGuildMasterActivityResultFromJson(data string) GetLastGuildMasterActivityResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetLastGuildMasterActivityResultFromDict(dict)
+}
+
+func NewGetLastGuildMasterActivityResultFromDict(data map[string]interface{}) GetLastGuildMasterActivityResult {
+	return GetLastGuildMasterActivityResult{
+		Item:  NewLastGuildMasterActivityFromDict(core.CastMap(data["item"])).Pointer(),
+		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+	}
+}
+
+func (p GetLastGuildMasterActivityResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":  p.Item.ToDict(),
+		"guild": p.Guild.ToDict(),
+	}
+}
+
+func (p GetLastGuildMasterActivityResult) Pointer() *GetLastGuildMasterActivityResult {
+	return &p
+}
+
+type GetLastGuildMasterActivityByGuildNameResult struct {
+	Item  *LastGuildMasterActivity `json:"item"`
+	Guild *Guild                   `json:"guild"`
+}
+
+type GetLastGuildMasterActivityByGuildNameAsyncResult struct {
+	result *GetLastGuildMasterActivityByGuildNameResult
+	err    error
+}
+
+func NewGetLastGuildMasterActivityByGuildNameResultFromJson(data string) GetLastGuildMasterActivityByGuildNameResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetLastGuildMasterActivityByGuildNameResultFromDict(dict)
+}
+
+func NewGetLastGuildMasterActivityByGuildNameResultFromDict(data map[string]interface{}) GetLastGuildMasterActivityByGuildNameResult {
+	return GetLastGuildMasterActivityByGuildNameResult{
+		Item:  NewLastGuildMasterActivityFromDict(core.CastMap(data["item"])).Pointer(),
+		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+	}
+}
+
+func (p GetLastGuildMasterActivityByGuildNameResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":  p.Item.ToDict(),
+		"guild": p.Guild.ToDict(),
+	}
+}
+
+func (p GetLastGuildMasterActivityByGuildNameResult) Pointer() *GetLastGuildMasterActivityByGuildNameResult {
+	return &p
+}
+
+type PromoteSeniorMemberResult struct {
+	Item  *LastGuildMasterActivity `json:"item"`
+	Guild *Guild                   `json:"guild"`
+}
+
+type PromoteSeniorMemberAsyncResult struct {
+	result *PromoteSeniorMemberResult
+	err    error
+}
+
+func NewPromoteSeniorMemberResultFromJson(data string) PromoteSeniorMemberResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPromoteSeniorMemberResultFromDict(dict)
+}
+
+func NewPromoteSeniorMemberResultFromDict(data map[string]interface{}) PromoteSeniorMemberResult {
+	return PromoteSeniorMemberResult{
+		Item:  NewLastGuildMasterActivityFromDict(core.CastMap(data["item"])).Pointer(),
+		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+	}
+}
+
+func (p PromoteSeniorMemberResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":  p.Item.ToDict(),
+		"guild": p.Guild.ToDict(),
+	}
+}
+
+func (p PromoteSeniorMemberResult) Pointer() *PromoteSeniorMemberResult {
+	return &p
+}
+
+type PromoteSeniorMemberByGuildNameResult struct {
+	Item  *LastGuildMasterActivity `json:"item"`
+	Guild *Guild                   `json:"guild"`
+}
+
+type PromoteSeniorMemberByGuildNameAsyncResult struct {
+	result *PromoteSeniorMemberByGuildNameResult
+	err    error
+}
+
+func NewPromoteSeniorMemberByGuildNameResultFromJson(data string) PromoteSeniorMemberByGuildNameResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewPromoteSeniorMemberByGuildNameResultFromDict(dict)
+}
+
+func NewPromoteSeniorMemberByGuildNameResultFromDict(data map[string]interface{}) PromoteSeniorMemberByGuildNameResult {
+	return PromoteSeniorMemberByGuildNameResult{
+		Item:  NewLastGuildMasterActivityFromDict(core.CastMap(data["item"])).Pointer(),
+		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+	}
+}
+
+func (p PromoteSeniorMemberByGuildNameResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":  p.Item.ToDict(),
+		"guild": p.Guild.ToDict(),
+	}
+}
+
+func (p PromoteSeniorMemberByGuildNameResult) Pointer() *PromoteSeniorMemberByGuildNameResult {
+	return &p
+}
+
 type ExportMasterResult struct {
 	Item *CurrentGuildMaster `json:"item"`
 }

@@ -3079,6 +3079,9 @@ func (p Gs2RankingWebSocketClient) PutScoreByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.putScoreByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
