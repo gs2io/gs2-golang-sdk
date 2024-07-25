@@ -3044,6 +3044,9 @@ func (p Gs2ScheduleRestClient) GetEventAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.IsInSchedule != nil {
+		queryStrings["isInSchedule"] = core.ToString(*request.IsInSchedule)
+	}
 	if request.ContextStack != nil {
 		queryStrings["contextStack"] = *request.ContextStack
 	}
@@ -3147,6 +3150,9 @@ func (p Gs2ScheduleRestClient) GetEventByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
+	if request.IsInSchedule != nil {
+		queryStrings["isInSchedule"] = core.ToString(*request.IsInSchedule)
+	}
 	if request.ContextStack != nil {
 		queryStrings["contextStack"] = *request.ContextStack
 	}
