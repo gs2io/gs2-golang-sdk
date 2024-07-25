@@ -632,6 +632,43 @@ func (p DistributeWithoutOverflowProcessResult) Pointer() *DistributeWithoutOver
 	return &p
 }
 
+type RunVerifyTaskResult struct {
+	ContextStack *string `json:"contextStack"`
+	StatusCode   *int32  `json:"statusCode"`
+	Result       *string `json:"result"`
+}
+
+type RunVerifyTaskAsyncResult struct {
+	result *RunVerifyTaskResult
+	err    error
+}
+
+func NewRunVerifyTaskResultFromJson(data string) RunVerifyTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRunVerifyTaskResultFromDict(dict)
+}
+
+func NewRunVerifyTaskResultFromDict(data map[string]interface{}) RunVerifyTaskResult {
+	return RunVerifyTaskResult{
+		ContextStack: core.CastString(data["contextStack"]),
+		StatusCode:   core.CastInt32(data["statusCode"]),
+		Result:       core.CastString(data["result"]),
+	}
+}
+
+func (p RunVerifyTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"contextStack": p.ContextStack,
+		"statusCode":   p.StatusCode,
+		"result":       p.Result,
+	}
+}
+
+func (p RunVerifyTaskResult) Pointer() *RunVerifyTaskResult {
+	return &p
+}
+
 type RunStampTaskResult struct {
 	ContextStack *string `json:"contextStack"`
 	StatusCode   *int32  `json:"statusCode"`
@@ -704,10 +741,12 @@ func (p RunStampSheetResult) Pointer() *RunStampSheetResult {
 }
 
 type RunStampSheetExpressResult struct {
-	TaskResultCodes []*int32  `json:"taskResultCodes"`
-	TaskResults     []*string `json:"taskResults"`
-	SheetResultCode *int32    `json:"sheetResultCode"`
-	SheetResult     *string   `json:"sheetResult"`
+	VerifyTaskResultCodes []*int32  `json:"verifyTaskResultCodes"`
+	VerifyTaskResults     []*string `json:"verifyTaskResults"`
+	TaskResultCodes       []*int32  `json:"taskResultCodes"`
+	TaskResults           []*string `json:"taskResults"`
+	SheetResultCode       *int32    `json:"sheetResultCode"`
+	SheetResult           *string   `json:"sheetResult"`
 }
 
 type RunStampSheetExpressAsyncResult struct {
@@ -723,15 +762,23 @@ func NewRunStampSheetExpressResultFromJson(data string) RunStampSheetExpressResu
 
 func NewRunStampSheetExpressResultFromDict(data map[string]interface{}) RunStampSheetExpressResult {
 	return RunStampSheetExpressResult{
-		TaskResultCodes: core.CastInt32s(core.CastArray(data["taskResultCodes"])),
-		TaskResults:     core.CastStrings(core.CastArray(data["taskResults"])),
-		SheetResultCode: core.CastInt32(data["sheetResultCode"]),
-		SheetResult:     core.CastString(data["sheetResult"]),
+		VerifyTaskResultCodes: core.CastInt32s(core.CastArray(data["verifyTaskResultCodes"])),
+		VerifyTaskResults:     core.CastStrings(core.CastArray(data["verifyTaskResults"])),
+		TaskResultCodes:       core.CastInt32s(core.CastArray(data["taskResultCodes"])),
+		TaskResults:           core.CastStrings(core.CastArray(data["taskResults"])),
+		SheetResultCode:       core.CastInt32(data["sheetResultCode"]),
+		SheetResult:           core.CastString(data["sheetResult"]),
 	}
 }
 
 func (p RunStampSheetExpressResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"verifyTaskResultCodes": core.CastInt32sFromDict(
+			p.VerifyTaskResultCodes,
+		),
+		"verifyTaskResults": core.CastStringsFromDict(
+			p.VerifyTaskResults,
+		),
 		"taskResultCodes": core.CastInt32sFromDict(
 			p.TaskResultCodes,
 		),
@@ -744,6 +791,43 @@ func (p RunStampSheetExpressResult) ToDict() map[string]interface{} {
 }
 
 func (p RunStampSheetExpressResult) Pointer() *RunStampSheetExpressResult {
+	return &p
+}
+
+type RunVerifyTaskWithoutNamespaceResult struct {
+	ContextStack *string `json:"contextStack"`
+	StatusCode   *int32  `json:"statusCode"`
+	Result       *string `json:"result"`
+}
+
+type RunVerifyTaskWithoutNamespaceAsyncResult struct {
+	result *RunVerifyTaskWithoutNamespaceResult
+	err    error
+}
+
+func NewRunVerifyTaskWithoutNamespaceResultFromJson(data string) RunVerifyTaskWithoutNamespaceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRunVerifyTaskWithoutNamespaceResultFromDict(dict)
+}
+
+func NewRunVerifyTaskWithoutNamespaceResultFromDict(data map[string]interface{}) RunVerifyTaskWithoutNamespaceResult {
+	return RunVerifyTaskWithoutNamespaceResult{
+		ContextStack: core.CastString(data["contextStack"]),
+		StatusCode:   core.CastInt32(data["statusCode"]),
+		Result:       core.CastString(data["result"]),
+	}
+}
+
+func (p RunVerifyTaskWithoutNamespaceResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"contextStack": p.ContextStack,
+		"statusCode":   p.StatusCode,
+		"result":       p.Result,
+	}
+}
+
+func (p RunVerifyTaskWithoutNamespaceResult) Pointer() *RunVerifyTaskWithoutNamespaceResult {
 	return &p
 }
 
@@ -819,10 +903,12 @@ func (p RunStampSheetWithoutNamespaceResult) Pointer() *RunStampSheetWithoutName
 }
 
 type RunStampSheetExpressWithoutNamespaceResult struct {
-	TaskResultCodes []*int32  `json:"taskResultCodes"`
-	TaskResults     []*string `json:"taskResults"`
-	SheetResultCode *int32    `json:"sheetResultCode"`
-	SheetResult     *string   `json:"sheetResult"`
+	VerifyTaskResultCodes []*int32  `json:"verifyTaskResultCodes"`
+	VerifyTaskResults     []*string `json:"verifyTaskResults"`
+	TaskResultCodes       []*int32  `json:"taskResultCodes"`
+	TaskResults           []*string `json:"taskResults"`
+	SheetResultCode       *int32    `json:"sheetResultCode"`
+	SheetResult           *string   `json:"sheetResult"`
 }
 
 type RunStampSheetExpressWithoutNamespaceAsyncResult struct {
@@ -838,15 +924,23 @@ func NewRunStampSheetExpressWithoutNamespaceResultFromJson(data string) RunStamp
 
 func NewRunStampSheetExpressWithoutNamespaceResultFromDict(data map[string]interface{}) RunStampSheetExpressWithoutNamespaceResult {
 	return RunStampSheetExpressWithoutNamespaceResult{
-		TaskResultCodes: core.CastInt32s(core.CastArray(data["taskResultCodes"])),
-		TaskResults:     core.CastStrings(core.CastArray(data["taskResults"])),
-		SheetResultCode: core.CastInt32(data["sheetResultCode"]),
-		SheetResult:     core.CastString(data["sheetResult"]),
+		VerifyTaskResultCodes: core.CastInt32s(core.CastArray(data["verifyTaskResultCodes"])),
+		VerifyTaskResults:     core.CastStrings(core.CastArray(data["verifyTaskResults"])),
+		TaskResultCodes:       core.CastInt32s(core.CastArray(data["taskResultCodes"])),
+		TaskResults:           core.CastStrings(core.CastArray(data["taskResults"])),
+		SheetResultCode:       core.CastInt32(data["sheetResultCode"]),
+		SheetResult:           core.CastString(data["sheetResult"]),
 	}
 }
 
 func (p RunStampSheetExpressWithoutNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
+		"verifyTaskResultCodes": core.CastInt32sFromDict(
+			p.VerifyTaskResultCodes,
+		),
+		"verifyTaskResults": core.CastStringsFromDict(
+			p.VerifyTaskResults,
+		),
 		"taskResultCodes": core.CastInt32sFromDict(
 			p.TaskResultCodes,
 		),

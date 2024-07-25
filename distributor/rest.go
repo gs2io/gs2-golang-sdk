@@ -1849,6 +1849,102 @@ func (p Gs2DistributorRestClient) DistributeWithoutOverflowProcess(
 	return asyncResult.result, asyncResult.err
 }
 
+func runVerifyTaskAsyncHandler(
+	client Gs2DistributorRestClient,
+	job *core.NetworkJob,
+	callback chan<- RunVerifyTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RunVerifyTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RunVerifyTaskResult
+	if asyncResult.Err != nil {
+		callback <- RunVerifyTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RunVerifyTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- RunVerifyTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorRestClient) RunVerifyTaskAsync(
+	request *RunVerifyTaskRequest,
+	callback chan<- RunVerifyTaskAsyncResult,
+) {
+	path := "/{namespaceName}/distribute/stamp/verifyTask/run"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.VerifyTask != nil && *request.VerifyTask != "" {
+		bodies["verifyTask"] = *request.VerifyTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go runVerifyTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorRestClient) RunVerifyTask(
+	request *RunVerifyTaskRequest,
+) (*RunVerifyTaskResult, error) {
+	callback := make(chan RunVerifyTaskAsyncResult, 1)
+	go p.RunVerifyTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func runStampTaskAsyncHandler(
 	client Gs2DistributorRestClient,
 	job *core.NetworkJob,
@@ -2130,6 +2226,97 @@ func (p Gs2DistributorRestClient) RunStampSheetExpress(
 ) (*RunStampSheetExpressResult, error) {
 	callback := make(chan RunStampSheetExpressAsyncResult, 1)
 	go p.RunStampSheetExpressAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func runVerifyTaskWithoutNamespaceAsyncHandler(
+	client Gs2DistributorRestClient,
+	job *core.NetworkJob,
+	callback chan<- RunVerifyTaskWithoutNamespaceAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RunVerifyTaskWithoutNamespaceAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RunVerifyTaskWithoutNamespaceResult
+	if asyncResult.Err != nil {
+		callback <- RunVerifyTaskWithoutNamespaceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RunVerifyTaskWithoutNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- RunVerifyTaskWithoutNamespaceAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorRestClient) RunVerifyTaskWithoutNamespaceAsync(
+	request *RunVerifyTaskWithoutNamespaceRequest,
+	callback chan<- RunVerifyTaskWithoutNamespaceAsyncResult,
+) {
+	path := "/stamp/verifyTask/run"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.VerifyTask != nil && *request.VerifyTask != "" {
+		bodies["verifyTask"] = *request.VerifyTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go runVerifyTaskWithoutNamespaceAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorRestClient) RunVerifyTaskWithoutNamespace(
+	request *RunVerifyTaskWithoutNamespaceRequest,
+) (*RunVerifyTaskWithoutNamespaceResult, error) {
+	callback := make(chan RunVerifyTaskWithoutNamespaceAsyncResult, 1)
+	go p.RunVerifyTaskWithoutNamespaceAsync(
 		request,
 		callback,
 	)

@@ -2224,6 +2224,139 @@ func (p DistributeWithoutOverflowProcessRequest) Pointer() *DistributeWithoutOve
 	return &p
 }
 
+type RunVerifyTaskRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	VerifyTask      *string `json:"verifyTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *RunVerifyTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RunVerifyTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RunVerifyTaskRequest{}
+	} else {
+		*p = RunVerifyTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["verifyTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewRunVerifyTaskRequestFromJson(data string) (RunVerifyTaskRequest, error) {
+	req := RunVerifyTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return RunVerifyTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewRunVerifyTaskRequestFromDict(data map[string]interface{}) RunVerifyTaskRequest {
+	return RunVerifyTaskRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		VerifyTask:    core.CastString(data["verifyTask"]),
+		KeyId:         core.CastString(data["keyId"]),
+	}
+}
+
+func (p RunVerifyTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"verifyTask":    p.VerifyTask,
+		"keyId":         p.KeyId,
+	}
+}
+
+func (p RunVerifyTaskRequest) Pointer() *RunVerifyTaskRequest {
+	return &p
+}
+
 type RunStampTaskRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`
@@ -2620,6 +2753,113 @@ func (p RunStampSheetExpressRequest) ToDict() map[string]interface{} {
 }
 
 func (p RunStampSheetExpressRequest) Pointer() *RunStampSheetExpressRequest {
+	return &p
+}
+
+type RunVerifyTaskWithoutNamespaceRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	VerifyTask      *string `json:"verifyTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *RunVerifyTaskWithoutNamespaceRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RunVerifyTaskWithoutNamespaceRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RunVerifyTaskWithoutNamespaceRequest{}
+	} else {
+		*p = RunVerifyTaskWithoutNamespaceRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["verifyTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewRunVerifyTaskWithoutNamespaceRequestFromJson(data string) (RunVerifyTaskWithoutNamespaceRequest, error) {
+	req := RunVerifyTaskWithoutNamespaceRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return RunVerifyTaskWithoutNamespaceRequest{}, err
+	}
+	return req, nil
+}
+
+func NewRunVerifyTaskWithoutNamespaceRequestFromDict(data map[string]interface{}) RunVerifyTaskWithoutNamespaceRequest {
+	return RunVerifyTaskWithoutNamespaceRequest{
+		VerifyTask: core.CastString(data["verifyTask"]),
+		KeyId:      core.CastString(data["keyId"]),
+	}
+}
+
+func (p RunVerifyTaskWithoutNamespaceRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"verifyTask": p.VerifyTask,
+		"keyId":      p.KeyId,
+	}
+}
+
+func (p RunVerifyTaskWithoutNamespaceRequest) Pointer() *RunVerifyTaskWithoutNamespaceRequest {
 	return &p
 }
 

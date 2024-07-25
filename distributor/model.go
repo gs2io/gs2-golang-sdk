@@ -888,18 +888,21 @@ func CastCurrentDistributorMastersFromDict(data []CurrentDistributorMaster) []in
 }
 
 type StampSheetResult struct {
-	StampSheetResultId *string         `json:"stampSheetResultId"`
-	UserId             *string         `json:"userId"`
-	TransactionId      *string         `json:"transactionId"`
-	TaskRequests       []ConsumeAction `json:"taskRequests"`
-	SheetRequest       *AcquireAction  `json:"sheetRequest"`
-	TaskResultCodes    []*int32        `json:"taskResultCodes"`
-	TaskResults        []*string       `json:"taskResults"`
-	SheetResultCode    *int32          `json:"sheetResultCode"`
-	SheetResult        *string         `json:"sheetResult"`
-	NextTransactionId  *string         `json:"nextTransactionId"`
-	CreatedAt          *int64          `json:"createdAt"`
-	Revision           *int64          `json:"revision"`
+	StampSheetResultId    *string         `json:"stampSheetResultId"`
+	UserId                *string         `json:"userId"`
+	TransactionId         *string         `json:"transactionId"`
+	VerifyTaskRequests    []VerifyAction  `json:"verifyTaskRequests"`
+	TaskRequests          []ConsumeAction `json:"taskRequests"`
+	SheetRequest          *AcquireAction  `json:"sheetRequest"`
+	VerifyTaskResultCodes []*int32        `json:"verifyTaskResultCodes"`
+	VerifyTaskResults     []*string       `json:"verifyTaskResults"`
+	TaskResultCodes       []*int32        `json:"taskResultCodes"`
+	TaskResults           []*string       `json:"taskResults"`
+	SheetResultCode       *int32          `json:"sheetResultCode"`
+	SheetResult           *string         `json:"sheetResult"`
+	NextTransactionId     *string         `json:"nextTransactionId"`
+	CreatedAt             *int64          `json:"createdAt"`
+	Revision              *int64          `json:"revision"`
 }
 
 func (p *StampSheetResult) UnmarshalJSON(data []byte) error {
@@ -993,11 +996,43 @@ func (p *StampSheetResult) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["verifyTaskRequests"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyTaskRequests)
+		}
 		if v, ok := d["taskRequests"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TaskRequests)
 		}
 		if v, ok := d["sheetRequest"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.SheetRequest)
+		}
+		if v, ok := d["verifyTaskResultCodes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyTaskResultCodes)
+		}
+		if v, ok := d["verifyTaskResults"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.VerifyTaskResults = l
+			}
 		}
 		if v, ok := d["taskResultCodes"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TaskResultCodes)
@@ -1095,18 +1130,21 @@ func NewStampSheetResultFromJson(data string) StampSheetResult {
 
 func NewStampSheetResultFromDict(data map[string]interface{}) StampSheetResult {
 	return StampSheetResult{
-		StampSheetResultId: core.CastString(data["stampSheetResultId"]),
-		UserId:             core.CastString(data["userId"]),
-		TransactionId:      core.CastString(data["transactionId"]),
-		TaskRequests:       CastConsumeActions(core.CastArray(data["taskRequests"])),
-		SheetRequest:       NewAcquireActionFromDict(core.CastMap(data["sheetRequest"])).Pointer(),
-		TaskResultCodes:    core.CastInt32s(core.CastArray(data["taskResultCodes"])),
-		TaskResults:        core.CastStrings(core.CastArray(data["taskResults"])),
-		SheetResultCode:    core.CastInt32(data["sheetResultCode"]),
-		SheetResult:        core.CastString(data["sheetResult"]),
-		NextTransactionId:  core.CastString(data["nextTransactionId"]),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		StampSheetResultId:    core.CastString(data["stampSheetResultId"]),
+		UserId:                core.CastString(data["userId"]),
+		TransactionId:         core.CastString(data["transactionId"]),
+		VerifyTaskRequests:    CastVerifyActions(core.CastArray(data["verifyTaskRequests"])),
+		TaskRequests:          CastConsumeActions(core.CastArray(data["taskRequests"])),
+		SheetRequest:          NewAcquireActionFromDict(core.CastMap(data["sheetRequest"])).Pointer(),
+		VerifyTaskResultCodes: core.CastInt32s(core.CastArray(data["verifyTaskResultCodes"])),
+		VerifyTaskResults:     core.CastStrings(core.CastArray(data["verifyTaskResults"])),
+		TaskResultCodes:       core.CastInt32s(core.CastArray(data["taskResultCodes"])),
+		TaskResults:           core.CastStrings(core.CastArray(data["taskResults"])),
+		SheetResultCode:       core.CastInt32(data["sheetResultCode"]),
+		SheetResult:           core.CastString(data["sheetResult"]),
+		NextTransactionId:     core.CastString(data["nextTransactionId"]),
+		CreatedAt:             core.CastInt64(data["createdAt"]),
+		Revision:              core.CastInt64(data["revision"]),
 	}
 }
 
@@ -1124,6 +1162,12 @@ func (p StampSheetResult) ToDict() map[string]interface{} {
 	if p.TransactionId != nil {
 		transactionId = p.TransactionId
 	}
+	var verifyTaskRequests []interface{}
+	if p.VerifyTaskRequests != nil {
+		verifyTaskRequests = CastVerifyActionsFromDict(
+			p.VerifyTaskRequests,
+		)
+	}
 	var taskRequests []interface{}
 	if p.TaskRequests != nil {
 		taskRequests = CastConsumeActionsFromDict(
@@ -1133,6 +1177,18 @@ func (p StampSheetResult) ToDict() map[string]interface{} {
 	var sheetRequest map[string]interface{}
 	if p.SheetRequest != nil {
 		sheetRequest = p.SheetRequest.ToDict()
+	}
+	var verifyTaskResultCodes []interface{}
+	if p.VerifyTaskResultCodes != nil {
+		verifyTaskResultCodes = core.CastInt32sFromDict(
+			p.VerifyTaskResultCodes,
+		)
+	}
+	var verifyTaskResults []interface{}
+	if p.VerifyTaskResults != nil {
+		verifyTaskResults = core.CastStringsFromDict(
+			p.VerifyTaskResults,
+		)
 	}
 	var taskResultCodes []interface{}
 	if p.TaskResultCodes != nil {
@@ -1167,18 +1223,21 @@ func (p StampSheetResult) ToDict() map[string]interface{} {
 		revision = p.Revision
 	}
 	return map[string]interface{}{
-		"stampSheetResultId": stampSheetResultId,
-		"userId":             userId,
-		"transactionId":      transactionId,
-		"taskRequests":       taskRequests,
-		"sheetRequest":       sheetRequest,
-		"taskResultCodes":    taskResultCodes,
-		"taskResults":        taskResults,
-		"sheetResultCode":    sheetResultCode,
-		"sheetResult":        sheetResult,
-		"nextTransactionId":  nextTransactionId,
-		"createdAt":          createdAt,
-		"revision":           revision,
+		"stampSheetResultId":    stampSheetResultId,
+		"userId":                userId,
+		"transactionId":         transactionId,
+		"verifyTaskRequests":    verifyTaskRequests,
+		"taskRequests":          taskRequests,
+		"sheetRequest":          sheetRequest,
+		"verifyTaskResultCodes": verifyTaskResultCodes,
+		"verifyTaskResults":     verifyTaskResults,
+		"taskResultCodes":       taskResultCodes,
+		"taskResults":           taskResults,
+		"sheetResultCode":       sheetResultCode,
+		"sheetResult":           sheetResult,
+		"nextTransactionId":     nextTransactionId,
+		"createdAt":             createdAt,
+		"revision":              revision,
 	}
 }
 
@@ -1447,6 +1506,132 @@ func CastConsumeActions(data []interface{}) []ConsumeAction {
 }
 
 func CastConsumeActionsFromDict(data []ConsumeAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type VerifyAction struct {
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func (p *VerifyAction) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyAction{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyAction{}
+	} else {
+		*p = VerifyAction{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["action"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Action = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Action = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Action = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Action)
+				}
+			}
+		}
+		if v, ok := d["request"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Request = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Request = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Request = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Request)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyActionFromJson(data string) VerifyAction {
+	req := VerifyAction{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewVerifyActionFromDict(data map[string]interface{}) VerifyAction {
+	return VerifyAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p VerifyAction) ToDict() map[string]interface{} {
+
+	var action *string
+	if p.Action != nil {
+		action = p.Action
+	}
+	var request *string
+	if p.Request != nil {
+		request = p.Request
+	}
+	return map[string]interface{}{
+		"action":  action,
+		"request": request,
+	}
+}
+
+func (p VerifyAction) Pointer() *VerifyAction {
+	return &p
+}
+
+func CastVerifyActions(data []interface{}) []VerifyAction {
+	v := make([]VerifyAction, 0)
+	for _, d := range data {
+		v = append(v, NewVerifyActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastVerifyActionsFromDict(data []VerifyAction) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

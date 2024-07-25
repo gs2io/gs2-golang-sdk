@@ -1674,6 +1674,93 @@ func (p Gs2DistributorWebSocketClient) DistributeWithoutOverflowProcess(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2DistributorWebSocketClient) runVerifyTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- RunVerifyTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RunVerifyTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RunVerifyTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RunVerifyTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- RunVerifyTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorWebSocketClient) RunVerifyTaskAsync(
+	request *RunVerifyTaskRequest,
+	callback chan<- RunVerifyTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "distributor",
+			"component":   "distribute",
+			"function":    "runVerifyTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.VerifyTask != nil && *request.VerifyTask != "" {
+		bodies["verifyTask"] = *request.VerifyTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.runVerifyTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorWebSocketClient) RunVerifyTask(
+	request *RunVerifyTaskRequest,
+) (*RunVerifyTaskResult, error) {
+	callback := make(chan RunVerifyTaskAsyncResult, 1)
+	go p.RunVerifyTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2DistributorWebSocketClient) runStampTaskAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- RunStampTaskAsyncResult,
@@ -1928,6 +2015,90 @@ func (p Gs2DistributorWebSocketClient) RunStampSheetExpress(
 ) (*RunStampSheetExpressResult, error) {
 	callback := make(chan RunStampSheetExpressAsyncResult, 1)
 	go p.RunStampSheetExpressAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2DistributorWebSocketClient) runVerifyTaskWithoutNamespaceAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- RunVerifyTaskWithoutNamespaceAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RunVerifyTaskWithoutNamespaceAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RunVerifyTaskWithoutNamespaceResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RunVerifyTaskWithoutNamespaceAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- RunVerifyTaskWithoutNamespaceAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorWebSocketClient) RunVerifyTaskWithoutNamespaceAsync(
+	request *RunVerifyTaskWithoutNamespaceRequest,
+	callback chan<- RunVerifyTaskWithoutNamespaceAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "distributor",
+			"component":   "distribute",
+			"function":    "runVerifyTaskWithoutNamespace",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.VerifyTask != nil && *request.VerifyTask != "" {
+		bodies["verifyTask"] = *request.VerifyTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.runVerifyTaskWithoutNamespaceAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorWebSocketClient) RunVerifyTaskWithoutNamespace(
+	request *RunVerifyTaskWithoutNamespaceRequest,
+) (*RunVerifyTaskWithoutNamespaceResult, error) {
+	callback := make(chan RunVerifyTaskWithoutNamespaceAsyncResult, 1)
+	go p.RunVerifyTaskWithoutNamespaceAsync(
 		request,
 		callback,
 	)
