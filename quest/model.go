@@ -576,6 +576,7 @@ type QuestModelMaster struct {
 	Contents                    []Contents      `json:"contents"`
 	ChallengePeriodEventId      *string         `json:"challengePeriodEventId"`
 	FirstCompleteAcquireActions []AcquireAction `json:"firstCompleteAcquireActions"`
+	VerifyActions               []VerifyAction  `json:"verifyActions"`
 	ConsumeActions              []ConsumeAction `json:"consumeActions"`
 	FailedAcquireActions        []AcquireAction `json:"failedAcquireActions"`
 	PremiseQuestNames           []*string       `json:"premiseQuestNames"`
@@ -750,6 +751,9 @@ func (p *QuestModelMaster) UnmarshalJSON(data []byte) error {
 		if v, ok := d["firstCompleteAcquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.FirstCompleteAcquireActions)
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ConsumeActions)
 		}
@@ -811,6 +815,7 @@ func NewQuestModelMasterFromDict(data map[string]interface{}) QuestModelMaster {
 		Contents:                    CastContentses(core.CastArray(data["contents"])),
 		ChallengePeriodEventId:      core.CastString(data["challengePeriodEventId"]),
 		FirstCompleteAcquireActions: CastAcquireActions(core.CastArray(data["firstCompleteAcquireActions"])),
+		VerifyActions:               CastVerifyActions(core.CastArray(data["verifyActions"])),
 		ConsumeActions:              CastConsumeActions(core.CastArray(data["consumeActions"])),
 		FailedAcquireActions:        CastAcquireActions(core.CastArray(data["failedAcquireActions"])),
 		PremiseQuestNames:           core.CastStrings(core.CastArray(data["premiseQuestNames"])),
@@ -858,6 +863,12 @@ func (p QuestModelMaster) ToDict() map[string]interface{} {
 			p.FirstCompleteAcquireActions,
 		)
 	}
+	var verifyActions []interface{}
+	if p.VerifyActions != nil {
+		verifyActions = CastVerifyActionsFromDict(
+			p.VerifyActions,
+		)
+	}
 	var consumeActions []interface{}
 	if p.ConsumeActions != nil {
 		consumeActions = CastConsumeActionsFromDict(
@@ -897,6 +908,7 @@ func (p QuestModelMaster) ToDict() map[string]interface{} {
 		"contents":                    contents,
 		"challengePeriodEventId":      challengePeriodEventId,
 		"firstCompleteAcquireActions": firstCompleteAcquireActions,
+		"verifyActions":               verifyActions,
 		"consumeActions":              consumeActions,
 		"failedAcquireActions":        failedAcquireActions,
 		"premiseQuestNames":           premiseQuestNames,
@@ -2042,6 +2054,7 @@ type QuestModel struct {
 	Contents                    []Contents      `json:"contents"`
 	ChallengePeriodEventId      *string         `json:"challengePeriodEventId"`
 	FirstCompleteAcquireActions []AcquireAction `json:"firstCompleteAcquireActions"`
+	VerifyActions               []VerifyAction  `json:"verifyActions"`
 	ConsumeActions              []ConsumeAction `json:"consumeActions"`
 	FailedAcquireActions        []AcquireAction `json:"failedAcquireActions"`
 	PremiseQuestNames           []*string       `json:"premiseQuestNames"`
@@ -2167,6 +2180,9 @@ func (p *QuestModel) UnmarshalJSON(data []byte) error {
 		if v, ok := d["firstCompleteAcquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.FirstCompleteAcquireActions)
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ConsumeActions)
 		}
@@ -2217,6 +2233,7 @@ func NewQuestModelFromDict(data map[string]interface{}) QuestModel {
 		Contents:                    CastContentses(core.CastArray(data["contents"])),
 		ChallengePeriodEventId:      core.CastString(data["challengePeriodEventId"]),
 		FirstCompleteAcquireActions: CastAcquireActions(core.CastArray(data["firstCompleteAcquireActions"])),
+		VerifyActions:               CastVerifyActions(core.CastArray(data["verifyActions"])),
 		ConsumeActions:              CastConsumeActions(core.CastArray(data["consumeActions"])),
 		FailedAcquireActions:        CastAcquireActions(core.CastArray(data["failedAcquireActions"])),
 		PremiseQuestNames:           core.CastStrings(core.CastArray(data["premiseQuestNames"])),
@@ -2253,6 +2270,12 @@ func (p QuestModel) ToDict() map[string]interface{} {
 			p.FirstCompleteAcquireActions,
 		)
 	}
+	var verifyActions []interface{}
+	if p.VerifyActions != nil {
+		verifyActions = CastVerifyActionsFromDict(
+			p.VerifyActions,
+		)
+	}
 	var consumeActions []interface{}
 	if p.ConsumeActions != nil {
 		consumeActions = CastConsumeActionsFromDict(
@@ -2278,6 +2301,7 @@ func (p QuestModel) ToDict() map[string]interface{} {
 		"contents":                    contents,
 		"challengePeriodEventId":      challengePeriodEventId,
 		"firstCompleteAcquireActions": firstCompleteAcquireActions,
+		"verifyActions":               verifyActions,
 		"consumeActions":              consumeActions,
 		"failedAcquireActions":        failedAcquireActions,
 		"premiseQuestNames":           premiseQuestNames,
@@ -2549,6 +2573,132 @@ func CastConsumeActions(data []interface{}) []ConsumeAction {
 }
 
 func CastConsumeActionsFromDict(data []ConsumeAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type VerifyAction struct {
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func (p *VerifyAction) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyAction{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyAction{}
+	} else {
+		*p = VerifyAction{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["action"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Action = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Action = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Action = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Action)
+				}
+			}
+		}
+		if v, ok := d["request"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Request = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Request = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Request = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Request)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyActionFromJson(data string) VerifyAction {
+	req := VerifyAction{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewVerifyActionFromDict(data map[string]interface{}) VerifyAction {
+	return VerifyAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p VerifyAction) ToDict() map[string]interface{} {
+
+	var action *string
+	if p.Action != nil {
+		action = p.Action
+	}
+	var request *string
+	if p.Request != nil {
+		request = p.Request
+	}
+	return map[string]interface{}{
+		"action":  action,
+		"request": request,
+	}
+}
+
+func (p VerifyAction) Pointer() *VerifyAction {
+	return &p
+}
+
+func CastVerifyActions(data []interface{}) []VerifyAction {
+	v := make([]VerifyAction, 0)
+	for _, d := range data {
+		v = append(v, NewVerifyActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastVerifyActionsFromDict(data []VerifyAction) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

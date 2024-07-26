@@ -306,6 +306,7 @@ type SalesItemMaster struct {
 	Name           *string         `json:"name"`
 	Description    *string         `json:"description"`
 	Metadata       *string         `json:"metadata"`
+	VerifyActions  []VerifyAction  `json:"verifyActions"`
 	ConsumeActions []ConsumeAction `json:"consumeActions"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
 	CreatedAt      *int64          `json:"createdAt"`
@@ -427,6 +428,9 @@ func (p *SalesItemMaster) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ConsumeActions)
 		}
@@ -458,6 +462,7 @@ func NewSalesItemMasterFromDict(data map[string]interface{}) SalesItemMaster {
 		Name:           core.CastString(data["name"]),
 		Description:    core.CastString(data["description"]),
 		Metadata:       core.CastString(data["metadata"]),
+		VerifyActions:  CastVerifyActions(core.CastArray(data["verifyActions"])),
 		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
 		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
 		CreatedAt:      core.CastInt64(data["createdAt"]),
@@ -483,6 +488,12 @@ func (p SalesItemMaster) ToDict() map[string]interface{} {
 	var metadata *string
 	if p.Metadata != nil {
 		metadata = p.Metadata
+	}
+	var verifyActions []interface{}
+	if p.VerifyActions != nil {
+		verifyActions = CastVerifyActionsFromDict(
+			p.VerifyActions,
+		)
 	}
 	var consumeActions []interface{}
 	if p.ConsumeActions != nil {
@@ -513,6 +524,7 @@ func (p SalesItemMaster) ToDict() map[string]interface{} {
 		"name":           name,
 		"description":    description,
 		"metadata":       metadata,
+		"verifyActions":  verifyActions,
 		"consumeActions": consumeActions,
 		"acquireActions": acquireActions,
 		"createdAt":      createdAt,
@@ -1179,6 +1191,7 @@ func CastCurrentShowcaseMastersFromDict(data []CurrentShowcaseMaster) []interfac
 type SalesItem struct {
 	Name           *string         `json:"name"`
 	Metadata       *string         `json:"metadata"`
+	VerifyActions  []VerifyAction  `json:"verifyActions"`
 	ConsumeActions []ConsumeAction `json:"consumeActions"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
 }
@@ -1251,6 +1264,9 @@ func (p *SalesItem) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ConsumeActions)
 		}
@@ -1271,6 +1287,7 @@ func NewSalesItemFromDict(data map[string]interface{}) SalesItem {
 	return SalesItem{
 		Name:           core.CastString(data["name"]),
 		Metadata:       core.CastString(data["metadata"]),
+		VerifyActions:  CastVerifyActions(core.CastArray(data["verifyActions"])),
 		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
 		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
 	}
@@ -1285,6 +1302,12 @@ func (p SalesItem) ToDict() map[string]interface{} {
 	var metadata *string
 	if p.Metadata != nil {
 		metadata = p.Metadata
+	}
+	var verifyActions []interface{}
+	if p.VerifyActions != nil {
+		verifyActions = CastVerifyActionsFromDict(
+			p.VerifyActions,
+		)
 	}
 	var consumeActions []interface{}
 	if p.ConsumeActions != nil {
@@ -1301,6 +1324,7 @@ func (p SalesItem) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"name":           name,
 		"metadata":       metadata,
+		"verifyActions":  verifyActions,
 		"consumeActions": consumeActions,
 		"acquireActions": acquireActions,
 	}
@@ -2690,6 +2714,7 @@ type RandomDisplayItem struct {
 	ShowcaseName         *string         `json:"showcaseName"`
 	Name                 *string         `json:"name"`
 	Metadata             *string         `json:"metadata"`
+	VerifyActions        []VerifyAction  `json:"verifyActions"`
 	ConsumeActions       []ConsumeAction `json:"consumeActions"`
 	AcquireActions       []AcquireAction `json:"acquireActions"`
 	CurrentPurchaseCount *int32          `json:"currentPurchaseCount"`
@@ -2787,6 +2812,9 @@ func (p *RandomDisplayItem) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ConsumeActions)
 		}
@@ -2814,6 +2842,7 @@ func NewRandomDisplayItemFromDict(data map[string]interface{}) RandomDisplayItem
 		ShowcaseName:         core.CastString(data["showcaseName"]),
 		Name:                 core.CastString(data["name"]),
 		Metadata:             core.CastString(data["metadata"]),
+		VerifyActions:        CastVerifyActions(core.CastArray(data["verifyActions"])),
 		ConsumeActions:       CastConsumeActions(core.CastArray(data["consumeActions"])),
 		AcquireActions:       CastAcquireActions(core.CastArray(data["acquireActions"])),
 		CurrentPurchaseCount: core.CastInt32(data["currentPurchaseCount"]),
@@ -2834,6 +2863,12 @@ func (p RandomDisplayItem) ToDict() map[string]interface{} {
 	var metadata *string
 	if p.Metadata != nil {
 		metadata = p.Metadata
+	}
+	var verifyActions []interface{}
+	if p.VerifyActions != nil {
+		verifyActions = CastVerifyActionsFromDict(
+			p.VerifyActions,
+		)
 	}
 	var consumeActions []interface{}
 	if p.ConsumeActions != nil {
@@ -2859,6 +2894,7 @@ func (p RandomDisplayItem) ToDict() map[string]interface{} {
 		"showcaseName":         showcaseName,
 		"name":                 name,
 		"metadata":             metadata,
+		"verifyActions":        verifyActions,
 		"consumeActions":       consumeActions,
 		"acquireActions":       acquireActions,
 		"currentPurchaseCount": currentPurchaseCount,
@@ -2889,6 +2925,7 @@ func CastRandomDisplayItemsFromDict(data []RandomDisplayItem) []interface{} {
 type RandomDisplayItemModel struct {
 	Name           *string         `json:"name"`
 	Metadata       *string         `json:"metadata"`
+	VerifyActions  []VerifyAction  `json:"verifyActions"`
 	ConsumeActions []ConsumeAction `json:"consumeActions"`
 	AcquireActions []AcquireAction `json:"acquireActions"`
 	Stock          *int32          `json:"stock"`
@@ -2963,6 +3000,9 @@ func (p *RandomDisplayItemModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ConsumeActions)
 		}
@@ -2989,6 +3029,7 @@ func NewRandomDisplayItemModelFromDict(data map[string]interface{}) RandomDispla
 	return RandomDisplayItemModel{
 		Name:           core.CastString(data["name"]),
 		Metadata:       core.CastString(data["metadata"]),
+		VerifyActions:  CastVerifyActions(core.CastArray(data["verifyActions"])),
 		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
 		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
 		Stock:          core.CastInt32(data["stock"]),
@@ -3005,6 +3046,12 @@ func (p RandomDisplayItemModel) ToDict() map[string]interface{} {
 	var metadata *string
 	if p.Metadata != nil {
 		metadata = p.Metadata
+	}
+	var verifyActions []interface{}
+	if p.VerifyActions != nil {
+		verifyActions = CastVerifyActionsFromDict(
+			p.VerifyActions,
+		)
 	}
 	var consumeActions []interface{}
 	if p.ConsumeActions != nil {
@@ -3029,6 +3076,7 @@ func (p RandomDisplayItemModel) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"name":           name,
 		"metadata":       metadata,
+		"verifyActions":  verifyActions,
 		"consumeActions": consumeActions,
 		"acquireActions": acquireActions,
 		"stock":          stock,
@@ -3175,6 +3223,132 @@ func CastConsumeActions(data []interface{}) []ConsumeAction {
 }
 
 func CastConsumeActionsFromDict(data []ConsumeAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type VerifyAction struct {
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func (p *VerifyAction) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyAction{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyAction{}
+	} else {
+		*p = VerifyAction{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["action"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Action = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Action = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Action = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Action)
+				}
+			}
+		}
+		if v, ok := d["request"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Request = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Request = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Request = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Request)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyActionFromJson(data string) VerifyAction {
+	req := VerifyAction{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewVerifyActionFromDict(data map[string]interface{}) VerifyAction {
+	return VerifyAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p VerifyAction) ToDict() map[string]interface{} {
+
+	var action *string
+	if p.Action != nil {
+		action = p.Action
+	}
+	var request *string
+	if p.Request != nil {
+		request = p.Request
+	}
+	return map[string]interface{}{
+		"action":  action,
+		"request": request,
+	}
+}
+
+func (p VerifyAction) Pointer() *VerifyAction {
+	return &p
+}
+
+func CastVerifyActions(data []interface{}) []VerifyAction {
+	v := make([]VerifyAction, 0)
+	for _, d := range data {
+		v = append(v, NewVerifyActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastVerifyActionsFromDict(data []VerifyAction) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

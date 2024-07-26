@@ -253,6 +253,7 @@ type NodeModel struct {
 	NodeModelId           *string         `json:"nodeModelId"`
 	Name                  *string         `json:"name"`
 	Metadata              *string         `json:"metadata"`
+	ReleaseVerifyActions  []VerifyAction  `json:"releaseVerifyActions"`
 	ReleaseConsumeActions []ConsumeAction `json:"releaseConsumeActions"`
 	ReturnAcquireActions  []AcquireAction `json:"returnAcquireActions"`
 	RestrainReturnRate    *float32        `json:"restrainReturnRate"`
@@ -350,6 +351,9 @@ func (p *NodeModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["releaseVerifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ReleaseVerifyActions)
+		}
 		if v, ok := d["releaseConsumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReleaseConsumeActions)
 		}
@@ -400,6 +404,7 @@ func NewNodeModelFromDict(data map[string]interface{}) NodeModel {
 		NodeModelId:           core.CastString(data["nodeModelId"]),
 		Name:                  core.CastString(data["name"]),
 		Metadata:              core.CastString(data["metadata"]),
+		ReleaseVerifyActions:  CastVerifyActions(core.CastArray(data["releaseVerifyActions"])),
 		ReleaseConsumeActions: CastConsumeActions(core.CastArray(data["releaseConsumeActions"])),
 		ReturnAcquireActions:  CastAcquireActions(core.CastArray(data["returnAcquireActions"])),
 		RestrainReturnRate:    core.CastFloat32(data["restrainReturnRate"]),
@@ -420,6 +425,12 @@ func (p NodeModel) ToDict() map[string]interface{} {
 	var metadata *string
 	if p.Metadata != nil {
 		metadata = p.Metadata
+	}
+	var releaseVerifyActions []interface{}
+	if p.ReleaseVerifyActions != nil {
+		releaseVerifyActions = CastVerifyActionsFromDict(
+			p.ReleaseVerifyActions,
+		)
 	}
 	var releaseConsumeActions []interface{}
 	if p.ReleaseConsumeActions != nil {
@@ -447,6 +458,7 @@ func (p NodeModel) ToDict() map[string]interface{} {
 		"nodeModelId":           nodeModelId,
 		"name":                  name,
 		"metadata":              metadata,
+		"releaseVerifyActions":  releaseVerifyActions,
 		"releaseConsumeActions": releaseConsumeActions,
 		"returnAcquireActions":  returnAcquireActions,
 		"restrainReturnRate":    restrainReturnRate,
@@ -479,6 +491,7 @@ type NodeModelMaster struct {
 	Name                  *string         `json:"name"`
 	Description           *string         `json:"description"`
 	Metadata              *string         `json:"metadata"`
+	ReleaseVerifyActions  []VerifyAction  `json:"releaseVerifyActions"`
 	ReleaseConsumeActions []ConsumeAction `json:"releaseConsumeActions"`
 	RestrainReturnRate    *float32        `json:"restrainReturnRate"`
 	PremiseNodeNames      []*string       `json:"premiseNodeNames"`
@@ -601,6 +614,9 @@ func (p *NodeModelMaster) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["releaseVerifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ReleaseVerifyActions)
+		}
 		if v, ok := d["releaseConsumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReleaseConsumeActions)
 		}
@@ -658,6 +674,7 @@ func NewNodeModelMasterFromDict(data map[string]interface{}) NodeModelMaster {
 		Name:                  core.CastString(data["name"]),
 		Description:           core.CastString(data["description"]),
 		Metadata:              core.CastString(data["metadata"]),
+		ReleaseVerifyActions:  CastVerifyActions(core.CastArray(data["releaseVerifyActions"])),
 		ReleaseConsumeActions: CastConsumeActions(core.CastArray(data["releaseConsumeActions"])),
 		RestrainReturnRate:    core.CastFloat32(data["restrainReturnRate"]),
 		PremiseNodeNames:      core.CastStrings(core.CastArray(data["premiseNodeNames"])),
@@ -684,6 +701,12 @@ func (p NodeModelMaster) ToDict() map[string]interface{} {
 	var metadata *string
 	if p.Metadata != nil {
 		metadata = p.Metadata
+	}
+	var releaseVerifyActions []interface{}
+	if p.ReleaseVerifyActions != nil {
+		releaseVerifyActions = CastVerifyActionsFromDict(
+			p.ReleaseVerifyActions,
+		)
 	}
 	var releaseConsumeActions []interface{}
 	if p.ReleaseConsumeActions != nil {
@@ -718,6 +741,7 @@ func (p NodeModelMaster) ToDict() map[string]interface{} {
 		"name":                  name,
 		"description":           description,
 		"metadata":              metadata,
+		"releaseVerifyActions":  releaseVerifyActions,
 		"releaseConsumeActions": releaseConsumeActions,
 		"restrainReturnRate":    restrainReturnRate,
 		"premiseNodeNames":      premiseNodeNames,
@@ -1339,6 +1363,132 @@ func CastConsumeActions(data []interface{}) []ConsumeAction {
 }
 
 func CastConsumeActionsFromDict(data []ConsumeAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type VerifyAction struct {
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func (p *VerifyAction) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyAction{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyAction{}
+	} else {
+		*p = VerifyAction{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["action"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Action = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Action = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Action = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Action)
+				}
+			}
+		}
+		if v, ok := d["request"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Request = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Request = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Request = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Request)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyActionFromJson(data string) VerifyAction {
+	req := VerifyAction{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewVerifyActionFromDict(data map[string]interface{}) VerifyAction {
+	return VerifyAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p VerifyAction) ToDict() map[string]interface{} {
+
+	var action *string
+	if p.Action != nil {
+		action = p.Action
+	}
+	var request *string
+	if p.Request != nil {
+		request = p.Request
+	}
+	return map[string]interface{}{
+		"action":  action,
+		"request": request,
+	}
+}
+
+func (p VerifyAction) Pointer() *VerifyAction {
+	return &p
+}
+
+func CastVerifyActions(data []interface{}) []VerifyAction {
+	v := make([]VerifyAction, 0)
+	for _, d := range data {
+		v = append(v, NewVerifyActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastVerifyActionsFromDict(data []VerifyAction) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

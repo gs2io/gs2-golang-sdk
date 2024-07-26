@@ -8343,7 +8343,7 @@ type CreateMissionTaskModelMasterRequest struct {
 	Description                  *string             `json:"description"`
 	VerifyCompleteType           *string             `json:"verifyCompleteType"`
 	TargetCounter                *TargetCounterModel `json:"targetCounter"`
-	VerifyCompleteConsumeActions []ConsumeAction     `json:"verifyCompleteConsumeActions"`
+	VerifyCompleteConsumeActions []VerifyAction      `json:"verifyCompleteConsumeActions"`
 	CompleteAcquireActions       []AcquireAction     `json:"completeAcquireActions"`
 	ChallengePeriodEventId       *string             `json:"challengePeriodEventId"`
 	PremiseMissionTaskName       *string             `json:"premiseMissionTaskName"`
@@ -8641,7 +8641,7 @@ func NewCreateMissionTaskModelMasterRequestFromDict(data map[string]interface{})
 		Description:                  core.CastString(data["description"]),
 		VerifyCompleteType:           core.CastString(data["verifyCompleteType"]),
 		TargetCounter:                NewTargetCounterModelFromDict(core.CastMap(data["targetCounter"])).Pointer(),
-		VerifyCompleteConsumeActions: CastConsumeActions(core.CastArray(data["verifyCompleteConsumeActions"])),
+		VerifyCompleteConsumeActions: CastVerifyActions(core.CastArray(data["verifyCompleteConsumeActions"])),
 		CompleteAcquireActions:       CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
 		ChallengePeriodEventId:       core.CastString(data["challengePeriodEventId"]),
 		PremiseMissionTaskName:       core.CastString(data["premiseMissionTaskName"]),
@@ -8660,7 +8660,7 @@ func (p CreateMissionTaskModelMasterRequest) ToDict() map[string]interface{} {
 		"description":        p.Description,
 		"verifyCompleteType": p.VerifyCompleteType,
 		"targetCounter":      p.TargetCounter.ToDict(),
-		"verifyCompleteConsumeActions": CastConsumeActionsFromDict(
+		"verifyCompleteConsumeActions": CastVerifyActionsFromDict(
 			p.VerifyCompleteConsumeActions,
 		),
 		"completeAcquireActions": CastAcquireActionsFromDict(
@@ -8822,7 +8822,7 @@ type UpdateMissionTaskModelMasterRequest struct {
 	Description                  *string             `json:"description"`
 	VerifyCompleteType           *string             `json:"verifyCompleteType"`
 	TargetCounter                *TargetCounterModel `json:"targetCounter"`
-	VerifyCompleteConsumeActions []ConsumeAction     `json:"verifyCompleteConsumeActions"`
+	VerifyCompleteConsumeActions []VerifyAction      `json:"verifyCompleteConsumeActions"`
 	CompleteAcquireActions       []AcquireAction     `json:"completeAcquireActions"`
 	ChallengePeriodEventId       *string             `json:"challengePeriodEventId"`
 	PremiseMissionTaskName       *string             `json:"premiseMissionTaskName"`
@@ -9120,7 +9120,7 @@ func NewUpdateMissionTaskModelMasterRequestFromDict(data map[string]interface{})
 		Description:                  core.CastString(data["description"]),
 		VerifyCompleteType:           core.CastString(data["verifyCompleteType"]),
 		TargetCounter:                NewTargetCounterModelFromDict(core.CastMap(data["targetCounter"])).Pointer(),
-		VerifyCompleteConsumeActions: CastConsumeActions(core.CastArray(data["verifyCompleteConsumeActions"])),
+		VerifyCompleteConsumeActions: CastVerifyActions(core.CastArray(data["verifyCompleteConsumeActions"])),
 		CompleteAcquireActions:       CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
 		ChallengePeriodEventId:       core.CastString(data["challengePeriodEventId"]),
 		PremiseMissionTaskName:       core.CastString(data["premiseMissionTaskName"]),
@@ -9139,7 +9139,7 @@ func (p UpdateMissionTaskModelMasterRequest) ToDict() map[string]interface{} {
 		"description":        p.Description,
 		"verifyCompleteType": p.VerifyCompleteType,
 		"targetCounter":      p.TargetCounter.ToDict(),
-		"verifyCompleteConsumeActions": CastConsumeActionsFromDict(
+		"verifyCompleteConsumeActions": CastVerifyActionsFromDict(
 			p.VerifyCompleteConsumeActions,
 		),
 		"completeAcquireActions": CastAcquireActionsFromDict(

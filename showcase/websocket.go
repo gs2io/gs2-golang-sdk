@@ -1302,6 +1302,13 @@ func (p Gs2ShowcaseWebSocketClient) CreateSalesItemMasterAsync(
 	if request.Metadata != nil && *request.Metadata != "" {
 		bodies["metadata"] = *request.Metadata
 	}
+	if request.VerifyActions != nil {
+		var _verifyActions []interface{}
+		for _, item := range request.VerifyActions {
+			_verifyActions = append(_verifyActions, item)
+		}
+		bodies["verifyActions"] = _verifyActions
+	}
 	if request.ConsumeActions != nil {
 		var _consumeActions []interface{}
 		for _, item := range request.ConsumeActions {
@@ -1489,6 +1496,13 @@ func (p Gs2ShowcaseWebSocketClient) UpdateSalesItemMasterAsync(
 	}
 	if request.Metadata != nil && *request.Metadata != "" {
 		bodies["metadata"] = *request.Metadata
+	}
+	if request.VerifyActions != nil {
+		var _verifyActions []interface{}
+		for _, item := range request.VerifyActions {
+			_verifyActions = append(_verifyActions, item)
+		}
+		bodies["verifyActions"] = _verifyActions
 	}
 	if request.ConsumeActions != nil {
 		var _consumeActions []interface{}

@@ -2269,7 +2269,7 @@ type MissionTaskModel struct {
 	Metadata                     *string             `json:"metadata"`
 	VerifyCompleteType           *string             `json:"verifyCompleteType"`
 	TargetCounter                *TargetCounterModel `json:"targetCounter"`
-	VerifyCompleteConsumeActions []ConsumeAction     `json:"verifyCompleteConsumeActions"`
+	VerifyCompleteConsumeActions []VerifyAction      `json:"verifyCompleteConsumeActions"`
 	CompleteAcquireActions       []AcquireAction     `json:"completeAcquireActions"`
 	ChallengePeriodEventId       *string             `json:"challengePeriodEventId"`
 	PremiseMissionTaskName       *string             `json:"premiseMissionTaskName"`
@@ -2516,7 +2516,7 @@ func NewMissionTaskModelFromDict(data map[string]interface{}) MissionTaskModel {
 		Metadata:                     core.CastString(data["metadata"]),
 		VerifyCompleteType:           core.CastString(data["verifyCompleteType"]),
 		TargetCounter:                NewTargetCounterModelFromDict(core.CastMap(data["targetCounter"])).Pointer(),
-		VerifyCompleteConsumeActions: CastConsumeActions(core.CastArray(data["verifyCompleteConsumeActions"])),
+		VerifyCompleteConsumeActions: CastVerifyActions(core.CastArray(data["verifyCompleteConsumeActions"])),
 		CompleteAcquireActions:       CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
 		ChallengePeriodEventId:       core.CastString(data["challengePeriodEventId"]),
 		PremiseMissionTaskName:       core.CastString(data["premiseMissionTaskName"]),
@@ -2550,7 +2550,7 @@ func (p MissionTaskModel) ToDict() map[string]interface{} {
 	}
 	var verifyCompleteConsumeActions []interface{}
 	if p.VerifyCompleteConsumeActions != nil {
-		verifyCompleteConsumeActions = CastConsumeActionsFromDict(
+		verifyCompleteConsumeActions = CastVerifyActionsFromDict(
 			p.VerifyCompleteConsumeActions,
 		)
 	}
@@ -2623,7 +2623,7 @@ type MissionTaskModelMaster struct {
 	Description                  *string             `json:"description"`
 	VerifyCompleteType           *string             `json:"verifyCompleteType"`
 	TargetCounter                *TargetCounterModel `json:"targetCounter"`
-	VerifyCompleteConsumeActions []ConsumeAction     `json:"verifyCompleteConsumeActions"`
+	VerifyCompleteConsumeActions []VerifyAction      `json:"verifyCompleteConsumeActions"`
 	CompleteAcquireActions       []AcquireAction     `json:"completeAcquireActions"`
 	ChallengePeriodEventId       *string             `json:"challengePeriodEventId"`
 	PremiseMissionTaskName       *string             `json:"premiseMissionTaskName"`
@@ -2906,7 +2906,7 @@ func NewMissionTaskModelMasterFromDict(data map[string]interface{}) MissionTaskM
 		Description:                  core.CastString(data["description"]),
 		VerifyCompleteType:           core.CastString(data["verifyCompleteType"]),
 		TargetCounter:                NewTargetCounterModelFromDict(core.CastMap(data["targetCounter"])).Pointer(),
-		VerifyCompleteConsumeActions: CastConsumeActions(core.CastArray(data["verifyCompleteConsumeActions"])),
+		VerifyCompleteConsumeActions: CastVerifyActions(core.CastArray(data["verifyCompleteConsumeActions"])),
 		CompleteAcquireActions:       CastAcquireActions(core.CastArray(data["completeAcquireActions"])),
 		ChallengePeriodEventId:       core.CastString(data["challengePeriodEventId"]),
 		PremiseMissionTaskName:       core.CastString(data["premiseMissionTaskName"]),
@@ -2947,7 +2947,7 @@ func (p MissionTaskModelMaster) ToDict() map[string]interface{} {
 	}
 	var verifyCompleteConsumeActions []interface{}
 	if p.VerifyCompleteConsumeActions != nil {
-		verifyCompleteConsumeActions = CastConsumeActionsFromDict(
+		verifyCompleteConsumeActions = CastVerifyActionsFromDict(
 			p.VerifyCompleteConsumeActions,
 		)
 	}
@@ -3536,6 +3536,132 @@ func CastConsumeActions(data []interface{}) []ConsumeAction {
 }
 
 func CastConsumeActionsFromDict(data []ConsumeAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type VerifyAction struct {
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func (p *VerifyAction) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyAction{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyAction{}
+	} else {
+		*p = VerifyAction{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["action"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Action = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Action = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Action = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Action)
+				}
+			}
+		}
+		if v, ok := d["request"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Request = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Request = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Request = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Request)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyActionFromJson(data string) VerifyAction {
+	req := VerifyAction{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewVerifyActionFromDict(data map[string]interface{}) VerifyAction {
+	return VerifyAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p VerifyAction) ToDict() map[string]interface{} {
+
+	var action *string
+	if p.Action != nil {
+		action = p.Action
+	}
+	var request *string
+	if p.Request != nil {
+		request = p.Request
+	}
+	return map[string]interface{}{
+		"action":  action,
+		"request": request,
+	}
+}
+
+func (p VerifyAction) Pointer() *VerifyAction {
+	return &p
+}
+
+func CastVerifyActions(data []interface{}) []VerifyAction {
+	v := make([]VerifyAction, 0)
+	for _, d := range data {
+		v = append(v, NewVerifyActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastVerifyActionsFromDict(data []VerifyAction) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

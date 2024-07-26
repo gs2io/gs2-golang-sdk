@@ -1434,6 +1434,13 @@ func (p Gs2LoginRewardRestClient) CreateBonusModelMasterAsync(
 	if request.MissedReceiveRelief != nil && *request.MissedReceiveRelief != "" {
 		bodies["missedReceiveRelief"] = *request.MissedReceiveRelief
 	}
+	if request.MissedReceiveReliefVerifyActions != nil {
+		var _missedReceiveReliefVerifyActions []interface{}
+		for _, item := range request.MissedReceiveReliefVerifyActions {
+			_missedReceiveReliefVerifyActions = append(_missedReceiveReliefVerifyActions, item)
+		}
+		bodies["missedReceiveReliefVerifyActions"] = _missedReceiveReliefVerifyActions
+	}
 	if request.MissedReceiveReliefConsumeActions != nil {
 		var _missedReceiveReliefConsumeActions []interface{}
 		for _, item := range request.MissedReceiveReliefConsumeActions {
@@ -1658,6 +1665,13 @@ func (p Gs2LoginRewardRestClient) UpdateBonusModelMasterAsync(
 	}
 	if request.MissedReceiveRelief != nil && *request.MissedReceiveRelief != "" {
 		bodies["missedReceiveRelief"] = *request.MissedReceiveRelief
+	}
+	if request.MissedReceiveReliefVerifyActions != nil {
+		var _missedReceiveReliefVerifyActions []interface{}
+		for _, item := range request.MissedReceiveReliefVerifyActions {
+			_missedReceiveReliefVerifyActions = append(_missedReceiveReliefVerifyActions, item)
+		}
+		bodies["missedReceiveReliefVerifyActions"] = _missedReceiveReliefVerifyActions
 	}
 	if request.MissedReceiveReliefConsumeActions != nil {
 		var _missedReceiveReliefConsumeActions []interface{}

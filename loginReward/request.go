@@ -1531,6 +1531,7 @@ type CreateBonusModelMasterRequest struct {
 	Repeat                            *string         `json:"repeat"`
 	Rewards                           []Reward        `json:"rewards"`
 	MissedReceiveRelief               *string         `json:"missedReceiveRelief"`
+	MissedReceiveReliefVerifyActions  []VerifyAction  `json:"missedReceiveReliefVerifyActions"`
 	MissedReceiveReliefConsumeActions []ConsumeAction `json:"missedReceiveReliefConsumeActions"`
 }
 
@@ -1746,6 +1747,9 @@ func (p *CreateBonusModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["missedReceiveReliefVerifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MissedReceiveReliefVerifyActions)
+		}
 		if v, ok := d["missedReceiveReliefConsumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.MissedReceiveReliefConsumeActions)
 		}
@@ -1774,6 +1778,7 @@ func NewCreateBonusModelMasterRequestFromDict(data map[string]interface{}) Creat
 		Repeat:                            core.CastString(data["repeat"]),
 		Rewards:                           CastRewards(core.CastArray(data["rewards"])),
 		MissedReceiveRelief:               core.CastString(data["missedReceiveRelief"]),
+		MissedReceiveReliefVerifyActions:  CastVerifyActions(core.CastArray(data["missedReceiveReliefVerifyActions"])),
 		MissedReceiveReliefConsumeActions: CastConsumeActions(core.CastArray(data["missedReceiveReliefConsumeActions"])),
 	}
 }
@@ -1792,6 +1797,9 @@ func (p CreateBonusModelMasterRequest) ToDict() map[string]interface{} {
 			p.Rewards,
 		),
 		"missedReceiveRelief": p.MissedReceiveRelief,
+		"missedReceiveReliefVerifyActions": CastVerifyActionsFromDict(
+			p.MissedReceiveReliefVerifyActions,
+		),
 		"missedReceiveReliefConsumeActions": CastConsumeActionsFromDict(
 			p.MissedReceiveReliefConsumeActions,
 		),
@@ -1923,6 +1931,7 @@ type UpdateBonusModelMasterRequest struct {
 	Repeat                            *string         `json:"repeat"`
 	Rewards                           []Reward        `json:"rewards"`
 	MissedReceiveRelief               *string         `json:"missedReceiveRelief"`
+	MissedReceiveReliefVerifyActions  []VerifyAction  `json:"missedReceiveReliefVerifyActions"`
 	MissedReceiveReliefConsumeActions []ConsumeAction `json:"missedReceiveReliefConsumeActions"`
 }
 
@@ -2138,6 +2147,9 @@ func (p *UpdateBonusModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["missedReceiveReliefVerifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MissedReceiveReliefVerifyActions)
+		}
 		if v, ok := d["missedReceiveReliefConsumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.MissedReceiveReliefConsumeActions)
 		}
@@ -2166,6 +2178,7 @@ func NewUpdateBonusModelMasterRequestFromDict(data map[string]interface{}) Updat
 		Repeat:                            core.CastString(data["repeat"]),
 		Rewards:                           CastRewards(core.CastArray(data["rewards"])),
 		MissedReceiveRelief:               core.CastString(data["missedReceiveRelief"]),
+		MissedReceiveReliefVerifyActions:  CastVerifyActions(core.CastArray(data["missedReceiveReliefVerifyActions"])),
 		MissedReceiveReliefConsumeActions: CastConsumeActions(core.CastArray(data["missedReceiveReliefConsumeActions"])),
 	}
 }
@@ -2184,6 +2197,9 @@ func (p UpdateBonusModelMasterRequest) ToDict() map[string]interface{} {
 			p.Rewards,
 		),
 		"missedReceiveRelief": p.MissedReceiveRelief,
+		"missedReceiveReliefVerifyActions": CastVerifyActionsFromDict(
+			p.MissedReceiveReliefVerifyActions,
+		),
 		"missedReceiveReliefConsumeActions": CastConsumeActionsFromDict(
 			p.MissedReceiveReliefConsumeActions,
 		),

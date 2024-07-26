@@ -1461,6 +1461,13 @@ func (p Gs2SkillTreeWebSocketClient) CreateNodeModelMasterAsync(
 	if request.Metadata != nil && *request.Metadata != "" {
 		bodies["metadata"] = *request.Metadata
 	}
+	if request.ReleaseVerifyActions != nil {
+		var _releaseVerifyActions []interface{}
+		for _, item := range request.ReleaseVerifyActions {
+			_releaseVerifyActions = append(_releaseVerifyActions, item)
+		}
+		bodies["releaseVerifyActions"] = _releaseVerifyActions
+	}
 	if request.ReleaseConsumeActions != nil {
 		var _releaseConsumeActions []interface{}
 		for _, item := range request.ReleaseConsumeActions {
@@ -1651,6 +1658,13 @@ func (p Gs2SkillTreeWebSocketClient) UpdateNodeModelMasterAsync(
 	}
 	if request.Metadata != nil && *request.Metadata != "" {
 		bodies["metadata"] = *request.Metadata
+	}
+	if request.ReleaseVerifyActions != nil {
+		var _releaseVerifyActions []interface{}
+		for _, item := range request.ReleaseVerifyActions {
+			_releaseVerifyActions = append(_releaseVerifyActions, item)
+		}
+		bodies["releaseVerifyActions"] = _releaseVerifyActions
 	}
 	if request.ReleaseConsumeActions != nil {
 		var _releaseConsumeActions []interface{}

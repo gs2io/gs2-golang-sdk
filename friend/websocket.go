@@ -204,8 +204,17 @@ func (p Gs2FriendWebSocketClient) CreateNamespaceAsync(
 	if request.ReceiveRequestNotification != nil {
 		bodies["receiveRequestNotification"] = request.ReceiveRequestNotification.ToDict()
 	}
+	if request.CancelRequestNotification != nil {
+		bodies["cancelRequestNotification"] = request.CancelRequestNotification.ToDict()
+	}
 	if request.AcceptRequestNotification != nil {
 		bodies["acceptRequestNotification"] = request.AcceptRequestNotification.ToDict()
+	}
+	if request.RejectRequestNotification != nil {
+		bodies["rejectRequestNotification"] = request.RejectRequestNotification.ToDict()
+	}
+	if request.DeleteFriendNotification != nil {
+		bodies["deleteFriendNotification"] = request.DeleteFriendNotification.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
@@ -486,8 +495,17 @@ func (p Gs2FriendWebSocketClient) UpdateNamespaceAsync(
 	if request.ReceiveRequestNotification != nil {
 		bodies["receiveRequestNotification"] = request.ReceiveRequestNotification.ToDict()
 	}
+	if request.CancelRequestNotification != nil {
+		bodies["cancelRequestNotification"] = request.CancelRequestNotification.ToDict()
+	}
 	if request.AcceptRequestNotification != nil {
 		bodies["acceptRequestNotification"] = request.AcceptRequestNotification.ToDict()
+	}
+	if request.RejectRequestNotification != nil {
+		bodies["rejectRequestNotification"] = request.RejectRequestNotification.ToDict()
+	}
+	if request.DeleteFriendNotification != nil {
+		bodies["deleteFriendNotification"] = request.DeleteFriendNotification.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()

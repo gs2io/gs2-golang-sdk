@@ -2384,6 +2384,7 @@ type CreateQuestModelMasterRequest struct {
 	Contents                    []Contents      `json:"contents"`
 	ChallengePeriodEventId      *string         `json:"challengePeriodEventId"`
 	FirstCompleteAcquireActions []AcquireAction `json:"firstCompleteAcquireActions"`
+	VerifyActions               []VerifyAction  `json:"verifyActions"`
 	ConsumeActions              []ConsumeAction `json:"consumeActions"`
 	FailedAcquireActions        []AcquireAction `json:"failedAcquireActions"`
 	PremiseQuestNames           []*string       `json:"premiseQuestNames"`
@@ -2555,6 +2556,9 @@ func (p *CreateQuestModelMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["firstCompleteAcquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.FirstCompleteAcquireActions)
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ConsumeActions)
 		}
@@ -2610,6 +2614,7 @@ func NewCreateQuestModelMasterRequestFromDict(data map[string]interface{}) Creat
 		Contents:                    CastContentses(core.CastArray(data["contents"])),
 		ChallengePeriodEventId:      core.CastString(data["challengePeriodEventId"]),
 		FirstCompleteAcquireActions: CastAcquireActions(core.CastArray(data["firstCompleteAcquireActions"])),
+		VerifyActions:               CastVerifyActions(core.CastArray(data["verifyActions"])),
 		ConsumeActions:              CastConsumeActions(core.CastArray(data["consumeActions"])),
 		FailedAcquireActions:        CastAcquireActions(core.CastArray(data["failedAcquireActions"])),
 		PremiseQuestNames:           core.CastStrings(core.CastArray(data["premiseQuestNames"])),
@@ -2629,6 +2634,9 @@ func (p CreateQuestModelMasterRequest) ToDict() map[string]interface{} {
 		"challengePeriodEventId": p.ChallengePeriodEventId,
 		"firstCompleteAcquireActions": CastAcquireActionsFromDict(
 			p.FirstCompleteAcquireActions,
+		),
+		"verifyActions": CastVerifyActionsFromDict(
+			p.VerifyActions,
 		),
 		"consumeActions": CastConsumeActionsFromDict(
 			p.ConsumeActions,
@@ -2791,6 +2799,7 @@ type UpdateQuestModelMasterRequest struct {
 	Contents                    []Contents      `json:"contents"`
 	ChallengePeriodEventId      *string         `json:"challengePeriodEventId"`
 	FirstCompleteAcquireActions []AcquireAction `json:"firstCompleteAcquireActions"`
+	VerifyActions               []VerifyAction  `json:"verifyActions"`
 	ConsumeActions              []ConsumeAction `json:"consumeActions"`
 	FailedAcquireActions        []AcquireAction `json:"failedAcquireActions"`
 	PremiseQuestNames           []*string       `json:"premiseQuestNames"`
@@ -2962,6 +2971,9 @@ func (p *UpdateQuestModelMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["firstCompleteAcquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.FirstCompleteAcquireActions)
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ConsumeActions)
 		}
@@ -3017,6 +3029,7 @@ func NewUpdateQuestModelMasterRequestFromDict(data map[string]interface{}) Updat
 		Contents:                    CastContentses(core.CastArray(data["contents"])),
 		ChallengePeriodEventId:      core.CastString(data["challengePeriodEventId"]),
 		FirstCompleteAcquireActions: CastAcquireActions(core.CastArray(data["firstCompleteAcquireActions"])),
+		VerifyActions:               CastVerifyActions(core.CastArray(data["verifyActions"])),
 		ConsumeActions:              CastConsumeActions(core.CastArray(data["consumeActions"])),
 		FailedAcquireActions:        CastAcquireActions(core.CastArray(data["failedAcquireActions"])),
 		PremiseQuestNames:           core.CastStrings(core.CastArray(data["premiseQuestNames"])),
@@ -3036,6 +3049,9 @@ func (p UpdateQuestModelMasterRequest) ToDict() map[string]interface{} {
 		"challengePeriodEventId": p.ChallengePeriodEventId,
 		"firstCompleteAcquireActions": CastAcquireActionsFromDict(
 			p.FirstCompleteAcquireActions,
+		),
+		"verifyActions": CastVerifyActionsFromDict(
+			p.VerifyActions,
 		),
 		"consumeActions": CastConsumeActionsFromDict(
 			p.ConsumeActions,

@@ -1860,6 +1860,7 @@ type CreateRateModelMasterRequest struct {
 	TimingType      *string         `json:"timingType"`
 	LockTime        *int32          `json:"lockTime"`
 	AcquireActions  []AcquireAction `json:"acquireActions"`
+	VerifyActions   []VerifyAction  `json:"verifyActions"`
 	ConsumeActions  []ConsumeAction `json:"consumeActions"`
 }
 
@@ -2006,6 +2007,9 @@ func (p *CreateRateModelMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["acquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireActions)
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ConsumeActions)
 		}
@@ -2031,6 +2035,7 @@ func NewCreateRateModelMasterRequestFromDict(data map[string]interface{}) Create
 		TimingType:     core.CastString(data["timingType"]),
 		LockTime:       core.CastInt32(data["lockTime"]),
 		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+		VerifyActions:  CastVerifyActions(core.CastArray(data["verifyActions"])),
 		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
 	}
 }
@@ -2045,6 +2050,9 @@ func (p CreateRateModelMasterRequest) ToDict() map[string]interface{} {
 		"lockTime":      p.LockTime,
 		"acquireActions": CastAcquireActionsFromDict(
 			p.AcquireActions,
+		),
+		"verifyActions": CastVerifyActionsFromDict(
+			p.VerifyActions,
 		),
 		"consumeActions": CastConsumeActionsFromDict(
 			p.ConsumeActions,
@@ -2174,6 +2182,7 @@ type UpdateRateModelMasterRequest struct {
 	TimingType      *string         `json:"timingType"`
 	LockTime        *int32          `json:"lockTime"`
 	AcquireActions  []AcquireAction `json:"acquireActions"`
+	VerifyActions   []VerifyAction  `json:"verifyActions"`
 	ConsumeActions  []ConsumeAction `json:"consumeActions"`
 }
 
@@ -2320,6 +2329,9 @@ func (p *UpdateRateModelMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["acquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireActions)
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ConsumeActions)
 		}
@@ -2345,6 +2357,7 @@ func NewUpdateRateModelMasterRequestFromDict(data map[string]interface{}) Update
 		TimingType:     core.CastString(data["timingType"]),
 		LockTime:       core.CastInt32(data["lockTime"]),
 		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+		VerifyActions:  CastVerifyActions(core.CastArray(data["verifyActions"])),
 		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
 	}
 }
@@ -2359,6 +2372,9 @@ func (p UpdateRateModelMasterRequest) ToDict() map[string]interface{} {
 		"lockTime":      p.LockTime,
 		"acquireActions": CastAcquireActionsFromDict(
 			p.AcquireActions,
+		),
+		"verifyActions": CastVerifyActionsFromDict(
+			p.VerifyActions,
 		),
 		"consumeActions": CastConsumeActionsFromDict(
 			p.ConsumeActions,

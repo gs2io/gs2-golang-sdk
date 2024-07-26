@@ -1633,6 +1633,7 @@ type CreateSalesItemMasterRequest struct {
 	Name            *string         `json:"name"`
 	Description     *string         `json:"description"`
 	Metadata        *string         `json:"metadata"`
+	VerifyActions   []VerifyAction  `json:"verifyActions"`
 	ConsumeActions  []ConsumeAction `json:"consumeActions"`
 	AcquireActions  []AcquireAction `json:"acquireActions"`
 }
@@ -1751,6 +1752,9 @@ func (p *CreateSalesItemMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ConsumeActions)
 		}
@@ -1776,6 +1780,7 @@ func NewCreateSalesItemMasterRequestFromDict(data map[string]interface{}) Create
 		Name:           core.CastString(data["name"]),
 		Description:    core.CastString(data["description"]),
 		Metadata:       core.CastString(data["metadata"]),
+		VerifyActions:  CastVerifyActions(core.CastArray(data["verifyActions"])),
 		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
 		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
 	}
@@ -1787,6 +1792,9 @@ func (p CreateSalesItemMasterRequest) ToDict() map[string]interface{} {
 		"name":          p.Name,
 		"description":   p.Description,
 		"metadata":      p.Metadata,
+		"verifyActions": CastVerifyActionsFromDict(
+			p.VerifyActions,
+		),
 		"consumeActions": CastConsumeActionsFromDict(
 			p.ConsumeActions,
 		),
@@ -1915,6 +1923,7 @@ type UpdateSalesItemMasterRequest struct {
 	SalesItemName   *string         `json:"salesItemName"`
 	Description     *string         `json:"description"`
 	Metadata        *string         `json:"metadata"`
+	VerifyActions   []VerifyAction  `json:"verifyActions"`
 	ConsumeActions  []ConsumeAction `json:"consumeActions"`
 	AcquireActions  []AcquireAction `json:"acquireActions"`
 }
@@ -2033,6 +2042,9 @@ func (p *UpdateSalesItemMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["verifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyActions)
+		}
 		if v, ok := d["consumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ConsumeActions)
 		}
@@ -2058,6 +2070,7 @@ func NewUpdateSalesItemMasterRequestFromDict(data map[string]interface{}) Update
 		SalesItemName:  core.CastString(data["salesItemName"]),
 		Description:    core.CastString(data["description"]),
 		Metadata:       core.CastString(data["metadata"]),
+		VerifyActions:  CastVerifyActions(core.CastArray(data["verifyActions"])),
 		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
 		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
 	}
@@ -2069,6 +2082,9 @@ func (p UpdateSalesItemMasterRequest) ToDict() map[string]interface{} {
 		"salesItemName": p.SalesItemName,
 		"description":   p.Description,
 		"metadata":      p.Metadata,
+		"verifyActions": CastVerifyActionsFromDict(
+			p.VerifyActions,
+		),
 		"consumeActions": CastConsumeActionsFromDict(
 			p.ConsumeActions,
 		),

@@ -37,7 +37,10 @@ type Namespace struct {
 	UpdateProfileScript        *ScriptSetting       `json:"updateProfileScript"`
 	FollowNotification         *NotificationSetting `json:"followNotification"`
 	ReceiveRequestNotification *NotificationSetting `json:"receiveRequestNotification"`
+	CancelRequestNotification  *NotificationSetting `json:"cancelRequestNotification"`
 	AcceptRequestNotification  *NotificationSetting `json:"acceptRequestNotification"`
+	RejectRequestNotification  *NotificationSetting `json:"rejectRequestNotification"`
+	DeleteFriendNotification   *NotificationSetting `json:"deleteFriendNotification"`
 	LogSetting                 *LogSetting          `json:"logSetting"`
 	CreatedAt                  *int64               `json:"createdAt"`
 	UpdatedAt                  *int64               `json:"updatedAt"`
@@ -165,8 +168,17 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		if v, ok := d["receiveRequestNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReceiveRequestNotification)
 		}
+		if v, ok := d["cancelRequestNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CancelRequestNotification)
+		}
 		if v, ok := d["acceptRequestNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcceptRequestNotification)
+		}
+		if v, ok := d["rejectRequestNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RejectRequestNotification)
+		}
+		if v, ok := d["deleteFriendNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DeleteFriendNotification)
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
@@ -205,7 +217,10 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 		UpdateProfileScript:        NewScriptSettingFromDict(core.CastMap(data["updateProfileScript"])).Pointer(),
 		FollowNotification:         NewNotificationSettingFromDict(core.CastMap(data["followNotification"])).Pointer(),
 		ReceiveRequestNotification: NewNotificationSettingFromDict(core.CastMap(data["receiveRequestNotification"])).Pointer(),
+		CancelRequestNotification:  NewNotificationSettingFromDict(core.CastMap(data["cancelRequestNotification"])).Pointer(),
 		AcceptRequestNotification:  NewNotificationSettingFromDict(core.CastMap(data["acceptRequestNotification"])).Pointer(),
+		RejectRequestNotification:  NewNotificationSettingFromDict(core.CastMap(data["rejectRequestNotification"])).Pointer(),
+		DeleteFriendNotification:   NewNotificationSettingFromDict(core.CastMap(data["deleteFriendNotification"])).Pointer(),
 		LogSetting:                 NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 		CreatedAt:                  core.CastInt64(data["createdAt"]),
 		UpdatedAt:                  core.CastInt64(data["updatedAt"]),
@@ -267,9 +282,21 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.ReceiveRequestNotification != nil {
 		receiveRequestNotification = p.ReceiveRequestNotification.ToDict()
 	}
+	var cancelRequestNotification map[string]interface{}
+	if p.CancelRequestNotification != nil {
+		cancelRequestNotification = p.CancelRequestNotification.ToDict()
+	}
 	var acceptRequestNotification map[string]interface{}
 	if p.AcceptRequestNotification != nil {
 		acceptRequestNotification = p.AcceptRequestNotification.ToDict()
+	}
+	var rejectRequestNotification map[string]interface{}
+	if p.RejectRequestNotification != nil {
+		rejectRequestNotification = p.RejectRequestNotification.ToDict()
+	}
+	var deleteFriendNotification map[string]interface{}
+	if p.DeleteFriendNotification != nil {
+		deleteFriendNotification = p.DeleteFriendNotification.ToDict()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
@@ -301,7 +328,10 @@ func (p Namespace) ToDict() map[string]interface{} {
 		"updateProfileScript":        updateProfileScript,
 		"followNotification":         followNotification,
 		"receiveRequestNotification": receiveRequestNotification,
+		"cancelRequestNotification":  cancelRequestNotification,
 		"acceptRequestNotification":  acceptRequestNotification,
+		"rejectRequestNotification":  rejectRequestNotification,
+		"deleteFriendNotification":   deleteFriendNotification,
 		"logSetting":                 logSetting,
 		"createdAt":                  createdAt,
 		"updatedAt":                  updatedAt,

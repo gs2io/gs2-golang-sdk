@@ -1955,6 +1955,13 @@ func (p Gs2QuestRestClient) CreateQuestModelMasterAsync(
 		}
 		bodies["firstCompleteAcquireActions"] = _firstCompleteAcquireActions
 	}
+	if request.VerifyActions != nil {
+		var _verifyActions []interface{}
+		for _, item := range request.VerifyActions {
+			_verifyActions = append(_verifyActions, item)
+		}
+		bodies["verifyActions"] = _verifyActions
+	}
 	if request.ConsumeActions != nil {
 		var _consumeActions []interface{}
 		for _, item := range request.ConsumeActions {
@@ -2198,6 +2205,13 @@ func (p Gs2QuestRestClient) UpdateQuestModelMasterAsync(
 			_firstCompleteAcquireActions = append(_firstCompleteAcquireActions, item)
 		}
 		bodies["firstCompleteAcquireActions"] = _firstCompleteAcquireActions
+	}
+	if request.VerifyActions != nil {
+		var _verifyActions []interface{}
+		for _, item := range request.VerifyActions {
+			_verifyActions = append(_verifyActions, item)
+		}
+		bodies["verifyActions"] = _verifyActions
 	}
 	if request.ConsumeActions != nil {
 		var _consumeActions []interface{}

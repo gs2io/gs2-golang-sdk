@@ -250,6 +250,7 @@ type BonusModelMaster struct {
 	Repeat                            *string         `json:"repeat"`
 	Rewards                           []Reward        `json:"rewards"`
 	MissedReceiveRelief               *string         `json:"missedReceiveRelief"`
+	MissedReceiveReliefVerifyActions  []VerifyAction  `json:"missedReceiveReliefVerifyActions"`
 	MissedReceiveReliefConsumeActions []ConsumeAction `json:"missedReceiveReliefConsumeActions"`
 	CreatedAt                         *int64          `json:"createdAt"`
 	UpdatedAt                         *int64          `json:"updatedAt"`
@@ -468,6 +469,9 @@ func (p *BonusModelMaster) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["missedReceiveReliefVerifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MissedReceiveReliefVerifyActions)
+		}
 		if v, ok := d["missedReceiveReliefConsumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.MissedReceiveReliefConsumeActions)
 		}
@@ -502,6 +506,7 @@ func NewBonusModelMasterFromDict(data map[string]interface{}) BonusModelMaster {
 		Repeat:                            core.CastString(data["repeat"]),
 		Rewards:                           CastRewards(core.CastArray(data["rewards"])),
 		MissedReceiveRelief:               core.CastString(data["missedReceiveRelief"]),
+		MissedReceiveReliefVerifyActions:  CastVerifyActions(core.CastArray(data["missedReceiveReliefVerifyActions"])),
 		MissedReceiveReliefConsumeActions: CastConsumeActions(core.CastArray(data["missedReceiveReliefConsumeActions"])),
 		CreatedAt:                         core.CastInt64(data["createdAt"]),
 		UpdatedAt:                         core.CastInt64(data["updatedAt"]),
@@ -553,6 +558,12 @@ func (p BonusModelMaster) ToDict() map[string]interface{} {
 	if p.MissedReceiveRelief != nil {
 		missedReceiveRelief = p.MissedReceiveRelief
 	}
+	var missedReceiveReliefVerifyActions []interface{}
+	if p.MissedReceiveReliefVerifyActions != nil {
+		missedReceiveReliefVerifyActions = CastVerifyActionsFromDict(
+			p.MissedReceiveReliefVerifyActions,
+		)
+	}
 	var missedReceiveReliefConsumeActions []interface{}
 	if p.MissedReceiveReliefConsumeActions != nil {
 		missedReceiveReliefConsumeActions = CastConsumeActionsFromDict(
@@ -582,6 +593,7 @@ func (p BonusModelMaster) ToDict() map[string]interface{} {
 		"repeat":                            repeat,
 		"rewards":                           rewards,
 		"missedReceiveRelief":               missedReceiveRelief,
+		"missedReceiveReliefVerifyActions":  missedReceiveReliefVerifyActions,
 		"missedReceiveReliefConsumeActions": missedReceiveReliefConsumeActions,
 		"createdAt":                         createdAt,
 		"updatedAt":                         updatedAt,
@@ -745,6 +757,7 @@ type BonusModel struct {
 	Repeat                            *string         `json:"repeat"`
 	Rewards                           []Reward        `json:"rewards"`
 	MissedReceiveRelief               *string         `json:"missedReceiveRelief"`
+	MissedReceiveReliefVerifyActions  []VerifyAction  `json:"missedReceiveReliefVerifyActions"`
 	MissedReceiveReliefConsumeActions []ConsumeAction `json:"missedReceiveReliefConsumeActions"`
 }
 
@@ -937,6 +950,9 @@ func (p *BonusModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["missedReceiveReliefVerifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MissedReceiveReliefVerifyActions)
+		}
 		if v, ok := d["missedReceiveReliefConsumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.MissedReceiveReliefConsumeActions)
 		}
@@ -961,6 +977,7 @@ func NewBonusModelFromDict(data map[string]interface{}) BonusModel {
 		Repeat:                            core.CastString(data["repeat"]),
 		Rewards:                           CastRewards(core.CastArray(data["rewards"])),
 		MissedReceiveRelief:               core.CastString(data["missedReceiveRelief"]),
+		MissedReceiveReliefVerifyActions:  CastVerifyActions(core.CastArray(data["missedReceiveReliefVerifyActions"])),
 		MissedReceiveReliefConsumeActions: CastConsumeActions(core.CastArray(data["missedReceiveReliefConsumeActions"])),
 	}
 }
@@ -1005,6 +1022,12 @@ func (p BonusModel) ToDict() map[string]interface{} {
 	if p.MissedReceiveRelief != nil {
 		missedReceiveRelief = p.MissedReceiveRelief
 	}
+	var missedReceiveReliefVerifyActions []interface{}
+	if p.MissedReceiveReliefVerifyActions != nil {
+		missedReceiveReliefVerifyActions = CastVerifyActionsFromDict(
+			p.MissedReceiveReliefVerifyActions,
+		)
+	}
 	var missedReceiveReliefConsumeActions []interface{}
 	if p.MissedReceiveReliefConsumeActions != nil {
 		missedReceiveReliefConsumeActions = CastConsumeActionsFromDict(
@@ -1021,6 +1044,7 @@ func (p BonusModel) ToDict() map[string]interface{} {
 		"repeat":                            repeat,
 		"rewards":                           rewards,
 		"missedReceiveRelief":               missedReceiveRelief,
+		"missedReceiveReliefVerifyActions":  missedReceiveReliefVerifyActions,
 		"missedReceiveReliefConsumeActions": missedReceiveReliefConsumeActions,
 	}
 }
@@ -1576,6 +1600,132 @@ func CastAcquireActions(data []interface{}) []AcquireAction {
 }
 
 func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type VerifyAction struct {
+	Action  *string `json:"action"`
+	Request *string `json:"request"`
+}
+
+func (p *VerifyAction) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyAction{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyAction{}
+	} else {
+		*p = VerifyAction{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["action"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Action = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Action = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Action = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Action)
+				}
+			}
+		}
+		if v, ok := d["request"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Request = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Request = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Request = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Request = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Request)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyActionFromJson(data string) VerifyAction {
+	req := VerifyAction{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewVerifyActionFromDict(data map[string]interface{}) VerifyAction {
+	return VerifyAction{
+		Action:  core.CastString(data["action"]),
+		Request: core.CastString(data["request"]),
+	}
+}
+
+func (p VerifyAction) ToDict() map[string]interface{} {
+
+	var action *string
+	if p.Action != nil {
+		action = p.Action
+	}
+	var request *string
+	if p.Request != nil {
+		request = p.Request
+	}
+	return map[string]interface{}{
+		"action":  action,
+		"request": request,
+	}
+}
+
+func (p VerifyAction) Pointer() *VerifyAction {
+	return &p
+}
+
+func CastVerifyActions(data []interface{}) []VerifyAction {
+	v := make([]VerifyAction, 0)
+	for _, d := range data {
+		v = append(v, NewVerifyActionFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastVerifyActionsFromDict(data []VerifyAction) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

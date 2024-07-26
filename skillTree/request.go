@@ -1725,6 +1725,7 @@ type CreateNodeModelMasterRequest struct {
 	Name                  *string         `json:"name"`
 	Description           *string         `json:"description"`
 	Metadata              *string         `json:"metadata"`
+	ReleaseVerifyActions  []VerifyAction  `json:"releaseVerifyActions"`
 	ReleaseConsumeActions []ConsumeAction `json:"releaseConsumeActions"`
 	RestrainReturnRate    *float32        `json:"restrainReturnRate"`
 	PremiseNodeNames      []*string       `json:"premiseNodeNames"`
@@ -1844,6 +1845,9 @@ func (p *CreateNodeModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["releaseVerifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ReleaseVerifyActions)
+		}
 		if v, ok := d["releaseConsumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReleaseConsumeActions)
 		}
@@ -1895,6 +1899,7 @@ func NewCreateNodeModelMasterRequestFromDict(data map[string]interface{}) Create
 		Name:                  core.CastString(data["name"]),
 		Description:           core.CastString(data["description"]),
 		Metadata:              core.CastString(data["metadata"]),
+		ReleaseVerifyActions:  CastVerifyActions(core.CastArray(data["releaseVerifyActions"])),
 		ReleaseConsumeActions: CastConsumeActions(core.CastArray(data["releaseConsumeActions"])),
 		RestrainReturnRate:    core.CastFloat32(data["restrainReturnRate"]),
 		PremiseNodeNames:      core.CastStrings(core.CastArray(data["premiseNodeNames"])),
@@ -1907,6 +1912,9 @@ func (p CreateNodeModelMasterRequest) ToDict() map[string]interface{} {
 		"name":          p.Name,
 		"description":   p.Description,
 		"metadata":      p.Metadata,
+		"releaseVerifyActions": CastVerifyActionsFromDict(
+			p.ReleaseVerifyActions,
+		),
 		"releaseConsumeActions": CastConsumeActionsFromDict(
 			p.ReleaseConsumeActions,
 		),
@@ -2036,6 +2044,7 @@ type UpdateNodeModelMasterRequest struct {
 	NodeModelName         *string         `json:"nodeModelName"`
 	Description           *string         `json:"description"`
 	Metadata              *string         `json:"metadata"`
+	ReleaseVerifyActions  []VerifyAction  `json:"releaseVerifyActions"`
 	ReleaseConsumeActions []ConsumeAction `json:"releaseConsumeActions"`
 	RestrainReturnRate    *float32        `json:"restrainReturnRate"`
 	PremiseNodeNames      []*string       `json:"premiseNodeNames"`
@@ -2155,6 +2164,9 @@ func (p *UpdateNodeModelMasterRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["releaseVerifyActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ReleaseVerifyActions)
+		}
 		if v, ok := d["releaseConsumeActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ReleaseConsumeActions)
 		}
@@ -2206,6 +2218,7 @@ func NewUpdateNodeModelMasterRequestFromDict(data map[string]interface{}) Update
 		NodeModelName:         core.CastString(data["nodeModelName"]),
 		Description:           core.CastString(data["description"]),
 		Metadata:              core.CastString(data["metadata"]),
+		ReleaseVerifyActions:  CastVerifyActions(core.CastArray(data["releaseVerifyActions"])),
 		ReleaseConsumeActions: CastConsumeActions(core.CastArray(data["releaseConsumeActions"])),
 		RestrainReturnRate:    core.CastFloat32(data["restrainReturnRate"]),
 		PremiseNodeNames:      core.CastStrings(core.CastArray(data["premiseNodeNames"])),
@@ -2218,6 +2231,9 @@ func (p UpdateNodeModelMasterRequest) ToDict() map[string]interface{} {
 		"nodeModelName": p.NodeModelName,
 		"description":   p.Description,
 		"metadata":      p.Metadata,
+		"releaseVerifyActions": CastVerifyActionsFromDict(
+			p.ReleaseVerifyActions,
+		),
 		"releaseConsumeActions": CastConsumeActionsFromDict(
 			p.ReleaseConsumeActions,
 		),
