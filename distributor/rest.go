@@ -2878,6 +2878,9 @@ func (p Gs2DistributorRestClient) IfExpressionByUserIdAsync(
 		}
 		bodies["falseActions"] = _falseActions
 	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -3132,10 +3135,10 @@ func (p Gs2DistributorRestClient) OrExpressionByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func ifExpressionByUserByStampTaskAsyncHandler(
+func ifExpressionByStampTaskAsyncHandler(
 	client Gs2DistributorRestClient,
 	job *core.NetworkJob,
-	callback chan<- IfExpressionByUserByStampTaskAsyncResult,
+	callback chan<- IfExpressionByStampTaskAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -3144,15 +3147,15 @@ func ifExpressionByUserByStampTaskAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- IfExpressionByUserByStampTaskAsyncResult{
+		callback <- IfExpressionByStampTaskAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result IfExpressionByUserByStampTaskResult
+	var result IfExpressionByStampTaskResult
 	if asyncResult.Err != nil {
-		callback <- IfExpressionByUserByStampTaskAsyncResult{
+		callback <- IfExpressionByStampTaskAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -3160,22 +3163,22 @@ func ifExpressionByUserByStampTaskAsyncHandler(
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- IfExpressionByUserByStampTaskAsyncResult{
+			callback <- IfExpressionByStampTaskAsyncResult{
 				err: err,
 			}
 			return
 		}
 	}
-	callback <- IfExpressionByUserByStampTaskAsyncResult{
+	callback <- IfExpressionByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2DistributorRestClient) IfExpressionByUserByStampTaskAsync(
-	request *IfExpressionByUserByStampTaskRequest,
-	callback chan<- IfExpressionByUserByStampTaskAsyncResult,
+func (p Gs2DistributorRestClient) IfExpressionByStampTaskAsync(
+	request *IfExpressionByStampTaskRequest,
+	callback chan<- IfExpressionByStampTaskAsyncResult,
 ) {
 	path := "/stamp/expression/if"
 
@@ -3199,7 +3202,7 @@ func (p Gs2DistributorRestClient) IfExpressionByUserByStampTaskAsync(
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
 
-	go ifExpressionByUserByStampTaskAsyncHandler(
+	go ifExpressionByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
@@ -3211,11 +3214,11 @@ func (p Gs2DistributorRestClient) IfExpressionByUserByStampTaskAsync(
 	)
 }
 
-func (p Gs2DistributorRestClient) IfExpressionByUserByStampTask(
-	request *IfExpressionByUserByStampTaskRequest,
-) (*IfExpressionByUserByStampTaskResult, error) {
-	callback := make(chan IfExpressionByUserByStampTaskAsyncResult, 1)
-	go p.IfExpressionByUserByStampTaskAsync(
+func (p Gs2DistributorRestClient) IfExpressionByStampTask(
+	request *IfExpressionByStampTaskRequest,
+) (*IfExpressionByStampTaskResult, error) {
+	callback := make(chan IfExpressionByStampTaskAsyncResult, 1)
+	go p.IfExpressionByStampTaskAsync(
 		request,
 		callback,
 	)
@@ -3223,10 +3226,10 @@ func (p Gs2DistributorRestClient) IfExpressionByUserByStampTask(
 	return asyncResult.result, asyncResult.err
 }
 
-func andExpressionByUserByStampTaskAsyncHandler(
+func andExpressionByStampTaskAsyncHandler(
 	client Gs2DistributorRestClient,
 	job *core.NetworkJob,
-	callback chan<- AndExpressionByUserByStampTaskAsyncResult,
+	callback chan<- AndExpressionByStampTaskAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -3235,15 +3238,15 @@ func andExpressionByUserByStampTaskAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- AndExpressionByUserByStampTaskAsyncResult{
+		callback <- AndExpressionByStampTaskAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result AndExpressionByUserByStampTaskResult
+	var result AndExpressionByStampTaskResult
 	if asyncResult.Err != nil {
-		callback <- AndExpressionByUserByStampTaskAsyncResult{
+		callback <- AndExpressionByStampTaskAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -3251,22 +3254,22 @@ func andExpressionByUserByStampTaskAsyncHandler(
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- AndExpressionByUserByStampTaskAsyncResult{
+			callback <- AndExpressionByStampTaskAsyncResult{
 				err: err,
 			}
 			return
 		}
 	}
-	callback <- AndExpressionByUserByStampTaskAsyncResult{
+	callback <- AndExpressionByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2DistributorRestClient) AndExpressionByUserByStampTaskAsync(
-	request *AndExpressionByUserByStampTaskRequest,
-	callback chan<- AndExpressionByUserByStampTaskAsyncResult,
+func (p Gs2DistributorRestClient) AndExpressionByStampTaskAsync(
+	request *AndExpressionByStampTaskRequest,
+	callback chan<- AndExpressionByStampTaskAsyncResult,
 ) {
 	path := "/stamp/expression/and"
 
@@ -3290,7 +3293,7 @@ func (p Gs2DistributorRestClient) AndExpressionByUserByStampTaskAsync(
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
 
-	go andExpressionByUserByStampTaskAsyncHandler(
+	go andExpressionByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
@@ -3302,11 +3305,11 @@ func (p Gs2DistributorRestClient) AndExpressionByUserByStampTaskAsync(
 	)
 }
 
-func (p Gs2DistributorRestClient) AndExpressionByUserByStampTask(
-	request *AndExpressionByUserByStampTaskRequest,
-) (*AndExpressionByUserByStampTaskResult, error) {
-	callback := make(chan AndExpressionByUserByStampTaskAsyncResult, 1)
-	go p.AndExpressionByUserByStampTaskAsync(
+func (p Gs2DistributorRestClient) AndExpressionByStampTask(
+	request *AndExpressionByStampTaskRequest,
+) (*AndExpressionByStampTaskResult, error) {
+	callback := make(chan AndExpressionByStampTaskAsyncResult, 1)
+	go p.AndExpressionByStampTaskAsync(
 		request,
 		callback,
 	)
@@ -3314,10 +3317,10 @@ func (p Gs2DistributorRestClient) AndExpressionByUserByStampTask(
 	return asyncResult.result, asyncResult.err
 }
 
-func orExpressionByUserByStampTaskAsyncHandler(
+func orExpressionByStampTaskAsyncHandler(
 	client Gs2DistributorRestClient,
 	job *core.NetworkJob,
-	callback chan<- OrExpressionByUserByStampTaskAsyncResult,
+	callback chan<- OrExpressionByStampTaskAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -3326,15 +3329,15 @@ func orExpressionByUserByStampTaskAsyncHandler(
 		false,
 	)
 	if err != nil {
-		callback <- OrExpressionByUserByStampTaskAsyncResult{
+		callback <- OrExpressionByStampTaskAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result OrExpressionByUserByStampTaskResult
+	var result OrExpressionByStampTaskResult
 	if asyncResult.Err != nil {
-		callback <- OrExpressionByUserByStampTaskAsyncResult{
+		callback <- OrExpressionByStampTaskAsyncResult{
 			err: asyncResult.Err,
 		}
 		return
@@ -3342,22 +3345,22 @@ func orExpressionByUserByStampTaskAsyncHandler(
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- OrExpressionByUserByStampTaskAsyncResult{
+			callback <- OrExpressionByStampTaskAsyncResult{
 				err: err,
 			}
 			return
 		}
 	}
-	callback <- OrExpressionByUserByStampTaskAsyncResult{
+	callback <- OrExpressionByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2DistributorRestClient) OrExpressionByUserByStampTaskAsync(
-	request *OrExpressionByUserByStampTaskRequest,
-	callback chan<- OrExpressionByUserByStampTaskAsyncResult,
+func (p Gs2DistributorRestClient) OrExpressionByStampTaskAsync(
+	request *OrExpressionByStampTaskRequest,
+	callback chan<- OrExpressionByStampTaskAsyncResult,
 ) {
 	path := "/stamp/expression/or"
 
@@ -3381,7 +3384,7 @@ func (p Gs2DistributorRestClient) OrExpressionByUserByStampTaskAsync(
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
 
-	go orExpressionByUserByStampTaskAsyncHandler(
+	go orExpressionByStampTaskAsyncHandler(
 		p,
 		&core.NetworkJob{
 			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
@@ -3393,11 +3396,11 @@ func (p Gs2DistributorRestClient) OrExpressionByUserByStampTaskAsync(
 	)
 }
 
-func (p Gs2DistributorRestClient) OrExpressionByUserByStampTask(
-	request *OrExpressionByUserByStampTaskRequest,
-) (*OrExpressionByUserByStampTaskResult, error) {
-	callback := make(chan OrExpressionByUserByStampTaskAsyncResult, 1)
-	go p.OrExpressionByUserByStampTaskAsync(
+func (p Gs2DistributorRestClient) OrExpressionByStampTask(
+	request *OrExpressionByStampTaskRequest,
+) (*OrExpressionByStampTaskResult, error) {
+	callback := make(chan OrExpressionByStampTaskAsyncResult, 1)
+	go p.OrExpressionByStampTaskAsync(
 		request,
 		callback,
 	)

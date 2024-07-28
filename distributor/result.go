@@ -1096,96 +1096,96 @@ func (p OrExpressionByUserIdResult) Pointer() *OrExpressionByUserIdResult {
 	return &p
 }
 
-type IfExpressionByUserByStampTaskResult struct {
+type IfExpressionByStampTaskResult struct {
 	NewContextStack *string `json:"newContextStack"`
 }
 
-type IfExpressionByUserByStampTaskAsyncResult struct {
-	result *IfExpressionByUserByStampTaskResult
+type IfExpressionByStampTaskAsyncResult struct {
+	result *IfExpressionByStampTaskResult
 	err    error
 }
 
-func NewIfExpressionByUserByStampTaskResultFromJson(data string) IfExpressionByUserByStampTaskResult {
+func NewIfExpressionByStampTaskResultFromJson(data string) IfExpressionByStampTaskResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewIfExpressionByUserByStampTaskResultFromDict(dict)
+	return NewIfExpressionByStampTaskResultFromDict(dict)
 }
 
-func NewIfExpressionByUserByStampTaskResultFromDict(data map[string]interface{}) IfExpressionByUserByStampTaskResult {
-	return IfExpressionByUserByStampTaskResult{
+func NewIfExpressionByStampTaskResultFromDict(data map[string]interface{}) IfExpressionByStampTaskResult {
+	return IfExpressionByStampTaskResult{
 		NewContextStack: core.CastString(data["newContextStack"]),
 	}
 }
 
-func (p IfExpressionByUserByStampTaskResult) ToDict() map[string]interface{} {
+func (p IfExpressionByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"newContextStack": p.NewContextStack,
 	}
 }
 
-func (p IfExpressionByUserByStampTaskResult) Pointer() *IfExpressionByUserByStampTaskResult {
+func (p IfExpressionByStampTaskResult) Pointer() *IfExpressionByStampTaskResult {
 	return &p
 }
 
-type AndExpressionByUserByStampTaskResult struct {
+type AndExpressionByStampTaskResult struct {
 	NewContextStack *string `json:"newContextStack"`
 }
 
-type AndExpressionByUserByStampTaskAsyncResult struct {
-	result *AndExpressionByUserByStampTaskResult
+type AndExpressionByStampTaskAsyncResult struct {
+	result *AndExpressionByStampTaskResult
 	err    error
 }
 
-func NewAndExpressionByUserByStampTaskResultFromJson(data string) AndExpressionByUserByStampTaskResult {
+func NewAndExpressionByStampTaskResultFromJson(data string) AndExpressionByStampTaskResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewAndExpressionByUserByStampTaskResultFromDict(dict)
+	return NewAndExpressionByStampTaskResultFromDict(dict)
 }
 
-func NewAndExpressionByUserByStampTaskResultFromDict(data map[string]interface{}) AndExpressionByUserByStampTaskResult {
-	return AndExpressionByUserByStampTaskResult{
+func NewAndExpressionByStampTaskResultFromDict(data map[string]interface{}) AndExpressionByStampTaskResult {
+	return AndExpressionByStampTaskResult{
 		NewContextStack: core.CastString(data["newContextStack"]),
 	}
 }
 
-func (p AndExpressionByUserByStampTaskResult) ToDict() map[string]interface{} {
+func (p AndExpressionByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"newContextStack": p.NewContextStack,
 	}
 }
 
-func (p AndExpressionByUserByStampTaskResult) Pointer() *AndExpressionByUserByStampTaskResult {
+func (p AndExpressionByStampTaskResult) Pointer() *AndExpressionByStampTaskResult {
 	return &p
 }
 
-type OrExpressionByUserByStampTaskResult struct {
+type OrExpressionByStampTaskResult struct {
 	NewContextStack *string `json:"newContextStack"`
 }
 
-type OrExpressionByUserByStampTaskAsyncResult struct {
-	result *OrExpressionByUserByStampTaskResult
+type OrExpressionByStampTaskAsyncResult struct {
+	result *OrExpressionByStampTaskResult
 	err    error
 }
 
-func NewOrExpressionByUserByStampTaskResultFromJson(data string) OrExpressionByUserByStampTaskResult {
+func NewOrExpressionByStampTaskResultFromJson(data string) OrExpressionByStampTaskResult {
 	dict := map[string]interface{}{}
 	_ = json.Unmarshal([]byte(data), &dict)
-	return NewOrExpressionByUserByStampTaskResultFromDict(dict)
+	return NewOrExpressionByStampTaskResultFromDict(dict)
 }
 
-func NewOrExpressionByUserByStampTaskResultFromDict(data map[string]interface{}) OrExpressionByUserByStampTaskResult {
-	return OrExpressionByUserByStampTaskResult{
+func NewOrExpressionByStampTaskResultFromDict(data map[string]interface{}) OrExpressionByStampTaskResult {
+	return OrExpressionByStampTaskResult{
 		NewContextStack: core.CastString(data["newContextStack"]),
 	}
 }
 
-func (p OrExpressionByUserByStampTaskResult) ToDict() map[string]interface{} {
+func (p OrExpressionByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"newContextStack": p.NewContextStack,
 	}
 }
 
-func (p OrExpressionByUserByStampTaskResult) Pointer() *OrExpressionByUserByStampTaskResult {
+func (p OrExpressionByStampTaskResult) Pointer() *OrExpressionByStampTaskResult {
 	return &p
 }
 

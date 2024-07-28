@@ -3393,16 +3393,17 @@ func (p SetTransactionDefaultConfigByUserIdRequest) Pointer() *SetTransactionDef
 }
 
 type IfExpressionByUserIdRequest struct {
-	SourceRequestId    *string         `json:"sourceRequestId"`
-	RequestId          *string         `json:"requestId"`
-	ContextStack       *string         `json:"contextStack"`
-	DuplicationAvoider *string         `json:"duplicationAvoider"`
-	NamespaceName      *string         `json:"namespaceName"`
-	UserId             *string         `json:"userId"`
-	Condition          *VerifyAction   `json:"condition"`
-	TrueActions        []ConsumeAction `json:"trueActions"`
-	FalseActions       []ConsumeAction `json:"falseActions"`
-	TimeOffsetToken    *string         `json:"timeOffsetToken"`
+	SourceRequestId                 *string         `json:"sourceRequestId"`
+	RequestId                       *string         `json:"requestId"`
+	ContextStack                    *string         `json:"contextStack"`
+	DuplicationAvoider              *string         `json:"duplicationAvoider"`
+	NamespaceName                   *string         `json:"namespaceName"`
+	UserId                          *string         `json:"userId"`
+	Condition                       *VerifyAction   `json:"condition"`
+	TrueActions                     []ConsumeAction `json:"trueActions"`
+	FalseActions                    []ConsumeAction `json:"falseActions"`
+	MultiplyValueSpecifyingQuantity *bool           `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string         `json:"timeOffsetToken"`
 }
 
 func (p *IfExpressionByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -3482,6 +3483,9 @@ func (p *IfExpressionByUserIdRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["falseActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.FalseActions)
 		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -3520,12 +3524,13 @@ func NewIfExpressionByUserIdRequestFromJson(data string) (IfExpressionByUserIdRe
 
 func NewIfExpressionByUserIdRequestFromDict(data map[string]interface{}) IfExpressionByUserIdRequest {
 	return IfExpressionByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		Condition:       NewVerifyActionFromDict(core.CastMap(data["condition"])).Pointer(),
-		TrueActions:     CastConsumeActions(core.CastArray(data["trueActions"])),
-		FalseActions:    CastConsumeActions(core.CastArray(data["falseActions"])),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		UserId:                          core.CastString(data["userId"]),
+		Condition:                       NewVerifyActionFromDict(core.CastMap(data["condition"])).Pointer(),
+		TrueActions:                     CastConsumeActions(core.CastArray(data["trueActions"])),
+		FalseActions:                    CastConsumeActions(core.CastArray(data["falseActions"])),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
 	}
 }
 
@@ -3540,7 +3545,8 @@ func (p IfExpressionByUserIdRequest) ToDict() map[string]interface{} {
 		"falseActions": CastConsumeActionsFromDict(
 			p.FalseActions,
 		),
-		"timeOffsetToken": p.TimeOffsetToken,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
 	}
 }
 
@@ -3832,7 +3838,7 @@ func (p OrExpressionByUserIdRequest) Pointer() *OrExpressionByUserIdRequest {
 	return &p
 }
 
-type IfExpressionByUserByStampTaskRequest struct {
+type IfExpressionByStampTaskRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
@@ -3840,10 +3846,10 @@ type IfExpressionByUserByStampTaskRequest struct {
 	KeyId           *string `json:"keyId"`
 }
 
-func (p *IfExpressionByUserByStampTaskRequest) UnmarshalJSON(data []byte) error {
+func (p *IfExpressionByStampTaskRequest) UnmarshalJSON(data []byte) error {
 	str := string(data)
 	if len(str) == 0 {
-		*p = IfExpressionByUserByStampTaskRequest{}
+		*p = IfExpressionByStampTaskRequest{}
 		return nil
 	}
 	if str[0] == '"' {
@@ -3855,9 +3861,9 @@ func (p *IfExpressionByUserByStampTaskRequest) UnmarshalJSON(data []byte) error 
 		str = strVal
 	}
 	if str == "null" {
-		*p = IfExpressionByUserByStampTaskRequest{}
+		*p = IfExpressionByStampTaskRequest{}
 	} else {
-		*p = IfExpressionByUserByStampTaskRequest{}
+		*p = IfExpressionByStampTaskRequest{}
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
@@ -3912,34 +3918,34 @@ func (p *IfExpressionByUserByStampTaskRequest) UnmarshalJSON(data []byte) error 
 	return nil
 }
 
-func NewIfExpressionByUserByStampTaskRequestFromJson(data string) (IfExpressionByUserByStampTaskRequest, error) {
-	req := IfExpressionByUserByStampTaskRequest{}
+func NewIfExpressionByStampTaskRequestFromJson(data string) (IfExpressionByStampTaskRequest, error) {
+	req := IfExpressionByStampTaskRequest{}
 	err := json.Unmarshal([]byte(data), &req)
 	if err != nil {
-		return IfExpressionByUserByStampTaskRequest{}, err
+		return IfExpressionByStampTaskRequest{}, err
 	}
 	return req, nil
 }
 
-func NewIfExpressionByUserByStampTaskRequestFromDict(data map[string]interface{}) IfExpressionByUserByStampTaskRequest {
-	return IfExpressionByUserByStampTaskRequest{
+func NewIfExpressionByStampTaskRequestFromDict(data map[string]interface{}) IfExpressionByStampTaskRequest {
+	return IfExpressionByStampTaskRequest{
 		StampTask: core.CastString(data["stampTask"]),
 		KeyId:     core.CastString(data["keyId"]),
 	}
 }
 
-func (p IfExpressionByUserByStampTaskRequest) ToDict() map[string]interface{} {
+func (p IfExpressionByStampTaskRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"stampTask": p.StampTask,
 		"keyId":     p.KeyId,
 	}
 }
 
-func (p IfExpressionByUserByStampTaskRequest) Pointer() *IfExpressionByUserByStampTaskRequest {
+func (p IfExpressionByStampTaskRequest) Pointer() *IfExpressionByStampTaskRequest {
 	return &p
 }
 
-type AndExpressionByUserByStampTaskRequest struct {
+type AndExpressionByStampTaskRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
@@ -3947,10 +3953,10 @@ type AndExpressionByUserByStampTaskRequest struct {
 	KeyId           *string `json:"keyId"`
 }
 
-func (p *AndExpressionByUserByStampTaskRequest) UnmarshalJSON(data []byte) error {
+func (p *AndExpressionByStampTaskRequest) UnmarshalJSON(data []byte) error {
 	str := string(data)
 	if len(str) == 0 {
-		*p = AndExpressionByUserByStampTaskRequest{}
+		*p = AndExpressionByStampTaskRequest{}
 		return nil
 	}
 	if str[0] == '"' {
@@ -3962,9 +3968,9 @@ func (p *AndExpressionByUserByStampTaskRequest) UnmarshalJSON(data []byte) error
 		str = strVal
 	}
 	if str == "null" {
-		*p = AndExpressionByUserByStampTaskRequest{}
+		*p = AndExpressionByStampTaskRequest{}
 	} else {
-		*p = AndExpressionByUserByStampTaskRequest{}
+		*p = AndExpressionByStampTaskRequest{}
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
@@ -4019,34 +4025,34 @@ func (p *AndExpressionByUserByStampTaskRequest) UnmarshalJSON(data []byte) error
 	return nil
 }
 
-func NewAndExpressionByUserByStampTaskRequestFromJson(data string) (AndExpressionByUserByStampTaskRequest, error) {
-	req := AndExpressionByUserByStampTaskRequest{}
+func NewAndExpressionByStampTaskRequestFromJson(data string) (AndExpressionByStampTaskRequest, error) {
+	req := AndExpressionByStampTaskRequest{}
 	err := json.Unmarshal([]byte(data), &req)
 	if err != nil {
-		return AndExpressionByUserByStampTaskRequest{}, err
+		return AndExpressionByStampTaskRequest{}, err
 	}
 	return req, nil
 }
 
-func NewAndExpressionByUserByStampTaskRequestFromDict(data map[string]interface{}) AndExpressionByUserByStampTaskRequest {
-	return AndExpressionByUserByStampTaskRequest{
+func NewAndExpressionByStampTaskRequestFromDict(data map[string]interface{}) AndExpressionByStampTaskRequest {
+	return AndExpressionByStampTaskRequest{
 		StampTask: core.CastString(data["stampTask"]),
 		KeyId:     core.CastString(data["keyId"]),
 	}
 }
 
-func (p AndExpressionByUserByStampTaskRequest) ToDict() map[string]interface{} {
+func (p AndExpressionByStampTaskRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"stampTask": p.StampTask,
 		"keyId":     p.KeyId,
 	}
 }
 
-func (p AndExpressionByUserByStampTaskRequest) Pointer() *AndExpressionByUserByStampTaskRequest {
+func (p AndExpressionByStampTaskRequest) Pointer() *AndExpressionByStampTaskRequest {
 	return &p
 }
 
-type OrExpressionByUserByStampTaskRequest struct {
+type OrExpressionByStampTaskRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
@@ -4054,10 +4060,10 @@ type OrExpressionByUserByStampTaskRequest struct {
 	KeyId           *string `json:"keyId"`
 }
 
-func (p *OrExpressionByUserByStampTaskRequest) UnmarshalJSON(data []byte) error {
+func (p *OrExpressionByStampTaskRequest) UnmarshalJSON(data []byte) error {
 	str := string(data)
 	if len(str) == 0 {
-		*p = OrExpressionByUserByStampTaskRequest{}
+		*p = OrExpressionByStampTaskRequest{}
 		return nil
 	}
 	if str[0] == '"' {
@@ -4069,9 +4075,9 @@ func (p *OrExpressionByUserByStampTaskRequest) UnmarshalJSON(data []byte) error 
 		str = strVal
 	}
 	if str == "null" {
-		*p = OrExpressionByUserByStampTaskRequest{}
+		*p = OrExpressionByStampTaskRequest{}
 	} else {
-		*p = OrExpressionByUserByStampTaskRequest{}
+		*p = OrExpressionByStampTaskRequest{}
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
@@ -4126,30 +4132,30 @@ func (p *OrExpressionByUserByStampTaskRequest) UnmarshalJSON(data []byte) error 
 	return nil
 }
 
-func NewOrExpressionByUserByStampTaskRequestFromJson(data string) (OrExpressionByUserByStampTaskRequest, error) {
-	req := OrExpressionByUserByStampTaskRequest{}
+func NewOrExpressionByStampTaskRequestFromJson(data string) (OrExpressionByStampTaskRequest, error) {
+	req := OrExpressionByStampTaskRequest{}
 	err := json.Unmarshal([]byte(data), &req)
 	if err != nil {
-		return OrExpressionByUserByStampTaskRequest{}, err
+		return OrExpressionByStampTaskRequest{}, err
 	}
 	return req, nil
 }
 
-func NewOrExpressionByUserByStampTaskRequestFromDict(data map[string]interface{}) OrExpressionByUserByStampTaskRequest {
-	return OrExpressionByUserByStampTaskRequest{
+func NewOrExpressionByStampTaskRequestFromDict(data map[string]interface{}) OrExpressionByStampTaskRequest {
+	return OrExpressionByStampTaskRequest{
 		StampTask: core.CastString(data["stampTask"]),
 		KeyId:     core.CastString(data["keyId"]),
 	}
 }
 
-func (p OrExpressionByUserByStampTaskRequest) ToDict() map[string]interface{} {
+func (p OrExpressionByStampTaskRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"stampTask": p.StampTask,
 		"keyId":     p.KeyId,
 	}
 }
 
-func (p OrExpressionByUserByStampTaskRequest) Pointer() *OrExpressionByUserByStampTaskRequest {
+func (p OrExpressionByStampTaskRequest) Pointer() *OrExpressionByStampTaskRequest {
 	return &p
 }
 

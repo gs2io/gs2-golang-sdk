@@ -2628,6 +2628,9 @@ func (p Gs2DistributorWebSocketClient) IfExpressionByUserIdAsync(
 		}
 		bodies["falseActions"] = _falseActions
 	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}
@@ -2853,9 +2856,9 @@ func (p Gs2DistributorWebSocketClient) OrExpressionByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2DistributorWebSocketClient) ifExpressionByUserByStampTaskAsyncHandler(
+func (p Gs2DistributorWebSocketClient) ifExpressionByStampTaskAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- IfExpressionByUserByStampTaskAsyncResult,
+	callback chan<- IfExpressionByStampTaskAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2864,17 +2867,17 @@ func (p Gs2DistributorWebSocketClient) ifExpressionByUserByStampTaskAsyncHandler
 		false,
 	)
 	if err != nil {
-		callback <- IfExpressionByUserByStampTaskAsyncResult{
+		callback <- IfExpressionByStampTaskAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result IfExpressionByUserByStampTaskResult
+	var result IfExpressionByStampTaskResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- IfExpressionByUserByStampTaskAsyncResult{
+			callback <- IfExpressionByStampTaskAsyncResult{
 				err: err,
 			}
 			return
@@ -2882,23 +2885,23 @@ func (p Gs2DistributorWebSocketClient) ifExpressionByUserByStampTaskAsyncHandler
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- IfExpressionByUserByStampTaskAsyncResult{
+	callback <- IfExpressionByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2DistributorWebSocketClient) IfExpressionByUserByStampTaskAsync(
-	request *IfExpressionByUserByStampTaskRequest,
-	callback chan<- IfExpressionByUserByStampTaskAsyncResult,
+func (p Gs2DistributorWebSocketClient) IfExpressionByStampTaskAsync(
+	request *IfExpressionByStampTaskRequest,
+	callback chan<- IfExpressionByStampTaskAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "distributor",
 			"component":   "distribute",
-			"function":    "ifExpressionByUserByStampTask",
+			"function":    "ifExpressionByStampTask",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -2916,7 +2919,7 @@ func (p Gs2DistributorWebSocketClient) IfExpressionByUserByStampTaskAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.ifExpressionByUserByStampTaskAsyncHandler(
+	go p.ifExpressionByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -2925,11 +2928,11 @@ func (p Gs2DistributorWebSocketClient) IfExpressionByUserByStampTaskAsync(
 	)
 }
 
-func (p Gs2DistributorWebSocketClient) IfExpressionByUserByStampTask(
-	request *IfExpressionByUserByStampTaskRequest,
-) (*IfExpressionByUserByStampTaskResult, error) {
-	callback := make(chan IfExpressionByUserByStampTaskAsyncResult, 1)
-	go p.IfExpressionByUserByStampTaskAsync(
+func (p Gs2DistributorWebSocketClient) IfExpressionByStampTask(
+	request *IfExpressionByStampTaskRequest,
+) (*IfExpressionByStampTaskResult, error) {
+	callback := make(chan IfExpressionByStampTaskAsyncResult, 1)
+	go p.IfExpressionByStampTaskAsync(
 		request,
 		callback,
 	)
@@ -2937,9 +2940,9 @@ func (p Gs2DistributorWebSocketClient) IfExpressionByUserByStampTask(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2DistributorWebSocketClient) andExpressionByUserByStampTaskAsyncHandler(
+func (p Gs2DistributorWebSocketClient) andExpressionByStampTaskAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- AndExpressionByUserByStampTaskAsyncResult,
+	callback chan<- AndExpressionByStampTaskAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -2948,17 +2951,17 @@ func (p Gs2DistributorWebSocketClient) andExpressionByUserByStampTaskAsyncHandle
 		false,
 	)
 	if err != nil {
-		callback <- AndExpressionByUserByStampTaskAsyncResult{
+		callback <- AndExpressionByStampTaskAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result AndExpressionByUserByStampTaskResult
+	var result AndExpressionByStampTaskResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- AndExpressionByUserByStampTaskAsyncResult{
+			callback <- AndExpressionByStampTaskAsyncResult{
 				err: err,
 			}
 			return
@@ -2966,23 +2969,23 @@ func (p Gs2DistributorWebSocketClient) andExpressionByUserByStampTaskAsyncHandle
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- AndExpressionByUserByStampTaskAsyncResult{
+	callback <- AndExpressionByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2DistributorWebSocketClient) AndExpressionByUserByStampTaskAsync(
-	request *AndExpressionByUserByStampTaskRequest,
-	callback chan<- AndExpressionByUserByStampTaskAsyncResult,
+func (p Gs2DistributorWebSocketClient) AndExpressionByStampTaskAsync(
+	request *AndExpressionByStampTaskRequest,
+	callback chan<- AndExpressionByStampTaskAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "distributor",
 			"component":   "distribute",
-			"function":    "andExpressionByUserByStampTask",
+			"function":    "andExpressionByStampTask",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -3000,7 +3003,7 @@ func (p Gs2DistributorWebSocketClient) AndExpressionByUserByStampTaskAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.andExpressionByUserByStampTaskAsyncHandler(
+	go p.andExpressionByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -3009,11 +3012,11 @@ func (p Gs2DistributorWebSocketClient) AndExpressionByUserByStampTaskAsync(
 	)
 }
 
-func (p Gs2DistributorWebSocketClient) AndExpressionByUserByStampTask(
-	request *AndExpressionByUserByStampTaskRequest,
-) (*AndExpressionByUserByStampTaskResult, error) {
-	callback := make(chan AndExpressionByUserByStampTaskAsyncResult, 1)
-	go p.AndExpressionByUserByStampTaskAsync(
+func (p Gs2DistributorWebSocketClient) AndExpressionByStampTask(
+	request *AndExpressionByStampTaskRequest,
+) (*AndExpressionByStampTaskResult, error) {
+	callback := make(chan AndExpressionByStampTaskAsyncResult, 1)
+	go p.AndExpressionByStampTaskAsync(
 		request,
 		callback,
 	)
@@ -3021,9 +3024,9 @@ func (p Gs2DistributorWebSocketClient) AndExpressionByUserByStampTask(
 	return asyncResult.result, asyncResult.err
 }
 
-func (p Gs2DistributorWebSocketClient) orExpressionByUserByStampTaskAsyncHandler(
+func (p Gs2DistributorWebSocketClient) orExpressionByStampTaskAsyncHandler(
 	job *core.WebSocketNetworkJob,
-	callback chan<- OrExpressionByUserByStampTaskAsyncResult,
+	callback chan<- OrExpressionByStampTaskAsyncResult,
 ) {
 	internalCallback := make(chan core.AsyncResult, 1)
 	job.Callback = internalCallback
@@ -3032,17 +3035,17 @@ func (p Gs2DistributorWebSocketClient) orExpressionByUserByStampTaskAsyncHandler
 		false,
 	)
 	if err != nil {
-		callback <- OrExpressionByUserByStampTaskAsyncResult{
+		callback <- OrExpressionByStampTaskAsyncResult{
 			err: err,
 		}
 		return
 	}
 	asyncResult := <-internalCallback
-	var result OrExpressionByUserByStampTaskResult
+	var result OrExpressionByStampTaskResult
 	if asyncResult.Payload != "" {
 		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
 		if err != nil {
-			callback <- OrExpressionByUserByStampTaskAsyncResult{
+			callback <- OrExpressionByStampTaskAsyncResult{
 				err: err,
 			}
 			return
@@ -3050,23 +3053,23 @@ func (p Gs2DistributorWebSocketClient) orExpressionByUserByStampTaskAsyncHandler
 	}
 	if asyncResult.Err != nil {
 	}
-	callback <- OrExpressionByUserByStampTaskAsyncResult{
+	callback <- OrExpressionByStampTaskAsyncResult{
 		result: &result,
 		err:    asyncResult.Err,
 	}
 
 }
 
-func (p Gs2DistributorWebSocketClient) OrExpressionByUserByStampTaskAsync(
-	request *OrExpressionByUserByStampTaskRequest,
-	callback chan<- OrExpressionByUserByStampTaskAsyncResult,
+func (p Gs2DistributorWebSocketClient) OrExpressionByStampTaskAsync(
+	request *OrExpressionByStampTaskRequest,
+	callback chan<- OrExpressionByStampTaskAsyncResult,
 ) {
 	requestId := core.WebSocketRequestId(uuid.New().String())
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "distributor",
 			"component":   "distribute",
-			"function":    "orExpressionByUserByStampTask",
+			"function":    "orExpressionByStampTask",
 			"contentType": "application/json",
 			"requestId":   requestId,
 		},
@@ -3084,7 +3087,7 @@ func (p Gs2DistributorWebSocketClient) OrExpressionByUserByStampTaskAsync(
 		bodies["contextStack"] = *request.ContextStack
 	}
 
-	go p.orExpressionByUserByStampTaskAsyncHandler(
+	go p.orExpressionByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
 			RequestId: requestId,
 			Bodies:    bodies,
@@ -3093,11 +3096,11 @@ func (p Gs2DistributorWebSocketClient) OrExpressionByUserByStampTaskAsync(
 	)
 }
 
-func (p Gs2DistributorWebSocketClient) OrExpressionByUserByStampTask(
-	request *OrExpressionByUserByStampTaskRequest,
-) (*OrExpressionByUserByStampTaskResult, error) {
-	callback := make(chan OrExpressionByUserByStampTaskAsyncResult, 1)
-	go p.OrExpressionByUserByStampTaskAsync(
+func (p Gs2DistributorWebSocketClient) OrExpressionByStampTask(
+	request *OrExpressionByStampTaskRequest,
+) (*OrExpressionByStampTaskResult, error) {
+	callback := make(chan OrExpressionByStampTaskAsyncResult, 1)
+	go p.OrExpressionByStampTaskAsync(
 		request,
 		callback,
 	)
