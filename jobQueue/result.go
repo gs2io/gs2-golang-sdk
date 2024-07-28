@@ -590,6 +590,37 @@ func (p RunByUserIdResult) Pointer() *RunByUserIdResult {
 	return &p
 }
 
+type DeleteJobResult struct {
+	Item *Job `json:"item"`
+}
+
+type DeleteJobAsyncResult struct {
+	result *DeleteJobResult
+	err    error
+}
+
+func NewDeleteJobResultFromJson(data string) DeleteJobResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteJobResultFromDict(dict)
+}
+
+func NewDeleteJobResultFromDict(data map[string]interface{}) DeleteJobResult {
+	return DeleteJobResult{
+		Item: NewJobFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeleteJobResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeleteJobResult) Pointer() *DeleteJobResult {
+	return &p
+}
+
 type DeleteJobByUserIdResult struct {
 	Item *Job `json:"item"`
 }

@@ -111,15 +111,16 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	SourceRequestId     *string             `json:"sourceRequestId"`
-	RequestId           *string             `json:"requestId"`
-	ContextStack        *string             `json:"contextStack"`
-	Name                *string             `json:"name"`
-	Description         *string             `json:"description"`
-	EnableDirectEnhance *bool               `json:"enableDirectEnhance"`
-	TransactionSetting  *TransactionSetting `json:"transactionSetting"`
-	EnhanceScript       *ScriptSetting      `json:"enhanceScript"`
-	LogSetting          *LogSetting         `json:"logSetting"`
+	SourceRequestId    *string             `json:"sourceRequestId"`
+	RequestId          *string             `json:"requestId"`
+	ContextStack       *string             `json:"contextStack"`
+	Name               *string             `json:"name"`
+	Description        *string             `json:"description"`
+	TransactionSetting *TransactionSetting `json:"transactionSetting"`
+	EnhanceScript      *ScriptSetting      `json:"enhanceScript"`
+	LogSetting         *LogSetting         `json:"logSetting"`
+	// Deprecated: should not be used
+	EnableDirectEnhance *bool `json:"enableDirectEnhance"`
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	// Deprecated: should not be used
@@ -194,9 +195,6 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["enableDirectEnhance"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.EnableDirectEnhance)
-		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
 		}
@@ -205,6 +203,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
+		}
+		if v, ok := d["enableDirectEnhance"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EnableDirectEnhance)
 		}
 		if v, ok := d["queueNamespaceId"]; ok && v != nil {
 			var temp interface{}
@@ -269,10 +270,10 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 	return CreateNamespaceRequest{
 		Name:                core.CastString(data["name"]),
 		Description:         core.CastString(data["description"]),
-		EnableDirectEnhance: core.CastBool(data["enableDirectEnhance"]),
 		TransactionSetting:  NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
 		EnhanceScript:       NewScriptSettingFromDict(core.CastMap(data["enhanceScript"])).Pointer(),
 		LogSetting:          NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		EnableDirectEnhance: core.CastBool(data["enableDirectEnhance"]),
 		QueueNamespaceId:    core.CastString(data["queueNamespaceId"]),
 		KeyId:               core.CastString(data["keyId"]),
 	}
@@ -282,10 +283,10 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"name":                p.Name,
 		"description":         p.Description,
-		"enableDirectEnhance": p.EnableDirectEnhance,
 		"transactionSetting":  p.TransactionSetting.ToDict(),
 		"enhanceScript":       p.EnhanceScript.ToDict(),
 		"logSetting":          p.LogSetting.ToDict(),
+		"enableDirectEnhance": p.EnableDirectEnhance,
 		"queueNamespaceId":    p.QueueNamespaceId,
 		"keyId":               p.KeyId,
 	}
@@ -458,15 +459,16 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	SourceRequestId     *string             `json:"sourceRequestId"`
-	RequestId           *string             `json:"requestId"`
-	ContextStack        *string             `json:"contextStack"`
-	NamespaceName       *string             `json:"namespaceName"`
-	Description         *string             `json:"description"`
-	EnableDirectEnhance *bool               `json:"enableDirectEnhance"`
-	TransactionSetting  *TransactionSetting `json:"transactionSetting"`
-	EnhanceScript       *ScriptSetting      `json:"enhanceScript"`
-	LogSetting          *LogSetting         `json:"logSetting"`
+	SourceRequestId    *string             `json:"sourceRequestId"`
+	RequestId          *string             `json:"requestId"`
+	ContextStack       *string             `json:"contextStack"`
+	NamespaceName      *string             `json:"namespaceName"`
+	Description        *string             `json:"description"`
+	TransactionSetting *TransactionSetting `json:"transactionSetting"`
+	EnhanceScript      *ScriptSetting      `json:"enhanceScript"`
+	LogSetting         *LogSetting         `json:"logSetting"`
+	// Deprecated: should not be used
+	EnableDirectEnhance *bool `json:"enableDirectEnhance"`
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	// Deprecated: should not be used
@@ -541,9 +543,6 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["enableDirectEnhance"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.EnableDirectEnhance)
-		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
 		}
@@ -552,6 +551,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
+		}
+		if v, ok := d["enableDirectEnhance"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EnableDirectEnhance)
 		}
 		if v, ok := d["queueNamespaceId"]; ok && v != nil {
 			var temp interface{}
@@ -616,10 +618,10 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 	return UpdateNamespaceRequest{
 		NamespaceName:       core.CastString(data["namespaceName"]),
 		Description:         core.CastString(data["description"]),
-		EnableDirectEnhance: core.CastBool(data["enableDirectEnhance"]),
 		TransactionSetting:  NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
 		EnhanceScript:       NewScriptSettingFromDict(core.CastMap(data["enhanceScript"])).Pointer(),
 		LogSetting:          NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		EnableDirectEnhance: core.CastBool(data["enableDirectEnhance"]),
 		QueueNamespaceId:    core.CastString(data["queueNamespaceId"]),
 		KeyId:               core.CastString(data["keyId"]),
 	}
@@ -629,10 +631,10 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName":       p.NamespaceName,
 		"description":         p.Description,
-		"enableDirectEnhance": p.EnableDirectEnhance,
 		"transactionSetting":  p.TransactionSetting.ToDict(),
 		"enhanceScript":       p.EnhanceScript.ToDict(),
 		"logSetting":          p.LogSetting.ToDict(),
+		"enableDirectEnhance": p.EnableDirectEnhance,
 		"queueNamespaceId":    p.QueueNamespaceId,
 		"keyId":               p.KeyId,
 	}

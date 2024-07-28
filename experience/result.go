@@ -1160,6 +1160,37 @@ func (p AddExperienceByUserIdResult) Pointer() *AddExperienceByUserIdResult {
 	return &p
 }
 
+type SubExperienceResult struct {
+	Item *Status `json:"item"`
+}
+
+type SubExperienceAsyncResult struct {
+	result *SubExperienceResult
+	err    error
+}
+
+func NewSubExperienceResultFromJson(data string) SubExperienceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSubExperienceResultFromDict(dict)
+}
+
+func NewSubExperienceResultFromDict(data map[string]interface{}) SubExperienceResult {
+	return SubExperienceResult{
+		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p SubExperienceResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p SubExperienceResult) Pointer() *SubExperienceResult {
+	return &p
+}
+
 type SubExperienceByUserIdResult struct {
 	Item *Status `json:"item"`
 }
@@ -1253,6 +1284,37 @@ func (p AddRankCapByUserIdResult) ToDict() map[string]interface{} {
 }
 
 func (p AddRankCapByUserIdResult) Pointer() *AddRankCapByUserIdResult {
+	return &p
+}
+
+type SubRankCapResult struct {
+	Item *Status `json:"item"`
+}
+
+type SubRankCapAsyncResult struct {
+	result *SubRankCapResult
+	err    error
+}
+
+func NewSubRankCapResultFromJson(data string) SubRankCapResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSubRankCapResultFromDict(dict)
+}
+
+func NewSubRankCapResultFromDict(data map[string]interface{}) SubRankCapResult {
+	return SubRankCapResult{
+		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p SubRankCapResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p SubRankCapResult) Pointer() *SubRankCapResult {
 	return &p
 }
 

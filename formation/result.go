@@ -1387,6 +1387,40 @@ func (p AddMoldCapacityByUserIdResult) Pointer() *AddMoldCapacityByUserIdResult 
 	return &p
 }
 
+type SubMoldCapacityResult struct {
+	Item      *Mold      `json:"item"`
+	MoldModel *MoldModel `json:"moldModel"`
+}
+
+type SubMoldCapacityAsyncResult struct {
+	result *SubMoldCapacityResult
+	err    error
+}
+
+func NewSubMoldCapacityResultFromJson(data string) SubMoldCapacityResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSubMoldCapacityResultFromDict(dict)
+}
+
+func NewSubMoldCapacityResultFromDict(data map[string]interface{}) SubMoldCapacityResult {
+	return SubMoldCapacityResult{
+		Item:      NewMoldFromDict(core.CastMap(data["item"])).Pointer(),
+		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
+	}
+}
+
+func (p SubMoldCapacityResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":      p.Item.ToDict(),
+		"moldModel": p.MoldModel.ToDict(),
+	}
+}
+
+func (p SubMoldCapacityResult) Pointer() *SubMoldCapacityResult {
+	return &p
+}
+
 type SubMoldCapacityByUserIdResult struct {
 	Item      *Mold      `json:"item"`
 	MoldModel *MoldModel `json:"moldModel"`

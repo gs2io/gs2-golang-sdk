@@ -970,6 +970,37 @@ func (p IncreaseMaximumIdleMinutesByUserIdResult) Pointer() *IncreaseMaximumIdle
 	return &p
 }
 
+type DecreaseMaximumIdleMinutesResult struct {
+	Item *Status `json:"item"`
+}
+
+type DecreaseMaximumIdleMinutesAsyncResult struct {
+	result *DecreaseMaximumIdleMinutesResult
+	err    error
+}
+
+func NewDecreaseMaximumIdleMinutesResultFromJson(data string) DecreaseMaximumIdleMinutesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDecreaseMaximumIdleMinutesResultFromDict(dict)
+}
+
+func NewDecreaseMaximumIdleMinutesResultFromDict(data map[string]interface{}) DecreaseMaximumIdleMinutesResult {
+	return DecreaseMaximumIdleMinutesResult{
+		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DecreaseMaximumIdleMinutesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DecreaseMaximumIdleMinutesResult) Pointer() *DecreaseMaximumIdleMinutesResult {
+	return &p
+}
+
 type DecreaseMaximumIdleMinutesByUserIdResult struct {
 	Item *Status `json:"item"`
 }

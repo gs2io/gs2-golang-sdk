@@ -329,6 +329,32 @@ func (p DeleteCompleteByUserIdResult) Pointer() *DeleteCompleteByUserIdResult {
 	return &p
 }
 
+type VerifyCompleteResult struct {
+}
+
+type VerifyCompleteAsyncResult struct {
+	result *VerifyCompleteResult
+	err    error
+}
+
+func NewVerifyCompleteResultFromJson(data string) VerifyCompleteResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCompleteResultFromDict(dict)
+}
+
+func NewVerifyCompleteResultFromDict(data map[string]interface{}) VerifyCompleteResult {
+	return VerifyCompleteResult{}
+}
+
+func (p VerifyCompleteResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyCompleteResult) Pointer() *VerifyCompleteResult {
+	return &p
+}
+
 type VerifyCompleteByUserIdResult struct {
 }
 
@@ -1306,6 +1332,42 @@ func (p SetCounterByUserIdResult) ToDict() map[string]interface{} {
 }
 
 func (p SetCounterByUserIdResult) Pointer() *SetCounterByUserIdResult {
+	return &p
+}
+
+type DecreaseCounterResult struct {
+	Item             *Counter   `json:"item"`
+	ChangedCompletes []Complete `json:"changedCompletes"`
+}
+
+type DecreaseCounterAsyncResult struct {
+	result *DecreaseCounterResult
+	err    error
+}
+
+func NewDecreaseCounterResultFromJson(data string) DecreaseCounterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDecreaseCounterResultFromDict(dict)
+}
+
+func NewDecreaseCounterResultFromDict(data map[string]interface{}) DecreaseCounterResult {
+	return DecreaseCounterResult{
+		Item:             NewCounterFromDict(core.CastMap(data["item"])).Pointer(),
+		ChangedCompletes: CastCompletes(core.CastArray(data["changedCompletes"])),
+	}
+}
+
+func (p DecreaseCounterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+		"changedCompletes": CastCompletesFromDict(
+			p.ChangedCompletes,
+		),
+	}
+}
+
+func (p DecreaseCounterResult) Pointer() *DecreaseCounterResult {
 	return &p
 }
 

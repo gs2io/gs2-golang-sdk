@@ -994,6 +994,122 @@ func (p Gs2MissionRestClient) DeleteCompleteByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyCompleteAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCompleteAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCompleteAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCompleteResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCompleteAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCompleteAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCompleteAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) VerifyCompleteAsync(
+	request *VerifyCompleteRequest,
+	callback chan<- VerifyCompleteAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/complete/group/{missionGroupName}/task/{missionTaskName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		path = strings.ReplaceAll(path, "{missionGroupName}", core.ToString(*request.MissionGroupName))
+	} else {
+		path = strings.ReplaceAll(path, "{missionGroupName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+	if request.MissionTaskName != nil && *request.MissionTaskName != "" {
+		path = strings.ReplaceAll(path, "{missionTaskName}", core.ToString(*request.MissionTaskName))
+	} else {
+		path = strings.ReplaceAll(path, "{missionTaskName}", "null")
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		path = strings.ReplaceAll(path, "{multiplyValueSpecifyingQuantity}", core.ToString(*request.MultiplyValueSpecifyingQuantity))
+	} else {
+		path = strings.ReplaceAll(path, "{multiplyValueSpecifyingQuantity}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyCompleteAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) VerifyComplete(
+	request *VerifyCompleteRequest,
+) (*VerifyCompleteResult, error) {
+	callback := make(chan VerifyCompleteAsyncResult, 1)
+	go p.VerifyCompleteAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func verifyCompleteByUserIdAsyncHandler(
 	client Gs2MissionRestClient,
 	job *core.NetworkJob,
@@ -4092,6 +4208,116 @@ func (p Gs2MissionRestClient) SetCounterByUserId(
 ) (*SetCounterByUserIdResult, error) {
 	callback := make(chan SetCounterByUserIdAsyncResult, 1)
 	go p.SetCounterByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func decreaseCounterAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- DecreaseCounterAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DecreaseCounterAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DecreaseCounterResult
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "counter.increase.conflict" {
+				asyncResult.Err = gs2err.SetClientError(Conflict{})
+			}
+		}
+		callback <- DecreaseCounterAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DecreaseCounterAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DecreaseCounterAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) DecreaseCounterAsync(
+	request *DecreaseCounterRequest,
+	callback chan<- DecreaseCounterAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/counter/{counterName}/decrease"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.CounterName != nil && *request.CounterName != "" {
+		path = strings.ReplaceAll(path, "{counterName}", core.ToString(*request.CounterName))
+	} else {
+		path = strings.ReplaceAll(path, "{counterName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go decreaseCounterAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) DecreaseCounter(
+	request *DecreaseCounterRequest,
+) (*DecreaseCounterResult, error) {
+	callback := make(chan DecreaseCounterAsyncResult, 1)
+	go p.DecreaseCounterAsync(
 		request,
 		callback,
 	)

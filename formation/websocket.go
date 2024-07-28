@@ -3803,6 +3803,102 @@ func (p Gs2FormationWebSocketClient) AddMoldCapacityByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2FormationWebSocketClient) subMoldCapacityAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SubMoldCapacityAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SubMoldCapacityAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SubMoldCapacityResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SubMoldCapacityAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SubMoldCapacityAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FormationWebSocketClient) SubMoldCapacityAsync(
+	request *SubMoldCapacityRequest,
+	callback chan<- SubMoldCapacityAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "formation",
+			"component":   "mold",
+			"function":    "subMoldCapacity",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.MoldModelName != nil && *request.MoldModelName != "" {
+		bodies["moldModelName"] = *request.MoldModelName
+	}
+	if request.Capacity != nil {
+		bodies["capacity"] = *request.Capacity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.subMoldCapacityAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FormationWebSocketClient) SubMoldCapacity(
+	request *SubMoldCapacityRequest,
+) (*SubMoldCapacityResult, error) {
+	callback := make(chan SubMoldCapacityAsyncResult, 1)
+	go p.SubMoldCapacityAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2FormationWebSocketClient) subMoldCapacityByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- SubMoldCapacityByUserIdAsyncResult,

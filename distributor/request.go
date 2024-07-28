@@ -1950,6 +1950,7 @@ type DistributeRequest struct {
 	SourceRequestId    *string             `json:"sourceRequestId"`
 	RequestId          *string             `json:"requestId"`
 	ContextStack       *string             `json:"contextStack"`
+	DuplicationAvoider *string             `json:"duplicationAvoider"`
 	NamespaceName      *string             `json:"namespaceName"`
 	DistributorName    *string             `json:"distributorName"`
 	UserId             *string             `json:"userId"`
@@ -2115,6 +2116,7 @@ type DistributeWithoutOverflowProcessRequest struct {
 	SourceRequestId    *string             `json:"sourceRequestId"`
 	RequestId          *string             `json:"requestId"`
 	ContextStack       *string             `json:"contextStack"`
+	DuplicationAvoider *string             `json:"duplicationAvoider"`
 	UserId             *string             `json:"userId"`
 	DistributeResource *DistributeResource `json:"distributeResource"`
 	TimeOffsetToken    *string             `json:"timeOffsetToken"`
@@ -3185,11 +3187,12 @@ func (p RunStampSheetExpressWithoutNamespaceRequest) Pointer() *RunStampSheetExp
 }
 
 type SetTransactionDefaultConfigRequest struct {
-	SourceRequestId *string  `json:"sourceRequestId"`
-	RequestId       *string  `json:"requestId"`
-	ContextStack    *string  `json:"contextStack"`
-	AccessToken     *string  `json:"accessToken"`
-	Config          []Config `json:"config"`
+	SourceRequestId    *string  `json:"sourceRequestId"`
+	RequestId          *string  `json:"requestId"`
+	ContextStack       *string  `json:"contextStack"`
+	DuplicationAvoider *string  `json:"duplicationAvoider"`
+	AccessToken        *string  `json:"accessToken"`
+	Config             []Config `json:"config"`
 }
 
 func (p *SetTransactionDefaultConfigRequest) UnmarshalJSON(data []byte) error {
@@ -3274,12 +3277,13 @@ func (p SetTransactionDefaultConfigRequest) Pointer() *SetTransactionDefaultConf
 }
 
 type SetTransactionDefaultConfigByUserIdRequest struct {
-	SourceRequestId *string  `json:"sourceRequestId"`
-	RequestId       *string  `json:"requestId"`
-	ContextStack    *string  `json:"contextStack"`
-	UserId          *string  `json:"userId"`
-	Config          []Config `json:"config"`
-	TimeOffsetToken *string  `json:"timeOffsetToken"`
+	SourceRequestId    *string  `json:"sourceRequestId"`
+	RequestId          *string  `json:"requestId"`
+	ContextStack       *string  `json:"contextStack"`
+	DuplicationAvoider *string  `json:"duplicationAvoider"`
+	UserId             *string  `json:"userId"`
+	Config             []Config `json:"config"`
+	TimeOffsetToken    *string  `json:"timeOffsetToken"`
 }
 
 func (p *SetTransactionDefaultConfigByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -3385,6 +3389,767 @@ func (p SetTransactionDefaultConfigByUserIdRequest) ToDict() map[string]interfac
 }
 
 func (p SetTransactionDefaultConfigByUserIdRequest) Pointer() *SetTransactionDefaultConfigByUserIdRequest {
+	return &p
+}
+
+type IfExpressionByUserIdRequest struct {
+	SourceRequestId    *string         `json:"sourceRequestId"`
+	RequestId          *string         `json:"requestId"`
+	ContextStack       *string         `json:"contextStack"`
+	DuplicationAvoider *string         `json:"duplicationAvoider"`
+	NamespaceName      *string         `json:"namespaceName"`
+	UserId             *string         `json:"userId"`
+	Condition          *VerifyAction   `json:"condition"`
+	TrueActions        []ConsumeAction `json:"trueActions"`
+	FalseActions       []ConsumeAction `json:"falseActions"`
+	TimeOffsetToken    *string         `json:"timeOffsetToken"`
+}
+
+func (p *IfExpressionByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = IfExpressionByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = IfExpressionByUserIdRequest{}
+	} else {
+		*p = IfExpressionByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["condition"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Condition)
+		}
+		if v, ok := d["trueActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TrueActions)
+		}
+		if v, ok := d["falseActions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.FalseActions)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewIfExpressionByUserIdRequestFromJson(data string) (IfExpressionByUserIdRequest, error) {
+	req := IfExpressionByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return IfExpressionByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewIfExpressionByUserIdRequestFromDict(data map[string]interface{}) IfExpressionByUserIdRequest {
+	return IfExpressionByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		Condition:       NewVerifyActionFromDict(core.CastMap(data["condition"])).Pointer(),
+		TrueActions:     CastConsumeActions(core.CastArray(data["trueActions"])),
+		FalseActions:    CastConsumeActions(core.CastArray(data["falseActions"])),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p IfExpressionByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"condition":     p.Condition.ToDict(),
+		"trueActions": CastConsumeActionsFromDict(
+			p.TrueActions,
+		),
+		"falseActions": CastConsumeActionsFromDict(
+			p.FalseActions,
+		),
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p IfExpressionByUserIdRequest) Pointer() *IfExpressionByUserIdRequest {
+	return &p
+}
+
+type AndExpressionByUserIdRequest struct {
+	SourceRequestId    *string        `json:"sourceRequestId"`
+	RequestId          *string        `json:"requestId"`
+	ContextStack       *string        `json:"contextStack"`
+	DuplicationAvoider *string        `json:"duplicationAvoider"`
+	NamespaceName      *string        `json:"namespaceName"`
+	UserId             *string        `json:"userId"`
+	Actions            []VerifyAction `json:"actions"`
+	TimeOffsetToken    *string        `json:"timeOffsetToken"`
+}
+
+func (p *AndExpressionByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AndExpressionByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AndExpressionByUserIdRequest{}
+	} else {
+		*p = AndExpressionByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["actions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Actions)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewAndExpressionByUserIdRequestFromJson(data string) (AndExpressionByUserIdRequest, error) {
+	req := AndExpressionByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return AndExpressionByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewAndExpressionByUserIdRequestFromDict(data map[string]interface{}) AndExpressionByUserIdRequest {
+	return AndExpressionByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		Actions:         CastVerifyActions(core.CastArray(data["actions"])),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p AndExpressionByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"actions": CastVerifyActionsFromDict(
+			p.Actions,
+		),
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p AndExpressionByUserIdRequest) Pointer() *AndExpressionByUserIdRequest {
+	return &p
+}
+
+type OrExpressionByUserIdRequest struct {
+	SourceRequestId    *string        `json:"sourceRequestId"`
+	RequestId          *string        `json:"requestId"`
+	ContextStack       *string        `json:"contextStack"`
+	DuplicationAvoider *string        `json:"duplicationAvoider"`
+	NamespaceName      *string        `json:"namespaceName"`
+	UserId             *string        `json:"userId"`
+	Actions            []VerifyAction `json:"actions"`
+	TimeOffsetToken    *string        `json:"timeOffsetToken"`
+}
+
+func (p *OrExpressionByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = OrExpressionByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = OrExpressionByUserIdRequest{}
+	} else {
+		*p = OrExpressionByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["actions"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Actions)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewOrExpressionByUserIdRequestFromJson(data string) (OrExpressionByUserIdRequest, error) {
+	req := OrExpressionByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return OrExpressionByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewOrExpressionByUserIdRequestFromDict(data map[string]interface{}) OrExpressionByUserIdRequest {
+	return OrExpressionByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		Actions:         CastVerifyActions(core.CastArray(data["actions"])),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p OrExpressionByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"actions": CastVerifyActionsFromDict(
+			p.Actions,
+		),
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p OrExpressionByUserIdRequest) Pointer() *OrExpressionByUserIdRequest {
+	return &p
+}
+
+type IfExpressionByUserByStampTaskRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *IfExpressionByUserByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = IfExpressionByUserByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = IfExpressionByUserByStampTaskRequest{}
+	} else {
+		*p = IfExpressionByUserByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewIfExpressionByUserByStampTaskRequestFromJson(data string) (IfExpressionByUserByStampTaskRequest, error) {
+	req := IfExpressionByUserByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return IfExpressionByUserByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewIfExpressionByUserByStampTaskRequestFromDict(data map[string]interface{}) IfExpressionByUserByStampTaskRequest {
+	return IfExpressionByUserByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p IfExpressionByUserByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p IfExpressionByUserByStampTaskRequest) Pointer() *IfExpressionByUserByStampTaskRequest {
+	return &p
+}
+
+type AndExpressionByUserByStampTaskRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *AndExpressionByUserByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AndExpressionByUserByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AndExpressionByUserByStampTaskRequest{}
+	} else {
+		*p = AndExpressionByUserByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewAndExpressionByUserByStampTaskRequestFromJson(data string) (AndExpressionByUserByStampTaskRequest, error) {
+	req := AndExpressionByUserByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return AndExpressionByUserByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewAndExpressionByUserByStampTaskRequestFromDict(data map[string]interface{}) AndExpressionByUserByStampTaskRequest {
+	return AndExpressionByUserByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p AndExpressionByUserByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p AndExpressionByUserByStampTaskRequest) Pointer() *AndExpressionByUserByStampTaskRequest {
+	return &p
+}
+
+type OrExpressionByUserByStampTaskRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *OrExpressionByUserByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = OrExpressionByUserByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = OrExpressionByUserByStampTaskRequest{}
+	} else {
+		*p = OrExpressionByUserByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewOrExpressionByUserByStampTaskRequestFromJson(data string) (OrExpressionByUserByStampTaskRequest, error) {
+	req := OrExpressionByUserByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return OrExpressionByUserByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewOrExpressionByUserByStampTaskRequestFromDict(data map[string]interface{}) OrExpressionByUserByStampTaskRequest {
+	return OrExpressionByUserByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p OrExpressionByUserByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p OrExpressionByUserByStampTaskRequest) Pointer() *OrExpressionByUserByStampTaskRequest {
 	return &p
 }
 

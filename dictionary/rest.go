@@ -2961,6 +2961,109 @@ func (p Gs2DictionaryRestClient) VerifyEntryByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func deleteEntriesAsyncHandler(
+	client Gs2DictionaryRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteEntriesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteEntriesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteEntriesResult
+	if asyncResult.Err != nil {
+		callback <- DeleteEntriesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteEntriesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DeleteEntriesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DictionaryRestClient) DeleteEntriesAsync(
+	request *DeleteEntriesRequest,
+	callback chan<- DeleteEntriesAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/entry/delete"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.EntryModelNames != nil {
+		var _entryModelNames []interface{}
+		for _, item := range request.EntryModelNames {
+			_entryModelNames = append(_entryModelNames, item)
+		}
+		bodies["entryModelNames"] = _entryModelNames
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go deleteEntriesAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("dictionary").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DictionaryRestClient) DeleteEntries(
+	request *DeleteEntriesRequest,
+) (*DeleteEntriesResult, error) {
+	callback := make(chan DeleteEntriesAsyncResult, 1)
+	go p.DeleteEntriesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteEntriesByUserIdAsyncHandler(
 	client Gs2DictionaryRestClient,
 	job *core.NetworkJob,

@@ -809,6 +809,43 @@ func (p AddGradeByUserIdResult) Pointer() *AddGradeByUserIdResult {
 	return &p
 }
 
+type SubGradeResult struct {
+	Item                    *Status            `json:"item"`
+	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status `json:"experienceStatus"`
+}
+
+type SubGradeAsyncResult struct {
+	result *SubGradeResult
+	err    error
+}
+
+func NewSubGradeResultFromJson(data string) SubGradeResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSubGradeResultFromDict(dict)
+}
+
+func NewSubGradeResultFromDict(data map[string]interface{}) SubGradeResult {
+	return SubGradeResult{
+		Item:                    NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		ExperienceNamespaceName: core.CastString(data["experienceNamespaceName"]),
+		ExperienceStatus:        experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer(),
+	}
+}
+
+func (p SubGradeResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":                    p.Item.ToDict(),
+		"experienceNamespaceName": p.ExperienceNamespaceName,
+		"experienceStatus":        p.ExperienceStatus.ToDict(),
+	}
+}
+
+func (p SubGradeResult) Pointer() *SubGradeResult {
+	return &p
+}
+
 type SubGradeByUserIdResult struct {
 	Item                    *Status            `json:"item"`
 	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`

@@ -1119,68 +1119,6 @@ func (p IncrementalExchangeByStampSheetResult) Pointer() *IncrementalExchangeByS
 	return &p
 }
 
-type UnlockIncrementalExchangeByUserIdResult struct {
-	Item *IncrementalRateModel `json:"item"`
-}
-
-type UnlockIncrementalExchangeByUserIdAsyncResult struct {
-	result *UnlockIncrementalExchangeByUserIdResult
-	err    error
-}
-
-func NewUnlockIncrementalExchangeByUserIdResultFromJson(data string) UnlockIncrementalExchangeByUserIdResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUnlockIncrementalExchangeByUserIdResultFromDict(dict)
-}
-
-func NewUnlockIncrementalExchangeByUserIdResultFromDict(data map[string]interface{}) UnlockIncrementalExchangeByUserIdResult {
-	return UnlockIncrementalExchangeByUserIdResult{
-		Item: NewIncrementalRateModelFromDict(core.CastMap(data["item"])).Pointer(),
-	}
-}
-
-func (p UnlockIncrementalExchangeByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
-}
-
-func (p UnlockIncrementalExchangeByUserIdResult) Pointer() *UnlockIncrementalExchangeByUserIdResult {
-	return &p
-}
-
-type UnlockIncrementalExchangeByStampSheetResult struct {
-	Item *IncrementalRateModel `json:"item"`
-}
-
-type UnlockIncrementalExchangeByStampSheetAsyncResult struct {
-	result *UnlockIncrementalExchangeByStampSheetResult
-	err    error
-}
-
-func NewUnlockIncrementalExchangeByStampSheetResultFromJson(data string) UnlockIncrementalExchangeByStampSheetResult {
-	dict := map[string]interface{}{}
-	_ = json.Unmarshal([]byte(data), &dict)
-	return NewUnlockIncrementalExchangeByStampSheetResultFromDict(dict)
-}
-
-func NewUnlockIncrementalExchangeByStampSheetResultFromDict(data map[string]interface{}) UnlockIncrementalExchangeByStampSheetResult {
-	return UnlockIncrementalExchangeByStampSheetResult{
-		Item: NewIncrementalRateModelFromDict(core.CastMap(data["item"])).Pointer(),
-	}
-}
-
-func (p UnlockIncrementalExchangeByStampSheetResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-	}
-}
-
-func (p UnlockIncrementalExchangeByStampSheetResult) Pointer() *UnlockIncrementalExchangeByStampSheetResult {
-	return &p
-}
-
 type ExportMasterResult struct {
 	Item *CurrentRateMaster `json:"item"`
 }

@@ -1554,6 +1554,40 @@ func (p RaiseMaxValueByUserIdResult) Pointer() *RaiseMaxValueByUserIdResult {
 	return &p
 }
 
+type DecreaseMaxValueResult struct {
+	Item         *Stamina      `json:"item"`
+	StaminaModel *StaminaModel `json:"staminaModel"`
+}
+
+type DecreaseMaxValueAsyncResult struct {
+	result *DecreaseMaxValueResult
+	err    error
+}
+
+func NewDecreaseMaxValueResultFromJson(data string) DecreaseMaxValueResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDecreaseMaxValueResultFromDict(dict)
+}
+
+func NewDecreaseMaxValueResultFromDict(data map[string]interface{}) DecreaseMaxValueResult {
+	return DecreaseMaxValueResult{
+		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+	}
+}
+
+func (p DecreaseMaxValueResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":         p.Item.ToDict(),
+		"staminaModel": p.StaminaModel.ToDict(),
+	}
+}
+
+func (p DecreaseMaxValueResult) Pointer() *DecreaseMaxValueResult {
+	return &p
+}
+
 type DecreaseMaxValueByUserIdResult struct {
 	Item         *Stamina      `json:"item"`
 	StaminaModel *StaminaModel `json:"staminaModel"`

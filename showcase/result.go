@@ -1391,6 +1391,37 @@ func (p DeleteRandomShowcaseMasterResult) Pointer() *DeleteRandomShowcaseMasterR
 	return &p
 }
 
+type IncrementPurchaseCountResult struct {
+	Item *RandomDisplayItem `json:"item"`
+}
+
+type IncrementPurchaseCountAsyncResult struct {
+	result *IncrementPurchaseCountResult
+	err    error
+}
+
+func NewIncrementPurchaseCountResultFromJson(data string) IncrementPurchaseCountResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIncrementPurchaseCountResultFromDict(dict)
+}
+
+func NewIncrementPurchaseCountResultFromDict(data map[string]interface{}) IncrementPurchaseCountResult {
+	return IncrementPurchaseCountResult{
+		Item: NewRandomDisplayItemFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p IncrementPurchaseCountResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p IncrementPurchaseCountResult) Pointer() *IncrementPurchaseCountResult {
+	return &p
+}
+
 type IncrementPurchaseCountByUserIdResult struct {
 	Item *RandomDisplayItem `json:"item"`
 }

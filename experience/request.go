@@ -4780,6 +4780,172 @@ func (p AddExperienceByUserIdRequest) Pointer() *AddExperienceByUserIdRequest {
 	return &p
 }
 
+type SubExperienceRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	ExperienceName     *string `json:"experienceName"`
+	PropertyId         *string `json:"propertyId"`
+	ExperienceValue    *int64  `json:"experienceValue"`
+}
+
+func (p *SubExperienceRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SubExperienceRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SubExperienceRequest{}
+	} else {
+		*p = SubExperienceRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["experienceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ExperienceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ExperienceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ExperienceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ExperienceName)
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PropertyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PropertyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PropertyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PropertyId)
+				}
+			}
+		}
+		if v, ok := d["experienceValue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ExperienceValue)
+		}
+	}
+	return nil
+}
+
+func NewSubExperienceRequestFromJson(data string) (SubExperienceRequest, error) {
+	req := SubExperienceRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return SubExperienceRequest{}, err
+	}
+	return req, nil
+}
+
+func NewSubExperienceRequestFromDict(data map[string]interface{}) SubExperienceRequest {
+	return SubExperienceRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		AccessToken:     core.CastString(data["accessToken"]),
+		ExperienceName:  core.CastString(data["experienceName"]),
+		PropertyId:      core.CastString(data["propertyId"]),
+		ExperienceValue: core.CastInt64(data["experienceValue"]),
+	}
+}
+
+func (p SubExperienceRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"accessToken":     p.AccessToken,
+		"experienceName":  p.ExperienceName,
+		"propertyId":      p.PropertyId,
+		"experienceValue": p.ExperienceValue,
+	}
+}
+
+func (p SubExperienceRequest) Pointer() *SubExperienceRequest {
+	return &p
+}
+
 type SubExperienceByUserIdRequest struct {
 	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
@@ -5353,6 +5519,172 @@ func (p AddRankCapByUserIdRequest) ToDict() map[string]interface{} {
 }
 
 func (p AddRankCapByUserIdRequest) Pointer() *AddRankCapByUserIdRequest {
+	return &p
+}
+
+type SubRankCapRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	ExperienceName     *string `json:"experienceName"`
+	PropertyId         *string `json:"propertyId"`
+	RankCapValue       *int64  `json:"rankCapValue"`
+}
+
+func (p *SubRankCapRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SubRankCapRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SubRankCapRequest{}
+	} else {
+		*p = SubRankCapRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["experienceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ExperienceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ExperienceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ExperienceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ExperienceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ExperienceName)
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PropertyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PropertyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PropertyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PropertyId)
+				}
+			}
+		}
+		if v, ok := d["rankCapValue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.RankCapValue)
+		}
+	}
+	return nil
+}
+
+func NewSubRankCapRequestFromJson(data string) (SubRankCapRequest, error) {
+	req := SubRankCapRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return SubRankCapRequest{}, err
+	}
+	return req, nil
+}
+
+func NewSubRankCapRequestFromDict(data map[string]interface{}) SubRankCapRequest {
+	return SubRankCapRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		AccessToken:    core.CastString(data["accessToken"]),
+		ExperienceName: core.CastString(data["experienceName"]),
+		PropertyId:     core.CastString(data["propertyId"]),
+		RankCapValue:   core.CastInt64(data["rankCapValue"]),
+	}
+}
+
+func (p SubRankCapRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"accessToken":    p.AccessToken,
+		"experienceName": p.ExperienceName,
+		"propertyId":     p.PropertyId,
+		"rankCapValue":   p.RankCapValue,
+	}
+}
+
+func (p SubRankCapRequest) Pointer() *SubRankCapRequest {
 	return &p
 }
 

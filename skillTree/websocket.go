@@ -2106,6 +2106,106 @@ func (p Gs2SkillTreeWebSocketClient) ReleaseByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2SkillTreeWebSocketClient) markRestrainAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- MarkRestrainAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- MarkRestrainAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result MarkRestrainResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- MarkRestrainAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- MarkRestrainAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SkillTreeWebSocketClient) MarkRestrainAsync(
+	request *MarkRestrainRequest,
+	callback chan<- MarkRestrainAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "skill_tree",
+			"component":   "status",
+			"function":    "markRestrain",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.NodeModelNames != nil {
+		var _nodeModelNames []interface{}
+		for _, item := range request.NodeModelNames {
+			_nodeModelNames = append(_nodeModelNames, item)
+		}
+		bodies["nodeModelNames"] = _nodeModelNames
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.markRestrainAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SkillTreeWebSocketClient) MarkRestrain(
+	request *MarkRestrainRequest,
+) (*MarkRestrainResult, error) {
+	callback := make(chan MarkRestrainAsyncResult, 1)
+	go p.MarkRestrainAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2SkillTreeWebSocketClient) markRestrainByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- MarkRestrainByUserIdAsyncResult,

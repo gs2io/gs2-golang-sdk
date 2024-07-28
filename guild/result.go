@@ -1112,6 +1112,37 @@ func (p IncreaseMaximumCurrentMaximumMemberCountByGuildNameResult) Pointer() *In
 	return &p
 }
 
+type DecreaseMaximumCurrentMaximumMemberCountResult struct {
+	Item *Guild `json:"item"`
+}
+
+type DecreaseMaximumCurrentMaximumMemberCountAsyncResult struct {
+	result *DecreaseMaximumCurrentMaximumMemberCountResult
+	err    error
+}
+
+func NewDecreaseMaximumCurrentMaximumMemberCountResultFromJson(data string) DecreaseMaximumCurrentMaximumMemberCountResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDecreaseMaximumCurrentMaximumMemberCountResultFromDict(dict)
+}
+
+func NewDecreaseMaximumCurrentMaximumMemberCountResultFromDict(data map[string]interface{}) DecreaseMaximumCurrentMaximumMemberCountResult {
+	return DecreaseMaximumCurrentMaximumMemberCountResult{
+		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DecreaseMaximumCurrentMaximumMemberCountResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DecreaseMaximumCurrentMaximumMemberCountResult) Pointer() *DecreaseMaximumCurrentMaximumMemberCountResult {
+	return &p
+}
+
 type DecreaseMaximumCurrentMaximumMemberCountByGuildNameResult struct {
 	Item *Guild `json:"item"`
 }

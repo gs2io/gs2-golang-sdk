@@ -3900,6 +3900,105 @@ func (p Gs2ShowcaseWebSocketClient) DeleteRandomShowcaseMaster(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2ShowcaseWebSocketClient) incrementPurchaseCountAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- IncrementPurchaseCountAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IncrementPurchaseCountAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IncrementPurchaseCountResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- IncrementPurchaseCountAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- IncrementPurchaseCountAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ShowcaseWebSocketClient) IncrementPurchaseCountAsync(
+	request *IncrementPurchaseCountRequest,
+	callback chan<- IncrementPurchaseCountAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "showcase",
+			"component":   "randomShowcaseStatus",
+			"function":    "incrementPurchaseCount",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.ShowcaseName != nil && *request.ShowcaseName != "" {
+		bodies["showcaseName"] = *request.ShowcaseName
+	}
+	if request.DisplayItemName != nil && *request.DisplayItemName != "" {
+		bodies["displayItemName"] = *request.DisplayItemName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.Count != nil {
+		bodies["count"] = *request.Count
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.incrementPurchaseCountAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ShowcaseWebSocketClient) IncrementPurchaseCount(
+	request *IncrementPurchaseCountRequest,
+) (*IncrementPurchaseCountResult, error) {
+	callback := make(chan IncrementPurchaseCountAsyncResult, 1)
+	go p.IncrementPurchaseCountAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2ShowcaseWebSocketClient) incrementPurchaseCountByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- IncrementPurchaseCountByUserIdAsyncResult,

@@ -3251,6 +3251,105 @@ func (p Gs2ExperienceWebSocketClient) AddExperienceByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2ExperienceWebSocketClient) subExperienceAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SubExperienceAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SubExperienceAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SubExperienceResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SubExperienceAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SubExperienceAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceWebSocketClient) SubExperienceAsync(
+	request *SubExperienceRequest,
+	callback chan<- SubExperienceAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "subExperience",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.ExperienceValue != nil {
+		bodies["experienceValue"] = *request.ExperienceValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.subExperienceAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceWebSocketClient) SubExperience(
+	request *SubExperienceRequest,
+) (*SubExperienceResult, error) {
+	callback := make(chan SubExperienceAsyncResult, 1)
+	go p.SubExperienceAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2ExperienceWebSocketClient) subExperienceByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- SubExperienceByUserIdAsyncResult,
@@ -3541,6 +3640,105 @@ func (p Gs2ExperienceWebSocketClient) AddRankCapByUserId(
 ) (*AddRankCapByUserIdResult, error) {
 	callback := make(chan AddRankCapByUserIdAsyncResult, 1)
 	go p.AddRankCapByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ExperienceWebSocketClient) subRankCapAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SubRankCapAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SubRankCapAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SubRankCapResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SubRankCapAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SubRankCapAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceWebSocketClient) SubRankCapAsync(
+	request *SubRankCapRequest,
+	callback chan<- SubRankCapAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "experience",
+			"component":   "status",
+			"function":    "subRankCap",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		bodies["experienceName"] = *request.ExperienceName
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		bodies["propertyId"] = *request.PropertyId
+	}
+	if request.RankCapValue != nil {
+		bodies["rankCapValue"] = *request.RankCapValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.subRankCapAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceWebSocketClient) SubRankCap(
+	request *SubRankCapRequest,
+) (*SubRankCapResult, error) {
+	callback := make(chan SubRankCapAsyncResult, 1)
+	go p.SubRankCapAsync(
 		request,
 		callback,
 	)

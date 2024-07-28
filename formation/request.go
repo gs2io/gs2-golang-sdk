@@ -5238,6 +5238,146 @@ func (p AddMoldCapacityByUserIdRequest) Pointer() *AddMoldCapacityByUserIdReques
 	return &p
 }
 
+type SubMoldCapacityRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	MoldModelName      *string `json:"moldModelName"`
+	Capacity           *int32  `json:"capacity"`
+}
+
+func (p *SubMoldCapacityRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SubMoldCapacityRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SubMoldCapacityRequest{}
+	} else {
+		*p = SubMoldCapacityRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["moldModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MoldModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MoldModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MoldModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MoldModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MoldModelName)
+				}
+			}
+		}
+		if v, ok := d["capacity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Capacity)
+		}
+	}
+	return nil
+}
+
+func NewSubMoldCapacityRequestFromJson(data string) (SubMoldCapacityRequest, error) {
+	req := SubMoldCapacityRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return SubMoldCapacityRequest{}, err
+	}
+	return req, nil
+}
+
+func NewSubMoldCapacityRequestFromDict(data map[string]interface{}) SubMoldCapacityRequest {
+	return SubMoldCapacityRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		MoldModelName: core.CastString(data["moldModelName"]),
+		Capacity:      core.CastInt32(data["capacity"]),
+	}
+}
+
+func (p SubMoldCapacityRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"moldModelName": p.MoldModelName,
+		"capacity":      p.Capacity,
+	}
+}
+
+func (p SubMoldCapacityRequest) Pointer() *SubMoldCapacityRequest {
+	return &p
+}
+
 type SubMoldCapacityByUserIdRequest struct {
 	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`

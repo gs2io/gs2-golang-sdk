@@ -956,6 +956,39 @@ func (p VerifyEntryByUserIdResult) Pointer() *VerifyEntryByUserIdResult {
 	return &p
 }
 
+type DeleteEntriesResult struct {
+	Items []Entry `json:"items"`
+}
+
+type DeleteEntriesAsyncResult struct {
+	result *DeleteEntriesResult
+	err    error
+}
+
+func NewDeleteEntriesResultFromJson(data string) DeleteEntriesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteEntriesResultFromDict(dict)
+}
+
+func NewDeleteEntriesResultFromDict(data map[string]interface{}) DeleteEntriesResult {
+	return DeleteEntriesResult{
+		Items: CastEntries(core.CastArray(data["items"])),
+	}
+}
+
+func (p DeleteEntriesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastEntriesFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p DeleteEntriesResult) Pointer() *DeleteEntriesResult {
+	return &p
+}
+
 type DeleteEntriesByUserIdResult struct {
 	Items []Entry `json:"items"`
 }

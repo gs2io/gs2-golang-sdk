@@ -5636,6 +5636,172 @@ func (p DeleteRandomShowcaseMasterRequest) Pointer() *DeleteRandomShowcaseMaster
 	return &p
 }
 
+type IncrementPurchaseCountRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	ShowcaseName       *string `json:"showcaseName"`
+	DisplayItemName    *string `json:"displayItemName"`
+	AccessToken        *string `json:"accessToken"`
+	Count              *int32  `json:"count"`
+}
+
+func (p *IncrementPurchaseCountRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = IncrementPurchaseCountRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = IncrementPurchaseCountRequest{}
+	} else {
+		*p = IncrementPurchaseCountRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["showcaseName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ShowcaseName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ShowcaseName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ShowcaseName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ShowcaseName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ShowcaseName)
+				}
+			}
+		}
+		if v, ok := d["displayItemName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DisplayItemName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DisplayItemName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DisplayItemName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DisplayItemName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DisplayItemName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DisplayItemName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["count"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Count)
+		}
+	}
+	return nil
+}
+
+func NewIncrementPurchaseCountRequestFromJson(data string) (IncrementPurchaseCountRequest, error) {
+	req := IncrementPurchaseCountRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return IncrementPurchaseCountRequest{}, err
+	}
+	return req, nil
+}
+
+func NewIncrementPurchaseCountRequestFromDict(data map[string]interface{}) IncrementPurchaseCountRequest {
+	return IncrementPurchaseCountRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		ShowcaseName:    core.CastString(data["showcaseName"]),
+		DisplayItemName: core.CastString(data["displayItemName"]),
+		AccessToken:     core.CastString(data["accessToken"]),
+		Count:           core.CastInt32(data["count"]),
+	}
+}
+
+func (p IncrementPurchaseCountRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"showcaseName":    p.ShowcaseName,
+		"displayItemName": p.DisplayItemName,
+		"accessToken":     p.AccessToken,
+		"count":           p.Count,
+	}
+}
+
+func (p IncrementPurchaseCountRequest) Pointer() *IncrementPurchaseCountRequest {
+	return &p
+}
+
 type IncrementPurchaseCountByUserIdRequest struct {
 	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`

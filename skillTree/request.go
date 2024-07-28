@@ -2918,6 +2918,171 @@ func (p ReleaseByUserIdRequest) Pointer() *ReleaseByUserIdRequest {
 	return &p
 }
 
+type MarkRestrainRequest struct {
+	SourceRequestId    *string   `json:"sourceRequestId"`
+	RequestId          *string   `json:"requestId"`
+	ContextStack       *string   `json:"contextStack"`
+	DuplicationAvoider *string   `json:"duplicationAvoider"`
+	NamespaceName      *string   `json:"namespaceName"`
+	AccessToken        *string   `json:"accessToken"`
+	PropertyId         *string   `json:"propertyId"`
+	NodeModelNames     []*string `json:"nodeModelNames"`
+}
+
+func (p *MarkRestrainRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = MarkRestrainRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = MarkRestrainRequest{}
+	} else {
+		*p = MarkRestrainRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["propertyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PropertyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PropertyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PropertyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PropertyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PropertyId)
+				}
+			}
+		}
+		if v, ok := d["nodeModelNames"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.NodeModelNames = l
+			}
+		}
+	}
+	return nil
+}
+
+func NewMarkRestrainRequestFromJson(data string) (MarkRestrainRequest, error) {
+	req := MarkRestrainRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return MarkRestrainRequest{}, err
+	}
+	return req, nil
+}
+
+func NewMarkRestrainRequestFromDict(data map[string]interface{}) MarkRestrainRequest {
+	return MarkRestrainRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		AccessToken:    core.CastString(data["accessToken"]),
+		PropertyId:     core.CastString(data["propertyId"]),
+		NodeModelNames: core.CastStrings(core.CastArray(data["nodeModelNames"])),
+	}
+}
+
+func (p MarkRestrainRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"propertyId":    p.PropertyId,
+		"nodeModelNames": core.CastStringsFromDict(
+			p.NodeModelNames,
+		),
+	}
+}
+
+func (p MarkRestrainRequest) Pointer() *MarkRestrainRequest {
+	return &p
+}
+
 type MarkRestrainByUserIdRequest struct {
 	SourceRequestId    *string   `json:"sourceRequestId"`
 	RequestId          *string   `json:"requestId"`

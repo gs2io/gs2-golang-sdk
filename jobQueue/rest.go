@@ -1783,6 +1783,107 @@ func (p Gs2JobQueueRestClient) RunByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func deleteJobAsyncHandler(
+	client Gs2JobQueueRestClient,
+	job *core.NetworkJob,
+	callback chan<- DeleteJobAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DeleteJobAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DeleteJobResult
+	if asyncResult.Err != nil {
+		callback <- DeleteJobAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DeleteJobAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DeleteJobAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2JobQueueRestClient) DeleteJobAsync(
+	request *DeleteJobRequest,
+	callback chan<- DeleteJobAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/job/{jobName}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.JobName != nil && *request.JobName != "" {
+		path = strings.ReplaceAll(path, "{jobName}", core.ToString(*request.JobName))
+	} else {
+		path = strings.ReplaceAll(path, "{jobName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go deleteJobAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("job-queue").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2JobQueueRestClient) DeleteJob(
+	request *DeleteJobRequest,
+) (*DeleteJobResult, error) {
+	callback := make(chan DeleteJobAsyncResult, 1)
+	go p.DeleteJobAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteJobByUserIdAsyncHandler(
 	client Gs2JobQueueRestClient,
 	job *core.NetworkJob,

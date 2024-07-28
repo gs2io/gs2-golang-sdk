@@ -177,9 +177,6 @@ func (p Gs2EnhanceRestClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
-	if request.EnableDirectEnhance != nil {
-		bodies["enableDirectEnhance"] = *request.EnableDirectEnhance
-	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
@@ -188,6 +185,9 @@ func (p Gs2EnhanceRestClient) CreateNamespaceAsync(
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
+	if request.EnableDirectEnhance != nil {
+		bodies["enableDirectEnhance"] = *request.EnableDirectEnhance
 	}
 	if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
 		bodies["queueNamespaceId"] = *request.QueueNamespaceId
@@ -468,9 +468,6 @@ func (p Gs2EnhanceRestClient) UpdateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
-	if request.EnableDirectEnhance != nil {
-		bodies["enableDirectEnhance"] = *request.EnableDirectEnhance
-	}
 	if request.TransactionSetting != nil {
 		bodies["transactionSetting"] = request.TransactionSetting.ToDict()
 	}
@@ -479,6 +476,9 @@ func (p Gs2EnhanceRestClient) UpdateNamespaceAsync(
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
+	}
+	if request.EnableDirectEnhance != nil {
+		bodies["enableDirectEnhance"] = *request.EnableDirectEnhance
 	}
 	if request.QueueNamespaceId != nil && *request.QueueNamespaceId != "" {
 		bodies["queueNamespaceId"] = *request.QueueNamespaceId

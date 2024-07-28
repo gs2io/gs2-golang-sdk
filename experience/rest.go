@@ -3606,6 +3606,115 @@ func (p Gs2ExperienceRestClient) AddExperienceByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func subExperienceAsyncHandler(
+	client Gs2ExperienceRestClient,
+	job *core.NetworkJob,
+	callback chan<- SubExperienceAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SubExperienceAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SubExperienceResult
+	if asyncResult.Err != nil {
+		callback <- SubExperienceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SubExperienceAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SubExperienceAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceRestClient) SubExperienceAsync(
+	request *SubExperienceRequest,
+	callback chan<- SubExperienceAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/status/model/{experienceName}/property/{propertyId}/sub"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
+	} else {
+		path = strings.ReplaceAll(path, "{experienceName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ExperienceValue != nil {
+		bodies["experienceValue"] = *request.ExperienceValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go subExperienceAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceRestClient) SubExperience(
+	request *SubExperienceRequest,
+) (*SubExperienceResult, error) {
+	callback := make(chan SubExperienceAsyncResult, 1)
+	go p.SubExperienceAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func subExperienceByUserIdAsyncHandler(
 	client Gs2ExperienceRestClient,
 	job *core.NetworkJob,
@@ -3941,6 +4050,115 @@ func (p Gs2ExperienceRestClient) AddRankCapByUserId(
 ) (*AddRankCapByUserIdResult, error) {
 	callback := make(chan AddRankCapByUserIdAsyncResult, 1)
 	go p.AddRankCapByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func subRankCapAsyncHandler(
+	client Gs2ExperienceRestClient,
+	job *core.NetworkJob,
+	callback chan<- SubRankCapAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SubRankCapAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SubRankCapResult
+	if asyncResult.Err != nil {
+		callback <- SubRankCapAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SubRankCapAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SubRankCapAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExperienceRestClient) SubRankCapAsync(
+	request *SubRankCapRequest,
+	callback chan<- SubRankCapAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/status/model/{experienceName}/property/{propertyId}/cap/sub"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.ExperienceName != nil && *request.ExperienceName != "" {
+		path = strings.ReplaceAll(path, "{experienceName}", core.ToString(*request.ExperienceName))
+	} else {
+		path = strings.ReplaceAll(path, "{experienceName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.RankCapValue != nil {
+		bodies["rankCapValue"] = *request.RankCapValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go subRankCapAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("experience").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExperienceRestClient) SubRankCap(
+	request *SubRankCapRequest,
+) (*SubRankCapResult, error) {
+	callback := make(chan SubRankCapAsyncResult, 1)
+	go p.SubRankCapAsync(
 		request,
 		callback,
 	)

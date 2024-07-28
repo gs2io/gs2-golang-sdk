@@ -4815,6 +4815,110 @@ func (p Gs2StaminaRestClient) RaiseMaxValueByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func decreaseMaxValueAsyncHandler(
+	client Gs2StaminaRestClient,
+	job *core.NetworkJob,
+	callback chan<- DecreaseMaxValueAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DecreaseMaxValueAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DecreaseMaxValueResult
+	if asyncResult.Err != nil {
+		callback <- DecreaseMaxValueAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DecreaseMaxValueAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DecreaseMaxValueAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaRestClient) DecreaseMaxValueAsync(
+	request *DecreaseMaxValueRequest,
+	callback chan<- DecreaseMaxValueAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/stamina/{staminaName}/decrease"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		path = strings.ReplaceAll(path, "{staminaName}", core.ToString(*request.StaminaName))
+	} else {
+		path = strings.ReplaceAll(path, "{staminaName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.DecreaseValue != nil {
+		bodies["decreaseValue"] = *request.DecreaseValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go decreaseMaxValueAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("stamina").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaRestClient) DecreaseMaxValue(
+	request *DecreaseMaxValueRequest,
+) (*DecreaseMaxValueResult, error) {
+	callback := make(chan DecreaseMaxValueAsyncResult, 1)
+	go p.DecreaseMaxValueAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func decreaseMaxValueByUserIdAsyncHandler(
 	client Gs2StaminaRestClient,
 	job *core.NetworkJob,

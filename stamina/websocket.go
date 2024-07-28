@@ -4342,6 +4342,102 @@ func (p Gs2StaminaWebSocketClient) RaiseMaxValueByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2StaminaWebSocketClient) decreaseMaxValueAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DecreaseMaxValueAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DecreaseMaxValueAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DecreaseMaxValueResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DecreaseMaxValueAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DecreaseMaxValueAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2StaminaWebSocketClient) DecreaseMaxValueAsync(
+	request *DecreaseMaxValueRequest,
+	callback chan<- DecreaseMaxValueAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "stamina",
+			"component":   "stamina",
+			"function":    "decreaseMaxValue",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.StaminaName != nil && *request.StaminaName != "" {
+		bodies["staminaName"] = *request.StaminaName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.DecreaseValue != nil {
+		bodies["decreaseValue"] = *request.DecreaseValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.decreaseMaxValueAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2StaminaWebSocketClient) DecreaseMaxValue(
+	request *DecreaseMaxValueRequest,
+) (*DecreaseMaxValueResult, error) {
+	callback := make(chan DecreaseMaxValueAsyncResult, 1)
+	go p.DecreaseMaxValueAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2StaminaWebSocketClient) decreaseMaxValueByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DecreaseMaxValueByUserIdAsyncResult,

@@ -1513,6 +1513,198 @@ func (p DeleteCompleteByUserIdRequest) Pointer() *DeleteCompleteByUserIdRequest 
 	return &p
 }
 
+type VerifyCompleteRequest struct {
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	MissionGroupName                *string `json:"missionGroupName"`
+	AccessToken                     *string `json:"accessToken"`
+	VerifyType                      *string `json:"verifyType"`
+	MissionTaskName                 *string `json:"missionTaskName"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+}
+
+func (p *VerifyCompleteRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyCompleteRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyCompleteRequest{}
+	} else {
+		*p = VerifyCompleteRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["missionGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionGroupName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["missionTaskName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionTaskName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionTaskName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionTaskName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionTaskName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionTaskName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionTaskName)
+				}
+			}
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+	}
+	return nil
+}
+
+func NewVerifyCompleteRequestFromJson(data string) (VerifyCompleteRequest, error) {
+	req := VerifyCompleteRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyCompleteRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyCompleteRequestFromDict(data map[string]interface{}) VerifyCompleteRequest {
+	return VerifyCompleteRequest{
+		NamespaceName:                   core.CastString(data["namespaceName"]),
+		MissionGroupName:                core.CastString(data["missionGroupName"]),
+		AccessToken:                     core.CastString(data["accessToken"]),
+		VerifyType:                      core.CastString(data["verifyType"]),
+		MissionTaskName:                 core.CastString(data["missionTaskName"]),
+		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+	}
+}
+
+func (p VerifyCompleteRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"missionGroupName":                p.MissionGroupName,
+		"accessToken":                     p.AccessToken,
+		"verifyType":                      p.VerifyType,
+		"missionTaskName":                 p.MissionTaskName,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+	}
+}
+
+func (p VerifyCompleteRequest) Pointer() *VerifyCompleteRequest {
+	return &p
+}
+
 type VerifyCompleteByUserIdRequest struct {
 	SourceRequestId                 *string `json:"sourceRequestId"`
 	RequestId                       *string `json:"requestId"`
@@ -5750,6 +5942,146 @@ func (p SetCounterByUserIdRequest) ToDict() map[string]interface{} {
 }
 
 func (p SetCounterByUserIdRequest) Pointer() *SetCounterByUserIdRequest {
+	return &p
+}
+
+type DecreaseCounterRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	CounterName        *string `json:"counterName"`
+	AccessToken        *string `json:"accessToken"`
+	Value              *int64  `json:"value"`
+}
+
+func (p *DecreaseCounterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DecreaseCounterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DecreaseCounterRequest{}
+	} else {
+		*p = DecreaseCounterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["counterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CounterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CounterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CounterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CounterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CounterName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+	}
+	return nil
+}
+
+func NewDecreaseCounterRequestFromJson(data string) (DecreaseCounterRequest, error) {
+	req := DecreaseCounterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DecreaseCounterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDecreaseCounterRequestFromDict(data map[string]interface{}) DecreaseCounterRequest {
+	return DecreaseCounterRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		CounterName:   core.CastString(data["counterName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		Value:         core.CastInt64(data["value"]),
+	}
+}
+
+func (p DecreaseCounterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"counterName":   p.CounterName,
+		"accessToken":   p.AccessToken,
+		"value":         p.Value,
+	}
+}
+
+func (p DecreaseCounterRequest) Pointer() *DecreaseCounterRequest {
 	return &p
 }
 

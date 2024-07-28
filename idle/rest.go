@@ -2909,6 +2909,110 @@ func (p Gs2IdleRestClient) IncreaseMaximumIdleMinutesByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func decreaseMaximumIdleMinutesAsyncHandler(
+	client Gs2IdleRestClient,
+	job *core.NetworkJob,
+	callback chan<- DecreaseMaximumIdleMinutesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DecreaseMaximumIdleMinutesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DecreaseMaximumIdleMinutesResult
+	if asyncResult.Err != nil {
+		callback <- DecreaseMaximumIdleMinutesAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DecreaseMaximumIdleMinutesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DecreaseMaximumIdleMinutesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2IdleRestClient) DecreaseMaximumIdleMinutesAsync(
+	request *DecreaseMaximumIdleMinutesRequest,
+	callback chan<- DecreaseMaximumIdleMinutesAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/status/model/{categoryName}/maximumIdle/decrease"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.CategoryName != nil && *request.CategoryName != "" {
+		path = strings.ReplaceAll(path, "{categoryName}", core.ToString(*request.CategoryName))
+	} else {
+		path = strings.ReplaceAll(path, "{categoryName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.DecreaseMinutes != nil {
+		bodies["decreaseMinutes"] = *request.DecreaseMinutes
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go decreaseMaximumIdleMinutesAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("idle").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2IdleRestClient) DecreaseMaximumIdleMinutes(
+	request *DecreaseMaximumIdleMinutesRequest,
+) (*DecreaseMaximumIdleMinutesResult, error) {
+	callback := make(chan DecreaseMaximumIdleMinutesAsyncResult, 1)
+	go p.DecreaseMaximumIdleMinutesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func decreaseMaximumIdleMinutesByUserIdAsyncHandler(
 	client Gs2IdleRestClient,
 	job *core.NetworkJob,

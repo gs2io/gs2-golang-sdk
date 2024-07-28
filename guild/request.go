@@ -5523,6 +5523,146 @@ func (p IncreaseMaximumCurrentMaximumMemberCountByGuildNameRequest) Pointer() *I
 	return &p
 }
 
+type DecreaseMaximumCurrentMaximumMemberCountRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	GuildModelName     *string `json:"guildModelName"`
+	AccessToken        *string `json:"accessToken"`
+	Value              *int32  `json:"value"`
+}
+
+func (p *DecreaseMaximumCurrentMaximumMemberCountRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DecreaseMaximumCurrentMaximumMemberCountRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DecreaseMaximumCurrentMaximumMemberCountRequest{}
+	} else {
+		*p = DecreaseMaximumCurrentMaximumMemberCountRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["guildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildModelName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Value)
+		}
+	}
+	return nil
+}
+
+func NewDecreaseMaximumCurrentMaximumMemberCountRequestFromJson(data string) (DecreaseMaximumCurrentMaximumMemberCountRequest, error) {
+	req := DecreaseMaximumCurrentMaximumMemberCountRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DecreaseMaximumCurrentMaximumMemberCountRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDecreaseMaximumCurrentMaximumMemberCountRequestFromDict(data map[string]interface{}) DecreaseMaximumCurrentMaximumMemberCountRequest {
+	return DecreaseMaximumCurrentMaximumMemberCountRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		GuildModelName: core.CastString(data["guildModelName"]),
+		AccessToken:    core.CastString(data["accessToken"]),
+		Value:          core.CastInt32(data["value"]),
+	}
+}
+
+func (p DecreaseMaximumCurrentMaximumMemberCountRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"guildModelName": p.GuildModelName,
+		"accessToken":    p.AccessToken,
+		"value":          p.Value,
+	}
+}
+
+func (p DecreaseMaximumCurrentMaximumMemberCountRequest) Pointer() *DecreaseMaximumCurrentMaximumMemberCountRequest {
+	return &p
+}
+
 type DecreaseMaximumCurrentMaximumMemberCountByGuildNameRequest struct {
 	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`

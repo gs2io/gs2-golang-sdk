@@ -24,15 +24,16 @@ import (
 )
 
 type Namespace struct {
-	NamespaceId         *string             `json:"namespaceId"`
-	Name                *string             `json:"name"`
-	Description         *string             `json:"description"`
-	EnableDirectEnhance *bool               `json:"enableDirectEnhance"`
-	TransactionSetting  *TransactionSetting `json:"transactionSetting"`
-	EnhanceScript       *ScriptSetting      `json:"enhanceScript"`
-	LogSetting          *LogSetting         `json:"logSetting"`
-	CreatedAt           *int64              `json:"createdAt"`
-	UpdatedAt           *int64              `json:"updatedAt"`
+	NamespaceId        *string             `json:"namespaceId"`
+	Name               *string             `json:"name"`
+	Description        *string             `json:"description"`
+	TransactionSetting *TransactionSetting `json:"transactionSetting"`
+	EnhanceScript      *ScriptSetting      `json:"enhanceScript"`
+	LogSetting         *LogSetting         `json:"logSetting"`
+	CreatedAt          *int64              `json:"createdAt"`
+	UpdatedAt          *int64              `json:"updatedAt"`
+	// Deprecated: should not be used
+	EnableDirectEnhance *bool `json:"enableDirectEnhance"`
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	// Deprecated: should not be used
@@ -131,9 +132,6 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
-		if v, ok := d["enableDirectEnhance"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.EnableDirectEnhance)
-		}
 		if v, ok := d["transactionSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.TransactionSetting)
 		}
@@ -148,6 +146,9 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["updatedAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["enableDirectEnhance"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EnableDirectEnhance)
 		}
 		if v, ok := d["queueNamespaceId"]; ok && v != nil {
 			var temp interface{}
@@ -213,12 +214,12 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 		NamespaceId:         core.CastString(data["namespaceId"]),
 		Name:                core.CastString(data["name"]),
 		Description:         core.CastString(data["description"]),
-		EnableDirectEnhance: core.CastBool(data["enableDirectEnhance"]),
 		TransactionSetting:  NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
 		EnhanceScript:       NewScriptSettingFromDict(core.CastMap(data["enhanceScript"])).Pointer(),
 		LogSetting:          NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 		CreatedAt:           core.CastInt64(data["createdAt"]),
 		UpdatedAt:           core.CastInt64(data["updatedAt"]),
+		EnableDirectEnhance: core.CastBool(data["enableDirectEnhance"]),
 		QueueNamespaceId:    core.CastString(data["queueNamespaceId"]),
 		KeyId:               core.CastString(data["keyId"]),
 		Revision:            core.CastInt64(data["revision"]),
@@ -238,10 +239,6 @@ func (p Namespace) ToDict() map[string]interface{} {
 	var description *string
 	if p.Description != nil {
 		description = p.Description
-	}
-	var enableDirectEnhance *bool
-	if p.EnableDirectEnhance != nil {
-		enableDirectEnhance = p.EnableDirectEnhance
 	}
 	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
@@ -263,6 +260,10 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.UpdatedAt != nil {
 		updatedAt = p.UpdatedAt
 	}
+	var enableDirectEnhance *bool
+	if p.EnableDirectEnhance != nil {
+		enableDirectEnhance = p.EnableDirectEnhance
+	}
 	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
 		queueNamespaceId = p.QueueNamespaceId
@@ -279,12 +280,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 		"namespaceId":         namespaceId,
 		"name":                name,
 		"description":         description,
-		"enableDirectEnhance": enableDirectEnhance,
 		"transactionSetting":  transactionSetting,
 		"enhanceScript":       enhanceScript,
 		"logSetting":          logSetting,
 		"createdAt":           createdAt,
 		"updatedAt":           updatedAt,
+		"enableDirectEnhance": enableDirectEnhance,
 		"queueNamespaceId":    queueNamespaceId,
 		"keyId":               keyId,
 		"revision":            revision,

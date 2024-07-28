@@ -2506,6 +2506,115 @@ func (p Gs2GradeRestClient) AddGradeByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func subGradeAsyncHandler(
+	client Gs2GradeRestClient,
+	job *core.NetworkJob,
+	callback chan<- SubGradeAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SubGradeAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SubGradeResult
+	if asyncResult.Err != nil {
+		callback <- SubGradeAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SubGradeAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SubGradeAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GradeRestClient) SubGradeAsync(
+	request *SubGradeRequest,
+	callback chan<- SubGradeAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/status/model/{gradeName}/property/{propertyId}/sub"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GradeName != nil && *request.GradeName != "" {
+		path = strings.ReplaceAll(path, "{gradeName}", core.ToString(*request.GradeName))
+	} else {
+		path = strings.ReplaceAll(path, "{gradeName}", "null")
+	}
+	if request.PropertyId != nil && *request.PropertyId != "" {
+		path = strings.ReplaceAll(path, "{propertyId}", core.ToString(*request.PropertyId))
+	} else {
+		path = strings.ReplaceAll(path, "{propertyId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.GradeValue != nil {
+		bodies["gradeValue"] = *request.GradeValue
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go subGradeAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("grade").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GradeRestClient) SubGrade(
+	request *SubGradeRequest,
+) (*SubGradeResult, error) {
+	callback := make(chan SubGradeAsyncResult, 1)
+	go p.SubGradeAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func subGradeByUserIdAsyncHandler(
 	client Gs2GradeRestClient,
 	job *core.NetworkJob,

@@ -3799,6 +3799,146 @@ func (p IncreaseMaximumIdleMinutesByUserIdRequest) Pointer() *IncreaseMaximumIdl
 	return &p
 }
 
+type DecreaseMaximumIdleMinutesRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	CategoryName       *string `json:"categoryName"`
+	DecreaseMinutes    *int32  `json:"decreaseMinutes"`
+}
+
+func (p *DecreaseMaximumIdleMinutesRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DecreaseMaximumIdleMinutesRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DecreaseMaximumIdleMinutesRequest{}
+	} else {
+		*p = DecreaseMaximumIdleMinutesRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["categoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CategoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CategoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CategoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CategoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CategoryName)
+				}
+			}
+		}
+		if v, ok := d["decreaseMinutes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DecreaseMinutes)
+		}
+	}
+	return nil
+}
+
+func NewDecreaseMaximumIdleMinutesRequestFromJson(data string) (DecreaseMaximumIdleMinutesRequest, error) {
+	req := DecreaseMaximumIdleMinutesRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DecreaseMaximumIdleMinutesRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDecreaseMaximumIdleMinutesRequestFromDict(data map[string]interface{}) DecreaseMaximumIdleMinutesRequest {
+	return DecreaseMaximumIdleMinutesRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		AccessToken:     core.CastString(data["accessToken"]),
+		CategoryName:    core.CastString(data["categoryName"]),
+		DecreaseMinutes: core.CastInt32(data["decreaseMinutes"]),
+	}
+}
+
+func (p DecreaseMaximumIdleMinutesRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"accessToken":     p.AccessToken,
+		"categoryName":    p.CategoryName,
+		"decreaseMinutes": p.DecreaseMinutes,
+	}
+}
+
+func (p DecreaseMaximumIdleMinutesRequest) Pointer() *DecreaseMaximumIdleMinutesRequest {
+	return &p
+}
+
 type DecreaseMaximumIdleMinutesByUserIdRequest struct {
 	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`

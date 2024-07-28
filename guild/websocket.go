@@ -3463,6 +3463,102 @@ func (p Gs2GuildWebSocketClient) IncreaseMaximumCurrentMaximumMemberCountByGuild
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2GuildWebSocketClient) decreaseMaximumCurrentMaximumMemberCountAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DecreaseMaximumCurrentMaximumMemberCountAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DecreaseMaximumCurrentMaximumMemberCountAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DecreaseMaximumCurrentMaximumMemberCountResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DecreaseMaximumCurrentMaximumMemberCountAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DecreaseMaximumCurrentMaximumMemberCountAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildWebSocketClient) DecreaseMaximumCurrentMaximumMemberCountAsync(
+	request *DecreaseMaximumCurrentMaximumMemberCountRequest,
+	callback chan<- DecreaseMaximumCurrentMaximumMemberCountAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "guild",
+			"component":   "guild",
+			"function":    "decreaseMaximumCurrentMaximumMemberCount",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		bodies["guildModelName"] = *request.GuildModelName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.Value != nil {
+		bodies["value"] = *request.Value
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.decreaseMaximumCurrentMaximumMemberCountAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildWebSocketClient) DecreaseMaximumCurrentMaximumMemberCount(
+	request *DecreaseMaximumCurrentMaximumMemberCountRequest,
+) (*DecreaseMaximumCurrentMaximumMemberCountResult, error) {
+	callback := make(chan DecreaseMaximumCurrentMaximumMemberCountAsyncResult, 1)
+	go p.DecreaseMaximumCurrentMaximumMemberCountAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2GuildWebSocketClient) decreaseMaximumCurrentMaximumMemberCountByGuildNameAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DecreaseMaximumCurrentMaximumMemberCountByGuildNameAsyncResult,

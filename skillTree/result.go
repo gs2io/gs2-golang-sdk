@@ -754,6 +754,37 @@ func (p ReleaseByUserIdResult) Pointer() *ReleaseByUserIdResult {
 	return &p
 }
 
+type MarkRestrainResult struct {
+	Item *Status `json:"item"`
+}
+
+type MarkRestrainAsyncResult struct {
+	result *MarkRestrainResult
+	err    error
+}
+
+func NewMarkRestrainResultFromJson(data string) MarkRestrainResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewMarkRestrainResultFromDict(dict)
+}
+
+func NewMarkRestrainResultFromDict(data map[string]interface{}) MarkRestrainResult {
+	return MarkRestrainResult{
+		Item: NewStatusFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p MarkRestrainResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p MarkRestrainResult) Pointer() *MarkRestrainResult {
+	return &p
+}
+
 type MarkRestrainByUserIdResult struct {
 	Item *Status `json:"item"`
 }
