@@ -842,6 +842,68 @@ func (p CreateTakeOverByUserIdResult) Pointer() *CreateTakeOverByUserIdResult {
 	return &p
 }
 
+type CreateTakeOverOpenIdConnectResult struct {
+	Item *TakeOver `json:"item"`
+}
+
+type CreateTakeOverOpenIdConnectAsyncResult struct {
+	result *CreateTakeOverOpenIdConnectResult
+	err    error
+}
+
+func NewCreateTakeOverOpenIdConnectResultFromJson(data string) CreateTakeOverOpenIdConnectResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateTakeOverOpenIdConnectResultFromDict(dict)
+}
+
+func NewCreateTakeOverOpenIdConnectResultFromDict(data map[string]interface{}) CreateTakeOverOpenIdConnectResult {
+	return CreateTakeOverOpenIdConnectResult{
+		Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p CreateTakeOverOpenIdConnectResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p CreateTakeOverOpenIdConnectResult) Pointer() *CreateTakeOverOpenIdConnectResult {
+	return &p
+}
+
+type CreateTakeOverOpenIdConnectAndByUserIdResult struct {
+	Item *TakeOver `json:"item"`
+}
+
+type CreateTakeOverOpenIdConnectAndByUserIdAsyncResult struct {
+	result *CreateTakeOverOpenIdConnectAndByUserIdResult
+	err    error
+}
+
+func NewCreateTakeOverOpenIdConnectAndByUserIdResultFromJson(data string) CreateTakeOverOpenIdConnectAndByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateTakeOverOpenIdConnectAndByUserIdResultFromDict(dict)
+}
+
+func NewCreateTakeOverOpenIdConnectAndByUserIdResultFromDict(data map[string]interface{}) CreateTakeOverOpenIdConnectAndByUserIdResult {
+	return CreateTakeOverOpenIdConnectAndByUserIdResult{
+		Item: NewTakeOverFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p CreateTakeOverOpenIdConnectAndByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p CreateTakeOverOpenIdConnectAndByUserIdResult) Pointer() *CreateTakeOverOpenIdConnectAndByUserIdResult {
+	return &p
+}
+
 type GetTakeOverResult struct {
 	Item *TakeOver `json:"item"`
 }
@@ -1087,6 +1149,37 @@ func (p DoTakeOverResult) ToDict() map[string]interface{} {
 }
 
 func (p DoTakeOverResult) Pointer() *DoTakeOverResult {
+	return &p
+}
+
+type DoTakeOverOpenIdConnectResult struct {
+	Item *Account `json:"item"`
+}
+
+type DoTakeOverOpenIdConnectAsyncResult struct {
+	result *DoTakeOverOpenIdConnectResult
+	err    error
+}
+
+func NewDoTakeOverOpenIdConnectResultFromJson(data string) DoTakeOverOpenIdConnectResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDoTakeOverOpenIdConnectResultFromDict(dict)
+}
+
+func NewDoTakeOverOpenIdConnectResultFromDict(data map[string]interface{}) DoTakeOverOpenIdConnectResult {
+	return DoTakeOverOpenIdConnectResult{
+		Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DoTakeOverOpenIdConnectResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DoTakeOverOpenIdConnectResult) Pointer() *DoTakeOverOpenIdConnectResult {
 	return &p
 }
 
@@ -1500,5 +1593,353 @@ func (p DeleteDataOwnerByUserIdResult) ToDict() map[string]interface{} {
 }
 
 func (p DeleteDataOwnerByUserIdResult) Pointer() *DeleteDataOwnerByUserIdResult {
+	return &p
+}
+
+type DescribeTakeOverTypeModelsResult struct {
+	Items []TakeOverTypeModel `json:"items"`
+}
+
+type DescribeTakeOverTypeModelsAsyncResult struct {
+	result *DescribeTakeOverTypeModelsResult
+	err    error
+}
+
+func NewDescribeTakeOverTypeModelsResultFromJson(data string) DescribeTakeOverTypeModelsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeTakeOverTypeModelsResultFromDict(dict)
+}
+
+func NewDescribeTakeOverTypeModelsResultFromDict(data map[string]interface{}) DescribeTakeOverTypeModelsResult {
+	return DescribeTakeOverTypeModelsResult{
+		Items: CastTakeOverTypeModels(core.CastArray(data["items"])),
+	}
+}
+
+func (p DescribeTakeOverTypeModelsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastTakeOverTypeModelsFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p DescribeTakeOverTypeModelsResult) Pointer() *DescribeTakeOverTypeModelsResult {
+	return &p
+}
+
+type GetTakeOverTypeModelResult struct {
+	Item *TakeOverTypeModel `json:"item"`
+}
+
+type GetTakeOverTypeModelAsyncResult struct {
+	result *GetTakeOverTypeModelResult
+	err    error
+}
+
+func NewGetTakeOverTypeModelResultFromJson(data string) GetTakeOverTypeModelResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetTakeOverTypeModelResultFromDict(dict)
+}
+
+func NewGetTakeOverTypeModelResultFromDict(data map[string]interface{}) GetTakeOverTypeModelResult {
+	return GetTakeOverTypeModelResult{
+		Item: NewTakeOverTypeModelFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetTakeOverTypeModelResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetTakeOverTypeModelResult) Pointer() *GetTakeOverTypeModelResult {
+	return &p
+}
+
+type DescribeTakeOverTypeModelMastersResult struct {
+	Items         []TakeOverTypeModelMaster `json:"items"`
+	NextPageToken *string                   `json:"nextPageToken"`
+}
+
+type DescribeTakeOverTypeModelMastersAsyncResult struct {
+	result *DescribeTakeOverTypeModelMastersResult
+	err    error
+}
+
+func NewDescribeTakeOverTypeModelMastersResultFromJson(data string) DescribeTakeOverTypeModelMastersResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeTakeOverTypeModelMastersResultFromDict(dict)
+}
+
+func NewDescribeTakeOverTypeModelMastersResultFromDict(data map[string]interface{}) DescribeTakeOverTypeModelMastersResult {
+	return DescribeTakeOverTypeModelMastersResult{
+		Items:         CastTakeOverTypeModelMasters(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+	}
+}
+
+func (p DescribeTakeOverTypeModelMastersResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastTakeOverTypeModelMastersFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+	}
+}
+
+func (p DescribeTakeOverTypeModelMastersResult) Pointer() *DescribeTakeOverTypeModelMastersResult {
+	return &p
+}
+
+type CreateTakeOverTypeModelMasterResult struct {
+	Item *TakeOverTypeModelMaster `json:"item"`
+}
+
+type CreateTakeOverTypeModelMasterAsyncResult struct {
+	result *CreateTakeOverTypeModelMasterResult
+	err    error
+}
+
+func NewCreateTakeOverTypeModelMasterResultFromJson(data string) CreateTakeOverTypeModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewCreateTakeOverTypeModelMasterResultFromDict(dict)
+}
+
+func NewCreateTakeOverTypeModelMasterResultFromDict(data map[string]interface{}) CreateTakeOverTypeModelMasterResult {
+	return CreateTakeOverTypeModelMasterResult{
+		Item: NewTakeOverTypeModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p CreateTakeOverTypeModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p CreateTakeOverTypeModelMasterResult) Pointer() *CreateTakeOverTypeModelMasterResult {
+	return &p
+}
+
+type GetTakeOverTypeModelMasterResult struct {
+	Item *TakeOverTypeModelMaster `json:"item"`
+}
+
+type GetTakeOverTypeModelMasterAsyncResult struct {
+	result *GetTakeOverTypeModelMasterResult
+	err    error
+}
+
+func NewGetTakeOverTypeModelMasterResultFromJson(data string) GetTakeOverTypeModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetTakeOverTypeModelMasterResultFromDict(dict)
+}
+
+func NewGetTakeOverTypeModelMasterResultFromDict(data map[string]interface{}) GetTakeOverTypeModelMasterResult {
+	return GetTakeOverTypeModelMasterResult{
+		Item: NewTakeOverTypeModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetTakeOverTypeModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetTakeOverTypeModelMasterResult) Pointer() *GetTakeOverTypeModelMasterResult {
+	return &p
+}
+
+type UpdateTakeOverTypeModelMasterResult struct {
+	Item *TakeOverTypeModelMaster `json:"item"`
+}
+
+type UpdateTakeOverTypeModelMasterAsyncResult struct {
+	result *UpdateTakeOverTypeModelMasterResult
+	err    error
+}
+
+func NewUpdateTakeOverTypeModelMasterResultFromJson(data string) UpdateTakeOverTypeModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateTakeOverTypeModelMasterResultFromDict(dict)
+}
+
+func NewUpdateTakeOverTypeModelMasterResultFromDict(data map[string]interface{}) UpdateTakeOverTypeModelMasterResult {
+	return UpdateTakeOverTypeModelMasterResult{
+		Item: NewTakeOverTypeModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p UpdateTakeOverTypeModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p UpdateTakeOverTypeModelMasterResult) Pointer() *UpdateTakeOverTypeModelMasterResult {
+	return &p
+}
+
+type DeleteTakeOverTypeModelMasterResult struct {
+	Item *TakeOverTypeModelMaster `json:"item"`
+}
+
+type DeleteTakeOverTypeModelMasterAsyncResult struct {
+	result *DeleteTakeOverTypeModelMasterResult
+	err    error
+}
+
+func NewDeleteTakeOverTypeModelMasterResultFromJson(data string) DeleteTakeOverTypeModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDeleteTakeOverTypeModelMasterResultFromDict(dict)
+}
+
+func NewDeleteTakeOverTypeModelMasterResultFromDict(data map[string]interface{}) DeleteTakeOverTypeModelMasterResult {
+	return DeleteTakeOverTypeModelMasterResult{
+		Item: NewTakeOverTypeModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DeleteTakeOverTypeModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DeleteTakeOverTypeModelMasterResult) Pointer() *DeleteTakeOverTypeModelMasterResult {
+	return &p
+}
+
+type ExportMasterResult struct {
+	Item *CurrentModelMaster `json:"item"`
+}
+
+type ExportMasterAsyncResult struct {
+	result *ExportMasterResult
+	err    error
+}
+
+func NewExportMasterResultFromJson(data string) ExportMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewExportMasterResultFromDict(dict)
+}
+
+func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
+	return ExportMasterResult{
+		Item: NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p ExportMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p ExportMasterResult) Pointer() *ExportMasterResult {
+	return &p
+}
+
+type GetCurrentModelMasterResult struct {
+	Item *CurrentModelMaster `json:"item"`
+}
+
+type GetCurrentModelMasterAsyncResult struct {
+	result *GetCurrentModelMasterResult
+	err    error
+}
+
+func NewGetCurrentModelMasterResultFromJson(data string) GetCurrentModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetCurrentModelMasterResultFromDict(dict)
+}
+
+func NewGetCurrentModelMasterResultFromDict(data map[string]interface{}) GetCurrentModelMasterResult {
+	return GetCurrentModelMasterResult{
+		Item: NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p GetCurrentModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p GetCurrentModelMasterResult) Pointer() *GetCurrentModelMasterResult {
+	return &p
+}
+
+type UpdateCurrentModelMasterResult struct {
+	Item *CurrentModelMaster `json:"item"`
+}
+
+type UpdateCurrentModelMasterAsyncResult struct {
+	result *UpdateCurrentModelMasterResult
+	err    error
+}
+
+func NewUpdateCurrentModelMasterResultFromJson(data string) UpdateCurrentModelMasterResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentModelMasterResultFromDict(dict)
+}
+
+func NewUpdateCurrentModelMasterResultFromDict(data map[string]interface{}) UpdateCurrentModelMasterResult {
+	return UpdateCurrentModelMasterResult{
+		Item: NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p UpdateCurrentModelMasterResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p UpdateCurrentModelMasterResult) Pointer() *UpdateCurrentModelMasterResult {
+	return &p
+}
+
+type UpdateCurrentModelMasterFromGitHubResult struct {
+	Item *CurrentModelMaster `json:"item"`
+}
+
+type UpdateCurrentModelMasterFromGitHubAsyncResult struct {
+	result *UpdateCurrentModelMasterFromGitHubResult
+	err    error
+}
+
+func NewUpdateCurrentModelMasterFromGitHubResultFromJson(data string) UpdateCurrentModelMasterFromGitHubResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateCurrentModelMasterFromGitHubResultFromDict(dict)
+}
+
+func NewUpdateCurrentModelMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentModelMasterFromGitHubResult {
+	return UpdateCurrentModelMasterFromGitHubResult{
+		Item: NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p UpdateCurrentModelMasterFromGitHubResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p UpdateCurrentModelMasterFromGitHubResult) Pointer() *UpdateCurrentModelMasterFromGitHubResult {
 	return &p
 }

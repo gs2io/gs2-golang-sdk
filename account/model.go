@@ -1075,6 +1075,610 @@ func CastDataOwnersFromDict(data []DataOwner) []interface{} {
 	return v
 }
 
+type TakeOverTypeModel struct {
+	TakeOverTypeModelId  *string               `json:"takeOverTypeModelId"`
+	Type                 *int32                `json:"type"`
+	Metadata             *string               `json:"metadata"`
+	OpenIdConnectSetting *OpenIdConnectSetting `json:"openIdConnectSetting"`
+}
+
+func (p *TakeOverTypeModel) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = TakeOverTypeModel{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = TakeOverTypeModel{}
+	} else {
+		*p = TakeOverTypeModel{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["takeOverTypeModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TakeOverTypeModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TakeOverTypeModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TakeOverTypeModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TakeOverTypeModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TakeOverTypeModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TakeOverTypeModelId)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["openIdConnectSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.OpenIdConnectSetting)
+		}
+	}
+	return nil
+}
+
+func NewTakeOverTypeModelFromJson(data string) TakeOverTypeModel {
+	req := TakeOverTypeModel{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewTakeOverTypeModelFromDict(data map[string]interface{}) TakeOverTypeModel {
+	return TakeOverTypeModel{
+		TakeOverTypeModelId:  core.CastString(data["takeOverTypeModelId"]),
+		Type:                 core.CastInt32(data["type"]),
+		Metadata:             core.CastString(data["metadata"]),
+		OpenIdConnectSetting: NewOpenIdConnectSettingFromDict(core.CastMap(data["openIdConnectSetting"])).Pointer(),
+	}
+}
+
+func (p TakeOverTypeModel) ToDict() map[string]interface{} {
+
+	var takeOverTypeModelId *string
+	if p.TakeOverTypeModelId != nil {
+		takeOverTypeModelId = p.TakeOverTypeModelId
+	}
+	var _type *int32
+	if p.Type != nil {
+		_type = p.Type
+	}
+	var metadata *string
+	if p.Metadata != nil {
+		metadata = p.Metadata
+	}
+	var openIdConnectSetting map[string]interface{}
+	if p.OpenIdConnectSetting != nil {
+		openIdConnectSetting = p.OpenIdConnectSetting.ToDict()
+	}
+	return map[string]interface{}{
+		"takeOverTypeModelId":  takeOverTypeModelId,
+		"type":                 _type,
+		"metadata":             metadata,
+		"openIdConnectSetting": openIdConnectSetting,
+	}
+}
+
+func (p TakeOverTypeModel) Pointer() *TakeOverTypeModel {
+	return &p
+}
+
+func CastTakeOverTypeModels(data []interface{}) []TakeOverTypeModel {
+	v := make([]TakeOverTypeModel, 0)
+	for _, d := range data {
+		v = append(v, NewTakeOverTypeModelFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTakeOverTypeModelsFromDict(data []TakeOverTypeModel) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type TakeOverTypeModelMaster struct {
+	TakeOverTypeModelId  *string               `json:"takeOverTypeModelId"`
+	Type                 *int32                `json:"type"`
+	Description          *string               `json:"description"`
+	Metadata             *string               `json:"metadata"`
+	OpenIdConnectSetting *OpenIdConnectSetting `json:"openIdConnectSetting"`
+	CreatedAt            *int64                `json:"createdAt"`
+	UpdatedAt            *int64                `json:"updatedAt"`
+	Revision             *int64                `json:"revision"`
+}
+
+func (p *TakeOverTypeModelMaster) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = TakeOverTypeModelMaster{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = TakeOverTypeModelMaster{}
+	} else {
+		*p = TakeOverTypeModelMaster{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["takeOverTypeModelId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TakeOverTypeModelId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TakeOverTypeModelId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TakeOverTypeModelId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TakeOverTypeModelId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TakeOverTypeModelId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TakeOverTypeModelId)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["openIdConnectSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.OpenIdConnectSetting)
+		}
+		if v, ok := d["createdAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CreatedAt)
+		}
+		if v, ok := d["updatedAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdatedAt)
+		}
+		if v, ok := d["revision"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Revision)
+		}
+	}
+	return nil
+}
+
+func NewTakeOverTypeModelMasterFromJson(data string) TakeOverTypeModelMaster {
+	req := TakeOverTypeModelMaster{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewTakeOverTypeModelMasterFromDict(data map[string]interface{}) TakeOverTypeModelMaster {
+	return TakeOverTypeModelMaster{
+		TakeOverTypeModelId:  core.CastString(data["takeOverTypeModelId"]),
+		Type:                 core.CastInt32(data["type"]),
+		Description:          core.CastString(data["description"]),
+		Metadata:             core.CastString(data["metadata"]),
+		OpenIdConnectSetting: NewOpenIdConnectSettingFromDict(core.CastMap(data["openIdConnectSetting"])).Pointer(),
+		CreatedAt:            core.CastInt64(data["createdAt"]),
+		UpdatedAt:            core.CastInt64(data["updatedAt"]),
+		Revision:             core.CastInt64(data["revision"]),
+	}
+}
+
+func (p TakeOverTypeModelMaster) ToDict() map[string]interface{} {
+
+	var takeOverTypeModelId *string
+	if p.TakeOverTypeModelId != nil {
+		takeOverTypeModelId = p.TakeOverTypeModelId
+	}
+	var _type *int32
+	if p.Type != nil {
+		_type = p.Type
+	}
+	var description *string
+	if p.Description != nil {
+		description = p.Description
+	}
+	var metadata *string
+	if p.Metadata != nil {
+		metadata = p.Metadata
+	}
+	var openIdConnectSetting map[string]interface{}
+	if p.OpenIdConnectSetting != nil {
+		openIdConnectSetting = p.OpenIdConnectSetting.ToDict()
+	}
+	var createdAt *int64
+	if p.CreatedAt != nil {
+		createdAt = p.CreatedAt
+	}
+	var updatedAt *int64
+	if p.UpdatedAt != nil {
+		updatedAt = p.UpdatedAt
+	}
+	var revision *int64
+	if p.Revision != nil {
+		revision = p.Revision
+	}
+	return map[string]interface{}{
+		"takeOverTypeModelId":  takeOverTypeModelId,
+		"type":                 _type,
+		"description":          description,
+		"metadata":             metadata,
+		"openIdConnectSetting": openIdConnectSetting,
+		"createdAt":            createdAt,
+		"updatedAt":            updatedAt,
+		"revision":             revision,
+	}
+}
+
+func (p TakeOverTypeModelMaster) Pointer() *TakeOverTypeModelMaster {
+	return &p
+}
+
+func CastTakeOverTypeModelMasters(data []interface{}) []TakeOverTypeModelMaster {
+	v := make([]TakeOverTypeModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewTakeOverTypeModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTakeOverTypeModelMastersFromDict(data []TakeOverTypeModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type CurrentModelMaster struct {
+	NamespaceId *string `json:"namespaceId"`
+	Settings    *string `json:"settings"`
+}
+
+func (p *CurrentModelMaster) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CurrentModelMaster{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CurrentModelMaster{}
+	} else {
+		*p = CurrentModelMaster{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceId)
+				}
+			}
+		}
+		if v, ok := d["settings"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Settings = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Settings = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Settings = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Settings = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Settings = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Settings)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCurrentModelMasterFromJson(data string) CurrentModelMaster {
+	req := CurrentModelMaster{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewCurrentModelMasterFromDict(data map[string]interface{}) CurrentModelMaster {
+	return CurrentModelMaster{
+		NamespaceId: core.CastString(data["namespaceId"]),
+		Settings:    core.CastString(data["settings"]),
+	}
+}
+
+func (p CurrentModelMaster) ToDict() map[string]interface{} {
+
+	var namespaceId *string
+	if p.NamespaceId != nil {
+		namespaceId = p.NamespaceId
+	}
+	var settings *string
+	if p.Settings != nil {
+		settings = p.Settings
+	}
+	return map[string]interface{}{
+		"namespaceId": namespaceId,
+		"settings":    settings,
+	}
+}
+
+func (p CurrentModelMaster) Pointer() *CurrentModelMaster {
+	return &p
+}
+
+func CastCurrentModelMasters(data []interface{}) []CurrentModelMaster {
+	v := make([]CurrentModelMaster, 0)
+	for _, d := range data {
+		v = append(v, NewCurrentModelMasterFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastCurrentModelMastersFromDict(data []CurrentModelMaster) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type OpenIdConnectSetting struct {
+	ConfigurationPath *string `json:"configurationPath"`
+	ClientId          *string `json:"clientId"`
+}
+
+func (p *OpenIdConnectSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = OpenIdConnectSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = OpenIdConnectSetting{}
+	} else {
+		*p = OpenIdConnectSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["configurationPath"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ConfigurationPath = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ConfigurationPath = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ConfigurationPath = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ConfigurationPath = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ConfigurationPath = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ConfigurationPath)
+				}
+			}
+		}
+		if v, ok := d["clientId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ClientId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ClientId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ClientId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ClientId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewOpenIdConnectSettingFromJson(data string) OpenIdConnectSetting {
+	req := OpenIdConnectSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewOpenIdConnectSettingFromDict(data map[string]interface{}) OpenIdConnectSetting {
+	return OpenIdConnectSetting{
+		ConfigurationPath: core.CastString(data["configurationPath"]),
+		ClientId:          core.CastString(data["clientId"]),
+	}
+}
+
+func (p OpenIdConnectSetting) ToDict() map[string]interface{} {
+
+	var configurationPath *string
+	if p.ConfigurationPath != nil {
+		configurationPath = p.ConfigurationPath
+	}
+	var clientId *string
+	if p.ClientId != nil {
+		clientId = p.ClientId
+	}
+	return map[string]interface{}{
+		"configurationPath": configurationPath,
+		"clientId":          clientId,
+	}
+}
+
+func (p OpenIdConnectSetting) Pointer() *OpenIdConnectSetting {
+	return &p
+}
+
+func CastOpenIdConnectSettings(data []interface{}) []OpenIdConnectSetting {
+	v := make([]OpenIdConnectSetting, 0)
+	for _, d := range data {
+		v = append(v, NewOpenIdConnectSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastOpenIdConnectSettingsFromDict(data []OpenIdConnectSetting) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type PlatformUser struct {
 	Type           *int32  `json:"type"`
 	UserIdentifier *string `json:"userIdentifier"`
@@ -1340,6 +1944,282 @@ func CastBanStatuses(data []interface{}) []BanStatus {
 }
 
 func CastBanStatusesFromDict(data []BanStatus) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type GitHubCheckoutSetting struct {
+	ApiKeyId       *string `json:"apiKeyId"`
+	RepositoryName *string `json:"repositoryName"`
+	SourcePath     *string `json:"sourcePath"`
+	ReferenceType  *string `json:"referenceType"`
+	CommitHash     *string `json:"commitHash"`
+	BranchName     *string `json:"branchName"`
+	TagName        *string `json:"tagName"`
+}
+
+func (p *GitHubCheckoutSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GitHubCheckoutSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GitHubCheckoutSetting{}
+	} else {
+		*p = GitHubCheckoutSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["apiKeyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ApiKeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ApiKeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ApiKeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ApiKeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ApiKeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ApiKeyId)
+				}
+			}
+		}
+		if v, ok := d["repositoryName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RepositoryName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RepositoryName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RepositoryName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RepositoryName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RepositoryName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RepositoryName)
+				}
+			}
+		}
+		if v, ok := d["sourcePath"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.SourcePath = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.SourcePath = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.SourcePath = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.SourcePath = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.SourcePath = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.SourcePath)
+				}
+			}
+		}
+		if v, ok := d["referenceType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ReferenceType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ReferenceType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ReferenceType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ReferenceType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ReferenceType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ReferenceType)
+				}
+			}
+		}
+		if v, ok := d["commitHash"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CommitHash = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CommitHash = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CommitHash = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CommitHash = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CommitHash = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CommitHash)
+				}
+			}
+		}
+		if v, ok := d["branchName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.BranchName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.BranchName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.BranchName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.BranchName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.BranchName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.BranchName)
+				}
+			}
+		}
+		if v, ok := d["tagName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TagName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TagName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TagName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TagName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TagName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TagName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
+	req := GitHubCheckoutSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
+	return GitHubCheckoutSetting{
+		ApiKeyId:       core.CastString(data["apiKeyId"]),
+		RepositoryName: core.CastString(data["repositoryName"]),
+		SourcePath:     core.CastString(data["sourcePath"]),
+		ReferenceType:  core.CastString(data["referenceType"]),
+		CommitHash:     core.CastString(data["commitHash"]),
+		BranchName:     core.CastString(data["branchName"]),
+		TagName:        core.CastString(data["tagName"]),
+	}
+}
+
+func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
+
+	var apiKeyId *string
+	if p.ApiKeyId != nil {
+		apiKeyId = p.ApiKeyId
+	}
+	var repositoryName *string
+	if p.RepositoryName != nil {
+		repositoryName = p.RepositoryName
+	}
+	var sourcePath *string
+	if p.SourcePath != nil {
+		sourcePath = p.SourcePath
+	}
+	var referenceType *string
+	if p.ReferenceType != nil {
+		referenceType = p.ReferenceType
+	}
+	var commitHash *string
+	if p.CommitHash != nil {
+		commitHash = p.CommitHash
+	}
+	var branchName *string
+	if p.BranchName != nil {
+		branchName = p.BranchName
+	}
+	var tagName *string
+	if p.TagName != nil {
+		tagName = p.TagName
+	}
+	return map[string]interface{}{
+		"apiKeyId":       apiKeyId,
+		"repositoryName": repositoryName,
+		"sourcePath":     sourcePath,
+		"referenceType":  referenceType,
+		"commitHash":     commitHash,
+		"branchName":     branchName,
+		"tagName":        tagName,
+	}
+}
+
+func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
+	return &p
+}
+
+func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	v := make([]GitHubCheckoutSetting, 0)
+	for _, d := range data {
+		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

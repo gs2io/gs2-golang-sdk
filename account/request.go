@@ -3335,6 +3335,312 @@ func (p CreateTakeOverByUserIdRequest) Pointer() *CreateTakeOverByUserIdRequest 
 	return &p
 }
 
+type CreateTakeOverOpenIdConnectRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	Type               *int32  `json:"type"`
+	IdToken            *string `json:"idToken"`
+}
+
+func (p *CreateTakeOverOpenIdConnectRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateTakeOverOpenIdConnectRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateTakeOverOpenIdConnectRequest{}
+	} else {
+		*p = CreateTakeOverOpenIdConnectRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+		if v, ok := d["idToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.IdToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.IdToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.IdToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.IdToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.IdToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.IdToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCreateTakeOverOpenIdConnectRequestFromJson(data string) (CreateTakeOverOpenIdConnectRequest, error) {
+	req := CreateTakeOverOpenIdConnectRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateTakeOverOpenIdConnectRequest{}, err
+	}
+	return req, nil
+}
+
+func NewCreateTakeOverOpenIdConnectRequestFromDict(data map[string]interface{}) CreateTakeOverOpenIdConnectRequest {
+	return CreateTakeOverOpenIdConnectRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		Type:          core.CastInt32(data["type"]),
+		IdToken:       core.CastString(data["idToken"]),
+	}
+}
+
+func (p CreateTakeOverOpenIdConnectRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"type":          p.Type,
+		"idToken":       p.IdToken,
+	}
+}
+
+func (p CreateTakeOverOpenIdConnectRequest) Pointer() *CreateTakeOverOpenIdConnectRequest {
+	return &p
+}
+
+type CreateTakeOverOpenIdConnectAndByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	Type               *int32  `json:"type"`
+	IdToken            *string `json:"idToken"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+}
+
+func (p *CreateTakeOverOpenIdConnectAndByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateTakeOverOpenIdConnectAndByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateTakeOverOpenIdConnectAndByUserIdRequest{}
+	} else {
+		*p = CreateTakeOverOpenIdConnectAndByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+		if v, ok := d["idToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.IdToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.IdToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.IdToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.IdToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.IdToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.IdToken)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewCreateTakeOverOpenIdConnectAndByUserIdRequestFromJson(data string) (CreateTakeOverOpenIdConnectAndByUserIdRequest, error) {
+	req := CreateTakeOverOpenIdConnectAndByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateTakeOverOpenIdConnectAndByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewCreateTakeOverOpenIdConnectAndByUserIdRequestFromDict(data map[string]interface{}) CreateTakeOverOpenIdConnectAndByUserIdRequest {
+	return CreateTakeOverOpenIdConnectAndByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		Type:            core.CastInt32(data["type"]),
+		IdToken:         core.CastString(data["idToken"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p CreateTakeOverOpenIdConnectAndByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"type":            p.Type,
+		"idToken":         p.IdToken,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p CreateTakeOverOpenIdConnectAndByUserIdRequest) Pointer() *CreateTakeOverOpenIdConnectAndByUserIdRequest {
+	return &p
+}
+
 type GetTakeOverRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`
@@ -4475,6 +4781,119 @@ func (p DoTakeOverRequest) ToDict() map[string]interface{} {
 }
 
 func (p DoTakeOverRequest) Pointer() *DoTakeOverRequest {
+	return &p
+}
+
+type DoTakeOverOpenIdConnectRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Type            *int32  `json:"type"`
+	IdToken         *string `json:"idToken"`
+}
+
+func (p *DoTakeOverOpenIdConnectRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DoTakeOverOpenIdConnectRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DoTakeOverOpenIdConnectRequest{}
+	} else {
+		*p = DoTakeOverOpenIdConnectRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+		if v, ok := d["idToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.IdToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.IdToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.IdToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.IdToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.IdToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.IdToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDoTakeOverOpenIdConnectRequestFromJson(data string) (DoTakeOverOpenIdConnectRequest, error) {
+	req := DoTakeOverOpenIdConnectRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DoTakeOverOpenIdConnectRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDoTakeOverOpenIdConnectRequestFromDict(data map[string]interface{}) DoTakeOverOpenIdConnectRequest {
+	return DoTakeOverOpenIdConnectRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		Type:          core.CastInt32(data["type"]),
+		IdToken:       core.CastString(data["idToken"]),
+	}
+}
+
+func (p DoTakeOverOpenIdConnectRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"type":          p.Type,
+		"idToken":       p.IdToken,
+	}
+}
+
+func (p DoTakeOverOpenIdConnectRequest) Pointer() *DoTakeOverOpenIdConnectRequest {
 	return &p
 }
 
@@ -6304,5 +6723,1106 @@ func (p DeleteDataOwnerByUserIdRequest) ToDict() map[string]interface{} {
 }
 
 func (p DeleteDataOwnerByUserIdRequest) Pointer() *DeleteDataOwnerByUserIdRequest {
+	return &p
+}
+
+type DescribeTakeOverTypeModelsRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+}
+
+func (p *DescribeTakeOverTypeModelsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeTakeOverTypeModelsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeTakeOverTypeModelsRequest{}
+	} else {
+		*p = DescribeTakeOverTypeModelsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeTakeOverTypeModelsRequestFromJson(data string) (DescribeTakeOverTypeModelsRequest, error) {
+	req := DescribeTakeOverTypeModelsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeTakeOverTypeModelsRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeTakeOverTypeModelsRequestFromDict(data map[string]interface{}) DescribeTakeOverTypeModelsRequest {
+	return DescribeTakeOverTypeModelsRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+	}
+}
+
+func (p DescribeTakeOverTypeModelsRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+	}
+}
+
+func (p DescribeTakeOverTypeModelsRequest) Pointer() *DescribeTakeOverTypeModelsRequest {
+	return &p
+}
+
+type GetTakeOverTypeModelRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Type            *int32  `json:"type"`
+}
+
+func (p *GetTakeOverTypeModelRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetTakeOverTypeModelRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetTakeOverTypeModelRequest{}
+	} else {
+		*p = GetTakeOverTypeModelRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+	}
+	return nil
+}
+
+func NewGetTakeOverTypeModelRequestFromJson(data string) (GetTakeOverTypeModelRequest, error) {
+	req := GetTakeOverTypeModelRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetTakeOverTypeModelRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetTakeOverTypeModelRequestFromDict(data map[string]interface{}) GetTakeOverTypeModelRequest {
+	return GetTakeOverTypeModelRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		Type:          core.CastInt32(data["type"]),
+	}
+}
+
+func (p GetTakeOverTypeModelRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"type":          p.Type,
+	}
+}
+
+func (p GetTakeOverTypeModelRequest) Pointer() *GetTakeOverTypeModelRequest {
+	return &p
+}
+
+type DescribeTakeOverTypeModelMastersRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+}
+
+func (p *DescribeTakeOverTypeModelMastersRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeTakeOverTypeModelMastersRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeTakeOverTypeModelMastersRequest{}
+	} else {
+		*p = DescribeTakeOverTypeModelMastersRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewDescribeTakeOverTypeModelMastersRequestFromJson(data string) (DescribeTakeOverTypeModelMastersRequest, error) {
+	req := DescribeTakeOverTypeModelMastersRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeTakeOverTypeModelMastersRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeTakeOverTypeModelMastersRequestFromDict(data map[string]interface{}) DescribeTakeOverTypeModelMastersRequest {
+	return DescribeTakeOverTypeModelMastersRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		PageToken:     core.CastString(data["pageToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
+}
+
+func (p DescribeTakeOverTypeModelMastersRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"pageToken":     p.PageToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p DescribeTakeOverTypeModelMastersRequest) Pointer() *DescribeTakeOverTypeModelMastersRequest {
+	return &p
+}
+
+type CreateTakeOverTypeModelMasterRequest struct {
+	SourceRequestId      *string               `json:"sourceRequestId"`
+	RequestId            *string               `json:"requestId"`
+	ContextStack         *string               `json:"contextStack"`
+	NamespaceName        *string               `json:"namespaceName"`
+	Type                 *int32                `json:"type"`
+	Description          *string               `json:"description"`
+	Metadata             *string               `json:"metadata"`
+	OpenIdConnectSetting *OpenIdConnectSetting `json:"openIdConnectSetting"`
+}
+
+func (p *CreateTakeOverTypeModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = CreateTakeOverTypeModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = CreateTakeOverTypeModelMasterRequest{}
+	} else {
+		*p = CreateTakeOverTypeModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["openIdConnectSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.OpenIdConnectSetting)
+		}
+	}
+	return nil
+}
+
+func NewCreateTakeOverTypeModelMasterRequestFromJson(data string) (CreateTakeOverTypeModelMasterRequest, error) {
+	req := CreateTakeOverTypeModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return CreateTakeOverTypeModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewCreateTakeOverTypeModelMasterRequestFromDict(data map[string]interface{}) CreateTakeOverTypeModelMasterRequest {
+	return CreateTakeOverTypeModelMasterRequest{
+		NamespaceName:        core.CastString(data["namespaceName"]),
+		Type:                 core.CastInt32(data["type"]),
+		Description:          core.CastString(data["description"]),
+		Metadata:             core.CastString(data["metadata"]),
+		OpenIdConnectSetting: NewOpenIdConnectSettingFromDict(core.CastMap(data["openIdConnectSetting"])).Pointer(),
+	}
+}
+
+func (p CreateTakeOverTypeModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":        p.NamespaceName,
+		"type":                 p.Type,
+		"description":          p.Description,
+		"metadata":             p.Metadata,
+		"openIdConnectSetting": p.OpenIdConnectSetting.ToDict(),
+	}
+}
+
+func (p CreateTakeOverTypeModelMasterRequest) Pointer() *CreateTakeOverTypeModelMasterRequest {
+	return &p
+}
+
+type GetTakeOverTypeModelMasterRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Type            *int32  `json:"type"`
+}
+
+func (p *GetTakeOverTypeModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetTakeOverTypeModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetTakeOverTypeModelMasterRequest{}
+	} else {
+		*p = GetTakeOverTypeModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+	}
+	return nil
+}
+
+func NewGetTakeOverTypeModelMasterRequestFromJson(data string) (GetTakeOverTypeModelMasterRequest, error) {
+	req := GetTakeOverTypeModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetTakeOverTypeModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetTakeOverTypeModelMasterRequestFromDict(data map[string]interface{}) GetTakeOverTypeModelMasterRequest {
+	return GetTakeOverTypeModelMasterRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		Type:          core.CastInt32(data["type"]),
+	}
+}
+
+func (p GetTakeOverTypeModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"type":          p.Type,
+	}
+}
+
+func (p GetTakeOverTypeModelMasterRequest) Pointer() *GetTakeOverTypeModelMasterRequest {
+	return &p
+}
+
+type UpdateTakeOverTypeModelMasterRequest struct {
+	SourceRequestId      *string               `json:"sourceRequestId"`
+	RequestId            *string               `json:"requestId"`
+	ContextStack         *string               `json:"contextStack"`
+	NamespaceName        *string               `json:"namespaceName"`
+	Type                 *int32                `json:"type"`
+	Description          *string               `json:"description"`
+	Metadata             *string               `json:"metadata"`
+	OpenIdConnectSetting *OpenIdConnectSetting `json:"openIdConnectSetting"`
+}
+
+func (p *UpdateTakeOverTypeModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateTakeOverTypeModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateTakeOverTypeModelMasterRequest{}
+	} else {
+		*p = UpdateTakeOverTypeModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+		if v, ok := d["description"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Description = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Description = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Description = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Description = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Description)
+				}
+			}
+		}
+		if v, ok := d["metadata"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Metadata = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Metadata = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Metadata = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Metadata = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Metadata)
+				}
+			}
+		}
+		if v, ok := d["openIdConnectSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.OpenIdConnectSetting)
+		}
+	}
+	return nil
+}
+
+func NewUpdateTakeOverTypeModelMasterRequestFromJson(data string) (UpdateTakeOverTypeModelMasterRequest, error) {
+	req := UpdateTakeOverTypeModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateTakeOverTypeModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewUpdateTakeOverTypeModelMasterRequestFromDict(data map[string]interface{}) UpdateTakeOverTypeModelMasterRequest {
+	return UpdateTakeOverTypeModelMasterRequest{
+		NamespaceName:        core.CastString(data["namespaceName"]),
+		Type:                 core.CastInt32(data["type"]),
+		Description:          core.CastString(data["description"]),
+		Metadata:             core.CastString(data["metadata"]),
+		OpenIdConnectSetting: NewOpenIdConnectSettingFromDict(core.CastMap(data["openIdConnectSetting"])).Pointer(),
+	}
+}
+
+func (p UpdateTakeOverTypeModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":        p.NamespaceName,
+		"type":                 p.Type,
+		"description":          p.Description,
+		"metadata":             p.Metadata,
+		"openIdConnectSetting": p.OpenIdConnectSetting.ToDict(),
+	}
+}
+
+func (p UpdateTakeOverTypeModelMasterRequest) Pointer() *UpdateTakeOverTypeModelMasterRequest {
+	return &p
+}
+
+type DeleteTakeOverTypeModelMasterRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Type            *int32  `json:"type"`
+}
+
+func (p *DeleteTakeOverTypeModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DeleteTakeOverTypeModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DeleteTakeOverTypeModelMasterRequest{}
+	} else {
+		*p = DeleteTakeOverTypeModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+	}
+	return nil
+}
+
+func NewDeleteTakeOverTypeModelMasterRequestFromJson(data string) (DeleteTakeOverTypeModelMasterRequest, error) {
+	req := DeleteTakeOverTypeModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DeleteTakeOverTypeModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDeleteTakeOverTypeModelMasterRequestFromDict(data map[string]interface{}) DeleteTakeOverTypeModelMasterRequest {
+	return DeleteTakeOverTypeModelMasterRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		Type:          core.CastInt32(data["type"]),
+	}
+}
+
+func (p DeleteTakeOverTypeModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"type":          p.Type,
+	}
+}
+
+func (p DeleteTakeOverTypeModelMasterRequest) Pointer() *DeleteTakeOverTypeModelMasterRequest {
+	return &p
+}
+
+type ExportMasterRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+}
+
+func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ExportMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ExportMasterRequest{}
+	} else {
+		*p = ExportMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewExportMasterRequestFromJson(data string) (ExportMasterRequest, error) {
+	req := ExportMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return ExportMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
+	return ExportMasterRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+	}
+}
+
+func (p ExportMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+	}
+}
+
+func (p ExportMasterRequest) Pointer() *ExportMasterRequest {
+	return &p
+}
+
+type GetCurrentModelMasterRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+}
+
+func (p *GetCurrentModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetCurrentModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetCurrentModelMasterRequest{}
+	} else {
+		*p = GetCurrentModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetCurrentModelMasterRequestFromJson(data string) (GetCurrentModelMasterRequest, error) {
+	req := GetCurrentModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetCurrentModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetCurrentModelMasterRequestFromDict(data map[string]interface{}) GetCurrentModelMasterRequest {
+	return GetCurrentModelMasterRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+	}
+}
+
+func (p GetCurrentModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+	}
+}
+
+func (p GetCurrentModelMasterRequest) Pointer() *GetCurrentModelMasterRequest {
+	return &p
+}
+
+type UpdateCurrentModelMasterRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Settings        *string `json:"settings"`
+}
+
+func (p *UpdateCurrentModelMasterRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateCurrentModelMasterRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateCurrentModelMasterRequest{}
+	} else {
+		*p = UpdateCurrentModelMasterRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["settings"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Settings = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Settings = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Settings = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Settings = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Settings = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Settings)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewUpdateCurrentModelMasterRequestFromJson(data string) (UpdateCurrentModelMasterRequest, error) {
+	req := UpdateCurrentModelMasterRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateCurrentModelMasterRequest{}, err
+	}
+	return req, nil
+}
+
+func NewUpdateCurrentModelMasterRequestFromDict(data map[string]interface{}) UpdateCurrentModelMasterRequest {
+	return UpdateCurrentModelMasterRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		Settings:      core.CastString(data["settings"]),
+	}
+}
+
+func (p UpdateCurrentModelMasterRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"settings":      p.Settings,
+	}
+}
+
+func (p UpdateCurrentModelMasterRequest) Pointer() *UpdateCurrentModelMasterRequest {
+	return &p
+}
+
+type UpdateCurrentModelMasterFromGitHubRequest struct {
+	SourceRequestId *string                `json:"sourceRequestId"`
+	RequestId       *string                `json:"requestId"`
+	ContextStack    *string                `json:"contextStack"`
+	NamespaceName   *string                `json:"namespaceName"`
+	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+}
+
+func (p *UpdateCurrentModelMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = UpdateCurrentModelMasterFromGitHubRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = UpdateCurrentModelMasterFromGitHubRequest{}
+	} else {
+		*p = UpdateCurrentModelMasterFromGitHubRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["checkoutSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.CheckoutSetting)
+		}
+	}
+	return nil
+}
+
+func NewUpdateCurrentModelMasterFromGitHubRequestFromJson(data string) (UpdateCurrentModelMasterFromGitHubRequest, error) {
+	req := UpdateCurrentModelMasterFromGitHubRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return UpdateCurrentModelMasterFromGitHubRequest{}, err
+	}
+	return req, nil
+}
+
+func NewUpdateCurrentModelMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentModelMasterFromGitHubRequest {
+	return UpdateCurrentModelMasterFromGitHubRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+	}
+}
+
+func (p UpdateCurrentModelMasterFromGitHubRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"checkoutSetting": p.CheckoutSetting.ToDict(),
+	}
+}
+
+func (p UpdateCurrentModelMasterFromGitHubRequest) Pointer() *UpdateCurrentModelMasterFromGitHubRequest {
 	return &p
 }
