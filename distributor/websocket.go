@@ -2596,7 +2596,7 @@ func (p Gs2DistributorWebSocketClient) IfExpressionByUserIdAsync(
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "distributor",
-			"component":   "distribute",
+			"component":   "expression",
 			"function":    "ifExpressionByUserId",
 			"contentType": "application/json",
 			"requestId":   requestId,
@@ -2706,7 +2706,7 @@ func (p Gs2DistributorWebSocketClient) AndExpressionByUserIdAsync(
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "distributor",
-			"component":   "distribute",
+			"component":   "expression",
 			"function":    "andExpressionByUserId",
 			"contentType": "application/json",
 			"requestId":   requestId,
@@ -2803,7 +2803,7 @@ func (p Gs2DistributorWebSocketClient) OrExpressionByUserIdAsync(
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "distributor",
-			"component":   "distribute",
+			"component":   "expression",
 			"function":    "orExpressionByUserId",
 			"contentType": "application/json",
 			"requestId":   requestId,
@@ -2900,7 +2900,7 @@ func (p Gs2DistributorWebSocketClient) IfExpressionByStampTaskAsync(
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "distributor",
-			"component":   "distribute",
+			"component":   "expression",
 			"function":    "ifExpressionByStampTask",
 			"contentType": "application/json",
 			"requestId":   requestId,
@@ -2984,7 +2984,7 @@ func (p Gs2DistributorWebSocketClient) AndExpressionByStampTaskAsync(
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "distributor",
-			"component":   "distribute",
+			"component":   "expression",
 			"function":    "andExpressionByStampTask",
 			"contentType": "application/json",
 			"requestId":   requestId,
@@ -3068,7 +3068,7 @@ func (p Gs2DistributorWebSocketClient) OrExpressionByStampTaskAsync(
 	var bodies = core.WebSocketBodies{
 		"x_gs2": map[string]interface{}{
 			"service":     "distributor",
-			"component":   "distribute",
+			"component":   "expression",
 			"function":    "orExpressionByStampTask",
 			"contentType": "application/json",
 			"requestId":   requestId,
