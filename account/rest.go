@@ -3770,6 +3770,104 @@ func (p Gs2AccountRestClient) DoTakeOverOpenIdConnect(
 	return asyncResult.result, asyncResult.err
 }
 
+func getAuthorizationUrlAsyncHandler(
+	client Gs2AccountRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetAuthorizationUrlAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetAuthorizationUrlAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetAuthorizationUrlResult
+	if asyncResult.Err != nil {
+		callback <- GetAuthorizationUrlAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetAuthorizationUrlAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetAuthorizationUrlAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountRestClient) GetAuthorizationUrlAsync(
+	request *GetAuthorizationUrlRequest,
+	callback chan<- GetAuthorizationUrlAsyncResult,
+) {
+	path := "/{namespaceName}/type/{type}/authorization/url"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.Type != nil {
+		path = strings.ReplaceAll(path, "{type}", core.ToString(*request.Type))
+	} else {
+		path = strings.ReplaceAll(path, "{type}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+
+	go getAuthorizationUrlAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("account").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountRestClient) GetAuthorizationUrl(
+	request *GetAuthorizationUrlRequest,
+) (*GetAuthorizationUrlResult, error) {
+	callback := make(chan GetAuthorizationUrlAsyncResult, 1)
+	go p.GetAuthorizationUrlAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describePlatformIdsAsyncHandler(
 	client Gs2AccountRestClient,
 	job *core.NetworkJob,

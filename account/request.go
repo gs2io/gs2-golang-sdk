@@ -4897,6 +4897,119 @@ func (p DoTakeOverOpenIdConnectRequest) Pointer() *DoTakeOverOpenIdConnectReques
 	return &p
 }
 
+type GetAuthorizationUrlRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AccessToken     *string `json:"accessToken"`
+	Type            *int32  `json:"type"`
+}
+
+func (p *GetAuthorizationUrlRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetAuthorizationUrlRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetAuthorizationUrlRequest{}
+	} else {
+		*p = GetAuthorizationUrlRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["type"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Type)
+		}
+	}
+	return nil
+}
+
+func NewGetAuthorizationUrlRequestFromJson(data string) (GetAuthorizationUrlRequest, error) {
+	req := GetAuthorizationUrlRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetAuthorizationUrlRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetAuthorizationUrlRequestFromDict(data map[string]interface{}) GetAuthorizationUrlRequest {
+	return GetAuthorizationUrlRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		Type:          core.CastInt32(data["type"]),
+	}
+}
+
+func (p GetAuthorizationUrlRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"type":          p.Type,
+	}
+}
+
+func (p GetAuthorizationUrlRequest) Pointer() *GetAuthorizationUrlRequest {
+	return &p
+}
+
 type DescribePlatformIdsRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`

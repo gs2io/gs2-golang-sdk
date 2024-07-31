@@ -1183,6 +1183,37 @@ func (p DoTakeOverOpenIdConnectResult) Pointer() *DoTakeOverOpenIdConnectResult 
 	return &p
 }
 
+type GetAuthorizationUrlResult struct {
+	AuthorizationUrl *string `json:"authorizationUrl"`
+}
+
+type GetAuthorizationUrlAsyncResult struct {
+	result *GetAuthorizationUrlResult
+	err    error
+}
+
+func NewGetAuthorizationUrlResultFromJson(data string) GetAuthorizationUrlResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetAuthorizationUrlResultFromDict(dict)
+}
+
+func NewGetAuthorizationUrlResultFromDict(data map[string]interface{}) GetAuthorizationUrlResult {
+	return GetAuthorizationUrlResult{
+		AuthorizationUrl: core.CastString(data["authorizationUrl"]),
+	}
+}
+
+func (p GetAuthorizationUrlResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"authorizationUrl": p.AuthorizationUrl,
+	}
+}
+
+func (p GetAuthorizationUrlResult) Pointer() *GetAuthorizationUrlResult {
+	return &p
+}
+
 type DescribePlatformIdsResult struct {
 	Items         []PlatformId `json:"items"`
 	NextPageToken *string      `json:"nextPageToken"`

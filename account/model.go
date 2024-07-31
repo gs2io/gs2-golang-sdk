@@ -1554,8 +1554,12 @@ func CastCurrentModelMastersFromDict(data []CurrentModelMaster) []interface{} {
 }
 
 type OpenIdConnectSetting struct {
-	ConfigurationPath *string `json:"configurationPath"`
-	ClientId          *string `json:"clientId"`
+	ConfigurationPath  *string `json:"configurationPath"`
+	ClientId           *string `json:"clientId"`
+	ClientSecret       *string `json:"clientSecret"`
+	AppleTeamId        *string `json:"appleTeamId"`
+	AppleKeyId         *string `json:"appleKeyId"`
+	ApplePrivateKeyPem *string `json:"applePrivateKeyPem"`
 }
 
 func (p *OpenIdConnectSetting) UnmarshalJSON(data []byte) error {
@@ -1626,6 +1630,98 @@ func (p *OpenIdConnectSetting) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["clientSecret"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ClientSecret = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ClientSecret = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ClientSecret = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientSecret = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientSecret = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ClientSecret)
+				}
+			}
+		}
+		if v, ok := d["appleTeamId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AppleTeamId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AppleTeamId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AppleTeamId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AppleTeamId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AppleTeamId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AppleTeamId)
+				}
+			}
+		}
+		if v, ok := d["appleKeyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AppleKeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AppleKeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AppleKeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AppleKeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AppleKeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AppleKeyId)
+				}
+			}
+		}
+		if v, ok := d["applePrivateKeyPem"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ApplePrivateKeyPem = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ApplePrivateKeyPem = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ApplePrivateKeyPem = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ApplePrivateKeyPem = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ApplePrivateKeyPem = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ApplePrivateKeyPem)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -1638,8 +1734,12 @@ func NewOpenIdConnectSettingFromJson(data string) OpenIdConnectSetting {
 
 func NewOpenIdConnectSettingFromDict(data map[string]interface{}) OpenIdConnectSetting {
 	return OpenIdConnectSetting{
-		ConfigurationPath: core.CastString(data["configurationPath"]),
-		ClientId:          core.CastString(data["clientId"]),
+		ConfigurationPath:  core.CastString(data["configurationPath"]),
+		ClientId:           core.CastString(data["clientId"]),
+		ClientSecret:       core.CastString(data["clientSecret"]),
+		AppleTeamId:        core.CastString(data["appleTeamId"]),
+		AppleKeyId:         core.CastString(data["appleKeyId"]),
+		ApplePrivateKeyPem: core.CastString(data["applePrivateKeyPem"]),
 	}
 }
 
@@ -1653,9 +1753,29 @@ func (p OpenIdConnectSetting) ToDict() map[string]interface{} {
 	if p.ClientId != nil {
 		clientId = p.ClientId
 	}
+	var clientSecret *string
+	if p.ClientSecret != nil {
+		clientSecret = p.ClientSecret
+	}
+	var appleTeamId *string
+	if p.AppleTeamId != nil {
+		appleTeamId = p.AppleTeamId
+	}
+	var appleKeyId *string
+	if p.AppleKeyId != nil {
+		appleKeyId = p.AppleKeyId
+	}
+	var applePrivateKeyPem *string
+	if p.ApplePrivateKeyPem != nil {
+		applePrivateKeyPem = p.ApplePrivateKeyPem
+	}
 	return map[string]interface{}{
-		"configurationPath": configurationPath,
-		"clientId":          clientId,
+		"configurationPath":  configurationPath,
+		"clientId":           clientId,
+		"clientSecret":       clientSecret,
+		"appleTeamId":        appleTeamId,
+		"appleKeyId":         appleKeyId,
+		"applePrivateKeyPem": applePrivateKeyPem,
 	}
 }
 

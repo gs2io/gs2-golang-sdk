@@ -3409,6 +3409,96 @@ func (p Gs2AccountWebSocketClient) DoTakeOverOpenIdConnect(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2AccountWebSocketClient) getAuthorizationUrlAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetAuthorizationUrlAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetAuthorizationUrlAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetAuthorizationUrlResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetAuthorizationUrlAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetAuthorizationUrlAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2AccountWebSocketClient) GetAuthorizationUrlAsync(
+	request *GetAuthorizationUrlRequest,
+	callback chan<- GetAuthorizationUrlAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "account",
+			"component":   "takeOver",
+			"function":    "getAuthorizationUrl",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.Type != nil {
+		bodies["type"] = *request.Type
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+
+	go p.getAuthorizationUrlAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2AccountWebSocketClient) GetAuthorizationUrl(
+	request *GetAuthorizationUrlRequest,
+) (*GetAuthorizationUrlResult, error) {
+	callback := make(chan GetAuthorizationUrlAsyncResult, 1)
+	go p.GetAuthorizationUrlAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2AccountWebSocketClient) describePlatformIdsAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribePlatformIdsAsyncResult,
