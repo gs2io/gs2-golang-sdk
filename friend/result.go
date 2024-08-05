@@ -568,6 +568,37 @@ func (p DeleteProfileByUserIdResult) Pointer() *DeleteProfileByUserIdResult {
 	return &p
 }
 
+type UpdateProfileByStampSheetResult struct {
+	Item *Profile `json:"item"`
+}
+
+type UpdateProfileByStampSheetAsyncResult struct {
+	result *UpdateProfileByStampSheetResult
+	err    error
+}
+
+func NewUpdateProfileByStampSheetResultFromJson(data string) UpdateProfileByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewUpdateProfileByStampSheetResultFromDict(dict)
+}
+
+func NewUpdateProfileByStampSheetResultFromDict(data map[string]interface{}) UpdateProfileByStampSheetResult {
+	return UpdateProfileByStampSheetResult{
+		Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p UpdateProfileByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p UpdateProfileByStampSheetResult) Pointer() *UpdateProfileByStampSheetResult {
+	return &p
+}
+
 type DescribeFriendsResult struct {
 	Items         []FriendUser `json:"items"`
 	NextPageToken *string      `json:"nextPageToken"`

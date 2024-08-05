@@ -1832,6 +1832,97 @@ func (p Gs2FriendRestClient) DeleteProfileByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func updateProfileByStampSheetAsyncHandler(
+	client Gs2FriendRestClient,
+	job *core.NetworkJob,
+	callback chan<- UpdateProfileByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateProfileByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateProfileByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- UpdateProfileByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateProfileByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- UpdateProfileByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendRestClient) UpdateProfileByStampSheetAsync(
+	request *UpdateProfileByStampSheetRequest,
+	callback chan<- UpdateProfileByStampSheetAsyncResult,
+) {
+	path := "/stamp/profile/update"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go updateProfileByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("friend").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendRestClient) UpdateProfileByStampSheet(
+	request *UpdateProfileByStampSheetRequest,
+) (*UpdateProfileByStampSheetResult, error) {
+	callback := make(chan UpdateProfileByStampSheetAsyncResult, 1)
+	go p.UpdateProfileByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describeFriendsAsyncHandler(
 	client Gs2FriendRestClient,
 	job *core.NetworkJob,

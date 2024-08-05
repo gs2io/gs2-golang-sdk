@@ -1672,6 +1672,90 @@ func (p Gs2FriendWebSocketClient) DeleteProfileByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2FriendWebSocketClient) updateProfileByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- UpdateProfileByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- UpdateProfileByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result UpdateProfileByStampSheetResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- UpdateProfileByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- UpdateProfileByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2FriendWebSocketClient) UpdateProfileByStampSheetAsync(
+	request *UpdateProfileByStampSheetRequest,
+	callback chan<- UpdateProfileByStampSheetAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "friend",
+			"component":   "profile",
+			"function":    "updateProfileByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.updateProfileByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2FriendWebSocketClient) UpdateProfileByStampSheet(
+	request *UpdateProfileByStampSheetRequest,
+) (*UpdateProfileByStampSheetResult, error) {
+	callback := make(chan UpdateProfileByStampSheetAsyncResult, 1)
+	go p.UpdateProfileByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2FriendWebSocketClient) describeFriendsAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribeFriendsAsyncResult,
