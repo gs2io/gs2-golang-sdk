@@ -549,6 +549,110 @@ func (p CountExecuteStampTaskLogResult) Pointer() *CountExecuteStampTaskLogResul
 	return &p
 }
 
+type QueryInGameLogResult struct {
+	Items         []InGameLog `json:"items"`
+	NextPageToken *string     `json:"nextPageToken"`
+	TotalCount    *int64      `json:"totalCount"`
+	ScanSize      *int64      `json:"scanSize"`
+}
+
+type QueryInGameLogAsyncResult struct {
+	result *QueryInGameLogResult
+	err    error
+}
+
+func NewQueryInGameLogResultFromJson(data string) QueryInGameLogResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewQueryInGameLogResultFromDict(dict)
+}
+
+func NewQueryInGameLogResultFromDict(data map[string]interface{}) QueryInGameLogResult {
+	return QueryInGameLogResult{
+		Items:         CastInGameLogs(core.CastArray(data["items"])),
+		NextPageToken: core.CastString(data["nextPageToken"]),
+		TotalCount:    core.CastInt64(data["totalCount"]),
+		ScanSize:      core.CastInt64(data["scanSize"]),
+	}
+}
+
+func (p QueryInGameLogResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastInGameLogsFromDict(
+			p.Items,
+		),
+		"nextPageToken": p.NextPageToken,
+		"totalCount":    p.TotalCount,
+		"scanSize":      p.ScanSize,
+	}
+}
+
+func (p QueryInGameLogResult) Pointer() *QueryInGameLogResult {
+	return &p
+}
+
+type SendInGameLogResult struct {
+	Item *InGameLog `json:"item"`
+}
+
+type SendInGameLogAsyncResult struct {
+	result *SendInGameLogResult
+	err    error
+}
+
+func NewSendInGameLogResultFromJson(data string) SendInGameLogResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSendInGameLogResultFromDict(dict)
+}
+
+func NewSendInGameLogResultFromDict(data map[string]interface{}) SendInGameLogResult {
+	return SendInGameLogResult{
+		Item: NewInGameLogFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p SendInGameLogResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p SendInGameLogResult) Pointer() *SendInGameLogResult {
+	return &p
+}
+
+type SendInGameLogByUserIdResult struct {
+	Item *InGameLog `json:"item"`
+}
+
+type SendInGameLogByUserIdAsyncResult struct {
+	result *SendInGameLogByUserIdResult
+	err    error
+}
+
+func NewSendInGameLogByUserIdResultFromJson(data string) SendInGameLogByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewSendInGameLogByUserIdResultFromDict(dict)
+}
+
+func NewSendInGameLogByUserIdResultFromDict(data map[string]interface{}) SendInGameLogByUserIdResult {
+	return SendInGameLogByUserIdResult{
+		Item: NewInGameLogFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p SendInGameLogByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p SendInGameLogByUserIdResult) Pointer() *SendInGameLogByUserIdResult {
+	return &p
+}
+
 type QueryAccessLogWithTelemetryResult struct {
 	Items         []AccessLogWithTelemetry `json:"items"`
 	NextPageToken *string                  `json:"nextPageToken"`

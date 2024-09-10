@@ -2683,6 +2683,508 @@ func (p CountExecuteStampTaskLogRequest) Pointer() *CountExecuteStampTaskLogRequ
 	return &p
 }
 
+type QueryInGameLogRequest struct {
+	SourceRequestId    *string        `json:"sourceRequestId"`
+	RequestId          *string        `json:"requestId"`
+	ContextStack       *string        `json:"contextStack"`
+	DuplicationAvoider *string        `json:"duplicationAvoider"`
+	NamespaceName      *string        `json:"namespaceName"`
+	UserId             *string        `json:"userId"`
+	Tags               []InGameLogTag `json:"tags"`
+	Begin              *int64         `json:"begin"`
+	End                *int64         `json:"end"`
+	LongTerm           *bool          `json:"longTerm"`
+	PageToken          *string        `json:"pageToken"`
+	Limit              *int32         `json:"limit"`
+	TimeOffsetToken    *string        `json:"timeOffsetToken"`
+}
+
+func (p *QueryInGameLogRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = QueryInGameLogRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = QueryInGameLogRequest{}
+	} else {
+		*p = QueryInGameLogRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["tags"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Tags)
+		}
+		if v, ok := d["begin"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Begin)
+		}
+		if v, ok := d["end"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.End)
+		}
+		if v, ok := d["longTerm"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.LongTerm)
+		}
+		if v, ok := d["pageToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.PageToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.PageToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.PageToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.PageToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.PageToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewQueryInGameLogRequestFromJson(data string) (QueryInGameLogRequest, error) {
+	req := QueryInGameLogRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return QueryInGameLogRequest{}, err
+	}
+	return req, nil
+}
+
+func NewQueryInGameLogRequestFromDict(data map[string]interface{}) QueryInGameLogRequest {
+	return QueryInGameLogRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		Tags:            CastInGameLogTags(core.CastArray(data["tags"])),
+		Begin:           core.CastInt64(data["begin"]),
+		End:             core.CastInt64(data["end"]),
+		LongTerm:        core.CastBool(data["longTerm"]),
+		PageToken:       core.CastString(data["pageToken"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p QueryInGameLogRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"tags": CastInGameLogTagsFromDict(
+			p.Tags,
+		),
+		"begin":           p.Begin,
+		"end":             p.End,
+		"longTerm":        p.LongTerm,
+		"pageToken":       p.PageToken,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p QueryInGameLogRequest) Pointer() *QueryInGameLogRequest {
+	return &p
+}
+
+type SendInGameLogRequest struct {
+	SourceRequestId    *string        `json:"sourceRequestId"`
+	RequestId          *string        `json:"requestId"`
+	ContextStack       *string        `json:"contextStack"`
+	DuplicationAvoider *string        `json:"duplicationAvoider"`
+	NamespaceName      *string        `json:"namespaceName"`
+	AccessToken        *string        `json:"accessToken"`
+	Tags               []InGameLogTag `json:"tags"`
+	Payload            *string        `json:"payload"`
+}
+
+func (p *SendInGameLogRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SendInGameLogRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SendInGameLogRequest{}
+	} else {
+		*p = SendInGameLogRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["tags"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Tags)
+		}
+		if v, ok := d["payload"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Payload = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Payload = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Payload = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Payload)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewSendInGameLogRequestFromJson(data string) (SendInGameLogRequest, error) {
+	req := SendInGameLogRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return SendInGameLogRequest{}, err
+	}
+	return req, nil
+}
+
+func NewSendInGameLogRequestFromDict(data map[string]interface{}) SendInGameLogRequest {
+	return SendInGameLogRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		Tags:          CastInGameLogTags(core.CastArray(data["tags"])),
+		Payload:       core.CastString(data["payload"]),
+	}
+}
+
+func (p SendInGameLogRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"tags": CastInGameLogTagsFromDict(
+			p.Tags,
+		),
+		"payload": p.Payload,
+	}
+}
+
+func (p SendInGameLogRequest) Pointer() *SendInGameLogRequest {
+	return &p
+}
+
+type SendInGameLogByUserIdRequest struct {
+	SourceRequestId    *string        `json:"sourceRequestId"`
+	RequestId          *string        `json:"requestId"`
+	ContextStack       *string        `json:"contextStack"`
+	DuplicationAvoider *string        `json:"duplicationAvoider"`
+	NamespaceName      *string        `json:"namespaceName"`
+	UserId             *string        `json:"userId"`
+	Tags               []InGameLogTag `json:"tags"`
+	Payload            *string        `json:"payload"`
+	TimeOffsetToken    *string        `json:"timeOffsetToken"`
+}
+
+func (p *SendInGameLogByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = SendInGameLogByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = SendInGameLogByUserIdRequest{}
+	} else {
+		*p = SendInGameLogByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["tags"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Tags)
+		}
+		if v, ok := d["payload"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Payload = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Payload = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Payload = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Payload)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewSendInGameLogByUserIdRequestFromJson(data string) (SendInGameLogByUserIdRequest, error) {
+	req := SendInGameLogByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return SendInGameLogByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewSendInGameLogByUserIdRequestFromDict(data map[string]interface{}) SendInGameLogByUserIdRequest {
+	return SendInGameLogByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		Tags:            CastInGameLogTags(core.CastArray(data["tags"])),
+		Payload:         core.CastString(data["payload"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p SendInGameLogByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"tags": CastInGameLogTagsFromDict(
+			p.Tags,
+		),
+		"payload":         p.Payload,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p SendInGameLogByUserIdRequest) Pointer() *SendInGameLogByUserIdRequest {
+	return &p
+}
+
 type QueryAccessLogWithTelemetryRequest struct {
 	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`

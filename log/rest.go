@@ -1590,6 +1590,344 @@ func (p Gs2LogRestClient) CountExecuteStampTaskLog(
 	return asyncResult.result, asyncResult.err
 }
 
+func queryInGameLogAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- QueryInGameLogAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- QueryInGameLogAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result QueryInGameLogResult
+	if asyncResult.Err != nil {
+		callback <- QueryInGameLogAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- QueryInGameLogAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- QueryInGameLogAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) QueryInGameLogAsync(
+	request *QueryInGameLogRequest,
+	callback chan<- QueryInGameLogAsyncResult,
+) {
+	path := "/{namespaceName}/ingame/log"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Tags != nil {
+		var _tags []interface{}
+		for _, item := range request.Tags {
+			_tags = append(_tags, item)
+		}
+		bodies["tags"] = _tags
+	}
+	if request.Begin != nil {
+		bodies["begin"] = *request.Begin
+	}
+	if request.End != nil {
+		bodies["end"] = *request.End
+	}
+	if request.LongTerm != nil {
+		bodies["longTerm"] = *request.LongTerm
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go queryInGameLogAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) QueryInGameLog(
+	request *QueryInGameLogRequest,
+) (*QueryInGameLogResult, error) {
+	callback := make(chan QueryInGameLogAsyncResult, 1)
+	go p.QueryInGameLogAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func sendInGameLogAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- SendInGameLogAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SendInGameLogAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SendInGameLogResult
+	if asyncResult.Err != nil {
+		callback <- SendInGameLogAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SendInGameLogAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SendInGameLogAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) SendInGameLogAsync(
+	request *SendInGameLogRequest,
+	callback chan<- SendInGameLogAsyncResult,
+) {
+	path := "/{namespaceName}/ingame/log/user/me/send"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Tags != nil {
+		var _tags []interface{}
+		for _, item := range request.Tags {
+			_tags = append(_tags, item)
+		}
+		bodies["tags"] = _tags
+	}
+	if request.Payload != nil && *request.Payload != "" {
+		bodies["payload"] = *request.Payload
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go sendInGameLogAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) SendInGameLog(
+	request *SendInGameLogRequest,
+) (*SendInGameLogResult, error) {
+	callback := make(chan SendInGameLogAsyncResult, 1)
+	go p.SendInGameLogAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func sendInGameLogByUserIdAsyncHandler(
+	client Gs2LogRestClient,
+	job *core.NetworkJob,
+	callback chan<- SendInGameLogByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SendInGameLogByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SendInGameLogByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- SendInGameLogByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SendInGameLogByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- SendInGameLogByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogRestClient) SendInGameLogByUserIdAsync(
+	request *SendInGameLogByUserIdRequest,
+	callback chan<- SendInGameLogByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/ingame/log/user/{userId}/send"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Tags != nil {
+		var _tags []interface{}
+		for _, item := range request.Tags {
+			_tags = append(_tags, item)
+		}
+		bodies["tags"] = _tags
+	}
+	if request.Payload != nil && *request.Payload != "" {
+		bodies["payload"] = *request.Payload
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go sendInGameLogByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("log").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogRestClient) SendInGameLogByUserId(
+	request *SendInGameLogByUserIdRequest,
+) (*SendInGameLogByUserIdResult, error) {
+	callback := make(chan SendInGameLogByUserIdAsyncResult, 1)
+	go p.SendInGameLogByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func queryAccessLogWithTelemetryAsyncHandler(
 	client Gs2LogRestClient,
 	job *core.NetworkJob,

@@ -1468,6 +1468,318 @@ func (p Gs2LogWebSocketClient) CountExecuteStampTaskLog(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2LogWebSocketClient) queryInGameLogAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- QueryInGameLogAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- QueryInGameLogAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result QueryInGameLogResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- QueryInGameLogAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- QueryInGameLogAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogWebSocketClient) QueryInGameLogAsync(
+	request *QueryInGameLogRequest,
+	callback chan<- QueryInGameLogAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "log",
+			"component":   "inGameLog",
+			"function":    "queryInGameLog",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Tags != nil {
+		var _tags []interface{}
+		for _, item := range request.Tags {
+			_tags = append(_tags, item)
+		}
+		bodies["tags"] = _tags
+	}
+	if request.Begin != nil {
+		bodies["begin"] = *request.Begin
+	}
+	if request.End != nil {
+		bodies["end"] = *request.End
+	}
+	if request.LongTerm != nil {
+		bodies["longTerm"] = *request.LongTerm
+	}
+	if request.PageToken != nil && *request.PageToken != "" {
+		bodies["pageToken"] = *request.PageToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.queryInGameLogAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogWebSocketClient) QueryInGameLog(
+	request *QueryInGameLogRequest,
+) (*QueryInGameLogResult, error) {
+	callback := make(chan QueryInGameLogAsyncResult, 1)
+	go p.QueryInGameLogAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LogWebSocketClient) sendInGameLogAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SendInGameLogAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SendInGameLogAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SendInGameLogResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SendInGameLogAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SendInGameLogAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogWebSocketClient) SendInGameLogAsync(
+	request *SendInGameLogRequest,
+	callback chan<- SendInGameLogAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "log",
+			"component":   "inGameLog",
+			"function":    "sendInGameLog",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.Tags != nil {
+		var _tags []interface{}
+		for _, item := range request.Tags {
+			_tags = append(_tags, item)
+		}
+		bodies["tags"] = _tags
+	}
+	if request.Payload != nil && *request.Payload != "" {
+		bodies["payload"] = *request.Payload
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.sendInGameLogAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogWebSocketClient) SendInGameLog(
+	request *SendInGameLogRequest,
+) (*SendInGameLogResult, error) {
+	callback := make(chan SendInGameLogAsyncResult, 1)
+	go p.SendInGameLogAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2LogWebSocketClient) sendInGameLogByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- SendInGameLogByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- SendInGameLogByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result SendInGameLogByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- SendInGameLogByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- SendInGameLogByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2LogWebSocketClient) SendInGameLogByUserIdAsync(
+	request *SendInGameLogByUserIdRequest,
+	callback chan<- SendInGameLogByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "log",
+			"component":   "inGameLog",
+			"function":    "sendInGameLogByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Tags != nil {
+		var _tags []interface{}
+		for _, item := range request.Tags {
+			_tags = append(_tags, item)
+		}
+		bodies["tags"] = _tags
+	}
+	if request.Payload != nil && *request.Payload != "" {
+		bodies["payload"] = *request.Payload
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.sendInGameLogByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2LogWebSocketClient) SendInGameLogByUserId(
+	request *SendInGameLogByUserIdRequest,
+) (*SendInGameLogByUserIdResult, error) {
+	callback := make(chan SendInGameLogByUserIdAsyncResult, 1)
+	go p.SendInGameLogByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2LogWebSocketClient) queryAccessLogWithTelemetryAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- QueryAccessLogWithTelemetryAsyncResult,

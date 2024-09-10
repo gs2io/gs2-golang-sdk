@@ -831,6 +831,7 @@ type Status struct {
 	UserId             *string `json:"userId"`
 	RandomSeed         *int64  `json:"randomSeed"`
 	IdleMinutes        *int32  `json:"idleMinutes"`
+	NextRewardsAt      *int64  `json:"nextRewardsAt"`
 	MaximumIdleMinutes *int32  `json:"maximumIdleMinutes"`
 	CreatedAt          *int64  `json:"createdAt"`
 	UpdatedAt          *int64  `json:"updatedAt"`
@@ -934,6 +935,9 @@ func (p *Status) UnmarshalJSON(data []byte) error {
 		if v, ok := d["idleMinutes"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.IdleMinutes)
 		}
+		if v, ok := d["nextRewardsAt"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.NextRewardsAt)
+		}
 		if v, ok := d["maximumIdleMinutes"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.MaximumIdleMinutes)
 		}
@@ -963,6 +967,7 @@ func NewStatusFromDict(data map[string]interface{}) Status {
 		UserId:             core.CastString(data["userId"]),
 		RandomSeed:         core.CastInt64(data["randomSeed"]),
 		IdleMinutes:        core.CastInt32(data["idleMinutes"]),
+		NextRewardsAt:      core.CastInt64(data["nextRewardsAt"]),
 		MaximumIdleMinutes: core.CastInt32(data["maximumIdleMinutes"]),
 		CreatedAt:          core.CastInt64(data["createdAt"]),
 		UpdatedAt:          core.CastInt64(data["updatedAt"]),
@@ -992,6 +997,10 @@ func (p Status) ToDict() map[string]interface{} {
 	if p.IdleMinutes != nil {
 		idleMinutes = p.IdleMinutes
 	}
+	var nextRewardsAt *int64
+	if p.NextRewardsAt != nil {
+		nextRewardsAt = p.NextRewardsAt
+	}
 	var maximumIdleMinutes *int32
 	if p.MaximumIdleMinutes != nil {
 		maximumIdleMinutes = p.MaximumIdleMinutes
@@ -1014,6 +1023,7 @@ func (p Status) ToDict() map[string]interface{} {
 		"userId":             userId,
 		"randomSeed":         randomSeed,
 		"idleMinutes":        idleMinutes,
+		"nextRewardsAt":      nextRewardsAt,
 		"maximumIdleMinutes": maximumIdleMinutes,
 		"createdAt":          createdAt,
 		"updatedAt":          updatedAt,

@@ -3009,9 +3009,6 @@ func (p Gs2AccountWebSocketClient) DeleteTakeOverAsync(
 	if request.Type != nil {
 		bodies["type"] = *request.Type
 	}
-	if request.UserIdentifier != nil && *request.UserIdentifier != "" {
-		bodies["userIdentifier"] = *request.UserIdentifier
-	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}

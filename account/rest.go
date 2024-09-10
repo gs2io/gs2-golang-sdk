@@ -3311,9 +3311,6 @@ func (p Gs2AccountRestClient) DeleteTakeOverAsync(
 
 	replacer := strings.NewReplacer()
 	queryStrings := core.QueryStrings{}
-	if request.UserIdentifier != nil {
-		queryStrings["userIdentifier"] = core.ToString(*request.UserIdentifier)
-	}
 	if request.ContextStack != nil {
 		queryStrings["contextStack"] = *request.ContextStack
 	}

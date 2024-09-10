@@ -186,8 +186,11 @@ func (p Gs2Money2RestClient) CreateNamespaceAsync(
 	if request.PlatformSetting != nil {
 		bodies["platformSetting"] = request.PlatformSetting.ToDict()
 	}
-	if request.ChangeBalanceScript != nil {
-		bodies["changeBalanceScript"] = request.ChangeBalanceScript.ToDict()
+	if request.DepositBalanceScript != nil {
+		bodies["depositBalanceScript"] = request.DepositBalanceScript.ToDict()
+	}
+	if request.WithdrawBalanceScript != nil {
+		bodies["withdrawBalanceScript"] = request.WithdrawBalanceScript.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
@@ -471,8 +474,11 @@ func (p Gs2Money2RestClient) UpdateNamespaceAsync(
 	if request.PlatformSetting != nil {
 		bodies["platformSetting"] = request.PlatformSetting.ToDict()
 	}
-	if request.ChangeBalanceScript != nil {
-		bodies["changeBalanceScript"] = request.ChangeBalanceScript.ToDict()
+	if request.DepositBalanceScript != nil {
+		bodies["depositBalanceScript"] = request.DepositBalanceScript.ToDict()
+	}
+	if request.WithdrawBalanceScript != nil {
+		bodies["withdrawBalanceScript"] = request.WithdrawBalanceScript.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()

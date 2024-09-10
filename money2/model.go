@@ -30,7 +30,8 @@ type Namespace struct {
 	CurrencyUsagePriority *string          `json:"currencyUsagePriority"`
 	SharedFreeCurrency    *bool            `json:"sharedFreeCurrency"`
 	PlatformSetting       *PlatformSetting `json:"platformSetting"`
-	ChangeBalanceScript   *ScriptSetting   `json:"changeBalanceScript"`
+	DepositBalanceScript  *ScriptSetting   `json:"depositBalanceScript"`
+	WithdrawBalanceScript *ScriptSetting   `json:"withdrawBalanceScript"`
 	LogSetting            *LogSetting      `json:"logSetting"`
 	CreatedAt             *int64           `json:"createdAt"`
 	UpdatedAt             *int64           `json:"updatedAt"`
@@ -157,8 +158,11 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		if v, ok := d["platformSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.PlatformSetting)
 		}
-		if v, ok := d["changeBalanceScript"]; ok && v != nil {
-			_ = json.Unmarshal(*v, &p.ChangeBalanceScript)
+		if v, ok := d["depositBalanceScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DepositBalanceScript)
+		}
+		if v, ok := d["withdrawBalanceScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.WithdrawBalanceScript)
 		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
@@ -190,7 +194,8 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 		CurrencyUsagePriority: core.CastString(data["currencyUsagePriority"]),
 		SharedFreeCurrency:    core.CastBool(data["sharedFreeCurrency"]),
 		PlatformSetting:       NewPlatformSettingFromDict(core.CastMap(data["platformSetting"])).Pointer(),
-		ChangeBalanceScript:   NewScriptSettingFromDict(core.CastMap(data["changeBalanceScript"])).Pointer(),
+		DepositBalanceScript:  NewScriptSettingFromDict(core.CastMap(data["depositBalanceScript"])).Pointer(),
+		WithdrawBalanceScript: NewScriptSettingFromDict(core.CastMap(data["withdrawBalanceScript"])).Pointer(),
 		LogSetting:            NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
 		CreatedAt:             core.CastInt64(data["createdAt"]),
 		UpdatedAt:             core.CastInt64(data["updatedAt"]),
@@ -224,9 +229,13 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.PlatformSetting != nil {
 		platformSetting = p.PlatformSetting.ToDict()
 	}
-	var changeBalanceScript map[string]interface{}
-	if p.ChangeBalanceScript != nil {
-		changeBalanceScript = p.ChangeBalanceScript.ToDict()
+	var depositBalanceScript map[string]interface{}
+	if p.DepositBalanceScript != nil {
+		depositBalanceScript = p.DepositBalanceScript.ToDict()
+	}
+	var withdrawBalanceScript map[string]interface{}
+	if p.WithdrawBalanceScript != nil {
+		withdrawBalanceScript = p.WithdrawBalanceScript.ToDict()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
@@ -251,7 +260,8 @@ func (p Namespace) ToDict() map[string]interface{} {
 		"currencyUsagePriority": currencyUsagePriority,
 		"sharedFreeCurrency":    sharedFreeCurrency,
 		"platformSetting":       platformSetting,
-		"changeBalanceScript":   changeBalanceScript,
+		"depositBalanceScript":  depositBalanceScript,
+		"withdrawBalanceScript": withdrawBalanceScript,
 		"logSetting":            logSetting,
 		"createdAt":             createdAt,
 		"updatedAt":             updatedAt,

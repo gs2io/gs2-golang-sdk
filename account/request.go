@@ -4259,7 +4259,6 @@ type DeleteTakeOverRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	AccessToken        *string `json:"accessToken"`
 	Type               *int32  `json:"type"`
-	UserIdentifier     *string `json:"userIdentifier"`
 }
 
 func (p *DeleteTakeOverRequest) UnmarshalJSON(data []byte) error {
@@ -4333,29 +4332,6 @@ func (p *DeleteTakeOverRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["type"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Type)
 		}
-		if v, ok := d["userIdentifier"]; ok && v != nil {
-			var temp interface{}
-			if err := json.Unmarshal(*v, &temp); err == nil {
-				switch v2 := temp.(type) {
-				case string:
-					p.UserIdentifier = &v2
-				case float64:
-					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
-					p.UserIdentifier = &strValue
-				case int:
-					strValue := strconv.Itoa(v2)
-					p.UserIdentifier = &strValue
-				case int32:
-					strValue := strconv.Itoa(int(v2))
-					p.UserIdentifier = &strValue
-				case int64:
-					strValue := strconv.Itoa(int(v2))
-					p.UserIdentifier = &strValue
-				default:
-					_ = json.Unmarshal(*v, &p.UserIdentifier)
-				}
-			}
-		}
 	}
 	return nil
 }
@@ -4371,19 +4347,17 @@ func NewDeleteTakeOverRequestFromJson(data string) (DeleteTakeOverRequest, error
 
 func NewDeleteTakeOverRequestFromDict(data map[string]interface{}) DeleteTakeOverRequest {
 	return DeleteTakeOverRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		Type:           core.CastInt32(data["type"]),
-		UserIdentifier: core.CastString(data["userIdentifier"]),
+		NamespaceName: core.CastString(data["namespaceName"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		Type:          core.CastInt32(data["type"]),
 	}
 }
 
 func (p DeleteTakeOverRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":  p.NamespaceName,
-		"accessToken":    p.AccessToken,
-		"type":           p.Type,
-		"userIdentifier": p.UserIdentifier,
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"type":          p.Type,
 	}
 }
 

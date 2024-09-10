@@ -2272,6 +2272,184 @@ func CastExecuteStampTaskLogCountsFromDict(data []ExecuteStampTaskLogCount) []in
 	return v
 }
 
+type InGameLog struct {
+	Timestamp *int64         `json:"timestamp"`
+	RequestId *string        `json:"requestId"`
+	UserId    *string        `json:"userId"`
+	Tags      []InGameLogTag `json:"tags"`
+	Payload   *string        `json:"payload"`
+}
+
+func (p *InGameLog) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InGameLog{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InGameLog{}
+	} else {
+		*p = InGameLog{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["timestamp"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Timestamp)
+		}
+		if v, ok := d["requestId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RequestId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RequestId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RequestId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RequestId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RequestId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RequestId)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["tags"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Tags)
+		}
+		if v, ok := d["payload"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Payload = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Payload = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Payload = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Payload = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Payload)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewInGameLogFromJson(data string) InGameLog {
+	req := InGameLog{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewInGameLogFromDict(data map[string]interface{}) InGameLog {
+	return InGameLog{
+		Timestamp: core.CastInt64(data["timestamp"]),
+		RequestId: core.CastString(data["requestId"]),
+		UserId:    core.CastString(data["userId"]),
+		Tags:      CastInGameLogTags(core.CastArray(data["tags"])),
+		Payload:   core.CastString(data["payload"]),
+	}
+}
+
+func (p InGameLog) ToDict() map[string]interface{} {
+
+	var timestamp *int64
+	if p.Timestamp != nil {
+		timestamp = p.Timestamp
+	}
+	var requestId *string
+	if p.RequestId != nil {
+		requestId = p.RequestId
+	}
+	var userId *string
+	if p.UserId != nil {
+		userId = p.UserId
+	}
+	var tags []interface{}
+	if p.Tags != nil {
+		tags = CastInGameLogTagsFromDict(
+			p.Tags,
+		)
+	}
+	var payload *string
+	if p.Payload != nil {
+		payload = p.Payload
+	}
+	return map[string]interface{}{
+		"timestamp": timestamp,
+		"requestId": requestId,
+		"userId":    userId,
+		"tags":      tags,
+		"payload":   payload,
+	}
+}
+
+func (p InGameLog) Pointer() *InGameLog {
+	return &p
+}
+
+func CastInGameLogs(data []interface{}) []InGameLog {
+	v := make([]InGameLog, 0)
+	for _, d := range data {
+		v = append(v, NewInGameLogFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastInGameLogsFromDict(data []InGameLog) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type AccessLogWithTelemetry struct {
 	Timestamp       *int64  `json:"timestamp"`
 	SourceRequestId *string `json:"sourceRequestId"`
@@ -2857,6 +3035,132 @@ func CastInsights(data []interface{}) []Insight {
 }
 
 func CastInsightsFromDict(data []Insight) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type InGameLogTag struct {
+	Key   *string `json:"key"`
+	Value *string `json:"value"`
+}
+
+func (p *InGameLogTag) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InGameLogTag{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InGameLogTag{}
+	} else {
+		*p = InGameLogTag{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["key"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Key = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Key = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Key = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Key = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Key = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Key)
+				}
+			}
+		}
+		if v, ok := d["value"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Value = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Value = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Value = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Value = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Value)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewInGameLogTagFromJson(data string) InGameLogTag {
+	req := InGameLogTag{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewInGameLogTagFromDict(data map[string]interface{}) InGameLogTag {
+	return InGameLogTag{
+		Key:   core.CastString(data["key"]),
+		Value: core.CastString(data["value"]),
+	}
+}
+
+func (p InGameLogTag) ToDict() map[string]interface{} {
+
+	var key *string
+	if p.Key != nil {
+		key = p.Key
+	}
+	var value *string
+	if p.Value != nil {
+		value = p.Value
+	}
+	return map[string]interface{}{
+		"key":   key,
+		"value": value,
+	}
+}
+
+func (p InGameLogTag) Pointer() *InGameLogTag {
+	return &p
+}
+
+func CastInGameLogTags(data []interface{}) []InGameLogTag {
+	v := make([]InGameLogTag, 0)
+	for _, d := range data {
+		v = append(v, NewInGameLogTagFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastInGameLogTagsFromDict(data []InGameLogTag) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
