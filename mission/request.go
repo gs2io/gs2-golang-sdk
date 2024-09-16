@@ -6552,7 +6552,9 @@ type VerifyCounterValueRequest struct {
 	AccessToken                     *string `json:"accessToken"`
 	CounterName                     *string `json:"counterName"`
 	VerifyType                      *string `json:"verifyType"`
+	ScopeType                       *string `json:"scopeType"`
 	ResetType                       *string `json:"resetType"`
+	ConditionName                   *string `json:"conditionName"`
 	Value                           *int64  `json:"value"`
 	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 }
@@ -6671,6 +6673,29 @@ func (p *VerifyCounterValueRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["scopeType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ScopeType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ScopeType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ScopeType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ScopeType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ScopeType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ScopeType)
+				}
+			}
+		}
 		if v, ok := d["resetType"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -6691,6 +6716,29 @@ func (p *VerifyCounterValueRequest) UnmarshalJSON(data []byte) error {
 					p.ResetType = &strValue
 				default:
 					_ = json.Unmarshal(*v, &p.ResetType)
+				}
+			}
+		}
+		if v, ok := d["conditionName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ConditionName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ConditionName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ConditionName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ConditionName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ConditionName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ConditionName)
 				}
 			}
 		}
@@ -6719,7 +6767,9 @@ func NewVerifyCounterValueRequestFromDict(data map[string]interface{}) VerifyCou
 		AccessToken:                     core.CastString(data["accessToken"]),
 		CounterName:                     core.CastString(data["counterName"]),
 		VerifyType:                      core.CastString(data["verifyType"]),
+		ScopeType:                       core.CastString(data["scopeType"]),
 		ResetType:                       core.CastString(data["resetType"]),
+		ConditionName:                   core.CastString(data["conditionName"]),
 		Value:                           core.CastInt64(data["value"]),
 		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 	}
@@ -6731,7 +6781,9 @@ func (p VerifyCounterValueRequest) ToDict() map[string]interface{} {
 		"accessToken":                     p.AccessToken,
 		"counterName":                     p.CounterName,
 		"verifyType":                      p.VerifyType,
+		"scopeType":                       p.ScopeType,
 		"resetType":                       p.ResetType,
+		"conditionName":                   p.ConditionName,
 		"value":                           p.Value,
 		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 	}
@@ -6750,7 +6802,9 @@ type VerifyCounterValueByUserIdRequest struct {
 	UserId                          *string `json:"userId"`
 	CounterName                     *string `json:"counterName"`
 	VerifyType                      *string `json:"verifyType"`
+	ScopeType                       *string `json:"scopeType"`
 	ResetType                       *string `json:"resetType"`
+	ConditionName                   *string `json:"conditionName"`
 	Value                           *int64  `json:"value"`
 	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 	TimeOffsetToken                 *string `json:"timeOffsetToken"`
@@ -6870,6 +6924,29 @@ func (p *VerifyCounterValueByUserIdRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["scopeType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ScopeType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ScopeType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ScopeType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ScopeType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ScopeType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ScopeType)
+				}
+			}
+		}
 		if v, ok := d["resetType"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -6890,6 +6967,29 @@ func (p *VerifyCounterValueByUserIdRequest) UnmarshalJSON(data []byte) error {
 					p.ResetType = &strValue
 				default:
 					_ = json.Unmarshal(*v, &p.ResetType)
+				}
+			}
+		}
+		if v, ok := d["conditionName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ConditionName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ConditionName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ConditionName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ConditionName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ConditionName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ConditionName)
 				}
 			}
 		}
@@ -6941,7 +7041,9 @@ func NewVerifyCounterValueByUserIdRequestFromDict(data map[string]interface{}) V
 		UserId:                          core.CastString(data["userId"]),
 		CounterName:                     core.CastString(data["counterName"]),
 		VerifyType:                      core.CastString(data["verifyType"]),
+		ScopeType:                       core.CastString(data["scopeType"]),
 		ResetType:                       core.CastString(data["resetType"]),
+		ConditionName:                   core.CastString(data["conditionName"]),
 		Value:                           core.CastInt64(data["value"]),
 		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
 		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
@@ -6954,7 +7056,9 @@ func (p VerifyCounterValueByUserIdRequest) ToDict() map[string]interface{} {
 		"userId":                          p.UserId,
 		"counterName":                     p.CounterName,
 		"verifyType":                      p.VerifyType,
+		"scopeType":                       p.ScopeType,
 		"resetType":                       p.ResetType,
+		"conditionName":                   p.ConditionName,
 		"value":                           p.Value,
 		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
 		"timeOffsetToken":                 p.TimeOffsetToken,

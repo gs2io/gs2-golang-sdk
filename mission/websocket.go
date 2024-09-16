@@ -4244,8 +4244,14 @@ func (p Gs2MissionWebSocketClient) VerifyCounterValueAsync(
 	if request.VerifyType != nil && *request.VerifyType != "" {
 		bodies["verifyType"] = *request.VerifyType
 	}
+	if request.ScopeType != nil && *request.ScopeType != "" {
+		bodies["scopeType"] = *request.ScopeType
+	}
 	if request.ResetType != nil && *request.ResetType != "" {
 		bodies["resetType"] = *request.ResetType
+	}
+	if request.ConditionName != nil && *request.ConditionName != "" {
+		bodies["conditionName"] = *request.ConditionName
 	}
 	if request.Value != nil {
 		bodies["value"] = *request.Value
@@ -4349,8 +4355,14 @@ func (p Gs2MissionWebSocketClient) VerifyCounterValueByUserIdAsync(
 	if request.VerifyType != nil && *request.VerifyType != "" {
 		bodies["verifyType"] = *request.VerifyType
 	}
+	if request.ScopeType != nil && *request.ScopeType != "" {
+		bodies["scopeType"] = *request.ScopeType
+	}
 	if request.ResetType != nil && *request.ResetType != "" {
 		bodies["resetType"] = *request.ResetType
+	}
+	if request.ConditionName != nil && *request.ConditionName != "" {
+		bodies["conditionName"] = *request.ConditionName
 	}
 	if request.Value != nil {
 		bodies["value"] = *request.Value

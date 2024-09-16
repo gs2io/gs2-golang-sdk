@@ -4705,8 +4705,14 @@ func (p Gs2MissionRestClient) VerifyCounterValueAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
+	if request.ScopeType != nil && *request.ScopeType != "" {
+		bodies["scopeType"] = *request.ScopeType
+	}
 	if request.ResetType != nil && *request.ResetType != "" {
 		bodies["resetType"] = *request.ResetType
+	}
+	if request.ConditionName != nil && *request.ConditionName != "" {
+		bodies["conditionName"] = *request.ConditionName
 	}
 	if request.Value != nil {
 		bodies["value"] = *request.Value
@@ -4825,8 +4831,14 @@ func (p Gs2MissionRestClient) VerifyCounterValueByUserIdAsync(
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
+	if request.ScopeType != nil && *request.ScopeType != "" {
+		bodies["scopeType"] = *request.ScopeType
+	}
 	if request.ResetType != nil && *request.ResetType != "" {
 		bodies["resetType"] = *request.ResetType
+	}
+	if request.ConditionName != nil && *request.ConditionName != "" {
+		bodies["conditionName"] = *request.ConditionName
 	}
 	if request.Value != nil {
 		bodies["value"] = *request.Value

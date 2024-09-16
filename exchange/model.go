@@ -1885,6 +1885,106 @@ func CastAwaitsFromDict(data []Await) []interface{} {
 	return v
 }
 
+type LogCost struct {
+	Base *float64   `json:"base"`
+	Adds []*float64 `json:"adds"`
+	Subs []*float64 `json:"subs"`
+}
+
+func (p *LogCost) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LogCost{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LogCost{}
+	} else {
+		*p = LogCost{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["base"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Base)
+		}
+		if v, ok := d["adds"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Adds)
+		}
+		if v, ok := d["subs"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Subs)
+		}
+	}
+	return nil
+}
+
+func NewLogCostFromJson(data string) LogCost {
+	req := LogCost{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewLogCostFromDict(data map[string]interface{}) LogCost {
+	return LogCost{
+		Base: core.CastFloat64(data["base"]),
+		Adds: core.CastFloat64s(core.CastArray(data["adds"])),
+		Subs: core.CastFloat64s(core.CastArray(data["subs"])),
+	}
+}
+
+func (p LogCost) ToDict() map[string]interface{} {
+
+	var base *float64
+	if p.Base != nil {
+		base = p.Base
+	}
+	var adds []interface{}
+	if p.Adds != nil {
+		adds = core.CastFloat64sFromDict(
+			p.Adds,
+		)
+	}
+	var subs []interface{}
+	if p.Subs != nil {
+		subs = core.CastFloat64sFromDict(
+			p.Subs,
+		)
+	}
+	return map[string]interface{}{
+		"base": base,
+		"adds": adds,
+		"subs": subs,
+	}
+}
+
+func (p LogCost) Pointer() *LogCost {
+	return &p
+}
+
+func CastLogCosts(data []interface{}) []LogCost {
+	v := make([]LogCost, 0)
+	for _, d := range data {
+		v = append(v, NewLogCostFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogCostsFromDict(data []LogCost) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type AcquireAction struct {
 	Action  *string `json:"action"`
 	Request *string `json:"request"`

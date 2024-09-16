@@ -684,10 +684,13 @@ func CastCounterModelMastersFromDict(data []CounterModelMaster) []interface{} {
 }
 
 type CounterScopeModel struct {
-	ResetType       *string `json:"resetType"`
-	ResetDayOfMonth *int32  `json:"resetDayOfMonth"`
-	ResetDayOfWeek  *string `json:"resetDayOfWeek"`
-	ResetHour       *int32  `json:"resetHour"`
+	ScopeType       *string       `json:"scopeType"`
+	ResetType       *string       `json:"resetType"`
+	ResetDayOfMonth *int32        `json:"resetDayOfMonth"`
+	ResetDayOfWeek  *string       `json:"resetDayOfWeek"`
+	ResetHour       *int32        `json:"resetHour"`
+	ConditionName   *string       `json:"conditionName"`
+	Condition       *VerifyAction `json:"condition"`
 }
 
 func (p *CounterScopeModel) UnmarshalJSON(data []byte) error {
@@ -711,6 +714,29 @@ func (p *CounterScopeModel) UnmarshalJSON(data []byte) error {
 		d := map[string]*json.RawMessage{}
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
+		}
+		if v, ok := d["scopeType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ScopeType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ScopeType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ScopeType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ScopeType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ScopeType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ScopeType)
+				}
+			}
 		}
 		if v, ok := d["resetType"]; ok && v != nil {
 			var temp interface{}
@@ -764,6 +790,32 @@ func (p *CounterScopeModel) UnmarshalJSON(data []byte) error {
 		if v, ok := d["resetHour"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.ResetHour)
 		}
+		if v, ok := d["conditionName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ConditionName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ConditionName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ConditionName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ConditionName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ConditionName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ConditionName)
+				}
+			}
+		}
+		if v, ok := d["condition"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Condition)
+		}
 	}
 	return nil
 }
@@ -776,15 +828,22 @@ func NewCounterScopeModelFromJson(data string) CounterScopeModel {
 
 func NewCounterScopeModelFromDict(data map[string]interface{}) CounterScopeModel {
 	return CounterScopeModel{
+		ScopeType:       core.CastString(data["scopeType"]),
 		ResetType:       core.CastString(data["resetType"]),
 		ResetDayOfMonth: core.CastInt32(data["resetDayOfMonth"]),
 		ResetDayOfWeek:  core.CastString(data["resetDayOfWeek"]),
 		ResetHour:       core.CastInt32(data["resetHour"]),
+		ConditionName:   core.CastString(data["conditionName"]),
+		Condition:       NewVerifyActionFromDict(core.CastMap(data["condition"])).Pointer(),
 	}
 }
 
 func (p CounterScopeModel) ToDict() map[string]interface{} {
 
+	var scopeType *string
+	if p.ScopeType != nil {
+		scopeType = p.ScopeType
+	}
 	var resetType *string
 	if p.ResetType != nil {
 		resetType = p.ResetType
@@ -801,11 +860,22 @@ func (p CounterScopeModel) ToDict() map[string]interface{} {
 	if p.ResetHour != nil {
 		resetHour = p.ResetHour
 	}
+	var conditionName *string
+	if p.ConditionName != nil {
+		conditionName = p.ConditionName
+	}
+	var condition map[string]interface{}
+	if p.Condition != nil {
+		condition = p.Condition.ToDict()
+	}
 	return map[string]interface{}{
+		"scopeType":       scopeType,
 		"resetType":       resetType,
 		"resetDayOfMonth": resetDayOfMonth,
 		"resetDayOfWeek":  resetDayOfWeek,
 		"resetHour":       resetHour,
+		"conditionName":   conditionName,
+		"condition":       condition,
 	}
 }
 
@@ -3030,10 +3100,12 @@ func CastMissionTaskModelMastersFromDict(data []MissionTaskModelMaster) []interf
 }
 
 type ScopedValue struct {
-	ResetType   *string `json:"resetType"`
-	Value       *int64  `json:"value"`
-	NextResetAt *int64  `json:"nextResetAt"`
-	UpdatedAt   *int64  `json:"updatedAt"`
+	ScopeType     *string `json:"scopeType"`
+	ResetType     *string `json:"resetType"`
+	ConditionName *string `json:"conditionName"`
+	Value         *int64  `json:"value"`
+	NextResetAt   *int64  `json:"nextResetAt"`
+	UpdatedAt     *int64  `json:"updatedAt"`
 }
 
 func (p *ScopedValue) UnmarshalJSON(data []byte) error {
@@ -3058,6 +3130,29 @@ func (p *ScopedValue) UnmarshalJSON(data []byte) error {
 		if err := json.Unmarshal([]byte(str), &d); err != nil {
 			return err
 		}
+		if v, ok := d["scopeType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ScopeType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ScopeType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ScopeType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ScopeType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ScopeType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ScopeType)
+				}
+			}
+		}
 		if v, ok := d["resetType"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -3078,6 +3173,29 @@ func (p *ScopedValue) UnmarshalJSON(data []byte) error {
 					p.ResetType = &strValue
 				default:
 					_ = json.Unmarshal(*v, &p.ResetType)
+				}
+			}
+		}
+		if v, ok := d["conditionName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ConditionName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ConditionName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ConditionName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ConditionName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ConditionName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ConditionName)
 				}
 			}
 		}
@@ -3102,18 +3220,28 @@ func NewScopedValueFromJson(data string) ScopedValue {
 
 func NewScopedValueFromDict(data map[string]interface{}) ScopedValue {
 	return ScopedValue{
-		ResetType:   core.CastString(data["resetType"]),
-		Value:       core.CastInt64(data["value"]),
-		NextResetAt: core.CastInt64(data["nextResetAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
+		ScopeType:     core.CastString(data["scopeType"]),
+		ResetType:     core.CastString(data["resetType"]),
+		ConditionName: core.CastString(data["conditionName"]),
+		Value:         core.CastInt64(data["value"]),
+		NextResetAt:   core.CastInt64(data["nextResetAt"]),
+		UpdatedAt:     core.CastInt64(data["updatedAt"]),
 	}
 }
 
 func (p ScopedValue) ToDict() map[string]interface{} {
 
+	var scopeType *string
+	if p.ScopeType != nil {
+		scopeType = p.ScopeType
+	}
 	var resetType *string
 	if p.ResetType != nil {
 		resetType = p.ResetType
+	}
+	var conditionName *string
+	if p.ConditionName != nil {
+		conditionName = p.ConditionName
 	}
 	var value *int64
 	if p.Value != nil {
@@ -3128,10 +3256,12 @@ func (p ScopedValue) ToDict() map[string]interface{} {
 		updatedAt = p.UpdatedAt
 	}
 	return map[string]interface{}{
-		"resetType":   resetType,
-		"value":       value,
-		"nextResetAt": nextResetAt,
-		"updatedAt":   updatedAt,
+		"scopeType":     scopeType,
+		"resetType":     resetType,
+		"conditionName": conditionName,
+		"value":         value,
+		"nextResetAt":   nextResetAt,
+		"updatedAt":     updatedAt,
 	}
 }
 
@@ -3156,9 +3286,11 @@ func CastScopedValuesFromDict(data []ScopedValue) []interface{} {
 }
 
 type TargetCounterModel struct {
-	CounterName *string `json:"counterName"`
-	ResetType   *string `json:"resetType"`
-	Value       *int64  `json:"value"`
+	CounterName   *string `json:"counterName"`
+	ScopeType     *string `json:"scopeType"`
+	ResetType     *string `json:"resetType"`
+	ConditionName *string `json:"conditionName"`
+	Value         *int64  `json:"value"`
 }
 
 func (p *TargetCounterModel) UnmarshalJSON(data []byte) error {
@@ -3206,6 +3338,29 @@ func (p *TargetCounterModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["scopeType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ScopeType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ScopeType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ScopeType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ScopeType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ScopeType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ScopeType)
+				}
+			}
+		}
 		if v, ok := d["resetType"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -3229,6 +3384,29 @@ func (p *TargetCounterModel) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["conditionName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ConditionName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ConditionName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ConditionName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ConditionName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ConditionName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ConditionName)
+				}
+			}
+		}
 		if v, ok := d["value"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.Value)
 		}
@@ -3244,9 +3422,11 @@ func NewTargetCounterModelFromJson(data string) TargetCounterModel {
 
 func NewTargetCounterModelFromDict(data map[string]interface{}) TargetCounterModel {
 	return TargetCounterModel{
-		CounterName: core.CastString(data["counterName"]),
-		ResetType:   core.CastString(data["resetType"]),
-		Value:       core.CastInt64(data["value"]),
+		CounterName:   core.CastString(data["counterName"]),
+		ScopeType:     core.CastString(data["scopeType"]),
+		ResetType:     core.CastString(data["resetType"]),
+		ConditionName: core.CastString(data["conditionName"]),
+		Value:         core.CastInt64(data["value"]),
 	}
 }
 
@@ -3256,18 +3436,28 @@ func (p TargetCounterModel) ToDict() map[string]interface{} {
 	if p.CounterName != nil {
 		counterName = p.CounterName
 	}
+	var scopeType *string
+	if p.ScopeType != nil {
+		scopeType = p.ScopeType
+	}
 	var resetType *string
 	if p.ResetType != nil {
 		resetType = p.ResetType
+	}
+	var conditionName *string
+	if p.ConditionName != nil {
+		conditionName = p.ConditionName
 	}
 	var value *int64
 	if p.Value != nil {
 		value = p.Value
 	}
 	return map[string]interface{}{
-		"counterName": counterName,
-		"resetType":   resetType,
-		"value":       value,
+		"counterName":   counterName,
+		"scopeType":     scopeType,
+		"resetType":     resetType,
+		"conditionName": conditionName,
+		"value":         value,
 	}
 }
 
