@@ -831,6 +831,58 @@ func (p DeleteTriggerByUserIdResult) Pointer() *DeleteTriggerByUserIdResult {
 	return &p
 }
 
+type VerifyTriggerResult struct {
+}
+
+type VerifyTriggerAsyncResult struct {
+	result *VerifyTriggerResult
+	err    error
+}
+
+func NewVerifyTriggerResultFromJson(data string) VerifyTriggerResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyTriggerResultFromDict(dict)
+}
+
+func NewVerifyTriggerResultFromDict(data map[string]interface{}) VerifyTriggerResult {
+	return VerifyTriggerResult{}
+}
+
+func (p VerifyTriggerResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyTriggerResult) Pointer() *VerifyTriggerResult {
+	return &p
+}
+
+type VerifyTriggerByUserIdResult struct {
+}
+
+type VerifyTriggerByUserIdAsyncResult struct {
+	result *VerifyTriggerByUserIdResult
+	err    error
+}
+
+func NewVerifyTriggerByUserIdResultFromJson(data string) VerifyTriggerByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyTriggerByUserIdResultFromDict(dict)
+}
+
+func NewVerifyTriggerByUserIdResultFromDict(data map[string]interface{}) VerifyTriggerByUserIdResult {
+	return VerifyTriggerByUserIdResult{}
+}
+
+func (p VerifyTriggerByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
+func (p VerifyTriggerByUserIdResult) Pointer() *VerifyTriggerByUserIdResult {
+	return &p
+}
+
 type DeleteTriggerByStampTaskResult struct {
 	Item            *Trigger `json:"item"`
 	NewContextStack *string  `json:"newContextStack"`
@@ -862,6 +914,37 @@ func (p DeleteTriggerByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p DeleteTriggerByStampTaskResult) Pointer() *DeleteTriggerByStampTaskResult {
+	return &p
+}
+
+type VerifyTriggerByStampTaskResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type VerifyTriggerByStampTaskAsyncResult struct {
+	result *VerifyTriggerByStampTaskResult
+	err    error
+}
+
+func NewVerifyTriggerByStampTaskResultFromJson(data string) VerifyTriggerByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyTriggerByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyTriggerByStampTaskResultFromDict(data map[string]interface{}) VerifyTriggerByStampTaskResult {
+	return VerifyTriggerByStampTaskResult{
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyTriggerByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyTriggerByStampTaskResult) Pointer() *VerifyTriggerByStampTaskResult {
 	return &p
 }
 

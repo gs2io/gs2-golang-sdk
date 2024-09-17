@@ -2613,6 +2613,229 @@ func (p Gs2ScheduleRestClient) DeleteTriggerByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func verifyTriggerAsyncHandler(
+	client Gs2ScheduleRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyTriggerAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyTriggerAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyTriggerResult
+	if asyncResult.Err != nil {
+		callback <- VerifyTriggerAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyTriggerAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyTriggerAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ScheduleRestClient) VerifyTriggerAsync(
+	request *VerifyTriggerRequest,
+	callback chan<- VerifyTriggerAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/trigger/{triggerName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.TriggerName != nil && *request.TriggerName != "" {
+		path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
+	} else {
+		path = strings.ReplaceAll(path, "{triggerName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ElapsedMinutes != nil {
+		bodies["elapsedMinutes"] = *request.ElapsedMinutes
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyTriggerAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ScheduleRestClient) VerifyTrigger(
+	request *VerifyTriggerRequest,
+) (*VerifyTriggerResult, error) {
+	callback := make(chan VerifyTriggerAsyncResult, 1)
+	go p.VerifyTriggerAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyTriggerByUserIdAsyncHandler(
+	client Gs2ScheduleRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyTriggerByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyTriggerByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyTriggerByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyTriggerByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyTriggerByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyTriggerByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ScheduleRestClient) VerifyTriggerByUserIdAsync(
+	request *VerifyTriggerByUserIdRequest,
+	callback chan<- VerifyTriggerByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/trigger/{triggerName}/verify/{verifyType}"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.TriggerName != nil && *request.TriggerName != "" {
+		path = strings.ReplaceAll(path, "{triggerName}", core.ToString(*request.TriggerName))
+	} else {
+		path = strings.ReplaceAll(path, "{triggerName}", "null")
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		path = strings.ReplaceAll(path, "{verifyType}", core.ToString(*request.VerifyType))
+	} else {
+		path = strings.ReplaceAll(path, "{verifyType}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.ElapsedMinutes != nil {
+		bodies["elapsedMinutes"] = *request.ElapsedMinutes
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go verifyTriggerByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ScheduleRestClient) VerifyTriggerByUserId(
+	request *VerifyTriggerByUserIdRequest,
+) (*VerifyTriggerByUserIdResult, error) {
+	callback := make(chan VerifyTriggerByUserIdAsyncResult, 1)
+	go p.VerifyTriggerByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func deleteTriggerByStampTaskAsyncHandler(
 	client Gs2ScheduleRestClient,
 	job *core.NetworkJob,
@@ -2697,6 +2920,97 @@ func (p Gs2ScheduleRestClient) DeleteTriggerByStampTask(
 ) (*DeleteTriggerByStampTaskResult, error) {
 	callback := make(chan DeleteTriggerByStampTaskAsyncResult, 1)
 	go p.DeleteTriggerByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyTriggerByStampTaskAsyncHandler(
+	client Gs2ScheduleRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyTriggerByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyTriggerByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyTriggerByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyTriggerByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyTriggerByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyTriggerByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ScheduleRestClient) VerifyTriggerByStampTaskAsync(
+	request *VerifyTriggerByStampTaskRequest,
+	callback chan<- VerifyTriggerByStampTaskAsyncResult,
+) {
+	path := "/stamp/trigger/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifyTriggerByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("schedule").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ScheduleRestClient) VerifyTriggerByStampTask(
+	request *VerifyTriggerByStampTaskRequest,
+) (*VerifyTriggerByStampTaskResult, error) {
+	callback := make(chan VerifyTriggerByStampTaskAsyncResult, 1)
+	go p.VerifyTriggerByStampTaskAsync(
 		request,
 		callback,
 	)

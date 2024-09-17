@@ -3572,6 +3572,364 @@ func (p DeleteTriggerByUserIdRequest) Pointer() *DeleteTriggerByUserIdRequest {
 	return &p
 }
 
+type VerifyTriggerRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	AccessToken        *string `json:"accessToken"`
+	TriggerName        *string `json:"triggerName"`
+	VerifyType         *string `json:"verifyType"`
+	ElapsedMinutes     *int32  `json:"elapsedMinutes"`
+}
+
+func (p *VerifyTriggerRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyTriggerRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyTriggerRequest{}
+	} else {
+		*p = VerifyTriggerRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["triggerName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TriggerName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TriggerName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TriggerName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TriggerName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["elapsedMinutes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ElapsedMinutes)
+		}
+	}
+	return nil
+}
+
+func NewVerifyTriggerRequestFromJson(data string) (VerifyTriggerRequest, error) {
+	req := VerifyTriggerRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyTriggerRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyTriggerRequestFromDict(data map[string]interface{}) VerifyTriggerRequest {
+	return VerifyTriggerRequest{
+		NamespaceName:  core.CastString(data["namespaceName"]),
+		AccessToken:    core.CastString(data["accessToken"]),
+		TriggerName:    core.CastString(data["triggerName"]),
+		VerifyType:     core.CastString(data["verifyType"]),
+		ElapsedMinutes: core.CastInt32(data["elapsedMinutes"]),
+	}
+}
+
+func (p VerifyTriggerRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"accessToken":    p.AccessToken,
+		"triggerName":    p.TriggerName,
+		"verifyType":     p.VerifyType,
+		"elapsedMinutes": p.ElapsedMinutes,
+	}
+}
+
+func (p VerifyTriggerRequest) Pointer() *VerifyTriggerRequest {
+	return &p
+}
+
+type VerifyTriggerByUserIdRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	TriggerName        *string `json:"triggerName"`
+	VerifyType         *string `json:"verifyType"`
+	ElapsedMinutes     *int32  `json:"elapsedMinutes"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+}
+
+func (p *VerifyTriggerByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyTriggerByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyTriggerByUserIdRequest{}
+	} else {
+		*p = VerifyTriggerByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["triggerName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TriggerName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TriggerName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TriggerName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TriggerName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TriggerName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["elapsedMinutes"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ElapsedMinutes)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyTriggerByUserIdRequestFromJson(data string) (VerifyTriggerByUserIdRequest, error) {
+	req := VerifyTriggerByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyTriggerByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyTriggerByUserIdRequestFromDict(data map[string]interface{}) VerifyTriggerByUserIdRequest {
+	return VerifyTriggerByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		UserId:          core.CastString(data["userId"]),
+		TriggerName:     core.CastString(data["triggerName"]),
+		VerifyType:      core.CastString(data["verifyType"]),
+		ElapsedMinutes:  core.CastInt32(data["elapsedMinutes"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p VerifyTriggerByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"triggerName":     p.TriggerName,
+		"verifyType":      p.VerifyType,
+		"elapsedMinutes":  p.ElapsedMinutes,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p VerifyTriggerByUserIdRequest) Pointer() *VerifyTriggerByUserIdRequest {
+	return &p
+}
+
 type DeleteTriggerByStampTaskRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`
@@ -3676,6 +4034,113 @@ func (p DeleteTriggerByStampTaskRequest) ToDict() map[string]interface{} {
 }
 
 func (p DeleteTriggerByStampTaskRequest) Pointer() *DeleteTriggerByStampTaskRequest {
+	return &p
+}
+
+type VerifyTriggerByStampTaskRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *VerifyTriggerByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyTriggerByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyTriggerByStampTaskRequest{}
+	} else {
+		*p = VerifyTriggerByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyTriggerByStampTaskRequestFromJson(data string) (VerifyTriggerByStampTaskRequest, error) {
+	req := VerifyTriggerByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyTriggerByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyTriggerByStampTaskRequestFromDict(data map[string]interface{}) VerifyTriggerByStampTaskRequest {
+	return VerifyTriggerByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p VerifyTriggerByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyTriggerByStampTaskRequest) Pointer() *VerifyTriggerByStampTaskRequest {
 	return &p
 }
 
