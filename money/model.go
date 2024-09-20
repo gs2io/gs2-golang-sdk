@@ -328,15 +328,30 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var createWalletScript map[string]interface{}
 	if p.CreateWalletScript != nil {
-		createWalletScript = p.CreateWalletScript.ToDict()
+		createWalletScript = func() map[string]interface{} {
+			if p.CreateWalletScript == nil {
+				return nil
+			}
+			return p.CreateWalletScript.ToDict()
+		}()
 	}
 	var depositScript map[string]interface{}
 	if p.DepositScript != nil {
-		depositScript = p.DepositScript.ToDict()
+		depositScript = func() map[string]interface{} {
+			if p.DepositScript == nil {
+				return nil
+			}
+			return p.DepositScript.ToDict()
+		}()
 	}
 	var withdrawScript map[string]interface{}
 	if p.WithdrawScript != nil {
-		withdrawScript = p.WithdrawScript.ToDict()
+		withdrawScript = func() map[string]interface{} {
+			if p.WithdrawScript == nil {
+				return nil
+			}
+			return p.WithdrawScript.ToDict()
+		}()
 	}
 	var balance *float64
 	if p.Balance != nil {
@@ -344,7 +359,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

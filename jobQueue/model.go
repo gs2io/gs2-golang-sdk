@@ -193,15 +193,30 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var runNotification map[string]interface{}
 	if p.RunNotification != nil {
-		runNotification = p.RunNotification.ToDict()
+		runNotification = func() map[string]interface{} {
+			if p.RunNotification == nil {
+				return nil
+			}
+			return p.RunNotification.ToDict()
+		}()
 	}
 	var pushNotification map[string]interface{}
 	if p.PushNotification != nil {
-		pushNotification = p.PushNotification.ToDict()
+		pushNotification = func() map[string]interface{} {
+			if p.PushNotification == nil {
+				return nil
+			}
+			return p.PushNotification.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

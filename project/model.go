@@ -24,14 +24,16 @@ import (
 )
 
 type Account struct {
-	AccountId   *string `json:"accountId"`
-	Name        *string `json:"name"`
-	Email       *string `json:"email"`
-	FullName    *string `json:"fullName"`
-	CompanyName *string `json:"companyName"`
-	Status      *string `json:"status"`
-	CreatedAt   *int64  `json:"createdAt"`
-	UpdatedAt   *int64  `json:"updatedAt"`
+	AccountId                      *string                         `json:"accountId"`
+	Name                           *string                         `json:"name"`
+	Email                          *string                         `json:"email"`
+	FullName                       *string                         `json:"fullName"`
+	CompanyName                    *string                         `json:"companyName"`
+	EnableTwoFactorAuthentication  *string                         `json:"enableTwoFactorAuthentication"`
+	TwoFactorAuthenticationSetting *TwoFactorAuthenticationSetting `json:"twoFactorAuthenticationSetting"`
+	Status                         *string                         `json:"status"`
+	CreatedAt                      *int64                          `json:"createdAt"`
+	UpdatedAt                      *int64                          `json:"updatedAt"`
 }
 
 func (p *Account) UnmarshalJSON(data []byte) error {
@@ -171,6 +173,32 @@ func (p *Account) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["enableTwoFactorAuthentication"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.EnableTwoFactorAuthentication = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.EnableTwoFactorAuthentication = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.EnableTwoFactorAuthentication = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.EnableTwoFactorAuthentication = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.EnableTwoFactorAuthentication = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.EnableTwoFactorAuthentication)
+				}
+			}
+		}
+		if v, ok := d["twoFactorAuthenticationSetting"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TwoFactorAuthenticationSetting)
+		}
 		if v, ok := d["status"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -212,14 +240,16 @@ func NewAccountFromJson(data string) Account {
 
 func NewAccountFromDict(data map[string]interface{}) Account {
 	return Account{
-		AccountId:   core.CastString(data["accountId"]),
-		Name:        core.CastString(data["name"]),
-		Email:       core.CastString(data["email"]),
-		FullName:    core.CastString(data["fullName"]),
-		CompanyName: core.CastString(data["companyName"]),
-		Status:      core.CastString(data["status"]),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
+		AccountId:                      core.CastString(data["accountId"]),
+		Name:                           core.CastString(data["name"]),
+		Email:                          core.CastString(data["email"]),
+		FullName:                       core.CastString(data["fullName"]),
+		CompanyName:                    core.CastString(data["companyName"]),
+		EnableTwoFactorAuthentication:  core.CastString(data["enableTwoFactorAuthentication"]),
+		TwoFactorAuthenticationSetting: NewTwoFactorAuthenticationSettingFromDict(core.CastMap(data["twoFactorAuthenticationSetting"])).Pointer(),
+		Status:                         core.CastString(data["status"]),
+		CreatedAt:                      core.CastInt64(data["createdAt"]),
+		UpdatedAt:                      core.CastInt64(data["updatedAt"]),
 	}
 }
 
@@ -245,6 +275,14 @@ func (p Account) ToDict() map[string]interface{} {
 	if p.CompanyName != nil {
 		companyName = p.CompanyName
 	}
+	var enableTwoFactorAuthentication *string
+	if p.EnableTwoFactorAuthentication != nil {
+		enableTwoFactorAuthentication = p.EnableTwoFactorAuthentication
+	}
+	var twoFactorAuthenticationSetting map[string]interface{}
+	if p.TwoFactorAuthenticationSetting != nil {
+		twoFactorAuthenticationSetting = p.TwoFactorAuthenticationSetting.ToDict()
+	}
 	var status *string
 	if p.Status != nil {
 		status = p.Status
@@ -258,14 +296,16 @@ func (p Account) ToDict() map[string]interface{} {
 		updatedAt = p.UpdatedAt
 	}
 	return map[string]interface{}{
-		"accountId":   accountId,
-		"name":        name,
-		"email":       email,
-		"fullName":    fullName,
-		"companyName": companyName,
-		"status":      status,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
+		"accountId":                      accountId,
+		"name":                           name,
+		"email":                          email,
+		"fullName":                       fullName,
+		"companyName":                    companyName,
+		"enableTwoFactorAuthentication":  enableTwoFactorAuthentication,
+		"twoFactorAuthenticationSetting": twoFactorAuthenticationSetting,
+		"status":                         status,
+		"createdAt":                      createdAt,
+		"updatedAt":                      updatedAt,
 	}
 }
 
@@ -1744,6 +1784,102 @@ func CastBillings(data []interface{}) []Billing {
 }
 
 func CastBillingsFromDict(data []Billing) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type TwoFactorAuthenticationSetting struct {
+	Status *string `json:"status"`
+}
+
+func (p *TwoFactorAuthenticationSetting) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = TwoFactorAuthenticationSetting{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = TwoFactorAuthenticationSetting{}
+	} else {
+		*p = TwoFactorAuthenticationSetting{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["status"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Status = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Status = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Status = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Status = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Status = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Status)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewTwoFactorAuthenticationSettingFromJson(data string) TwoFactorAuthenticationSetting {
+	req := TwoFactorAuthenticationSetting{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewTwoFactorAuthenticationSettingFromDict(data map[string]interface{}) TwoFactorAuthenticationSetting {
+	return TwoFactorAuthenticationSetting{
+		Status: core.CastString(data["status"]),
+	}
+}
+
+func (p TwoFactorAuthenticationSetting) ToDict() map[string]interface{} {
+
+	var status *string
+	if p.Status != nil {
+		status = p.Status
+	}
+	return map[string]interface{}{
+		"status": status,
+	}
+}
+
+func (p TwoFactorAuthenticationSetting) Pointer() *TwoFactorAuthenticationSetting {
+	return &p
+}
+
+func CastTwoFactorAuthenticationSettings(data []interface{}) []TwoFactorAuthenticationSetting {
+	v := make([]TwoFactorAuthenticationSetting, 0)
+	for _, d := range data {
+		v = append(v, NewTwoFactorAuthenticationSettingFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTwoFactorAuthenticationSettingsFromDict(data []TwoFactorAuthenticationSetting) []interface{} {
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())

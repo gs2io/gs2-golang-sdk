@@ -246,23 +246,48 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = p.TransactionSetting.ToDict()
+		transactionSetting = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	var startQuestScript map[string]interface{}
 	if p.StartQuestScript != nil {
-		startQuestScript = p.StartQuestScript.ToDict()
+		startQuestScript = func() map[string]interface{} {
+			if p.StartQuestScript == nil {
+				return nil
+			}
+			return p.StartQuestScript.ToDict()
+		}()
 	}
 	var completeQuestScript map[string]interface{}
 	if p.CompleteQuestScript != nil {
-		completeQuestScript = p.CompleteQuestScript.ToDict()
+		completeQuestScript = func() map[string]interface{} {
+			if p.CompleteQuestScript == nil {
+				return nil
+			}
+			return p.CompleteQuestScript.ToDict()
+		}()
 	}
 	var failedQuestScript map[string]interface{}
 	if p.FailedQuestScript != nil {
-		failedQuestScript = p.FailedQuestScript.ToDict()
+		failedQuestScript = func() map[string]interface{} {
+			if p.FailedQuestScript == nil {
+				return nil
+			}
+			return p.FailedQuestScript.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

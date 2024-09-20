@@ -189,19 +189,39 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = p.TransactionSetting.ToDict()
+		transactionSetting = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	var releaseScript map[string]interface{}
 	if p.ReleaseScript != nil {
-		releaseScript = p.ReleaseScript.ToDict()
+		releaseScript = func() map[string]interface{} {
+			if p.ReleaseScript == nil {
+				return nil
+			}
+			return p.ReleaseScript.ToDict()
+		}()
 	}
 	var restrainScript map[string]interface{}
 	if p.RestrainScript != nil {
-		restrainScript = p.RestrainScript.ToDict()
+		restrainScript = func() map[string]interface{} {
+			if p.RestrainScript == nil {
+				return nil
+			}
+			return p.RestrainScript.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

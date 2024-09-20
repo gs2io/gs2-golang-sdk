@@ -81,7 +81,12 @@ func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespa
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -143,7 +148,12 @@ func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResu
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -174,7 +184,12 @@ func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespa
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -205,7 +220,12 @@ func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespa
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -510,7 +530,12 @@ func NewPrepareUploadResultFromDict(data map[string]interface{}) PrepareUploadRe
 
 func (p PrepareUploadResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"uploadUrl": p.UploadUrl,
 	}
 }
@@ -544,7 +569,12 @@ func NewPrepareUploadByUserIdResultFromDict(data map[string]interface{}) Prepare
 
 func (p PrepareUploadByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"uploadUrl": p.UploadUrl,
 	}
 }
@@ -576,7 +606,12 @@ func NewUpdateDataObjectResultFromDict(data map[string]interface{}) UpdateDataOb
 
 func (p UpdateDataObjectResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -607,7 +642,12 @@ func NewUpdateDataObjectByUserIdResultFromDict(data map[string]interface{}) Upda
 
 func (p UpdateDataObjectByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -640,7 +680,12 @@ func NewPrepareReUploadResultFromDict(data map[string]interface{}) PrepareReUplo
 
 func (p PrepareReUploadResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"uploadUrl": p.UploadUrl,
 	}
 }
@@ -674,7 +719,12 @@ func NewPrepareReUploadByUserIdResultFromDict(data map[string]interface{}) Prepa
 
 func (p PrepareReUploadByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"uploadUrl": p.UploadUrl,
 	}
 }
@@ -706,7 +756,12 @@ func NewDoneUploadResultFromDict(data map[string]interface{}) DoneUploadResult {
 
 func (p DoneUploadResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -737,7 +792,12 @@ func NewDoneUploadByUserIdResultFromDict(data map[string]interface{}) DoneUpload
 
 func (p DoneUploadByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -768,7 +828,12 @@ func NewDeleteDataObjectResultFromDict(data map[string]interface{}) DeleteDataOb
 
 func (p DeleteDataObjectResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -799,7 +864,12 @@ func NewDeleteDataObjectByUserIdResultFromDict(data map[string]interface{}) Dele
 
 func (p DeleteDataObjectByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -834,7 +904,12 @@ func NewPrepareDownloadResultFromDict(data map[string]interface{}) PrepareDownlo
 
 func (p PrepareDownloadResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"fileUrl":       p.FileUrl,
 		"contentLength": p.ContentLength,
 	}
@@ -871,7 +946,12 @@ func NewPrepareDownloadByUserIdResultFromDict(data map[string]interface{}) Prepa
 
 func (p PrepareDownloadByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"fileUrl":       p.FileUrl,
 		"contentLength": p.ContentLength,
 	}
@@ -908,7 +988,12 @@ func NewPrepareDownloadByGenerationResultFromDict(data map[string]interface{}) P
 
 func (p PrepareDownloadByGenerationResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"fileUrl":       p.FileUrl,
 		"contentLength": p.ContentLength,
 	}
@@ -945,7 +1030,12 @@ func NewPrepareDownloadByGenerationAndUserIdResultFromDict(data map[string]inter
 
 func (p PrepareDownloadByGenerationAndUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"fileUrl":       p.FileUrl,
 		"contentLength": p.ContentLength,
 	}
@@ -982,7 +1072,12 @@ func NewPrepareDownloadOwnDataResultFromDict(data map[string]interface{}) Prepar
 
 func (p PrepareDownloadOwnDataResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"fileUrl":       p.FileUrl,
 		"contentLength": p.ContentLength,
 	}
@@ -1019,7 +1114,12 @@ func NewPrepareDownloadByUserIdAndDataObjectNameResultFromDict(data map[string]i
 
 func (p PrepareDownloadByUserIdAndDataObjectNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"fileUrl":       p.FileUrl,
 		"contentLength": p.ContentLength,
 	}
@@ -1056,7 +1156,12 @@ func NewPrepareDownloadOwnDataByGenerationResultFromDict(data map[string]interfa
 
 func (p PrepareDownloadOwnDataByGenerationResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"fileUrl":       p.FileUrl,
 		"contentLength": p.ContentLength,
 	}
@@ -1093,7 +1198,12 @@ func NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationResultFromDict(data
 
 func (p PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"fileUrl":       p.FileUrl,
 		"contentLength": p.ContentLength,
 	}
@@ -1126,7 +1236,12 @@ func NewRestoreDataObjectResultFromDict(data map[string]interface{}) RestoreData
 
 func (p RestoreDataObjectResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1229,7 +1344,12 @@ func NewGetDataObjectHistoryResultFromDict(data map[string]interface{}) GetDataO
 
 func (p GetDataObjectHistoryResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1260,7 +1380,12 @@ func NewGetDataObjectHistoryByUserIdResultFromDict(data map[string]interface{}) 
 
 func (p GetDataObjectHistoryByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 

@@ -264,6 +264,9 @@ func (p Gs2ProjectWebSocketClient) SignInAsync(
 	if request.Password != nil && *request.Password != "" {
 		bodies["password"] = *request.Password
 	}
+	if request.Otp != nil && *request.Otp != "" {
+		bodies["otp"] = *request.Otp
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -540,6 +543,252 @@ func (p Gs2ProjectWebSocketClient) UpdateAccount(
 ) (*UpdateAccountResult, error) {
 	callback := make(chan UpdateAccountAsyncResult, 1)
 	go p.UpdateAccountAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ProjectWebSocketClient) enableMfaAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- EnableMfaAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- EnableMfaAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result EnableMfaResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- EnableMfaAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- EnableMfaAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ProjectWebSocketClient) EnableMfaAsync(
+	request *EnableMfaRequest,
+	callback chan<- EnableMfaAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "project",
+			"component":   "account",
+			"function":    "enableMfa",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.AccountToken != nil && *request.AccountToken != "" {
+		bodies["accountToken"] = *request.AccountToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.enableMfaAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ProjectWebSocketClient) EnableMfa(
+	request *EnableMfaRequest,
+) (*EnableMfaResult, error) {
+	callback := make(chan EnableMfaAsyncResult, 1)
+	go p.EnableMfaAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ProjectWebSocketClient) challengeMfaAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- ChallengeMfaAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- ChallengeMfaAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result ChallengeMfaResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- ChallengeMfaAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- ChallengeMfaAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ProjectWebSocketClient) ChallengeMfaAsync(
+	request *ChallengeMfaRequest,
+	callback chan<- ChallengeMfaAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "project",
+			"component":   "account",
+			"function":    "challengeMfa",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.AccountToken != nil && *request.AccountToken != "" {
+		bodies["accountToken"] = *request.AccountToken
+	}
+	if request.Passcode != nil && *request.Passcode != "" {
+		bodies["passcode"] = *request.Passcode
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.challengeMfaAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ProjectWebSocketClient) ChallengeMfa(
+	request *ChallengeMfaRequest,
+) (*ChallengeMfaResult, error) {
+	callback := make(chan ChallengeMfaAsyncResult, 1)
+	go p.ChallengeMfaAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ProjectWebSocketClient) disableMfaAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DisableMfaAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DisableMfaAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DisableMfaResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DisableMfaAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DisableMfaAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ProjectWebSocketClient) DisableMfaAsync(
+	request *DisableMfaRequest,
+	callback chan<- DisableMfaAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "project",
+			"component":   "account",
+			"function":    "disableMfa",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.AccountToken != nil && *request.AccountToken != "" {
+		bodies["accountToken"] = *request.AccountToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.disableMfaAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ProjectWebSocketClient) DisableMfa(
+	request *DisableMfaRequest,
+) (*DisableMfaResult, error) {
+	callback := make(chan DisableMfaAsyncResult, 1)
+	go p.DisableMfaAsync(
 		request,
 		callback,
 	)
@@ -1055,6 +1304,9 @@ func (p Gs2ProjectWebSocketClient) GetProjectTokenByIdentifierAsync(
 	}
 	if request.Password != nil && *request.Password != "" {
 		bodies["password"] = *request.Password
+	}
+	if request.Otp != nil && *request.Otp != "" {
+		bodies["otp"] = *request.Otp
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

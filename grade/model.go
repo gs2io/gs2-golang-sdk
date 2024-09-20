@@ -184,15 +184,30 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = p.TransactionSetting.ToDict()
+		transactionSetting = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	var changeGradeScript map[string]interface{}
 	if p.ChangeGradeScript != nil {
-		changeGradeScript = p.ChangeGradeScript.ToDict()
+		changeGradeScript = func() map[string]interface{} {
+			if p.ChangeGradeScript == nil {
+				return nil
+			}
+			return p.ChangeGradeScript.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

@@ -212,23 +212,48 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var createAccountScript map[string]interface{}
 	if p.CreateAccountScript != nil {
-		createAccountScript = p.CreateAccountScript.ToDict()
+		createAccountScript = func() map[string]interface{} {
+			if p.CreateAccountScript == nil {
+				return nil
+			}
+			return p.CreateAccountScript.ToDict()
+		}()
 	}
 	var authenticationScript map[string]interface{}
 	if p.AuthenticationScript != nil {
-		authenticationScript = p.AuthenticationScript.ToDict()
+		authenticationScript = func() map[string]interface{} {
+			if p.AuthenticationScript == nil {
+				return nil
+			}
+			return p.AuthenticationScript.ToDict()
+		}()
 	}
 	var createTakeOverScript map[string]interface{}
 	if p.CreateTakeOverScript != nil {
-		createTakeOverScript = p.CreateTakeOverScript.ToDict()
+		createTakeOverScript = func() map[string]interface{} {
+			if p.CreateTakeOverScript == nil {
+				return nil
+			}
+			return p.CreateTakeOverScript.ToDict()
+		}()
 	}
 	var doTakeOverScript map[string]interface{}
 	if p.DoTakeOverScript != nil {
-		doTakeOverScript = p.DoTakeOverScript.ToDict()
+		doTakeOverScript = func() map[string]interface{} {
+			if p.DoTakeOverScript == nil {
+				return nil
+			}
+			return p.DoTakeOverScript.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -1191,7 +1216,12 @@ func (p TakeOverTypeModel) ToDict() map[string]interface{} {
 	}
 	var openIdConnectSetting map[string]interface{}
 	if p.OpenIdConnectSetting != nil {
-		openIdConnectSetting = p.OpenIdConnectSetting.ToDict()
+		openIdConnectSetting = func() map[string]interface{} {
+			if p.OpenIdConnectSetting == nil {
+				return nil
+			}
+			return p.OpenIdConnectSetting.ToDict()
+		}()
 	}
 	return map[string]interface{}{
 		"takeOverTypeModelId":  takeOverTypeModelId,
@@ -1381,7 +1411,12 @@ func (p TakeOverTypeModelMaster) ToDict() map[string]interface{} {
 	}
 	var openIdConnectSetting map[string]interface{}
 	if p.OpenIdConnectSetting != nil {
-		openIdConnectSetting = p.OpenIdConnectSetting.ToDict()
+		openIdConnectSetting = func() map[string]interface{} {
+			if p.OpenIdConnectSetting == nil {
+				return nil
+			}
+			return p.OpenIdConnectSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

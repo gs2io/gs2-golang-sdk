@@ -81,7 +81,12 @@ func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespa
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -143,7 +148,12 @@ func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResu
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -174,7 +184,12 @@ func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespa
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -205,7 +220,12 @@ func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespa
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -272,7 +292,12 @@ func NewCreateScriptResultFromDict(data map[string]interface{}) CreateScriptResu
 
 func (p CreateScriptResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -303,7 +328,12 @@ func NewCreateScriptFromGitHubResultFromDict(data map[string]interface{}) Create
 
 func (p CreateScriptFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -334,7 +364,12 @@ func NewGetScriptResultFromDict(data map[string]interface{}) GetScriptResult {
 
 func (p GetScriptResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -365,7 +400,12 @@ func NewUpdateScriptResultFromDict(data map[string]interface{}) UpdateScriptResu
 
 func (p UpdateScriptResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -396,7 +436,12 @@ func NewUpdateScriptFromGitHubResultFromDict(data map[string]interface{}) Update
 
 func (p UpdateScriptFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -427,7 +472,12 @@ func NewDeleteScriptResultFromDict(data map[string]interface{}) DeleteScriptResu
 
 func (p DeleteScriptResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -470,12 +520,22 @@ func NewInvokeScriptResultFromDict(data map[string]interface{}) InvokeScriptResu
 
 func (p InvokeScriptResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"code":         p.Code,
-		"result":       p.Result,
-		"transaction":  p.Transaction.ToDict(),
-		"randomStatus": p.RandomStatus.ToDict(),
-		"executeTime":  p.ExecuteTime,
-		"charged":      p.Charged,
+		"code":   p.Code,
+		"result": p.Result,
+		"transaction": func() map[string]interface{} {
+			if p.Transaction == nil {
+				return nil
+			}
+			return p.Transaction.ToDict()
+		}(),
+		"randomStatus": func() map[string]interface{} {
+			if p.RandomStatus == nil {
+				return nil
+			}
+			return p.RandomStatus.ToDict()
+		}(),
+		"executeTime": p.ExecuteTime,
+		"charged":     p.Charged,
 		"output": core.CastStringsFromDict(
 			p.Output,
 		),
@@ -521,12 +581,22 @@ func NewDebugInvokeResultFromDict(data map[string]interface{}) DebugInvokeResult
 
 func (p DebugInvokeResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"code":         p.Code,
-		"result":       p.Result,
-		"transaction":  p.Transaction.ToDict(),
-		"randomStatus": p.RandomStatus.ToDict(),
-		"executeTime":  p.ExecuteTime,
-		"charged":      p.Charged,
+		"code":   p.Code,
+		"result": p.Result,
+		"transaction": func() map[string]interface{} {
+			if p.Transaction == nil {
+				return nil
+			}
+			return p.Transaction.ToDict()
+		}(),
+		"randomStatus": func() map[string]interface{} {
+			if p.RandomStatus == nil {
+				return nil
+			}
+			return p.RandomStatus.ToDict()
+		}(),
+		"executeTime": p.ExecuteTime,
+		"charged":     p.Charged,
 		"output": core.CastStringsFromDict(
 			p.Output,
 		),

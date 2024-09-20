@@ -194,23 +194,48 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = p.TransactionSetting.ToDict()
+		transactionSetting = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	var updateMoldScript map[string]interface{}
 	if p.UpdateMoldScript != nil {
-		updateMoldScript = p.UpdateMoldScript.ToDict()
+		updateMoldScript = func() map[string]interface{} {
+			if p.UpdateMoldScript == nil {
+				return nil
+			}
+			return p.UpdateMoldScript.ToDict()
+		}()
 	}
 	var updateFormScript map[string]interface{}
 	if p.UpdateFormScript != nil {
-		updateFormScript = p.UpdateFormScript.ToDict()
+		updateFormScript = func() map[string]interface{} {
+			if p.UpdateFormScript == nil {
+				return nil
+			}
+			return p.UpdateFormScript.ToDict()
+		}()
 	}
 	var updatePropertyFormScript map[string]interface{}
 	if p.UpdatePropertyFormScript != nil {
-		updatePropertyFormScript = p.UpdatePropertyFormScript.ToDict()
+		updatePropertyFormScript = func() map[string]interface{} {
+			if p.UpdatePropertyFormScript == nil {
+				return nil
+			}
+			return p.UpdatePropertyFormScript.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -809,7 +834,12 @@ func (p MoldModel) ToDict() map[string]interface{} {
 	}
 	var formModel map[string]interface{}
 	if p.FormModel != nil {
-		formModel = p.FormModel.ToDict()
+		formModel = func() map[string]interface{} {
+			if p.FormModel == nil {
+				return nil
+			}
+			return p.FormModel.ToDict()
+		}()
 	}
 	return map[string]interface{}{
 		"moldModelId":        moldModelId,

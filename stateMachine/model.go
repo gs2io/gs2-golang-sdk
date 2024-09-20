@@ -228,19 +228,39 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = p.TransactionSetting.ToDict()
+		transactionSetting = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	var startScript map[string]interface{}
 	if p.StartScript != nil {
-		startScript = p.StartScript.ToDict()
+		startScript = func() map[string]interface{} {
+			if p.StartScript == nil {
+				return nil
+			}
+			return p.StartScript.ToDict()
+		}()
 	}
 	var passScript map[string]interface{}
 	if p.PassScript != nil {
-		passScript = p.PassScript.ToDict()
+		passScript = func() map[string]interface{} {
+			if p.PassScript == nil {
+				return nil
+			}
+			return p.PassScript.ToDict()
+		}()
 	}
 	var errorScript map[string]interface{}
 	if p.ErrorScript != nil {
-		errorScript = p.ErrorScript.ToDict()
+		errorScript = func() map[string]interface{} {
+			if p.ErrorScript == nil {
+				return nil
+			}
+			return p.ErrorScript.ToDict()
+		}()
 	}
 	var lowestStateMachineVersion *int64
 	if p.LowestStateMachineVersion != nil {
@@ -248,7 +268,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -773,7 +798,12 @@ func (p Status) ToDict() map[string]interface{} {
 	}
 	var randomStatus map[string]interface{}
 	if p.RandomStatus != nil {
-		randomStatus = p.RandomStatus.ToDict()
+		randomStatus = func() map[string]interface{} {
+			if p.RandomStatus == nil {
+				return nil
+			}
+			return p.RandomStatus.ToDict()
+		}()
 	}
 	var stacks []interface{}
 	if p.Stacks != nil {
@@ -1347,11 +1377,21 @@ func (p Event) ToDict() map[string]interface{} {
 	}
 	var changeStateEvent map[string]interface{}
 	if p.ChangeStateEvent != nil {
-		changeStateEvent = p.ChangeStateEvent.ToDict()
+		changeStateEvent = func() map[string]interface{} {
+			if p.ChangeStateEvent == nil {
+				return nil
+			}
+			return p.ChangeStateEvent.ToDict()
+		}()
 	}
 	var emitEvent map[string]interface{}
 	if p.EmitEvent != nil {
-		emitEvent = p.EmitEvent.ToDict()
+		emitEvent = func() map[string]interface{} {
+			if p.EmitEvent == nil {
+				return nil
+			}
+			return p.EmitEvent.ToDict()
+		}()
 	}
 	return map[string]interface{}{
 		"eventType":        eventType,

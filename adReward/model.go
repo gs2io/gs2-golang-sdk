@@ -204,11 +204,21 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var admob map[string]interface{}
 	if p.Admob != nil {
-		admob = p.Admob.ToDict()
+		admob = func() map[string]interface{} {
+			if p.Admob == nil {
+				return nil
+			}
+			return p.Admob.ToDict()
+		}()
 	}
 	var unityAd map[string]interface{}
 	if p.UnityAd != nil {
-		unityAd = p.UnityAd.ToDict()
+		unityAd = func() map[string]interface{} {
+			if p.UnityAd == nil {
+				return nil
+			}
+			return p.UnityAd.ToDict()
+		}()
 	}
 	var appLovinMaxes []interface{}
 	if p.AppLovinMaxes != nil {
@@ -218,19 +228,39 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var acquirePointScript map[string]interface{}
 	if p.AcquirePointScript != nil {
-		acquirePointScript = p.AcquirePointScript.ToDict()
+		acquirePointScript = func() map[string]interface{} {
+			if p.AcquirePointScript == nil {
+				return nil
+			}
+			return p.AcquirePointScript.ToDict()
+		}()
 	}
 	var consumePointScript map[string]interface{}
 	if p.ConsumePointScript != nil {
-		consumePointScript = p.ConsumePointScript.ToDict()
+		consumePointScript = func() map[string]interface{} {
+			if p.ConsumePointScript == nil {
+				return nil
+			}
+			return p.ConsumePointScript.ToDict()
+		}()
 	}
 	var changePointNotification map[string]interface{}
 	if p.ChangePointNotification != nil {
-		changePointNotification = p.ChangePointNotification.ToDict()
+		changePointNotification = func() map[string]interface{} {
+			if p.ChangePointNotification == nil {
+				return nil
+			}
+			return p.ChangePointNotification.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

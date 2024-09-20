@@ -285,15 +285,40 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                p.Name,
-		"description":         p.Description,
-		"transactionSetting":  p.TransactionSetting.ToDict(),
-		"startQuestScript":    p.StartQuestScript.ToDict(),
-		"completeQuestScript": p.CompleteQuestScript.ToDict(),
-		"failedQuestScript":   p.FailedQuestScript.ToDict(),
-		"logSetting":          p.LogSetting.ToDict(),
-		"queueNamespaceId":    p.QueueNamespaceId,
-		"keyId":               p.KeyId,
+		"name":        p.Name,
+		"description": p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"startQuestScript": func() map[string]interface{} {
+			if p.StartQuestScript == nil {
+				return nil
+			}
+			return p.StartQuestScript.ToDict()
+		}(),
+		"completeQuestScript": func() map[string]interface{} {
+			if p.CompleteQuestScript == nil {
+				return nil
+			}
+			return p.CompleteQuestScript.ToDict()
+		}(),
+		"failedQuestScript": func() map[string]interface{} {
+			if p.FailedQuestScript == nil {
+				return nil
+			}
+			return p.FailedQuestScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
+		"queueNamespaceId": p.QueueNamespaceId,
+		"keyId":            p.KeyId,
 	}
 }
 
@@ -638,15 +663,40 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":       p.NamespaceName,
-		"description":         p.Description,
-		"transactionSetting":  p.TransactionSetting.ToDict(),
-		"startQuestScript":    p.StartQuestScript.ToDict(),
-		"completeQuestScript": p.CompleteQuestScript.ToDict(),
-		"failedQuestScript":   p.FailedQuestScript.ToDict(),
-		"logSetting":          p.LogSetting.ToDict(),
-		"queueNamespaceId":    p.QueueNamespaceId,
-		"keyId":               p.KeyId,
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"startQuestScript": func() map[string]interface{} {
+			if p.StartQuestScript == nil {
+				return nil
+			}
+			return p.StartQuestScript.ToDict()
+		}(),
+		"completeQuestScript": func() map[string]interface{} {
+			if p.CompleteQuestScript == nil {
+				return nil
+			}
+			return p.CompleteQuestScript.ToDict()
+		}(),
+		"failedQuestScript": func() map[string]interface{} {
+			if p.FailedQuestScript == nil {
+				return nil
+			}
+			return p.FailedQuestScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
+		"queueNamespaceId": p.QueueNamespaceId,
+		"keyId":            p.KeyId,
 	}
 }
 
@@ -3549,8 +3599,13 @@ func NewUpdateCurrentQuestMasterFromGitHubRequestFromDict(data map[string]interf
 
 func (p UpdateCurrentQuestMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

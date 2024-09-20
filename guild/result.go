@@ -81,7 +81,12 @@ func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespa
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -143,7 +148,12 @@ func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResu
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -174,7 +184,12 @@ func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespa
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -205,7 +220,12 @@ func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespa
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -472,7 +492,12 @@ func NewCreateGuildModelMasterResultFromDict(data map[string]interface{}) Create
 
 func (p CreateGuildModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -503,7 +528,12 @@ func NewGetGuildModelMasterResultFromDict(data map[string]interface{}) GetGuildM
 
 func (p GetGuildModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -534,7 +564,12 @@ func NewUpdateGuildModelMasterResultFromDict(data map[string]interface{}) Update
 
 func (p UpdateGuildModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -565,7 +600,12 @@ func NewDeleteGuildModelMasterResultFromDict(data map[string]interface{}) Delete
 
 func (p DeleteGuildModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -629,7 +669,12 @@ func NewGetGuildModelResultFromDict(data map[string]interface{}) GetGuildModelRe
 
 func (p GetGuildModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -732,7 +777,12 @@ func NewCreateGuildResultFromDict(data map[string]interface{}) CreateGuildResult
 
 func (p CreateGuildResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -763,7 +813,12 @@ func NewCreateGuildByUserIdResultFromDict(data map[string]interface{}) CreateGui
 
 func (p CreateGuildByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -794,7 +849,12 @@ func NewGetGuildResultFromDict(data map[string]interface{}) GetGuildResult {
 
 func (p GetGuildResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -825,7 +885,12 @@ func NewGetGuildByUserIdResultFromDict(data map[string]interface{}) GetGuildByUs
 
 func (p GetGuildByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -856,7 +921,12 @@ func NewUpdateGuildResultFromDict(data map[string]interface{}) UpdateGuildResult
 
 func (p UpdateGuildResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -887,7 +957,12 @@ func NewUpdateGuildByGuildNameResultFromDict(data map[string]interface{}) Update
 
 func (p UpdateGuildByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -918,7 +993,12 @@ func NewDeleteMemberResultFromDict(data map[string]interface{}) DeleteMemberResu
 
 func (p DeleteMemberResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -949,7 +1029,12 @@ func NewDeleteMemberByGuildNameResultFromDict(data map[string]interface{}) Delet
 
 func (p DeleteMemberByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -980,7 +1065,12 @@ func NewUpdateMemberRoleResultFromDict(data map[string]interface{}) UpdateMember
 
 func (p UpdateMemberRoleResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1011,7 +1101,12 @@ func NewUpdateMemberRoleByGuildNameResultFromDict(data map[string]interface{}) U
 
 func (p UpdateMemberRoleByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1042,7 +1137,12 @@ func NewDeleteGuildResultFromDict(data map[string]interface{}) DeleteGuildResult
 
 func (p DeleteGuildResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1073,7 +1173,12 @@ func NewDeleteGuildByGuildNameResultFromDict(data map[string]interface{}) Delete
 
 func (p DeleteGuildByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1104,7 +1209,12 @@ func NewIncreaseMaximumCurrentMaximumMemberCountByGuildNameResultFromDict(data m
 
 func (p IncreaseMaximumCurrentMaximumMemberCountByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1135,7 +1245,12 @@ func NewDecreaseMaximumCurrentMaximumMemberCountResultFromDict(data map[string]i
 
 func (p DecreaseMaximumCurrentMaximumMemberCountResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1166,7 +1281,12 @@ func NewDecreaseMaximumCurrentMaximumMemberCountByGuildNameResultFromDict(data m
 
 func (p DecreaseMaximumCurrentMaximumMemberCountByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1303,8 +1423,18 @@ func NewSetMaximumCurrentMaximumMemberCountByGuildNameResultFromDict(data map[st
 
 func (p SetMaximumCurrentMaximumMemberCountByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 
@@ -1409,7 +1539,12 @@ func NewIncreaseMaximumCurrentMaximumMemberCountByStampSheetResultFromDict(data 
 
 func (p IncreaseMaximumCurrentMaximumMemberCountByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1442,7 +1577,12 @@ func NewDecreaseMaximumCurrentMaximumMemberCountByStampTaskResultFromDict(data m
 
 func (p DecreaseMaximumCurrentMaximumMemberCountByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 	}
 }
@@ -1476,8 +1616,18 @@ func NewSetMaximumCurrentMaximumMemberCountByStampSheetResultFromDict(data map[s
 
 func (p SetMaximumCurrentMaximumMemberCountByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 
@@ -1642,7 +1792,12 @@ func NewGetJoinedGuildResultFromDict(data map[string]interface{}) GetJoinedGuild
 
 func (p GetJoinedGuildResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1673,7 +1828,12 @@ func NewGetJoinedGuildByUserIdResultFromDict(data map[string]interface{}) GetJoi
 
 func (p GetJoinedGuildByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1706,8 +1866,18 @@ func NewWithdrawalResultFromDict(data map[string]interface{}) WithdrawalResult {
 
 func (p WithdrawalResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":  p.Item.ToDict(),
-		"guild": p.Guild.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"guild": func() map[string]interface{} {
+			if p.Guild == nil {
+				return nil
+			}
+			return p.Guild.ToDict()
+		}(),
 	}
 }
 
@@ -1740,8 +1910,18 @@ func NewWithdrawalByUserIdResultFromDict(data map[string]interface{}) Withdrawal
 
 func (p WithdrawalByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":  p.Item.ToDict(),
-		"guild": p.Guild.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"guild": func() map[string]interface{} {
+			if p.Guild == nil {
+				return nil
+			}
+			return p.Guild.ToDict()
+		}(),
 	}
 }
 
@@ -1774,8 +1954,18 @@ func NewGetLastGuildMasterActivityResultFromDict(data map[string]interface{}) Ge
 
 func (p GetLastGuildMasterActivityResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":  p.Item.ToDict(),
-		"guild": p.Guild.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"guild": func() map[string]interface{} {
+			if p.Guild == nil {
+				return nil
+			}
+			return p.Guild.ToDict()
+		}(),
 	}
 }
 
@@ -1808,8 +1998,18 @@ func NewGetLastGuildMasterActivityByGuildNameResultFromDict(data map[string]inte
 
 func (p GetLastGuildMasterActivityByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":  p.Item.ToDict(),
-		"guild": p.Guild.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"guild": func() map[string]interface{} {
+			if p.Guild == nil {
+				return nil
+			}
+			return p.Guild.ToDict()
+		}(),
 	}
 }
 
@@ -1842,8 +2042,18 @@ func NewPromoteSeniorMemberResultFromDict(data map[string]interface{}) PromoteSe
 
 func (p PromoteSeniorMemberResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":  p.Item.ToDict(),
-		"guild": p.Guild.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"guild": func() map[string]interface{} {
+			if p.Guild == nil {
+				return nil
+			}
+			return p.Guild.ToDict()
+		}(),
 	}
 }
 
@@ -1876,8 +2086,18 @@ func NewPromoteSeniorMemberByGuildNameResultFromDict(data map[string]interface{}
 
 func (p PromoteSeniorMemberByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":  p.Item.ToDict(),
-		"guild": p.Guild.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"guild": func() map[string]interface{} {
+			if p.Guild == nil {
+				return nil
+			}
+			return p.Guild.ToDict()
+		}(),
 	}
 }
 
@@ -1908,7 +2128,12 @@ func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResu
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1939,7 +2164,12 @@ func NewGetCurrentGuildMasterResultFromDict(data map[string]interface{}) GetCurr
 
 func (p GetCurrentGuildMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1970,7 +2200,12 @@ func NewUpdateCurrentGuildMasterResultFromDict(data map[string]interface{}) Upda
 
 func (p UpdateCurrentGuildMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2001,7 +2236,12 @@ func NewUpdateCurrentGuildMasterFromGitHubResultFromDict(data map[string]interfa
 
 func (p UpdateCurrentGuildMasterFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2104,7 +2344,12 @@ func NewGetReceiveRequestResultFromDict(data map[string]interface{}) GetReceiveR
 
 func (p GetReceiveRequestResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2135,7 +2380,12 @@ func NewGetReceiveRequestByGuildNameResultFromDict(data map[string]interface{}) 
 
 func (p GetReceiveRequestByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2168,8 +2418,18 @@ func NewAcceptRequestResultFromDict(data map[string]interface{}) AcceptRequestRe
 
 func (p AcceptRequestResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":  p.Item.ToDict(),
-		"guild": p.Guild.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"guild": func() map[string]interface{} {
+			if p.Guild == nil {
+				return nil
+			}
+			return p.Guild.ToDict()
+		}(),
 	}
 }
 
@@ -2202,8 +2462,18 @@ func NewAcceptRequestByGuildNameResultFromDict(data map[string]interface{}) Acce
 
 func (p AcceptRequestByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":  p.Item.ToDict(),
-		"guild": p.Guild.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"guild": func() map[string]interface{} {
+			if p.Guild == nil {
+				return nil
+			}
+			return p.Guild.ToDict()
+		}(),
 	}
 }
 
@@ -2234,7 +2504,12 @@ func NewRejectRequestResultFromDict(data map[string]interface{}) RejectRequestRe
 
 func (p RejectRequestResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2265,7 +2540,12 @@ func NewRejectRequestByGuildNameResultFromDict(data map[string]interface{}) Reje
 
 func (p RejectRequestByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2368,7 +2648,12 @@ func NewGetSendRequestResultFromDict(data map[string]interface{}) GetSendRequest
 
 func (p GetSendRequestResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2399,7 +2684,12 @@ func NewGetSendRequestByUserIdResultFromDict(data map[string]interface{}) GetSen
 
 func (p GetSendRequestByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2432,8 +2722,18 @@ func NewSendRequestResultFromDict(data map[string]interface{}) SendRequestResult
 
 func (p SendRequestResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":              p.Item.ToDict(),
-		"sendMemberRequest": p.SendMemberRequest.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"sendMemberRequest": func() map[string]interface{} {
+			if p.SendMemberRequest == nil {
+				return nil
+			}
+			return p.SendMemberRequest.ToDict()
+		}(),
 	}
 }
 
@@ -2466,8 +2766,18 @@ func NewSendRequestByUserIdResultFromDict(data map[string]interface{}) SendReque
 
 func (p SendRequestByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":              p.Item.ToDict(),
-		"sendMemberRequest": p.SendMemberRequest.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"sendMemberRequest": func() map[string]interface{} {
+			if p.SendMemberRequest == nil {
+				return nil
+			}
+			return p.SendMemberRequest.ToDict()
+		}(),
 	}
 }
 
@@ -2498,7 +2808,12 @@ func NewDeleteRequestResultFromDict(data map[string]interface{}) DeleteRequestRe
 
 func (p DeleteRequestResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2529,7 +2844,12 @@ func NewDeleteRequestByUserIdResultFromDict(data map[string]interface{}) DeleteR
 
 func (p DeleteRequestByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2632,7 +2952,12 @@ func NewGetIgnoreUserResultFromDict(data map[string]interface{}) GetIgnoreUserRe
 
 func (p GetIgnoreUserResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2663,7 +2988,12 @@ func NewGetIgnoreUserByGuildNameResultFromDict(data map[string]interface{}) GetI
 
 func (p GetIgnoreUserByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2696,8 +3026,18 @@ func NewAddIgnoreUserResultFromDict(data map[string]interface{}) AddIgnoreUserRe
 
 func (p AddIgnoreUserResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":  p.Item.ToDict(),
-		"guild": p.Guild.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"guild": func() map[string]interface{} {
+			if p.Guild == nil {
+				return nil
+			}
+			return p.Guild.ToDict()
+		}(),
 	}
 }
 
@@ -2730,8 +3070,18 @@ func NewAddIgnoreUserByGuildNameResultFromDict(data map[string]interface{}) AddI
 
 func (p AddIgnoreUserByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":  p.Item.ToDict(),
-		"guild": p.Guild.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"guild": func() map[string]interface{} {
+			if p.Guild == nil {
+				return nil
+			}
+			return p.Guild.ToDict()
+		}(),
 	}
 }
 
@@ -2762,7 +3112,12 @@ func NewDeleteIgnoreUserResultFromDict(data map[string]interface{}) DeleteIgnore
 
 func (p DeleteIgnoreUserResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2793,7 +3148,12 @@ func NewDeleteIgnoreUserByGuildNameResultFromDict(data map[string]interface{}) D
 
 func (p DeleteIgnoreUserByGuildNameResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 

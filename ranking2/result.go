@@ -81,7 +81,12 @@ func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespa
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -143,7 +148,12 @@ func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResu
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -174,7 +184,12 @@ func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespa
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -205,7 +220,12 @@ func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespa
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -469,7 +489,12 @@ func NewGetGlobalRankingModelResultFromDict(data map[string]interface{}) GetGlob
 
 func (p GetGlobalRankingModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -536,7 +561,12 @@ func NewCreateGlobalRankingModelMasterResultFromDict(data map[string]interface{}
 
 func (p CreateGlobalRankingModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -567,7 +597,12 @@ func NewGetGlobalRankingModelMasterResultFromDict(data map[string]interface{}) G
 
 func (p GetGlobalRankingModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -598,7 +633,12 @@ func NewUpdateGlobalRankingModelMasterResultFromDict(data map[string]interface{}
 
 func (p UpdateGlobalRankingModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -629,7 +669,12 @@ func NewDeleteGlobalRankingModelMasterResultFromDict(data map[string]interface{}
 
 func (p DeleteGlobalRankingModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -732,7 +777,12 @@ func NewPutGlobalRankingScoreResultFromDict(data map[string]interface{}) PutGlob
 
 func (p PutGlobalRankingScoreResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -763,7 +813,12 @@ func NewPutGlobalRankingScoreByUserIdResultFromDict(data map[string]interface{})
 
 func (p PutGlobalRankingScoreByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -794,7 +849,12 @@ func NewGetGlobalRankingScoreResultFromDict(data map[string]interface{}) GetGlob
 
 func (p GetGlobalRankingScoreResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -825,7 +885,12 @@ func NewGetGlobalRankingScoreByUserIdResultFromDict(data map[string]interface{})
 
 func (p GetGlobalRankingScoreByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -856,7 +921,12 @@ func NewDeleteGlobalRankingScoreByUserIdResultFromDict(data map[string]interface
 
 func (p DeleteGlobalRankingScoreByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -959,7 +1029,12 @@ func NewCreateGlobalRankingReceivedRewardResultFromDict(data map[string]interfac
 
 func (p CreateGlobalRankingReceivedRewardResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -990,7 +1065,12 @@ func NewCreateGlobalRankingReceivedRewardByUserIdResultFromDict(data map[string]
 
 func (p CreateGlobalRankingReceivedRewardByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1031,7 +1111,12 @@ func NewReceiveGlobalRankingReceivedRewardResultFromDict(data map[string]interfa
 
 func (p ReceiveGlobalRankingReceivedRewardResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"acquireActions": CastAcquireActionsFromDict(
 			p.AcquireActions,
 		),
@@ -1079,7 +1164,12 @@ func NewReceiveGlobalRankingReceivedRewardByUserIdResultFromDict(data map[string
 
 func (p ReceiveGlobalRankingReceivedRewardByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"acquireActions": CastAcquireActionsFromDict(
 			p.AcquireActions,
 		),
@@ -1117,7 +1207,12 @@ func NewGetGlobalRankingReceivedRewardResultFromDict(data map[string]interface{}
 
 func (p GetGlobalRankingReceivedRewardResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1148,7 +1243,12 @@ func NewGetGlobalRankingReceivedRewardByUserIdResultFromDict(data map[string]int
 
 func (p GetGlobalRankingReceivedRewardByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1179,7 +1279,12 @@ func NewDeleteGlobalRankingReceivedRewardByUserIdResultFromDict(data map[string]
 
 func (p DeleteGlobalRankingReceivedRewardByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1212,7 +1317,12 @@ func NewCreateGlobalRankingReceivedRewardByStampTaskResultFromDict(data map[stri
 
 func (p CreateGlobalRankingReceivedRewardByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 	}
 }
@@ -1316,7 +1426,12 @@ func NewGetGlobalRankingResultFromDict(data map[string]interface{}) GetGlobalRan
 
 func (p GetGlobalRankingResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1347,7 +1462,12 @@ func NewGetGlobalRankingByUserIdResultFromDict(data map[string]interface{}) GetG
 
 func (p GetGlobalRankingByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1411,7 +1531,12 @@ func NewGetClusterRankingModelResultFromDict(data map[string]interface{}) GetClu
 
 func (p GetClusterRankingModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1478,7 +1603,12 @@ func NewCreateClusterRankingModelMasterResultFromDict(data map[string]interface{
 
 func (p CreateClusterRankingModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1509,7 +1639,12 @@ func NewGetClusterRankingModelMasterResultFromDict(data map[string]interface{}) 
 
 func (p GetClusterRankingModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1540,7 +1675,12 @@ func NewUpdateClusterRankingModelMasterResultFromDict(data map[string]interface{
 
 func (p UpdateClusterRankingModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1571,7 +1711,12 @@ func NewDeleteClusterRankingModelMasterResultFromDict(data map[string]interface{
 
 func (p DeleteClusterRankingModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1674,7 +1819,12 @@ func NewPutClusterRankingScoreResultFromDict(data map[string]interface{}) PutClu
 
 func (p PutClusterRankingScoreResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1705,7 +1855,12 @@ func NewPutClusterRankingScoreByUserIdResultFromDict(data map[string]interface{}
 
 func (p PutClusterRankingScoreByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1736,7 +1891,12 @@ func NewGetClusterRankingScoreResultFromDict(data map[string]interface{}) GetClu
 
 func (p GetClusterRankingScoreResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1767,7 +1927,12 @@ func NewGetClusterRankingScoreByUserIdResultFromDict(data map[string]interface{}
 
 func (p GetClusterRankingScoreByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1798,7 +1963,12 @@ func NewDeleteClusterRankingScoreByUserIdResultFromDict(data map[string]interfac
 
 func (p DeleteClusterRankingScoreByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1901,7 +2071,12 @@ func NewCreateClusterRankingReceivedRewardResultFromDict(data map[string]interfa
 
 func (p CreateClusterRankingReceivedRewardResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1932,7 +2107,12 @@ func NewCreateClusterRankingReceivedRewardByUserIdResultFromDict(data map[string
 
 func (p CreateClusterRankingReceivedRewardByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1973,7 +2153,12 @@ func NewReceiveClusterRankingReceivedRewardResultFromDict(data map[string]interf
 
 func (p ReceiveClusterRankingReceivedRewardResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"acquireActions": CastAcquireActionsFromDict(
 			p.AcquireActions,
 		),
@@ -2021,7 +2206,12 @@ func NewReceiveClusterRankingReceivedRewardByUserIdResultFromDict(data map[strin
 
 func (p ReceiveClusterRankingReceivedRewardByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"acquireActions": CastAcquireActionsFromDict(
 			p.AcquireActions,
 		),
@@ -2059,7 +2249,12 @@ func NewGetClusterRankingReceivedRewardResultFromDict(data map[string]interface{
 
 func (p GetClusterRankingReceivedRewardResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2090,7 +2285,12 @@ func NewGetClusterRankingReceivedRewardByUserIdResultFromDict(data map[string]in
 
 func (p GetClusterRankingReceivedRewardByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2121,7 +2321,12 @@ func NewDeleteClusterRankingReceivedRewardByUserIdResultFromDict(data map[string
 
 func (p DeleteClusterRankingReceivedRewardByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2154,7 +2359,12 @@ func NewCreateClusterRankingReceivedRewardByStampTaskResultFromDict(data map[str
 
 func (p CreateClusterRankingReceivedRewardByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 	}
 }
@@ -2258,7 +2468,12 @@ func NewGetClusterRankingResultFromDict(data map[string]interface{}) GetClusterR
 
 func (p GetClusterRankingResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2289,7 +2504,12 @@ func NewGetClusterRankingByUserIdResultFromDict(data map[string]interface{}) Get
 
 func (p GetClusterRankingByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2353,7 +2573,12 @@ func NewGetSubscribeRankingModelResultFromDict(data map[string]interface{}) GetS
 
 func (p GetSubscribeRankingModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2420,7 +2645,12 @@ func NewCreateSubscribeRankingModelMasterResultFromDict(data map[string]interfac
 
 func (p CreateSubscribeRankingModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2451,7 +2681,12 @@ func NewGetSubscribeRankingModelMasterResultFromDict(data map[string]interface{}
 
 func (p GetSubscribeRankingModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2482,7 +2717,12 @@ func NewUpdateSubscribeRankingModelMasterResultFromDict(data map[string]interfac
 
 func (p UpdateSubscribeRankingModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2513,7 +2753,12 @@ func NewDeleteSubscribeRankingModelMasterResultFromDict(data map[string]interfac
 
 func (p DeleteSubscribeRankingModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2616,7 +2861,12 @@ func NewAddSubscribeResultFromDict(data map[string]interface{}) AddSubscribeResu
 
 func (p AddSubscribeResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2647,7 +2897,12 @@ func NewAddSubscribeByUserIdResultFromDict(data map[string]interface{}) AddSubsc
 
 func (p AddSubscribeByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2750,7 +3005,12 @@ func NewPutSubscribeRankingScoreResultFromDict(data map[string]interface{}) PutS
 
 func (p PutSubscribeRankingScoreResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2781,7 +3041,12 @@ func NewPutSubscribeRankingScoreByUserIdResultFromDict(data map[string]interface
 
 func (p PutSubscribeRankingScoreByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2812,7 +3077,12 @@ func NewGetSubscribeRankingScoreResultFromDict(data map[string]interface{}) GetS
 
 func (p GetSubscribeRankingScoreResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2843,7 +3113,12 @@ func NewGetSubscribeRankingScoreByUserIdResultFromDict(data map[string]interface
 
 func (p GetSubscribeRankingScoreByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2874,7 +3149,12 @@ func NewDeleteSubscribeRankingScoreByUserIdResultFromDict(data map[string]interf
 
 func (p DeleteSubscribeRankingScoreByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -2977,7 +3257,12 @@ func NewGetSubscribeRankingResultFromDict(data map[string]interface{}) GetSubscr
 
 func (p GetSubscribeRankingResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -3008,7 +3293,12 @@ func NewGetSubscribeRankingByUserIdResultFromDict(data map[string]interface{}) G
 
 func (p GetSubscribeRankingByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -3039,7 +3329,12 @@ func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResu
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -3070,7 +3365,12 @@ func NewGetCurrentRankingMasterResultFromDict(data map[string]interface{}) GetCu
 
 func (p GetCurrentRankingMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -3101,7 +3401,12 @@ func NewUpdateCurrentRankingMasterResultFromDict(data map[string]interface{}) Up
 
 func (p UpdateCurrentRankingMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -3132,7 +3437,12 @@ func NewUpdateCurrentRankingMasterFromGitHubResultFromDict(data map[string]inter
 
 func (p UpdateCurrentRankingMasterFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -3163,7 +3473,12 @@ func NewGetSubscribeResultFromDict(data map[string]interface{}) GetSubscribeResu
 
 func (p GetSubscribeResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -3194,7 +3509,12 @@ func NewGetSubscribeByUserIdResultFromDict(data map[string]interface{}) GetSubsc
 
 func (p GetSubscribeByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -3225,7 +3545,12 @@ func NewDeleteSubscribeResultFromDict(data map[string]interface{}) DeleteSubscri
 
 func (p DeleteSubscribeResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -3256,7 +3581,12 @@ func NewDeleteSubscribeByUserIdResultFromDict(data map[string]interface{}) Delet
 
 func (p DeleteSubscribeByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 

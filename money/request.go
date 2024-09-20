@@ -338,18 +338,38 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":               p.Name,
-		"description":        p.Description,
-		"priority":           p.Priority,
-		"shareFree":          p.ShareFree,
-		"currency":           p.Currency,
-		"appleKey":           p.AppleKey,
-		"googleKey":          p.GoogleKey,
-		"enableFakeReceipt":  p.EnableFakeReceipt,
-		"createWalletScript": p.CreateWalletScript.ToDict(),
-		"depositScript":      p.DepositScript.ToDict(),
-		"withdrawScript":     p.WithdrawScript.ToDict(),
-		"logSetting":         p.LogSetting.ToDict(),
+		"name":              p.Name,
+		"description":       p.Description,
+		"priority":          p.Priority,
+		"shareFree":         p.ShareFree,
+		"currency":          p.Currency,
+		"appleKey":          p.AppleKey,
+		"googleKey":         p.GoogleKey,
+		"enableFakeReceipt": p.EnableFakeReceipt,
+		"createWalletScript": func() map[string]interface{} {
+			if p.CreateWalletScript == nil {
+				return nil
+			}
+			return p.CreateWalletScript.ToDict()
+		}(),
+		"depositScript": func() map[string]interface{} {
+			if p.DepositScript == nil {
+				return nil
+			}
+			return p.DepositScript.ToDict()
+		}(),
+		"withdrawScript": func() map[string]interface{} {
+			if p.WithdrawScript == nil {
+				return nil
+			}
+			return p.WithdrawScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -717,16 +737,36 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":      p.NamespaceName,
-		"description":        p.Description,
-		"priority":           p.Priority,
-		"appleKey":           p.AppleKey,
-		"googleKey":          p.GoogleKey,
-		"enableFakeReceipt":  p.EnableFakeReceipt,
-		"createWalletScript": p.CreateWalletScript.ToDict(),
-		"depositScript":      p.DepositScript.ToDict(),
-		"withdrawScript":     p.WithdrawScript.ToDict(),
-		"logSetting":         p.LogSetting.ToDict(),
+		"namespaceName":     p.NamespaceName,
+		"description":       p.Description,
+		"priority":          p.Priority,
+		"appleKey":          p.AppleKey,
+		"googleKey":         p.GoogleKey,
+		"enableFakeReceipt": p.EnableFakeReceipt,
+		"createWalletScript": func() map[string]interface{} {
+			if p.CreateWalletScript == nil {
+				return nil
+			}
+			return p.CreateWalletScript.ToDict()
+		}(),
+		"depositScript": func() map[string]interface{} {
+			if p.DepositScript == nil {
+				return nil
+			}
+			return p.DepositScript.ToDict()
+		}(),
+		"withdrawScript": func() map[string]interface{} {
+			if p.WithdrawScript == nil {
+				return nil
+			}
+			return p.WithdrawScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 

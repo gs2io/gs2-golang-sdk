@@ -492,12 +492,42 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"enableCollaborateSeasonRating":                 p.EnableCollaborateSeasonRating,
 		"collaborateSeasonRatingNamespaceId":            p.CollaborateSeasonRatingNamespaceId,
 		"collaborateSeasonRatingTtl":                    p.CollaborateSeasonRatingTtl,
-		"changeRatingScript":                            p.ChangeRatingScript.ToDict(),
-		"joinNotification":                              p.JoinNotification.ToDict(),
-		"leaveNotification":                             p.LeaveNotification.ToDict(),
-		"completeNotification":                          p.CompleteNotification.ToDict(),
-		"changeRatingNotification":                      p.ChangeRatingNotification.ToDict(),
-		"logSetting":                                    p.LogSetting.ToDict(),
+		"changeRatingScript": func() map[string]interface{} {
+			if p.ChangeRatingScript == nil {
+				return nil
+			}
+			return p.ChangeRatingScript.ToDict()
+		}(),
+		"joinNotification": func() map[string]interface{} {
+			if p.JoinNotification == nil {
+				return nil
+			}
+			return p.JoinNotification.ToDict()
+		}(),
+		"leaveNotification": func() map[string]interface{} {
+			if p.LeaveNotification == nil {
+				return nil
+			}
+			return p.LeaveNotification.ToDict()
+		}(),
+		"completeNotification": func() map[string]interface{} {
+			if p.CompleteNotification == nil {
+				return nil
+			}
+			return p.CompleteNotification.ToDict()
+		}(),
+		"changeRatingNotification": func() map[string]interface{} {
+			if p.ChangeRatingNotification == nil {
+				return nil
+			}
+			return p.ChangeRatingNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -1049,12 +1079,42 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"enableCollaborateSeasonRating":                 p.EnableCollaborateSeasonRating,
 		"collaborateSeasonRatingNamespaceId":            p.CollaborateSeasonRatingNamespaceId,
 		"collaborateSeasonRatingTtl":                    p.CollaborateSeasonRatingTtl,
-		"changeRatingScript":                            p.ChangeRatingScript.ToDict(),
-		"joinNotification":                              p.JoinNotification.ToDict(),
-		"leaveNotification":                             p.LeaveNotification.ToDict(),
-		"completeNotification":                          p.CompleteNotification.ToDict(),
-		"changeRatingNotification":                      p.ChangeRatingNotification.ToDict(),
-		"logSetting":                                    p.LogSetting.ToDict(),
+		"changeRatingScript": func() map[string]interface{} {
+			if p.ChangeRatingScript == nil {
+				return nil
+			}
+			return p.ChangeRatingScript.ToDict()
+		}(),
+		"joinNotification": func() map[string]interface{} {
+			if p.JoinNotification == nil {
+				return nil
+			}
+			return p.JoinNotification.ToDict()
+		}(),
+		"leaveNotification": func() map[string]interface{} {
+			if p.LeaveNotification == nil {
+				return nil
+			}
+			return p.LeaveNotification.ToDict()
+		}(),
+		"completeNotification": func() map[string]interface{} {
+			if p.CompleteNotification == nil {
+				return nil
+			}
+			return p.CompleteNotification.ToDict()
+		}(),
+		"changeRatingNotification": func() map[string]interface{} {
+			if p.ChangeRatingNotification == nil {
+				return nil
+			}
+			return p.ChangeRatingNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -2211,7 +2271,12 @@ func (p CreateGatheringRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
-		"player":        p.Player.ToDict(),
+		"player": func() map[string]interface{} {
+			if p.Player == nil {
+				return nil
+			}
+			return p.Player.ToDict()
+		}(),
 		"attributeRanges": CastAttributeRangesFromDict(
 			p.AttributeRanges,
 		),
@@ -2221,8 +2286,13 @@ func (p CreateGatheringRequest) ToDict() map[string]interface{} {
 		"allowUserIds": core.CastStringsFromDict(
 			p.AllowUserIds,
 		),
-		"expiresAt":         p.ExpiresAt,
-		"expiresAtTimeSpan": p.ExpiresAtTimeSpan.ToDict(),
+		"expiresAt": p.ExpiresAt,
+		"expiresAtTimeSpan": func() map[string]interface{} {
+			if p.ExpiresAtTimeSpan == nil {
+				return nil
+			}
+			return p.ExpiresAtTimeSpan.ToDict()
+		}(),
 	}
 }
 
@@ -2409,7 +2479,12 @@ func (p CreateGatheringByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"userId":        p.UserId,
-		"player":        p.Player.ToDict(),
+		"player": func() map[string]interface{} {
+			if p.Player == nil {
+				return nil
+			}
+			return p.Player.ToDict()
+		}(),
 		"attributeRanges": CastAttributeRangesFromDict(
 			p.AttributeRanges,
 		),
@@ -2419,9 +2494,14 @@ func (p CreateGatheringByUserIdRequest) ToDict() map[string]interface{} {
 		"allowUserIds": core.CastStringsFromDict(
 			p.AllowUserIds,
 		),
-		"expiresAt":         p.ExpiresAt,
-		"expiresAtTimeSpan": p.ExpiresAtTimeSpan.ToDict(),
-		"timeOffsetToken":   p.TimeOffsetToken,
+		"expiresAt": p.ExpiresAt,
+		"expiresAtTimeSpan": func() map[string]interface{} {
+			if p.ExpiresAtTimeSpan == nil {
+				return nil
+			}
+			return p.ExpiresAtTimeSpan.ToDict()
+		}(),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2842,8 +2922,13 @@ func NewDoMatchmakingByPlayerRequestFromDict(data map[string]interface{}) DoMatc
 
 func (p DoMatchmakingByPlayerRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":           p.NamespaceName,
-		"player":                  p.Player.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"player": func() map[string]interface{} {
+			if p.Player == nil {
+				return nil
+			}
+			return p.Player.ToDict()
+		}(),
 		"matchmakingContextToken": p.MatchmakingContextToken,
 	}
 }
@@ -2981,9 +3066,14 @@ func NewDoMatchmakingRequestFromDict(data map[string]interface{}) DoMatchmakingR
 
 func (p DoMatchmakingRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":           p.NamespaceName,
-		"accessToken":             p.AccessToken,
-		"player":                  p.Player.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"player": func() map[string]interface{} {
+			if p.Player == nil {
+				return nil
+			}
+			return p.Player.ToDict()
+		}(),
 		"matchmakingContextToken": p.MatchmakingContextToken,
 	}
 }
@@ -3146,9 +3236,14 @@ func NewDoMatchmakingByUserIdRequestFromDict(data map[string]interface{}) DoMatc
 
 func (p DoMatchmakingByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":           p.NamespaceName,
-		"userId":                  p.UserId,
-		"player":                  p.Player.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"player": func() map[string]interface{} {
+			if p.Player == nil {
+				return nil
+			}
+			return p.Player.ToDict()
+		}(),
 		"matchmakingContextToken": p.MatchmakingContextToken,
 		"timeOffsetToken":         p.TimeOffsetToken,
 	}
@@ -5458,8 +5553,13 @@ func NewUpdateCurrentModelMasterFromGitHubRequestFromDict(data map[string]interf
 
 func (p UpdateCurrentModelMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

@@ -233,13 +233,38 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                     p.Name,
-		"description":              p.Description,
-		"transactionSetting":       p.TransactionSetting.ToDict(),
-		"updateMoldScript":         p.UpdateMoldScript.ToDict(),
-		"updateFormScript":         p.UpdateFormScript.ToDict(),
-		"updatePropertyFormScript": p.UpdatePropertyFormScript.ToDict(),
-		"logSetting":               p.LogSetting.ToDict(),
+		"name":        p.Name,
+		"description": p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"updateMoldScript": func() map[string]interface{} {
+			if p.UpdateMoldScript == nil {
+				return nil
+			}
+			return p.UpdateMoldScript.ToDict()
+		}(),
+		"updateFormScript": func() map[string]interface{} {
+			if p.UpdateFormScript == nil {
+				return nil
+			}
+			return p.UpdateFormScript.ToDict()
+		}(),
+		"updatePropertyFormScript": func() map[string]interface{} {
+			if p.UpdatePropertyFormScript == nil {
+				return nil
+			}
+			return p.UpdatePropertyFormScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -532,13 +557,38 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":            p.NamespaceName,
-		"description":              p.Description,
-		"transactionSetting":       p.TransactionSetting.ToDict(),
-		"updateMoldScript":         p.UpdateMoldScript.ToDict(),
-		"updateFormScript":         p.UpdateFormScript.ToDict(),
-		"updatePropertyFormScript": p.UpdatePropertyFormScript.ToDict(),
-		"logSetting":               p.LogSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"updateMoldScript": func() map[string]interface{} {
+			if p.UpdateMoldScript == nil {
+				return nil
+			}
+			return p.UpdateMoldScript.ToDict()
+		}(),
+		"updateFormScript": func() map[string]interface{} {
+			if p.UpdateFormScript == nil {
+				return nil
+			}
+			return p.UpdateFormScript.ToDict()
+		}(),
+		"updatePropertyFormScript": func() map[string]interface{} {
+			if p.UpdatePropertyFormScript == nil {
+				return nil
+			}
+			return p.UpdatePropertyFormScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -4301,8 +4351,13 @@ func NewUpdateCurrentFormMasterFromGitHubRequestFromDict(data map[string]interfa
 
 func (p UpdateCurrentFormMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 
@@ -7691,7 +7746,12 @@ func (p AcquireActionsToFormPropertiesRequest) ToDict() map[string]interface{} {
 		"userId":        p.UserId,
 		"moldModelName": p.MoldModelName,
 		"index":         p.Index,
-		"acquireAction": p.AcquireAction.ToDict(),
+		"acquireAction": func() map[string]interface{} {
+			if p.AcquireAction == nil {
+				return nil
+			}
+			return p.AcquireAction.ToDict()
+		}(),
 		"config": CastConfigsFromDict(
 			p.Config,
 		),
@@ -9895,7 +9955,12 @@ func (p AcquireActionsToPropertyFormPropertiesRequest) ToDict() map[string]inter
 		"userId":                p.UserId,
 		"propertyFormModelName": p.PropertyFormModelName,
 		"propertyId":            p.PropertyId,
-		"acquireAction":         p.AcquireAction.ToDict(),
+		"acquireAction": func() map[string]interface{} {
+			if p.AcquireAction == nil {
+				return nil
+			}
+			return p.AcquireAction.ToDict()
+		}(),
 		"config": CastConfigsFromDict(
 			p.Config,
 		),

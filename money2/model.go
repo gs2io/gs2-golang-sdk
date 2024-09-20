@@ -227,19 +227,39 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var platformSetting map[string]interface{}
 	if p.PlatformSetting != nil {
-		platformSetting = p.PlatformSetting.ToDict()
+		platformSetting = func() map[string]interface{} {
+			if p.PlatformSetting == nil {
+				return nil
+			}
+			return p.PlatformSetting.ToDict()
+		}()
 	}
 	var depositBalanceScript map[string]interface{}
 	if p.DepositBalanceScript != nil {
-		depositBalanceScript = p.DepositBalanceScript.ToDict()
+		depositBalanceScript = func() map[string]interface{} {
+			if p.DepositBalanceScript == nil {
+				return nil
+			}
+			return p.DepositBalanceScript.ToDict()
+		}()
 	}
 	var withdrawBalanceScript map[string]interface{}
 	if p.WithdrawBalanceScript != nil {
-		withdrawBalanceScript = p.WithdrawBalanceScript.ToDict()
+		withdrawBalanceScript = func() map[string]interface{} {
+			if p.WithdrawBalanceScript == nil {
+				return nil
+			}
+			return p.WithdrawBalanceScript.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -430,7 +450,12 @@ func (p Wallet) ToDict() map[string]interface{} {
 	}
 	var summary map[string]interface{}
 	if p.Summary != nil {
-		summary = p.Summary.ToDict()
+		summary = func() map[string]interface{} {
+			if p.Summary == nil {
+				return nil
+			}
+			return p.Summary.ToDict()
+		}()
 	}
 	var depositTransactions []interface{}
 	if p.DepositTransactions != nil {
@@ -672,15 +697,30 @@ func (p Event) ToDict() map[string]interface{} {
 	}
 	var verifyReceiptEvent map[string]interface{}
 	if p.VerifyReceiptEvent != nil {
-		verifyReceiptEvent = p.VerifyReceiptEvent.ToDict()
+		verifyReceiptEvent = func() map[string]interface{} {
+			if p.VerifyReceiptEvent == nil {
+				return nil
+			}
+			return p.VerifyReceiptEvent.ToDict()
+		}()
 	}
 	var depositEvent map[string]interface{}
 	if p.DepositEvent != nil {
-		depositEvent = p.DepositEvent.ToDict()
+		depositEvent = func() map[string]interface{} {
+			if p.DepositEvent == nil {
+				return nil
+			}
+			return p.DepositEvent.ToDict()
+		}()
 	}
 	var withdrawEvent map[string]interface{}
 	if p.WithdrawEvent != nil {
-		withdrawEvent = p.WithdrawEvent.ToDict()
+		withdrawEvent = func() map[string]interface{} {
+			if p.WithdrawEvent == nil {
+				return nil
+			}
+			return p.WithdrawEvent.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -864,11 +904,21 @@ func (p StoreContentModel) ToDict() map[string]interface{} {
 	}
 	var appleAppStore map[string]interface{}
 	if p.AppleAppStore != nil {
-		appleAppStore = p.AppleAppStore.ToDict()
+		appleAppStore = func() map[string]interface{} {
+			if p.AppleAppStore == nil {
+				return nil
+			}
+			return p.AppleAppStore.ToDict()
+		}()
 	}
 	var googlePlay map[string]interface{}
 	if p.GooglePlay != nil {
-		googlePlay = p.GooglePlay.ToDict()
+		googlePlay = func() map[string]interface{} {
+			if p.GooglePlay == nil {
+				return nil
+			}
+			return p.GooglePlay.ToDict()
+		}()
 	}
 	return map[string]interface{}{
 		"storeContentModelId": storeContentModelId,
@@ -1084,11 +1134,21 @@ func (p StoreContentModelMaster) ToDict() map[string]interface{} {
 	}
 	var appleAppStore map[string]interface{}
 	if p.AppleAppStore != nil {
-		appleAppStore = p.AppleAppStore.ToDict()
+		appleAppStore = func() map[string]interface{} {
+			if p.AppleAppStore == nil {
+				return nil
+			}
+			return p.AppleAppStore.ToDict()
+		}()
 	}
 	var googlePlay map[string]interface{}
 	if p.GooglePlay != nil {
-		googlePlay = p.GooglePlay.ToDict()
+		googlePlay = func() map[string]interface{} {
+			if p.GooglePlay == nil {
+				return nil
+			}
+			return p.GooglePlay.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -1476,15 +1536,30 @@ func (p PlatformSetting) ToDict() map[string]interface{} {
 
 	var appleAppStore map[string]interface{}
 	if p.AppleAppStore != nil {
-		appleAppStore = p.AppleAppStore.ToDict()
+		appleAppStore = func() map[string]interface{} {
+			if p.AppleAppStore == nil {
+				return nil
+			}
+			return p.AppleAppStore.ToDict()
+		}()
 	}
 	var googlePlay map[string]interface{}
 	if p.GooglePlay != nil {
-		googlePlay = p.GooglePlay.ToDict()
+		googlePlay = func() map[string]interface{} {
+			if p.GooglePlay == nil {
+				return nil
+			}
+			return p.GooglePlay.ToDict()
+		}()
 	}
 	var fake map[string]interface{}
 	if p.Fake != nil {
-		fake = p.Fake.ToDict()
+		fake = func() map[string]interface{} {
+			if p.Fake == nil {
+				return nil
+			}
+			return p.Fake.ToDict()
+		}()
 	}
 	return map[string]interface{}{
 		"appleAppStore": appleAppStore,
@@ -2165,11 +2240,21 @@ func (p VerifyReceiptEvent) ToDict() map[string]interface{} {
 	}
 	var appleAppStoreVerifyReceiptEvent map[string]interface{}
 	if p.AppleAppStoreVerifyReceiptEvent != nil {
-		appleAppStoreVerifyReceiptEvent = p.AppleAppStoreVerifyReceiptEvent.ToDict()
+		appleAppStoreVerifyReceiptEvent = func() map[string]interface{} {
+			if p.AppleAppStoreVerifyReceiptEvent == nil {
+				return nil
+			}
+			return p.AppleAppStoreVerifyReceiptEvent.ToDict()
+		}()
 	}
 	var googlePlayVerifyReceiptEvent map[string]interface{}
 	if p.GooglePlayVerifyReceiptEvent != nil {
-		googlePlayVerifyReceiptEvent = p.GooglePlayVerifyReceiptEvent.ToDict()
+		googlePlayVerifyReceiptEvent = func() map[string]interface{} {
+			if p.GooglePlayVerifyReceiptEvent == nil {
+				return nil
+			}
+			return p.GooglePlayVerifyReceiptEvent.ToDict()
+		}()
 	}
 	return map[string]interface{}{
 		"contentName":                     contentName,
@@ -2268,7 +2353,12 @@ func (p DepositEvent) ToDict() map[string]interface{} {
 	}
 	var status map[string]interface{}
 	if p.Status != nil {
-		status = p.Status.ToDict()
+		status = func() map[string]interface{} {
+			if p.Status == nil {
+				return nil
+			}
+			return p.Status.ToDict()
+		}()
 	}
 	return map[string]interface{}{
 		"slot":                slot,
@@ -2366,7 +2456,12 @@ func (p WithdrawEvent) ToDict() map[string]interface{} {
 	}
 	var status map[string]interface{}
 	if p.Status != nil {
-		status = p.Status.ToDict()
+		status = func() map[string]interface{} {
+			if p.Status == nil {
+				return nil
+			}
+			return p.Status.ToDict()
+		}()
 	}
 	return map[string]interface{}{
 		"slot":            slot,

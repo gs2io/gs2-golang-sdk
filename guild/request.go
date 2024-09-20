@@ -258,18 +258,68 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                       p.Name,
-		"description":                p.Description,
-		"joinNotification":           p.JoinNotification.ToDict(),
-		"leaveNotification":          p.LeaveNotification.ToDict(),
-		"changeMemberNotification":   p.ChangeMemberNotification.ToDict(),
-		"receiveRequestNotification": p.ReceiveRequestNotification.ToDict(),
-		"removeRequestNotification":  p.RemoveRequestNotification.ToDict(),
-		"createGuildScript":          p.CreateGuildScript.ToDict(),
-		"joinGuildScript":            p.JoinGuildScript.ToDict(),
-		"leaveGuildScript":           p.LeaveGuildScript.ToDict(),
-		"changeRoleScript":           p.ChangeRoleScript.ToDict(),
-		"logSetting":                 p.LogSetting.ToDict(),
+		"name":        p.Name,
+		"description": p.Description,
+		"joinNotification": func() map[string]interface{} {
+			if p.JoinNotification == nil {
+				return nil
+			}
+			return p.JoinNotification.ToDict()
+		}(),
+		"leaveNotification": func() map[string]interface{} {
+			if p.LeaveNotification == nil {
+				return nil
+			}
+			return p.LeaveNotification.ToDict()
+		}(),
+		"changeMemberNotification": func() map[string]interface{} {
+			if p.ChangeMemberNotification == nil {
+				return nil
+			}
+			return p.ChangeMemberNotification.ToDict()
+		}(),
+		"receiveRequestNotification": func() map[string]interface{} {
+			if p.ReceiveRequestNotification == nil {
+				return nil
+			}
+			return p.ReceiveRequestNotification.ToDict()
+		}(),
+		"removeRequestNotification": func() map[string]interface{} {
+			if p.RemoveRequestNotification == nil {
+				return nil
+			}
+			return p.RemoveRequestNotification.ToDict()
+		}(),
+		"createGuildScript": func() map[string]interface{} {
+			if p.CreateGuildScript == nil {
+				return nil
+			}
+			return p.CreateGuildScript.ToDict()
+		}(),
+		"joinGuildScript": func() map[string]interface{} {
+			if p.JoinGuildScript == nil {
+				return nil
+			}
+			return p.JoinGuildScript.ToDict()
+		}(),
+		"leaveGuildScript": func() map[string]interface{} {
+			if p.LeaveGuildScript == nil {
+				return nil
+			}
+			return p.LeaveGuildScript.ToDict()
+		}(),
+		"changeRoleScript": func() map[string]interface{} {
+			if p.ChangeRoleScript == nil {
+				return nil
+			}
+			return p.ChangeRoleScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -587,18 +637,68 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":              p.NamespaceName,
-		"description":                p.Description,
-		"joinNotification":           p.JoinNotification.ToDict(),
-		"leaveNotification":          p.LeaveNotification.ToDict(),
-		"changeMemberNotification":   p.ChangeMemberNotification.ToDict(),
-		"receiveRequestNotification": p.ReceiveRequestNotification.ToDict(),
-		"removeRequestNotification":  p.RemoveRequestNotification.ToDict(),
-		"createGuildScript":          p.CreateGuildScript.ToDict(),
-		"joinGuildScript":            p.JoinGuildScript.ToDict(),
-		"leaveGuildScript":           p.LeaveGuildScript.ToDict(),
-		"changeRoleScript":           p.ChangeRoleScript.ToDict(),
-		"logSetting":                 p.LogSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"joinNotification": func() map[string]interface{} {
+			if p.JoinNotification == nil {
+				return nil
+			}
+			return p.JoinNotification.ToDict()
+		}(),
+		"leaveNotification": func() map[string]interface{} {
+			if p.LeaveNotification == nil {
+				return nil
+			}
+			return p.LeaveNotification.ToDict()
+		}(),
+		"changeMemberNotification": func() map[string]interface{} {
+			if p.ChangeMemberNotification == nil {
+				return nil
+			}
+			return p.ChangeMemberNotification.ToDict()
+		}(),
+		"receiveRequestNotification": func() map[string]interface{} {
+			if p.ReceiveRequestNotification == nil {
+				return nil
+			}
+			return p.ReceiveRequestNotification.ToDict()
+		}(),
+		"removeRequestNotification": func() map[string]interface{} {
+			if p.RemoveRequestNotification == nil {
+				return nil
+			}
+			return p.RemoveRequestNotification.ToDict()
+		}(),
+		"createGuildScript": func() map[string]interface{} {
+			if p.CreateGuildScript == nil {
+				return nil
+			}
+			return p.CreateGuildScript.ToDict()
+		}(),
+		"joinGuildScript": func() map[string]interface{} {
+			if p.JoinGuildScript == nil {
+				return nil
+			}
+			return p.JoinGuildScript.ToDict()
+		}(),
+		"leaveGuildScript": func() map[string]interface{} {
+			if p.LeaveGuildScript == nil {
+				return nil
+			}
+			return p.LeaveGuildScript.ToDict()
+		}(),
+		"changeRoleScript": func() map[string]interface{} {
+			if p.ChangeRoleScript == nil {
+				return nil
+			}
+			return p.ChangeRoleScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -9493,8 +9593,13 @@ func NewUpdateCurrentGuildMasterFromGitHubRequestFromDict(data map[string]interf
 
 func (p UpdateCurrentGuildMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

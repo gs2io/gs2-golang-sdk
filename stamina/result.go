@@ -81,7 +81,12 @@ func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespa
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -143,7 +148,12 @@ func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResu
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -174,7 +184,12 @@ func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespa
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -205,7 +220,12 @@ func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespa
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -472,7 +492,12 @@ func NewCreateStaminaModelMasterResultFromDict(data map[string]interface{}) Crea
 
 func (p CreateStaminaModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -503,7 +528,12 @@ func NewGetStaminaModelMasterResultFromDict(data map[string]interface{}) GetStam
 
 func (p GetStaminaModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -534,7 +564,12 @@ func NewUpdateStaminaModelMasterResultFromDict(data map[string]interface{}) Upda
 
 func (p UpdateStaminaModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -565,7 +600,12 @@ func NewDeleteStaminaModelMasterResultFromDict(data map[string]interface{}) Dele
 
 func (p DeleteStaminaModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -632,7 +672,12 @@ func NewCreateMaxStaminaTableMasterResultFromDict(data map[string]interface{}) C
 
 func (p CreateMaxStaminaTableMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -663,7 +708,12 @@ func NewGetMaxStaminaTableMasterResultFromDict(data map[string]interface{}) GetM
 
 func (p GetMaxStaminaTableMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -694,7 +744,12 @@ func NewUpdateMaxStaminaTableMasterResultFromDict(data map[string]interface{}) U
 
 func (p UpdateMaxStaminaTableMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -725,7 +780,12 @@ func NewDeleteMaxStaminaTableMasterResultFromDict(data map[string]interface{}) D
 
 func (p DeleteMaxStaminaTableMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -792,7 +852,12 @@ func NewCreateRecoverIntervalTableMasterResultFromDict(data map[string]interface
 
 func (p CreateRecoverIntervalTableMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -823,7 +888,12 @@ func NewGetRecoverIntervalTableMasterResultFromDict(data map[string]interface{})
 
 func (p GetRecoverIntervalTableMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -854,7 +924,12 @@ func NewUpdateRecoverIntervalTableMasterResultFromDict(data map[string]interface
 
 func (p UpdateRecoverIntervalTableMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -885,7 +960,12 @@ func NewDeleteRecoverIntervalTableMasterResultFromDict(data map[string]interface
 
 func (p DeleteRecoverIntervalTableMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -952,7 +1032,12 @@ func NewCreateRecoverValueTableMasterResultFromDict(data map[string]interface{})
 
 func (p CreateRecoverValueTableMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -983,7 +1068,12 @@ func NewGetRecoverValueTableMasterResultFromDict(data map[string]interface{}) Ge
 
 func (p GetRecoverValueTableMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1014,7 +1104,12 @@ func NewUpdateRecoverValueTableMasterResultFromDict(data map[string]interface{})
 
 func (p UpdateRecoverValueTableMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1045,7 +1140,12 @@ func NewDeleteRecoverValueTableMasterResultFromDict(data map[string]interface{})
 
 func (p DeleteRecoverValueTableMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1076,7 +1176,12 @@ func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResu
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1107,7 +1212,12 @@ func NewGetCurrentStaminaMasterResultFromDict(data map[string]interface{}) GetCu
 
 func (p GetCurrentStaminaMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1138,7 +1248,12 @@ func NewUpdateCurrentStaminaMasterResultFromDict(data map[string]interface{}) Up
 
 func (p UpdateCurrentStaminaMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1169,7 +1284,12 @@ func NewUpdateCurrentStaminaMasterFromGitHubResultFromDict(data map[string]inter
 
 func (p UpdateCurrentStaminaMasterFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1233,7 +1353,12 @@ func NewGetStaminaModelResultFromDict(data map[string]interface{}) GetStaminaMod
 
 func (p GetStaminaModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1338,8 +1463,18 @@ func NewGetStaminaResultFromDict(data map[string]interface{}) GetStaminaResult {
 
 func (p GetStaminaResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1372,8 +1507,18 @@ func NewGetStaminaByUserIdResultFromDict(data map[string]interface{}) GetStamina
 
 func (p GetStaminaByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1406,8 +1551,18 @@ func NewUpdateStaminaByUserIdResultFromDict(data map[string]interface{}) UpdateS
 
 func (p UpdateStaminaByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1440,8 +1595,18 @@ func NewConsumeStaminaResultFromDict(data map[string]interface{}) ConsumeStamina
 
 func (p ConsumeStaminaResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1474,8 +1639,18 @@ func NewConsumeStaminaByUserIdResultFromDict(data map[string]interface{}) Consum
 
 func (p ConsumeStaminaByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1510,8 +1685,18 @@ func NewRecoverStaminaByUserIdResultFromDict(data map[string]interface{}) Recove
 
 func (p RecoverStaminaByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"staminaModel":  p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 		"overflowValue": p.OverflowValue,
 	}
 }
@@ -1545,8 +1730,18 @@ func NewRaiseMaxValueByUserIdResultFromDict(data map[string]interface{}) RaiseMa
 
 func (p RaiseMaxValueByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1579,8 +1774,18 @@ func NewDecreaseMaxValueResultFromDict(data map[string]interface{}) DecreaseMaxV
 
 func (p DecreaseMaxValueResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1613,8 +1818,18 @@ func NewDecreaseMaxValueByUserIdResultFromDict(data map[string]interface{}) Decr
 
 func (p DecreaseMaxValueByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1649,9 +1864,24 @@ func NewSetMaxValueByUserIdResultFromDict(data map[string]interface{}) SetMaxVal
 
 func (p SetMaxValueByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"old":          p.Old.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1686,9 +1916,24 @@ func NewSetRecoverIntervalByUserIdResultFromDict(data map[string]interface{}) Se
 
 func (p SetRecoverIntervalByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"old":          p.Old.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1723,9 +1968,24 @@ func NewSetRecoverValueByUserIdResultFromDict(data map[string]interface{}) SetRe
 
 func (p SetRecoverValueByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"old":          p.Old.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1760,9 +2020,24 @@ func NewSetMaxValueByStatusResultFromDict(data map[string]interface{}) SetMaxVal
 
 func (p SetMaxValueByStatusResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"old":          p.Old.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1797,9 +2072,24 @@ func NewSetRecoverIntervalByStatusResultFromDict(data map[string]interface{}) Se
 
 func (p SetRecoverIntervalByStatusResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"old":          p.Old.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1834,9 +2124,24 @@ func NewSetRecoverValueByStatusResultFromDict(data map[string]interface{}) SetRe
 
 func (p SetRecoverValueByStatusResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"old":          p.Old.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1867,7 +2172,12 @@ func NewDeleteStaminaByUserIdResultFromDict(data map[string]interface{}) DeleteS
 
 func (p DeleteStaminaByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1902,8 +2212,18 @@ func NewRecoverStaminaByStampSheetResultFromDict(data map[string]interface{}) Re
 
 func (p RecoverStaminaByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"staminaModel":  p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 		"overflowValue": p.OverflowValue,
 	}
 }
@@ -1937,8 +2257,18 @@ func NewRaiseMaxValueByStampSheetResultFromDict(data map[string]interface{}) Rai
 
 func (p RaiseMaxValueByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -1973,8 +2303,18 @@ func NewDecreaseMaxValueByStampTaskResultFromDict(data map[string]interface{}) D
 
 func (p DecreaseMaxValueByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
-		"staminaModel":    p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 	}
 }
@@ -2010,9 +2350,24 @@ func NewSetMaxValueByStampSheetResultFromDict(data map[string]interface{}) SetMa
 
 func (p SetMaxValueByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"old":          p.Old.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -2047,9 +2402,24 @@ func NewSetRecoverIntervalByStampSheetResultFromDict(data map[string]interface{}
 
 func (p SetRecoverIntervalByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"old":          p.Old.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -2084,9 +2454,24 @@ func NewSetRecoverValueByStampSheetResultFromDict(data map[string]interface{}) S
 
 func (p SetRecoverValueByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
-		"old":          p.Old.ToDict(),
-		"staminaModel": p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 	}
 }
 
@@ -2121,8 +2506,18 @@ func NewConsumeStaminaByStampTaskResultFromDict(data map[string]interface{}) Con
 
 func (p ConsumeStaminaByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
-		"staminaModel":    p.StaminaModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"staminaModel": func() map[string]interface{} {
+			if p.StaminaModel == nil {
+				return nil
+			}
+			return p.StaminaModel.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 	}
 }

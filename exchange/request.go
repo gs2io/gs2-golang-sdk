@@ -290,16 +290,36 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                      p.Name,
-		"description":               p.Description,
-		"enableAwaitExchange":       p.EnableAwaitExchange,
-		"enableDirectExchange":      p.EnableDirectExchange,
-		"transactionSetting":        p.TransactionSetting.ToDict(),
-		"exchangeScript":            p.ExchangeScript.ToDict(),
-		"incrementalExchangeScript": p.IncrementalExchangeScript.ToDict(),
-		"logSetting":                p.LogSetting.ToDict(),
-		"queueNamespaceId":          p.QueueNamespaceId,
-		"keyId":                     p.KeyId,
+		"name":                 p.Name,
+		"description":          p.Description,
+		"enableAwaitExchange":  p.EnableAwaitExchange,
+		"enableDirectExchange": p.EnableDirectExchange,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"exchangeScript": func() map[string]interface{} {
+			if p.ExchangeScript == nil {
+				return nil
+			}
+			return p.ExchangeScript.ToDict()
+		}(),
+		"incrementalExchangeScript": func() map[string]interface{} {
+			if p.IncrementalExchangeScript == nil {
+				return nil
+			}
+			return p.IncrementalExchangeScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
+		"queueNamespaceId": p.QueueNamespaceId,
+		"keyId":            p.KeyId,
 	}
 }
 
@@ -649,16 +669,36 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":             p.NamespaceName,
-		"description":               p.Description,
-		"enableAwaitExchange":       p.EnableAwaitExchange,
-		"enableDirectExchange":      p.EnableDirectExchange,
-		"transactionSetting":        p.TransactionSetting.ToDict(),
-		"exchangeScript":            p.ExchangeScript.ToDict(),
-		"incrementalExchangeScript": p.IncrementalExchangeScript.ToDict(),
-		"logSetting":                p.LogSetting.ToDict(),
-		"queueNamespaceId":          p.QueueNamespaceId,
-		"keyId":                     p.KeyId,
+		"namespaceName":        p.NamespaceName,
+		"description":          p.Description,
+		"enableAwaitExchange":  p.EnableAwaitExchange,
+		"enableDirectExchange": p.EnableDirectExchange,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"exchangeScript": func() map[string]interface{} {
+			if p.ExchangeScript == nil {
+				return nil
+			}
+			return p.ExchangeScript.ToDict()
+		}(),
+		"incrementalExchangeScript": func() map[string]interface{} {
+			if p.IncrementalExchangeScript == nil {
+				return nil
+			}
+			return p.IncrementalExchangeScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
+		"queueNamespaceId": p.QueueNamespaceId,
+		"keyId":            p.KeyId,
 	}
 }
 
@@ -3042,11 +3082,16 @@ func NewCreateIncrementalRateModelMasterRequestFromDict(data map[string]interfac
 
 func (p CreateIncrementalRateModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":        p.NamespaceName,
-		"name":                 p.Name,
-		"description":          p.Description,
-		"metadata":             p.Metadata,
-		"consumeAction":        p.ConsumeAction.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"name":          p.Name,
+		"description":   p.Description,
+		"metadata":      p.Metadata,
+		"consumeAction": func() map[string]interface{} {
+			if p.ConsumeAction == nil {
+				return nil
+			}
+			return p.ConsumeAction.ToDict()
+		}(),
 		"calculateType":        p.CalculateType,
 		"baseValue":            p.BaseValue,
 		"coefficientValue":     p.CoefficientValue,
@@ -3418,11 +3463,16 @@ func NewUpdateIncrementalRateModelMasterRequestFromDict(data map[string]interfac
 
 func (p UpdateIncrementalRateModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":        p.NamespaceName,
-		"rateName":             p.RateName,
-		"description":          p.Description,
-		"metadata":             p.Metadata,
-		"consumeAction":        p.ConsumeAction.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"rateName":      p.RateName,
+		"description":   p.Description,
+		"metadata":      p.Metadata,
+		"consumeAction": func() map[string]interface{} {
+			if p.ConsumeAction == nil {
+				return nil
+			}
+			return p.ConsumeAction.ToDict()
+		}(),
 		"calculateType":        p.CalculateType,
 		"baseValue":            p.BaseValue,
 		"coefficientValue":     p.CoefficientValue,
@@ -4751,8 +4801,13 @@ func NewUpdateCurrentRateMasterFromGitHubRequestFromDict(data map[string]interfa
 
 func (p UpdateCurrentRateMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

@@ -81,7 +81,12 @@ func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespa
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -143,7 +148,12 @@ func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResu
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -174,7 +184,12 @@ func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespa
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -205,7 +220,12 @@ func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespa
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -472,7 +492,12 @@ func NewCreateExperienceModelMasterResultFromDict(data map[string]interface{}) C
 
 func (p CreateExperienceModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -503,7 +528,12 @@ func NewGetExperienceModelMasterResultFromDict(data map[string]interface{}) GetE
 
 func (p GetExperienceModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -534,7 +564,12 @@ func NewUpdateExperienceModelMasterResultFromDict(data map[string]interface{}) U
 
 func (p UpdateExperienceModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -565,7 +600,12 @@ func NewDeleteExperienceModelMasterResultFromDict(data map[string]interface{}) D
 
 func (p DeleteExperienceModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -629,7 +669,12 @@ func NewGetExperienceModelResultFromDict(data map[string]interface{}) GetExperie
 
 func (p GetExperienceModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -696,7 +741,12 @@ func NewCreateThresholdMasterResultFromDict(data map[string]interface{}) CreateT
 
 func (p CreateThresholdMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -727,7 +777,12 @@ func NewGetThresholdMasterResultFromDict(data map[string]interface{}) GetThresho
 
 func (p GetThresholdMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -758,7 +813,12 @@ func NewUpdateThresholdMasterResultFromDict(data map[string]interface{}) UpdateT
 
 func (p UpdateThresholdMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -789,7 +849,12 @@ func NewDeleteThresholdMasterResultFromDict(data map[string]interface{}) DeleteT
 
 func (p DeleteThresholdMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -820,7 +885,12 @@ func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResu
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -851,7 +921,12 @@ func NewGetCurrentExperienceMasterResultFromDict(data map[string]interface{}) Ge
 
 func (p GetCurrentExperienceMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -882,7 +957,12 @@ func NewUpdateCurrentExperienceMasterResultFromDict(data map[string]interface{})
 
 func (p UpdateCurrentExperienceMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -913,7 +993,12 @@ func NewUpdateCurrentExperienceMasterFromGitHubResultFromDict(data map[string]in
 
 func (p UpdateCurrentExperienceMasterFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1016,7 +1101,12 @@ func NewGetStatusResultFromDict(data map[string]interface{}) GetStatusResult {
 
 func (p GetStatusResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1047,7 +1137,12 @@ func NewGetStatusByUserIdResultFromDict(data map[string]interface{}) GetStatusBy
 
 func (p GetStatusByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1082,7 +1177,12 @@ func NewGetStatusWithSignatureResultFromDict(data map[string]interface{}) GetSta
 
 func (p GetStatusWithSignatureResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"body":      p.Body,
 		"signature": p.Signature,
 	}
@@ -1119,7 +1219,12 @@ func NewGetStatusWithSignatureByUserIdResultFromDict(data map[string]interface{}
 
 func (p GetStatusWithSignatureByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"body":      p.Body,
 		"signature": p.Signature,
 	}
@@ -1152,7 +1257,12 @@ func NewAddExperienceByUserIdResultFromDict(data map[string]interface{}) AddExpe
 
 func (p AddExperienceByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1183,7 +1293,12 @@ func NewSubExperienceResultFromDict(data map[string]interface{}) SubExperienceRe
 
 func (p SubExperienceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1214,7 +1329,12 @@ func NewSubExperienceByUserIdResultFromDict(data map[string]interface{}) SubExpe
 
 func (p SubExperienceByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1247,8 +1367,18 @@ func NewSetExperienceByUserIdResultFromDict(data map[string]interface{}) SetExpe
 
 func (p SetExperienceByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 
@@ -1279,7 +1409,12 @@ func NewAddRankCapByUserIdResultFromDict(data map[string]interface{}) AddRankCap
 
 func (p AddRankCapByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1310,7 +1445,12 @@ func NewSubRankCapResultFromDict(data map[string]interface{}) SubRankCapResult {
 
 func (p SubRankCapResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1341,7 +1481,12 @@ func NewSubRankCapByUserIdResultFromDict(data map[string]interface{}) SubRankCap
 
 func (p SubRankCapByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1374,8 +1519,18 @@ func NewSetRankCapByUserIdResultFromDict(data map[string]interface{}) SetRankCap
 
 func (p SetRankCapByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 
@@ -1406,7 +1561,12 @@ func NewDeleteStatusByUserIdResultFromDict(data map[string]interface{}) DeleteSt
 
 func (p DeleteStatusByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1541,7 +1701,12 @@ func NewAddExperienceByStampSheetResultFromDict(data map[string]interface{}) Add
 
 func (p AddExperienceByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1572,7 +1737,12 @@ func NewSetExperienceByStampSheetResultFromDict(data map[string]interface{}) Set
 
 func (p SetExperienceByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1605,7 +1775,12 @@ func NewSubExperienceByStampTaskResultFromDict(data map[string]interface{}) SubE
 
 func (p SubExperienceByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 	}
 }
@@ -1637,7 +1812,12 @@ func NewAddRankCapByStampSheetResultFromDict(data map[string]interface{}) AddRan
 
 func (p AddRankCapByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1670,7 +1850,12 @@ func NewSubRankCapByStampTaskResultFromDict(data map[string]interface{}) SubRank
 
 func (p SubRankCapByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 	}
 }
@@ -1704,8 +1889,18 @@ func NewSetRankCapByStampSheetResultFromDict(data map[string]interface{}) SetRan
 
 func (p SetRankCapByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 

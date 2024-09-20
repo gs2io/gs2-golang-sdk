@@ -208,11 +208,21 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var autoRunStampSheetNotification map[string]interface{}
 	if p.AutoRunStampSheetNotification != nil {
-		autoRunStampSheetNotification = p.AutoRunStampSheetNotification.ToDict()
+		autoRunStampSheetNotification = func() map[string]interface{} {
+			if p.AutoRunStampSheetNotification == nil {
+				return nil
+			}
+			return p.AutoRunStampSheetNotification.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -1176,7 +1186,12 @@ func (p StampSheetResult) ToDict() map[string]interface{} {
 	}
 	var sheetRequest map[string]interface{}
 	if p.SheetRequest != nil {
-		sheetRequest = p.SheetRequest.ToDict()
+		sheetRequest = func() map[string]interface{} {
+			if p.SheetRequest == nil {
+				return nil
+			}
+			return p.SheetRequest.ToDict()
+		}()
 	}
 	var verifyTaskResultCodes []interface{}
 	if p.VerifyTaskResultCodes != nil {

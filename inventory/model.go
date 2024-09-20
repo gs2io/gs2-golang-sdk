@@ -209,35 +209,75 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var acquireScript map[string]interface{}
 	if p.AcquireScript != nil {
-		acquireScript = p.AcquireScript.ToDict()
+		acquireScript = func() map[string]interface{} {
+			if p.AcquireScript == nil {
+				return nil
+			}
+			return p.AcquireScript.ToDict()
+		}()
 	}
 	var overflowScript map[string]interface{}
 	if p.OverflowScript != nil {
-		overflowScript = p.OverflowScript.ToDict()
+		overflowScript = func() map[string]interface{} {
+			if p.OverflowScript == nil {
+				return nil
+			}
+			return p.OverflowScript.ToDict()
+		}()
 	}
 	var consumeScript map[string]interface{}
 	if p.ConsumeScript != nil {
-		consumeScript = p.ConsumeScript.ToDict()
+		consumeScript = func() map[string]interface{} {
+			if p.ConsumeScript == nil {
+				return nil
+			}
+			return p.ConsumeScript.ToDict()
+		}()
 	}
 	var simpleItemAcquireScript map[string]interface{}
 	if p.SimpleItemAcquireScript != nil {
-		simpleItemAcquireScript = p.SimpleItemAcquireScript.ToDict()
+		simpleItemAcquireScript = func() map[string]interface{} {
+			if p.SimpleItemAcquireScript == nil {
+				return nil
+			}
+			return p.SimpleItemAcquireScript.ToDict()
+		}()
 	}
 	var simpleItemConsumeScript map[string]interface{}
 	if p.SimpleItemConsumeScript != nil {
-		simpleItemConsumeScript = p.SimpleItemConsumeScript.ToDict()
+		simpleItemConsumeScript = func() map[string]interface{} {
+			if p.SimpleItemConsumeScript == nil {
+				return nil
+			}
+			return p.SimpleItemConsumeScript.ToDict()
+		}()
 	}
 	var bigItemAcquireScript map[string]interface{}
 	if p.BigItemAcquireScript != nil {
-		bigItemAcquireScript = p.BigItemAcquireScript.ToDict()
+		bigItemAcquireScript = func() map[string]interface{} {
+			if p.BigItemAcquireScript == nil {
+				return nil
+			}
+			return p.BigItemAcquireScript.ToDict()
+		}()
 	}
 	var bigItemConsumeScript map[string]interface{}
 	if p.BigItemConsumeScript != nil {
-		bigItemConsumeScript = p.BigItemConsumeScript.ToDict()
+		bigItemConsumeScript = func() map[string]interface{} {
+			if p.BigItemConsumeScript == nil {
+				return nil
+			}
+			return p.BigItemConsumeScript.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

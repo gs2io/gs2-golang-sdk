@@ -218,10 +218,20 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":             p.Name,
-		"description":      p.Description,
-		"logSetting":       p.LogSetting.ToDict(),
-		"doneUploadScript": p.DoneUploadScript.ToDict(),
+		"name":        p.Name,
+		"description": p.Description,
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
+		"doneUploadScript": func() map[string]interface{} {
+			if p.DoneUploadScript == nil {
+				return nil
+			}
+			return p.DoneUploadScript.ToDict()
+		}(),
 	}
 }
 
@@ -499,10 +509,20 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":    p.NamespaceName,
-		"description":      p.Description,
-		"logSetting":       p.LogSetting.ToDict(),
-		"doneUploadScript": p.DoneUploadScript.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
+		"doneUploadScript": func() map[string]interface{} {
+			if p.DoneUploadScript == nil {
+				return nil
+			}
+			return p.DoneUploadScript.ToDict()
+		}(),
 	}
 }
 

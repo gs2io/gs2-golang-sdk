@@ -260,27 +260,57 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = p.TransactionSetting.ToDict()
+		transactionSetting = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	var receiveMessageScript map[string]interface{}
 	if p.ReceiveMessageScript != nil {
-		receiveMessageScript = p.ReceiveMessageScript.ToDict()
+		receiveMessageScript = func() map[string]interface{} {
+			if p.ReceiveMessageScript == nil {
+				return nil
+			}
+			return p.ReceiveMessageScript.ToDict()
+		}()
 	}
 	var readMessageScript map[string]interface{}
 	if p.ReadMessageScript != nil {
-		readMessageScript = p.ReadMessageScript.ToDict()
+		readMessageScript = func() map[string]interface{} {
+			if p.ReadMessageScript == nil {
+				return nil
+			}
+			return p.ReadMessageScript.ToDict()
+		}()
 	}
 	var deleteMessageScript map[string]interface{}
 	if p.DeleteMessageScript != nil {
-		deleteMessageScript = p.DeleteMessageScript.ToDict()
+		deleteMessageScript = func() map[string]interface{} {
+			if p.DeleteMessageScript == nil {
+				return nil
+			}
+			return p.DeleteMessageScript.ToDict()
+		}()
 	}
 	var receiveNotification map[string]interface{}
 	if p.ReceiveNotification != nil {
-		receiveNotification = p.ReceiveNotification.ToDict()
+		receiveNotification = func() map[string]interface{} {
+			if p.ReceiveNotification == nil {
+				return nil
+			}
+			return p.ReceiveNotification.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -903,7 +933,12 @@ func (p GlobalMessageMaster) ToDict() map[string]interface{} {
 	}
 	var expiresTimeSpan map[string]interface{}
 	if p.ExpiresTimeSpan != nil {
-		expiresTimeSpan = p.ExpiresTimeSpan.ToDict()
+		expiresTimeSpan = func() map[string]interface{} {
+			if p.ExpiresTimeSpan == nil {
+				return nil
+			}
+			return p.ExpiresTimeSpan.ToDict()
+		}()
 	}
 	var expiresAt *int64
 	if p.ExpiresAt != nil {
@@ -1132,7 +1167,12 @@ func (p GlobalMessage) ToDict() map[string]interface{} {
 	}
 	var expiresTimeSpan map[string]interface{}
 	if p.ExpiresTimeSpan != nil {
-		expiresTimeSpan = p.ExpiresTimeSpan.ToDict()
+		expiresTimeSpan = func() map[string]interface{} {
+			if p.ExpiresTimeSpan == nil {
+				return nil
+			}
+			return p.ExpiresTimeSpan.ToDict()
+		}()
 	}
 	var expiresAt *int64
 	if p.ExpiresAt != nil {

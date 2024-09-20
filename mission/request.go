@@ -4049,16 +4049,46 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                   p.Name,
-		"description":            p.Description,
-		"transactionSetting":     p.TransactionSetting.ToDict(),
-		"missionCompleteScript":  p.MissionCompleteScript.ToDict(),
-		"counterIncrementScript": p.CounterIncrementScript.ToDict(),
-		"receiveRewardsScript":   p.ReceiveRewardsScript.ToDict(),
-		"completeNotification":   p.CompleteNotification.ToDict(),
-		"logSetting":             p.LogSetting.ToDict(),
-		"queueNamespaceId":       p.QueueNamespaceId,
-		"keyId":                  p.KeyId,
+		"name":        p.Name,
+		"description": p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"missionCompleteScript": func() map[string]interface{} {
+			if p.MissionCompleteScript == nil {
+				return nil
+			}
+			return p.MissionCompleteScript.ToDict()
+		}(),
+		"counterIncrementScript": func() map[string]interface{} {
+			if p.CounterIncrementScript == nil {
+				return nil
+			}
+			return p.CounterIncrementScript.ToDict()
+		}(),
+		"receiveRewardsScript": func() map[string]interface{} {
+			if p.ReceiveRewardsScript == nil {
+				return nil
+			}
+			return p.ReceiveRewardsScript.ToDict()
+		}(),
+		"completeNotification": func() map[string]interface{} {
+			if p.CompleteNotification == nil {
+				return nil
+			}
+			return p.CompleteNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
+		"queueNamespaceId": p.QueueNamespaceId,
+		"keyId":            p.KeyId,
 	}
 }
 
@@ -4408,16 +4438,46 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":          p.NamespaceName,
-		"description":            p.Description,
-		"transactionSetting":     p.TransactionSetting.ToDict(),
-		"missionCompleteScript":  p.MissionCompleteScript.ToDict(),
-		"counterIncrementScript": p.CounterIncrementScript.ToDict(),
-		"receiveRewardsScript":   p.ReceiveRewardsScript.ToDict(),
-		"completeNotification":   p.CompleteNotification.ToDict(),
-		"logSetting":             p.LogSetting.ToDict(),
-		"queueNamespaceId":       p.QueueNamespaceId,
-		"keyId":                  p.KeyId,
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"missionCompleteScript": func() map[string]interface{} {
+			if p.MissionCompleteScript == nil {
+				return nil
+			}
+			return p.MissionCompleteScript.ToDict()
+		}(),
+		"counterIncrementScript": func() map[string]interface{} {
+			if p.CounterIncrementScript == nil {
+				return nil
+			}
+			return p.CounterIncrementScript.ToDict()
+		}(),
+		"receiveRewardsScript": func() map[string]interface{} {
+			if p.ReceiveRewardsScript == nil {
+				return nil
+			}
+			return p.ReceiveRewardsScript.ToDict()
+		}(),
+		"completeNotification": func() map[string]interface{} {
+			if p.CompleteNotification == nil {
+				return nil
+			}
+			return p.CompleteNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
+		"queueNamespaceId": p.QueueNamespaceId,
+		"keyId":            p.KeyId,
 	}
 }
 
@@ -8004,8 +8064,13 @@ func NewUpdateCurrentMissionMasterFromGitHubRequestFromDict(data map[string]inte
 
 func (p UpdateCurrentMissionMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 
@@ -9095,7 +9160,12 @@ func (p CreateMissionTaskModelMasterRequest) ToDict() map[string]interface{} {
 		"metadata":           p.Metadata,
 		"description":        p.Description,
 		"verifyCompleteType": p.VerifyCompleteType,
-		"targetCounter":      p.TargetCounter.ToDict(),
+		"targetCounter": func() map[string]interface{} {
+			if p.TargetCounter == nil {
+				return nil
+			}
+			return p.TargetCounter.ToDict()
+		}(),
 		"verifyCompleteConsumeActions": CastVerifyActionsFromDict(
 			p.VerifyCompleteConsumeActions,
 		),
@@ -9574,7 +9644,12 @@ func (p UpdateMissionTaskModelMasterRequest) ToDict() map[string]interface{} {
 		"metadata":           p.Metadata,
 		"description":        p.Description,
 		"verifyCompleteType": p.VerifyCompleteType,
-		"targetCounter":      p.TargetCounter.ToDict(),
+		"targetCounter": func() map[string]interface{} {
+			if p.TargetCounter == nil {
+				return nil
+			}
+			return p.TargetCounter.ToDict()
+		}(),
 		"verifyCompleteConsumeActions": CastVerifyActionsFromDict(
 			p.VerifyCompleteConsumeActions,
 		),

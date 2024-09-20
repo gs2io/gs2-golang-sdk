@@ -766,7 +766,12 @@ func (p Password) ToDict() map[string]interface{} {
 	}
 	var twoFactorAuthenticationSetting map[string]interface{}
 	if p.TwoFactorAuthenticationSetting != nil {
-		twoFactorAuthenticationSetting = p.TwoFactorAuthenticationSetting.ToDict()
+		twoFactorAuthenticationSetting = func() map[string]interface{} {
+			if p.TwoFactorAuthenticationSetting == nil {
+				return nil
+			}
+			return p.TwoFactorAuthenticationSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

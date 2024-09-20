@@ -244,7 +244,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = p.TransactionSetting.ToDict()
+		transactionSetting = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	var rankCapScriptId *string
 	if p.RankCapScriptId != nil {
@@ -252,15 +257,30 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var changeExperienceScript map[string]interface{}
 	if p.ChangeExperienceScript != nil {
-		changeExperienceScript = p.ChangeExperienceScript.ToDict()
+		changeExperienceScript = func() map[string]interface{} {
+			if p.ChangeExperienceScript == nil {
+				return nil
+			}
+			return p.ChangeExperienceScript.ToDict()
+		}()
 	}
 	var changeRankScript map[string]interface{}
 	if p.ChangeRankScript != nil {
-		changeRankScript = p.ChangeRankScript.ToDict()
+		changeRankScript = func() map[string]interface{} {
+			if p.ChangeRankScript == nil {
+				return nil
+			}
+			return p.ChangeRankScript.ToDict()
+		}()
 	}
 	var changeRankCapScript map[string]interface{}
 	if p.ChangeRankCapScript != nil {
-		changeRankCapScript = p.ChangeRankCapScript.ToDict()
+		changeRankCapScript = func() map[string]interface{} {
+			if p.ChangeRankCapScript == nil {
+				return nil
+			}
+			return p.ChangeRankCapScript.ToDict()
+		}()
 	}
 	var overflowExperienceScript *string
 	if p.OverflowExperienceScript != nil {
@@ -268,7 +288,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -775,7 +800,12 @@ func (p ExperienceModel) ToDict() map[string]interface{} {
 	}
 	var rankThreshold map[string]interface{}
 	if p.RankThreshold != nil {
-		rankThreshold = p.RankThreshold.ToDict()
+		rankThreshold = func() map[string]interface{} {
+			if p.RankThreshold == nil {
+				return nil
+			}
+			return p.RankThreshold.ToDict()
+		}()
 	}
 	var acquireActionRates []interface{}
 	if p.AcquireActionRates != nil {

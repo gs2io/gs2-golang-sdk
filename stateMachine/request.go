@@ -266,12 +266,37 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"name":                        p.Name,
 		"description":                 p.Description,
 		"supportSpeculativeExecution": p.SupportSpeculativeExecution,
-		"transactionSetting":          p.TransactionSetting.ToDict(),
-		"startScript":                 p.StartScript.ToDict(),
-		"passScript":                  p.PassScript.ToDict(),
-		"errorScript":                 p.ErrorScript.ToDict(),
-		"lowestStateMachineVersion":   p.LowestStateMachineVersion,
-		"logSetting":                  p.LogSetting.ToDict(),
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"startScript": func() map[string]interface{} {
+			if p.StartScript == nil {
+				return nil
+			}
+			return p.StartScript.ToDict()
+		}(),
+		"passScript": func() map[string]interface{} {
+			if p.PassScript == nil {
+				return nil
+			}
+			return p.PassScript.ToDict()
+		}(),
+		"errorScript": func() map[string]interface{} {
+			if p.ErrorScript == nil {
+				return nil
+			}
+			return p.ErrorScript.ToDict()
+		}(),
+		"lowestStateMachineVersion": p.LowestStateMachineVersion,
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -597,12 +622,37 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"namespaceName":               p.NamespaceName,
 		"description":                 p.Description,
 		"supportSpeculativeExecution": p.SupportSpeculativeExecution,
-		"transactionSetting":          p.TransactionSetting.ToDict(),
-		"startScript":                 p.StartScript.ToDict(),
-		"passScript":                  p.PassScript.ToDict(),
-		"errorScript":                 p.ErrorScript.ToDict(),
-		"lowestStateMachineVersion":   p.LowestStateMachineVersion,
-		"logSetting":                  p.LogSetting.ToDict(),
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"startScript": func() map[string]interface{} {
+			if p.StartScript == nil {
+				return nil
+			}
+			return p.StartScript.ToDict()
+		}(),
+		"passScript": func() map[string]interface{} {
+			if p.PassScript == nil {
+				return nil
+			}
+			return p.PassScript.ToDict()
+		}(),
+		"errorScript": func() map[string]interface{} {
+			if p.ErrorScript == nil {
+				return nil
+			}
+			return p.ErrorScript.ToDict()
+		}(),
+		"lowestStateMachineVersion": p.LowestStateMachineVersion,
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 

@@ -209,11 +209,21 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = p.TransactionSetting.ToDict()
+		transactionSetting = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	var receiveScript map[string]interface{}
 	if p.ReceiveScript != nil {
-		receiveScript = p.ReceiveScript.ToDict()
+		receiveScript = func() map[string]interface{} {
+			if p.ReceiveScript == nil {
+				return nil
+			}
+			return p.ReceiveScript.ToDict()
+		}()
 	}
 	var overrideAcquireActionsScriptId *string
 	if p.OverrideAcquireActionsScriptId != nil {
@@ -221,7 +231,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

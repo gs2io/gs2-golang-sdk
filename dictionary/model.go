@@ -204,7 +204,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var entryScript map[string]interface{}
 	if p.EntryScript != nil {
-		entryScript = p.EntryScript.ToDict()
+		entryScript = func() map[string]interface{} {
+			if p.EntryScript == nil {
+				return nil
+			}
+			return p.EntryScript.ToDict()
+		}()
 	}
 	var duplicateEntryScript *string
 	if p.DuplicateEntryScript != nil {
@@ -212,7 +217,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

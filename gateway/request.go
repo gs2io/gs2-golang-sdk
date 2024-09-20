@@ -241,7 +241,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"name":           p.Name,
 		"description":    p.Description,
 		"firebaseSecret": p.FirebaseSecret,
-		"logSetting":     p.LogSetting.ToDict(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -542,7 +547,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"namespaceName":  p.NamespaceName,
 		"description":    p.Description,
 		"firebaseSecret": p.FirebaseSecret,
-		"logSetting":     p.LogSetting.ToDict(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 

@@ -487,27 +487,57 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var changeRatingScript map[string]interface{}
 	if p.ChangeRatingScript != nil {
-		changeRatingScript = p.ChangeRatingScript.ToDict()
+		changeRatingScript = func() map[string]interface{} {
+			if p.ChangeRatingScript == nil {
+				return nil
+			}
+			return p.ChangeRatingScript.ToDict()
+		}()
 	}
 	var joinNotification map[string]interface{}
 	if p.JoinNotification != nil {
-		joinNotification = p.JoinNotification.ToDict()
+		joinNotification = func() map[string]interface{} {
+			if p.JoinNotification == nil {
+				return nil
+			}
+			return p.JoinNotification.ToDict()
+		}()
 	}
 	var leaveNotification map[string]interface{}
 	if p.LeaveNotification != nil {
-		leaveNotification = p.LeaveNotification.ToDict()
+		leaveNotification = func() map[string]interface{} {
+			if p.LeaveNotification == nil {
+				return nil
+			}
+			return p.LeaveNotification.ToDict()
+		}()
 	}
 	var completeNotification map[string]interface{}
 	if p.CompleteNotification != nil {
-		completeNotification = p.CompleteNotification.ToDict()
+		completeNotification = func() map[string]interface{} {
+			if p.CompleteNotification == nil {
+				return nil
+			}
+			return p.CompleteNotification.ToDict()
+		}()
 	}
 	var changeRatingNotification map[string]interface{}
 	if p.ChangeRatingNotification != nil {
-		changeRatingNotification = p.ChangeRatingNotification.ToDict()
+		changeRatingNotification = func() map[string]interface{} {
+			if p.ChangeRatingNotification == nil {
+				return nil
+			}
+			return p.ChangeRatingNotification.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -4221,7 +4251,12 @@ func (p WrittenBallot) ToDict() map[string]interface{} {
 
 	var ballot map[string]interface{}
 	if p.Ballot != nil {
-		ballot = p.Ballot.ToDict()
+		ballot = func() map[string]interface{} {
+			if p.Ballot == nil {
+				return nil
+			}
+			return p.Ballot.ToDict()
+		}()
 	}
 	var gameResults []interface{}
 	if p.GameResults != nil {

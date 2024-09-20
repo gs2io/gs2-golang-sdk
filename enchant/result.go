@@ -81,7 +81,12 @@ func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespa
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -143,7 +148,12 @@ func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResu
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -174,7 +184,12 @@ func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespa
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -205,7 +220,12 @@ func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespa
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -469,7 +489,12 @@ func NewGetBalanceParameterModelResultFromDict(data map[string]interface{}) GetB
 
 func (p GetBalanceParameterModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -536,7 +561,12 @@ func NewCreateBalanceParameterModelMasterResultFromDict(data map[string]interfac
 
 func (p CreateBalanceParameterModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -567,7 +597,12 @@ func NewGetBalanceParameterModelMasterResultFromDict(data map[string]interface{}
 
 func (p GetBalanceParameterModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -598,7 +633,12 @@ func NewUpdateBalanceParameterModelMasterResultFromDict(data map[string]interfac
 
 func (p UpdateBalanceParameterModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -629,7 +669,12 @@ func NewDeleteBalanceParameterModelMasterResultFromDict(data map[string]interfac
 
 func (p DeleteBalanceParameterModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -693,7 +738,12 @@ func NewGetRarityParameterModelResultFromDict(data map[string]interface{}) GetRa
 
 func (p GetRarityParameterModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -760,7 +810,12 @@ func NewCreateRarityParameterModelMasterResultFromDict(data map[string]interface
 
 func (p CreateRarityParameterModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -791,7 +846,12 @@ func NewGetRarityParameterModelMasterResultFromDict(data map[string]interface{})
 
 func (p GetRarityParameterModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -822,7 +882,12 @@ func NewUpdateRarityParameterModelMasterResultFromDict(data map[string]interface
 
 func (p UpdateRarityParameterModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -853,7 +918,12 @@ func NewDeleteRarityParameterModelMasterResultFromDict(data map[string]interface
 
 func (p DeleteRarityParameterModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -884,7 +954,12 @@ func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResu
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -915,7 +990,12 @@ func NewGetCurrentParameterMasterResultFromDict(data map[string]interface{}) Get
 
 func (p GetCurrentParameterMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -946,7 +1026,12 @@ func NewUpdateCurrentParameterMasterResultFromDict(data map[string]interface{}) 
 
 func (p UpdateCurrentParameterMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -977,7 +1062,12 @@ func NewUpdateCurrentParameterMasterFromGitHubResultFromDict(data map[string]int
 
 func (p UpdateCurrentParameterMasterFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1080,7 +1170,12 @@ func NewGetBalanceParameterStatusResultFromDict(data map[string]interface{}) Get
 
 func (p GetBalanceParameterStatusResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1111,7 +1206,12 @@ func NewGetBalanceParameterStatusByUserIdResultFromDict(data map[string]interfac
 
 func (p GetBalanceParameterStatusByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1142,7 +1242,12 @@ func NewDeleteBalanceParameterStatusByUserIdResultFromDict(data map[string]inter
 
 func (p DeleteBalanceParameterStatusByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1175,8 +1280,18 @@ func NewReDrawBalanceParameterStatusByUserIdResultFromDict(data map[string]inter
 
 func (p ReDrawBalanceParameterStatusByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 
@@ -1209,8 +1324,18 @@ func NewReDrawBalanceParameterStatusByStampSheetResultFromDict(data map[string]i
 
 func (p ReDrawBalanceParameterStatusByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 
@@ -1243,8 +1368,18 @@ func NewSetBalanceParameterStatusByUserIdResultFromDict(data map[string]interfac
 
 func (p SetBalanceParameterStatusByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 
@@ -1277,8 +1412,18 @@ func NewSetBalanceParameterStatusByStampSheetResultFromDict(data map[string]inte
 
 func (p SetBalanceParameterStatusByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 
@@ -1381,7 +1526,12 @@ func NewGetRarityParameterStatusResultFromDict(data map[string]interface{}) GetR
 
 func (p GetRarityParameterStatusResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1412,7 +1562,12 @@ func NewGetRarityParameterStatusByUserIdResultFromDict(data map[string]interface
 
 func (p GetRarityParameterStatusByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1443,7 +1598,12 @@ func NewDeleteRarityParameterStatusByUserIdResultFromDict(data map[string]interf
 
 func (p DeleteRarityParameterStatusByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1476,8 +1636,18 @@ func NewReDrawRarityParameterStatusByUserIdResultFromDict(data map[string]interf
 
 func (p ReDrawRarityParameterStatusByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 
@@ -1510,8 +1680,18 @@ func NewReDrawRarityParameterStatusByStampSheetResultFromDict(data map[string]in
 
 func (p ReDrawRarityParameterStatusByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 
@@ -1544,8 +1724,18 @@ func NewAddRarityParameterStatusByUserIdResultFromDict(data map[string]interface
 
 func (p AddRarityParameterStatusByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 
@@ -1578,8 +1768,18 @@ func NewAddRarityParameterStatusByStampSheetResultFromDict(data map[string]inter
 
 func (p AddRarityParameterStatusByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 
@@ -1610,7 +1810,12 @@ func NewVerifyRarityParameterStatusResultFromDict(data map[string]interface{}) V
 
 func (p VerifyRarityParameterStatusResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1641,7 +1846,12 @@ func NewVerifyRarityParameterStatusByUserIdResultFromDict(data map[string]interf
 
 func (p VerifyRarityParameterStatusByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1674,7 +1884,12 @@ func NewVerifyRarityParameterStatusByStampTaskResultFromDict(data map[string]int
 
 func (p VerifyRarityParameterStatusByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 	}
 }
@@ -1708,8 +1923,18 @@ func NewSetRarityParameterStatusByUserIdResultFromDict(data map[string]interface
 
 func (p SetRarityParameterStatusByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 
@@ -1742,8 +1967,18 @@ func NewSetRarityParameterStatusByStampSheetResultFromDict(data map[string]inter
 
 func (p SetRarityParameterStatusByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
-		"old":  p.Old.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
 	}
 }
 

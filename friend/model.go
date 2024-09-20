@@ -244,63 +244,138 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var followScript map[string]interface{}
 	if p.FollowScript != nil {
-		followScript = p.FollowScript.ToDict()
+		followScript = func() map[string]interface{} {
+			if p.FollowScript == nil {
+				return nil
+			}
+			return p.FollowScript.ToDict()
+		}()
 	}
 	var unfollowScript map[string]interface{}
 	if p.UnfollowScript != nil {
-		unfollowScript = p.UnfollowScript.ToDict()
+		unfollowScript = func() map[string]interface{} {
+			if p.UnfollowScript == nil {
+				return nil
+			}
+			return p.UnfollowScript.ToDict()
+		}()
 	}
 	var sendRequestScript map[string]interface{}
 	if p.SendRequestScript != nil {
-		sendRequestScript = p.SendRequestScript.ToDict()
+		sendRequestScript = func() map[string]interface{} {
+			if p.SendRequestScript == nil {
+				return nil
+			}
+			return p.SendRequestScript.ToDict()
+		}()
 	}
 	var cancelRequestScript map[string]interface{}
 	if p.CancelRequestScript != nil {
-		cancelRequestScript = p.CancelRequestScript.ToDict()
+		cancelRequestScript = func() map[string]interface{} {
+			if p.CancelRequestScript == nil {
+				return nil
+			}
+			return p.CancelRequestScript.ToDict()
+		}()
 	}
 	var acceptRequestScript map[string]interface{}
 	if p.AcceptRequestScript != nil {
-		acceptRequestScript = p.AcceptRequestScript.ToDict()
+		acceptRequestScript = func() map[string]interface{} {
+			if p.AcceptRequestScript == nil {
+				return nil
+			}
+			return p.AcceptRequestScript.ToDict()
+		}()
 	}
 	var rejectRequestScript map[string]interface{}
 	if p.RejectRequestScript != nil {
-		rejectRequestScript = p.RejectRequestScript.ToDict()
+		rejectRequestScript = func() map[string]interface{} {
+			if p.RejectRequestScript == nil {
+				return nil
+			}
+			return p.RejectRequestScript.ToDict()
+		}()
 	}
 	var deleteFriendScript map[string]interface{}
 	if p.DeleteFriendScript != nil {
-		deleteFriendScript = p.DeleteFriendScript.ToDict()
+		deleteFriendScript = func() map[string]interface{} {
+			if p.DeleteFriendScript == nil {
+				return nil
+			}
+			return p.DeleteFriendScript.ToDict()
+		}()
 	}
 	var updateProfileScript map[string]interface{}
 	if p.UpdateProfileScript != nil {
-		updateProfileScript = p.UpdateProfileScript.ToDict()
+		updateProfileScript = func() map[string]interface{} {
+			if p.UpdateProfileScript == nil {
+				return nil
+			}
+			return p.UpdateProfileScript.ToDict()
+		}()
 	}
 	var followNotification map[string]interface{}
 	if p.FollowNotification != nil {
-		followNotification = p.FollowNotification.ToDict()
+		followNotification = func() map[string]interface{} {
+			if p.FollowNotification == nil {
+				return nil
+			}
+			return p.FollowNotification.ToDict()
+		}()
 	}
 	var receiveRequestNotification map[string]interface{}
 	if p.ReceiveRequestNotification != nil {
-		receiveRequestNotification = p.ReceiveRequestNotification.ToDict()
+		receiveRequestNotification = func() map[string]interface{} {
+			if p.ReceiveRequestNotification == nil {
+				return nil
+			}
+			return p.ReceiveRequestNotification.ToDict()
+		}()
 	}
 	var cancelRequestNotification map[string]interface{}
 	if p.CancelRequestNotification != nil {
-		cancelRequestNotification = p.CancelRequestNotification.ToDict()
+		cancelRequestNotification = func() map[string]interface{} {
+			if p.CancelRequestNotification == nil {
+				return nil
+			}
+			return p.CancelRequestNotification.ToDict()
+		}()
 	}
 	var acceptRequestNotification map[string]interface{}
 	if p.AcceptRequestNotification != nil {
-		acceptRequestNotification = p.AcceptRequestNotification.ToDict()
+		acceptRequestNotification = func() map[string]interface{} {
+			if p.AcceptRequestNotification == nil {
+				return nil
+			}
+			return p.AcceptRequestNotification.ToDict()
+		}()
 	}
 	var rejectRequestNotification map[string]interface{}
 	if p.RejectRequestNotification != nil {
-		rejectRequestNotification = p.RejectRequestNotification.ToDict()
+		rejectRequestNotification = func() map[string]interface{} {
+			if p.RejectRequestNotification == nil {
+				return nil
+			}
+			return p.RejectRequestNotification.ToDict()
+		}()
 	}
 	var deleteFriendNotification map[string]interface{}
 	if p.DeleteFriendNotification != nil {
-		deleteFriendNotification = p.DeleteFriendNotification.ToDict()
+		deleteFriendNotification = func() map[string]interface{} {
+			if p.DeleteFriendNotification == nil {
+				return nil
+			}
+			return p.DeleteFriendNotification.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

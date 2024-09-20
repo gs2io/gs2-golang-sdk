@@ -268,12 +268,22 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                        p.Name,
-		"description":                 p.Description,
-		"assumeUserId":                p.AssumeUserId,
-		"acceptVersionScript":         p.AcceptVersionScript.ToDict(),
+		"name":         p.Name,
+		"description":  p.Description,
+		"assumeUserId": p.AssumeUserId,
+		"acceptVersionScript": func() map[string]interface{} {
+			if p.AcceptVersionScript == nil {
+				return nil
+			}
+			return p.AcceptVersionScript.ToDict()
+		}(),
 		"checkVersionTriggerScriptId": p.CheckVersionTriggerScriptId,
-		"logSetting":                  p.LogSetting.ToDict(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -601,12 +611,22 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":               p.NamespaceName,
-		"description":                 p.Description,
-		"assumeUserId":                p.AssumeUserId,
-		"acceptVersionScript":         p.AcceptVersionScript.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"assumeUserId":  p.AssumeUserId,
+		"acceptVersionScript": func() map[string]interface{} {
+			if p.AcceptVersionScript == nil {
+				return nil
+			}
+			return p.AcceptVersionScript.ToDict()
+		}(),
 		"checkVersionTriggerScriptId": p.CheckVersionTriggerScriptId,
-		"logSetting":                  p.LogSetting.ToDict(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -1857,15 +1877,30 @@ func NewCreateVersionModelMasterRequestFromDict(data map[string]interface{}) Cre
 
 func (p CreateVersionModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":  p.NamespaceName,
-		"name":           p.Name,
-		"description":    p.Description,
-		"metadata":       p.Metadata,
-		"scope":          p.Scope,
-		"type":           p.Type,
-		"currentVersion": p.CurrentVersion.ToDict(),
-		"warningVersion": p.WarningVersion.ToDict(),
-		"errorVersion":   p.ErrorVersion.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"name":          p.Name,
+		"description":   p.Description,
+		"metadata":      p.Metadata,
+		"scope":         p.Scope,
+		"type":          p.Type,
+		"currentVersion": func() map[string]interface{} {
+			if p.CurrentVersion == nil {
+				return nil
+			}
+			return p.CurrentVersion.ToDict()
+		}(),
+		"warningVersion": func() map[string]interface{} {
+			if p.WarningVersion == nil {
+				return nil
+			}
+			return p.WarningVersion.ToDict()
+		}(),
+		"errorVersion": func() map[string]interface{} {
+			if p.ErrorVersion == nil {
+				return nil
+			}
+			return p.ErrorVersion.ToDict()
+		}(),
 		"scheduleVersions": CastScheduleVersionsFromDict(
 			p.ScheduleVersions,
 		),
@@ -2233,15 +2268,30 @@ func NewUpdateVersionModelMasterRequestFromDict(data map[string]interface{}) Upd
 
 func (p UpdateVersionModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":  p.NamespaceName,
-		"versionName":    p.VersionName,
-		"description":    p.Description,
-		"metadata":       p.Metadata,
-		"scope":          p.Scope,
-		"type":           p.Type,
-		"currentVersion": p.CurrentVersion.ToDict(),
-		"warningVersion": p.WarningVersion.ToDict(),
-		"errorVersion":   p.ErrorVersion.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"versionName":   p.VersionName,
+		"description":   p.Description,
+		"metadata":      p.Metadata,
+		"scope":         p.Scope,
+		"type":          p.Type,
+		"currentVersion": func() map[string]interface{} {
+			if p.CurrentVersion == nil {
+				return nil
+			}
+			return p.CurrentVersion.ToDict()
+		}(),
+		"warningVersion": func() map[string]interface{} {
+			if p.WarningVersion == nil {
+				return nil
+			}
+			return p.WarningVersion.ToDict()
+		}(),
+		"errorVersion": func() map[string]interface{} {
+			if p.ErrorVersion == nil {
+				return nil
+			}
+			return p.ErrorVersion.ToDict()
+		}(),
 		"scheduleVersions": CastScheduleVersionsFromDict(
 			p.ScheduleVersions,
 		),
@@ -2985,7 +3035,12 @@ func (p AcceptRequest) ToDict() map[string]interface{} {
 		"namespaceName": p.NamespaceName,
 		"versionName":   p.VersionName,
 		"accessToken":   p.AccessToken,
-		"version":       p.Version.ToDict(),
+		"version": func() map[string]interface{} {
+			if p.Version == nil {
+				return nil
+			}
+			return p.Version.ToDict()
+		}(),
 	}
 }
 
@@ -3147,10 +3202,15 @@ func NewAcceptByUserIdRequestFromDict(data map[string]interface{}) AcceptByUserI
 
 func (p AcceptByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"versionName":     p.VersionName,
-		"userId":          p.UserId,
-		"version":         p.Version.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"versionName":   p.VersionName,
+		"userId":        p.UserId,
+		"version": func() map[string]interface{} {
+			if p.Version == nil {
+				return nil
+			}
+			return p.Version.ToDict()
+		}(),
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
@@ -4108,7 +4168,12 @@ func (p CalculateSignatureRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"versionName":   p.VersionName,
-		"version":       p.Version.ToDict(),
+		"version": func() map[string]interface{} {
+			if p.Version == nil {
+				return nil
+			}
+			return p.Version.ToDict()
+		}(),
 	}
 }
 
@@ -4463,8 +4528,13 @@ func NewUpdateCurrentVersionMasterFromGitHubRequestFromDict(data map[string]inte
 
 func (p UpdateCurrentVersionMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

@@ -203,7 +203,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -1696,15 +1701,30 @@ func (p StaminaModel) ToDict() map[string]interface{} {
 	}
 	var maxStaminaTable map[string]interface{}
 	if p.MaxStaminaTable != nil {
-		maxStaminaTable = p.MaxStaminaTable.ToDict()
+		maxStaminaTable = func() map[string]interface{} {
+			if p.MaxStaminaTable == nil {
+				return nil
+			}
+			return p.MaxStaminaTable.ToDict()
+		}()
 	}
 	var recoverIntervalTable map[string]interface{}
 	if p.RecoverIntervalTable != nil {
-		recoverIntervalTable = p.RecoverIntervalTable.ToDict()
+		recoverIntervalTable = func() map[string]interface{} {
+			if p.RecoverIntervalTable == nil {
+				return nil
+			}
+			return p.RecoverIntervalTable.ToDict()
+		}()
 	}
 	var recoverValueTable map[string]interface{}
 	if p.RecoverValueTable != nil {
-		recoverValueTable = p.RecoverValueTable.ToDict()
+		recoverValueTable = func() map[string]interface{} {
+			if p.RecoverValueTable == nil {
+				return nil
+			}
+			return p.RecoverValueTable.ToDict()
+		}()
 	}
 	return map[string]interface{}{
 		"staminaModelId":         staminaModelId,

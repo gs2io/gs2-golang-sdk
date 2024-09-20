@@ -233,7 +233,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var acceptVersionScript map[string]interface{}
 	if p.AcceptVersionScript != nil {
-		acceptVersionScript = p.AcceptVersionScript.ToDict()
+		acceptVersionScript = func() map[string]interface{} {
+			if p.AcceptVersionScript == nil {
+				return nil
+			}
+			return p.AcceptVersionScript.ToDict()
+		}()
 	}
 	var checkVersionTriggerScriptId *string
 	if p.CheckVersionTriggerScriptId != nil {
@@ -241,7 +246,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -572,15 +582,30 @@ func (p VersionModelMaster) ToDict() map[string]interface{} {
 	}
 	var currentVersion map[string]interface{}
 	if p.CurrentVersion != nil {
-		currentVersion = p.CurrentVersion.ToDict()
+		currentVersion = func() map[string]interface{} {
+			if p.CurrentVersion == nil {
+				return nil
+			}
+			return p.CurrentVersion.ToDict()
+		}()
 	}
 	var warningVersion map[string]interface{}
 	if p.WarningVersion != nil {
-		warningVersion = p.WarningVersion.ToDict()
+		warningVersion = func() map[string]interface{} {
+			if p.WarningVersion == nil {
+				return nil
+			}
+			return p.WarningVersion.ToDict()
+		}()
 	}
 	var errorVersion map[string]interface{}
 	if p.ErrorVersion != nil {
-		errorVersion = p.ErrorVersion.ToDict()
+		errorVersion = func() map[string]interface{} {
+			if p.ErrorVersion == nil {
+				return nil
+			}
+			return p.ErrorVersion.ToDict()
+		}()
 	}
 	var scheduleVersions []interface{}
 	if p.ScheduleVersions != nil {
@@ -886,15 +911,30 @@ func (p VersionModel) ToDict() map[string]interface{} {
 	}
 	var currentVersion map[string]interface{}
 	if p.CurrentVersion != nil {
-		currentVersion = p.CurrentVersion.ToDict()
+		currentVersion = func() map[string]interface{} {
+			if p.CurrentVersion == nil {
+				return nil
+			}
+			return p.CurrentVersion.ToDict()
+		}()
 	}
 	var warningVersion map[string]interface{}
 	if p.WarningVersion != nil {
-		warningVersion = p.WarningVersion.ToDict()
+		warningVersion = func() map[string]interface{} {
+			if p.WarningVersion == nil {
+				return nil
+			}
+			return p.WarningVersion.ToDict()
+		}()
 	}
 	var errorVersion map[string]interface{}
 	if p.ErrorVersion != nil {
-		errorVersion = p.ErrorVersion.ToDict()
+		errorVersion = func() map[string]interface{} {
+			if p.ErrorVersion == nil {
+				return nil
+			}
+			return p.ErrorVersion.ToDict()
+		}()
 	}
 	var scheduleVersions []interface{}
 	if p.ScheduleVersions != nil {
@@ -1096,7 +1136,12 @@ func (p AcceptVersion) ToDict() map[string]interface{} {
 	}
 	var version map[string]interface{}
 	if p.Version != nil {
-		version = p.Version.ToDict()
+		version = func() map[string]interface{} {
+			if p.Version == nil {
+				return nil
+			}
+			return p.Version.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -1195,11 +1240,21 @@ func (p Status) ToDict() map[string]interface{} {
 
 	var versionModel map[string]interface{}
 	if p.VersionModel != nil {
-		versionModel = p.VersionModel.ToDict()
+		versionModel = func() map[string]interface{} {
+			if p.VersionModel == nil {
+				return nil
+			}
+			return p.VersionModel.ToDict()
+		}()
 	}
 	var currentVersion map[string]interface{}
 	if p.CurrentVersion != nil {
-		currentVersion = p.CurrentVersion.ToDict()
+		currentVersion = func() map[string]interface{} {
+			if p.CurrentVersion == nil {
+				return nil
+			}
+			return p.CurrentVersion.ToDict()
+		}()
 	}
 	return map[string]interface{}{
 		"versionModel":   versionModel,
@@ -1363,7 +1418,12 @@ func (p TargetVersion) ToDict() map[string]interface{} {
 	}
 	var version map[string]interface{}
 	if p.Version != nil {
-		version = p.Version.ToDict()
+		version = func() map[string]interface{} {
+			if p.Version == nil {
+				return nil
+			}
+			return p.Version.ToDict()
+		}()
 	}
 	return map[string]interface{}{
 		"versionName": versionName,
@@ -1529,7 +1589,12 @@ func (p SignTargetVersion) ToDict() map[string]interface{} {
 	}
 	var version map[string]interface{}
 	if p.Version != nil {
-		version = p.Version.ToDict()
+		version = func() map[string]interface{} {
+			if p.Version == nil {
+				return nil
+			}
+			return p.Version.ToDict()
+		}()
 	}
 	return map[string]interface{}{
 		"region":        region,
@@ -2423,15 +2488,30 @@ func (p ScheduleVersion) ToDict() map[string]interface{} {
 
 	var currentVersion map[string]interface{}
 	if p.CurrentVersion != nil {
-		currentVersion = p.CurrentVersion.ToDict()
+		currentVersion = func() map[string]interface{} {
+			if p.CurrentVersion == nil {
+				return nil
+			}
+			return p.CurrentVersion.ToDict()
+		}()
 	}
 	var warningVersion map[string]interface{}
 	if p.WarningVersion != nil {
-		warningVersion = p.WarningVersion.ToDict()
+		warningVersion = func() map[string]interface{} {
+			if p.WarningVersion == nil {
+				return nil
+			}
+			return p.WarningVersion.ToDict()
+		}()
 	}
 	var errorVersion map[string]interface{}
 	if p.ErrorVersion != nil {
-		errorVersion = p.ErrorVersion.ToDict()
+		errorVersion = func() map[string]interface{} {
+			if p.ErrorVersion == nil {
+				return nil
+			}
+			return p.ErrorVersion.ToDict()
+		}()
 	}
 	var scheduleEventId *string
 	if p.ScheduleEventId != nil {

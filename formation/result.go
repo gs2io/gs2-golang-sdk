@@ -81,7 +81,12 @@ func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespa
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -143,7 +148,12 @@ func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResu
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -174,7 +184,12 @@ func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespa
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -205,7 +220,12 @@ func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespa
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -436,7 +456,12 @@ func NewGetFormModelResultFromDict(data map[string]interface{}) GetFormModelResu
 
 func (p GetFormModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -503,7 +528,12 @@ func NewCreateFormModelMasterResultFromDict(data map[string]interface{}) CreateF
 
 func (p CreateFormModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -534,7 +564,12 @@ func NewGetFormModelMasterResultFromDict(data map[string]interface{}) GetFormMod
 
 func (p GetFormModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -565,7 +600,12 @@ func NewUpdateFormModelMasterResultFromDict(data map[string]interface{}) UpdateF
 
 func (p UpdateFormModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -596,7 +636,12 @@ func NewDeleteFormModelMasterResultFromDict(data map[string]interface{}) DeleteF
 
 func (p DeleteFormModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -660,7 +705,12 @@ func NewGetMoldModelResultFromDict(data map[string]interface{}) GetMoldModelResu
 
 func (p GetMoldModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -727,7 +777,12 @@ func NewCreateMoldModelMasterResultFromDict(data map[string]interface{}) CreateM
 
 func (p CreateMoldModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -758,7 +813,12 @@ func NewGetMoldModelMasterResultFromDict(data map[string]interface{}) GetMoldMod
 
 func (p GetMoldModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -789,7 +849,12 @@ func NewUpdateMoldModelMasterResultFromDict(data map[string]interface{}) UpdateM
 
 func (p UpdateMoldModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -820,7 +885,12 @@ func NewDeleteMoldModelMasterResultFromDict(data map[string]interface{}) DeleteM
 
 func (p DeleteMoldModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -884,7 +954,12 @@ func NewGetPropertyFormModelResultFromDict(data map[string]interface{}) GetPrope
 
 func (p GetPropertyFormModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -951,7 +1026,12 @@ func NewCreatePropertyFormModelMasterResultFromDict(data map[string]interface{})
 
 func (p CreatePropertyFormModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -982,7 +1062,12 @@ func NewGetPropertyFormModelMasterResultFromDict(data map[string]interface{}) Ge
 
 func (p GetPropertyFormModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1013,7 +1098,12 @@ func NewUpdatePropertyFormModelMasterResultFromDict(data map[string]interface{})
 
 func (p UpdatePropertyFormModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1044,7 +1134,12 @@ func NewDeletePropertyFormModelMasterResultFromDict(data map[string]interface{})
 
 func (p DeletePropertyFormModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1075,7 +1170,12 @@ func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResu
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1106,7 +1206,12 @@ func NewGetCurrentFormMasterResultFromDict(data map[string]interface{}) GetCurre
 
 func (p GetCurrentFormMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1137,7 +1242,12 @@ func NewUpdateCurrentFormMasterResultFromDict(data map[string]interface{}) Updat
 
 func (p UpdateCurrentFormMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1168,7 +1278,12 @@ func NewUpdateCurrentFormMasterFromGitHubResultFromDict(data map[string]interfac
 
 func (p UpdateCurrentFormMasterFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1273,8 +1388,18 @@ func NewGetMoldResultFromDict(data map[string]interface{}) GetMoldResult {
 
 func (p GetMoldResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
 	}
 }
 
@@ -1307,8 +1432,18 @@ func NewGetMoldByUserIdResultFromDict(data map[string]interface{}) GetMoldByUser
 
 func (p GetMoldByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
 	}
 }
 
@@ -1343,9 +1478,24 @@ func NewSetMoldCapacityByUserIdResultFromDict(data map[string]interface{}) SetMo
 
 func (p SetMoldCapacityByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"old":       p.Old.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
 	}
 }
 
@@ -1378,8 +1528,18 @@ func NewAddMoldCapacityByUserIdResultFromDict(data map[string]interface{}) AddMo
 
 func (p AddMoldCapacityByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
 	}
 }
 
@@ -1412,8 +1572,18 @@ func NewSubMoldCapacityResultFromDict(data map[string]interface{}) SubMoldCapaci
 
 func (p SubMoldCapacityResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
 	}
 }
 
@@ -1446,8 +1616,18 @@ func NewSubMoldCapacityByUserIdResultFromDict(data map[string]interface{}) SubMo
 
 func (p SubMoldCapacityByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
 	}
 }
 
@@ -1478,7 +1658,12 @@ func NewDeleteMoldResultFromDict(data map[string]interface{}) DeleteMoldResult {
 
 func (p DeleteMoldResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1509,7 +1694,12 @@ func NewDeleteMoldByUserIdResultFromDict(data map[string]interface{}) DeleteMold
 
 func (p DeleteMoldByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1542,8 +1732,18 @@ func NewAddCapacityByStampSheetResultFromDict(data map[string]interface{}) AddCa
 
 func (p AddCapacityByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
 	}
 }
 
@@ -1578,8 +1778,18 @@ func NewSubCapacityByStampTaskResultFromDict(data map[string]interface{}) SubCap
 
 func (p SubCapacityByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
-		"moldModel":       p.MoldModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 	}
 }
@@ -1615,9 +1825,24 @@ func NewSetCapacityByStampSheetResultFromDict(data map[string]interface{}) SetCa
 
 func (p SetCapacityByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"old":       p.Old.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"old": func() map[string]interface{} {
+			if p.Old == nil {
+				return nil
+			}
+			return p.Old.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
 	}
 }
 
@@ -1726,10 +1951,30 @@ func NewGetFormResultFromDict(data map[string]interface{}) GetFormResult {
 
 func (p GetFormResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"mold":      p.Mold.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
-		"formModel": p.FormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"mold": func() map[string]interface{} {
+			if p.Mold == nil {
+				return nil
+			}
+			return p.Mold.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
+		"formModel": func() map[string]interface{} {
+			if p.FormModel == nil {
+				return nil
+			}
+			return p.FormModel.ToDict()
+		}(),
 	}
 }
 
@@ -1766,10 +2011,30 @@ func NewGetFormByUserIdResultFromDict(data map[string]interface{}) GetFormByUser
 
 func (p GetFormByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"mold":      p.Mold.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
-		"formModel": p.FormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"mold": func() map[string]interface{} {
+			if p.Mold == nil {
+				return nil
+			}
+			return p.Mold.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
+		"formModel": func() map[string]interface{} {
+			if p.FormModel == nil {
+				return nil
+			}
+			return p.FormModel.ToDict()
+		}(),
 	}
 }
 
@@ -1810,12 +2075,32 @@ func NewGetFormWithSignatureResultFromDict(data map[string]interface{}) GetFormW
 
 func (p GetFormWithSignatureResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"body":      p.Body,
 		"signature": p.Signature,
-		"mold":      p.Mold.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
-		"formModel": p.FormModel.ToDict(),
+		"mold": func() map[string]interface{} {
+			if p.Mold == nil {
+				return nil
+			}
+			return p.Mold.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
+		"formModel": func() map[string]interface{} {
+			if p.FormModel == nil {
+				return nil
+			}
+			return p.FormModel.ToDict()
+		}(),
 	}
 }
 
@@ -1856,12 +2141,32 @@ func NewGetFormWithSignatureByUserIdResultFromDict(data map[string]interface{}) 
 
 func (p GetFormWithSignatureByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"body":      p.Body,
 		"signature": p.Signature,
-		"mold":      p.Mold.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
-		"formModel": p.FormModel.ToDict(),
+		"mold": func() map[string]interface{} {
+			if p.Mold == nil {
+				return nil
+			}
+			return p.Mold.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
+		"formModel": func() map[string]interface{} {
+			if p.FormModel == nil {
+				return nil
+			}
+			return p.FormModel.ToDict()
+		}(),
 	}
 }
 
@@ -1898,10 +2203,30 @@ func NewSetFormByUserIdResultFromDict(data map[string]interface{}) SetFormByUser
 
 func (p SetFormByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"mold":      p.Mold.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
-		"formModel": p.FormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"mold": func() map[string]interface{} {
+			if p.Mold == nil {
+				return nil
+			}
+			return p.Mold.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
+		"formModel": func() map[string]interface{} {
+			if p.FormModel == nil {
+				return nil
+			}
+			return p.FormModel.ToDict()
+		}(),
 	}
 }
 
@@ -1938,10 +2263,30 @@ func NewSetFormWithSignatureResultFromDict(data map[string]interface{}) SetFormW
 
 func (p SetFormWithSignatureResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"mold":      p.Mold.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
-		"formModel": p.FormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"mold": func() map[string]interface{} {
+			if p.Mold == nil {
+				return nil
+			}
+			return p.Mold.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
+		"formModel": func() map[string]interface{} {
+			if p.FormModel == nil {
+				return nil
+			}
+			return p.FormModel.ToDict()
+		}(),
 	}
 }
 
@@ -1982,8 +2327,18 @@ func NewAcquireActionsToFormPropertiesResultFromDict(data map[string]interface{}
 
 func (p AcquireActionsToFormPropertiesResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":                      p.Item.ToDict(),
-		"mold":                      p.Mold.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"mold": func() map[string]interface{} {
+			if p.Mold == nil {
+				return nil
+			}
+			return p.Mold.ToDict()
+		}(),
 		"transactionId":             p.TransactionId,
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
@@ -2024,10 +2379,30 @@ func NewDeleteFormResultFromDict(data map[string]interface{}) DeleteFormResult {
 
 func (p DeleteFormResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"mold":      p.Mold.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
-		"formModel": p.FormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"mold": func() map[string]interface{} {
+			if p.Mold == nil {
+				return nil
+			}
+			return p.Mold.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
+		"formModel": func() map[string]interface{} {
+			if p.FormModel == nil {
+				return nil
+			}
+			return p.FormModel.ToDict()
+		}(),
 	}
 }
 
@@ -2064,10 +2439,30 @@ func NewDeleteFormByUserIdResultFromDict(data map[string]interface{}) DeleteForm
 
 func (p DeleteFormByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"mold":      p.Mold.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
-		"formModel": p.FormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"mold": func() map[string]interface{} {
+			if p.Mold == nil {
+				return nil
+			}
+			return p.Mold.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
+		"formModel": func() map[string]interface{} {
+			if p.FormModel == nil {
+				return nil
+			}
+			return p.FormModel.ToDict()
+		}(),
 	}
 }
 
@@ -2108,8 +2503,18 @@ func NewAcquireActionToFormPropertiesByStampSheetResultFromDict(data map[string]
 
 func (p AcquireActionToFormPropertiesByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":                      p.Item.ToDict(),
-		"mold":                      p.Mold.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"mold": func() map[string]interface{} {
+			if p.Mold == nil {
+				return nil
+			}
+			return p.Mold.ToDict()
+		}(),
 		"transactionId":             p.TransactionId,
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
@@ -2150,10 +2555,30 @@ func NewSetFormByStampSheetResultFromDict(data map[string]interface{}) SetFormBy
 
 func (p SetFormByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":      p.Item.ToDict(),
-		"mold":      p.Mold.ToDict(),
-		"moldModel": p.MoldModel.ToDict(),
-		"formModel": p.FormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"mold": func() map[string]interface{} {
+			if p.Mold == nil {
+				return nil
+			}
+			return p.Mold.ToDict()
+		}(),
+		"moldModel": func() map[string]interface{} {
+			if p.MoldModel == nil {
+				return nil
+			}
+			return p.MoldModel.ToDict()
+		}(),
+		"formModel": func() map[string]interface{} {
+			if p.FormModel == nil {
+				return nil
+			}
+			return p.FormModel.ToDict()
+		}(),
 	}
 }
 
@@ -2258,8 +2683,18 @@ func NewGetPropertyFormResultFromDict(data map[string]interface{}) GetPropertyFo
 
 func (p GetPropertyFormResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":              p.Item.ToDict(),
-		"propertyFormModel": p.PropertyFormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"propertyFormModel": func() map[string]interface{} {
+			if p.PropertyFormModel == nil {
+				return nil
+			}
+			return p.PropertyFormModel.ToDict()
+		}(),
 	}
 }
 
@@ -2292,8 +2727,18 @@ func NewGetPropertyFormByUserIdResultFromDict(data map[string]interface{}) GetPr
 
 func (p GetPropertyFormByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":              p.Item.ToDict(),
-		"propertyFormModel": p.PropertyFormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"propertyFormModel": func() map[string]interface{} {
+			if p.PropertyFormModel == nil {
+				return nil
+			}
+			return p.PropertyFormModel.ToDict()
+		}(),
 	}
 }
 
@@ -2330,10 +2775,20 @@ func NewGetPropertyFormWithSignatureResultFromDict(data map[string]interface{}) 
 
 func (p GetPropertyFormWithSignatureResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":              p.Item.ToDict(),
-		"body":              p.Body,
-		"signature":         p.Signature,
-		"propertyFormModel": p.PropertyFormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"body":      p.Body,
+		"signature": p.Signature,
+		"propertyFormModel": func() map[string]interface{} {
+			if p.PropertyFormModel == nil {
+				return nil
+			}
+			return p.PropertyFormModel.ToDict()
+		}(),
 	}
 }
 
@@ -2370,10 +2825,20 @@ func NewGetPropertyFormWithSignatureByUserIdResultFromDict(data map[string]inter
 
 func (p GetPropertyFormWithSignatureByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":              p.Item.ToDict(),
-		"body":              p.Body,
-		"signature":         p.Signature,
-		"propertyFormModel": p.PropertyFormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"body":      p.Body,
+		"signature": p.Signature,
+		"propertyFormModel": func() map[string]interface{} {
+			if p.PropertyFormModel == nil {
+				return nil
+			}
+			return p.PropertyFormModel.ToDict()
+		}(),
 	}
 }
 
@@ -2406,8 +2871,18 @@ func NewSetPropertyFormByUserIdResultFromDict(data map[string]interface{}) SetPr
 
 func (p SetPropertyFormByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":              p.Item.ToDict(),
-		"propertyFormModel": p.PropertyFormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"propertyFormModel": func() map[string]interface{} {
+			if p.PropertyFormModel == nil {
+				return nil
+			}
+			return p.PropertyFormModel.ToDict()
+		}(),
 	}
 }
 
@@ -2440,8 +2915,18 @@ func NewSetPropertyFormWithSignatureResultFromDict(data map[string]interface{}) 
 
 func (p SetPropertyFormWithSignatureResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":              p.Item.ToDict(),
-		"proeprtyFormModel": p.ProeprtyFormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"proeprtyFormModel": func() map[string]interface{} {
+			if p.ProeprtyFormModel == nil {
+				return nil
+			}
+			return p.ProeprtyFormModel.ToDict()
+		}(),
 	}
 }
 
@@ -2480,7 +2965,12 @@ func NewAcquireActionsToPropertyFormPropertiesResultFromDict(data map[string]int
 
 func (p AcquireActionsToPropertyFormPropertiesResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":                      p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"transactionId":             p.TransactionId,
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
@@ -2517,8 +3007,18 @@ func NewDeletePropertyFormResultFromDict(data map[string]interface{}) DeleteProp
 
 func (p DeletePropertyFormResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":              p.Item.ToDict(),
-		"propertyFormModel": p.PropertyFormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"propertyFormModel": func() map[string]interface{} {
+			if p.PropertyFormModel == nil {
+				return nil
+			}
+			return p.PropertyFormModel.ToDict()
+		}(),
 	}
 }
 
@@ -2551,8 +3051,18 @@ func NewDeletePropertyFormByUserIdResultFromDict(data map[string]interface{}) De
 
 func (p DeletePropertyFormByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":              p.Item.ToDict(),
-		"propertyFormModel": p.PropertyFormModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"propertyFormModel": func() map[string]interface{} {
+			if p.PropertyFormModel == nil {
+				return nil
+			}
+			return p.PropertyFormModel.ToDict()
+		}(),
 	}
 }
 
@@ -2591,7 +3101,12 @@ func NewAcquireActionToPropertyFormPropertiesByStampSheetResultFromDict(data map
 
 func (p AcquireActionToPropertyFormPropertiesByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":                      p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"transactionId":             p.TransactionId,
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,

@@ -206,6 +206,102 @@ func (p UpdateAccountResult) Pointer() *UpdateAccountResult {
 	return &p
 }
 
+type EnableMfaResult struct {
+	Item           *Account `json:"item"`
+	ChallengeToken *string  `json:"challengeToken"`
+}
+
+type EnableMfaAsyncResult struct {
+	result *EnableMfaResult
+	err    error
+}
+
+func NewEnableMfaResultFromJson(data string) EnableMfaResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewEnableMfaResultFromDict(dict)
+}
+
+func NewEnableMfaResultFromDict(data map[string]interface{}) EnableMfaResult {
+	return EnableMfaResult{
+		Item:           NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+		ChallengeToken: core.CastString(data["challengeToken"]),
+	}
+}
+
+func (p EnableMfaResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item":           p.Item.ToDict(),
+		"challengeToken": p.ChallengeToken,
+	}
+}
+
+func (p EnableMfaResult) Pointer() *EnableMfaResult {
+	return &p
+}
+
+type ChallengeMfaResult struct {
+	Item *Account `json:"item"`
+}
+
+type ChallengeMfaAsyncResult struct {
+	result *ChallengeMfaResult
+	err    error
+}
+
+func NewChallengeMfaResultFromJson(data string) ChallengeMfaResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewChallengeMfaResultFromDict(dict)
+}
+
+func NewChallengeMfaResultFromDict(data map[string]interface{}) ChallengeMfaResult {
+	return ChallengeMfaResult{
+		Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p ChallengeMfaResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p ChallengeMfaResult) Pointer() *ChallengeMfaResult {
+	return &p
+}
+
+type DisableMfaResult struct {
+	Item *Account `json:"item"`
+}
+
+type DisableMfaAsyncResult struct {
+	result *DisableMfaResult
+	err    error
+}
+
+func NewDisableMfaResultFromJson(data string) DisableMfaResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDisableMfaResultFromDict(dict)
+}
+
+func NewDisableMfaResultFromDict(data map[string]interface{}) DisableMfaResult {
+	return DisableMfaResult{
+		Item: NewAccountFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p DisableMfaResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": p.Item.ToDict(),
+	}
+}
+
+func (p DisableMfaResult) Pointer() *DisableMfaResult {
+	return &p
+}
+
 type DeleteAccountResult struct {
 	Item *Account `json:"item"`
 }

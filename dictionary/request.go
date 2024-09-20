@@ -243,11 +243,21 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                 p.Name,
-		"description":          p.Description,
-		"entryScript":          p.EntryScript.ToDict(),
+		"name":        p.Name,
+		"description": p.Description,
+		"entryScript": func() map[string]interface{} {
+			if p.EntryScript == nil {
+				return nil
+			}
+			return p.EntryScript.ToDict()
+		}(),
 		"duplicateEntryScript": p.DuplicateEntryScript,
-		"logSetting":           p.LogSetting.ToDict(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -550,11 +560,21 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":        p.NamespaceName,
-		"description":          p.Description,
-		"entryScript":          p.EntryScript.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"entryScript": func() map[string]interface{} {
+			if p.EntryScript == nil {
+				return nil
+			}
+			return p.EntryScript.ToDict()
+		}(),
 		"duplicateEntryScript": p.DuplicateEntryScript,
-		"logSetting":           p.LogSetting.ToDict(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -4834,8 +4854,13 @@ func NewUpdateCurrentEntryMasterFromGitHubRequestFromDict(data map[string]interf
 
 func (p UpdateCurrentEntryMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

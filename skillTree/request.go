@@ -228,12 +228,32 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":               p.Name,
-		"description":        p.Description,
-		"transactionSetting": p.TransactionSetting.ToDict(),
-		"releaseScript":      p.ReleaseScript.ToDict(),
-		"restrainScript":     p.RestrainScript.ToDict(),
-		"logSetting":         p.LogSetting.ToDict(),
+		"name":        p.Name,
+		"description": p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"releaseScript": func() map[string]interface{} {
+			if p.ReleaseScript == nil {
+				return nil
+			}
+			return p.ReleaseScript.ToDict()
+		}(),
+		"restrainScript": func() map[string]interface{} {
+			if p.RestrainScript == nil {
+				return nil
+			}
+			return p.RestrainScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -521,12 +541,32 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":      p.NamespaceName,
-		"description":        p.Description,
-		"transactionSetting": p.TransactionSetting.ToDict(),
-		"releaseScript":      p.ReleaseScript.ToDict(),
-		"restrainScript":     p.RestrainScript.ToDict(),
-		"logSetting":         p.LogSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"releaseScript": func() map[string]interface{} {
+			if p.ReleaseScript == nil {
+				return nil
+			}
+			return p.ReleaseScript.ToDict()
+		}(),
+		"restrainScript": func() map[string]interface{} {
+			if p.RestrainScript == nil {
+				return nil
+			}
+			return p.RestrainScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -5113,8 +5153,13 @@ func NewUpdateCurrentTreeMasterFromGitHubRequestFromDict(data map[string]interfa
 
 func (p UpdateCurrentTreeMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

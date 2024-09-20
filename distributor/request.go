@@ -243,11 +243,21 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                          p.Name,
-		"description":                   p.Description,
-		"assumeUserId":                  p.AssumeUserId,
-		"autoRunStampSheetNotification": p.AutoRunStampSheetNotification.ToDict(),
-		"logSetting":                    p.LogSetting.ToDict(),
+		"name":         p.Name,
+		"description":  p.Description,
+		"assumeUserId": p.AssumeUserId,
+		"autoRunStampSheetNotification": func() map[string]interface{} {
+			if p.AutoRunStampSheetNotification == nil {
+				return nil
+			}
+			return p.AutoRunStampSheetNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -550,11 +560,21 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":                 p.NamespaceName,
-		"description":                   p.Description,
-		"assumeUserId":                  p.AssumeUserId,
-		"autoRunStampSheetNotification": p.AutoRunStampSheetNotification.ToDict(),
-		"logSetting":                    p.LogSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"assumeUserId":  p.AssumeUserId,
+		"autoRunStampSheetNotification": func() map[string]interface{} {
+			if p.AutoRunStampSheetNotification == nil {
+				return nil
+			}
+			return p.AutoRunStampSheetNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -1937,8 +1957,13 @@ func NewUpdateCurrentDistributorMasterFromGitHubRequestFromDict(data map[string]
 
 func (p UpdateCurrentDistributorMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 
@@ -2100,11 +2125,16 @@ func NewDistributeRequestFromDict(data map[string]interface{}) DistributeRequest
 
 func (p DistributeRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":      p.NamespaceName,
-		"distributorName":    p.DistributorName,
-		"userId":             p.UserId,
-		"distributeResource": p.DistributeResource.ToDict(),
-		"timeOffsetToken":    p.TimeOffsetToken,
+		"namespaceName":   p.NamespaceName,
+		"distributorName": p.DistributorName,
+		"userId":          p.UserId,
+		"distributeResource": func() map[string]interface{} {
+			if p.DistributeResource == nil {
+				return nil
+			}
+			return p.DistributeResource.ToDict()
+		}(),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -2216,9 +2246,14 @@ func NewDistributeWithoutOverflowProcessRequestFromDict(data map[string]interfac
 
 func (p DistributeWithoutOverflowProcessRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"userId":             p.UserId,
-		"distributeResource": p.DistributeResource.ToDict(),
-		"timeOffsetToken":    p.TimeOffsetToken,
+		"userId": p.UserId,
+		"distributeResource": func() map[string]interface{} {
+			if p.DistributeResource == nil {
+				return nil
+			}
+			return p.DistributeResource.ToDict()
+		}(),
+		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
 
@@ -3538,7 +3573,12 @@ func (p IfExpressionByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"userId":        p.UserId,
-		"condition":     p.Condition.ToDict(),
+		"condition": func() map[string]interface{} {
+			if p.Condition == nil {
+				return nil
+			}
+			return p.Condition.ToDict()
+		}(),
 		"trueActions": CastConsumeActionsFromDict(
 			p.TrueActions,
 		),

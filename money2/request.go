@@ -262,10 +262,30 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"currencyUsagePriority": p.CurrencyUsagePriority,
 		"description":           p.Description,
 		"sharedFreeCurrency":    p.SharedFreeCurrency,
-		"platformSetting":       p.PlatformSetting.ToDict(),
-		"depositBalanceScript":  p.DepositBalanceScript.ToDict(),
-		"withdrawBalanceScript": p.WithdrawBalanceScript.ToDict(),
-		"logSetting":            p.LogSetting.ToDict(),
+		"platformSetting": func() map[string]interface{} {
+			if p.PlatformSetting == nil {
+				return nil
+			}
+			return p.PlatformSetting.ToDict()
+		}(),
+		"depositBalanceScript": func() map[string]interface{} {
+			if p.DepositBalanceScript == nil {
+				return nil
+			}
+			return p.DepositBalanceScript.ToDict()
+		}(),
+		"withdrawBalanceScript": func() map[string]interface{} {
+			if p.WithdrawBalanceScript == nil {
+				return nil
+			}
+			return p.WithdrawBalanceScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -581,10 +601,30 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"namespaceName":         p.NamespaceName,
 		"currencyUsagePriority": p.CurrencyUsagePriority,
 		"description":           p.Description,
-		"platformSetting":       p.PlatformSetting.ToDict(),
-		"depositBalanceScript":  p.DepositBalanceScript.ToDict(),
-		"withdrawBalanceScript": p.WithdrawBalanceScript.ToDict(),
-		"logSetting":            p.LogSetting.ToDict(),
+		"platformSetting": func() map[string]interface{} {
+			if p.PlatformSetting == nil {
+				return nil
+			}
+			return p.PlatformSetting.ToDict()
+		}(),
+		"depositBalanceScript": func() map[string]interface{} {
+			if p.DepositBalanceScript == nil {
+				return nil
+			}
+			return p.DepositBalanceScript.ToDict()
+		}(),
+		"withdrawBalanceScript": func() map[string]interface{} {
+			if p.WithdrawBalanceScript == nil {
+				return nil
+			}
+			return p.WithdrawBalanceScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -3086,7 +3126,12 @@ func (p VerifyReceiptRequest) ToDict() map[string]interface{} {
 		"namespaceName": p.NamespaceName,
 		"accessToken":   p.AccessToken,
 		"contentName":   p.ContentName,
-		"receipt":       p.Receipt.ToDict(),
+		"receipt": func() map[string]interface{} {
+			if p.Receipt == nil {
+				return nil
+			}
+			return p.Receipt.ToDict()
+		}(),
 	}
 }
 
@@ -3248,10 +3293,15 @@ func NewVerifyReceiptByUserIdRequestFromDict(data map[string]interface{}) Verify
 
 func (p VerifyReceiptByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"userId":          p.UserId,
-		"contentName":     p.ContentName,
-		"receipt":         p.Receipt.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"contentName":   p.ContentName,
+		"receipt": func() map[string]interface{} {
+			if p.Receipt == nil {
+				return nil
+			}
+			return p.Receipt.ToDict()
+		}(),
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
@@ -3830,8 +3880,18 @@ func (p CreateStoreContentModelMasterRequest) ToDict() map[string]interface{} {
 		"name":          p.Name,
 		"description":   p.Description,
 		"metadata":      p.Metadata,
-		"appleAppStore": p.AppleAppStore.ToDict(),
-		"googlePlay":    p.GooglePlay.ToDict(),
+		"appleAppStore": func() map[string]interface{} {
+			if p.AppleAppStore == nil {
+				return nil
+			}
+			return p.AppleAppStore.ToDict()
+		}(),
+		"googlePlay": func() map[string]interface{} {
+			if p.GooglePlay == nil {
+				return nil
+			}
+			return p.GooglePlay.ToDict()
+		}(),
 	}
 }
 
@@ -4108,8 +4168,18 @@ func (p UpdateStoreContentModelMasterRequest) ToDict() map[string]interface{} {
 		"contentName":   p.ContentName,
 		"description":   p.Description,
 		"metadata":      p.Metadata,
-		"appleAppStore": p.AppleAppStore.ToDict(),
-		"googlePlay":    p.GooglePlay.ToDict(),
+		"appleAppStore": func() map[string]interface{} {
+			if p.AppleAppStore == nil {
+				return nil
+			}
+			return p.AppleAppStore.ToDict()
+		}(),
+		"googlePlay": func() map[string]interface{} {
+			if p.GooglePlay == nil {
+				return nil
+			}
+			return p.GooglePlay.ToDict()
+		}(),
 	}
 }
 
@@ -4571,8 +4641,13 @@ func NewUpdateCurrentModelMasterFromGitHubRequestFromDict(data map[string]interf
 
 func (p UpdateCurrentModelMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

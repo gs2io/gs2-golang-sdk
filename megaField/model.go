@@ -174,7 +174,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -1472,11 +1477,21 @@ func (p Spatial) ToDict() map[string]interface{} {
 	}
 	var position map[string]interface{}
 	if p.Position != nil {
-		position = p.Position.ToDict()
+		position = func() map[string]interface{} {
+			if p.Position == nil {
+				return nil
+			}
+			return p.Position.ToDict()
+		}()
 	}
 	var vector map[string]interface{}
 	if p.Vector != nil {
-		vector = p.Vector.ToDict()
+		vector = func() map[string]interface{} {
+			if p.Vector == nil {
+				return nil
+			}
+			return p.Vector.ToDict()
+		}()
 	}
 	var r *float32
 	if p.R != nil {
@@ -1678,11 +1693,21 @@ func (p MyPosition) ToDict() map[string]interface{} {
 
 	var position map[string]interface{}
 	if p.Position != nil {
-		position = p.Position.ToDict()
+		position = func() map[string]interface{} {
+			if p.Position == nil {
+				return nil
+			}
+			return p.Position.ToDict()
+		}()
 	}
 	var vector map[string]interface{}
 	if p.Vector != nil {
-		vector = p.Vector.ToDict()
+		vector = func() map[string]interface{} {
+			if p.Vector == nil {
+				return nil
+			}
+			return p.Vector.ToDict()
+		}()
 	}
 	var r *float32
 	if p.R != nil {

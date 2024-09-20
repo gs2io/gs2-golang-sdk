@@ -218,10 +218,20 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":               p.Name,
-		"description":        p.Description,
-		"transactionSetting": p.TransactionSetting.ToDict(),
-		"logSetting":         p.LogSetting.ToDict(),
+		"name":        p.Name,
+		"description": p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -499,10 +509,20 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":      p.NamespaceName,
-		"description":        p.Description,
-		"transactionSetting": p.TransactionSetting.ToDict(),
-		"logSetting":         p.LogSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -991,10 +1011,15 @@ func NewCreateScriptFromGitHubRequestFromDict(data map[string]interface{}) Creat
 
 func (p CreateScriptFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"name":            p.Name,
-		"description":     p.Description,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"name":          p.Name,
+		"description":   p.Description,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 
@@ -1396,10 +1421,15 @@ func NewUpdateScriptFromGitHubRequestFromDict(data map[string]interface{}) Updat
 
 func (p UpdateScriptFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"scriptName":      p.ScriptName,
-		"description":     p.Description,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"scriptName":    p.ScriptName,
+		"description":   p.Description,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 
@@ -1667,10 +1697,15 @@ func NewInvokeScriptRequestFromDict(data map[string]interface{}) InvokeScriptReq
 
 func (p InvokeScriptRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"scriptId":        p.ScriptId,
-		"userId":          p.UserId,
-		"args":            p.Args,
-		"randomStatus":    p.RandomStatus.ToDict(),
+		"scriptId": p.ScriptId,
+		"userId":   p.UserId,
+		"args":     p.Args,
+		"randomStatus": func() map[string]interface{} {
+			if p.RandomStatus == nil {
+				return nil
+			}
+			return p.RandomStatus.ToDict()
+		}(),
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
@@ -1782,9 +1817,14 @@ func NewDebugInvokeRequestFromDict(data map[string]interface{}) DebugInvokeReque
 
 func (p DebugInvokeRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"script":       p.Script,
-		"args":         p.Args,
-		"randomStatus": p.RandomStatus.ToDict(),
+		"script": p.Script,
+		"args":   p.Args,
+		"randomStatus": func() map[string]interface{} {
+			if p.RandomStatus == nil {
+				return nil
+			}
+			return p.RandomStatus.ToDict()
+		}(),
 	}
 }
 

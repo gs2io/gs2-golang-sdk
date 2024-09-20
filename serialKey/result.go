@@ -81,7 +81,12 @@ func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespa
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -143,7 +148,12 @@ func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResu
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -174,7 +184,12 @@ func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespa
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -205,7 +220,12 @@ func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespa
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -472,7 +492,12 @@ func NewGetIssueJobResultFromDict(data map[string]interface{}) GetIssueJobResult
 
 func (p GetIssueJobResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -503,7 +528,12 @@ func NewIssueResultFromDict(data map[string]interface{}) IssueResult {
 
 func (p IssueResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -603,8 +633,18 @@ func NewGetSerialKeyResultFromDict(data map[string]interface{}) GetSerialKeyResu
 
 func (p GetSerialKeyResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"campaignModel": p.CampaignModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"campaignModel": func() map[string]interface{} {
+			if p.CampaignModel == nil {
+				return nil
+			}
+			return p.CampaignModel.ToDict()
+		}(),
 	}
 }
 
@@ -637,8 +677,18 @@ func NewUseResultFromDict(data map[string]interface{}) UseResult {
 
 func (p UseResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"campaignModel": p.CampaignModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"campaignModel": func() map[string]interface{} {
+			if p.CampaignModel == nil {
+				return nil
+			}
+			return p.CampaignModel.ToDict()
+		}(),
 	}
 }
 
@@ -671,8 +721,18 @@ func NewUseByUserIdResultFromDict(data map[string]interface{}) UseByUserIdResult
 
 func (p UseByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"campaignModel": p.CampaignModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"campaignModel": func() map[string]interface{} {
+			if p.CampaignModel == nil {
+				return nil
+			}
+			return p.CampaignModel.ToDict()
+		}(),
 	}
 }
 
@@ -705,8 +765,18 @@ func NewRevertUseByUserIdResultFromDict(data map[string]interface{}) RevertUseBy
 
 func (p RevertUseByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"campaignModel": p.CampaignModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"campaignModel": func() map[string]interface{} {
+			if p.CampaignModel == nil {
+				return nil
+			}
+			return p.CampaignModel.ToDict()
+		}(),
 	}
 }
 
@@ -741,8 +811,18 @@ func NewUseByStampTaskResultFromDict(data map[string]interface{}) UseByStampTask
 
 func (p UseByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
-		"campaignModel":   p.CampaignModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"campaignModel": func() map[string]interface{} {
+			if p.CampaignModel == nil {
+				return nil
+			}
+			return p.CampaignModel.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 	}
 }
@@ -776,8 +856,18 @@ func NewRevertUseByStampSheetResultFromDict(data map[string]interface{}) RevertU
 
 func (p RevertUseByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":          p.Item.ToDict(),
-		"campaignModel": p.CampaignModel.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"campaignModel": func() map[string]interface{} {
+			if p.CampaignModel == nil {
+				return nil
+			}
+			return p.CampaignModel.ToDict()
+		}(),
 	}
 }
 
@@ -841,7 +931,12 @@ func NewGetCampaignModelResultFromDict(data map[string]interface{}) GetCampaignM
 
 func (p GetCampaignModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -908,7 +1003,12 @@ func NewCreateCampaignModelMasterResultFromDict(data map[string]interface{}) Cre
 
 func (p CreateCampaignModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -939,7 +1039,12 @@ func NewGetCampaignModelMasterResultFromDict(data map[string]interface{}) GetCam
 
 func (p GetCampaignModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -970,7 +1075,12 @@ func NewUpdateCampaignModelMasterResultFromDict(data map[string]interface{}) Upd
 
 func (p UpdateCampaignModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1001,7 +1111,12 @@ func NewDeleteCampaignModelMasterResultFromDict(data map[string]interface{}) Del
 
 func (p DeleteCampaignModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1032,7 +1147,12 @@ func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResu
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1063,7 +1183,12 @@ func NewGetCurrentCampaignMasterResultFromDict(data map[string]interface{}) GetC
 
 func (p GetCurrentCampaignMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1094,7 +1219,12 @@ func NewUpdateCurrentCampaignMasterResultFromDict(data map[string]interface{}) U
 
 func (p UpdateCurrentCampaignMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1125,7 +1255,12 @@ func NewUpdateCurrentCampaignMasterFromGitHubResultFromDict(data map[string]inte
 
 func (p UpdateCurrentCampaignMasterFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 

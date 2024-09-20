@@ -320,14 +320,24 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                     p.Name,
-		"description":              p.Description,
-		"transactionSetting":       p.TransactionSetting.ToDict(),
+		"name":        p.Name,
+		"description": p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
 		"lotteryTriggerScriptId":   p.LotteryTriggerScriptId,
 		"choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
-		"logSetting":               p.LogSetting.ToDict(),
-		"queueNamespaceId":         p.QueueNamespaceId,
-		"keyId":                    p.KeyId,
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
+		"queueNamespaceId": p.QueueNamespaceId,
+		"keyId":            p.KeyId,
 	}
 }
 
@@ -707,14 +717,24 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":            p.NamespaceName,
-		"description":              p.Description,
-		"transactionSetting":       p.TransactionSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
 		"lotteryTriggerScriptId":   p.LotteryTriggerScriptId,
 		"choicePrizeTableScriptId": p.ChoicePrizeTableScriptId,
-		"logSetting":               p.LogSetting.ToDict(),
-		"queueNamespaceId":         p.QueueNamespaceId,
-		"keyId":                    p.KeyId,
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
+		"queueNamespaceId": p.QueueNamespaceId,
+		"keyId":            p.KeyId,
 	}
 }
 
@@ -4912,8 +4932,13 @@ func NewUpdateCurrentLotteryMasterFromGitHubRequestFromDict(data map[string]inte
 
 func (p UpdateCurrentLotteryMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

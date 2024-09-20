@@ -259,19 +259,39 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = p.TransactionSetting.ToDict()
+		transactionSetting = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	var exchangeScript map[string]interface{}
 	if p.ExchangeScript != nil {
-		exchangeScript = p.ExchangeScript.ToDict()
+		exchangeScript = func() map[string]interface{} {
+			if p.ExchangeScript == nil {
+				return nil
+			}
+			return p.ExchangeScript.ToDict()
+		}()
 	}
 	var incrementalExchangeScript map[string]interface{}
 	if p.IncrementalExchangeScript != nil {
-		incrementalExchangeScript = p.IncrementalExchangeScript.ToDict()
+		incrementalExchangeScript = func() map[string]interface{} {
+			if p.IncrementalExchangeScript == nil {
+				return nil
+			}
+			return p.IncrementalExchangeScript.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -1086,7 +1106,12 @@ func (p IncrementalRateModel) ToDict() map[string]interface{} {
 	}
 	var consumeAction map[string]interface{}
 	if p.ConsumeAction != nil {
-		consumeAction = p.ConsumeAction.ToDict()
+		consumeAction = func() map[string]interface{} {
+			if p.ConsumeAction == nil {
+				return nil
+			}
+			return p.ConsumeAction.ToDict()
+		}()
 	}
 	var calculateType *string
 	if p.CalculateType != nil {
@@ -1428,7 +1453,12 @@ func (p IncrementalRateModelMaster) ToDict() map[string]interface{} {
 	}
 	var consumeAction map[string]interface{}
 	if p.ConsumeAction != nil {
-		consumeAction = p.ConsumeAction.ToDict()
+		consumeAction = func() map[string]interface{} {
+			if p.ConsumeAction == nil {
+				return nil
+			}
+			return p.ConsumeAction.ToDict()
+		}()
 	}
 	var calculateType *string
 	if p.CalculateType != nil {

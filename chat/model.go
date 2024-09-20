@@ -213,31 +213,66 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var postMessageScript map[string]interface{}
 	if p.PostMessageScript != nil {
-		postMessageScript = p.PostMessageScript.ToDict()
+		postMessageScript = func() map[string]interface{} {
+			if p.PostMessageScript == nil {
+				return nil
+			}
+			return p.PostMessageScript.ToDict()
+		}()
 	}
 	var createRoomScript map[string]interface{}
 	if p.CreateRoomScript != nil {
-		createRoomScript = p.CreateRoomScript.ToDict()
+		createRoomScript = func() map[string]interface{} {
+			if p.CreateRoomScript == nil {
+				return nil
+			}
+			return p.CreateRoomScript.ToDict()
+		}()
 	}
 	var deleteRoomScript map[string]interface{}
 	if p.DeleteRoomScript != nil {
-		deleteRoomScript = p.DeleteRoomScript.ToDict()
+		deleteRoomScript = func() map[string]interface{} {
+			if p.DeleteRoomScript == nil {
+				return nil
+			}
+			return p.DeleteRoomScript.ToDict()
+		}()
 	}
 	var subscribeRoomScript map[string]interface{}
 	if p.SubscribeRoomScript != nil {
-		subscribeRoomScript = p.SubscribeRoomScript.ToDict()
+		subscribeRoomScript = func() map[string]interface{} {
+			if p.SubscribeRoomScript == nil {
+				return nil
+			}
+			return p.SubscribeRoomScript.ToDict()
+		}()
 	}
 	var unsubscribeRoomScript map[string]interface{}
 	if p.UnsubscribeRoomScript != nil {
-		unsubscribeRoomScript = p.UnsubscribeRoomScript.ToDict()
+		unsubscribeRoomScript = func() map[string]interface{} {
+			if p.UnsubscribeRoomScript == nil {
+				return nil
+			}
+			return p.UnsubscribeRoomScript.ToDict()
+		}()
 	}
 	var postNotification map[string]interface{}
 	if p.PostNotification != nil {
-		postNotification = p.PostNotification.ToDict()
+		postNotification = func() map[string]interface{} {
+			if p.PostNotification == nil {
+				return nil
+			}
+			return p.PostNotification.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

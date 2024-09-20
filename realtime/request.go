@@ -268,12 +268,22 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":               p.Name,
-		"description":        p.Description,
-		"serverType":         p.ServerType,
-		"serverSpec":         p.ServerSpec,
-		"createNotification": p.CreateNotification.ToDict(),
-		"logSetting":         p.LogSetting.ToDict(),
+		"name":        p.Name,
+		"description": p.Description,
+		"serverType":  p.ServerType,
+		"serverSpec":  p.ServerSpec,
+		"createNotification": func() map[string]interface{} {
+			if p.CreateNotification == nil {
+				return nil
+			}
+			return p.CreateNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -601,12 +611,22 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":      p.NamespaceName,
-		"description":        p.Description,
-		"serverType":         p.ServerType,
-		"serverSpec":         p.ServerSpec,
-		"createNotification": p.CreateNotification.ToDict(),
-		"logSetting":         p.LogSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"serverType":    p.ServerType,
+		"serverSpec":    p.ServerSpec,
+		"createNotification": func() map[string]interface{} {
+			if p.CreateNotification == nil {
+				return nil
+			}
+			return p.CreateNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 

@@ -283,15 +283,40 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                     p.Name,
-		"description":              p.Description,
-		"transactionSetting":       p.TransactionSetting.ToDict(),
-		"rankCapScriptId":          p.RankCapScriptId,
-		"changeExperienceScript":   p.ChangeExperienceScript.ToDict(),
-		"changeRankScript":         p.ChangeRankScript.ToDict(),
-		"changeRankCapScript":      p.ChangeRankCapScript.ToDict(),
+		"name":        p.Name,
+		"description": p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"rankCapScriptId": p.RankCapScriptId,
+		"changeExperienceScript": func() map[string]interface{} {
+			if p.ChangeExperienceScript == nil {
+				return nil
+			}
+			return p.ChangeExperienceScript.ToDict()
+		}(),
+		"changeRankScript": func() map[string]interface{} {
+			if p.ChangeRankScript == nil {
+				return nil
+			}
+			return p.ChangeRankScript.ToDict()
+		}(),
+		"changeRankCapScript": func() map[string]interface{} {
+			if p.ChangeRankCapScript == nil {
+				return nil
+			}
+			return p.ChangeRankCapScript.ToDict()
+		}(),
 		"overflowExperienceScript": p.OverflowExperienceScript,
-		"logSetting":               p.LogSetting.ToDict(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -634,15 +659,40 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":            p.NamespaceName,
-		"description":              p.Description,
-		"transactionSetting":       p.TransactionSetting.ToDict(),
-		"rankCapScriptId":          p.RankCapScriptId,
-		"changeExperienceScript":   p.ChangeExperienceScript.ToDict(),
-		"changeRankScript":         p.ChangeRankScript.ToDict(),
-		"changeRankCapScript":      p.ChangeRankCapScript.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"rankCapScriptId": p.RankCapScriptId,
+		"changeExperienceScript": func() map[string]interface{} {
+			if p.ChangeExperienceScript == nil {
+				return nil
+			}
+			return p.ChangeExperienceScript.ToDict()
+		}(),
+		"changeRankScript": func() map[string]interface{} {
+			if p.ChangeRankScript == nil {
+				return nil
+			}
+			return p.ChangeRankScript.ToDict()
+		}(),
+		"changeRankCapScript": func() map[string]interface{} {
+			if p.ChangeRankCapScript == nil {
+				return nil
+			}
+			return p.ChangeRankCapScript.ToDict()
+		}(),
 		"overflowExperienceScript": p.OverflowExperienceScript,
-		"logSetting":               p.LogSetting.ToDict(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -3477,8 +3527,13 @@ func NewUpdateCurrentExperienceMasterFromGitHubRequestFromDict(data map[string]i
 
 func (p UpdateCurrentExperienceMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

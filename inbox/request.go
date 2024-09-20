@@ -298,14 +298,44 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"name":                       p.Name,
 		"description":                p.Description,
 		"isAutomaticDeletingEnabled": p.IsAutomaticDeletingEnabled,
-		"transactionSetting":         p.TransactionSetting.ToDict(),
-		"receiveMessageScript":       p.ReceiveMessageScript.ToDict(),
-		"readMessageScript":          p.ReadMessageScript.ToDict(),
-		"deleteMessageScript":        p.DeleteMessageScript.ToDict(),
-		"receiveNotification":        p.ReceiveNotification.ToDict(),
-		"logSetting":                 p.LogSetting.ToDict(),
-		"queueNamespaceId":           p.QueueNamespaceId,
-		"keyId":                      p.KeyId,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"receiveMessageScript": func() map[string]interface{} {
+			if p.ReceiveMessageScript == nil {
+				return nil
+			}
+			return p.ReceiveMessageScript.ToDict()
+		}(),
+		"readMessageScript": func() map[string]interface{} {
+			if p.ReadMessageScript == nil {
+				return nil
+			}
+			return p.ReadMessageScript.ToDict()
+		}(),
+		"deleteMessageScript": func() map[string]interface{} {
+			if p.DeleteMessageScript == nil {
+				return nil
+			}
+			return p.DeleteMessageScript.ToDict()
+		}(),
+		"receiveNotification": func() map[string]interface{} {
+			if p.ReceiveNotification == nil {
+				return nil
+			}
+			return p.ReceiveNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
+		"queueNamespaceId": p.QueueNamespaceId,
+		"keyId":            p.KeyId,
 	}
 }
 
@@ -663,14 +693,44 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"namespaceName":              p.NamespaceName,
 		"description":                p.Description,
 		"isAutomaticDeletingEnabled": p.IsAutomaticDeletingEnabled,
-		"transactionSetting":         p.TransactionSetting.ToDict(),
-		"receiveMessageScript":       p.ReceiveMessageScript.ToDict(),
-		"readMessageScript":          p.ReadMessageScript.ToDict(),
-		"deleteMessageScript":        p.DeleteMessageScript.ToDict(),
-		"receiveNotification":        p.ReceiveNotification.ToDict(),
-		"logSetting":                 p.LogSetting.ToDict(),
-		"queueNamespaceId":           p.QueueNamespaceId,
-		"keyId":                      p.KeyId,
+		"transactionSetting": func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}(),
+		"receiveMessageScript": func() map[string]interface{} {
+			if p.ReceiveMessageScript == nil {
+				return nil
+			}
+			return p.ReceiveMessageScript.ToDict()
+		}(),
+		"readMessageScript": func() map[string]interface{} {
+			if p.ReadMessageScript == nil {
+				return nil
+			}
+			return p.ReadMessageScript.ToDict()
+		}(),
+		"deleteMessageScript": func() map[string]interface{} {
+			if p.DeleteMessageScript == nil {
+				return nil
+			}
+			return p.DeleteMessageScript.ToDict()
+		}(),
+		"receiveNotification": func() map[string]interface{} {
+			if p.ReceiveNotification == nil {
+				return nil
+			}
+			return p.ReceiveNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
+		"queueNamespaceId": p.QueueNamespaceId,
+		"keyId":            p.KeyId,
 	}
 }
 
@@ -2046,8 +2106,13 @@ func (p SendMessageByUserIdRequest) ToDict() map[string]interface{} {
 		"readAcquireActions": CastAcquireActionsFromDict(
 			p.ReadAcquireActions,
 		),
-		"expiresAt":       p.ExpiresAt,
-		"expiresTimeSpan": p.ExpiresTimeSpan.ToDict(),
+		"expiresAt": p.ExpiresAt,
+		"expiresTimeSpan": func() map[string]interface{} {
+			if p.ExpiresTimeSpan == nil {
+				return nil
+			}
+			return p.ExpiresTimeSpan.ToDict()
+		}(),
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
@@ -4156,8 +4221,13 @@ func NewUpdateCurrentMessageMasterFromGitHubRequestFromDict(data map[string]inte
 
 func (p UpdateCurrentMessageMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 
@@ -4448,7 +4518,12 @@ func (p CreateGlobalMessageMasterRequest) ToDict() map[string]interface{} {
 		"readAcquireActions": CastAcquireActionsFromDict(
 			p.ReadAcquireActions,
 		),
-		"expiresTimeSpan":               p.ExpiresTimeSpan.ToDict(),
+		"expiresTimeSpan": func() map[string]interface{} {
+			if p.ExpiresTimeSpan == nil {
+				return nil
+			}
+			return p.ExpiresTimeSpan.ToDict()
+		}(),
 		"expiresAt":                     p.ExpiresAt,
 		"messageReceptionPeriodEventId": p.MessageReceptionPeriodEventId,
 	}
@@ -4735,7 +4810,12 @@ func (p UpdateGlobalMessageMasterRequest) ToDict() map[string]interface{} {
 		"readAcquireActions": CastAcquireActionsFromDict(
 			p.ReadAcquireActions,
 		),
-		"expiresTimeSpan":               p.ExpiresTimeSpan.ToDict(),
+		"expiresTimeSpan": func() map[string]interface{} {
+			if p.ExpiresTimeSpan == nil {
+				return nil
+			}
+			return p.ExpiresTimeSpan.ToDict()
+		}(),
 		"expiresAt":                     p.ExpiresAt,
 		"messageReceptionPeriodEventId": p.MessageReceptionPeriodEventId,
 	}

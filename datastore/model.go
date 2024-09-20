@@ -179,11 +179,21 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var doneUploadScript map[string]interface{}
 	if p.DoneUploadScript != nil {
-		doneUploadScript = p.DoneUploadScript.ToDict()
+		doneUploadScript = func() map[string]interface{} {
+			if p.DoneUploadScript == nil {
+				return nil
+			}
+			return p.DoneUploadScript.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

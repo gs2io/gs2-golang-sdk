@@ -283,23 +283,98 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                       p.Name,
-		"description":                p.Description,
-		"followScript":               p.FollowScript.ToDict(),
-		"unfollowScript":             p.UnfollowScript.ToDict(),
-		"sendRequestScript":          p.SendRequestScript.ToDict(),
-		"cancelRequestScript":        p.CancelRequestScript.ToDict(),
-		"acceptRequestScript":        p.AcceptRequestScript.ToDict(),
-		"rejectRequestScript":        p.RejectRequestScript.ToDict(),
-		"deleteFriendScript":         p.DeleteFriendScript.ToDict(),
-		"updateProfileScript":        p.UpdateProfileScript.ToDict(),
-		"followNotification":         p.FollowNotification.ToDict(),
-		"receiveRequestNotification": p.ReceiveRequestNotification.ToDict(),
-		"cancelRequestNotification":  p.CancelRequestNotification.ToDict(),
-		"acceptRequestNotification":  p.AcceptRequestNotification.ToDict(),
-		"rejectRequestNotification":  p.RejectRequestNotification.ToDict(),
-		"deleteFriendNotification":   p.DeleteFriendNotification.ToDict(),
-		"logSetting":                 p.LogSetting.ToDict(),
+		"name":        p.Name,
+		"description": p.Description,
+		"followScript": func() map[string]interface{} {
+			if p.FollowScript == nil {
+				return nil
+			}
+			return p.FollowScript.ToDict()
+		}(),
+		"unfollowScript": func() map[string]interface{} {
+			if p.UnfollowScript == nil {
+				return nil
+			}
+			return p.UnfollowScript.ToDict()
+		}(),
+		"sendRequestScript": func() map[string]interface{} {
+			if p.SendRequestScript == nil {
+				return nil
+			}
+			return p.SendRequestScript.ToDict()
+		}(),
+		"cancelRequestScript": func() map[string]interface{} {
+			if p.CancelRequestScript == nil {
+				return nil
+			}
+			return p.CancelRequestScript.ToDict()
+		}(),
+		"acceptRequestScript": func() map[string]interface{} {
+			if p.AcceptRequestScript == nil {
+				return nil
+			}
+			return p.AcceptRequestScript.ToDict()
+		}(),
+		"rejectRequestScript": func() map[string]interface{} {
+			if p.RejectRequestScript == nil {
+				return nil
+			}
+			return p.RejectRequestScript.ToDict()
+		}(),
+		"deleteFriendScript": func() map[string]interface{} {
+			if p.DeleteFriendScript == nil {
+				return nil
+			}
+			return p.DeleteFriendScript.ToDict()
+		}(),
+		"updateProfileScript": func() map[string]interface{} {
+			if p.UpdateProfileScript == nil {
+				return nil
+			}
+			return p.UpdateProfileScript.ToDict()
+		}(),
+		"followNotification": func() map[string]interface{} {
+			if p.FollowNotification == nil {
+				return nil
+			}
+			return p.FollowNotification.ToDict()
+		}(),
+		"receiveRequestNotification": func() map[string]interface{} {
+			if p.ReceiveRequestNotification == nil {
+				return nil
+			}
+			return p.ReceiveRequestNotification.ToDict()
+		}(),
+		"cancelRequestNotification": func() map[string]interface{} {
+			if p.CancelRequestNotification == nil {
+				return nil
+			}
+			return p.CancelRequestNotification.ToDict()
+		}(),
+		"acceptRequestNotification": func() map[string]interface{} {
+			if p.AcceptRequestNotification == nil {
+				return nil
+			}
+			return p.AcceptRequestNotification.ToDict()
+		}(),
+		"rejectRequestNotification": func() map[string]interface{} {
+			if p.RejectRequestNotification == nil {
+				return nil
+			}
+			return p.RejectRequestNotification.ToDict()
+		}(),
+		"deleteFriendNotification": func() map[string]interface{} {
+			if p.DeleteFriendNotification == nil {
+				return nil
+			}
+			return p.DeleteFriendNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -642,23 +717,98 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":              p.NamespaceName,
-		"description":                p.Description,
-		"followScript":               p.FollowScript.ToDict(),
-		"unfollowScript":             p.UnfollowScript.ToDict(),
-		"sendRequestScript":          p.SendRequestScript.ToDict(),
-		"cancelRequestScript":        p.CancelRequestScript.ToDict(),
-		"acceptRequestScript":        p.AcceptRequestScript.ToDict(),
-		"rejectRequestScript":        p.RejectRequestScript.ToDict(),
-		"deleteFriendScript":         p.DeleteFriendScript.ToDict(),
-		"updateProfileScript":        p.UpdateProfileScript.ToDict(),
-		"followNotification":         p.FollowNotification.ToDict(),
-		"receiveRequestNotification": p.ReceiveRequestNotification.ToDict(),
-		"cancelRequestNotification":  p.CancelRequestNotification.ToDict(),
-		"acceptRequestNotification":  p.AcceptRequestNotification.ToDict(),
-		"rejectRequestNotification":  p.RejectRequestNotification.ToDict(),
-		"deleteFriendNotification":   p.DeleteFriendNotification.ToDict(),
-		"logSetting":                 p.LogSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"followScript": func() map[string]interface{} {
+			if p.FollowScript == nil {
+				return nil
+			}
+			return p.FollowScript.ToDict()
+		}(),
+		"unfollowScript": func() map[string]interface{} {
+			if p.UnfollowScript == nil {
+				return nil
+			}
+			return p.UnfollowScript.ToDict()
+		}(),
+		"sendRequestScript": func() map[string]interface{} {
+			if p.SendRequestScript == nil {
+				return nil
+			}
+			return p.SendRequestScript.ToDict()
+		}(),
+		"cancelRequestScript": func() map[string]interface{} {
+			if p.CancelRequestScript == nil {
+				return nil
+			}
+			return p.CancelRequestScript.ToDict()
+		}(),
+		"acceptRequestScript": func() map[string]interface{} {
+			if p.AcceptRequestScript == nil {
+				return nil
+			}
+			return p.AcceptRequestScript.ToDict()
+		}(),
+		"rejectRequestScript": func() map[string]interface{} {
+			if p.RejectRequestScript == nil {
+				return nil
+			}
+			return p.RejectRequestScript.ToDict()
+		}(),
+		"deleteFriendScript": func() map[string]interface{} {
+			if p.DeleteFriendScript == nil {
+				return nil
+			}
+			return p.DeleteFriendScript.ToDict()
+		}(),
+		"updateProfileScript": func() map[string]interface{} {
+			if p.UpdateProfileScript == nil {
+				return nil
+			}
+			return p.UpdateProfileScript.ToDict()
+		}(),
+		"followNotification": func() map[string]interface{} {
+			if p.FollowNotification == nil {
+				return nil
+			}
+			return p.FollowNotification.ToDict()
+		}(),
+		"receiveRequestNotification": func() map[string]interface{} {
+			if p.ReceiveRequestNotification == nil {
+				return nil
+			}
+			return p.ReceiveRequestNotification.ToDict()
+		}(),
+		"cancelRequestNotification": func() map[string]interface{} {
+			if p.CancelRequestNotification == nil {
+				return nil
+			}
+			return p.CancelRequestNotification.ToDict()
+		}(),
+		"acceptRequestNotification": func() map[string]interface{} {
+			if p.AcceptRequestNotification == nil {
+				return nil
+			}
+			return p.AcceptRequestNotification.ToDict()
+		}(),
+		"rejectRequestNotification": func() map[string]interface{} {
+			if p.RejectRequestNotification == nil {
+				return nil
+			}
+			return p.RejectRequestNotification.ToDict()
+		}(),
+		"deleteFriendNotification": func() map[string]interface{} {
+			if p.DeleteFriendNotification == nil {
+				return nil
+			}
+			return p.DeleteFriendNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 

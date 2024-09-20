@@ -215,7 +215,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"name":        p.Name,
 		"description": p.Description,
-		"logSetting":  p.LogSetting.ToDict(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -490,7 +495,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"description":   p.Description,
-		"logSetting":    p.LogSetting.ToDict(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -2774,8 +2784,13 @@ func NewUpdateCurrentFieldMasterFromGitHubRequestFromDict(data map[string]interf
 
 func (p UpdateCurrentFieldMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 
@@ -2951,9 +2966,19 @@ func (p PutPositionRequest) ToDict() map[string]interface{} {
 		"accessToken":    p.AccessToken,
 		"areaModelName":  p.AreaModelName,
 		"layerModelName": p.LayerModelName,
-		"position":       p.Position.ToDict(),
-		"vector":         p.Vector.ToDict(),
-		"r":              p.R,
+		"position": func() map[string]interface{} {
+			if p.Position == nil {
+				return nil
+			}
+			return p.Position.ToDict()
+		}(),
+		"vector": func() map[string]interface{} {
+			if p.Vector == nil {
+				return nil
+			}
+			return p.Vector.ToDict()
+		}(),
+		"r": p.R,
 	}
 }
 
@@ -3150,12 +3175,22 @@ func NewPutPositionByUserIdRequestFromDict(data map[string]interface{}) PutPosit
 
 func (p PutPositionByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"userId":          p.UserId,
-		"areaModelName":   p.AreaModelName,
-		"layerModelName":  p.LayerModelName,
-		"position":        p.Position.ToDict(),
-		"vector":          p.Vector.ToDict(),
+		"namespaceName":  p.NamespaceName,
+		"userId":         p.UserId,
+		"areaModelName":  p.AreaModelName,
+		"layerModelName": p.LayerModelName,
+		"position": func() map[string]interface{} {
+			if p.Position == nil {
+				return nil
+			}
+			return p.Position.ToDict()
+		}(),
+		"vector": func() map[string]interface{} {
+			if p.Vector == nil {
+				return nil
+			}
+			return p.Vector.ToDict()
+		}(),
 		"r":               p.R,
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
@@ -3689,9 +3724,14 @@ func (p NearUserIdsRequest) ToDict() map[string]interface{} {
 		"accessToken":    p.AccessToken,
 		"areaModelName":  p.AreaModelName,
 		"layerModelName": p.LayerModelName,
-		"point":          p.Point.ToDict(),
-		"r":              p.R,
-		"limit":          p.Limit,
+		"point": func() map[string]interface{} {
+			if p.Point == nil {
+				return nil
+			}
+			return p.Point.ToDict()
+		}(),
+		"r":     p.R,
+		"limit": p.Limit,
 	}
 }
 
@@ -3841,9 +3881,14 @@ func (p NearUserIdsFromSystemRequest) ToDict() map[string]interface{} {
 		"namespaceName":  p.NamespaceName,
 		"areaModelName":  p.AreaModelName,
 		"layerModelName": p.LayerModelName,
-		"point":          p.Point.ToDict(),
-		"r":              p.R,
-		"limit":          p.Limit,
+		"point": func() map[string]interface{} {
+			if p.Point == nil {
+				return nil
+			}
+			return p.Point.ToDict()
+		}(),
+		"r":     p.R,
+		"limit": p.Limit,
 	}
 }
 
@@ -4014,7 +4059,12 @@ func (p ActionRequest) ToDict() map[string]interface{} {
 		"accessToken":    p.AccessToken,
 		"areaModelName":  p.AreaModelName,
 		"layerModelName": p.LayerModelName,
-		"position":       p.Position.ToDict(),
+		"position": func() map[string]interface{} {
+			if p.Position == nil {
+				return nil
+			}
+			return p.Position.ToDict()
+		}(),
 		"scopes": CastScopesFromDict(
 			p.Scopes,
 		),
@@ -4213,7 +4263,12 @@ func (p ActionByUserIdRequest) ToDict() map[string]interface{} {
 		"userId":         p.UserId,
 		"areaModelName":  p.AreaModelName,
 		"layerModelName": p.LayerModelName,
-		"position":       p.Position.ToDict(),
+		"position": func() map[string]interface{} {
+			if p.Position == nil {
+				return nil
+			}
+			return p.Position.ToDict()
+		}(),
 		"scopes": CastScopesFromDict(
 			p.Scopes,
 		),

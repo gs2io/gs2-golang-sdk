@@ -81,7 +81,12 @@ func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespa
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -143,7 +148,12 @@ func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResu
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -174,7 +184,12 @@ func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespa
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -205,7 +220,12 @@ func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespa
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -472,7 +492,12 @@ func NewCreateQuestGroupModelMasterResultFromDict(data map[string]interface{}) C
 
 func (p CreateQuestGroupModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -503,7 +528,12 @@ func NewGetQuestGroupModelMasterResultFromDict(data map[string]interface{}) GetQ
 
 func (p GetQuestGroupModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -534,7 +564,12 @@ func NewUpdateQuestGroupModelMasterResultFromDict(data map[string]interface{}) U
 
 func (p UpdateQuestGroupModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -565,7 +600,12 @@ func NewDeleteQuestGroupModelMasterResultFromDict(data map[string]interface{}) D
 
 func (p DeleteQuestGroupModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -632,7 +672,12 @@ func NewCreateQuestModelMasterResultFromDict(data map[string]interface{}) Create
 
 func (p CreateQuestModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -663,7 +708,12 @@ func NewGetQuestModelMasterResultFromDict(data map[string]interface{}) GetQuestM
 
 func (p GetQuestModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -694,7 +744,12 @@ func NewUpdateQuestModelMasterResultFromDict(data map[string]interface{}) Update
 
 func (p UpdateQuestModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -725,7 +780,12 @@ func NewDeleteQuestModelMasterResultFromDict(data map[string]interface{}) Delete
 
 func (p DeleteQuestModelMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -756,7 +816,12 @@ func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResu
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -787,7 +852,12 @@ func NewGetCurrentQuestMasterResultFromDict(data map[string]interface{}) GetCurr
 
 func (p GetCurrentQuestMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -818,7 +888,12 @@ func NewUpdateCurrentQuestMasterResultFromDict(data map[string]interface{}) Upda
 
 func (p UpdateCurrentQuestMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -849,7 +924,12 @@ func NewUpdateCurrentQuestMasterFromGitHubResultFromDict(data map[string]interfa
 
 func (p UpdateCurrentQuestMasterFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -916,7 +996,12 @@ func NewCreateProgressByUserIdResultFromDict(data map[string]interface{}) Create
 
 func (p CreateProgressByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -951,9 +1036,24 @@ func NewGetProgressResultFromDict(data map[string]interface{}) GetProgressResult
 
 func (p GetProgressResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":       p.Item.ToDict(),
-		"questGroup": p.QuestGroup.ToDict(),
-		"quest":      p.Quest.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"questGroup": func() map[string]interface{} {
+			if p.QuestGroup == nil {
+				return nil
+			}
+			return p.QuestGroup.ToDict()
+		}(),
+		"quest": func() map[string]interface{} {
+			if p.Quest == nil {
+				return nil
+			}
+			return p.Quest.ToDict()
+		}(),
 	}
 }
 
@@ -988,9 +1088,24 @@ func NewGetProgressByUserIdResultFromDict(data map[string]interface{}) GetProgre
 
 func (p GetProgressByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":       p.Item.ToDict(),
-		"questGroup": p.QuestGroup.ToDict(),
-		"quest":      p.Quest.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"questGroup": func() map[string]interface{} {
+			if p.QuestGroup == nil {
+				return nil
+			}
+			return p.QuestGroup.ToDict()
+		}(),
+		"quest": func() map[string]interface{} {
+			if p.Quest == nil {
+				return nil
+			}
+			return p.Quest.ToDict()
+		}(),
 	}
 }
 
@@ -1109,7 +1224,12 @@ func NewEndResultFromDict(data map[string]interface{}) EndResult {
 
 func (p EndResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":                      p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"transactionId":             p.TransactionId,
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
@@ -1152,7 +1272,12 @@ func NewEndByUserIdResultFromDict(data map[string]interface{}) EndByUserIdResult
 
 func (p EndByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":                      p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"transactionId":             p.TransactionId,
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
@@ -1187,7 +1312,12 @@ func NewDeleteProgressResultFromDict(data map[string]interface{}) DeleteProgress
 
 func (p DeleteProgressResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1218,7 +1348,12 @@ func NewDeleteProgressByUserIdResultFromDict(data map[string]interface{}) Delete
 
 func (p DeleteProgressByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1249,7 +1384,12 @@ func NewCreateProgressByStampSheetResultFromDict(data map[string]interface{}) Cr
 
 func (p CreateProgressByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1282,7 +1422,12 @@ func NewDeleteProgressByStampTaskResultFromDict(data map[string]interface{}) Del
 
 func (p DeleteProgressByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 	}
 }
@@ -1386,7 +1531,12 @@ func NewGetCompletedQuestListResultFromDict(data map[string]interface{}) GetComp
 
 func (p GetCompletedQuestListResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1417,7 +1567,12 @@ func NewGetCompletedQuestListByUserIdResultFromDict(data map[string]interface{})
 
 func (p GetCompletedQuestListByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1448,7 +1603,12 @@ func NewDeleteCompletedQuestListByUserIdResultFromDict(data map[string]interface
 
 func (p DeleteCompletedQuestListByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1512,7 +1672,12 @@ func NewGetQuestGroupModelResultFromDict(data map[string]interface{}) GetQuestGr
 
 func (p GetQuestGroupModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1576,7 +1741,12 @@ func NewGetQuestModelResultFromDict(data map[string]interface{}) GetQuestModelRe
 
 func (p GetQuestModelResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 

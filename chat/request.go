@@ -248,16 +248,51 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                  p.Name,
-		"description":           p.Description,
-		"allowCreateRoom":       p.AllowCreateRoom,
-		"postMessageScript":     p.PostMessageScript.ToDict(),
-		"createRoomScript":      p.CreateRoomScript.ToDict(),
-		"deleteRoomScript":      p.DeleteRoomScript.ToDict(),
-		"subscribeRoomScript":   p.SubscribeRoomScript.ToDict(),
-		"unsubscribeRoomScript": p.UnsubscribeRoomScript.ToDict(),
-		"postNotification":      p.PostNotification.ToDict(),
-		"logSetting":            p.LogSetting.ToDict(),
+		"name":            p.Name,
+		"description":     p.Description,
+		"allowCreateRoom": p.AllowCreateRoom,
+		"postMessageScript": func() map[string]interface{} {
+			if p.PostMessageScript == nil {
+				return nil
+			}
+			return p.PostMessageScript.ToDict()
+		}(),
+		"createRoomScript": func() map[string]interface{} {
+			if p.CreateRoomScript == nil {
+				return nil
+			}
+			return p.CreateRoomScript.ToDict()
+		}(),
+		"deleteRoomScript": func() map[string]interface{} {
+			if p.DeleteRoomScript == nil {
+				return nil
+			}
+			return p.DeleteRoomScript.ToDict()
+		}(),
+		"subscribeRoomScript": func() map[string]interface{} {
+			if p.SubscribeRoomScript == nil {
+				return nil
+			}
+			return p.SubscribeRoomScript.ToDict()
+		}(),
+		"unsubscribeRoomScript": func() map[string]interface{} {
+			if p.UnsubscribeRoomScript == nil {
+				return nil
+			}
+			return p.UnsubscribeRoomScript.ToDict()
+		}(),
+		"postNotification": func() map[string]interface{} {
+			if p.PostNotification == nil {
+				return nil
+			}
+			return p.PostNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -565,16 +600,51 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":         p.NamespaceName,
-		"description":           p.Description,
-		"allowCreateRoom":       p.AllowCreateRoom,
-		"postMessageScript":     p.PostMessageScript.ToDict(),
-		"createRoomScript":      p.CreateRoomScript.ToDict(),
-		"deleteRoomScript":      p.DeleteRoomScript.ToDict(),
-		"subscribeRoomScript":   p.SubscribeRoomScript.ToDict(),
-		"unsubscribeRoomScript": p.UnsubscribeRoomScript.ToDict(),
-		"postNotification":      p.PostNotification.ToDict(),
-		"logSetting":            p.LogSetting.ToDict(),
+		"namespaceName":   p.NamespaceName,
+		"description":     p.Description,
+		"allowCreateRoom": p.AllowCreateRoom,
+		"postMessageScript": func() map[string]interface{} {
+			if p.PostMessageScript == nil {
+				return nil
+			}
+			return p.PostMessageScript.ToDict()
+		}(),
+		"createRoomScript": func() map[string]interface{} {
+			if p.CreateRoomScript == nil {
+				return nil
+			}
+			return p.CreateRoomScript.ToDict()
+		}(),
+		"deleteRoomScript": func() map[string]interface{} {
+			if p.DeleteRoomScript == nil {
+				return nil
+			}
+			return p.DeleteRoomScript.ToDict()
+		}(),
+		"subscribeRoomScript": func() map[string]interface{} {
+			if p.SubscribeRoomScript == nil {
+				return nil
+			}
+			return p.SubscribeRoomScript.ToDict()
+		}(),
+		"unsubscribeRoomScript": func() map[string]interface{} {
+			if p.UnsubscribeRoomScript == nil {
+				return nil
+			}
+			return p.UnsubscribeRoomScript.ToDict()
+		}(),
+		"postNotification": func() map[string]interface{} {
+			if p.PostNotification == nil {
+				return nil
+			}
+			return p.PostNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 

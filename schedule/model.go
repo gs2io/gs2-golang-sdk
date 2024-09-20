@@ -174,7 +174,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -577,7 +582,12 @@ func (p EventMaster) ToDict() map[string]interface{} {
 	}
 	var repeatSetting map[string]interface{}
 	if p.RepeatSetting != nil {
-		repeatSetting = p.RepeatSetting.ToDict()
+		repeatSetting = func() map[string]interface{} {
+			if p.RepeatSetting == nil {
+				return nil
+			}
+			return p.RepeatSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -1162,7 +1172,12 @@ func (p Event) ToDict() map[string]interface{} {
 	}
 	var repeatSetting map[string]interface{}
 	if p.RepeatSetting != nil {
-		repeatSetting = p.RepeatSetting.ToDict()
+		repeatSetting = func() map[string]interface{} {
+			if p.RepeatSetting == nil {
+				return nil
+			}
+			return p.RepeatSetting.ToDict()
+		}()
 	}
 	var repeatType *string
 	if p.RepeatType != nil {

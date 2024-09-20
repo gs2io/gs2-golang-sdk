@@ -215,7 +215,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"name":        p.Name,
 		"description": p.Description,
-		"logSetting":  p.LogSetting.ToDict(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -490,7 +495,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"description":   p.Description,
-		"logSetting":    p.LogSetting.ToDict(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -1823,7 +1833,12 @@ func (p CreateEventMasterRequest) ToDict() map[string]interface{} {
 		"repeatBeginHour":       p.RepeatBeginHour,
 		"repeatEndHour":         p.RepeatEndHour,
 		"relativeTriggerName":   p.RelativeTriggerName,
-		"repeatSetting":         p.RepeatSetting.ToDict(),
+		"repeatSetting": func() map[string]interface{} {
+			if p.RepeatSetting == nil {
+				return nil
+			}
+			return p.RepeatSetting.ToDict()
+		}(),
 	}
 }
 
@@ -2268,7 +2283,12 @@ func (p UpdateEventMasterRequest) ToDict() map[string]interface{} {
 		"repeatBeginHour":       p.RepeatBeginHour,
 		"repeatEndHour":         p.RepeatEndHour,
 		"relativeTriggerName":   p.RelativeTriggerName,
-		"repeatSetting":         p.RepeatSetting.ToDict(),
+		"repeatSetting": func() map[string]interface{} {
+			if p.RepeatSetting == nil {
+				return nil
+			}
+			return p.RepeatSetting.ToDict()
+		}(),
 	}
 }
 
@@ -5676,8 +5696,13 @@ func NewUpdateCurrentEventMasterFromGitHubRequestFromDict(data map[string]interf
 
 func (p UpdateCurrentEventMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

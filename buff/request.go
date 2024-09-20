@@ -218,10 +218,20 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":            p.Name,
-		"description":     p.Description,
-		"applyBuffScript": p.ApplyBuffScript.ToDict(),
-		"logSetting":      p.LogSetting.ToDict(),
+		"name":        p.Name,
+		"description": p.Description,
+		"applyBuffScript": func() map[string]interface{} {
+			if p.ApplyBuffScript == nil {
+				return nil
+			}
+			return p.ApplyBuffScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -499,10 +509,20 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"description":     p.Description,
-		"applyBuffScript": p.ApplyBuffScript.ToDict(),
-		"logSetting":      p.LogSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"applyBuffScript": func() map[string]interface{} {
+			if p.ApplyBuffScript == nil {
+				return nil
+			}
+			return p.ApplyBuffScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -1931,14 +1951,24 @@ func NewCreateBuffEntryModelMasterRequestFromDict(data map[string]interface{}) C
 
 func (p CreateBuffEntryModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":              p.NamespaceName,
-		"name":                       p.Name,
-		"description":                p.Description,
-		"metadata":                   p.Metadata,
-		"expression":                 p.Expression,
-		"targetType":                 p.TargetType,
-		"targetModel":                p.TargetModel.ToDict(),
-		"targetAction":               p.TargetAction.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"name":          p.Name,
+		"description":   p.Description,
+		"metadata":      p.Metadata,
+		"expression":    p.Expression,
+		"targetType":    p.TargetType,
+		"targetModel": func() map[string]interface{} {
+			if p.TargetModel == nil {
+				return nil
+			}
+			return p.TargetModel.ToDict()
+		}(),
+		"targetAction": func() map[string]interface{} {
+			if p.TargetAction == nil {
+				return nil
+			}
+			return p.TargetAction.ToDict()
+		}(),
 		"priority":                   p.Priority,
 		"applyPeriodScheduleEventId": p.ApplyPeriodScheduleEventId,
 	}
@@ -2293,14 +2323,24 @@ func NewUpdateBuffEntryModelMasterRequestFromDict(data map[string]interface{}) U
 
 func (p UpdateBuffEntryModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":              p.NamespaceName,
-		"buffEntryName":              p.BuffEntryName,
-		"description":                p.Description,
-		"metadata":                   p.Metadata,
-		"expression":                 p.Expression,
-		"targetType":                 p.TargetType,
-		"targetModel":                p.TargetModel.ToDict(),
-		"targetAction":               p.TargetAction.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"buffEntryName": p.BuffEntryName,
+		"description":   p.Description,
+		"metadata":      p.Metadata,
+		"expression":    p.Expression,
+		"targetType":    p.TargetType,
+		"targetModel": func() map[string]interface{} {
+			if p.TargetModel == nil {
+				return nil
+			}
+			return p.TargetModel.ToDict()
+		}(),
+		"targetAction": func() map[string]interface{} {
+			if p.TargetAction == nil {
+				return nil
+			}
+			return p.TargetAction.ToDict()
+		}(),
 		"priority":                   p.Priority,
 		"applyPeriodScheduleEventId": p.ApplyPeriodScheduleEventId,
 	}
@@ -3006,8 +3046,13 @@ func NewUpdateCurrentBuffMasterFromGitHubRequestFromDict(data map[string]interfa
 
 func (p UpdateCurrentBuffMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

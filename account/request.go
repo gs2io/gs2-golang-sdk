@@ -247,11 +247,36 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 		"description":              p.Description,
 		"changePasswordIfTakeOver": p.ChangePasswordIfTakeOver,
 		"differentUserIdForLoginAndDataRetention": p.DifferentUserIdForLoginAndDataRetention,
-		"createAccountScript":                     p.CreateAccountScript.ToDict(),
-		"authenticationScript":                    p.AuthenticationScript.ToDict(),
-		"createTakeOverScript":                    p.CreateTakeOverScript.ToDict(),
-		"doTakeOverScript":                        p.DoTakeOverScript.ToDict(),
-		"logSetting":                              p.LogSetting.ToDict(),
+		"createAccountScript": func() map[string]interface{} {
+			if p.CreateAccountScript == nil {
+				return nil
+			}
+			return p.CreateAccountScript.ToDict()
+		}(),
+		"authenticationScript": func() map[string]interface{} {
+			if p.AuthenticationScript == nil {
+				return nil
+			}
+			return p.AuthenticationScript.ToDict()
+		}(),
+		"createTakeOverScript": func() map[string]interface{} {
+			if p.CreateTakeOverScript == nil {
+				return nil
+			}
+			return p.CreateTakeOverScript.ToDict()
+		}(),
+		"doTakeOverScript": func() map[string]interface{} {
+			if p.DoTakeOverScript == nil {
+				return nil
+			}
+			return p.DoTakeOverScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -552,11 +577,36 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 		"namespaceName":            p.NamespaceName,
 		"description":              p.Description,
 		"changePasswordIfTakeOver": p.ChangePasswordIfTakeOver,
-		"createAccountScript":      p.CreateAccountScript.ToDict(),
-		"authenticationScript":     p.AuthenticationScript.ToDict(),
-		"createTakeOverScript":     p.CreateTakeOverScript.ToDict(),
-		"doTakeOverScript":         p.DoTakeOverScript.ToDict(),
-		"logSetting":               p.LogSetting.ToDict(),
+		"createAccountScript": func() map[string]interface{} {
+			if p.CreateAccountScript == nil {
+				return nil
+			}
+			return p.CreateAccountScript.ToDict()
+		}(),
+		"authenticationScript": func() map[string]interface{} {
+			if p.AuthenticationScript == nil {
+				return nil
+			}
+			return p.AuthenticationScript.ToDict()
+		}(),
+		"createTakeOverScript": func() map[string]interface{} {
+			if p.CreateTakeOverScript == nil {
+				return nil
+			}
+			return p.CreateTakeOverScript.ToDict()
+		}(),
+		"doTakeOverScript": func() map[string]interface{} {
+			if p.DoTakeOverScript == nil {
+				return nil
+			}
+			return p.DoTakeOverScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -2049,9 +2099,14 @@ func NewAddBanRequestFromDict(data map[string]interface{}) AddBanRequest {
 
 func (p AddBanRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"userId":          p.UserId,
-		"banStatus":       p.BanStatus.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"userId":        p.UserId,
+		"banStatus": func() map[string]interface{} {
+			if p.BanStatus == nil {
+				return nil
+			}
+			return p.BanStatus.ToDict()
+		}(),
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
@@ -7227,11 +7282,16 @@ func NewCreateTakeOverTypeModelMasterRequestFromDict(data map[string]interface{}
 
 func (p CreateTakeOverTypeModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":        p.NamespaceName,
-		"type":                 p.Type,
-		"description":          p.Description,
-		"metadata":             p.Metadata,
-		"openIdConnectSetting": p.OpenIdConnectSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"type":          p.Type,
+		"description":   p.Description,
+		"metadata":      p.Metadata,
+		"openIdConnectSetting": func() map[string]interface{} {
+			if p.OpenIdConnectSetting == nil {
+				return nil
+			}
+			return p.OpenIdConnectSetting.ToDict()
+		}(),
 	}
 }
 
@@ -7459,11 +7519,16 @@ func NewUpdateTakeOverTypeModelMasterRequestFromDict(data map[string]interface{}
 
 func (p UpdateTakeOverTypeModelMasterRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":        p.NamespaceName,
-		"type":                 p.Type,
-		"description":          p.Description,
-		"metadata":             p.Metadata,
-		"openIdConnectSetting": p.OpenIdConnectSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"type":          p.Type,
+		"description":   p.Description,
+		"metadata":      p.Metadata,
+		"openIdConnectSetting": func() map[string]interface{} {
+			if p.OpenIdConnectSetting == nil {
+				return nil
+			}
+			return p.OpenIdConnectSetting.ToDict()
+		}(),
 	}
 }
 
@@ -7905,8 +7970,13 @@ func NewUpdateCurrentModelMasterFromGitHubRequestFromDict(data map[string]interf
 
 func (p UpdateCurrentModelMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

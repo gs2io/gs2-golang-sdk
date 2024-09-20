@@ -81,7 +81,12 @@ func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespa
 
 func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -143,7 +148,12 @@ func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResu
 
 func (p GetNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -174,7 +184,12 @@ func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespa
 
 func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -205,7 +220,12 @@ func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespa
 
 func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -472,7 +492,12 @@ func NewCreateEventMasterResultFromDict(data map[string]interface{}) CreateEvent
 
 func (p CreateEventMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -503,7 +528,12 @@ func NewGetEventMasterResultFromDict(data map[string]interface{}) GetEventMaster
 
 func (p GetEventMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -534,7 +564,12 @@ func NewUpdateEventMasterResultFromDict(data map[string]interface{}) UpdateEvent
 
 func (p UpdateEventMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -565,7 +600,12 @@ func NewDeleteEventMasterResultFromDict(data map[string]interface{}) DeleteEvent
 
 func (p DeleteEventMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -668,7 +708,12 @@ func NewGetTriggerResultFromDict(data map[string]interface{}) GetTriggerResult {
 
 func (p GetTriggerResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -699,7 +744,12 @@ func NewGetTriggerByUserIdResultFromDict(data map[string]interface{}) GetTrigger
 
 func (p GetTriggerByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -730,7 +780,12 @@ func NewTriggerByUserIdResultFromDict(data map[string]interface{}) TriggerByUser
 
 func (p TriggerByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -761,7 +816,12 @@ func NewTriggerByStampSheetResultFromDict(data map[string]interface{}) TriggerBy
 
 func (p TriggerByStampSheetResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -792,7 +852,12 @@ func NewDeleteTriggerResultFromDict(data map[string]interface{}) DeleteTriggerRe
 
 func (p DeleteTriggerResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -823,7 +888,12 @@ func NewDeleteTriggerByUserIdResultFromDict(data map[string]interface{}) DeleteT
 
 func (p DeleteTriggerByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -908,7 +978,12 @@ func NewDeleteTriggerByStampTaskResultFromDict(data map[string]interface{}) Dele
 
 func (p DeleteTriggerByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"newContextStack": p.NewContextStack,
 	}
 }
@@ -1078,11 +1153,21 @@ func NewGetEventResultFromDict(data map[string]interface{}) GetEventResult {
 
 func (p GetEventResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"inSchedule":      p.InSchedule,
 		"scheduleStartAt": p.ScheduleStartAt,
 		"scheduleEndAt":   p.ScheduleEndAt,
-		"repeatSchedule":  p.RepeatSchedule.ToDict(),
+		"repeatSchedule": func() map[string]interface{} {
+			if p.RepeatSchedule == nil {
+				return nil
+			}
+			return p.RepeatSchedule.ToDict()
+		}(),
 	}
 }
 
@@ -1121,11 +1206,21 @@ func NewGetEventByUserIdResultFromDict(data map[string]interface{}) GetEventByUs
 
 func (p GetEventByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":            p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"inSchedule":      p.InSchedule,
 		"scheduleStartAt": p.ScheduleStartAt,
 		"scheduleEndAt":   p.ScheduleEndAt,
-		"repeatSchedule":  p.RepeatSchedule.ToDict(),
+		"repeatSchedule": func() map[string]interface{} {
+			if p.RepeatSchedule == nil {
+				return nil
+			}
+			return p.RepeatSchedule.ToDict()
+		}(),
 	}
 }
 
@@ -1156,7 +1251,12 @@ func NewGetRawEventResultFromDict(data map[string]interface{}) GetRawEventResult
 
 func (p GetRawEventResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1270,7 +1370,12 @@ func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResu
 
 func (p ExportMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1301,7 +1406,12 @@ func NewGetCurrentEventMasterResultFromDict(data map[string]interface{}) GetCurr
 
 func (p GetCurrentEventMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1332,7 +1442,12 @@ func NewUpdateCurrentEventMasterResultFromDict(data map[string]interface{}) Upda
 
 func (p UpdateCurrentEventMasterResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -1363,7 +1478,12 @@ func NewUpdateCurrentEventMasterFromGitHubResultFromDict(data map[string]interfa
 
 func (p UpdateCurrentEventMasterFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 

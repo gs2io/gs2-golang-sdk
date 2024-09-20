@@ -179,11 +179,21 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var applyBuffScript map[string]interface{}
 	if p.ApplyBuffScript != nil {
-		applyBuffScript = p.ApplyBuffScript.ToDict()
+		applyBuffScript = func() map[string]interface{} {
+			if p.ApplyBuffScript == nil {
+				return nil
+			}
+			return p.ApplyBuffScript.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -880,11 +890,21 @@ func (p BuffEntryModel) ToDict() map[string]interface{} {
 	}
 	var targetModel map[string]interface{}
 	if p.TargetModel != nil {
-		targetModel = p.TargetModel.ToDict()
+		targetModel = func() map[string]interface{} {
+			if p.TargetModel == nil {
+				return nil
+			}
+			return p.TargetModel.ToDict()
+		}()
 	}
 	var targetAction map[string]interface{}
 	if p.TargetAction != nil {
-		targetAction = p.TargetAction.ToDict()
+		targetAction = func() map[string]interface{} {
+			if p.TargetAction == nil {
+				return nil
+			}
+			return p.TargetAction.ToDict()
+		}()
 	}
 	var priority *int32
 	if p.Priority != nil {
@@ -1200,11 +1220,21 @@ func (p BuffEntryModelMaster) ToDict() map[string]interface{} {
 	}
 	var targetModel map[string]interface{}
 	if p.TargetModel != nil {
-		targetModel = p.TargetModel.ToDict()
+		targetModel = func() map[string]interface{} {
+			if p.TargetModel == nil {
+				return nil
+			}
+			return p.TargetModel.ToDict()
+		}()
 	}
 	var targetAction map[string]interface{}
 	if p.TargetAction != nil {
-		targetAction = p.TargetAction.ToDict()
+		targetAction = func() map[string]interface{} {
+			if p.TargetAction == nil {
+				return nil
+			}
+			return p.TargetAction.ToDict()
+		}()
 	}
 	var priority *int32
 	if p.Priority != nil {

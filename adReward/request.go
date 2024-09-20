@@ -243,17 +243,47 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":    p.Name,
-		"admob":   p.Admob.ToDict(),
-		"unityAd": p.UnityAd.ToDict(),
+		"name": p.Name,
+		"admob": func() map[string]interface{} {
+			if p.Admob == nil {
+				return nil
+			}
+			return p.Admob.ToDict()
+		}(),
+		"unityAd": func() map[string]interface{} {
+			if p.UnityAd == nil {
+				return nil
+			}
+			return p.UnityAd.ToDict()
+		}(),
 		"appLovinMaxes": CastAppLovinMaxesFromDict(
 			p.AppLovinMaxes,
 		),
-		"description":             p.Description,
-		"acquirePointScript":      p.AcquirePointScript.ToDict(),
-		"consumePointScript":      p.ConsumePointScript.ToDict(),
-		"changePointNotification": p.ChangePointNotification.ToDict(),
-		"logSetting":              p.LogSetting.ToDict(),
+		"description": p.Description,
+		"acquirePointScript": func() map[string]interface{} {
+			if p.AcquirePointScript == nil {
+				return nil
+			}
+			return p.AcquirePointScript.ToDict()
+		}(),
+		"consumePointScript": func() map[string]interface{} {
+			if p.ConsumePointScript == nil {
+				return nil
+			}
+			return p.ConsumePointScript.ToDict()
+		}(),
+		"changePointNotification": func() map[string]interface{} {
+			if p.ChangePointNotification == nil {
+				return nil
+			}
+			return p.ChangePointNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -558,15 +588,45 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"description":   p.Description,
-		"admob":         p.Admob.ToDict(),
-		"unityAd":       p.UnityAd.ToDict(),
+		"admob": func() map[string]interface{} {
+			if p.Admob == nil {
+				return nil
+			}
+			return p.Admob.ToDict()
+		}(),
+		"unityAd": func() map[string]interface{} {
+			if p.UnityAd == nil {
+				return nil
+			}
+			return p.UnityAd.ToDict()
+		}(),
 		"appLovinMaxes": CastAppLovinMaxesFromDict(
 			p.AppLovinMaxes,
 		),
-		"acquirePointScript":      p.AcquirePointScript.ToDict(),
-		"consumePointScript":      p.ConsumePointScript.ToDict(),
-		"changePointNotification": p.ChangePointNotification.ToDict(),
-		"logSetting":              p.LogSetting.ToDict(),
+		"acquirePointScript": func() map[string]interface{} {
+			if p.AcquirePointScript == nil {
+				return nil
+			}
+			return p.AcquirePointScript.ToDict()
+		}(),
+		"consumePointScript": func() map[string]interface{} {
+			if p.ConsumePointScript == nil {
+				return nil
+			}
+			return p.ConsumePointScript.ToDict()
+		}(),
+		"changePointNotification": func() map[string]interface{} {
+			if p.ChangePointNotification == nil {
+				return nil
+			}
+			return p.ChangePointNotification.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 

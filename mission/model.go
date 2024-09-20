@@ -866,7 +866,12 @@ func (p CounterScopeModel) ToDict() map[string]interface{} {
 	}
 	var condition map[string]interface{}
 	if p.Condition != nil {
-		condition = p.Condition.ToDict()
+		condition = func() map[string]interface{} {
+			if p.Condition == nil {
+				return nil
+			}
+			return p.Condition.ToDict()
+		}()
 	}
 	return map[string]interface{}{
 		"scopeType":       scopeType,
@@ -1453,27 +1458,57 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = p.TransactionSetting.ToDict()
+		transactionSetting = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	var missionCompleteScript map[string]interface{}
 	if p.MissionCompleteScript != nil {
-		missionCompleteScript = p.MissionCompleteScript.ToDict()
+		missionCompleteScript = func() map[string]interface{} {
+			if p.MissionCompleteScript == nil {
+				return nil
+			}
+			return p.MissionCompleteScript.ToDict()
+		}()
 	}
 	var counterIncrementScript map[string]interface{}
 	if p.CounterIncrementScript != nil {
-		counterIncrementScript = p.CounterIncrementScript.ToDict()
+		counterIncrementScript = func() map[string]interface{} {
+			if p.CounterIncrementScript == nil {
+				return nil
+			}
+			return p.CounterIncrementScript.ToDict()
+		}()
 	}
 	var receiveRewardsScript map[string]interface{}
 	if p.ReceiveRewardsScript != nil {
-		receiveRewardsScript = p.ReceiveRewardsScript.ToDict()
+		receiveRewardsScript = func() map[string]interface{} {
+			if p.ReceiveRewardsScript == nil {
+				return nil
+			}
+			return p.ReceiveRewardsScript.ToDict()
+		}()
 	}
 	var completeNotification map[string]interface{}
 	if p.CompleteNotification != nil {
-		completeNotification = p.CompleteNotification.ToDict()
+		completeNotification = func() map[string]interface{} {
+			if p.CompleteNotification == nil {
+				return nil
+			}
+			return p.CompleteNotification.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -2616,7 +2651,12 @@ func (p MissionTaskModel) ToDict() map[string]interface{} {
 	}
 	var targetCounter map[string]interface{}
 	if p.TargetCounter != nil {
-		targetCounter = p.TargetCounter.ToDict()
+		targetCounter = func() map[string]interface{} {
+			if p.TargetCounter == nil {
+				return nil
+			}
+			return p.TargetCounter.ToDict()
+		}()
 	}
 	var verifyCompleteConsumeActions []interface{}
 	if p.VerifyCompleteConsumeActions != nil {
@@ -3013,7 +3053,12 @@ func (p MissionTaskModelMaster) ToDict() map[string]interface{} {
 	}
 	var targetCounter map[string]interface{}
 	if p.TargetCounter != nil {
-		targetCounter = p.TargetCounter.ToDict()
+		targetCounter = func() map[string]interface{} {
+			if p.TargetCounter == nil {
+				return nil
+			}
+			return p.TargetCounter.ToDict()
+		}()
 	}
 	var verifyCompleteConsumeActions []interface{}
 	if p.VerifyCompleteConsumeActions != nil {

@@ -185,7 +185,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -587,7 +592,12 @@ func (p CategoryModel) ToDict() map[string]interface{} {
 	}
 	var globalRankingSetting map[string]interface{}
 	if p.GlobalRankingSetting != nil {
-		globalRankingSetting = p.GlobalRankingSetting.ToDict()
+		globalRankingSetting = func() map[string]interface{} {
+			if p.GlobalRankingSetting == nil {
+				return nil
+			}
+			return p.GlobalRankingSetting.ToDict()
+		}()
 	}
 	var entryPeriodEventId *string
 	if p.EntryPeriodEventId != nil {
@@ -1071,7 +1081,12 @@ func (p CategoryModelMaster) ToDict() map[string]interface{} {
 	}
 	var globalRankingSetting map[string]interface{}
 	if p.GlobalRankingSetting != nil {
-		globalRankingSetting = p.GlobalRankingSetting.ToDict()
+		globalRankingSetting = func() map[string]interface{} {
+			if p.GlobalRankingSetting == nil {
+				return nil
+			}
+			return p.GlobalRankingSetting.ToDict()
+		}()
 	}
 	var entryPeriodEventId *string
 	if p.EntryPeriodEventId != nil {
@@ -2246,7 +2261,12 @@ func (p GlobalRankingSetting) ToDict() map[string]interface{} {
 	}
 	var calculateFixedTiming map[string]interface{}
 	if p.CalculateFixedTiming != nil {
-		calculateFixedTiming = p.CalculateFixedTiming.ToDict()
+		calculateFixedTiming = func() map[string]interface{} {
+			if p.CalculateFixedTiming == nil {
+				return nil
+			}
+			return p.CalculateFixedTiming.ToDict()
+		}()
 	}
 	var additionalScopes []interface{}
 	if p.AdditionalScopes != nil {

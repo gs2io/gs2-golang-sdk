@@ -281,7 +281,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = p.TransactionSetting.ToDict()
+		transactionSetting = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	var lotteryTriggerScriptId *string
 	if p.LotteryTriggerScriptId != nil {
@@ -293,7 +298,12 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -1413,7 +1423,12 @@ func (p Probability) ToDict() map[string]interface{} {
 
 	var prize map[string]interface{}
 	if p.Prize != nil {
-		prize = p.Prize.ToDict()
+		prize = func() map[string]interface{} {
+			if p.Prize == nil {
+				return nil
+			}
+			return p.Prize.ToDict()
+		}()
 	}
 	var rate *float32
 	if p.Rate != nil {

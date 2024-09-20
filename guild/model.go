@@ -219,43 +219,93 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var joinNotification map[string]interface{}
 	if p.JoinNotification != nil {
-		joinNotification = p.JoinNotification.ToDict()
+		joinNotification = func() map[string]interface{} {
+			if p.JoinNotification == nil {
+				return nil
+			}
+			return p.JoinNotification.ToDict()
+		}()
 	}
 	var leaveNotification map[string]interface{}
 	if p.LeaveNotification != nil {
-		leaveNotification = p.LeaveNotification.ToDict()
+		leaveNotification = func() map[string]interface{} {
+			if p.LeaveNotification == nil {
+				return nil
+			}
+			return p.LeaveNotification.ToDict()
+		}()
 	}
 	var changeMemberNotification map[string]interface{}
 	if p.ChangeMemberNotification != nil {
-		changeMemberNotification = p.ChangeMemberNotification.ToDict()
+		changeMemberNotification = func() map[string]interface{} {
+			if p.ChangeMemberNotification == nil {
+				return nil
+			}
+			return p.ChangeMemberNotification.ToDict()
+		}()
 	}
 	var receiveRequestNotification map[string]interface{}
 	if p.ReceiveRequestNotification != nil {
-		receiveRequestNotification = p.ReceiveRequestNotification.ToDict()
+		receiveRequestNotification = func() map[string]interface{} {
+			if p.ReceiveRequestNotification == nil {
+				return nil
+			}
+			return p.ReceiveRequestNotification.ToDict()
+		}()
 	}
 	var removeRequestNotification map[string]interface{}
 	if p.RemoveRequestNotification != nil {
-		removeRequestNotification = p.RemoveRequestNotification.ToDict()
+		removeRequestNotification = func() map[string]interface{} {
+			if p.RemoveRequestNotification == nil {
+				return nil
+			}
+			return p.RemoveRequestNotification.ToDict()
+		}()
 	}
 	var createGuildScript map[string]interface{}
 	if p.CreateGuildScript != nil {
-		createGuildScript = p.CreateGuildScript.ToDict()
+		createGuildScript = func() map[string]interface{} {
+			if p.CreateGuildScript == nil {
+				return nil
+			}
+			return p.CreateGuildScript.ToDict()
+		}()
 	}
 	var joinGuildScript map[string]interface{}
 	if p.JoinGuildScript != nil {
-		joinGuildScript = p.JoinGuildScript.ToDict()
+		joinGuildScript = func() map[string]interface{} {
+			if p.JoinGuildScript == nil {
+				return nil
+			}
+			return p.JoinGuildScript.ToDict()
+		}()
 	}
 	var leaveGuildScript map[string]interface{}
 	if p.LeaveGuildScript != nil {
-		leaveGuildScript = p.LeaveGuildScript.ToDict()
+		leaveGuildScript = func() map[string]interface{} {
+			if p.LeaveGuildScript == nil {
+				return nil
+			}
+			return p.LeaveGuildScript.ToDict()
+		}()
 	}
 	var changeRoleScript map[string]interface{}
 	if p.ChangeRoleScript != nil {
-		changeRoleScript = p.ChangeRoleScript.ToDict()
+		changeRoleScript = func() map[string]interface{} {
+			if p.ChangeRoleScript == nil {
+				return nil
+			}
+			return p.ChangeRoleScript.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {

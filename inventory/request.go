@@ -248,16 +248,56 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":                    p.Name,
-		"description":             p.Description,
-		"acquireScript":           p.AcquireScript.ToDict(),
-		"overflowScript":          p.OverflowScript.ToDict(),
-		"consumeScript":           p.ConsumeScript.ToDict(),
-		"simpleItemAcquireScript": p.SimpleItemAcquireScript.ToDict(),
-		"simpleItemConsumeScript": p.SimpleItemConsumeScript.ToDict(),
-		"bigItemAcquireScript":    p.BigItemAcquireScript.ToDict(),
-		"bigItemConsumeScript":    p.BigItemConsumeScript.ToDict(),
-		"logSetting":              p.LogSetting.ToDict(),
+		"name":        p.Name,
+		"description": p.Description,
+		"acquireScript": func() map[string]interface{} {
+			if p.AcquireScript == nil {
+				return nil
+			}
+			return p.AcquireScript.ToDict()
+		}(),
+		"overflowScript": func() map[string]interface{} {
+			if p.OverflowScript == nil {
+				return nil
+			}
+			return p.OverflowScript.ToDict()
+		}(),
+		"consumeScript": func() map[string]interface{} {
+			if p.ConsumeScript == nil {
+				return nil
+			}
+			return p.ConsumeScript.ToDict()
+		}(),
+		"simpleItemAcquireScript": func() map[string]interface{} {
+			if p.SimpleItemAcquireScript == nil {
+				return nil
+			}
+			return p.SimpleItemAcquireScript.ToDict()
+		}(),
+		"simpleItemConsumeScript": func() map[string]interface{} {
+			if p.SimpleItemConsumeScript == nil {
+				return nil
+			}
+			return p.SimpleItemConsumeScript.ToDict()
+		}(),
+		"bigItemAcquireScript": func() map[string]interface{} {
+			if p.BigItemAcquireScript == nil {
+				return nil
+			}
+			return p.BigItemAcquireScript.ToDict()
+		}(),
+		"bigItemConsumeScript": func() map[string]interface{} {
+			if p.BigItemConsumeScript == nil {
+				return nil
+			}
+			return p.BigItemConsumeScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -565,16 +605,56 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":           p.NamespaceName,
-		"description":             p.Description,
-		"acquireScript":           p.AcquireScript.ToDict(),
-		"overflowScript":          p.OverflowScript.ToDict(),
-		"consumeScript":           p.ConsumeScript.ToDict(),
-		"simpleItemAcquireScript": p.SimpleItemAcquireScript.ToDict(),
-		"simpleItemConsumeScript": p.SimpleItemConsumeScript.ToDict(),
-		"bigItemAcquireScript":    p.BigItemAcquireScript.ToDict(),
-		"bigItemConsumeScript":    p.BigItemConsumeScript.ToDict(),
-		"logSetting":              p.LogSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"description":   p.Description,
+		"acquireScript": func() map[string]interface{} {
+			if p.AcquireScript == nil {
+				return nil
+			}
+			return p.AcquireScript.ToDict()
+		}(),
+		"overflowScript": func() map[string]interface{} {
+			if p.OverflowScript == nil {
+				return nil
+			}
+			return p.OverflowScript.ToDict()
+		}(),
+		"consumeScript": func() map[string]interface{} {
+			if p.ConsumeScript == nil {
+				return nil
+			}
+			return p.ConsumeScript.ToDict()
+		}(),
+		"simpleItemAcquireScript": func() map[string]interface{} {
+			if p.SimpleItemAcquireScript == nil {
+				return nil
+			}
+			return p.SimpleItemAcquireScript.ToDict()
+		}(),
+		"simpleItemConsumeScript": func() map[string]interface{} {
+			if p.SimpleItemConsumeScript == nil {
+				return nil
+			}
+			return p.SimpleItemConsumeScript.ToDict()
+		}(),
+		"bigItemAcquireScript": func() map[string]interface{} {
+			if p.BigItemAcquireScript == nil {
+				return nil
+			}
+			return p.BigItemAcquireScript.ToDict()
+		}(),
+		"bigItemConsumeScript": func() map[string]interface{} {
+			if p.BigItemConsumeScript == nil {
+				return nil
+			}
+			return p.BigItemConsumeScript.ToDict()
+		}(),
+		"logSetting": func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}(),
 	}
 }
 
@@ -7427,8 +7507,13 @@ func NewUpdateCurrentItemModelMasterFromGitHubRequestFromDict(data map[string]in
 
 func (p UpdateCurrentItemModelMasterFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"namespaceName": p.NamespaceName,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

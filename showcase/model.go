@@ -236,15 +236,30 @@ func (p Namespace) ToDict() map[string]interface{} {
 	}
 	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = p.TransactionSetting.ToDict()
+		transactionSetting = func() map[string]interface{} {
+			if p.TransactionSetting == nil {
+				return nil
+			}
+			return p.TransactionSetting.ToDict()
+		}()
 	}
 	var buyScript map[string]interface{}
 	if p.BuyScript != nil {
-		buyScript = p.BuyScript.ToDict()
+		buyScript = func() map[string]interface{} {
+			if p.BuyScript == nil {
+				return nil
+			}
+			return p.BuyScript.ToDict()
+		}()
 	}
 	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = p.LogSetting.ToDict()
+		logSetting = func() map[string]interface{} {
+			if p.LogSetting == nil {
+				return nil
+			}
+			return p.LogSetting.ToDict()
+		}()
 	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
@@ -1823,11 +1838,21 @@ func (p DisplayItem) ToDict() map[string]interface{} {
 	}
 	var salesItem map[string]interface{}
 	if p.SalesItem != nil {
-		salesItem = p.SalesItem.ToDict()
+		salesItem = func() map[string]interface{} {
+			if p.SalesItem == nil {
+				return nil
+			}
+			return p.SalesItem.ToDict()
+		}()
 	}
 	var salesItemGroup map[string]interface{}
 	if p.SalesItemGroup != nil {
-		salesItemGroup = p.SalesItemGroup.ToDict()
+		salesItemGroup = func() map[string]interface{} {
+			if p.SalesItemGroup == nil {
+				return nil
+			}
+			return p.SalesItemGroup.ToDict()
+		}()
 	}
 	var salesPeriodEventId *string
 	if p.SalesPeriodEventId != nil {
