@@ -29,13 +29,13 @@ func ToString(data interface{}) string {
 	{
 		v, ok := data.(float32)
 		if ok {
-			return fmt.Sprintf("%f", v)
+			return fmt.Sprintf("%g", v)
 		}
 	}
 	{
 		v, ok := data.(float64)
 		if ok {
-			return fmt.Sprintf("%f", v)
+			return fmt.Sprintf("%g", v)
 		}
 	}
 	{
@@ -95,28 +95,28 @@ func CastString(value interface{}) *string {
 	{
 		v, ok := value.(float32)
 		if ok {
-			v2 := fmt.Sprintf("%f", v)
+			v2 := fmt.Sprintf("%g", v)
 			return &v2
 		}
 	}
 	{
 		v, ok := value.(*float32)
 		if ok {
-			v2 := fmt.Sprintf("%f", *v)
+			v2 := fmt.Sprintf("%g", *v)
 			return &v2
 		}
 	}
 	{
 		v, ok := value.(float64)
 		if ok {
-			v2 := fmt.Sprintf("%v", v)
+			v2 := fmt.Sprintf("%g", v)
 			return &v2
 		}
 	}
 	{
 		v, ok := value.(*float64)
 		if ok {
-			v2 := fmt.Sprintf("%v", *v)
+			v2 := fmt.Sprintf("%g", *v)
 			return &v2
 		}
 	}
