@@ -346,9 +346,14 @@ func NewCreateStackFromGitHubRequestFromDict(data map[string]interface{}) Create
 
 func (p CreateStackFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":            p.Name,
-		"description":     p.Description,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"name":        p.Name,
+		"description": p.Description,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 
@@ -942,9 +947,14 @@ func NewUpdateStackFromGitHubRequestFromDict(data map[string]interface{}) Update
 
 func (p UpdateStackFromGitHubRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"stackName":       p.StackName,
-		"description":     p.Description,
-		"checkoutSetting": p.CheckoutSetting.ToDict(),
+		"stackName":   p.StackName,
+		"description": p.Description,
+		"checkoutSetting": func() map[string]interface{} {
+			if p.CheckoutSetting == nil {
+				return nil
+			}
+			return p.CheckoutSetting.ToDict()
+		}(),
 	}
 }
 

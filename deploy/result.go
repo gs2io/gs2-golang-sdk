@@ -81,7 +81,12 @@ func NewCreateStackResultFromDict(data map[string]interface{}) CreateStackResult
 
 func (p CreateStackResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -112,7 +117,12 @@ func NewCreateStackFromGitHubResultFromDict(data map[string]interface{}) CreateS
 
 func (p CreateStackFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -200,7 +210,12 @@ func NewGetStackResultFromDict(data map[string]interface{}) GetStackResult {
 
 func (p GetStackResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -231,7 +246,12 @@ func NewUpdateStackResultFromDict(data map[string]interface{}) UpdateStackResult
 
 func (p UpdateStackResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -295,7 +315,12 @@ func NewUpdateStackFromGitHubResultFromDict(data map[string]interface{}) UpdateS
 
 func (p UpdateStackFromGitHubResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -326,7 +351,12 @@ func NewDeleteStackResultFromDict(data map[string]interface{}) DeleteStackResult
 
 func (p DeleteStackResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -357,7 +387,12 @@ func NewForceDeleteStackResultFromDict(data map[string]interface{}) ForceDeleteS
 
 func (p ForceDeleteStackResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -388,7 +423,12 @@ func NewDeleteStackResourcesResultFromDict(data map[string]interface{}) DeleteSt
 
 func (p DeleteStackResourcesResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -419,7 +459,12 @@ func NewDeleteStackEntityResultFromDict(data map[string]interface{}) DeleteStack
 
 func (p DeleteStackEntityResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -486,7 +531,12 @@ func NewGetResourceResultFromDict(data map[string]interface{}) GetResourceResult
 
 func (p GetResourceResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -553,7 +603,12 @@ func NewGetEventResultFromDict(data map[string]interface{}) GetEventResult {
 
 func (p GetEventResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -620,7 +675,12 @@ func NewGetOutputResultFromDict(data map[string]interface{}) GetOutputResult {
 
 func (p GetOutputResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 

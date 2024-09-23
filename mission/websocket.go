@@ -423,6 +423,220 @@ func (p Gs2MissionWebSocketClient) CompleteByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2MissionWebSocketClient) batchCompleteAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- BatchCompleteAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchCompleteAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchCompleteResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchCompleteAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- BatchCompleteAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionWebSocketClient) BatchCompleteAsync(
+	request *BatchCompleteRequest,
+	callback chan<- BatchCompleteAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "mission",
+			"component":   "complete",
+			"function":    "batchComplete",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		bodies["missionGroupName"] = *request.MissionGroupName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.MissionTaskNames != nil {
+		var _missionTaskNames []interface{}
+		for _, item := range request.MissionTaskNames {
+			_missionTaskNames = append(_missionTaskNames, item)
+		}
+		bodies["missionTaskNames"] = _missionTaskNames
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.batchCompleteAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionWebSocketClient) BatchComplete(
+	request *BatchCompleteRequest,
+) (*BatchCompleteResult, error) {
+	callback := make(chan BatchCompleteAsyncResult, 1)
+	go p.BatchCompleteAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MissionWebSocketClient) batchCompleteByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- BatchCompleteByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchCompleteByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchCompleteByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchCompleteByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- BatchCompleteByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionWebSocketClient) BatchCompleteByUserIdAsync(
+	request *BatchCompleteByUserIdRequest,
+	callback chan<- BatchCompleteByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "mission",
+			"component":   "complete",
+			"function":    "batchCompleteByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		bodies["missionGroupName"] = *request.MissionGroupName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.MissionTaskNames != nil {
+		var _missionTaskNames []interface{}
+		for _, item := range request.MissionTaskNames {
+			_missionTaskNames = append(_missionTaskNames, item)
+		}
+		bodies["missionTaskNames"] = _missionTaskNames
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.batchCompleteByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionWebSocketClient) BatchCompleteByUserId(
+	request *BatchCompleteByUserIdRequest,
+) (*BatchCompleteByUserIdResult, error) {
+	callback := make(chan BatchCompleteByUserIdAsyncResult, 1)
+	go p.BatchCompleteByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2MissionWebSocketClient) receiveByUserIdAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- ReceiveByUserIdAsyncResult,
@@ -512,6 +726,106 @@ func (p Gs2MissionWebSocketClient) ReceiveByUserId(
 ) (*ReceiveByUserIdResult, error) {
 	callback := make(chan ReceiveByUserIdAsyncResult, 1)
 	go p.ReceiveByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MissionWebSocketClient) batchReceiveByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- BatchReceiveByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchReceiveByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchReceiveByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchReceiveByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- BatchReceiveByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionWebSocketClient) BatchReceiveByUserIdAsync(
+	request *BatchReceiveByUserIdRequest,
+	callback chan<- BatchReceiveByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "mission",
+			"component":   "complete",
+			"function":    "batchReceiveByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		bodies["missionGroupName"] = *request.MissionGroupName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.MissionTaskNames != nil {
+		var _missionTaskNames []interface{}
+		for _, item := range request.MissionTaskNames {
+			_missionTaskNames = append(_missionTaskNames, item)
+		}
+		bodies["missionTaskNames"] = _missionTaskNames
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.batchReceiveByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionWebSocketClient) BatchReceiveByUserId(
+	request *BatchReceiveByUserIdRequest,
+) (*BatchReceiveByUserIdResult, error) {
+	callback := make(chan BatchReceiveByUserIdAsyncResult, 1)
+	go p.BatchReceiveByUserIdAsync(
 		request,
 		callback,
 	)
@@ -1169,6 +1483,90 @@ func (p Gs2MissionWebSocketClient) ReceiveByStampTask(
 ) (*ReceiveByStampTaskResult, error) {
 	callback := make(chan ReceiveByStampTaskAsyncResult, 1)
 	go p.ReceiveByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2MissionWebSocketClient) batchReceiveByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- BatchReceiveByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchReceiveByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchReceiveByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchReceiveByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- BatchReceiveByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionWebSocketClient) BatchReceiveByStampTaskAsync(
+	request *BatchReceiveByStampTaskRequest,
+	callback chan<- BatchReceiveByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "mission",
+			"component":   "complete",
+			"function":    "batchReceiveByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.batchReceiveByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionWebSocketClient) BatchReceiveByStampTask(
+	request *BatchReceiveByStampTaskRequest,
+) (*BatchReceiveByStampTaskResult, error) {
+	callback := make(chan BatchReceiveByStampTaskAsyncResult, 1)
+	go p.BatchReceiveByStampTaskAsync(
 		request,
 		callback,
 	)

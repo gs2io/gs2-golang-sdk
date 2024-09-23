@@ -944,19 +944,20 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type QueryAccessLogRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	Service         *string `json:"service"`
-	Method          *string `json:"method"`
-	UserId          *string `json:"userId"`
-	Begin           *int64  `json:"begin"`
-	End             *int64  `json:"end"`
-	LongTerm        *bool   `json:"longTerm"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	TimeOffsetToken *string `json:"timeOffsetToken"`
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	Service            *string `json:"service"`
+	Method             *string `json:"method"`
+	UserId             *string `json:"userId"`
+	Begin              *int64  `json:"begin"`
+	End                *int64  `json:"end"`
+	LongTerm           *bool   `json:"longTerm"`
+	PageToken          *string `json:"pageToken"`
+	Limit              *int32  `json:"limit"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func (p *QueryAccessLogRequest) UnmarshalJSON(data []byte) error {
@@ -1354,20 +1355,21 @@ func (p CountAccessLogRequest) Pointer() *CountAccessLogRequest {
 }
 
 type QueryIssueStampSheetLogRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	Service         *string `json:"service"`
-	Method          *string `json:"method"`
-	UserId          *string `json:"userId"`
-	Action          *string `json:"action"`
-	Begin           *int64  `json:"begin"`
-	End             *int64  `json:"end"`
-	LongTerm        *bool   `json:"longTerm"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	TimeOffsetToken *string `json:"timeOffsetToken"`
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	Service            *string `json:"service"`
+	Method             *string `json:"method"`
+	UserId             *string `json:"userId"`
+	Action             *string `json:"action"`
+	Begin              *int64  `json:"begin"`
+	End                *int64  `json:"end"`
+	LongTerm           *bool   `json:"longTerm"`
+	PageToken          *string `json:"pageToken"`
+	Limit              *int32  `json:"limit"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func (p *QueryIssueStampSheetLogRequest) UnmarshalJSON(data []byte) error {
@@ -1796,20 +1798,21 @@ func (p CountIssueStampSheetLogRequest) Pointer() *CountIssueStampSheetLogReques
 }
 
 type QueryExecuteStampSheetLogRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	Service         *string `json:"service"`
-	Method          *string `json:"method"`
-	UserId          *string `json:"userId"`
-	Action          *string `json:"action"`
-	Begin           *int64  `json:"begin"`
-	End             *int64  `json:"end"`
-	LongTerm        *bool   `json:"longTerm"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	TimeOffsetToken *string `json:"timeOffsetToken"`
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	Service            *string `json:"service"`
+	Method             *string `json:"method"`
+	UserId             *string `json:"userId"`
+	Action             *string `json:"action"`
+	Begin              *int64  `json:"begin"`
+	End                *int64  `json:"end"`
+	LongTerm           *bool   `json:"longTerm"`
+	PageToken          *string `json:"pageToken"`
+	Limit              *int32  `json:"limit"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func (p *QueryExecuteStampSheetLogRequest) UnmarshalJSON(data []byte) error {
@@ -2238,20 +2241,21 @@ func (p CountExecuteStampSheetLogRequest) Pointer() *CountExecuteStampSheetLogRe
 }
 
 type QueryExecuteStampTaskLogRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	Service         *string `json:"service"`
-	Method          *string `json:"method"`
-	UserId          *string `json:"userId"`
-	Action          *string `json:"action"`
-	Begin           *int64  `json:"begin"`
-	End             *int64  `json:"end"`
-	LongTerm        *bool   `json:"longTerm"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	TimeOffsetToken *string `json:"timeOffsetToken"`
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	Service            *string `json:"service"`
+	Method             *string `json:"method"`
+	UserId             *string `json:"userId"`
+	Action             *string `json:"action"`
+	Begin              *int64  `json:"begin"`
+	End                *int64  `json:"end"`
+	LongTerm           *bool   `json:"longTerm"`
+	PageToken          *string `json:"pageToken"`
+	Limit              *int32  `json:"limit"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func (p *QueryExecuteStampTaskLogRequest) UnmarshalJSON(data []byte) error {
@@ -3182,17 +3186,18 @@ func (p SendInGameLogByUserIdRequest) Pointer() *SendInGameLogByUserIdRequest {
 }
 
 type QueryAccessLogWithTelemetryRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	UserId          *string `json:"userId"`
-	Begin           *int64  `json:"begin"`
-	End             *int64  `json:"end"`
-	LongTerm        *bool   `json:"longTerm"`
-	PageToken       *string `json:"pageToken"`
-	Limit           *int32  `json:"limit"`
-	TimeOffsetToken *string `json:"timeOffsetToken"`
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	Begin              *int64  `json:"begin"`
+	End                *int64  `json:"end"`
+	LongTerm           *bool   `json:"longTerm"`
+	PageToken          *string `json:"pageToken"`
+	Limit              *int32  `json:"limit"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
 
 func (p *QueryAccessLogWithTelemetryRequest) UnmarshalJSON(data []byte) error {

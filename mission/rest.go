@@ -465,6 +465,241 @@ func (p Gs2MissionRestClient) CompleteByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func batchCompleteAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- BatchCompleteAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchCompleteAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchCompleteResult
+	if asyncResult.Err != nil {
+		callback <- BatchCompleteAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchCompleteAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- BatchCompleteAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) BatchCompleteAsync(
+	request *BatchCompleteRequest,
+	callback chan<- BatchCompleteAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/complete/group/{missionGroupName}/task/any/batch"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		path = strings.ReplaceAll(path, "{missionGroupName}", core.ToString(*request.MissionGroupName))
+	} else {
+		path = strings.ReplaceAll(path, "{missionGroupName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.MissionTaskNames != nil {
+		var _missionTaskNames []interface{}
+		for _, item := range request.MissionTaskNames {
+			_missionTaskNames = append(_missionTaskNames, item)
+		}
+		bodies["missionTaskNames"] = _missionTaskNames
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go batchCompleteAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) BatchComplete(
+	request *BatchCompleteRequest,
+) (*BatchCompleteResult, error) {
+	callback := make(chan BatchCompleteAsyncResult, 1)
+	go p.BatchCompleteAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func batchCompleteByUserIdAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- BatchCompleteByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchCompleteByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchCompleteByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- BatchCompleteByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchCompleteByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- BatchCompleteByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) BatchCompleteByUserIdAsync(
+	request *BatchCompleteByUserIdRequest,
+	callback chan<- BatchCompleteByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/complete/group/{missionGroupName}/task/any/batch"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		path = strings.ReplaceAll(path, "{missionGroupName}", core.ToString(*request.MissionGroupName))
+	} else {
+		path = strings.ReplaceAll(path, "{missionGroupName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.MissionTaskNames != nil {
+		var _missionTaskNames []interface{}
+		for _, item := range request.MissionTaskNames {
+			_missionTaskNames = append(_missionTaskNames, item)
+		}
+		bodies["missionTaskNames"] = _missionTaskNames
+	}
+	if request.Config != nil {
+		var _config []interface{}
+		for _, item := range request.Config {
+			_config = append(_config, item)
+		}
+		bodies["config"] = _config
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go batchCompleteByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) BatchCompleteByUserId(
+	request *BatchCompleteByUserIdRequest,
+) (*BatchCompleteByUserIdResult, error) {
+	callback := make(chan BatchCompleteByUserIdAsyncResult, 1)
+	go p.BatchCompleteByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func receiveByUserIdAsyncHandler(
 	client Gs2MissionRestClient,
 	job *core.NetworkJob,
@@ -569,6 +804,119 @@ func (p Gs2MissionRestClient) ReceiveByUserId(
 ) (*ReceiveByUserIdResult, error) {
 	callback := make(chan ReceiveByUserIdAsyncResult, 1)
 	go p.ReceiveByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func batchReceiveByUserIdAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- BatchReceiveByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchReceiveByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchReceiveByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- BatchReceiveByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchReceiveByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- BatchReceiveByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) BatchReceiveByUserIdAsync(
+	request *BatchReceiveByUserIdRequest,
+	callback chan<- BatchReceiveByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/complete/group/{missionGroupName}/task/any/receive/batch"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.MissionGroupName != nil && *request.MissionGroupName != "" {
+		path = strings.ReplaceAll(path, "{missionGroupName}", core.ToString(*request.MissionGroupName))
+	} else {
+		path = strings.ReplaceAll(path, "{missionGroupName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.MissionTaskNames != nil {
+		var _missionTaskNames []interface{}
+		for _, item := range request.MissionTaskNames {
+			_missionTaskNames = append(_missionTaskNames, item)
+		}
+		bodies["missionTaskNames"] = _missionTaskNames
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go batchReceiveByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) BatchReceiveByUserId(
+	request *BatchReceiveByUserIdRequest,
+) (*BatchReceiveByUserIdResult, error) {
+	callback := make(chan BatchReceiveByUserIdAsyncResult, 1)
+	go p.BatchReceiveByUserIdAsync(
 		request,
 		callback,
 	)
@@ -1315,6 +1663,97 @@ func (p Gs2MissionRestClient) ReceiveByStampTask(
 ) (*ReceiveByStampTaskResult, error) {
 	callback := make(chan ReceiveByStampTaskAsyncResult, 1)
 	go p.ReceiveByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func batchReceiveByStampTaskAsyncHandler(
+	client Gs2MissionRestClient,
+	job *core.NetworkJob,
+	callback chan<- BatchReceiveByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchReceiveByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchReceiveByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- BatchReceiveByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchReceiveByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- BatchReceiveByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2MissionRestClient) BatchReceiveByStampTaskAsync(
+	request *BatchReceiveByStampTaskRequest,
+	callback chan<- BatchReceiveByStampTaskAsyncResult,
+) {
+	path := "/stamp/receive"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go batchReceiveByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("mission").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2MissionRestClient) BatchReceiveByStampTask(
+	request *BatchReceiveByStampTaskRequest,
+) (*BatchReceiveByStampTaskResult, error) {
+	callback := make(chan BatchReceiveByStampTaskAsyncResult, 1)
+	go p.BatchReceiveByStampTaskAsync(
 		request,
 		callback,
 	)

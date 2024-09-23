@@ -174,6 +174,86 @@ func (p CompleteByUserIdResult) Pointer() *CompleteByUserIdResult {
 	return &p
 }
 
+type BatchCompleteResult struct {
+	TransactionId             *string `json:"transactionId"`
+	StampSheet                *string `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool   `json:"autoRunStampSheet"`
+}
+
+type BatchCompleteAsyncResult struct {
+	result *BatchCompleteResult
+	err    error
+}
+
+func NewBatchCompleteResultFromJson(data string) BatchCompleteResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBatchCompleteResultFromDict(dict)
+}
+
+func NewBatchCompleteResultFromDict(data map[string]interface{}) BatchCompleteResult {
+	return BatchCompleteResult{
+		TransactionId:             core.CastString(data["transactionId"]),
+		StampSheet:                core.CastString(data["stampSheet"]),
+		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+	}
+}
+
+func (p BatchCompleteResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"transactionId":             p.TransactionId,
+		"stampSheet":                p.StampSheet,
+		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+		"autoRunStampSheet":         p.AutoRunStampSheet,
+	}
+}
+
+func (p BatchCompleteResult) Pointer() *BatchCompleteResult {
+	return &p
+}
+
+type BatchCompleteByUserIdResult struct {
+	TransactionId             *string `json:"transactionId"`
+	StampSheet                *string `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool   `json:"autoRunStampSheet"`
+}
+
+type BatchCompleteByUserIdAsyncResult struct {
+	result *BatchCompleteByUserIdResult
+	err    error
+}
+
+func NewBatchCompleteByUserIdResultFromJson(data string) BatchCompleteByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBatchCompleteByUserIdResultFromDict(dict)
+}
+
+func NewBatchCompleteByUserIdResultFromDict(data map[string]interface{}) BatchCompleteByUserIdResult {
+	return BatchCompleteByUserIdResult{
+		TransactionId:             core.CastString(data["transactionId"]),
+		StampSheet:                core.CastString(data["stampSheet"]),
+		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
+		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+	}
+}
+
+func (p BatchCompleteByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"transactionId":             p.TransactionId,
+		"stampSheet":                p.StampSheet,
+		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+		"autoRunStampSheet":         p.AutoRunStampSheet,
+	}
+}
+
+func (p BatchCompleteByUserIdResult) Pointer() *BatchCompleteByUserIdResult {
+	return &p
+}
+
 type ReceiveByUserIdResult struct {
 	Item *Complete `json:"item"`
 }
@@ -207,6 +287,42 @@ func (p ReceiveByUserIdResult) ToDict() map[string]interface{} {
 }
 
 func (p ReceiveByUserIdResult) Pointer() *ReceiveByUserIdResult {
+	return &p
+}
+
+type BatchReceiveByUserIdResult struct {
+	Item *Complete `json:"item"`
+}
+
+type BatchReceiveByUserIdAsyncResult struct {
+	result *BatchReceiveByUserIdResult
+	err    error
+}
+
+func NewBatchReceiveByUserIdResultFromJson(data string) BatchReceiveByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBatchReceiveByUserIdResultFromDict(dict)
+}
+
+func NewBatchReceiveByUserIdResultFromDict(data map[string]interface{}) BatchReceiveByUserIdResult {
+	return BatchReceiveByUserIdResult{
+		Item: NewCompleteFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p BatchReceiveByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p BatchReceiveByUserIdResult) Pointer() *BatchReceiveByUserIdResult {
 	return &p
 }
 
@@ -442,6 +558,45 @@ func (p ReceiveByStampTaskResult) ToDict() map[string]interface{} {
 }
 
 func (p ReceiveByStampTaskResult) Pointer() *ReceiveByStampTaskResult {
+	return &p
+}
+
+type BatchReceiveByStampTaskResult struct {
+	Item            *Complete `json:"item"`
+	NewContextStack *string   `json:"newContextStack"`
+}
+
+type BatchReceiveByStampTaskAsyncResult struct {
+	result *BatchReceiveByStampTaskResult
+	err    error
+}
+
+func NewBatchReceiveByStampTaskResultFromJson(data string) BatchReceiveByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBatchReceiveByStampTaskResultFromDict(dict)
+}
+
+func NewBatchReceiveByStampTaskResultFromDict(data map[string]interface{}) BatchReceiveByStampTaskResult {
+	return BatchReceiveByStampTaskResult{
+		Item:            NewCompleteFromDict(core.CastMap(data["item"])).Pointer(),
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p BatchReceiveByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p BatchReceiveByStampTaskResult) Pointer() *BatchReceiveByStampTaskResult {
 	return &p
 }
 

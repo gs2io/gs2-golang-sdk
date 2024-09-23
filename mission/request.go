@@ -689,6 +689,378 @@ func (p CompleteByUserIdRequest) Pointer() *CompleteByUserIdRequest {
 	return &p
 }
 
+type BatchCompleteRequest struct {
+	SourceRequestId    *string   `json:"sourceRequestId"`
+	RequestId          *string   `json:"requestId"`
+	ContextStack       *string   `json:"contextStack"`
+	DuplicationAvoider *string   `json:"duplicationAvoider"`
+	NamespaceName      *string   `json:"namespaceName"`
+	MissionGroupName   *string   `json:"missionGroupName"`
+	AccessToken        *string   `json:"accessToken"`
+	MissionTaskNames   []*string `json:"missionTaskNames"`
+	Config             []Config  `json:"config"`
+}
+
+func (p *BatchCompleteRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = BatchCompleteRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = BatchCompleteRequest{}
+	} else {
+		*p = BatchCompleteRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["missionGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionGroupName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["missionTaskNames"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.MissionTaskNames = l
+			}
+		}
+		if v, ok := d["config"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Config)
+		}
+	}
+	return nil
+}
+
+func NewBatchCompleteRequestFromJson(data string) (BatchCompleteRequest, error) {
+	req := BatchCompleteRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return BatchCompleteRequest{}, err
+	}
+	return req, nil
+}
+
+func NewBatchCompleteRequestFromDict(data map[string]interface{}) BatchCompleteRequest {
+	return BatchCompleteRequest{
+		NamespaceName:    core.CastString(data["namespaceName"]),
+		MissionGroupName: core.CastString(data["missionGroupName"]),
+		AccessToken:      core.CastString(data["accessToken"]),
+		MissionTaskNames: core.CastStrings(core.CastArray(data["missionTaskNames"])),
+		Config:           CastConfigs(core.CastArray(data["config"])),
+	}
+}
+
+func (p BatchCompleteRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":    p.NamespaceName,
+		"missionGroupName": p.MissionGroupName,
+		"accessToken":      p.AccessToken,
+		"missionTaskNames": core.CastStringsFromDict(
+			p.MissionTaskNames,
+		),
+		"config": CastConfigsFromDict(
+			p.Config,
+		),
+	}
+}
+
+func (p BatchCompleteRequest) Pointer() *BatchCompleteRequest {
+	return &p
+}
+
+type BatchCompleteByUserIdRequest struct {
+	SourceRequestId    *string   `json:"sourceRequestId"`
+	RequestId          *string   `json:"requestId"`
+	ContextStack       *string   `json:"contextStack"`
+	DuplicationAvoider *string   `json:"duplicationAvoider"`
+	NamespaceName      *string   `json:"namespaceName"`
+	MissionGroupName   *string   `json:"missionGroupName"`
+	UserId             *string   `json:"userId"`
+	MissionTaskNames   []*string `json:"missionTaskNames"`
+	Config             []Config  `json:"config"`
+	TimeOffsetToken    *string   `json:"timeOffsetToken"`
+}
+
+func (p *BatchCompleteByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = BatchCompleteByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = BatchCompleteByUserIdRequest{}
+	} else {
+		*p = BatchCompleteByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["missionGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionGroupName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["missionTaskNames"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.MissionTaskNames = l
+			}
+		}
+		if v, ok := d["config"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Config)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewBatchCompleteByUserIdRequestFromJson(data string) (BatchCompleteByUserIdRequest, error) {
+	req := BatchCompleteByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return BatchCompleteByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewBatchCompleteByUserIdRequestFromDict(data map[string]interface{}) BatchCompleteByUserIdRequest {
+	return BatchCompleteByUserIdRequest{
+		NamespaceName:    core.CastString(data["namespaceName"]),
+		MissionGroupName: core.CastString(data["missionGroupName"]),
+		UserId:           core.CastString(data["userId"]),
+		MissionTaskNames: core.CastStrings(core.CastArray(data["missionTaskNames"])),
+		Config:           CastConfigs(core.CastArray(data["config"])),
+		TimeOffsetToken:  core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p BatchCompleteByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":    p.NamespaceName,
+		"missionGroupName": p.MissionGroupName,
+		"userId":           p.UserId,
+		"missionTaskNames": core.CastStringsFromDict(
+			p.MissionTaskNames,
+		),
+		"config": CastConfigsFromDict(
+			p.Config,
+		),
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p BatchCompleteByUserIdRequest) Pointer() *BatchCompleteByUserIdRequest {
+	return &p
+}
+
 type ReceiveByUserIdRequest struct {
 	SourceRequestId    *string `json:"sourceRequestId"`
 	RequestId          *string `json:"requestId"`
@@ -872,6 +1244,197 @@ func (p ReceiveByUserIdRequest) ToDict() map[string]interface{} {
 }
 
 func (p ReceiveByUserIdRequest) Pointer() *ReceiveByUserIdRequest {
+	return &p
+}
+
+type BatchReceiveByUserIdRequest struct {
+	SourceRequestId    *string   `json:"sourceRequestId"`
+	RequestId          *string   `json:"requestId"`
+	ContextStack       *string   `json:"contextStack"`
+	DuplicationAvoider *string   `json:"duplicationAvoider"`
+	NamespaceName      *string   `json:"namespaceName"`
+	MissionGroupName   *string   `json:"missionGroupName"`
+	UserId             *string   `json:"userId"`
+	MissionTaskNames   []*string `json:"missionTaskNames"`
+	TimeOffsetToken    *string   `json:"timeOffsetToken"`
+}
+
+func (p *BatchReceiveByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = BatchReceiveByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = BatchReceiveByUserIdRequest{}
+	} else {
+		*p = BatchReceiveByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["missionGroupName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.MissionGroupName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.MissionGroupName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.MissionGroupName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.MissionGroupName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.MissionGroupName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["missionTaskNames"]; ok && v != nil {
+			var v2 []interface{}
+			if err := json.Unmarshal(*v, &v2); err == nil {
+				l := make([]*string, len(v2))
+				for i, v3 := range v2 {
+					switch v4 := v3.(type) {
+					case string:
+						l[i] = &v4
+					case float64:
+						strValue := strconv.FormatFloat(v4, 'f', -1, 64)
+						l[i] = &strValue
+					case int:
+						strValue := strconv.Itoa(v4)
+						l[i] = &strValue
+					case int32:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					case int64:
+						strValue := strconv.Itoa(int(v4))
+						l[i] = &strValue
+					default:
+					}
+				}
+				p.MissionTaskNames = l
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewBatchReceiveByUserIdRequestFromJson(data string) (BatchReceiveByUserIdRequest, error) {
+	req := BatchReceiveByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return BatchReceiveByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewBatchReceiveByUserIdRequestFromDict(data map[string]interface{}) BatchReceiveByUserIdRequest {
+	return BatchReceiveByUserIdRequest{
+		NamespaceName:    core.CastString(data["namespaceName"]),
+		MissionGroupName: core.CastString(data["missionGroupName"]),
+		UserId:           core.CastString(data["userId"]),
+		MissionTaskNames: core.CastStrings(core.CastArray(data["missionTaskNames"])),
+		TimeOffsetToken:  core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p BatchReceiveByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":    p.NamespaceName,
+		"missionGroupName": p.MissionGroupName,
+		"userId":           p.UserId,
+		"missionTaskNames": core.CastStringsFromDict(
+			p.MissionTaskNames,
+		),
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p BatchReceiveByUserIdRequest) Pointer() *BatchReceiveByUserIdRequest {
 	return &p
 }
 
@@ -2027,6 +2590,113 @@ func (p ReceiveByStampTaskRequest) ToDict() map[string]interface{} {
 }
 
 func (p ReceiveByStampTaskRequest) Pointer() *ReceiveByStampTaskRequest {
+	return &p
+}
+
+type BatchReceiveByStampTaskRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *BatchReceiveByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = BatchReceiveByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = BatchReceiveByStampTaskRequest{}
+	} else {
+		*p = BatchReceiveByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewBatchReceiveByStampTaskRequestFromJson(data string) (BatchReceiveByStampTaskRequest, error) {
+	req := BatchReceiveByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return BatchReceiveByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewBatchReceiveByStampTaskRequestFromDict(data map[string]interface{}) BatchReceiveByStampTaskRequest {
+	return BatchReceiveByStampTaskRequest{
+		StampTask: core.CastString(data["stampTask"]),
+		KeyId:     core.CastString(data["keyId"]),
+	}
+}
+
+func (p BatchReceiveByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p BatchReceiveByStampTaskRequest) Pointer() *BatchReceiveByStampTaskRequest {
 	return &p
 }
 
