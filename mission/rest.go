@@ -1715,7 +1715,7 @@ func (p Gs2MissionRestClient) BatchReceiveByStampTaskAsync(
 	request *BatchReceiveByStampTaskRequest,
 	callback chan<- BatchReceiveByStampTaskAsyncResult,
 ) {
-	path := "/stamp/receive"
+	path := "/stamp/receive/batch"
 
 	replacer := strings.NewReplacer()
 	var bodies = core.Bodies{}
