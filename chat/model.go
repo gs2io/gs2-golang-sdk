@@ -28,6 +28,7 @@ type Namespace struct {
 	Name                  *string              `json:"name"`
 	Description           *string              `json:"description"`
 	AllowCreateRoom       *bool                `json:"allowCreateRoom"`
+	MessageLifeTimeDays   *int32               `json:"messageLifeTimeDays"`
 	PostMessageScript     *ScriptSetting       `json:"postMessageScript"`
 	CreateRoomScript      *ScriptSetting       `json:"createRoomScript"`
 	DeleteRoomScript      *ScriptSetting       `json:"deleteRoomScript"`
@@ -134,6 +135,9 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		if v, ok := d["allowCreateRoom"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AllowCreateRoom)
 		}
+		if v, ok := d["messageLifeTimeDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MessageLifeTimeDays)
+		}
 		if v, ok := d["postMessageScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.PostMessageScript)
 		}
@@ -180,6 +184,7 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 		Name:                  core.CastString(data["name"]),
 		Description:           core.CastString(data["description"]),
 		AllowCreateRoom:       core.CastBool(data["allowCreateRoom"]),
+		MessageLifeTimeDays:   core.CastInt32(data["messageLifeTimeDays"]),
 		PostMessageScript:     NewScriptSettingFromDict(core.CastMap(data["postMessageScript"])).Pointer(),
 		CreateRoomScript:      NewScriptSettingFromDict(core.CastMap(data["createRoomScript"])).Pointer(),
 		DeleteRoomScript:      NewScriptSettingFromDict(core.CastMap(data["deleteRoomScript"])).Pointer(),
@@ -210,6 +215,10 @@ func (p Namespace) ToDict() map[string]interface{} {
 	var allowCreateRoom *bool
 	if p.AllowCreateRoom != nil {
 		allowCreateRoom = p.AllowCreateRoom
+	}
+	var messageLifeTimeDays *int32
+	if p.MessageLifeTimeDays != nil {
+		messageLifeTimeDays = p.MessageLifeTimeDays
 	}
 	var postMessageScript map[string]interface{}
 	if p.PostMessageScript != nil {
@@ -291,6 +300,7 @@ func (p Namespace) ToDict() map[string]interface{} {
 		"name":                  name,
 		"description":           description,
 		"allowCreateRoom":       allowCreateRoom,
+		"messageLifeTimeDays":   messageLifeTimeDays,
 		"postMessageScript":     postMessageScript,
 		"createRoomScript":      createRoomScript,
 		"deleteRoomScript":      deleteRoomScript,

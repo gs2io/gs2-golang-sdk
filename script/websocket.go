@@ -690,6 +690,9 @@ func (p Gs2ScriptWebSocketClient) CreateScriptAsync(
 	if request.Script != nil && *request.Script != "" {
 		bodies["script"] = *request.Script
 	}
+	if request.DisableStringNumberToNumber != nil {
+		bodies["disableStringNumberToNumber"] = *request.DisableStringNumberToNumber
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -779,6 +782,9 @@ func (p Gs2ScriptWebSocketClient) CreateScriptFromGitHubAsync(
 	}
 	if request.CheckoutSetting != nil {
 		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+	}
+	if request.DisableStringNumberToNumber != nil {
+		bodies["disableStringNumberToNumber"] = *request.DisableStringNumberToNumber
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -954,6 +960,9 @@ func (p Gs2ScriptWebSocketClient) UpdateScriptAsync(
 	if request.Script != nil && *request.Script != "" {
 		bodies["script"] = *request.Script
 	}
+	if request.DisableStringNumberToNumber != nil {
+		bodies["disableStringNumberToNumber"] = *request.DisableStringNumberToNumber
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1043,6 +1052,9 @@ func (p Gs2ScriptWebSocketClient) UpdateScriptFromGitHubAsync(
 	}
 	if request.CheckoutSetting != nil {
 		bodies["checkoutSetting"] = request.CheckoutSetting.ToDict()
+	}
+	if request.DisableStringNumberToNumber != nil {
+		bodies["disableStringNumberToNumber"] = *request.DisableStringNumberToNumber
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -1307,6 +1319,9 @@ func (p Gs2ScriptWebSocketClient) DebugInvokeAsync(
 	}
 	if request.RandomStatus != nil {
 		bodies["randomStatus"] = request.RandomStatus.ToDict()
+	}
+	if request.DisableStringNumberToNumber != nil {
+		bodies["disableStringNumberToNumber"] = *request.DisableStringNumberToNumber
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

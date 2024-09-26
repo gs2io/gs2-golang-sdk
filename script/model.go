@@ -240,13 +240,14 @@ func CastNamespacesFromDict(data []Namespace) []interface{} {
 }
 
 type Script struct {
-	ScriptId    *string `json:"scriptId"`
-	Name        *string `json:"name"`
-	Description *string `json:"description"`
-	Script      *string `json:"script"`
-	CreatedAt   *int64  `json:"createdAt"`
-	UpdatedAt   *int64  `json:"updatedAt"`
-	Revision    *int64  `json:"revision"`
+	ScriptId                    *string `json:"scriptId"`
+	Name                        *string `json:"name"`
+	Description                 *string `json:"description"`
+	Script                      *string `json:"script"`
+	DisableStringNumberToNumber *bool   `json:"disableStringNumberToNumber"`
+	CreatedAt                   *int64  `json:"createdAt"`
+	UpdatedAt                   *int64  `json:"updatedAt"`
+	Revision                    *int64  `json:"revision"`
 }
 
 func (p *Script) UnmarshalJSON(data []byte) error {
@@ -363,6 +364,9 @@ func (p *Script) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["disableStringNumberToNumber"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DisableStringNumberToNumber)
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -384,13 +388,14 @@ func NewScriptFromJson(data string) Script {
 
 func NewScriptFromDict(data map[string]interface{}) Script {
 	return Script{
-		ScriptId:    core.CastString(data["scriptId"]),
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		Script:      core.CastString(data["script"]),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-		Revision:    core.CastInt64(data["revision"]),
+		ScriptId:                    core.CastString(data["scriptId"]),
+		Name:                        core.CastString(data["name"]),
+		Description:                 core.CastString(data["description"]),
+		Script:                      core.CastString(data["script"]),
+		DisableStringNumberToNumber: core.CastBool(data["disableStringNumberToNumber"]),
+		CreatedAt:                   core.CastInt64(data["createdAt"]),
+		UpdatedAt:                   core.CastInt64(data["updatedAt"]),
+		Revision:                    core.CastInt64(data["revision"]),
 	}
 }
 
@@ -412,6 +417,10 @@ func (p Script) ToDict() map[string]interface{} {
 	if p.Script != nil {
 		script = p.Script
 	}
+	var disableStringNumberToNumber *bool
+	if p.DisableStringNumberToNumber != nil {
+		disableStringNumberToNumber = p.DisableStringNumberToNumber
+	}
 	var createdAt *int64
 	if p.CreatedAt != nil {
 		createdAt = p.CreatedAt
@@ -425,13 +434,14 @@ func (p Script) ToDict() map[string]interface{} {
 		revision = p.Revision
 	}
 	return map[string]interface{}{
-		"scriptId":    scriptId,
-		"name":        name,
-		"description": description,
-		"script":      script,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
+		"scriptId":                    scriptId,
+		"name":                        name,
+		"description":                 description,
+		"script":                      script,
+		"disableStringNumberToNumber": disableStringNumberToNumber,
+		"createdAt":                   createdAt,
+		"updatedAt":                   updatedAt,
+		"revision":                    revision,
 	}
 }
 

@@ -177,6 +177,9 @@ func (p Gs2ChatWebSocketClient) CreateNamespaceAsync(
 	if request.AllowCreateRoom != nil {
 		bodies["allowCreateRoom"] = *request.AllowCreateRoom
 	}
+	if request.MessageLifeTimeDays != nil {
+		bodies["messageLifeTimeDays"] = *request.MessageLifeTimeDays
+	}
 	if request.PostMessageScript != nil {
 		bodies["postMessageScript"] = request.PostMessageScript.ToDict()
 	}
@@ -446,6 +449,9 @@ func (p Gs2ChatWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.AllowCreateRoom != nil {
 		bodies["allowCreateRoom"] = *request.AllowCreateRoom
+	}
+	if request.MessageLifeTimeDays != nil {
+		bodies["messageLifeTimeDays"] = *request.MessageLifeTimeDays
 	}
 	if request.PostMessageScript != nil {
 		bodies["postMessageScript"] = request.PostMessageScript.ToDict()
@@ -2182,6 +2188,222 @@ func (p Gs2ChatWebSocketClient) DescribeMessagesByUserId(
 ) (*DescribeMessagesByUserIdResult, error) {
 	callback := make(chan DescribeMessagesByUserIdAsyncResult, 1)
 	go p.DescribeMessagesByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ChatWebSocketClient) describeLatestMessagesAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeLatestMessagesAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeLatestMessagesAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeLatestMessagesResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeLatestMessagesAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+			}
+		}
+	}
+	callback <- DescribeLatestMessagesAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ChatWebSocketClient) DescribeLatestMessagesAsync(
+	request *DescribeLatestMessagesRequest,
+	callback chan<- DescribeLatestMessagesAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "chat",
+			"component":   "message",
+			"function":    "describeLatestMessages",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.RoomName != nil && *request.RoomName != "" {
+		bodies["roomName"] = *request.RoomName
+	}
+	if request.Password != nil && *request.Password != "" {
+		bodies["password"] = *request.Password
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+
+	go p.describeLatestMessagesAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ChatWebSocketClient) DescribeLatestMessages(
+	request *DescribeLatestMessagesRequest,
+) (*DescribeLatestMessagesResult, error) {
+	callback := make(chan DescribeLatestMessagesAsyncResult, 1)
+	go p.DescribeLatestMessagesAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ChatWebSocketClient) describeLatestMessagesByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeLatestMessagesByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeLatestMessagesByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeLatestMessagesByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeLatestMessagesByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+		gs2err, ok := asyncResult.Err.(core.Gs2Exception)
+		if ok {
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.allowUserIds.notInclude" {
+				asyncResult.Err = gs2err.SetClientError(NoAccessPrivileges{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.require" {
+				asyncResult.Err = gs2err.SetClientError(PasswordRequired{})
+			}
+			if len(gs2err.RequestErrors()) > 0 && gs2err.RequestErrors()[0].Code != nil && *gs2err.RequestErrors()[0].Code == "room.password.invalid" {
+				asyncResult.Err = gs2err.SetClientError(PasswordIncorrect{})
+			}
+		}
+	}
+	callback <- DescribeLatestMessagesByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ChatWebSocketClient) DescribeLatestMessagesByUserIdAsync(
+	request *DescribeLatestMessagesByUserIdRequest,
+	callback chan<- DescribeLatestMessagesByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "chat",
+			"component":   "message",
+			"function":    "describeLatestMessagesByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.RoomName != nil && *request.RoomName != "" {
+		bodies["roomName"] = *request.RoomName
+	}
+	if request.Password != nil && *request.Password != "" {
+		bodies["password"] = *request.Password
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Limit != nil {
+		bodies["limit"] = *request.Limit
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.describeLatestMessagesByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ChatWebSocketClient) DescribeLatestMessagesByUserId(
+	request *DescribeLatestMessagesByUserIdRequest,
+) (*DescribeLatestMessagesByUserIdResult, error) {
+	callback := make(chan DescribeLatestMessagesByUserIdAsyncResult, 1)
+	go p.DescribeLatestMessagesByUserIdAsync(
 		request,
 		callback,
 	)

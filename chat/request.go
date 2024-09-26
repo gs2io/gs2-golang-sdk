@@ -117,6 +117,7 @@ type CreateNamespaceRequest struct {
 	Name                  *string              `json:"name"`
 	Description           *string              `json:"description"`
 	AllowCreateRoom       *bool                `json:"allowCreateRoom"`
+	MessageLifeTimeDays   *int32               `json:"messageLifeTimeDays"`
 	PostMessageScript     *ScriptSetting       `json:"postMessageScript"`
 	CreateRoomScript      *ScriptSetting       `json:"createRoomScript"`
 	DeleteRoomScript      *ScriptSetting       `json:"deleteRoomScript"`
@@ -197,6 +198,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["allowCreateRoom"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AllowCreateRoom)
 		}
+		if v, ok := d["messageLifeTimeDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MessageLifeTimeDays)
+		}
 		if v, ok := d["postMessageScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.PostMessageScript)
 		}
@@ -236,6 +240,7 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 		Name:                  core.CastString(data["name"]),
 		Description:           core.CastString(data["description"]),
 		AllowCreateRoom:       core.CastBool(data["allowCreateRoom"]),
+		MessageLifeTimeDays:   core.CastInt32(data["messageLifeTimeDays"]),
 		PostMessageScript:     NewScriptSettingFromDict(core.CastMap(data["postMessageScript"])).Pointer(),
 		CreateRoomScript:      NewScriptSettingFromDict(core.CastMap(data["createRoomScript"])).Pointer(),
 		DeleteRoomScript:      NewScriptSettingFromDict(core.CastMap(data["deleteRoomScript"])).Pointer(),
@@ -248,9 +253,10 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 
 func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"name":            p.Name,
-		"description":     p.Description,
-		"allowCreateRoom": p.AllowCreateRoom,
+		"name":                p.Name,
+		"description":         p.Description,
+		"allowCreateRoom":     p.AllowCreateRoom,
+		"messageLifeTimeDays": p.MessageLifeTimeDays,
 		"postMessageScript": func() map[string]interface{} {
 			if p.PostMessageScript == nil {
 				return nil
@@ -469,6 +475,7 @@ type UpdateNamespaceRequest struct {
 	NamespaceName         *string              `json:"namespaceName"`
 	Description           *string              `json:"description"`
 	AllowCreateRoom       *bool                `json:"allowCreateRoom"`
+	MessageLifeTimeDays   *int32               `json:"messageLifeTimeDays"`
 	PostMessageScript     *ScriptSetting       `json:"postMessageScript"`
 	CreateRoomScript      *ScriptSetting       `json:"createRoomScript"`
 	DeleteRoomScript      *ScriptSetting       `json:"deleteRoomScript"`
@@ -549,6 +556,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["allowCreateRoom"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AllowCreateRoom)
 		}
+		if v, ok := d["messageLifeTimeDays"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MessageLifeTimeDays)
+		}
 		if v, ok := d["postMessageScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.PostMessageScript)
 		}
@@ -588,6 +598,7 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 		NamespaceName:         core.CastString(data["namespaceName"]),
 		Description:           core.CastString(data["description"]),
 		AllowCreateRoom:       core.CastBool(data["allowCreateRoom"]),
+		MessageLifeTimeDays:   core.CastInt32(data["messageLifeTimeDays"]),
 		PostMessageScript:     NewScriptSettingFromDict(core.CastMap(data["postMessageScript"])).Pointer(),
 		CreateRoomScript:      NewScriptSettingFromDict(core.CastMap(data["createRoomScript"])).Pointer(),
 		DeleteRoomScript:      NewScriptSettingFromDict(core.CastMap(data["deleteRoomScript"])).Pointer(),
@@ -600,9 +611,10 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 
 func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"description":     p.Description,
-		"allowCreateRoom": p.AllowCreateRoom,
+		"namespaceName":       p.NamespaceName,
+		"description":         p.Description,
+		"allowCreateRoom":     p.AllowCreateRoom,
+		"messageLifeTimeDays": p.MessageLifeTimeDays,
 		"postMessageScript": func() map[string]interface{} {
 			if p.PostMessageScript == nil {
 				return nil
@@ -3333,6 +3345,362 @@ func (p DescribeMessagesByUserIdRequest) ToDict() map[string]interface{} {
 }
 
 func (p DescribeMessagesByUserIdRequest) Pointer() *DescribeMessagesByUserIdRequest {
+	return &p
+}
+
+type DescribeLatestMessagesRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	RoomName        *string `json:"roomName"`
+	Password        *string `json:"password"`
+	AccessToken     *string `json:"accessToken"`
+	Limit           *int32  `json:"limit"`
+}
+
+func (p *DescribeLatestMessagesRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeLatestMessagesRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeLatestMessagesRequest{}
+	} else {
+		*p = DescribeLatestMessagesRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["roomName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RoomName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RoomName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RoomName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RoomName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RoomName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RoomName)
+				}
+			}
+		}
+		if v, ok := d["password"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Password = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Password = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Password = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Password)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+	}
+	return nil
+}
+
+func NewDescribeLatestMessagesRequestFromJson(data string) (DescribeLatestMessagesRequest, error) {
+	req := DescribeLatestMessagesRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeLatestMessagesRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeLatestMessagesRequestFromDict(data map[string]interface{}) DescribeLatestMessagesRequest {
+	return DescribeLatestMessagesRequest{
+		NamespaceName: core.CastString(data["namespaceName"]),
+		RoomName:      core.CastString(data["roomName"]),
+		Password:      core.CastString(data["password"]),
+		AccessToken:   core.CastString(data["accessToken"]),
+		Limit:         core.CastInt32(data["limit"]),
+	}
+}
+
+func (p DescribeLatestMessagesRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"roomName":      p.RoomName,
+		"password":      p.Password,
+		"accessToken":   p.AccessToken,
+		"limit":         p.Limit,
+	}
+}
+
+func (p DescribeLatestMessagesRequest) Pointer() *DescribeLatestMessagesRequest {
+	return &p
+}
+
+type DescribeLatestMessagesByUserIdRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	RoomName        *string `json:"roomName"`
+	Password        *string `json:"password"`
+	UserId          *string `json:"userId"`
+	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+}
+
+func (p *DescribeLatestMessagesByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeLatestMessagesByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeLatestMessagesByUserIdRequest{}
+	} else {
+		*p = DescribeLatestMessagesByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["roomName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RoomName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RoomName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RoomName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RoomName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RoomName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RoomName)
+				}
+			}
+		}
+		if v, ok := d["password"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Password = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Password = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Password = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Password = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Password)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["limit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Limit)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeLatestMessagesByUserIdRequestFromJson(data string) (DescribeLatestMessagesByUserIdRequest, error) {
+	req := DescribeLatestMessagesByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeLatestMessagesByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeLatestMessagesByUserIdRequestFromDict(data map[string]interface{}) DescribeLatestMessagesByUserIdRequest {
+	return DescribeLatestMessagesByUserIdRequest{
+		NamespaceName:   core.CastString(data["namespaceName"]),
+		RoomName:        core.CastString(data["roomName"]),
+		Password:        core.CastString(data["password"]),
+		UserId:          core.CastString(data["userId"]),
+		Limit:           core.CastInt32(data["limit"]),
+		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+	}
+}
+
+func (p DescribeLatestMessagesByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"roomName":        p.RoomName,
+		"password":        p.Password,
+		"userId":          p.UserId,
+		"limit":           p.Limit,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p DescribeLatestMessagesByUserIdRequest) Pointer() *DescribeLatestMessagesByUserIdRequest {
 	return &p
 }
 

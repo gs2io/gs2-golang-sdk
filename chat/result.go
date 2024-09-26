@@ -787,6 +787,72 @@ func (p DescribeMessagesByUserIdResult) Pointer() *DescribeMessagesByUserIdResul
 	return &p
 }
 
+type DescribeLatestMessagesResult struct {
+	Items []Message `json:"items"`
+}
+
+type DescribeLatestMessagesAsyncResult struct {
+	result *DescribeLatestMessagesResult
+	err    error
+}
+
+func NewDescribeLatestMessagesResultFromJson(data string) DescribeLatestMessagesResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeLatestMessagesResultFromDict(dict)
+}
+
+func NewDescribeLatestMessagesResultFromDict(data map[string]interface{}) DescribeLatestMessagesResult {
+	return DescribeLatestMessagesResult{
+		Items: CastMessages(core.CastArray(data["items"])),
+	}
+}
+
+func (p DescribeLatestMessagesResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastMessagesFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p DescribeLatestMessagesResult) Pointer() *DescribeLatestMessagesResult {
+	return &p
+}
+
+type DescribeLatestMessagesByUserIdResult struct {
+	Items []Message `json:"items"`
+}
+
+type DescribeLatestMessagesByUserIdAsyncResult struct {
+	result *DescribeLatestMessagesByUserIdResult
+	err    error
+}
+
+func NewDescribeLatestMessagesByUserIdResultFromJson(data string) DescribeLatestMessagesByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeLatestMessagesByUserIdResultFromDict(dict)
+}
+
+func NewDescribeLatestMessagesByUserIdResultFromDict(data map[string]interface{}) DescribeLatestMessagesByUserIdResult {
+	return DescribeLatestMessagesByUserIdResult{
+		Items: CastMessages(core.CastArray(data["items"])),
+	}
+}
+
+func (p DescribeLatestMessagesByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": CastMessagesFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p DescribeLatestMessagesByUserIdResult) Pointer() *DescribeLatestMessagesByUserIdResult {
+	return &p
+}
+
 type PostResult struct {
 	Item *Message `json:"item"`
 }

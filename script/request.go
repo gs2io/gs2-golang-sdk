@@ -725,13 +725,14 @@ func (p DescribeScriptsRequest) Pointer() *DescribeScriptsRequest {
 }
 
 type CreateScriptRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	Name            *string `json:"name"`
-	Description     *string `json:"description"`
-	Script          *string `json:"script"`
+	SourceRequestId             *string `json:"sourceRequestId"`
+	RequestId                   *string `json:"requestId"`
+	ContextStack                *string `json:"contextStack"`
+	NamespaceName               *string `json:"namespaceName"`
+	Name                        *string `json:"name"`
+	Description                 *string `json:"description"`
+	Script                      *string `json:"script"`
+	DisableStringNumberToNumber *bool   `json:"disableStringNumberToNumber"`
 }
 
 func (p *CreateScriptRequest) UnmarshalJSON(data []byte) error {
@@ -848,6 +849,9 @@ func (p *CreateScriptRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["disableStringNumberToNumber"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DisableStringNumberToNumber)
+		}
 	}
 	return nil
 }
@@ -863,19 +867,21 @@ func NewCreateScriptRequestFromJson(data string) (CreateScriptRequest, error) {
 
 func NewCreateScriptRequestFromDict(data map[string]interface{}) CreateScriptRequest {
 	return CreateScriptRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Name:          core.CastString(data["name"]),
-		Description:   core.CastString(data["description"]),
-		Script:        core.CastString(data["script"]),
+		NamespaceName:               core.CastString(data["namespaceName"]),
+		Name:                        core.CastString(data["name"]),
+		Description:                 core.CastString(data["description"]),
+		Script:                      core.CastString(data["script"]),
+		DisableStringNumberToNumber: core.CastBool(data["disableStringNumberToNumber"]),
 	}
 }
 
 func (p CreateScriptRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"name":          p.Name,
-		"description":   p.Description,
-		"script":        p.Script,
+		"namespaceName":               p.NamespaceName,
+		"name":                        p.Name,
+		"description":                 p.Description,
+		"script":                      p.Script,
+		"disableStringNumberToNumber": p.DisableStringNumberToNumber,
 	}
 }
 
@@ -884,13 +890,14 @@ func (p CreateScriptRequest) Pointer() *CreateScriptRequest {
 }
 
 type CreateScriptFromGitHubRequest struct {
-	SourceRequestId *string                `json:"sourceRequestId"`
-	RequestId       *string                `json:"requestId"`
-	ContextStack    *string                `json:"contextStack"`
-	NamespaceName   *string                `json:"namespaceName"`
-	Name            *string                `json:"name"`
-	Description     *string                `json:"description"`
-	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	SourceRequestId             *string                `json:"sourceRequestId"`
+	RequestId                   *string                `json:"requestId"`
+	ContextStack                *string                `json:"contextStack"`
+	NamespaceName               *string                `json:"namespaceName"`
+	Name                        *string                `json:"name"`
+	Description                 *string                `json:"description"`
+	CheckoutSetting             *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DisableStringNumberToNumber *bool                  `json:"disableStringNumberToNumber"`
 }
 
 func (p *CreateScriptFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -987,6 +994,9 @@ func (p *CreateScriptFromGitHubRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["checkoutSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CheckoutSetting)
 		}
+		if v, ok := d["disableStringNumberToNumber"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DisableStringNumberToNumber)
+		}
 	}
 	return nil
 }
@@ -1002,10 +1012,11 @@ func NewCreateScriptFromGitHubRequestFromJson(data string) (CreateScriptFromGitH
 
 func NewCreateScriptFromGitHubRequestFromDict(data map[string]interface{}) CreateScriptFromGitHubRequest {
 	return CreateScriptFromGitHubRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		Name:            core.CastString(data["name"]),
-		Description:     core.CastString(data["description"]),
-		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+		NamespaceName:               core.CastString(data["namespaceName"]),
+		Name:                        core.CastString(data["name"]),
+		Description:                 core.CastString(data["description"]),
+		CheckoutSetting:             NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+		DisableStringNumberToNumber: core.CastBool(data["disableStringNumberToNumber"]),
 	}
 }
 
@@ -1020,6 +1031,7 @@ func (p CreateScriptFromGitHubRequest) ToDict() map[string]interface{} {
 			}
 			return p.CheckoutSetting.ToDict()
 		}(),
+		"disableStringNumberToNumber": p.DisableStringNumberToNumber,
 	}
 }
 
@@ -1135,13 +1147,14 @@ func (p GetScriptRequest) Pointer() *GetScriptRequest {
 }
 
 type UpdateScriptRequest struct {
-	SourceRequestId *string `json:"sourceRequestId"`
-	RequestId       *string `json:"requestId"`
-	ContextStack    *string `json:"contextStack"`
-	NamespaceName   *string `json:"namespaceName"`
-	ScriptName      *string `json:"scriptName"`
-	Description     *string `json:"description"`
-	Script          *string `json:"script"`
+	SourceRequestId             *string `json:"sourceRequestId"`
+	RequestId                   *string `json:"requestId"`
+	ContextStack                *string `json:"contextStack"`
+	NamespaceName               *string `json:"namespaceName"`
+	ScriptName                  *string `json:"scriptName"`
+	Description                 *string `json:"description"`
+	Script                      *string `json:"script"`
+	DisableStringNumberToNumber *bool   `json:"disableStringNumberToNumber"`
 }
 
 func (p *UpdateScriptRequest) UnmarshalJSON(data []byte) error {
@@ -1258,6 +1271,9 @@ func (p *UpdateScriptRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["disableStringNumberToNumber"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DisableStringNumberToNumber)
+		}
 	}
 	return nil
 }
@@ -1273,19 +1289,21 @@ func NewUpdateScriptRequestFromJson(data string) (UpdateScriptRequest, error) {
 
 func NewUpdateScriptRequestFromDict(data map[string]interface{}) UpdateScriptRequest {
 	return UpdateScriptRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ScriptName:    core.CastString(data["scriptName"]),
-		Description:   core.CastString(data["description"]),
-		Script:        core.CastString(data["script"]),
+		NamespaceName:               core.CastString(data["namespaceName"]),
+		ScriptName:                  core.CastString(data["scriptName"]),
+		Description:                 core.CastString(data["description"]),
+		Script:                      core.CastString(data["script"]),
+		DisableStringNumberToNumber: core.CastBool(data["disableStringNumberToNumber"]),
 	}
 }
 
 func (p UpdateScriptRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"scriptName":    p.ScriptName,
-		"description":   p.Description,
-		"script":        p.Script,
+		"namespaceName":               p.NamespaceName,
+		"scriptName":                  p.ScriptName,
+		"description":                 p.Description,
+		"script":                      p.Script,
+		"disableStringNumberToNumber": p.DisableStringNumberToNumber,
 	}
 }
 
@@ -1294,13 +1312,14 @@ func (p UpdateScriptRequest) Pointer() *UpdateScriptRequest {
 }
 
 type UpdateScriptFromGitHubRequest struct {
-	SourceRequestId *string                `json:"sourceRequestId"`
-	RequestId       *string                `json:"requestId"`
-	ContextStack    *string                `json:"contextStack"`
-	NamespaceName   *string                `json:"namespaceName"`
-	ScriptName      *string                `json:"scriptName"`
-	Description     *string                `json:"description"`
-	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	SourceRequestId             *string                `json:"sourceRequestId"`
+	RequestId                   *string                `json:"requestId"`
+	ContextStack                *string                `json:"contextStack"`
+	NamespaceName               *string                `json:"namespaceName"`
+	ScriptName                  *string                `json:"scriptName"`
+	Description                 *string                `json:"description"`
+	CheckoutSetting             *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DisableStringNumberToNumber *bool                  `json:"disableStringNumberToNumber"`
 }
 
 func (p *UpdateScriptFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -1397,6 +1416,9 @@ func (p *UpdateScriptFromGitHubRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["checkoutSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CheckoutSetting)
 		}
+		if v, ok := d["disableStringNumberToNumber"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DisableStringNumberToNumber)
+		}
 	}
 	return nil
 }
@@ -1412,10 +1434,11 @@ func NewUpdateScriptFromGitHubRequestFromJson(data string) (UpdateScriptFromGitH
 
 func NewUpdateScriptFromGitHubRequestFromDict(data map[string]interface{}) UpdateScriptFromGitHubRequest {
 	return UpdateScriptFromGitHubRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		ScriptName:      core.CastString(data["scriptName"]),
-		Description:     core.CastString(data["description"]),
-		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+		NamespaceName:               core.CastString(data["namespaceName"]),
+		ScriptName:                  core.CastString(data["scriptName"]),
+		Description:                 core.CastString(data["description"]),
+		CheckoutSetting:             NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+		DisableStringNumberToNumber: core.CastBool(data["disableStringNumberToNumber"]),
 	}
 }
 
@@ -1430,6 +1453,7 @@ func (p UpdateScriptFromGitHubRequest) ToDict() map[string]interface{} {
 			}
 			return p.CheckoutSetting.ToDict()
 		}(),
+		"disableStringNumberToNumber": p.DisableStringNumberToNumber,
 	}
 }
 
@@ -1715,12 +1739,13 @@ func (p InvokeScriptRequest) Pointer() *InvokeScriptRequest {
 }
 
 type DebugInvokeRequest struct {
-	SourceRequestId *string       `json:"sourceRequestId"`
-	RequestId       *string       `json:"requestId"`
-	ContextStack    *string       `json:"contextStack"`
-	Script          *string       `json:"script"`
-	Args            *string       `json:"args"`
-	RandomStatus    *RandomStatus `json:"randomStatus"`
+	SourceRequestId             *string       `json:"sourceRequestId"`
+	RequestId                   *string       `json:"requestId"`
+	ContextStack                *string       `json:"contextStack"`
+	Script                      *string       `json:"script"`
+	Args                        *string       `json:"args"`
+	RandomStatus                *RandomStatus `json:"randomStatus"`
+	DisableStringNumberToNumber *bool         `json:"disableStringNumberToNumber"`
 }
 
 func (p *DebugInvokeRequest) UnmarshalJSON(data []byte) error {
@@ -1794,6 +1819,9 @@ func (p *DebugInvokeRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["randomStatus"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RandomStatus)
 		}
+		if v, ok := d["disableStringNumberToNumber"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.DisableStringNumberToNumber)
+		}
 	}
 	return nil
 }
@@ -1809,9 +1837,10 @@ func NewDebugInvokeRequestFromJson(data string) (DebugInvokeRequest, error) {
 
 func NewDebugInvokeRequestFromDict(data map[string]interface{}) DebugInvokeRequest {
 	return DebugInvokeRequest{
-		Script:       core.CastString(data["script"]),
-		Args:         core.CastString(data["args"]),
-		RandomStatus: NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
+		Script:                      core.CastString(data["script"]),
+		Args:                        core.CastString(data["args"]),
+		RandomStatus:                NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
+		DisableStringNumberToNumber: core.CastBool(data["disableStringNumberToNumber"]),
 	}
 }
 
@@ -1825,6 +1854,7 @@ func (p DebugInvokeRequest) ToDict() map[string]interface{} {
 			}
 			return p.RandomStatus.ToDict()
 		}(),
+		"disableStringNumberToNumber": p.DisableStringNumberToNumber,
 	}
 }
 
