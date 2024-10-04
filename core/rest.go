@@ -199,15 +199,23 @@ type NetworkJob struct {
 	Callback     chan<- AsyncResult
 }
 
+type IConnection interface {
+	Client() *http.Client
+}
+
 type Connection struct {
 	client *http.Client
+}
+
+func (p Connection) Client() *http.Client {
+	return p.client
 }
 
 type Gs2RestSession struct {
 	Credential   IGs2Credential
 	Region       Region
 	projectToken ProjectToken
-	connection   *Connection
+	connection   IConnection
 }
 
 func (p Gs2RestSession) EndpointHost(service string) Url {
@@ -287,7 +295,7 @@ func (p Gs2RestSession) send(job *NetworkJob) error {
 		request.Header.Add(key, value)
 	}
 
-	response, err := p.connection.client.Do(request)
+	response, err := p.connection.Client().Do(request)
 	if err != nil {
 		err := UnknownException{}
 		job.Callback <- AsyncResult{
@@ -331,14 +339,13 @@ func (p *Gs2RestSession) Send(
 	return nil
 }
 
-func (p *Gs2RestSession) connectAsync(
+func (p *Gs2RestSession) connectWithCustomConnectionAsync(
+	createConnection func() IConnection,
 	callback chan<- AsyncResult,
 	isBlocking bool,
 ) {
 	if p.connection == nil {
-		p.connection = &Connection{
-			client: new(http.Client),
-		}
+		p.connection = createConnection()
 	}
 
 	projectTokenCredential, isProjectTokenCredential := p.Credential.(ProjectTokenGs2Credential)
@@ -374,10 +381,27 @@ func connectAsyncHandler(
 	callback chan<- ConnectAsyncResult,
 	session *Gs2RestSession,
 ) {
+	connectWithCustomConnectionAsyncHandler(
+		func() IConnection {
+			return &Connection{
+				client: new(http.Client),
+			}
+		},
+		callback,
+		session,
+	)
+}
+
+func connectWithCustomConnectionAsyncHandler(
+	createConnection func() IConnection,
+	callback chan<- ConnectAsyncResult,
+	session *Gs2RestSession,
+) {
 
 	internalCallback := make(chan AsyncResult, 1)
 
-	go session.connectAsync(
+	go session.connectWithCustomConnectionAsync(
+		createConnection,
 		internalCallback,
 		true,
 	)
@@ -407,6 +431,25 @@ func connectAsyncHandler(
 	}
 }
 
+func (p *Gs2RestSession) ConnectWithCustomConnectionAsync(
+	createConnection func() IConnection,
+	callback chan<- ConnectAsyncResult,
+) {
+
+	if p.connection != nil {
+		callback <- ConnectAsyncResult{
+			err: ConnectionBroken{},
+		}
+		return
+	}
+
+	go connectWithCustomConnectionAsyncHandler(
+		createConnection,
+		callback,
+		p,
+	)
+}
+
 func (p *Gs2RestSession) ConnectAsync(
 	callback chan<- ConnectAsyncResult,
 ) {
@@ -422,6 +465,24 @@ func (p *Gs2RestSession) ConnectAsync(
 		callback,
 		p,
 	)
+}
+
+func (p *Gs2RestSession) ConnectWithCustomConnection(
+	createConnection func() IConnection,
+) error {
+
+	callback := make(chan ConnectAsyncResult, 1)
+	go p.ConnectWithCustomConnectionAsync(
+		createConnection,
+		callback,
+	)
+
+	result := <-callback
+	if result.err != nil {
+		return result.err
+	}
+
+	return nil
 }
 
 func (p *Gs2RestSession) Connect() error {
