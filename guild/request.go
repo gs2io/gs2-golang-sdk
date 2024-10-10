@@ -2605,6 +2605,7 @@ type SearchGuildsRequest struct {
 	Attributes5             []*int32  `json:"attributes5"`
 	JoinPolicies            []*string `json:"joinPolicies"`
 	IncludeFullMembersGuild *bool     `json:"includeFullMembersGuild"`
+	OrderBy                 *string   `json:"orderBy"`
 	PageToken               *string   `json:"pageToken"`
 	Limit                   *int32    `json:"limit"`
 }
@@ -2767,6 +2768,29 @@ func (p *SearchGuildsRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["includeFullMembersGuild"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.IncludeFullMembersGuild)
 		}
+		if v, ok := d["orderBy"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.OrderBy = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.OrderBy = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.OrderBy = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.OrderBy = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.OrderBy = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.OrderBy)
+				}
+			}
+		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -2819,6 +2843,7 @@ func NewSearchGuildsRequestFromDict(data map[string]interface{}) SearchGuildsReq
 		Attributes5:             core.CastInt32s(core.CastArray(data["attributes5"])),
 		JoinPolicies:            core.CastStrings(core.CastArray(data["joinPolicies"])),
 		IncludeFullMembersGuild: core.CastBool(data["includeFullMembersGuild"]),
+		OrderBy:                 core.CastString(data["orderBy"]),
 		PageToken:               core.CastString(data["pageToken"]),
 		Limit:                   core.CastInt32(data["limit"]),
 	}
@@ -2849,6 +2874,7 @@ func (p SearchGuildsRequest) ToDict() map[string]interface{} {
 			p.JoinPolicies,
 		),
 		"includeFullMembersGuild": p.IncludeFullMembersGuild,
+		"orderBy":                 p.OrderBy,
 		"pageToken":               p.PageToken,
 		"limit":                   p.Limit,
 	}
@@ -2874,6 +2900,7 @@ type SearchGuildsByUserIdRequest struct {
 	Attributes5             []*int32  `json:"attributes5"`
 	JoinPolicies            []*string `json:"joinPolicies"`
 	IncludeFullMembersGuild *bool     `json:"includeFullMembersGuild"`
+	OrderBy                 *string   `json:"orderBy"`
 	PageToken               *string   `json:"pageToken"`
 	Limit                   *int32    `json:"limit"`
 	TimeOffsetToken         *string   `json:"timeOffsetToken"`
@@ -3037,6 +3064,29 @@ func (p *SearchGuildsByUserIdRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["includeFullMembersGuild"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.IncludeFullMembersGuild)
 		}
+		if v, ok := d["orderBy"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.OrderBy = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.OrderBy = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.OrderBy = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.OrderBy = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.OrderBy = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.OrderBy)
+				}
+			}
+		}
 		if v, ok := d["pageToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -3112,6 +3162,7 @@ func NewSearchGuildsByUserIdRequestFromDict(data map[string]interface{}) SearchG
 		Attributes5:             core.CastInt32s(core.CastArray(data["attributes5"])),
 		JoinPolicies:            core.CastStrings(core.CastArray(data["joinPolicies"])),
 		IncludeFullMembersGuild: core.CastBool(data["includeFullMembersGuild"]),
+		OrderBy:                 core.CastString(data["orderBy"]),
 		PageToken:               core.CastString(data["pageToken"]),
 		Limit:                   core.CastInt32(data["limit"]),
 		TimeOffsetToken:         core.CastString(data["timeOffsetToken"]),
@@ -3143,6 +3194,7 @@ func (p SearchGuildsByUserIdRequest) ToDict() map[string]interface{} {
 			p.JoinPolicies,
 		),
 		"includeFullMembersGuild": p.IncludeFullMembersGuild,
+		"orderBy":                 p.OrderBy,
 		"pageToken":               p.PageToken,
 		"limit":                   p.Limit,
 		"timeOffsetToken":         p.TimeOffsetToken,

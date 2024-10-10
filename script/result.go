@@ -606,3 +606,64 @@ func (p DebugInvokeResult) ToDict() map[string]interface{} {
 func (p DebugInvokeResult) Pointer() *DebugInvokeResult {
 	return &p
 }
+
+type InvokeByStampSheetResult struct {
+	Code         *int32        `json:"code"`
+	Result       *string       `json:"result"`
+	Transaction  *Transaction  `json:"transaction"`
+	RandomStatus *RandomStatus `json:"randomStatus"`
+	ExecuteTime  *int32        `json:"executeTime"`
+	Charged      *int32        `json:"charged"`
+	Output       []*string     `json:"output"`
+}
+
+type InvokeByStampSheetAsyncResult struct {
+	result *InvokeByStampSheetResult
+	err    error
+}
+
+func NewInvokeByStampSheetResultFromJson(data string) InvokeByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewInvokeByStampSheetResultFromDict(dict)
+}
+
+func NewInvokeByStampSheetResultFromDict(data map[string]interface{}) InvokeByStampSheetResult {
+	return InvokeByStampSheetResult{
+		Code:         core.CastInt32(data["code"]),
+		Result:       core.CastString(data["result"]),
+		Transaction:  NewTransactionFromDict(core.CastMap(data["transaction"])).Pointer(),
+		RandomStatus: NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
+		ExecuteTime:  core.CastInt32(data["executeTime"]),
+		Charged:      core.CastInt32(data["charged"]),
+		Output:       core.CastStrings(core.CastArray(data["output"])),
+	}
+}
+
+func (p InvokeByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"code":   p.Code,
+		"result": p.Result,
+		"transaction": func() map[string]interface{} {
+			if p.Transaction == nil {
+				return nil
+			}
+			return p.Transaction.ToDict()
+		}(),
+		"randomStatus": func() map[string]interface{} {
+			if p.RandomStatus == nil {
+				return nil
+			}
+			return p.RandomStatus.ToDict()
+		}(),
+		"executeTime": p.ExecuteTime,
+		"charged":     p.Charged,
+		"output": core.CastStringsFromDict(
+			p.Output,
+		),
+	}
+}
+
+func (p InvokeByStampSheetResult) Pointer() *InvokeByStampSheetResult {
+	return &p
+}

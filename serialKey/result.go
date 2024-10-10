@@ -608,6 +608,42 @@ func (p DownloadSerialCodesResult) Pointer() *DownloadSerialCodesResult {
 	return &p
 }
 
+type IssueOnceResult struct {
+	Item *SerialKey `json:"item"`
+}
+
+type IssueOnceAsyncResult struct {
+	result *IssueOnceResult
+	err    error
+}
+
+func NewIssueOnceResultFromJson(data string) IssueOnceResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIssueOnceResultFromDict(dict)
+}
+
+func NewIssueOnceResultFromDict(data map[string]interface{}) IssueOnceResult {
+	return IssueOnceResult{
+		Item: NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p IssueOnceResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p IssueOnceResult) Pointer() *IssueOnceResult {
+	return &p
+}
+
 type GetSerialKeyResult struct {
 	Item          *SerialKey     `json:"item"`
 	CampaignModel *CampaignModel `json:"campaignModel"`
@@ -649,6 +685,78 @@ func (p GetSerialKeyResult) ToDict() map[string]interface{} {
 }
 
 func (p GetSerialKeyResult) Pointer() *GetSerialKeyResult {
+	return &p
+}
+
+type VerifyCodeResult struct {
+	Item *SerialKey `json:"item"`
+}
+
+type VerifyCodeAsyncResult struct {
+	result *VerifyCodeResult
+	err    error
+}
+
+func NewVerifyCodeResultFromJson(data string) VerifyCodeResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCodeResultFromDict(dict)
+}
+
+func NewVerifyCodeResultFromDict(data map[string]interface{}) VerifyCodeResult {
+	return VerifyCodeResult{
+		Item: NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p VerifyCodeResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyCodeResult) Pointer() *VerifyCodeResult {
+	return &p
+}
+
+type VerifyCodeByUserIdResult struct {
+	Item *SerialKey `json:"item"`
+}
+
+type VerifyCodeByUserIdAsyncResult struct {
+	result *VerifyCodeByUserIdResult
+	err    error
+}
+
+func NewVerifyCodeByUserIdResultFromJson(data string) VerifyCodeByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyCodeByUserIdResultFromDict(dict)
+}
+
+func NewVerifyCodeByUserIdResultFromDict(data map[string]interface{}) VerifyCodeByUserIdResult {
+	return VerifyCodeByUserIdResult{
+		Item: NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
+	}
+}
+
+func (p VerifyCodeByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyCodeByUserIdResult) Pointer() *VerifyCodeByUserIdResult {
 	return &p
 }
 
@@ -872,6 +980,53 @@ func (p RevertUseByStampSheetResult) ToDict() map[string]interface{} {
 }
 
 func (p RevertUseByStampSheetResult) Pointer() *RevertUseByStampSheetResult {
+	return &p
+}
+
+type VerifyByStampTaskResult struct {
+	Item            *SerialKey     `json:"item"`
+	CampaignModel   *CampaignModel `json:"campaignModel"`
+	NewContextStack *string        `json:"newContextStack"`
+}
+
+type VerifyByStampTaskAsyncResult struct {
+	result *VerifyByStampTaskResult
+	err    error
+}
+
+func NewVerifyByStampTaskResultFromJson(data string) VerifyByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyByStampTaskResultFromDict(data map[string]interface{}) VerifyByStampTaskResult {
+	return VerifyByStampTaskResult{
+		Item:            NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer(),
+		CampaignModel:   NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer(),
+		NewContextStack: core.CastString(data["newContextStack"]),
+	}
+}
+
+func (p VerifyByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"campaignModel": func() map[string]interface{} {
+			if p.CampaignModel == nil {
+				return nil
+			}
+			return p.CampaignModel.ToDict()
+		}(),
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyByStampTaskResult) Pointer() *VerifyByStampTaskResult {
 	return &p
 }
 

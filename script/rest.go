@@ -1358,6 +1358,9 @@ func (p Gs2ScriptRestClient) InvokeScriptAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
@@ -1476,6 +1479,97 @@ func (p Gs2ScriptRestClient) DebugInvoke(
 ) (*DebugInvokeResult, error) {
 	callback := make(chan DebugInvokeAsyncResult, 1)
 	go p.DebugInvokeAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func invokeByStampSheetAsyncHandler(
+	client Gs2ScriptRestClient,
+	job *core.NetworkJob,
+	callback chan<- InvokeByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- InvokeByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result InvokeByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- InvokeByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- InvokeByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- InvokeByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ScriptRestClient) InvokeByStampSheetAsync(
+	request *InvokeByStampSheetRequest,
+	callback chan<- InvokeByStampSheetAsyncResult,
+) {
+	path := "/stamp/script/invoke"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go invokeByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("script").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ScriptRestClient) InvokeByStampSheet(
+	request *InvokeByStampSheetRequest,
+) (*InvokeByStampSheetResult, error) {
+	callback := make(chan InvokeByStampSheetAsyncResult, 1)
+	go p.InvokeByStampSheetAsync(
 		request,
 		callback,
 	)

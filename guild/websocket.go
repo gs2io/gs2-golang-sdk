@@ -1940,6 +1940,9 @@ func (p Gs2GuildWebSocketClient) SearchGuildsAsync(
 	if request.IncludeFullMembersGuild != nil {
 		bodies["includeFullMembersGuild"] = *request.IncludeFullMembersGuild
 	}
+	if request.OrderBy != nil && *request.OrderBy != "" {
+		bodies["orderBy"] = *request.OrderBy
+	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken
 	}
@@ -2086,6 +2089,9 @@ func (p Gs2GuildWebSocketClient) SearchGuildsByUserIdAsync(
 	}
 	if request.IncludeFullMembersGuild != nil {
 		bodies["includeFullMembersGuild"] = *request.IncludeFullMembersGuild
+	}
+	if request.OrderBy != nil && *request.OrderBy != "" {
+		bodies["orderBy"] = *request.OrderBy
 	}
 	if request.PageToken != nil && *request.PageToken != "" {
 		bodies["pageToken"] = *request.PageToken

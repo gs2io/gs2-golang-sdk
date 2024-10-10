@@ -1236,6 +1236,9 @@ func (p Gs2ScriptWebSocketClient) InvokeScriptAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
 
 	go p.invokeScriptAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1341,6 +1344,90 @@ func (p Gs2ScriptWebSocketClient) DebugInvoke(
 ) (*DebugInvokeResult, error) {
 	callback := make(chan DebugInvokeAsyncResult, 1)
 	go p.DebugInvokeAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2ScriptWebSocketClient) invokeByStampSheetAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- InvokeByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- InvokeByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result InvokeByStampSheetResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- InvokeByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- InvokeByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ScriptWebSocketClient) InvokeByStampSheetAsync(
+	request *InvokeByStampSheetRequest,
+	callback chan<- InvokeByStampSheetAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "script",
+			"component":   "script",
+			"function":    "invokeByStampSheet",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.invokeByStampSheetAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ScriptWebSocketClient) InvokeByStampSheet(
+	request *InvokeByStampSheetRequest,
+) (*InvokeByStampSheetResult, error) {
+	callback := make(chan InvokeByStampSheetAsyncResult, 1)
+	go p.InvokeByStampSheetAsync(
 		request,
 		callback,
 	)

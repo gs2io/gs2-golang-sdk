@@ -1569,14 +1569,15 @@ func (p DeleteScriptRequest) Pointer() *DeleteScriptRequest {
 }
 
 type InvokeScriptRequest struct {
-	SourceRequestId *string       `json:"sourceRequestId"`
-	RequestId       *string       `json:"requestId"`
-	ContextStack    *string       `json:"contextStack"`
-	ScriptId        *string       `json:"scriptId"`
-	UserId          *string       `json:"userId"`
-	Args            *string       `json:"args"`
-	RandomStatus    *RandomStatus `json:"randomStatus"`
-	TimeOffsetToken *string       `json:"timeOffsetToken"`
+	SourceRequestId    *string       `json:"sourceRequestId"`
+	RequestId          *string       `json:"requestId"`
+	ContextStack       *string       `json:"contextStack"`
+	DuplicationAvoider *string       `json:"duplicationAvoider"`
+	ScriptId           *string       `json:"scriptId"`
+	UserId             *string       `json:"userId"`
+	Args               *string       `json:"args"`
+	RandomStatus       *RandomStatus `json:"randomStatus"`
+	TimeOffsetToken    *string       `json:"timeOffsetToken"`
 }
 
 func (p *InvokeScriptRequest) UnmarshalJSON(data []byte) error {
@@ -1859,5 +1860,112 @@ func (p DebugInvokeRequest) ToDict() map[string]interface{} {
 }
 
 func (p DebugInvokeRequest) Pointer() *DebugInvokeRequest {
+	return &p
+}
+
+type InvokeByStampSheetRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampSheet      *string `json:"stampSheet"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *InvokeByStampSheetRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = InvokeByStampSheetRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = InvokeByStampSheetRequest{}
+	} else {
+		*p = InvokeByStampSheetRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampSheet"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampSheet = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampSheet = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampSheet = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampSheet = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampSheet = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampSheet)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewInvokeByStampSheetRequestFromJson(data string) (InvokeByStampSheetRequest, error) {
+	req := InvokeByStampSheetRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return InvokeByStampSheetRequest{}, err
+	}
+	return req, nil
+}
+
+func NewInvokeByStampSheetRequestFromDict(data map[string]interface{}) InvokeByStampSheetRequest {
+	return InvokeByStampSheetRequest{
+		StampSheet: core.CastString(data["stampSheet"]),
+		KeyId:      core.CastString(data["keyId"]),
+	}
+}
+
+func (p InvokeByStampSheetRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampSheet": p.StampSheet,
+		"keyId":      p.KeyId,
+	}
+}
+
+func (p InvokeByStampSheetRequest) Pointer() *InvokeByStampSheetRequest {
 	return &p
 }

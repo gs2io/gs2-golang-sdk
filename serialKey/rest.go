@@ -1749,6 +1749,104 @@ func (p Gs2SerialKeyRestClient) DownloadSerialCodes(
 	return asyncResult.result, asyncResult.err
 }
 
+func issueOnceAsyncHandler(
+	client Gs2SerialKeyRestClient,
+	job *core.NetworkJob,
+	callback chan<- IssueOnceAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IssueOnceAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IssueOnceResult
+	if asyncResult.Err != nil {
+		callback <- IssueOnceAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- IssueOnceAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- IssueOnceAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SerialKeyRestClient) IssueOnceAsync(
+	request *IssueOnceRequest,
+	callback chan<- IssueOnceAsyncResult,
+) {
+	path := "/{namespaceName}/campaign/{campaignModelName}/serialKey"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.CampaignModelName != nil && *request.CampaignModelName != "" {
+		path = strings.ReplaceAll(path, "{campaignModelName}", core.ToString(*request.CampaignModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{campaignModelName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Metadata != nil && *request.Metadata != "" {
+		bodies["metadata"] = *request.Metadata
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go issueOnceAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SerialKeyRestClient) IssueOnce(
+	request *IssueOnceRequest,
+) (*IssueOnceResult, error) {
+	callback := make(chan IssueOnceAsyncResult, 1)
+	go p.IssueOnceAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func getSerialKeyAsyncHandler(
 	client Gs2SerialKeyRestClient,
 	job *core.NetworkJob,
@@ -1837,6 +1935,209 @@ func (p Gs2SerialKeyRestClient) GetSerialKey(
 ) (*GetSerialKeyResult, error) {
 	callback := make(chan GetSerialKeyAsyncResult, 1)
 	go p.GetSerialKeyAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyCodeAsyncHandler(
+	client Gs2SerialKeyRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCodeAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCodeAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCodeResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCodeAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCodeAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCodeAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SerialKeyRestClient) VerifyCodeAsync(
+	request *VerifyCodeRequest,
+	callback chan<- VerifyCodeAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/serialKey/verify"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Code != nil && *request.Code != "" {
+		bodies["code"] = *request.Code
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go verifyCodeAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SerialKeyRestClient) VerifyCode(
+	request *VerifyCodeRequest,
+) (*VerifyCodeResult, error) {
+	callback := make(chan VerifyCodeAsyncResult, 1)
+	go p.VerifyCodeAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyCodeByUserIdAsyncHandler(
+	client Gs2SerialKeyRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyCodeByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyCodeByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyCodeByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- VerifyCodeByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyCodeByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyCodeByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SerialKeyRestClient) VerifyCodeByUserIdAsync(
+	request *VerifyCodeByUserIdRequest,
+	callback chan<- VerifyCodeByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/serialKey/verify"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Code != nil && *request.Code != "" {
+		bodies["code"] = *request.Code
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+
+	go verifyCodeByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SerialKeyRestClient) VerifyCodeByUserId(
+	request *VerifyCodeByUserIdRequest,
+) (*VerifyCodeByUserIdResult, error) {
+	callback := make(chan VerifyCodeByUserIdAsyncResult, 1)
+	go p.VerifyCodeByUserIdAsync(
 		request,
 		callback,
 	)
@@ -2335,6 +2636,97 @@ func (p Gs2SerialKeyRestClient) RevertUseByStampSheet(
 ) (*RevertUseByStampSheetResult, error) {
 	callback := make(chan RevertUseByStampSheetAsyncResult, 1)
 	go p.RevertUseByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func verifyByStampTaskAsyncHandler(
+	client Gs2SerialKeyRestClient,
+	job *core.NetworkJob,
+	callback chan<- VerifyByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyByStampTaskResult
+	if asyncResult.Err != nil {
+		callback <- VerifyByStampTaskAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- VerifyByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SerialKeyRestClient) VerifyByStampTaskAsync(
+	request *VerifyByStampTaskRequest,
+	callback chan<- VerifyByStampTaskAsyncResult,
+) {
+	path := "/serialKey/verify"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go verifyByStampTaskAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SerialKeyRestClient) VerifyByStampTask(
+	request *VerifyByStampTaskRequest,
+) (*VerifyByStampTaskResult, error) {
+	callback := make(chan VerifyByStampTaskAsyncResult, 1)
+	go p.VerifyByStampTaskAsync(
 		request,
 		callback,
 	)
