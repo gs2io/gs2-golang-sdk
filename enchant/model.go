@@ -152,14 +152,62 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:        core.CastString(data["namespaceId"]),
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		UpdatedAt:          core.CastInt64(data["updatedAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -380,12 +428,47 @@ func NewBalanceParameterModelFromJson(data string) BalanceParameterModel {
 
 func NewBalanceParameterModelFromDict(data map[string]interface{}) BalanceParameterModel {
 	return BalanceParameterModel{
-		BalanceParameterModelId: core.CastString(data["balanceParameterModelId"]),
-		Name:                    core.CastString(data["name"]),
-		Metadata:                core.CastString(data["metadata"]),
-		TotalValue:              core.CastInt64(data["totalValue"]),
-		InitialValueStrategy:    core.CastString(data["initialValueStrategy"]),
-		Parameters:              CastBalanceParameterValueModels(core.CastArray(data["parameters"])),
+		BalanceParameterModelId: func() *string {
+			v, ok := data["balanceParameterModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["balanceParameterModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		TotalValue: func() *int64 {
+			v, ok := data["totalValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalValue"])
+		}(),
+		InitialValueStrategy: func() *string {
+			v, ok := data["initialValueStrategy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["initialValueStrategy"])
+		}(),
+		Parameters: func() []BalanceParameterValueModel {
+			if data["parameters"] == nil {
+				return nil
+			}
+			return CastBalanceParameterValueModels(core.CastArray(data["parameters"]))
+		}(),
 	}
 }
 
@@ -624,16 +707,75 @@ func NewBalanceParameterModelMasterFromJson(data string) BalanceParameterModelMa
 
 func NewBalanceParameterModelMasterFromDict(data map[string]interface{}) BalanceParameterModelMaster {
 	return BalanceParameterModelMaster{
-		BalanceParameterModelId: core.CastString(data["balanceParameterModelId"]),
-		Name:                    core.CastString(data["name"]),
-		Description:             core.CastString(data["description"]),
-		Metadata:                core.CastString(data["metadata"]),
-		TotalValue:              core.CastInt64(data["totalValue"]),
-		InitialValueStrategy:    core.CastString(data["initialValueStrategy"]),
-		Parameters:              CastBalanceParameterValueModels(core.CastArray(data["parameters"])),
-		CreatedAt:               core.CastInt64(data["createdAt"]),
-		UpdatedAt:               core.CastInt64(data["updatedAt"]),
-		Revision:                core.CastInt64(data["revision"]),
+		BalanceParameterModelId: func() *string {
+			v, ok := data["balanceParameterModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["balanceParameterModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		TotalValue: func() *int64 {
+			v, ok := data["totalValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalValue"])
+		}(),
+		InitialValueStrategy: func() *string {
+			v, ok := data["initialValueStrategy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["initialValueStrategy"])
+		}(),
+		Parameters: func() []BalanceParameterValueModel {
+			if data["parameters"] == nil {
+				return nil
+			}
+			return CastBalanceParameterValueModels(core.CastArray(data["parameters"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -836,12 +978,46 @@ func NewRarityParameterModelFromJson(data string) RarityParameterModel {
 
 func NewRarityParameterModelFromDict(data map[string]interface{}) RarityParameterModel {
 	return RarityParameterModel{
-		RarityParameterModelId: core.CastString(data["rarityParameterModelId"]),
-		Name:                   core.CastString(data["name"]),
-		Metadata:               core.CastString(data["metadata"]),
-		MaximumParameterCount:  core.CastInt32(data["maximumParameterCount"]),
-		ParameterCounts:        CastRarityParameterCountModels(core.CastArray(data["parameterCounts"])),
-		Parameters:             CastRarityParameterValueModels(core.CastArray(data["parameters"])),
+		RarityParameterModelId: func() *string {
+			v, ok := data["rarityParameterModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rarityParameterModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		MaximumParameterCount: func() *int32 {
+			v, ok := data["maximumParameterCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maximumParameterCount"])
+		}(),
+		ParameterCounts: func() []RarityParameterCountModel {
+			if data["parameterCounts"] == nil {
+				return nil
+			}
+			return CastRarityParameterCountModels(core.CastArray(data["parameterCounts"]))
+		}(),
+		Parameters: func() []RarityParameterValueModel {
+			if data["parameters"] == nil {
+				return nil
+			}
+			return CastRarityParameterValueModels(core.CastArray(data["parameters"]))
+		}(),
 	}
 }
 
@@ -1062,16 +1238,74 @@ func NewRarityParameterModelMasterFromJson(data string) RarityParameterModelMast
 
 func NewRarityParameterModelMasterFromDict(data map[string]interface{}) RarityParameterModelMaster {
 	return RarityParameterModelMaster{
-		RarityParameterModelId: core.CastString(data["rarityParameterModelId"]),
-		Name:                   core.CastString(data["name"]),
-		Description:            core.CastString(data["description"]),
-		Metadata:               core.CastString(data["metadata"]),
-		MaximumParameterCount:  core.CastInt32(data["maximumParameterCount"]),
-		ParameterCounts:        CastRarityParameterCountModels(core.CastArray(data["parameterCounts"])),
-		Parameters:             CastRarityParameterValueModels(core.CastArray(data["parameters"])),
-		CreatedAt:              core.CastInt64(data["createdAt"]),
-		UpdatedAt:              core.CastInt64(data["updatedAt"]),
-		Revision:               core.CastInt64(data["revision"]),
+		RarityParameterModelId: func() *string {
+			v, ok := data["rarityParameterModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rarityParameterModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		MaximumParameterCount: func() *int32 {
+			v, ok := data["maximumParameterCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maximumParameterCount"])
+		}(),
+		ParameterCounts: func() []RarityParameterCountModel {
+			if data["parameterCounts"] == nil {
+				return nil
+			}
+			return CastRarityParameterCountModels(core.CastArray(data["parameterCounts"]))
+		}(),
+		Parameters: func() []RarityParameterValueModel {
+			if data["parameters"] == nil {
+				return nil
+			}
+			return CastRarityParameterValueModels(core.CastArray(data["parameters"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1240,8 +1474,20 @@ func NewCurrentParameterMasterFromJson(data string) CurrentParameterMaster {
 
 func NewCurrentParameterMasterFromDict(data map[string]interface{}) CurrentParameterMaster {
 	return CurrentParameterMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -1430,14 +1676,61 @@ func NewBalanceParameterStatusFromJson(data string) BalanceParameterStatus {
 
 func NewBalanceParameterStatusFromDict(data map[string]interface{}) BalanceParameterStatus {
 	return BalanceParameterStatus{
-		BalanceParameterStatusId: core.CastString(data["balanceParameterStatusId"]),
-		UserId:                   core.CastString(data["userId"]),
-		ParameterName:            core.CastString(data["parameterName"]),
-		PropertyId:               core.CastString(data["propertyId"]),
-		ParameterValues:          CastBalanceParameterValues(core.CastArray(data["parameterValues"])),
-		CreatedAt:                core.CastInt64(data["createdAt"]),
-		UpdatedAt:                core.CastInt64(data["updatedAt"]),
-		Revision:                 core.CastInt64(data["revision"]),
+		BalanceParameterStatusId: func() *string {
+			v, ok := data["balanceParameterStatusId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["balanceParameterStatusId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		ParameterValues: func() []BalanceParameterValue {
+			if data["parameterValues"] == nil {
+				return nil
+			}
+			return CastBalanceParameterValues(core.CastArray(data["parameterValues"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1658,14 +1951,61 @@ func NewRarityParameterStatusFromJson(data string) RarityParameterStatus {
 
 func NewRarityParameterStatusFromDict(data map[string]interface{}) RarityParameterStatus {
 	return RarityParameterStatus{
-		RarityParameterStatusId: core.CastString(data["rarityParameterStatusId"]),
-		UserId:                  core.CastString(data["userId"]),
-		ParameterName:           core.CastString(data["parameterName"]),
-		PropertyId:              core.CastString(data["propertyId"]),
-		ParameterValues:         CastRarityParameterValues(core.CastArray(data["parameterValues"])),
-		CreatedAt:               core.CastInt64(data["createdAt"]),
-		UpdatedAt:               core.CastInt64(data["updatedAt"]),
-		Revision:                core.CastInt64(data["revision"]),
+		RarityParameterStatusId: func() *string {
+			v, ok := data["rarityParameterStatusId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rarityParameterStatusId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		ParameterValues: func() []RarityParameterValue {
+			if data["parameterValues"] == nil {
+				return nil
+			}
+			return CastRarityParameterValues(core.CastArray(data["parameterValues"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1822,8 +2162,20 @@ func NewBalanceParameterValueModelFromJson(data string) BalanceParameterValueMod
 
 func NewBalanceParameterValueModelFromDict(data map[string]interface{}) BalanceParameterValueModel {
 	return BalanceParameterValueModel{
-		Name:     core.CastString(data["name"]),
-		Metadata: core.CastString(data["metadata"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -1908,8 +2260,20 @@ func NewRarityParameterCountModelFromJson(data string) RarityParameterCountModel
 
 func NewRarityParameterCountModelFromDict(data map[string]interface{}) RarityParameterCountModel {
 	return RarityParameterCountModel{
-		Count:  core.CastInt32(data["count"]),
-		Weight: core.CastInt32(data["weight"]),
+		Count: func() *int32 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["count"])
+		}(),
+		Weight: func() *int32 {
+			v, ok := data["weight"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["weight"])
+		}(),
 	}
 }
 
@@ -2066,11 +2430,41 @@ func NewRarityParameterValueModelFromJson(data string) RarityParameterValueModel
 
 func NewRarityParameterValueModelFromDict(data map[string]interface{}) RarityParameterValueModel {
 	return RarityParameterValueModel{
-		Name:          core.CastString(data["name"]),
-		Metadata:      core.CastString(data["metadata"]),
-		ResourceName:  core.CastString(data["resourceName"]),
-		ResourceValue: core.CastInt64(data["resourceValue"]),
-		Weight:        core.CastInt32(data["weight"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		ResourceName: func() *string {
+			v, ok := data["resourceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["resourceName"])
+		}(),
+		ResourceValue: func() *int64 {
+			v, ok := data["resourceValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["resourceValue"])
+		}(),
+		Weight: func() *int32 {
+			v, ok := data["weight"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["weight"])
+		}(),
 	}
 }
 
@@ -2190,8 +2584,20 @@ func NewBalanceParameterValueFromJson(data string) BalanceParameterValue {
 
 func NewBalanceParameterValueFromDict(data map[string]interface{}) BalanceParameterValue {
 	return BalanceParameterValue{
-		Name:  core.CastString(data["name"]),
-		Value: core.CastInt64(data["value"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Value: func() *int64 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["value"])
+		}(),
 	}
 }
 
@@ -2320,9 +2726,27 @@ func NewRarityParameterValueFromJson(data string) RarityParameterValue {
 
 func NewRarityParameterValueFromDict(data map[string]interface{}) RarityParameterValue {
 	return RarityParameterValue{
-		Name:          core.CastString(data["name"]),
-		ResourceName:  core.CastString(data["resourceName"]),
-		ResourceValue: core.CastInt64(data["resourceValue"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		ResourceName: func() *string {
+			v, ok := data["resourceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["resourceName"])
+		}(),
+		ResourceValue: func() *int64 {
+			v, ok := data["resourceValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["resourceValue"])
+		}(),
 	}
 }
 
@@ -2452,8 +2876,20 @@ func NewConfigFromJson(data string) Config {
 
 func NewConfigFromDict(data map[string]interface{}) Config {
 	return Config{
-		Key:   core.CastString(data["key"]),
-		Value: core.CastString(data["value"]),
+		Key: func() *string {
+			v, ok := data["key"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["key"])
+		}(),
+		Value: func() *string {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["value"])
+		}(),
 	}
 }
 
@@ -2698,13 +3134,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 
@@ -2902,10 +3380,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 
@@ -3016,7 +3518,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -3165,10 +3673,34 @@ func NewTransactionSettingFromJson(data string) TransactionSetting {
 
 func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
 	return TransactionSetting{
-		EnableAutoRun:          core.CastBool(data["enableAutoRun"]),
-		DistributorNamespaceId: core.CastString(data["distributorNamespaceId"]),
-		KeyId:                  core.CastString(data["keyId"]),
-		QueueNamespaceId:       core.CastString(data["queueNamespaceId"]),
+		EnableAutoRun: func() *bool {
+			v, ok := data["enableAutoRun"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableAutoRun"])
+		}(),
+		DistributorNamespaceId: func() *string {
+			v, ok := data["distributorNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorNamespaceId"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		QueueNamespaceId: func() *string {
+			v, ok := data["queueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["queueNamespaceId"])
+		}(),
 	}
 }
 

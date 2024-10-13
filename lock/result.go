@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -251,8 +292,19 @@ func NewDescribeMutexesResultFromJson(data string) DescribeMutexesResult {
 
 func NewDescribeMutexesResultFromDict(data map[string]interface{}) DescribeMutexesResult {
 	return DescribeMutexesResult{
-		Items:         CastMutexes(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Mutex {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMutexes(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -287,8 +339,19 @@ func NewDescribeMutexesByUserIdResultFromJson(data string) DescribeMutexesByUser
 
 func NewDescribeMutexesByUserIdResultFromDict(data map[string]interface{}) DescribeMutexesByUserIdResult {
 	return DescribeMutexesByUserIdResult{
-		Items:         CastMutexes(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Mutex {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMutexes(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -322,7 +385,13 @@ func NewLockResultFromJson(data string) LockResult {
 
 func NewLockResultFromDict(data map[string]interface{}) LockResult {
 	return LockResult{
-		Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Mutex {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMutexFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -358,7 +427,13 @@ func NewLockByUserIdResultFromJson(data string) LockByUserIdResult {
 
 func NewLockByUserIdResultFromDict(data map[string]interface{}) LockByUserIdResult {
 	return LockByUserIdResult{
-		Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Mutex {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMutexFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -394,7 +469,13 @@ func NewUnlockResultFromJson(data string) UnlockResult {
 
 func NewUnlockResultFromDict(data map[string]interface{}) UnlockResult {
 	return UnlockResult{
-		Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Mutex {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMutexFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -430,7 +511,13 @@ func NewUnlockByUserIdResultFromJson(data string) UnlockByUserIdResult {
 
 func NewUnlockByUserIdResultFromDict(data map[string]interface{}) UnlockByUserIdResult {
 	return UnlockByUserIdResult{
-		Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Mutex {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMutexFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -466,7 +553,13 @@ func NewGetMutexResultFromJson(data string) GetMutexResult {
 
 func NewGetMutexResultFromDict(data map[string]interface{}) GetMutexResult {
 	return GetMutexResult{
-		Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Mutex {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMutexFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -502,7 +595,13 @@ func NewGetMutexByUserIdResultFromJson(data string) GetMutexByUserIdResult {
 
 func NewGetMutexByUserIdResultFromDict(data map[string]interface{}) GetMutexByUserIdResult {
 	return GetMutexByUserIdResult{
-		Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Mutex {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMutexFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -538,7 +637,13 @@ func NewDeleteMutexByUserIdResultFromJson(data string) DeleteMutexByUserIdResult
 
 func NewDeleteMutexByUserIdResultFromDict(data map[string]interface{}) DeleteMutexByUserIdResult {
 	return DeleteMutexByUserIdResult{
-		Item: NewMutexFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Mutex {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMutexFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 

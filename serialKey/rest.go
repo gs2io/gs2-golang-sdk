@@ -1999,6 +1999,9 @@ func (p Gs2SerialKeyRestClient) VerifyCodeAsync(
 	if request.Code != nil && *request.Code != "" {
 		bodies["code"] = *request.Code
 	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -2102,6 +2105,9 @@ func (p Gs2SerialKeyRestClient) VerifyCodeByUserIdAsync(
 	var bodies = core.Bodies{}
 	if request.Code != nil && *request.Code != "" {
 		bodies["code"] = *request.Code
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack

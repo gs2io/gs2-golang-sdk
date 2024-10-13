@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -251,8 +292,19 @@ func NewDescribeScriptsResultFromJson(data string) DescribeScriptsResult {
 
 func NewDescribeScriptsResultFromDict(data map[string]interface{}) DescribeScriptsResult {
 	return DescribeScriptsResult{
-		Items:         CastScripts(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Script {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastScripts(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -286,7 +338,13 @@ func NewCreateScriptResultFromJson(data string) CreateScriptResult {
 
 func NewCreateScriptResultFromDict(data map[string]interface{}) CreateScriptResult {
 	return CreateScriptResult{
-		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Script {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -322,7 +380,13 @@ func NewCreateScriptFromGitHubResultFromJson(data string) CreateScriptFromGitHub
 
 func NewCreateScriptFromGitHubResultFromDict(data map[string]interface{}) CreateScriptFromGitHubResult {
 	return CreateScriptFromGitHubResult{
-		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Script {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -358,7 +422,13 @@ func NewGetScriptResultFromJson(data string) GetScriptResult {
 
 func NewGetScriptResultFromDict(data map[string]interface{}) GetScriptResult {
 	return GetScriptResult{
-		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Script {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -394,7 +464,13 @@ func NewUpdateScriptResultFromJson(data string) UpdateScriptResult {
 
 func NewUpdateScriptResultFromDict(data map[string]interface{}) UpdateScriptResult {
 	return UpdateScriptResult{
-		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Script {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -430,7 +506,13 @@ func NewUpdateScriptFromGitHubResultFromJson(data string) UpdateScriptFromGitHub
 
 func NewUpdateScriptFromGitHubResultFromDict(data map[string]interface{}) UpdateScriptFromGitHubResult {
 	return UpdateScriptFromGitHubResult{
-		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Script {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -466,7 +548,13 @@ func NewDeleteScriptResultFromJson(data string) DeleteScriptResult {
 
 func NewDeleteScriptResultFromDict(data map[string]interface{}) DeleteScriptResult {
 	return DeleteScriptResult{
-		Item: NewScriptFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Script {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -508,13 +596,55 @@ func NewInvokeScriptResultFromJson(data string) InvokeScriptResult {
 
 func NewInvokeScriptResultFromDict(data map[string]interface{}) InvokeScriptResult {
 	return InvokeScriptResult{
-		Code:         core.CastInt32(data["code"]),
-		Result:       core.CastString(data["result"]),
-		Transaction:  NewTransactionFromDict(core.CastMap(data["transaction"])).Pointer(),
-		RandomStatus: NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
-		ExecuteTime:  core.CastInt32(data["executeTime"]),
-		Charged:      core.CastInt32(data["charged"]),
-		Output:       core.CastStrings(core.CastArray(data["output"])),
+		Code: func() *int32 {
+			v, ok := data["code"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["code"])
+		}(),
+		Result: func() *string {
+			v, ok := data["result"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["result"])
+		}(),
+		Transaction: func() *Transaction {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionFromDict(core.CastMap(data["transaction"])).Pointer()
+		}(),
+		RandomStatus: func() *RandomStatus {
+			v, ok := data["randomStatus"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer()
+		}(),
+		ExecuteTime: func() *int32 {
+			v, ok := data["executeTime"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["executeTime"])
+		}(),
+		Charged: func() *int32 {
+			v, ok := data["charged"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["charged"])
+		}(),
+		Output: func() []*string {
+			v, ok := data["output"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -569,13 +699,55 @@ func NewDebugInvokeResultFromJson(data string) DebugInvokeResult {
 
 func NewDebugInvokeResultFromDict(data map[string]interface{}) DebugInvokeResult {
 	return DebugInvokeResult{
-		Code:         core.CastInt32(data["code"]),
-		Result:       core.CastString(data["result"]),
-		Transaction:  NewTransactionFromDict(core.CastMap(data["transaction"])).Pointer(),
-		RandomStatus: NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
-		ExecuteTime:  core.CastInt32(data["executeTime"]),
-		Charged:      core.CastInt32(data["charged"]),
-		Output:       core.CastStrings(core.CastArray(data["output"])),
+		Code: func() *int32 {
+			v, ok := data["code"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["code"])
+		}(),
+		Result: func() *string {
+			v, ok := data["result"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["result"])
+		}(),
+		Transaction: func() *Transaction {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionFromDict(core.CastMap(data["transaction"])).Pointer()
+		}(),
+		RandomStatus: func() *RandomStatus {
+			v, ok := data["randomStatus"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer()
+		}(),
+		ExecuteTime: func() *int32 {
+			v, ok := data["executeTime"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["executeTime"])
+		}(),
+		Charged: func() *int32 {
+			v, ok := data["charged"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["charged"])
+		}(),
+		Output: func() []*string {
+			v, ok := data["output"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -630,13 +802,55 @@ func NewInvokeByStampSheetResultFromJson(data string) InvokeByStampSheetResult {
 
 func NewInvokeByStampSheetResultFromDict(data map[string]interface{}) InvokeByStampSheetResult {
 	return InvokeByStampSheetResult{
-		Code:         core.CastInt32(data["code"]),
-		Result:       core.CastString(data["result"]),
-		Transaction:  NewTransactionFromDict(core.CastMap(data["transaction"])).Pointer(),
-		RandomStatus: NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
-		ExecuteTime:  core.CastInt32(data["executeTime"]),
-		Charged:      core.CastInt32(data["charged"]),
-		Output:       core.CastStrings(core.CastArray(data["output"])),
+		Code: func() *int32 {
+			v, ok := data["code"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["code"])
+		}(),
+		Result: func() *string {
+			v, ok := data["result"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["result"])
+		}(),
+		Transaction: func() *Transaction {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionFromDict(core.CastMap(data["transaction"])).Pointer()
+		}(),
+		RandomStatus: func() *RandomStatus {
+			v, ok := data["randomStatus"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer()
+		}(),
+		ExecuteTime: func() *int32 {
+			v, ok := data["executeTime"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["executeTime"])
+		}(),
+		Charged: func() *int32 {
+			v, ok := data["charged"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["charged"])
+		}(),
+		Output: func() []*string {
+			v, ok := data["output"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 

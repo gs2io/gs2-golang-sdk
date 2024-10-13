@@ -240,16 +240,76 @@ func NewAccountFromJson(data string) Account {
 
 func NewAccountFromDict(data map[string]interface{}) Account {
 	return Account{
-		AccountId:                      core.CastString(data["accountId"]),
-		Name:                           core.CastString(data["name"]),
-		Email:                          core.CastString(data["email"]),
-		FullName:                       core.CastString(data["fullName"]),
-		CompanyName:                    core.CastString(data["companyName"]),
-		EnableTwoFactorAuthentication:  core.CastString(data["enableTwoFactorAuthentication"]),
-		TwoFactorAuthenticationSetting: NewTwoFactorAuthenticationSettingFromDict(core.CastMap(data["twoFactorAuthenticationSetting"])).Pointer(),
-		Status:                         core.CastString(data["status"]),
-		CreatedAt:                      core.CastInt64(data["createdAt"]),
-		UpdatedAt:                      core.CastInt64(data["updatedAt"]),
+		AccountId: func() *string {
+			v, ok := data["accountId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Email: func() *string {
+			v, ok := data["email"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["email"])
+		}(),
+		FullName: func() *string {
+			v, ok := data["fullName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fullName"])
+		}(),
+		CompanyName: func() *string {
+			v, ok := data["companyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["companyName"])
+		}(),
+		EnableTwoFactorAuthentication: func() *string {
+			v, ok := data["enableTwoFactorAuthentication"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["enableTwoFactorAuthentication"])
+		}(),
+		TwoFactorAuthenticationSetting: func() *TwoFactorAuthenticationSetting {
+			v, ok := data["twoFactorAuthenticationSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTwoFactorAuthenticationSettingFromDict(core.CastMap(data["twoFactorAuthenticationSetting"])).Pointer()
+		}(),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
 	}
 }
 
@@ -281,7 +341,12 @@ func (p Account) ToDict() map[string]interface{} {
 	}
 	var twoFactorAuthenticationSetting map[string]interface{}
 	if p.TwoFactorAuthenticationSetting != nil {
-		twoFactorAuthenticationSetting = p.TwoFactorAuthenticationSetting.ToDict()
+		twoFactorAuthenticationSetting = func() map[string]interface{} {
+			if p.TwoFactorAuthenticationSetting == nil {
+				return nil
+			}
+			return p.TwoFactorAuthenticationSetting.ToDict()
+		}()
 	}
 	var status *string
 	if p.Status != nil {
@@ -618,19 +683,96 @@ func NewProjectFromJson(data string) Project {
 
 func NewProjectFromDict(data map[string]interface{}) Project {
 	return Project{
-		ProjectId:               core.CastString(data["projectId"]),
-		AccountName:             core.CastString(data["accountName"]),
-		Name:                    core.CastString(data["name"]),
-		Description:             core.CastString(data["description"]),
-		Plan:                    core.CastString(data["plan"]),
-		Regions:                 CastGs2Regions(core.CastArray(data["regions"])),
-		BillingMethodName:       core.CastString(data["billingMethodName"]),
-		EnableEventBridge:       core.CastString(data["enableEventBridge"]),
-		Currency:                core.CastString(data["currency"]),
-		EventBridgeAwsAccountId: core.CastString(data["eventBridgeAwsAccountId"]),
-		EventBridgeAwsRegion:    core.CastString(data["eventBridgeAwsRegion"]),
-		CreatedAt:               core.CastInt64(data["createdAt"]),
-		UpdatedAt:               core.CastInt64(data["updatedAt"]),
+		ProjectId: func() *string {
+			v, ok := data["projectId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["projectId"])
+		}(),
+		AccountName: func() *string {
+			v, ok := data["accountName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Plan: func() *string {
+			v, ok := data["plan"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["plan"])
+		}(),
+		Regions: func() []Gs2Region {
+			if data["regions"] == nil {
+				return nil
+			}
+			return CastGs2Regions(core.CastArray(data["regions"]))
+		}(),
+		BillingMethodName: func() *string {
+			v, ok := data["billingMethodName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["billingMethodName"])
+		}(),
+		EnableEventBridge: func() *string {
+			v, ok := data["enableEventBridge"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["enableEventBridge"])
+		}(),
+		Currency: func() *string {
+			v, ok := data["currency"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["currency"])
+		}(),
+		EventBridgeAwsAccountId: func() *string {
+			v, ok := data["eventBridgeAwsAccountId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventBridgeAwsAccountId"])
+		}(),
+		EventBridgeAwsRegion: func() *string {
+			v, ok := data["eventBridgeAwsRegion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventBridgeAwsRegion"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
 	}
 }
 
@@ -812,8 +954,20 @@ func NewGs2RegionFromJson(data string) Gs2Region {
 
 func NewGs2RegionFromDict(data map[string]interface{}) Gs2Region {
 	return Gs2Region{
-		RegionName: core.CastString(data["regionName"]),
-		Status:     core.CastString(data["status"]),
+		RegionName: func() *string {
+			v, ok := data["regionName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["regionName"])
+		}(),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -1114,17 +1268,83 @@ func NewBillingMethodFromJson(data string) BillingMethod {
 
 func NewBillingMethodFromDict(data map[string]interface{}) BillingMethod {
 	return BillingMethod{
-		BillingMethodId:   core.CastString(data["billingMethodId"]),
-		AccountName:       core.CastString(data["accountName"]),
-		Name:              core.CastString(data["name"]),
-		Description:       core.CastString(data["description"]),
-		MethodType:        core.CastString(data["methodType"]),
-		CardSignatureName: core.CastString(data["cardSignatureName"]),
-		CardBrand:         core.CastString(data["cardBrand"]),
-		CardLast4:         core.CastString(data["cardLast4"]),
-		PartnerId:         core.CastString(data["partnerId"]),
-		CreatedAt:         core.CastInt64(data["createdAt"]),
-		UpdatedAt:         core.CastInt64(data["updatedAt"]),
+		BillingMethodId: func() *string {
+			v, ok := data["billingMethodId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["billingMethodId"])
+		}(),
+		AccountName: func() *string {
+			v, ok := data["accountName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		MethodType: func() *string {
+			v, ok := data["methodType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["methodType"])
+		}(),
+		CardSignatureName: func() *string {
+			v, ok := data["cardSignatureName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["cardSignatureName"])
+		}(),
+		CardBrand: func() *string {
+			v, ok := data["cardBrand"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["cardBrand"])
+		}(),
+		CardLast4: func() *string {
+			v, ok := data["cardLast4"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["cardLast4"])
+		}(),
+		PartnerId: func() *string {
+			v, ok := data["partnerId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["partnerId"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
 	}
 }
 
@@ -1378,14 +1598,62 @@ func NewReceiptFromJson(data string) Receipt {
 
 func NewReceiptFromDict(data map[string]interface{}) Receipt {
 	return Receipt{
-		ReceiptId:   core.CastString(data["receiptId"]),
-		AccountName: core.CastString(data["accountName"]),
-		Name:        core.CastString(data["name"]),
-		Date:        core.CastInt64(data["date"]),
-		Amount:      core.CastString(data["amount"]),
-		PdfUrl:      core.CastString(data["pdfUrl"]),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
+		ReceiptId: func() *string {
+			v, ok := data["receiptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["receiptId"])
+		}(),
+		AccountName: func() *string {
+			v, ok := data["accountName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Date: func() *int64 {
+			v, ok := data["date"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["date"])
+		}(),
+		Amount: func() *string {
+			v, ok := data["amount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["amount"])
+		}(),
+		PdfUrl: func() *string {
+			v, ok := data["pdfUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pdfUrl"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
 	}
 }
 
@@ -1684,19 +1952,97 @@ func NewBillingFromJson(data string) Billing {
 
 func NewBillingFromDict(data map[string]interface{}) Billing {
 	return Billing{
-		BillingId:    core.CastString(data["billingId"]),
-		ProjectName:  core.CastString(data["projectName"]),
-		Year:         core.CastInt32(data["year"]),
-		Month:        core.CastInt32(data["month"]),
-		Region:       core.CastString(data["region"]),
-		Service:      core.CastString(data["service"]),
-		ActivityType: core.CastString(data["activityType"]),
-		Unit:         core.CastFloat64(data["unit"]),
-		UnitName:     core.CastString(data["unitName"]),
-		Price:        core.CastFloat64(data["price"]),
-		Currency:     core.CastString(data["currency"]),
-		CreatedAt:    core.CastInt64(data["createdAt"]),
-		UpdatedAt:    core.CastInt64(data["updatedAt"]),
+		BillingId: func() *string {
+			v, ok := data["billingId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["billingId"])
+		}(),
+		ProjectName: func() *string {
+			v, ok := data["projectName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["projectName"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Region: func() *string {
+			v, ok := data["region"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["region"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		ActivityType: func() *string {
+			v, ok := data["activityType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["activityType"])
+		}(),
+		Unit: func() *float64 {
+			v, ok := data["unit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat64(data["unit"])
+		}(),
+		UnitName: func() *string {
+			v, ok := data["unitName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["unitName"])
+		}(),
+		Price: func() *float64 {
+			v, ok := data["price"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat64(data["price"])
+		}(),
+		Currency: func() *string {
+			v, ok := data["currency"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["currency"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
 	}
 }
 
@@ -1852,7 +2198,13 @@ func NewTwoFactorAuthenticationSettingFromJson(data string) TwoFactorAuthenticat
 
 func NewTwoFactorAuthenticationSettingFromDict(data map[string]interface{}) TwoFactorAuthenticationSetting {
 	return TwoFactorAuthenticationSetting{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -2016,14 +2368,62 @@ func NewDumpProgressFromJson(data string) DumpProgress {
 
 func NewDumpProgressFromDict(data map[string]interface{}) DumpProgress {
 	return DumpProgress{
-		DumpProgressId:    core.CastString(data["dumpProgressId"]),
-		TransactionId:     core.CastString(data["transactionId"]),
-		UserId:            core.CastString(data["userId"]),
-		Dumped:            core.CastInt32(data["dumped"]),
-		MicroserviceCount: core.CastInt32(data["microserviceCount"]),
-		CreatedAt:         core.CastInt64(data["createdAt"]),
-		UpdatedAt:         core.CastInt64(data["updatedAt"]),
-		Revision:          core.CastInt64(data["revision"]),
+		DumpProgressId: func() *string {
+			v, ok := data["dumpProgressId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["dumpProgressId"])
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Dumped: func() *int32 {
+			v, ok := data["dumped"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["dumped"])
+		}(),
+		MicroserviceCount: func() *int32 {
+			v, ok := data["microserviceCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["microserviceCount"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -2222,14 +2622,62 @@ func NewCleanProgressFromJson(data string) CleanProgress {
 
 func NewCleanProgressFromDict(data map[string]interface{}) CleanProgress {
 	return CleanProgress{
-		CleanProgressId:   core.CastString(data["cleanProgressId"]),
-		TransactionId:     core.CastString(data["transactionId"]),
-		UserId:            core.CastString(data["userId"]),
-		Cleaned:           core.CastInt32(data["cleaned"]),
-		MicroserviceCount: core.CastInt32(data["microserviceCount"]),
-		CreatedAt:         core.CastInt64(data["createdAt"]),
-		UpdatedAt:         core.CastInt64(data["updatedAt"]),
-		Revision:          core.CastInt64(data["revision"]),
+		CleanProgressId: func() *string {
+			v, ok := data["cleanProgressId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["cleanProgressId"])
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Cleaned: func() *int32 {
+			v, ok := data["cleaned"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["cleaned"])
+		}(),
+		MicroserviceCount: func() *int32 {
+			v, ok := data["microserviceCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["microserviceCount"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -2428,14 +2876,62 @@ func NewImportProgressFromJson(data string) ImportProgress {
 
 func NewImportProgressFromDict(data map[string]interface{}) ImportProgress {
 	return ImportProgress{
-		ImportProgressId:  core.CastString(data["importProgressId"]),
-		TransactionId:     core.CastString(data["transactionId"]),
-		UserId:            core.CastString(data["userId"]),
-		Imported:          core.CastInt32(data["imported"]),
-		MicroserviceCount: core.CastInt32(data["microserviceCount"]),
-		CreatedAt:         core.CastInt64(data["createdAt"]),
-		UpdatedAt:         core.CastInt64(data["updatedAt"]),
-		Revision:          core.CastInt64(data["revision"]),
+		ImportProgressId: func() *string {
+			v, ok := data["importProgressId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["importProgressId"])
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Imported: func() *int32 {
+			v, ok := data["imported"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["imported"])
+		}(),
+		MicroserviceCount: func() *int32 {
+			v, ok := data["microserviceCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["microserviceCount"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -2646,12 +3142,48 @@ func NewImportErrorLogFromJson(data string) ImportErrorLog {
 
 func NewImportErrorLogFromDict(data map[string]interface{}) ImportErrorLog {
 	return ImportErrorLog{
-		DumpProgressId:   core.CastString(data["dumpProgressId"]),
-		Name:             core.CastString(data["name"]),
-		MicroserviceName: core.CastString(data["microserviceName"]),
-		Message:          core.CastString(data["message"]),
-		CreatedAt:        core.CastInt64(data["createdAt"]),
-		Revision:         core.CastInt64(data["revision"]),
+		DumpProgressId: func() *string {
+			v, ok := data["dumpProgressId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["dumpProgressId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		MicroserviceName: func() *string {
+			v, ok := data["microserviceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["microserviceName"])
+		}(),
+		Message: func() *string {
+			v, ok := data["message"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["message"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 

@@ -188,18 +188,90 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:           core.CastString(data["namespaceId"]),
-		Name:                  core.CastString(data["name"]),
-		Description:           core.CastString(data["description"]),
-		CurrencyUsagePriority: core.CastString(data["currencyUsagePriority"]),
-		SharedFreeCurrency:    core.CastBool(data["sharedFreeCurrency"]),
-		PlatformSetting:       NewPlatformSettingFromDict(core.CastMap(data["platformSetting"])).Pointer(),
-		DepositBalanceScript:  NewScriptSettingFromDict(core.CastMap(data["depositBalanceScript"])).Pointer(),
-		WithdrawBalanceScript: NewScriptSettingFromDict(core.CastMap(data["withdrawBalanceScript"])).Pointer(),
-		LogSetting:            NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:             core.CastInt64(data["createdAt"]),
-		UpdatedAt:             core.CastInt64(data["updatedAt"]),
-		Revision:              core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		CurrencyUsagePriority: func() *string {
+			v, ok := data["currencyUsagePriority"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["currencyUsagePriority"])
+		}(),
+		SharedFreeCurrency: func() *bool {
+			v, ok := data["sharedFreeCurrency"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["sharedFreeCurrency"])
+		}(),
+		PlatformSetting: func() *PlatformSetting {
+			v, ok := data["platformSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPlatformSettingFromDict(core.CastMap(data["platformSetting"])).Pointer()
+		}(),
+		DepositBalanceScript: func() *ScriptSetting {
+			v, ok := data["depositBalanceScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["depositBalanceScript"])).Pointer()
+		}(),
+		WithdrawBalanceScript: func() *ScriptSetting {
+			v, ok := data["withdrawBalanceScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["withdrawBalanceScript"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -422,15 +494,68 @@ func NewWalletFromJson(data string) Wallet {
 
 func NewWalletFromDict(data map[string]interface{}) Wallet {
 	return Wallet{
-		WalletId:            core.CastString(data["walletId"]),
-		UserId:              core.CastString(data["userId"]),
-		Slot:                core.CastInt32(data["slot"]),
-		Summary:             NewWalletSummaryFromDict(core.CastMap(data["summary"])).Pointer(),
-		DepositTransactions: CastDepositTransactions(core.CastArray(data["depositTransactions"])),
-		SharedFreeCurrency:  core.CastBool(data["sharedFreeCurrency"]),
-		CreatedAt:           core.CastInt64(data["createdAt"]),
-		UpdatedAt:           core.CastInt64(data["updatedAt"]),
-		Revision:            core.CastInt64(data["revision"]),
+		WalletId: func() *string {
+			v, ok := data["walletId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["walletId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Slot: func() *int32 {
+			v, ok := data["slot"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["slot"])
+		}(),
+		Summary: func() *WalletSummary {
+			v, ok := data["summary"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewWalletSummaryFromDict(core.CastMap(data["summary"])).Pointer()
+		}(),
+		DepositTransactions: func() []DepositTransaction {
+			if data["depositTransactions"] == nil {
+				return nil
+			}
+			return CastDepositTransactions(core.CastArray(data["depositTransactions"]))
+		}(),
+		SharedFreeCurrency: func() *bool {
+			v, ok := data["sharedFreeCurrency"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["sharedFreeCurrency"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -665,15 +790,69 @@ func NewEventFromJson(data string) Event {
 
 func NewEventFromDict(data map[string]interface{}) Event {
 	return Event{
-		EventId:            core.CastString(data["eventId"]),
-		TransactionId:      core.CastString(data["transactionId"]),
-		UserId:             core.CastString(data["userId"]),
-		EventType:          core.CastString(data["eventType"]),
-		VerifyReceiptEvent: NewVerifyReceiptEventFromDict(core.CastMap(data["verifyReceiptEvent"])).Pointer(),
-		DepositEvent:       NewDepositEventFromDict(core.CastMap(data["depositEvent"])).Pointer(),
-		WithdrawEvent:      NewWithdrawEventFromDict(core.CastMap(data["withdrawEvent"])).Pointer(),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		EventId: func() *string {
+			v, ok := data["eventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventId"])
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		EventType: func() *string {
+			v, ok := data["eventType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventType"])
+		}(),
+		VerifyReceiptEvent: func() *VerifyReceiptEvent {
+			v, ok := data["verifyReceiptEvent"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVerifyReceiptEventFromDict(core.CastMap(data["verifyReceiptEvent"])).Pointer()
+		}(),
+		DepositEvent: func() *DepositEvent {
+			v, ok := data["depositEvent"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDepositEventFromDict(core.CastMap(data["depositEvent"])).Pointer()
+		}(),
+		WithdrawEvent: func() *WithdrawEvent {
+			v, ok := data["withdrawEvent"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewWithdrawEventFromDict(core.CastMap(data["withdrawEvent"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -880,11 +1059,41 @@ func NewStoreContentModelFromJson(data string) StoreContentModel {
 
 func NewStoreContentModelFromDict(data map[string]interface{}) StoreContentModel {
 	return StoreContentModel{
-		StoreContentModelId: core.CastString(data["storeContentModelId"]),
-		Name:                core.CastString(data["name"]),
-		Metadata:            core.CastString(data["metadata"]),
-		AppleAppStore:       NewAppleAppStoreContentFromDict(core.CastMap(data["appleAppStore"])).Pointer(),
-		GooglePlay:          NewGooglePlayContentFromDict(core.CastMap(data["googlePlay"])).Pointer(),
+		StoreContentModelId: func() *string {
+			v, ok := data["storeContentModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["storeContentModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		AppleAppStore: func() *AppleAppStoreContent {
+			v, ok := data["appleAppStore"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAppleAppStoreContentFromDict(core.CastMap(data["appleAppStore"])).Pointer()
+		}(),
+		GooglePlay: func() *GooglePlayContent {
+			v, ok := data["googlePlay"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGooglePlayContentFromDict(core.CastMap(data["googlePlay"])).Pointer()
+		}(),
 	}
 }
 
@@ -1102,15 +1311,69 @@ func NewStoreContentModelMasterFromJson(data string) StoreContentModelMaster {
 
 func NewStoreContentModelMasterFromDict(data map[string]interface{}) StoreContentModelMaster {
 	return StoreContentModelMaster{
-		StoreContentModelId: core.CastString(data["storeContentModelId"]),
-		Name:                core.CastString(data["name"]),
-		Description:         core.CastString(data["description"]),
-		Metadata:            core.CastString(data["metadata"]),
-		AppleAppStore:       NewAppleAppStoreContentFromDict(core.CastMap(data["appleAppStore"])).Pointer(),
-		GooglePlay:          NewGooglePlayContentFromDict(core.CastMap(data["googlePlay"])).Pointer(),
-		CreatedAt:           core.CastInt64(data["createdAt"]),
-		UpdatedAt:           core.CastInt64(data["updatedAt"]),
-		Revision:            core.CastInt64(data["revision"]),
+		StoreContentModelId: func() *string {
+			v, ok := data["storeContentModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["storeContentModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		AppleAppStore: func() *AppleAppStoreContent {
+			v, ok := data["appleAppStore"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAppleAppStoreContentFromDict(core.CastMap(data["appleAppStore"])).Pointer()
+		}(),
+		GooglePlay: func() *GooglePlayContent {
+			v, ok := data["googlePlay"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGooglePlayContentFromDict(core.CastMap(data["googlePlay"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1280,8 +1543,20 @@ func NewCurrentModelMasterFromJson(data string) CurrentModelMaster {
 
 func NewCurrentModelMasterFromDict(data map[string]interface{}) CurrentModelMaster {
 	return CurrentModelMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -1430,9 +1705,27 @@ func NewReceiptFromJson(data string) Receipt {
 
 func NewReceiptFromDict(data map[string]interface{}) Receipt {
 	return Receipt{
-		Store:         core.CastString(data["store"]),
-		TransactionID: core.CastString(data["transactionID"]),
-		Payload:       core.CastString(data["payload"]),
+		Store: func() *string {
+			v, ok := data["store"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["store"])
+		}(),
+		TransactionID: func() *string {
+			v, ok := data["transactionID"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionID"])
+		}(),
+		Payload: func() *string {
+			v, ok := data["payload"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["payload"])
+		}(),
 	}
 }
 
@@ -1526,9 +1819,27 @@ func NewPlatformSettingFromJson(data string) PlatformSetting {
 
 func NewPlatformSettingFromDict(data map[string]interface{}) PlatformSetting {
 	return PlatformSetting{
-		AppleAppStore: NewAppleAppStoreSettingFromDict(core.CastMap(data["appleAppStore"])).Pointer(),
-		GooglePlay:    NewGooglePlaySettingFromDict(core.CastMap(data["googlePlay"])).Pointer(),
-		Fake:          NewFakeSettingFromDict(core.CastMap(data["fake"])).Pointer(),
+		AppleAppStore: func() *AppleAppStoreSetting {
+			v, ok := data["appleAppStore"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAppleAppStoreSettingFromDict(core.CastMap(data["appleAppStore"])).Pointer()
+		}(),
+		GooglePlay: func() *GooglePlaySetting {
+			v, ok := data["googlePlay"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGooglePlaySettingFromDict(core.CastMap(data["googlePlay"])).Pointer()
+		}(),
+		Fake: func() *FakeSetting {
+			v, ok := data["fake"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFakeSettingFromDict(core.CastMap(data["fake"])).Pointer()
+		}(),
 	}
 }
 
@@ -1649,7 +1960,13 @@ func NewAppleAppStoreSettingFromJson(data string) AppleAppStoreSetting {
 
 func NewAppleAppStoreSettingFromDict(data map[string]interface{}) AppleAppStoreSetting {
 	return AppleAppStoreSetting{
-		BundleId: core.CastString(data["bundleId"]),
+		BundleId: func() *string {
+			v, ok := data["bundleId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["bundleId"])
+		}(),
 	}
 }
 
@@ -1769,8 +2086,20 @@ func NewGooglePlaySettingFromJson(data string) GooglePlaySetting {
 
 func NewGooglePlaySettingFromDict(data map[string]interface{}) GooglePlaySetting {
 	return GooglePlaySetting{
-		PackageName: core.CastString(data["packageName"]),
-		PublicKey:   core.CastString(data["publicKey"]),
+		PackageName: func() *string {
+			v, ok := data["packageName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["packageName"])
+		}(),
+		PublicKey: func() *string {
+			v, ok := data["publicKey"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["publicKey"])
+		}(),
 	}
 }
 
@@ -1871,7 +2200,13 @@ func NewFakeSettingFromJson(data string) FakeSetting {
 
 func NewFakeSettingFromDict(data map[string]interface{}) FakeSetting {
 	return FakeSetting{
-		AcceptFakeReceipt: core.CastString(data["acceptFakeReceipt"]),
+		AcceptFakeReceipt: func() *string {
+			v, ok := data["acceptFakeReceipt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["acceptFakeReceipt"])
+		}(),
 	}
 }
 
@@ -1955,9 +2290,27 @@ func NewWalletSummaryFromJson(data string) WalletSummary {
 
 func NewWalletSummaryFromDict(data map[string]interface{}) WalletSummary {
 	return WalletSummary{
-		Paid:  core.CastInt32(data["paid"]),
-		Free:  core.CastInt32(data["free"]),
-		Total: core.CastInt32(data["total"]),
+		Paid: func() *int32 {
+			v, ok := data["paid"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["paid"])
+		}(),
+		Free: func() *int32 {
+			v, ok := data["free"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["free"])
+		}(),
+		Total: func() *int32 {
+			v, ok := data["total"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["total"])
+		}(),
 	}
 }
 
@@ -2075,10 +2428,34 @@ func NewDepositTransactionFromJson(data string) DepositTransaction {
 
 func NewDepositTransactionFromDict(data map[string]interface{}) DepositTransaction {
 	return DepositTransaction{
-		Price:       core.CastFloat32(data["price"]),
-		Currency:    core.CastString(data["currency"]),
-		Count:       core.CastInt32(data["count"]),
-		DepositedAt: core.CastInt64(data["depositedAt"]),
+		Price: func() *float32 {
+			v, ok := data["price"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["price"])
+		}(),
+		Currency: func() *string {
+			v, ok := data["currency"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["currency"])
+		}(),
+		Count: func() *int32 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["count"])
+		}(),
+		DepositedAt: func() *int64 {
+			v, ok := data["depositedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["depositedAt"])
+		}(),
 	}
 }
 
@@ -2221,10 +2598,34 @@ func NewVerifyReceiptEventFromJson(data string) VerifyReceiptEvent {
 
 func NewVerifyReceiptEventFromDict(data map[string]interface{}) VerifyReceiptEvent {
 	return VerifyReceiptEvent{
-		ContentName:                     core.CastString(data["contentName"]),
-		Platform:                        core.CastString(data["platform"]),
-		AppleAppStoreVerifyReceiptEvent: NewAppleAppStoreVerifyReceiptEventFromDict(core.CastMap(data["appleAppStoreVerifyReceiptEvent"])).Pointer(),
-		GooglePlayVerifyReceiptEvent:    NewGooglePlayVerifyReceiptEventFromDict(core.CastMap(data["googlePlayVerifyReceiptEvent"])).Pointer(),
+		ContentName: func() *string {
+			v, ok := data["contentName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentName"])
+		}(),
+		Platform: func() *string {
+			v, ok := data["platform"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["platform"])
+		}(),
+		AppleAppStoreVerifyReceiptEvent: func() *AppleAppStoreVerifyReceiptEvent {
+			v, ok := data["appleAppStoreVerifyReceiptEvent"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAppleAppStoreVerifyReceiptEventFromDict(core.CastMap(data["appleAppStoreVerifyReceiptEvent"])).Pointer()
+		}(),
+		GooglePlayVerifyReceiptEvent: func() *GooglePlayVerifyReceiptEvent {
+			v, ok := data["googlePlayVerifyReceiptEvent"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGooglePlayVerifyReceiptEventFromDict(core.CastMap(data["googlePlayVerifyReceiptEvent"])).Pointer()
+		}(),
 	}
 }
 
@@ -2333,9 +2734,26 @@ func NewDepositEventFromJson(data string) DepositEvent {
 
 func NewDepositEventFromDict(data map[string]interface{}) DepositEvent {
 	return DepositEvent{
-		Slot:                core.CastInt32(data["slot"]),
-		DepositTransactions: CastDepositTransactions(core.CastArray(data["depositTransactions"])),
-		Status:              NewWalletSummaryFromDict(core.CastMap(data["status"])).Pointer(),
+		Slot: func() *int32 {
+			v, ok := data["slot"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["slot"])
+		}(),
+		DepositTransactions: func() []DepositTransaction {
+			if data["depositTransactions"] == nil {
+				return nil
+			}
+			return CastDepositTransactions(core.CastArray(data["depositTransactions"]))
+		}(),
+		Status: func() *WalletSummary {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewWalletSummaryFromDict(core.CastMap(data["status"])).Pointer()
+		}(),
 	}
 }
 
@@ -2436,9 +2854,26 @@ func NewWithdrawEventFromJson(data string) WithdrawEvent {
 
 func NewWithdrawEventFromDict(data map[string]interface{}) WithdrawEvent {
 	return WithdrawEvent{
-		Slot:            core.CastInt32(data["slot"]),
-		WithdrawDetails: CastDepositTransactions(core.CastArray(data["withdrawDetails"])),
-		Status:          NewWalletSummaryFromDict(core.CastMap(data["status"])).Pointer(),
+		Slot: func() *int32 {
+			v, ok := data["slot"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["slot"])
+		}(),
+		WithdrawDetails: func() []DepositTransaction {
+			if data["withdrawDetails"] == nil {
+				return nil
+			}
+			return CastDepositTransactions(core.CastArray(data["withdrawDetails"]))
+		}(),
+		Status: func() *WalletSummary {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewWalletSummaryFromDict(core.CastMap(data["status"])).Pointer()
+		}(),
 	}
 }
 
@@ -2551,7 +2986,13 @@ func NewAppleAppStoreVerifyReceiptEventFromJson(data string) AppleAppStoreVerify
 
 func NewAppleAppStoreVerifyReceiptEventFromDict(data map[string]interface{}) AppleAppStoreVerifyReceiptEvent {
 	return AppleAppStoreVerifyReceiptEvent{
-		Environment: core.CastString(data["environment"]),
+		Environment: func() *string {
+			v, ok := data["environment"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["environment"])
+		}(),
 	}
 }
 
@@ -2647,7 +3088,13 @@ func NewGooglePlayVerifyReceiptEventFromJson(data string) GooglePlayVerifyReceip
 
 func NewGooglePlayVerifyReceiptEventFromDict(data map[string]interface{}) GooglePlayVerifyReceiptEvent {
 	return GooglePlayVerifyReceiptEvent{
-		PurchaseToken: core.CastString(data["purchaseToken"]),
+		PurchaseToken: func() *string {
+			v, ok := data["purchaseToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["purchaseToken"])
+		}(),
 	}
 }
 
@@ -2743,7 +3190,13 @@ func NewAppleAppStoreContentFromJson(data string) AppleAppStoreContent {
 
 func NewAppleAppStoreContentFromDict(data map[string]interface{}) AppleAppStoreContent {
 	return AppleAppStoreContent{
-		ProductId: core.CastString(data["productId"]),
+		ProductId: func() *string {
+			v, ok := data["productId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["productId"])
+		}(),
 	}
 }
 
@@ -2839,7 +3292,13 @@ func NewGooglePlayContentFromJson(data string) GooglePlayContent {
 
 func NewGooglePlayContentFromDict(data map[string]interface{}) GooglePlayContent {
 	return GooglePlayContent{
-		ProductId: core.CastString(data["productId"]),
+		ProductId: func() *string {
+			v, ok := data["productId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["productId"])
+		}(),
 	}
 }
 
@@ -3079,13 +3538,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 
@@ -3283,10 +3784,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 
@@ -3397,7 +3922,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -3545,15 +4076,69 @@ func NewDailyTransactionHistoryFromJson(data string) DailyTransactionHistory {
 
 func NewDailyTransactionHistoryFromDict(data map[string]interface{}) DailyTransactionHistory {
 	return DailyTransactionHistory{
-		DailyTransactionHistoryId: core.CastString(data["dailyTransactionHistoryId"]),
-		Year:                      core.CastInt32(data["year"]),
-		Month:                     core.CastInt32(data["month"]),
-		Day:                       core.CastInt32(data["day"]),
-		Currency:                  core.CastString(data["currency"]),
-		DepositAmount:             core.CastFloat32(data["depositAmount"]),
-		WithdrawAmount:            core.CastFloat32(data["withdrawAmount"]),
-		UpdatedAt:                 core.CastInt64(data["updatedAt"]),
-		Revision:                  core.CastInt64(data["revision"]),
+		DailyTransactionHistoryId: func() *string {
+			v, ok := data["dailyTransactionHistoryId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["dailyTransactionHistoryId"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Day: func() *int32 {
+			v, ok := data["day"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["day"])
+		}(),
+		Currency: func() *string {
+			v, ok := data["currency"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["currency"])
+		}(),
+		DepositAmount: func() *float32 {
+			v, ok := data["depositAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["depositAmount"])
+		}(),
+		WithdrawAmount: func() *float32 {
+			v, ok := data["withdrawAmount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["withdrawAmount"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -3725,11 +4310,41 @@ func NewUnusedBalanceFromJson(data string) UnusedBalance {
 
 func NewUnusedBalanceFromDict(data map[string]interface{}) UnusedBalance {
 	return UnusedBalance{
-		UnusedBalanceId: core.CastString(data["unusedBalanceId"]),
-		Currency:        core.CastString(data["currency"]),
-		Balance:         core.CastFloat32(data["balance"]),
-		UpdatedAt:       core.CastInt64(data["updatedAt"]),
-		Revision:        core.CastInt64(data["revision"]),
+		UnusedBalanceId: func() *string {
+			v, ok := data["unusedBalanceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["unusedBalanceId"])
+		}(),
+		Currency: func() *string {
+			v, ok := data["currency"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["currency"])
+		}(),
+		Balance: func() *float32 {
+			v, ok := data["balance"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["balance"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 

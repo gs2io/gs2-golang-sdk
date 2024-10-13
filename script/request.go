@@ -94,8 +94,20 @@ func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesReques
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
 	return DescribeNamespacesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -209,10 +221,34 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -306,7 +342,13 @@ func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusReques
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -387,7 +429,13 @@ func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
 	return GetNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -500,10 +548,34 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		Description:        core.CastString(data["description"]),
-		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -597,7 +669,13 @@ func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, err
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -706,9 +784,27 @@ func NewDescribeScriptsRequestFromJson(data string) (DescribeScriptsRequest, err
 
 func NewDescribeScriptsRequestFromDict(data map[string]interface{}) DescribeScriptsRequest {
 	return DescribeScriptsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -867,11 +963,41 @@ func NewCreateScriptRequestFromJson(data string) (CreateScriptRequest, error) {
 
 func NewCreateScriptRequestFromDict(data map[string]interface{}) CreateScriptRequest {
 	return CreateScriptRequest{
-		NamespaceName:               core.CastString(data["namespaceName"]),
-		Name:                        core.CastString(data["name"]),
-		Description:                 core.CastString(data["description"]),
-		Script:                      core.CastString(data["script"]),
-		DisableStringNumberToNumber: core.CastBool(data["disableStringNumberToNumber"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Script: func() *string {
+			v, ok := data["script"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["script"])
+		}(),
+		DisableStringNumberToNumber: func() *bool {
+			v, ok := data["disableStringNumberToNumber"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["disableStringNumberToNumber"])
+		}(),
 	}
 }
 
@@ -1012,11 +1138,41 @@ func NewCreateScriptFromGitHubRequestFromJson(data string) (CreateScriptFromGitH
 
 func NewCreateScriptFromGitHubRequestFromDict(data map[string]interface{}) CreateScriptFromGitHubRequest {
 	return CreateScriptFromGitHubRequest{
-		NamespaceName:               core.CastString(data["namespaceName"]),
-		Name:                        core.CastString(data["name"]),
-		Description:                 core.CastString(data["description"]),
-		CheckoutSetting:             NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
-		DisableStringNumberToNumber: core.CastBool(data["disableStringNumberToNumber"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		CheckoutSetting: func() *GitHubCheckoutSetting {
+			v, ok := data["checkoutSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer()
+		}(),
+		DisableStringNumberToNumber: func() *bool {
+			v, ok := data["disableStringNumberToNumber"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["disableStringNumberToNumber"])
+		}(),
 	}
 }
 
@@ -1130,8 +1286,20 @@ func NewGetScriptRequestFromJson(data string) (GetScriptRequest, error) {
 
 func NewGetScriptRequestFromDict(data map[string]interface{}) GetScriptRequest {
 	return GetScriptRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ScriptName:    core.CastString(data["scriptName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ScriptName: func() *string {
+			v, ok := data["scriptName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scriptName"])
+		}(),
 	}
 }
 
@@ -1289,11 +1457,41 @@ func NewUpdateScriptRequestFromJson(data string) (UpdateScriptRequest, error) {
 
 func NewUpdateScriptRequestFromDict(data map[string]interface{}) UpdateScriptRequest {
 	return UpdateScriptRequest{
-		NamespaceName:               core.CastString(data["namespaceName"]),
-		ScriptName:                  core.CastString(data["scriptName"]),
-		Description:                 core.CastString(data["description"]),
-		Script:                      core.CastString(data["script"]),
-		DisableStringNumberToNumber: core.CastBool(data["disableStringNumberToNumber"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ScriptName: func() *string {
+			v, ok := data["scriptName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scriptName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Script: func() *string {
+			v, ok := data["script"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["script"])
+		}(),
+		DisableStringNumberToNumber: func() *bool {
+			v, ok := data["disableStringNumberToNumber"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["disableStringNumberToNumber"])
+		}(),
 	}
 }
 
@@ -1434,11 +1632,41 @@ func NewUpdateScriptFromGitHubRequestFromJson(data string) (UpdateScriptFromGitH
 
 func NewUpdateScriptFromGitHubRequestFromDict(data map[string]interface{}) UpdateScriptFromGitHubRequest {
 	return UpdateScriptFromGitHubRequest{
-		NamespaceName:               core.CastString(data["namespaceName"]),
-		ScriptName:                  core.CastString(data["scriptName"]),
-		Description:                 core.CastString(data["description"]),
-		CheckoutSetting:             NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
-		DisableStringNumberToNumber: core.CastBool(data["disableStringNumberToNumber"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ScriptName: func() *string {
+			v, ok := data["scriptName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scriptName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		CheckoutSetting: func() *GitHubCheckoutSetting {
+			v, ok := data["checkoutSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer()
+		}(),
+		DisableStringNumberToNumber: func() *bool {
+			v, ok := data["disableStringNumberToNumber"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["disableStringNumberToNumber"])
+		}(),
 	}
 }
 
@@ -1552,8 +1780,20 @@ func NewDeleteScriptRequestFromJson(data string) (DeleteScriptRequest, error) {
 
 func NewDeleteScriptRequestFromDict(data map[string]interface{}) DeleteScriptRequest {
 	return DeleteScriptRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ScriptName:    core.CastString(data["scriptName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ScriptName: func() *string {
+			v, ok := data["scriptName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scriptName"])
+		}(),
 	}
 }
 
@@ -1712,11 +1952,41 @@ func NewInvokeScriptRequestFromJson(data string) (InvokeScriptRequest, error) {
 
 func NewInvokeScriptRequestFromDict(data map[string]interface{}) InvokeScriptRequest {
 	return InvokeScriptRequest{
-		ScriptId:        core.CastString(data["scriptId"]),
-		UserId:          core.CastString(data["userId"]),
-		Args:            core.CastString(data["args"]),
-		RandomStatus:    NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		ScriptId: func() *string {
+			v, ok := data["scriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scriptId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Args: func() *string {
+			v, ok := data["args"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["args"])
+		}(),
+		RandomStatus: func() *RandomStatus {
+			v, ok := data["randomStatus"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer()
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1838,10 +2108,34 @@ func NewDebugInvokeRequestFromJson(data string) (DebugInvokeRequest, error) {
 
 func NewDebugInvokeRequestFromDict(data map[string]interface{}) DebugInvokeRequest {
 	return DebugInvokeRequest{
-		Script:                      core.CastString(data["script"]),
-		Args:                        core.CastString(data["args"]),
-		RandomStatus:                NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
-		DisableStringNumberToNumber: core.CastBool(data["disableStringNumberToNumber"]),
+		Script: func() *string {
+			v, ok := data["script"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["script"])
+		}(),
+		Args: func() *string {
+			v, ok := data["args"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["args"])
+		}(),
+		RandomStatus: func() *RandomStatus {
+			v, ok := data["randomStatus"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer()
+		}(),
+		DisableStringNumberToNumber: func() *bool {
+			v, ok := data["disableStringNumberToNumber"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["disableStringNumberToNumber"])
+		}(),
 	}
 }
 
@@ -1954,8 +2248,20 @@ func NewInvokeByStampSheetRequestFromJson(data string) (InvokeByStampSheetReques
 
 func NewInvokeByStampSheetRequestFromDict(data map[string]interface{}) InvokeByStampSheetRequest {
 	return InvokeByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 

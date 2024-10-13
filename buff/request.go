@@ -94,8 +94,20 @@ func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesReques
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
 	return DescribeNamespacesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -209,10 +221,34 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:            core.CastString(data["name"]),
-		Description:     core.CastString(data["description"]),
-		ApplyBuffScript: NewScriptSettingFromDict(core.CastMap(data["applyBuffScript"])).Pointer(),
-		LogSetting:      NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		ApplyBuffScript: func() *ScriptSetting {
+			v, ok := data["applyBuffScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["applyBuffScript"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -306,7 +342,13 @@ func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusReques
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -387,7 +429,13 @@ func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
 	return GetNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -500,10 +548,34 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		Description:     core.CastString(data["description"]),
-		ApplyBuffScript: NewScriptSettingFromDict(core.CastMap(data["applyBuffScript"])).Pointer(),
-		LogSetting:      NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		ApplyBuffScript: func() *ScriptSetting {
+			v, ok := data["applyBuffScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["applyBuffScript"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -597,7 +669,13 @@ func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, err
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -702,8 +780,20 @@ func NewDumpUserDataByUserIdRequestFromJson(data string) (DumpUserDataByUserIdRe
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
 	return DumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -809,8 +899,20 @@ func NewCheckDumpUserDataByUserIdRequestFromJson(data string) (CheckDumpUserData
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
 	return CheckDumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -916,8 +1018,20 @@ func NewCleanUserDataByUserIdRequestFromJson(data string) (CleanUserDataByUserId
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
 	return CleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1023,8 +1137,20 @@ func NewCheckCleanUserDataByUserIdRequestFromJson(data string) (CheckCleanUserDa
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
 	return CheckCleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1130,8 +1256,20 @@ func NewPrepareImportUserDataByUserIdRequestFromJson(data string) (PrepareImport
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
 	return PrepareImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1261,9 +1399,27 @@ func NewImportUserDataByUserIdRequestFromJson(data string) (ImportUserDataByUser
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
 	return ImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1394,9 +1550,27 @@ func NewCheckImportUserDataByUserIdRequestFromJson(data string) (CheckImportUser
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
 	return CheckImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1479,7 +1653,13 @@ func NewDescribeBuffEntryModelsRequestFromJson(data string) (DescribeBuffEntryMo
 
 func NewDescribeBuffEntryModelsRequestFromDict(data map[string]interface{}) DescribeBuffEntryModelsRequest {
 	return DescribeBuffEntryModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -1584,8 +1764,20 @@ func NewGetBuffEntryModelRequestFromJson(data string) (GetBuffEntryModelRequest,
 
 func NewGetBuffEntryModelRequestFromDict(data map[string]interface{}) GetBuffEntryModelRequest {
 	return GetBuffEntryModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		BuffEntryName: core.CastString(data["buffEntryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		BuffEntryName: func() *string {
+			v, ok := data["buffEntryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["buffEntryName"])
+		}(),
 	}
 }
 
@@ -1695,9 +1887,27 @@ func NewDescribeBuffEntryModelMastersRequestFromJson(data string) (DescribeBuffE
 
 func NewDescribeBuffEntryModelMastersRequestFromDict(data map[string]interface{}) DescribeBuffEntryModelMastersRequest {
 	return DescribeBuffEntryModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1936,16 +2146,76 @@ func NewCreateBuffEntryModelMasterRequestFromJson(data string) (CreateBuffEntryM
 
 func NewCreateBuffEntryModelMasterRequestFromDict(data map[string]interface{}) CreateBuffEntryModelMasterRequest {
 	return CreateBuffEntryModelMasterRequest{
-		NamespaceName:              core.CastString(data["namespaceName"]),
-		Name:                       core.CastString(data["name"]),
-		Description:                core.CastString(data["description"]),
-		Metadata:                   core.CastString(data["metadata"]),
-		Expression:                 core.CastString(data["expression"]),
-		TargetType:                 core.CastString(data["targetType"]),
-		TargetModel:                NewBuffTargetModelFromDict(core.CastMap(data["targetModel"])).Pointer(),
-		TargetAction:               NewBuffTargetActionFromDict(core.CastMap(data["targetAction"])).Pointer(),
-		Priority:                   core.CastInt32(data["priority"]),
-		ApplyPeriodScheduleEventId: core.CastString(data["applyPeriodScheduleEventId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Expression: func() *string {
+			v, ok := data["expression"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["expression"])
+		}(),
+		TargetType: func() *string {
+			v, ok := data["targetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetType"])
+		}(),
+		TargetModel: func() *BuffTargetModel {
+			v, ok := data["targetModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBuffTargetModelFromDict(core.CastMap(data["targetModel"])).Pointer()
+		}(),
+		TargetAction: func() *BuffTargetAction {
+			v, ok := data["targetAction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBuffTargetActionFromDict(core.CastMap(data["targetAction"])).Pointer()
+		}(),
+		Priority: func() *int32 {
+			v, ok := data["priority"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["priority"])
+		}(),
+		ApplyPeriodScheduleEventId: func() *string {
+			v, ok := data["applyPeriodScheduleEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["applyPeriodScheduleEventId"])
+		}(),
 	}
 }
 
@@ -2069,8 +2339,20 @@ func NewGetBuffEntryModelMasterRequestFromJson(data string) (GetBuffEntryModelMa
 
 func NewGetBuffEntryModelMasterRequestFromDict(data map[string]interface{}) GetBuffEntryModelMasterRequest {
 	return GetBuffEntryModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		BuffEntryName: core.CastString(data["buffEntryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		BuffEntryName: func() *string {
+			v, ok := data["buffEntryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["buffEntryName"])
+		}(),
 	}
 }
 
@@ -2308,16 +2590,76 @@ func NewUpdateBuffEntryModelMasterRequestFromJson(data string) (UpdateBuffEntryM
 
 func NewUpdateBuffEntryModelMasterRequestFromDict(data map[string]interface{}) UpdateBuffEntryModelMasterRequest {
 	return UpdateBuffEntryModelMasterRequest{
-		NamespaceName:              core.CastString(data["namespaceName"]),
-		BuffEntryName:              core.CastString(data["buffEntryName"]),
-		Description:                core.CastString(data["description"]),
-		Metadata:                   core.CastString(data["metadata"]),
-		Expression:                 core.CastString(data["expression"]),
-		TargetType:                 core.CastString(data["targetType"]),
-		TargetModel:                NewBuffTargetModelFromDict(core.CastMap(data["targetModel"])).Pointer(),
-		TargetAction:               NewBuffTargetActionFromDict(core.CastMap(data["targetAction"])).Pointer(),
-		Priority:                   core.CastInt32(data["priority"]),
-		ApplyPeriodScheduleEventId: core.CastString(data["applyPeriodScheduleEventId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		BuffEntryName: func() *string {
+			v, ok := data["buffEntryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["buffEntryName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Expression: func() *string {
+			v, ok := data["expression"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["expression"])
+		}(),
+		TargetType: func() *string {
+			v, ok := data["targetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetType"])
+		}(),
+		TargetModel: func() *BuffTargetModel {
+			v, ok := data["targetModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBuffTargetModelFromDict(core.CastMap(data["targetModel"])).Pointer()
+		}(),
+		TargetAction: func() *BuffTargetAction {
+			v, ok := data["targetAction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBuffTargetActionFromDict(core.CastMap(data["targetAction"])).Pointer()
+		}(),
+		Priority: func() *int32 {
+			v, ok := data["priority"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["priority"])
+		}(),
+		ApplyPeriodScheduleEventId: func() *string {
+			v, ok := data["applyPeriodScheduleEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["applyPeriodScheduleEventId"])
+		}(),
 	}
 }
 
@@ -2441,8 +2783,20 @@ func NewDeleteBuffEntryModelMasterRequestFromJson(data string) (DeleteBuffEntryM
 
 func NewDeleteBuffEntryModelMasterRequestFromDict(data map[string]interface{}) DeleteBuffEntryModelMasterRequest {
 	return DeleteBuffEntryModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		BuffEntryName: core.CastString(data["buffEntryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		BuffEntryName: func() *string {
+			v, ok := data["buffEntryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["buffEntryName"])
+		}(),
 	}
 }
 
@@ -2549,8 +2903,20 @@ func NewApplyBuffRequestFromJson(data string) (ApplyBuffRequest, error) {
 
 func NewApplyBuffRequestFromDict(data map[string]interface{}) ApplyBuffRequest {
 	return ApplyBuffRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -2681,9 +3047,27 @@ func NewApplyBuffByUserIdRequestFromJson(data string) (ApplyBuffByUserIdRequest,
 
 func NewApplyBuffByUserIdRequestFromDict(data map[string]interface{}) ApplyBuffByUserIdRequest {
 	return ApplyBuffByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2766,7 +3150,13 @@ func NewExportMasterRequestFromJson(data string) (ExportMasterRequest, error) {
 
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -2847,7 +3237,13 @@ func NewGetCurrentBuffMasterRequestFromJson(data string) (GetCurrentBuffMasterRe
 
 func NewGetCurrentBuffMasterRequestFromDict(data map[string]interface{}) GetCurrentBuffMasterRequest {
 	return GetCurrentBuffMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -2952,8 +3348,20 @@ func NewUpdateCurrentBuffMasterRequestFromJson(data string) (UpdateCurrentBuffMa
 
 func NewUpdateCurrentBuffMasterRequestFromDict(data map[string]interface{}) UpdateCurrentBuffMasterRequest {
 	return UpdateCurrentBuffMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Settings:      core.CastString(data["settings"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -3039,8 +3447,20 @@ func NewUpdateCurrentBuffMasterFromGitHubRequestFromJson(data string) (UpdateCur
 
 func NewUpdateCurrentBuffMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentBuffMasterFromGitHubRequest {
 	return UpdateCurrentBuffMasterFromGitHubRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		CheckoutSetting: func() *GitHubCheckoutSetting {
+			v, ok := data["checkoutSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer()
+		}(),
 	}
 }
 

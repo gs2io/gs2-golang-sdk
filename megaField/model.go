@@ -148,13 +148,55 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		LogSetting:  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-		Revision:    core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -337,10 +379,33 @@ func NewAreaModelFromJson(data string) AreaModel {
 
 func NewAreaModelFromDict(data map[string]interface{}) AreaModel {
 	return AreaModel{
-		AreaModelId: core.CastString(data["areaModelId"]),
-		Name:        core.CastString(data["name"]),
-		Metadata:    core.CastString(data["metadata"]),
-		LayerModels: CastLayerModels(core.CastArray(data["layerModels"])),
+		AreaModelId: func() *string {
+			v, ok := data["areaModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["areaModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		LayerModels: func() []LayerModel {
+			if data["layerModels"] == nil {
+				return nil
+			}
+			return CastLayerModels(core.CastArray(data["layerModels"]))
+		}(),
 	}
 }
 
@@ -537,13 +602,55 @@ func NewAreaModelMasterFromJson(data string) AreaModelMaster {
 
 func NewAreaModelMasterFromDict(data map[string]interface{}) AreaModelMaster {
 	return AreaModelMaster{
-		AreaModelMasterId: core.CastString(data["areaModelMasterId"]),
-		Name:              core.CastString(data["name"]),
-		Description:       core.CastString(data["description"]),
-		Metadata:          core.CastString(data["metadata"]),
-		CreatedAt:         core.CastInt64(data["createdAt"]),
-		UpdatedAt:         core.CastInt64(data["updatedAt"]),
-		Revision:          core.CastInt64(data["revision"]),
+		AreaModelMasterId: func() *string {
+			v, ok := data["areaModelMasterId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["areaModelMasterId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -717,9 +824,27 @@ func NewLayerModelFromJson(data string) LayerModel {
 
 func NewLayerModelFromDict(data map[string]interface{}) LayerModel {
 	return LayerModel{
-		LayerModelId: core.CastString(data["layerModelId"]),
-		Name:         core.CastString(data["name"]),
-		Metadata:     core.CastString(data["metadata"]),
+		LayerModelId: func() *string {
+			v, ok := data["layerModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["layerModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -909,13 +1034,55 @@ func NewLayerModelMasterFromJson(data string) LayerModelMaster {
 
 func NewLayerModelMasterFromDict(data map[string]interface{}) LayerModelMaster {
 	return LayerModelMaster{
-		LayerModelMasterId: core.CastString(data["layerModelMasterId"]),
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		Metadata:           core.CastString(data["metadata"]),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		UpdatedAt:          core.CastInt64(data["updatedAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		LayerModelMasterId: func() *string {
+			v, ok := data["layerModelMasterId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["layerModelMasterId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1065,8 +1232,20 @@ func NewCurrentFieldMasterFromJson(data string) CurrentFieldMaster {
 
 func NewCurrentFieldMasterFromDict(data map[string]interface{}) CurrentFieldMaster {
 	return CurrentFieldMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -1227,12 +1406,48 @@ func NewLayerFromJson(data string) Layer {
 
 func NewLayerFromDict(data map[string]interface{}) Layer {
 	return Layer{
-		LayerId:            core.CastString(data["layerId"]),
-		AreaModelName:      core.CastString(data["areaModelName"]),
-		LayerModelName:     core.CastString(data["layerModelName"]),
-		NumberOfMinEntries: core.CastInt32(data["numberOfMinEntries"]),
-		NumberOfMaxEntries: core.CastInt32(data["numberOfMaxEntries"]),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
+		LayerId: func() *string {
+			v, ok := data["layerId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["layerId"])
+		}(),
+		AreaModelName: func() *string {
+			v, ok := data["areaModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["areaModelName"])
+		}(),
+		LayerModelName: func() *string {
+			v, ok := data["layerModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["layerModelName"])
+		}(),
+		NumberOfMinEntries: func() *int32 {
+			v, ok := data["numberOfMinEntries"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["numberOfMinEntries"])
+		}(),
+		NumberOfMaxEntries: func() *int32 {
+			v, ok := data["numberOfMaxEntries"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["numberOfMaxEntries"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
 	}
 }
 
@@ -1445,15 +1660,69 @@ func NewSpatialFromJson(data string) Spatial {
 
 func NewSpatialFromDict(data map[string]interface{}) Spatial {
 	return Spatial{
-		SpatialId:      core.CastString(data["spatialId"]),
-		UserId:         core.CastString(data["userId"]),
-		AreaModelName:  core.CastString(data["areaModelName"]),
-		LayerModelName: core.CastString(data["layerModelName"]),
-		Position:       NewPositionFromDict(core.CastMap(data["position"])).Pointer(),
-		Vector:         NewVectorFromDict(core.CastMap(data["vector"])).Pointer(),
-		R:              core.CastFloat32(data["r"]),
-		LastSyncAt:     core.CastInt64(data["lastSyncAt"]),
-		CreatedAt:      core.CastInt64(data["createdAt"]),
+		SpatialId: func() *string {
+			v, ok := data["spatialId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["spatialId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		AreaModelName: func() *string {
+			v, ok := data["areaModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["areaModelName"])
+		}(),
+		LayerModelName: func() *string {
+			v, ok := data["layerModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["layerModelName"])
+		}(),
+		Position: func() *Position {
+			v, ok := data["position"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPositionFromDict(core.CastMap(data["position"])).Pointer()
+		}(),
+		Vector: func() *Vector {
+			v, ok := data["vector"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVectorFromDict(core.CastMap(data["vector"])).Pointer()
+		}(),
+		R: func() *float32 {
+			v, ok := data["r"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["r"])
+		}(),
+		LastSyncAt: func() *int64 {
+			v, ok := data["lastSyncAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["lastSyncAt"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
 	}
 }
 
@@ -1587,9 +1856,27 @@ func NewPositionFromJson(data string) Position {
 
 func NewPositionFromDict(data map[string]interface{}) Position {
 	return Position{
-		X: core.CastFloat32(data["x"]),
-		Y: core.CastFloat32(data["y"]),
-		Z: core.CastFloat32(data["z"]),
+		X: func() *float32 {
+			v, ok := data["x"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["x"])
+		}(),
+		Y: func() *float32 {
+			v, ok := data["y"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["y"])
+		}(),
+		Z: func() *float32 {
+			v, ok := data["z"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["z"])
+		}(),
 	}
 }
 
@@ -1683,9 +1970,27 @@ func NewMyPositionFromJson(data string) MyPosition {
 
 func NewMyPositionFromDict(data map[string]interface{}) MyPosition {
 	return MyPosition{
-		Position: NewPositionFromDict(core.CastMap(data["position"])).Pointer(),
-		Vector:   NewVectorFromDict(core.CastMap(data["vector"])).Pointer(),
-		R:        core.CastFloat32(data["r"]),
+		Position: func() *Position {
+			v, ok := data["position"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPositionFromDict(core.CastMap(data["position"])).Pointer()
+		}(),
+		Vector: func() *Vector {
+			v, ok := data["vector"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVectorFromDict(core.CastMap(data["vector"])).Pointer()
+		}(),
+		R: func() *float32 {
+			v, ok := data["r"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["r"])
+		}(),
 	}
 }
 
@@ -1809,9 +2114,27 @@ func NewScopeFromJson(data string) Scope {
 
 func NewScopeFromDict(data map[string]interface{}) Scope {
 	return Scope{
-		LayerName: core.CastString(data["layerName"]),
-		R:         core.CastFloat32(data["r"]),
-		Limit:     core.CastInt32(data["limit"]),
+		LayerName: func() *string {
+			v, ok := data["layerName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["layerName"])
+		}(),
+		R: func() *float32 {
+			v, ok := data["r"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["r"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1905,9 +2228,27 @@ func NewVectorFromJson(data string) Vector {
 
 func NewVectorFromDict(data map[string]interface{}) Vector {
 	return Vector{
-		X: core.CastFloat32(data["x"]),
-		Y: core.CastFloat32(data["y"]),
-		Z: core.CastFloat32(data["z"]),
+		X: func() *float32 {
+			v, ok := data["x"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["x"])
+		}(),
+		Y: func() *float32 {
+			v, ok := data["y"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["y"])
+		}(),
+		Z: func() *float32 {
+			v, ok := data["z"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["z"])
+		}(),
 	}
 }
 
@@ -2013,7 +2354,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -2253,13 +2600,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 

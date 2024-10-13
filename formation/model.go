@@ -164,17 +164,83 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:              core.CastString(data["namespaceId"]),
-		Name:                     core.CastString(data["name"]),
-		Description:              core.CastString(data["description"]),
-		TransactionSetting:       NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		UpdateMoldScript:         NewScriptSettingFromDict(core.CastMap(data["updateMoldScript"])).Pointer(),
-		UpdateFormScript:         NewScriptSettingFromDict(core.CastMap(data["updateFormScript"])).Pointer(),
-		UpdatePropertyFormScript: NewScriptSettingFromDict(core.CastMap(data["updatePropertyFormScript"])).Pointer(),
-		LogSetting:               NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:                core.CastInt64(data["createdAt"]),
-		UpdatedAt:                core.CastInt64(data["updatedAt"]),
-		Revision:                 core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		UpdateMoldScript: func() *ScriptSetting {
+			v, ok := data["updateMoldScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["updateMoldScript"])).Pointer()
+		}(),
+		UpdateFormScript: func() *ScriptSetting {
+			v, ok := data["updateFormScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["updateFormScript"])).Pointer()
+		}(),
+		UpdatePropertyFormScript: func() *ScriptSetting {
+			v, ok := data["updatePropertyFormScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["updatePropertyFormScript"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -397,10 +463,33 @@ func NewFormModelFromJson(data string) FormModel {
 
 func NewFormModelFromDict(data map[string]interface{}) FormModel {
 	return FormModel{
-		FormModelId: core.CastString(data["formModelId"]),
-		Name:        core.CastString(data["name"]),
-		Metadata:    core.CastString(data["metadata"]),
-		Slots:       CastSlotModels(core.CastArray(data["slots"])),
+		FormModelId: func() *string {
+			v, ok := data["formModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["formModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Slots: func() []SlotModel {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlotModels(core.CastArray(data["slots"]))
+		}(),
 	}
 }
 
@@ -601,14 +690,61 @@ func NewFormModelMasterFromJson(data string) FormModelMaster {
 
 func NewFormModelMasterFromDict(data map[string]interface{}) FormModelMaster {
 	return FormModelMaster{
-		FormModelId: core.CastString(data["formModelId"]),
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		Metadata:    core.CastString(data["metadata"]),
-		Slots:       CastSlotModels(core.CastArray(data["slots"])),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-		Revision:    core.CastInt64(data["revision"]),
+		FormModelId: func() *string {
+			v, ok := data["formModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["formModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Slots: func() []SlotModel {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlotModels(core.CastArray(data["slots"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -801,12 +937,48 @@ func NewMoldModelFromJson(data string) MoldModel {
 
 func NewMoldModelFromDict(data map[string]interface{}) MoldModel {
 	return MoldModel{
-		MoldModelId:        core.CastString(data["moldModelId"]),
-		Name:               core.CastString(data["name"]),
-		Metadata:           core.CastString(data["metadata"]),
-		InitialMaxCapacity: core.CastInt32(data["initialMaxCapacity"]),
-		MaxCapacity:        core.CastInt32(data["maxCapacity"]),
-		FormModel:          NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+		MoldModelId: func() *string {
+			v, ok := data["moldModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		InitialMaxCapacity: func() *int32 {
+			v, ok := data["initialMaxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["initialMaxCapacity"])
+		}(),
+		MaxCapacity: func() *int32 {
+			v, ok := data["maxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxCapacity"])
+		}(),
+		FormModel: func() *FormModel {
+			v, ok := data["formModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1048,16 +1220,76 @@ func NewMoldModelMasterFromJson(data string) MoldModelMaster {
 
 func NewMoldModelMasterFromDict(data map[string]interface{}) MoldModelMaster {
 	return MoldModelMaster{
-		MoldModelId:        core.CastString(data["moldModelId"]),
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		Metadata:           core.CastString(data["metadata"]),
-		InitialMaxCapacity: core.CastInt32(data["initialMaxCapacity"]),
-		MaxCapacity:        core.CastInt32(data["maxCapacity"]),
-		FormModelName:      core.CastString(data["formModelName"]),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		UpdatedAt:          core.CastInt64(data["updatedAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		MoldModelId: func() *string {
+			v, ok := data["moldModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		InitialMaxCapacity: func() *int32 {
+			v, ok := data["initialMaxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["initialMaxCapacity"])
+		}(),
+		MaxCapacity: func() *int32 {
+			v, ok := data["maxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxCapacity"])
+		}(),
+		FormModelName: func() *string {
+			v, ok := data["formModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["formModelName"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1250,10 +1482,33 @@ func NewPropertyFormModelFromJson(data string) PropertyFormModel {
 
 func NewPropertyFormModelFromDict(data map[string]interface{}) PropertyFormModel {
 	return PropertyFormModel{
-		PropertyFormModelId: core.CastString(data["propertyFormModelId"]),
-		Name:                core.CastString(data["name"]),
-		Metadata:            core.CastString(data["metadata"]),
-		Slots:               CastSlotModels(core.CastArray(data["slots"])),
+		PropertyFormModelId: func() *string {
+			v, ok := data["propertyFormModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Slots: func() []SlotModel {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlotModels(core.CastArray(data["slots"]))
+		}(),
 	}
 }
 
@@ -1454,14 +1709,61 @@ func NewPropertyFormModelMasterFromJson(data string) PropertyFormModelMaster {
 
 func NewPropertyFormModelMasterFromDict(data map[string]interface{}) PropertyFormModelMaster {
 	return PropertyFormModelMaster{
-		PropertyFormModelId: core.CastString(data["propertyFormModelId"]),
-		Name:                core.CastString(data["name"]),
-		Description:         core.CastString(data["description"]),
-		Metadata:            core.CastString(data["metadata"]),
-		Slots:               CastSlotModels(core.CastArray(data["slots"])),
-		CreatedAt:           core.CastInt64(data["createdAt"]),
-		UpdatedAt:           core.CastInt64(data["updatedAt"]),
-		Revision:            core.CastInt64(data["revision"]),
+		PropertyFormModelId: func() *string {
+			v, ok := data["propertyFormModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Slots: func() []SlotModel {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlotModels(core.CastArray(data["slots"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1618,8 +1920,20 @@ func NewCurrentFormMasterFromJson(data string) CurrentFormMaster {
 
 func NewCurrentFormMasterFromDict(data map[string]interface{}) CurrentFormMaster {
 	return CurrentFormMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -1784,13 +2098,55 @@ func NewMoldFromJson(data string) Mold {
 
 func NewMoldFromDict(data map[string]interface{}) Mold {
 	return Mold{
-		MoldId:    core.CastString(data["moldId"]),
-		Name:      core.CastString(data["name"]),
-		UserId:    core.CastString(data["userId"]),
-		Capacity:  core.CastInt32(data["capacity"]),
-		CreatedAt: core.CastInt64(data["createdAt"]),
-		UpdatedAt: core.CastInt64(data["updatedAt"]),
-		Revision:  core.CastInt64(data["revision"]),
+		MoldId: func() *string {
+			v, ok := data["moldId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Capacity: func() *int32 {
+			v, ok := data["capacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["capacity"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1960,13 +2316,54 @@ func NewFormFromJson(data string) Form {
 
 func NewFormFromDict(data map[string]interface{}) Form {
 	return Form{
-		FormId:    core.CastString(data["formId"]),
-		Name:      core.CastString(data["name"]),
-		Index:     core.CastInt32(data["index"]),
-		Slots:     CastSlots(core.CastArray(data["slots"])),
-		CreatedAt: core.CastInt64(data["createdAt"]),
-		UpdatedAt: core.CastInt64(data["updatedAt"]),
-		Revision:  core.CastInt64(data["revision"]),
+		FormId: func() *string {
+			v, ok := data["formId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["formId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Index: func() *int32 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["index"])
+		}(),
+		Slots: func() []Slot {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlots(core.CastArray(data["slots"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -2182,14 +2579,61 @@ func NewPropertyFormFromJson(data string) PropertyForm {
 
 func NewPropertyFormFromDict(data map[string]interface{}) PropertyForm {
 	return PropertyForm{
-		FormId:     core.CastString(data["formId"]),
-		UserId:     core.CastString(data["userId"]),
-		Name:       core.CastString(data["name"]),
-		PropertyId: core.CastString(data["propertyId"]),
-		Slots:      CastSlots(core.CastArray(data["slots"])),
-		CreatedAt:  core.CastInt64(data["createdAt"]),
-		UpdatedAt:  core.CastInt64(data["updatedAt"]),
-		Revision:   core.CastInt64(data["revision"]),
+		FormId: func() *string {
+			v, ok := data["formId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["formId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		Slots: func() []Slot {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlots(core.CastArray(data["slots"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -2370,9 +2814,27 @@ func NewSlotFromJson(data string) Slot {
 
 func NewSlotFromDict(data map[string]interface{}) Slot {
 	return Slot{
-		Name:       core.CastString(data["name"]),
-		PropertyId: core.CastString(data["propertyId"]),
-		Metadata:   core.CastString(data["metadata"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -2526,9 +2988,27 @@ func NewSlotModelFromJson(data string) SlotModel {
 
 func NewSlotModelFromDict(data map[string]interface{}) SlotModel {
 	return SlotModel{
-		Name:          core.CastString(data["name"]),
-		PropertyRegex: core.CastString(data["propertyRegex"]),
-		Metadata:      core.CastString(data["metadata"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		PropertyRegex: func() *string {
+			v, ok := data["propertyRegex"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyRegex"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -2730,11 +3210,41 @@ func NewSlotWithSignatureFromJson(data string) SlotWithSignature {
 
 func NewSlotWithSignatureFromDict(data map[string]interface{}) SlotWithSignature {
 	return SlotWithSignature{
-		Name:         core.CastString(data["name"]),
-		PropertyType: core.CastString(data["propertyType"]),
-		Body:         core.CastString(data["body"]),
-		Signature:    core.CastString(data["signature"]),
-		Metadata:     core.CastString(data["metadata"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		PropertyType: func() *string {
+			v, ok := data["propertyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyType"])
+		}(),
+		Body: func() *string {
+			v, ok := data["body"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["body"])
+		}(),
+		Signature: func() *string {
+			v, ok := data["signature"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["signature"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -2874,8 +3384,20 @@ func NewAcquireActionFromJson(data string) AcquireAction {
 
 func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 	return AcquireAction{
-		Action:  core.CastString(data["action"]),
-		Request: core.CastString(data["request"]),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Request: func() *string {
+			v, ok := data["request"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["request"])
+		}(),
 	}
 }
 
@@ -3000,8 +3522,20 @@ func NewConfigFromJson(data string) Config {
 
 func NewConfigFromDict(data map[string]interface{}) Config {
 	return Config{
-		Key:   core.CastString(data["key"]),
-		Value: core.CastString(data["value"]),
+		Key: func() *string {
+			v, ok := data["key"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["key"])
+		}(),
+		Value: func() *string {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["value"])
+		}(),
 	}
 }
 
@@ -3246,13 +3780,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 
@@ -3450,10 +4026,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 
@@ -3564,7 +4164,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -3713,10 +4319,34 @@ func NewTransactionSettingFromJson(data string) TransactionSetting {
 
 func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
 	return TransactionSetting{
-		EnableAutoRun:          core.CastBool(data["enableAutoRun"]),
-		DistributorNamespaceId: core.CastString(data["distributorNamespaceId"]),
-		KeyId:                  core.CastString(data["keyId"]),
-		QueueNamespaceId:       core.CastString(data["queueNamespaceId"]),
+		EnableAutoRun: func() *bool {
+			v, ok := data["enableAutoRun"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableAutoRun"])
+		}(),
+		DistributorNamespaceId: func() *string {
+			v, ok := data["distributorNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorNamespaceId"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		QueueNamespaceId: func() *string {
+			v, ok := data["queueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["queueNamespaceId"])
+		}(),
 	}
 }
 

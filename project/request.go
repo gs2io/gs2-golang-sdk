@@ -186,11 +186,41 @@ func NewCreateAccountRequestFromJson(data string) (CreateAccountRequest, error) 
 
 func NewCreateAccountRequestFromDict(data map[string]interface{}) CreateAccountRequest {
 	return CreateAccountRequest{
-		Email:       core.CastString(data["email"]),
-		FullName:    core.CastString(data["fullName"]),
-		CompanyName: core.CastString(data["companyName"]),
-		Password:    core.CastString(data["password"]),
-		Lang:        core.CastString(data["lang"]),
+		Email: func() *string {
+			v, ok := data["email"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["email"])
+		}(),
+		FullName: func() *string {
+			v, ok := data["fullName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fullName"])
+		}(),
+		CompanyName: func() *string {
+			v, ok := data["companyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["companyName"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		Lang: func() *string {
+			v, ok := data["lang"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["lang"])
+		}(),
 	}
 }
 
@@ -275,7 +305,13 @@ func NewVerifyRequestFromJson(data string) (VerifyRequest, error) {
 
 func NewVerifyRequestFromDict(data map[string]interface{}) VerifyRequest {
 	return VerifyRequest{
-		VerifyToken: core.CastString(data["verifyToken"]),
+		VerifyToken: func() *string {
+			v, ok := data["verifyToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyToken"])
+		}(),
 	}
 }
 
@@ -404,9 +440,27 @@ func NewSignInRequestFromJson(data string) (SignInRequest, error) {
 
 func NewSignInRequestFromDict(data map[string]interface{}) SignInRequest {
 	return SignInRequest{
-		Email:    core.CastString(data["email"]),
-		Password: core.CastString(data["password"]),
-		Otp:      core.CastString(data["otp"]),
+		Email: func() *string {
+			v, ok := data["email"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["email"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		Otp: func() *string {
+			v, ok := data["otp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["otp"])
+		}(),
 	}
 }
 
@@ -513,8 +567,20 @@ func NewForgetRequestFromJson(data string) (ForgetRequest, error) {
 
 func NewForgetRequestFromDict(data map[string]interface{}) ForgetRequest {
 	return ForgetRequest{
-		Email: core.CastString(data["email"]),
-		Lang:  core.CastString(data["lang"]),
+		Email: func() *string {
+			v, ok := data["email"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["email"])
+		}(),
+		Lang: func() *string {
+			v, ok := data["lang"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["lang"])
+		}(),
 	}
 }
 
@@ -596,7 +662,13 @@ func NewIssuePasswordRequestFromJson(data string) (IssuePasswordRequest, error) 
 
 func NewIssuePasswordRequestFromDict(data map[string]interface{}) IssuePasswordRequest {
 	return IssuePasswordRequest{
-		IssuePasswordToken: core.CastString(data["issuePasswordToken"]),
+		IssuePasswordToken: func() *string {
+			v, ok := data["issuePasswordToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["issuePasswordToken"])
+		}(),
 	}
 }
 
@@ -773,11 +845,41 @@ func NewUpdateAccountRequestFromJson(data string) (UpdateAccountRequest, error) 
 
 func NewUpdateAccountRequestFromDict(data map[string]interface{}) UpdateAccountRequest {
 	return UpdateAccountRequest{
-		Email:        core.CastString(data["email"]),
-		FullName:     core.CastString(data["fullName"]),
-		CompanyName:  core.CastString(data["companyName"]),
-		Password:     core.CastString(data["password"]),
-		AccountToken: core.CastString(data["accountToken"]),
+		Email: func() *string {
+			v, ok := data["email"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["email"])
+		}(),
+		FullName: func() *string {
+			v, ok := data["fullName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fullName"])
+		}(),
+		CompanyName: func() *string {
+			v, ok := data["companyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["companyName"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
 	}
 }
 
@@ -862,7 +964,13 @@ func NewEnableMfaRequestFromJson(data string) (EnableMfaRequest, error) {
 
 func NewEnableMfaRequestFromDict(data map[string]interface{}) EnableMfaRequest {
 	return EnableMfaRequest{
-		AccountToken: core.CastString(data["accountToken"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
 	}
 }
 
@@ -967,8 +1075,20 @@ func NewChallengeMfaRequestFromJson(data string) (ChallengeMfaRequest, error) {
 
 func NewChallengeMfaRequestFromDict(data map[string]interface{}) ChallengeMfaRequest {
 	return ChallengeMfaRequest{
-		AccountToken: core.CastString(data["accountToken"]),
-		Passcode:     core.CastString(data["passcode"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		Passcode: func() *string {
+			v, ok := data["passcode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["passcode"])
+		}(),
 	}
 }
 
@@ -1050,7 +1170,13 @@ func NewDisableMfaRequestFromJson(data string) (DisableMfaRequest, error) {
 
 func NewDisableMfaRequestFromDict(data map[string]interface{}) DisableMfaRequest {
 	return DisableMfaRequest{
-		AccountToken: core.CastString(data["accountToken"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
 	}
 }
 
@@ -1131,7 +1257,13 @@ func NewDeleteAccountRequestFromJson(data string) (DeleteAccountRequest, error) 
 
 func NewDeleteAccountRequestFromDict(data map[string]interface{}) DeleteAccountRequest {
 	return DeleteAccountRequest{
-		AccountToken: core.CastString(data["accountToken"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
 	}
 }
 
@@ -1240,9 +1372,27 @@ func NewDescribeProjectsRequestFromJson(data string) (DescribeProjectsRequest, e
 
 func NewDescribeProjectsRequestFromDict(data map[string]interface{}) DescribeProjectsRequest {
 	return DescribeProjectsRequest{
-		AccountToken: core.CastString(data["accountToken"]),
-		PageToken:    core.CastString(data["pageToken"]),
-		Limit:        core.CastInt32(data["limit"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1541,16 +1691,76 @@ func NewCreateProjectRequestFromJson(data string) (CreateProjectRequest, error) 
 
 func NewCreateProjectRequestFromDict(data map[string]interface{}) CreateProjectRequest {
 	return CreateProjectRequest{
-		AccountToken:            core.CastString(data["accountToken"]),
-		Name:                    core.CastString(data["name"]),
-		Description:             core.CastString(data["description"]),
-		Plan:                    core.CastString(data["plan"]),
-		Currency:                core.CastString(data["currency"]),
-		ActivateRegionName:      core.CastString(data["activateRegionName"]),
-		BillingMethodName:       core.CastString(data["billingMethodName"]),
-		EnableEventBridge:       core.CastString(data["enableEventBridge"]),
-		EventBridgeAwsAccountId: core.CastString(data["eventBridgeAwsAccountId"]),
-		EventBridgeAwsRegion:    core.CastString(data["eventBridgeAwsRegion"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Plan: func() *string {
+			v, ok := data["plan"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["plan"])
+		}(),
+		Currency: func() *string {
+			v, ok := data["currency"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["currency"])
+		}(),
+		ActivateRegionName: func() *string {
+			v, ok := data["activateRegionName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["activateRegionName"])
+		}(),
+		BillingMethodName: func() *string {
+			v, ok := data["billingMethodName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["billingMethodName"])
+		}(),
+		EnableEventBridge: func() *string {
+			v, ok := data["enableEventBridge"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["enableEventBridge"])
+		}(),
+		EventBridgeAwsAccountId: func() *string {
+			v, ok := data["eventBridgeAwsAccountId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventBridgeAwsAccountId"])
+		}(),
+		EventBridgeAwsRegion: func() *string {
+			v, ok := data["eventBridgeAwsRegion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventBridgeAwsRegion"])
+		}(),
 	}
 }
 
@@ -1664,8 +1874,20 @@ func NewGetProjectRequestFromJson(data string) (GetProjectRequest, error) {
 
 func NewGetProjectRequestFromDict(data map[string]interface{}) GetProjectRequest {
 	return GetProjectRequest{
-		AccountToken: core.CastString(data["accountToken"]),
-		ProjectName:  core.CastString(data["projectName"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		ProjectName: func() *string {
+			v, ok := data["projectName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["projectName"])
+		}(),
 	}
 }
 
@@ -1771,8 +1993,20 @@ func NewGetProjectTokenRequestFromJson(data string) (GetProjectTokenRequest, err
 
 func NewGetProjectTokenRequestFromDict(data map[string]interface{}) GetProjectTokenRequest {
 	return GetProjectTokenRequest{
-		ProjectName:  core.CastString(data["projectName"]),
-		AccountToken: core.CastString(data["accountToken"]),
+		ProjectName: func() *string {
+			v, ok := data["projectName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["projectName"])
+		}(),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
 	}
 }
 
@@ -1950,11 +2184,41 @@ func NewGetProjectTokenByIdentifierRequestFromJson(data string) (GetProjectToken
 
 func NewGetProjectTokenByIdentifierRequestFromDict(data map[string]interface{}) GetProjectTokenByIdentifierRequest {
 	return GetProjectTokenByIdentifierRequest{
-		AccountName: core.CastString(data["accountName"]),
-		ProjectName: core.CastString(data["projectName"]),
-		UserName:    core.CastString(data["userName"]),
-		Password:    core.CastString(data["password"]),
-		Otp:         core.CastString(data["otp"]),
+		AccountName: func() *string {
+			v, ok := data["accountName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountName"])
+		}(),
+		ProjectName: func() *string {
+			v, ok := data["projectName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["projectName"])
+		}(),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		Otp: func() *string {
+			v, ok := data["otp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["otp"])
+		}(),
 	}
 }
 
@@ -2207,14 +2471,62 @@ func NewUpdateProjectRequestFromJson(data string) (UpdateProjectRequest, error) 
 
 func NewUpdateProjectRequestFromDict(data map[string]interface{}) UpdateProjectRequest {
 	return UpdateProjectRequest{
-		AccountToken:            core.CastString(data["accountToken"]),
-		ProjectName:             core.CastString(data["projectName"]),
-		Description:             core.CastString(data["description"]),
-		Plan:                    core.CastString(data["plan"]),
-		BillingMethodName:       core.CastString(data["billingMethodName"]),
-		EnableEventBridge:       core.CastString(data["enableEventBridge"]),
-		EventBridgeAwsAccountId: core.CastString(data["eventBridgeAwsAccountId"]),
-		EventBridgeAwsRegion:    core.CastString(data["eventBridgeAwsRegion"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		ProjectName: func() *string {
+			v, ok := data["projectName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["projectName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Plan: func() *string {
+			v, ok := data["plan"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["plan"])
+		}(),
+		BillingMethodName: func() *string {
+			v, ok := data["billingMethodName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["billingMethodName"])
+		}(),
+		EnableEventBridge: func() *string {
+			v, ok := data["enableEventBridge"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["enableEventBridge"])
+		}(),
+		EventBridgeAwsAccountId: func() *string {
+			v, ok := data["eventBridgeAwsAccountId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventBridgeAwsAccountId"])
+		}(),
+		EventBridgeAwsRegion: func() *string {
+			v, ok := data["eventBridgeAwsRegion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventBridgeAwsRegion"])
+		}(),
 	}
 }
 
@@ -2350,9 +2662,27 @@ func NewActivateRegionRequestFromJson(data string) (ActivateRegionRequest, error
 
 func NewActivateRegionRequestFromDict(data map[string]interface{}) ActivateRegionRequest {
 	return ActivateRegionRequest{
-		AccountToken: core.CastString(data["accountToken"]),
-		ProjectName:  core.CastString(data["projectName"]),
-		RegionName:   core.CastString(data["regionName"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		ProjectName: func() *string {
+			v, ok := data["projectName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["projectName"])
+		}(),
+		RegionName: func() *string {
+			v, ok := data["regionName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["regionName"])
+		}(),
 	}
 }
 
@@ -2459,8 +2789,20 @@ func NewWaitActivateRegionRequestFromJson(data string) (WaitActivateRegionReques
 
 func NewWaitActivateRegionRequestFromDict(data map[string]interface{}) WaitActivateRegionRequest {
 	return WaitActivateRegionRequest{
-		ProjectName: core.CastString(data["projectName"]),
-		RegionName:  core.CastString(data["regionName"]),
+		ProjectName: func() *string {
+			v, ok := data["projectName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["projectName"])
+		}(),
+		RegionName: func() *string {
+			v, ok := data["regionName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["regionName"])
+		}(),
 	}
 }
 
@@ -2566,8 +2908,20 @@ func NewDeleteProjectRequestFromJson(data string) (DeleteProjectRequest, error) 
 
 func NewDeleteProjectRequestFromDict(data map[string]interface{}) DeleteProjectRequest {
 	return DeleteProjectRequest{
-		AccountToken: core.CastString(data["accountToken"]),
-		ProjectName:  core.CastString(data["projectName"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		ProjectName: func() *string {
+			v, ok := data["projectName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["projectName"])
+		}(),
 	}
 }
 
@@ -2677,9 +3031,27 @@ func NewDescribeBillingMethodsRequestFromJson(data string) (DescribeBillingMetho
 
 func NewDescribeBillingMethodsRequestFromDict(data map[string]interface{}) DescribeBillingMethodsRequest {
 	return DescribeBillingMethodsRequest{
-		AccountToken: core.CastString(data["accountToken"]),
-		PageToken:    core.CastString(data["pageToken"]),
-		Limit:        core.CastInt32(data["limit"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -2858,11 +3230,41 @@ func NewCreateBillingMethodRequestFromJson(data string) (CreateBillingMethodRequ
 
 func NewCreateBillingMethodRequestFromDict(data map[string]interface{}) CreateBillingMethodRequest {
 	return CreateBillingMethodRequest{
-		AccountToken:   core.CastString(data["accountToken"]),
-		Description:    core.CastString(data["description"]),
-		MethodType:     core.CastString(data["methodType"]),
-		CardCustomerId: core.CastString(data["cardCustomerId"]),
-		PartnerId:      core.CastString(data["partnerId"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		MethodType: func() *string {
+			v, ok := data["methodType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["methodType"])
+		}(),
+		CardCustomerId: func() *string {
+			v, ok := data["cardCustomerId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["cardCustomerId"])
+		}(),
+		PartnerId: func() *string {
+			v, ok := data["partnerId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["partnerId"])
+		}(),
 	}
 }
 
@@ -2971,8 +3373,20 @@ func NewGetBillingMethodRequestFromJson(data string) (GetBillingMethodRequest, e
 
 func NewGetBillingMethodRequestFromDict(data map[string]interface{}) GetBillingMethodRequest {
 	return GetBillingMethodRequest{
-		AccountToken:      core.CastString(data["accountToken"]),
-		BillingMethodName: core.CastString(data["billingMethodName"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		BillingMethodName: func() *string {
+			v, ok := data["billingMethodName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["billingMethodName"])
+		}(),
 	}
 }
 
@@ -3102,9 +3516,27 @@ func NewUpdateBillingMethodRequestFromJson(data string) (UpdateBillingMethodRequ
 
 func NewUpdateBillingMethodRequestFromDict(data map[string]interface{}) UpdateBillingMethodRequest {
 	return UpdateBillingMethodRequest{
-		AccountToken:      core.CastString(data["accountToken"]),
-		BillingMethodName: core.CastString(data["billingMethodName"]),
-		Description:       core.CastString(data["description"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		BillingMethodName: func() *string {
+			v, ok := data["billingMethodName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["billingMethodName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
 	}
 }
 
@@ -3211,8 +3643,20 @@ func NewDeleteBillingMethodRequestFromJson(data string) (DeleteBillingMethodRequ
 
 func NewDeleteBillingMethodRequestFromDict(data map[string]interface{}) DeleteBillingMethodRequest {
 	return DeleteBillingMethodRequest{
-		AccountToken:      core.CastString(data["accountToken"]),
-		BillingMethodName: core.CastString(data["billingMethodName"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		BillingMethodName: func() *string {
+			v, ok := data["billingMethodName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["billingMethodName"])
+		}(),
 	}
 }
 
@@ -3322,9 +3766,27 @@ func NewDescribeReceiptsRequestFromJson(data string) (DescribeReceiptsRequest, e
 
 func NewDescribeReceiptsRequestFromDict(data map[string]interface{}) DescribeReceiptsRequest {
 	return DescribeReceiptsRequest{
-		AccountToken: core.CastString(data["accountToken"]),
-		PageToken:    core.CastString(data["pageToken"]),
-		Limit:        core.CastInt32(data["limit"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -3487,12 +3949,48 @@ func NewDescribeBillingsRequestFromJson(data string) (DescribeBillingsRequest, e
 
 func NewDescribeBillingsRequestFromDict(data map[string]interface{}) DescribeBillingsRequest {
 	return DescribeBillingsRequest{
-		AccountToken: core.CastString(data["accountToken"]),
-		ProjectName:  core.CastString(data["projectName"]),
-		Year:         core.CastInt32(data["year"]),
-		Month:        core.CastInt32(data["month"]),
-		Region:       core.CastString(data["region"]),
-		Service:      core.CastString(data["service"]),
+		AccountToken: func() *string {
+			v, ok := data["accountToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accountToken"])
+		}(),
+		ProjectName: func() *string {
+			v, ok := data["projectName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["projectName"])
+		}(),
+		Year: func() *int32 {
+			v, ok := data["year"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["year"])
+		}(),
+		Month: func() *int32 {
+			v, ok := data["month"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["month"])
+		}(),
+		Region: func() *string {
+			v, ok := data["region"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["region"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
 	}
 }
 
@@ -3582,8 +4080,20 @@ func NewDescribeDumpProgressesRequestFromJson(data string) (DescribeDumpProgress
 
 func NewDescribeDumpProgressesRequestFromDict(data map[string]interface{}) DescribeDumpProgressesRequest {
 	return DescribeDumpProgressesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -3665,7 +4175,13 @@ func NewGetDumpProgressRequestFromJson(data string) (GetDumpProgressRequest, err
 
 func NewGetDumpProgressRequestFromDict(data map[string]interface{}) GetDumpProgressRequest {
 	return GetDumpProgressRequest{
-		TransactionId: core.CastString(data["transactionId"]),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
 	}
 }
 
@@ -3819,10 +4335,34 @@ func NewWaitDumpUserDataRequestFromJson(data string) (WaitDumpUserDataRequest, e
 
 func NewWaitDumpUserDataRequestFromDict(data map[string]interface{}) WaitDumpUserDataRequest {
 	return WaitDumpUserDataRequest{
-		TransactionId:    core.CastString(data["transactionId"]),
-		UserId:           core.CastString(data["userId"]),
-		MicroserviceName: core.CastString(data["microserviceName"]),
-		TimeOffsetToken:  core.CastString(data["timeOffsetToken"]),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MicroserviceName: func() *string {
+			v, ok := data["microserviceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["microserviceName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3906,7 +4446,13 @@ func NewArchiveDumpUserDataRequestFromJson(data string) (ArchiveDumpUserDataRequ
 
 func NewArchiveDumpUserDataRequestFromDict(data map[string]interface{}) ArchiveDumpUserDataRequest {
 	return ArchiveDumpUserDataRequest{
-		TransactionId: core.CastString(data["transactionId"]),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
 	}
 }
 
@@ -4012,8 +4558,20 @@ func NewDumpUserDataRequestFromJson(data string) (DumpUserDataRequest, error) {
 
 func NewDumpUserDataRequestFromDict(data map[string]interface{}) DumpUserDataRequest {
 	return DumpUserDataRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4095,7 +4653,13 @@ func NewGetDumpUserDataRequestFromJson(data string) (GetDumpUserDataRequest, err
 
 func NewGetDumpUserDataRequestFromDict(data map[string]interface{}) GetDumpUserDataRequest {
 	return GetDumpUserDataRequest{
-		TransactionId: core.CastString(data["transactionId"]),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
 	}
 }
 
@@ -4180,8 +4744,20 @@ func NewDescribeCleanProgressesRequestFromJson(data string) (DescribeCleanProgre
 
 func NewDescribeCleanProgressesRequestFromDict(data map[string]interface{}) DescribeCleanProgressesRequest {
 	return DescribeCleanProgressesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -4263,7 +4839,13 @@ func NewGetCleanProgressRequestFromJson(data string) (GetCleanProgressRequest, e
 
 func NewGetCleanProgressRequestFromDict(data map[string]interface{}) GetCleanProgressRequest {
 	return GetCleanProgressRequest{
-		TransactionId: core.CastString(data["transactionId"]),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
 	}
 }
 
@@ -4417,10 +4999,34 @@ func NewWaitCleanUserDataRequestFromJson(data string) (WaitCleanUserDataRequest,
 
 func NewWaitCleanUserDataRequestFromDict(data map[string]interface{}) WaitCleanUserDataRequest {
 	return WaitCleanUserDataRequest{
-		TransactionId:    core.CastString(data["transactionId"]),
-		UserId:           core.CastString(data["userId"]),
-		MicroserviceName: core.CastString(data["microserviceName"]),
-		TimeOffsetToken:  core.CastString(data["timeOffsetToken"]),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MicroserviceName: func() *string {
+			v, ok := data["microserviceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["microserviceName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4529,8 +5135,20 @@ func NewCleanUserDataRequestFromJson(data string) (CleanUserDataRequest, error) 
 
 func NewCleanUserDataRequestFromDict(data map[string]interface{}) CleanUserDataRequest {
 	return CleanUserDataRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4616,8 +5234,20 @@ func NewDescribeImportProgressesRequestFromJson(data string) (DescribeImportProg
 
 func NewDescribeImportProgressesRequestFromDict(data map[string]interface{}) DescribeImportProgressesRequest {
 	return DescribeImportProgressesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -4699,7 +5329,13 @@ func NewGetImportProgressRequestFromJson(data string) (GetImportProgressRequest,
 
 func NewGetImportProgressRequestFromDict(data map[string]interface{}) GetImportProgressRequest {
 	return GetImportProgressRequest{
-		TransactionId: core.CastString(data["transactionId"]),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
 	}
 }
 
@@ -4853,10 +5489,34 @@ func NewWaitImportUserDataRequestFromJson(data string) (WaitImportUserDataReques
 
 func NewWaitImportUserDataRequestFromDict(data map[string]interface{}) WaitImportUserDataRequest {
 	return WaitImportUserDataRequest{
-		TransactionId:    core.CastString(data["transactionId"]),
-		UserId:           core.CastString(data["userId"]),
-		MicroserviceName: core.CastString(data["microserviceName"]),
-		TimeOffsetToken:  core.CastString(data["timeOffsetToken"]),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MicroserviceName: func() *string {
+			v, ok := data["microserviceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["microserviceName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4965,8 +5625,20 @@ func NewPrepareImportUserDataRequestFromJson(data string) (PrepareImportUserData
 
 func NewPrepareImportUserDataRequestFromDict(data map[string]interface{}) PrepareImportUserDataRequest {
 	return PrepareImportUserDataRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -5097,9 +5769,27 @@ func NewImportUserDataRequestFromJson(data string) (ImportUserDataRequest, error
 
 func NewImportUserDataRequestFromDict(data map[string]interface{}) ImportUserDataRequest {
 	return ImportUserDataRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -5210,9 +5900,27 @@ func NewDescribeImportErrorLogsRequestFromJson(data string) (DescribeImportError
 
 func NewDescribeImportErrorLogsRequestFromDict(data map[string]interface{}) DescribeImportErrorLogsRequest {
 	return DescribeImportErrorLogsRequest{
-		TransactionId: core.CastString(data["transactionId"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -5319,8 +6027,20 @@ func NewGetImportErrorLogRequestFromJson(data string) (GetImportErrorLogRequest,
 
 func NewGetImportErrorLogRequestFromDict(data map[string]interface{}) GetImportErrorLogRequest {
 	return GetImportErrorLogRequest{
-		TransactionId: core.CastString(data["transactionId"]),
-		ErrorLogName:  core.CastString(data["errorLogName"]),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		ErrorLogName: func() *string {
+			v, ok := data["errorLogName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["errorLogName"])
+		}(),
 	}
 }
 

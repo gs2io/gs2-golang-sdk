@@ -94,8 +94,20 @@ func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesReques
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
 	return DescribeNamespacesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -209,10 +221,34 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -306,7 +342,13 @@ func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusReques
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -387,7 +429,13 @@ func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
 	return GetNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -500,10 +548,34 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		Description:        core.CastString(data["description"]),
-		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -597,7 +669,13 @@ func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, err
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -702,8 +780,20 @@ func NewDumpUserDataByUserIdRequestFromJson(data string) (DumpUserDataByUserIdRe
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
 	return DumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -809,8 +899,20 @@ func NewCheckDumpUserDataByUserIdRequestFromJson(data string) (CheckDumpUserData
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
 	return CheckDumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -916,8 +1018,20 @@ func NewCleanUserDataByUserIdRequestFromJson(data string) (CleanUserDataByUserId
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
 	return CleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1023,8 +1137,20 @@ func NewCheckCleanUserDataByUserIdRequestFromJson(data string) (CheckCleanUserDa
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
 	return CheckCleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1130,8 +1256,20 @@ func NewPrepareImportUserDataByUserIdRequestFromJson(data string) (PrepareImport
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
 	return PrepareImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1261,9 +1399,27 @@ func NewImportUserDataByUserIdRequestFromJson(data string) (ImportUserDataByUser
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
 	return ImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1394,9 +1550,27 @@ func NewCheckImportUserDataByUserIdRequestFromJson(data string) (CheckImportUser
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
 	return CheckImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1479,7 +1653,13 @@ func NewDescribeBalanceParameterModelsRequestFromJson(data string) (DescribeBala
 
 func NewDescribeBalanceParameterModelsRequestFromDict(data map[string]interface{}) DescribeBalanceParameterModelsRequest {
 	return DescribeBalanceParameterModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -1584,8 +1764,20 @@ func NewGetBalanceParameterModelRequestFromJson(data string) (GetBalanceParamete
 
 func NewGetBalanceParameterModelRequestFromDict(data map[string]interface{}) GetBalanceParameterModelRequest {
 	return GetBalanceParameterModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ParameterName: core.CastString(data["parameterName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
 	}
 }
 
@@ -1695,9 +1887,27 @@ func NewDescribeBalanceParameterModelMastersRequestFromJson(data string) (Descri
 
 func NewDescribeBalanceParameterModelMastersRequestFromDict(data map[string]interface{}) DescribeBalanceParameterModelMastersRequest {
 	return DescribeBalanceParameterModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1884,13 +2094,54 @@ func NewCreateBalanceParameterModelMasterRequestFromJson(data string) (CreateBal
 
 func NewCreateBalanceParameterModelMasterRequestFromDict(data map[string]interface{}) CreateBalanceParameterModelMasterRequest {
 	return CreateBalanceParameterModelMasterRequest{
-		NamespaceName:        core.CastString(data["namespaceName"]),
-		Name:                 core.CastString(data["name"]),
-		Description:          core.CastString(data["description"]),
-		Metadata:             core.CastString(data["metadata"]),
-		TotalValue:           core.CastInt64(data["totalValue"]),
-		InitialValueStrategy: core.CastString(data["initialValueStrategy"]),
-		Parameters:           CastBalanceParameterValueModels(core.CastArray(data["parameters"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		TotalValue: func() *int64 {
+			v, ok := data["totalValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalValue"])
+		}(),
+		InitialValueStrategy: func() *string {
+			v, ok := data["initialValueStrategy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["initialValueStrategy"])
+		}(),
+		Parameters: func() []BalanceParameterValueModel {
+			if data["parameters"] == nil {
+				return nil
+			}
+			return CastBalanceParameterValueModels(core.CastArray(data["parameters"]))
+		}(),
 	}
 }
 
@@ -2003,8 +2254,20 @@ func NewGetBalanceParameterModelMasterRequestFromJson(data string) (GetBalancePa
 
 func NewGetBalanceParameterModelMasterRequestFromDict(data map[string]interface{}) GetBalanceParameterModelMasterRequest {
 	return GetBalanceParameterModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ParameterName: core.CastString(data["parameterName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
 	}
 }
 
@@ -2190,13 +2453,54 @@ func NewUpdateBalanceParameterModelMasterRequestFromJson(data string) (UpdateBal
 
 func NewUpdateBalanceParameterModelMasterRequestFromDict(data map[string]interface{}) UpdateBalanceParameterModelMasterRequest {
 	return UpdateBalanceParameterModelMasterRequest{
-		NamespaceName:        core.CastString(data["namespaceName"]),
-		ParameterName:        core.CastString(data["parameterName"]),
-		Description:          core.CastString(data["description"]),
-		Metadata:             core.CastString(data["metadata"]),
-		TotalValue:           core.CastInt64(data["totalValue"]),
-		InitialValueStrategy: core.CastString(data["initialValueStrategy"]),
-		Parameters:           CastBalanceParameterValueModels(core.CastArray(data["parameters"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		TotalValue: func() *int64 {
+			v, ok := data["totalValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalValue"])
+		}(),
+		InitialValueStrategy: func() *string {
+			v, ok := data["initialValueStrategy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["initialValueStrategy"])
+		}(),
+		Parameters: func() []BalanceParameterValueModel {
+			if data["parameters"] == nil {
+				return nil
+			}
+			return CastBalanceParameterValueModels(core.CastArray(data["parameters"]))
+		}(),
 	}
 }
 
@@ -2309,8 +2613,20 @@ func NewDeleteBalanceParameterModelMasterRequestFromJson(data string) (DeleteBal
 
 func NewDeleteBalanceParameterModelMasterRequestFromDict(data map[string]interface{}) DeleteBalanceParameterModelMasterRequest {
 	return DeleteBalanceParameterModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ParameterName: core.CastString(data["parameterName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
 	}
 }
 
@@ -2392,7 +2708,13 @@ func NewDescribeRarityParameterModelsRequestFromJson(data string) (DescribeRarit
 
 func NewDescribeRarityParameterModelsRequestFromDict(data map[string]interface{}) DescribeRarityParameterModelsRequest {
 	return DescribeRarityParameterModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -2497,8 +2819,20 @@ func NewGetRarityParameterModelRequestFromJson(data string) (GetRarityParameterM
 
 func NewGetRarityParameterModelRequestFromDict(data map[string]interface{}) GetRarityParameterModelRequest {
 	return GetRarityParameterModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ParameterName: core.CastString(data["parameterName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
 	}
 }
 
@@ -2608,9 +2942,27 @@ func NewDescribeRarityParameterModelMastersRequestFromJson(data string) (Describ
 
 func NewDescribeRarityParameterModelMastersRequestFromDict(data map[string]interface{}) DescribeRarityParameterModelMastersRequest {
 	return DescribeRarityParameterModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -2777,13 +3129,53 @@ func NewCreateRarityParameterModelMasterRequestFromJson(data string) (CreateRari
 
 func NewCreateRarityParameterModelMasterRequestFromDict(data map[string]interface{}) CreateRarityParameterModelMasterRequest {
 	return CreateRarityParameterModelMasterRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		Name:                  core.CastString(data["name"]),
-		Description:           core.CastString(data["description"]),
-		Metadata:              core.CastString(data["metadata"]),
-		MaximumParameterCount: core.CastInt32(data["maximumParameterCount"]),
-		ParameterCounts:       CastRarityParameterCountModels(core.CastArray(data["parameterCounts"])),
-		Parameters:            CastRarityParameterValueModels(core.CastArray(data["parameters"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		MaximumParameterCount: func() *int32 {
+			v, ok := data["maximumParameterCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maximumParameterCount"])
+		}(),
+		ParameterCounts: func() []RarityParameterCountModel {
+			if data["parameterCounts"] == nil {
+				return nil
+			}
+			return CastRarityParameterCountModels(core.CastArray(data["parameterCounts"]))
+		}(),
+		Parameters: func() []RarityParameterValueModel {
+			if data["parameters"] == nil {
+				return nil
+			}
+			return CastRarityParameterValueModels(core.CastArray(data["parameters"]))
+		}(),
 	}
 }
 
@@ -2898,8 +3290,20 @@ func NewGetRarityParameterModelMasterRequestFromJson(data string) (GetRarityPara
 
 func NewGetRarityParameterModelMasterRequestFromDict(data map[string]interface{}) GetRarityParameterModelMasterRequest {
 	return GetRarityParameterModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ParameterName: core.CastString(data["parameterName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
 	}
 }
 
@@ -3065,13 +3469,53 @@ func NewUpdateRarityParameterModelMasterRequestFromJson(data string) (UpdateRari
 
 func NewUpdateRarityParameterModelMasterRequestFromDict(data map[string]interface{}) UpdateRarityParameterModelMasterRequest {
 	return UpdateRarityParameterModelMasterRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		ParameterName:         core.CastString(data["parameterName"]),
-		Description:           core.CastString(data["description"]),
-		Metadata:              core.CastString(data["metadata"]),
-		MaximumParameterCount: core.CastInt32(data["maximumParameterCount"]),
-		ParameterCounts:       CastRarityParameterCountModels(core.CastArray(data["parameterCounts"])),
-		Parameters:            CastRarityParameterValueModels(core.CastArray(data["parameters"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		MaximumParameterCount: func() *int32 {
+			v, ok := data["maximumParameterCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maximumParameterCount"])
+		}(),
+		ParameterCounts: func() []RarityParameterCountModel {
+			if data["parameterCounts"] == nil {
+				return nil
+			}
+			return CastRarityParameterCountModels(core.CastArray(data["parameterCounts"]))
+		}(),
+		Parameters: func() []RarityParameterValueModel {
+			if data["parameters"] == nil {
+				return nil
+			}
+			return CastRarityParameterValueModels(core.CastArray(data["parameters"]))
+		}(),
 	}
 }
 
@@ -3186,8 +3630,20 @@ func NewDeleteRarityParameterModelMasterRequestFromJson(data string) (DeleteRari
 
 func NewDeleteRarityParameterModelMasterRequestFromDict(data map[string]interface{}) DeleteRarityParameterModelMasterRequest {
 	return DeleteRarityParameterModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ParameterName: core.CastString(data["parameterName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
 	}
 }
 
@@ -3269,7 +3725,13 @@ func NewExportMasterRequestFromJson(data string) (ExportMasterRequest, error) {
 
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -3350,7 +3812,13 @@ func NewGetCurrentParameterMasterRequestFromJson(data string) (GetCurrentParamet
 
 func NewGetCurrentParameterMasterRequestFromDict(data map[string]interface{}) GetCurrentParameterMasterRequest {
 	return GetCurrentParameterMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -3455,8 +3923,20 @@ func NewUpdateCurrentParameterMasterRequestFromJson(data string) (UpdateCurrentP
 
 func NewUpdateCurrentParameterMasterRequestFromDict(data map[string]interface{}) UpdateCurrentParameterMasterRequest {
 	return UpdateCurrentParameterMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Settings:      core.CastString(data["settings"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -3542,8 +4022,20 @@ func NewUpdateCurrentParameterMasterFromGitHubRequestFromJson(data string) (Upda
 
 func NewUpdateCurrentParameterMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentParameterMasterFromGitHubRequest {
 	return UpdateCurrentParameterMasterFromGitHubRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		CheckoutSetting: func() *GitHubCheckoutSetting {
+			v, ok := data["checkoutSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -3706,11 +4198,41 @@ func NewDescribeBalanceParameterStatusesRequestFromJson(data string) (DescribeBa
 
 func NewDescribeBalanceParameterStatusesRequestFromDict(data map[string]interface{}) DescribeBalanceParameterStatusesRequest {
 	return DescribeBalanceParameterStatusesRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ParameterName: core.CastString(data["parameterName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -3895,12 +4417,48 @@ func NewDescribeBalanceParameterStatusesByUserIdRequestFromJson(data string) (De
 
 func NewDescribeBalanceParameterStatusesByUserIdRequestFromDict(data map[string]interface{}) DescribeBalanceParameterStatusesByUserIdRequest {
 	return DescribeBalanceParameterStatusesByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		ParameterName:   core.CastString(data["parameterName"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4058,10 +4616,34 @@ func NewGetBalanceParameterStatusRequestFromJson(data string) (GetBalanceParamet
 
 func NewGetBalanceParameterStatusRequestFromDict(data map[string]interface{}) GetBalanceParameterStatusRequest {
 	return GetBalanceParameterStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ParameterName: core.CastString(data["parameterName"]),
-		PropertyId:    core.CastString(data["propertyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
 	}
 }
 
@@ -4241,11 +4823,41 @@ func NewGetBalanceParameterStatusByUserIdRequestFromJson(data string) (GetBalanc
 
 func NewGetBalanceParameterStatusByUserIdRequestFromDict(data map[string]interface{}) GetBalanceParameterStatusByUserIdRequest {
 	return GetBalanceParameterStatusByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		ParameterName:   core.CastString(data["parameterName"]),
-		PropertyId:      core.CastString(data["propertyId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4427,11 +5039,41 @@ func NewDeleteBalanceParameterStatusByUserIdRequestFromJson(data string) (Delete
 
 func NewDeleteBalanceParameterStatusByUserIdRequestFromDict(data map[string]interface{}) DeleteBalanceParameterStatusByUserIdRequest {
 	return DeleteBalanceParameterStatusByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		ParameterName:   core.CastString(data["parameterName"]),
-		PropertyId:      core.CastString(data["propertyId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4640,12 +5282,48 @@ func NewReDrawBalanceParameterStatusByUserIdRequestFromJson(data string) (ReDraw
 
 func NewReDrawBalanceParameterStatusByUserIdRequestFromDict(data map[string]interface{}) ReDrawBalanceParameterStatusByUserIdRequest {
 	return ReDrawBalanceParameterStatusByUserIdRequest{
-		NamespaceName:       core.CastString(data["namespaceName"]),
-		UserId:              core.CastString(data["userId"]),
-		ParameterName:       core.CastString(data["parameterName"]),
-		PropertyId:          core.CastString(data["propertyId"]),
-		FixedParameterNames: core.CastStrings(core.CastArray(data["fixedParameterNames"])),
-		TimeOffsetToken:     core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		FixedParameterNames: func() []*string {
+			v, ok := data["fixedParameterNames"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4757,8 +5435,20 @@ func NewReDrawBalanceParameterStatusByStampSheetRequestFromJson(data string) (Re
 
 func NewReDrawBalanceParameterStatusByStampSheetRequestFromDict(data map[string]interface{}) ReDrawBalanceParameterStatusByStampSheetRequest {
 	return ReDrawBalanceParameterStatusByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -4941,12 +5631,47 @@ func NewSetBalanceParameterStatusByUserIdRequestFromJson(data string) (SetBalanc
 
 func NewSetBalanceParameterStatusByUserIdRequestFromDict(data map[string]interface{}) SetBalanceParameterStatusByUserIdRequest {
 	return SetBalanceParameterStatusByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		ParameterName:   core.CastString(data["parameterName"]),
-		PropertyId:      core.CastString(data["propertyId"]),
-		ParameterValues: CastBalanceParameterValues(core.CastArray(data["parameterValues"])),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		ParameterValues: func() []BalanceParameterValue {
+			if data["parameterValues"] == nil {
+				return nil
+			}
+			return CastBalanceParameterValues(core.CastArray(data["parameterValues"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -5058,8 +5783,20 @@ func NewSetBalanceParameterStatusByStampSheetRequestFromJson(data string) (SetBa
 
 func NewSetBalanceParameterStatusByStampSheetRequestFromDict(data map[string]interface{}) SetBalanceParameterStatusByStampSheetRequest {
 	return SetBalanceParameterStatusByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -5217,11 +5954,41 @@ func NewDescribeRarityParameterStatusesRequestFromJson(data string) (DescribeRar
 
 func NewDescribeRarityParameterStatusesRequestFromDict(data map[string]interface{}) DescribeRarityParameterStatusesRequest {
 	return DescribeRarityParameterStatusesRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ParameterName: core.CastString(data["parameterName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -5406,12 +6173,48 @@ func NewDescribeRarityParameterStatusesByUserIdRequestFromJson(data string) (Des
 
 func NewDescribeRarityParameterStatusesByUserIdRequestFromDict(data map[string]interface{}) DescribeRarityParameterStatusesByUserIdRequest {
 	return DescribeRarityParameterStatusesByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		ParameterName:   core.CastString(data["parameterName"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -5569,10 +6372,34 @@ func NewGetRarityParameterStatusRequestFromJson(data string) (GetRarityParameter
 
 func NewGetRarityParameterStatusRequestFromDict(data map[string]interface{}) GetRarityParameterStatusRequest {
 	return GetRarityParameterStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ParameterName: core.CastString(data["parameterName"]),
-		PropertyId:    core.CastString(data["propertyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
 	}
 }
 
@@ -5752,11 +6579,41 @@ func NewGetRarityParameterStatusByUserIdRequestFromJson(data string) (GetRarityP
 
 func NewGetRarityParameterStatusByUserIdRequestFromDict(data map[string]interface{}) GetRarityParameterStatusByUserIdRequest {
 	return GetRarityParameterStatusByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		ParameterName:   core.CastString(data["parameterName"]),
-		PropertyId:      core.CastString(data["propertyId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -5938,11 +6795,41 @@ func NewDeleteRarityParameterStatusByUserIdRequestFromJson(data string) (DeleteR
 
 func NewDeleteRarityParameterStatusByUserIdRequestFromDict(data map[string]interface{}) DeleteRarityParameterStatusByUserIdRequest {
 	return DeleteRarityParameterStatusByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		ParameterName:   core.CastString(data["parameterName"]),
-		PropertyId:      core.CastString(data["propertyId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -6151,12 +7038,48 @@ func NewReDrawRarityParameterStatusByUserIdRequestFromJson(data string) (ReDrawR
 
 func NewReDrawRarityParameterStatusByUserIdRequestFromDict(data map[string]interface{}) ReDrawRarityParameterStatusByUserIdRequest {
 	return ReDrawRarityParameterStatusByUserIdRequest{
-		NamespaceName:       core.CastString(data["namespaceName"]),
-		UserId:              core.CastString(data["userId"]),
-		ParameterName:       core.CastString(data["parameterName"]),
-		PropertyId:          core.CastString(data["propertyId"]),
-		FixedParameterNames: core.CastStrings(core.CastArray(data["fixedParameterNames"])),
-		TimeOffsetToken:     core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		FixedParameterNames: func() []*string {
+			v, ok := data["fixedParameterNames"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -6268,8 +7191,20 @@ func NewReDrawRarityParameterStatusByStampSheetRequestFromJson(data string) (ReD
 
 func NewReDrawRarityParameterStatusByStampSheetRequestFromDict(data map[string]interface{}) ReDrawRarityParameterStatusByStampSheetRequest {
 	return ReDrawRarityParameterStatusByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -6452,12 +7387,48 @@ func NewAddRarityParameterStatusByUserIdRequestFromJson(data string) (AddRarityP
 
 func NewAddRarityParameterStatusByUserIdRequestFromDict(data map[string]interface{}) AddRarityParameterStatusByUserIdRequest {
 	return AddRarityParameterStatusByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		ParameterName:   core.CastString(data["parameterName"]),
-		PropertyId:      core.CastString(data["propertyId"]),
-		Count:           core.CastInt32(data["count"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		Count: func() *int32 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["count"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -6567,8 +7538,20 @@ func NewAddRarityParameterStatusByStampSheetRequestFromJson(data string) (AddRar
 
 func NewAddRarityParameterStatusByStampSheetRequestFromDict(data map[string]interface{}) AddRarityParameterStatusByStampSheetRequest {
 	return AddRarityParameterStatusByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -6779,14 +7762,62 @@ func NewVerifyRarityParameterStatusRequestFromJson(data string) (VerifyRarityPar
 
 func NewVerifyRarityParameterStatusRequestFromDict(data map[string]interface{}) VerifyRarityParameterStatusRequest {
 	return VerifyRarityParameterStatusRequest{
-		NamespaceName:                   core.CastString(data["namespaceName"]),
-		ParameterName:                   core.CastString(data["parameterName"]),
-		AccessToken:                     core.CastString(data["accessToken"]),
-		PropertyId:                      core.CastString(data["propertyId"]),
-		VerifyType:                      core.CastString(data["verifyType"]),
-		ParameterValueName:              core.CastString(data["parameterValueName"]),
-		ParameterCount:                  core.CastInt32(data["parameterCount"]),
-		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		ParameterValueName: func() *string {
+			v, ok := data["parameterValueName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterValueName"])
+		}(),
+		ParameterCount: func() *int32 {
+			v, ok := data["parameterCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["parameterCount"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
 	}
 }
 
@@ -7027,15 +8058,69 @@ func NewVerifyRarityParameterStatusByUserIdRequestFromJson(data string) (VerifyR
 
 func NewVerifyRarityParameterStatusByUserIdRequestFromDict(data map[string]interface{}) VerifyRarityParameterStatusByUserIdRequest {
 	return VerifyRarityParameterStatusByUserIdRequest{
-		NamespaceName:                   core.CastString(data["namespaceName"]),
-		ParameterName:                   core.CastString(data["parameterName"]),
-		UserId:                          core.CastString(data["userId"]),
-		PropertyId:                      core.CastString(data["propertyId"]),
-		VerifyType:                      core.CastString(data["verifyType"]),
-		ParameterValueName:              core.CastString(data["parameterValueName"]),
-		ParameterCount:                  core.CastInt32(data["parameterCount"]),
-		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
-		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		ParameterValueName: func() *string {
+			v, ok := data["parameterValueName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterValueName"])
+		}(),
+		ParameterCount: func() *int32 {
+			v, ok := data["parameterCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["parameterCount"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -7148,8 +8233,20 @@ func NewVerifyRarityParameterStatusByStampTaskRequestFromJson(data string) (Veri
 
 func NewVerifyRarityParameterStatusByStampTaskRequestFromDict(data map[string]interface{}) VerifyRarityParameterStatusByStampTaskRequest {
 	return VerifyRarityParameterStatusByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -7332,12 +8429,47 @@ func NewSetRarityParameterStatusByUserIdRequestFromJson(data string) (SetRarityP
 
 func NewSetRarityParameterStatusByUserIdRequestFromDict(data map[string]interface{}) SetRarityParameterStatusByUserIdRequest {
 	return SetRarityParameterStatusByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		ParameterName:   core.CastString(data["parameterName"]),
-		PropertyId:      core.CastString(data["propertyId"]),
-		ParameterValues: CastRarityParameterValues(core.CastArray(data["parameterValues"])),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ParameterName: func() *string {
+			v, ok := data["parameterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameterName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		ParameterValues: func() []RarityParameterValue {
+			if data["parameterValues"] == nil {
+				return nil
+			}
+			return CastRarityParameterValues(core.CastArray(data["parameterValues"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -7449,8 +8581,20 @@ func NewSetRarityParameterStatusByStampSheetRequestFromJson(data string) (SetRar
 
 func NewSetRarityParameterStatusByStampSheetRequestFromDict(data map[string]interface{}) SetRarityParameterStatusByStampSheetRequest {
 	return SetRarityParameterStatusByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 

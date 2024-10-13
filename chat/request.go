@@ -94,8 +94,20 @@ func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesReques
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
 	return DescribeNamespacesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -237,17 +249,83 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:                  core.CastString(data["name"]),
-		Description:           core.CastString(data["description"]),
-		AllowCreateRoom:       core.CastBool(data["allowCreateRoom"]),
-		MessageLifeTimeDays:   core.CastInt32(data["messageLifeTimeDays"]),
-		PostMessageScript:     NewScriptSettingFromDict(core.CastMap(data["postMessageScript"])).Pointer(),
-		CreateRoomScript:      NewScriptSettingFromDict(core.CastMap(data["createRoomScript"])).Pointer(),
-		DeleteRoomScript:      NewScriptSettingFromDict(core.CastMap(data["deleteRoomScript"])).Pointer(),
-		SubscribeRoomScript:   NewScriptSettingFromDict(core.CastMap(data["subscribeRoomScript"])).Pointer(),
-		UnsubscribeRoomScript: NewScriptSettingFromDict(core.CastMap(data["unsubscribeRoomScript"])).Pointer(),
-		PostNotification:      NewNotificationSettingFromDict(core.CastMap(data["postNotification"])).Pointer(),
-		LogSetting:            NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		AllowCreateRoom: func() *bool {
+			v, ok := data["allowCreateRoom"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["allowCreateRoom"])
+		}(),
+		MessageLifeTimeDays: func() *int32 {
+			v, ok := data["messageLifeTimeDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["messageLifeTimeDays"])
+		}(),
+		PostMessageScript: func() *ScriptSetting {
+			v, ok := data["postMessageScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["postMessageScript"])).Pointer()
+		}(),
+		CreateRoomScript: func() *ScriptSetting {
+			v, ok := data["createRoomScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["createRoomScript"])).Pointer()
+		}(),
+		DeleteRoomScript: func() *ScriptSetting {
+			v, ok := data["deleteRoomScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["deleteRoomScript"])).Pointer()
+		}(),
+		SubscribeRoomScript: func() *ScriptSetting {
+			v, ok := data["subscribeRoomScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["subscribeRoomScript"])).Pointer()
+		}(),
+		UnsubscribeRoomScript: func() *ScriptSetting {
+			v, ok := data["unsubscribeRoomScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["unsubscribeRoomScript"])).Pointer()
+		}(),
+		PostNotification: func() *NotificationSetting {
+			v, ok := data["postNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["postNotification"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -373,7 +451,13 @@ func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusReques
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -454,7 +538,13 @@ func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
 	return GetNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -595,17 +685,83 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		Description:           core.CastString(data["description"]),
-		AllowCreateRoom:       core.CastBool(data["allowCreateRoom"]),
-		MessageLifeTimeDays:   core.CastInt32(data["messageLifeTimeDays"]),
-		PostMessageScript:     NewScriptSettingFromDict(core.CastMap(data["postMessageScript"])).Pointer(),
-		CreateRoomScript:      NewScriptSettingFromDict(core.CastMap(data["createRoomScript"])).Pointer(),
-		DeleteRoomScript:      NewScriptSettingFromDict(core.CastMap(data["deleteRoomScript"])).Pointer(),
-		SubscribeRoomScript:   NewScriptSettingFromDict(core.CastMap(data["subscribeRoomScript"])).Pointer(),
-		UnsubscribeRoomScript: NewScriptSettingFromDict(core.CastMap(data["unsubscribeRoomScript"])).Pointer(),
-		PostNotification:      NewNotificationSettingFromDict(core.CastMap(data["postNotification"])).Pointer(),
-		LogSetting:            NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		AllowCreateRoom: func() *bool {
+			v, ok := data["allowCreateRoom"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["allowCreateRoom"])
+		}(),
+		MessageLifeTimeDays: func() *int32 {
+			v, ok := data["messageLifeTimeDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["messageLifeTimeDays"])
+		}(),
+		PostMessageScript: func() *ScriptSetting {
+			v, ok := data["postMessageScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["postMessageScript"])).Pointer()
+		}(),
+		CreateRoomScript: func() *ScriptSetting {
+			v, ok := data["createRoomScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["createRoomScript"])).Pointer()
+		}(),
+		DeleteRoomScript: func() *ScriptSetting {
+			v, ok := data["deleteRoomScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["deleteRoomScript"])).Pointer()
+		}(),
+		SubscribeRoomScript: func() *ScriptSetting {
+			v, ok := data["subscribeRoomScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["subscribeRoomScript"])).Pointer()
+		}(),
+		UnsubscribeRoomScript: func() *ScriptSetting {
+			v, ok := data["unsubscribeRoomScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["unsubscribeRoomScript"])).Pointer()
+		}(),
+		PostNotification: func() *NotificationSetting {
+			v, ok := data["postNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["postNotification"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -731,7 +887,13 @@ func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, err
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -836,8 +998,20 @@ func NewDumpUserDataByUserIdRequestFromJson(data string) (DumpUserDataByUserIdRe
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
 	return DumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -943,8 +1117,20 @@ func NewCheckDumpUserDataByUserIdRequestFromJson(data string) (CheckDumpUserData
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
 	return CheckDumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1050,8 +1236,20 @@ func NewCleanUserDataByUserIdRequestFromJson(data string) (CleanUserDataByUserId
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
 	return CleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1157,8 +1355,20 @@ func NewCheckCleanUserDataByUserIdRequestFromJson(data string) (CheckCleanUserDa
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
 	return CheckCleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1264,8 +1474,20 @@ func NewPrepareImportUserDataByUserIdRequestFromJson(data string) (PrepareImport
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
 	return PrepareImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1395,9 +1617,27 @@ func NewImportUserDataByUserIdRequestFromJson(data string) (ImportUserDataByUser
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
 	return ImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1528,9 +1768,27 @@ func NewCheckImportUserDataByUserIdRequestFromJson(data string) (CheckImportUser
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
 	return CheckImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1641,9 +1899,27 @@ func NewDescribeRoomsRequestFromJson(data string) (DescribeRoomsRequest, error) 
 
 func NewDescribeRoomsRequestFromDict(data map[string]interface{}) DescribeRoomsRequest {
 	return DescribeRoomsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1850,12 +2126,48 @@ func NewCreateRoomRequestFromJson(data string) (CreateRoomRequest, error) {
 
 func NewCreateRoomRequestFromDict(data map[string]interface{}) CreateRoomRequest {
 	return CreateRoomRequest{
-		NamespaceName:    core.CastString(data["namespaceName"]),
-		AccessToken:      core.CastString(data["accessToken"]),
-		Name:             core.CastString(data["name"]),
-		Metadata:         core.CastString(data["metadata"]),
-		Password:         core.CastString(data["password"]),
-		WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		WhiteListUserIds: func() []*string {
+			v, ok := data["whiteListUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -2091,13 +2403,55 @@ func NewCreateRoomFromBackendRequestFromJson(data string) (CreateRoomFromBackend
 
 func NewCreateRoomFromBackendRequestFromDict(data map[string]interface{}) CreateRoomFromBackendRequest {
 	return CreateRoomFromBackendRequest{
-		NamespaceName:    core.CastString(data["namespaceName"]),
-		Name:             core.CastString(data["name"]),
-		UserId:           core.CastString(data["userId"]),
-		Metadata:         core.CastString(data["metadata"]),
-		Password:         core.CastString(data["password"]),
-		WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
-		TimeOffsetToken:  core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		WhiteListUserIds: func() []*string {
+			v, ok := data["whiteListUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2210,8 +2564,20 @@ func NewGetRoomRequestFromJson(data string) (GetRoomRequest, error) {
 
 func NewGetRoomRequestFromDict(data map[string]interface{}) GetRoomRequest {
 	return GetRoomRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RoomName:      core.CastString(data["roomName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
 	}
 }
 
@@ -2417,12 +2783,48 @@ func NewUpdateRoomRequestFromJson(data string) (UpdateRoomRequest, error) {
 
 func NewUpdateRoomRequestFromDict(data map[string]interface{}) UpdateRoomRequest {
 	return UpdateRoomRequest{
-		NamespaceName:    core.CastString(data["namespaceName"]),
-		RoomName:         core.CastString(data["roomName"]),
-		Metadata:         core.CastString(data["metadata"]),
-		Password:         core.CastString(data["password"]),
-		WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
-		AccessToken:      core.CastString(data["accessToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		WhiteListUserIds: func() []*string {
+			v, ok := data["whiteListUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -2658,13 +3060,55 @@ func NewUpdateRoomFromBackendRequestFromJson(data string) (UpdateRoomFromBackend
 
 func NewUpdateRoomFromBackendRequestFromDict(data map[string]interface{}) UpdateRoomFromBackendRequest {
 	return UpdateRoomFromBackendRequest{
-		NamespaceName:    core.CastString(data["namespaceName"]),
-		RoomName:         core.CastString(data["roomName"]),
-		Metadata:         core.CastString(data["metadata"]),
-		Password:         core.CastString(data["password"]),
-		WhiteListUserIds: core.CastStrings(core.CastArray(data["whiteListUserIds"])),
-		UserId:           core.CastString(data["userId"]),
-		TimeOffsetToken:  core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		WhiteListUserIds: func() []*string {
+			v, ok := data["whiteListUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2802,9 +3246,27 @@ func NewDeleteRoomRequestFromJson(data string) (DeleteRoomRequest, error) {
 
 func NewDeleteRoomRequestFromDict(data map[string]interface{}) DeleteRoomRequest {
 	return DeleteRoomRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RoomName:      core.CastString(data["roomName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -2960,10 +3422,34 @@ func NewDeleteRoomFromBackendRequestFromJson(data string) (DeleteRoomFromBackend
 
 func NewDeleteRoomFromBackendRequestFromDict(data map[string]interface{}) DeleteRoomFromBackendRequest {
 	return DeleteRoomFromBackendRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		RoomName:        core.CastString(data["roomName"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3127,12 +3613,48 @@ func NewDescribeMessagesRequestFromJson(data string) (DescribeMessagesRequest, e
 
 func NewDescribeMessagesRequestFromDict(data map[string]interface{}) DescribeMessagesRequest {
 	return DescribeMessagesRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RoomName:      core.CastString(data["roomName"]),
-		Password:      core.CastString(data["password"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		StartAt:       core.CastInt64(data["startAt"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		StartAt: func() *int64 {
+			v, ok := data["startAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["startAt"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -3322,13 +3844,55 @@ func NewDescribeMessagesByUserIdRequestFromJson(data string) (DescribeMessagesBy
 
 func NewDescribeMessagesByUserIdRequestFromDict(data map[string]interface{}) DescribeMessagesByUserIdRequest {
 	return DescribeMessagesByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		RoomName:        core.CastString(data["roomName"]),
-		Password:        core.CastString(data["password"]),
-		UserId:          core.CastString(data["userId"]),
-		StartAt:         core.CastInt64(data["startAt"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		StartAt: func() *int64 {
+			v, ok := data["startAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["startAt"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3491,11 +4055,41 @@ func NewDescribeLatestMessagesRequestFromJson(data string) (DescribeLatestMessag
 
 func NewDescribeLatestMessagesRequestFromDict(data map[string]interface{}) DescribeLatestMessagesRequest {
 	return DescribeLatestMessagesRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RoomName:      core.CastString(data["roomName"]),
-		Password:      core.CastString(data["password"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -3680,12 +4274,48 @@ func NewDescribeLatestMessagesByUserIdRequestFromJson(data string) (DescribeLate
 
 func NewDescribeLatestMessagesByUserIdRequestFromDict(data map[string]interface{}) DescribeLatestMessagesByUserIdRequest {
 	return DescribeLatestMessagesByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		RoomName:        core.CastString(data["roomName"]),
-		Password:        core.CastString(data["password"]),
-		UserId:          core.CastString(data["userId"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3872,12 +4502,48 @@ func NewPostRequestFromJson(data string) (PostRequest, error) {
 
 func NewPostRequestFromDict(data map[string]interface{}) PostRequest {
 	return PostRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RoomName:      core.CastString(data["roomName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		Category:      core.CastInt32(data["category"]),
-		Metadata:      core.CastString(data["metadata"]),
-		Password:      core.CastString(data["password"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Category: func() *int32 {
+			v, ok := data["category"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["category"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
 	}
 }
 
@@ -4088,13 +4754,55 @@ func NewPostByUserIdRequestFromJson(data string) (PostByUserIdRequest, error) {
 
 func NewPostByUserIdRequestFromDict(data map[string]interface{}) PostByUserIdRequest {
 	return PostByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		RoomName:        core.CastString(data["roomName"]),
-		UserId:          core.CastString(data["userId"]),
-		Category:        core.CastInt32(data["category"]),
-		Metadata:        core.CastString(data["metadata"]),
-		Password:        core.CastString(data["password"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Category: func() *int32 {
+			v, ok := data["category"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["category"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4277,11 +4985,41 @@ func NewGetMessageRequestFromJson(data string) (GetMessageRequest, error) {
 
 func NewGetMessageRequestFromDict(data map[string]interface{}) GetMessageRequest {
 	return GetMessageRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RoomName:      core.CastString(data["roomName"]),
-		MessageName:   core.CastString(data["messageName"]),
-		Password:      core.CastString(data["password"]),
-		AccessToken:   core.CastString(data["accessToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		MessageName: func() *string {
+			v, ok := data["messageName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["messageName"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -4486,12 +5224,48 @@ func NewGetMessageByUserIdRequestFromJson(data string) (GetMessageByUserIdReques
 
 func NewGetMessageByUserIdRequestFromDict(data map[string]interface{}) GetMessageByUserIdRequest {
 	return GetMessageByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		RoomName:        core.CastString(data["roomName"]),
-		MessageName:     core.CastString(data["messageName"]),
-		Password:        core.CastString(data["password"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		MessageName: func() *string {
+			v, ok := data["messageName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["messageName"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4674,11 +5448,41 @@ func NewDeleteMessageRequestFromJson(data string) (DeleteMessageRequest, error) 
 
 func NewDeleteMessageRequestFromDict(data map[string]interface{}) DeleteMessageRequest {
 	return DeleteMessageRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		RoomName:        core.CastString(data["roomName"]),
-		UserId:          core.CastString(data["userId"]),
-		MessageName:     core.CastString(data["messageName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MessageName: func() *string {
+			v, ok := data["messageName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["messageName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4815,10 +5619,34 @@ func NewDescribeSubscribesRequestFromJson(data string) (DescribeSubscribesReques
 
 func NewDescribeSubscribesRequestFromDict(data map[string]interface{}) DescribeSubscribesRequest {
 	return DescribeSubscribesRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -4978,11 +5806,41 @@ func NewDescribeSubscribesByUserIdRequestFromJson(data string) (DescribeSubscrib
 
 func NewDescribeSubscribesByUserIdRequestFromDict(data map[string]interface{}) DescribeSubscribesByUserIdRequest {
 	return DescribeSubscribesByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -5119,10 +5977,34 @@ func NewDescribeSubscribesByRoomNameRequestFromJson(data string) (DescribeSubscr
 
 func NewDescribeSubscribesByRoomNameRequestFromDict(data map[string]interface{}) DescribeSubscribesByRoomNameRequest {
 	return DescribeSubscribesByRoomNameRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RoomName:      core.CastString(data["roomName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -5259,10 +6141,33 @@ func NewSubscribeRequestFromJson(data string) (SubscribeRequest, error) {
 
 func NewSubscribeRequestFromDict(data map[string]interface{}) SubscribeRequest {
 	return SubscribeRequest{
-		NamespaceName:     core.CastString(data["namespaceName"]),
-		RoomName:          core.CastString(data["roomName"]),
-		AccessToken:       core.CastString(data["accessToken"]),
-		NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		NotificationTypes: func() []NotificationType {
+			if data["notificationTypes"] == nil {
+				return nil
+			}
+			return CastNotificationTypes(core.CastArray(data["notificationTypes"]))
+		}(),
 	}
 }
 
@@ -5425,11 +6330,40 @@ func NewSubscribeByUserIdRequestFromJson(data string) (SubscribeByUserIdRequest,
 
 func NewSubscribeByUserIdRequestFromDict(data map[string]interface{}) SubscribeByUserIdRequest {
 	return SubscribeByUserIdRequest{
-		NamespaceName:     core.CastString(data["namespaceName"]),
-		RoomName:          core.CastString(data["roomName"]),
-		UserId:            core.CastString(data["userId"]),
-		NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
-		TimeOffsetToken:   core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		NotificationTypes: func() []NotificationType {
+			if data["notificationTypes"] == nil {
+				return nil
+			}
+			return CastNotificationTypes(core.CastArray(data["notificationTypes"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -5564,9 +6498,27 @@ func NewGetSubscribeRequestFromJson(data string) (GetSubscribeRequest, error) {
 
 func NewGetSubscribeRequestFromDict(data map[string]interface{}) GetSubscribeRequest {
 	return GetSubscribeRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RoomName:      core.CastString(data["roomName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -5721,10 +6673,34 @@ func NewGetSubscribeByUserIdRequestFromJson(data string) (GetSubscribeByUserIdRe
 
 func NewGetSubscribeByUserIdRequestFromDict(data map[string]interface{}) GetSubscribeByUserIdRequest {
 	return GetSubscribeByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		RoomName:        core.CastString(data["roomName"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -5861,10 +6837,33 @@ func NewUpdateNotificationTypeRequestFromJson(data string) (UpdateNotificationTy
 
 func NewUpdateNotificationTypeRequestFromDict(data map[string]interface{}) UpdateNotificationTypeRequest {
 	return UpdateNotificationTypeRequest{
-		NamespaceName:     core.CastString(data["namespaceName"]),
-		RoomName:          core.CastString(data["roomName"]),
-		AccessToken:       core.CastString(data["accessToken"]),
-		NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		NotificationTypes: func() []NotificationType {
+			if data["notificationTypes"] == nil {
+				return nil
+			}
+			return CastNotificationTypes(core.CastArray(data["notificationTypes"]))
+		}(),
 	}
 }
 
@@ -6027,11 +7026,40 @@ func NewUpdateNotificationTypeByUserIdRequestFromJson(data string) (UpdateNotifi
 
 func NewUpdateNotificationTypeByUserIdRequestFromDict(data map[string]interface{}) UpdateNotificationTypeByUserIdRequest {
 	return UpdateNotificationTypeByUserIdRequest{
-		NamespaceName:     core.CastString(data["namespaceName"]),
-		RoomName:          core.CastString(data["roomName"]),
-		UserId:            core.CastString(data["userId"]),
-		NotificationTypes: CastNotificationTypes(core.CastArray(data["notificationTypes"])),
-		TimeOffsetToken:   core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		NotificationTypes: func() []NotificationType {
+			if data["notificationTypes"] == nil {
+				return nil
+			}
+			return CastNotificationTypes(core.CastArray(data["notificationTypes"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -6167,9 +7195,27 @@ func NewUnsubscribeRequestFromJson(data string) (UnsubscribeRequest, error) {
 
 func NewUnsubscribeRequestFromDict(data map[string]interface{}) UnsubscribeRequest {
 	return UnsubscribeRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RoomName:      core.CastString(data["roomName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -6325,10 +7371,34 @@ func NewUnsubscribeByUserIdRequestFromJson(data string) (UnsubscribeByUserIdRequ
 
 func NewUnsubscribeByUserIdRequestFromDict(data map[string]interface{}) UnsubscribeByUserIdRequest {
 	return UnsubscribeByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		RoomName:        core.CastString(data["roomName"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 

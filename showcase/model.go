@@ -206,17 +206,83 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:        core.CastString(data["namespaceId"]),
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		BuyScript:          NewScriptSettingFromDict(core.CastMap(data["buyScript"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		UpdatedAt:          core.CastInt64(data["updatedAt"]),
-		QueueNamespaceId:   core.CastString(data["queueNamespaceId"]),
-		KeyId:              core.CastString(data["keyId"]),
-		Revision:           core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		BuyScript: func() *ScriptSetting {
+			v, ok := data["buyScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["buyScript"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		QueueNamespaceId: func() *string {
+			v, ok := data["queueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["queueNamespaceId"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -473,16 +539,73 @@ func NewSalesItemMasterFromJson(data string) SalesItemMaster {
 
 func NewSalesItemMasterFromDict(data map[string]interface{}) SalesItemMaster {
 	return SalesItemMaster{
-		SalesItemId:    core.CastString(data["salesItemId"]),
-		Name:           core.CastString(data["name"]),
-		Description:    core.CastString(data["description"]),
-		Metadata:       core.CastString(data["metadata"]),
-		VerifyActions:  CastVerifyActions(core.CastArray(data["verifyActions"])),
-		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
-		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
-		CreatedAt:      core.CastInt64(data["createdAt"]),
-		UpdatedAt:      core.CastInt64(data["updatedAt"]),
-		Revision:       core.CastInt64(data["revision"]),
+		SalesItemId: func() *string {
+			v, ok := data["salesItemId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["salesItemId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		VerifyActions: func() []VerifyAction {
+			if data["verifyActions"] == nil {
+				return nil
+			}
+			return CastVerifyActions(core.CastArray(data["verifyActions"]))
+		}(),
+		ConsumeActions: func() []ConsumeAction {
+			if data["consumeActions"] == nil {
+				return nil
+			}
+			return CastConsumeActions(core.CastArray(data["consumeActions"]))
+		}(),
+		AcquireActions: func() []AcquireAction {
+			if data["acquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActions(core.CastArray(data["acquireActions"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -740,14 +863,62 @@ func NewSalesItemGroupMasterFromJson(data string) SalesItemGroupMaster {
 
 func NewSalesItemGroupMasterFromDict(data map[string]interface{}) SalesItemGroupMaster {
 	return SalesItemGroupMaster{
-		SalesItemGroupId: core.CastString(data["salesItemGroupId"]),
-		Name:             core.CastString(data["name"]),
-		Description:      core.CastString(data["description"]),
-		Metadata:         core.CastString(data["metadata"]),
-		SalesItemNames:   core.CastStrings(core.CastArray(data["salesItemNames"])),
-		CreatedAt:        core.CastInt64(data["createdAt"]),
-		UpdatedAt:        core.CastInt64(data["updatedAt"]),
-		Revision:         core.CastInt64(data["revision"]),
+		SalesItemGroupId: func() *string {
+			v, ok := data["salesItemGroupId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["salesItemGroupId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		SalesItemNames: func() []*string {
+			v, ok := data["salesItemNames"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -992,15 +1163,68 @@ func NewShowcaseMasterFromJson(data string) ShowcaseMaster {
 
 func NewShowcaseMasterFromDict(data map[string]interface{}) ShowcaseMaster {
 	return ShowcaseMaster{
-		ShowcaseId:         core.CastString(data["showcaseId"]),
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		Metadata:           core.CastString(data["metadata"]),
-		SalesPeriodEventId: core.CastString(data["salesPeriodEventId"]),
-		DisplayItems:       CastDisplayItemMasters(core.CastArray(data["displayItems"])),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		UpdatedAt:          core.CastInt64(data["updatedAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		ShowcaseId: func() *string {
+			v, ok := data["showcaseId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["showcaseId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		SalesPeriodEventId: func() *string {
+			v, ok := data["salesPeriodEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["salesPeriodEventId"])
+		}(),
+		DisplayItems: func() []DisplayItemMaster {
+			if data["displayItems"] == nil {
+				return nil
+			}
+			return CastDisplayItemMasters(core.CastArray(data["displayItems"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1162,8 +1386,20 @@ func NewCurrentShowcaseMasterFromJson(data string) CurrentShowcaseMaster {
 
 func NewCurrentShowcaseMasterFromDict(data map[string]interface{}) CurrentShowcaseMaster {
 	return CurrentShowcaseMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -1300,11 +1536,38 @@ func NewSalesItemFromJson(data string) SalesItem {
 
 func NewSalesItemFromDict(data map[string]interface{}) SalesItem {
 	return SalesItem{
-		Name:           core.CastString(data["name"]),
-		Metadata:       core.CastString(data["metadata"]),
-		VerifyActions:  CastVerifyActions(core.CastArray(data["verifyActions"])),
-		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
-		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		VerifyActions: func() []VerifyAction {
+			if data["verifyActions"] == nil {
+				return nil
+			}
+			return CastVerifyActions(core.CastArray(data["verifyActions"]))
+		}(),
+		ConsumeActions: func() []ConsumeAction {
+			if data["consumeActions"] == nil {
+				return nil
+			}
+			return CastConsumeActions(core.CastArray(data["consumeActions"]))
+		}(),
+		AcquireActions: func() []AcquireAction {
+			if data["acquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActions(core.CastArray(data["acquireActions"]))
+		}(),
 	}
 }
 
@@ -1454,9 +1717,26 @@ func NewSalesItemGroupFromJson(data string) SalesItemGroup {
 
 func NewSalesItemGroupFromDict(data map[string]interface{}) SalesItemGroup {
 	return SalesItemGroup{
-		Name:       core.CastString(data["name"]),
-		Metadata:   core.CastString(data["metadata"]),
-		SalesItems: CastSalesItems(core.CastArray(data["salesItems"])),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		SalesItems: func() []SalesItem {
+			if data["salesItems"] == nil {
+				return nil
+			}
+			return CastSalesItems(core.CastArray(data["salesItems"]))
+		}(),
 	}
 }
 
@@ -1640,11 +1920,40 @@ func NewShowcaseFromJson(data string) Showcase {
 
 func NewShowcaseFromDict(data map[string]interface{}) Showcase {
 	return Showcase{
-		ShowcaseId:         core.CastString(data["showcaseId"]),
-		Name:               core.CastString(data["name"]),
-		Metadata:           core.CastString(data["metadata"]),
-		SalesPeriodEventId: core.CastString(data["salesPeriodEventId"]),
-		DisplayItems:       CastDisplayItems(core.CastArray(data["displayItems"])),
+		ShowcaseId: func() *string {
+			v, ok := data["showcaseId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["showcaseId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		SalesPeriodEventId: func() *string {
+			v, ok := data["salesPeriodEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["salesPeriodEventId"])
+		}(),
+		DisplayItems: func() []DisplayItem {
+			if data["displayItems"] == nil {
+				return nil
+			}
+			return CastDisplayItems(core.CastArray(data["displayItems"]))
+		}(),
 	}
 }
 
@@ -1818,11 +2127,41 @@ func NewDisplayItemFromJson(data string) DisplayItem {
 
 func NewDisplayItemFromDict(data map[string]interface{}) DisplayItem {
 	return DisplayItem{
-		DisplayItemId:      core.CastString(data["displayItemId"]),
-		Type:               core.CastString(data["type"]),
-		SalesItem:          NewSalesItemFromDict(core.CastMap(data["salesItem"])).Pointer(),
-		SalesItemGroup:     NewSalesItemGroupFromDict(core.CastMap(data["salesItemGroup"])).Pointer(),
-		SalesPeriodEventId: core.CastString(data["salesPeriodEventId"]),
+		DisplayItemId: func() *string {
+			v, ok := data["displayItemId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["displayItemId"])
+		}(),
+		Type: func() *string {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["type"])
+		}(),
+		SalesItem: func() *SalesItem {
+			v, ok := data["salesItem"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSalesItemFromDict(core.CastMap(data["salesItem"])).Pointer()
+		}(),
+		SalesItemGroup: func() *SalesItemGroup {
+			v, ok := data["salesItemGroup"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSalesItemGroupFromDict(core.CastMap(data["salesItemGroup"])).Pointer()
+		}(),
+		SalesPeriodEventId: func() *string {
+			v, ok := data["salesPeriodEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["salesPeriodEventId"])
+		}(),
 	}
 }
 
@@ -2048,12 +2387,48 @@ func NewDisplayItemMasterFromJson(data string) DisplayItemMaster {
 
 func NewDisplayItemMasterFromDict(data map[string]interface{}) DisplayItemMaster {
 	return DisplayItemMaster{
-		DisplayItemId:      core.CastString(data["displayItemId"]),
-		Type:               core.CastString(data["type"]),
-		SalesItemName:      core.CastString(data["salesItemName"]),
-		SalesItemGroupName: core.CastString(data["salesItemGroupName"]),
-		SalesPeriodEventId: core.CastString(data["salesPeriodEventId"]),
-		Revision:           core.CastInt64(data["revision"]),
+		DisplayItemId: func() *string {
+			v, ok := data["displayItemId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["displayItemId"])
+		}(),
+		Type: func() *string {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["type"])
+		}(),
+		SalesItemName: func() *string {
+			v, ok := data["salesItemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["salesItemName"])
+		}(),
+		SalesItemGroupName: func() *string {
+			v, ok := data["salesItemGroupName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["salesItemGroupName"])
+		}(),
+		SalesPeriodEventId: func() *string {
+			v, ok := data["salesPeriodEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["salesPeriodEventId"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -2298,18 +2673,89 @@ func NewRandomShowcaseMasterFromJson(data string) RandomShowcaseMaster {
 
 func NewRandomShowcaseMasterFromDict(data map[string]interface{}) RandomShowcaseMaster {
 	return RandomShowcaseMaster{
-		ShowcaseId:            core.CastString(data["showcaseId"]),
-		Name:                  core.CastString(data["name"]),
-		Description:           core.CastString(data["description"]),
-		Metadata:              core.CastString(data["metadata"]),
-		MaximumNumberOfChoice: core.CastInt32(data["maximumNumberOfChoice"]),
-		DisplayItems:          CastRandomDisplayItemModels(core.CastArray(data["displayItems"])),
-		BaseTimestamp:         core.CastInt64(data["baseTimestamp"]),
-		ResetIntervalHours:    core.CastInt32(data["resetIntervalHours"]),
-		SalesPeriodEventId:    core.CastString(data["salesPeriodEventId"]),
-		CreatedAt:             core.CastInt64(data["createdAt"]),
-		UpdatedAt:             core.CastInt64(data["updatedAt"]),
-		Revision:              core.CastInt64(data["revision"]),
+		ShowcaseId: func() *string {
+			v, ok := data["showcaseId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["showcaseId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		MaximumNumberOfChoice: func() *int32 {
+			v, ok := data["maximumNumberOfChoice"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maximumNumberOfChoice"])
+		}(),
+		DisplayItems: func() []RandomDisplayItemModel {
+			if data["displayItems"] == nil {
+				return nil
+			}
+			return CastRandomDisplayItemModels(core.CastArray(data["displayItems"]))
+		}(),
+		BaseTimestamp: func() *int64 {
+			v, ok := data["baseTimestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["baseTimestamp"])
+		}(),
+		ResetIntervalHours: func() *int32 {
+			v, ok := data["resetIntervalHours"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["resetIntervalHours"])
+		}(),
+		SalesPeriodEventId: func() *string {
+			v, ok := data["salesPeriodEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["salesPeriodEventId"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -2550,14 +2996,61 @@ func NewRandomShowcaseFromJson(data string) RandomShowcase {
 
 func NewRandomShowcaseFromDict(data map[string]interface{}) RandomShowcase {
 	return RandomShowcase{
-		RandomShowcaseId:      core.CastString(data["randomShowcaseId"]),
-		Name:                  core.CastString(data["name"]),
-		Metadata:              core.CastString(data["metadata"]),
-		MaximumNumberOfChoice: core.CastInt32(data["maximumNumberOfChoice"]),
-		DisplayItems:          CastRandomDisplayItemModels(core.CastArray(data["displayItems"])),
-		BaseTimestamp:         core.CastInt64(data["baseTimestamp"]),
-		ResetIntervalHours:    core.CastInt32(data["resetIntervalHours"]),
-		SalesPeriodEventId:    core.CastString(data["salesPeriodEventId"]),
+		RandomShowcaseId: func() *string {
+			v, ok := data["randomShowcaseId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["randomShowcaseId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		MaximumNumberOfChoice: func() *int32 {
+			v, ok := data["maximumNumberOfChoice"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maximumNumberOfChoice"])
+		}(),
+		DisplayItems: func() []RandomDisplayItemModel {
+			if data["displayItems"] == nil {
+				return nil
+			}
+			return CastRandomDisplayItemModels(core.CastArray(data["displayItems"]))
+		}(),
+		BaseTimestamp: func() *int64 {
+			v, ok := data["baseTimestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["baseTimestamp"])
+		}(),
+		ResetIntervalHours: func() *int32 {
+			v, ok := data["resetIntervalHours"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["resetIntervalHours"])
+		}(),
+		SalesPeriodEventId: func() *string {
+			v, ok := data["salesPeriodEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["salesPeriodEventId"])
+		}(),
 	}
 }
 
@@ -2694,8 +3187,20 @@ func NewPurchaseCountFromJson(data string) PurchaseCount {
 
 func NewPurchaseCountFromDict(data map[string]interface{}) PurchaseCount {
 	return PurchaseCount{
-		Name:  core.CastString(data["name"]),
-		Count: core.CastInt32(data["count"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Count: func() *int32 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["count"])
+		}(),
 	}
 }
 
@@ -2864,14 +3369,59 @@ func NewRandomDisplayItemFromJson(data string) RandomDisplayItem {
 
 func NewRandomDisplayItemFromDict(data map[string]interface{}) RandomDisplayItem {
 	return RandomDisplayItem{
-		ShowcaseName:         core.CastString(data["showcaseName"]),
-		Name:                 core.CastString(data["name"]),
-		Metadata:             core.CastString(data["metadata"]),
-		VerifyActions:        CastVerifyActions(core.CastArray(data["verifyActions"])),
-		ConsumeActions:       CastConsumeActions(core.CastArray(data["consumeActions"])),
-		AcquireActions:       CastAcquireActions(core.CastArray(data["acquireActions"])),
-		CurrentPurchaseCount: core.CastInt32(data["currentPurchaseCount"]),
-		MaximumPurchaseCount: core.CastInt32(data["maximumPurchaseCount"]),
+		ShowcaseName: func() *string {
+			v, ok := data["showcaseName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["showcaseName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		VerifyActions: func() []VerifyAction {
+			if data["verifyActions"] == nil {
+				return nil
+			}
+			return CastVerifyActions(core.CastArray(data["verifyActions"]))
+		}(),
+		ConsumeActions: func() []ConsumeAction {
+			if data["consumeActions"] == nil {
+				return nil
+			}
+			return CastConsumeActions(core.CastArray(data["consumeActions"]))
+		}(),
+		AcquireActions: func() []AcquireAction {
+			if data["acquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActions(core.CastArray(data["acquireActions"]))
+		}(),
+		CurrentPurchaseCount: func() *int32 {
+			v, ok := data["currentPurchaseCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["currentPurchaseCount"])
+		}(),
+		MaximumPurchaseCount: func() *int32 {
+			v, ok := data["maximumPurchaseCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maximumPurchaseCount"])
+		}(),
 	}
 }
 
@@ -3052,13 +3602,52 @@ func NewRandomDisplayItemModelFromJson(data string) RandomDisplayItemModel {
 
 func NewRandomDisplayItemModelFromDict(data map[string]interface{}) RandomDisplayItemModel {
 	return RandomDisplayItemModel{
-		Name:           core.CastString(data["name"]),
-		Metadata:       core.CastString(data["metadata"]),
-		VerifyActions:  CastVerifyActions(core.CastArray(data["verifyActions"])),
-		ConsumeActions: CastConsumeActions(core.CastArray(data["consumeActions"])),
-		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
-		Stock:          core.CastInt32(data["stock"]),
-		Weight:         core.CastInt32(data["weight"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		VerifyActions: func() []VerifyAction {
+			if data["verifyActions"] == nil {
+				return nil
+			}
+			return CastVerifyActions(core.CastArray(data["verifyActions"]))
+		}(),
+		ConsumeActions: func() []ConsumeAction {
+			if data["consumeActions"] == nil {
+				return nil
+			}
+			return CastConsumeActions(core.CastArray(data["consumeActions"]))
+		}(),
+		AcquireActions: func() []AcquireAction {
+			if data["acquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActions(core.CastArray(data["acquireActions"]))
+		}(),
+		Stock: func() *int32 {
+			v, ok := data["stock"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["stock"])
+		}(),
+		Weight: func() *int32 {
+			v, ok := data["weight"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["weight"])
+		}(),
 	}
 }
 
@@ -3214,8 +3803,20 @@ func NewConsumeActionFromJson(data string) ConsumeAction {
 
 func NewConsumeActionFromDict(data map[string]interface{}) ConsumeAction {
 	return ConsumeAction{
-		Action:  core.CastString(data["action"]),
-		Request: core.CastString(data["request"]),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Request: func() *string {
+			v, ok := data["request"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["request"])
+		}(),
 	}
 }
 
@@ -3340,8 +3941,20 @@ func NewVerifyActionFromJson(data string) VerifyAction {
 
 func NewVerifyActionFromDict(data map[string]interface{}) VerifyAction {
 	return VerifyAction{
-		Action:  core.CastString(data["action"]),
-		Request: core.CastString(data["request"]),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Request: func() *string {
+			v, ok := data["request"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["request"])
+		}(),
 	}
 }
 
@@ -3466,8 +4079,20 @@ func NewAcquireActionFromJson(data string) AcquireAction {
 
 func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 	return AcquireAction{
-		Action:  core.CastString(data["action"]),
-		Request: core.CastString(data["request"]),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Request: func() *string {
+			v, ok := data["request"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["request"])
+		}(),
 	}
 }
 
@@ -3592,8 +4217,20 @@ func NewConfigFromJson(data string) Config {
 
 func NewConfigFromDict(data map[string]interface{}) Config {
 	return Config{
-		Key:   core.CastString(data["key"]),
-		Value: core.CastString(data["value"]),
+		Key: func() *string {
+			v, ok := data["key"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["key"])
+		}(),
+		Value: func() *string {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["value"])
+		}(),
 	}
 }
 
@@ -3838,13 +4475,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 
@@ -3970,7 +4649,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -4119,10 +4804,34 @@ func NewTransactionSettingFromJson(data string) TransactionSetting {
 
 func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
 	return TransactionSetting{
-		EnableAutoRun:          core.CastBool(data["enableAutoRun"]),
-		DistributorNamespaceId: core.CastString(data["distributorNamespaceId"]),
-		KeyId:                  core.CastString(data["keyId"]),
-		QueueNamespaceId:       core.CastString(data["queueNamespaceId"]),
+		EnableAutoRun: func() *bool {
+			v, ok := data["enableAutoRun"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableAutoRun"])
+		}(),
+		DistributorNamespaceId: func() *string {
+			v, ok := data["distributorNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorNamespaceId"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		QueueNamespaceId: func() *string {
+			v, ok := data["queueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["queueNamespaceId"])
+		}(),
 	}
 }
 
@@ -4305,10 +5014,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 

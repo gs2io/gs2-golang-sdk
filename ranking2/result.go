@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -276,7 +317,13 @@ func NewCheckDumpUserDataByUserIdResultFromJson(data string) CheckDumpUserDataBy
 
 func NewCheckDumpUserDataByUserIdResultFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdResult {
 	return CheckDumpUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -360,8 +407,20 @@ func NewPrepareImportUserDataByUserIdResultFromJson(data string) PrepareImportUs
 
 func NewPrepareImportUserDataByUserIdResultFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdResult {
 	return PrepareImportUserDataByUserIdResult{
-		UploadToken: core.CastString(data["uploadToken"]),
-		UploadUrl:   core.CastString(data["uploadUrl"]),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -419,7 +478,13 @@ func NewCheckImportUserDataByUserIdResultFromJson(data string) CheckImportUserDa
 
 func NewCheckImportUserDataByUserIdResultFromDict(data map[string]interface{}) CheckImportUserDataByUserIdResult {
 	return CheckImportUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -450,7 +515,12 @@ func NewDescribeGlobalRankingModelsResultFromJson(data string) DescribeGlobalRan
 
 func NewDescribeGlobalRankingModelsResultFromDict(data map[string]interface{}) DescribeGlobalRankingModelsResult {
 	return DescribeGlobalRankingModelsResult{
-		Items: CastGlobalRankingModels(core.CastArray(data["items"])),
+		Items: func() []GlobalRankingModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastGlobalRankingModels(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -483,7 +553,13 @@ func NewGetGlobalRankingModelResultFromJson(data string) GetGlobalRankingModelRe
 
 func NewGetGlobalRankingModelResultFromDict(data map[string]interface{}) GetGlobalRankingModelResult {
 	return GetGlobalRankingModelResult{
-		Item: NewGlobalRankingModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -520,8 +596,19 @@ func NewDescribeGlobalRankingModelMastersResultFromJson(data string) DescribeGlo
 
 func NewDescribeGlobalRankingModelMastersResultFromDict(data map[string]interface{}) DescribeGlobalRankingModelMastersResult {
 	return DescribeGlobalRankingModelMastersResult{
-		Items:         CastGlobalRankingModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []GlobalRankingModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastGlobalRankingModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -555,7 +642,13 @@ func NewCreateGlobalRankingModelMasterResultFromJson(data string) CreateGlobalRa
 
 func NewCreateGlobalRankingModelMasterResultFromDict(data map[string]interface{}) CreateGlobalRankingModelMasterResult {
 	return CreateGlobalRankingModelMasterResult{
-		Item: NewGlobalRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -591,7 +684,13 @@ func NewGetGlobalRankingModelMasterResultFromJson(data string) GetGlobalRankingM
 
 func NewGetGlobalRankingModelMasterResultFromDict(data map[string]interface{}) GetGlobalRankingModelMasterResult {
 	return GetGlobalRankingModelMasterResult{
-		Item: NewGlobalRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -627,7 +726,13 @@ func NewUpdateGlobalRankingModelMasterResultFromJson(data string) UpdateGlobalRa
 
 func NewUpdateGlobalRankingModelMasterResultFromDict(data map[string]interface{}) UpdateGlobalRankingModelMasterResult {
 	return UpdateGlobalRankingModelMasterResult{
-		Item: NewGlobalRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -663,7 +768,13 @@ func NewDeleteGlobalRankingModelMasterResultFromJson(data string) DeleteGlobalRa
 
 func NewDeleteGlobalRankingModelMasterResultFromDict(data map[string]interface{}) DeleteGlobalRankingModelMasterResult {
 	return DeleteGlobalRankingModelMasterResult{
-		Item: NewGlobalRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -700,8 +811,19 @@ func NewDescribeGlobalRankingScoresResultFromJson(data string) DescribeGlobalRan
 
 func NewDescribeGlobalRankingScoresResultFromDict(data map[string]interface{}) DescribeGlobalRankingScoresResult {
 	return DescribeGlobalRankingScoresResult{
-		Items:         CastGlobalRankingScores(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []GlobalRankingScore {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastGlobalRankingScores(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -736,8 +858,19 @@ func NewDescribeGlobalRankingScoresByUserIdResultFromJson(data string) DescribeG
 
 func NewDescribeGlobalRankingScoresByUserIdResultFromDict(data map[string]interface{}) DescribeGlobalRankingScoresByUserIdResult {
 	return DescribeGlobalRankingScoresByUserIdResult{
-		Items:         CastGlobalRankingScores(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []GlobalRankingScore {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastGlobalRankingScores(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -771,7 +904,13 @@ func NewPutGlobalRankingScoreResultFromJson(data string) PutGlobalRankingScoreRe
 
 func NewPutGlobalRankingScoreResultFromDict(data map[string]interface{}) PutGlobalRankingScoreResult {
 	return PutGlobalRankingScoreResult{
-		Item: NewGlobalRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -807,7 +946,13 @@ func NewPutGlobalRankingScoreByUserIdResultFromJson(data string) PutGlobalRankin
 
 func NewPutGlobalRankingScoreByUserIdResultFromDict(data map[string]interface{}) PutGlobalRankingScoreByUserIdResult {
 	return PutGlobalRankingScoreByUserIdResult{
-		Item: NewGlobalRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -843,7 +988,13 @@ func NewGetGlobalRankingScoreResultFromJson(data string) GetGlobalRankingScoreRe
 
 func NewGetGlobalRankingScoreResultFromDict(data map[string]interface{}) GetGlobalRankingScoreResult {
 	return GetGlobalRankingScoreResult{
-		Item: NewGlobalRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -879,7 +1030,13 @@ func NewGetGlobalRankingScoreByUserIdResultFromJson(data string) GetGlobalRankin
 
 func NewGetGlobalRankingScoreByUserIdResultFromDict(data map[string]interface{}) GetGlobalRankingScoreByUserIdResult {
 	return GetGlobalRankingScoreByUserIdResult{
-		Item: NewGlobalRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -915,7 +1072,13 @@ func NewDeleteGlobalRankingScoreByUserIdResultFromJson(data string) DeleteGlobal
 
 func NewDeleteGlobalRankingScoreByUserIdResultFromDict(data map[string]interface{}) DeleteGlobalRankingScoreByUserIdResult {
 	return DeleteGlobalRankingScoreByUserIdResult{
-		Item: NewGlobalRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -952,8 +1115,19 @@ func NewDescribeGlobalRankingReceivedRewardsResultFromJson(data string) Describe
 
 func NewDescribeGlobalRankingReceivedRewardsResultFromDict(data map[string]interface{}) DescribeGlobalRankingReceivedRewardsResult {
 	return DescribeGlobalRankingReceivedRewardsResult{
-		Items:         CastGlobalRankingReceivedRewards(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []GlobalRankingReceivedReward {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastGlobalRankingReceivedRewards(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -988,8 +1162,19 @@ func NewDescribeGlobalRankingReceivedRewardsByUserIdResultFromJson(data string) 
 
 func NewDescribeGlobalRankingReceivedRewardsByUserIdResultFromDict(data map[string]interface{}) DescribeGlobalRankingReceivedRewardsByUserIdResult {
 	return DescribeGlobalRankingReceivedRewardsByUserIdResult{
-		Items:         CastGlobalRankingReceivedRewards(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []GlobalRankingReceivedReward {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastGlobalRankingReceivedRewards(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1023,7 +1208,13 @@ func NewCreateGlobalRankingReceivedRewardResultFromJson(data string) CreateGloba
 
 func NewCreateGlobalRankingReceivedRewardResultFromDict(data map[string]interface{}) CreateGlobalRankingReceivedRewardResult {
 	return CreateGlobalRankingReceivedRewardResult{
-		Item: NewGlobalRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingReceivedReward {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1059,7 +1250,13 @@ func NewCreateGlobalRankingReceivedRewardByUserIdResultFromJson(data string) Cre
 
 func NewCreateGlobalRankingReceivedRewardByUserIdResultFromDict(data map[string]interface{}) CreateGlobalRankingReceivedRewardByUserIdResult {
 	return CreateGlobalRankingReceivedRewardByUserIdResult{
-		Item: NewGlobalRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingReceivedReward {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1100,12 +1297,47 @@ func NewReceiveGlobalRankingReceivedRewardResultFromJson(data string) ReceiveGlo
 
 func NewReceiveGlobalRankingReceivedRewardResultFromDict(data map[string]interface{}) ReceiveGlobalRankingReceivedRewardResult {
 	return ReceiveGlobalRankingReceivedRewardResult{
-		Item:                      NewGlobalRankingModelFromDict(core.CastMap(data["item"])).Pointer(),
-		AcquireActions:            CastAcquireActions(core.CastArray(data["acquireActions"])),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+		Item: func() *GlobalRankingModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		AcquireActions: func() []AcquireAction {
+			if data["acquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActions(core.CastArray(data["acquireActions"]))
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		StampSheetEncryptionKeyId: func() *string {
+			v, ok := data["stampSheetEncryptionKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheetEncryptionKeyId"])
+		}(),
+		AutoRunStampSheet: func() *bool {
+			v, ok := data["autoRunStampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["autoRunStampSheet"])
+		}(),
 	}
 }
 
@@ -1153,12 +1385,47 @@ func NewReceiveGlobalRankingReceivedRewardByUserIdResultFromJson(data string) Re
 
 func NewReceiveGlobalRankingReceivedRewardByUserIdResultFromDict(data map[string]interface{}) ReceiveGlobalRankingReceivedRewardByUserIdResult {
 	return ReceiveGlobalRankingReceivedRewardByUserIdResult{
-		Item:                      NewGlobalRankingModelFromDict(core.CastMap(data["item"])).Pointer(),
-		AcquireActions:            CastAcquireActions(core.CastArray(data["acquireActions"])),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+		Item: func() *GlobalRankingModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		AcquireActions: func() []AcquireAction {
+			if data["acquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActions(core.CastArray(data["acquireActions"]))
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		StampSheetEncryptionKeyId: func() *string {
+			v, ok := data["stampSheetEncryptionKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheetEncryptionKeyId"])
+		}(),
+		AutoRunStampSheet: func() *bool {
+			v, ok := data["autoRunStampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["autoRunStampSheet"])
+		}(),
 	}
 }
 
@@ -1201,7 +1468,13 @@ func NewGetGlobalRankingReceivedRewardResultFromJson(data string) GetGlobalRanki
 
 func NewGetGlobalRankingReceivedRewardResultFromDict(data map[string]interface{}) GetGlobalRankingReceivedRewardResult {
 	return GetGlobalRankingReceivedRewardResult{
-		Item: NewGlobalRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingReceivedReward {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1237,7 +1510,13 @@ func NewGetGlobalRankingReceivedRewardByUserIdResultFromJson(data string) GetGlo
 
 func NewGetGlobalRankingReceivedRewardByUserIdResultFromDict(data map[string]interface{}) GetGlobalRankingReceivedRewardByUserIdResult {
 	return GetGlobalRankingReceivedRewardByUserIdResult{
-		Item: NewGlobalRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingReceivedReward {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1273,7 +1552,13 @@ func NewDeleteGlobalRankingReceivedRewardByUserIdResultFromJson(data string) Del
 
 func NewDeleteGlobalRankingReceivedRewardByUserIdResultFromDict(data map[string]interface{}) DeleteGlobalRankingReceivedRewardByUserIdResult {
 	return DeleteGlobalRankingReceivedRewardByUserIdResult{
-		Item: NewGlobalRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingReceivedReward {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1310,8 +1595,20 @@ func NewCreateGlobalRankingReceivedRewardByStampTaskResultFromJson(data string) 
 
 func NewCreateGlobalRankingReceivedRewardByStampTaskResultFromDict(data map[string]interface{}) CreateGlobalRankingReceivedRewardByStampTaskResult {
 	return CreateGlobalRankingReceivedRewardByStampTaskResult{
-		Item:            NewGlobalRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
+		Item: func() *GlobalRankingReceivedReward {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
 	}
 }
 
@@ -1349,8 +1646,19 @@ func NewDescribeGlobalRankingsResultFromJson(data string) DescribeGlobalRankings
 
 func NewDescribeGlobalRankingsResultFromDict(data map[string]interface{}) DescribeGlobalRankingsResult {
 	return DescribeGlobalRankingsResult{
-		Items:         CastGlobalRankingDatas(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []GlobalRankingData {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastGlobalRankingDatas(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1385,8 +1693,19 @@ func NewDescribeGlobalRankingsByUserIdResultFromJson(data string) DescribeGlobal
 
 func NewDescribeGlobalRankingsByUserIdResultFromDict(data map[string]interface{}) DescribeGlobalRankingsByUserIdResult {
 	return DescribeGlobalRankingsByUserIdResult{
-		Items:         CastGlobalRankingDatas(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []GlobalRankingData {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastGlobalRankingDatas(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1420,7 +1739,13 @@ func NewGetGlobalRankingResultFromJson(data string) GetGlobalRankingResult {
 
 func NewGetGlobalRankingResultFromDict(data map[string]interface{}) GetGlobalRankingResult {
 	return GetGlobalRankingResult{
-		Item: NewGlobalRankingDataFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingData {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingDataFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1456,7 +1781,13 @@ func NewGetGlobalRankingByUserIdResultFromJson(data string) GetGlobalRankingByUs
 
 func NewGetGlobalRankingByUserIdResultFromDict(data map[string]interface{}) GetGlobalRankingByUserIdResult {
 	return GetGlobalRankingByUserIdResult{
-		Item: NewGlobalRankingDataFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GlobalRankingData {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingDataFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1492,7 +1823,12 @@ func NewDescribeClusterRankingModelsResultFromJson(data string) DescribeClusterR
 
 func NewDescribeClusterRankingModelsResultFromDict(data map[string]interface{}) DescribeClusterRankingModelsResult {
 	return DescribeClusterRankingModelsResult{
-		Items: CastClusterRankingModels(core.CastArray(data["items"])),
+		Items: func() []ClusterRankingModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastClusterRankingModels(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -1525,7 +1861,13 @@ func NewGetClusterRankingModelResultFromJson(data string) GetClusterRankingModel
 
 func NewGetClusterRankingModelResultFromDict(data map[string]interface{}) GetClusterRankingModelResult {
 	return GetClusterRankingModelResult{
-		Item: NewClusterRankingModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1562,8 +1904,19 @@ func NewDescribeClusterRankingModelMastersResultFromJson(data string) DescribeCl
 
 func NewDescribeClusterRankingModelMastersResultFromDict(data map[string]interface{}) DescribeClusterRankingModelMastersResult {
 	return DescribeClusterRankingModelMastersResult{
-		Items:         CastClusterRankingModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []ClusterRankingModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastClusterRankingModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1597,7 +1950,13 @@ func NewCreateClusterRankingModelMasterResultFromJson(data string) CreateCluster
 
 func NewCreateClusterRankingModelMasterResultFromDict(data map[string]interface{}) CreateClusterRankingModelMasterResult {
 	return CreateClusterRankingModelMasterResult{
-		Item: NewClusterRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1633,7 +1992,13 @@ func NewGetClusterRankingModelMasterResultFromJson(data string) GetClusterRankin
 
 func NewGetClusterRankingModelMasterResultFromDict(data map[string]interface{}) GetClusterRankingModelMasterResult {
 	return GetClusterRankingModelMasterResult{
-		Item: NewClusterRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1669,7 +2034,13 @@ func NewUpdateClusterRankingModelMasterResultFromJson(data string) UpdateCluster
 
 func NewUpdateClusterRankingModelMasterResultFromDict(data map[string]interface{}) UpdateClusterRankingModelMasterResult {
 	return UpdateClusterRankingModelMasterResult{
-		Item: NewClusterRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1705,7 +2076,13 @@ func NewDeleteClusterRankingModelMasterResultFromJson(data string) DeleteCluster
 
 func NewDeleteClusterRankingModelMasterResultFromDict(data map[string]interface{}) DeleteClusterRankingModelMasterResult {
 	return DeleteClusterRankingModelMasterResult{
-		Item: NewClusterRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1742,8 +2119,19 @@ func NewDescribeClusterRankingScoresResultFromJson(data string) DescribeClusterR
 
 func NewDescribeClusterRankingScoresResultFromDict(data map[string]interface{}) DescribeClusterRankingScoresResult {
 	return DescribeClusterRankingScoresResult{
-		Items:         CastClusterRankingScores(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []ClusterRankingScore {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastClusterRankingScores(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1778,8 +2166,19 @@ func NewDescribeClusterRankingScoresByUserIdResultFromJson(data string) Describe
 
 func NewDescribeClusterRankingScoresByUserIdResultFromDict(data map[string]interface{}) DescribeClusterRankingScoresByUserIdResult {
 	return DescribeClusterRankingScoresByUserIdResult{
-		Items:         CastClusterRankingScores(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []ClusterRankingScore {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastClusterRankingScores(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1813,7 +2212,13 @@ func NewPutClusterRankingScoreResultFromJson(data string) PutClusterRankingScore
 
 func NewPutClusterRankingScoreResultFromDict(data map[string]interface{}) PutClusterRankingScoreResult {
 	return PutClusterRankingScoreResult{
-		Item: NewClusterRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1849,7 +2254,13 @@ func NewPutClusterRankingScoreByUserIdResultFromJson(data string) PutClusterRank
 
 func NewPutClusterRankingScoreByUserIdResultFromDict(data map[string]interface{}) PutClusterRankingScoreByUserIdResult {
 	return PutClusterRankingScoreByUserIdResult{
-		Item: NewClusterRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1885,7 +2296,13 @@ func NewGetClusterRankingScoreResultFromJson(data string) GetClusterRankingScore
 
 func NewGetClusterRankingScoreResultFromDict(data map[string]interface{}) GetClusterRankingScoreResult {
 	return GetClusterRankingScoreResult{
-		Item: NewClusterRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1921,7 +2338,13 @@ func NewGetClusterRankingScoreByUserIdResultFromJson(data string) GetClusterRank
 
 func NewGetClusterRankingScoreByUserIdResultFromDict(data map[string]interface{}) GetClusterRankingScoreByUserIdResult {
 	return GetClusterRankingScoreByUserIdResult{
-		Item: NewClusterRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1957,7 +2380,13 @@ func NewDeleteClusterRankingScoreByUserIdResultFromJson(data string) DeleteClust
 
 func NewDeleteClusterRankingScoreByUserIdResultFromDict(data map[string]interface{}) DeleteClusterRankingScoreByUserIdResult {
 	return DeleteClusterRankingScoreByUserIdResult{
-		Item: NewClusterRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1994,8 +2423,19 @@ func NewDescribeClusterRankingReceivedRewardsResultFromJson(data string) Describ
 
 func NewDescribeClusterRankingReceivedRewardsResultFromDict(data map[string]interface{}) DescribeClusterRankingReceivedRewardsResult {
 	return DescribeClusterRankingReceivedRewardsResult{
-		Items:         CastClusterRankingReceivedRewards(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []ClusterRankingReceivedReward {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastClusterRankingReceivedRewards(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2030,8 +2470,19 @@ func NewDescribeClusterRankingReceivedRewardsByUserIdResultFromJson(data string)
 
 func NewDescribeClusterRankingReceivedRewardsByUserIdResultFromDict(data map[string]interface{}) DescribeClusterRankingReceivedRewardsByUserIdResult {
 	return DescribeClusterRankingReceivedRewardsByUserIdResult{
-		Items:         CastClusterRankingReceivedRewards(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []ClusterRankingReceivedReward {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastClusterRankingReceivedRewards(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2065,7 +2516,13 @@ func NewCreateClusterRankingReceivedRewardResultFromJson(data string) CreateClus
 
 func NewCreateClusterRankingReceivedRewardResultFromDict(data map[string]interface{}) CreateClusterRankingReceivedRewardResult {
 	return CreateClusterRankingReceivedRewardResult{
-		Item: NewClusterRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingReceivedReward {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2101,7 +2558,13 @@ func NewCreateClusterRankingReceivedRewardByUserIdResultFromJson(data string) Cr
 
 func NewCreateClusterRankingReceivedRewardByUserIdResultFromDict(data map[string]interface{}) CreateClusterRankingReceivedRewardByUserIdResult {
 	return CreateClusterRankingReceivedRewardByUserIdResult{
-		Item: NewClusterRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingReceivedReward {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2142,12 +2605,47 @@ func NewReceiveClusterRankingReceivedRewardResultFromJson(data string) ReceiveCl
 
 func NewReceiveClusterRankingReceivedRewardResultFromDict(data map[string]interface{}) ReceiveClusterRankingReceivedRewardResult {
 	return ReceiveClusterRankingReceivedRewardResult{
-		Item:                      NewClusterRankingModelFromDict(core.CastMap(data["item"])).Pointer(),
-		AcquireActions:            CastAcquireActions(core.CastArray(data["acquireActions"])),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+		Item: func() *ClusterRankingModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		AcquireActions: func() []AcquireAction {
+			if data["acquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActions(core.CastArray(data["acquireActions"]))
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		StampSheetEncryptionKeyId: func() *string {
+			v, ok := data["stampSheetEncryptionKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheetEncryptionKeyId"])
+		}(),
+		AutoRunStampSheet: func() *bool {
+			v, ok := data["autoRunStampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["autoRunStampSheet"])
+		}(),
 	}
 }
 
@@ -2195,12 +2693,47 @@ func NewReceiveClusterRankingReceivedRewardByUserIdResultFromJson(data string) R
 
 func NewReceiveClusterRankingReceivedRewardByUserIdResultFromDict(data map[string]interface{}) ReceiveClusterRankingReceivedRewardByUserIdResult {
 	return ReceiveClusterRankingReceivedRewardByUserIdResult{
-		Item:                      NewClusterRankingModelFromDict(core.CastMap(data["item"])).Pointer(),
-		AcquireActions:            CastAcquireActions(core.CastArray(data["acquireActions"])),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+		Item: func() *ClusterRankingModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		AcquireActions: func() []AcquireAction {
+			if data["acquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActions(core.CastArray(data["acquireActions"]))
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		StampSheetEncryptionKeyId: func() *string {
+			v, ok := data["stampSheetEncryptionKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheetEncryptionKeyId"])
+		}(),
+		AutoRunStampSheet: func() *bool {
+			v, ok := data["autoRunStampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["autoRunStampSheet"])
+		}(),
 	}
 }
 
@@ -2243,7 +2776,13 @@ func NewGetClusterRankingReceivedRewardResultFromJson(data string) GetClusterRan
 
 func NewGetClusterRankingReceivedRewardResultFromDict(data map[string]interface{}) GetClusterRankingReceivedRewardResult {
 	return GetClusterRankingReceivedRewardResult{
-		Item: NewClusterRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingReceivedReward {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2279,7 +2818,13 @@ func NewGetClusterRankingReceivedRewardByUserIdResultFromJson(data string) GetCl
 
 func NewGetClusterRankingReceivedRewardByUserIdResultFromDict(data map[string]interface{}) GetClusterRankingReceivedRewardByUserIdResult {
 	return GetClusterRankingReceivedRewardByUserIdResult{
-		Item: NewClusterRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingReceivedReward {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2315,7 +2860,13 @@ func NewDeleteClusterRankingReceivedRewardByUserIdResultFromJson(data string) De
 
 func NewDeleteClusterRankingReceivedRewardByUserIdResultFromDict(data map[string]interface{}) DeleteClusterRankingReceivedRewardByUserIdResult {
 	return DeleteClusterRankingReceivedRewardByUserIdResult{
-		Item: NewClusterRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingReceivedReward {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2352,8 +2903,20 @@ func NewCreateClusterRankingReceivedRewardByStampTaskResultFromJson(data string)
 
 func NewCreateClusterRankingReceivedRewardByStampTaskResultFromDict(data map[string]interface{}) CreateClusterRankingReceivedRewardByStampTaskResult {
 	return CreateClusterRankingReceivedRewardByStampTaskResult{
-		Item:            NewClusterRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
+		Item: func() *ClusterRankingReceivedReward {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingReceivedRewardFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
 	}
 }
 
@@ -2391,8 +2954,19 @@ func NewDescribeClusterRankingsResultFromJson(data string) DescribeClusterRankin
 
 func NewDescribeClusterRankingsResultFromDict(data map[string]interface{}) DescribeClusterRankingsResult {
 	return DescribeClusterRankingsResult{
-		Items:         CastClusterRankingDatas(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []ClusterRankingData {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastClusterRankingDatas(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2427,8 +3001,19 @@ func NewDescribeClusterRankingsByUserIdResultFromJson(data string) DescribeClust
 
 func NewDescribeClusterRankingsByUserIdResultFromDict(data map[string]interface{}) DescribeClusterRankingsByUserIdResult {
 	return DescribeClusterRankingsByUserIdResult{
-		Items:         CastClusterRankingDatas(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []ClusterRankingData {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastClusterRankingDatas(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2462,7 +3047,13 @@ func NewGetClusterRankingResultFromJson(data string) GetClusterRankingResult {
 
 func NewGetClusterRankingResultFromDict(data map[string]interface{}) GetClusterRankingResult {
 	return GetClusterRankingResult{
-		Item: NewClusterRankingDataFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingData {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingDataFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2498,7 +3089,13 @@ func NewGetClusterRankingByUserIdResultFromJson(data string) GetClusterRankingBy
 
 func NewGetClusterRankingByUserIdResultFromDict(data map[string]interface{}) GetClusterRankingByUserIdResult {
 	return GetClusterRankingByUserIdResult{
-		Item: NewClusterRankingDataFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ClusterRankingData {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingDataFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2534,7 +3131,12 @@ func NewDescribeSubscribeRankingModelsResultFromJson(data string) DescribeSubscr
 
 func NewDescribeSubscribeRankingModelsResultFromDict(data map[string]interface{}) DescribeSubscribeRankingModelsResult {
 	return DescribeSubscribeRankingModelsResult{
-		Items: CastSubscribeRankingModels(core.CastArray(data["items"])),
+		Items: func() []SubscribeRankingModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSubscribeRankingModels(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -2567,7 +3169,13 @@ func NewGetSubscribeRankingModelResultFromJson(data string) GetSubscribeRankingM
 
 func NewGetSubscribeRankingModelResultFromDict(data map[string]interface{}) GetSubscribeRankingModelResult {
 	return GetSubscribeRankingModelResult{
-		Item: NewSubscribeRankingModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeRankingModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2604,8 +3212,19 @@ func NewDescribeSubscribeRankingModelMastersResultFromJson(data string) Describe
 
 func NewDescribeSubscribeRankingModelMastersResultFromDict(data map[string]interface{}) DescribeSubscribeRankingModelMastersResult {
 	return DescribeSubscribeRankingModelMastersResult{
-		Items:         CastSubscribeRankingModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []SubscribeRankingModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSubscribeRankingModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2639,7 +3258,13 @@ func NewCreateSubscribeRankingModelMasterResultFromJson(data string) CreateSubsc
 
 func NewCreateSubscribeRankingModelMasterResultFromDict(data map[string]interface{}) CreateSubscribeRankingModelMasterResult {
 	return CreateSubscribeRankingModelMasterResult{
-		Item: NewSubscribeRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeRankingModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2675,7 +3300,13 @@ func NewGetSubscribeRankingModelMasterResultFromJson(data string) GetSubscribeRa
 
 func NewGetSubscribeRankingModelMasterResultFromDict(data map[string]interface{}) GetSubscribeRankingModelMasterResult {
 	return GetSubscribeRankingModelMasterResult{
-		Item: NewSubscribeRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeRankingModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2711,7 +3342,13 @@ func NewUpdateSubscribeRankingModelMasterResultFromJson(data string) UpdateSubsc
 
 func NewUpdateSubscribeRankingModelMasterResultFromDict(data map[string]interface{}) UpdateSubscribeRankingModelMasterResult {
 	return UpdateSubscribeRankingModelMasterResult{
-		Item: NewSubscribeRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeRankingModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2747,7 +3384,13 @@ func NewDeleteSubscribeRankingModelMasterResultFromJson(data string) DeleteSubsc
 
 func NewDeleteSubscribeRankingModelMasterResultFromDict(data map[string]interface{}) DeleteSubscribeRankingModelMasterResult {
 	return DeleteSubscribeRankingModelMasterResult{
-		Item: NewSubscribeRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeRankingModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2784,8 +3427,19 @@ func NewDescribeSubscribesResultFromJson(data string) DescribeSubscribesResult {
 
 func NewDescribeSubscribesResultFromDict(data map[string]interface{}) DescribeSubscribesResult {
 	return DescribeSubscribesResult{
-		Items:         CastSubscribeUsers(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []SubscribeUser {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSubscribeUsers(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2820,8 +3474,19 @@ func NewDescribeSubscribesByUserIdResultFromJson(data string) DescribeSubscribes
 
 func NewDescribeSubscribesByUserIdResultFromDict(data map[string]interface{}) DescribeSubscribesByUserIdResult {
 	return DescribeSubscribesByUserIdResult{
-		Items:         CastSubscribeUsers(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []SubscribeUser {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSubscribeUsers(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2855,7 +3520,13 @@ func NewAddSubscribeResultFromJson(data string) AddSubscribeResult {
 
 func NewAddSubscribeResultFromDict(data map[string]interface{}) AddSubscribeResult {
 	return AddSubscribeResult{
-		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2891,7 +3562,13 @@ func NewAddSubscribeByUserIdResultFromJson(data string) AddSubscribeByUserIdResu
 
 func NewAddSubscribeByUserIdResultFromDict(data map[string]interface{}) AddSubscribeByUserIdResult {
 	return AddSubscribeByUserIdResult{
-		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2928,8 +3605,19 @@ func NewDescribeSubscribeRankingScoresResultFromJson(data string) DescribeSubscr
 
 func NewDescribeSubscribeRankingScoresResultFromDict(data map[string]interface{}) DescribeSubscribeRankingScoresResult {
 	return DescribeSubscribeRankingScoresResult{
-		Items:         CastSubscribeRankingScores(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []SubscribeRankingScore {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSubscribeRankingScores(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2964,8 +3652,19 @@ func NewDescribeSubscribeRankingScoresByUserIdResultFromJson(data string) Descri
 
 func NewDescribeSubscribeRankingScoresByUserIdResultFromDict(data map[string]interface{}) DescribeSubscribeRankingScoresByUserIdResult {
 	return DescribeSubscribeRankingScoresByUserIdResult{
-		Items:         CastSubscribeRankingScores(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []SubscribeRankingScore {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSubscribeRankingScores(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2999,7 +3698,13 @@ func NewPutSubscribeRankingScoreResultFromJson(data string) PutSubscribeRankingS
 
 func NewPutSubscribeRankingScoreResultFromDict(data map[string]interface{}) PutSubscribeRankingScoreResult {
 	return PutSubscribeRankingScoreResult{
-		Item: NewSubscribeRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3035,7 +3740,13 @@ func NewPutSubscribeRankingScoreByUserIdResultFromJson(data string) PutSubscribe
 
 func NewPutSubscribeRankingScoreByUserIdResultFromDict(data map[string]interface{}) PutSubscribeRankingScoreByUserIdResult {
 	return PutSubscribeRankingScoreByUserIdResult{
-		Item: NewSubscribeRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3071,7 +3782,13 @@ func NewGetSubscribeRankingScoreResultFromJson(data string) GetSubscribeRankingS
 
 func NewGetSubscribeRankingScoreResultFromDict(data map[string]interface{}) GetSubscribeRankingScoreResult {
 	return GetSubscribeRankingScoreResult{
-		Item: NewSubscribeRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3107,7 +3824,13 @@ func NewGetSubscribeRankingScoreByUserIdResultFromJson(data string) GetSubscribe
 
 func NewGetSubscribeRankingScoreByUserIdResultFromDict(data map[string]interface{}) GetSubscribeRankingScoreByUserIdResult {
 	return GetSubscribeRankingScoreByUserIdResult{
-		Item: NewSubscribeRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3143,7 +3866,13 @@ func NewDeleteSubscribeRankingScoreByUserIdResultFromJson(data string) DeleteSub
 
 func NewDeleteSubscribeRankingScoreByUserIdResultFromDict(data map[string]interface{}) DeleteSubscribeRankingScoreByUserIdResult {
 	return DeleteSubscribeRankingScoreByUserIdResult{
-		Item: NewSubscribeRankingScoreFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3180,8 +3909,19 @@ func NewDescribeSubscribeRankingsResultFromJson(data string) DescribeSubscribeRa
 
 func NewDescribeSubscribeRankingsResultFromDict(data map[string]interface{}) DescribeSubscribeRankingsResult {
 	return DescribeSubscribeRankingsResult{
-		Items:         CastSubscribeRankingDatas(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []SubscribeRankingData {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSubscribeRankingDatas(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -3216,8 +3956,19 @@ func NewDescribeSubscribeRankingsByUserIdResultFromJson(data string) DescribeSub
 
 func NewDescribeSubscribeRankingsByUserIdResultFromDict(data map[string]interface{}) DescribeSubscribeRankingsByUserIdResult {
 	return DescribeSubscribeRankingsByUserIdResult{
-		Items:         CastSubscribeRankingDatas(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []SubscribeRankingData {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSubscribeRankingDatas(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -3251,7 +4002,13 @@ func NewGetSubscribeRankingResultFromJson(data string) GetSubscribeRankingResult
 
 func NewGetSubscribeRankingResultFromDict(data map[string]interface{}) GetSubscribeRankingResult {
 	return GetSubscribeRankingResult{
-		Item: NewSubscribeRankingDataFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeRankingData {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingDataFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3287,7 +4044,13 @@ func NewGetSubscribeRankingByUserIdResultFromJson(data string) GetSubscribeRanki
 
 func NewGetSubscribeRankingByUserIdResultFromDict(data map[string]interface{}) GetSubscribeRankingByUserIdResult {
 	return GetSubscribeRankingByUserIdResult{
-		Item: NewSubscribeRankingDataFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeRankingData {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingDataFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3323,7 +4086,13 @@ func NewExportMasterResultFromJson(data string) ExportMasterResult {
 
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
 	return ExportMasterResult{
-		Item: NewCurrentRankingMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentRankingMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentRankingMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3359,7 +4128,13 @@ func NewGetCurrentRankingMasterResultFromJson(data string) GetCurrentRankingMast
 
 func NewGetCurrentRankingMasterResultFromDict(data map[string]interface{}) GetCurrentRankingMasterResult {
 	return GetCurrentRankingMasterResult{
-		Item: NewCurrentRankingMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentRankingMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentRankingMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3395,7 +4170,13 @@ func NewUpdateCurrentRankingMasterResultFromJson(data string) UpdateCurrentRanki
 
 func NewUpdateCurrentRankingMasterResultFromDict(data map[string]interface{}) UpdateCurrentRankingMasterResult {
 	return UpdateCurrentRankingMasterResult{
-		Item: NewCurrentRankingMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentRankingMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentRankingMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3431,7 +4212,13 @@ func NewUpdateCurrentRankingMasterFromGitHubResultFromJson(data string) UpdateCu
 
 func NewUpdateCurrentRankingMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentRankingMasterFromGitHubResult {
 	return UpdateCurrentRankingMasterFromGitHubResult{
-		Item: NewCurrentRankingMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentRankingMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentRankingMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3467,7 +4254,13 @@ func NewGetSubscribeResultFromJson(data string) GetSubscribeResult {
 
 func NewGetSubscribeResultFromDict(data map[string]interface{}) GetSubscribeResult {
 	return GetSubscribeResult{
-		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3503,7 +4296,13 @@ func NewGetSubscribeByUserIdResultFromJson(data string) GetSubscribeByUserIdResu
 
 func NewGetSubscribeByUserIdResultFromDict(data map[string]interface{}) GetSubscribeByUserIdResult {
 	return GetSubscribeByUserIdResult{
-		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3539,7 +4338,13 @@ func NewDeleteSubscribeResultFromJson(data string) DeleteSubscribeResult {
 
 func NewDeleteSubscribeResultFromDict(data map[string]interface{}) DeleteSubscribeResult {
 	return DeleteSubscribeResult{
-		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3575,7 +4380,13 @@ func NewDeleteSubscribeByUserIdResultFromJson(data string) DeleteSubscribeByUser
 
 func NewDeleteSubscribeByUserIdResultFromDict(data map[string]interface{}) DeleteSubscribeByUserIdResult {
 	return DeleteSubscribeByUserIdResult{
-		Item: NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SubscribeUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 

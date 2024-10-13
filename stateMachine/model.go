@@ -192,19 +192,97 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:                 core.CastString(data["namespaceId"]),
-		Name:                        core.CastString(data["name"]),
-		Description:                 core.CastString(data["description"]),
-		SupportSpeculativeExecution: core.CastString(data["supportSpeculativeExecution"]),
-		TransactionSetting:          NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		StartScript:                 NewScriptSettingFromDict(core.CastMap(data["startScript"])).Pointer(),
-		PassScript:                  NewScriptSettingFromDict(core.CastMap(data["passScript"])).Pointer(),
-		ErrorScript:                 NewScriptSettingFromDict(core.CastMap(data["errorScript"])).Pointer(),
-		LowestStateMachineVersion:   core.CastInt64(data["lowestStateMachineVersion"]),
-		LogSetting:                  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:                   core.CastInt64(data["createdAt"]),
-		UpdatedAt:                   core.CastInt64(data["updatedAt"]),
-		Revision:                    core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		SupportSpeculativeExecution: func() *string {
+			v, ok := data["supportSpeculativeExecution"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["supportSpeculativeExecution"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		StartScript: func() *ScriptSetting {
+			v, ok := data["startScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["startScript"])).Pointer()
+		}(),
+		PassScript: func() *ScriptSetting {
+			v, ok := data["passScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["passScript"])).Pointer()
+		}(),
+		ErrorScript: func() *ScriptSetting {
+			v, ok := data["errorScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["errorScript"])).Pointer()
+		}(),
+		LowestStateMachineVersion: func() *int64 {
+			v, ok := data["lowestStateMachineVersion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["lowestStateMachineVersion"])
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -449,13 +527,55 @@ func NewStateMachineMasterFromJson(data string) StateMachineMaster {
 
 func NewStateMachineMasterFromDict(data map[string]interface{}) StateMachineMaster {
 	return StateMachineMaster{
-		StateMachineId:       core.CastString(data["stateMachineId"]),
-		MainStateMachineName: core.CastString(data["mainStateMachineName"]),
-		Payload:              core.CastString(data["payload"]),
-		Version:              core.CastInt64(data["version"]),
-		CreatedAt:            core.CastInt64(data["createdAt"]),
-		UpdatedAt:            core.CastInt64(data["updatedAt"]),
-		Revision:             core.CastInt64(data["revision"]),
+		StateMachineId: func() *string {
+			v, ok := data["stateMachineId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stateMachineId"])
+		}(),
+		MainStateMachineName: func() *string {
+			v, ok := data["mainStateMachineName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["mainStateMachineName"])
+		}(),
+		Payload: func() *string {
+			v, ok := data["payload"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["payload"])
+		}(),
+		Version: func() *int64 {
+			v, ok := data["version"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["version"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -753,20 +873,102 @@ func NewStatusFromJson(data string) Status {
 
 func NewStatusFromDict(data map[string]interface{}) Status {
 	return Status{
-		StatusId:                   core.CastString(data["statusId"]),
-		UserId:                     core.CastString(data["userId"]),
-		Name:                       core.CastString(data["name"]),
-		StateMachineVersion:        core.CastInt64(data["stateMachineVersion"]),
-		EnableSpeculativeExecution: core.CastString(data["enableSpeculativeExecution"]),
-		StateMachineDefinition:     core.CastString(data["stateMachineDefinition"]),
-		RandomStatus:               NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer(),
-		Stacks:                     CastStackEntries(core.CastArray(data["stacks"])),
-		Variables:                  CastVariables(core.CastArray(data["variables"])),
-		Status:                     core.CastString(data["status"]),
-		LastError:                  core.CastString(data["lastError"]),
-		TransitionCount:            core.CastInt32(data["transitionCount"]),
-		CreatedAt:                  core.CastInt64(data["createdAt"]),
-		UpdatedAt:                  core.CastInt64(data["updatedAt"]),
+		StatusId: func() *string {
+			v, ok := data["statusId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["statusId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		StateMachineVersion: func() *int64 {
+			v, ok := data["stateMachineVersion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["stateMachineVersion"])
+		}(),
+		EnableSpeculativeExecution: func() *string {
+			v, ok := data["enableSpeculativeExecution"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["enableSpeculativeExecution"])
+		}(),
+		StateMachineDefinition: func() *string {
+			v, ok := data["stateMachineDefinition"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stateMachineDefinition"])
+		}(),
+		RandomStatus: func() *RandomStatus {
+			v, ok := data["randomStatus"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRandomStatusFromDict(core.CastMap(data["randomStatus"])).Pointer()
+		}(),
+		Stacks: func() []StackEntry {
+			if data["stacks"] == nil {
+				return nil
+			}
+			return CastStackEntries(core.CastArray(data["stacks"]))
+		}(),
+		Variables: func() []Variable {
+			if data["variables"] == nil {
+				return nil
+			}
+			return CastVariables(core.CastArray(data["variables"]))
+		}(),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
+		LastError: func() *string {
+			v, ok := data["lastError"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["lastError"])
+		}(),
+		TransitionCount: func() *int32 {
+			v, ok := data["transitionCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["transitionCount"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
 	}
 }
 
@@ -960,8 +1162,20 @@ func NewStackEntryFromJson(data string) StackEntry {
 
 func NewStackEntryFromDict(data map[string]interface{}) StackEntry {
 	return StackEntry{
-		StateMachineName: core.CastString(data["stateMachineName"]),
-		TaskName:         core.CastString(data["taskName"]),
+		StateMachineName: func() *string {
+			v, ok := data["stateMachineName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stateMachineName"])
+		}(),
+		TaskName: func() *string {
+			v, ok := data["taskName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["taskName"])
+		}(),
 	}
 }
 
@@ -1086,8 +1300,20 @@ func NewVariableFromJson(data string) Variable {
 
 func NewVariableFromDict(data map[string]interface{}) Variable {
 	return Variable{
-		StateMachineName: core.CastString(data["stateMachineName"]),
-		Value:            core.CastString(data["value"]),
+		StateMachineName: func() *string {
+			v, ok := data["stateMachineName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stateMachineName"])
+		}(),
+		Value: func() *string {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["value"])
+		}(),
 	}
 }
 
@@ -1241,10 +1467,34 @@ func NewTransactionSettingFromJson(data string) TransactionSetting {
 
 func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
 	return TransactionSetting{
-		EnableAutoRun:          core.CastBool(data["enableAutoRun"]),
-		DistributorNamespaceId: core.CastString(data["distributorNamespaceId"]),
-		KeyId:                  core.CastString(data["keyId"]),
-		QueueNamespaceId:       core.CastString(data["queueNamespaceId"]),
+		EnableAutoRun: func() *bool {
+			v, ok := data["enableAutoRun"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableAutoRun"])
+		}(),
+		DistributorNamespaceId: func() *string {
+			v, ok := data["distributorNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorNamespaceId"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		QueueNamespaceId: func() *string {
+			v, ok := data["queueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["queueNamespaceId"])
+		}(),
 	}
 }
 
@@ -1363,9 +1613,27 @@ func NewEventFromJson(data string) Event {
 
 func NewEventFromDict(data map[string]interface{}) Event {
 	return Event{
-		EventType:        core.CastString(data["eventType"]),
-		ChangeStateEvent: NewChangeStateEventFromDict(core.CastMap(data["changeStateEvent"])).Pointer(),
-		EmitEvent:        NewEmitEventFromDict(core.CastMap(data["emitEvent"])).Pointer(),
+		EventType: func() *string {
+			v, ok := data["eventType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventType"])
+		}(),
+		ChangeStateEvent: func() *ChangeStateEvent {
+			v, ok := data["changeStateEvent"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewChangeStateEventFromDict(core.CastMap(data["changeStateEvent"])).Pointer()
+		}(),
+		EmitEvent: func() *EmitEvent {
+			v, ok := data["emitEvent"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewEmitEventFromDict(core.CastMap(data["emitEvent"])).Pointer()
+		}(),
 	}
 }
 
@@ -1509,9 +1777,27 @@ func NewChangeStateEventFromJson(data string) ChangeStateEvent {
 
 func NewChangeStateEventFromDict(data map[string]interface{}) ChangeStateEvent {
 	return ChangeStateEvent{
-		TaskName:  core.CastString(data["taskName"]),
-		Hash:      core.CastString(data["hash"]),
-		Timestamp: core.CastInt64(data["timestamp"]),
+		TaskName: func() *string {
+			v, ok := data["taskName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["taskName"])
+		}(),
+		Hash: func() *string {
+			v, ok := data["hash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["hash"])
+		}(),
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
 	}
 }
 
@@ -1645,9 +1931,27 @@ func NewEmitEventFromJson(data string) EmitEvent {
 
 func NewEmitEventFromDict(data map[string]interface{}) EmitEvent {
 	return EmitEvent{
-		Event:      core.CastString(data["event"]),
-		Parameters: core.CastString(data["parameters"]),
-		Timestamp:  core.CastInt64(data["timestamp"]),
+		Event: func() *string {
+			v, ok := data["event"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["event"])
+		}(),
+		Parameters: func() *string {
+			v, ok := data["parameters"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["parameters"])
+		}(),
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
 	}
 }
 
@@ -1737,8 +2041,19 @@ func NewRandomStatusFromJson(data string) RandomStatus {
 
 func NewRandomStatusFromDict(data map[string]interface{}) RandomStatus {
 	return RandomStatus{
-		Seed: core.CastInt64(data["seed"]),
-		Used: CastRandomUseds(core.CastArray(data["used"])),
+		Seed: func() *int64 {
+			v, ok := data["seed"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["seed"])
+		}(),
+		Used: func() []RandomUsed {
+			if data["used"] == nil {
+				return nil
+			}
+			return CastRandomUseds(core.CastArray(data["used"]))
+		}(),
 	}
 }
 
@@ -1825,8 +2140,20 @@ func NewRandomUsedFromJson(data string) RandomUsed {
 
 func NewRandomUsedFromDict(data map[string]interface{}) RandomUsed {
 	return RandomUsed{
-		Category: core.CastInt64(data["category"]),
-		Used:     core.CastInt64(data["used"]),
+		Category: func() *int64 {
+			v, ok := data["category"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["category"])
+		}(),
+		Used: func() *int64 {
+			v, ok := data["used"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["used"])
+		}(),
 	}
 }
 
@@ -1927,7 +2254,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -2095,10 +2428,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 

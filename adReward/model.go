@@ -172,19 +172,96 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:             core.CastString(data["namespaceId"]),
-		Name:                    core.CastString(data["name"]),
-		Description:             core.CastString(data["description"]),
-		Admob:                   NewAdMobFromDict(core.CastMap(data["admob"])).Pointer(),
-		UnityAd:                 NewUnityAdFromDict(core.CastMap(data["unityAd"])).Pointer(),
-		AppLovinMaxes:           CastAppLovinMaxes(core.CastArray(data["appLovinMaxes"])),
-		AcquirePointScript:      NewScriptSettingFromDict(core.CastMap(data["acquirePointScript"])).Pointer(),
-		ConsumePointScript:      NewScriptSettingFromDict(core.CastMap(data["consumePointScript"])).Pointer(),
-		ChangePointNotification: NewNotificationSettingFromDict(core.CastMap(data["changePointNotification"])).Pointer(),
-		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:               core.CastInt64(data["createdAt"]),
-		UpdatedAt:               core.CastInt64(data["updatedAt"]),
-		Revision:                core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Admob: func() *AdMob {
+			v, ok := data["admob"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAdMobFromDict(core.CastMap(data["admob"])).Pointer()
+		}(),
+		UnityAd: func() *UnityAd {
+			v, ok := data["unityAd"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewUnityAdFromDict(core.CastMap(data["unityAd"])).Pointer()
+		}(),
+		AppLovinMaxes: func() []AppLovinMax {
+			if data["appLovinMaxes"] == nil {
+				return nil
+			}
+			return CastAppLovinMaxes(core.CastArray(data["appLovinMaxes"]))
+		}(),
+		AcquirePointScript: func() *ScriptSetting {
+			v, ok := data["acquirePointScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["acquirePointScript"])).Pointer()
+		}(),
+		ConsumePointScript: func() *ScriptSetting {
+			v, ok := data["consumePointScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["consumePointScript"])).Pointer()
+		}(),
+		ChangePointNotification: func() *NotificationSetting {
+			v, ok := data["changePointNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["changePointNotification"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -412,12 +489,48 @@ func NewPointFromJson(data string) Point {
 
 func NewPointFromDict(data map[string]interface{}) Point {
 	return Point{
-		PointId:   core.CastString(data["pointId"]),
-		UserId:    core.CastString(data["userId"]),
-		Point:     core.CastInt64(data["point"]),
-		CreatedAt: core.CastInt64(data["createdAt"]),
-		UpdatedAt: core.CastInt64(data["updatedAt"]),
-		Revision:  core.CastInt64(data["revision"]),
+		PointId: func() *string {
+			v, ok := data["pointId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pointId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Point: func() *int64 {
+			v, ok := data["point"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["point"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -541,7 +654,13 @@ func NewAdMobFromJson(data string) AdMob {
 
 func NewAdMobFromDict(data map[string]interface{}) AdMob {
 	return AdMob{
-		AllowAdUnitIds: core.CastStrings(core.CastArray(data["allowAdUnitIds"])),
+		AllowAdUnitIds: func() []*string {
+			v, ok := data["allowAdUnitIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -642,7 +761,13 @@ func NewUnityAdFromJson(data string) UnityAd {
 
 func NewUnityAdFromDict(data map[string]interface{}) UnityAd {
 	return UnityAd{
-		Keys: core.CastStrings(core.CastArray(data["keys"])),
+		Keys: func() []*string {
+			v, ok := data["keys"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -764,8 +889,20 @@ func NewAppLovinMaxFromJson(data string) AppLovinMax {
 
 func NewAppLovinMaxFromDict(data map[string]interface{}) AppLovinMax {
 	return AppLovinMax{
-		AllowAdUnitId: core.CastString(data["allowAdUnitId"]),
-		EventKey:      core.CastString(data["eventKey"]),
+		AllowAdUnitId: func() *string {
+			v, ok := data["allowAdUnitId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["allowAdUnitId"])
+		}(),
+		EventKey: func() *string {
+			v, ok := data["eventKey"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventKey"])
+		}(),
 	}
 }
 
@@ -938,10 +1075,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 
@@ -1080,9 +1241,27 @@ func NewNotificationSettingFromJson(data string) NotificationSetting {
 
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
 	return NotificationSetting{
-		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
-		EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
-		Sound:                            core.CastString(data["sound"]),
+		GatewayNamespaceId: func() *string {
+			v, ok := data["gatewayNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatewayNamespaceId"])
+		}(),
+		EnableTransferMobileNotification: func() *bool {
+			v, ok := data["enableTransferMobileNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableTransferMobileNotification"])
+		}(),
+		Sound: func() *string {
+			v, ok := data["sound"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sound"])
+		}(),
 	}
 }
 
@@ -1188,7 +1367,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 

@@ -192,14 +192,62 @@ func NewStackFromJson(data string) Stack {
 
 func NewStackFromDict(data map[string]interface{}) Stack {
 	return Stack{
-		StackId:     core.CastString(data["stackId"]),
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		Template:    core.CastString(data["template"]),
-		Status:      core.CastString(data["status"]),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-		Revision:    core.CastInt64(data["revision"]),
+		StackId: func() *string {
+			v, ok := data["stackId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Template: func() *string {
+			v, ok := data["template"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["template"])
+		}(),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -533,17 +581,82 @@ func NewResourceFromJson(data string) Resource {
 
 func NewResourceFromDict(data map[string]interface{}) Resource {
 	return Resource{
-		ResourceId:      core.CastString(data["resourceId"]),
-		Type:            core.CastString(data["type"]),
-		Name:            core.CastString(data["name"]),
-		Request:         core.CastString(data["request"]),
-		Response:        core.CastString(data["response"]),
-		RollbackContext: core.CastString(data["rollbackContext"]),
-		RollbackRequest: core.CastString(data["rollbackRequest"]),
-		RollbackAfter:   core.CastStrings(core.CastArray(data["rollbackAfter"])),
-		OutputFields:    CastOutputFields(core.CastArray(data["outputFields"])),
-		WorkId:          core.CastString(data["workId"]),
-		CreatedAt:       core.CastInt64(data["createdAt"]),
+		ResourceId: func() *string {
+			v, ok := data["resourceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["resourceId"])
+		}(),
+		Type: func() *string {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["type"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Request: func() *string {
+			v, ok := data["request"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["request"])
+		}(),
+		Response: func() *string {
+			v, ok := data["response"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["response"])
+		}(),
+		RollbackContext: func() *string {
+			v, ok := data["rollbackContext"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rollbackContext"])
+		}(),
+		RollbackRequest: func() *string {
+			v, ok := data["rollbackRequest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rollbackRequest"])
+		}(),
+		RollbackAfter: func() []*string {
+			v, ok := data["rollbackAfter"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		OutputFields: func() []OutputField {
+			if data["outputFields"] == nil {
+				return nil
+			}
+			return CastOutputFields(core.CastArray(data["outputFields"]))
+		}(),
+		WorkId: func() *string {
+			v, ok := data["workId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["workId"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
 	}
 }
 
@@ -797,13 +910,55 @@ func NewEventFromJson(data string) Event {
 
 func NewEventFromDict(data map[string]interface{}) Event {
 	return Event{
-		EventId:      core.CastString(data["eventId"]),
-		Name:         core.CastString(data["name"]),
-		ResourceName: core.CastString(data["resourceName"]),
-		Type:         core.CastString(data["type"]),
-		Message:      core.CastString(data["message"]),
-		EventAt:      core.CastInt64(data["eventAt"]),
-		Revision:     core.CastInt64(data["revision"]),
+		EventId: func() *string {
+			v, ok := data["eventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		ResourceName: func() *string {
+			v, ok := data["resourceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["resourceName"])
+		}(),
+		Type: func() *string {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["type"])
+		}(),
+		Message: func() *string {
+			v, ok := data["message"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["message"])
+		}(),
+		EventAt: func() *int64 {
+			v, ok := data["eventAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["eventAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -981,10 +1136,34 @@ func NewOutputFromJson(data string) Output {
 
 func NewOutputFromDict(data map[string]interface{}) Output {
 	return Output{
-		OutputId:  core.CastString(data["outputId"]),
-		Name:      core.CastString(data["name"]),
-		Value:     core.CastString(data["value"]),
-		CreatedAt: core.CastInt64(data["createdAt"]),
+		OutputId: func() *string {
+			v, ok := data["outputId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["outputId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Value: func() *string {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["value"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
 	}
 }
 
@@ -1119,8 +1298,20 @@ func NewOutputFieldFromJson(data string) OutputField {
 
 func NewOutputFieldFromDict(data map[string]interface{}) OutputField {
 	return OutputField{
-		Name:      core.CastString(data["name"]),
-		FieldName: core.CastString(data["fieldName"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		FieldName: func() *string {
+			v, ok := data["fieldName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fieldName"])
+		}(),
 	}
 }
 
@@ -1269,9 +1460,27 @@ func NewChangeSetFromJson(data string) ChangeSet {
 
 func NewChangeSetFromDict(data map[string]interface{}) ChangeSet {
 	return ChangeSet{
-		ResourceName: core.CastString(data["resourceName"]),
-		ResourceType: core.CastString(data["resourceType"]),
-		Operation:    core.CastString(data["operation"]),
+		ResourceName: func() *string {
+			v, ok := data["resourceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["resourceName"])
+		}(),
+		ResourceType: func() *string {
+			v, ok := data["resourceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["resourceType"])
+		}(),
+		Operation: func() *string {
+			v, ok := data["operation"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["operation"])
+		}(),
 	}
 }
 
@@ -1521,13 +1730,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 

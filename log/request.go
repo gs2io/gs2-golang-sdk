@@ -94,8 +94,20 @@ func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesReques
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
 	return DescribeNamespacesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -373,16 +385,76 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:                core.CastString(data["name"]),
-		Description:         core.CastString(data["description"]),
-		Type:                core.CastString(data["type"]),
-		GcpCredentialJson:   core.CastString(data["gcpCredentialJson"]),
-		BigQueryDatasetName: core.CastString(data["bigQueryDatasetName"]),
-		LogExpireDays:       core.CastInt32(data["logExpireDays"]),
-		AwsRegion:           core.CastString(data["awsRegion"]),
-		AwsAccessKeyId:      core.CastString(data["awsAccessKeyId"]),
-		AwsSecretAccessKey:  core.CastString(data["awsSecretAccessKey"]),
-		FirehoseStreamName:  core.CastString(data["firehoseStreamName"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Type: func() *string {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["type"])
+		}(),
+		GcpCredentialJson: func() *string {
+			v, ok := data["gcpCredentialJson"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gcpCredentialJson"])
+		}(),
+		BigQueryDatasetName: func() *string {
+			v, ok := data["bigQueryDatasetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["bigQueryDatasetName"])
+		}(),
+		LogExpireDays: func() *int32 {
+			v, ok := data["logExpireDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["logExpireDays"])
+		}(),
+		AwsRegion: func() *string {
+			v, ok := data["awsRegion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["awsRegion"])
+		}(),
+		AwsAccessKeyId: func() *string {
+			v, ok := data["awsAccessKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["awsAccessKeyId"])
+		}(),
+		AwsSecretAccessKey: func() *string {
+			v, ok := data["awsSecretAccessKey"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["awsSecretAccessKey"])
+		}(),
+		FirehoseStreamName: func() *string {
+			v, ok := data["firehoseStreamName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["firehoseStreamName"])
+		}(),
 	}
 }
 
@@ -472,7 +544,13 @@ func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusReques
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -553,7 +631,13 @@ func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
 	return GetNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -830,16 +914,76 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:       core.CastString(data["namespaceName"]),
-		Description:         core.CastString(data["description"]),
-		Type:                core.CastString(data["type"]),
-		GcpCredentialJson:   core.CastString(data["gcpCredentialJson"]),
-		BigQueryDatasetName: core.CastString(data["bigQueryDatasetName"]),
-		LogExpireDays:       core.CastInt32(data["logExpireDays"]),
-		AwsRegion:           core.CastString(data["awsRegion"]),
-		AwsAccessKeyId:      core.CastString(data["awsAccessKeyId"]),
-		AwsSecretAccessKey:  core.CastString(data["awsSecretAccessKey"]),
-		FirehoseStreamName:  core.CastString(data["firehoseStreamName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Type: func() *string {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["type"])
+		}(),
+		GcpCredentialJson: func() *string {
+			v, ok := data["gcpCredentialJson"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gcpCredentialJson"])
+		}(),
+		BigQueryDatasetName: func() *string {
+			v, ok := data["bigQueryDatasetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["bigQueryDatasetName"])
+		}(),
+		LogExpireDays: func() *int32 {
+			v, ok := data["logExpireDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["logExpireDays"])
+		}(),
+		AwsRegion: func() *string {
+			v, ok := data["awsRegion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["awsRegion"])
+		}(),
+		AwsAccessKeyId: func() *string {
+			v, ok := data["awsAccessKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["awsAccessKeyId"])
+		}(),
+		AwsSecretAccessKey: func() *string {
+			v, ok := data["awsSecretAccessKey"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["awsSecretAccessKey"])
+		}(),
+		FirehoseStreamName: func() *string {
+			v, ok := data["firehoseStreamName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["firehoseStreamName"])
+		}(),
 	}
 }
 
@@ -929,7 +1073,13 @@ func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, err
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -944,20 +1094,19 @@ func (p DeleteNamespaceRequest) Pointer() *DeleteNamespaceRequest {
 }
 
 type QueryAccessLogRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	Service            *string `json:"service"`
-	Method             *string `json:"method"`
-	UserId             *string `json:"userId"`
-	Begin              *int64  `json:"begin"`
-	End                *int64  `json:"end"`
-	LongTerm           *bool   `json:"longTerm"`
-	PageToken          *string `json:"pageToken"`
-	Limit              *int32  `json:"limit"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Service         *string `json:"service"`
+	Method          *string `json:"method"`
+	UserId          *string `json:"userId"`
+	Begin           *int64  `json:"begin"`
+	End             *int64  `json:"end"`
+	LongTerm        *bool   `json:"longTerm"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func (p *QueryAccessLogRequest) UnmarshalJSON(data []byte) error {
@@ -1147,16 +1296,76 @@ func NewQueryAccessLogRequestFromJson(data string) (QueryAccessLogRequest, error
 
 func NewQueryAccessLogRequestFromDict(data map[string]interface{}) QueryAccessLogRequest {
 	return QueryAccessLogRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		Service:         core.CastString(data["service"]),
-		Method:          core.CastString(data["method"]),
-		UserId:          core.CastString(data["userId"]),
-		Begin:           core.CastInt64(data["begin"]),
-		End:             core.CastInt64(data["end"]),
-		LongTerm:        core.CastBool(data["longTerm"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Begin: func() *int64 {
+			v, ok := data["begin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["begin"])
+		}(),
+		End: func() *int64 {
+			v, ok := data["end"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["end"])
+		}(),
+		LongTerm: func() *bool {
+			v, ok := data["longTerm"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["longTerm"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1322,16 +1531,76 @@ func NewCountAccessLogRequestFromJson(data string) (CountAccessLogRequest, error
 
 func NewCountAccessLogRequestFromDict(data map[string]interface{}) CountAccessLogRequest {
 	return CountAccessLogRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		Service:         core.CastBool(data["service"]),
-		Method:          core.CastBool(data["method"]),
-		UserId:          core.CastBool(data["userId"]),
-		Begin:           core.CastInt64(data["begin"]),
-		End:             core.CastInt64(data["end"]),
-		LongTerm:        core.CastBool(data["longTerm"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Service: func() *bool {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["service"])
+		}(),
+		Method: func() *bool {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["method"])
+		}(),
+		UserId: func() *bool {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["userId"])
+		}(),
+		Begin: func() *int64 {
+			v, ok := data["begin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["begin"])
+		}(),
+		End: func() *int64 {
+			v, ok := data["end"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["end"])
+		}(),
+		LongTerm: func() *bool {
+			v, ok := data["longTerm"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["longTerm"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1355,21 +1624,20 @@ func (p CountAccessLogRequest) Pointer() *CountAccessLogRequest {
 }
 
 type QueryIssueStampSheetLogRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	Service            *string `json:"service"`
-	Method             *string `json:"method"`
-	UserId             *string `json:"userId"`
-	Action             *string `json:"action"`
-	Begin              *int64  `json:"begin"`
-	End                *int64  `json:"end"`
-	LongTerm           *bool   `json:"longTerm"`
-	PageToken          *string `json:"pageToken"`
-	Limit              *int32  `json:"limit"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Service         *string `json:"service"`
+	Method          *string `json:"method"`
+	UserId          *string `json:"userId"`
+	Action          *string `json:"action"`
+	Begin           *int64  `json:"begin"`
+	End             *int64  `json:"end"`
+	LongTerm        *bool   `json:"longTerm"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func (p *QueryIssueStampSheetLogRequest) UnmarshalJSON(data []byte) error {
@@ -1582,17 +1850,83 @@ func NewQueryIssueStampSheetLogRequestFromJson(data string) (QueryIssueStampShee
 
 func NewQueryIssueStampSheetLogRequestFromDict(data map[string]interface{}) QueryIssueStampSheetLogRequest {
 	return QueryIssueStampSheetLogRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		Service:         core.CastString(data["service"]),
-		Method:          core.CastString(data["method"]),
-		UserId:          core.CastString(data["userId"]),
-		Action:          core.CastString(data["action"]),
-		Begin:           core.CastInt64(data["begin"]),
-		End:             core.CastInt64(data["end"]),
-		LongTerm:        core.CastBool(data["longTerm"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Begin: func() *int64 {
+			v, ok := data["begin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["begin"])
+		}(),
+		End: func() *int64 {
+			v, ok := data["end"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["end"])
+		}(),
+		LongTerm: func() *bool {
+			v, ok := data["longTerm"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["longTerm"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1763,17 +2097,83 @@ func NewCountIssueStampSheetLogRequestFromJson(data string) (CountIssueStampShee
 
 func NewCountIssueStampSheetLogRequestFromDict(data map[string]interface{}) CountIssueStampSheetLogRequest {
 	return CountIssueStampSheetLogRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		Service:         core.CastBool(data["service"]),
-		Method:          core.CastBool(data["method"]),
-		UserId:          core.CastBool(data["userId"]),
-		Action:          core.CastBool(data["action"]),
-		Begin:           core.CastInt64(data["begin"]),
-		End:             core.CastInt64(data["end"]),
-		LongTerm:        core.CastBool(data["longTerm"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Service: func() *bool {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["service"])
+		}(),
+		Method: func() *bool {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["method"])
+		}(),
+		UserId: func() *bool {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["userId"])
+		}(),
+		Action: func() *bool {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["action"])
+		}(),
+		Begin: func() *int64 {
+			v, ok := data["begin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["begin"])
+		}(),
+		End: func() *int64 {
+			v, ok := data["end"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["end"])
+		}(),
+		LongTerm: func() *bool {
+			v, ok := data["longTerm"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["longTerm"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1798,21 +2198,20 @@ func (p CountIssueStampSheetLogRequest) Pointer() *CountIssueStampSheetLogReques
 }
 
 type QueryExecuteStampSheetLogRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	Service            *string `json:"service"`
-	Method             *string `json:"method"`
-	UserId             *string `json:"userId"`
-	Action             *string `json:"action"`
-	Begin              *int64  `json:"begin"`
-	End                *int64  `json:"end"`
-	LongTerm           *bool   `json:"longTerm"`
-	PageToken          *string `json:"pageToken"`
-	Limit              *int32  `json:"limit"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Service         *string `json:"service"`
+	Method          *string `json:"method"`
+	UserId          *string `json:"userId"`
+	Action          *string `json:"action"`
+	Begin           *int64  `json:"begin"`
+	End             *int64  `json:"end"`
+	LongTerm        *bool   `json:"longTerm"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func (p *QueryExecuteStampSheetLogRequest) UnmarshalJSON(data []byte) error {
@@ -2025,17 +2424,83 @@ func NewQueryExecuteStampSheetLogRequestFromJson(data string) (QueryExecuteStamp
 
 func NewQueryExecuteStampSheetLogRequestFromDict(data map[string]interface{}) QueryExecuteStampSheetLogRequest {
 	return QueryExecuteStampSheetLogRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		Service:         core.CastString(data["service"]),
-		Method:          core.CastString(data["method"]),
-		UserId:          core.CastString(data["userId"]),
-		Action:          core.CastString(data["action"]),
-		Begin:           core.CastInt64(data["begin"]),
-		End:             core.CastInt64(data["end"]),
-		LongTerm:        core.CastBool(data["longTerm"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Begin: func() *int64 {
+			v, ok := data["begin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["begin"])
+		}(),
+		End: func() *int64 {
+			v, ok := data["end"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["end"])
+		}(),
+		LongTerm: func() *bool {
+			v, ok := data["longTerm"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["longTerm"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2206,17 +2671,83 @@ func NewCountExecuteStampSheetLogRequestFromJson(data string) (CountExecuteStamp
 
 func NewCountExecuteStampSheetLogRequestFromDict(data map[string]interface{}) CountExecuteStampSheetLogRequest {
 	return CountExecuteStampSheetLogRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		Service:         core.CastBool(data["service"]),
-		Method:          core.CastBool(data["method"]),
-		UserId:          core.CastBool(data["userId"]),
-		Action:          core.CastBool(data["action"]),
-		Begin:           core.CastInt64(data["begin"]),
-		End:             core.CastInt64(data["end"]),
-		LongTerm:        core.CastBool(data["longTerm"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Service: func() *bool {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["service"])
+		}(),
+		Method: func() *bool {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["method"])
+		}(),
+		UserId: func() *bool {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["userId"])
+		}(),
+		Action: func() *bool {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["action"])
+		}(),
+		Begin: func() *int64 {
+			v, ok := data["begin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["begin"])
+		}(),
+		End: func() *int64 {
+			v, ok := data["end"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["end"])
+		}(),
+		LongTerm: func() *bool {
+			v, ok := data["longTerm"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["longTerm"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2241,21 +2772,20 @@ func (p CountExecuteStampSheetLogRequest) Pointer() *CountExecuteStampSheetLogRe
 }
 
 type QueryExecuteStampTaskLogRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	Service            *string `json:"service"`
-	Method             *string `json:"method"`
-	UserId             *string `json:"userId"`
-	Action             *string `json:"action"`
-	Begin              *int64  `json:"begin"`
-	End                *int64  `json:"end"`
-	LongTerm           *bool   `json:"longTerm"`
-	PageToken          *string `json:"pageToken"`
-	Limit              *int32  `json:"limit"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	Service         *string `json:"service"`
+	Method          *string `json:"method"`
+	UserId          *string `json:"userId"`
+	Action          *string `json:"action"`
+	Begin           *int64  `json:"begin"`
+	End             *int64  `json:"end"`
+	LongTerm        *bool   `json:"longTerm"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func (p *QueryExecuteStampTaskLogRequest) UnmarshalJSON(data []byte) error {
@@ -2468,17 +2998,83 @@ func NewQueryExecuteStampTaskLogRequestFromJson(data string) (QueryExecuteStampT
 
 func NewQueryExecuteStampTaskLogRequestFromDict(data map[string]interface{}) QueryExecuteStampTaskLogRequest {
 	return QueryExecuteStampTaskLogRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		Service:         core.CastString(data["service"]),
-		Method:          core.CastString(data["method"]),
-		UserId:          core.CastString(data["userId"]),
-		Action:          core.CastString(data["action"]),
-		Begin:           core.CastInt64(data["begin"]),
-		End:             core.CastInt64(data["end"]),
-		LongTerm:        core.CastBool(data["longTerm"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Begin: func() *int64 {
+			v, ok := data["begin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["begin"])
+		}(),
+		End: func() *int64 {
+			v, ok := data["end"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["end"])
+		}(),
+		LongTerm: func() *bool {
+			v, ok := data["longTerm"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["longTerm"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2649,17 +3245,83 @@ func NewCountExecuteStampTaskLogRequestFromJson(data string) (CountExecuteStampT
 
 func NewCountExecuteStampTaskLogRequestFromDict(data map[string]interface{}) CountExecuteStampTaskLogRequest {
 	return CountExecuteStampTaskLogRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		Service:         core.CastBool(data["service"]),
-		Method:          core.CastBool(data["method"]),
-		UserId:          core.CastBool(data["userId"]),
-		Action:          core.CastBool(data["action"]),
-		Begin:           core.CastInt64(data["begin"]),
-		End:             core.CastInt64(data["end"]),
-		LongTerm:        core.CastBool(data["longTerm"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Service: func() *bool {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["service"])
+		}(),
+		Method: func() *bool {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["method"])
+		}(),
+		UserId: func() *bool {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["userId"])
+		}(),
+		Action: func() *bool {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["action"])
+		}(),
+		Begin: func() *int64 {
+			v, ok := data["begin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["begin"])
+		}(),
+		End: func() *int64 {
+			v, ok := data["end"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["end"])
+		}(),
+		LongTerm: func() *bool {
+			v, ok := data["longTerm"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["longTerm"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2843,15 +3505,68 @@ func NewQueryInGameLogRequestFromJson(data string) (QueryInGameLogRequest, error
 
 func NewQueryInGameLogRequestFromDict(data map[string]interface{}) QueryInGameLogRequest {
 	return QueryInGameLogRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		Tags:            CastInGameLogTags(core.CastArray(data["tags"])),
-		Begin:           core.CastInt64(data["begin"]),
-		End:             core.CastInt64(data["end"]),
-		LongTerm:        core.CastBool(data["longTerm"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Tags: func() []InGameLogTag {
+			if data["tags"] == nil {
+				return nil
+			}
+			return CastInGameLogTags(core.CastArray(data["tags"]))
+		}(),
+		Begin: func() *int64 {
+			v, ok := data["begin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["begin"])
+		}(),
+		End: func() *int64 {
+			v, ok := data["end"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["end"])
+		}(),
+		LongTerm: func() *bool {
+			v, ok := data["longTerm"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["longTerm"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2995,10 +3710,33 @@ func NewSendInGameLogRequestFromJson(data string) (SendInGameLogRequest, error) 
 
 func NewSendInGameLogRequestFromDict(data map[string]interface{}) SendInGameLogRequest {
 	return SendInGameLogRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		Tags:          CastInGameLogTags(core.CastArray(data["tags"])),
-		Payload:       core.CastString(data["payload"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Tags: func() []InGameLogTag {
+			if data["tags"] == nil {
+				return nil
+			}
+			return CastInGameLogTags(core.CastArray(data["tags"]))
+		}(),
+		Payload: func() *string {
+			v, ok := data["payload"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["payload"])
+		}(),
 	}
 }
 
@@ -3161,11 +3899,40 @@ func NewSendInGameLogByUserIdRequestFromJson(data string) (SendInGameLogByUserId
 
 func NewSendInGameLogByUserIdRequestFromDict(data map[string]interface{}) SendInGameLogByUserIdRequest {
 	return SendInGameLogByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		Tags:            CastInGameLogTags(core.CastArray(data["tags"])),
-		Payload:         core.CastString(data["payload"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Tags: func() []InGameLogTag {
+			if data["tags"] == nil {
+				return nil
+			}
+			return CastInGameLogTags(core.CastArray(data["tags"]))
+		}(),
+		Payload: func() *string {
+			v, ok := data["payload"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["payload"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3186,18 +3953,17 @@ func (p SendInGameLogByUserIdRequest) Pointer() *SendInGameLogByUserIdRequest {
 }
 
 type QueryAccessLogWithTelemetryRequest struct {
-	SourceRequestId    *string `json:"sourceRequestId"`
-	RequestId          *string `json:"requestId"`
-	ContextStack       *string `json:"contextStack"`
-	DuplicationAvoider *string `json:"duplicationAvoider"`
-	NamespaceName      *string `json:"namespaceName"`
-	UserId             *string `json:"userId"`
-	Begin              *int64  `json:"begin"`
-	End                *int64  `json:"end"`
-	LongTerm           *bool   `json:"longTerm"`
-	PageToken          *string `json:"pageToken"`
-	Limit              *int32  `json:"limit"`
-	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	Begin           *int64  `json:"begin"`
+	End             *int64  `json:"end"`
+	LongTerm        *bool   `json:"longTerm"`
+	PageToken       *string `json:"pageToken"`
+	Limit           *int32  `json:"limit"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
 }
 
 func (p *QueryAccessLogWithTelemetryRequest) UnmarshalJSON(data []byte) error {
@@ -3341,14 +4107,62 @@ func NewQueryAccessLogWithTelemetryRequestFromJson(data string) (QueryAccessLogW
 
 func NewQueryAccessLogWithTelemetryRequestFromDict(data map[string]interface{}) QueryAccessLogWithTelemetryRequest {
 	return QueryAccessLogWithTelemetryRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		Begin:           core.CastInt64(data["begin"]),
-		End:             core.CastInt64(data["end"]),
-		LongTerm:        core.CastBool(data["longTerm"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Begin: func() *int64 {
+			v, ok := data["begin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["begin"])
+		}(),
+		End: func() *int64 {
+			v, ok := data["end"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["end"])
+		}(),
+		LongTerm: func() *bool {
+			v, ok := data["longTerm"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["longTerm"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3464,9 +4278,27 @@ func NewDescribeInsightsRequestFromJson(data string) (DescribeInsightsRequest, e
 
 func NewDescribeInsightsRequestFromDict(data map[string]interface{}) DescribeInsightsRequest {
 	return DescribeInsightsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -3549,7 +4381,13 @@ func NewCreateInsightRequestFromJson(data string) (CreateInsightRequest, error) 
 
 func NewCreateInsightRequestFromDict(data map[string]interface{}) CreateInsightRequest {
 	return CreateInsightRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -3654,8 +4492,20 @@ func NewGetInsightRequestFromJson(data string) (GetInsightRequest, error) {
 
 func NewGetInsightRequestFromDict(data map[string]interface{}) GetInsightRequest {
 	return GetInsightRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InsightName:   core.CastString(data["insightName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InsightName: func() *string {
+			v, ok := data["insightName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["insightName"])
+		}(),
 	}
 }
 
@@ -3761,8 +4611,20 @@ func NewDeleteInsightRequestFromJson(data string) (DeleteInsightRequest, error) 
 
 func NewDeleteInsightRequestFromDict(data map[string]interface{}) DeleteInsightRequest {
 	return DeleteInsightRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InsightName:   core.CastString(data["insightName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InsightName: func() *string {
+			v, ok := data["insightName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["insightName"])
+		}(),
 	}
 }
 

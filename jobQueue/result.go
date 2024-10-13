@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -276,7 +317,13 @@ func NewCheckDumpUserDataByUserIdResultFromJson(data string) CheckDumpUserDataBy
 
 func NewCheckDumpUserDataByUserIdResultFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdResult {
 	return CheckDumpUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -360,8 +407,20 @@ func NewPrepareImportUserDataByUserIdResultFromJson(data string) PrepareImportUs
 
 func NewPrepareImportUserDataByUserIdResultFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdResult {
 	return PrepareImportUserDataByUserIdResult{
-		UploadToken: core.CastString(data["uploadToken"]),
-		UploadUrl:   core.CastString(data["uploadUrl"]),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -419,7 +478,13 @@ func NewCheckImportUserDataByUserIdResultFromJson(data string) CheckImportUserDa
 
 func NewCheckImportUserDataByUserIdResultFromDict(data map[string]interface{}) CheckImportUserDataByUserIdResult {
 	return CheckImportUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -451,8 +516,19 @@ func NewDescribeJobsByUserIdResultFromJson(data string) DescribeJobsByUserIdResu
 
 func NewDescribeJobsByUserIdResultFromDict(data map[string]interface{}) DescribeJobsByUserIdResult {
 	return DescribeJobsByUserIdResult{
-		Items:         CastJobs(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Job {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastJobs(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -486,7 +562,13 @@ func NewGetJobByUserIdResultFromJson(data string) GetJobByUserIdResult {
 
 func NewGetJobByUserIdResultFromDict(data map[string]interface{}) GetJobByUserIdResult {
 	return GetJobByUserIdResult{
-		Item: NewJobFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Job {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJobFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -523,8 +605,19 @@ func NewPushByUserIdResultFromJson(data string) PushByUserIdResult {
 
 func NewPushByUserIdResultFromDict(data map[string]interface{}) PushByUserIdResult {
 	return PushByUserIdResult{
-		Items:   CastJobs(core.CastArray(data["items"])),
-		AutoRun: core.CastBool(data["autoRun"]),
+		Items: func() []Job {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastJobs(core.CastArray(data["items"]))
+		}(),
+		AutoRun: func() *bool {
+			v, ok := data["autoRun"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["autoRun"])
+		}(),
 	}
 }
 
@@ -560,9 +653,27 @@ func NewRunResultFromJson(data string) RunResult {
 
 func NewRunResultFromDict(data map[string]interface{}) RunResult {
 	return RunResult{
-		Item:      NewJobFromDict(core.CastMap(data["item"])).Pointer(),
-		Result:    NewJobResultBodyFromDict(core.CastMap(data["result"])).Pointer(),
-		IsLastJob: core.CastBool(data["isLastJob"]),
+		Item: func() *Job {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJobFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Result: func() *JobResultBody {
+			v, ok := data["result"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJobResultBodyFromDict(core.CastMap(data["result"])).Pointer()
+		}(),
+		IsLastJob: func() *bool {
+			v, ok := data["isLastJob"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["isLastJob"])
+		}(),
 	}
 }
 
@@ -607,9 +718,27 @@ func NewRunByUserIdResultFromJson(data string) RunByUserIdResult {
 
 func NewRunByUserIdResultFromDict(data map[string]interface{}) RunByUserIdResult {
 	return RunByUserIdResult{
-		Item:      NewJobFromDict(core.CastMap(data["item"])).Pointer(),
-		Result:    NewJobResultBodyFromDict(core.CastMap(data["result"])).Pointer(),
-		IsLastJob: core.CastBool(data["isLastJob"]),
+		Item: func() *Job {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJobFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Result: func() *JobResultBody {
+			v, ok := data["result"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJobResultBodyFromDict(core.CastMap(data["result"])).Pointer()
+		}(),
+		IsLastJob: func() *bool {
+			v, ok := data["isLastJob"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["isLastJob"])
+		}(),
 	}
 }
 
@@ -652,7 +781,13 @@ func NewDeleteJobResultFromJson(data string) DeleteJobResult {
 
 func NewDeleteJobResultFromDict(data map[string]interface{}) DeleteJobResult {
 	return DeleteJobResult{
-		Item: NewJobFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Job {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJobFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -688,7 +823,13 @@ func NewDeleteJobByUserIdResultFromJson(data string) DeleteJobByUserIdResult {
 
 func NewDeleteJobByUserIdResultFromDict(data map[string]interface{}) DeleteJobByUserIdResult {
 	return DeleteJobByUserIdResult{
-		Item: NewJobFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Job {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJobFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -725,8 +866,19 @@ func NewPushByStampSheetResultFromJson(data string) PushByStampSheetResult {
 
 func NewPushByStampSheetResultFromDict(data map[string]interface{}) PushByStampSheetResult {
 	return PushByStampSheetResult{
-		Items:   CastJobs(core.CastArray(data["items"])),
-		AutoRun: core.CastBool(data["autoRun"]),
+		Items: func() []Job {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastJobs(core.CastArray(data["items"]))
+		}(),
+		AutoRun: func() *bool {
+			v, ok := data["autoRun"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["autoRun"])
+		}(),
 	}
 }
 
@@ -761,8 +913,20 @@ func NewDeleteByStampTaskResultFromJson(data string) DeleteByStampTaskResult {
 
 func NewDeleteByStampTaskResultFromDict(data map[string]interface{}) DeleteByStampTaskResult {
 	return DeleteByStampTaskResult{
-		Item:            NewJobFromDict(core.CastMap(data["item"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
+		Item: func() *Job {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJobFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
 	}
 }
 
@@ -799,7 +963,13 @@ func NewGetJobResultResultFromJson(data string) GetJobResultResult {
 
 func NewGetJobResultResultFromDict(data map[string]interface{}) GetJobResultResult {
 	return GetJobResultResult{
-		Item: NewJobResultFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *JobResult {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJobResultFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -835,7 +1005,13 @@ func NewGetJobResultByUserIdResultFromJson(data string) GetJobResultByUserIdResu
 
 func NewGetJobResultByUserIdResultFromDict(data map[string]interface{}) GetJobResultByUserIdResult {
 	return GetJobResultByUserIdResult{
-		Item: NewJobResultFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *JobResult {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJobResultFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -872,8 +1048,19 @@ func NewDescribeDeadLetterJobsByUserIdResultFromJson(data string) DescribeDeadLe
 
 func NewDescribeDeadLetterJobsByUserIdResultFromDict(data map[string]interface{}) DescribeDeadLetterJobsByUserIdResult {
 	return DescribeDeadLetterJobsByUserIdResult{
-		Items:         CastDeadLetterJobs(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []DeadLetterJob {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastDeadLetterJobs(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -907,7 +1094,13 @@ func NewGetDeadLetterJobByUserIdResultFromJson(data string) GetDeadLetterJobByUs
 
 func NewGetDeadLetterJobByUserIdResultFromDict(data map[string]interface{}) GetDeadLetterJobByUserIdResult {
 	return GetDeadLetterJobByUserIdResult{
-		Item: NewDeadLetterJobFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DeadLetterJob {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDeadLetterJobFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -943,7 +1136,13 @@ func NewDeleteDeadLetterJobByUserIdResultFromJson(data string) DeleteDeadLetterJ
 
 func NewDeleteDeadLetterJobByUserIdResultFromDict(data map[string]interface{}) DeleteDeadLetterJobByUserIdResult {
 	return DeleteDeadLetterJobByUserIdResult{
-		Item: NewDeadLetterJobFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DeadLetterJob {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDeadLetterJobFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 

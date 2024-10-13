@@ -94,8 +94,20 @@ func NewDescribeUsersRequestFromJson(data string) (DescribeUsersRequest, error) 
 
 func NewDescribeUsersRequestFromDict(data map[string]interface{}) DescribeUsersRequest {
 	return DescribeUsersRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -201,8 +213,20 @@ func NewCreateUserRequestFromJson(data string) (CreateUserRequest, error) {
 
 func NewCreateUserRequestFromDict(data map[string]interface{}) CreateUserRequest {
 	return CreateUserRequest{
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
 	}
 }
 
@@ -308,8 +332,20 @@ func NewUpdateUserRequestFromJson(data string) (UpdateUserRequest, error) {
 
 func NewUpdateUserRequestFromDict(data map[string]interface{}) UpdateUserRequest {
 	return UpdateUserRequest{
-		UserName:    core.CastString(data["userName"]),
-		Description: core.CastString(data["description"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
 	}
 }
 
@@ -391,7 +427,13 @@ func NewGetUserRequestFromJson(data string) (GetUserRequest, error) {
 
 func NewGetUserRequestFromDict(data map[string]interface{}) GetUserRequest {
 	return GetUserRequest{
-		UserName: core.CastString(data["userName"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
 	}
 }
 
@@ -472,7 +514,13 @@ func NewDeleteUserRequestFromJson(data string) (DeleteUserRequest, error) {
 
 func NewDeleteUserRequestFromDict(data map[string]interface{}) DeleteUserRequest {
 	return DeleteUserRequest{
-		UserName: core.CastString(data["userName"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
 	}
 }
 
@@ -557,8 +605,20 @@ func NewDescribeSecurityPoliciesRequestFromJson(data string) (DescribeSecurityPo
 
 func NewDescribeSecurityPoliciesRequestFromDict(data map[string]interface{}) DescribeSecurityPoliciesRequest {
 	return DescribeSecurityPoliciesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -644,8 +704,20 @@ func NewDescribeCommonSecurityPoliciesRequestFromJson(data string) (DescribeComm
 
 func NewDescribeCommonSecurityPoliciesRequestFromDict(data map[string]interface{}) DescribeCommonSecurityPoliciesRequest {
 	return DescribeCommonSecurityPoliciesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -775,9 +847,27 @@ func NewCreateSecurityPolicyRequestFromJson(data string) (CreateSecurityPolicyRe
 
 func NewCreateSecurityPolicyRequestFromDict(data map[string]interface{}) CreateSecurityPolicyRequest {
 	return CreateSecurityPolicyRequest{
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		Policy:      core.CastString(data["policy"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Policy: func() *string {
+			v, ok := data["policy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["policy"])
+		}(),
 	}
 }
 
@@ -908,9 +998,27 @@ func NewUpdateSecurityPolicyRequestFromJson(data string) (UpdateSecurityPolicyRe
 
 func NewUpdateSecurityPolicyRequestFromDict(data map[string]interface{}) UpdateSecurityPolicyRequest {
 	return UpdateSecurityPolicyRequest{
-		SecurityPolicyName: core.CastString(data["securityPolicyName"]),
-		Description:        core.CastString(data["description"]),
-		Policy:             core.CastString(data["policy"]),
+		SecurityPolicyName: func() *string {
+			v, ok := data["securityPolicyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["securityPolicyName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Policy: func() *string {
+			v, ok := data["policy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["policy"])
+		}(),
 	}
 }
 
@@ -993,7 +1101,13 @@ func NewGetSecurityPolicyRequestFromJson(data string) (GetSecurityPolicyRequest,
 
 func NewGetSecurityPolicyRequestFromDict(data map[string]interface{}) GetSecurityPolicyRequest {
 	return GetSecurityPolicyRequest{
-		SecurityPolicyName: core.CastString(data["securityPolicyName"]),
+		SecurityPolicyName: func() *string {
+			v, ok := data["securityPolicyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["securityPolicyName"])
+		}(),
 	}
 }
 
@@ -1074,7 +1188,13 @@ func NewDeleteSecurityPolicyRequestFromJson(data string) (DeleteSecurityPolicyRe
 
 func NewDeleteSecurityPolicyRequestFromDict(data map[string]interface{}) DeleteSecurityPolicyRequest {
 	return DeleteSecurityPolicyRequest{
-		SecurityPolicyName: core.CastString(data["securityPolicyName"]),
+		SecurityPolicyName: func() *string {
+			v, ok := data["securityPolicyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["securityPolicyName"])
+		}(),
 	}
 }
 
@@ -1183,9 +1303,27 @@ func NewDescribeIdentifiersRequestFromJson(data string) (DescribeIdentifiersRequ
 
 func NewDescribeIdentifiersRequestFromDict(data map[string]interface{}) DescribeIdentifiersRequest {
 	return DescribeIdentifiersRequest{
-		UserName:  core.CastString(data["userName"]),
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1268,7 +1406,13 @@ func NewCreateIdentifierRequestFromJson(data string) (CreateIdentifierRequest, e
 
 func NewCreateIdentifierRequestFromDict(data map[string]interface{}) CreateIdentifierRequest {
 	return CreateIdentifierRequest{
-		UserName: core.CastString(data["userName"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
 	}
 }
 
@@ -1373,8 +1517,20 @@ func NewGetIdentifierRequestFromJson(data string) (GetIdentifierRequest, error) 
 
 func NewGetIdentifierRequestFromDict(data map[string]interface{}) GetIdentifierRequest {
 	return GetIdentifierRequest{
-		UserName: core.CastString(data["userName"]),
-		ClientId: core.CastString(data["clientId"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		ClientId: func() *string {
+			v, ok := data["clientId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["clientId"])
+		}(),
 	}
 }
 
@@ -1480,8 +1636,20 @@ func NewDeleteIdentifierRequestFromJson(data string) (DeleteIdentifierRequest, e
 
 func NewDeleteIdentifierRequestFromDict(data map[string]interface{}) DeleteIdentifierRequest {
 	return DeleteIdentifierRequest{
-		UserName: core.CastString(data["userName"]),
-		ClientId: core.CastString(data["clientId"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		ClientId: func() *string {
+			v, ok := data["clientId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["clientId"])
+		}(),
 	}
 }
 
@@ -1591,9 +1759,27 @@ func NewDescribePasswordsRequestFromJson(data string) (DescribePasswordsRequest,
 
 func NewDescribePasswordsRequestFromDict(data map[string]interface{}) DescribePasswordsRequest {
 	return DescribePasswordsRequest{
-		UserName:  core.CastString(data["userName"]),
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1700,8 +1886,20 @@ func NewCreatePasswordRequestFromJson(data string) (CreatePasswordRequest, error
 
 func NewCreatePasswordRequestFromDict(data map[string]interface{}) CreatePasswordRequest {
 	return CreatePasswordRequest{
-		UserName: core.CastString(data["userName"]),
-		Password: core.CastString(data["password"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
 	}
 }
 
@@ -1783,7 +1981,13 @@ func NewGetPasswordRequestFromJson(data string) (GetPasswordRequest, error) {
 
 func NewGetPasswordRequestFromDict(data map[string]interface{}) GetPasswordRequest {
 	return GetPasswordRequest{
-		UserName: core.CastString(data["userName"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
 	}
 }
 
@@ -1864,7 +2068,13 @@ func NewEnableMfaRequestFromJson(data string) (EnableMfaRequest, error) {
 
 func NewEnableMfaRequestFromDict(data map[string]interface{}) EnableMfaRequest {
 	return EnableMfaRequest{
-		UserName: core.CastString(data["userName"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
 	}
 }
 
@@ -1969,8 +2179,20 @@ func NewChallengeMfaRequestFromJson(data string) (ChallengeMfaRequest, error) {
 
 func NewChallengeMfaRequestFromDict(data map[string]interface{}) ChallengeMfaRequest {
 	return ChallengeMfaRequest{
-		UserName: core.CastString(data["userName"]),
-		Passcode: core.CastString(data["passcode"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		Passcode: func() *string {
+			v, ok := data["passcode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["passcode"])
+		}(),
 	}
 }
 
@@ -2052,7 +2274,13 @@ func NewDisableMfaRequestFromJson(data string) (DisableMfaRequest, error) {
 
 func NewDisableMfaRequestFromDict(data map[string]interface{}) DisableMfaRequest {
 	return DisableMfaRequest{
-		UserName: core.CastString(data["userName"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
 	}
 }
 
@@ -2133,7 +2361,13 @@ func NewDeletePasswordRequestFromJson(data string) (DeletePasswordRequest, error
 
 func NewDeletePasswordRequestFromDict(data map[string]interface{}) DeletePasswordRequest {
 	return DeletePasswordRequest{
-		UserName: core.CastString(data["userName"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
 	}
 }
 
@@ -2214,7 +2448,13 @@ func NewGetHasSecurityPolicyRequestFromJson(data string) (GetHasSecurityPolicyRe
 
 func NewGetHasSecurityPolicyRequestFromDict(data map[string]interface{}) GetHasSecurityPolicyRequest {
 	return GetHasSecurityPolicyRequest{
-		UserName: core.CastString(data["userName"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
 	}
 }
 
@@ -2319,8 +2559,20 @@ func NewAttachSecurityPolicyRequestFromJson(data string) (AttachSecurityPolicyRe
 
 func NewAttachSecurityPolicyRequestFromDict(data map[string]interface{}) AttachSecurityPolicyRequest {
 	return AttachSecurityPolicyRequest{
-		UserName:         core.CastString(data["userName"]),
-		SecurityPolicyId: core.CastString(data["securityPolicyId"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		SecurityPolicyId: func() *string {
+			v, ok := data["securityPolicyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["securityPolicyId"])
+		}(),
 	}
 }
 
@@ -2426,8 +2678,20 @@ func NewDetachSecurityPolicyRequestFromJson(data string) (DetachSecurityPolicyRe
 
 func NewDetachSecurityPolicyRequestFromDict(data map[string]interface{}) DetachSecurityPolicyRequest {
 	return DetachSecurityPolicyRequest{
-		UserName:         core.CastString(data["userName"]),
-		SecurityPolicyId: core.CastString(data["securityPolicyId"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		SecurityPolicyId: func() *string {
+			v, ok := data["securityPolicyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["securityPolicyId"])
+		}(),
 	}
 }
 
@@ -2533,8 +2797,20 @@ func NewLoginRequestFromJson(data string) (LoginRequest, error) {
 
 func NewLoginRequestFromDict(data map[string]interface{}) LoginRequest {
 	return LoginRequest{
-		ClientId:     core.CastString(data["clientId"]),
-		ClientSecret: core.CastString(data["clientSecret"]),
+		ClientId: func() *string {
+			v, ok := data["clientId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["clientId"])
+		}(),
+		ClientSecret: func() *string {
+			v, ok := data["clientSecret"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["clientSecret"])
+		}(),
 	}
 }
 
@@ -2664,9 +2940,27 @@ func NewLoginByUserRequestFromJson(data string) (LoginByUserRequest, error) {
 
 func NewLoginByUserRequestFromDict(data map[string]interface{}) LoginByUserRequest {
 	return LoginByUserRequest{
-		UserName: core.CastString(data["userName"]),
-		Password: core.CastString(data["password"]),
-		Otp:      core.CastString(data["otp"]),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		Otp: func() *string {
+			v, ok := data["otp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["otp"])
+		}(),
 	}
 }
 

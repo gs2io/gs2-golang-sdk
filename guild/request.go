@@ -94,8 +94,20 @@ func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesReques
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
 	return DescribeNamespacesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -241,18 +253,90 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:                       core.CastString(data["name"]),
-		Description:                core.CastString(data["description"]),
-		JoinNotification:           NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer(),
-		LeaveNotification:          NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer(),
-		ChangeMemberNotification:   NewNotificationSettingFromDict(core.CastMap(data["changeMemberNotification"])).Pointer(),
-		ReceiveRequestNotification: NewNotificationSettingFromDict(core.CastMap(data["receiveRequestNotification"])).Pointer(),
-		RemoveRequestNotification:  NewNotificationSettingFromDict(core.CastMap(data["removeRequestNotification"])).Pointer(),
-		CreateGuildScript:          NewScriptSettingFromDict(core.CastMap(data["createGuildScript"])).Pointer(),
-		JoinGuildScript:            NewScriptSettingFromDict(core.CastMap(data["joinGuildScript"])).Pointer(),
-		LeaveGuildScript:           NewScriptSettingFromDict(core.CastMap(data["leaveGuildScript"])).Pointer(),
-		ChangeRoleScript:           NewScriptSettingFromDict(core.CastMap(data["changeRoleScript"])).Pointer(),
-		LogSetting:                 NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		JoinNotification: func() *NotificationSetting {
+			v, ok := data["joinNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer()
+		}(),
+		LeaveNotification: func() *NotificationSetting {
+			v, ok := data["leaveNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer()
+		}(),
+		ChangeMemberNotification: func() *NotificationSetting {
+			v, ok := data["changeMemberNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["changeMemberNotification"])).Pointer()
+		}(),
+		ReceiveRequestNotification: func() *NotificationSetting {
+			v, ok := data["receiveRequestNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["receiveRequestNotification"])).Pointer()
+		}(),
+		RemoveRequestNotification: func() *NotificationSetting {
+			v, ok := data["removeRequestNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["removeRequestNotification"])).Pointer()
+		}(),
+		CreateGuildScript: func() *ScriptSetting {
+			v, ok := data["createGuildScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["createGuildScript"])).Pointer()
+		}(),
+		JoinGuildScript: func() *ScriptSetting {
+			v, ok := data["joinGuildScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["joinGuildScript"])).Pointer()
+		}(),
+		LeaveGuildScript: func() *ScriptSetting {
+			v, ok := data["leaveGuildScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["leaveGuildScript"])).Pointer()
+		}(),
+		ChangeRoleScript: func() *ScriptSetting {
+			v, ok := data["changeRoleScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["changeRoleScript"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -394,7 +478,13 @@ func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusReques
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -475,7 +565,13 @@ func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
 	return GetNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -620,18 +716,90 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:              core.CastString(data["namespaceName"]),
-		Description:                core.CastString(data["description"]),
-		JoinNotification:           NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer(),
-		LeaveNotification:          NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer(),
-		ChangeMemberNotification:   NewNotificationSettingFromDict(core.CastMap(data["changeMemberNotification"])).Pointer(),
-		ReceiveRequestNotification: NewNotificationSettingFromDict(core.CastMap(data["receiveRequestNotification"])).Pointer(),
-		RemoveRequestNotification:  NewNotificationSettingFromDict(core.CastMap(data["removeRequestNotification"])).Pointer(),
-		CreateGuildScript:          NewScriptSettingFromDict(core.CastMap(data["createGuildScript"])).Pointer(),
-		JoinGuildScript:            NewScriptSettingFromDict(core.CastMap(data["joinGuildScript"])).Pointer(),
-		LeaveGuildScript:           NewScriptSettingFromDict(core.CastMap(data["leaveGuildScript"])).Pointer(),
-		ChangeRoleScript:           NewScriptSettingFromDict(core.CastMap(data["changeRoleScript"])).Pointer(),
-		LogSetting:                 NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		JoinNotification: func() *NotificationSetting {
+			v, ok := data["joinNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer()
+		}(),
+		LeaveNotification: func() *NotificationSetting {
+			v, ok := data["leaveNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer()
+		}(),
+		ChangeMemberNotification: func() *NotificationSetting {
+			v, ok := data["changeMemberNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["changeMemberNotification"])).Pointer()
+		}(),
+		ReceiveRequestNotification: func() *NotificationSetting {
+			v, ok := data["receiveRequestNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["receiveRequestNotification"])).Pointer()
+		}(),
+		RemoveRequestNotification: func() *NotificationSetting {
+			v, ok := data["removeRequestNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["removeRequestNotification"])).Pointer()
+		}(),
+		CreateGuildScript: func() *ScriptSetting {
+			v, ok := data["createGuildScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["createGuildScript"])).Pointer()
+		}(),
+		JoinGuildScript: func() *ScriptSetting {
+			v, ok := data["joinGuildScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["joinGuildScript"])).Pointer()
+		}(),
+		LeaveGuildScript: func() *ScriptSetting {
+			v, ok := data["leaveGuildScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["leaveGuildScript"])).Pointer()
+		}(),
+		ChangeRoleScript: func() *ScriptSetting {
+			v, ok := data["changeRoleScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["changeRoleScript"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -773,7 +941,13 @@ func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, err
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -878,8 +1052,20 @@ func NewDumpUserDataByUserIdRequestFromJson(data string) (DumpUserDataByUserIdRe
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
 	return DumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -985,8 +1171,20 @@ func NewCheckDumpUserDataByUserIdRequestFromJson(data string) (CheckDumpUserData
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
 	return CheckDumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1092,8 +1290,20 @@ func NewCleanUserDataByUserIdRequestFromJson(data string) (CleanUserDataByUserId
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
 	return CleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1199,8 +1409,20 @@ func NewCheckCleanUserDataByUserIdRequestFromJson(data string) (CheckCleanUserDa
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
 	return CheckCleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1306,8 +1528,20 @@ func NewPrepareImportUserDataByUserIdRequestFromJson(data string) (PrepareImport
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
 	return PrepareImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1437,9 +1671,27 @@ func NewImportUserDataByUserIdRequestFromJson(data string) (ImportUserDataByUser
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
 	return ImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1570,9 +1822,27 @@ func NewCheckImportUserDataByUserIdRequestFromJson(data string) (CheckImportUser
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
 	return CheckImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1683,9 +1953,27 @@ func NewDescribeGuildModelMastersRequestFromJson(data string) (DescribeGuildMode
 
 func NewDescribeGuildModelMastersRequestFromDict(data map[string]interface{}) DescribeGuildModelMastersRequest {
 	return DescribeGuildModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1908,17 +2196,82 @@ func NewCreateGuildModelMasterRequestFromJson(data string) (CreateGuildModelMast
 
 func NewCreateGuildModelMasterRequestFromDict(data map[string]interface{}) CreateGuildModelMasterRequest {
 	return CreateGuildModelMasterRequest{
-		NamespaceName:             core.CastString(data["namespaceName"]),
-		Name:                      core.CastString(data["name"]),
-		Description:               core.CastString(data["description"]),
-		Metadata:                  core.CastString(data["metadata"]),
-		DefaultMaximumMemberCount: core.CastInt32(data["defaultMaximumMemberCount"]),
-		MaximumMemberCount:        core.CastInt32(data["maximumMemberCount"]),
-		InactivityPeriodDays:      core.CastInt32(data["inactivityPeriodDays"]),
-		Roles:                     CastRoleModels(core.CastArray(data["roles"])),
-		GuildMasterRole:           core.CastString(data["guildMasterRole"]),
-		GuildMemberDefaultRole:    core.CastString(data["guildMemberDefaultRole"]),
-		RejoinCoolTimeMinutes:     core.CastInt32(data["rejoinCoolTimeMinutes"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		DefaultMaximumMemberCount: func() *int32 {
+			v, ok := data["defaultMaximumMemberCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["defaultMaximumMemberCount"])
+		}(),
+		MaximumMemberCount: func() *int32 {
+			v, ok := data["maximumMemberCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maximumMemberCount"])
+		}(),
+		InactivityPeriodDays: func() *int32 {
+			v, ok := data["inactivityPeriodDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["inactivityPeriodDays"])
+		}(),
+		Roles: func() []RoleModel {
+			if data["roles"] == nil {
+				return nil
+			}
+			return CastRoleModels(core.CastArray(data["roles"]))
+		}(),
+		GuildMasterRole: func() *string {
+			v, ok := data["guildMasterRole"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildMasterRole"])
+		}(),
+		GuildMemberDefaultRole: func() *string {
+			v, ok := data["guildMemberDefaultRole"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildMemberDefaultRole"])
+		}(),
+		RejoinCoolTimeMinutes: func() *int32 {
+			v, ok := data["rejoinCoolTimeMinutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["rejoinCoolTimeMinutes"])
+		}(),
 	}
 }
 
@@ -2035,8 +2388,20 @@ func NewGetGuildModelMasterRequestFromJson(data string) (GetGuildModelMasterRequ
 
 func NewGetGuildModelMasterRequestFromDict(data map[string]interface{}) GetGuildModelMasterRequest {
 	return GetGuildModelMasterRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
 	}
 }
 
@@ -2258,17 +2623,82 @@ func NewUpdateGuildModelMasterRequestFromJson(data string) (UpdateGuildModelMast
 
 func NewUpdateGuildModelMasterRequestFromDict(data map[string]interface{}) UpdateGuildModelMasterRequest {
 	return UpdateGuildModelMasterRequest{
-		NamespaceName:             core.CastString(data["namespaceName"]),
-		GuildModelName:            core.CastString(data["guildModelName"]),
-		Description:               core.CastString(data["description"]),
-		Metadata:                  core.CastString(data["metadata"]),
-		DefaultMaximumMemberCount: core.CastInt32(data["defaultMaximumMemberCount"]),
-		MaximumMemberCount:        core.CastInt32(data["maximumMemberCount"]),
-		InactivityPeriodDays:      core.CastInt32(data["inactivityPeriodDays"]),
-		Roles:                     CastRoleModels(core.CastArray(data["roles"])),
-		GuildMasterRole:           core.CastString(data["guildMasterRole"]),
-		GuildMemberDefaultRole:    core.CastString(data["guildMemberDefaultRole"]),
-		RejoinCoolTimeMinutes:     core.CastInt32(data["rejoinCoolTimeMinutes"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		DefaultMaximumMemberCount: func() *int32 {
+			v, ok := data["defaultMaximumMemberCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["defaultMaximumMemberCount"])
+		}(),
+		MaximumMemberCount: func() *int32 {
+			v, ok := data["maximumMemberCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maximumMemberCount"])
+		}(),
+		InactivityPeriodDays: func() *int32 {
+			v, ok := data["inactivityPeriodDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["inactivityPeriodDays"])
+		}(),
+		Roles: func() []RoleModel {
+			if data["roles"] == nil {
+				return nil
+			}
+			return CastRoleModels(core.CastArray(data["roles"]))
+		}(),
+		GuildMasterRole: func() *string {
+			v, ok := data["guildMasterRole"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildMasterRole"])
+		}(),
+		GuildMemberDefaultRole: func() *string {
+			v, ok := data["guildMemberDefaultRole"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildMemberDefaultRole"])
+		}(),
+		RejoinCoolTimeMinutes: func() *int32 {
+			v, ok := data["rejoinCoolTimeMinutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["rejoinCoolTimeMinutes"])
+		}(),
 	}
 }
 
@@ -2385,8 +2815,20 @@ func NewDeleteGuildModelMasterRequestFromJson(data string) (DeleteGuildModelMast
 
 func NewDeleteGuildModelMasterRequestFromDict(data map[string]interface{}) DeleteGuildModelMasterRequest {
 	return DeleteGuildModelMasterRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
 	}
 }
 
@@ -2468,7 +2910,13 @@ func NewDescribeGuildModelsRequestFromJson(data string) (DescribeGuildModelsRequ
 
 func NewDescribeGuildModelsRequestFromDict(data map[string]interface{}) DescribeGuildModelsRequest {
 	return DescribeGuildModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -2573,8 +3021,20 @@ func NewGetGuildModelRequestFromJson(data string) (GetGuildModelRequest, error) 
 
 func NewGetGuildModelRequestFromDict(data map[string]interface{}) GetGuildModelRequest {
 	return GetGuildModelRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
 	}
 }
 
@@ -2832,20 +3292,104 @@ func NewSearchGuildsRequestFromJson(data string) (SearchGuildsRequest, error) {
 
 func NewSearchGuildsRequestFromDict(data map[string]interface{}) SearchGuildsRequest {
 	return SearchGuildsRequest{
-		NamespaceName:           core.CastString(data["namespaceName"]),
-		GuildModelName:          core.CastString(data["guildModelName"]),
-		AccessToken:             core.CastString(data["accessToken"]),
-		DisplayName:             core.CastString(data["displayName"]),
-		Attributes1:             core.CastInt32s(core.CastArray(data["attributes1"])),
-		Attributes2:             core.CastInt32s(core.CastArray(data["attributes2"])),
-		Attributes3:             core.CastInt32s(core.CastArray(data["attributes3"])),
-		Attributes4:             core.CastInt32s(core.CastArray(data["attributes4"])),
-		Attributes5:             core.CastInt32s(core.CastArray(data["attributes5"])),
-		JoinPolicies:            core.CastStrings(core.CastArray(data["joinPolicies"])),
-		IncludeFullMembersGuild: core.CastBool(data["includeFullMembersGuild"]),
-		OrderBy:                 core.CastString(data["orderBy"]),
-		PageToken:               core.CastString(data["pageToken"]),
-		Limit:                   core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		DisplayName: func() *string {
+			v, ok := data["displayName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["displayName"])
+		}(),
+		Attributes1: func() []*int32 {
+			v, ok := data["attributes1"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
+		Attributes2: func() []*int32 {
+			v, ok := data["attributes2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
+		Attributes3: func() []*int32 {
+			v, ok := data["attributes3"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
+		Attributes4: func() []*int32 {
+			v, ok := data["attributes4"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
+		Attributes5: func() []*int32 {
+			v, ok := data["attributes5"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
+		JoinPolicies: func() []*string {
+			v, ok := data["joinPolicies"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		IncludeFullMembersGuild: func() *bool {
+			v, ok := data["includeFullMembersGuild"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["includeFullMembersGuild"])
+		}(),
+		OrderBy: func() *string {
+			v, ok := data["orderBy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["orderBy"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -3151,21 +3695,111 @@ func NewSearchGuildsByUserIdRequestFromJson(data string) (SearchGuildsByUserIdRe
 
 func NewSearchGuildsByUserIdRequestFromDict(data map[string]interface{}) SearchGuildsByUserIdRequest {
 	return SearchGuildsByUserIdRequest{
-		NamespaceName:           core.CastString(data["namespaceName"]),
-		GuildModelName:          core.CastString(data["guildModelName"]),
-		UserId:                  core.CastString(data["userId"]),
-		DisplayName:             core.CastString(data["displayName"]),
-		Attributes1:             core.CastInt32s(core.CastArray(data["attributes1"])),
-		Attributes2:             core.CastInt32s(core.CastArray(data["attributes2"])),
-		Attributes3:             core.CastInt32s(core.CastArray(data["attributes3"])),
-		Attributes4:             core.CastInt32s(core.CastArray(data["attributes4"])),
-		Attributes5:             core.CastInt32s(core.CastArray(data["attributes5"])),
-		JoinPolicies:            core.CastStrings(core.CastArray(data["joinPolicies"])),
-		IncludeFullMembersGuild: core.CastBool(data["includeFullMembersGuild"]),
-		OrderBy:                 core.CastString(data["orderBy"]),
-		PageToken:               core.CastString(data["pageToken"]),
-		Limit:                   core.CastInt32(data["limit"]),
-		TimeOffsetToken:         core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		DisplayName: func() *string {
+			v, ok := data["displayName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["displayName"])
+		}(),
+		Attributes1: func() []*int32 {
+			v, ok := data["attributes1"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
+		Attributes2: func() []*int32 {
+			v, ok := data["attributes2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
+		Attributes3: func() []*int32 {
+			v, ok := data["attributes3"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
+		Attributes4: func() []*int32 {
+			v, ok := data["attributes4"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
+		Attributes5: func() []*int32 {
+			v, ok := data["attributes5"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
+		JoinPolicies: func() []*string {
+			v, ok := data["joinPolicies"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		IncludeFullMembersGuild: func() *bool {
+			v, ok := data["includeFullMembersGuild"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["includeFullMembersGuild"])
+		}(),
+		OrderBy: func() *string {
+			v, ok := data["orderBy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["orderBy"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3417,18 +4051,89 @@ func NewCreateGuildRequestFromJson(data string) (CreateGuildRequest, error) {
 
 func NewCreateGuildRequestFromDict(data map[string]interface{}) CreateGuildRequest {
 	return CreateGuildRequest{
-		NamespaceName:          core.CastString(data["namespaceName"]),
-		AccessToken:            core.CastString(data["accessToken"]),
-		GuildModelName:         core.CastString(data["guildModelName"]),
-		DisplayName:            core.CastString(data["displayName"]),
-		Attribute1:             core.CastInt32(data["attribute1"]),
-		Attribute2:             core.CastInt32(data["attribute2"]),
-		Attribute3:             core.CastInt32(data["attribute3"]),
-		Attribute4:             core.CastInt32(data["attribute4"]),
-		Attribute5:             core.CastInt32(data["attribute5"]),
-		JoinPolicy:             core.CastString(data["joinPolicy"]),
-		CustomRoles:            CastRoleModels(core.CastArray(data["customRoles"])),
-		GuildMemberDefaultRole: core.CastString(data["guildMemberDefaultRole"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		DisplayName: func() *string {
+			v, ok := data["displayName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["displayName"])
+		}(),
+		Attribute1: func() *int32 {
+			v, ok := data["attribute1"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute1"])
+		}(),
+		Attribute2: func() *int32 {
+			v, ok := data["attribute2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute2"])
+		}(),
+		Attribute3: func() *int32 {
+			v, ok := data["attribute3"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute3"])
+		}(),
+		Attribute4: func() *int32 {
+			v, ok := data["attribute4"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute4"])
+		}(),
+		Attribute5: func() *int32 {
+			v, ok := data["attribute5"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute5"])
+		}(),
+		JoinPolicy: func() *string {
+			v, ok := data["joinPolicy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["joinPolicy"])
+		}(),
+		CustomRoles: func() []RoleModel {
+			if data["customRoles"] == nil {
+				return nil
+			}
+			return CastRoleModels(core.CastArray(data["customRoles"]))
+		}(),
+		GuildMemberDefaultRole: func() *string {
+			v, ok := data["guildMemberDefaultRole"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildMemberDefaultRole"])
+		}(),
 	}
 }
 
@@ -3691,19 +4396,96 @@ func NewCreateGuildByUserIdRequestFromJson(data string) (CreateGuildByUserIdRequ
 
 func NewCreateGuildByUserIdRequestFromDict(data map[string]interface{}) CreateGuildByUserIdRequest {
 	return CreateGuildByUserIdRequest{
-		NamespaceName:          core.CastString(data["namespaceName"]),
-		UserId:                 core.CastString(data["userId"]),
-		GuildModelName:         core.CastString(data["guildModelName"]),
-		DisplayName:            core.CastString(data["displayName"]),
-		Attribute1:             core.CastInt32(data["attribute1"]),
-		Attribute2:             core.CastInt32(data["attribute2"]),
-		Attribute3:             core.CastInt32(data["attribute3"]),
-		Attribute4:             core.CastInt32(data["attribute4"]),
-		Attribute5:             core.CastInt32(data["attribute5"]),
-		JoinPolicy:             core.CastString(data["joinPolicy"]),
-		CustomRoles:            CastRoleModels(core.CastArray(data["customRoles"])),
-		GuildMemberDefaultRole: core.CastString(data["guildMemberDefaultRole"]),
-		TimeOffsetToken:        core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		DisplayName: func() *string {
+			v, ok := data["displayName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["displayName"])
+		}(),
+		Attribute1: func() *int32 {
+			v, ok := data["attribute1"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute1"])
+		}(),
+		Attribute2: func() *int32 {
+			v, ok := data["attribute2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute2"])
+		}(),
+		Attribute3: func() *int32 {
+			v, ok := data["attribute3"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute3"])
+		}(),
+		Attribute4: func() *int32 {
+			v, ok := data["attribute4"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute4"])
+		}(),
+		Attribute5: func() *int32 {
+			v, ok := data["attribute5"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute5"])
+		}(),
+		JoinPolicy: func() *string {
+			v, ok := data["joinPolicy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["joinPolicy"])
+		}(),
+		CustomRoles: func() []RoleModel {
+			if data["customRoles"] == nil {
+				return nil
+			}
+			return CastRoleModels(core.CastArray(data["customRoles"]))
+		}(),
+		GuildMemberDefaultRole: func() *string {
+			v, ok := data["guildMemberDefaultRole"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildMemberDefaultRole"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3870,10 +4652,34 @@ func NewGetGuildRequestFromJson(data string) (GetGuildRequest, error) {
 
 func NewGetGuildRequestFromDict(data map[string]interface{}) GetGuildRequest {
 	return GetGuildRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
 	}
 }
 
@@ -4053,11 +4859,41 @@ func NewGetGuildByUserIdRequestFromJson(data string) (GetGuildByUserIdRequest, e
 
 func NewGetGuildByUserIdRequestFromDict(data map[string]interface{}) GetGuildByUserIdRequest {
 	return GetGuildByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		GuildName:       core.CastString(data["guildName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4287,18 +5123,89 @@ func NewUpdateGuildRequestFromJson(data string) (UpdateGuildRequest, error) {
 
 func NewUpdateGuildRequestFromDict(data map[string]interface{}) UpdateGuildRequest {
 	return UpdateGuildRequest{
-		NamespaceName:          core.CastString(data["namespaceName"]),
-		AccessToken:            core.CastString(data["accessToken"]),
-		GuildModelName:         core.CastString(data["guildModelName"]),
-		DisplayName:            core.CastString(data["displayName"]),
-		Attribute1:             core.CastInt32(data["attribute1"]),
-		Attribute2:             core.CastInt32(data["attribute2"]),
-		Attribute3:             core.CastInt32(data["attribute3"]),
-		Attribute4:             core.CastInt32(data["attribute4"]),
-		Attribute5:             core.CastInt32(data["attribute5"]),
-		JoinPolicy:             core.CastString(data["joinPolicy"]),
-		CustomRoles:            CastRoleModels(core.CastArray(data["customRoles"])),
-		GuildMemberDefaultRole: core.CastString(data["guildMemberDefaultRole"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		DisplayName: func() *string {
+			v, ok := data["displayName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["displayName"])
+		}(),
+		Attribute1: func() *int32 {
+			v, ok := data["attribute1"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute1"])
+		}(),
+		Attribute2: func() *int32 {
+			v, ok := data["attribute2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute2"])
+		}(),
+		Attribute3: func() *int32 {
+			v, ok := data["attribute3"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute3"])
+		}(),
+		Attribute4: func() *int32 {
+			v, ok := data["attribute4"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute4"])
+		}(),
+		Attribute5: func() *int32 {
+			v, ok := data["attribute5"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute5"])
+		}(),
+		JoinPolicy: func() *string {
+			v, ok := data["joinPolicy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["joinPolicy"])
+		}(),
+		CustomRoles: func() []RoleModel {
+			if data["customRoles"] == nil {
+				return nil
+			}
+			return CastRoleModels(core.CastArray(data["customRoles"]))
+		}(),
+		GuildMemberDefaultRole: func() *string {
+			v, ok := data["guildMemberDefaultRole"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildMemberDefaultRole"])
+		}(),
 	}
 }
 
@@ -4537,18 +5444,89 @@ func NewUpdateGuildByGuildNameRequestFromJson(data string) (UpdateGuildByGuildNa
 
 func NewUpdateGuildByGuildNameRequestFromDict(data map[string]interface{}) UpdateGuildByGuildNameRequest {
 	return UpdateGuildByGuildNameRequest{
-		NamespaceName:          core.CastString(data["namespaceName"]),
-		GuildName:              core.CastString(data["guildName"]),
-		GuildModelName:         core.CastString(data["guildModelName"]),
-		DisplayName:            core.CastString(data["displayName"]),
-		Attribute1:             core.CastInt32(data["attribute1"]),
-		Attribute2:             core.CastInt32(data["attribute2"]),
-		Attribute3:             core.CastInt32(data["attribute3"]),
-		Attribute4:             core.CastInt32(data["attribute4"]),
-		Attribute5:             core.CastInt32(data["attribute5"]),
-		JoinPolicy:             core.CastString(data["joinPolicy"]),
-		CustomRoles:            CastRoleModels(core.CastArray(data["customRoles"])),
-		GuildMemberDefaultRole: core.CastString(data["guildMemberDefaultRole"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		DisplayName: func() *string {
+			v, ok := data["displayName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["displayName"])
+		}(),
+		Attribute1: func() *int32 {
+			v, ok := data["attribute1"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute1"])
+		}(),
+		Attribute2: func() *int32 {
+			v, ok := data["attribute2"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute2"])
+		}(),
+		Attribute3: func() *int32 {
+			v, ok := data["attribute3"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute3"])
+		}(),
+		Attribute4: func() *int32 {
+			v, ok := data["attribute4"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute4"])
+		}(),
+		Attribute5: func() *int32 {
+			v, ok := data["attribute5"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["attribute5"])
+		}(),
+		JoinPolicy: func() *string {
+			v, ok := data["joinPolicy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["joinPolicy"])
+		}(),
+		CustomRoles: func() []RoleModel {
+			if data["customRoles"] == nil {
+				return nil
+			}
+			return CastRoleModels(core.CastArray(data["customRoles"]))
+		}(),
+		GuildMemberDefaultRole: func() *string {
+			v, ok := data["guildMemberDefaultRole"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildMemberDefaultRole"])
+		}(),
 	}
 }
 
@@ -4715,10 +5693,34 @@ func NewDeleteMemberRequestFromJson(data string) (DeleteMemberRequest, error) {
 
 func NewDeleteMemberRequestFromDict(data map[string]interface{}) DeleteMemberRequest {
 	return DeleteMemberRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		TargetUserId:   core.CastString(data["targetUserId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		TargetUserId: func() *string {
+			v, ok := data["targetUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetUserId"])
+		}(),
 	}
 }
 
@@ -4875,10 +5877,34 @@ func NewDeleteMemberByGuildNameRequestFromJson(data string) (DeleteMemberByGuild
 
 func NewDeleteMemberByGuildNameRequestFromDict(data map[string]interface{}) DeleteMemberByGuildNameRequest {
 	return DeleteMemberByGuildNameRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
-		TargetUserId:   core.CastString(data["targetUserId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		TargetUserId: func() *string {
+			v, ok := data["targetUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetUserId"])
+		}(),
 	}
 }
 
@@ -5059,11 +6085,41 @@ func NewUpdateMemberRoleRequestFromJson(data string) (UpdateMemberRoleRequest, e
 
 func NewUpdateMemberRoleRequestFromDict(data map[string]interface{}) UpdateMemberRoleRequest {
 	return UpdateMemberRoleRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		TargetUserId:   core.CastString(data["targetUserId"]),
-		RoleName:       core.CastString(data["roleName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		TargetUserId: func() *string {
+			v, ok := data["targetUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetUserId"])
+		}(),
+		RoleName: func() *string {
+			v, ok := data["roleName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roleName"])
+		}(),
 	}
 }
 
@@ -5245,11 +6301,41 @@ func NewUpdateMemberRoleByGuildNameRequestFromJson(data string) (UpdateMemberRol
 
 func NewUpdateMemberRoleByGuildNameRequestFromDict(data map[string]interface{}) UpdateMemberRoleByGuildNameRequest {
 	return UpdateMemberRoleByGuildNameRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
-		TargetUserId:   core.CastString(data["targetUserId"]),
-		RoleName:       core.CastString(data["roleName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		TargetUserId: func() *string {
+			v, ok := data["targetUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetUserId"])
+		}(),
+		RoleName: func() *string {
+			v, ok := data["roleName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roleName"])
+		}(),
 	}
 }
 
@@ -5383,9 +6469,27 @@ func NewDeleteGuildRequestFromJson(data string) (DeleteGuildRequest, error) {
 
 func NewDeleteGuildRequestFromDict(data map[string]interface{}) DeleteGuildRequest {
 	return DeleteGuildRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -5517,9 +6621,27 @@ func NewDeleteGuildByGuildNameRequestFromJson(data string) (DeleteGuildByGuildNa
 
 func NewDeleteGuildByGuildNameRequestFromDict(data map[string]interface{}) DeleteGuildByGuildNameRequest {
 	return DeleteGuildByGuildNameRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
 	}
 }
 
@@ -5655,10 +6777,34 @@ func NewIncreaseMaximumCurrentMaximumMemberCountByGuildNameRequestFromJson(data 
 
 func NewIncreaseMaximumCurrentMaximumMemberCountByGuildNameRequestFromDict(data map[string]interface{}) IncreaseMaximumCurrentMaximumMemberCountByGuildNameRequest {
 	return IncreaseMaximumCurrentMaximumMemberCountByGuildNameRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
-		Value:          core.CastInt32(data["value"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
 	}
 }
 
@@ -5795,10 +6941,34 @@ func NewDecreaseMaximumCurrentMaximumMemberCountRequestFromJson(data string) (De
 
 func NewDecreaseMaximumCurrentMaximumMemberCountRequestFromDict(data map[string]interface{}) DecreaseMaximumCurrentMaximumMemberCountRequest {
 	return DecreaseMaximumCurrentMaximumMemberCountRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		Value:          core.CastInt32(data["value"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
 	}
 }
 
@@ -5935,10 +7105,34 @@ func NewDecreaseMaximumCurrentMaximumMemberCountByGuildNameRequestFromJson(data 
 
 func NewDecreaseMaximumCurrentMaximumMemberCountByGuildNameRequestFromDict(data map[string]interface{}) DecreaseMaximumCurrentMaximumMemberCountByGuildNameRequest {
 	return DecreaseMaximumCurrentMaximumMemberCountByGuildNameRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
-		Value:          core.CastInt32(data["value"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
 	}
 }
 
@@ -6103,12 +7297,48 @@ func NewVerifyCurrentMaximumMemberCountRequestFromJson(data string) (VerifyCurre
 
 func NewVerifyCurrentMaximumMemberCountRequestFromDict(data map[string]interface{}) VerifyCurrentMaximumMemberCountRequest {
 	return VerifyCurrentMaximumMemberCountRequest{
-		NamespaceName:                   core.CastString(data["namespaceName"]),
-		GuildModelName:                  core.CastString(data["guildModelName"]),
-		AccessToken:                     core.CastString(data["accessToken"]),
-		VerifyType:                      core.CastString(data["verifyType"]),
-		Value:                           core.CastInt32(data["value"]),
-		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
 	}
 }
 
@@ -6275,12 +7505,48 @@ func NewVerifyCurrentMaximumMemberCountByGuildNameRequestFromJson(data string) (
 
 func NewVerifyCurrentMaximumMemberCountByGuildNameRequestFromDict(data map[string]interface{}) VerifyCurrentMaximumMemberCountByGuildNameRequest {
 	return VerifyCurrentMaximumMemberCountByGuildNameRequest{
-		NamespaceName:                   core.CastString(data["namespaceName"]),
-		GuildModelName:                  core.CastString(data["guildModelName"]),
-		GuildName:                       core.CastString(data["guildName"]),
-		VerifyType:                      core.CastString(data["verifyType"]),
-		Value:                           core.CastInt32(data["value"]),
-		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
 	}
 }
 
@@ -6463,11 +7729,41 @@ func NewVerifyIncludeMemberRequestFromJson(data string) (VerifyIncludeMemberRequ
 
 func NewVerifyIncludeMemberRequestFromDict(data map[string]interface{}) VerifyIncludeMemberRequest {
 	return VerifyIncludeMemberRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		VerifyType:     core.CastString(data["verifyType"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
 	}
 }
 
@@ -6673,12 +7969,48 @@ func NewVerifyIncludeMemberByUserIdRequestFromJson(data string) (VerifyIncludeMe
 
 func NewVerifyIncludeMemberByUserIdRequestFromDict(data map[string]interface{}) VerifyIncludeMemberByUserIdRequest {
 	return VerifyIncludeMemberByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		GuildName:       core.CastString(data["guildName"]),
-		UserId:          core.CastString(data["userId"]),
-		VerifyType:      core.CastString(data["verifyType"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -6817,10 +8149,34 @@ func NewSetMaximumCurrentMaximumMemberCountByGuildNameRequestFromJson(data strin
 
 func NewSetMaximumCurrentMaximumMemberCountByGuildNameRequestFromDict(data map[string]interface{}) SetMaximumCurrentMaximumMemberCountByGuildNameRequest {
 	return SetMaximumCurrentMaximumMemberCountByGuildNameRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildName:      core.CastString(data["guildName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		Value:          core.CastInt32(data["value"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
 	}
 }
 
@@ -6977,10 +8333,34 @@ func NewAssumeRequestFromJson(data string) (AssumeRequest, error) {
 
 func NewAssumeRequestFromDict(data map[string]interface{}) AssumeRequest {
 	return AssumeRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
 	}
 }
 
@@ -7161,11 +8541,41 @@ func NewAssumeByUserIdRequestFromJson(data string) (AssumeByUserIdRequest, error
 
 func NewAssumeByUserIdRequestFromDict(data map[string]interface{}) AssumeByUserIdRequest {
 	return AssumeByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		GuildName:       core.CastString(data["guildName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -7274,8 +8684,20 @@ func NewIncreaseMaximumCurrentMaximumMemberCountByStampSheetRequestFromJson(data
 
 func NewIncreaseMaximumCurrentMaximumMemberCountByStampSheetRequestFromDict(data map[string]interface{}) IncreaseMaximumCurrentMaximumMemberCountByStampSheetRequest {
 	return IncreaseMaximumCurrentMaximumMemberCountByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -7381,8 +8803,20 @@ func NewDecreaseMaximumCurrentMaximumMemberCountByStampTaskRequestFromJson(data 
 
 func NewDecreaseMaximumCurrentMaximumMemberCountByStampTaskRequestFromDict(data map[string]interface{}) DecreaseMaximumCurrentMaximumMemberCountByStampTaskRequest {
 	return DecreaseMaximumCurrentMaximumMemberCountByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -7488,8 +8922,20 @@ func NewSetMaximumCurrentMaximumMemberCountByStampSheetRequestFromJson(data stri
 
 func NewSetMaximumCurrentMaximumMemberCountByStampSheetRequestFromDict(data map[string]interface{}) SetMaximumCurrentMaximumMemberCountByStampSheetRequest {
 	return SetMaximumCurrentMaximumMemberCountByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -7595,8 +9041,20 @@ func NewVerifyCurrentMaximumMemberCountByStampTaskRequestFromJson(data string) (
 
 func NewVerifyCurrentMaximumMemberCountByStampTaskRequestFromDict(data map[string]interface{}) VerifyCurrentMaximumMemberCountByStampTaskRequest {
 	return VerifyCurrentMaximumMemberCountByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -7702,8 +9160,20 @@ func NewVerifyIncludeMemberByStampTaskRequestFromJson(data string) (VerifyInclud
 
 func NewVerifyIncludeMemberByStampTaskRequestFromDict(data map[string]interface{}) VerifyIncludeMemberByStampTaskRequest {
 	return VerifyIncludeMemberByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -7861,11 +9331,41 @@ func NewDescribeJoinedGuildsRequestFromJson(data string) (DescribeJoinedGuildsRe
 
 func NewDescribeJoinedGuildsRequestFromDict(data map[string]interface{}) DescribeJoinedGuildsRequest {
 	return DescribeJoinedGuildsRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		PageToken:      core.CastString(data["pageToken"]),
-		Limit:          core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -8050,12 +9550,48 @@ func NewDescribeJoinedGuildsByUserIdRequestFromJson(data string) (DescribeJoined
 
 func NewDescribeJoinedGuildsByUserIdRequestFromDict(data map[string]interface{}) DescribeJoinedGuildsByUserIdRequest {
 	return DescribeJoinedGuildsByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -8213,10 +9749,34 @@ func NewGetJoinedGuildRequestFromJson(data string) (GetJoinedGuildRequest, error
 
 func NewGetJoinedGuildRequestFromDict(data map[string]interface{}) GetJoinedGuildRequest {
 	return GetJoinedGuildRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
 	}
 }
 
@@ -8396,11 +9956,41 @@ func NewGetJoinedGuildByUserIdRequestFromJson(data string) (GetJoinedGuildByUser
 
 func NewGetJoinedGuildByUserIdRequestFromDict(data map[string]interface{}) GetJoinedGuildByUserIdRequest {
 	return GetJoinedGuildByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		GuildName:       core.CastString(data["guildName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -8558,10 +10148,34 @@ func NewWithdrawalRequestFromJson(data string) (WithdrawalRequest, error) {
 
 func NewWithdrawalRequestFromDict(data map[string]interface{}) WithdrawalRequest {
 	return WithdrawalRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
 	}
 }
 
@@ -8742,11 +10356,41 @@ func NewWithdrawalByUserIdRequestFromJson(data string) (WithdrawalByUserIdReques
 
 func NewWithdrawalByUserIdRequestFromDict(data map[string]interface{}) WithdrawalByUserIdRequest {
 	return WithdrawalByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		GuildName:       core.CastString(data["guildName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -8879,9 +10523,27 @@ func NewGetLastGuildMasterActivityRequestFromJson(data string) (GetLastGuildMast
 
 func NewGetLastGuildMasterActivityRequestFromDict(data map[string]interface{}) GetLastGuildMasterActivityRequest {
 	return GetLastGuildMasterActivityRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -9012,9 +10674,27 @@ func NewGetLastGuildMasterActivityByGuildNameRequestFromJson(data string) (GetLa
 
 func NewGetLastGuildMasterActivityByGuildNameRequestFromDict(data map[string]interface{}) GetLastGuildMasterActivityByGuildNameRequest {
 	return GetLastGuildMasterActivityByGuildNameRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
 	}
 }
 
@@ -9146,9 +10826,27 @@ func NewPromoteSeniorMemberRequestFromJson(data string) (PromoteSeniorMemberRequ
 
 func NewPromoteSeniorMemberRequestFromDict(data map[string]interface{}) PromoteSeniorMemberRequest {
 	return PromoteSeniorMemberRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -9280,9 +10978,27 @@ func NewPromoteSeniorMemberByGuildNameRequestFromJson(data string) (PromoteSenio
 
 func NewPromoteSeniorMemberByGuildNameRequestFromDict(data map[string]interface{}) PromoteSeniorMemberByGuildNameRequest {
 	return PromoteSeniorMemberByGuildNameRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
 	}
 }
 
@@ -9365,7 +11081,13 @@ func NewExportMasterRequestFromJson(data string) (ExportMasterRequest, error) {
 
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -9446,7 +11168,13 @@ func NewGetCurrentGuildMasterRequestFromJson(data string) (GetCurrentGuildMaster
 
 func NewGetCurrentGuildMasterRequestFromDict(data map[string]interface{}) GetCurrentGuildMasterRequest {
 	return GetCurrentGuildMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -9551,8 +11279,20 @@ func NewUpdateCurrentGuildMasterRequestFromJson(data string) (UpdateCurrentGuild
 
 func NewUpdateCurrentGuildMasterRequestFromDict(data map[string]interface{}) UpdateCurrentGuildMasterRequest {
 	return UpdateCurrentGuildMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Settings:      core.CastString(data["settings"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -9638,8 +11378,20 @@ func NewUpdateCurrentGuildMasterFromGitHubRequestFromJson(data string) (UpdateCu
 
 func NewUpdateCurrentGuildMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentGuildMasterFromGitHubRequest {
 	return UpdateCurrentGuildMasterFromGitHubRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		CheckoutSetting: func() *GitHubCheckoutSetting {
+			v, ok := data["checkoutSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -9802,11 +11554,41 @@ func NewDescribeReceiveRequestsRequestFromJson(data string) (DescribeReceiveRequ
 
 func NewDescribeReceiveRequestsRequestFromDict(data map[string]interface{}) DescribeReceiveRequestsRequest {
 	return DescribeReceiveRequestsRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		PageToken:      core.CastString(data["pageToken"]),
-		Limit:          core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -9967,11 +11749,41 @@ func NewDescribeReceiveRequestsByGuildNameRequestFromJson(data string) (Describe
 
 func NewDescribeReceiveRequestsByGuildNameRequestFromDict(data map[string]interface{}) DescribeReceiveRequestsByGuildNameRequest {
 	return DescribeReceiveRequestsByGuildNameRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
-		PageToken:      core.CastString(data["pageToken"]),
-		Limit:          core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -10128,10 +11940,34 @@ func NewGetReceiveRequestRequestFromJson(data string) (GetReceiveRequestRequest,
 
 func NewGetReceiveRequestRequestFromDict(data map[string]interface{}) GetReceiveRequestRequest {
 	return GetReceiveRequestRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		FromUserId:     core.CastString(data["fromUserId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		FromUserId: func() *string {
+			v, ok := data["fromUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fromUserId"])
+		}(),
 	}
 }
 
@@ -10287,10 +12123,34 @@ func NewGetReceiveRequestByGuildNameRequestFromJson(data string) (GetReceiveRequ
 
 func NewGetReceiveRequestByGuildNameRequestFromDict(data map[string]interface{}) GetReceiveRequestByGuildNameRequest {
 	return GetReceiveRequestByGuildNameRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
-		FromUserId:     core.CastString(data["fromUserId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		FromUserId: func() *string {
+			v, ok := data["fromUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fromUserId"])
+		}(),
 	}
 }
 
@@ -10447,10 +12307,34 @@ func NewAcceptRequestRequestFromJson(data string) (AcceptRequestRequest, error) 
 
 func NewAcceptRequestRequestFromDict(data map[string]interface{}) AcceptRequestRequest {
 	return AcceptRequestRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		FromUserId:     core.CastString(data["fromUserId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		FromUserId: func() *string {
+			v, ok := data["fromUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fromUserId"])
+		}(),
 	}
 }
 
@@ -10607,10 +12491,34 @@ func NewAcceptRequestByGuildNameRequestFromJson(data string) (AcceptRequestByGui
 
 func NewAcceptRequestByGuildNameRequestFromDict(data map[string]interface{}) AcceptRequestByGuildNameRequest {
 	return AcceptRequestByGuildNameRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
-		FromUserId:     core.CastString(data["fromUserId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		FromUserId: func() *string {
+			v, ok := data["fromUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fromUserId"])
+		}(),
 	}
 }
 
@@ -10767,10 +12675,34 @@ func NewRejectRequestRequestFromJson(data string) (RejectRequestRequest, error) 
 
 func NewRejectRequestRequestFromDict(data map[string]interface{}) RejectRequestRequest {
 	return RejectRequestRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		FromUserId:     core.CastString(data["fromUserId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		FromUserId: func() *string {
+			v, ok := data["fromUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fromUserId"])
+		}(),
 	}
 }
 
@@ -10927,10 +12859,34 @@ func NewRejectRequestByGuildNameRequestFromJson(data string) (RejectRequestByGui
 
 func NewRejectRequestByGuildNameRequestFromDict(data map[string]interface{}) RejectRequestByGuildNameRequest {
 	return RejectRequestByGuildNameRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
-		FromUserId:     core.CastString(data["fromUserId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		FromUserId: func() *string {
+			v, ok := data["fromUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fromUserId"])
+		}(),
 	}
 }
 
@@ -11090,11 +13046,41 @@ func NewDescribeSendRequestsRequestFromJson(data string) (DescribeSendRequestsRe
 
 func NewDescribeSendRequestsRequestFromDict(data map[string]interface{}) DescribeSendRequestsRequest {
 	return DescribeSendRequestsRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		PageToken:      core.CastString(data["pageToken"]),
-		Limit:          core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -11279,12 +13265,48 @@ func NewDescribeSendRequestsByUserIdRequestFromJson(data string) (DescribeSendRe
 
 func NewDescribeSendRequestsByUserIdRequestFromDict(data map[string]interface{}) DescribeSendRequestsByUserIdRequest {
 	return DescribeSendRequestsByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -11442,10 +13464,34 @@ func NewGetSendRequestRequestFromJson(data string) (GetSendRequestRequest, error
 
 func NewGetSendRequestRequestFromDict(data map[string]interface{}) GetSendRequestRequest {
 	return GetSendRequestRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		AccessToken:     core.CastString(data["accessToken"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		TargetGuildName: core.CastString(data["targetGuildName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		TargetGuildName: func() *string {
+			v, ok := data["targetGuildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetGuildName"])
+		}(),
 	}
 }
 
@@ -11625,11 +13671,41 @@ func NewGetSendRequestByUserIdRequestFromJson(data string) (GetSendRequestByUser
 
 func NewGetSendRequestByUserIdRequestFromDict(data map[string]interface{}) GetSendRequestByUserIdRequest {
 	return GetSendRequestByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		TargetGuildName: core.CastString(data["targetGuildName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		TargetGuildName: func() *string {
+			v, ok := data["targetGuildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetGuildName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -11787,10 +13863,34 @@ func NewSendRequestRequestFromJson(data string) (SendRequestRequest, error) {
 
 func NewSendRequestRequestFromDict(data map[string]interface{}) SendRequestRequest {
 	return SendRequestRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		AccessToken:     core.CastString(data["accessToken"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		TargetGuildName: core.CastString(data["targetGuildName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		TargetGuildName: func() *string {
+			v, ok := data["targetGuildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetGuildName"])
+		}(),
 	}
 }
 
@@ -11971,11 +14071,41 @@ func NewSendRequestByUserIdRequestFromJson(data string) (SendRequestByUserIdRequ
 
 func NewSendRequestByUserIdRequestFromDict(data map[string]interface{}) SendRequestByUserIdRequest {
 	return SendRequestByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		TargetGuildName: core.CastString(data["targetGuildName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		TargetGuildName: func() *string {
+			v, ok := data["targetGuildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetGuildName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -12133,10 +14263,34 @@ func NewDeleteRequestRequestFromJson(data string) (DeleteRequestRequest, error) 
 
 func NewDeleteRequestRequestFromDict(data map[string]interface{}) DeleteRequestRequest {
 	return DeleteRequestRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		AccessToken:     core.CastString(data["accessToken"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		TargetGuildName: core.CastString(data["targetGuildName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		TargetGuildName: func() *string {
+			v, ok := data["targetGuildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetGuildName"])
+		}(),
 	}
 }
 
@@ -12317,11 +14471,41 @@ func NewDeleteRequestByUserIdRequestFromJson(data string) (DeleteRequestByUserId
 
 func NewDeleteRequestByUserIdRequestFromDict(data map[string]interface{}) DeleteRequestByUserIdRequest {
 	return DeleteRequestByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		TargetGuildName: core.CastString(data["targetGuildName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		TargetGuildName: func() *string {
+			v, ok := data["targetGuildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetGuildName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -12482,11 +14666,41 @@ func NewDescribeIgnoreUsersRequestFromJson(data string) (DescribeIgnoreUsersRequ
 
 func NewDescribeIgnoreUsersRequestFromDict(data map[string]interface{}) DescribeIgnoreUsersRequest {
 	return DescribeIgnoreUsersRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		PageToken:      core.CastString(data["pageToken"]),
-		Limit:          core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -12647,11 +14861,41 @@ func NewDescribeIgnoreUsersByGuildNameRequestFromJson(data string) (DescribeIgno
 
 func NewDescribeIgnoreUsersByGuildNameRequestFromDict(data map[string]interface{}) DescribeIgnoreUsersByGuildNameRequest {
 	return DescribeIgnoreUsersByGuildNameRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		GuildName:      core.CastString(data["guildName"]),
-		PageToken:      core.CastString(data["pageToken"]),
-		Limit:          core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -12808,10 +15052,34 @@ func NewGetIgnoreUserRequestFromJson(data string) (GetIgnoreUserRequest, error) 
 
 func NewGetIgnoreUserRequestFromDict(data map[string]interface{}) GetIgnoreUserRequest {
 	return GetIgnoreUserRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		UserId:         core.CastString(data["userId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
 	}
 }
 
@@ -12991,11 +15259,41 @@ func NewGetIgnoreUserByGuildNameRequestFromJson(data string) (GetIgnoreUserByGui
 
 func NewGetIgnoreUserByGuildNameRequestFromDict(data map[string]interface{}) GetIgnoreUserByGuildNameRequest {
 	return GetIgnoreUserByGuildNameRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		GuildName:       core.CastString(data["guildName"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -13153,10 +15451,34 @@ func NewAddIgnoreUserRequestFromJson(data string) (AddIgnoreUserRequest, error) 
 
 func NewAddIgnoreUserRequestFromDict(data map[string]interface{}) AddIgnoreUserRequest {
 	return AddIgnoreUserRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		UserId:         core.CastString(data["userId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
 	}
 }
 
@@ -13337,11 +15659,41 @@ func NewAddIgnoreUserByGuildNameRequestFromJson(data string) (AddIgnoreUserByGui
 
 func NewAddIgnoreUserByGuildNameRequestFromDict(data map[string]interface{}) AddIgnoreUserByGuildNameRequest {
 	return AddIgnoreUserByGuildNameRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		GuildName:       core.CastString(data["guildName"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -13499,10 +15851,34 @@ func NewDeleteIgnoreUserRequestFromJson(data string) (DeleteIgnoreUserRequest, e
 
 func NewDeleteIgnoreUserRequestFromDict(data map[string]interface{}) DeleteIgnoreUserRequest {
 	return DeleteIgnoreUserRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		GuildModelName: core.CastString(data["guildModelName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		UserId:         core.CastString(data["userId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
 	}
 }
 
@@ -13683,11 +16059,41 @@ func NewDeleteIgnoreUserByGuildNameRequestFromJson(data string) (DeleteIgnoreUse
 
 func NewDeleteIgnoreUserByGuildNameRequestFromDict(data map[string]interface{}) DeleteIgnoreUserByGuildNameRequest {
 	return DeleteIgnoreUserByGuildNameRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		GuildModelName:  core.CastString(data["guildModelName"]),
-		GuildName:       core.CastString(data["guildName"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 

@@ -144,12 +144,48 @@ func NewUserFromJson(data string) User {
 
 func NewUserFromDict(data map[string]interface{}) User {
 	return User{
-		UserId:      core.CastString(data["userId"]),
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-		Revision:    core.CastInt64(data["revision"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -350,12 +386,48 @@ func NewSecurityPolicyFromJson(data string) SecurityPolicy {
 
 func NewSecurityPolicyFromDict(data map[string]interface{}) SecurityPolicy {
 	return SecurityPolicy{
-		SecurityPolicyId: core.CastString(data["securityPolicyId"]),
-		Name:             core.CastString(data["name"]),
-		Description:      core.CastString(data["description"]),
-		Policy:           core.CastString(data["policy"]),
-		CreatedAt:        core.CastInt64(data["createdAt"]),
-		UpdatedAt:        core.CastInt64(data["updatedAt"]),
+		SecurityPolicyId: func() *string {
+			v, ok := data["securityPolicyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["securityPolicyId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Policy: func() *string {
+			v, ok := data["policy"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["policy"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
 	}
 }
 
@@ -532,11 +604,41 @@ func NewIdentifierFromJson(data string) Identifier {
 
 func NewIdentifierFromDict(data map[string]interface{}) Identifier {
 	return Identifier{
-		ClientId:     core.CastString(data["clientId"]),
-		UserName:     core.CastString(data["userName"]),
-		ClientSecret: core.CastString(data["clientSecret"]),
-		CreatedAt:    core.CastInt64(data["createdAt"]),
-		Revision:     core.CastInt64(data["revision"]),
+		ClientId: func() *string {
+			v, ok := data["clientId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["clientId"])
+		}(),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		ClientSecret: func() *string {
+			v, ok := data["clientSecret"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["clientSecret"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -736,13 +838,55 @@ func NewPasswordFromJson(data string) Password {
 
 func NewPasswordFromDict(data map[string]interface{}) Password {
 	return Password{
-		PasswordId:                     core.CastString(data["passwordId"]),
-		UserId:                         core.CastString(data["userId"]),
-		UserName:                       core.CastString(data["userName"]),
-		EnableTwoFactorAuthentication:  core.CastString(data["enableTwoFactorAuthentication"]),
-		TwoFactorAuthenticationSetting: NewTwoFactorAuthenticationSettingFromDict(core.CastMap(data["twoFactorAuthenticationSetting"])).Pointer(),
-		CreatedAt:                      core.CastInt64(data["createdAt"]),
-		Revision:                       core.CastInt64(data["revision"]),
+		PasswordId: func() *string {
+			v, ok := data["passwordId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["passwordId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		EnableTwoFactorAuthentication: func() *string {
+			v, ok := data["enableTwoFactorAuthentication"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["enableTwoFactorAuthentication"])
+		}(),
+		TwoFactorAuthenticationSetting: func() *TwoFactorAuthenticationSetting {
+			v, ok := data["twoFactorAuthenticationSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTwoFactorAuthenticationSettingFromDict(core.CastMap(data["twoFactorAuthenticationSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -908,10 +1052,34 @@ func NewAttachSecurityPolicyFromJson(data string) AttachSecurityPolicy {
 
 func NewAttachSecurityPolicyFromDict(data map[string]interface{}) AttachSecurityPolicy {
 	return AttachSecurityPolicy{
-		UserId:            core.CastString(data["userId"]),
-		SecurityPolicyIds: core.CastStrings(core.CastArray(data["securityPolicyIds"])),
-		AttachedAt:        core.CastInt64(data["attachedAt"]),
-		Revision:          core.CastInt64(data["revision"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		SecurityPolicyIds: func() []*string {
+			v, ok := data["securityPolicyIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		AttachedAt: func() *int64 {
+			v, ok := data["attachedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["attachedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1024,7 +1192,13 @@ func NewProjectTokenFromJson(data string) ProjectToken {
 
 func NewProjectTokenFromDict(data map[string]interface{}) ProjectToken {
 	return ProjectToken{
-		Token: core.CastString(data["token"]),
+		Token: func() *string {
+			v, ok := data["token"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["token"])
+		}(),
 	}
 }
 
@@ -1120,7 +1294,13 @@ func NewTwoFactorAuthenticationSettingFromJson(data string) TwoFactorAuthenticat
 
 func NewTwoFactorAuthenticationSettingFromDict(data map[string]interface{}) TwoFactorAuthenticationSetting {
 	return TwoFactorAuthenticationSetting{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 

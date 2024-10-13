@@ -172,14 +172,62 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:           core.CastString(data["namespaceId"]),
-		Name:                  core.CastString(data["name"]),
-		Description:           core.CastString(data["description"]),
-		OverflowTriggerScript: core.CastString(data["overflowTriggerScript"]),
-		LogSetting:            NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:             core.CastInt64(data["createdAt"]),
-		UpdatedAt:             core.CastInt64(data["updatedAt"]),
-		Revision:              core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		OverflowTriggerScript: func() *string {
+			v, ok := data["overflowTriggerScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["overflowTriggerScript"])
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -491,21 +539,111 @@ func NewStaminaModelMasterFromJson(data string) StaminaModelMaster {
 
 func NewStaminaModelMasterFromDict(data map[string]interface{}) StaminaModelMaster {
 	return StaminaModelMaster{
-		StaminaModelId:           core.CastString(data["staminaModelId"]),
-		Name:                     core.CastString(data["name"]),
-		Metadata:                 core.CastString(data["metadata"]),
-		Description:              core.CastString(data["description"]),
-		RecoverIntervalMinutes:   core.CastInt32(data["recoverIntervalMinutes"]),
-		RecoverValue:             core.CastInt32(data["recoverValue"]),
-		InitialCapacity:          core.CastInt32(data["initialCapacity"]),
-		IsOverflow:               core.CastBool(data["isOverflow"]),
-		MaxCapacity:              core.CastInt32(data["maxCapacity"]),
-		MaxStaminaTableName:      core.CastString(data["maxStaminaTableName"]),
-		RecoverIntervalTableName: core.CastString(data["recoverIntervalTableName"]),
-		RecoverValueTableName:    core.CastString(data["recoverValueTableName"]),
-		CreatedAt:                core.CastInt64(data["createdAt"]),
-		UpdatedAt:                core.CastInt64(data["updatedAt"]),
-		Revision:                 core.CastInt64(data["revision"]),
+		StaminaModelId: func() *string {
+			v, ok := data["staminaModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		RecoverIntervalMinutes: func() *int32 {
+			v, ok := data["recoverIntervalMinutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["recoverIntervalMinutes"])
+		}(),
+		RecoverValue: func() *int32 {
+			v, ok := data["recoverValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["recoverValue"])
+		}(),
+		InitialCapacity: func() *int32 {
+			v, ok := data["initialCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["initialCapacity"])
+		}(),
+		IsOverflow: func() *bool {
+			v, ok := data["isOverflow"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["isOverflow"])
+		}(),
+		MaxCapacity: func() *int32 {
+			v, ok := data["maxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxCapacity"])
+		}(),
+		MaxStaminaTableName: func() *string {
+			v, ok := data["maxStaminaTableName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["maxStaminaTableName"])
+		}(),
+		RecoverIntervalTableName: func() *string {
+			v, ok := data["recoverIntervalTableName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["recoverIntervalTableName"])
+		}(),
+		RecoverValueTableName: func() *string {
+			v, ok := data["recoverValueTableName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["recoverValueTableName"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -783,15 +921,69 @@ func NewMaxStaminaTableMasterFromJson(data string) MaxStaminaTableMaster {
 
 func NewMaxStaminaTableMasterFromDict(data map[string]interface{}) MaxStaminaTableMaster {
 	return MaxStaminaTableMaster{
-		MaxStaminaTableId: core.CastString(data["maxStaminaTableId"]),
-		Name:              core.CastString(data["name"]),
-		Metadata:          core.CastString(data["metadata"]),
-		Description:       core.CastString(data["description"]),
-		ExperienceModelId: core.CastString(data["experienceModelId"]),
-		Values:            core.CastInt32s(core.CastArray(data["values"])),
-		CreatedAt:         core.CastInt64(data["createdAt"]),
-		UpdatedAt:         core.CastInt64(data["updatedAt"]),
-		Revision:          core.CastInt64(data["revision"]),
+		MaxStaminaTableId: func() *string {
+			v, ok := data["maxStaminaTableId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["maxStaminaTableId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		ExperienceModelId: func() *string {
+			v, ok := data["experienceModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceModelId"])
+		}(),
+		Values: func() []*int32 {
+			v, ok := data["values"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1041,15 +1233,69 @@ func NewRecoverIntervalTableMasterFromJson(data string) RecoverIntervalTableMast
 
 func NewRecoverIntervalTableMasterFromDict(data map[string]interface{}) RecoverIntervalTableMaster {
 	return RecoverIntervalTableMaster{
-		RecoverIntervalTableId: core.CastString(data["recoverIntervalTableId"]),
-		Name:                   core.CastString(data["name"]),
-		Metadata:               core.CastString(data["metadata"]),
-		Description:            core.CastString(data["description"]),
-		ExperienceModelId:      core.CastString(data["experienceModelId"]),
-		Values:                 core.CastInt32s(core.CastArray(data["values"])),
-		CreatedAt:              core.CastInt64(data["createdAt"]),
-		UpdatedAt:              core.CastInt64(data["updatedAt"]),
-		Revision:               core.CastInt64(data["revision"]),
+		RecoverIntervalTableId: func() *string {
+			v, ok := data["recoverIntervalTableId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["recoverIntervalTableId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		ExperienceModelId: func() *string {
+			v, ok := data["experienceModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceModelId"])
+		}(),
+		Values: func() []*int32 {
+			v, ok := data["values"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1299,15 +1545,69 @@ func NewRecoverValueTableMasterFromJson(data string) RecoverValueTableMaster {
 
 func NewRecoverValueTableMasterFromDict(data map[string]interface{}) RecoverValueTableMaster {
 	return RecoverValueTableMaster{
-		RecoverValueTableId: core.CastString(data["recoverValueTableId"]),
-		Name:                core.CastString(data["name"]),
-		Metadata:            core.CastString(data["metadata"]),
-		Description:         core.CastString(data["description"]),
-		ExperienceModelId:   core.CastString(data["experienceModelId"]),
-		Values:              core.CastInt32s(core.CastArray(data["values"])),
-		CreatedAt:           core.CastInt64(data["createdAt"]),
-		UpdatedAt:           core.CastInt64(data["updatedAt"]),
-		Revision:            core.CastInt64(data["revision"]),
+		RecoverValueTableId: func() *string {
+			v, ok := data["recoverValueTableId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["recoverValueTableId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		ExperienceModelId: func() *string {
+			v, ok := data["experienceModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceModelId"])
+		}(),
+		Values: func() []*int32 {
+			v, ok := data["values"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1469,8 +1769,20 @@ func NewCurrentStaminaMasterFromJson(data string) CurrentStaminaMaster {
 
 func NewCurrentStaminaMasterFromDict(data map[string]interface{}) CurrentStaminaMaster {
 	return CurrentStaminaMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -1651,17 +1963,83 @@ func NewStaminaModelFromJson(data string) StaminaModel {
 
 func NewStaminaModelFromDict(data map[string]interface{}) StaminaModel {
 	return StaminaModel{
-		StaminaModelId:         core.CastString(data["staminaModelId"]),
-		Name:                   core.CastString(data["name"]),
-		Metadata:               core.CastString(data["metadata"]),
-		RecoverIntervalMinutes: core.CastInt32(data["recoverIntervalMinutes"]),
-		RecoverValue:           core.CastInt32(data["recoverValue"]),
-		InitialCapacity:        core.CastInt32(data["initialCapacity"]),
-		IsOverflow:             core.CastBool(data["isOverflow"]),
-		MaxCapacity:            core.CastInt32(data["maxCapacity"]),
-		MaxStaminaTable:        NewMaxStaminaTableFromDict(core.CastMap(data["maxStaminaTable"])).Pointer(),
-		RecoverIntervalTable:   NewRecoverIntervalTableFromDict(core.CastMap(data["recoverIntervalTable"])).Pointer(),
-		RecoverValueTable:      NewRecoverValueTableFromDict(core.CastMap(data["recoverValueTable"])).Pointer(),
+		StaminaModelId: func() *string {
+			v, ok := data["staminaModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		RecoverIntervalMinutes: func() *int32 {
+			v, ok := data["recoverIntervalMinutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["recoverIntervalMinutes"])
+		}(),
+		RecoverValue: func() *int32 {
+			v, ok := data["recoverValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["recoverValue"])
+		}(),
+		InitialCapacity: func() *int32 {
+			v, ok := data["initialCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["initialCapacity"])
+		}(),
+		IsOverflow: func() *bool {
+			v, ok := data["isOverflow"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["isOverflow"])
+		}(),
+		MaxCapacity: func() *int32 {
+			v, ok := data["maxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxCapacity"])
+		}(),
+		MaxStaminaTable: func() *MaxStaminaTable {
+			v, ok := data["maxStaminaTable"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMaxStaminaTableFromDict(core.CastMap(data["maxStaminaTable"])).Pointer()
+		}(),
+		RecoverIntervalTable: func() *RecoverIntervalTable {
+			v, ok := data["recoverIntervalTable"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRecoverIntervalTableFromDict(core.CastMap(data["recoverIntervalTable"])).Pointer()
+		}(),
+		RecoverValueTable: func() *RecoverValueTable {
+			v, ok := data["recoverValueTable"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRecoverValueTableFromDict(core.CastMap(data["recoverValueTable"])).Pointer()
+		}(),
 	}
 }
 
@@ -1874,10 +2252,34 @@ func NewMaxStaminaTableFromJson(data string) MaxStaminaTable {
 
 func NewMaxStaminaTableFromDict(data map[string]interface{}) MaxStaminaTable {
 	return MaxStaminaTable{
-		Name:              core.CastString(data["name"]),
-		Metadata:          core.CastString(data["metadata"]),
-		ExperienceModelId: core.CastString(data["experienceModelId"]),
-		Values:            core.CastInt32s(core.CastArray(data["values"])),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		ExperienceModelId: func() *string {
+			v, ok := data["experienceModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceModelId"])
+		}(),
+		Values: func() []*int32 {
+			v, ok := data["values"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -2042,10 +2444,34 @@ func NewRecoverIntervalTableFromJson(data string) RecoverIntervalTable {
 
 func NewRecoverIntervalTableFromDict(data map[string]interface{}) RecoverIntervalTable {
 	return RecoverIntervalTable{
-		Name:              core.CastString(data["name"]),
-		Metadata:          core.CastString(data["metadata"]),
-		ExperienceModelId: core.CastString(data["experienceModelId"]),
-		Values:            core.CastInt32s(core.CastArray(data["values"])),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		ExperienceModelId: func() *string {
+			v, ok := data["experienceModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceModelId"])
+		}(),
+		Values: func() []*int32 {
+			v, ok := data["values"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -2210,10 +2636,34 @@ func NewRecoverValueTableFromJson(data string) RecoverValueTable {
 
 func NewRecoverValueTableFromDict(data map[string]interface{}) RecoverValueTable {
 	return RecoverValueTable{
-		Name:              core.CastString(data["name"]),
-		Metadata:          core.CastString(data["metadata"]),
-		ExperienceModelId: core.CastString(data["experienceModelId"]),
-		Values:            core.CastInt32s(core.CastArray(data["values"])),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		ExperienceModelId: func() *string {
+			v, ok := data["experienceModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceModelId"])
+		}(),
+		Values: func() []*int32 {
+			v, ok := data["values"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32s(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -2414,19 +2864,97 @@ func NewStaminaFromJson(data string) Stamina {
 
 func NewStaminaFromDict(data map[string]interface{}) Stamina {
 	return Stamina{
-		StaminaId:              core.CastString(data["staminaId"]),
-		StaminaName:            core.CastString(data["staminaName"]),
-		UserId:                 core.CastString(data["userId"]),
-		Value:                  core.CastInt32(data["value"]),
-		MaxValue:               core.CastInt32(data["maxValue"]),
-		RecoverIntervalMinutes: core.CastInt32(data["recoverIntervalMinutes"]),
-		RecoverValue:           core.CastInt32(data["recoverValue"]),
-		OverflowValue:          core.CastInt32(data["overflowValue"]),
-		NextRecoverAt:          core.CastInt64(data["nextRecoverAt"]),
-		LastRecoveredAt:        core.CastInt64(data["lastRecoveredAt"]),
-		CreatedAt:              core.CastInt64(data["createdAt"]),
-		UpdatedAt:              core.CastInt64(data["updatedAt"]),
-		Revision:               core.CastInt64(data["revision"]),
+		StaminaId: func() *string {
+			v, ok := data["staminaId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaId"])
+		}(),
+		StaminaName: func() *string {
+			v, ok := data["staminaName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["staminaName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Value: func() *int32 {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["value"])
+		}(),
+		MaxValue: func() *int32 {
+			v, ok := data["maxValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxValue"])
+		}(),
+		RecoverIntervalMinutes: func() *int32 {
+			v, ok := data["recoverIntervalMinutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["recoverIntervalMinutes"])
+		}(),
+		RecoverValue: func() *int32 {
+			v, ok := data["recoverValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["recoverValue"])
+		}(),
+		OverflowValue: func() *int32 {
+			v, ok := data["overflowValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["overflowValue"])
+		}(),
+		NextRecoverAt: func() *int64 {
+			v, ok := data["nextRecoverAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["nextRecoverAt"])
+		}(),
+		LastRecoveredAt: func() *int64 {
+			v, ok := data["lastRecoveredAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["lastRecoveredAt"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -2726,13 +3254,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 
@@ -2858,7 +3428,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -3026,10 +3602,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 

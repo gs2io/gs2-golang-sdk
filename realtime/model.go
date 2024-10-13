@@ -200,16 +200,76 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:        core.CastString(data["namespaceId"]),
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		ServerType:         core.CastString(data["serverType"]),
-		ServerSpec:         core.CastString(data["serverSpec"]),
-		CreateNotification: NewNotificationSettingFromDict(core.CastMap(data["createNotification"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		UpdatedAt:          core.CastInt64(data["updatedAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		ServerType: func() *string {
+			v, ok := data["serverType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["serverType"])
+		}(),
+		ServerSpec: func() *string {
+			v, ok := data["serverSpec"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["serverSpec"])
+		}(),
+		CreateNotification: func() *NotificationSetting {
+			v, ok := data["createNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["createNotification"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -475,15 +535,69 @@ func NewRoomFromJson(data string) Room {
 
 func NewRoomFromDict(data map[string]interface{}) Room {
 	return Room{
-		RoomId:              core.CastString(data["roomId"]),
-		Name:                core.CastString(data["name"]),
-		IpAddress:           core.CastString(data["ipAddress"]),
-		Port:                core.CastInt32(data["port"]),
-		EncryptionKey:       core.CastString(data["encryptionKey"]),
-		NotificationUserIds: core.CastStrings(core.CastArray(data["notificationUserIds"])),
-		CreatedAt:           core.CastInt64(data["createdAt"]),
-		UpdatedAt:           core.CastInt64(data["updatedAt"]),
-		Revision:            core.CastInt64(data["revision"]),
+		RoomId: func() *string {
+			v, ok := data["roomId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		IpAddress: func() *string {
+			v, ok := data["ipAddress"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ipAddress"])
+		}(),
+		Port: func() *int32 {
+			v, ok := data["port"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["port"])
+		}(),
+		EncryptionKey: func() *string {
+			v, ok := data["encryptionKey"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["encryptionKey"])
+		}(),
+		NotificationUserIds: func() []*string {
+			v, ok := data["notificationUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -649,9 +763,27 @@ func NewNotificationSettingFromJson(data string) NotificationSetting {
 
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
 	return NotificationSetting{
-		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
-		EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
-		Sound:                            core.CastString(data["sound"]),
+		GatewayNamespaceId: func() *string {
+			v, ok := data["gatewayNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatewayNamespaceId"])
+		}(),
+		EnableTransferMobileNotification: func() *bool {
+			v, ok := data["enableTransferMobileNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableTransferMobileNotification"])
+		}(),
+		Sound: func() *string {
+			v, ok := data["sound"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sound"])
+		}(),
 	}
 }
 
@@ -757,7 +889,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 

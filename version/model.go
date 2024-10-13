@@ -200,16 +200,76 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:                 core.CastString(data["namespaceId"]),
-		Name:                        core.CastString(data["name"]),
-		Description:                 core.CastString(data["description"]),
-		AssumeUserId:                core.CastString(data["assumeUserId"]),
-		AcceptVersionScript:         NewScriptSettingFromDict(core.CastMap(data["acceptVersionScript"])).Pointer(),
-		CheckVersionTriggerScriptId: core.CastString(data["checkVersionTriggerScriptId"]),
-		LogSetting:                  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:                   core.CastInt64(data["createdAt"]),
-		UpdatedAt:                   core.CastInt64(data["updatedAt"]),
-		Revision:                    core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		AssumeUserId: func() *string {
+			v, ok := data["assumeUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["assumeUserId"])
+		}(),
+		AcceptVersionScript: func() *ScriptSetting {
+			v, ok := data["acceptVersionScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["acceptVersionScript"])).Pointer()
+		}(),
+		CheckVersionTriggerScriptId: func() *string {
+			v, ok := data["checkVersionTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["checkVersionTriggerScriptId"])
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -536,21 +596,110 @@ func NewVersionModelMasterFromJson(data string) VersionModelMaster {
 
 func NewVersionModelMasterFromDict(data map[string]interface{}) VersionModelMaster {
 	return VersionModelMaster{
-		VersionModelId:   core.CastString(data["versionModelId"]),
-		Name:             core.CastString(data["name"]),
-		Description:      core.CastString(data["description"]),
-		Metadata:         core.CastString(data["metadata"]),
-		Scope:            core.CastString(data["scope"]),
-		Type:             core.CastString(data["type"]),
-		CurrentVersion:   NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer(),
-		WarningVersion:   NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer(),
-		ErrorVersion:     NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer(),
-		ScheduleVersions: CastScheduleVersions(core.CastArray(data["scheduleVersions"])),
-		NeedSignature:    core.CastBool(data["needSignature"]),
-		SignatureKeyId:   core.CastString(data["signatureKeyId"]),
-		CreatedAt:        core.CastInt64(data["createdAt"]),
-		UpdatedAt:        core.CastInt64(data["updatedAt"]),
-		Revision:         core.CastInt64(data["revision"]),
+		VersionModelId: func() *string {
+			v, ok := data["versionModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["versionModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Scope: func() *string {
+			v, ok := data["scope"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scope"])
+		}(),
+		Type: func() *string {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["type"])
+		}(),
+		CurrentVersion: func() *Version {
+			v, ok := data["currentVersion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer()
+		}(),
+		WarningVersion: func() *Version {
+			v, ok := data["warningVersion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer()
+		}(),
+		ErrorVersion: func() *Version {
+			v, ok := data["errorVersion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer()
+		}(),
+		ScheduleVersions: func() []ScheduleVersion {
+			if data["scheduleVersions"] == nil {
+				return nil
+			}
+			return CastScheduleVersions(core.CastArray(data["scheduleVersions"]))
+		}(),
+		NeedSignature: func() *bool {
+			v, ok := data["needSignature"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["needSignature"])
+		}(),
+		SignatureKeyId: func() *string {
+			v, ok := data["signatureKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["signatureKeyId"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -873,17 +1022,82 @@ func NewVersionModelFromJson(data string) VersionModel {
 
 func NewVersionModelFromDict(data map[string]interface{}) VersionModel {
 	return VersionModel{
-		VersionModelId:   core.CastString(data["versionModelId"]),
-		Name:             core.CastString(data["name"]),
-		Metadata:         core.CastString(data["metadata"]),
-		Scope:            core.CastString(data["scope"]),
-		Type:             core.CastString(data["type"]),
-		CurrentVersion:   NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer(),
-		WarningVersion:   NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer(),
-		ErrorVersion:     NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer(),
-		ScheduleVersions: CastScheduleVersions(core.CastArray(data["scheduleVersions"])),
-		NeedSignature:    core.CastBool(data["needSignature"]),
-		SignatureKeyId:   core.CastString(data["signatureKeyId"]),
+		VersionModelId: func() *string {
+			v, ok := data["versionModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["versionModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Scope: func() *string {
+			v, ok := data["scope"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scope"])
+		}(),
+		Type: func() *string {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["type"])
+		}(),
+		CurrentVersion: func() *Version {
+			v, ok := data["currentVersion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer()
+		}(),
+		WarningVersion: func() *Version {
+			v, ok := data["warningVersion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer()
+		}(),
+		ErrorVersion: func() *Version {
+			v, ok := data["errorVersion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer()
+		}(),
+		ScheduleVersions: func() []ScheduleVersion {
+			if data["scheduleVersions"] == nil {
+				return nil
+			}
+			return CastScheduleVersions(core.CastArray(data["scheduleVersions"]))
+		}(),
+		NeedSignature: func() *bool {
+			v, ok := data["needSignature"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["needSignature"])
+		}(),
+		SignatureKeyId: func() *string {
+			v, ok := data["signatureKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["signatureKeyId"])
+		}(),
 	}
 }
 
@@ -1110,13 +1324,55 @@ func NewAcceptVersionFromJson(data string) AcceptVersion {
 
 func NewAcceptVersionFromDict(data map[string]interface{}) AcceptVersion {
 	return AcceptVersion{
-		AcceptVersionId: core.CastString(data["acceptVersionId"]),
-		VersionName:     core.CastString(data["versionName"]),
-		UserId:          core.CastString(data["userId"]),
-		Version:         NewVersionFromDict(core.CastMap(data["version"])).Pointer(),
-		CreatedAt:       core.CastInt64(data["createdAt"]),
-		UpdatedAt:       core.CastInt64(data["updatedAt"]),
-		Revision:        core.CastInt64(data["revision"]),
+		AcceptVersionId: func() *string {
+			v, ok := data["acceptVersionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["acceptVersionId"])
+		}(),
+		VersionName: func() *string {
+			v, ok := data["versionName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["versionName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Version: func() *Version {
+			v, ok := data["version"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["version"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1231,8 +1487,20 @@ func NewStatusFromJson(data string) Status {
 
 func NewStatusFromDict(data map[string]interface{}) Status {
 	return Status{
-		VersionModel:   NewVersionModelFromDict(core.CastMap(data["versionModel"])).Pointer(),
-		CurrentVersion: NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer(),
+		VersionModel: func() *VersionModel {
+			v, ok := data["versionModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionModelFromDict(core.CastMap(data["versionModel"])).Pointer()
+		}(),
+		CurrentVersion: func() *Version {
+			v, ok := data["currentVersion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer()
+		}(),
 	}
 }
 
@@ -1395,10 +1663,34 @@ func NewTargetVersionFromJson(data string) TargetVersion {
 
 func NewTargetVersionFromDict(data map[string]interface{}) TargetVersion {
 	return TargetVersion{
-		VersionName: core.CastString(data["versionName"]),
-		Body:        core.CastString(data["body"]),
-		Signature:   core.CastString(data["signature"]),
-		Version:     NewVersionFromDict(core.CastMap(data["version"])).Pointer(),
+		VersionName: func() *string {
+			v, ok := data["versionName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["versionName"])
+		}(),
+		Body: func() *string {
+			v, ok := data["body"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["body"])
+		}(),
+		Signature: func() *string {
+			v, ok := data["signature"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["signature"])
+		}(),
+		Version: func() *Version {
+			v, ok := data["version"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["version"])).Pointer()
+		}(),
 	}
 }
 
@@ -1566,10 +1858,34 @@ func NewSignTargetVersionFromJson(data string) SignTargetVersion {
 
 func NewSignTargetVersionFromDict(data map[string]interface{}) SignTargetVersion {
 	return SignTargetVersion{
-		Region:        core.CastString(data["region"]),
-		NamespaceName: core.CastString(data["namespaceName"]),
-		VersionName:   core.CastString(data["versionName"]),
-		Version:       NewVersionFromDict(core.CastMap(data["version"])).Pointer(),
+		Region: func() *string {
+			v, ok := data["region"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["region"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		VersionName: func() *string {
+			v, ok := data["versionName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["versionName"])
+		}(),
+		Version: func() *Version {
+			v, ok := data["version"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["version"])).Pointer()
+		}(),
 	}
 }
 
@@ -1709,8 +2025,20 @@ func NewCurrentVersionMasterFromJson(data string) CurrentVersionMaster {
 
 func NewCurrentVersionMasterFromDict(data map[string]interface{}) CurrentVersionMaster {
 	return CurrentVersionMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -1883,10 +2211,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 
@@ -2141,13 +2493,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 
@@ -2273,7 +2667,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -2357,9 +2757,27 @@ func NewVersionFromJson(data string) Version {
 
 func NewVersionFromDict(data map[string]interface{}) Version {
 	return Version{
-		Major: core.CastInt32(data["major"]),
-		Minor: core.CastInt32(data["minor"]),
-		Micro: core.CastInt32(data["micro"]),
+		Major: func() *int32 {
+			v, ok := data["major"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["major"])
+		}(),
+		Minor: func() *int32 {
+			v, ok := data["minor"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["minor"])
+		}(),
+		Micro: func() *int32 {
+			v, ok := data["micro"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["micro"])
+		}(),
 	}
 }
 
@@ -2477,10 +2895,34 @@ func NewScheduleVersionFromJson(data string) ScheduleVersion {
 
 func NewScheduleVersionFromDict(data map[string]interface{}) ScheduleVersion {
 	return ScheduleVersion{
-		CurrentVersion:  NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer(),
-		WarningVersion:  NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer(),
-		ErrorVersion:    NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer(),
-		ScheduleEventId: core.CastString(data["scheduleEventId"]),
+		CurrentVersion: func() *Version {
+			v, ok := data["currentVersion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["currentVersion"])).Pointer()
+		}(),
+		WarningVersion: func() *Version {
+			v, ok := data["warningVersion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["warningVersion"])).Pointer()
+		}(),
+		ErrorVersion: func() *Version {
+			v, ok := data["errorVersion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVersionFromDict(core.CastMap(data["errorVersion"])).Pointer()
+		}(),
+		ScheduleEventId: func() *string {
+			v, ok := data["scheduleEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scheduleEventId"])
+		}(),
 	}
 }
 

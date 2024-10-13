@@ -172,14 +172,62 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		Version:     core.CastString(data["version"]),
-		LogSetting:  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-		Revision:    core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Version: func() *string {
+			v, ok := data["version"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["version"])
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -359,13 +407,55 @@ func NewProgressFromJson(data string) Progress {
 
 func NewProgressFromDict(data map[string]interface{}) Progress {
 	return Progress{
-		ProgressId:   core.CastString(data["progressId"]),
-		UploadToken:  core.CastString(data["uploadToken"]),
-		Generated:    core.CastInt32(data["generated"]),
-		PatternCount: core.CastInt32(data["patternCount"]),
-		CreatedAt:    core.CastInt64(data["createdAt"]),
-		UpdatedAt:    core.CastInt64(data["updatedAt"]),
-		Revision:     core.CastInt64(data["revision"]),
+		ProgressId: func() *string {
+			v, ok := data["progressId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["progressId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		Generated: func() *int32 {
+			v, ok := data["generated"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["generated"])
+		}(),
+		PatternCount: func() *int32 {
+			v, ok := data["patternCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["patternCount"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -547,11 +637,41 @@ func NewOutputFromJson(data string) Output {
 
 func NewOutputFromDict(data map[string]interface{}) Output {
 	return Output{
-		OutputId:  core.CastString(data["outputId"]),
-		Name:      core.CastString(data["name"]),
-		Text:      core.CastString(data["text"]),
-		CreatedAt: core.CastInt64(data["createdAt"]),
-		Revision:  core.CastInt64(data["revision"]),
+		OutputId: func() *string {
+			v, ok := data["outputId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["outputId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Text: func() *string {
+			v, ok := data["text"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["text"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -651,8 +771,18 @@ func NewViewFromJson(data string) View {
 
 func NewViewFromDict(data map[string]interface{}) View {
 	return View{
-		Contents:       CastContents(core.CastArray(data["contents"])),
-		RemoveContents: CastContents(core.CastArray(data["removeContents"])),
+		Contents: func() []Content {
+			if data["contents"] == nil {
+				return nil
+			}
+			return CastContents(core.CastArray(data["contents"]))
+		}(),
+		RemoveContents: func() []Content {
+			if data["removeContents"] == nil {
+				return nil
+			}
+			return CastContents(core.CastArray(data["removeContents"]))
+		}(),
 	}
 }
 
@@ -805,9 +935,27 @@ func NewContentFromJson(data string) Content {
 
 func NewContentFromDict(data map[string]interface{}) Content {
 	return Content{
-		Section:     core.CastString(data["section"]),
-		Content:     core.CastString(data["content"]),
-		FrontMatter: core.CastString(data["frontMatter"]),
+		Section: func() *string {
+			v, ok := data["section"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["section"])
+		}(),
+		Content: func() *string {
+			v, ok := data["content"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["content"])
+		}(),
+		FrontMatter: func() *string {
+			v, ok := data["frontMatter"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["frontMatter"])
+		}(),
 	}
 }
 
@@ -1013,12 +1161,48 @@ func NewNewsFromJson(data string) News {
 
 func NewNewsFromDict(data map[string]interface{}) News {
 	return News{
-		Section:         core.CastString(data["section"]),
-		Content:         core.CastString(data["content"]),
-		Title:           core.CastString(data["title"]),
-		ScheduleEventId: core.CastString(data["scheduleEventId"]),
-		Timestamp:       core.CastInt64(data["timestamp"]),
-		FrontMatter:     core.CastString(data["frontMatter"]),
+		Section: func() *string {
+			v, ok := data["section"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["section"])
+		}(),
+		Content: func() *string {
+			v, ok := data["content"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["content"])
+		}(),
+		Title: func() *string {
+			v, ok := data["title"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["title"])
+		}(),
+		ScheduleEventId: func() *string {
+			v, ok := data["scheduleEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scheduleEventId"])
+		}(),
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
+		FrontMatter: func() *string {
+			v, ok := data["frontMatter"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["frontMatter"])
+		}(),
 	}
 }
 
@@ -1163,8 +1347,20 @@ func NewSetCookieRequestEntryFromJson(data string) SetCookieRequestEntry {
 
 func NewSetCookieRequestEntryFromDict(data map[string]interface{}) SetCookieRequestEntry {
 	return SetCookieRequestEntry{
-		Key:   core.CastString(data["key"]),
-		Value: core.CastString(data["value"]),
+		Key: func() *string {
+			v, ok := data["key"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["key"])
+		}(),
+		Value: func() *string {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["value"])
+		}(),
 	}
 }
 
@@ -1265,7 +1461,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -1505,13 +1707,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 

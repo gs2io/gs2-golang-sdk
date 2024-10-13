@@ -94,8 +94,20 @@ func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesReques
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
 	return DescribeNamespacesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -233,11 +245,41 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:                          core.CastString(data["name"]),
-		Description:                   core.CastString(data["description"]),
-		AssumeUserId:                  core.CastString(data["assumeUserId"]),
-		AutoRunStampSheetNotification: NewNotificationSettingFromDict(core.CastMap(data["autoRunStampSheetNotification"])).Pointer(),
-		LogSetting:                    NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		AssumeUserId: func() *string {
+			v, ok := data["assumeUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["assumeUserId"])
+		}(),
+		AutoRunStampSheetNotification: func() *NotificationSetting {
+			v, ok := data["autoRunStampSheetNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["autoRunStampSheetNotification"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -332,7 +374,13 @@ func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusReques
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -413,7 +461,13 @@ func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
 	return GetNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -550,11 +604,41 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:                 core.CastString(data["namespaceName"]),
-		Description:                   core.CastString(data["description"]),
-		AssumeUserId:                  core.CastString(data["assumeUserId"]),
-		AutoRunStampSheetNotification: NewNotificationSettingFromDict(core.CastMap(data["autoRunStampSheetNotification"])).Pointer(),
-		LogSetting:                    NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		AssumeUserId: func() *string {
+			v, ok := data["assumeUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["assumeUserId"])
+		}(),
+		AutoRunStampSheetNotification: func() *NotificationSetting {
+			v, ok := data["autoRunStampSheetNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["autoRunStampSheetNotification"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -649,7 +733,13 @@ func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, err
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -758,9 +848,27 @@ func NewDescribeDistributorModelMastersRequestFromJson(data string) (DescribeDis
 
 func NewDescribeDistributorModelMastersRequestFromDict(data map[string]interface{}) DescribeDistributorModelMastersRequest {
 	return DescribeDistributorModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -966,12 +1074,48 @@ func NewCreateDistributorModelMasterRequestFromJson(data string) (CreateDistribu
 
 func NewCreateDistributorModelMasterRequestFromDict(data map[string]interface{}) CreateDistributorModelMasterRequest {
 	return CreateDistributorModelMasterRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		Metadata:           core.CastString(data["metadata"]),
-		InboxNamespaceId:   core.CastString(data["inboxNamespaceId"]),
-		WhiteListTargetIds: core.CastStrings(core.CastArray(data["whiteListTargetIds"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		InboxNamespaceId: func() *string {
+			v, ok := data["inboxNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inboxNamespaceId"])
+		}(),
+		WhiteListTargetIds: func() []*string {
+			v, ok := data["whiteListTargetIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -1083,8 +1227,20 @@ func NewGetDistributorModelMasterRequestFromJson(data string) (GetDistributorMod
 
 func NewGetDistributorModelMasterRequestFromDict(data map[string]interface{}) GetDistributorModelMasterRequest {
 	return GetDistributorModelMasterRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		DistributorName: core.CastString(data["distributorName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		DistributorName: func() *string {
+			v, ok := data["distributorName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorName"])
+		}(),
 	}
 }
 
@@ -1289,12 +1445,48 @@ func NewUpdateDistributorModelMasterRequestFromJson(data string) (UpdateDistribu
 
 func NewUpdateDistributorModelMasterRequestFromDict(data map[string]interface{}) UpdateDistributorModelMasterRequest {
 	return UpdateDistributorModelMasterRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		DistributorName:    core.CastString(data["distributorName"]),
-		Description:        core.CastString(data["description"]),
-		Metadata:           core.CastString(data["metadata"]),
-		InboxNamespaceId:   core.CastString(data["inboxNamespaceId"]),
-		WhiteListTargetIds: core.CastStrings(core.CastArray(data["whiteListTargetIds"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		DistributorName: func() *string {
+			v, ok := data["distributorName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		InboxNamespaceId: func() *string {
+			v, ok := data["inboxNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inboxNamespaceId"])
+		}(),
+		WhiteListTargetIds: func() []*string {
+			v, ok := data["whiteListTargetIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -1406,8 +1598,20 @@ func NewDeleteDistributorModelMasterRequestFromJson(data string) (DeleteDistribu
 
 func NewDeleteDistributorModelMasterRequestFromDict(data map[string]interface{}) DeleteDistributorModelMasterRequest {
 	return DeleteDistributorModelMasterRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		DistributorName: core.CastString(data["distributorName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		DistributorName: func() *string {
+			v, ok := data["distributorName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorName"])
+		}(),
 	}
 }
 
@@ -1489,7 +1693,13 @@ func NewDescribeDistributorModelsRequestFromJson(data string) (DescribeDistribut
 
 func NewDescribeDistributorModelsRequestFromDict(data map[string]interface{}) DescribeDistributorModelsRequest {
 	return DescribeDistributorModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -1594,8 +1804,20 @@ func NewGetDistributorModelRequestFromJson(data string) (GetDistributorModelRequ
 
 func NewGetDistributorModelRequestFromDict(data map[string]interface{}) GetDistributorModelRequest {
 	return GetDistributorModelRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		DistributorName: core.CastString(data["distributorName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		DistributorName: func() *string {
+			v, ok := data["distributorName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorName"])
+		}(),
 	}
 }
 
@@ -1677,7 +1899,13 @@ func NewExportMasterRequestFromJson(data string) (ExportMasterRequest, error) {
 
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -1758,7 +1986,13 @@ func NewGetCurrentDistributorMasterRequestFromJson(data string) (GetCurrentDistr
 
 func NewGetCurrentDistributorMasterRequestFromDict(data map[string]interface{}) GetCurrentDistributorMasterRequest {
 	return GetCurrentDistributorMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -1863,8 +2097,20 @@ func NewUpdateCurrentDistributorMasterRequestFromJson(data string) (UpdateCurren
 
 func NewUpdateCurrentDistributorMasterRequestFromDict(data map[string]interface{}) UpdateCurrentDistributorMasterRequest {
 	return UpdateCurrentDistributorMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Settings:      core.CastString(data["settings"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -1950,8 +2196,20 @@ func NewUpdateCurrentDistributorMasterFromGitHubRequestFromJson(data string) (Up
 
 func NewUpdateCurrentDistributorMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentDistributorMasterFromGitHubRequest {
 	return UpdateCurrentDistributorMasterFromGitHubRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		CheckoutSetting: func() *GitHubCheckoutSetting {
+			v, ok := data["checkoutSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -2115,11 +2373,41 @@ func NewDistributeRequestFromJson(data string) (DistributeRequest, error) {
 
 func NewDistributeRequestFromDict(data map[string]interface{}) DistributeRequest {
 	return DistributeRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		DistributorName:    core.CastString(data["distributorName"]),
-		UserId:             core.CastString(data["userId"]),
-		DistributeResource: NewDistributeResourceFromDict(core.CastMap(data["distributeResource"])).Pointer(),
-		TimeOffsetToken:    core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		DistributorName: func() *string {
+			v, ok := data["distributorName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		DistributeResource: func() *DistributeResource {
+			v, ok := data["distributeResource"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDistributeResourceFromDict(core.CastMap(data["distributeResource"])).Pointer()
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2238,9 +2526,27 @@ func NewDistributeWithoutOverflowProcessRequestFromJson(data string) (Distribute
 
 func NewDistributeWithoutOverflowProcessRequestFromDict(data map[string]interface{}) DistributeWithoutOverflowProcessRequest {
 	return DistributeWithoutOverflowProcessRequest{
-		UserId:             core.CastString(data["userId"]),
-		DistributeResource: NewDistributeResourceFromDict(core.CastMap(data["distributeResource"])).Pointer(),
-		TimeOffsetToken:    core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		DistributeResource: func() *DistributeResource {
+			v, ok := data["distributeResource"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDistributeResourceFromDict(core.CastMap(data["distributeResource"])).Pointer()
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2376,9 +2682,27 @@ func NewRunVerifyTaskRequestFromJson(data string) (RunVerifyTaskRequest, error) 
 
 func NewRunVerifyTaskRequestFromDict(data map[string]interface{}) RunVerifyTaskRequest {
 	return RunVerifyTaskRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		VerifyTask:    core.CastString(data["verifyTask"]),
-		KeyId:         core.CastString(data["keyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		VerifyTask: func() *string {
+			v, ok := data["verifyTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -2509,9 +2833,27 @@ func NewRunStampTaskRequestFromJson(data string) (RunStampTaskRequest, error) {
 
 func NewRunStampTaskRequestFromDict(data map[string]interface{}) RunStampTaskRequest {
 	return RunStampTaskRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		StampTask:     core.CastString(data["stampTask"]),
-		KeyId:         core.CastString(data["keyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -2642,9 +2984,27 @@ func NewRunStampSheetRequestFromJson(data string) (RunStampSheetRequest, error) 
 
 func NewRunStampSheetRequestFromDict(data map[string]interface{}) RunStampSheetRequest {
 	return RunStampSheetRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		StampSheet:    core.CastString(data["stampSheet"]),
-		KeyId:         core.CastString(data["keyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -2775,9 +3135,27 @@ func NewRunStampSheetExpressRequestFromJson(data string) (RunStampSheetExpressRe
 
 func NewRunStampSheetExpressRequestFromDict(data map[string]interface{}) RunStampSheetExpressRequest {
 	return RunStampSheetExpressRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		StampSheet:    core.CastString(data["stampSheet"]),
-		KeyId:         core.CastString(data["keyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -2884,8 +3262,20 @@ func NewRunVerifyTaskWithoutNamespaceRequestFromJson(data string) (RunVerifyTask
 
 func NewRunVerifyTaskWithoutNamespaceRequestFromDict(data map[string]interface{}) RunVerifyTaskWithoutNamespaceRequest {
 	return RunVerifyTaskWithoutNamespaceRequest{
-		VerifyTask: core.CastString(data["verifyTask"]),
-		KeyId:      core.CastString(data["keyId"]),
+		VerifyTask: func() *string {
+			v, ok := data["verifyTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -2991,8 +3381,20 @@ func NewRunStampTaskWithoutNamespaceRequestFromJson(data string) (RunStampTaskWi
 
 func NewRunStampTaskWithoutNamespaceRequestFromDict(data map[string]interface{}) RunStampTaskWithoutNamespaceRequest {
 	return RunStampTaskWithoutNamespaceRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -3098,8 +3500,20 @@ func NewRunStampSheetWithoutNamespaceRequestFromJson(data string) (RunStampSheet
 
 func NewRunStampSheetWithoutNamespaceRequestFromDict(data map[string]interface{}) RunStampSheetWithoutNamespaceRequest {
 	return RunStampSheetWithoutNamespaceRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -3205,8 +3619,20 @@ func NewRunStampSheetExpressWithoutNamespaceRequestFromJson(data string) (RunSta
 
 func NewRunStampSheetExpressWithoutNamespaceRequestFromDict(data map[string]interface{}) RunStampSheetExpressWithoutNamespaceRequest {
 	return RunStampSheetExpressWithoutNamespaceRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -3293,8 +3719,19 @@ func NewSetTransactionDefaultConfigRequestFromJson(data string) (SetTransactionD
 
 func NewSetTransactionDefaultConfigRequestFromDict(data map[string]interface{}) SetTransactionDefaultConfigRequest {
 	return SetTransactionDefaultConfigRequest{
-		AccessToken: core.CastString(data["accessToken"]),
-		Config:      CastConfigs(core.CastArray(data["config"])),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Config: func() []Config {
+			if data["config"] == nil {
+				return nil
+			}
+			return CastConfigs(core.CastArray(data["config"]))
+		}(),
 	}
 }
 
@@ -3407,9 +3844,26 @@ func NewSetTransactionDefaultConfigByUserIdRequestFromJson(data string) (SetTran
 
 func NewSetTransactionDefaultConfigByUserIdRequestFromDict(data map[string]interface{}) SetTransactionDefaultConfigByUserIdRequest {
 	return SetTransactionDefaultConfigByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		Config:          CastConfigs(core.CastArray(data["config"])),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Config: func() []Config {
+			if data["config"] == nil {
+				return nil
+			}
+			return CastConfigs(core.CastArray(data["config"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3559,13 +4013,53 @@ func NewIfExpressionByUserIdRequestFromJson(data string) (IfExpressionByUserIdRe
 
 func NewIfExpressionByUserIdRequestFromDict(data map[string]interface{}) IfExpressionByUserIdRequest {
 	return IfExpressionByUserIdRequest{
-		NamespaceName:                   core.CastString(data["namespaceName"]),
-		UserId:                          core.CastString(data["userId"]),
-		Condition:                       NewVerifyActionFromDict(core.CastMap(data["condition"])).Pointer(),
-		TrueActions:                     CastConsumeActions(core.CastArray(data["trueActions"])),
-		FalseActions:                    CastConsumeActions(core.CastArray(data["falseActions"])),
-		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
-		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Condition: func() *VerifyAction {
+			v, ok := data["condition"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewVerifyActionFromDict(core.CastMap(data["condition"])).Pointer()
+		}(),
+		TrueActions: func() []ConsumeAction {
+			if data["trueActions"] == nil {
+				return nil
+			}
+			return CastConsumeActions(core.CastArray(data["trueActions"]))
+		}(),
+		FalseActions: func() []ConsumeAction {
+			if data["falseActions"] == nil {
+				return nil
+			}
+			return CastConsumeActions(core.CastArray(data["falseActions"]))
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3714,10 +4208,33 @@ func NewAndExpressionByUserIdRequestFromJson(data string) (AndExpressionByUserId
 
 func NewAndExpressionByUserIdRequestFromDict(data map[string]interface{}) AndExpressionByUserIdRequest {
 	return AndExpressionByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		Actions:         CastVerifyActions(core.CastArray(data["actions"])),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Actions: func() []VerifyAction {
+			if data["actions"] == nil {
+				return nil
+			}
+			return CastVerifyActions(core.CastArray(data["actions"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3856,10 +4373,33 @@ func NewOrExpressionByUserIdRequestFromJson(data string) (OrExpressionByUserIdRe
 
 func NewOrExpressionByUserIdRequestFromDict(data map[string]interface{}) OrExpressionByUserIdRequest {
 	return OrExpressionByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		Actions:         CastVerifyActions(core.CastArray(data["actions"])),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Actions: func() []VerifyAction {
+			if data["actions"] == nil {
+				return nil
+			}
+			return CastVerifyActions(core.CastArray(data["actions"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3969,8 +4509,20 @@ func NewIfExpressionByStampTaskRequestFromJson(data string) (IfExpressionByStamp
 
 func NewIfExpressionByStampTaskRequestFromDict(data map[string]interface{}) IfExpressionByStampTaskRequest {
 	return IfExpressionByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -4076,8 +4628,20 @@ func NewAndExpressionByStampTaskRequestFromJson(data string) (AndExpressionBySta
 
 func NewAndExpressionByStampTaskRequestFromDict(data map[string]interface{}) AndExpressionByStampTaskRequest {
 	return AndExpressionByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -4183,8 +4747,20 @@ func NewOrExpressionByStampTaskRequestFromJson(data string) (OrExpressionByStamp
 
 func NewOrExpressionByStampTaskRequestFromDict(data map[string]interface{}) OrExpressionByStampTaskRequest {
 	return OrExpressionByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -4314,9 +4890,27 @@ func NewGetStampSheetResultRequestFromJson(data string) (GetStampSheetResultRequ
 
 func NewGetStampSheetResultRequestFromDict(data map[string]interface{}) GetStampSheetResultRequest {
 	return GetStampSheetResultRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		TransactionId: core.CastString(data["transactionId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
 	}
 }
 
@@ -4471,10 +5065,34 @@ func NewGetStampSheetResultByUserIdRequestFromJson(data string) (GetStampSheetRe
 
 func NewGetStampSheetResultByUserIdRequestFromDict(data map[string]interface{}) GetStampSheetResultByUserIdRequest {
 	return GetStampSheetResultByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		TransactionId:   core.CastString(data["transactionId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 

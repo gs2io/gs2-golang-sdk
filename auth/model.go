@@ -140,11 +140,41 @@ func NewAccessTokenFromJson(data string) AccessToken {
 
 func NewAccessTokenFromDict(data map[string]interface{}) AccessToken {
 	return AccessToken{
-		Token:                core.CastString(data["token"]),
-		UserId:               core.CastString(data["userId"]),
-		FederationFromUserId: core.CastString(data["federationFromUserId"]),
-		Expire:               core.CastInt64(data["expire"]),
-		TimeOffset:           core.CastInt32(data["timeOffset"]),
+		Token: func() *string {
+			v, ok := data["token"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["token"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		FederationFromUserId: func() *string {
+			v, ok := data["federationFromUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["federationFromUserId"])
+		}(),
+		Expire: func() *int64 {
+			v, ok := data["expire"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expire"])
+		}(),
+		TimeOffset: func() *int32 {
+			v, ok := data["timeOffset"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["timeOffset"])
+		}(),
 	}
 }
 

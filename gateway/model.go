@@ -172,14 +172,62 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:    core.CastString(data["namespaceId"]),
-		Name:           core.CastString(data["name"]),
-		Description:    core.CastString(data["description"]),
-		FirebaseSecret: core.CastString(data["firebaseSecret"]),
-		LogSetting:     NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:      core.CastInt64(data["createdAt"]),
-		UpdatedAt:      core.CastInt64(data["updatedAt"]),
-		Revision:       core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		FirebaseSecret: func() *string {
+			v, ok := data["firebaseSecret"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["firebaseSecret"])
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -399,13 +447,55 @@ func NewWebSocketSessionFromJson(data string) WebSocketSession {
 
 func NewWebSocketSessionFromDict(data map[string]interface{}) WebSocketSession {
 	return WebSocketSession{
-		WebSocketSessionId: core.CastString(data["webSocketSessionId"]),
-		ConnectionId:       core.CastString(data["connectionId"]),
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		UserId:             core.CastString(data["userId"]),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		UpdatedAt:          core.CastInt64(data["updatedAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		WebSocketSessionId: func() *string {
+			v, ok := data["webSocketSessionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["webSocketSessionId"])
+		}(),
+		ConnectionId: func() *string {
+			v, ok := data["connectionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["connectionId"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -591,12 +681,48 @@ func NewFirebaseTokenFromJson(data string) FirebaseToken {
 
 func NewFirebaseTokenFromDict(data map[string]interface{}) FirebaseToken {
 	return FirebaseToken{
-		FirebaseTokenId: core.CastString(data["firebaseTokenId"]),
-		UserId:          core.CastString(data["userId"]),
-		Token:           core.CastString(data["token"]),
-		CreatedAt:       core.CastInt64(data["createdAt"]),
-		UpdatedAt:       core.CastInt64(data["updatedAt"]),
-		Revision:        core.CastInt64(data["revision"]),
+		FirebaseTokenId: func() *string {
+			v, ok := data["firebaseTokenId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["firebaseTokenId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Token: func() *string {
+			v, ok := data["token"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["token"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -717,7 +843,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 

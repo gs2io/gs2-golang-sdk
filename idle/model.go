@@ -180,16 +180,76 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:                    core.CastString(data["namespaceId"]),
-		Name:                           core.CastString(data["name"]),
-		Description:                    core.CastString(data["description"]),
-		TransactionSetting:             NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		ReceiveScript:                  NewScriptSettingFromDict(core.CastMap(data["receiveScript"])).Pointer(),
-		OverrideAcquireActionsScriptId: core.CastString(data["overrideAcquireActionsScriptId"]),
-		LogSetting:                     NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:                      core.CastInt64(data["createdAt"]),
-		UpdatedAt:                      core.CastInt64(data["updatedAt"]),
-		Revision:                       core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		ReceiveScript: func() *ScriptSetting {
+			v, ok := data["receiveScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["receiveScript"])).Pointer()
+		}(),
+		OverrideAcquireActionsScriptId: func() *string {
+			v, ok := data["overrideAcquireActionsScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["overrideAcquireActionsScriptId"])
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -489,18 +549,89 @@ func NewCategoryModelMasterFromJson(data string) CategoryModelMaster {
 
 func NewCategoryModelMasterFromDict(data map[string]interface{}) CategoryModelMaster {
 	return CategoryModelMaster{
-		CategoryModelId:           core.CastString(data["categoryModelId"]),
-		Name:                      core.CastString(data["name"]),
-		Description:               core.CastString(data["description"]),
-		Metadata:                  core.CastString(data["metadata"]),
-		RewardIntervalMinutes:     core.CastInt32(data["rewardIntervalMinutes"]),
-		DefaultMaximumIdleMinutes: core.CastInt32(data["defaultMaximumIdleMinutes"]),
-		AcquireActions:            CastAcquireActionList(core.CastArray(data["acquireActions"])),
-		IdlePeriodScheduleId:      core.CastString(data["idlePeriodScheduleId"]),
-		ReceivePeriodScheduleId:   core.CastString(data["receivePeriodScheduleId"]),
-		CreatedAt:                 core.CastInt64(data["createdAt"]),
-		UpdatedAt:                 core.CastInt64(data["updatedAt"]),
-		Revision:                  core.CastInt64(data["revision"]),
+		CategoryModelId: func() *string {
+			v, ok := data["categoryModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["categoryModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		RewardIntervalMinutes: func() *int32 {
+			v, ok := data["rewardIntervalMinutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["rewardIntervalMinutes"])
+		}(),
+		DefaultMaximumIdleMinutes: func() *int32 {
+			v, ok := data["defaultMaximumIdleMinutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["defaultMaximumIdleMinutes"])
+		}(),
+		AcquireActions: func() []AcquireActionList {
+			if data["acquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActionList(core.CastArray(data["acquireActions"]))
+		}(),
+		IdlePeriodScheduleId: func() *string {
+			v, ok := data["idlePeriodScheduleId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["idlePeriodScheduleId"])
+		}(),
+		ReceivePeriodScheduleId: func() *string {
+			v, ok := data["receivePeriodScheduleId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["receivePeriodScheduleId"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -761,14 +892,61 @@ func NewCategoryModelFromJson(data string) CategoryModel {
 
 func NewCategoryModelFromDict(data map[string]interface{}) CategoryModel {
 	return CategoryModel{
-		CategoryModelId:           core.CastString(data["categoryModelId"]),
-		Name:                      core.CastString(data["name"]),
-		Metadata:                  core.CastString(data["metadata"]),
-		RewardIntervalMinutes:     core.CastInt32(data["rewardIntervalMinutes"]),
-		DefaultMaximumIdleMinutes: core.CastInt32(data["defaultMaximumIdleMinutes"]),
-		AcquireActions:            CastAcquireActionList(core.CastArray(data["acquireActions"])),
-		IdlePeriodScheduleId:      core.CastString(data["idlePeriodScheduleId"]),
-		ReceivePeriodScheduleId:   core.CastString(data["receivePeriodScheduleId"]),
+		CategoryModelId: func() *string {
+			v, ok := data["categoryModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["categoryModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		RewardIntervalMinutes: func() *int32 {
+			v, ok := data["rewardIntervalMinutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["rewardIntervalMinutes"])
+		}(),
+		DefaultMaximumIdleMinutes: func() *int32 {
+			v, ok := data["defaultMaximumIdleMinutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["defaultMaximumIdleMinutes"])
+		}(),
+		AcquireActions: func() []AcquireActionList {
+			if data["acquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActionList(core.CastArray(data["acquireActions"]))
+		}(),
+		IdlePeriodScheduleId: func() *string {
+			v, ok := data["idlePeriodScheduleId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["idlePeriodScheduleId"])
+		}(),
+		ReceivePeriodScheduleId: func() *string {
+			v, ok := data["receivePeriodScheduleId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["receivePeriodScheduleId"])
+		}(),
 	}
 }
 
@@ -977,16 +1155,76 @@ func NewStatusFromJson(data string) Status {
 
 func NewStatusFromDict(data map[string]interface{}) Status {
 	return Status{
-		StatusId:           core.CastString(data["statusId"]),
-		CategoryName:       core.CastString(data["categoryName"]),
-		UserId:             core.CastString(data["userId"]),
-		RandomSeed:         core.CastInt64(data["randomSeed"]),
-		IdleMinutes:        core.CastInt32(data["idleMinutes"]),
-		NextRewardsAt:      core.CastInt64(data["nextRewardsAt"]),
-		MaximumIdleMinutes: core.CastInt32(data["maximumIdleMinutes"]),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		UpdatedAt:          core.CastInt64(data["updatedAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		StatusId: func() *string {
+			v, ok := data["statusId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["statusId"])
+		}(),
+		CategoryName: func() *string {
+			v, ok := data["categoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["categoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		RandomSeed: func() *int64 {
+			v, ok := data["randomSeed"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["randomSeed"])
+		}(),
+		IdleMinutes: func() *int32 {
+			v, ok := data["idleMinutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["idleMinutes"])
+		}(),
+		NextRewardsAt: func() *int64 {
+			v, ok := data["nextRewardsAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["nextRewardsAt"])
+		}(),
+		MaximumIdleMinutes: func() *int32 {
+			v, ok := data["maximumIdleMinutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maximumIdleMinutes"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1151,8 +1389,20 @@ func NewCurrentCategoryMasterFromJson(data string) CurrentCategoryMaster {
 
 func NewCurrentCategoryMasterFromDict(data map[string]interface{}) CurrentCategoryMaster {
 	return CurrentCategoryMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -1277,8 +1527,20 @@ func NewConfigFromJson(data string) Config {
 
 func NewConfigFromDict(data map[string]interface{}) Config {
 	return Config{
-		Key:   core.CastString(data["key"]),
-		Value: core.CastString(data["value"]),
+		Key: func() *string {
+			v, ok := data["key"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["key"])
+		}(),
+		Value: func() *string {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["value"])
+		}(),
 	}
 }
 
@@ -1403,8 +1665,20 @@ func NewAcquireActionFromJson(data string) AcquireAction {
 
 func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 	return AcquireAction{
-		Action:  core.CastString(data["action"]),
-		Request: core.CastString(data["request"]),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Request: func() *string {
+			v, ok := data["request"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["request"])
+		}(),
 	}
 }
 
@@ -1485,7 +1759,12 @@ func NewAcquireActionListFromJson(data string) AcquireActionList {
 
 func NewAcquireActionListFromDict(data map[string]interface{}) AcquireActionList {
 	return AcquireActionList{
-		AcquireActions: CastAcquireActions(core.CastArray(data["acquireActions"])),
+		AcquireActions: func() []AcquireAction {
+			if data["acquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActions(core.CastArray(data["acquireActions"]))
+		}(),
 	}
 }
 
@@ -1636,10 +1915,34 @@ func NewTransactionSettingFromJson(data string) TransactionSetting {
 
 func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
 	return TransactionSetting{
-		EnableAutoRun:          core.CastBool(data["enableAutoRun"]),
-		DistributorNamespaceId: core.CastString(data["distributorNamespaceId"]),
-		KeyId:                  core.CastString(data["keyId"]),
-		QueueNamespaceId:       core.CastString(data["queueNamespaceId"]),
+		EnableAutoRun: func() *bool {
+			v, ok := data["enableAutoRun"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableAutoRun"])
+		}(),
+		DistributorNamespaceId: func() *string {
+			v, ok := data["distributorNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorNamespaceId"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		QueueNamespaceId: func() *string {
+			v, ok := data["queueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["queueNamespaceId"])
+		}(),
 	}
 }
 
@@ -1822,10 +2125,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 
@@ -1936,7 +2263,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -2176,13 +2509,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 

@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -253,10 +294,33 @@ func NewQueryAccessLogResultFromJson(data string) QueryAccessLogResult {
 
 func NewQueryAccessLogResultFromDict(data map[string]interface{}) QueryAccessLogResult {
 	return QueryAccessLogResult{
-		Items:         CastAccessLogs(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-		TotalCount:    core.CastInt64(data["totalCount"]),
-		ScanSize:      core.CastInt64(data["scanSize"]),
+		Items: func() []AccessLog {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastAccessLogs(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		TotalCount: func() *int64 {
+			v, ok := data["totalCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalCount"])
+		}(),
+		ScanSize: func() *int64 {
+			v, ok := data["scanSize"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scanSize"])
+		}(),
 	}
 }
 
@@ -295,10 +359,33 @@ func NewCountAccessLogResultFromJson(data string) CountAccessLogResult {
 
 func NewCountAccessLogResultFromDict(data map[string]interface{}) CountAccessLogResult {
 	return CountAccessLogResult{
-		Items:         CastAccessLogCounts(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-		TotalCount:    core.CastInt64(data["totalCount"]),
-		ScanSize:      core.CastInt64(data["scanSize"]),
+		Items: func() []AccessLogCount {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastAccessLogCounts(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		TotalCount: func() *int64 {
+			v, ok := data["totalCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalCount"])
+		}(),
+		ScanSize: func() *int64 {
+			v, ok := data["scanSize"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scanSize"])
+		}(),
 	}
 }
 
@@ -337,10 +424,33 @@ func NewQueryIssueStampSheetLogResultFromJson(data string) QueryIssueStampSheetL
 
 func NewQueryIssueStampSheetLogResultFromDict(data map[string]interface{}) QueryIssueStampSheetLogResult {
 	return QueryIssueStampSheetLogResult{
-		Items:         CastIssueStampSheetLogs(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-		TotalCount:    core.CastInt64(data["totalCount"]),
-		ScanSize:      core.CastInt64(data["scanSize"]),
+		Items: func() []IssueStampSheetLog {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastIssueStampSheetLogs(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		TotalCount: func() *int64 {
+			v, ok := data["totalCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalCount"])
+		}(),
+		ScanSize: func() *int64 {
+			v, ok := data["scanSize"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scanSize"])
+		}(),
 	}
 }
 
@@ -379,10 +489,33 @@ func NewCountIssueStampSheetLogResultFromJson(data string) CountIssueStampSheetL
 
 func NewCountIssueStampSheetLogResultFromDict(data map[string]interface{}) CountIssueStampSheetLogResult {
 	return CountIssueStampSheetLogResult{
-		Items:         CastIssueStampSheetLogCounts(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-		TotalCount:    core.CastInt64(data["totalCount"]),
-		ScanSize:      core.CastInt64(data["scanSize"]),
+		Items: func() []IssueStampSheetLogCount {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastIssueStampSheetLogCounts(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		TotalCount: func() *int64 {
+			v, ok := data["totalCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalCount"])
+		}(),
+		ScanSize: func() *int64 {
+			v, ok := data["scanSize"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scanSize"])
+		}(),
 	}
 }
 
@@ -421,10 +554,33 @@ func NewQueryExecuteStampSheetLogResultFromJson(data string) QueryExecuteStampSh
 
 func NewQueryExecuteStampSheetLogResultFromDict(data map[string]interface{}) QueryExecuteStampSheetLogResult {
 	return QueryExecuteStampSheetLogResult{
-		Items:         CastExecuteStampSheetLogs(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-		TotalCount:    core.CastInt64(data["totalCount"]),
-		ScanSize:      core.CastInt64(data["scanSize"]),
+		Items: func() []ExecuteStampSheetLog {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastExecuteStampSheetLogs(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		TotalCount: func() *int64 {
+			v, ok := data["totalCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalCount"])
+		}(),
+		ScanSize: func() *int64 {
+			v, ok := data["scanSize"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scanSize"])
+		}(),
 	}
 }
 
@@ -463,10 +619,33 @@ func NewCountExecuteStampSheetLogResultFromJson(data string) CountExecuteStampSh
 
 func NewCountExecuteStampSheetLogResultFromDict(data map[string]interface{}) CountExecuteStampSheetLogResult {
 	return CountExecuteStampSheetLogResult{
-		Items:         CastExecuteStampSheetLogCounts(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-		TotalCount:    core.CastInt64(data["totalCount"]),
-		ScanSize:      core.CastInt64(data["scanSize"]),
+		Items: func() []ExecuteStampSheetLogCount {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastExecuteStampSheetLogCounts(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		TotalCount: func() *int64 {
+			v, ok := data["totalCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalCount"])
+		}(),
+		ScanSize: func() *int64 {
+			v, ok := data["scanSize"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scanSize"])
+		}(),
 	}
 }
 
@@ -505,10 +684,33 @@ func NewQueryExecuteStampTaskLogResultFromJson(data string) QueryExecuteStampTas
 
 func NewQueryExecuteStampTaskLogResultFromDict(data map[string]interface{}) QueryExecuteStampTaskLogResult {
 	return QueryExecuteStampTaskLogResult{
-		Items:         CastExecuteStampTaskLogs(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-		TotalCount:    core.CastInt64(data["totalCount"]),
-		ScanSize:      core.CastInt64(data["scanSize"]),
+		Items: func() []ExecuteStampTaskLog {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastExecuteStampTaskLogs(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		TotalCount: func() *int64 {
+			v, ok := data["totalCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalCount"])
+		}(),
+		ScanSize: func() *int64 {
+			v, ok := data["scanSize"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scanSize"])
+		}(),
 	}
 }
 
@@ -547,10 +749,33 @@ func NewCountExecuteStampTaskLogResultFromJson(data string) CountExecuteStampTas
 
 func NewCountExecuteStampTaskLogResultFromDict(data map[string]interface{}) CountExecuteStampTaskLogResult {
 	return CountExecuteStampTaskLogResult{
-		Items:         CastExecuteStampTaskLogCounts(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-		TotalCount:    core.CastInt64(data["totalCount"]),
-		ScanSize:      core.CastInt64(data["scanSize"]),
+		Items: func() []ExecuteStampTaskLogCount {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastExecuteStampTaskLogCounts(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		TotalCount: func() *int64 {
+			v, ok := data["totalCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalCount"])
+		}(),
+		ScanSize: func() *int64 {
+			v, ok := data["scanSize"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scanSize"])
+		}(),
 	}
 }
 
@@ -589,10 +814,33 @@ func NewQueryInGameLogResultFromJson(data string) QueryInGameLogResult {
 
 func NewQueryInGameLogResultFromDict(data map[string]interface{}) QueryInGameLogResult {
 	return QueryInGameLogResult{
-		Items:         CastInGameLogs(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-		TotalCount:    core.CastInt64(data["totalCount"]),
-		ScanSize:      core.CastInt64(data["scanSize"]),
+		Items: func() []InGameLog {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastInGameLogs(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		TotalCount: func() *int64 {
+			v, ok := data["totalCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalCount"])
+		}(),
+		ScanSize: func() *int64 {
+			v, ok := data["scanSize"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scanSize"])
+		}(),
 	}
 }
 
@@ -628,7 +876,13 @@ func NewSendInGameLogResultFromJson(data string) SendInGameLogResult {
 
 func NewSendInGameLogResultFromDict(data map[string]interface{}) SendInGameLogResult {
 	return SendInGameLogResult{
-		Item: NewInGameLogFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *InGameLog {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInGameLogFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -664,7 +918,13 @@ func NewSendInGameLogByUserIdResultFromJson(data string) SendInGameLogByUserIdRe
 
 func NewSendInGameLogByUserIdResultFromDict(data map[string]interface{}) SendInGameLogByUserIdResult {
 	return SendInGameLogByUserIdResult{
-		Item: NewInGameLogFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *InGameLog {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInGameLogFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -703,10 +963,33 @@ func NewQueryAccessLogWithTelemetryResultFromJson(data string) QueryAccessLogWit
 
 func NewQueryAccessLogWithTelemetryResultFromDict(data map[string]interface{}) QueryAccessLogWithTelemetryResult {
 	return QueryAccessLogWithTelemetryResult{
-		Items:         CastAccessLogWithTelemetries(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
-		TotalCount:    core.CastInt64(data["totalCount"]),
-		ScanSize:      core.CastInt64(data["scanSize"]),
+		Items: func() []AccessLogWithTelemetry {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastAccessLogWithTelemetries(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
+		TotalCount: func() *int64 {
+			v, ok := data["totalCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["totalCount"])
+		}(),
+		ScanSize: func() *int64 {
+			v, ok := data["scanSize"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["scanSize"])
+		}(),
 	}
 }
 
@@ -743,8 +1026,19 @@ func NewDescribeInsightsResultFromJson(data string) DescribeInsightsResult {
 
 func NewDescribeInsightsResultFromDict(data map[string]interface{}) DescribeInsightsResult {
 	return DescribeInsightsResult{
-		Items:         CastInsights(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Insight {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastInsights(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -778,7 +1072,13 @@ func NewCreateInsightResultFromJson(data string) CreateInsightResult {
 
 func NewCreateInsightResultFromDict(data map[string]interface{}) CreateInsightResult {
 	return CreateInsightResult{
-		Item: NewInsightFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Insight {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInsightFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -814,7 +1114,13 @@ func NewGetInsightResultFromJson(data string) GetInsightResult {
 
 func NewGetInsightResultFromDict(data map[string]interface{}) GetInsightResult {
 	return GetInsightResult{
-		Item: NewInsightFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Insight {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInsightFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -850,7 +1156,13 @@ func NewDeleteInsightResultFromJson(data string) DeleteInsightResult {
 
 func NewDeleteInsightResultFromDict(data map[string]interface{}) DeleteInsightResult {
 	return DeleteInsightResult{
-		Item: NewInsightFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Insight {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewInsightFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 

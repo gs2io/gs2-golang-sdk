@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -276,7 +317,13 @@ func NewCheckDumpUserDataByUserIdResultFromJson(data string) CheckDumpUserDataBy
 
 func NewCheckDumpUserDataByUserIdResultFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdResult {
 	return CheckDumpUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -360,8 +407,20 @@ func NewPrepareImportUserDataByUserIdResultFromJson(data string) PrepareImportUs
 
 func NewPrepareImportUserDataByUserIdResultFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdResult {
 	return PrepareImportUserDataByUserIdResult{
-		UploadToken: core.CastString(data["uploadToken"]),
-		UploadUrl:   core.CastString(data["uploadUrl"]),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -419,7 +478,13 @@ func NewCheckImportUserDataByUserIdResultFromJson(data string) CheckImportUserDa
 
 func NewCheckImportUserDataByUserIdResultFromDict(data map[string]interface{}) CheckImportUserDataByUserIdResult {
 	return CheckImportUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -451,8 +516,19 @@ func NewDescribeWalletsResultFromJson(data string) DescribeWalletsResult {
 
 func NewDescribeWalletsResultFromDict(data map[string]interface{}) DescribeWalletsResult {
 	return DescribeWalletsResult{
-		Items:         CastWallets(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Wallet {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastWallets(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -487,8 +563,19 @@ func NewDescribeWalletsByUserIdResultFromJson(data string) DescribeWalletsByUser
 
 func NewDescribeWalletsByUserIdResultFromDict(data map[string]interface{}) DescribeWalletsByUserIdResult {
 	return DescribeWalletsByUserIdResult{
-		Items:         CastWallets(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Wallet {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastWallets(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -522,7 +609,13 @@ func NewGetWalletResultFromJson(data string) GetWalletResult {
 
 func NewGetWalletResultFromDict(data map[string]interface{}) GetWalletResult {
 	return GetWalletResult{
-		Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Wallet {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewWalletFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -558,7 +651,13 @@ func NewGetWalletByUserIdResultFromJson(data string) GetWalletByUserIdResult {
 
 func NewGetWalletByUserIdResultFromDict(data map[string]interface{}) GetWalletByUserIdResult {
 	return GetWalletByUserIdResult{
-		Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Wallet {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewWalletFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -594,7 +693,13 @@ func NewDepositByUserIdResultFromJson(data string) DepositByUserIdResult {
 
 func NewDepositByUserIdResultFromDict(data map[string]interface{}) DepositByUserIdResult {
 	return DepositByUserIdResult{
-		Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Wallet {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewWalletFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -631,8 +736,19 @@ func NewWithdrawResultFromJson(data string) WithdrawResult {
 
 func NewWithdrawResultFromDict(data map[string]interface{}) WithdrawResult {
 	return WithdrawResult{
-		Item:                 NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
-		WithdrawTransactions: CastDepositTransactions(core.CastArray(data["withdrawTransactions"])),
+		Item: func() *Wallet {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewWalletFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		WithdrawTransactions: func() []DepositTransaction {
+			if data["withdrawTransactions"] == nil {
+				return nil
+			}
+			return CastDepositTransactions(core.CastArray(data["withdrawTransactions"]))
+		}(),
 	}
 }
 
@@ -672,8 +788,19 @@ func NewWithdrawByUserIdResultFromJson(data string) WithdrawByUserIdResult {
 
 func NewWithdrawByUserIdResultFromDict(data map[string]interface{}) WithdrawByUserIdResult {
 	return WithdrawByUserIdResult{
-		Item:                 NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
-		WithdrawTransactions: CastDepositTransactions(core.CastArray(data["withdrawTransactions"])),
+		Item: func() *Wallet {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewWalletFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		WithdrawTransactions: func() []DepositTransaction {
+			if data["withdrawTransactions"] == nil {
+				return nil
+			}
+			return CastDepositTransactions(core.CastArray(data["withdrawTransactions"]))
+		}(),
 	}
 }
 
@@ -712,7 +839,13 @@ func NewDepositByStampSheetResultFromJson(data string) DepositByStampSheetResult
 
 func NewDepositByStampSheetResultFromDict(data map[string]interface{}) DepositByStampSheetResult {
 	return DepositByStampSheetResult{
-		Item: NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Wallet {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewWalletFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -750,9 +883,26 @@ func NewWithdrawByStampTaskResultFromJson(data string) WithdrawByStampTaskResult
 
 func NewWithdrawByStampTaskResultFromDict(data map[string]interface{}) WithdrawByStampTaskResult {
 	return WithdrawByStampTaskResult{
-		Item:                 NewWalletFromDict(core.CastMap(data["item"])).Pointer(),
-		WithdrawTransactions: CastDepositTransactions(core.CastArray(data["withdrawTransactions"])),
-		NewContextStack:      core.CastString(data["newContextStack"]),
+		Item: func() *Wallet {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewWalletFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		WithdrawTransactions: func() []DepositTransaction {
+			if data["withdrawTransactions"] == nil {
+				return nil
+			}
+			return CastDepositTransactions(core.CastArray(data["withdrawTransactions"]))
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
 	}
 }
 
@@ -793,8 +943,19 @@ func NewDescribeEventsByUserIdResultFromJson(data string) DescribeEventsByUserId
 
 func NewDescribeEventsByUserIdResultFromDict(data map[string]interface{}) DescribeEventsByUserIdResult {
 	return DescribeEventsByUserIdResult{
-		Items:         CastEvents(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Event {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastEvents(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -828,7 +989,13 @@ func NewGetEventByTransactionIdResultFromJson(data string) GetEventByTransaction
 
 func NewGetEventByTransactionIdResultFromDict(data map[string]interface{}) GetEventByTransactionIdResult {
 	return GetEventByTransactionIdResult{
-		Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Event {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewEventFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -864,7 +1031,13 @@ func NewVerifyReceiptResultFromJson(data string) VerifyReceiptResult {
 
 func NewVerifyReceiptResultFromDict(data map[string]interface{}) VerifyReceiptResult {
 	return VerifyReceiptResult{
-		Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Event {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewEventFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -900,7 +1073,13 @@ func NewVerifyReceiptByUserIdResultFromJson(data string) VerifyReceiptByUserIdRe
 
 func NewVerifyReceiptByUserIdResultFromDict(data map[string]interface{}) VerifyReceiptByUserIdResult {
 	return VerifyReceiptByUserIdResult{
-		Item: NewEventFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Event {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewEventFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -937,8 +1116,20 @@ func NewVerifyReceiptByStampTaskResultFromJson(data string) VerifyReceiptByStamp
 
 func NewVerifyReceiptByStampTaskResultFromDict(data map[string]interface{}) VerifyReceiptByStampTaskResult {
 	return VerifyReceiptByStampTaskResult{
-		Item:            NewEventFromDict(core.CastMap(data["item"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
+		Item: func() *Event {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewEventFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
 	}
 }
 
@@ -975,7 +1166,12 @@ func NewDescribeStoreContentModelsResultFromJson(data string) DescribeStoreConte
 
 func NewDescribeStoreContentModelsResultFromDict(data map[string]interface{}) DescribeStoreContentModelsResult {
 	return DescribeStoreContentModelsResult{
-		Items: CastStoreContentModels(core.CastArray(data["items"])),
+		Items: func() []StoreContentModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastStoreContentModels(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -1008,7 +1204,13 @@ func NewGetStoreContentModelResultFromJson(data string) GetStoreContentModelResu
 
 func NewGetStoreContentModelResultFromDict(data map[string]interface{}) GetStoreContentModelResult {
 	return GetStoreContentModelResult{
-		Item: NewStoreContentModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *StoreContentModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStoreContentModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1045,8 +1247,19 @@ func NewDescribeStoreContentModelMastersResultFromJson(data string) DescribeStor
 
 func NewDescribeStoreContentModelMastersResultFromDict(data map[string]interface{}) DescribeStoreContentModelMastersResult {
 	return DescribeStoreContentModelMastersResult{
-		Items:         CastStoreContentModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []StoreContentModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastStoreContentModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1080,7 +1293,13 @@ func NewCreateStoreContentModelMasterResultFromJson(data string) CreateStoreCont
 
 func NewCreateStoreContentModelMasterResultFromDict(data map[string]interface{}) CreateStoreContentModelMasterResult {
 	return CreateStoreContentModelMasterResult{
-		Item: NewStoreContentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *StoreContentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStoreContentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1116,7 +1335,13 @@ func NewGetStoreContentModelMasterResultFromJson(data string) GetStoreContentMod
 
 func NewGetStoreContentModelMasterResultFromDict(data map[string]interface{}) GetStoreContentModelMasterResult {
 	return GetStoreContentModelMasterResult{
-		Item: NewStoreContentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *StoreContentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStoreContentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1152,7 +1377,13 @@ func NewUpdateStoreContentModelMasterResultFromJson(data string) UpdateStoreCont
 
 func NewUpdateStoreContentModelMasterResultFromDict(data map[string]interface{}) UpdateStoreContentModelMasterResult {
 	return UpdateStoreContentModelMasterResult{
-		Item: NewStoreContentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *StoreContentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStoreContentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1188,7 +1419,13 @@ func NewDeleteStoreContentModelMasterResultFromJson(data string) DeleteStoreCont
 
 func NewDeleteStoreContentModelMasterResultFromDict(data map[string]interface{}) DeleteStoreContentModelMasterResult {
 	return DeleteStoreContentModelMasterResult{
-		Item: NewStoreContentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *StoreContentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStoreContentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1224,7 +1461,13 @@ func NewExportMasterResultFromJson(data string) ExportMasterResult {
 
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
 	return ExportMasterResult{
-		Item: NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1260,7 +1503,13 @@ func NewGetCurrentModelMasterResultFromJson(data string) GetCurrentModelMasterRe
 
 func NewGetCurrentModelMasterResultFromDict(data map[string]interface{}) GetCurrentModelMasterResult {
 	return GetCurrentModelMasterResult{
-		Item: NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1296,7 +1545,13 @@ func NewUpdateCurrentModelMasterResultFromJson(data string) UpdateCurrentModelMa
 
 func NewUpdateCurrentModelMasterResultFromDict(data map[string]interface{}) UpdateCurrentModelMasterResult {
 	return UpdateCurrentModelMasterResult{
-		Item: NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1332,7 +1587,13 @@ func NewUpdateCurrentModelMasterFromGitHubResultFromJson(data string) UpdateCurr
 
 func NewUpdateCurrentModelMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentModelMasterFromGitHubResult {
 	return UpdateCurrentModelMasterFromGitHubResult{
-		Item: NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1369,8 +1630,19 @@ func NewDescribeDailyTransactionHistoriesByCurrencyResultFromJson(data string) D
 
 func NewDescribeDailyTransactionHistoriesByCurrencyResultFromDict(data map[string]interface{}) DescribeDailyTransactionHistoriesByCurrencyResult {
 	return DescribeDailyTransactionHistoriesByCurrencyResult{
-		Items:         CastDailyTransactionHistories(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []DailyTransactionHistory {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastDailyTransactionHistories(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1405,8 +1677,19 @@ func NewDescribeDailyTransactionHistoriesResultFromJson(data string) DescribeDai
 
 func NewDescribeDailyTransactionHistoriesResultFromDict(data map[string]interface{}) DescribeDailyTransactionHistoriesResult {
 	return DescribeDailyTransactionHistoriesResult{
-		Items:         CastDailyTransactionHistories(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []DailyTransactionHistory {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastDailyTransactionHistories(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1440,7 +1723,13 @@ func NewGetDailyTransactionHistoryResultFromJson(data string) GetDailyTransactio
 
 func NewGetDailyTransactionHistoryResultFromDict(data map[string]interface{}) GetDailyTransactionHistoryResult {
 	return GetDailyTransactionHistoryResult{
-		Item: NewDailyTransactionHistoryFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DailyTransactionHistory {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDailyTransactionHistoryFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1477,8 +1766,19 @@ func NewDescribeUnusedBalancesResultFromJson(data string) DescribeUnusedBalances
 
 func NewDescribeUnusedBalancesResultFromDict(data map[string]interface{}) DescribeUnusedBalancesResult {
 	return DescribeUnusedBalancesResult{
-		Items:         CastUnusedBalances(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []UnusedBalance {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastUnusedBalances(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1512,7 +1812,13 @@ func NewGetUnusedBalanceResultFromJson(data string) GetUnusedBalanceResult {
 
 func NewGetUnusedBalanceResultFromDict(data map[string]interface{}) GetUnusedBalanceResult {
 	return GetUnusedBalanceResult{
-		Item: NewUnusedBalanceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *UnusedBalance {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewUnusedBalanceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 

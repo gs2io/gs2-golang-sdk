@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -276,7 +317,13 @@ func NewCheckDumpUserDataByUserIdResultFromJson(data string) CheckDumpUserDataBy
 
 func NewCheckDumpUserDataByUserIdResultFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdResult {
 	return CheckDumpUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -360,8 +407,20 @@ func NewPrepareImportUserDataByUserIdResultFromJson(data string) PrepareImportUs
 
 func NewPrepareImportUserDataByUserIdResultFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdResult {
 	return PrepareImportUserDataByUserIdResult{
-		UploadToken: core.CastString(data["uploadToken"]),
-		UploadUrl:   core.CastString(data["uploadUrl"]),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -419,7 +478,13 @@ func NewCheckImportUserDataByUserIdResultFromJson(data string) CheckImportUserDa
 
 func NewCheckImportUserDataByUserIdResultFromDict(data map[string]interface{}) CheckImportUserDataByUserIdResult {
 	return CheckImportUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -450,7 +515,13 @@ func NewGetFormModelResultFromJson(data string) GetFormModelResult {
 
 func NewGetFormModelResultFromDict(data map[string]interface{}) GetFormModelResult {
 	return GetFormModelResult{
-		Item: NewFormModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FormModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -487,8 +558,19 @@ func NewDescribeFormModelMastersResultFromJson(data string) DescribeFormModelMas
 
 func NewDescribeFormModelMastersResultFromDict(data map[string]interface{}) DescribeFormModelMastersResult {
 	return DescribeFormModelMastersResult{
-		Items:         CastFormModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []FormModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFormModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -522,7 +604,13 @@ func NewCreateFormModelMasterResultFromJson(data string) CreateFormModelMasterRe
 
 func NewCreateFormModelMasterResultFromDict(data map[string]interface{}) CreateFormModelMasterResult {
 	return CreateFormModelMasterResult{
-		Item: NewFormModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FormModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -558,7 +646,13 @@ func NewGetFormModelMasterResultFromJson(data string) GetFormModelMasterResult {
 
 func NewGetFormModelMasterResultFromDict(data map[string]interface{}) GetFormModelMasterResult {
 	return GetFormModelMasterResult{
-		Item: NewFormModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FormModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -594,7 +688,13 @@ func NewUpdateFormModelMasterResultFromJson(data string) UpdateFormModelMasterRe
 
 func NewUpdateFormModelMasterResultFromDict(data map[string]interface{}) UpdateFormModelMasterResult {
 	return UpdateFormModelMasterResult{
-		Item: NewFormModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FormModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -630,7 +730,13 @@ func NewDeleteFormModelMasterResultFromJson(data string) DeleteFormModelMasterRe
 
 func NewDeleteFormModelMasterResultFromDict(data map[string]interface{}) DeleteFormModelMasterResult {
 	return DeleteFormModelMasterResult{
-		Item: NewFormModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FormModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -666,7 +772,12 @@ func NewDescribeMoldModelsResultFromJson(data string) DescribeMoldModelsResult {
 
 func NewDescribeMoldModelsResultFromDict(data map[string]interface{}) DescribeMoldModelsResult {
 	return DescribeMoldModelsResult{
-		Items: CastMoldModels(core.CastArray(data["items"])),
+		Items: func() []MoldModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMoldModels(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -699,7 +810,13 @@ func NewGetMoldModelResultFromJson(data string) GetMoldModelResult {
 
 func NewGetMoldModelResultFromDict(data map[string]interface{}) GetMoldModelResult {
 	return GetMoldModelResult{
-		Item: NewMoldModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *MoldModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -736,8 +853,19 @@ func NewDescribeMoldModelMastersResultFromJson(data string) DescribeMoldModelMas
 
 func NewDescribeMoldModelMastersResultFromDict(data map[string]interface{}) DescribeMoldModelMastersResult {
 	return DescribeMoldModelMastersResult{
-		Items:         CastMoldModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []MoldModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMoldModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -771,7 +899,13 @@ func NewCreateMoldModelMasterResultFromJson(data string) CreateMoldModelMasterRe
 
 func NewCreateMoldModelMasterResultFromDict(data map[string]interface{}) CreateMoldModelMasterResult {
 	return CreateMoldModelMasterResult{
-		Item: NewMoldModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *MoldModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -807,7 +941,13 @@ func NewGetMoldModelMasterResultFromJson(data string) GetMoldModelMasterResult {
 
 func NewGetMoldModelMasterResultFromDict(data map[string]interface{}) GetMoldModelMasterResult {
 	return GetMoldModelMasterResult{
-		Item: NewMoldModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *MoldModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -843,7 +983,13 @@ func NewUpdateMoldModelMasterResultFromJson(data string) UpdateMoldModelMasterRe
 
 func NewUpdateMoldModelMasterResultFromDict(data map[string]interface{}) UpdateMoldModelMasterResult {
 	return UpdateMoldModelMasterResult{
-		Item: NewMoldModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *MoldModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -879,7 +1025,13 @@ func NewDeleteMoldModelMasterResultFromJson(data string) DeleteMoldModelMasterRe
 
 func NewDeleteMoldModelMasterResultFromDict(data map[string]interface{}) DeleteMoldModelMasterResult {
 	return DeleteMoldModelMasterResult{
-		Item: NewMoldModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *MoldModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -915,7 +1067,12 @@ func NewDescribePropertyFormModelsResultFromJson(data string) DescribePropertyFo
 
 func NewDescribePropertyFormModelsResultFromDict(data map[string]interface{}) DescribePropertyFormModelsResult {
 	return DescribePropertyFormModelsResult{
-		Items: CastPropertyFormModels(core.CastArray(data["items"])),
+		Items: func() []PropertyFormModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastPropertyFormModels(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -948,7 +1105,13 @@ func NewGetPropertyFormModelResultFromJson(data string) GetPropertyFormModelResu
 
 func NewGetPropertyFormModelResultFromDict(data map[string]interface{}) GetPropertyFormModelResult {
 	return GetPropertyFormModelResult{
-		Item: NewPropertyFormModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *PropertyFormModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -985,8 +1148,19 @@ func NewDescribePropertyFormModelMastersResultFromJson(data string) DescribeProp
 
 func NewDescribePropertyFormModelMastersResultFromDict(data map[string]interface{}) DescribePropertyFormModelMastersResult {
 	return DescribePropertyFormModelMastersResult{
-		Items:         CastPropertyFormModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []PropertyFormModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastPropertyFormModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1020,7 +1194,13 @@ func NewCreatePropertyFormModelMasterResultFromJson(data string) CreatePropertyF
 
 func NewCreatePropertyFormModelMasterResultFromDict(data map[string]interface{}) CreatePropertyFormModelMasterResult {
 	return CreatePropertyFormModelMasterResult{
-		Item: NewPropertyFormModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *PropertyFormModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1056,7 +1236,13 @@ func NewGetPropertyFormModelMasterResultFromJson(data string) GetPropertyFormMod
 
 func NewGetPropertyFormModelMasterResultFromDict(data map[string]interface{}) GetPropertyFormModelMasterResult {
 	return GetPropertyFormModelMasterResult{
-		Item: NewPropertyFormModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *PropertyFormModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1092,7 +1278,13 @@ func NewUpdatePropertyFormModelMasterResultFromJson(data string) UpdatePropertyF
 
 func NewUpdatePropertyFormModelMasterResultFromDict(data map[string]interface{}) UpdatePropertyFormModelMasterResult {
 	return UpdatePropertyFormModelMasterResult{
-		Item: NewPropertyFormModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *PropertyFormModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1128,7 +1320,13 @@ func NewDeletePropertyFormModelMasterResultFromJson(data string) DeletePropertyF
 
 func NewDeletePropertyFormModelMasterResultFromDict(data map[string]interface{}) DeletePropertyFormModelMasterResult {
 	return DeletePropertyFormModelMasterResult{
-		Item: NewPropertyFormModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *PropertyFormModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1164,7 +1362,13 @@ func NewExportMasterResultFromJson(data string) ExportMasterResult {
 
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
 	return ExportMasterResult{
-		Item: NewCurrentFormMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentFormMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentFormMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1200,7 +1404,13 @@ func NewGetCurrentFormMasterResultFromJson(data string) GetCurrentFormMasterResu
 
 func NewGetCurrentFormMasterResultFromDict(data map[string]interface{}) GetCurrentFormMasterResult {
 	return GetCurrentFormMasterResult{
-		Item: NewCurrentFormMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentFormMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentFormMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1236,7 +1446,13 @@ func NewUpdateCurrentFormMasterResultFromJson(data string) UpdateCurrentFormMast
 
 func NewUpdateCurrentFormMasterResultFromDict(data map[string]interface{}) UpdateCurrentFormMasterResult {
 	return UpdateCurrentFormMasterResult{
-		Item: NewCurrentFormMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentFormMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentFormMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1272,7 +1488,13 @@ func NewUpdateCurrentFormMasterFromGitHubResultFromJson(data string) UpdateCurre
 
 func NewUpdateCurrentFormMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentFormMasterFromGitHubResult {
 	return UpdateCurrentFormMasterFromGitHubResult{
-		Item: NewCurrentFormMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentFormMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentFormMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1309,8 +1531,19 @@ func NewDescribeMoldsResultFromJson(data string) DescribeMoldsResult {
 
 func NewDescribeMoldsResultFromDict(data map[string]interface{}) DescribeMoldsResult {
 	return DescribeMoldsResult{
-		Items:         CastMolds(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Mold {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMolds(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1345,8 +1578,19 @@ func NewDescribeMoldsByUserIdResultFromJson(data string) DescribeMoldsByUserIdRe
 
 func NewDescribeMoldsByUserIdResultFromDict(data map[string]interface{}) DescribeMoldsByUserIdResult {
 	return DescribeMoldsByUserIdResult{
-		Items:         CastMolds(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Mold {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMolds(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1381,8 +1625,20 @@ func NewGetMoldResultFromJson(data string) GetMoldResult {
 
 func NewGetMoldResultFromDict(data map[string]interface{}) GetMoldResult {
 	return GetMoldResult{
-		Item:      NewMoldFromDict(core.CastMap(data["item"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
+		Item: func() *Mold {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1425,8 +1681,20 @@ func NewGetMoldByUserIdResultFromJson(data string) GetMoldByUserIdResult {
 
 func NewGetMoldByUserIdResultFromDict(data map[string]interface{}) GetMoldByUserIdResult {
 	return GetMoldByUserIdResult{
-		Item:      NewMoldFromDict(core.CastMap(data["item"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
+		Item: func() *Mold {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1470,9 +1738,27 @@ func NewSetMoldCapacityByUserIdResultFromJson(data string) SetMoldCapacityByUser
 
 func NewSetMoldCapacityByUserIdResultFromDict(data map[string]interface{}) SetMoldCapacityByUserIdResult {
 	return SetMoldCapacityByUserIdResult{
-		Item:      NewMoldFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:       NewMoldFromDict(core.CastMap(data["old"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
+		Item: func() *Mold {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *Mold {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1521,8 +1807,20 @@ func NewAddMoldCapacityByUserIdResultFromJson(data string) AddMoldCapacityByUser
 
 func NewAddMoldCapacityByUserIdResultFromDict(data map[string]interface{}) AddMoldCapacityByUserIdResult {
 	return AddMoldCapacityByUserIdResult{
-		Item:      NewMoldFromDict(core.CastMap(data["item"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
+		Item: func() *Mold {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1565,8 +1863,20 @@ func NewSubMoldCapacityResultFromJson(data string) SubMoldCapacityResult {
 
 func NewSubMoldCapacityResultFromDict(data map[string]interface{}) SubMoldCapacityResult {
 	return SubMoldCapacityResult{
-		Item:      NewMoldFromDict(core.CastMap(data["item"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
+		Item: func() *Mold {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1609,8 +1919,20 @@ func NewSubMoldCapacityByUserIdResultFromJson(data string) SubMoldCapacityByUser
 
 func NewSubMoldCapacityByUserIdResultFromDict(data map[string]interface{}) SubMoldCapacityByUserIdResult {
 	return SubMoldCapacityByUserIdResult{
-		Item:      NewMoldFromDict(core.CastMap(data["item"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
+		Item: func() *Mold {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1652,7 +1974,13 @@ func NewDeleteMoldResultFromJson(data string) DeleteMoldResult {
 
 func NewDeleteMoldResultFromDict(data map[string]interface{}) DeleteMoldResult {
 	return DeleteMoldResult{
-		Item: NewMoldFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Mold {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1688,7 +2016,13 @@ func NewDeleteMoldByUserIdResultFromJson(data string) DeleteMoldByUserIdResult {
 
 func NewDeleteMoldByUserIdResultFromDict(data map[string]interface{}) DeleteMoldByUserIdResult {
 	return DeleteMoldByUserIdResult{
-		Item: NewMoldFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Mold {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1725,8 +2059,20 @@ func NewAddCapacityByStampSheetResultFromJson(data string) AddCapacityByStampShe
 
 func NewAddCapacityByStampSheetResultFromDict(data map[string]interface{}) AddCapacityByStampSheetResult {
 	return AddCapacityByStampSheetResult{
-		Item:      NewMoldFromDict(core.CastMap(data["item"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
+		Item: func() *Mold {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1770,9 +2116,27 @@ func NewSubCapacityByStampTaskResultFromJson(data string) SubCapacityByStampTask
 
 func NewSubCapacityByStampTaskResultFromDict(data map[string]interface{}) SubCapacityByStampTaskResult {
 	return SubCapacityByStampTaskResult{
-		Item:            NewMoldFromDict(core.CastMap(data["item"])).Pointer(),
-		MoldModel:       NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
+		Item: func() *Mold {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
 	}
 }
 
@@ -1817,9 +2181,27 @@ func NewSetCapacityByStampSheetResultFromJson(data string) SetCapacityByStampShe
 
 func NewSetCapacityByStampSheetResultFromDict(data map[string]interface{}) SetCapacityByStampSheetResult {
 	return SetCapacityByStampSheetResult{
-		Item:      NewMoldFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:       NewMoldFromDict(core.CastMap(data["old"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
+		Item: func() *Mold {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *Mold {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1868,8 +2250,19 @@ func NewDescribeFormsResultFromJson(data string) DescribeFormsResult {
 
 func NewDescribeFormsResultFromDict(data map[string]interface{}) DescribeFormsResult {
 	return DescribeFormsResult{
-		Items:         CastForms(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Form {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastForms(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1904,8 +2297,19 @@ func NewDescribeFormsByUserIdResultFromJson(data string) DescribeFormsByUserIdRe
 
 func NewDescribeFormsByUserIdResultFromDict(data map[string]interface{}) DescribeFormsByUserIdResult {
 	return DescribeFormsByUserIdResult{
-		Items:         CastForms(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Form {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastForms(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1942,10 +2346,34 @@ func NewGetFormResultFromJson(data string) GetFormResult {
 
 func NewGetFormResultFromDict(data map[string]interface{}) GetFormResult {
 	return GetFormResult{
-		Item:      NewFormFromDict(core.CastMap(data["item"])).Pointer(),
-		Mold:      NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
-		FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+		Item: func() *Form {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Mold: func() *Mold {
+			v, ok := data["mold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["mold"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
+		FormModel: func() *FormModel {
+			v, ok := data["formModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2002,10 +2430,34 @@ func NewGetFormByUserIdResultFromJson(data string) GetFormByUserIdResult {
 
 func NewGetFormByUserIdResultFromDict(data map[string]interface{}) GetFormByUserIdResult {
 	return GetFormByUserIdResult{
-		Item:      NewFormFromDict(core.CastMap(data["item"])).Pointer(),
-		Mold:      NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
-		FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+		Item: func() *Form {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Mold: func() *Mold {
+			v, ok := data["mold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["mold"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
+		FormModel: func() *FormModel {
+			v, ok := data["formModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2064,12 +2516,48 @@ func NewGetFormWithSignatureResultFromJson(data string) GetFormWithSignatureResu
 
 func NewGetFormWithSignatureResultFromDict(data map[string]interface{}) GetFormWithSignatureResult {
 	return GetFormWithSignatureResult{
-		Item:      NewFormFromDict(core.CastMap(data["item"])).Pointer(),
-		Body:      core.CastString(data["body"]),
-		Signature: core.CastString(data["signature"]),
-		Mold:      NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
-		FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+		Item: func() *Form {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Body: func() *string {
+			v, ok := data["body"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["body"])
+		}(),
+		Signature: func() *string {
+			v, ok := data["signature"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["signature"])
+		}(),
+		Mold: func() *Mold {
+			v, ok := data["mold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["mold"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
+		FormModel: func() *FormModel {
+			v, ok := data["formModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2130,12 +2618,48 @@ func NewGetFormWithSignatureByUserIdResultFromJson(data string) GetFormWithSigna
 
 func NewGetFormWithSignatureByUserIdResultFromDict(data map[string]interface{}) GetFormWithSignatureByUserIdResult {
 	return GetFormWithSignatureByUserIdResult{
-		Item:      NewFormFromDict(core.CastMap(data["item"])).Pointer(),
-		Body:      core.CastString(data["body"]),
-		Signature: core.CastString(data["signature"]),
-		Mold:      NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
-		FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+		Item: func() *Form {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Body: func() *string {
+			v, ok := data["body"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["body"])
+		}(),
+		Signature: func() *string {
+			v, ok := data["signature"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["signature"])
+		}(),
+		Mold: func() *Mold {
+			v, ok := data["mold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["mold"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
+		FormModel: func() *FormModel {
+			v, ok := data["formModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2194,10 +2718,34 @@ func NewSetFormByUserIdResultFromJson(data string) SetFormByUserIdResult {
 
 func NewSetFormByUserIdResultFromDict(data map[string]interface{}) SetFormByUserIdResult {
 	return SetFormByUserIdResult{
-		Item:      NewFormFromDict(core.CastMap(data["item"])).Pointer(),
-		Mold:      NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
-		FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+		Item: func() *Form {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Mold: func() *Mold {
+			v, ok := data["mold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["mold"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
+		FormModel: func() *FormModel {
+			v, ok := data["formModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2254,10 +2802,34 @@ func NewSetFormWithSignatureResultFromJson(data string) SetFormWithSignatureResu
 
 func NewSetFormWithSignatureResultFromDict(data map[string]interface{}) SetFormWithSignatureResult {
 	return SetFormWithSignatureResult{
-		Item:      NewFormFromDict(core.CastMap(data["item"])).Pointer(),
-		Mold:      NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
-		FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+		Item: func() *Form {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Mold: func() *Mold {
+			v, ok := data["mold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["mold"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
+		FormModel: func() *FormModel {
+			v, ok := data["formModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2316,12 +2888,48 @@ func NewAcquireActionsToFormPropertiesResultFromJson(data string) AcquireActions
 
 func NewAcquireActionsToFormPropertiesResultFromDict(data map[string]interface{}) AcquireActionsToFormPropertiesResult {
 	return AcquireActionsToFormPropertiesResult{
-		Item:                      NewFormFromDict(core.CastMap(data["item"])).Pointer(),
-		Mold:                      NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+		Item: func() *Form {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Mold: func() *Mold {
+			v, ok := data["mold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["mold"])).Pointer()
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		StampSheetEncryptionKeyId: func() *string {
+			v, ok := data["stampSheetEncryptionKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheetEncryptionKeyId"])
+		}(),
+		AutoRunStampSheet: func() *bool {
+			v, ok := data["autoRunStampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["autoRunStampSheet"])
+		}(),
 	}
 }
 
@@ -2370,10 +2978,34 @@ func NewDeleteFormResultFromJson(data string) DeleteFormResult {
 
 func NewDeleteFormResultFromDict(data map[string]interface{}) DeleteFormResult {
 	return DeleteFormResult{
-		Item:      NewFormFromDict(core.CastMap(data["item"])).Pointer(),
-		Mold:      NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
-		FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+		Item: func() *Form {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Mold: func() *Mold {
+			v, ok := data["mold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["mold"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
+		FormModel: func() *FormModel {
+			v, ok := data["formModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2430,10 +3062,34 @@ func NewDeleteFormByUserIdResultFromJson(data string) DeleteFormByUserIdResult {
 
 func NewDeleteFormByUserIdResultFromDict(data map[string]interface{}) DeleteFormByUserIdResult {
 	return DeleteFormByUserIdResult{
-		Item:      NewFormFromDict(core.CastMap(data["item"])).Pointer(),
-		Mold:      NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
-		FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+		Item: func() *Form {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Mold: func() *Mold {
+			v, ok := data["mold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["mold"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
+		FormModel: func() *FormModel {
+			v, ok := data["formModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2492,12 +3148,48 @@ func NewAcquireActionToFormPropertiesByStampSheetResultFromJson(data string) Acq
 
 func NewAcquireActionToFormPropertiesByStampSheetResultFromDict(data map[string]interface{}) AcquireActionToFormPropertiesByStampSheetResult {
 	return AcquireActionToFormPropertiesByStampSheetResult{
-		Item:                      NewFormFromDict(core.CastMap(data["item"])).Pointer(),
-		Mold:                      NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+		Item: func() *Form {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Mold: func() *Mold {
+			v, ok := data["mold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["mold"])).Pointer()
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		StampSheetEncryptionKeyId: func() *string {
+			v, ok := data["stampSheetEncryptionKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheetEncryptionKeyId"])
+		}(),
+		AutoRunStampSheet: func() *bool {
+			v, ok := data["autoRunStampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["autoRunStampSheet"])
+		}(),
 	}
 }
 
@@ -2546,10 +3238,34 @@ func NewSetFormByStampSheetResultFromJson(data string) SetFormByStampSheetResult
 
 func NewSetFormByStampSheetResultFromDict(data map[string]interface{}) SetFormByStampSheetResult {
 	return SetFormByStampSheetResult{
-		Item:      NewFormFromDict(core.CastMap(data["item"])).Pointer(),
-		Mold:      NewMoldFromDict(core.CastMap(data["mold"])).Pointer(),
-		MoldModel: NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer(),
-		FormModel: NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer(),
+		Item: func() *Form {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Mold: func() *Mold {
+			v, ok := data["mold"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldFromDict(core.CastMap(data["mold"])).Pointer()
+		}(),
+		MoldModel: func() *MoldModel {
+			v, ok := data["moldModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMoldModelFromDict(core.CastMap(data["moldModel"])).Pointer()
+		}(),
+		FormModel: func() *FormModel {
+			v, ok := data["formModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFormModelFromDict(core.CastMap(data["formModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2604,8 +3320,19 @@ func NewDescribePropertyFormsResultFromJson(data string) DescribePropertyFormsRe
 
 func NewDescribePropertyFormsResultFromDict(data map[string]interface{}) DescribePropertyFormsResult {
 	return DescribePropertyFormsResult{
-		Items:         CastPropertyForms(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []PropertyForm {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastPropertyForms(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2640,8 +3367,19 @@ func NewDescribePropertyFormsByUserIdResultFromJson(data string) DescribePropert
 
 func NewDescribePropertyFormsByUserIdResultFromDict(data map[string]interface{}) DescribePropertyFormsByUserIdResult {
 	return DescribePropertyFormsByUserIdResult{
-		Items:         CastPropertyForms(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []PropertyForm {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastPropertyForms(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2676,8 +3414,20 @@ func NewGetPropertyFormResultFromJson(data string) GetPropertyFormResult {
 
 func NewGetPropertyFormResultFromDict(data map[string]interface{}) GetPropertyFormResult {
 	return GetPropertyFormResult{
-		Item:              NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
-		PropertyFormModel: NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer(),
+		Item: func() *PropertyForm {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		PropertyFormModel: func() *PropertyFormModel {
+			v, ok := data["propertyFormModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2720,8 +3470,20 @@ func NewGetPropertyFormByUserIdResultFromJson(data string) GetPropertyFormByUser
 
 func NewGetPropertyFormByUserIdResultFromDict(data map[string]interface{}) GetPropertyFormByUserIdResult {
 	return GetPropertyFormByUserIdResult{
-		Item:              NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
-		PropertyFormModel: NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer(),
+		Item: func() *PropertyForm {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		PropertyFormModel: func() *PropertyFormModel {
+			v, ok := data["propertyFormModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2766,10 +3528,34 @@ func NewGetPropertyFormWithSignatureResultFromJson(data string) GetPropertyFormW
 
 func NewGetPropertyFormWithSignatureResultFromDict(data map[string]interface{}) GetPropertyFormWithSignatureResult {
 	return GetPropertyFormWithSignatureResult{
-		Item:              NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
-		Body:              core.CastString(data["body"]),
-		Signature:         core.CastString(data["signature"]),
-		PropertyFormModel: NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer(),
+		Item: func() *PropertyForm {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Body: func() *string {
+			v, ok := data["body"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["body"])
+		}(),
+		Signature: func() *string {
+			v, ok := data["signature"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["signature"])
+		}(),
+		PropertyFormModel: func() *PropertyFormModel {
+			v, ok := data["propertyFormModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2816,10 +3602,34 @@ func NewGetPropertyFormWithSignatureByUserIdResultFromJson(data string) GetPrope
 
 func NewGetPropertyFormWithSignatureByUserIdResultFromDict(data map[string]interface{}) GetPropertyFormWithSignatureByUserIdResult {
 	return GetPropertyFormWithSignatureByUserIdResult{
-		Item:              NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
-		Body:              core.CastString(data["body"]),
-		Signature:         core.CastString(data["signature"]),
-		PropertyFormModel: NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer(),
+		Item: func() *PropertyForm {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Body: func() *string {
+			v, ok := data["body"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["body"])
+		}(),
+		Signature: func() *string {
+			v, ok := data["signature"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["signature"])
+		}(),
+		PropertyFormModel: func() *PropertyFormModel {
+			v, ok := data["propertyFormModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2864,8 +3674,20 @@ func NewSetPropertyFormByUserIdResultFromJson(data string) SetPropertyFormByUser
 
 func NewSetPropertyFormByUserIdResultFromDict(data map[string]interface{}) SetPropertyFormByUserIdResult {
 	return SetPropertyFormByUserIdResult{
-		Item:              NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
-		PropertyFormModel: NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer(),
+		Item: func() *PropertyForm {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		PropertyFormModel: func() *PropertyFormModel {
+			v, ok := data["propertyFormModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2908,8 +3730,20 @@ func NewSetPropertyFormWithSignatureResultFromJson(data string) SetPropertyFormW
 
 func NewSetPropertyFormWithSignatureResultFromDict(data map[string]interface{}) SetPropertyFormWithSignatureResult {
 	return SetPropertyFormWithSignatureResult{
-		Item:              NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
-		ProeprtyFormModel: NewPropertyFormModelFromDict(core.CastMap(data["proeprtyFormModel"])).Pointer(),
+		Item: func() *PropertyForm {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		ProeprtyFormModel: func() *PropertyFormModel {
+			v, ok := data["proeprtyFormModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelFromDict(core.CastMap(data["proeprtyFormModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2955,11 +3789,41 @@ func NewAcquireActionsToPropertyFormPropertiesResultFromJson(data string) Acquir
 
 func NewAcquireActionsToPropertyFormPropertiesResultFromDict(data map[string]interface{}) AcquireActionsToPropertyFormPropertiesResult {
 	return AcquireActionsToPropertyFormPropertiesResult{
-		Item:                      NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+		Item: func() *PropertyForm {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		StampSheetEncryptionKeyId: func() *string {
+			v, ok := data["stampSheetEncryptionKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheetEncryptionKeyId"])
+		}(),
+		AutoRunStampSheet: func() *bool {
+			v, ok := data["autoRunStampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["autoRunStampSheet"])
+		}(),
 	}
 }
 
@@ -3000,8 +3864,20 @@ func NewDeletePropertyFormResultFromJson(data string) DeletePropertyFormResult {
 
 func NewDeletePropertyFormResultFromDict(data map[string]interface{}) DeletePropertyFormResult {
 	return DeletePropertyFormResult{
-		Item:              NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
-		PropertyFormModel: NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer(),
+		Item: func() *PropertyForm {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		PropertyFormModel: func() *PropertyFormModel {
+			v, ok := data["propertyFormModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -3044,8 +3920,20 @@ func NewDeletePropertyFormByUserIdResultFromJson(data string) DeletePropertyForm
 
 func NewDeletePropertyFormByUserIdResultFromDict(data map[string]interface{}) DeletePropertyFormByUserIdResult {
 	return DeletePropertyFormByUserIdResult{
-		Item:              NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
-		PropertyFormModel: NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer(),
+		Item: func() *PropertyForm {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		PropertyFormModel: func() *PropertyFormModel {
+			v, ok := data["propertyFormModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormModelFromDict(core.CastMap(data["propertyFormModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -3091,11 +3979,41 @@ func NewAcquireActionToPropertyFormPropertiesByStampSheetResultFromJson(data str
 
 func NewAcquireActionToPropertyFormPropertiesByStampSheetResultFromDict(data map[string]interface{}) AcquireActionToPropertyFormPropertiesByStampSheetResult {
 	return AcquireActionToPropertyFormPropertiesByStampSheetResult{
-		Item:                      NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer(),
-		TransactionId:             core.CastString(data["transactionId"]),
-		StampSheet:                core.CastString(data["stampSheet"]),
-		StampSheetEncryptionKeyId: core.CastString(data["stampSheetEncryptionKeyId"]),
-		AutoRunStampSheet:         core.CastBool(data["autoRunStampSheet"]),
+		Item: func() *PropertyForm {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPropertyFormFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		StampSheetEncryptionKeyId: func() *string {
+			v, ok := data["stampSheetEncryptionKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheetEncryptionKeyId"])
+		}(),
+		AutoRunStampSheet: func() *bool {
+			v, ok := data["autoRunStampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["autoRunStampSheet"])
+		}(),
 	}
 }
 

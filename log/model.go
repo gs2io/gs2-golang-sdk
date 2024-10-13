@@ -340,21 +340,111 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:         core.CastString(data["namespaceId"]),
-		Name:                core.CastString(data["name"]),
-		Description:         core.CastString(data["description"]),
-		Type:                core.CastString(data["type"]),
-		GcpCredentialJson:   core.CastString(data["gcpCredentialJson"]),
-		BigQueryDatasetName: core.CastString(data["bigQueryDatasetName"]),
-		LogExpireDays:       core.CastInt32(data["logExpireDays"]),
-		AwsRegion:           core.CastString(data["awsRegion"]),
-		AwsAccessKeyId:      core.CastString(data["awsAccessKeyId"]),
-		AwsSecretAccessKey:  core.CastString(data["awsSecretAccessKey"]),
-		FirehoseStreamName:  core.CastString(data["firehoseStreamName"]),
-		Status:              core.CastString(data["status"]),
-		CreatedAt:           core.CastInt64(data["createdAt"]),
-		UpdatedAt:           core.CastInt64(data["updatedAt"]),
-		Revision:            core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Type: func() *string {
+			v, ok := data["type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["type"])
+		}(),
+		GcpCredentialJson: func() *string {
+			v, ok := data["gcpCredentialJson"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gcpCredentialJson"])
+		}(),
+		BigQueryDatasetName: func() *string {
+			v, ok := data["bigQueryDatasetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["bigQueryDatasetName"])
+		}(),
+		LogExpireDays: func() *int32 {
+			v, ok := data["logExpireDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["logExpireDays"])
+		}(),
+		AwsRegion: func() *string {
+			v, ok := data["awsRegion"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["awsRegion"])
+		}(),
+		AwsAccessKeyId: func() *string {
+			v, ok := data["awsAccessKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["awsAccessKeyId"])
+		}(),
+		AwsSecretAccessKey: func() *string {
+			v, ok := data["awsSecretAccessKey"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["awsSecretAccessKey"])
+		}(),
+		FirehoseStreamName: func() *string {
+			v, ok := data["firehoseStreamName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["firehoseStreamName"])
+		}(),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -644,13 +734,55 @@ func NewAccessLogFromJson(data string) AccessLog {
 
 func NewAccessLogFromDict(data map[string]interface{}) AccessLog {
 	return AccessLog{
-		Timestamp: core.CastInt64(data["timestamp"]),
-		RequestId: core.CastString(data["requestId"]),
-		Service:   core.CastString(data["service"]),
-		Method:    core.CastString(data["method"]),
-		UserId:    core.CastString(data["userId"]),
-		Request:   core.CastString(data["request"]),
-		Result:    core.CastString(data["result"]),
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
+		RequestId: func() *string {
+			v, ok := data["requestId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["requestId"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Request: func() *string {
+			v, ok := data["request"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["request"])
+		}(),
+		Result: func() *string {
+			v, ok := data["result"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["result"])
+		}(),
 	}
 }
 
@@ -828,10 +960,34 @@ func NewAccessLogCountFromJson(data string) AccessLogCount {
 
 func NewAccessLogCountFromDict(data map[string]interface{}) AccessLogCount {
 	return AccessLogCount{
-		Service: core.CastString(data["service"]),
-		Method:  core.CastString(data["method"]),
-		UserId:  core.CastString(data["userId"]),
-		Count:   core.CastInt64(data["count"]),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
@@ -1093,14 +1249,62 @@ func NewIssueStampSheetLogFromJson(data string) IssueStampSheetLog {
 
 func NewIssueStampSheetLogFromDict(data map[string]interface{}) IssueStampSheetLog {
 	return IssueStampSheetLog{
-		Timestamp:     core.CastInt64(data["timestamp"]),
-		TransactionId: core.CastString(data["transactionId"]),
-		Service:       core.CastString(data["service"]),
-		Method:        core.CastString(data["method"]),
-		UserId:        core.CastString(data["userId"]),
-		Action:        core.CastString(data["action"]),
-		Args:          core.CastString(data["args"]),
-		Tasks:         core.CastStrings(core.CastArray(data["tasks"])),
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Args: func() *string {
+			v, ok := data["args"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["args"])
+		}(),
+		Tasks: func() []*string {
+			v, ok := data["tasks"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -1309,11 +1513,41 @@ func NewIssueStampSheetLogCountFromJson(data string) IssueStampSheetLogCount {
 
 func NewIssueStampSheetLogCountFromDict(data map[string]interface{}) IssueStampSheetLogCount {
 	return IssueStampSheetLogCount{
-		Service: core.CastString(data["service"]),
-		Method:  core.CastString(data["method"]),
-		UserId:  core.CastString(data["userId"]),
-		Action:  core.CastString(data["action"]),
-		Count:   core.CastInt64(data["count"]),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
@@ -1553,13 +1787,55 @@ func NewExecuteStampSheetLogFromJson(data string) ExecuteStampSheetLog {
 
 func NewExecuteStampSheetLogFromDict(data map[string]interface{}) ExecuteStampSheetLog {
 	return ExecuteStampSheetLog{
-		Timestamp:     core.CastInt64(data["timestamp"]),
-		TransactionId: core.CastString(data["transactionId"]),
-		Service:       core.CastString(data["service"]),
-		Method:        core.CastString(data["method"]),
-		UserId:        core.CastString(data["userId"]),
-		Action:        core.CastString(data["action"]),
-		Args:          core.CastString(data["args"]),
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Args: func() *string {
+			v, ok := data["args"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["args"])
+		}(),
 	}
 }
 
@@ -1761,11 +2037,41 @@ func NewExecuteStampSheetLogCountFromJson(data string) ExecuteStampSheetLogCount
 
 func NewExecuteStampSheetLogCountFromDict(data map[string]interface{}) ExecuteStampSheetLogCount {
 	return ExecuteStampSheetLogCount{
-		Service: core.CastString(data["service"]),
-		Method:  core.CastString(data["method"]),
-		UserId:  core.CastString(data["userId"]),
-		Action:  core.CastString(data["action"]),
-		Count:   core.CastInt64(data["count"]),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
@@ -2005,13 +2311,55 @@ func NewExecuteStampTaskLogFromJson(data string) ExecuteStampTaskLog {
 
 func NewExecuteStampTaskLogFromDict(data map[string]interface{}) ExecuteStampTaskLog {
 	return ExecuteStampTaskLog{
-		Timestamp: core.CastInt64(data["timestamp"]),
-		TaskId:    core.CastString(data["taskId"]),
-		Service:   core.CastString(data["service"]),
-		Method:    core.CastString(data["method"]),
-		UserId:    core.CastString(data["userId"]),
-		Action:    core.CastString(data["action"]),
-		Args:      core.CastString(data["args"]),
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
+		TaskId: func() *string {
+			v, ok := data["taskId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["taskId"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Args: func() *string {
+			v, ok := data["args"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["args"])
+		}(),
 	}
 }
 
@@ -2213,11 +2561,41 @@ func NewExecuteStampTaskLogCountFromJson(data string) ExecuteStampTaskLogCount {
 
 func NewExecuteStampTaskLogCountFromDict(data map[string]interface{}) ExecuteStampTaskLogCount {
 	return ExecuteStampTaskLogCount{
-		Service: core.CastString(data["service"]),
-		Method:  core.CastString(data["method"]),
-		UserId:  core.CastString(data["userId"]),
-		Action:  core.CastString(data["action"]),
-		Count:   core.CastInt64(data["count"]),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
@@ -2389,11 +2767,40 @@ func NewInGameLogFromJson(data string) InGameLog {
 
 func NewInGameLogFromDict(data map[string]interface{}) InGameLog {
 	return InGameLog{
-		Timestamp: core.CastInt64(data["timestamp"]),
-		RequestId: core.CastString(data["requestId"]),
-		UserId:    core.CastString(data["userId"]),
-		Tags:      CastInGameLogTags(core.CastArray(data["tags"])),
-		Payload:   core.CastString(data["payload"]),
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
+		RequestId: func() *string {
+			v, ok := data["requestId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["requestId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Tags: func() []InGameLogTag {
+			if data["tags"] == nil {
+				return nil
+			}
+			return CastInGameLogTags(core.CastArray(data["tags"]))
+		}(),
+		Payload: func() *string {
+			v, ok := data["payload"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["payload"])
+		}(),
 	}
 }
 
@@ -2687,16 +3094,76 @@ func NewAccessLogWithTelemetryFromJson(data string) AccessLogWithTelemetry {
 
 func NewAccessLogWithTelemetryFromDict(data map[string]interface{}) AccessLogWithTelemetry {
 	return AccessLogWithTelemetry{
-		Timestamp:       core.CastInt64(data["timestamp"]),
-		SourceRequestId: core.CastString(data["sourceRequestId"]),
-		RequestId:       core.CastString(data["requestId"]),
-		Duration:        core.CastInt64(data["duration"]),
-		Service:         core.CastString(data["service"]),
-		Method:          core.CastString(data["method"]),
-		UserId:          core.CastString(data["userId"]),
-		Request:         core.CastString(data["request"]),
-		Result:          core.CastString(data["result"]),
-		Status:          core.CastString(data["status"]),
+		Timestamp: func() *int64 {
+			v, ok := data["timestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["timestamp"])
+		}(),
+		SourceRequestId: func() *string {
+			v, ok := data["sourceRequestId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourceRequestId"])
+		}(),
+		RequestId: func() *string {
+			v, ok := data["requestId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["requestId"])
+		}(),
+		Duration: func() *int64 {
+			v, ok := data["duration"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["duration"])
+		}(),
+		Service: func() *string {
+			v, ok := data["service"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["service"])
+		}(),
+		Method: func() *string {
+			v, ok := data["method"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["method"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Request: func() *string {
+			v, ok := data["request"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["request"])
+		}(),
+		Result: func() *string {
+			v, ok := data["result"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["result"])
+		}(),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -2965,14 +3432,62 @@ func NewInsightFromJson(data string) Insight {
 
 func NewInsightFromDict(data map[string]interface{}) Insight {
 	return Insight{
-		InsightId: core.CastString(data["insightId"]),
-		Name:      core.CastString(data["name"]),
-		TaskId:    core.CastString(data["taskId"]),
-		Host:      core.CastString(data["host"]),
-		Password:  core.CastString(data["password"]),
-		Status:    core.CastString(data["status"]),
-		CreatedAt: core.CastInt64(data["createdAt"]),
-		Revision:  core.CastInt64(data["revision"]),
+		InsightId: func() *string {
+			v, ok := data["insightId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["insightId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		TaskId: func() *string {
+			v, ok := data["taskId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["taskId"])
+		}(),
+		Host: func() *string {
+			v, ok := data["host"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["host"])
+		}(),
+		Password: func() *string {
+			v, ok := data["password"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["password"])
+		}(),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -3127,8 +3642,20 @@ func NewInGameLogTagFromJson(data string) InGameLogTag {
 
 func NewInGameLogTagFromDict(data map[string]interface{}) InGameLogTag {
 	return InGameLogTag{
-		Key:   core.CastString(data["key"]),
-		Value: core.CastString(data["value"]),
+		Key: func() *string {
+			v, ok := data["key"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["key"])
+		}(),
+		Value: func() *string {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["value"])
+		}(),
 	}
 }
 

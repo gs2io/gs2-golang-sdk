@@ -152,14 +152,62 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:        core.CastString(data["namespaceId"]),
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		TransactionSetting: NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		UpdatedAt:          core.CastInt64(data["updatedAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -332,10 +380,34 @@ func NewMatchSessionFromJson(data string) MatchSession {
 
 func NewMatchSessionFromDict(data map[string]interface{}) MatchSession {
 	return MatchSession{
-		SessionId: core.CastString(data["sessionId"]),
-		Name:      core.CastString(data["name"]),
-		CreatedAt: core.CastInt64(data["createdAt"]),
-		Revision:  core.CastInt64(data["revision"]),
+		SessionId: func() *string {
+			v, ok := data["sessionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sessionId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -582,16 +654,75 @@ func NewSeasonModelMasterFromJson(data string) SeasonModelMaster {
 
 func NewSeasonModelMasterFromDict(data map[string]interface{}) SeasonModelMaster {
 	return SeasonModelMaster{
-		SeasonModelId:          core.CastString(data["seasonModelId"]),
-		Name:                   core.CastString(data["name"]),
-		Metadata:               core.CastString(data["metadata"]),
-		Description:            core.CastString(data["description"]),
-		Tiers:                  CastTierModels(core.CastArray(data["tiers"])),
-		ExperienceModelId:      core.CastString(data["experienceModelId"]),
-		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
-		CreatedAt:              core.CastInt64(data["createdAt"]),
-		UpdatedAt:              core.CastInt64(data["updatedAt"]),
-		Revision:               core.CastInt64(data["revision"]),
+		SeasonModelId: func() *string {
+			v, ok := data["seasonModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Tiers: func() []TierModel {
+			if data["tiers"] == nil {
+				return nil
+			}
+			return CastTierModels(core.CastArray(data["tiers"]))
+		}(),
+		ExperienceModelId: func() *string {
+			v, ok := data["experienceModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceModelId"])
+		}(),
+		ChallengePeriodEventId: func() *string {
+			v, ok := data["challengePeriodEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["challengePeriodEventId"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -834,12 +965,47 @@ func NewSeasonModelFromJson(data string) SeasonModel {
 
 func NewSeasonModelFromDict(data map[string]interface{}) SeasonModel {
 	return SeasonModel{
-		SeasonModelId:          core.CastString(data["seasonModelId"]),
-		Name:                   core.CastString(data["name"]),
-		Metadata:               core.CastString(data["metadata"]),
-		Tiers:                  CastTierModels(core.CastArray(data["tiers"])),
-		ExperienceModelId:      core.CastString(data["experienceModelId"]),
-		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+		SeasonModelId: func() *string {
+			v, ok := data["seasonModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Tiers: func() []TierModel {
+			if data["tiers"] == nil {
+				return nil
+			}
+			return CastTierModels(core.CastArray(data["tiers"]))
+		}(),
+		ExperienceModelId: func() *string {
+			v, ok := data["experienceModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceModelId"])
+		}(),
+		ChallengePeriodEventId: func() *string {
+			v, ok := data["challengePeriodEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["challengePeriodEventId"])
+		}(),
 	}
 }
 
@@ -978,11 +1144,41 @@ func NewTierModelFromJson(data string) TierModel {
 
 func NewTierModelFromDict(data map[string]interface{}) TierModel {
 	return TierModel{
-		Metadata:           core.CastString(data["metadata"]),
-		RaiseRankBonus:     core.CastInt32(data["raiseRankBonus"]),
-		EntryFee:           core.CastInt32(data["entryFee"]),
-		MinimumChangePoint: core.CastInt32(data["minimumChangePoint"]),
-		MaximumChangePoint: core.CastInt32(data["maximumChangePoint"]),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		RaiseRankBonus: func() *int32 {
+			v, ok := data["raiseRankBonus"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["raiseRankBonus"])
+		}(),
+		EntryFee: func() *int32 {
+			v, ok := data["entryFee"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["entryFee"])
+		}(),
+		MinimumChangePoint: func() *int32 {
+			v, ok := data["minimumChangePoint"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["minimumChangePoint"])
+		}(),
+		MaximumChangePoint: func() *int32 {
+			v, ok := data["maximumChangePoint"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maximumChangePoint"])
+		}(),
 	}
 }
 
@@ -1122,8 +1318,20 @@ func NewCurrentSeasonModelMasterFromJson(data string) CurrentSeasonModelMaster {
 
 func NewCurrentSeasonModelMasterFromDict(data map[string]interface{}) CurrentSeasonModelMaster {
 	return CurrentSeasonModelMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -1248,8 +1456,20 @@ func NewTransactionSettingFromJson(data string) TransactionSetting {
 
 func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
 	return TransactionSetting{
-		DistributorNamespaceId: core.CastString(data["distributorNamespaceId"]),
-		QueueNamespaceId:       core.CastString(data["queueNamespaceId"]),
+		DistributorNamespaceId: func() *string {
+			v, ok := data["distributorNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorNamespaceId"])
+		}(),
+		QueueNamespaceId: func() *string {
+			v, ok := data["queueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["queueNamespaceId"])
+		}(),
 	}
 }
 
@@ -1422,10 +1642,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 
@@ -1536,7 +1780,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -1776,13 +2026,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 
@@ -1912,8 +2204,20 @@ func NewGameResultFromJson(data string) GameResult {
 
 func NewGameResultFromDict(data map[string]interface{}) GameResult {
 	return GameResult{
-		Rank:   core.CastInt32(data["rank"]),
-		UserId: core.CastString(data["userId"]),
+		Rank: func() *int32 {
+			v, ok := data["rank"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["rank"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
 	}
 }
 
@@ -2066,10 +2370,34 @@ func NewBallotFromJson(data string) Ballot {
 
 func NewBallotFromDict(data map[string]interface{}) Ballot {
 	return Ballot{
-		UserId:         core.CastString(data["userId"]),
-		SeasonName:     core.CastString(data["seasonName"]),
-		SessionName:    core.CastString(data["sessionName"]),
-		NumberOfPlayer: core.CastInt32(data["numberOfPlayer"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		SessionName: func() *string {
+			v, ok := data["sessionName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sessionName"])
+		}(),
+		NumberOfPlayer: func() *int32 {
+			v, ok := data["numberOfPlayer"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["numberOfPlayer"])
+		}(),
 	}
 }
 
@@ -2204,8 +2532,20 @@ func NewSignedBallotFromJson(data string) SignedBallot {
 
 func NewSignedBallotFromDict(data map[string]interface{}) SignedBallot {
 	return SignedBallot{
-		Body:      core.CastString(data["body"]),
-		Signature: core.CastString(data["signature"]),
+		Body: func() *string {
+			v, ok := data["body"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["body"])
+		}(),
+		Signature: func() *string {
+			v, ok := data["signature"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["signature"])
+		}(),
 	}
 }
 
@@ -2290,8 +2630,19 @@ func NewWrittenBallotFromJson(data string) WrittenBallot {
 
 func NewWrittenBallotFromDict(data map[string]interface{}) WrittenBallot {
 	return WrittenBallot{
-		Ballot:      NewBallotFromDict(core.CastMap(data["ballot"])).Pointer(),
-		GameResults: CastGameResults(core.CastArray(data["gameResults"])),
+		Ballot: func() *Ballot {
+			v, ok := data["ballot"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBallotFromDict(core.CastMap(data["ballot"])).Pointer()
+		}(),
+		GameResults: func() []GameResult {
+			if data["gameResults"] == nil {
+				return nil
+			}
+			return CastGameResults(core.CastArray(data["gameResults"]))
+		}(),
 	}
 }
 
@@ -2463,13 +2814,54 @@ func NewVoteFromJson(data string) Vote {
 
 func NewVoteFromDict(data map[string]interface{}) Vote {
 	return Vote{
-		VoteId:         core.CastString(data["voteId"]),
-		SeasonName:     core.CastString(data["seasonName"]),
-		SessionName:    core.CastString(data["sessionName"]),
-		WrittenBallots: CastWrittenBallots(core.CastArray(data["writtenBallots"])),
-		CreatedAt:      core.CastInt64(data["createdAt"]),
-		UpdatedAt:      core.CastInt64(data["updatedAt"]),
-		Revision:       core.CastInt64(data["revision"]),
+		VoteId: func() *string {
+			v, ok := data["voteId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["voteId"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		SessionName: func() *string {
+			v, ok := data["sessionName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sessionName"])
+		}(),
+		WrittenBallots: func() []WrittenBallot {
+			if data["writtenBallots"] == nil {
+				return nil
+			}
+			return CastWrittenBallots(core.CastArray(data["writtenBallots"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 

@@ -94,8 +94,20 @@ func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesReques
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
 	return DescribeNamespacesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -257,12 +269,48 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		ServerType:         core.CastString(data["serverType"]),
-		ServerSpec:         core.CastString(data["serverSpec"]),
-		CreateNotification: NewNotificationSettingFromDict(core.CastMap(data["createNotification"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		ServerType: func() *string {
+			v, ok := data["serverType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["serverType"])
+		}(),
+		ServerSpec: func() *string {
+			v, ok := data["serverSpec"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["serverSpec"])
+		}(),
+		CreateNotification: func() *NotificationSetting {
+			v, ok := data["createNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["createNotification"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -358,7 +406,13 @@ func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusReques
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -439,7 +493,13 @@ func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
 	return GetNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -600,12 +660,48 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		Description:        core.CastString(data["description"]),
-		ServerType:         core.CastString(data["serverType"]),
-		ServerSpec:         core.CastString(data["serverSpec"]),
-		CreateNotification: NewNotificationSettingFromDict(core.CastMap(data["createNotification"])).Pointer(),
-		LogSetting:         NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		ServerType: func() *string {
+			v, ok := data["serverType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["serverType"])
+		}(),
+		ServerSpec: func() *string {
+			v, ok := data["serverSpec"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["serverSpec"])
+		}(),
+		CreateNotification: func() *NotificationSetting {
+			v, ok := data["createNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["createNotification"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -701,7 +797,13 @@ func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, err
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -782,7 +884,13 @@ func NewNowRequestFromJson(data string) (NowRequest, error) {
 
 func NewNowRequestFromDict(data map[string]interface{}) NowRequest {
 	return NowRequest{
-		AccessToken: core.CastString(data["accessToken"]),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -891,9 +999,27 @@ func NewDescribeRoomsRequestFromJson(data string) (DescribeRoomsRequest, error) 
 
 func NewDescribeRoomsRequestFromDict(data map[string]interface{}) DescribeRoomsRequest {
 	return DescribeRoomsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1027,9 +1153,27 @@ func NewWantRoomRequestFromJson(data string) (WantRoomRequest, error) {
 
 func NewWantRoomRequestFromDict(data map[string]interface{}) WantRoomRequest {
 	return WantRoomRequest{
-		NamespaceName:       core.CastString(data["namespaceName"]),
-		Name:                core.CastString(data["name"]),
-		NotificationUserIds: core.CastStrings(core.CastArray(data["notificationUserIds"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		NotificationUserIds: func() []*string {
+			v, ok := data["notificationUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -1138,8 +1282,20 @@ func NewGetRoomRequestFromJson(data string) (GetRoomRequest, error) {
 
 func NewGetRoomRequestFromDict(data map[string]interface{}) GetRoomRequest {
 	return GetRoomRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RoomName:      core.CastString(data["roomName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
 	}
 }
 
@@ -1245,8 +1401,20 @@ func NewDeleteRoomRequestFromJson(data string) (DeleteRoomRequest, error) {
 
 func NewDeleteRoomRequestFromDict(data map[string]interface{}) DeleteRoomRequest {
 	return DeleteRoomRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RoomName:      core.CastString(data["roomName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RoomName: func() *string {
+			v, ok := data["roomName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["roomName"])
+		}(),
 	}
 }
 

@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -276,7 +317,13 @@ func NewCheckDumpUserDataByUserIdResultFromJson(data string) CheckDumpUserDataBy
 
 func NewCheckDumpUserDataByUserIdResultFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdResult {
 	return CheckDumpUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -360,8 +407,20 @@ func NewPrepareImportUserDataByUserIdResultFromJson(data string) PrepareImportUs
 
 func NewPrepareImportUserDataByUserIdResultFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdResult {
 	return PrepareImportUserDataByUserIdResult{
-		UploadToken: core.CastString(data["uploadToken"]),
-		UploadUrl:   core.CastString(data["uploadUrl"]),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -419,7 +478,13 @@ func NewCheckImportUserDataByUserIdResultFromJson(data string) CheckImportUserDa
 
 func NewCheckImportUserDataByUserIdResultFromDict(data map[string]interface{}) CheckImportUserDataByUserIdResult {
 	return CheckImportUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -451,8 +516,19 @@ func NewDescribeGuildModelMastersResultFromJson(data string) DescribeGuildModelM
 
 func NewDescribeGuildModelMastersResultFromDict(data map[string]interface{}) DescribeGuildModelMastersResult {
 	return DescribeGuildModelMastersResult{
-		Items:         CastGuildModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []GuildModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastGuildModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -486,7 +562,13 @@ func NewCreateGuildModelMasterResultFromJson(data string) CreateGuildModelMaster
 
 func NewCreateGuildModelMasterResultFromDict(data map[string]interface{}) CreateGuildModelMasterResult {
 	return CreateGuildModelMasterResult{
-		Item: NewGuildModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GuildModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -522,7 +604,13 @@ func NewGetGuildModelMasterResultFromJson(data string) GetGuildModelMasterResult
 
 func NewGetGuildModelMasterResultFromDict(data map[string]interface{}) GetGuildModelMasterResult {
 	return GetGuildModelMasterResult{
-		Item: NewGuildModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GuildModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -558,7 +646,13 @@ func NewUpdateGuildModelMasterResultFromJson(data string) UpdateGuildModelMaster
 
 func NewUpdateGuildModelMasterResultFromDict(data map[string]interface{}) UpdateGuildModelMasterResult {
 	return UpdateGuildModelMasterResult{
-		Item: NewGuildModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GuildModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -594,7 +688,13 @@ func NewDeleteGuildModelMasterResultFromJson(data string) DeleteGuildModelMaster
 
 func NewDeleteGuildModelMasterResultFromDict(data map[string]interface{}) DeleteGuildModelMasterResult {
 	return DeleteGuildModelMasterResult{
-		Item: NewGuildModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GuildModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -630,7 +730,12 @@ func NewDescribeGuildModelsResultFromJson(data string) DescribeGuildModelsResult
 
 func NewDescribeGuildModelsResultFromDict(data map[string]interface{}) DescribeGuildModelsResult {
 	return DescribeGuildModelsResult{
-		Items: CastGuildModels(core.CastArray(data["items"])),
+		Items: func() []GuildModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastGuildModels(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -663,7 +768,13 @@ func NewGetGuildModelResultFromJson(data string) GetGuildModelResult {
 
 func NewGetGuildModelResultFromDict(data map[string]interface{}) GetGuildModelResult {
 	return GetGuildModelResult{
-		Item: NewGuildModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *GuildModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -700,8 +811,19 @@ func NewSearchGuildsResultFromJson(data string) SearchGuildsResult {
 
 func NewSearchGuildsResultFromDict(data map[string]interface{}) SearchGuildsResult {
 	return SearchGuildsResult{
-		Items:         CastGuilds(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Guild {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastGuilds(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -736,8 +858,19 @@ func NewSearchGuildsByUserIdResultFromJson(data string) SearchGuildsByUserIdResu
 
 func NewSearchGuildsByUserIdResultFromDict(data map[string]interface{}) SearchGuildsByUserIdResult {
 	return SearchGuildsByUserIdResult{
-		Items:         CastGuilds(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Guild {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastGuilds(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -771,7 +904,13 @@ func NewCreateGuildResultFromJson(data string) CreateGuildResult {
 
 func NewCreateGuildResultFromDict(data map[string]interface{}) CreateGuildResult {
 	return CreateGuildResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -807,7 +946,13 @@ func NewCreateGuildByUserIdResultFromJson(data string) CreateGuildByUserIdResult
 
 func NewCreateGuildByUserIdResultFromDict(data map[string]interface{}) CreateGuildByUserIdResult {
 	return CreateGuildByUserIdResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -843,7 +988,13 @@ func NewGetGuildResultFromJson(data string) GetGuildResult {
 
 func NewGetGuildResultFromDict(data map[string]interface{}) GetGuildResult {
 	return GetGuildResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -879,7 +1030,13 @@ func NewGetGuildByUserIdResultFromJson(data string) GetGuildByUserIdResult {
 
 func NewGetGuildByUserIdResultFromDict(data map[string]interface{}) GetGuildByUserIdResult {
 	return GetGuildByUserIdResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -915,7 +1072,13 @@ func NewUpdateGuildResultFromJson(data string) UpdateGuildResult {
 
 func NewUpdateGuildResultFromDict(data map[string]interface{}) UpdateGuildResult {
 	return UpdateGuildResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -951,7 +1114,13 @@ func NewUpdateGuildByGuildNameResultFromJson(data string) UpdateGuildByGuildName
 
 func NewUpdateGuildByGuildNameResultFromDict(data map[string]interface{}) UpdateGuildByGuildNameResult {
 	return UpdateGuildByGuildNameResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -987,7 +1156,13 @@ func NewDeleteMemberResultFromJson(data string) DeleteMemberResult {
 
 func NewDeleteMemberResultFromDict(data map[string]interface{}) DeleteMemberResult {
 	return DeleteMemberResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1023,7 +1198,13 @@ func NewDeleteMemberByGuildNameResultFromJson(data string) DeleteMemberByGuildNa
 
 func NewDeleteMemberByGuildNameResultFromDict(data map[string]interface{}) DeleteMemberByGuildNameResult {
 	return DeleteMemberByGuildNameResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1059,7 +1240,13 @@ func NewUpdateMemberRoleResultFromJson(data string) UpdateMemberRoleResult {
 
 func NewUpdateMemberRoleResultFromDict(data map[string]interface{}) UpdateMemberRoleResult {
 	return UpdateMemberRoleResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1095,7 +1282,13 @@ func NewUpdateMemberRoleByGuildNameResultFromJson(data string) UpdateMemberRoleB
 
 func NewUpdateMemberRoleByGuildNameResultFromDict(data map[string]interface{}) UpdateMemberRoleByGuildNameResult {
 	return UpdateMemberRoleByGuildNameResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1131,7 +1324,13 @@ func NewDeleteGuildResultFromJson(data string) DeleteGuildResult {
 
 func NewDeleteGuildResultFromDict(data map[string]interface{}) DeleteGuildResult {
 	return DeleteGuildResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1167,7 +1366,13 @@ func NewDeleteGuildByGuildNameResultFromJson(data string) DeleteGuildByGuildName
 
 func NewDeleteGuildByGuildNameResultFromDict(data map[string]interface{}) DeleteGuildByGuildNameResult {
 	return DeleteGuildByGuildNameResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1203,7 +1408,13 @@ func NewIncreaseMaximumCurrentMaximumMemberCountByGuildNameResultFromJson(data s
 
 func NewIncreaseMaximumCurrentMaximumMemberCountByGuildNameResultFromDict(data map[string]interface{}) IncreaseMaximumCurrentMaximumMemberCountByGuildNameResult {
 	return IncreaseMaximumCurrentMaximumMemberCountByGuildNameResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1239,7 +1450,13 @@ func NewDecreaseMaximumCurrentMaximumMemberCountResultFromJson(data string) Decr
 
 func NewDecreaseMaximumCurrentMaximumMemberCountResultFromDict(data map[string]interface{}) DecreaseMaximumCurrentMaximumMemberCountResult {
 	return DecreaseMaximumCurrentMaximumMemberCountResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1275,7 +1492,13 @@ func NewDecreaseMaximumCurrentMaximumMemberCountByGuildNameResultFromJson(data s
 
 func NewDecreaseMaximumCurrentMaximumMemberCountByGuildNameResultFromDict(data map[string]interface{}) DecreaseMaximumCurrentMaximumMemberCountByGuildNameResult {
 	return DecreaseMaximumCurrentMaximumMemberCountByGuildNameResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1416,8 +1639,20 @@ func NewSetMaximumCurrentMaximumMemberCountByGuildNameResultFromJson(data string
 
 func NewSetMaximumCurrentMaximumMemberCountByGuildNameResultFromDict(data map[string]interface{}) SetMaximumCurrentMaximumMemberCountByGuildNameResult {
 	return SetMaximumCurrentMaximumMemberCountByGuildNameResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewGuildFromDict(core.CastMap(data["old"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *Guild {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
 	}
 }
 
@@ -1461,9 +1696,27 @@ func NewAssumeResultFromJson(data string) AssumeResult {
 
 func NewAssumeResultFromDict(data map[string]interface{}) AssumeResult {
 	return AssumeResult{
-		Token:  core.CastString(data["token"]),
-		UserId: core.CastString(data["userId"]),
-		Expire: core.CastInt64(data["expire"]),
+		Token: func() *string {
+			v, ok := data["token"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["token"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Expire: func() *int64 {
+			v, ok := data["expire"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expire"])
+		}(),
 	}
 }
 
@@ -1498,9 +1751,27 @@ func NewAssumeByUserIdResultFromJson(data string) AssumeByUserIdResult {
 
 func NewAssumeByUserIdResultFromDict(data map[string]interface{}) AssumeByUserIdResult {
 	return AssumeByUserIdResult{
-		Token:  core.CastString(data["token"]),
-		UserId: core.CastString(data["userId"]),
-		Expire: core.CastInt64(data["expire"]),
+		Token: func() *string {
+			v, ok := data["token"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["token"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Expire: func() *int64 {
+			v, ok := data["expire"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expire"])
+		}(),
 	}
 }
 
@@ -1533,7 +1804,13 @@ func NewIncreaseMaximumCurrentMaximumMemberCountByStampSheetResultFromJson(data 
 
 func NewIncreaseMaximumCurrentMaximumMemberCountByStampSheetResultFromDict(data map[string]interface{}) IncreaseMaximumCurrentMaximumMemberCountByStampSheetResult {
 	return IncreaseMaximumCurrentMaximumMemberCountByStampSheetResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1570,8 +1847,20 @@ func NewDecreaseMaximumCurrentMaximumMemberCountByStampTaskResultFromJson(data s
 
 func NewDecreaseMaximumCurrentMaximumMemberCountByStampTaskResultFromDict(data map[string]interface{}) DecreaseMaximumCurrentMaximumMemberCountByStampTaskResult {
 	return DecreaseMaximumCurrentMaximumMemberCountByStampTaskResult{
-		Item:            NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
 	}
 }
 
@@ -1609,8 +1898,20 @@ func NewSetMaximumCurrentMaximumMemberCountByStampSheetResultFromJson(data strin
 
 func NewSetMaximumCurrentMaximumMemberCountByStampSheetResultFromDict(data map[string]interface{}) SetMaximumCurrentMaximumMemberCountByStampSheetResult {
 	return SetMaximumCurrentMaximumMemberCountByStampSheetResult{
-		Item: NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewGuildFromDict(core.CastMap(data["old"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *Guild {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
 	}
 }
 
@@ -1652,7 +1953,13 @@ func NewVerifyCurrentMaximumMemberCountByStampTaskResultFromJson(data string) Ve
 
 func NewVerifyCurrentMaximumMemberCountByStampTaskResultFromDict(data map[string]interface{}) VerifyCurrentMaximumMemberCountByStampTaskResult {
 	return VerifyCurrentMaximumMemberCountByStampTaskResult{
-		NewContextStack: core.CastString(data["newContextStack"]),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
 	}
 }
 
@@ -1683,7 +1990,13 @@ func NewVerifyIncludeMemberByStampTaskResultFromJson(data string) VerifyIncludeM
 
 func NewVerifyIncludeMemberByStampTaskResultFromDict(data map[string]interface{}) VerifyIncludeMemberByStampTaskResult {
 	return VerifyIncludeMemberByStampTaskResult{
-		NewContextStack: core.CastString(data["newContextStack"]),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
 	}
 }
 
@@ -1715,8 +2028,19 @@ func NewDescribeJoinedGuildsResultFromJson(data string) DescribeJoinedGuildsResu
 
 func NewDescribeJoinedGuildsResultFromDict(data map[string]interface{}) DescribeJoinedGuildsResult {
 	return DescribeJoinedGuildsResult{
-		Items:         CastJoinedGuilds(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []JoinedGuild {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastJoinedGuilds(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1751,8 +2075,19 @@ func NewDescribeJoinedGuildsByUserIdResultFromJson(data string) DescribeJoinedGu
 
 func NewDescribeJoinedGuildsByUserIdResultFromDict(data map[string]interface{}) DescribeJoinedGuildsByUserIdResult {
 	return DescribeJoinedGuildsByUserIdResult{
-		Items:         CastJoinedGuilds(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []JoinedGuild {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastJoinedGuilds(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1786,7 +2121,13 @@ func NewGetJoinedGuildResultFromJson(data string) GetJoinedGuildResult {
 
 func NewGetJoinedGuildResultFromDict(data map[string]interface{}) GetJoinedGuildResult {
 	return GetJoinedGuildResult{
-		Item: NewJoinedGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *JoinedGuild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJoinedGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1822,7 +2163,13 @@ func NewGetJoinedGuildByUserIdResultFromJson(data string) GetJoinedGuildByUserId
 
 func NewGetJoinedGuildByUserIdResultFromDict(data map[string]interface{}) GetJoinedGuildByUserIdResult {
 	return GetJoinedGuildByUserIdResult{
-		Item: NewJoinedGuildFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *JoinedGuild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJoinedGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1859,8 +2206,20 @@ func NewWithdrawalResultFromJson(data string) WithdrawalResult {
 
 func NewWithdrawalResultFromDict(data map[string]interface{}) WithdrawalResult {
 	return WithdrawalResult{
-		Item:  NewJoinedGuildFromDict(core.CastMap(data["item"])).Pointer(),
-		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+		Item: func() *JoinedGuild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJoinedGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Guild: func() *Guild {
+			v, ok := data["guild"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["guild"])).Pointer()
+		}(),
 	}
 }
 
@@ -1903,8 +2262,20 @@ func NewWithdrawalByUserIdResultFromJson(data string) WithdrawalByUserIdResult {
 
 func NewWithdrawalByUserIdResultFromDict(data map[string]interface{}) WithdrawalByUserIdResult {
 	return WithdrawalByUserIdResult{
-		Item:  NewJoinedGuildFromDict(core.CastMap(data["item"])).Pointer(),
-		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+		Item: func() *JoinedGuild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewJoinedGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Guild: func() *Guild {
+			v, ok := data["guild"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["guild"])).Pointer()
+		}(),
 	}
 }
 
@@ -1947,8 +2318,20 @@ func NewGetLastGuildMasterActivityResultFromJson(data string) GetLastGuildMaster
 
 func NewGetLastGuildMasterActivityResultFromDict(data map[string]interface{}) GetLastGuildMasterActivityResult {
 	return GetLastGuildMasterActivityResult{
-		Item:  NewLastGuildMasterActivityFromDict(core.CastMap(data["item"])).Pointer(),
-		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+		Item: func() *LastGuildMasterActivity {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLastGuildMasterActivityFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Guild: func() *Guild {
+			v, ok := data["guild"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["guild"])).Pointer()
+		}(),
 	}
 }
 
@@ -1991,8 +2374,20 @@ func NewGetLastGuildMasterActivityByGuildNameResultFromJson(data string) GetLast
 
 func NewGetLastGuildMasterActivityByGuildNameResultFromDict(data map[string]interface{}) GetLastGuildMasterActivityByGuildNameResult {
 	return GetLastGuildMasterActivityByGuildNameResult{
-		Item:  NewLastGuildMasterActivityFromDict(core.CastMap(data["item"])).Pointer(),
-		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+		Item: func() *LastGuildMasterActivity {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLastGuildMasterActivityFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Guild: func() *Guild {
+			v, ok := data["guild"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["guild"])).Pointer()
+		}(),
 	}
 }
 
@@ -2035,8 +2430,20 @@ func NewPromoteSeniorMemberResultFromJson(data string) PromoteSeniorMemberResult
 
 func NewPromoteSeniorMemberResultFromDict(data map[string]interface{}) PromoteSeniorMemberResult {
 	return PromoteSeniorMemberResult{
-		Item:  NewLastGuildMasterActivityFromDict(core.CastMap(data["item"])).Pointer(),
-		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+		Item: func() *LastGuildMasterActivity {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLastGuildMasterActivityFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Guild: func() *Guild {
+			v, ok := data["guild"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["guild"])).Pointer()
+		}(),
 	}
 }
 
@@ -2079,8 +2486,20 @@ func NewPromoteSeniorMemberByGuildNameResultFromJson(data string) PromoteSeniorM
 
 func NewPromoteSeniorMemberByGuildNameResultFromDict(data map[string]interface{}) PromoteSeniorMemberByGuildNameResult {
 	return PromoteSeniorMemberByGuildNameResult{
-		Item:  NewLastGuildMasterActivityFromDict(core.CastMap(data["item"])).Pointer(),
-		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+		Item: func() *LastGuildMasterActivity {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLastGuildMasterActivityFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Guild: func() *Guild {
+			v, ok := data["guild"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["guild"])).Pointer()
+		}(),
 	}
 }
 
@@ -2122,7 +2541,13 @@ func NewExportMasterResultFromJson(data string) ExportMasterResult {
 
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
 	return ExportMasterResult{
-		Item: NewCurrentGuildMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentGuildMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentGuildMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2158,7 +2583,13 @@ func NewGetCurrentGuildMasterResultFromJson(data string) GetCurrentGuildMasterRe
 
 func NewGetCurrentGuildMasterResultFromDict(data map[string]interface{}) GetCurrentGuildMasterResult {
 	return GetCurrentGuildMasterResult{
-		Item: NewCurrentGuildMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentGuildMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentGuildMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2194,7 +2625,13 @@ func NewUpdateCurrentGuildMasterResultFromJson(data string) UpdateCurrentGuildMa
 
 func NewUpdateCurrentGuildMasterResultFromDict(data map[string]interface{}) UpdateCurrentGuildMasterResult {
 	return UpdateCurrentGuildMasterResult{
-		Item: NewCurrentGuildMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentGuildMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentGuildMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2230,7 +2667,13 @@ func NewUpdateCurrentGuildMasterFromGitHubResultFromJson(data string) UpdateCurr
 
 func NewUpdateCurrentGuildMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentGuildMasterFromGitHubResult {
 	return UpdateCurrentGuildMasterFromGitHubResult{
-		Item: NewCurrentGuildMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentGuildMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentGuildMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2267,8 +2710,19 @@ func NewDescribeReceiveRequestsResultFromJson(data string) DescribeReceiveReques
 
 func NewDescribeReceiveRequestsResultFromDict(data map[string]interface{}) DescribeReceiveRequestsResult {
 	return DescribeReceiveRequestsResult{
-		Items:         CastReceiveMemberRequests(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []ReceiveMemberRequest {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastReceiveMemberRequests(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2303,8 +2757,19 @@ func NewDescribeReceiveRequestsByGuildNameResultFromJson(data string) DescribeRe
 
 func NewDescribeReceiveRequestsByGuildNameResultFromDict(data map[string]interface{}) DescribeReceiveRequestsByGuildNameResult {
 	return DescribeReceiveRequestsByGuildNameResult{
-		Items:         CastReceiveMemberRequests(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []ReceiveMemberRequest {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastReceiveMemberRequests(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2338,7 +2803,13 @@ func NewGetReceiveRequestResultFromJson(data string) GetReceiveRequestResult {
 
 func NewGetReceiveRequestResultFromDict(data map[string]interface{}) GetReceiveRequestResult {
 	return GetReceiveRequestResult{
-		Item: NewReceiveMemberRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ReceiveMemberRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewReceiveMemberRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2374,7 +2845,13 @@ func NewGetReceiveRequestByGuildNameResultFromJson(data string) GetReceiveReques
 
 func NewGetReceiveRequestByGuildNameResultFromDict(data map[string]interface{}) GetReceiveRequestByGuildNameResult {
 	return GetReceiveRequestByGuildNameResult{
-		Item: NewReceiveMemberRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ReceiveMemberRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewReceiveMemberRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2411,8 +2888,20 @@ func NewAcceptRequestResultFromJson(data string) AcceptRequestResult {
 
 func NewAcceptRequestResultFromDict(data map[string]interface{}) AcceptRequestResult {
 	return AcceptRequestResult{
-		Item:  NewReceiveMemberRequestFromDict(core.CastMap(data["item"])).Pointer(),
-		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+		Item: func() *ReceiveMemberRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewReceiveMemberRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Guild: func() *Guild {
+			v, ok := data["guild"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["guild"])).Pointer()
+		}(),
 	}
 }
 
@@ -2455,8 +2944,20 @@ func NewAcceptRequestByGuildNameResultFromJson(data string) AcceptRequestByGuild
 
 func NewAcceptRequestByGuildNameResultFromDict(data map[string]interface{}) AcceptRequestByGuildNameResult {
 	return AcceptRequestByGuildNameResult{
-		Item:  NewReceiveMemberRequestFromDict(core.CastMap(data["item"])).Pointer(),
-		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+		Item: func() *ReceiveMemberRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewReceiveMemberRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Guild: func() *Guild {
+			v, ok := data["guild"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["guild"])).Pointer()
+		}(),
 	}
 }
 
@@ -2498,7 +2999,13 @@ func NewRejectRequestResultFromJson(data string) RejectRequestResult {
 
 func NewRejectRequestResultFromDict(data map[string]interface{}) RejectRequestResult {
 	return RejectRequestResult{
-		Item: NewReceiveMemberRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ReceiveMemberRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewReceiveMemberRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2534,7 +3041,13 @@ func NewRejectRequestByGuildNameResultFromJson(data string) RejectRequestByGuild
 
 func NewRejectRequestByGuildNameResultFromDict(data map[string]interface{}) RejectRequestByGuildNameResult {
 	return RejectRequestByGuildNameResult{
-		Item: NewReceiveMemberRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ReceiveMemberRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewReceiveMemberRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2571,8 +3084,19 @@ func NewDescribeSendRequestsResultFromJson(data string) DescribeSendRequestsResu
 
 func NewDescribeSendRequestsResultFromDict(data map[string]interface{}) DescribeSendRequestsResult {
 	return DescribeSendRequestsResult{
-		Items:         CastSendMemberRequests(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []SendMemberRequest {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSendMemberRequests(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2607,8 +3131,19 @@ func NewDescribeSendRequestsByUserIdResultFromJson(data string) DescribeSendRequ
 
 func NewDescribeSendRequestsByUserIdResultFromDict(data map[string]interface{}) DescribeSendRequestsByUserIdResult {
 	return DescribeSendRequestsByUserIdResult{
-		Items:         CastSendMemberRequests(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []SendMemberRequest {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSendMemberRequests(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2642,7 +3177,13 @@ func NewGetSendRequestResultFromJson(data string) GetSendRequestResult {
 
 func NewGetSendRequestResultFromDict(data map[string]interface{}) GetSendRequestResult {
 	return GetSendRequestResult{
-		Item: NewSendMemberRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SendMemberRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSendMemberRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2678,7 +3219,13 @@ func NewGetSendRequestByUserIdResultFromJson(data string) GetSendRequestByUserId
 
 func NewGetSendRequestByUserIdResultFromDict(data map[string]interface{}) GetSendRequestByUserIdResult {
 	return GetSendRequestByUserIdResult{
-		Item: NewSendMemberRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SendMemberRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSendMemberRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2715,8 +3262,20 @@ func NewSendRequestResultFromJson(data string) SendRequestResult {
 
 func NewSendRequestResultFromDict(data map[string]interface{}) SendRequestResult {
 	return SendRequestResult{
-		Item:              NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
-		SendMemberRequest: NewSendMemberRequestFromDict(core.CastMap(data["sendMemberRequest"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		SendMemberRequest: func() *SendMemberRequest {
+			v, ok := data["sendMemberRequest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSendMemberRequestFromDict(core.CastMap(data["sendMemberRequest"])).Pointer()
+		}(),
 	}
 }
 
@@ -2759,8 +3318,20 @@ func NewSendRequestByUserIdResultFromJson(data string) SendRequestByUserIdResult
 
 func NewSendRequestByUserIdResultFromDict(data map[string]interface{}) SendRequestByUserIdResult {
 	return SendRequestByUserIdResult{
-		Item:              NewGuildFromDict(core.CastMap(data["item"])).Pointer(),
-		SendMemberRequest: NewSendMemberRequestFromDict(core.CastMap(data["sendMemberRequest"])).Pointer(),
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		SendMemberRequest: func() *SendMemberRequest {
+			v, ok := data["sendMemberRequest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSendMemberRequestFromDict(core.CastMap(data["sendMemberRequest"])).Pointer()
+		}(),
 	}
 }
 
@@ -2802,7 +3373,13 @@ func NewDeleteRequestResultFromJson(data string) DeleteRequestResult {
 
 func NewDeleteRequestResultFromDict(data map[string]interface{}) DeleteRequestResult {
 	return DeleteRequestResult{
-		Item: NewSendMemberRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SendMemberRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSendMemberRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2838,7 +3415,13 @@ func NewDeleteRequestByUserIdResultFromJson(data string) DeleteRequestByUserIdRe
 
 func NewDeleteRequestByUserIdResultFromDict(data map[string]interface{}) DeleteRequestByUserIdResult {
 	return DeleteRequestByUserIdResult{
-		Item: NewSendMemberRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SendMemberRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSendMemberRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2875,8 +3458,19 @@ func NewDescribeIgnoreUsersResultFromJson(data string) DescribeIgnoreUsersResult
 
 func NewDescribeIgnoreUsersResultFromDict(data map[string]interface{}) DescribeIgnoreUsersResult {
 	return DescribeIgnoreUsersResult{
-		Items:         CastIgnoreUsers(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []IgnoreUser {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastIgnoreUsers(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2911,8 +3505,19 @@ func NewDescribeIgnoreUsersByGuildNameResultFromJson(data string) DescribeIgnore
 
 func NewDescribeIgnoreUsersByGuildNameResultFromDict(data map[string]interface{}) DescribeIgnoreUsersByGuildNameResult {
 	return DescribeIgnoreUsersByGuildNameResult{
-		Items:         CastIgnoreUsers(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []IgnoreUser {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastIgnoreUsers(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -2946,7 +3551,13 @@ func NewGetIgnoreUserResultFromJson(data string) GetIgnoreUserResult {
 
 func NewGetIgnoreUserResultFromDict(data map[string]interface{}) GetIgnoreUserResult {
 	return GetIgnoreUserResult{
-		Item: NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *IgnoreUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2982,7 +3593,13 @@ func NewGetIgnoreUserByGuildNameResultFromJson(data string) GetIgnoreUserByGuild
 
 func NewGetIgnoreUserByGuildNameResultFromDict(data map[string]interface{}) GetIgnoreUserByGuildNameResult {
 	return GetIgnoreUserByGuildNameResult{
-		Item: NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *IgnoreUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3019,8 +3636,20 @@ func NewAddIgnoreUserResultFromJson(data string) AddIgnoreUserResult {
 
 func NewAddIgnoreUserResultFromDict(data map[string]interface{}) AddIgnoreUserResult {
 	return AddIgnoreUserResult{
-		Item:  NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer(),
-		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+		Item: func() *IgnoreUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Guild: func() *Guild {
+			v, ok := data["guild"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["guild"])).Pointer()
+		}(),
 	}
 }
 
@@ -3063,8 +3692,20 @@ func NewAddIgnoreUserByGuildNameResultFromJson(data string) AddIgnoreUserByGuild
 
 func NewAddIgnoreUserByGuildNameResultFromDict(data map[string]interface{}) AddIgnoreUserByGuildNameResult {
 	return AddIgnoreUserByGuildNameResult{
-		Item:  NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer(),
-		Guild: NewGuildFromDict(core.CastMap(data["guild"])).Pointer(),
+		Item: func() *IgnoreUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Guild: func() *Guild {
+			v, ok := data["guild"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["guild"])).Pointer()
+		}(),
 	}
 }
 
@@ -3106,7 +3747,13 @@ func NewDeleteIgnoreUserResultFromJson(data string) DeleteIgnoreUserResult {
 
 func NewDeleteIgnoreUserResultFromDict(data map[string]interface{}) DeleteIgnoreUserResult {
 	return DeleteIgnoreUserResult{
-		Item: NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *IgnoreUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -3142,7 +3789,13 @@ func NewDeleteIgnoreUserByGuildNameResultFromJson(data string) DeleteIgnoreUserB
 
 func NewDeleteIgnoreUserByGuildNameResultFromDict(data map[string]interface{}) DeleteIgnoreUserByGuildNameResult {
 	return DeleteIgnoreUserByGuildNameResult{
-		Item: NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *IgnoreUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewIgnoreUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 

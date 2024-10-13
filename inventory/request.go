@@ -94,8 +94,20 @@ func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesReques
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
 	return DescribeNamespacesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -233,16 +245,76 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:                    core.CastString(data["name"]),
-		Description:             core.CastString(data["description"]),
-		AcquireScript:           NewScriptSettingFromDict(core.CastMap(data["acquireScript"])).Pointer(),
-		OverflowScript:          NewScriptSettingFromDict(core.CastMap(data["overflowScript"])).Pointer(),
-		ConsumeScript:           NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer(),
-		SimpleItemAcquireScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemAcquireScript"])).Pointer(),
-		SimpleItemConsumeScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemConsumeScript"])).Pointer(),
-		BigItemAcquireScript:    NewScriptSettingFromDict(core.CastMap(data["bigItemAcquireScript"])).Pointer(),
-		BigItemConsumeScript:    NewScriptSettingFromDict(core.CastMap(data["bigItemConsumeScript"])).Pointer(),
-		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		AcquireScript: func() *ScriptSetting {
+			v, ok := data["acquireScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["acquireScript"])).Pointer()
+		}(),
+		OverflowScript: func() *ScriptSetting {
+			v, ok := data["overflowScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["overflowScript"])).Pointer()
+		}(),
+		ConsumeScript: func() *ScriptSetting {
+			v, ok := data["consumeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer()
+		}(),
+		SimpleItemAcquireScript: func() *ScriptSetting {
+			v, ok := data["simpleItemAcquireScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["simpleItemAcquireScript"])).Pointer()
+		}(),
+		SimpleItemConsumeScript: func() *ScriptSetting {
+			v, ok := data["simpleItemConsumeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["simpleItemConsumeScript"])).Pointer()
+		}(),
+		BigItemAcquireScript: func() *ScriptSetting {
+			v, ok := data["bigItemAcquireScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["bigItemAcquireScript"])).Pointer()
+		}(),
+		BigItemConsumeScript: func() *ScriptSetting {
+			v, ok := data["bigItemConsumeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["bigItemConsumeScript"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -372,7 +444,13 @@ func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusReques
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -453,7 +531,13 @@ func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
 	return GetNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -590,16 +674,76 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:           core.CastString(data["namespaceName"]),
-		Description:             core.CastString(data["description"]),
-		AcquireScript:           NewScriptSettingFromDict(core.CastMap(data["acquireScript"])).Pointer(),
-		OverflowScript:          NewScriptSettingFromDict(core.CastMap(data["overflowScript"])).Pointer(),
-		ConsumeScript:           NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer(),
-		SimpleItemAcquireScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemAcquireScript"])).Pointer(),
-		SimpleItemConsumeScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemConsumeScript"])).Pointer(),
-		BigItemAcquireScript:    NewScriptSettingFromDict(core.CastMap(data["bigItemAcquireScript"])).Pointer(),
-		BigItemConsumeScript:    NewScriptSettingFromDict(core.CastMap(data["bigItemConsumeScript"])).Pointer(),
-		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		AcquireScript: func() *ScriptSetting {
+			v, ok := data["acquireScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["acquireScript"])).Pointer()
+		}(),
+		OverflowScript: func() *ScriptSetting {
+			v, ok := data["overflowScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["overflowScript"])).Pointer()
+		}(),
+		ConsumeScript: func() *ScriptSetting {
+			v, ok := data["consumeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer()
+		}(),
+		SimpleItemAcquireScript: func() *ScriptSetting {
+			v, ok := data["simpleItemAcquireScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["simpleItemAcquireScript"])).Pointer()
+		}(),
+		SimpleItemConsumeScript: func() *ScriptSetting {
+			v, ok := data["simpleItemConsumeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["simpleItemConsumeScript"])).Pointer()
+		}(),
+		BigItemAcquireScript: func() *ScriptSetting {
+			v, ok := data["bigItemAcquireScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["bigItemAcquireScript"])).Pointer()
+		}(),
+		BigItemConsumeScript: func() *ScriptSetting {
+			v, ok := data["bigItemConsumeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["bigItemConsumeScript"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -729,7 +873,13 @@ func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, err
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -834,8 +984,20 @@ func NewDumpUserDataByUserIdRequestFromJson(data string) (DumpUserDataByUserIdRe
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
 	return DumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -941,8 +1103,20 @@ func NewCheckDumpUserDataByUserIdRequestFromJson(data string) (CheckDumpUserData
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
 	return CheckDumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1048,8 +1222,20 @@ func NewCleanUserDataByUserIdRequestFromJson(data string) (CleanUserDataByUserId
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
 	return CleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1155,8 +1341,20 @@ func NewCheckCleanUserDataByUserIdRequestFromJson(data string) (CheckCleanUserDa
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
 	return CheckCleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1262,8 +1460,20 @@ func NewPrepareImportUserDataByUserIdRequestFromJson(data string) (PrepareImport
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
 	return PrepareImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1393,9 +1603,27 @@ func NewImportUserDataByUserIdRequestFromJson(data string) (ImportUserDataByUser
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
 	return ImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1526,9 +1754,27 @@ func NewCheckImportUserDataByUserIdRequestFromJson(data string) (CheckImportUser
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
 	return CheckImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1639,9 +1885,27 @@ func NewDescribeInventoryModelMastersRequestFromJson(data string) (DescribeInven
 
 func NewDescribeInventoryModelMastersRequestFromDict(data map[string]interface{}) DescribeInventoryModelMastersRequest {
 	return DescribeInventoryModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1808,13 +2072,55 @@ func NewCreateInventoryModelMasterRequestFromJson(data string) (CreateInventoryM
 
 func NewCreateInventoryModelMasterRequestFromDict(data map[string]interface{}) CreateInventoryModelMasterRequest {
 	return CreateInventoryModelMasterRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		Name:                  core.CastString(data["name"]),
-		Description:           core.CastString(data["description"]),
-		Metadata:              core.CastString(data["metadata"]),
-		InitialCapacity:       core.CastInt32(data["initialCapacity"]),
-		MaxCapacity:           core.CastInt32(data["maxCapacity"]),
-		ProtectReferencedItem: core.CastBool(data["protectReferencedItem"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		InitialCapacity: func() *int32 {
+			v, ok := data["initialCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["initialCapacity"])
+		}(),
+		MaxCapacity: func() *int32 {
+			v, ok := data["maxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxCapacity"])
+		}(),
+		ProtectReferencedItem: func() *bool {
+			v, ok := data["protectReferencedItem"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["protectReferencedItem"])
+		}(),
 	}
 }
 
@@ -1925,8 +2231,20 @@ func NewGetInventoryModelMasterRequestFromJson(data string) (GetInventoryModelMa
 
 func NewGetInventoryModelMasterRequestFromDict(data map[string]interface{}) GetInventoryModelMasterRequest {
 	return GetInventoryModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
 	}
 }
 
@@ -2092,13 +2410,55 @@ func NewUpdateInventoryModelMasterRequestFromJson(data string) (UpdateInventoryM
 
 func NewUpdateInventoryModelMasterRequestFromDict(data map[string]interface{}) UpdateInventoryModelMasterRequest {
 	return UpdateInventoryModelMasterRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		InventoryName:         core.CastString(data["inventoryName"]),
-		Description:           core.CastString(data["description"]),
-		Metadata:              core.CastString(data["metadata"]),
-		InitialCapacity:       core.CastInt32(data["initialCapacity"]),
-		MaxCapacity:           core.CastInt32(data["maxCapacity"]),
-		ProtectReferencedItem: core.CastBool(data["protectReferencedItem"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		InitialCapacity: func() *int32 {
+			v, ok := data["initialCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["initialCapacity"])
+		}(),
+		MaxCapacity: func() *int32 {
+			v, ok := data["maxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxCapacity"])
+		}(),
+		ProtectReferencedItem: func() *bool {
+			v, ok := data["protectReferencedItem"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["protectReferencedItem"])
+		}(),
 	}
 }
 
@@ -2209,8 +2569,20 @@ func NewDeleteInventoryModelMasterRequestFromJson(data string) (DeleteInventoryM
 
 func NewDeleteInventoryModelMasterRequestFromDict(data map[string]interface{}) DeleteInventoryModelMasterRequest {
 	return DeleteInventoryModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
 	}
 }
 
@@ -2292,7 +2664,13 @@ func NewDescribeInventoryModelsRequestFromJson(data string) (DescribeInventoryMo
 
 func NewDescribeInventoryModelsRequestFromDict(data map[string]interface{}) DescribeInventoryModelsRequest {
 	return DescribeInventoryModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -2397,8 +2775,20 @@ func NewGetInventoryModelRequestFromJson(data string) (GetInventoryModelRequest,
 
 func NewGetInventoryModelRequestFromDict(data map[string]interface{}) GetInventoryModelRequest {
 	return GetInventoryModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
 	}
 }
 
@@ -2532,10 +2922,34 @@ func NewDescribeItemModelMastersRequestFromJson(data string) (DescribeItemModelM
 
 func NewDescribeItemModelMastersRequestFromDict(data map[string]interface{}) DescribeItemModelMastersRequest {
 	return DescribeItemModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -2727,14 +3141,62 @@ func NewCreateItemModelMasterRequestFromJson(data string) (CreateItemModelMaster
 
 func NewCreateItemModelMasterRequestFromDict(data map[string]interface{}) CreateItemModelMasterRequest {
 	return CreateItemModelMasterRequest{
-		NamespaceName:       core.CastString(data["namespaceName"]),
-		InventoryName:       core.CastString(data["inventoryName"]),
-		Name:                core.CastString(data["name"]),
-		Description:         core.CastString(data["description"]),
-		Metadata:            core.CastString(data["metadata"]),
-		StackingLimit:       core.CastInt64(data["stackingLimit"]),
-		AllowMultipleStacks: core.CastBool(data["allowMultipleStacks"]),
-		SortValue:           core.CastInt32(data["sortValue"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		StackingLimit: func() *int64 {
+			v, ok := data["stackingLimit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["stackingLimit"])
+		}(),
+		AllowMultipleStacks: func() *bool {
+			v, ok := data["allowMultipleStacks"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["allowMultipleStacks"])
+		}(),
+		SortValue: func() *int32 {
+			v, ok := data["sortValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["sortValue"])
+		}(),
 	}
 }
 
@@ -2870,9 +3332,27 @@ func NewGetItemModelMasterRequestFromJson(data string) (GetItemModelMasterReques
 
 func NewGetItemModelMasterRequestFromDict(data map[string]interface{}) GetItemModelMasterRequest {
 	return GetItemModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
 	}
 }
 
@@ -3063,14 +3543,62 @@ func NewUpdateItemModelMasterRequestFromJson(data string) (UpdateItemModelMaster
 
 func NewUpdateItemModelMasterRequestFromDict(data map[string]interface{}) UpdateItemModelMasterRequest {
 	return UpdateItemModelMasterRequest{
-		NamespaceName:       core.CastString(data["namespaceName"]),
-		InventoryName:       core.CastString(data["inventoryName"]),
-		ItemName:            core.CastString(data["itemName"]),
-		Description:         core.CastString(data["description"]),
-		Metadata:            core.CastString(data["metadata"]),
-		StackingLimit:       core.CastInt64(data["stackingLimit"]),
-		AllowMultipleStacks: core.CastBool(data["allowMultipleStacks"]),
-		SortValue:           core.CastInt32(data["sortValue"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		StackingLimit: func() *int64 {
+			v, ok := data["stackingLimit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["stackingLimit"])
+		}(),
+		AllowMultipleStacks: func() *bool {
+			v, ok := data["allowMultipleStacks"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["allowMultipleStacks"])
+		}(),
+		SortValue: func() *int32 {
+			v, ok := data["sortValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["sortValue"])
+		}(),
 	}
 }
 
@@ -3206,9 +3734,27 @@ func NewDeleteItemModelMasterRequestFromJson(data string) (DeleteItemModelMaster
 
 func NewDeleteItemModelMasterRequestFromDict(data map[string]interface{}) DeleteItemModelMasterRequest {
 	return DeleteItemModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
 	}
 }
 
@@ -3315,8 +3861,20 @@ func NewDescribeItemModelsRequestFromJson(data string) (DescribeItemModelsReques
 
 func NewDescribeItemModelsRequestFromDict(data map[string]interface{}) DescribeItemModelsRequest {
 	return DescribeItemModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
 	}
 }
 
@@ -3446,9 +4004,27 @@ func NewGetItemModelRequestFromJson(data string) (GetItemModelRequest, error) {
 
 func NewGetItemModelRequestFromDict(data map[string]interface{}) GetItemModelRequest {
 	return GetItemModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
 	}
 }
 
@@ -3559,9 +4135,27 @@ func NewDescribeSimpleInventoryModelMastersRequestFromJson(data string) (Describ
 
 func NewDescribeSimpleInventoryModelMastersRequestFromDict(data map[string]interface{}) DescribeSimpleInventoryModelMastersRequest {
 	return DescribeSimpleInventoryModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -3716,10 +4310,34 @@ func NewCreateSimpleInventoryModelMasterRequestFromJson(data string) (CreateSimp
 
 func NewCreateSimpleInventoryModelMasterRequestFromDict(data map[string]interface{}) CreateSimpleInventoryModelMasterRequest {
 	return CreateSimpleInventoryModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Name:          core.CastString(data["name"]),
-		Description:   core.CastString(data["description"]),
-		Metadata:      core.CastString(data["metadata"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -3827,8 +4445,20 @@ func NewGetSimpleInventoryModelMasterRequestFromJson(data string) (GetSimpleInve
 
 func NewGetSimpleInventoryModelMasterRequestFromDict(data map[string]interface{}) GetSimpleInventoryModelMasterRequest {
 	return GetSimpleInventoryModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
 	}
 }
 
@@ -3982,10 +4612,34 @@ func NewUpdateSimpleInventoryModelMasterRequestFromJson(data string) (UpdateSimp
 
 func NewUpdateSimpleInventoryModelMasterRequestFromDict(data map[string]interface{}) UpdateSimpleInventoryModelMasterRequest {
 	return UpdateSimpleInventoryModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		Description:   core.CastString(data["description"]),
-		Metadata:      core.CastString(data["metadata"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -4093,8 +4747,20 @@ func NewDeleteSimpleInventoryModelMasterRequestFromJson(data string) (DeleteSimp
 
 func NewDeleteSimpleInventoryModelMasterRequestFromDict(data map[string]interface{}) DeleteSimpleInventoryModelMasterRequest {
 	return DeleteSimpleInventoryModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
 	}
 }
 
@@ -4176,7 +4842,13 @@ func NewDescribeSimpleInventoryModelsRequestFromJson(data string) (DescribeSimpl
 
 func NewDescribeSimpleInventoryModelsRequestFromDict(data map[string]interface{}) DescribeSimpleInventoryModelsRequest {
 	return DescribeSimpleInventoryModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -4281,8 +4953,20 @@ func NewGetSimpleInventoryModelRequestFromJson(data string) (GetSimpleInventoryM
 
 func NewGetSimpleInventoryModelRequestFromDict(data map[string]interface{}) GetSimpleInventoryModelRequest {
 	return GetSimpleInventoryModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
 	}
 }
 
@@ -4416,10 +5100,34 @@ func NewDescribeSimpleItemModelMastersRequestFromJson(data string) (DescribeSimp
 
 func NewDescribeSimpleItemModelMastersRequestFromDict(data map[string]interface{}) DescribeSimpleItemModelMastersRequest {
 	return DescribeSimpleItemModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -4599,11 +5307,41 @@ func NewCreateSimpleItemModelMasterRequestFromJson(data string) (CreateSimpleIte
 
 func NewCreateSimpleItemModelMasterRequestFromDict(data map[string]interface{}) CreateSimpleItemModelMasterRequest {
 	return CreateSimpleItemModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		Name:          core.CastString(data["name"]),
-		Description:   core.CastString(data["description"]),
-		Metadata:      core.CastString(data["metadata"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -4736,9 +5474,27 @@ func NewGetSimpleItemModelMasterRequestFromJson(data string) (GetSimpleItemModel
 
 func NewGetSimpleItemModelMasterRequestFromDict(data map[string]interface{}) GetSimpleItemModelMasterRequest {
 	return GetSimpleItemModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
 	}
 }
 
@@ -4917,11 +5673,41 @@ func NewUpdateSimpleItemModelMasterRequestFromJson(data string) (UpdateSimpleIte
 
 func NewUpdateSimpleItemModelMasterRequestFromDict(data map[string]interface{}) UpdateSimpleItemModelMasterRequest {
 	return UpdateSimpleItemModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
-		Description:   core.CastString(data["description"]),
-		Metadata:      core.CastString(data["metadata"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -5054,9 +5840,27 @@ func NewDeleteSimpleItemModelMasterRequestFromJson(data string) (DeleteSimpleIte
 
 func NewDeleteSimpleItemModelMasterRequestFromDict(data map[string]interface{}) DeleteSimpleItemModelMasterRequest {
 	return DeleteSimpleItemModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
 	}
 }
 
@@ -5163,8 +5967,20 @@ func NewDescribeSimpleItemModelsRequestFromJson(data string) (DescribeSimpleItem
 
 func NewDescribeSimpleItemModelsRequestFromDict(data map[string]interface{}) DescribeSimpleItemModelsRequest {
 	return DescribeSimpleItemModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
 	}
 }
 
@@ -5294,9 +6110,27 @@ func NewGetSimpleItemModelRequestFromJson(data string) (GetSimpleItemModelReques
 
 func NewGetSimpleItemModelRequestFromDict(data map[string]interface{}) GetSimpleItemModelRequest {
 	return GetSimpleItemModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
 	}
 }
 
@@ -5407,9 +6241,27 @@ func NewDescribeBigInventoryModelMastersRequestFromJson(data string) (DescribeBi
 
 func NewDescribeBigInventoryModelMastersRequestFromDict(data map[string]interface{}) DescribeBigInventoryModelMastersRequest {
 	return DescribeBigInventoryModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -5564,10 +6416,34 @@ func NewCreateBigInventoryModelMasterRequestFromJson(data string) (CreateBigInve
 
 func NewCreateBigInventoryModelMasterRequestFromDict(data map[string]interface{}) CreateBigInventoryModelMasterRequest {
 	return CreateBigInventoryModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Name:          core.CastString(data["name"]),
-		Description:   core.CastString(data["description"]),
-		Metadata:      core.CastString(data["metadata"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -5675,8 +6551,20 @@ func NewGetBigInventoryModelMasterRequestFromJson(data string) (GetBigInventoryM
 
 func NewGetBigInventoryModelMasterRequestFromDict(data map[string]interface{}) GetBigInventoryModelMasterRequest {
 	return GetBigInventoryModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
 	}
 }
 
@@ -5830,10 +6718,34 @@ func NewUpdateBigInventoryModelMasterRequestFromJson(data string) (UpdateBigInve
 
 func NewUpdateBigInventoryModelMasterRequestFromDict(data map[string]interface{}) UpdateBigInventoryModelMasterRequest {
 	return UpdateBigInventoryModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		Description:   core.CastString(data["description"]),
-		Metadata:      core.CastString(data["metadata"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -5941,8 +6853,20 @@ func NewDeleteBigInventoryModelMasterRequestFromJson(data string) (DeleteBigInve
 
 func NewDeleteBigInventoryModelMasterRequestFromDict(data map[string]interface{}) DeleteBigInventoryModelMasterRequest {
 	return DeleteBigInventoryModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
 	}
 }
 
@@ -6024,7 +6948,13 @@ func NewDescribeBigInventoryModelsRequestFromJson(data string) (DescribeBigInven
 
 func NewDescribeBigInventoryModelsRequestFromDict(data map[string]interface{}) DescribeBigInventoryModelsRequest {
 	return DescribeBigInventoryModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -6129,8 +7059,20 @@ func NewGetBigInventoryModelRequestFromJson(data string) (GetBigInventoryModelRe
 
 func NewGetBigInventoryModelRequestFromDict(data map[string]interface{}) GetBigInventoryModelRequest {
 	return GetBigInventoryModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
 	}
 }
 
@@ -6264,10 +7206,34 @@ func NewDescribeBigItemModelMastersRequestFromJson(data string) (DescribeBigItem
 
 func NewDescribeBigItemModelMastersRequestFromDict(data map[string]interface{}) DescribeBigItemModelMastersRequest {
 	return DescribeBigItemModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -6447,11 +7413,41 @@ func NewCreateBigItemModelMasterRequestFromJson(data string) (CreateBigItemModel
 
 func NewCreateBigItemModelMasterRequestFromDict(data map[string]interface{}) CreateBigItemModelMasterRequest {
 	return CreateBigItemModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		Name:          core.CastString(data["name"]),
-		Description:   core.CastString(data["description"]),
-		Metadata:      core.CastString(data["metadata"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -6584,9 +7580,27 @@ func NewGetBigItemModelMasterRequestFromJson(data string) (GetBigItemModelMaster
 
 func NewGetBigItemModelMasterRequestFromDict(data map[string]interface{}) GetBigItemModelMasterRequest {
 	return GetBigItemModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
 	}
 }
 
@@ -6765,11 +7779,41 @@ func NewUpdateBigItemModelMasterRequestFromJson(data string) (UpdateBigItemModel
 
 func NewUpdateBigItemModelMasterRequestFromDict(data map[string]interface{}) UpdateBigItemModelMasterRequest {
 	return UpdateBigItemModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
-		Description:   core.CastString(data["description"]),
-		Metadata:      core.CastString(data["metadata"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -6902,9 +7946,27 @@ func NewDeleteBigItemModelMasterRequestFromJson(data string) (DeleteBigItemModel
 
 func NewDeleteBigItemModelMasterRequestFromDict(data map[string]interface{}) DeleteBigItemModelMasterRequest {
 	return DeleteBigItemModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
 	}
 }
 
@@ -7011,8 +8073,20 @@ func NewDescribeBigItemModelsRequestFromJson(data string) (DescribeBigItemModels
 
 func NewDescribeBigItemModelsRequestFromDict(data map[string]interface{}) DescribeBigItemModelsRequest {
 	return DescribeBigItemModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
 	}
 }
 
@@ -7142,9 +8216,27 @@ func NewGetBigItemModelRequestFromJson(data string) (GetBigItemModelRequest, err
 
 func NewGetBigItemModelRequestFromDict(data map[string]interface{}) GetBigItemModelRequest {
 	return GetBigItemModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
 	}
 }
 
@@ -7227,7 +8319,13 @@ func NewExportMasterRequestFromJson(data string) (ExportMasterRequest, error) {
 
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -7308,7 +8406,13 @@ func NewGetCurrentItemModelMasterRequestFromJson(data string) (GetCurrentItemMod
 
 func NewGetCurrentItemModelMasterRequestFromDict(data map[string]interface{}) GetCurrentItemModelMasterRequest {
 	return GetCurrentItemModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -7413,8 +8517,20 @@ func NewUpdateCurrentItemModelMasterRequestFromJson(data string) (UpdateCurrentI
 
 func NewUpdateCurrentItemModelMasterRequestFromDict(data map[string]interface{}) UpdateCurrentItemModelMasterRequest {
 	return UpdateCurrentItemModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Settings:      core.CastString(data["settings"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -7500,8 +8616,20 @@ func NewUpdateCurrentItemModelMasterFromGitHubRequestFromJson(data string) (Upda
 
 func NewUpdateCurrentItemModelMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentItemModelMasterFromGitHubRequest {
 	return UpdateCurrentItemModelMasterFromGitHubRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		CheckoutSetting: func() *GitHubCheckoutSetting {
+			v, ok := data["checkoutSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -7640,10 +8768,34 @@ func NewDescribeInventoriesRequestFromJson(data string) (DescribeInventoriesRequ
 
 func NewDescribeInventoriesRequestFromDict(data map[string]interface{}) DescribeInventoriesRequest {
 	return DescribeInventoriesRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -7803,11 +8955,41 @@ func NewDescribeInventoriesByUserIdRequestFromJson(data string) (DescribeInvento
 
 func NewDescribeInventoriesByUserIdRequestFromDict(data map[string]interface{}) DescribeInventoriesByUserIdRequest {
 	return DescribeInventoriesByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -7940,9 +9122,27 @@ func NewGetInventoryRequestFromJson(data string) (GetInventoryRequest, error) {
 
 func NewGetInventoryRequestFromDict(data map[string]interface{}) GetInventoryRequest {
 	return GetInventoryRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -8097,10 +9297,34 @@ func NewGetInventoryByUserIdRequestFromJson(data string) (GetInventoryByUserIdRe
 
 func NewGetInventoryByUserIdRequestFromDict(data map[string]interface{}) GetInventoryByUserIdRequest {
 	return GetInventoryByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -8261,11 +9485,41 @@ func NewAddCapacityByUserIdRequestFromJson(data string) (AddCapacityByUserIdRequ
 
 func NewAddCapacityByUserIdRequestFromDict(data map[string]interface{}) AddCapacityByUserIdRequest {
 	return AddCapacityByUserIdRequest{
-		NamespaceName:    core.CastString(data["namespaceName"]),
-		InventoryName:    core.CastString(data["inventoryName"]),
-		UserId:           core.CastString(data["userId"]),
-		AddCapacityValue: core.CastInt32(data["addCapacityValue"]),
-		TimeOffsetToken:  core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		AddCapacityValue: func() *int32 {
+			v, ok := data["addCapacityValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["addCapacityValue"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -8427,11 +9681,41 @@ func NewSetCapacityByUserIdRequestFromJson(data string) (SetCapacityByUserIdRequ
 
 func NewSetCapacityByUserIdRequestFromDict(data map[string]interface{}) SetCapacityByUserIdRequest {
 	return SetCapacityByUserIdRequest{
-		NamespaceName:    core.CastString(data["namespaceName"]),
-		InventoryName:    core.CastString(data["inventoryName"]),
-		UserId:           core.CastString(data["userId"]),
-		NewCapacityValue: core.CastInt32(data["newCapacityValue"]),
-		TimeOffsetToken:  core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		NewCapacityValue: func() *int32 {
+			v, ok := data["newCapacityValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["newCapacityValue"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -8589,10 +9873,34 @@ func NewDeleteInventoryByUserIdRequestFromJson(data string) (DeleteInventoryByUs
 
 func NewDeleteInventoryByUserIdRequestFromDict(data map[string]interface{}) DeleteInventoryByUserIdRequest {
 	return DeleteInventoryByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -8757,12 +10065,48 @@ func NewVerifyInventoryCurrentMaxCapacityRequestFromJson(data string) (VerifyInv
 
 func NewVerifyInventoryCurrentMaxCapacityRequestFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityRequest {
 	return VerifyInventoryCurrentMaxCapacityRequest{
-		NamespaceName:                   core.CastString(data["namespaceName"]),
-		AccessToken:                     core.CastString(data["accessToken"]),
-		InventoryName:                   core.CastString(data["inventoryName"]),
-		VerifyType:                      core.CastString(data["verifyType"]),
-		CurrentInventoryMaxCapacity:     core.CastInt32(data["currentInventoryMaxCapacity"]),
-		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		CurrentInventoryMaxCapacity: func() *int32 {
+			v, ok := data["currentInventoryMaxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["currentInventoryMaxCapacity"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
 	}
 }
 
@@ -8953,13 +10297,55 @@ func NewVerifyInventoryCurrentMaxCapacityByUserIdRequestFromJson(data string) (V
 
 func NewVerifyInventoryCurrentMaxCapacityByUserIdRequestFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityByUserIdRequest {
 	return VerifyInventoryCurrentMaxCapacityByUserIdRequest{
-		NamespaceName:                   core.CastString(data["namespaceName"]),
-		UserId:                          core.CastString(data["userId"]),
-		InventoryName:                   core.CastString(data["inventoryName"]),
-		VerifyType:                      core.CastString(data["verifyType"]),
-		CurrentInventoryMaxCapacity:     core.CastInt32(data["currentInventoryMaxCapacity"]),
-		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
-		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		CurrentInventoryMaxCapacity: func() *int32 {
+			v, ok := data["currentInventoryMaxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["currentInventoryMaxCapacity"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -9070,8 +10456,20 @@ func NewVerifyInventoryCurrentMaxCapacityByStampTaskRequestFromJson(data string)
 
 func NewVerifyInventoryCurrentMaxCapacityByStampTaskRequestFromDict(data map[string]interface{}) VerifyInventoryCurrentMaxCapacityByStampTaskRequest {
 	return VerifyInventoryCurrentMaxCapacityByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -9177,8 +10575,20 @@ func NewAddCapacityByStampSheetRequestFromJson(data string) (AddCapacityByStampS
 
 func NewAddCapacityByStampSheetRequestFromDict(data map[string]interface{}) AddCapacityByStampSheetRequest {
 	return AddCapacityByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -9284,8 +10694,20 @@ func NewSetCapacityByStampSheetRequestFromJson(data string) (SetCapacityByStampS
 
 func NewSetCapacityByStampSheetRequestFromDict(data map[string]interface{}) SetCapacityByStampSheetRequest {
 	return SetCapacityByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -9443,11 +10865,41 @@ func NewDescribeItemSetsRequestFromJson(data string) (DescribeItemSetsRequest, e
 
 func NewDescribeItemSetsRequestFromDict(data map[string]interface{}) DescribeItemSetsRequest {
 	return DescribeItemSetsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -9632,12 +11084,48 @@ func NewDescribeItemSetsByUserIdRequestFromJson(data string) (DescribeItemSetsBy
 
 func NewDescribeItemSetsByUserIdRequestFromDict(data map[string]interface{}) DescribeItemSetsByUserIdRequest {
 	return DescribeItemSetsByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -9819,11 +11307,41 @@ func NewGetItemSetRequestFromJson(data string) (GetItemSetRequest, error) {
 
 func NewGetItemSetRequestFromDict(data map[string]interface{}) GetItemSetRequest {
 	return GetItemSetRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
 	}
 }
 
@@ -10028,12 +11546,48 @@ func NewGetItemSetByUserIdRequestFromJson(data string) (GetItemSetByUserIdReques
 
 func NewGetItemSetByUserIdRequestFromDict(data map[string]interface{}) GetItemSetByUserIdRequest {
 	return GetItemSetByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		ItemSetName:     core.CastString(data["itemSetName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -10239,12 +11793,48 @@ func NewGetItemWithSignatureRequestFromJson(data string) (GetItemWithSignatureRe
 
 func NewGetItemWithSignatureRequestFromDict(data map[string]interface{}) GetItemWithSignatureRequest {
 	return GetItemWithSignatureRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
-		KeyId:         core.CastString(data["keyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -10474,13 +12064,55 @@ func NewGetItemWithSignatureByUserIdRequestFromJson(data string) (GetItemWithSig
 
 func NewGetItemWithSignatureByUserIdRequestFromDict(data map[string]interface{}) GetItemWithSignatureByUserIdRequest {
 	return GetItemWithSignatureByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		ItemSetName:     core.CastString(data["itemSetName"]),
-		KeyId:           core.CastString(data["keyId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -10700,15 +12332,69 @@ func NewAcquireItemSetByUserIdRequestFromJson(data string) (AcquireItemSetByUser
 
 func NewAcquireItemSetByUserIdRequestFromDict(data map[string]interface{}) AcquireItemSetByUserIdRequest {
 	return AcquireItemSetByUserIdRequest{
-		NamespaceName:    core.CastString(data["namespaceName"]),
-		InventoryName:    core.CastString(data["inventoryName"]),
-		ItemName:         core.CastString(data["itemName"]),
-		UserId:           core.CastString(data["userId"]),
-		AcquireCount:     core.CastInt64(data["acquireCount"]),
-		ExpiresAt:        core.CastInt64(data["expiresAt"]),
-		CreateNewItemSet: core.CastBool(data["createNewItemSet"]),
-		ItemSetName:      core.CastString(data["itemSetName"]),
-		TimeOffsetToken:  core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		AcquireCount: func() *int64 {
+			v, ok := data["acquireCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["acquireCount"])
+		}(),
+		ExpiresAt: func() *int64 {
+			v, ok := data["expiresAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expiresAt"])
+		}(),
+		CreateNewItemSet: func() *bool {
+			v, ok := data["createNewItemSet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["createNewItemSet"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -10922,13 +12608,55 @@ func NewAcquireItemSetWithGradeByUserIdRequestFromJson(data string) (AcquireItem
 
 func NewAcquireItemSetWithGradeByUserIdRequestFromDict(data map[string]interface{}) AcquireItemSetWithGradeByUserIdRequest {
 	return AcquireItemSetWithGradeByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		ItemName:        core.CastString(data["itemName"]),
-		UserId:          core.CastString(data["userId"]),
-		GradeModelId:    core.CastString(data["gradeModelId"]),
-		GradeValue:      core.CastInt64(data["gradeValue"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		GradeModelId: func() *string {
+			v, ok := data["gradeModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gradeModelId"])
+		}(),
+		GradeValue: func() *int64 {
+			v, ok := data["gradeValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["gradeValue"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -11116,12 +12844,48 @@ func NewConsumeItemSetRequestFromJson(data string) (ConsumeItemSetRequest, error
 
 func NewConsumeItemSetRequestFromDict(data map[string]interface{}) ConsumeItemSetRequest {
 	return ConsumeItemSetRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ConsumeCount:  core.CastInt64(data["consumeCount"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ConsumeCount: func() *int64 {
+			v, ok := data["consumeCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["consumeCount"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
 	}
 }
 
@@ -11332,13 +13096,55 @@ func NewConsumeItemSetByUserIdRequestFromJson(data string) (ConsumeItemSetByUser
 
 func NewConsumeItemSetByUserIdRequestFromDict(data map[string]interface{}) ConsumeItemSetByUserIdRequest {
 	return ConsumeItemSetByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		ConsumeCount:    core.CastInt64(data["consumeCount"]),
-		ItemSetName:     core.CastString(data["itemSetName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ConsumeCount: func() *int64 {
+			v, ok := data["consumeCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["consumeCount"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -11546,12 +13352,48 @@ func NewDeleteItemSetByUserIdRequestFromJson(data string) (DeleteItemSetByUserId
 
 func NewDeleteItemSetByUserIdRequestFromDict(data map[string]interface{}) DeleteItemSetByUserIdRequest {
 	return DeleteItemSetByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		ItemSetName:     core.CastString(data["itemSetName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -11766,14 +13608,62 @@ func NewVerifyItemSetRequestFromJson(data string) (VerifyItemSetRequest, error) 
 
 func NewVerifyItemSetRequestFromDict(data map[string]interface{}) VerifyItemSetRequest {
 	return VerifyItemSetRequest{
-		NamespaceName:                   core.CastString(data["namespaceName"]),
-		AccessToken:                     core.CastString(data["accessToken"]),
-		InventoryName:                   core.CastString(data["inventoryName"]),
-		ItemName:                        core.CastString(data["itemName"]),
-		VerifyType:                      core.CastString(data["verifyType"]),
-		ItemSetName:                     core.CastString(data["itemSetName"]),
-		Count:                           core.CastInt64(data["count"]),
-		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
 	}
 }
 
@@ -12014,15 +13904,69 @@ func NewVerifyItemSetByUserIdRequestFromJson(data string) (VerifyItemSetByUserId
 
 func NewVerifyItemSetByUserIdRequestFromDict(data map[string]interface{}) VerifyItemSetByUserIdRequest {
 	return VerifyItemSetByUserIdRequest{
-		NamespaceName:                   core.CastString(data["namespaceName"]),
-		UserId:                          core.CastString(data["userId"]),
-		InventoryName:                   core.CastString(data["inventoryName"]),
-		ItemName:                        core.CastString(data["itemName"]),
-		VerifyType:                      core.CastString(data["verifyType"]),
-		ItemSetName:                     core.CastString(data["itemSetName"]),
-		Count:                           core.CastInt64(data["count"]),
-		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
-		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -12135,8 +14079,20 @@ func NewAcquireItemSetByStampSheetRequestFromJson(data string) (AcquireItemSetBy
 
 func NewAcquireItemSetByStampSheetRequestFromDict(data map[string]interface{}) AcquireItemSetByStampSheetRequest {
 	return AcquireItemSetByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -12242,8 +14198,20 @@ func NewAcquireItemSetWithGradeByStampSheetRequestFromJson(data string) (Acquire
 
 func NewAcquireItemSetWithGradeByStampSheetRequestFromDict(data map[string]interface{}) AcquireItemSetWithGradeByStampSheetRequest {
 	return AcquireItemSetWithGradeByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -12349,8 +14317,20 @@ func NewConsumeItemSetByStampTaskRequestFromJson(data string) (ConsumeItemSetByS
 
 func NewConsumeItemSetByStampTaskRequestFromDict(data map[string]interface{}) ConsumeItemSetByStampTaskRequest {
 	return ConsumeItemSetByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -12456,8 +14436,20 @@ func NewVerifyItemSetByStampTaskRequestFromJson(data string) (VerifyItemSetBySta
 
 func NewVerifyItemSetByStampTaskRequestFromDict(data map[string]interface{}) VerifyItemSetByStampTaskRequest {
 	return VerifyItemSetByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -12635,11 +14627,41 @@ func NewDescribeReferenceOfRequestFromJson(data string) (DescribeReferenceOfRequ
 
 func NewDescribeReferenceOfRequestFromDict(data map[string]interface{}) DescribeReferenceOfRequest {
 	return DescribeReferenceOfRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
 	}
 }
 
@@ -12844,12 +14866,48 @@ func NewDescribeReferenceOfByUserIdRequestFromJson(data string) (DescribeReferen
 
 func NewDescribeReferenceOfByUserIdRequestFromDict(data map[string]interface{}) DescribeReferenceOfByUserIdRequest {
 	return DescribeReferenceOfByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		ItemSetName:     core.CastString(data["itemSetName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -13055,12 +15113,48 @@ func NewGetReferenceOfRequestFromJson(data string) (GetReferenceOfRequest, error
 
 func NewGetReferenceOfRequestFromDict(data map[string]interface{}) GetReferenceOfRequest {
 	return GetReferenceOfRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
-		ReferenceOf:   core.CastString(data["referenceOf"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		ReferenceOf: func() *string {
+			v, ok := data["referenceOf"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceOf"])
+		}(),
 	}
 }
 
@@ -13290,13 +15384,55 @@ func NewGetReferenceOfByUserIdRequestFromJson(data string) (GetReferenceOfByUser
 
 func NewGetReferenceOfByUserIdRequestFromDict(data map[string]interface{}) GetReferenceOfByUserIdRequest {
 	return GetReferenceOfByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		ItemSetName:     core.CastString(data["itemSetName"]),
-		ReferenceOf:     core.CastString(data["referenceOf"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		ReferenceOf: func() *string {
+			v, ok := data["referenceOf"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceOf"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -13528,13 +15664,55 @@ func NewVerifyReferenceOfRequestFromJson(data string) (VerifyReferenceOfRequest,
 
 func NewVerifyReferenceOfRequestFromDict(data map[string]interface{}) VerifyReferenceOfRequest {
 	return VerifyReferenceOfRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
-		ReferenceOf:   core.CastString(data["referenceOf"]),
-		VerifyType:    core.CastString(data["verifyType"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		ReferenceOf: func() *string {
+			v, ok := data["referenceOf"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceOf"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
 	}
 }
 
@@ -13790,14 +15968,62 @@ func NewVerifyReferenceOfByUserIdRequestFromJson(data string) (VerifyReferenceOf
 
 func NewVerifyReferenceOfByUserIdRequestFromDict(data map[string]interface{}) VerifyReferenceOfByUserIdRequest {
 	return VerifyReferenceOfByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		ItemSetName:     core.CastString(data["itemSetName"]),
-		ReferenceOf:     core.CastString(data["referenceOf"]),
-		VerifyType:      core.CastString(data["verifyType"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		ReferenceOf: func() *string {
+			v, ok := data["referenceOf"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceOf"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -14006,12 +16232,48 @@ func NewAddReferenceOfRequestFromJson(data string) (AddReferenceOfRequest, error
 
 func NewAddReferenceOfRequestFromDict(data map[string]interface{}) AddReferenceOfRequest {
 	return AddReferenceOfRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
-		ReferenceOf:   core.CastString(data["referenceOf"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		ReferenceOf: func() *string {
+			v, ok := data["referenceOf"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceOf"])
+		}(),
 	}
 }
 
@@ -14242,13 +16504,55 @@ func NewAddReferenceOfByUserIdRequestFromJson(data string) (AddReferenceOfByUser
 
 func NewAddReferenceOfByUserIdRequestFromDict(data map[string]interface{}) AddReferenceOfByUserIdRequest {
 	return AddReferenceOfByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		ItemSetName:     core.CastString(data["itemSetName"]),
-		ReferenceOf:     core.CastString(data["referenceOf"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		ReferenceOf: func() *string {
+			v, ok := data["referenceOf"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceOf"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -14456,12 +16760,48 @@ func NewDeleteReferenceOfRequestFromJson(data string) (DeleteReferenceOfRequest,
 
 func NewDeleteReferenceOfRequestFromDict(data map[string]interface{}) DeleteReferenceOfRequest {
 	return DeleteReferenceOfRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ItemSetName:   core.CastString(data["itemSetName"]),
-		ReferenceOf:   core.CastString(data["referenceOf"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		ReferenceOf: func() *string {
+			v, ok := data["referenceOf"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceOf"])
+		}(),
 	}
 }
 
@@ -14692,13 +17032,55 @@ func NewDeleteReferenceOfByUserIdRequestFromJson(data string) (DeleteReferenceOf
 
 func NewDeleteReferenceOfByUserIdRequestFromDict(data map[string]interface{}) DeleteReferenceOfByUserIdRequest {
 	return DeleteReferenceOfByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		ItemSetName:     core.CastString(data["itemSetName"]),
-		ReferenceOf:     core.CastString(data["referenceOf"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ItemSetName: func() *string {
+			v, ok := data["itemSetName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetName"])
+		}(),
+		ReferenceOf: func() *string {
+			v, ok := data["referenceOf"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceOf"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -14809,8 +17191,20 @@ func NewAddReferenceOfItemSetByStampSheetRequestFromJson(data string) (AddRefere
 
 func NewAddReferenceOfItemSetByStampSheetRequestFromDict(data map[string]interface{}) AddReferenceOfItemSetByStampSheetRequest {
 	return AddReferenceOfItemSetByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -14916,8 +17310,20 @@ func NewDeleteReferenceOfItemSetByStampSheetRequestFromJson(data string) (Delete
 
 func NewDeleteReferenceOfItemSetByStampSheetRequestFromDict(data map[string]interface{}) DeleteReferenceOfItemSetByStampSheetRequest {
 	return DeleteReferenceOfItemSetByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -15023,8 +17429,20 @@ func NewVerifyReferenceOfByStampTaskRequestFromJson(data string) (VerifyReferenc
 
 func NewVerifyReferenceOfByStampTaskRequestFromDict(data map[string]interface{}) VerifyReferenceOfByStampTaskRequest {
 	return VerifyReferenceOfByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -15182,11 +17600,41 @@ func NewDescribeSimpleItemsRequestFromJson(data string) (DescribeSimpleItemsRequ
 
 func NewDescribeSimpleItemsRequestFromDict(data map[string]interface{}) DescribeSimpleItemsRequest {
 	return DescribeSimpleItemsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -15371,12 +17819,48 @@ func NewDescribeSimpleItemsByUserIdRequestFromJson(data string) (DescribeSimpleI
 
 func NewDescribeSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) DescribeSimpleItemsByUserIdRequest {
 	return DescribeSimpleItemsByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -15534,10 +18018,34 @@ func NewGetSimpleItemRequestFromJson(data string) (GetSimpleItemRequest, error) 
 
 func NewGetSimpleItemRequestFromDict(data map[string]interface{}) GetSimpleItemRequest {
 	return GetSimpleItemRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
 	}
 }
 
@@ -15717,11 +18225,41 @@ func NewGetSimpleItemByUserIdRequestFromJson(data string) (GetSimpleItemByUserId
 
 func NewGetSimpleItemByUserIdRequestFromDict(data map[string]interface{}) GetSimpleItemByUserIdRequest {
 	return GetSimpleItemByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -15902,11 +18440,41 @@ func NewGetSimpleItemWithSignatureRequestFromJson(data string) (GetSimpleItemWit
 
 func NewGetSimpleItemWithSignatureRequestFromDict(data map[string]interface{}) GetSimpleItemWithSignatureRequest {
 	return GetSimpleItemWithSignatureRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ItemName:      core.CastString(data["itemName"]),
-		KeyId:         core.CastString(data["keyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -16111,12 +18679,48 @@ func NewGetSimpleItemWithSignatureByUserIdRequestFromJson(data string) (GetSimpl
 
 func NewGetSimpleItemWithSignatureByUserIdRequestFromDict(data map[string]interface{}) GetSimpleItemWithSignatureByUserIdRequest {
 	return GetSimpleItemWithSignatureByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		KeyId:           core.CastString(data["keyId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -16279,11 +18883,40 @@ func NewAcquireSimpleItemsByUserIdRequestFromJson(data string) (AcquireSimpleIte
 
 func NewAcquireSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) AcquireSimpleItemsByUserIdRequest {
 	return AcquireSimpleItemsByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		AcquireCounts:   CastAcquireCounts(core.CastArray(data["acquireCounts"])),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		AcquireCounts: func() []AcquireCount {
+			if data["acquireCounts"] == nil {
+				return nil
+			}
+			return CastAcquireCounts(core.CastArray(data["acquireCounts"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -16423,10 +19056,33 @@ func NewConsumeSimpleItemsRequestFromJson(data string) (ConsumeSimpleItemsReques
 
 func NewConsumeSimpleItemsRequestFromDict(data map[string]interface{}) ConsumeSimpleItemsRequest {
 	return ConsumeSimpleItemsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ConsumeCounts: CastConsumeCounts(core.CastArray(data["consumeCounts"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ConsumeCounts: func() []ConsumeCount {
+			if data["consumeCounts"] == nil {
+				return nil
+			}
+			return CastConsumeCounts(core.CastArray(data["consumeCounts"]))
+		}(),
 	}
 }
 
@@ -16589,11 +19245,40 @@ func NewConsumeSimpleItemsByUserIdRequestFromJson(data string) (ConsumeSimpleIte
 
 func NewConsumeSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) ConsumeSimpleItemsByUserIdRequest {
 	return ConsumeSimpleItemsByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ConsumeCounts:   CastConsumeCounts(core.CastArray(data["consumeCounts"])),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ConsumeCounts: func() []ConsumeCount {
+			if data["consumeCounts"] == nil {
+				return nil
+			}
+			return CastConsumeCounts(core.CastArray(data["consumeCounts"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -16757,11 +19442,40 @@ func NewSetSimpleItemsByUserIdRequestFromJson(data string) (SetSimpleItemsByUser
 
 func NewSetSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) SetSimpleItemsByUserIdRequest {
 	return SetSimpleItemsByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		Counts:          CastHeldCounts(core.CastArray(data["counts"])),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Counts: func() []HeldCount {
+			if data["counts"] == nil {
+				return nil
+			}
+			return CastHeldCounts(core.CastArray(data["counts"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -16921,10 +19635,34 @@ func NewDeleteSimpleItemsByUserIdRequestFromJson(data string) (DeleteSimpleItems
 
 func NewDeleteSimpleItemsByUserIdRequestFromDict(data map[string]interface{}) DeleteSimpleItemsByUserIdRequest {
 	return DeleteSimpleItemsByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -17113,13 +19851,55 @@ func NewVerifySimpleItemRequestFromJson(data string) (VerifySimpleItemRequest, e
 
 func NewVerifySimpleItemRequestFromDict(data map[string]interface{}) VerifySimpleItemRequest {
 	return VerifySimpleItemRequest{
-		NamespaceName:                   core.CastString(data["namespaceName"]),
-		AccessToken:                     core.CastString(data["accessToken"]),
-		InventoryName:                   core.CastString(data["inventoryName"]),
-		ItemName:                        core.CastString(data["itemName"]),
-		VerifyType:                      core.CastString(data["verifyType"]),
-		Count:                           core.CastInt64(data["count"]),
-		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
 	}
 }
 
@@ -17335,14 +20115,62 @@ func NewVerifySimpleItemByUserIdRequestFromJson(data string) (VerifySimpleItemBy
 
 func NewVerifySimpleItemByUserIdRequestFromDict(data map[string]interface{}) VerifySimpleItemByUserIdRequest {
 	return VerifySimpleItemByUserIdRequest{
-		NamespaceName:                   core.CastString(data["namespaceName"]),
-		UserId:                          core.CastString(data["userId"]),
-		InventoryName:                   core.CastString(data["inventoryName"]),
-		ItemName:                        core.CastString(data["itemName"]),
-		VerifyType:                      core.CastString(data["verifyType"]),
-		Count:                           core.CastInt64(data["count"]),
-		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
-		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -17454,8 +20282,20 @@ func NewAcquireSimpleItemsByStampSheetRequestFromJson(data string) (AcquireSimpl
 
 func NewAcquireSimpleItemsByStampSheetRequestFromDict(data map[string]interface{}) AcquireSimpleItemsByStampSheetRequest {
 	return AcquireSimpleItemsByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -17561,8 +20401,20 @@ func NewConsumeSimpleItemsByStampTaskRequestFromJson(data string) (ConsumeSimple
 
 func NewConsumeSimpleItemsByStampTaskRequestFromDict(data map[string]interface{}) ConsumeSimpleItemsByStampTaskRequest {
 	return ConsumeSimpleItemsByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -17668,8 +20520,20 @@ func NewSetSimpleItemsByStampSheetRequestFromJson(data string) (SetSimpleItemsBy
 
 func NewSetSimpleItemsByStampSheetRequestFromDict(data map[string]interface{}) SetSimpleItemsByStampSheetRequest {
 	return SetSimpleItemsByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -17775,8 +20639,20 @@ func NewVerifySimpleItemByStampTaskRequestFromJson(data string) (VerifySimpleIte
 
 func NewVerifySimpleItemByStampTaskRequestFromDict(data map[string]interface{}) VerifySimpleItemByStampTaskRequest {
 	return VerifySimpleItemByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -17934,11 +20810,41 @@ func NewDescribeBigItemsRequestFromJson(data string) (DescribeBigItemsRequest, e
 
 func NewDescribeBigItemsRequestFromDict(data map[string]interface{}) DescribeBigItemsRequest {
 	return DescribeBigItemsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -18123,12 +21029,48 @@ func NewDescribeBigItemsByUserIdRequestFromJson(data string) (DescribeBigItemsBy
 
 func NewDescribeBigItemsByUserIdRequestFromDict(data map[string]interface{}) DescribeBigItemsByUserIdRequest {
 	return DescribeBigItemsByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -18286,10 +21228,34 @@ func NewGetBigItemRequestFromJson(data string) (GetBigItemRequest, error) {
 
 func NewGetBigItemRequestFromDict(data map[string]interface{}) GetBigItemRequest {
 	return GetBigItemRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ItemName:      core.CastString(data["itemName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
 	}
 }
 
@@ -18469,11 +21435,41 @@ func NewGetBigItemByUserIdRequestFromJson(data string) (GetBigItemByUserIdReques
 
 func NewGetBigItemByUserIdRequestFromDict(data map[string]interface{}) GetBigItemByUserIdRequest {
 	return GetBigItemByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -18679,12 +21675,48 @@ func NewAcquireBigItemByUserIdRequestFromJson(data string) (AcquireBigItemByUser
 
 func NewAcquireBigItemByUserIdRequestFromDict(data map[string]interface{}) AcquireBigItemByUserIdRequest {
 	return AcquireBigItemByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		AcquireCount:    core.CastString(data["acquireCount"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		AcquireCount: func() *string {
+			v, ok := data["acquireCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["acquireCount"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -18867,11 +21899,41 @@ func NewConsumeBigItemRequestFromJson(data string) (ConsumeBigItemRequest, error
 
 func NewConsumeBigItemRequestFromDict(data map[string]interface{}) ConsumeBigItemRequest {
 	return ConsumeBigItemRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		ItemName:      core.CastString(data["itemName"]),
-		ConsumeCount:  core.CastString(data["consumeCount"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ConsumeCount: func() *string {
+			v, ok := data["consumeCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["consumeCount"])
+		}(),
 	}
 }
 
@@ -19077,12 +22139,48 @@ func NewConsumeBigItemByUserIdRequestFromJson(data string) (ConsumeBigItemByUser
 
 func NewConsumeBigItemByUserIdRequestFromDict(data map[string]interface{}) ConsumeBigItemByUserIdRequest {
 	return ConsumeBigItemByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		ConsumeCount:    core.CastString(data["consumeCount"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		ConsumeCount: func() *string {
+			v, ok := data["consumeCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["consumeCount"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -19289,12 +22387,48 @@ func NewSetBigItemByUserIdRequestFromJson(data string) (SetBigItemByUserIdReques
 
 func NewSetBigItemByUserIdRequestFromDict(data map[string]interface{}) SetBigItemByUserIdRequest {
 	return SetBigItemByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		Count:           core.CastString(data["count"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Count: func() *string {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["count"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -19477,11 +22611,41 @@ func NewDeleteBigItemByUserIdRequestFromJson(data string) (DeleteBigItemByUserId
 
 func NewDeleteBigItemByUserIdRequestFromDict(data map[string]interface{}) DeleteBigItemByUserIdRequest {
 	return DeleteBigItemByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		InventoryName:   core.CastString(data["inventoryName"]),
-		UserId:          core.CastString(data["userId"]),
-		ItemName:        core.CastString(data["itemName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -19691,13 +22855,55 @@ func NewVerifyBigItemRequestFromJson(data string) (VerifyBigItemRequest, error) 
 
 func NewVerifyBigItemRequestFromDict(data map[string]interface{}) VerifyBigItemRequest {
 	return VerifyBigItemRequest{
-		NamespaceName:                   core.CastString(data["namespaceName"]),
-		AccessToken:                     core.CastString(data["accessToken"]),
-		InventoryName:                   core.CastString(data["inventoryName"]),
-		ItemName:                        core.CastString(data["itemName"]),
-		VerifyType:                      core.CastString(data["verifyType"]),
-		Count:                           core.CastString(data["count"]),
-		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Count: func() *string {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["count"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
 	}
 }
 
@@ -19933,14 +23139,62 @@ func NewVerifyBigItemByUserIdRequestFromJson(data string) (VerifyBigItemByUserId
 
 func NewVerifyBigItemByUserIdRequestFromDict(data map[string]interface{}) VerifyBigItemByUserIdRequest {
 	return VerifyBigItemByUserIdRequest{
-		NamespaceName:                   core.CastString(data["namespaceName"]),
-		UserId:                          core.CastString(data["userId"]),
-		InventoryName:                   core.CastString(data["inventoryName"]),
-		ItemName:                        core.CastString(data["itemName"]),
-		VerifyType:                      core.CastString(data["verifyType"]),
-		Count:                           core.CastString(data["count"]),
-		MultiplyValueSpecifyingQuantity: core.CastBool(data["multiplyValueSpecifyingQuantity"]),
-		TimeOffsetToken:                 core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Count: func() *string {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["count"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -20052,8 +23306,20 @@ func NewAcquireBigItemByStampSheetRequestFromJson(data string) (AcquireBigItemBy
 
 func NewAcquireBigItemByStampSheetRequestFromDict(data map[string]interface{}) AcquireBigItemByStampSheetRequest {
 	return AcquireBigItemByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -20159,8 +23425,20 @@ func NewConsumeBigItemByStampTaskRequestFromJson(data string) (ConsumeBigItemByS
 
 func NewConsumeBigItemByStampTaskRequestFromDict(data map[string]interface{}) ConsumeBigItemByStampTaskRequest {
 	return ConsumeBigItemByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -20266,8 +23544,20 @@ func NewSetBigItemByStampSheetRequestFromJson(data string) (SetBigItemByStampShe
 
 func NewSetBigItemByStampSheetRequestFromDict(data map[string]interface{}) SetBigItemByStampSheetRequest {
 	return SetBigItemByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -20373,8 +23663,20 @@ func NewVerifyBigItemByStampTaskRequestFromJson(data string) (VerifyBigItemBySta
 
 func NewVerifyBigItemByStampTaskRequestFromDict(data map[string]interface{}) VerifyBigItemByStampTaskRequest {
 	return VerifyBigItemByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 

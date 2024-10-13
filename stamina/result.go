@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -276,7 +317,13 @@ func NewCheckDumpUserDataByUserIdResultFromJson(data string) CheckDumpUserDataBy
 
 func NewCheckDumpUserDataByUserIdResultFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdResult {
 	return CheckDumpUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -360,8 +407,20 @@ func NewPrepareImportUserDataByUserIdResultFromJson(data string) PrepareImportUs
 
 func NewPrepareImportUserDataByUserIdResultFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdResult {
 	return PrepareImportUserDataByUserIdResult{
-		UploadToken: core.CastString(data["uploadToken"]),
-		UploadUrl:   core.CastString(data["uploadUrl"]),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -419,7 +478,13 @@ func NewCheckImportUserDataByUserIdResultFromJson(data string) CheckImportUserDa
 
 func NewCheckImportUserDataByUserIdResultFromDict(data map[string]interface{}) CheckImportUserDataByUserIdResult {
 	return CheckImportUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -451,8 +516,19 @@ func NewDescribeStaminaModelMastersResultFromJson(data string) DescribeStaminaMo
 
 func NewDescribeStaminaModelMastersResultFromDict(data map[string]interface{}) DescribeStaminaModelMastersResult {
 	return DescribeStaminaModelMastersResult{
-		Items:         CastStaminaModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []StaminaModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastStaminaModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -486,7 +562,13 @@ func NewCreateStaminaModelMasterResultFromJson(data string) CreateStaminaModelMa
 
 func NewCreateStaminaModelMasterResultFromDict(data map[string]interface{}) CreateStaminaModelMasterResult {
 	return CreateStaminaModelMasterResult{
-		Item: NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *StaminaModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -522,7 +604,13 @@ func NewGetStaminaModelMasterResultFromJson(data string) GetStaminaModelMasterRe
 
 func NewGetStaminaModelMasterResultFromDict(data map[string]interface{}) GetStaminaModelMasterResult {
 	return GetStaminaModelMasterResult{
-		Item: NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *StaminaModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -558,7 +646,13 @@ func NewUpdateStaminaModelMasterResultFromJson(data string) UpdateStaminaModelMa
 
 func NewUpdateStaminaModelMasterResultFromDict(data map[string]interface{}) UpdateStaminaModelMasterResult {
 	return UpdateStaminaModelMasterResult{
-		Item: NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *StaminaModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -594,7 +688,13 @@ func NewDeleteStaminaModelMasterResultFromJson(data string) DeleteStaminaModelMa
 
 func NewDeleteStaminaModelMasterResultFromDict(data map[string]interface{}) DeleteStaminaModelMasterResult {
 	return DeleteStaminaModelMasterResult{
-		Item: NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *StaminaModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -631,8 +731,19 @@ func NewDescribeMaxStaminaTableMastersResultFromJson(data string) DescribeMaxSta
 
 func NewDescribeMaxStaminaTableMastersResultFromDict(data map[string]interface{}) DescribeMaxStaminaTableMastersResult {
 	return DescribeMaxStaminaTableMastersResult{
-		Items:         CastMaxStaminaTableMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []MaxStaminaTableMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastMaxStaminaTableMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -666,7 +777,13 @@ func NewCreateMaxStaminaTableMasterResultFromJson(data string) CreateMaxStaminaT
 
 func NewCreateMaxStaminaTableMasterResultFromDict(data map[string]interface{}) CreateMaxStaminaTableMasterResult {
 	return CreateMaxStaminaTableMasterResult{
-		Item: NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *MaxStaminaTableMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -702,7 +819,13 @@ func NewGetMaxStaminaTableMasterResultFromJson(data string) GetMaxStaminaTableMa
 
 func NewGetMaxStaminaTableMasterResultFromDict(data map[string]interface{}) GetMaxStaminaTableMasterResult {
 	return GetMaxStaminaTableMasterResult{
-		Item: NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *MaxStaminaTableMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -738,7 +861,13 @@ func NewUpdateMaxStaminaTableMasterResultFromJson(data string) UpdateMaxStaminaT
 
 func NewUpdateMaxStaminaTableMasterResultFromDict(data map[string]interface{}) UpdateMaxStaminaTableMasterResult {
 	return UpdateMaxStaminaTableMasterResult{
-		Item: NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *MaxStaminaTableMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -774,7 +903,13 @@ func NewDeleteMaxStaminaTableMasterResultFromJson(data string) DeleteMaxStaminaT
 
 func NewDeleteMaxStaminaTableMasterResultFromDict(data map[string]interface{}) DeleteMaxStaminaTableMasterResult {
 	return DeleteMaxStaminaTableMasterResult{
-		Item: NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *MaxStaminaTableMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewMaxStaminaTableMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -811,8 +946,19 @@ func NewDescribeRecoverIntervalTableMastersResultFromJson(data string) DescribeR
 
 func NewDescribeRecoverIntervalTableMastersResultFromDict(data map[string]interface{}) DescribeRecoverIntervalTableMastersResult {
 	return DescribeRecoverIntervalTableMastersResult{
-		Items:         CastRecoverIntervalTableMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []RecoverIntervalTableMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastRecoverIntervalTableMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -846,7 +992,13 @@ func NewCreateRecoverIntervalTableMasterResultFromJson(data string) CreateRecove
 
 func NewCreateRecoverIntervalTableMasterResultFromDict(data map[string]interface{}) CreateRecoverIntervalTableMasterResult {
 	return CreateRecoverIntervalTableMasterResult{
-		Item: NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RecoverIntervalTableMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -882,7 +1034,13 @@ func NewGetRecoverIntervalTableMasterResultFromJson(data string) GetRecoverInter
 
 func NewGetRecoverIntervalTableMasterResultFromDict(data map[string]interface{}) GetRecoverIntervalTableMasterResult {
 	return GetRecoverIntervalTableMasterResult{
-		Item: NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RecoverIntervalTableMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -918,7 +1076,13 @@ func NewUpdateRecoverIntervalTableMasterResultFromJson(data string) UpdateRecove
 
 func NewUpdateRecoverIntervalTableMasterResultFromDict(data map[string]interface{}) UpdateRecoverIntervalTableMasterResult {
 	return UpdateRecoverIntervalTableMasterResult{
-		Item: NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RecoverIntervalTableMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -954,7 +1118,13 @@ func NewDeleteRecoverIntervalTableMasterResultFromJson(data string) DeleteRecove
 
 func NewDeleteRecoverIntervalTableMasterResultFromDict(data map[string]interface{}) DeleteRecoverIntervalTableMasterResult {
 	return DeleteRecoverIntervalTableMasterResult{
-		Item: NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RecoverIntervalTableMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRecoverIntervalTableMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -991,8 +1161,19 @@ func NewDescribeRecoverValueTableMastersResultFromJson(data string) DescribeReco
 
 func NewDescribeRecoverValueTableMastersResultFromDict(data map[string]interface{}) DescribeRecoverValueTableMastersResult {
 	return DescribeRecoverValueTableMastersResult{
-		Items:         CastRecoverValueTableMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []RecoverValueTableMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastRecoverValueTableMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1026,7 +1207,13 @@ func NewCreateRecoverValueTableMasterResultFromJson(data string) CreateRecoverVa
 
 func NewCreateRecoverValueTableMasterResultFromDict(data map[string]interface{}) CreateRecoverValueTableMasterResult {
 	return CreateRecoverValueTableMasterResult{
-		Item: NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RecoverValueTableMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1062,7 +1249,13 @@ func NewGetRecoverValueTableMasterResultFromJson(data string) GetRecoverValueTab
 
 func NewGetRecoverValueTableMasterResultFromDict(data map[string]interface{}) GetRecoverValueTableMasterResult {
 	return GetRecoverValueTableMasterResult{
-		Item: NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RecoverValueTableMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1098,7 +1291,13 @@ func NewUpdateRecoverValueTableMasterResultFromJson(data string) UpdateRecoverVa
 
 func NewUpdateRecoverValueTableMasterResultFromDict(data map[string]interface{}) UpdateRecoverValueTableMasterResult {
 	return UpdateRecoverValueTableMasterResult{
-		Item: NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RecoverValueTableMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1134,7 +1333,13 @@ func NewDeleteRecoverValueTableMasterResultFromJson(data string) DeleteRecoverVa
 
 func NewDeleteRecoverValueTableMasterResultFromDict(data map[string]interface{}) DeleteRecoverValueTableMasterResult {
 	return DeleteRecoverValueTableMasterResult{
-		Item: NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RecoverValueTableMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRecoverValueTableMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1170,7 +1375,13 @@ func NewExportMasterResultFromJson(data string) ExportMasterResult {
 
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
 	return ExportMasterResult{
-		Item: NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentStaminaMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1206,7 +1417,13 @@ func NewGetCurrentStaminaMasterResultFromJson(data string) GetCurrentStaminaMast
 
 func NewGetCurrentStaminaMasterResultFromDict(data map[string]interface{}) GetCurrentStaminaMasterResult {
 	return GetCurrentStaminaMasterResult{
-		Item: NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentStaminaMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1242,7 +1459,13 @@ func NewUpdateCurrentStaminaMasterResultFromJson(data string) UpdateCurrentStami
 
 func NewUpdateCurrentStaminaMasterResultFromDict(data map[string]interface{}) UpdateCurrentStaminaMasterResult {
 	return UpdateCurrentStaminaMasterResult{
-		Item: NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentStaminaMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1278,7 +1501,13 @@ func NewUpdateCurrentStaminaMasterFromGitHubResultFromJson(data string) UpdateCu
 
 func NewUpdateCurrentStaminaMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentStaminaMasterFromGitHubResult {
 	return UpdateCurrentStaminaMasterFromGitHubResult{
-		Item: NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentStaminaMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentStaminaMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1314,7 +1543,12 @@ func NewDescribeStaminaModelsResultFromJson(data string) DescribeStaminaModelsRe
 
 func NewDescribeStaminaModelsResultFromDict(data map[string]interface{}) DescribeStaminaModelsResult {
 	return DescribeStaminaModelsResult{
-		Items: CastStaminaModels(core.CastArray(data["items"])),
+		Items: func() []StaminaModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastStaminaModels(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -1347,7 +1581,13 @@ func NewGetStaminaModelResultFromJson(data string) GetStaminaModelResult {
 
 func NewGetStaminaModelResultFromDict(data map[string]interface{}) GetStaminaModelResult {
 	return GetStaminaModelResult{
-		Item: NewStaminaModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *StaminaModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1384,8 +1624,19 @@ func NewDescribeStaminasResultFromJson(data string) DescribeStaminasResult {
 
 func NewDescribeStaminasResultFromDict(data map[string]interface{}) DescribeStaminasResult {
 	return DescribeStaminasResult{
-		Items:         CastStaminas(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Stamina {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastStaminas(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1420,8 +1671,19 @@ func NewDescribeStaminasByUserIdResultFromJson(data string) DescribeStaminasByUs
 
 func NewDescribeStaminasByUserIdResultFromDict(data map[string]interface{}) DescribeStaminasByUserIdResult {
 	return DescribeStaminasByUserIdResult{
-		Items:         CastStaminas(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Stamina {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastStaminas(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1456,8 +1718,20 @@ func NewGetStaminaResultFromJson(data string) GetStaminaResult {
 
 func NewGetStaminaResultFromDict(data map[string]interface{}) GetStaminaResult {
 	return GetStaminaResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1500,8 +1774,20 @@ func NewGetStaminaByUserIdResultFromJson(data string) GetStaminaByUserIdResult {
 
 func NewGetStaminaByUserIdResultFromDict(data map[string]interface{}) GetStaminaByUserIdResult {
 	return GetStaminaByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1544,8 +1830,20 @@ func NewUpdateStaminaByUserIdResultFromJson(data string) UpdateStaminaByUserIdRe
 
 func NewUpdateStaminaByUserIdResultFromDict(data map[string]interface{}) UpdateStaminaByUserIdResult {
 	return UpdateStaminaByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1588,8 +1886,20 @@ func NewConsumeStaminaResultFromJson(data string) ConsumeStaminaResult {
 
 func NewConsumeStaminaResultFromDict(data map[string]interface{}) ConsumeStaminaResult {
 	return ConsumeStaminaResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1632,8 +1942,20 @@ func NewConsumeStaminaByUserIdResultFromJson(data string) ConsumeStaminaByUserId
 
 func NewConsumeStaminaByUserIdResultFromDict(data map[string]interface{}) ConsumeStaminaByUserIdResult {
 	return ConsumeStaminaByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1677,9 +1999,27 @@ func NewRecoverStaminaByUserIdResultFromJson(data string) RecoverStaminaByUserId
 
 func NewRecoverStaminaByUserIdResultFromDict(data map[string]interface{}) RecoverStaminaByUserIdResult {
 	return RecoverStaminaByUserIdResult{
-		Item:          NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel:  NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-		OverflowValue: core.CastInt32(data["overflowValue"]),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
+		OverflowValue: func() *int32 {
+			v, ok := data["overflowValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["overflowValue"])
+		}(),
 	}
 }
 
@@ -1723,8 +2063,20 @@ func NewRaiseMaxValueByUserIdResultFromJson(data string) RaiseMaxValueByUserIdRe
 
 func NewRaiseMaxValueByUserIdResultFromDict(data map[string]interface{}) RaiseMaxValueByUserIdResult {
 	return RaiseMaxValueByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1767,8 +2119,20 @@ func NewDecreaseMaxValueResultFromJson(data string) DecreaseMaxValueResult {
 
 func NewDecreaseMaxValueResultFromDict(data map[string]interface{}) DecreaseMaxValueResult {
 	return DecreaseMaxValueResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1811,8 +2175,20 @@ func NewDecreaseMaxValueByUserIdResultFromJson(data string) DecreaseMaxValueByUs
 
 func NewDecreaseMaxValueByUserIdResultFromDict(data map[string]interface{}) DecreaseMaxValueByUserIdResult {
 	return DecreaseMaxValueByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1856,9 +2232,27 @@ func NewSetMaxValueByUserIdResultFromJson(data string) SetMaxValueByUserIdResult
 
 func NewSetMaxValueByUserIdResultFromDict(data map[string]interface{}) SetMaxValueByUserIdResult {
 	return SetMaxValueByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:          NewStaminaFromDict(core.CastMap(data["old"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *Stamina {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1908,9 +2302,27 @@ func NewSetRecoverIntervalByUserIdResultFromJson(data string) SetRecoverInterval
 
 func NewSetRecoverIntervalByUserIdResultFromDict(data map[string]interface{}) SetRecoverIntervalByUserIdResult {
 	return SetRecoverIntervalByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:          NewStaminaFromDict(core.CastMap(data["old"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *Stamina {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -1960,9 +2372,27 @@ func NewSetRecoverValueByUserIdResultFromJson(data string) SetRecoverValueByUser
 
 func NewSetRecoverValueByUserIdResultFromDict(data map[string]interface{}) SetRecoverValueByUserIdResult {
 	return SetRecoverValueByUserIdResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:          NewStaminaFromDict(core.CastMap(data["old"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *Stamina {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2012,9 +2442,27 @@ func NewSetMaxValueByStatusResultFromJson(data string) SetMaxValueByStatusResult
 
 func NewSetMaxValueByStatusResultFromDict(data map[string]interface{}) SetMaxValueByStatusResult {
 	return SetMaxValueByStatusResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:          NewStaminaFromDict(core.CastMap(data["old"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *Stamina {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2064,9 +2512,27 @@ func NewSetRecoverIntervalByStatusResultFromJson(data string) SetRecoverInterval
 
 func NewSetRecoverIntervalByStatusResultFromDict(data map[string]interface{}) SetRecoverIntervalByStatusResult {
 	return SetRecoverIntervalByStatusResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:          NewStaminaFromDict(core.CastMap(data["old"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *Stamina {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2116,9 +2582,27 @@ func NewSetRecoverValueByStatusResultFromJson(data string) SetRecoverValueByStat
 
 func NewSetRecoverValueByStatusResultFromDict(data map[string]interface{}) SetRecoverValueByStatusResult {
 	return SetRecoverValueByStatusResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:          NewStaminaFromDict(core.CastMap(data["old"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *Stamina {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2166,7 +2650,13 @@ func NewDeleteStaminaByUserIdResultFromJson(data string) DeleteStaminaByUserIdRe
 
 func NewDeleteStaminaByUserIdResultFromDict(data map[string]interface{}) DeleteStaminaByUserIdResult {
 	return DeleteStaminaByUserIdResult{
-		Item: NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -2204,9 +2694,27 @@ func NewRecoverStaminaByStampSheetResultFromJson(data string) RecoverStaminaBySt
 
 func NewRecoverStaminaByStampSheetResultFromDict(data map[string]interface{}) RecoverStaminaByStampSheetResult {
 	return RecoverStaminaByStampSheetResult{
-		Item:          NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel:  NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-		OverflowValue: core.CastInt32(data["overflowValue"]),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
+		OverflowValue: func() *int32 {
+			v, ok := data["overflowValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["overflowValue"])
+		}(),
 	}
 }
 
@@ -2250,8 +2758,20 @@ func NewRaiseMaxValueByStampSheetResultFromJson(data string) RaiseMaxValueByStam
 
 func NewRaiseMaxValueByStampSheetResultFromDict(data map[string]interface{}) RaiseMaxValueByStampSheetResult {
 	return RaiseMaxValueByStampSheetResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2295,9 +2815,27 @@ func NewDecreaseMaxValueByStampTaskResultFromJson(data string) DecreaseMaxValueB
 
 func NewDecreaseMaxValueByStampTaskResultFromDict(data map[string]interface{}) DecreaseMaxValueByStampTaskResult {
 	return DecreaseMaxValueByStampTaskResult{
-		Item:            NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel:    NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
 	}
 }
 
@@ -2342,9 +2880,27 @@ func NewSetMaxValueByStampSheetResultFromJson(data string) SetMaxValueByStampShe
 
 func NewSetMaxValueByStampSheetResultFromDict(data map[string]interface{}) SetMaxValueByStampSheetResult {
 	return SetMaxValueByStampSheetResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:          NewStaminaFromDict(core.CastMap(data["old"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *Stamina {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2394,9 +2950,27 @@ func NewSetRecoverIntervalByStampSheetResultFromJson(data string) SetRecoverInte
 
 func NewSetRecoverIntervalByStampSheetResultFromDict(data map[string]interface{}) SetRecoverIntervalByStampSheetResult {
 	return SetRecoverIntervalByStampSheetResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:          NewStaminaFromDict(core.CastMap(data["old"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *Stamina {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2446,9 +3020,27 @@ func NewSetRecoverValueByStampSheetResultFromJson(data string) SetRecoverValueBy
 
 func NewSetRecoverValueByStampSheetResultFromDict(data map[string]interface{}) SetRecoverValueByStampSheetResult {
 	return SetRecoverValueByStampSheetResult{
-		Item:         NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:          NewStaminaFromDict(core.CastMap(data["old"])).Pointer(),
-		StaminaModel: NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *Stamina {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -2498,9 +3090,27 @@ func NewConsumeStaminaByStampTaskResultFromJson(data string) ConsumeStaminaBySta
 
 func NewConsumeStaminaByStampTaskResultFromDict(data map[string]interface{}) ConsumeStaminaByStampTaskResult {
 	return ConsumeStaminaByStampTaskResult{
-		Item:            NewStaminaFromDict(core.CastMap(data["item"])).Pointer(),
-		StaminaModel:    NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
+		Item: func() *Stamina {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		StaminaModel: func() *StaminaModel {
+			v, ok := data["staminaModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewStaminaModelFromDict(core.CastMap(data["staminaModel"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
 	}
 }
 

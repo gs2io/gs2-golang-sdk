@@ -204,27 +204,153 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:                core.CastString(data["namespaceId"]),
-		Name:                       core.CastString(data["name"]),
-		Description:                core.CastString(data["description"]),
-		FollowScript:               NewScriptSettingFromDict(core.CastMap(data["followScript"])).Pointer(),
-		UnfollowScript:             NewScriptSettingFromDict(core.CastMap(data["unfollowScript"])).Pointer(),
-		SendRequestScript:          NewScriptSettingFromDict(core.CastMap(data["sendRequestScript"])).Pointer(),
-		CancelRequestScript:        NewScriptSettingFromDict(core.CastMap(data["cancelRequestScript"])).Pointer(),
-		AcceptRequestScript:        NewScriptSettingFromDict(core.CastMap(data["acceptRequestScript"])).Pointer(),
-		RejectRequestScript:        NewScriptSettingFromDict(core.CastMap(data["rejectRequestScript"])).Pointer(),
-		DeleteFriendScript:         NewScriptSettingFromDict(core.CastMap(data["deleteFriendScript"])).Pointer(),
-		UpdateProfileScript:        NewScriptSettingFromDict(core.CastMap(data["updateProfileScript"])).Pointer(),
-		FollowNotification:         NewNotificationSettingFromDict(core.CastMap(data["followNotification"])).Pointer(),
-		ReceiveRequestNotification: NewNotificationSettingFromDict(core.CastMap(data["receiveRequestNotification"])).Pointer(),
-		CancelRequestNotification:  NewNotificationSettingFromDict(core.CastMap(data["cancelRequestNotification"])).Pointer(),
-		AcceptRequestNotification:  NewNotificationSettingFromDict(core.CastMap(data["acceptRequestNotification"])).Pointer(),
-		RejectRequestNotification:  NewNotificationSettingFromDict(core.CastMap(data["rejectRequestNotification"])).Pointer(),
-		DeleteFriendNotification:   NewNotificationSettingFromDict(core.CastMap(data["deleteFriendNotification"])).Pointer(),
-		LogSetting:                 NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:                  core.CastInt64(data["createdAt"]),
-		UpdatedAt:                  core.CastInt64(data["updatedAt"]),
-		Revision:                   core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		FollowScript: func() *ScriptSetting {
+			v, ok := data["followScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["followScript"])).Pointer()
+		}(),
+		UnfollowScript: func() *ScriptSetting {
+			v, ok := data["unfollowScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["unfollowScript"])).Pointer()
+		}(),
+		SendRequestScript: func() *ScriptSetting {
+			v, ok := data["sendRequestScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["sendRequestScript"])).Pointer()
+		}(),
+		CancelRequestScript: func() *ScriptSetting {
+			v, ok := data["cancelRequestScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["cancelRequestScript"])).Pointer()
+		}(),
+		AcceptRequestScript: func() *ScriptSetting {
+			v, ok := data["acceptRequestScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["acceptRequestScript"])).Pointer()
+		}(),
+		RejectRequestScript: func() *ScriptSetting {
+			v, ok := data["rejectRequestScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["rejectRequestScript"])).Pointer()
+		}(),
+		DeleteFriendScript: func() *ScriptSetting {
+			v, ok := data["deleteFriendScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["deleteFriendScript"])).Pointer()
+		}(),
+		UpdateProfileScript: func() *ScriptSetting {
+			v, ok := data["updateProfileScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["updateProfileScript"])).Pointer()
+		}(),
+		FollowNotification: func() *NotificationSetting {
+			v, ok := data["followNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["followNotification"])).Pointer()
+		}(),
+		ReceiveRequestNotification: func() *NotificationSetting {
+			v, ok := data["receiveRequestNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["receiveRequestNotification"])).Pointer()
+		}(),
+		CancelRequestNotification: func() *NotificationSetting {
+			v, ok := data["cancelRequestNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["cancelRequestNotification"])).Pointer()
+		}(),
+		AcceptRequestNotification: func() *NotificationSetting {
+			v, ok := data["acceptRequestNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["acceptRequestNotification"])).Pointer()
+		}(),
+		RejectRequestNotification: func() *NotificationSetting {
+			v, ok := data["rejectRequestNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["rejectRequestNotification"])).Pointer()
+		}(),
+		DeleteFriendNotification: func() *NotificationSetting {
+			v, ok := data["deleteFriendNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["deleteFriendNotification"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -603,14 +729,62 @@ func NewProfileFromJson(data string) Profile {
 
 func NewProfileFromDict(data map[string]interface{}) Profile {
 	return Profile{
-		ProfileId:       core.CastString(data["profileId"]),
-		UserId:          core.CastString(data["userId"]),
-		PublicProfile:   core.CastString(data["publicProfile"]),
-		FollowerProfile: core.CastString(data["followerProfile"]),
-		FriendProfile:   core.CastString(data["friendProfile"]),
-		CreatedAt:       core.CastInt64(data["createdAt"]),
-		UpdatedAt:       core.CastInt64(data["updatedAt"]),
-		Revision:        core.CastInt64(data["revision"]),
+		ProfileId: func() *string {
+			v, ok := data["profileId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["profileId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PublicProfile: func() *string {
+			v, ok := data["publicProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["publicProfile"])
+		}(),
+		FollowerProfile: func() *string {
+			v, ok := data["followerProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["followerProfile"])
+		}(),
+		FriendProfile: func() *string {
+			v, ok := data["friendProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["friendProfile"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -804,12 +978,48 @@ func NewFollowFromJson(data string) Follow {
 
 func NewFollowFromDict(data map[string]interface{}) Follow {
 	return Follow{
-		FollowId:      core.CastString(data["followId"]),
-		UserId:        core.CastString(data["userId"]),
-		TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
-		CreatedAt:     core.CastInt64(data["createdAt"]),
-		UpdatedAt:     core.CastInt64(data["updatedAt"]),
-		Revision:      core.CastInt64(data["revision"]),
+		FollowId: func() *string {
+			v, ok := data["followId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["followId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TargetUserIds: func() []*string {
+			v, ok := data["targetUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -995,12 +1205,48 @@ func NewFriendFromJson(data string) Friend {
 
 func NewFriendFromDict(data map[string]interface{}) Friend {
 	return Friend{
-		FriendId:      core.CastString(data["friendId"]),
-		UserId:        core.CastString(data["userId"]),
-		TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
-		CreatedAt:     core.CastInt64(data["createdAt"]),
-		UpdatedAt:     core.CastInt64(data["updatedAt"]),
-		Revision:      core.CastInt64(data["revision"]),
+		FriendId: func() *string {
+			v, ok := data["friendId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["friendId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TargetUserIds: func() []*string {
+			v, ok := data["targetUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1186,12 +1432,48 @@ func NewSendBoxFromJson(data string) SendBox {
 
 func NewSendBoxFromDict(data map[string]interface{}) SendBox {
 	return SendBox{
-		SendBoxId:     core.CastString(data["sendBoxId"]),
-		UserId:        core.CastString(data["userId"]),
-		TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
-		CreatedAt:     core.CastInt64(data["createdAt"]),
-		UpdatedAt:     core.CastInt64(data["updatedAt"]),
-		Revision:      core.CastInt64(data["revision"]),
+		SendBoxId: func() *string {
+			v, ok := data["sendBoxId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sendBoxId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TargetUserIds: func() []*string {
+			v, ok := data["targetUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1377,12 +1659,48 @@ func NewInboxFromJson(data string) Inbox {
 
 func NewInboxFromDict(data map[string]interface{}) Inbox {
 	return Inbox{
-		InboxId:     core.CastString(data["inboxId"]),
-		UserId:      core.CastString(data["userId"]),
-		FromUserIds: core.CastStrings(core.CastArray(data["fromUserIds"])),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-		Revision:    core.CastInt64(data["revision"]),
+		InboxId: func() *string {
+			v, ok := data["inboxId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inboxId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		FromUserIds: func() []*string {
+			v, ok := data["fromUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1568,12 +1886,48 @@ func NewBlackListFromJson(data string) BlackList {
 
 func NewBlackListFromDict(data map[string]interface{}) BlackList {
 	return BlackList{
-		BlackListId:   core.CastString(data["blackListId"]),
-		UserId:        core.CastString(data["userId"]),
-		TargetUserIds: core.CastStrings(core.CastArray(data["targetUserIds"])),
-		CreatedAt:     core.CastInt64(data["createdAt"]),
-		UpdatedAt:     core.CastInt64(data["updatedAt"]),
-		Revision:      core.CastInt64(data["revision"]),
+		BlackListId: func() *string {
+			v, ok := data["blackListId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["blackListId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TargetUserIds: func() []*string {
+			v, ok := data["targetUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1744,9 +2098,27 @@ func NewFollowUserFromJson(data string) FollowUser {
 
 func NewFollowUserFromDict(data map[string]interface{}) FollowUser {
 	return FollowUser{
-		UserId:          core.CastString(data["userId"]),
-		PublicProfile:   core.CastString(data["publicProfile"]),
-		FollowerProfile: core.CastString(data["followerProfile"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PublicProfile: func() *string {
+			v, ok := data["publicProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["publicProfile"])
+		}(),
+		FollowerProfile: func() *string {
+			v, ok := data["followerProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["followerProfile"])
+		}(),
 	}
 }
 
@@ -1900,9 +2272,27 @@ func NewFriendUserFromJson(data string) FriendUser {
 
 func NewFriendUserFromDict(data map[string]interface{}) FriendUser {
 	return FriendUser{
-		UserId:        core.CastString(data["userId"]),
-		PublicProfile: core.CastString(data["publicProfile"]),
-		FriendProfile: core.CastString(data["friendProfile"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PublicProfile: func() *string {
+			v, ok := data["publicProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["publicProfile"])
+		}(),
+		FriendProfile: func() *string {
+			v, ok := data["friendProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["friendProfile"])
+		}(),
 	}
 }
 
@@ -2032,8 +2422,20 @@ func NewFriendRequestFromJson(data string) FriendRequest {
 
 func NewFriendRequestFromDict(data map[string]interface{}) FriendRequest {
 	return FriendRequest{
-		UserId:       core.CastString(data["userId"]),
-		TargetUserId: core.CastString(data["targetUserId"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TargetUserId: func() *string {
+			v, ok := data["targetUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetUserId"])
+		}(),
 	}
 }
 
@@ -2158,8 +2560,20 @@ func NewSendFriendRequestFromJson(data string) SendFriendRequest {
 
 func NewSendFriendRequestFromDict(data map[string]interface{}) SendFriendRequest {
 	return SendFriendRequest{
-		UserId:       core.CastString(data["userId"]),
-		TargetUserId: core.CastString(data["targetUserId"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TargetUserId: func() *string {
+			v, ok := data["targetUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetUserId"])
+		}(),
 	}
 }
 
@@ -2284,8 +2698,20 @@ func NewReceiveFriendRequestFromJson(data string) ReceiveFriendRequest {
 
 func NewReceiveFriendRequestFromDict(data map[string]interface{}) ReceiveFriendRequest {
 	return ReceiveFriendRequest{
-		UserId:       core.CastString(data["userId"]),
-		TargetUserId: core.CastString(data["targetUserId"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TargetUserId: func() *string {
+			v, ok := data["targetUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["targetUserId"])
+		}(),
 	}
 }
 
@@ -2410,8 +2836,20 @@ func NewPublicProfileFromJson(data string) PublicProfile {
 
 func NewPublicProfileFromDict(data map[string]interface{}) PublicProfile {
 	return PublicProfile{
-		UserId:        core.CastString(data["userId"]),
-		PublicProfile: core.CastString(data["publicProfile"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PublicProfile: func() *string {
+			v, ok := data["publicProfile"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["publicProfile"])
+		}(),
 	}
 }
 
@@ -2584,10 +3022,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 
@@ -2726,9 +3188,27 @@ func NewNotificationSettingFromJson(data string) NotificationSetting {
 
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
 	return NotificationSetting{
-		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
-		EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
-		Sound:                            core.CastString(data["sound"]),
+		GatewayNamespaceId: func() *string {
+			v, ok := data["gatewayNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatewayNamespaceId"])
+		}(),
+		EnableTransferMobileNotification: func() *bool {
+			v, ok := data["enableTransferMobileNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableTransferMobileNotification"])
+		}(),
+		Sound: func() *string {
+			v, ok := data["sound"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sound"])
+		}(),
 	}
 }
 
@@ -2834,7 +3314,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 

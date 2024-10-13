@@ -148,13 +148,55 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		LogSetting:  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-		Revision:    core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -524,25 +566,139 @@ func NewEventMasterFromJson(data string) EventMaster {
 
 func NewEventMasterFromDict(data map[string]interface{}) EventMaster {
 	return EventMaster{
-		EventId:               core.CastString(data["eventId"]),
-		Name:                  core.CastString(data["name"]),
-		Description:           core.CastString(data["description"]),
-		Metadata:              core.CastString(data["metadata"]),
-		ScheduleType:          core.CastString(data["scheduleType"]),
-		AbsoluteBegin:         core.CastInt64(data["absoluteBegin"]),
-		AbsoluteEnd:           core.CastInt64(data["absoluteEnd"]),
-		RelativeTriggerName:   core.CastString(data["relativeTriggerName"]),
-		RepeatSetting:         NewRepeatSettingFromDict(core.CastMap(data["repeatSetting"])).Pointer(),
-		CreatedAt:             core.CastInt64(data["createdAt"]),
-		UpdatedAt:             core.CastInt64(data["updatedAt"]),
-		Revision:              core.CastInt64(data["revision"]),
-		RepeatType:            core.CastString(data["repeatType"]),
-		RepeatBeginDayOfMonth: core.CastInt32(data["repeatBeginDayOfMonth"]),
-		RepeatEndDayOfMonth:   core.CastInt32(data["repeatEndDayOfMonth"]),
-		RepeatBeginDayOfWeek:  core.CastString(data["repeatBeginDayOfWeek"]),
-		RepeatEndDayOfWeek:    core.CastString(data["repeatEndDayOfWeek"]),
-		RepeatBeginHour:       core.CastInt32(data["repeatBeginHour"]),
-		RepeatEndHour:         core.CastInt32(data["repeatEndHour"]),
+		EventId: func() *string {
+			v, ok := data["eventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		ScheduleType: func() *string {
+			v, ok := data["scheduleType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scheduleType"])
+		}(),
+		AbsoluteBegin: func() *int64 {
+			v, ok := data["absoluteBegin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["absoluteBegin"])
+		}(),
+		AbsoluteEnd: func() *int64 {
+			v, ok := data["absoluteEnd"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["absoluteEnd"])
+		}(),
+		RelativeTriggerName: func() *string {
+			v, ok := data["relativeTriggerName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["relativeTriggerName"])
+		}(),
+		RepeatSetting: func() *RepeatSetting {
+			v, ok := data["repeatSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRepeatSettingFromDict(core.CastMap(data["repeatSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
+		RepeatType: func() *string {
+			v, ok := data["repeatType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repeatType"])
+		}(),
+		RepeatBeginDayOfMonth: func() *int32 {
+			v, ok := data["repeatBeginDayOfMonth"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["repeatBeginDayOfMonth"])
+		}(),
+		RepeatEndDayOfMonth: func() *int32 {
+			v, ok := data["repeatEndDayOfMonth"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["repeatEndDayOfMonth"])
+		}(),
+		RepeatBeginDayOfWeek: func() *string {
+			v, ok := data["repeatBeginDayOfWeek"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repeatBeginDayOfWeek"])
+		}(),
+		RepeatEndDayOfWeek: func() *string {
+			v, ok := data["repeatEndDayOfWeek"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repeatEndDayOfWeek"])
+		}(),
+		RepeatBeginHour: func() *int32 {
+			v, ok := data["repeatBeginHour"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["repeatBeginHour"])
+		}(),
+		RepeatEndHour: func() *int32 {
+			v, ok := data["repeatEndHour"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["repeatEndHour"])
+		}(),
 	}
 }
 
@@ -793,12 +949,48 @@ func NewTriggerFromJson(data string) Trigger {
 
 func NewTriggerFromDict(data map[string]interface{}) Trigger {
 	return Trigger{
-		TriggerId: core.CastString(data["triggerId"]),
-		Name:      core.CastString(data["name"]),
-		UserId:    core.CastString(data["userId"]),
-		CreatedAt: core.CastInt64(data["createdAt"]),
-		ExpiresAt: core.CastInt64(data["expiresAt"]),
-		Revision:  core.CastInt64(data["revision"]),
+		TriggerId: func() *string {
+			v, ok := data["triggerId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		ExpiresAt: func() *int64 {
+			v, ok := data["expiresAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expiresAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1122,21 +1314,111 @@ func NewEventFromJson(data string) Event {
 
 func NewEventFromDict(data map[string]interface{}) Event {
 	return Event{
-		EventId:               core.CastString(data["eventId"]),
-		Name:                  core.CastString(data["name"]),
-		Metadata:              core.CastString(data["metadata"]),
-		ScheduleType:          core.CastString(data["scheduleType"]),
-		AbsoluteBegin:         core.CastInt64(data["absoluteBegin"]),
-		AbsoluteEnd:           core.CastInt64(data["absoluteEnd"]),
-		RelativeTriggerName:   core.CastString(data["relativeTriggerName"]),
-		RepeatSetting:         NewRepeatSettingFromDict(core.CastMap(data["repeatSetting"])).Pointer(),
-		RepeatType:            core.CastString(data["repeatType"]),
-		RepeatBeginDayOfMonth: core.CastInt32(data["repeatBeginDayOfMonth"]),
-		RepeatEndDayOfMonth:   core.CastInt32(data["repeatEndDayOfMonth"]),
-		RepeatBeginDayOfWeek:  core.CastString(data["repeatBeginDayOfWeek"]),
-		RepeatEndDayOfWeek:    core.CastString(data["repeatEndDayOfWeek"]),
-		RepeatBeginHour:       core.CastInt32(data["repeatBeginHour"]),
-		RepeatEndHour:         core.CastInt32(data["repeatEndHour"]),
+		EventId: func() *string {
+			v, ok := data["eventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		ScheduleType: func() *string {
+			v, ok := data["scheduleType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scheduleType"])
+		}(),
+		AbsoluteBegin: func() *int64 {
+			v, ok := data["absoluteBegin"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["absoluteBegin"])
+		}(),
+		AbsoluteEnd: func() *int64 {
+			v, ok := data["absoluteEnd"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["absoluteEnd"])
+		}(),
+		RelativeTriggerName: func() *string {
+			v, ok := data["relativeTriggerName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["relativeTriggerName"])
+		}(),
+		RepeatSetting: func() *RepeatSetting {
+			v, ok := data["repeatSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRepeatSettingFromDict(core.CastMap(data["repeatSetting"])).Pointer()
+		}(),
+		RepeatType: func() *string {
+			v, ok := data["repeatType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repeatType"])
+		}(),
+		RepeatBeginDayOfMonth: func() *int32 {
+			v, ok := data["repeatBeginDayOfMonth"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["repeatBeginDayOfMonth"])
+		}(),
+		RepeatEndDayOfMonth: func() *int32 {
+			v, ok := data["repeatEndDayOfMonth"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["repeatEndDayOfMonth"])
+		}(),
+		RepeatBeginDayOfWeek: func() *string {
+			v, ok := data["repeatBeginDayOfWeek"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repeatBeginDayOfWeek"])
+		}(),
+		RepeatEndDayOfWeek: func() *string {
+			v, ok := data["repeatEndDayOfWeek"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repeatEndDayOfWeek"])
+		}(),
+		RepeatBeginHour: func() *int32 {
+			v, ok := data["repeatBeginHour"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["repeatBeginHour"])
+		}(),
+		RepeatEndHour: func() *int32 {
+			v, ok := data["repeatEndHour"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["repeatEndHour"])
+		}(),
 	}
 }
 
@@ -1383,16 +1665,76 @@ func NewRepeatSettingFromJson(data string) RepeatSetting {
 
 func NewRepeatSettingFromDict(data map[string]interface{}) RepeatSetting {
 	return RepeatSetting{
-		RepeatType:      core.CastString(data["repeatType"]),
-		BeginDayOfMonth: core.CastInt32(data["beginDayOfMonth"]),
-		EndDayOfMonth:   core.CastInt32(data["endDayOfMonth"]),
-		BeginDayOfWeek:  core.CastString(data["beginDayOfWeek"]),
-		EndDayOfWeek:    core.CastString(data["endDayOfWeek"]),
-		BeginHour:       core.CastInt32(data["beginHour"]),
-		EndHour:         core.CastInt32(data["endHour"]),
-		AnchorTimestamp: core.CastInt64(data["anchorTimestamp"]),
-		ActiveDays:      core.CastInt32(data["activeDays"]),
-		InactiveDays:    core.CastInt32(data["inactiveDays"]),
+		RepeatType: func() *string {
+			v, ok := data["repeatType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repeatType"])
+		}(),
+		BeginDayOfMonth: func() *int32 {
+			v, ok := data["beginDayOfMonth"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["beginDayOfMonth"])
+		}(),
+		EndDayOfMonth: func() *int32 {
+			v, ok := data["endDayOfMonth"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["endDayOfMonth"])
+		}(),
+		BeginDayOfWeek: func() *string {
+			v, ok := data["beginDayOfWeek"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["beginDayOfWeek"])
+		}(),
+		EndDayOfWeek: func() *string {
+			v, ok := data["endDayOfWeek"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["endDayOfWeek"])
+		}(),
+		BeginHour: func() *int32 {
+			v, ok := data["beginHour"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["beginHour"])
+		}(),
+		EndHour: func() *int32 {
+			v, ok := data["endHour"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["endHour"])
+		}(),
+		AnchorTimestamp: func() *int64 {
+			v, ok := data["anchorTimestamp"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["anchorTimestamp"])
+		}(),
+		ActiveDays: func() *int32 {
+			v, ok := data["activeDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["activeDays"])
+		}(),
+		InactiveDays: func() *int32 {
+			v, ok := data["inactiveDays"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["inactiveDays"])
+		}(),
 	}
 }
 
@@ -1529,11 +1871,41 @@ func NewRepeatScheduleFromJson(data string) RepeatSchedule {
 
 func NewRepeatScheduleFromDict(data map[string]interface{}) RepeatSchedule {
 	return RepeatSchedule{
-		RepeatCount:          core.CastInt32(data["repeatCount"]),
-		CurrentRepeatStartAt: core.CastInt64(data["currentRepeatStartAt"]),
-		CurrentRepeatEndAt:   core.CastInt64(data["currentRepeatEndAt"]),
-		LastRepeatEndAt:      core.CastInt64(data["lastRepeatEndAt"]),
-		NextRepeatStartAt:    core.CastInt64(data["nextRepeatStartAt"]),
+		RepeatCount: func() *int32 {
+			v, ok := data["repeatCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["repeatCount"])
+		}(),
+		CurrentRepeatStartAt: func() *int64 {
+			v, ok := data["currentRepeatStartAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["currentRepeatStartAt"])
+		}(),
+		CurrentRepeatEndAt: func() *int64 {
+			v, ok := data["currentRepeatEndAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["currentRepeatEndAt"])
+		}(),
+		LastRepeatEndAt: func() *int64 {
+			v, ok := data["lastRepeatEndAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["lastRepeatEndAt"])
+		}(),
+		NextRepeatStartAt: func() *int64 {
+			v, ok := data["nextRepeatStartAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["nextRepeatStartAt"])
+		}(),
 	}
 }
 
@@ -1673,8 +2045,20 @@ func NewCurrentEventMasterFromJson(data string) CurrentEventMaster {
 
 func NewCurrentEventMasterFromDict(data map[string]interface{}) CurrentEventMaster {
 	return CurrentEventMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -1919,13 +2303,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 
@@ -2051,7 +2477,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 

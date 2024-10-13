@@ -94,8 +94,20 @@ func NewDescribeStacksRequestFromJson(data string) (DescribeStacksRequest, error
 
 func NewDescribeStacksRequestFromDict(data map[string]interface{}) DescribeStacksRequest {
 	return DescribeStacksRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -225,9 +237,27 @@ func NewCreateStackRequestFromJson(data string) (CreateStackRequest, error) {
 
 func NewCreateStackRequestFromDict(data map[string]interface{}) CreateStackRequest {
 	return CreateStackRequest{
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		Template:    core.CastString(data["template"]),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Template: func() *string {
+			v, ok := data["template"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["template"])
+		}(),
 	}
 }
 
@@ -338,9 +368,27 @@ func NewCreateStackFromGitHubRequestFromJson(data string) (CreateStackFromGitHub
 
 func NewCreateStackFromGitHubRequestFromDict(data map[string]interface{}) CreateStackFromGitHubRequest {
 	return CreateStackFromGitHubRequest{
-		Name:            core.CastString(data["name"]),
-		Description:     core.CastString(data["description"]),
-		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		CheckoutSetting: func() *GitHubCheckoutSetting {
+			v, ok := data["checkoutSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -428,7 +476,13 @@ func NewValidateRequestFromJson(data string) (ValidateRequest, error) {
 
 func NewValidateRequestFromDict(data map[string]interface{}) ValidateRequest {
 	return ValidateRequest{
-		Template: core.CastString(data["template"]),
+		Template: func() *string {
+			v, ok := data["template"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["template"])
+		}(),
 	}
 }
 
@@ -509,7 +563,13 @@ func NewGetStackStatusRequestFromJson(data string) (GetStackStatusRequest, error
 
 func NewGetStackStatusRequestFromDict(data map[string]interface{}) GetStackStatusRequest {
 	return GetStackStatusRequest{
-		StackName: core.CastString(data["stackName"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
 	}
 }
 
@@ -590,7 +650,13 @@ func NewGetStackRequestFromJson(data string) (GetStackRequest, error) {
 
 func NewGetStackRequestFromDict(data map[string]interface{}) GetStackRequest {
 	return GetStackRequest{
-		StackName: core.CastString(data["stackName"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
 	}
 }
 
@@ -719,9 +785,27 @@ func NewUpdateStackRequestFromJson(data string) (UpdateStackRequest, error) {
 
 func NewUpdateStackRequestFromDict(data map[string]interface{}) UpdateStackRequest {
 	return UpdateStackRequest{
-		StackName:   core.CastString(data["stackName"]),
-		Description: core.CastString(data["description"]),
-		Template:    core.CastString(data["template"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Template: func() *string {
+			v, ok := data["template"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["template"])
+		}(),
 	}
 }
 
@@ -828,8 +912,20 @@ func NewChangeSetRequestFromJson(data string) (ChangeSetRequest, error) {
 
 func NewChangeSetRequestFromDict(data map[string]interface{}) ChangeSetRequest {
 	return ChangeSetRequest{
-		StackName: core.CastString(data["stackName"]),
-		Template:  core.CastString(data["template"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
+		Template: func() *string {
+			v, ok := data["template"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["template"])
+		}(),
 	}
 }
 
@@ -939,9 +1035,27 @@ func NewUpdateStackFromGitHubRequestFromJson(data string) (UpdateStackFromGitHub
 
 func NewUpdateStackFromGitHubRequestFromDict(data map[string]interface{}) UpdateStackFromGitHubRequest {
 	return UpdateStackFromGitHubRequest{
-		StackName:       core.CastString(data["stackName"]),
-		Description:     core.CastString(data["description"]),
-		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		CheckoutSetting: func() *GitHubCheckoutSetting {
+			v, ok := data["checkoutSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -1029,7 +1143,13 @@ func NewDeleteStackRequestFromJson(data string) (DeleteStackRequest, error) {
 
 func NewDeleteStackRequestFromDict(data map[string]interface{}) DeleteStackRequest {
 	return DeleteStackRequest{
-		StackName: core.CastString(data["stackName"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
 	}
 }
 
@@ -1110,7 +1230,13 @@ func NewForceDeleteStackRequestFromJson(data string) (ForceDeleteStackRequest, e
 
 func NewForceDeleteStackRequestFromDict(data map[string]interface{}) ForceDeleteStackRequest {
 	return ForceDeleteStackRequest{
-		StackName: core.CastString(data["stackName"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
 	}
 }
 
@@ -1191,7 +1317,13 @@ func NewDeleteStackResourcesRequestFromJson(data string) (DeleteStackResourcesRe
 
 func NewDeleteStackResourcesRequestFromDict(data map[string]interface{}) DeleteStackResourcesRequest {
 	return DeleteStackResourcesRequest{
-		StackName: core.CastString(data["stackName"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
 	}
 }
 
@@ -1272,7 +1404,13 @@ func NewDeleteStackEntityRequestFromJson(data string) (DeleteStackEntityRequest,
 
 func NewDeleteStackEntityRequestFromDict(data map[string]interface{}) DeleteStackEntityRequest {
 	return DeleteStackEntityRequest{
-		StackName: core.CastString(data["stackName"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
 	}
 }
 
@@ -1381,9 +1519,27 @@ func NewDescribeResourcesRequestFromJson(data string) (DescribeResourcesRequest,
 
 func NewDescribeResourcesRequestFromDict(data map[string]interface{}) DescribeResourcesRequest {
 	return DescribeResourcesRequest{
-		StackName: core.CastString(data["stackName"]),
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1490,8 +1646,20 @@ func NewGetResourceRequestFromJson(data string) (GetResourceRequest, error) {
 
 func NewGetResourceRequestFromDict(data map[string]interface{}) GetResourceRequest {
 	return GetResourceRequest{
-		StackName:    core.CastString(data["stackName"]),
-		ResourceName: core.CastString(data["resourceName"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
+		ResourceName: func() *string {
+			v, ok := data["resourceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["resourceName"])
+		}(),
 	}
 }
 
@@ -1601,9 +1769,27 @@ func NewDescribeEventsRequestFromJson(data string) (DescribeEventsRequest, error
 
 func NewDescribeEventsRequestFromDict(data map[string]interface{}) DescribeEventsRequest {
 	return DescribeEventsRequest{
-		StackName: core.CastString(data["stackName"]),
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1710,8 +1896,20 @@ func NewGetEventRequestFromJson(data string) (GetEventRequest, error) {
 
 func NewGetEventRequestFromDict(data map[string]interface{}) GetEventRequest {
 	return GetEventRequest{
-		StackName: core.CastString(data["stackName"]),
-		EventName: core.CastString(data["eventName"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
+		EventName: func() *string {
+			v, ok := data["eventName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["eventName"])
+		}(),
 	}
 }
 
@@ -1821,9 +2019,27 @@ func NewDescribeOutputsRequestFromJson(data string) (DescribeOutputsRequest, err
 
 func NewDescribeOutputsRequestFromDict(data map[string]interface{}) DescribeOutputsRequest {
 	return DescribeOutputsRequest{
-		StackName: core.CastString(data["stackName"]),
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1930,8 +2146,20 @@ func NewGetOutputRequestFromJson(data string) (GetOutputRequest, error) {
 
 func NewGetOutputRequestFromDict(data map[string]interface{}) GetOutputRequest {
 	return GetOutputRequest{
-		StackName:  core.CastString(data["stackName"]),
-		OutputName: core.CastString(data["outputName"]),
+		StackName: func() *string {
+			v, ok := data["stackName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stackName"])
+		}(),
+		OutputName: func() *string {
+			v, ok := data["outputName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["outputName"])
+		}(),
 	}
 }
 

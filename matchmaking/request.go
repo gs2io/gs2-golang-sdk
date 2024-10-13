@@ -94,8 +94,20 @@ func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesReques
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
 	return DescribeNamespacesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -453,26 +465,146 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:                              core.CastString(data["name"]),
-		Description:                       core.CastString(data["description"]),
-		EnableRating:                      core.CastBool(data["enableRating"]),
-		EnableDisconnectDetection:         core.CastString(data["enableDisconnectDetection"]),
-		DisconnectDetectionTimeoutSeconds: core.CastInt32(data["disconnectDetectionTimeoutSeconds"]),
-		CreateGatheringTriggerType:        core.CastString(data["createGatheringTriggerType"]),
-		CreateGatheringTriggerRealtimeNamespaceId:     core.CastString(data["createGatheringTriggerRealtimeNamespaceId"]),
-		CreateGatheringTriggerScriptId:                core.CastString(data["createGatheringTriggerScriptId"]),
-		CompleteMatchmakingTriggerType:                core.CastString(data["completeMatchmakingTriggerType"]),
-		CompleteMatchmakingTriggerRealtimeNamespaceId: core.CastString(data["completeMatchmakingTriggerRealtimeNamespaceId"]),
-		CompleteMatchmakingTriggerScriptId:            core.CastString(data["completeMatchmakingTriggerScriptId"]),
-		EnableCollaborateSeasonRating:                 core.CastString(data["enableCollaborateSeasonRating"]),
-		CollaborateSeasonRatingNamespaceId:            core.CastString(data["collaborateSeasonRatingNamespaceId"]),
-		CollaborateSeasonRatingTtl:                    core.CastInt32(data["collaborateSeasonRatingTtl"]),
-		ChangeRatingScript:                            NewScriptSettingFromDict(core.CastMap(data["changeRatingScript"])).Pointer(),
-		JoinNotification:                              NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer(),
-		LeaveNotification:                             NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer(),
-		CompleteNotification:                          NewNotificationSettingFromDict(core.CastMap(data["completeNotification"])).Pointer(),
-		ChangeRatingNotification:                      NewNotificationSettingFromDict(core.CastMap(data["changeRatingNotification"])).Pointer(),
-		LogSetting:                                    NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		EnableRating: func() *bool {
+			v, ok := data["enableRating"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableRating"])
+		}(),
+		EnableDisconnectDetection: func() *string {
+			v, ok := data["enableDisconnectDetection"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["enableDisconnectDetection"])
+		}(),
+		DisconnectDetectionTimeoutSeconds: func() *int32 {
+			v, ok := data["disconnectDetectionTimeoutSeconds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["disconnectDetectionTimeoutSeconds"])
+		}(),
+		CreateGatheringTriggerType: func() *string {
+			v, ok := data["createGatheringTriggerType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["createGatheringTriggerType"])
+		}(),
+		CreateGatheringTriggerRealtimeNamespaceId: func() *string {
+			v, ok := data["createGatheringTriggerRealtimeNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["createGatheringTriggerRealtimeNamespaceId"])
+		}(),
+		CreateGatheringTriggerScriptId: func() *string {
+			v, ok := data["createGatheringTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["createGatheringTriggerScriptId"])
+		}(),
+		CompleteMatchmakingTriggerType: func() *string {
+			v, ok := data["completeMatchmakingTriggerType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["completeMatchmakingTriggerType"])
+		}(),
+		CompleteMatchmakingTriggerRealtimeNamespaceId: func() *string {
+			v, ok := data["completeMatchmakingTriggerRealtimeNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["completeMatchmakingTriggerRealtimeNamespaceId"])
+		}(),
+		CompleteMatchmakingTriggerScriptId: func() *string {
+			v, ok := data["completeMatchmakingTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["completeMatchmakingTriggerScriptId"])
+		}(),
+		EnableCollaborateSeasonRating: func() *string {
+			v, ok := data["enableCollaborateSeasonRating"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["enableCollaborateSeasonRating"])
+		}(),
+		CollaborateSeasonRatingNamespaceId: func() *string {
+			v, ok := data["collaborateSeasonRatingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["collaborateSeasonRatingNamespaceId"])
+		}(),
+		CollaborateSeasonRatingTtl: func() *int32 {
+			v, ok := data["collaborateSeasonRatingTtl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["collaborateSeasonRatingTtl"])
+		}(),
+		ChangeRatingScript: func() *ScriptSetting {
+			v, ok := data["changeRatingScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["changeRatingScript"])).Pointer()
+		}(),
+		JoinNotification: func() *NotificationSetting {
+			v, ok := data["joinNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer()
+		}(),
+		LeaveNotification: func() *NotificationSetting {
+			v, ok := data["leaveNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer()
+		}(),
+		CompleteNotification: func() *NotificationSetting {
+			v, ok := data["completeNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["completeNotification"])).Pointer()
+		}(),
+		ChangeRatingNotification: func() *NotificationSetting {
+			v, ok := data["changeRatingNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["changeRatingNotification"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -602,7 +734,13 @@ func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusReques
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -683,7 +821,13 @@ func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
 	return GetNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -1040,26 +1184,146 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:                                 core.CastString(data["namespaceName"]),
-		Description:                                   core.CastString(data["description"]),
-		EnableRating:                                  core.CastBool(data["enableRating"]),
-		EnableDisconnectDetection:                     core.CastString(data["enableDisconnectDetection"]),
-		DisconnectDetectionTimeoutSeconds:             core.CastInt32(data["disconnectDetectionTimeoutSeconds"]),
-		CreateGatheringTriggerType:                    core.CastString(data["createGatheringTriggerType"]),
-		CreateGatheringTriggerRealtimeNamespaceId:     core.CastString(data["createGatheringTriggerRealtimeNamespaceId"]),
-		CreateGatheringTriggerScriptId:                core.CastString(data["createGatheringTriggerScriptId"]),
-		CompleteMatchmakingTriggerType:                core.CastString(data["completeMatchmakingTriggerType"]),
-		CompleteMatchmakingTriggerRealtimeNamespaceId: core.CastString(data["completeMatchmakingTriggerRealtimeNamespaceId"]),
-		CompleteMatchmakingTriggerScriptId:            core.CastString(data["completeMatchmakingTriggerScriptId"]),
-		EnableCollaborateSeasonRating:                 core.CastString(data["enableCollaborateSeasonRating"]),
-		CollaborateSeasonRatingNamespaceId:            core.CastString(data["collaborateSeasonRatingNamespaceId"]),
-		CollaborateSeasonRatingTtl:                    core.CastInt32(data["collaborateSeasonRatingTtl"]),
-		ChangeRatingScript:                            NewScriptSettingFromDict(core.CastMap(data["changeRatingScript"])).Pointer(),
-		JoinNotification:                              NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer(),
-		LeaveNotification:                             NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer(),
-		CompleteNotification:                          NewNotificationSettingFromDict(core.CastMap(data["completeNotification"])).Pointer(),
-		ChangeRatingNotification:                      NewNotificationSettingFromDict(core.CastMap(data["changeRatingNotification"])).Pointer(),
-		LogSetting:                                    NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		EnableRating: func() *bool {
+			v, ok := data["enableRating"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableRating"])
+		}(),
+		EnableDisconnectDetection: func() *string {
+			v, ok := data["enableDisconnectDetection"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["enableDisconnectDetection"])
+		}(),
+		DisconnectDetectionTimeoutSeconds: func() *int32 {
+			v, ok := data["disconnectDetectionTimeoutSeconds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["disconnectDetectionTimeoutSeconds"])
+		}(),
+		CreateGatheringTriggerType: func() *string {
+			v, ok := data["createGatheringTriggerType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["createGatheringTriggerType"])
+		}(),
+		CreateGatheringTriggerRealtimeNamespaceId: func() *string {
+			v, ok := data["createGatheringTriggerRealtimeNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["createGatheringTriggerRealtimeNamespaceId"])
+		}(),
+		CreateGatheringTriggerScriptId: func() *string {
+			v, ok := data["createGatheringTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["createGatheringTriggerScriptId"])
+		}(),
+		CompleteMatchmakingTriggerType: func() *string {
+			v, ok := data["completeMatchmakingTriggerType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["completeMatchmakingTriggerType"])
+		}(),
+		CompleteMatchmakingTriggerRealtimeNamespaceId: func() *string {
+			v, ok := data["completeMatchmakingTriggerRealtimeNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["completeMatchmakingTriggerRealtimeNamespaceId"])
+		}(),
+		CompleteMatchmakingTriggerScriptId: func() *string {
+			v, ok := data["completeMatchmakingTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["completeMatchmakingTriggerScriptId"])
+		}(),
+		EnableCollaborateSeasonRating: func() *string {
+			v, ok := data["enableCollaborateSeasonRating"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["enableCollaborateSeasonRating"])
+		}(),
+		CollaborateSeasonRatingNamespaceId: func() *string {
+			v, ok := data["collaborateSeasonRatingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["collaborateSeasonRatingNamespaceId"])
+		}(),
+		CollaborateSeasonRatingTtl: func() *int32 {
+			v, ok := data["collaborateSeasonRatingTtl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["collaborateSeasonRatingTtl"])
+		}(),
+		ChangeRatingScript: func() *ScriptSetting {
+			v, ok := data["changeRatingScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["changeRatingScript"])).Pointer()
+		}(),
+		JoinNotification: func() *NotificationSetting {
+			v, ok := data["joinNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["joinNotification"])).Pointer()
+		}(),
+		LeaveNotification: func() *NotificationSetting {
+			v, ok := data["leaveNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["leaveNotification"])).Pointer()
+		}(),
+		CompleteNotification: func() *NotificationSetting {
+			v, ok := data["completeNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["completeNotification"])).Pointer()
+		}(),
+		ChangeRatingNotification: func() *NotificationSetting {
+			v, ok := data["changeRatingNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["changeRatingNotification"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -1189,7 +1453,13 @@ func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, err
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -1294,8 +1564,20 @@ func NewDumpUserDataByUserIdRequestFromJson(data string) (DumpUserDataByUserIdRe
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
 	return DumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1401,8 +1683,20 @@ func NewCheckDumpUserDataByUserIdRequestFromJson(data string) (CheckDumpUserData
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
 	return CheckDumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1508,8 +1802,20 @@ func NewCleanUserDataByUserIdRequestFromJson(data string) (CleanUserDataByUserId
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
 	return CleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1615,8 +1921,20 @@ func NewCheckCleanUserDataByUserIdRequestFromJson(data string) (CheckCleanUserDa
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
 	return CheckCleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1722,8 +2040,20 @@ func NewPrepareImportUserDataByUserIdRequestFromJson(data string) (PrepareImport
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
 	return PrepareImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1853,9 +2183,27 @@ func NewImportUserDataByUserIdRequestFromJson(data string) (ImportUserDataByUser
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
 	return ImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1986,9 +2334,27 @@ func NewCheckImportUserDataByUserIdRequestFromJson(data string) (CheckImportUser
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
 	return CheckImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2099,9 +2465,27 @@ func NewDescribeGatheringsRequestFromJson(data string) (DescribeGatheringsReques
 
 func NewDescribeGatheringsRequestFromDict(data map[string]interface{}) DescribeGatheringsRequest {
 	return DescribeGatheringsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -2256,14 +2640,60 @@ func NewCreateGatheringRequestFromJson(data string) (CreateGatheringRequest, err
 
 func NewCreateGatheringRequestFromDict(data map[string]interface{}) CreateGatheringRequest {
 	return CreateGatheringRequest{
-		NamespaceName:     core.CastString(data["namespaceName"]),
-		AccessToken:       core.CastString(data["accessToken"]),
-		Player:            NewPlayerFromDict(core.CastMap(data["player"])).Pointer(),
-		AttributeRanges:   CastAttributeRanges(core.CastArray(data["attributeRanges"])),
-		CapacityOfRoles:   CastCapacityOfRoles(core.CastArray(data["capacityOfRoles"])),
-		AllowUserIds:      core.CastStrings(core.CastArray(data["allowUserIds"])),
-		ExpiresAt:         core.CastInt64(data["expiresAt"]),
-		ExpiresAtTimeSpan: NewTimeSpanFromDict(core.CastMap(data["expiresAtTimeSpan"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Player: func() *Player {
+			v, ok := data["player"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPlayerFromDict(core.CastMap(data["player"])).Pointer()
+		}(),
+		AttributeRanges: func() []AttributeRange {
+			if data["attributeRanges"] == nil {
+				return nil
+			}
+			return CastAttributeRanges(core.CastArray(data["attributeRanges"]))
+		}(),
+		CapacityOfRoles: func() []CapacityOfRole {
+			if data["capacityOfRoles"] == nil {
+				return nil
+			}
+			return CastCapacityOfRoles(core.CastArray(data["capacityOfRoles"]))
+		}(),
+		AllowUserIds: func() []*string {
+			v, ok := data["allowUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		ExpiresAt: func() *int64 {
+			v, ok := data["expiresAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expiresAt"])
+		}(),
+		ExpiresAtTimeSpan: func() *TimeSpan {
+			v, ok := data["expiresAtTimeSpan"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTimeSpanFromDict(core.CastMap(data["expiresAtTimeSpan"])).Pointer()
+		}(),
 	}
 }
 
@@ -2463,15 +2893,67 @@ func NewCreateGatheringByUserIdRequestFromJson(data string) (CreateGatheringByUs
 
 func NewCreateGatheringByUserIdRequestFromDict(data map[string]interface{}) CreateGatheringByUserIdRequest {
 	return CreateGatheringByUserIdRequest{
-		NamespaceName:     core.CastString(data["namespaceName"]),
-		UserId:            core.CastString(data["userId"]),
-		Player:            NewPlayerFromDict(core.CastMap(data["player"])).Pointer(),
-		AttributeRanges:   CastAttributeRanges(core.CastArray(data["attributeRanges"])),
-		CapacityOfRoles:   CastCapacityOfRoles(core.CastArray(data["capacityOfRoles"])),
-		AllowUserIds:      core.CastStrings(core.CastArray(data["allowUserIds"])),
-		ExpiresAt:         core.CastInt64(data["expiresAt"]),
-		ExpiresAtTimeSpan: NewTimeSpanFromDict(core.CastMap(data["expiresAtTimeSpan"])).Pointer(),
-		TimeOffsetToken:   core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Player: func() *Player {
+			v, ok := data["player"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPlayerFromDict(core.CastMap(data["player"])).Pointer()
+		}(),
+		AttributeRanges: func() []AttributeRange {
+			if data["attributeRanges"] == nil {
+				return nil
+			}
+			return CastAttributeRanges(core.CastArray(data["attributeRanges"]))
+		}(),
+		CapacityOfRoles: func() []CapacityOfRole {
+			if data["capacityOfRoles"] == nil {
+				return nil
+			}
+			return CastCapacityOfRoles(core.CastArray(data["capacityOfRoles"]))
+		}(),
+		AllowUserIds: func() []*string {
+			v, ok := data["allowUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		ExpiresAt: func() *int64 {
+			v, ok := data["expiresAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expiresAt"])
+		}(),
+		ExpiresAtTimeSpan: func() *TimeSpan {
+			v, ok := data["expiresAtTimeSpan"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTimeSpanFromDict(core.CastMap(data["expiresAtTimeSpan"])).Pointer()
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2629,10 +3111,33 @@ func NewUpdateGatheringRequestFromJson(data string) (UpdateGatheringRequest, err
 
 func NewUpdateGatheringRequestFromDict(data map[string]interface{}) UpdateGatheringRequest {
 	return UpdateGatheringRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		GatheringName:   core.CastString(data["gatheringName"]),
-		AccessToken:     core.CastString(data["accessToken"]),
-		AttributeRanges: CastAttributeRanges(core.CastArray(data["attributeRanges"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GatheringName: func() *string {
+			v, ok := data["gatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatheringName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		AttributeRanges: func() []AttributeRange {
+			if data["attributeRanges"] == nil {
+				return nil
+			}
+			return CastAttributeRanges(core.CastArray(data["attributeRanges"]))
+		}(),
 	}
 }
 
@@ -2795,11 +3300,40 @@ func NewUpdateGatheringByUserIdRequestFromJson(data string) (UpdateGatheringByUs
 
 func NewUpdateGatheringByUserIdRequestFromDict(data map[string]interface{}) UpdateGatheringByUserIdRequest {
 	return UpdateGatheringByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		GatheringName:   core.CastString(data["gatheringName"]),
-		UserId:          core.CastString(data["userId"]),
-		AttributeRanges: CastAttributeRanges(core.CastArray(data["attributeRanges"])),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GatheringName: func() *string {
+			v, ok := data["gatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatheringName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		AttributeRanges: func() []AttributeRange {
+			if data["attributeRanges"] == nil {
+				return nil
+			}
+			return CastAttributeRanges(core.CastArray(data["attributeRanges"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -2914,9 +3448,27 @@ func NewDoMatchmakingByPlayerRequestFromJson(data string) (DoMatchmakingByPlayer
 
 func NewDoMatchmakingByPlayerRequestFromDict(data map[string]interface{}) DoMatchmakingByPlayerRequest {
 	return DoMatchmakingByPlayerRequest{
-		NamespaceName:           core.CastString(data["namespaceName"]),
-		Player:                  NewPlayerFromDict(core.CastMap(data["player"])).Pointer(),
-		MatchmakingContextToken: core.CastString(data["matchmakingContextToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Player: func() *Player {
+			v, ok := data["player"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPlayerFromDict(core.CastMap(data["player"])).Pointer()
+		}(),
+		MatchmakingContextToken: func() *string {
+			v, ok := data["matchmakingContextToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["matchmakingContextToken"])
+		}(),
 	}
 }
 
@@ -3057,10 +3609,34 @@ func NewDoMatchmakingRequestFromJson(data string) (DoMatchmakingRequest, error) 
 
 func NewDoMatchmakingRequestFromDict(data map[string]interface{}) DoMatchmakingRequest {
 	return DoMatchmakingRequest{
-		NamespaceName:           core.CastString(data["namespaceName"]),
-		AccessToken:             core.CastString(data["accessToken"]),
-		Player:                  NewPlayerFromDict(core.CastMap(data["player"])).Pointer(),
-		MatchmakingContextToken: core.CastString(data["matchmakingContextToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Player: func() *Player {
+			v, ok := data["player"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPlayerFromDict(core.CastMap(data["player"])).Pointer()
+		}(),
+		MatchmakingContextToken: func() *string {
+			v, ok := data["matchmakingContextToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["matchmakingContextToken"])
+		}(),
 	}
 }
 
@@ -3226,11 +3802,41 @@ func NewDoMatchmakingByUserIdRequestFromJson(data string) (DoMatchmakingByUserId
 
 func NewDoMatchmakingByUserIdRequestFromDict(data map[string]interface{}) DoMatchmakingByUserIdRequest {
 	return DoMatchmakingByUserIdRequest{
-		NamespaceName:           core.CastString(data["namespaceName"]),
-		UserId:                  core.CastString(data["userId"]),
-		Player:                  NewPlayerFromDict(core.CastMap(data["player"])).Pointer(),
-		MatchmakingContextToken: core.CastString(data["matchmakingContextToken"]),
-		TimeOffsetToken:         core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Player: func() *Player {
+			v, ok := data["player"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPlayerFromDict(core.CastMap(data["player"])).Pointer()
+		}(),
+		MatchmakingContextToken: func() *string {
+			v, ok := data["matchmakingContextToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["matchmakingContextToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3369,9 +3975,27 @@ func NewPingRequestFromJson(data string) (PingRequest, error) {
 
 func NewPingRequestFromDict(data map[string]interface{}) PingRequest {
 	return PingRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		GatheringName: core.CastString(data["gatheringName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GatheringName: func() *string {
+			v, ok := data["gatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatheringName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -3527,10 +4151,34 @@ func NewPingByUserIdRequestFromJson(data string) (PingByUserIdRequest, error) {
 
 func NewPingByUserIdRequestFromDict(data map[string]interface{}) PingByUserIdRequest {
 	return PingByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		GatheringName:   core.CastString(data["gatheringName"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GatheringName: func() *string {
+			v, ok := data["gatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatheringName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -3638,8 +4286,20 @@ func NewGetGatheringRequestFromJson(data string) (GetGatheringRequest, error) {
 
 func NewGetGatheringRequestFromDict(data map[string]interface{}) GetGatheringRequest {
 	return GetGatheringRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		GatheringName: core.CastString(data["gatheringName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GatheringName: func() *string {
+			v, ok := data["gatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatheringName"])
+		}(),
 	}
 }
 
@@ -3770,9 +4430,27 @@ func NewCancelMatchmakingRequestFromJson(data string) (CancelMatchmakingRequest,
 
 func NewCancelMatchmakingRequestFromDict(data map[string]interface{}) CancelMatchmakingRequest {
 	return CancelMatchmakingRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		GatheringName: core.CastString(data["gatheringName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GatheringName: func() *string {
+			v, ok := data["gatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatheringName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -3928,10 +4606,34 @@ func NewCancelMatchmakingByUserIdRequestFromJson(data string) (CancelMatchmaking
 
 func NewCancelMatchmakingByUserIdRequestFromDict(data map[string]interface{}) CancelMatchmakingByUserIdRequest {
 	return CancelMatchmakingByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		GatheringName:   core.CastString(data["gatheringName"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GatheringName: func() *string {
+			v, ok := data["gatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatheringName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4064,9 +4766,27 @@ func NewEarlyCompleteRequestFromJson(data string) (EarlyCompleteRequest, error) 
 
 func NewEarlyCompleteRequestFromDict(data map[string]interface{}) EarlyCompleteRequest {
 	return EarlyCompleteRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		GatheringName: core.CastString(data["gatheringName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GatheringName: func() *string {
+			v, ok := data["gatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatheringName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
 	}
 }
 
@@ -4222,10 +4942,34 @@ func NewEarlyCompleteByUserIdRequestFromJson(data string) (EarlyCompleteByUserId
 
 func NewEarlyCompleteByUserIdRequestFromDict(data map[string]interface{}) EarlyCompleteByUserIdRequest {
 	return EarlyCompleteByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		GatheringName:   core.CastString(data["gatheringName"]),
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GatheringName: func() *string {
+			v, ok := data["gatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatheringName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4333,8 +5077,20 @@ func NewDeleteGatheringRequestFromJson(data string) (DeleteGatheringRequest, err
 
 func NewDeleteGatheringRequestFromDict(data map[string]interface{}) DeleteGatheringRequest {
 	return DeleteGatheringRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		GatheringName: core.CastString(data["gatheringName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GatheringName: func() *string {
+			v, ok := data["gatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatheringName"])
+		}(),
 	}
 }
 
@@ -4444,9 +5200,27 @@ func NewDescribeRatingModelMastersRequestFromJson(data string) (DescribeRatingMo
 
 func NewDescribeRatingModelMastersRequestFromDict(data map[string]interface{}) DescribeRatingModelMastersRequest {
 	return DescribeRatingModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -4609,12 +5383,48 @@ func NewCreateRatingModelMasterRequestFromJson(data string) (CreateRatingModelMa
 
 func NewCreateRatingModelMasterRequestFromDict(data map[string]interface{}) CreateRatingModelMasterRequest {
 	return CreateRatingModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Name:          core.CastString(data["name"]),
-		Description:   core.CastString(data["description"]),
-		Metadata:      core.CastString(data["metadata"]),
-		InitialValue:  core.CastInt32(data["initialValue"]),
-		Volatility:    core.CastInt32(data["volatility"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		InitialValue: func() *int32 {
+			v, ok := data["initialValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["initialValue"])
+		}(),
+		Volatility: func() *int32 {
+			v, ok := data["volatility"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["volatility"])
+		}(),
 	}
 }
 
@@ -4724,8 +5534,20 @@ func NewGetRatingModelMasterRequestFromJson(data string) (GetRatingModelMasterRe
 
 func NewGetRatingModelMasterRequestFromDict(data map[string]interface{}) GetRatingModelMasterRequest {
 	return GetRatingModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RatingName:    core.CastString(data["ratingName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RatingName: func() *string {
+			v, ok := data["ratingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ratingName"])
+		}(),
 	}
 }
 
@@ -4887,12 +5709,48 @@ func NewUpdateRatingModelMasterRequestFromJson(data string) (UpdateRatingModelMa
 
 func NewUpdateRatingModelMasterRequestFromDict(data map[string]interface{}) UpdateRatingModelMasterRequest {
 	return UpdateRatingModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RatingName:    core.CastString(data["ratingName"]),
-		Description:   core.CastString(data["description"]),
-		Metadata:      core.CastString(data["metadata"]),
-		InitialValue:  core.CastInt32(data["initialValue"]),
-		Volatility:    core.CastInt32(data["volatility"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RatingName: func() *string {
+			v, ok := data["ratingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ratingName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		InitialValue: func() *int32 {
+			v, ok := data["initialValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["initialValue"])
+		}(),
+		Volatility: func() *int32 {
+			v, ok := data["volatility"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["volatility"])
+		}(),
 	}
 }
 
@@ -5002,8 +5860,20 @@ func NewDeleteRatingModelMasterRequestFromJson(data string) (DeleteRatingModelMa
 
 func NewDeleteRatingModelMasterRequestFromDict(data map[string]interface{}) DeleteRatingModelMasterRequest {
 	return DeleteRatingModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RatingName:    core.CastString(data["ratingName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RatingName: func() *string {
+			v, ok := data["ratingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ratingName"])
+		}(),
 	}
 }
 
@@ -5085,7 +5955,13 @@ func NewDescribeRatingModelsRequestFromJson(data string) (DescribeRatingModelsRe
 
 func NewDescribeRatingModelsRequestFromDict(data map[string]interface{}) DescribeRatingModelsRequest {
 	return DescribeRatingModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -5190,8 +6066,20 @@ func NewGetRatingModelRequestFromJson(data string) (GetRatingModelRequest, error
 
 func NewGetRatingModelRequestFromDict(data map[string]interface{}) GetRatingModelRequest {
 	return GetRatingModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RatingName:    core.CastString(data["ratingName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RatingName: func() *string {
+			v, ok := data["ratingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ratingName"])
+		}(),
 	}
 }
 
@@ -5273,7 +6161,13 @@ func NewExportMasterRequestFromJson(data string) (ExportMasterRequest, error) {
 
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -5354,7 +6248,13 @@ func NewGetCurrentModelMasterRequestFromJson(data string) (GetCurrentModelMaster
 
 func NewGetCurrentModelMasterRequestFromDict(data map[string]interface{}) GetCurrentModelMasterRequest {
 	return GetCurrentModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -5459,8 +6359,20 @@ func NewUpdateCurrentModelMasterRequestFromJson(data string) (UpdateCurrentModel
 
 func NewUpdateCurrentModelMasterRequestFromDict(data map[string]interface{}) UpdateCurrentModelMasterRequest {
 	return UpdateCurrentModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Settings:      core.CastString(data["settings"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -5546,8 +6458,20 @@ func NewUpdateCurrentModelMasterFromGitHubRequestFromJson(data string) (UpdateCu
 
 func NewUpdateCurrentModelMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentModelMasterFromGitHubRequest {
 	return UpdateCurrentModelMasterFromGitHubRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		CheckoutSetting: func() *GitHubCheckoutSetting {
+			v, ok := data["checkoutSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -5634,7 +6558,13 @@ func NewDescribeSeasonModelsRequestFromJson(data string) (DescribeSeasonModelsRe
 
 func NewDescribeSeasonModelsRequestFromDict(data map[string]interface{}) DescribeSeasonModelsRequest {
 	return DescribeSeasonModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -5739,8 +6669,20 @@ func NewGetSeasonModelRequestFromJson(data string) (GetSeasonModelRequest, error
 
 func NewGetSeasonModelRequestFromDict(data map[string]interface{}) GetSeasonModelRequest {
 	return GetSeasonModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		SeasonName:    core.CastString(data["seasonName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
 	}
 }
 
@@ -5850,9 +6792,27 @@ func NewDescribeSeasonModelMastersRequestFromJson(data string) (DescribeSeasonMo
 
 func NewDescribeSeasonModelMastersRequestFromDict(data map[string]interface{}) DescribeSeasonModelMastersRequest {
 	return DescribeSeasonModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -6059,13 +7019,55 @@ func NewCreateSeasonModelMasterRequestFromJson(data string) (CreateSeasonModelMa
 
 func NewCreateSeasonModelMasterRequestFromDict(data map[string]interface{}) CreateSeasonModelMasterRequest {
 	return CreateSeasonModelMasterRequest{
-		NamespaceName:          core.CastString(data["namespaceName"]),
-		Name:                   core.CastString(data["name"]),
-		Description:            core.CastString(data["description"]),
-		Metadata:               core.CastString(data["metadata"]),
-		MaximumParticipants:    core.CastInt32(data["maximumParticipants"]),
-		ExperienceModelId:      core.CastString(data["experienceModelId"]),
-		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		MaximumParticipants: func() *int32 {
+			v, ok := data["maximumParticipants"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maximumParticipants"])
+		}(),
+		ExperienceModelId: func() *string {
+			v, ok := data["experienceModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceModelId"])
+		}(),
+		ChallengePeriodEventId: func() *string {
+			v, ok := data["challengePeriodEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["challengePeriodEventId"])
+		}(),
 	}
 }
 
@@ -6176,8 +7178,20 @@ func NewGetSeasonModelMasterRequestFromJson(data string) (GetSeasonModelMasterRe
 
 func NewGetSeasonModelMasterRequestFromDict(data map[string]interface{}) GetSeasonModelMasterRequest {
 	return GetSeasonModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		SeasonName:    core.CastString(data["seasonName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
 	}
 }
 
@@ -6383,13 +7397,55 @@ func NewUpdateSeasonModelMasterRequestFromJson(data string) (UpdateSeasonModelMa
 
 func NewUpdateSeasonModelMasterRequestFromDict(data map[string]interface{}) UpdateSeasonModelMasterRequest {
 	return UpdateSeasonModelMasterRequest{
-		NamespaceName:          core.CastString(data["namespaceName"]),
-		SeasonName:             core.CastString(data["seasonName"]),
-		Description:            core.CastString(data["description"]),
-		Metadata:               core.CastString(data["metadata"]),
-		MaximumParticipants:    core.CastInt32(data["maximumParticipants"]),
-		ExperienceModelId:      core.CastString(data["experienceModelId"]),
-		ChallengePeriodEventId: core.CastString(data["challengePeriodEventId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		MaximumParticipants: func() *int32 {
+			v, ok := data["maximumParticipants"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maximumParticipants"])
+		}(),
+		ExperienceModelId: func() *string {
+			v, ok := data["experienceModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["experienceModelId"])
+		}(),
+		ChallengePeriodEventId: func() *string {
+			v, ok := data["challengePeriodEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["challengePeriodEventId"])
+		}(),
 	}
 }
 
@@ -6500,8 +7556,20 @@ func NewDeleteSeasonModelMasterRequestFromJson(data string) (DeleteSeasonModelMa
 
 func NewDeleteSeasonModelMasterRequestFromDict(data map[string]interface{}) DeleteSeasonModelMasterRequest {
 	return DeleteSeasonModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		SeasonName:    core.CastString(data["seasonName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
 	}
 }
 
@@ -6643,12 +7711,48 @@ func NewDescribeSeasonGatheringsRequestFromJson(data string) (DescribeSeasonGath
 
 func NewDescribeSeasonGatheringsRequestFromDict(data map[string]interface{}) DescribeSeasonGatheringsRequest {
 	return DescribeSeasonGatheringsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		SeasonName:    core.CastString(data["seasonName"]),
-		Season:        core.CastInt64(data["season"]),
-		Tier:          core.CastInt64(data["tier"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
+		Tier: func() *int64 {
+			v, ok := data["tier"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["tier"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -6794,12 +7898,48 @@ func NewDescribeMatchmakingSeasonGatheringsRequestFromJson(data string) (Describ
 
 func NewDescribeMatchmakingSeasonGatheringsRequestFromDict(data map[string]interface{}) DescribeMatchmakingSeasonGatheringsRequest {
 	return DescribeMatchmakingSeasonGatheringsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		SeasonName:    core.CastString(data["seasonName"]),
-		Season:        core.CastInt64(data["season"]),
-		Tier:          core.CastInt64(data["tier"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
+		Tier: func() *int64 {
+			v, ok := data["tier"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["tier"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -6958,10 +8098,34 @@ func NewDoSeasonMatchmakingRequestFromJson(data string) (DoSeasonMatchmakingRequ
 
 func NewDoSeasonMatchmakingRequestFromDict(data map[string]interface{}) DoSeasonMatchmakingRequest {
 	return DoSeasonMatchmakingRequest{
-		NamespaceName:           core.CastString(data["namespaceName"]),
-		SeasonName:              core.CastString(data["seasonName"]),
-		AccessToken:             core.CastString(data["accessToken"]),
-		MatchmakingContextToken: core.CastString(data["matchmakingContextToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		MatchmakingContextToken: func() *string {
+			v, ok := data["matchmakingContextToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["matchmakingContextToken"])
+		}(),
 	}
 }
 
@@ -7142,11 +8306,41 @@ func NewDoSeasonMatchmakingByUserIdRequestFromJson(data string) (DoSeasonMatchma
 
 func NewDoSeasonMatchmakingByUserIdRequestFromDict(data map[string]interface{}) DoSeasonMatchmakingByUserIdRequest {
 	return DoSeasonMatchmakingByUserIdRequest{
-		NamespaceName:           core.CastString(data["namespaceName"]),
-		SeasonName:              core.CastString(data["seasonName"]),
-		UserId:                  core.CastString(data["userId"]),
-		MatchmakingContextToken: core.CastString(data["matchmakingContextToken"]),
-		TimeOffsetToken:         core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MatchmakingContextToken: func() *string {
+			v, ok := data["matchmakingContextToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["matchmakingContextToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -7287,11 +8481,41 @@ func NewGetSeasonGatheringRequestFromJson(data string) (GetSeasonGatheringReques
 
 func NewGetSeasonGatheringRequestFromDict(data map[string]interface{}) GetSeasonGatheringRequest {
 	return GetSeasonGatheringRequest{
-		NamespaceName:       core.CastString(data["namespaceName"]),
-		SeasonName:          core.CastString(data["seasonName"]),
-		Season:              core.CastInt64(data["season"]),
-		Tier:                core.CastInt64(data["tier"]),
-		SeasonGatheringName: core.CastString(data["seasonGatheringName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
+		Tier: func() *int64 {
+			v, ok := data["tier"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["tier"])
+		}(),
+		SeasonGatheringName: func() *string {
+			v, ok := data["seasonGatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonGatheringName"])
+		}(),
 	}
 }
 
@@ -7481,13 +8705,55 @@ func NewVerifyIncludeParticipantRequestFromJson(data string) (VerifyIncludeParti
 
 func NewVerifyIncludeParticipantRequestFromDict(data map[string]interface{}) VerifyIncludeParticipantRequest {
 	return VerifyIncludeParticipantRequest{
-		NamespaceName:       core.CastString(data["namespaceName"]),
-		SeasonName:          core.CastString(data["seasonName"]),
-		Season:              core.CastInt64(data["season"]),
-		Tier:                core.CastInt64(data["tier"]),
-		SeasonGatheringName: core.CastString(data["seasonGatheringName"]),
-		AccessToken:         core.CastString(data["accessToken"]),
-		VerifyType:          core.CastString(data["verifyType"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
+		Tier: func() *int64 {
+			v, ok := data["tier"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["tier"])
+		}(),
+		SeasonGatheringName: func() *string {
+			v, ok := data["seasonGatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonGatheringName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
 	}
 }
 
@@ -7703,14 +8969,62 @@ func NewVerifyIncludeParticipantByUserIdRequestFromJson(data string) (VerifyIncl
 
 func NewVerifyIncludeParticipantByUserIdRequestFromDict(data map[string]interface{}) VerifyIncludeParticipantByUserIdRequest {
 	return VerifyIncludeParticipantByUserIdRequest{
-		NamespaceName:       core.CastString(data["namespaceName"]),
-		SeasonName:          core.CastString(data["seasonName"]),
-		Season:              core.CastInt64(data["season"]),
-		Tier:                core.CastInt64(data["tier"]),
-		SeasonGatheringName: core.CastString(data["seasonGatheringName"]),
-		UserId:              core.CastString(data["userId"]),
-		VerifyType:          core.CastString(data["verifyType"]),
-		TimeOffsetToken:     core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
+		Tier: func() *int64 {
+			v, ok := data["tier"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["tier"])
+		}(),
+		SeasonGatheringName: func() *string {
+			v, ok := data["seasonGatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonGatheringName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -7854,11 +9168,41 @@ func NewDeleteSeasonGatheringRequestFromJson(data string) (DeleteSeasonGathering
 
 func NewDeleteSeasonGatheringRequestFromDict(data map[string]interface{}) DeleteSeasonGatheringRequest {
 	return DeleteSeasonGatheringRequest{
-		NamespaceName:       core.CastString(data["namespaceName"]),
-		SeasonName:          core.CastString(data["seasonName"]),
-		Season:              core.CastInt64(data["season"]),
-		Tier:                core.CastInt64(data["tier"]),
-		SeasonGatheringName: core.CastString(data["seasonGatheringName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
+		Tier: func() *int64 {
+			v, ok := data["tier"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["tier"])
+		}(),
+		SeasonGatheringName: func() *string {
+			v, ok := data["seasonGatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonGatheringName"])
+		}(),
 	}
 }
 
@@ -7967,8 +9311,20 @@ func NewVerifyIncludeParticipantByStampTaskRequestFromJson(data string) (VerifyI
 
 func NewVerifyIncludeParticipantByStampTaskRequestFromDict(data map[string]interface{}) VerifyIncludeParticipantByStampTaskRequest {
 	return VerifyIncludeParticipantByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -8126,11 +9482,41 @@ func NewDescribeJoinedSeasonGatheringsRequestFromJson(data string) (DescribeJoin
 
 func NewDescribeJoinedSeasonGatheringsRequestFromDict(data map[string]interface{}) DescribeJoinedSeasonGatheringsRequest {
 	return DescribeJoinedSeasonGatheringsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		SeasonName:    core.CastString(data["seasonName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -8315,12 +9701,48 @@ func NewDescribeJoinedSeasonGatheringsByUserIdRequestFromJson(data string) (Desc
 
 func NewDescribeJoinedSeasonGatheringsByUserIdRequestFromDict(data map[string]interface{}) DescribeJoinedSeasonGatheringsByUserIdRequest {
 	return DescribeJoinedSeasonGatheringsByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		SeasonName:      core.CastString(data["seasonName"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -8458,10 +9880,34 @@ func NewGetJoinedSeasonGatheringRequestFromJson(data string) (GetJoinedSeasonGat
 
 func NewGetJoinedSeasonGatheringRequestFromDict(data map[string]interface{}) GetJoinedSeasonGatheringRequest {
 	return GetJoinedSeasonGatheringRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		SeasonName:    core.CastString(data["seasonName"]),
-		Season:        core.CastInt64(data["season"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
 	}
 }
 
@@ -8621,11 +10067,41 @@ func NewGetJoinedSeasonGatheringByUserIdRequestFromJson(data string) (GetJoinedS
 
 func NewGetJoinedSeasonGatheringByUserIdRequestFromDict(data map[string]interface{}) GetJoinedSeasonGatheringByUserIdRequest {
 	return GetJoinedSeasonGatheringByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		SeasonName:      core.CastString(data["seasonName"]),
-		Season:          core.CastInt64(data["season"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		SeasonName: func() *string {
+			v, ok := data["seasonName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["seasonName"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -8762,10 +10238,34 @@ func NewDescribeRatingsRequestFromJson(data string) (DescribeRatingsRequest, err
 
 func NewDescribeRatingsRequestFromDict(data map[string]interface{}) DescribeRatingsRequest {
 	return DescribeRatingsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -8925,11 +10425,41 @@ func NewDescribeRatingsByUserIdRequestFromJson(data string) (DescribeRatingsByUs
 
 func NewDescribeRatingsByUserIdRequestFromDict(data map[string]interface{}) DescribeRatingsByUserIdRequest {
 	return DescribeRatingsByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -9062,9 +10592,27 @@ func NewGetRatingRequestFromJson(data string) (GetRatingRequest, error) {
 
 func NewGetRatingRequestFromDict(data map[string]interface{}) GetRatingRequest {
 	return GetRatingRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		RatingName:    core.CastString(data["ratingName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		RatingName: func() *string {
+			v, ok := data["ratingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ratingName"])
+		}(),
 	}
 }
 
@@ -9219,10 +10767,34 @@ func NewGetRatingByUserIdRequestFromJson(data string) (GetRatingByUserIdRequest,
 
 func NewGetRatingByUserIdRequestFromDict(data map[string]interface{}) GetRatingByUserIdRequest {
 	return GetRatingByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		RatingName:      core.CastString(data["ratingName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		RatingName: func() *string {
+			v, ok := data["ratingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ratingName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -9334,9 +10906,26 @@ func NewPutResultRequestFromJson(data string) (PutResultRequest, error) {
 
 func NewPutResultRequestFromDict(data map[string]interface{}) PutResultRequest {
 	return PutResultRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RatingName:    core.CastString(data["ratingName"]),
-		GameResults:   CastGameResults(core.CastArray(data["gameResults"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RatingName: func() *string {
+			v, ok := data["ratingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ratingName"])
+		}(),
+		GameResults: func() []GameResult {
+			if data["gameResults"] == nil {
+				return nil
+			}
+			return CastGameResults(core.CastArray(data["gameResults"]))
+		}(),
 	}
 }
 
@@ -9494,10 +11083,34 @@ func NewDeleteRatingRequestFromJson(data string) (DeleteRatingRequest, error) {
 
 func NewDeleteRatingRequestFromDict(data map[string]interface{}) DeleteRatingRequest {
 	return DeleteRatingRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		RatingName:      core.CastString(data["ratingName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		RatingName: func() *string {
+			v, ok := data["ratingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ratingName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -9681,12 +11294,48 @@ func NewGetBallotRequestFromJson(data string) (GetBallotRequest, error) {
 
 func NewGetBallotRequestFromDict(data map[string]interface{}) GetBallotRequest {
 	return GetBallotRequest{
-		NamespaceName:  core.CastString(data["namespaceName"]),
-		RatingName:     core.CastString(data["ratingName"]),
-		GatheringName:  core.CastString(data["gatheringName"]),
-		AccessToken:    core.CastString(data["accessToken"]),
-		NumberOfPlayer: core.CastInt32(data["numberOfPlayer"]),
-		KeyId:          core.CastString(data["keyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RatingName: func() *string {
+			v, ok := data["ratingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ratingName"])
+		}(),
+		GatheringName: func() *string {
+			v, ok := data["gatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatheringName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		NumberOfPlayer: func() *int32 {
+			v, ok := data["numberOfPlayer"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["numberOfPlayer"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -9896,13 +11545,55 @@ func NewGetBallotByUserIdRequestFromJson(data string) (GetBallotByUserIdRequest,
 
 func NewGetBallotByUserIdRequestFromDict(data map[string]interface{}) GetBallotByUserIdRequest {
 	return GetBallotByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		RatingName:      core.CastString(data["ratingName"]),
-		GatheringName:   core.CastString(data["gatheringName"]),
-		UserId:          core.CastString(data["userId"]),
-		NumberOfPlayer:  core.CastInt32(data["numberOfPlayer"]),
-		KeyId:           core.CastString(data["keyId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RatingName: func() *string {
+			v, ok := data["ratingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ratingName"])
+		}(),
+		GatheringName: func() *string {
+			v, ok := data["gatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatheringName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		NumberOfPlayer: func() *int32 {
+			v, ok := data["numberOfPlayer"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["numberOfPlayer"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -10065,11 +11756,40 @@ func NewVoteRequestFromJson(data string) (VoteRequest, error) {
 
 func NewVoteRequestFromDict(data map[string]interface{}) VoteRequest {
 	return VoteRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		BallotBody:      core.CastString(data["ballotBody"]),
-		BallotSignature: core.CastString(data["ballotSignature"]),
-		GameResults:     CastGameResults(core.CastArray(data["gameResults"])),
-		KeyId:           core.CastString(data["keyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		BallotBody: func() *string {
+			v, ok := data["ballotBody"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ballotBody"])
+		}(),
+		BallotSignature: func() *string {
+			v, ok := data["ballotSignature"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ballotSignature"])
+		}(),
+		GameResults: func() []GameResult {
+			if data["gameResults"] == nil {
+				return nil
+			}
+			return CastGameResults(core.CastArray(data["gameResults"]))
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -10188,10 +11908,32 @@ func NewVoteMultipleRequestFromJson(data string) (VoteMultipleRequest, error) {
 
 func NewVoteMultipleRequestFromDict(data map[string]interface{}) VoteMultipleRequest {
 	return VoteMultipleRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		SignedBallots: CastSignedBallots(core.CastArray(data["signedBallots"])),
-		GameResults:   CastGameResults(core.CastArray(data["gameResults"])),
-		KeyId:         core.CastString(data["keyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		SignedBallots: func() []SignedBallot {
+			if data["signedBallots"] == nil {
+				return nil
+			}
+			return CastSignedBallots(core.CastArray(data["signedBallots"]))
+		}(),
+		GameResults: func() []GameResult {
+			if data["gameResults"] == nil {
+				return nil
+			}
+			return CastGameResults(core.CastArray(data["gameResults"]))
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -10327,9 +12069,27 @@ func NewCommitVoteRequestFromJson(data string) (CommitVoteRequest, error) {
 
 func NewCommitVoteRequestFromDict(data map[string]interface{}) CommitVoteRequest {
 	return CommitVoteRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		RatingName:    core.CastString(data["ratingName"]),
-		GatheringName: core.CastString(data["gatheringName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		RatingName: func() *string {
+			v, ok := data["ratingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ratingName"])
+		}(),
+		GatheringName: func() *string {
+			v, ok := data["gatheringName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatheringName"])
+		}(),
 	}
 }
 

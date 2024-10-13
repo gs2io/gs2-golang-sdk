@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -276,7 +317,13 @@ func NewCheckDumpUserDataByUserIdResultFromJson(data string) CheckDumpUserDataBy
 
 func NewCheckDumpUserDataByUserIdResultFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdResult {
 	return CheckDumpUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -360,8 +407,20 @@ func NewPrepareImportUserDataByUserIdResultFromJson(data string) PrepareImportUs
 
 func NewPrepareImportUserDataByUserIdResultFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdResult {
 	return PrepareImportUserDataByUserIdResult{
-		UploadToken: core.CastString(data["uploadToken"]),
-		UploadUrl:   core.CastString(data["uploadUrl"]),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -419,7 +478,13 @@ func NewCheckImportUserDataByUserIdResultFromJson(data string) CheckImportUserDa
 
 func NewCheckImportUserDataByUserIdResultFromDict(data map[string]interface{}) CheckImportUserDataByUserIdResult {
 	return CheckImportUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -450,7 +515,12 @@ func NewDescribeBalanceParameterModelsResultFromJson(data string) DescribeBalanc
 
 func NewDescribeBalanceParameterModelsResultFromDict(data map[string]interface{}) DescribeBalanceParameterModelsResult {
 	return DescribeBalanceParameterModelsResult{
-		Items: CastBalanceParameterModels(core.CastArray(data["items"])),
+		Items: func() []BalanceParameterModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastBalanceParameterModels(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -483,7 +553,13 @@ func NewGetBalanceParameterModelResultFromJson(data string) GetBalanceParameterM
 
 func NewGetBalanceParameterModelResultFromDict(data map[string]interface{}) GetBalanceParameterModelResult {
 	return GetBalanceParameterModelResult{
-		Item: NewBalanceParameterModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *BalanceParameterModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -520,8 +596,19 @@ func NewDescribeBalanceParameterModelMastersResultFromJson(data string) Describe
 
 func NewDescribeBalanceParameterModelMastersResultFromDict(data map[string]interface{}) DescribeBalanceParameterModelMastersResult {
 	return DescribeBalanceParameterModelMastersResult{
-		Items:         CastBalanceParameterModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []BalanceParameterModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastBalanceParameterModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -555,7 +642,13 @@ func NewCreateBalanceParameterModelMasterResultFromJson(data string) CreateBalan
 
 func NewCreateBalanceParameterModelMasterResultFromDict(data map[string]interface{}) CreateBalanceParameterModelMasterResult {
 	return CreateBalanceParameterModelMasterResult{
-		Item: NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *BalanceParameterModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -591,7 +684,13 @@ func NewGetBalanceParameterModelMasterResultFromJson(data string) GetBalancePara
 
 func NewGetBalanceParameterModelMasterResultFromDict(data map[string]interface{}) GetBalanceParameterModelMasterResult {
 	return GetBalanceParameterModelMasterResult{
-		Item: NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *BalanceParameterModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -627,7 +726,13 @@ func NewUpdateBalanceParameterModelMasterResultFromJson(data string) UpdateBalan
 
 func NewUpdateBalanceParameterModelMasterResultFromDict(data map[string]interface{}) UpdateBalanceParameterModelMasterResult {
 	return UpdateBalanceParameterModelMasterResult{
-		Item: NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *BalanceParameterModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -663,7 +768,13 @@ func NewDeleteBalanceParameterModelMasterResultFromJson(data string) DeleteBalan
 
 func NewDeleteBalanceParameterModelMasterResultFromDict(data map[string]interface{}) DeleteBalanceParameterModelMasterResult {
 	return DeleteBalanceParameterModelMasterResult{
-		Item: NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *BalanceParameterModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -699,7 +810,12 @@ func NewDescribeRarityParameterModelsResultFromJson(data string) DescribeRarityP
 
 func NewDescribeRarityParameterModelsResultFromDict(data map[string]interface{}) DescribeRarityParameterModelsResult {
 	return DescribeRarityParameterModelsResult{
-		Items: CastRarityParameterModels(core.CastArray(data["items"])),
+		Items: func() []RarityParameterModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastRarityParameterModels(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -732,7 +848,13 @@ func NewGetRarityParameterModelResultFromJson(data string) GetRarityParameterMod
 
 func NewGetRarityParameterModelResultFromDict(data map[string]interface{}) GetRarityParameterModelResult {
 	return GetRarityParameterModelResult{
-		Item: NewRarityParameterModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RarityParameterModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -769,8 +891,19 @@ func NewDescribeRarityParameterModelMastersResultFromJson(data string) DescribeR
 
 func NewDescribeRarityParameterModelMastersResultFromDict(data map[string]interface{}) DescribeRarityParameterModelMastersResult {
 	return DescribeRarityParameterModelMastersResult{
-		Items:         CastRarityParameterModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []RarityParameterModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastRarityParameterModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -804,7 +937,13 @@ func NewCreateRarityParameterModelMasterResultFromJson(data string) CreateRarity
 
 func NewCreateRarityParameterModelMasterResultFromDict(data map[string]interface{}) CreateRarityParameterModelMasterResult {
 	return CreateRarityParameterModelMasterResult{
-		Item: NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RarityParameterModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -840,7 +979,13 @@ func NewGetRarityParameterModelMasterResultFromJson(data string) GetRarityParame
 
 func NewGetRarityParameterModelMasterResultFromDict(data map[string]interface{}) GetRarityParameterModelMasterResult {
 	return GetRarityParameterModelMasterResult{
-		Item: NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RarityParameterModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -876,7 +1021,13 @@ func NewUpdateRarityParameterModelMasterResultFromJson(data string) UpdateRarity
 
 func NewUpdateRarityParameterModelMasterResultFromDict(data map[string]interface{}) UpdateRarityParameterModelMasterResult {
 	return UpdateRarityParameterModelMasterResult{
-		Item: NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RarityParameterModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -912,7 +1063,13 @@ func NewDeleteRarityParameterModelMasterResultFromJson(data string) DeleteRarity
 
 func NewDeleteRarityParameterModelMasterResultFromDict(data map[string]interface{}) DeleteRarityParameterModelMasterResult {
 	return DeleteRarityParameterModelMasterResult{
-		Item: NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RarityParameterModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -948,7 +1105,13 @@ func NewExportMasterResultFromJson(data string) ExportMasterResult {
 
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
 	return ExportMasterResult{
-		Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentParameterMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -984,7 +1147,13 @@ func NewGetCurrentParameterMasterResultFromJson(data string) GetCurrentParameter
 
 func NewGetCurrentParameterMasterResultFromDict(data map[string]interface{}) GetCurrentParameterMasterResult {
 	return GetCurrentParameterMasterResult{
-		Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentParameterMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1020,7 +1189,13 @@ func NewUpdateCurrentParameterMasterResultFromJson(data string) UpdateCurrentPar
 
 func NewUpdateCurrentParameterMasterResultFromDict(data map[string]interface{}) UpdateCurrentParameterMasterResult {
 	return UpdateCurrentParameterMasterResult{
-		Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentParameterMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1056,7 +1231,13 @@ func NewUpdateCurrentParameterMasterFromGitHubResultFromJson(data string) Update
 
 func NewUpdateCurrentParameterMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentParameterMasterFromGitHubResult {
 	return UpdateCurrentParameterMasterFromGitHubResult{
-		Item: NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentParameterMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentParameterMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1093,8 +1274,19 @@ func NewDescribeBalanceParameterStatusesResultFromJson(data string) DescribeBala
 
 func NewDescribeBalanceParameterStatusesResultFromDict(data map[string]interface{}) DescribeBalanceParameterStatusesResult {
 	return DescribeBalanceParameterStatusesResult{
-		Items:         CastBalanceParameterStatuses(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []BalanceParameterStatus {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastBalanceParameterStatuses(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1129,8 +1321,19 @@ func NewDescribeBalanceParameterStatusesByUserIdResultFromJson(data string) Desc
 
 func NewDescribeBalanceParameterStatusesByUserIdResultFromDict(data map[string]interface{}) DescribeBalanceParameterStatusesByUserIdResult {
 	return DescribeBalanceParameterStatusesByUserIdResult{
-		Items:         CastBalanceParameterStatuses(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []BalanceParameterStatus {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastBalanceParameterStatuses(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1164,7 +1367,13 @@ func NewGetBalanceParameterStatusResultFromJson(data string) GetBalanceParameter
 
 func NewGetBalanceParameterStatusResultFromDict(data map[string]interface{}) GetBalanceParameterStatusResult {
 	return GetBalanceParameterStatusResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *BalanceParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1200,7 +1409,13 @@ func NewGetBalanceParameterStatusByUserIdResultFromJson(data string) GetBalanceP
 
 func NewGetBalanceParameterStatusByUserIdResultFromDict(data map[string]interface{}) GetBalanceParameterStatusByUserIdResult {
 	return GetBalanceParameterStatusByUserIdResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *BalanceParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1236,7 +1451,13 @@ func NewDeleteBalanceParameterStatusByUserIdResultFromJson(data string) DeleteBa
 
 func NewDeleteBalanceParameterStatusByUserIdResultFromDict(data map[string]interface{}) DeleteBalanceParameterStatusByUserIdResult {
 	return DeleteBalanceParameterStatusByUserIdResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *BalanceParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1273,8 +1494,20 @@ func NewReDrawBalanceParameterStatusByUserIdResultFromJson(data string) ReDrawBa
 
 func NewReDrawBalanceParameterStatusByUserIdResultFromDict(data map[string]interface{}) ReDrawBalanceParameterStatusByUserIdResult {
 	return ReDrawBalanceParameterStatusByUserIdResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+		Item: func() *BalanceParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *BalanceParameterStatus {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
 	}
 }
 
@@ -1317,8 +1550,20 @@ func NewReDrawBalanceParameterStatusByStampSheetResultFromJson(data string) ReDr
 
 func NewReDrawBalanceParameterStatusByStampSheetResultFromDict(data map[string]interface{}) ReDrawBalanceParameterStatusByStampSheetResult {
 	return ReDrawBalanceParameterStatusByStampSheetResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+		Item: func() *BalanceParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *BalanceParameterStatus {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
 	}
 }
 
@@ -1361,8 +1606,20 @@ func NewSetBalanceParameterStatusByUserIdResultFromJson(data string) SetBalanceP
 
 func NewSetBalanceParameterStatusByUserIdResultFromDict(data map[string]interface{}) SetBalanceParameterStatusByUserIdResult {
 	return SetBalanceParameterStatusByUserIdResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+		Item: func() *BalanceParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *BalanceParameterStatus {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
 	}
 }
 
@@ -1405,8 +1662,20 @@ func NewSetBalanceParameterStatusByStampSheetResultFromJson(data string) SetBala
 
 func NewSetBalanceParameterStatusByStampSheetResultFromDict(data map[string]interface{}) SetBalanceParameterStatusByStampSheetResult {
 	return SetBalanceParameterStatusByStampSheetResult{
-		Item: NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+		Item: func() *BalanceParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *BalanceParameterStatus {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBalanceParameterStatusFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
 	}
 }
 
@@ -1449,8 +1718,19 @@ func NewDescribeRarityParameterStatusesResultFromJson(data string) DescribeRarit
 
 func NewDescribeRarityParameterStatusesResultFromDict(data map[string]interface{}) DescribeRarityParameterStatusesResult {
 	return DescribeRarityParameterStatusesResult{
-		Items:         CastRarityParameterStatuses(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []RarityParameterStatus {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastRarityParameterStatuses(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1485,8 +1765,19 @@ func NewDescribeRarityParameterStatusesByUserIdResultFromJson(data string) Descr
 
 func NewDescribeRarityParameterStatusesByUserIdResultFromDict(data map[string]interface{}) DescribeRarityParameterStatusesByUserIdResult {
 	return DescribeRarityParameterStatusesByUserIdResult{
-		Items:         CastRarityParameterStatuses(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []RarityParameterStatus {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastRarityParameterStatuses(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1520,7 +1811,13 @@ func NewGetRarityParameterStatusResultFromJson(data string) GetRarityParameterSt
 
 func NewGetRarityParameterStatusResultFromDict(data map[string]interface{}) GetRarityParameterStatusResult {
 	return GetRarityParameterStatusResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RarityParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1556,7 +1853,13 @@ func NewGetRarityParameterStatusByUserIdResultFromJson(data string) GetRarityPar
 
 func NewGetRarityParameterStatusByUserIdResultFromDict(data map[string]interface{}) GetRarityParameterStatusByUserIdResult {
 	return GetRarityParameterStatusByUserIdResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RarityParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1592,7 +1895,13 @@ func NewDeleteRarityParameterStatusByUserIdResultFromJson(data string) DeleteRar
 
 func NewDeleteRarityParameterStatusByUserIdResultFromDict(data map[string]interface{}) DeleteRarityParameterStatusByUserIdResult {
 	return DeleteRarityParameterStatusByUserIdResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RarityParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1629,8 +1938,20 @@ func NewReDrawRarityParameterStatusByUserIdResultFromJson(data string) ReDrawRar
 
 func NewReDrawRarityParameterStatusByUserIdResultFromDict(data map[string]interface{}) ReDrawRarityParameterStatusByUserIdResult {
 	return ReDrawRarityParameterStatusByUserIdResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+		Item: func() *RarityParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *RarityParameterStatus {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
 	}
 }
 
@@ -1673,8 +1994,20 @@ func NewReDrawRarityParameterStatusByStampSheetResultFromJson(data string) ReDra
 
 func NewReDrawRarityParameterStatusByStampSheetResultFromDict(data map[string]interface{}) ReDrawRarityParameterStatusByStampSheetResult {
 	return ReDrawRarityParameterStatusByStampSheetResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+		Item: func() *RarityParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *RarityParameterStatus {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
 	}
 }
 
@@ -1717,8 +2050,20 @@ func NewAddRarityParameterStatusByUserIdResultFromJson(data string) AddRarityPar
 
 func NewAddRarityParameterStatusByUserIdResultFromDict(data map[string]interface{}) AddRarityParameterStatusByUserIdResult {
 	return AddRarityParameterStatusByUserIdResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+		Item: func() *RarityParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *RarityParameterStatus {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
 	}
 }
 
@@ -1761,8 +2106,20 @@ func NewAddRarityParameterStatusByStampSheetResultFromJson(data string) AddRarit
 
 func NewAddRarityParameterStatusByStampSheetResultFromDict(data map[string]interface{}) AddRarityParameterStatusByStampSheetResult {
 	return AddRarityParameterStatusByStampSheetResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+		Item: func() *RarityParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *RarityParameterStatus {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
 	}
 }
 
@@ -1804,7 +2161,13 @@ func NewVerifyRarityParameterStatusResultFromJson(data string) VerifyRarityParam
 
 func NewVerifyRarityParameterStatusResultFromDict(data map[string]interface{}) VerifyRarityParameterStatusResult {
 	return VerifyRarityParameterStatusResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RarityParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1840,7 +2203,13 @@ func NewVerifyRarityParameterStatusByUserIdResultFromJson(data string) VerifyRar
 
 func NewVerifyRarityParameterStatusByUserIdResultFromDict(data map[string]interface{}) VerifyRarityParameterStatusByUserIdResult {
 	return VerifyRarityParameterStatusByUserIdResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *RarityParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1877,8 +2246,20 @@ func NewVerifyRarityParameterStatusByStampTaskResultFromJson(data string) Verify
 
 func NewVerifyRarityParameterStatusByStampTaskResultFromDict(data map[string]interface{}) VerifyRarityParameterStatusByStampTaskResult {
 	return VerifyRarityParameterStatusByStampTaskResult{
-		Item:            NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		NewContextStack: core.CastString(data["newContextStack"]),
+		Item: func() *RarityParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
 	}
 }
 
@@ -1916,8 +2297,20 @@ func NewSetRarityParameterStatusByUserIdResultFromJson(data string) SetRarityPar
 
 func NewSetRarityParameterStatusByUserIdResultFromDict(data map[string]interface{}) SetRarityParameterStatusByUserIdResult {
 	return SetRarityParameterStatusByUserIdResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+		Item: func() *RarityParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *RarityParameterStatus {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
 	}
 }
 
@@ -1960,8 +2353,20 @@ func NewSetRarityParameterStatusByStampSheetResultFromJson(data string) SetRarit
 
 func NewSetRarityParameterStatusByStampSheetResultFromDict(data map[string]interface{}) SetRarityParameterStatusByStampSheetResult {
 	return SetRarityParameterStatusByStampSheetResult{
-		Item: NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer(),
-		Old:  NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer(),
+		Item: func() *RarityParameterStatus {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		Old: func() *RarityParameterStatus {
+			v, ok := data["old"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewRarityParameterStatusFromDict(core.CastMap(data["old"])).Pointer()
+		}(),
 	}
 }
 

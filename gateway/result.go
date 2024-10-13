@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -276,7 +317,13 @@ func NewCheckDumpUserDataByUserIdResultFromJson(data string) CheckDumpUserDataBy
 
 func NewCheckDumpUserDataByUserIdResultFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdResult {
 	return CheckDumpUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -360,8 +407,20 @@ func NewPrepareImportUserDataByUserIdResultFromJson(data string) PrepareImportUs
 
 func NewPrepareImportUserDataByUserIdResultFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdResult {
 	return PrepareImportUserDataByUserIdResult{
-		UploadToken: core.CastString(data["uploadToken"]),
-		UploadUrl:   core.CastString(data["uploadUrl"]),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -419,7 +478,13 @@ func NewCheckImportUserDataByUserIdResultFromJson(data string) CheckImportUserDa
 
 func NewCheckImportUserDataByUserIdResultFromDict(data map[string]interface{}) CheckImportUserDataByUserIdResult {
 	return CheckImportUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -451,8 +516,19 @@ func NewDescribeWebSocketSessionsResultFromJson(data string) DescribeWebSocketSe
 
 func NewDescribeWebSocketSessionsResultFromDict(data map[string]interface{}) DescribeWebSocketSessionsResult {
 	return DescribeWebSocketSessionsResult{
-		Items:         CastWebSocketSessions(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []WebSocketSession {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastWebSocketSessions(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -487,8 +563,19 @@ func NewDescribeWebSocketSessionsByUserIdResultFromJson(data string) DescribeWeb
 
 func NewDescribeWebSocketSessionsByUserIdResultFromDict(data map[string]interface{}) DescribeWebSocketSessionsByUserIdResult {
 	return DescribeWebSocketSessionsByUserIdResult{
-		Items:         CastWebSocketSessions(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []WebSocketSession {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastWebSocketSessions(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -522,7 +609,13 @@ func NewSetUserIdResultFromJson(data string) SetUserIdResult {
 
 func NewSetUserIdResultFromDict(data map[string]interface{}) SetUserIdResult {
 	return SetUserIdResult{
-		Item: NewWebSocketSessionFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *WebSocketSession {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewWebSocketSessionFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -558,7 +651,13 @@ func NewSetUserIdByUserIdResultFromJson(data string) SetUserIdByUserIdResult {
 
 func NewSetUserIdByUserIdResultFromDict(data map[string]interface{}) SetUserIdByUserIdResult {
 	return SetUserIdByUserIdResult{
-		Item: NewWebSocketSessionFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *WebSocketSession {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewWebSocketSessionFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -594,7 +693,13 @@ func NewSendNotificationResultFromJson(data string) SendNotificationResult {
 
 func NewSendNotificationResultFromDict(data map[string]interface{}) SendNotificationResult {
 	return SendNotificationResult{
-		Protocol: core.CastString(data["protocol"]),
+		Protocol: func() *string {
+			v, ok := data["protocol"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["protocol"])
+		}(),
 	}
 }
 
@@ -625,7 +730,12 @@ func NewDisconnectByUserIdResultFromJson(data string) DisconnectByUserIdResult {
 
 func NewDisconnectByUserIdResultFromDict(data map[string]interface{}) DisconnectByUserIdResult {
 	return DisconnectByUserIdResult{
-		Items: CastWebSocketSessions(core.CastArray(data["items"])),
+		Items: func() []WebSocketSession {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastWebSocketSessions(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -684,7 +794,13 @@ func NewSetFirebaseTokenResultFromJson(data string) SetFirebaseTokenResult {
 
 func NewSetFirebaseTokenResultFromDict(data map[string]interface{}) SetFirebaseTokenResult {
 	return SetFirebaseTokenResult{
-		Item: NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FirebaseToken {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -720,7 +836,13 @@ func NewSetFirebaseTokenByUserIdResultFromJson(data string) SetFirebaseTokenByUs
 
 func NewSetFirebaseTokenByUserIdResultFromDict(data map[string]interface{}) SetFirebaseTokenByUserIdResult {
 	return SetFirebaseTokenByUserIdResult{
-		Item: NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FirebaseToken {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -756,7 +878,13 @@ func NewGetFirebaseTokenResultFromJson(data string) GetFirebaseTokenResult {
 
 func NewGetFirebaseTokenResultFromDict(data map[string]interface{}) GetFirebaseTokenResult {
 	return GetFirebaseTokenResult{
-		Item: NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FirebaseToken {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -792,7 +920,13 @@ func NewGetFirebaseTokenByUserIdResultFromJson(data string) GetFirebaseTokenByUs
 
 func NewGetFirebaseTokenByUserIdResultFromDict(data map[string]interface{}) GetFirebaseTokenByUserIdResult {
 	return GetFirebaseTokenByUserIdResult{
-		Item: NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FirebaseToken {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -828,7 +962,13 @@ func NewDeleteFirebaseTokenResultFromJson(data string) DeleteFirebaseTokenResult
 
 func NewDeleteFirebaseTokenResultFromDict(data map[string]interface{}) DeleteFirebaseTokenResult {
 	return DeleteFirebaseTokenResult{
-		Item: NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FirebaseToken {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -864,7 +1004,13 @@ func NewDeleteFirebaseTokenByUserIdResultFromJson(data string) DeleteFirebaseTok
 
 func NewDeleteFirebaseTokenByUserIdResultFromDict(data map[string]interface{}) DeleteFirebaseTokenByUserIdResult {
 	return DeleteFirebaseTokenByUserIdResult{
-		Item: NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FirebaseToken {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFirebaseTokenFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 

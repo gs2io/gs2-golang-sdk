@@ -222,21 +222,111 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:                core.CastString(data["namespaceId"]),
-		Name:                       core.CastString(data["name"]),
-		Description:                core.CastString(data["description"]),
-		IsAutomaticDeletingEnabled: core.CastBool(data["isAutomaticDeletingEnabled"]),
-		TransactionSetting:         NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		ReceiveMessageScript:       NewScriptSettingFromDict(core.CastMap(data["receiveMessageScript"])).Pointer(),
-		ReadMessageScript:          NewScriptSettingFromDict(core.CastMap(data["readMessageScript"])).Pointer(),
-		DeleteMessageScript:        NewScriptSettingFromDict(core.CastMap(data["deleteMessageScript"])).Pointer(),
-		ReceiveNotification:        NewNotificationSettingFromDict(core.CastMap(data["receiveNotification"])).Pointer(),
-		LogSetting:                 NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:                  core.CastInt64(data["createdAt"]),
-		UpdatedAt:                  core.CastInt64(data["updatedAt"]),
-		QueueNamespaceId:           core.CastString(data["queueNamespaceId"]),
-		KeyId:                      core.CastString(data["keyId"]),
-		Revision:                   core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		IsAutomaticDeletingEnabled: func() *bool {
+			v, ok := data["isAutomaticDeletingEnabled"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["isAutomaticDeletingEnabled"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		ReceiveMessageScript: func() *ScriptSetting {
+			v, ok := data["receiveMessageScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["receiveMessageScript"])).Pointer()
+		}(),
+		ReadMessageScript: func() *ScriptSetting {
+			v, ok := data["readMessageScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["readMessageScript"])).Pointer()
+		}(),
+		DeleteMessageScript: func() *ScriptSetting {
+			v, ok := data["deleteMessageScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["deleteMessageScript"])).Pointer()
+		}(),
+		ReceiveNotification: func() *NotificationSetting {
+			v, ok := data["receiveNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["receiveNotification"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		QueueNamespaceId: func() *string {
+			v, ok := data["queueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["queueNamespaceId"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -528,16 +618,75 @@ func NewMessageFromJson(data string) Message {
 
 func NewMessageFromDict(data map[string]interface{}) Message {
 	return Message{
-		MessageId:          core.CastString(data["messageId"]),
-		Name:               core.CastString(data["name"]),
-		UserId:             core.CastString(data["userId"]),
-		Metadata:           core.CastString(data["metadata"]),
-		IsRead:             core.CastBool(data["isRead"]),
-		ReadAcquireActions: CastAcquireActions(core.CastArray(data["readAcquireActions"])),
-		ReceivedAt:         core.CastInt64(data["receivedAt"]),
-		ReadAt:             core.CastInt64(data["readAt"]),
-		ExpiresAt:          core.CastInt64(data["expiresAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		MessageId: func() *string {
+			v, ok := data["messageId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["messageId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		IsRead: func() *bool {
+			v, ok := data["isRead"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["isRead"])
+		}(),
+		ReadAcquireActions: func() []AcquireAction {
+			if data["readAcquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActions(core.CastArray(data["readAcquireActions"]))
+		}(),
+		ReceivedAt: func() *int64 {
+			v, ok := data["receivedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["receivedAt"])
+		}(),
+		ReadAt: func() *int64 {
+			v, ok := data["readAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["readAt"])
+		}(),
+		ExpiresAt: func() *int64 {
+			v, ok := data["expiresAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expiresAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -704,8 +853,20 @@ func NewCurrentMessageMasterFromJson(data string) CurrentMessageMaster {
 
 func NewCurrentMessageMasterFromDict(data map[string]interface{}) CurrentMessageMaster {
 	return CurrentMessageMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -899,15 +1060,68 @@ func NewGlobalMessageMasterFromJson(data string) GlobalMessageMaster {
 
 func NewGlobalMessageMasterFromDict(data map[string]interface{}) GlobalMessageMaster {
 	return GlobalMessageMaster{
-		GlobalMessageId:               core.CastString(data["globalMessageId"]),
-		Name:                          core.CastString(data["name"]),
-		Metadata:                      core.CastString(data["metadata"]),
-		ReadAcquireActions:            CastAcquireActions(core.CastArray(data["readAcquireActions"])),
-		ExpiresTimeSpan:               NewTimeSpanFromDict(core.CastMap(data["expiresTimeSpan"])).Pointer(),
-		ExpiresAt:                     core.CastInt64(data["expiresAt"]),
-		MessageReceptionPeriodEventId: core.CastString(data["messageReceptionPeriodEventId"]),
-		CreatedAt:                     core.CastInt64(data["createdAt"]),
-		Revision:                      core.CastInt64(data["revision"]),
+		GlobalMessageId: func() *string {
+			v, ok := data["globalMessageId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["globalMessageId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		ReadAcquireActions: func() []AcquireAction {
+			if data["readAcquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActions(core.CastArray(data["readAcquireActions"]))
+		}(),
+		ExpiresTimeSpan: func() *TimeSpan {
+			v, ok := data["expiresTimeSpan"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTimeSpanFromDict(core.CastMap(data["expiresTimeSpan"])).Pointer()
+		}(),
+		ExpiresAt: func() *int64 {
+			v, ok := data["expiresAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expiresAt"])
+		}(),
+		MessageReceptionPeriodEventId: func() *string {
+			v, ok := data["messageReceptionPeriodEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["messageReceptionPeriodEventId"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1135,13 +1349,54 @@ func NewGlobalMessageFromJson(data string) GlobalMessage {
 
 func NewGlobalMessageFromDict(data map[string]interface{}) GlobalMessage {
 	return GlobalMessage{
-		GlobalMessageId:               core.CastString(data["globalMessageId"]),
-		Name:                          core.CastString(data["name"]),
-		Metadata:                      core.CastString(data["metadata"]),
-		ReadAcquireActions:            CastAcquireActions(core.CastArray(data["readAcquireActions"])),
-		ExpiresTimeSpan:               NewTimeSpanFromDict(core.CastMap(data["expiresTimeSpan"])).Pointer(),
-		ExpiresAt:                     core.CastInt64(data["expiresAt"]),
-		MessageReceptionPeriodEventId: core.CastString(data["messageReceptionPeriodEventId"]),
+		GlobalMessageId: func() *string {
+			v, ok := data["globalMessageId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["globalMessageId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		ReadAcquireActions: func() []AcquireAction {
+			if data["readAcquireActions"] == nil {
+				return nil
+			}
+			return CastAcquireActions(core.CastArray(data["readAcquireActions"]))
+		}(),
+		ExpiresTimeSpan: func() *TimeSpan {
+			v, ok := data["expiresTimeSpan"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTimeSpanFromDict(core.CastMap(data["expiresTimeSpan"])).Pointer()
+		}(),
+		ExpiresAt: func() *int64 {
+			v, ok := data["expiresAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expiresAt"])
+		}(),
+		MessageReceptionPeriodEventId: func() *string {
+			v, ok := data["messageReceptionPeriodEventId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["messageReceptionPeriodEventId"])
+		}(),
 	}
 }
 
@@ -1337,12 +1592,48 @@ func NewReceivedFromJson(data string) Received {
 
 func NewReceivedFromDict(data map[string]interface{}) Received {
 	return Received{
-		ReceivedId:                 core.CastString(data["receivedId"]),
-		UserId:                     core.CastString(data["userId"]),
-		ReceivedGlobalMessageNames: core.CastStrings(core.CastArray(data["receivedGlobalMessageNames"])),
-		CreatedAt:                  core.CastInt64(data["createdAt"]),
-		UpdatedAt:                  core.CastInt64(data["updatedAt"]),
-		Revision:                   core.CastInt64(data["revision"]),
+		ReceivedId: func() *string {
+			v, ok := data["receivedId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["receivedId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ReceivedGlobalMessageNames: func() []*string {
+			v, ok := data["receivedGlobalMessageNames"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1453,9 +1744,27 @@ func NewTimeSpanFromJson(data string) TimeSpan {
 
 func NewTimeSpanFromDict(data map[string]interface{}) TimeSpan {
 	return TimeSpan{
-		Days:    core.CastInt32(data["days"]),
-		Hours:   core.CastInt32(data["hours"]),
-		Minutes: core.CastInt32(data["minutes"]),
+		Days: func() *int32 {
+			v, ok := data["days"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["days"])
+		}(),
+		Hours: func() *int32 {
+			v, ok := data["hours"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["hours"])
+		}(),
+		Minutes: func() *int32 {
+			v, ok := data["minutes"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["minutes"])
+		}(),
 	}
 }
 
@@ -1585,8 +1894,20 @@ func NewAcquireActionFromJson(data string) AcquireAction {
 
 func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 	return AcquireAction{
-		Action:  core.CastString(data["action"]),
-		Request: core.CastString(data["request"]),
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		Request: func() *string {
+			v, ok := data["request"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["request"])
+		}(),
 	}
 }
 
@@ -1711,8 +2032,20 @@ func NewConfigFromJson(data string) Config {
 
 func NewConfigFromDict(data map[string]interface{}) Config {
 	return Config{
-		Key:   core.CastString(data["key"]),
-		Value: core.CastString(data["value"]),
+		Key: func() *string {
+			v, ok := data["key"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["key"])
+		}(),
+		Value: func() *string {
+			v, ok := data["value"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["value"])
+		}(),
 	}
 }
 
@@ -1885,10 +2218,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 
@@ -2027,9 +2384,27 @@ func NewNotificationSettingFromJson(data string) NotificationSetting {
 
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
 	return NotificationSetting{
-		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
-		EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
-		Sound:                            core.CastString(data["sound"]),
+		GatewayNamespaceId: func() *string {
+			v, ok := data["gatewayNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatewayNamespaceId"])
+		}(),
+		EnableTransferMobileNotification: func() *bool {
+			v, ok := data["enableTransferMobileNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableTransferMobileNotification"])
+		}(),
+		Sound: func() *string {
+			v, ok := data["sound"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sound"])
+		}(),
 	}
 }
 
@@ -2279,13 +2654,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 
@@ -2411,7 +2828,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -2560,10 +2983,34 @@ func NewTransactionSettingFromJson(data string) TransactionSetting {
 
 func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetting {
 	return TransactionSetting{
-		EnableAutoRun:          core.CastBool(data["enableAutoRun"]),
-		DistributorNamespaceId: core.CastString(data["distributorNamespaceId"]),
-		KeyId:                  core.CastString(data["keyId"]),
-		QueueNamespaceId:       core.CastString(data["queueNamespaceId"]),
+		EnableAutoRun: func() *bool {
+			v, ok := data["enableAutoRun"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableAutoRun"])
+		}(),
+		DistributorNamespaceId: func() *string {
+			v, ok := data["distributorNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["distributorNamespaceId"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		QueueNamespaceId: func() *string {
+			v, ok := data["queueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["queueNamespaceId"])
+		}(),
 	}
 }
 

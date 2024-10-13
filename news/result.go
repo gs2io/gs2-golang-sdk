@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -251,8 +292,19 @@ func NewDescribeProgressesResultFromJson(data string) DescribeProgressesResult {
 
 func NewDescribeProgressesResultFromDict(data map[string]interface{}) DescribeProgressesResult {
 	return DescribeProgressesResult{
-		Items:         CastProgresses(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Progress {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastProgresses(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -286,7 +338,13 @@ func NewGetProgressResultFromJson(data string) GetProgressResult {
 
 func NewGetProgressResultFromDict(data map[string]interface{}) GetProgressResult {
 	return GetProgressResult{
-		Item: NewProgressFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Progress {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewProgressFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -323,8 +381,19 @@ func NewDescribeOutputsResultFromJson(data string) DescribeOutputsResult {
 
 func NewDescribeOutputsResultFromDict(data map[string]interface{}) DescribeOutputsResult {
 	return DescribeOutputsResult{
-		Items:         CastOutputs(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Output {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastOutputs(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -358,7 +427,13 @@ func NewGetOutputResultFromJson(data string) GetOutputResult {
 
 func NewGetOutputResultFromDict(data map[string]interface{}) GetOutputResult {
 	return GetOutputResult{
-		Item: NewOutputFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Output {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewOutputFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -395,8 +470,20 @@ func NewPrepareUpdateCurrentNewsMasterResultFromJson(data string) PrepareUpdateC
 
 func NewPrepareUpdateCurrentNewsMasterResultFromDict(data map[string]interface{}) PrepareUpdateCurrentNewsMasterResult {
 	return PrepareUpdateCurrentNewsMasterResult{
-		UploadToken:       core.CastString(data["uploadToken"]),
-		TemplateUploadUrl: core.CastString(data["templateUploadUrl"]),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TemplateUploadUrl: func() *string {
+			v, ok := data["templateUploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["templateUploadUrl"])
+		}(),
 	}
 }
 
@@ -454,7 +541,13 @@ func NewPrepareUpdateCurrentNewsMasterFromGitHubResultFromJson(data string) Prep
 
 func NewPrepareUpdateCurrentNewsMasterFromGitHubResultFromDict(data map[string]interface{}) PrepareUpdateCurrentNewsMasterFromGitHubResult {
 	return PrepareUpdateCurrentNewsMasterFromGitHubResult{
-		UploadToken: core.CastString(data["uploadToken"]),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
 	}
 }
 
@@ -487,9 +580,26 @@ func NewDescribeNewsResultFromJson(data string) DescribeNewsResult {
 
 func NewDescribeNewsResultFromDict(data map[string]interface{}) DescribeNewsResult {
 	return DescribeNewsResult{
-		Items:        CastNewses(core.CastArray(data["items"])),
-		ContentHash:  core.CastString(data["contentHash"]),
-		TemplateHash: core.CastString(data["templateHash"]),
+		Items: func() []News {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNewses(core.CastArray(data["items"]))
+		}(),
+		ContentHash: func() *string {
+			v, ok := data["contentHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentHash"])
+		}(),
+		TemplateHash: func() *string {
+			v, ok := data["templateHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["templateHash"])
+		}(),
 	}
 }
 
@@ -526,9 +636,26 @@ func NewDescribeNewsByUserIdResultFromJson(data string) DescribeNewsByUserIdResu
 
 func NewDescribeNewsByUserIdResultFromDict(data map[string]interface{}) DescribeNewsByUserIdResult {
 	return DescribeNewsByUserIdResult{
-		Items:        CastNewses(core.CastArray(data["items"])),
-		ContentHash:  core.CastString(data["contentHash"]),
-		TemplateHash: core.CastString(data["templateHash"]),
+		Items: func() []News {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNewses(core.CastArray(data["items"]))
+		}(),
+		ContentHash: func() *string {
+			v, ok := data["contentHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["contentHash"])
+		}(),
+		TemplateHash: func() *string {
+			v, ok := data["templateHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["templateHash"])
+		}(),
 	}
 }
 
@@ -565,9 +692,26 @@ func NewWantGrantResultFromJson(data string) WantGrantResult {
 
 func NewWantGrantResultFromDict(data map[string]interface{}) WantGrantResult {
 	return WantGrantResult{
-		Items:      CastSetCookieRequestEntries(core.CastArray(data["items"])),
-		BrowserUrl: core.CastString(data["browserUrl"]),
-		ZipUrl:     core.CastString(data["zipUrl"]),
+		Items: func() []SetCookieRequestEntry {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSetCookieRequestEntries(core.CastArray(data["items"]))
+		}(),
+		BrowserUrl: func() *string {
+			v, ok := data["browserUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["browserUrl"])
+		}(),
+		ZipUrl: func() *string {
+			v, ok := data["zipUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["zipUrl"])
+		}(),
 	}
 }
 
@@ -604,9 +748,26 @@ func NewWantGrantByUserIdResultFromJson(data string) WantGrantByUserIdResult {
 
 func NewWantGrantByUserIdResultFromDict(data map[string]interface{}) WantGrantByUserIdResult {
 	return WantGrantByUserIdResult{
-		Items:      CastSetCookieRequestEntries(core.CastArray(data["items"])),
-		BrowserUrl: core.CastString(data["browserUrl"]),
-		ZipUrl:     core.CastString(data["zipUrl"]),
+		Items: func() []SetCookieRequestEntry {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSetCookieRequestEntries(core.CastArray(data["items"]))
+		}(),
+		BrowserUrl: func() *string {
+			v, ok := data["browserUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["browserUrl"])
+		}(),
+		ZipUrl: func() *string {
+			v, ok := data["zipUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["zipUrl"])
+		}(),
 	}
 }
 

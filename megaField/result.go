@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -250,7 +291,12 @@ func NewDescribeAreaModelsResultFromJson(data string) DescribeAreaModelsResult {
 
 func NewDescribeAreaModelsResultFromDict(data map[string]interface{}) DescribeAreaModelsResult {
 	return DescribeAreaModelsResult{
-		Items: CastAreaModels(core.CastArray(data["items"])),
+		Items: func() []AreaModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastAreaModels(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -283,7 +329,13 @@ func NewGetAreaModelResultFromJson(data string) GetAreaModelResult {
 
 func NewGetAreaModelResultFromDict(data map[string]interface{}) GetAreaModelResult {
 	return GetAreaModelResult{
-		Item: NewAreaModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *AreaModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAreaModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -320,8 +372,19 @@ func NewDescribeAreaModelMastersResultFromJson(data string) DescribeAreaModelMas
 
 func NewDescribeAreaModelMastersResultFromDict(data map[string]interface{}) DescribeAreaModelMastersResult {
 	return DescribeAreaModelMastersResult{
-		Items:         CastAreaModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []AreaModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastAreaModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -355,7 +418,13 @@ func NewCreateAreaModelMasterResultFromJson(data string) CreateAreaModelMasterRe
 
 func NewCreateAreaModelMasterResultFromDict(data map[string]interface{}) CreateAreaModelMasterResult {
 	return CreateAreaModelMasterResult{
-		Item: NewAreaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *AreaModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAreaModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -391,7 +460,13 @@ func NewGetAreaModelMasterResultFromJson(data string) GetAreaModelMasterResult {
 
 func NewGetAreaModelMasterResultFromDict(data map[string]interface{}) GetAreaModelMasterResult {
 	return GetAreaModelMasterResult{
-		Item: NewAreaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *AreaModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAreaModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -427,7 +502,13 @@ func NewUpdateAreaModelMasterResultFromJson(data string) UpdateAreaModelMasterRe
 
 func NewUpdateAreaModelMasterResultFromDict(data map[string]interface{}) UpdateAreaModelMasterResult {
 	return UpdateAreaModelMasterResult{
-		Item: NewAreaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *AreaModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAreaModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -463,7 +544,13 @@ func NewDeleteAreaModelMasterResultFromJson(data string) DeleteAreaModelMasterRe
 
 func NewDeleteAreaModelMasterResultFromDict(data map[string]interface{}) DeleteAreaModelMasterResult {
 	return DeleteAreaModelMasterResult{
-		Item: NewAreaModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *AreaModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAreaModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -499,7 +586,12 @@ func NewDescribeLayerModelsResultFromJson(data string) DescribeLayerModelsResult
 
 func NewDescribeLayerModelsResultFromDict(data map[string]interface{}) DescribeLayerModelsResult {
 	return DescribeLayerModelsResult{
-		Items: CastLayerModels(core.CastArray(data["items"])),
+		Items: func() []LayerModel {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLayerModels(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -532,7 +624,13 @@ func NewGetLayerModelResultFromJson(data string) GetLayerModelResult {
 
 func NewGetLayerModelResultFromDict(data map[string]interface{}) GetLayerModelResult {
 	return GetLayerModelResult{
-		Item: NewLayerModelFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *LayerModel {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLayerModelFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -569,8 +667,19 @@ func NewDescribeLayerModelMastersResultFromJson(data string) DescribeLayerModelM
 
 func NewDescribeLayerModelMastersResultFromDict(data map[string]interface{}) DescribeLayerModelMastersResult {
 	return DescribeLayerModelMastersResult{
-		Items:         CastLayerModelMasters(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []LayerModelMaster {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastLayerModelMasters(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -604,7 +713,13 @@ func NewCreateLayerModelMasterResultFromJson(data string) CreateLayerModelMaster
 
 func NewCreateLayerModelMasterResultFromDict(data map[string]interface{}) CreateLayerModelMasterResult {
 	return CreateLayerModelMasterResult{
-		Item: NewLayerModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *LayerModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLayerModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -640,7 +755,13 @@ func NewGetLayerModelMasterResultFromJson(data string) GetLayerModelMasterResult
 
 func NewGetLayerModelMasterResultFromDict(data map[string]interface{}) GetLayerModelMasterResult {
 	return GetLayerModelMasterResult{
-		Item: NewLayerModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *LayerModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLayerModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -676,7 +797,13 @@ func NewUpdateLayerModelMasterResultFromJson(data string) UpdateLayerModelMaster
 
 func NewUpdateLayerModelMasterResultFromDict(data map[string]interface{}) UpdateLayerModelMasterResult {
 	return UpdateLayerModelMasterResult{
-		Item: NewLayerModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *LayerModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLayerModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -712,7 +839,13 @@ func NewDeleteLayerModelMasterResultFromJson(data string) DeleteLayerModelMaster
 
 func NewDeleteLayerModelMasterResultFromDict(data map[string]interface{}) DeleteLayerModelMasterResult {
 	return DeleteLayerModelMasterResult{
-		Item: NewLayerModelMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *LayerModelMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLayerModelMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -748,7 +881,13 @@ func NewExportMasterResultFromJson(data string) ExportMasterResult {
 
 func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResult {
 	return ExportMasterResult{
-		Item: NewCurrentFieldMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentFieldMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentFieldMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -784,7 +923,13 @@ func NewGetCurrentFieldMasterResultFromJson(data string) GetCurrentFieldMasterRe
 
 func NewGetCurrentFieldMasterResultFromDict(data map[string]interface{}) GetCurrentFieldMasterResult {
 	return GetCurrentFieldMasterResult{
-		Item: NewCurrentFieldMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentFieldMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentFieldMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -820,7 +965,13 @@ func NewUpdateCurrentFieldMasterResultFromJson(data string) UpdateCurrentFieldMa
 
 func NewUpdateCurrentFieldMasterResultFromDict(data map[string]interface{}) UpdateCurrentFieldMasterResult {
 	return UpdateCurrentFieldMasterResult{
-		Item: NewCurrentFieldMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentFieldMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentFieldMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -856,7 +1007,13 @@ func NewUpdateCurrentFieldMasterFromGitHubResultFromJson(data string) UpdateCurr
 
 func NewUpdateCurrentFieldMasterFromGitHubResultFromDict(data map[string]interface{}) UpdateCurrentFieldMasterFromGitHubResult {
 	return UpdateCurrentFieldMasterFromGitHubResult{
-		Item: NewCurrentFieldMasterFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *CurrentFieldMaster {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCurrentFieldMasterFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -892,7 +1049,13 @@ func NewPutPositionResultFromJson(data string) PutPositionResult {
 
 func NewPutPositionResultFromDict(data map[string]interface{}) PutPositionResult {
 	return PutPositionResult{
-		Item: NewSpatialFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Spatial {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSpatialFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -928,7 +1091,13 @@ func NewPutPositionByUserIdResultFromJson(data string) PutPositionByUserIdResult
 
 func NewPutPositionByUserIdResultFromDict(data map[string]interface{}) PutPositionByUserIdResult {
 	return PutPositionByUserIdResult{
-		Item: NewSpatialFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Spatial {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSpatialFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -964,7 +1133,12 @@ func NewFetchPositionResultFromJson(data string) FetchPositionResult {
 
 func NewFetchPositionResultFromDict(data map[string]interface{}) FetchPositionResult {
 	return FetchPositionResult{
-		Items: CastSpatials(core.CastArray(data["items"])),
+		Items: func() []Spatial {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSpatials(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -997,7 +1171,12 @@ func NewFetchPositionFromSystemResultFromJson(data string) FetchPositionFromSyst
 
 func NewFetchPositionFromSystemResultFromDict(data map[string]interface{}) FetchPositionFromSystemResult {
 	return FetchPositionFromSystemResult{
-		Items: CastSpatials(core.CastArray(data["items"])),
+		Items: func() []Spatial {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSpatials(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -1030,7 +1209,13 @@ func NewNearUserIdsResultFromJson(data string) NearUserIdsResult {
 
 func NewNearUserIdsResultFromDict(data map[string]interface{}) NearUserIdsResult {
 	return NearUserIdsResult{
-		Items: core.CastStrings(core.CastArray(data["items"])),
+		Items: func() []*string {
+			v, ok := data["items"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -1063,7 +1248,13 @@ func NewNearUserIdsFromSystemResultFromJson(data string) NearUserIdsFromSystemRe
 
 func NewNearUserIdsFromSystemResultFromDict(data map[string]interface{}) NearUserIdsFromSystemResult {
 	return NearUserIdsFromSystemResult{
-		Items: core.CastStrings(core.CastArray(data["items"])),
+		Items: func() []*string {
+			v, ok := data["items"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
@@ -1096,7 +1287,12 @@ func NewActionResultFromJson(data string) ActionResult {
 
 func NewActionResultFromDict(data map[string]interface{}) ActionResult {
 	return ActionResult{
-		Items: CastSpatials(core.CastArray(data["items"])),
+		Items: func() []Spatial {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSpatials(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -1129,7 +1325,12 @@ func NewActionByUserIdResultFromJson(data string) ActionByUserIdResult {
 
 func NewActionByUserIdResultFromDict(data map[string]interface{}) ActionByUserIdResult {
 	return ActionByUserIdResult{
-		Items: CastSpatials(core.CastArray(data["items"])),
+		Items: func() []Spatial {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSpatials(core.CastArray(data["items"]))
+		}(),
 	}
 }
 

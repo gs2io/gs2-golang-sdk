@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -276,7 +317,13 @@ func NewCheckDumpUserDataByUserIdResultFromJson(data string) CheckDumpUserDataBy
 
 func NewCheckDumpUserDataByUserIdResultFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdResult {
 	return CheckDumpUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -360,8 +407,20 @@ func NewPrepareImportUserDataByUserIdResultFromJson(data string) PrepareImportUs
 
 func NewPrepareImportUserDataByUserIdResultFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdResult {
 	return PrepareImportUserDataByUserIdResult{
-		UploadToken: core.CastString(data["uploadToken"]),
-		UploadUrl:   core.CastString(data["uploadUrl"]),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -419,7 +478,13 @@ func NewCheckImportUserDataByUserIdResultFromJson(data string) CheckImportUserDa
 
 func NewCheckImportUserDataByUserIdResultFromDict(data map[string]interface{}) CheckImportUserDataByUserIdResult {
 	return CheckImportUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -450,7 +515,13 @@ func NewGetProfileResultFromJson(data string) GetProfileResult {
 
 func NewGetProfileResultFromDict(data map[string]interface{}) GetProfileResult {
 	return GetProfileResult{
-		Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Profile {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewProfileFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -486,7 +557,13 @@ func NewGetProfileByUserIdResultFromJson(data string) GetProfileByUserIdResult {
 
 func NewGetProfileByUserIdResultFromDict(data map[string]interface{}) GetProfileByUserIdResult {
 	return GetProfileByUserIdResult{
-		Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Profile {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewProfileFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -522,7 +599,13 @@ func NewUpdateProfileResultFromJson(data string) UpdateProfileResult {
 
 func NewUpdateProfileResultFromDict(data map[string]interface{}) UpdateProfileResult {
 	return UpdateProfileResult{
-		Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Profile {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewProfileFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -558,7 +641,13 @@ func NewUpdateProfileByUserIdResultFromJson(data string) UpdateProfileByUserIdRe
 
 func NewUpdateProfileByUserIdResultFromDict(data map[string]interface{}) UpdateProfileByUserIdResult {
 	return UpdateProfileByUserIdResult{
-		Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Profile {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewProfileFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -594,7 +683,13 @@ func NewDeleteProfileByUserIdResultFromJson(data string) DeleteProfileByUserIdRe
 
 func NewDeleteProfileByUserIdResultFromDict(data map[string]interface{}) DeleteProfileByUserIdResult {
 	return DeleteProfileByUserIdResult{
-		Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Profile {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewProfileFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -630,7 +725,13 @@ func NewUpdateProfileByStampSheetResultFromJson(data string) UpdateProfileByStam
 
 func NewUpdateProfileByStampSheetResultFromDict(data map[string]interface{}) UpdateProfileByStampSheetResult {
 	return UpdateProfileByStampSheetResult{
-		Item: NewProfileFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Profile {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewProfileFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -667,8 +768,19 @@ func NewDescribeFriendsResultFromJson(data string) DescribeFriendsResult {
 
 func NewDescribeFriendsResultFromDict(data map[string]interface{}) DescribeFriendsResult {
 	return DescribeFriendsResult{
-		Items:         CastFriendUsers(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []FriendUser {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFriendUsers(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -703,8 +815,19 @@ func NewDescribeFriendsByUserIdResultFromJson(data string) DescribeFriendsByUser
 
 func NewDescribeFriendsByUserIdResultFromDict(data map[string]interface{}) DescribeFriendsByUserIdResult {
 	return DescribeFriendsByUserIdResult{
-		Items:         CastFriendUsers(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []FriendUser {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFriendUsers(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -739,8 +862,20 @@ func NewDescribeBlackListResultFromJson(data string) DescribeBlackListResult {
 
 func NewDescribeBlackListResultFromDict(data map[string]interface{}) DescribeBlackListResult {
 	return DescribeBlackListResult{
-		Items:         core.CastStrings(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []*string {
+			v, ok := data["items"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -775,8 +910,20 @@ func NewDescribeBlackListByUserIdResultFromJson(data string) DescribeBlackListBy
 
 func NewDescribeBlackListByUserIdResultFromDict(data map[string]interface{}) DescribeBlackListByUserIdResult {
 	return DescribeBlackListByUserIdResult{
-		Items:         core.CastStrings(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []*string {
+			v, ok := data["items"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -810,7 +957,13 @@ func NewRegisterBlackListResultFromJson(data string) RegisterBlackListResult {
 
 func NewRegisterBlackListResultFromDict(data map[string]interface{}) RegisterBlackListResult {
 	return RegisterBlackListResult{
-		Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *BlackList {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBlackListFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -846,7 +999,13 @@ func NewRegisterBlackListByUserIdResultFromJson(data string) RegisterBlackListBy
 
 func NewRegisterBlackListByUserIdResultFromDict(data map[string]interface{}) RegisterBlackListByUserIdResult {
 	return RegisterBlackListByUserIdResult{
-		Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *BlackList {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBlackListFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -882,7 +1041,13 @@ func NewUnregisterBlackListResultFromJson(data string) UnregisterBlackListResult
 
 func NewUnregisterBlackListResultFromDict(data map[string]interface{}) UnregisterBlackListResult {
 	return UnregisterBlackListResult{
-		Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *BlackList {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBlackListFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -918,7 +1083,13 @@ func NewUnregisterBlackListByUserIdResultFromJson(data string) UnregisterBlackLi
 
 func NewUnregisterBlackListByUserIdResultFromDict(data map[string]interface{}) UnregisterBlackListByUserIdResult {
 	return UnregisterBlackListByUserIdResult{
-		Item: NewBlackListFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *BlackList {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewBlackListFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -955,8 +1126,19 @@ func NewDescribeFollowsResultFromJson(data string) DescribeFollowsResult {
 
 func NewDescribeFollowsResultFromDict(data map[string]interface{}) DescribeFollowsResult {
 	return DescribeFollowsResult{
-		Items:         CastFollowUsers(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []FollowUser {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFollowUsers(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -991,8 +1173,19 @@ func NewDescribeFollowsByUserIdResultFromJson(data string) DescribeFollowsByUser
 
 func NewDescribeFollowsByUserIdResultFromDict(data map[string]interface{}) DescribeFollowsByUserIdResult {
 	return DescribeFollowsByUserIdResult{
-		Items:         CastFollowUsers(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []FollowUser {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFollowUsers(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1026,7 +1219,13 @@ func NewGetFollowResultFromJson(data string) GetFollowResult {
 
 func NewGetFollowResultFromDict(data map[string]interface{}) GetFollowResult {
 	return GetFollowResult{
-		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FollowUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFollowUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1062,7 +1261,13 @@ func NewGetFollowByUserIdResultFromJson(data string) GetFollowByUserIdResult {
 
 func NewGetFollowByUserIdResultFromDict(data map[string]interface{}) GetFollowByUserIdResult {
 	return GetFollowByUserIdResult{
-		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FollowUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFollowUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1098,7 +1303,13 @@ func NewFollowResultFromJson(data string) FollowResult {
 
 func NewFollowResultFromDict(data map[string]interface{}) FollowResult {
 	return FollowResult{
-		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FollowUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFollowUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1134,7 +1345,13 @@ func NewFollowByUserIdResultFromJson(data string) FollowByUserIdResult {
 
 func NewFollowByUserIdResultFromDict(data map[string]interface{}) FollowByUserIdResult {
 	return FollowByUserIdResult{
-		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FollowUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFollowUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1170,7 +1387,13 @@ func NewUnfollowResultFromJson(data string) UnfollowResult {
 
 func NewUnfollowResultFromDict(data map[string]interface{}) UnfollowResult {
 	return UnfollowResult{
-		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FollowUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFollowUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1206,7 +1429,13 @@ func NewUnfollowByUserIdResultFromJson(data string) UnfollowByUserIdResult {
 
 func NewUnfollowByUserIdResultFromDict(data map[string]interface{}) UnfollowByUserIdResult {
 	return UnfollowByUserIdResult{
-		Item: NewFollowUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FollowUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFollowUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1242,7 +1471,13 @@ func NewGetFriendResultFromJson(data string) GetFriendResult {
 
 func NewGetFriendResultFromDict(data map[string]interface{}) GetFriendResult {
 	return GetFriendResult{
-		Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1278,7 +1513,13 @@ func NewGetFriendByUserIdResultFromJson(data string) GetFriendByUserIdResult {
 
 func NewGetFriendByUserIdResultFromDict(data map[string]interface{}) GetFriendByUserIdResult {
 	return GetFriendByUserIdResult{
-		Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1314,7 +1555,13 @@ func NewDeleteFriendResultFromJson(data string) DeleteFriendResult {
 
 func NewDeleteFriendResultFromDict(data map[string]interface{}) DeleteFriendResult {
 	return DeleteFriendResult{
-		Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1350,7 +1597,13 @@ func NewDeleteFriendByUserIdResultFromJson(data string) DeleteFriendByUserIdResu
 
 func NewDeleteFriendByUserIdResultFromDict(data map[string]interface{}) DeleteFriendByUserIdResult {
 	return DeleteFriendByUserIdResult{
-		Item: NewFriendUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendUser {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1387,8 +1640,19 @@ func NewDescribeSendRequestsResultFromJson(data string) DescribeSendRequestsResu
 
 func NewDescribeSendRequestsResultFromDict(data map[string]interface{}) DescribeSendRequestsResult {
 	return DescribeSendRequestsResult{
-		Items:         CastFriendRequests(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []FriendRequest {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFriendRequests(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1423,8 +1687,19 @@ func NewDescribeSendRequestsByUserIdResultFromJson(data string) DescribeSendRequ
 
 func NewDescribeSendRequestsByUserIdResultFromDict(data map[string]interface{}) DescribeSendRequestsByUserIdResult {
 	return DescribeSendRequestsByUserIdResult{
-		Items:         CastFriendRequests(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []FriendRequest {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFriendRequests(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1458,7 +1733,13 @@ func NewGetSendRequestResultFromJson(data string) GetSendRequestResult {
 
 func NewGetSendRequestResultFromDict(data map[string]interface{}) GetSendRequestResult {
 	return GetSendRequestResult{
-		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1494,7 +1775,13 @@ func NewGetSendRequestByUserIdResultFromJson(data string) GetSendRequestByUserId
 
 func NewGetSendRequestByUserIdResultFromDict(data map[string]interface{}) GetSendRequestByUserIdResult {
 	return GetSendRequestByUserIdResult{
-		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1530,7 +1817,13 @@ func NewSendRequestResultFromJson(data string) SendRequestResult {
 
 func NewSendRequestResultFromDict(data map[string]interface{}) SendRequestResult {
 	return SendRequestResult{
-		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1566,7 +1859,13 @@ func NewSendRequestByUserIdResultFromJson(data string) SendRequestByUserIdResult
 
 func NewSendRequestByUserIdResultFromDict(data map[string]interface{}) SendRequestByUserIdResult {
 	return SendRequestByUserIdResult{
-		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1602,7 +1901,13 @@ func NewDeleteRequestResultFromJson(data string) DeleteRequestResult {
 
 func NewDeleteRequestResultFromDict(data map[string]interface{}) DeleteRequestResult {
 	return DeleteRequestResult{
-		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1638,7 +1943,13 @@ func NewDeleteRequestByUserIdResultFromJson(data string) DeleteRequestByUserIdRe
 
 func NewDeleteRequestByUserIdResultFromDict(data map[string]interface{}) DeleteRequestByUserIdResult {
 	return DeleteRequestByUserIdResult{
-		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1675,8 +1986,19 @@ func NewDescribeReceiveRequestsResultFromJson(data string) DescribeReceiveReques
 
 func NewDescribeReceiveRequestsResultFromDict(data map[string]interface{}) DescribeReceiveRequestsResult {
 	return DescribeReceiveRequestsResult{
-		Items:         CastFriendRequests(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []FriendRequest {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFriendRequests(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1711,8 +2033,19 @@ func NewDescribeReceiveRequestsByUserIdResultFromJson(data string) DescribeRecei
 
 func NewDescribeReceiveRequestsByUserIdResultFromDict(data map[string]interface{}) DescribeReceiveRequestsByUserIdResult {
 	return DescribeReceiveRequestsByUserIdResult{
-		Items:         CastFriendRequests(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []FriendRequest {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastFriendRequests(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1746,7 +2079,13 @@ func NewGetReceiveRequestResultFromJson(data string) GetReceiveRequestResult {
 
 func NewGetReceiveRequestResultFromDict(data map[string]interface{}) GetReceiveRequestResult {
 	return GetReceiveRequestResult{
-		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1782,7 +2121,13 @@ func NewGetReceiveRequestByUserIdResultFromJson(data string) GetReceiveRequestBy
 
 func NewGetReceiveRequestByUserIdResultFromDict(data map[string]interface{}) GetReceiveRequestByUserIdResult {
 	return GetReceiveRequestByUserIdResult{
-		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1818,7 +2163,13 @@ func NewAcceptRequestResultFromJson(data string) AcceptRequestResult {
 
 func NewAcceptRequestResultFromDict(data map[string]interface{}) AcceptRequestResult {
 	return AcceptRequestResult{
-		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1854,7 +2205,13 @@ func NewAcceptRequestByUserIdResultFromJson(data string) AcceptRequestByUserIdRe
 
 func NewAcceptRequestByUserIdResultFromDict(data map[string]interface{}) AcceptRequestByUserIdResult {
 	return AcceptRequestByUserIdResult{
-		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1890,7 +2247,13 @@ func NewRejectRequestResultFromJson(data string) RejectRequestResult {
 
 func NewRejectRequestResultFromDict(data map[string]interface{}) RejectRequestResult {
 	return RejectRequestResult{
-		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1926,7 +2289,13 @@ func NewRejectRequestByUserIdResultFromJson(data string) RejectRequestByUserIdRe
 
 func NewRejectRequestByUserIdResultFromDict(data map[string]interface{}) RejectRequestByUserIdResult {
 	return RejectRequestByUserIdResult{
-		Item: NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *FriendRequest {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewFriendRequestFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1962,7 +2331,13 @@ func NewGetPublicProfileResultFromJson(data string) GetPublicProfileResult {
 
 func NewGetPublicProfileResultFromDict(data map[string]interface{}) GetPublicProfileResult {
 	return GetPublicProfileResult{
-		Item: NewPublicProfileFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *PublicProfile {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPublicProfileFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 

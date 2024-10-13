@@ -176,20 +176,104 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:             core.CastString(data["namespaceId"]),
-		Name:                    core.CastString(data["name"]),
-		Description:             core.CastString(data["description"]),
-		AcquireScript:           NewScriptSettingFromDict(core.CastMap(data["acquireScript"])).Pointer(),
-		OverflowScript:          NewScriptSettingFromDict(core.CastMap(data["overflowScript"])).Pointer(),
-		ConsumeScript:           NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer(),
-		SimpleItemAcquireScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemAcquireScript"])).Pointer(),
-		SimpleItemConsumeScript: NewScriptSettingFromDict(core.CastMap(data["simpleItemConsumeScript"])).Pointer(),
-		BigItemAcquireScript:    NewScriptSettingFromDict(core.CastMap(data["bigItemAcquireScript"])).Pointer(),
-		BigItemConsumeScript:    NewScriptSettingFromDict(core.CastMap(data["bigItemConsumeScript"])).Pointer(),
-		LogSetting:              NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:               core.CastInt64(data["createdAt"]),
-		UpdatedAt:               core.CastInt64(data["updatedAt"]),
-		Revision:                core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		AcquireScript: func() *ScriptSetting {
+			v, ok := data["acquireScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["acquireScript"])).Pointer()
+		}(),
+		OverflowScript: func() *ScriptSetting {
+			v, ok := data["overflowScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["overflowScript"])).Pointer()
+		}(),
+		ConsumeScript: func() *ScriptSetting {
+			v, ok := data["consumeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["consumeScript"])).Pointer()
+		}(),
+		SimpleItemAcquireScript: func() *ScriptSetting {
+			v, ok := data["simpleItemAcquireScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["simpleItemAcquireScript"])).Pointer()
+		}(),
+		SimpleItemConsumeScript: func() *ScriptSetting {
+			v, ok := data["simpleItemConsumeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["simpleItemConsumeScript"])).Pointer()
+		}(),
+		BigItemAcquireScript: func() *ScriptSetting {
+			v, ok := data["bigItemAcquireScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["bigItemAcquireScript"])).Pointer()
+		}(),
+		BigItemConsumeScript: func() *ScriptSetting {
+			v, ok := data["bigItemConsumeScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["bigItemConsumeScript"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -486,16 +570,76 @@ func NewInventoryModelMasterFromJson(data string) InventoryModelMaster {
 
 func NewInventoryModelMasterFromDict(data map[string]interface{}) InventoryModelMaster {
 	return InventoryModelMaster{
-		InventoryModelId:      core.CastString(data["inventoryModelId"]),
-		Name:                  core.CastString(data["name"]),
-		Metadata:              core.CastString(data["metadata"]),
-		Description:           core.CastString(data["description"]),
-		InitialCapacity:       core.CastInt32(data["initialCapacity"]),
-		MaxCapacity:           core.CastInt32(data["maxCapacity"]),
-		ProtectReferencedItem: core.CastBool(data["protectReferencedItem"]),
-		CreatedAt:             core.CastInt64(data["createdAt"]),
-		UpdatedAt:             core.CastInt64(data["updatedAt"]),
-		Revision:              core.CastInt64(data["revision"]),
+		InventoryModelId: func() *string {
+			v, ok := data["inventoryModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		InitialCapacity: func() *int32 {
+			v, ok := data["initialCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["initialCapacity"])
+		}(),
+		MaxCapacity: func() *int32 {
+			v, ok := data["maxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxCapacity"])
+		}(),
+		ProtectReferencedItem: func() *bool {
+			v, ok := data["protectReferencedItem"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["protectReferencedItem"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -700,13 +844,54 @@ func NewInventoryModelFromJson(data string) InventoryModel {
 
 func NewInventoryModelFromDict(data map[string]interface{}) InventoryModel {
 	return InventoryModel{
-		InventoryModelId:      core.CastString(data["inventoryModelId"]),
-		Name:                  core.CastString(data["name"]),
-		Metadata:              core.CastString(data["metadata"]),
-		InitialCapacity:       core.CastInt32(data["initialCapacity"]),
-		MaxCapacity:           core.CastInt32(data["maxCapacity"]),
-		ProtectReferencedItem: core.CastBool(data["protectReferencedItem"]),
-		ItemModels:            CastItemModels(core.CastArray(data["itemModels"])),
+		InventoryModelId: func() *string {
+			v, ok := data["inventoryModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		InitialCapacity: func() *int32 {
+			v, ok := data["initialCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["initialCapacity"])
+		}(),
+		MaxCapacity: func() *int32 {
+			v, ok := data["maxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxCapacity"])
+		}(),
+		ProtectReferencedItem: func() *bool {
+			v, ok := data["protectReferencedItem"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["protectReferencedItem"])
+		}(),
+		ItemModels: func() []ItemModel {
+			if data["itemModels"] == nil {
+				return nil
+			}
+			return CastItemModels(core.CastArray(data["itemModels"]))
+		}(),
 	}
 }
 
@@ -954,17 +1139,83 @@ func NewItemModelMasterFromJson(data string) ItemModelMaster {
 
 func NewItemModelMasterFromDict(data map[string]interface{}) ItemModelMaster {
 	return ItemModelMaster{
-		ItemModelId:         core.CastString(data["itemModelId"]),
-		InventoryName:       core.CastString(data["inventoryName"]),
-		Name:                core.CastString(data["name"]),
-		Description:         core.CastString(data["description"]),
-		Metadata:            core.CastString(data["metadata"]),
-		StackingLimit:       core.CastInt64(data["stackingLimit"]),
-		AllowMultipleStacks: core.CastBool(data["allowMultipleStacks"]),
-		SortValue:           core.CastInt32(data["sortValue"]),
-		CreatedAt:           core.CastInt64(data["createdAt"]),
-		UpdatedAt:           core.CastInt64(data["updatedAt"]),
-		Revision:            core.CastInt64(data["revision"]),
+		ItemModelId: func() *string {
+			v, ok := data["itemModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemModelId"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		StackingLimit: func() *int64 {
+			v, ok := data["stackingLimit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["stackingLimit"])
+		}(),
+		AllowMultipleStacks: func() *bool {
+			v, ok := data["allowMultipleStacks"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["allowMultipleStacks"])
+		}(),
+		SortValue: func() *int32 {
+			v, ok := data["sortValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["sortValue"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1170,12 +1421,48 @@ func NewItemModelFromJson(data string) ItemModel {
 
 func NewItemModelFromDict(data map[string]interface{}) ItemModel {
 	return ItemModel{
-		ItemModelId:         core.CastString(data["itemModelId"]),
-		Name:                core.CastString(data["name"]),
-		Metadata:            core.CastString(data["metadata"]),
-		StackingLimit:       core.CastInt64(data["stackingLimit"]),
-		AllowMultipleStacks: core.CastBool(data["allowMultipleStacks"]),
-		SortValue:           core.CastInt32(data["sortValue"]),
+		ItemModelId: func() *string {
+			v, ok := data["itemModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		StackingLimit: func() *int64 {
+			v, ok := data["stackingLimit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["stackingLimit"])
+		}(),
+		AllowMultipleStacks: func() *bool {
+			v, ok := data["allowMultipleStacks"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["allowMultipleStacks"])
+		}(),
+		SortValue: func() *int32 {
+			v, ok := data["sortValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["sortValue"])
+		}(),
 	}
 }
 
@@ -1380,13 +1667,55 @@ func NewSimpleInventoryModelMasterFromJson(data string) SimpleInventoryModelMast
 
 func NewSimpleInventoryModelMasterFromDict(data map[string]interface{}) SimpleInventoryModelMaster {
 	return SimpleInventoryModelMaster{
-		InventoryModelId: core.CastString(data["inventoryModelId"]),
-		Name:             core.CastString(data["name"]),
-		Metadata:         core.CastString(data["metadata"]),
-		Description:      core.CastString(data["description"]),
-		CreatedAt:        core.CastInt64(data["createdAt"]),
-		UpdatedAt:        core.CastInt64(data["updatedAt"]),
-		Revision:         core.CastInt64(data["revision"]),
+		InventoryModelId: func() *string {
+			v, ok := data["inventoryModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1564,10 +1893,33 @@ func NewSimpleInventoryModelFromJson(data string) SimpleInventoryModel {
 
 func NewSimpleInventoryModelFromDict(data map[string]interface{}) SimpleInventoryModel {
 	return SimpleInventoryModel{
-		InventoryModelId: core.CastString(data["inventoryModelId"]),
-		Name:             core.CastString(data["name"]),
-		Metadata:         core.CastString(data["metadata"]),
-		SimpleItemModels: CastSimpleItemModels(core.CastArray(data["simpleItemModels"])),
+		InventoryModelId: func() *string {
+			v, ok := data["inventoryModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		SimpleItemModels: func() []SimpleItemModel {
+			if data["simpleItemModels"] == nil {
+				return nil
+			}
+			return CastSimpleItemModels(core.CastArray(data["simpleItemModels"]))
+		}(),
 	}
 }
 
@@ -1764,13 +2116,55 @@ func NewSimpleItemModelMasterFromJson(data string) SimpleItemModelMaster {
 
 func NewSimpleItemModelMasterFromDict(data map[string]interface{}) SimpleItemModelMaster {
 	return SimpleItemModelMaster{
-		ItemModelId: core.CastString(data["itemModelId"]),
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		Metadata:    core.CastString(data["metadata"]),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-		Revision:    core.CastInt64(data["revision"]),
+		ItemModelId: func() *string {
+			v, ok := data["itemModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1944,9 +2338,27 @@ func NewSimpleItemModelFromJson(data string) SimpleItemModel {
 
 func NewSimpleItemModelFromDict(data map[string]interface{}) SimpleItemModel {
 	return SimpleItemModel{
-		ItemModelId: core.CastString(data["itemModelId"]),
-		Name:        core.CastString(data["name"]),
-		Metadata:    core.CastString(data["metadata"]),
+		ItemModelId: func() *string {
+			v, ok := data["itemModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -2136,13 +2548,55 @@ func NewBigInventoryModelMasterFromJson(data string) BigInventoryModelMaster {
 
 func NewBigInventoryModelMasterFromDict(data map[string]interface{}) BigInventoryModelMaster {
 	return BigInventoryModelMaster{
-		InventoryModelId: core.CastString(data["inventoryModelId"]),
-		Name:             core.CastString(data["name"]),
-		Metadata:         core.CastString(data["metadata"]),
-		Description:      core.CastString(data["description"]),
-		CreatedAt:        core.CastInt64(data["createdAt"]),
-		UpdatedAt:        core.CastInt64(data["updatedAt"]),
-		Revision:         core.CastInt64(data["revision"]),
+		InventoryModelId: func() *string {
+			v, ok := data["inventoryModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -2320,10 +2774,33 @@ func NewBigInventoryModelFromJson(data string) BigInventoryModel {
 
 func NewBigInventoryModelFromDict(data map[string]interface{}) BigInventoryModel {
 	return BigInventoryModel{
-		InventoryModelId: core.CastString(data["inventoryModelId"]),
-		Name:             core.CastString(data["name"]),
-		Metadata:         core.CastString(data["metadata"]),
-		BigItemModels:    CastBigItemModels(core.CastArray(data["bigItemModels"])),
+		InventoryModelId: func() *string {
+			v, ok := data["inventoryModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		BigItemModels: func() []BigItemModel {
+			if data["bigItemModels"] == nil {
+				return nil
+			}
+			return CastBigItemModels(core.CastArray(data["bigItemModels"]))
+		}(),
 	}
 }
 
@@ -2520,13 +2997,55 @@ func NewBigItemModelMasterFromJson(data string) BigItemModelMaster {
 
 func NewBigItemModelMasterFromDict(data map[string]interface{}) BigItemModelMaster {
 	return BigItemModelMaster{
-		ItemModelId: core.CastString(data["itemModelId"]),
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		Metadata:    core.CastString(data["metadata"]),
-		CreatedAt:   core.CastInt64(data["createdAt"]),
-		UpdatedAt:   core.CastInt64(data["updatedAt"]),
-		Revision:    core.CastInt64(data["revision"]),
+		ItemModelId: func() *string {
+			v, ok := data["itemModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -2700,9 +3219,27 @@ func NewBigItemModelFromJson(data string) BigItemModel {
 
 func NewBigItemModelFromDict(data map[string]interface{}) BigItemModel {
 	return BigItemModel{
-		ItemModelId: core.CastString(data["itemModelId"]),
-		Name:        core.CastString(data["name"]),
-		Metadata:    core.CastString(data["metadata"]),
+		ItemModelId: func() *string {
+			v, ok := data["itemModelId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemModelId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
 	}
 }
 
@@ -2832,8 +3369,20 @@ func NewCurrentItemModelMasterFromJson(data string) CurrentItemModelMaster {
 
 func NewCurrentItemModelMasterFromDict(data map[string]interface{}) CurrentItemModelMaster {
 	return CurrentItemModelMaster{
-		NamespaceId: core.CastString(data["namespaceId"]),
-		Settings:    core.CastString(data["settings"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -3002,14 +3551,62 @@ func NewInventoryFromJson(data string) Inventory {
 
 func NewInventoryFromDict(data map[string]interface{}) Inventory {
 	return Inventory{
-		InventoryId:                   core.CastString(data["inventoryId"]),
-		InventoryName:                 core.CastString(data["inventoryName"]),
-		UserId:                        core.CastString(data["userId"]),
-		CurrentInventoryCapacityUsage: core.CastInt32(data["currentInventoryCapacityUsage"]),
-		CurrentInventoryMaxCapacity:   core.CastInt32(data["currentInventoryMaxCapacity"]),
-		CreatedAt:                     core.CastInt64(data["createdAt"]),
-		UpdatedAt:                     core.CastInt64(data["updatedAt"]),
-		Revision:                      core.CastInt64(data["revision"]),
+		InventoryId: func() *string {
+			v, ok := data["inventoryId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryId"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		CurrentInventoryCapacityUsage: func() *int32 {
+			v, ok := data["currentInventoryCapacityUsage"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["currentInventoryCapacityUsage"])
+		}(),
+		CurrentInventoryMaxCapacity: func() *int32 {
+			v, ok := data["currentInventoryMaxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["currentInventoryMaxCapacity"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -3283,17 +3880,83 @@ func NewItemSetFromJson(data string) ItemSet {
 
 func NewItemSetFromDict(data map[string]interface{}) ItemSet {
 	return ItemSet{
-		ItemSetId:     core.CastString(data["itemSetId"]),
-		Name:          core.CastString(data["name"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		ItemName:      core.CastString(data["itemName"]),
-		Count:         core.CastInt64(data["count"]),
-		ReferenceOf:   core.CastStrings(core.CastArray(data["referenceOf"])),
-		SortValue:     core.CastInt32(data["sortValue"]),
-		ExpiresAt:     core.CastInt64(data["expiresAt"]),
-		CreatedAt:     core.CastInt64(data["createdAt"]),
-		UpdatedAt:     core.CastInt64(data["updatedAt"]),
+		ItemSetId: func() *string {
+			v, ok := data["itemSetId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemSetId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		ReferenceOf: func() []*string {
+			v, ok := data["referenceOf"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		SortValue: func() *int32 {
+			v, ok := data["sortValue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["sortValue"])
+		}(),
+		ExpiresAt: func() *int64 {
+			v, ok := data["expiresAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["expiresAt"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
 	}
 }
 
@@ -3465,8 +4128,20 @@ func NewReferenceOfFromJson(data string) ReferenceOf {
 
 func NewReferenceOfFromDict(data map[string]interface{}) ReferenceOf {
 	return ReferenceOf{
-		ReferenceOfId: core.CastString(data["referenceOfId"]),
-		Name:          core.CastString(data["name"]),
+		ReferenceOfId: func() *string {
+			v, ok := data["referenceOfId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceOfId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
 	}
 }
 
@@ -3631,13 +4306,54 @@ func NewSimpleInventoryFromJson(data string) SimpleInventory {
 
 func NewSimpleInventoryFromDict(data map[string]interface{}) SimpleInventory {
 	return SimpleInventory{
-		InventoryId:   core.CastString(data["inventoryId"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		SimpleItems:   CastSimpleItems(core.CastArray(data["simpleItems"])),
-		CreatedAt:     core.CastInt64(data["createdAt"]),
-		UpdatedAt:     core.CastInt64(data["updatedAt"]),
-		Revision:      core.CastInt64(data["revision"]),
+		InventoryId: func() *string {
+			v, ok := data["inventoryId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryId"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		SimpleItems: func() []SimpleItem {
+			if data["simpleItems"] == nil {
+				return nil
+			}
+			return CastSimpleItems(core.CastArray(data["simpleItems"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -3821,11 +4537,41 @@ func NewSimpleItemFromJson(data string) SimpleItem {
 
 func NewSimpleItemFromDict(data map[string]interface{}) SimpleItem {
 	return SimpleItem{
-		ItemId:   core.CastString(data["itemId"]),
-		UserId:   core.CastString(data["userId"]),
-		ItemName: core.CastString(data["itemName"]),
-		Count:    core.CastInt64(data["count"]),
-		Revision: core.CastInt64(data["revision"]),
+		ItemId: func() *string {
+			v, ok := data["itemId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -4001,12 +4747,47 @@ func NewBigInventoryFromJson(data string) BigInventory {
 
 func NewBigInventoryFromDict(data map[string]interface{}) BigInventory {
 	return BigInventory{
-		InventoryId:   core.CastString(data["inventoryId"]),
-		InventoryName: core.CastString(data["inventoryName"]),
-		UserId:        core.CastString(data["userId"]),
-		BigItems:      CastBigItems(core.CastArray(data["bigItems"])),
-		CreatedAt:     core.CastInt64(data["createdAt"]),
-		UpdatedAt:     core.CastInt64(data["updatedAt"]),
+		InventoryId: func() *string {
+			v, ok := data["inventoryId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryId"])
+		}(),
+		InventoryName: func() *string {
+			v, ok := data["inventoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["inventoryName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		BigItems: func() []BigItem {
+			if data["bigItems"] == nil {
+				return nil
+			}
+			return CastBigItems(core.CastArray(data["bigItems"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
 	}
 }
 
@@ -4213,13 +4994,55 @@ func NewBigItemFromJson(data string) BigItem {
 
 func NewBigItemFromDict(data map[string]interface{}) BigItem {
 	return BigItem{
-		ItemId:    core.CastString(data["itemId"]),
-		UserId:    core.CastString(data["userId"]),
-		ItemName:  core.CastString(data["itemName"]),
-		Count:     core.CastString(data["count"]),
-		CreatedAt: core.CastInt64(data["createdAt"]),
-		UpdatedAt: core.CastInt64(data["updatedAt"]),
-		Revision:  core.CastInt64(data["revision"]),
+		ItemId: func() *string {
+			v, ok := data["itemId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Count: func() *string {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["count"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -4489,13 +5312,55 @@ func NewGitHubCheckoutSettingFromJson(data string) GitHubCheckoutSetting {
 
 func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckoutSetting {
 	return GitHubCheckoutSetting{
-		ApiKeyId:       core.CastString(data["apiKeyId"]),
-		RepositoryName: core.CastString(data["repositoryName"]),
-		SourcePath:     core.CastString(data["sourcePath"]),
-		ReferenceType:  core.CastString(data["referenceType"]),
-		CommitHash:     core.CastString(data["commitHash"]),
-		BranchName:     core.CastString(data["branchName"]),
-		TagName:        core.CastString(data["tagName"]),
+		ApiKeyId: func() *string {
+			v, ok := data["apiKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyId"])
+		}(),
+		RepositoryName: func() *string {
+			v, ok := data["repositoryName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["repositoryName"])
+		}(),
+		SourcePath: func() *string {
+			v, ok := data["sourcePath"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sourcePath"])
+		}(),
+		ReferenceType: func() *string {
+			v, ok := data["referenceType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["referenceType"])
+		}(),
+		CommitHash: func() *string {
+			v, ok := data["commitHash"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["commitHash"])
+		}(),
+		BranchName: func() *string {
+			v, ok := data["branchName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["branchName"])
+		}(),
+		TagName: func() *string {
+			v, ok := data["tagName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["tagName"])
+		}(),
 	}
 }
 
@@ -4693,10 +5558,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 
@@ -4807,7 +5696,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -4907,8 +5802,20 @@ func NewAcquireCountFromJson(data string) AcquireCount {
 
 func NewAcquireCountFromDict(data map[string]interface{}) AcquireCount {
 	return AcquireCount{
-		ItemName: core.CastString(data["itemName"]),
-		Count:    core.CastInt64(data["count"]),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
@@ -5013,8 +5920,20 @@ func NewConsumeCountFromJson(data string) ConsumeCount {
 
 func NewConsumeCountFromDict(data map[string]interface{}) ConsumeCount {
 	return ConsumeCount{
-		ItemName: core.CastString(data["itemName"]),
-		Count:    core.CastInt64(data["count"]),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 
@@ -5119,8 +6038,20 @@ func NewHeldCountFromJson(data string) HeldCount {
 
 func NewHeldCountFromDict(data map[string]interface{}) HeldCount {
 	return HeldCount{
-		ItemName: core.CastString(data["itemName"]),
-		Count:    core.CastInt64(data["count"]),
+		ItemName: func() *string {
+			v, ok := data["itemName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["itemName"])
+		}(),
+		Count: func() *int64 {
+			v, ok := data["count"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["count"])
+		}(),
 	}
 }
 

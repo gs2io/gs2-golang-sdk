@@ -94,8 +94,20 @@ func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesReques
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
 	return DescribeNamespacesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -221,13 +233,55 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:                     core.CastString(data["name"]),
-		Description:              core.CastString(data["description"]),
-		TransactionSetting:       NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		UpdateMoldScript:         NewScriptSettingFromDict(core.CastMap(data["updateMoldScript"])).Pointer(),
-		UpdateFormScript:         NewScriptSettingFromDict(core.CastMap(data["updateFormScript"])).Pointer(),
-		UpdatePropertyFormScript: NewScriptSettingFromDict(core.CastMap(data["updatePropertyFormScript"])).Pointer(),
-		LogSetting:               NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		UpdateMoldScript: func() *ScriptSetting {
+			v, ok := data["updateMoldScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["updateMoldScript"])).Pointer()
+		}(),
+		UpdateFormScript: func() *ScriptSetting {
+			v, ok := data["updateFormScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["updateFormScript"])).Pointer()
+		}(),
+		UpdatePropertyFormScript: func() *ScriptSetting {
+			v, ok := data["updatePropertyFormScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["updatePropertyFormScript"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -339,7 +393,13 @@ func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusReques
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -420,7 +480,13 @@ func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
 	return GetNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -545,13 +611,55 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName:            core.CastString(data["namespaceName"]),
-		Description:              core.CastString(data["description"]),
-		TransactionSetting:       NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer(),
-		UpdateMoldScript:         NewScriptSettingFromDict(core.CastMap(data["updateMoldScript"])).Pointer(),
-		UpdateFormScript:         NewScriptSettingFromDict(core.CastMap(data["updateFormScript"])).Pointer(),
-		UpdatePropertyFormScript: NewScriptSettingFromDict(core.CastMap(data["updatePropertyFormScript"])).Pointer(),
-		LogSetting:               NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		TransactionSetting: func() *TransactionSetting {
+			v, ok := data["transactionSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionSettingFromDict(core.CastMap(data["transactionSetting"])).Pointer()
+		}(),
+		UpdateMoldScript: func() *ScriptSetting {
+			v, ok := data["updateMoldScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["updateMoldScript"])).Pointer()
+		}(),
+		UpdateFormScript: func() *ScriptSetting {
+			v, ok := data["updateFormScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["updateFormScript"])).Pointer()
+		}(),
+		UpdatePropertyFormScript: func() *ScriptSetting {
+			v, ok := data["updatePropertyFormScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["updatePropertyFormScript"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -663,7 +771,13 @@ func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, err
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -768,8 +882,20 @@ func NewDumpUserDataByUserIdRequestFromJson(data string) (DumpUserDataByUserIdRe
 
 func NewDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) DumpUserDataByUserIdRequest {
 	return DumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -875,8 +1001,20 @@ func NewCheckDumpUserDataByUserIdRequestFromJson(data string) (CheckDumpUserData
 
 func NewCheckDumpUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdRequest {
 	return CheckDumpUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -982,8 +1120,20 @@ func NewCleanUserDataByUserIdRequestFromJson(data string) (CleanUserDataByUserId
 
 func NewCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CleanUserDataByUserIdRequest {
 	return CleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1089,8 +1239,20 @@ func NewCheckCleanUserDataByUserIdRequestFromJson(data string) (CheckCleanUserDa
 
 func NewCheckCleanUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdRequest {
 	return CheckCleanUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1196,8 +1358,20 @@ func NewPrepareImportUserDataByUserIdRequestFromJson(data string) (PrepareImport
 
 func NewPrepareImportUserDataByUserIdRequestFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdRequest {
 	return PrepareImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1327,9 +1501,27 @@ func NewImportUserDataByUserIdRequestFromJson(data string) (ImportUserDataByUser
 
 func NewImportUserDataByUserIdRequestFromDict(data map[string]interface{}) ImportUserDataByUserIdRequest {
 	return ImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1460,9 +1652,27 @@ func NewCheckImportUserDataByUserIdRequestFromJson(data string) (CheckImportUser
 
 func NewCheckImportUserDataByUserIdRequestFromDict(data map[string]interface{}) CheckImportUserDataByUserIdRequest {
 	return CheckImportUserDataByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		UploadToken:     core.CastString(data["uploadToken"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -1569,8 +1779,20 @@ func NewGetFormModelRequestFromJson(data string) (GetFormModelRequest, error) {
 
 func NewGetFormModelRequestFromDict(data map[string]interface{}) GetFormModelRequest {
 	return GetFormModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
 	}
 }
 
@@ -1680,9 +1902,27 @@ func NewDescribeFormModelMastersRequestFromJson(data string) (DescribeFormModelM
 
 func NewDescribeFormModelMastersRequestFromDict(data map[string]interface{}) DescribeFormModelMastersRequest {
 	return DescribeFormModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1841,11 +2081,40 @@ func NewCreateFormModelMasterRequestFromJson(data string) (CreateFormModelMaster
 
 func NewCreateFormModelMasterRequestFromDict(data map[string]interface{}) CreateFormModelMasterRequest {
 	return CreateFormModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Name:          core.CastString(data["name"]),
-		Description:   core.CastString(data["description"]),
-		Metadata:      core.CastString(data["metadata"]),
-		Slots:         CastSlotModels(core.CastArray(data["slots"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Slots: func() []SlotModel {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlotModels(core.CastArray(data["slots"]))
+		}(),
 	}
 }
 
@@ -1956,8 +2225,20 @@ func NewGetFormModelMasterRequestFromJson(data string) (GetFormModelMasterReques
 
 func NewGetFormModelMasterRequestFromDict(data map[string]interface{}) GetFormModelMasterRequest {
 	return GetFormModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		FormModelName: core.CastString(data["formModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		FormModelName: func() *string {
+			v, ok := data["formModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["formModelName"])
+		}(),
 	}
 }
 
@@ -2115,11 +2396,40 @@ func NewUpdateFormModelMasterRequestFromJson(data string) (UpdateFormModelMaster
 
 func NewUpdateFormModelMasterRequestFromDict(data map[string]interface{}) UpdateFormModelMasterRequest {
 	return UpdateFormModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		FormModelName: core.CastString(data["formModelName"]),
-		Description:   core.CastString(data["description"]),
-		Metadata:      core.CastString(data["metadata"]),
-		Slots:         CastSlotModels(core.CastArray(data["slots"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		FormModelName: func() *string {
+			v, ok := data["formModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["formModelName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Slots: func() []SlotModel {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlotModels(core.CastArray(data["slots"]))
+		}(),
 	}
 }
 
@@ -2230,8 +2540,20 @@ func NewDeleteFormModelMasterRequestFromJson(data string) (DeleteFormModelMaster
 
 func NewDeleteFormModelMasterRequestFromDict(data map[string]interface{}) DeleteFormModelMasterRequest {
 	return DeleteFormModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		FormModelName: core.CastString(data["formModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		FormModelName: func() *string {
+			v, ok := data["formModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["formModelName"])
+		}(),
 	}
 }
 
@@ -2313,7 +2635,13 @@ func NewDescribeMoldModelsRequestFromJson(data string) (DescribeMoldModelsReques
 
 func NewDescribeMoldModelsRequestFromDict(data map[string]interface{}) DescribeMoldModelsRequest {
 	return DescribeMoldModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -2418,8 +2746,20 @@ func NewGetMoldModelRequestFromJson(data string) (GetMoldModelRequest, error) {
 
 func NewGetMoldModelRequestFromDict(data map[string]interface{}) GetMoldModelRequest {
 	return GetMoldModelRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
 	}
 }
 
@@ -2529,9 +2869,27 @@ func NewDescribeMoldModelMastersRequestFromJson(data string) (DescribeMoldModelM
 
 func NewDescribeMoldModelMastersRequestFromDict(data map[string]interface{}) DescribeMoldModelMastersRequest {
 	return DescribeMoldModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -2718,13 +3076,55 @@ func NewCreateMoldModelMasterRequestFromJson(data string) (CreateMoldModelMaster
 
 func NewCreateMoldModelMasterRequestFromDict(data map[string]interface{}) CreateMoldModelMasterRequest {
 	return CreateMoldModelMasterRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		Name:               core.CastString(data["name"]),
-		Description:        core.CastString(data["description"]),
-		Metadata:           core.CastString(data["metadata"]),
-		FormModelName:      core.CastString(data["formModelName"]),
-		InitialMaxCapacity: core.CastInt32(data["initialMaxCapacity"]),
-		MaxCapacity:        core.CastInt32(data["maxCapacity"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		FormModelName: func() *string {
+			v, ok := data["formModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["formModelName"])
+		}(),
+		InitialMaxCapacity: func() *int32 {
+			v, ok := data["initialMaxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["initialMaxCapacity"])
+		}(),
+		MaxCapacity: func() *int32 {
+			v, ok := data["maxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxCapacity"])
+		}(),
 	}
 }
 
@@ -2835,8 +3235,20 @@ func NewGetMoldModelMasterRequestFromJson(data string) (GetMoldModelMasterReques
 
 func NewGetMoldModelMasterRequestFromDict(data map[string]interface{}) GetMoldModelMasterRequest {
 	return GetMoldModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
 	}
 }
 
@@ -3022,13 +3434,55 @@ func NewUpdateMoldModelMasterRequestFromJson(data string) (UpdateMoldModelMaster
 
 func NewUpdateMoldModelMasterRequestFromDict(data map[string]interface{}) UpdateMoldModelMasterRequest {
 	return UpdateMoldModelMasterRequest{
-		NamespaceName:      core.CastString(data["namespaceName"]),
-		MoldModelName:      core.CastString(data["moldModelName"]),
-		Description:        core.CastString(data["description"]),
-		Metadata:           core.CastString(data["metadata"]),
-		FormModelName:      core.CastString(data["formModelName"]),
-		InitialMaxCapacity: core.CastInt32(data["initialMaxCapacity"]),
-		MaxCapacity:        core.CastInt32(data["maxCapacity"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		FormModelName: func() *string {
+			v, ok := data["formModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["formModelName"])
+		}(),
+		InitialMaxCapacity: func() *int32 {
+			v, ok := data["initialMaxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["initialMaxCapacity"])
+		}(),
+		MaxCapacity: func() *int32 {
+			v, ok := data["maxCapacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxCapacity"])
+		}(),
 	}
 }
 
@@ -3139,8 +3593,20 @@ func NewDeleteMoldModelMasterRequestFromJson(data string) (DeleteMoldModelMaster
 
 func NewDeleteMoldModelMasterRequestFromDict(data map[string]interface{}) DeleteMoldModelMasterRequest {
 	return DeleteMoldModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
 	}
 }
 
@@ -3222,7 +3688,13 @@ func NewDescribePropertyFormModelsRequestFromJson(data string) (DescribeProperty
 
 func NewDescribePropertyFormModelsRequestFromDict(data map[string]interface{}) DescribePropertyFormModelsRequest {
 	return DescribePropertyFormModelsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -3327,8 +3799,20 @@ func NewGetPropertyFormModelRequestFromJson(data string) (GetPropertyFormModelRe
 
 func NewGetPropertyFormModelRequestFromDict(data map[string]interface{}) GetPropertyFormModelRequest {
 	return GetPropertyFormModelRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
 	}
 }
 
@@ -3438,9 +3922,27 @@ func NewDescribePropertyFormModelMastersRequestFromJson(data string) (DescribePr
 
 func NewDescribePropertyFormModelMastersRequestFromDict(data map[string]interface{}) DescribePropertyFormModelMastersRequest {
 	return DescribePropertyFormModelMastersRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -3599,11 +4101,40 @@ func NewCreatePropertyFormModelMasterRequestFromJson(data string) (CreatePropert
 
 func NewCreatePropertyFormModelMasterRequestFromDict(data map[string]interface{}) CreatePropertyFormModelMasterRequest {
 	return CreatePropertyFormModelMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Name:          core.CastString(data["name"]),
-		Description:   core.CastString(data["description"]),
-		Metadata:      core.CastString(data["metadata"]),
-		Slots:         CastSlotModels(core.CastArray(data["slots"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Slots: func() []SlotModel {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlotModels(core.CastArray(data["slots"]))
+		}(),
 	}
 }
 
@@ -3714,8 +4245,20 @@ func NewGetPropertyFormModelMasterRequestFromJson(data string) (GetPropertyFormM
 
 func NewGetPropertyFormModelMasterRequestFromDict(data map[string]interface{}) GetPropertyFormModelMasterRequest {
 	return GetPropertyFormModelMasterRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
 	}
 }
 
@@ -3873,11 +4416,40 @@ func NewUpdatePropertyFormModelMasterRequestFromJson(data string) (UpdatePropert
 
 func NewUpdatePropertyFormModelMasterRequestFromDict(data map[string]interface{}) UpdatePropertyFormModelMasterRequest {
 	return UpdatePropertyFormModelMasterRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
-		Description:           core.CastString(data["description"]),
-		Metadata:              core.CastString(data["metadata"]),
-		Slots:                 CastSlotModels(core.CastArray(data["slots"])),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		Metadata: func() *string {
+			v, ok := data["metadata"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["metadata"])
+		}(),
+		Slots: func() []SlotModel {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlotModels(core.CastArray(data["slots"]))
+		}(),
 	}
 }
 
@@ -3988,8 +4560,20 @@ func NewDeletePropertyFormModelMasterRequestFromJson(data string) (DeletePropert
 
 func NewDeletePropertyFormModelMasterRequestFromDict(data map[string]interface{}) DeletePropertyFormModelMasterRequest {
 	return DeletePropertyFormModelMasterRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
 	}
 }
 
@@ -4071,7 +4655,13 @@ func NewExportMasterRequestFromJson(data string) (ExportMasterRequest, error) {
 
 func NewExportMasterRequestFromDict(data map[string]interface{}) ExportMasterRequest {
 	return ExportMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -4152,7 +4742,13 @@ func NewGetCurrentFormMasterRequestFromJson(data string) (GetCurrentFormMasterRe
 
 func NewGetCurrentFormMasterRequestFromDict(data map[string]interface{}) GetCurrentFormMasterRequest {
 	return GetCurrentFormMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -4257,8 +4853,20 @@ func NewUpdateCurrentFormMasterRequestFromJson(data string) (UpdateCurrentFormMa
 
 func NewUpdateCurrentFormMasterRequestFromDict(data map[string]interface{}) UpdateCurrentFormMasterRequest {
 	return UpdateCurrentFormMasterRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Settings:      core.CastString(data["settings"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Settings: func() *string {
+			v, ok := data["settings"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["settings"])
+		}(),
 	}
 }
 
@@ -4344,8 +4952,20 @@ func NewUpdateCurrentFormMasterFromGitHubRequestFromJson(data string) (UpdateCur
 
 func NewUpdateCurrentFormMasterFromGitHubRequestFromDict(data map[string]interface{}) UpdateCurrentFormMasterFromGitHubRequest {
 	return UpdateCurrentFormMasterFromGitHubRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		CheckoutSetting: NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		CheckoutSetting: func() *GitHubCheckoutSetting {
+			v, ok := data["checkoutSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGitHubCheckoutSettingFromDict(core.CastMap(data["checkoutSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -4484,10 +5104,34 @@ func NewDescribeMoldsRequestFromJson(data string) (DescribeMoldsRequest, error) 
 
 func NewDescribeMoldsRequestFromDict(data map[string]interface{}) DescribeMoldsRequest {
 	return DescribeMoldsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -4647,11 +5291,41 @@ func NewDescribeMoldsByUserIdRequestFromJson(data string) (DescribeMoldsByUserId
 
 func NewDescribeMoldsByUserIdRequestFromDict(data map[string]interface{}) DescribeMoldsByUserIdRequest {
 	return DescribeMoldsByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -4784,9 +5458,27 @@ func NewGetMoldRequestFromJson(data string) (GetMoldRequest, error) {
 
 func NewGetMoldRequestFromDict(data map[string]interface{}) GetMoldRequest {
 	return GetMoldRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
 	}
 }
 
@@ -4941,10 +5633,34 @@ func NewGetMoldByUserIdRequestFromJson(data string) (GetMoldByUserIdRequest, err
 
 func NewGetMoldByUserIdRequestFromDict(data map[string]interface{}) GetMoldByUserIdRequest {
 	return GetMoldByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		MoldModelName:   core.CastString(data["moldModelName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -5105,11 +5821,41 @@ func NewSetMoldCapacityByUserIdRequestFromJson(data string) (SetMoldCapacityByUs
 
 func NewSetMoldCapacityByUserIdRequestFromDict(data map[string]interface{}) SetMoldCapacityByUserIdRequest {
 	return SetMoldCapacityByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		MoldModelName:   core.CastString(data["moldModelName"]),
-		Capacity:        core.CastInt32(data["capacity"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Capacity: func() *int32 {
+			v, ok := data["capacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["capacity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -5271,11 +6017,41 @@ func NewAddMoldCapacityByUserIdRequestFromJson(data string) (AddMoldCapacityByUs
 
 func NewAddMoldCapacityByUserIdRequestFromDict(data map[string]interface{}) AddMoldCapacityByUserIdRequest {
 	return AddMoldCapacityByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		MoldModelName:   core.CastString(data["moldModelName"]),
-		Capacity:        core.CastInt32(data["capacity"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Capacity: func() *int32 {
+			v, ok := data["capacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["capacity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -5413,10 +6189,34 @@ func NewSubMoldCapacityRequestFromJson(data string) (SubMoldCapacityRequest, err
 
 func NewSubMoldCapacityRequestFromDict(data map[string]interface{}) SubMoldCapacityRequest {
 	return SubMoldCapacityRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Capacity:      core.CastInt32(data["capacity"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Capacity: func() *int32 {
+			v, ok := data["capacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["capacity"])
+		}(),
 	}
 }
 
@@ -5577,11 +6377,41 @@ func NewSubMoldCapacityByUserIdRequestFromJson(data string) (SubMoldCapacityByUs
 
 func NewSubMoldCapacityByUserIdRequestFromDict(data map[string]interface{}) SubMoldCapacityByUserIdRequest {
 	return SubMoldCapacityByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		MoldModelName:   core.CastString(data["moldModelName"]),
-		Capacity:        core.CastInt32(data["capacity"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Capacity: func() *int32 {
+			v, ok := data["capacity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["capacity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -5715,9 +6545,27 @@ func NewDeleteMoldRequestFromJson(data string) (DeleteMoldRequest, error) {
 
 func NewDeleteMoldRequestFromDict(data map[string]interface{}) DeleteMoldRequest {
 	return DeleteMoldRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
 	}
 }
 
@@ -5873,10 +6721,34 @@ func NewDeleteMoldByUserIdRequestFromJson(data string) (DeleteMoldByUserIdReques
 
 func NewDeleteMoldByUserIdRequestFromDict(data map[string]interface{}) DeleteMoldByUserIdRequest {
 	return DeleteMoldByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		MoldModelName:   core.CastString(data["moldModelName"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -5984,8 +6856,20 @@ func NewAddCapacityByStampSheetRequestFromJson(data string) (AddCapacityByStampS
 
 func NewAddCapacityByStampSheetRequestFromDict(data map[string]interface{}) AddCapacityByStampSheetRequest {
 	return AddCapacityByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -6091,8 +6975,20 @@ func NewSubCapacityByStampTaskRequestFromJson(data string) (SubCapacityByStampTa
 
 func NewSubCapacityByStampTaskRequestFromDict(data map[string]interface{}) SubCapacityByStampTaskRequest {
 	return SubCapacityByStampTaskRequest{
-		StampTask: core.CastString(data["stampTask"]),
-		KeyId:     core.CastString(data["keyId"]),
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -6198,8 +7094,20 @@ func NewSetCapacityByStampSheetRequestFromJson(data string) (SetCapacityByStampS
 
 func NewSetCapacityByStampSheetRequestFromDict(data map[string]interface{}) SetCapacityByStampSheetRequest {
 	return SetCapacityByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -6357,11 +7265,41 @@ func NewDescribeFormsRequestFromJson(data string) (DescribeFormsRequest, error) 
 
 func NewDescribeFormsRequestFromDict(data map[string]interface{}) DescribeFormsRequest {
 	return DescribeFormsRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -6546,12 +7484,48 @@ func NewDescribeFormsByUserIdRequestFromJson(data string) (DescribeFormsByUserId
 
 func NewDescribeFormsByUserIdRequestFromDict(data map[string]interface{}) DescribeFormsByUserIdRequest {
 	return DescribeFormsByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		MoldModelName:   core.CastString(data["moldModelName"]),
-		UserId:          core.CastString(data["userId"]),
-		PageToken:       core.CastString(data["pageToken"]),
-		Limit:           core.CastInt32(data["limit"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -6689,10 +7663,34 @@ func NewGetFormRequestFromJson(data string) (GetFormRequest, error) {
 
 func NewGetFormRequestFromDict(data map[string]interface{}) GetFormRequest {
 	return GetFormRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Index:         core.CastInt32(data["index"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Index: func() *int32 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["index"])
+		}(),
 	}
 }
 
@@ -6852,11 +7850,41 @@ func NewGetFormByUserIdRequestFromJson(data string) (GetFormByUserIdRequest, err
 
 func NewGetFormByUserIdRequestFromDict(data map[string]interface{}) GetFormByUserIdRequest {
 	return GetFormByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		MoldModelName:   core.CastString(data["moldModelName"]),
-		Index:           core.CastInt32(data["index"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Index: func() *int32 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["index"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -7017,11 +8045,41 @@ func NewGetFormWithSignatureRequestFromJson(data string) (GetFormWithSignatureRe
 
 func NewGetFormWithSignatureRequestFromDict(data map[string]interface{}) GetFormWithSignatureRequest {
 	return GetFormWithSignatureRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Index:         core.CastInt32(data["index"]),
-		KeyId:         core.CastString(data["keyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Index: func() *int32 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["index"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -7206,12 +8264,48 @@ func NewGetFormWithSignatureByUserIdRequestFromJson(data string) (GetFormWithSig
 
 func NewGetFormWithSignatureByUserIdRequestFromDict(data map[string]interface{}) GetFormWithSignatureByUserIdRequest {
 	return GetFormWithSignatureByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		MoldModelName:   core.CastString(data["moldModelName"]),
-		Index:           core.CastInt32(data["index"]),
-		KeyId:           core.CastString(data["keyId"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Index: func() *int32 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["index"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -7378,12 +8472,47 @@ func NewSetFormByUserIdRequestFromJson(data string) (SetFormByUserIdRequest, err
 
 func NewSetFormByUserIdRequestFromDict(data map[string]interface{}) SetFormByUserIdRequest {
 	return SetFormByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		MoldModelName:   core.CastString(data["moldModelName"]),
-		Index:           core.CastInt32(data["index"]),
-		Slots:           CastSlots(core.CastArray(data["slots"])),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Index: func() *int32 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["index"])
+		}(),
+		Slots: func() []Slot {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlots(core.CastArray(data["slots"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -7552,12 +8681,47 @@ func NewSetFormWithSignatureRequestFromJson(data string) (SetFormWithSignatureRe
 
 func NewSetFormWithSignatureRequestFromDict(data map[string]interface{}) SetFormWithSignatureRequest {
 	return SetFormWithSignatureRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Index:         core.CastInt32(data["index"]),
-		Slots:         CastSlotWithSignatures(core.CastArray(data["slots"])),
-		KeyId:         core.CastString(data["keyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Index: func() *int32 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["index"])
+		}(),
+		Slots: func() []SlotWithSignature {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlotWithSignatures(core.CastArray(data["slots"]))
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -7730,13 +8894,54 @@ func NewAcquireActionsToFormPropertiesRequestFromJson(data string) (AcquireActio
 
 func NewAcquireActionsToFormPropertiesRequestFromDict(data map[string]interface{}) AcquireActionsToFormPropertiesRequest {
 	return AcquireActionsToFormPropertiesRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		MoldModelName:   core.CastString(data["moldModelName"]),
-		Index:           core.CastInt32(data["index"]),
-		AcquireAction:   NewAcquireActionFromDict(core.CastMap(data["acquireAction"])).Pointer(),
-		Config:          CastConfigs(core.CastArray(data["config"])),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Index: func() *int32 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["index"])
+		}(),
+		AcquireAction: func() *AcquireAction {
+			v, ok := data["acquireAction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAcquireActionFromDict(core.CastMap(data["acquireAction"])).Pointer()
+		}(),
+		Config: func() []Config {
+			if data["config"] == nil {
+				return nil
+			}
+			return CastConfigs(core.CastArray(data["config"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -7883,10 +9088,34 @@ func NewDeleteFormRequestFromJson(data string) (DeleteFormRequest, error) {
 
 func NewDeleteFormRequestFromDict(data map[string]interface{}) DeleteFormRequest {
 	return DeleteFormRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		AccessToken:   core.CastString(data["accessToken"]),
-		MoldModelName: core.CastString(data["moldModelName"]),
-		Index:         core.CastInt32(data["index"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Index: func() *int32 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["index"])
+		}(),
 	}
 }
 
@@ -8047,11 +9276,41 @@ func NewDeleteFormByUserIdRequestFromJson(data string) (DeleteFormByUserIdReques
 
 func NewDeleteFormByUserIdRequestFromDict(data map[string]interface{}) DeleteFormByUserIdRequest {
 	return DeleteFormByUserIdRequest{
-		NamespaceName:   core.CastString(data["namespaceName"]),
-		UserId:          core.CastString(data["userId"]),
-		MoldModelName:   core.CastString(data["moldModelName"]),
-		Index:           core.CastInt32(data["index"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		MoldModelName: func() *string {
+			v, ok := data["moldModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["moldModelName"])
+		}(),
+		Index: func() *int32 {
+			v, ok := data["index"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["index"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -8160,8 +9419,20 @@ func NewAcquireActionToFormPropertiesByStampSheetRequestFromJson(data string) (A
 
 func NewAcquireActionToFormPropertiesByStampSheetRequestFromDict(data map[string]interface{}) AcquireActionToFormPropertiesByStampSheetRequest {
 	return AcquireActionToFormPropertiesByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -8267,8 +9538,20 @@ func NewSetFormByStampSheetRequestFromJson(data string) (SetFormByStampSheetRequ
 
 func NewSetFormByStampSheetRequestFromDict(data map[string]interface{}) SetFormByStampSheetRequest {
 	return SetFormByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -8426,11 +9709,41 @@ func NewDescribePropertyFormsRequestFromJson(data string) (DescribePropertyForms
 
 func NewDescribePropertyFormsRequestFromDict(data map[string]interface{}) DescribePropertyFormsRequest {
 	return DescribePropertyFormsRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		AccessToken:           core.CastString(data["accessToken"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
-		PageToken:             core.CastString(data["pageToken"]),
-		Limit:                 core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -8615,12 +9928,48 @@ func NewDescribePropertyFormsByUserIdRequestFromJson(data string) (DescribePrope
 
 func NewDescribePropertyFormsByUserIdRequestFromDict(data map[string]interface{}) DescribePropertyFormsByUserIdRequest {
 	return DescribePropertyFormsByUserIdRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		UserId:                core.CastString(data["userId"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
-		PageToken:             core.CastString(data["pageToken"]),
-		Limit:                 core.CastInt32(data["limit"]),
-		TimeOffsetToken:       core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -8778,10 +10127,34 @@ func NewGetPropertyFormRequestFromJson(data string) (GetPropertyFormRequest, err
 
 func NewGetPropertyFormRequestFromDict(data map[string]interface{}) GetPropertyFormRequest {
 	return GetPropertyFormRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		AccessToken:           core.CastString(data["accessToken"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
-		PropertyId:            core.CastString(data["propertyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
 	}
 }
 
@@ -8961,11 +10334,41 @@ func NewGetPropertyFormByUserIdRequestFromJson(data string) (GetPropertyFormByUs
 
 func NewGetPropertyFormByUserIdRequestFromDict(data map[string]interface{}) GetPropertyFormByUserIdRequest {
 	return GetPropertyFormByUserIdRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		UserId:                core.CastString(data["userId"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
-		PropertyId:            core.CastString(data["propertyId"]),
-		TimeOffsetToken:       core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -9146,11 +10549,41 @@ func NewGetPropertyFormWithSignatureRequestFromJson(data string) (GetPropertyFor
 
 func NewGetPropertyFormWithSignatureRequestFromDict(data map[string]interface{}) GetPropertyFormWithSignatureRequest {
 	return GetPropertyFormWithSignatureRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		AccessToken:           core.CastString(data["accessToken"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
-		PropertyId:            core.CastString(data["propertyId"]),
-		KeyId:                 core.CastString(data["keyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -9355,12 +10788,48 @@ func NewGetPropertyFormWithSignatureByUserIdRequestFromJson(data string) (GetPro
 
 func NewGetPropertyFormWithSignatureByUserIdRequestFromDict(data map[string]interface{}) GetPropertyFormWithSignatureByUserIdRequest {
 	return GetPropertyFormWithSignatureByUserIdRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		UserId:                core.CastString(data["userId"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
-		PropertyId:            core.CastString(data["propertyId"]),
-		KeyId:                 core.CastString(data["keyId"]),
-		TimeOffsetToken:       core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -9547,12 +11016,47 @@ func NewSetPropertyFormByUserIdRequestFromJson(data string) (SetPropertyFormByUs
 
 func NewSetPropertyFormByUserIdRequestFromDict(data map[string]interface{}) SetPropertyFormByUserIdRequest {
 	return SetPropertyFormByUserIdRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		UserId:                core.CastString(data["userId"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
-		PropertyId:            core.CastString(data["propertyId"]),
-		Slots:                 CastSlots(core.CastArray(data["slots"])),
-		TimeOffsetToken:       core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		Slots: func() []Slot {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlots(core.CastArray(data["slots"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -9741,12 +11245,47 @@ func NewSetPropertyFormWithSignatureRequestFromJson(data string) (SetPropertyFor
 
 func NewSetPropertyFormWithSignatureRequestFromDict(data map[string]interface{}) SetPropertyFormWithSignatureRequest {
 	return SetPropertyFormWithSignatureRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		AccessToken:           core.CastString(data["accessToken"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
-		PropertyId:            core.CastString(data["propertyId"]),
-		Slots:                 CastSlotWithSignatures(core.CastArray(data["slots"])),
-		KeyId:                 core.CastString(data["keyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		Slots: func() []SlotWithSignature {
+			if data["slots"] == nil {
+				return nil
+			}
+			return CastSlotWithSignatures(core.CastArray(data["slots"]))
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 
@@ -9939,13 +11478,54 @@ func NewAcquireActionsToPropertyFormPropertiesRequestFromJson(data string) (Acqu
 
 func NewAcquireActionsToPropertyFormPropertiesRequestFromDict(data map[string]interface{}) AcquireActionsToPropertyFormPropertiesRequest {
 	return AcquireActionsToPropertyFormPropertiesRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		UserId:                core.CastString(data["userId"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
-		PropertyId:            core.CastString(data["propertyId"]),
-		AcquireAction:         NewAcquireActionFromDict(core.CastMap(data["acquireAction"])).Pointer(),
-		Config:                CastConfigs(core.CastArray(data["config"])),
-		TimeOffsetToken:       core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		AcquireAction: func() *AcquireAction {
+			v, ok := data["acquireAction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAcquireActionFromDict(core.CastMap(data["acquireAction"])).Pointer()
+		}(),
+		Config: func() []Config {
+			if data["config"] == nil {
+				return nil
+			}
+			return CastConfigs(core.CastArray(data["config"]))
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -10112,10 +11692,34 @@ func NewDeletePropertyFormRequestFromJson(data string) (DeletePropertyFormReques
 
 func NewDeletePropertyFormRequestFromDict(data map[string]interface{}) DeletePropertyFormRequest {
 	return DeletePropertyFormRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		AccessToken:           core.CastString(data["accessToken"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
-		PropertyId:            core.CastString(data["propertyId"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
 	}
 }
 
@@ -10296,11 +11900,41 @@ func NewDeletePropertyFormByUserIdRequestFromJson(data string) (DeletePropertyFo
 
 func NewDeletePropertyFormByUserIdRequestFromDict(data map[string]interface{}) DeletePropertyFormByUserIdRequest {
 	return DeletePropertyFormByUserIdRequest{
-		NamespaceName:         core.CastString(data["namespaceName"]),
-		UserId:                core.CastString(data["userId"]),
-		PropertyFormModelName: core.CastString(data["propertyFormModelName"]),
-		PropertyId:            core.CastString(data["propertyId"]),
-		TimeOffsetToken:       core.CastString(data["timeOffsetToken"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PropertyFormModelName: func() *string {
+			v, ok := data["propertyFormModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyFormModelName"])
+		}(),
+		PropertyId: func() *string {
+			v, ok := data["propertyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["propertyId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -10409,8 +12043,20 @@ func NewAcquireActionToPropertyFormPropertiesByStampSheetRequestFromJson(data st
 
 func NewAcquireActionToPropertyFormPropertiesByStampSheetRequestFromDict(data map[string]interface{}) AcquireActionToPropertyFormPropertiesByStampSheetRequest {
 	return AcquireActionToPropertyFormPropertiesByStampSheetRequest{
-		StampSheet: core.CastString(data["stampSheet"]),
-		KeyId:      core.CastString(data["keyId"]),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
 	}
 }
 

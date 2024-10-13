@@ -118,9 +118,27 @@ func NewLoginRequestFromJson(data string) (LoginRequest, error) {
 
 func NewLoginRequestFromDict(data map[string]interface{}) LoginRequest {
 	return LoginRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffset:      core.CastInt32(data["timeOffset"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffset: func() *int32 {
+			v, ok := data["timeOffset"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["timeOffset"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -251,9 +269,27 @@ func NewLoginBySignatureRequestFromJson(data string) (LoginBySignatureRequest, e
 
 func NewLoginBySignatureRequestFromDict(data map[string]interface{}) LoginBySignatureRequest {
 	return LoginBySignatureRequest{
-		KeyId:     core.CastString(data["keyId"]),
-		Body:      core.CastString(data["body"]),
-		Signature: core.CastString(data["signature"]),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+		Body: func() *string {
+			v, ok := data["body"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["body"])
+		}(),
+		Signature: func() *string {
+			v, ok := data["signature"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["signature"])
+		}(),
 	}
 }
 
@@ -412,11 +448,41 @@ func NewFederationRequestFromJson(data string) (FederationRequest, error) {
 
 func NewFederationRequestFromDict(data map[string]interface{}) FederationRequest {
 	return FederationRequest{
-		OriginalUserId:  core.CastString(data["originalUserId"]),
-		UserId:          core.CastString(data["userId"]),
-		PolicyDocument:  core.CastString(data["policyDocument"]),
-		TimeOffset:      core.CastInt32(data["timeOffset"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		OriginalUserId: func() *string {
+			v, ok := data["originalUserId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["originalUserId"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		PolicyDocument: func() *string {
+			v, ok := data["policyDocument"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["policyDocument"])
+		}(),
+		TimeOffset: func() *int32 {
+			v, ok := data["timeOffset"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["timeOffset"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 
@@ -529,9 +595,27 @@ func NewIssueTimeOffsetTokenByUserIdRequestFromJson(data string) (IssueTimeOffse
 
 func NewIssueTimeOffsetTokenByUserIdRequestFromDict(data map[string]interface{}) IssueTimeOffsetTokenByUserIdRequest {
 	return IssueTimeOffsetTokenByUserIdRequest{
-		UserId:          core.CastString(data["userId"]),
-		TimeOffset:      core.CastInt32(data["timeOffset"]),
-		TimeOffsetToken: core.CastString(data["timeOffsetToken"]),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TimeOffset: func() *int32 {
+			v, ok := data["timeOffset"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["timeOffset"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
 	}
 }
 

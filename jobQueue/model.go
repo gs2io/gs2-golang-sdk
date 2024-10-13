@@ -160,16 +160,76 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:      core.CastString(data["namespaceId"]),
-		Name:             core.CastString(data["name"]),
-		Description:      core.CastString(data["description"]),
-		EnableAutoRun:    core.CastBool(data["enableAutoRun"]),
-		RunNotification:  NewNotificationSettingFromDict(core.CastMap(data["runNotification"])).Pointer(),
-		PushNotification: NewNotificationSettingFromDict(core.CastMap(data["pushNotification"])).Pointer(),
-		LogSetting:       NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:        core.CastInt64(data["createdAt"]),
-		UpdatedAt:        core.CastInt64(data["updatedAt"]),
-		Revision:         core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		EnableAutoRun: func() *bool {
+			v, ok := data["enableAutoRun"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableAutoRun"])
+		}(),
+		RunNotification: func() *NotificationSetting {
+			v, ok := data["runNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["runNotification"])).Pointer()
+		}(),
+		PushNotification: func() *NotificationSetting {
+			v, ok := data["pushNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["pushNotification"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -437,15 +497,69 @@ func NewJobFromJson(data string) Job {
 
 func NewJobFromDict(data map[string]interface{}) Job {
 	return Job{
-		JobId:             core.CastString(data["jobId"]),
-		Name:              core.CastString(data["name"]),
-		UserId:            core.CastString(data["userId"]),
-		ScriptId:          core.CastString(data["scriptId"]),
-		Args:              core.CastString(data["args"]),
-		CurrentRetryCount: core.CastInt32(data["currentRetryCount"]),
-		MaxTryCount:       core.CastInt32(data["maxTryCount"]),
-		CreatedAt:         core.CastInt64(data["createdAt"]),
-		UpdatedAt:         core.CastInt64(data["updatedAt"]),
+		JobId: func() *string {
+			v, ok := data["jobId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["jobId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ScriptId: func() *string {
+			v, ok := data["scriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scriptId"])
+		}(),
+		Args: func() *string {
+			v, ok := data["args"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["args"])
+		}(),
+		CurrentRetryCount: func() *int32 {
+			v, ok := data["currentRetryCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["currentRetryCount"])
+		}(),
+		MaxTryCount: func() *int32 {
+			v, ok := data["maxTryCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxTryCount"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
 	}
 }
 
@@ -689,14 +803,62 @@ func NewJobResultFromJson(data string) JobResult {
 
 func NewJobResultFromDict(data map[string]interface{}) JobResult {
 	return JobResult{
-		JobResultId: core.CastString(data["jobResultId"]),
-		JobId:       core.CastString(data["jobId"]),
-		ScriptId:    core.CastString(data["scriptId"]),
-		Args:        core.CastString(data["args"]),
-		TryNumber:   core.CastInt32(data["tryNumber"]),
-		StatusCode:  core.CastInt32(data["statusCode"]),
-		Result:      core.CastString(data["result"]),
-		TryAt:       core.CastInt64(data["tryAt"]),
+		JobResultId: func() *string {
+			v, ok := data["jobResultId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["jobResultId"])
+		}(),
+		JobId: func() *string {
+			v, ok := data["jobId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["jobId"])
+		}(),
+		ScriptId: func() *string {
+			v, ok := data["scriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scriptId"])
+		}(),
+		Args: func() *string {
+			v, ok := data["args"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["args"])
+		}(),
+		TryNumber: func() *int32 {
+			v, ok := data["tryNumber"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["tryNumber"])
+		}(),
+		StatusCode: func() *int32 {
+			v, ok := data["statusCode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["statusCode"])
+		}(),
+		Result: func() *string {
+			v, ok := data["result"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["result"])
+		}(),
+		TryAt: func() *int64 {
+			v, ok := data["tryAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["tryAt"])
+		}(),
 	}
 }
 
@@ -935,14 +1097,61 @@ func NewDeadLetterJobFromJson(data string) DeadLetterJob {
 
 func NewDeadLetterJobFromDict(data map[string]interface{}) DeadLetterJob {
 	return DeadLetterJob{
-		DeadLetterJobId: core.CastString(data["deadLetterJobId"]),
-		Name:            core.CastString(data["name"]),
-		UserId:          core.CastString(data["userId"]),
-		ScriptId:        core.CastString(data["scriptId"]),
-		Args:            core.CastString(data["args"]),
-		Result:          CastJobResultBodies(core.CastArray(data["result"])),
-		CreatedAt:       core.CastInt64(data["createdAt"]),
-		UpdatedAt:       core.CastInt64(data["updatedAt"]),
+		DeadLetterJobId: func() *string {
+			v, ok := data["deadLetterJobId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["deadLetterJobId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		ScriptId: func() *string {
+			v, ok := data["scriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scriptId"])
+		}(),
+		Args: func() *string {
+			v, ok := data["args"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["args"])
+		}(),
+		Result: func() []JobResultBody {
+			if data["result"] == nil {
+				return nil
+			}
+			return CastJobResultBodies(core.CastArray(data["result"]))
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
 	}
 }
 
@@ -1103,9 +1312,27 @@ func NewNotificationSettingFromJson(data string) NotificationSetting {
 
 func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSetting {
 	return NotificationSetting{
-		GatewayNamespaceId:               core.CastString(data["gatewayNamespaceId"]),
-		EnableTransferMobileNotification: core.CastBool(data["enableTransferMobileNotification"]),
-		Sound:                            core.CastString(data["sound"]),
+		GatewayNamespaceId: func() *string {
+			v, ok := data["gatewayNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["gatewayNamespaceId"])
+		}(),
+		EnableTransferMobileNotification: func() *bool {
+			v, ok := data["enableTransferMobileNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableTransferMobileNotification"])
+		}(),
+		Sound: func() *string {
+			v, ok := data["sound"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["sound"])
+		}(),
 	}
 }
 
@@ -1211,7 +1438,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 
@@ -1335,9 +1568,27 @@ func NewJobEntryFromJson(data string) JobEntry {
 
 func NewJobEntryFromDict(data map[string]interface{}) JobEntry {
 	return JobEntry{
-		ScriptId:    core.CastString(data["scriptId"]),
-		Args:        core.CastString(data["args"]),
-		MaxTryCount: core.CastInt32(data["maxTryCount"]),
+		ScriptId: func() *string {
+			v, ok := data["scriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scriptId"])
+		}(),
+		Args: func() *string {
+			v, ok := data["args"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["args"])
+		}(),
+		MaxTryCount: func() *int32 {
+			v, ok := data["maxTryCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxTryCount"])
+		}(),
 	}
 }
 
@@ -1455,10 +1706,34 @@ func NewJobResultBodyFromJson(data string) JobResultBody {
 
 func NewJobResultBodyFromDict(data map[string]interface{}) JobResultBody {
 	return JobResultBody{
-		TryNumber:  core.CastInt32(data["tryNumber"]),
-		StatusCode: core.CastInt32(data["statusCode"]),
-		Result:     core.CastString(data["result"]),
-		TryAt:      core.CastInt64(data["tryAt"]),
+		TryNumber: func() *int32 {
+			v, ok := data["tryNumber"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["tryNumber"])
+		}(),
+		StatusCode: func() *int32 {
+			v, ok := data["statusCode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["statusCode"])
+		}(),
+		Result: func() *string {
+			v, ok := data["result"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["result"])
+		}(),
+		TryAt: func() *int64 {
+			v, ok := data["tryAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["tryAt"])
+		}(),
 	}
 }
 

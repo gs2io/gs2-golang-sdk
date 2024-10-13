@@ -40,8 +40,19 @@ func NewDescribeNamespacesResultFromJson(data string) DescribeNamespacesResult {
 
 func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNamespacesResult {
 	return DescribeNamespacesResult{
-		Items:         CastNamespaces(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Namespace {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastNamespaces(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -75,7 +86,13 @@ func NewCreateNamespaceResultFromJson(data string) CreateNamespaceResult {
 
 func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespaceResult {
 	return CreateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -111,7 +128,13 @@ func NewGetNamespaceStatusResultFromJson(data string) GetNamespaceStatusResult {
 
 func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespaceStatusResult {
 	return GetNamespaceStatusResult{
-		Status: core.CastString(data["status"]),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
 	}
 }
 
@@ -142,7 +165,13 @@ func NewGetNamespaceResultFromJson(data string) GetNamespaceResult {
 
 func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResult {
 	return GetNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -178,7 +207,13 @@ func NewUpdateNamespaceResultFromJson(data string) UpdateNamespaceResult {
 
 func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespaceResult {
 	return UpdateNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -214,7 +249,13 @@ func NewDeleteNamespaceResultFromJson(data string) DeleteNamespaceResult {
 
 func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespaceResult {
 	return DeleteNamespaceResult{
-		Item: NewNamespaceFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Namespace {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -276,7 +317,13 @@ func NewCheckDumpUserDataByUserIdResultFromJson(data string) CheckDumpUserDataBy
 
 func NewCheckDumpUserDataByUserIdResultFromDict(data map[string]interface{}) CheckDumpUserDataByUserIdResult {
 	return CheckDumpUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -360,8 +407,20 @@ func NewPrepareImportUserDataByUserIdResultFromJson(data string) PrepareImportUs
 
 func NewPrepareImportUserDataByUserIdResultFromDict(data map[string]interface{}) PrepareImportUserDataByUserIdResult {
 	return PrepareImportUserDataByUserIdResult{
-		UploadToken: core.CastString(data["uploadToken"]),
-		UploadUrl:   core.CastString(data["uploadUrl"]),
+		UploadToken: func() *string {
+			v, ok := data["uploadToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadToken"])
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -419,7 +478,13 @@ func NewCheckImportUserDataByUserIdResultFromJson(data string) CheckImportUserDa
 
 func NewCheckImportUserDataByUserIdResultFromDict(data map[string]interface{}) CheckImportUserDataByUserIdResult {
 	return CheckImportUserDataByUserIdResult{
-		Url: core.CastString(data["url"]),
+		Url: func() *string {
+			v, ok := data["url"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["url"])
+		}(),
 	}
 }
 
@@ -451,8 +516,19 @@ func NewDescribeDataObjectsResultFromJson(data string) DescribeDataObjectsResult
 
 func NewDescribeDataObjectsResultFromDict(data map[string]interface{}) DescribeDataObjectsResult {
 	return DescribeDataObjectsResult{
-		Items:         CastDataObjects(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []DataObject {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastDataObjects(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -487,8 +563,19 @@ func NewDescribeDataObjectsByUserIdResultFromJson(data string) DescribeDataObjec
 
 func NewDescribeDataObjectsByUserIdResultFromDict(data map[string]interface{}) DescribeDataObjectsByUserIdResult {
 	return DescribeDataObjectsByUserIdResult{
-		Items:         CastDataObjects(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []DataObject {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastDataObjects(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -523,8 +610,20 @@ func NewPrepareUploadResultFromJson(data string) PrepareUploadResult {
 
 func NewPrepareUploadResultFromDict(data map[string]interface{}) PrepareUploadResult {
 	return PrepareUploadResult{
-		Item:      NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		UploadUrl: core.CastString(data["uploadUrl"]),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -562,8 +661,20 @@ func NewPrepareUploadByUserIdResultFromJson(data string) PrepareUploadByUserIdRe
 
 func NewPrepareUploadByUserIdResultFromDict(data map[string]interface{}) PrepareUploadByUserIdResult {
 	return PrepareUploadByUserIdResult{
-		Item:      NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		UploadUrl: core.CastString(data["uploadUrl"]),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -600,7 +711,13 @@ func NewUpdateDataObjectResultFromJson(data string) UpdateDataObjectResult {
 
 func NewUpdateDataObjectResultFromDict(data map[string]interface{}) UpdateDataObjectResult {
 	return UpdateDataObjectResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -636,7 +753,13 @@ func NewUpdateDataObjectByUserIdResultFromJson(data string) UpdateDataObjectByUs
 
 func NewUpdateDataObjectByUserIdResultFromDict(data map[string]interface{}) UpdateDataObjectByUserIdResult {
 	return UpdateDataObjectByUserIdResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -673,8 +796,20 @@ func NewPrepareReUploadResultFromJson(data string) PrepareReUploadResult {
 
 func NewPrepareReUploadResultFromDict(data map[string]interface{}) PrepareReUploadResult {
 	return PrepareReUploadResult{
-		Item:      NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		UploadUrl: core.CastString(data["uploadUrl"]),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -712,8 +847,20 @@ func NewPrepareReUploadByUserIdResultFromJson(data string) PrepareReUploadByUser
 
 func NewPrepareReUploadByUserIdResultFromDict(data map[string]interface{}) PrepareReUploadByUserIdResult {
 	return PrepareReUploadByUserIdResult{
-		Item:      NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		UploadUrl: core.CastString(data["uploadUrl"]),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		UploadUrl: func() *string {
+			v, ok := data["uploadUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["uploadUrl"])
+		}(),
 	}
 }
 
@@ -750,7 +897,13 @@ func NewDoneUploadResultFromJson(data string) DoneUploadResult {
 
 func NewDoneUploadResultFromDict(data map[string]interface{}) DoneUploadResult {
 	return DoneUploadResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -786,7 +939,13 @@ func NewDoneUploadByUserIdResultFromJson(data string) DoneUploadByUserIdResult {
 
 func NewDoneUploadByUserIdResultFromDict(data map[string]interface{}) DoneUploadByUserIdResult {
 	return DoneUploadByUserIdResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -822,7 +981,13 @@ func NewDeleteDataObjectResultFromJson(data string) DeleteDataObjectResult {
 
 func NewDeleteDataObjectResultFromDict(data map[string]interface{}) DeleteDataObjectResult {
 	return DeleteDataObjectResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -858,7 +1023,13 @@ func NewDeleteDataObjectByUserIdResultFromJson(data string) DeleteDataObjectByUs
 
 func NewDeleteDataObjectByUserIdResultFromDict(data map[string]interface{}) DeleteDataObjectByUserIdResult {
 	return DeleteDataObjectByUserIdResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -896,9 +1067,27 @@ func NewPrepareDownloadResultFromJson(data string) PrepareDownloadResult {
 
 func NewPrepareDownloadResultFromDict(data map[string]interface{}) PrepareDownloadResult {
 	return PrepareDownloadResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		FileUrl: func() *string {
+			v, ok := data["fileUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fileUrl"])
+		}(),
+		ContentLength: func() *int64 {
+			v, ok := data["contentLength"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["contentLength"])
+		}(),
 	}
 }
 
@@ -938,9 +1127,27 @@ func NewPrepareDownloadByUserIdResultFromJson(data string) PrepareDownloadByUser
 
 func NewPrepareDownloadByUserIdResultFromDict(data map[string]interface{}) PrepareDownloadByUserIdResult {
 	return PrepareDownloadByUserIdResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		FileUrl: func() *string {
+			v, ok := data["fileUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fileUrl"])
+		}(),
+		ContentLength: func() *int64 {
+			v, ok := data["contentLength"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["contentLength"])
+		}(),
 	}
 }
 
@@ -980,9 +1187,27 @@ func NewPrepareDownloadByGenerationResultFromJson(data string) PrepareDownloadBy
 
 func NewPrepareDownloadByGenerationResultFromDict(data map[string]interface{}) PrepareDownloadByGenerationResult {
 	return PrepareDownloadByGenerationResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		FileUrl: func() *string {
+			v, ok := data["fileUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fileUrl"])
+		}(),
+		ContentLength: func() *int64 {
+			v, ok := data["contentLength"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["contentLength"])
+		}(),
 	}
 }
 
@@ -1022,9 +1247,27 @@ func NewPrepareDownloadByGenerationAndUserIdResultFromJson(data string) PrepareD
 
 func NewPrepareDownloadByGenerationAndUserIdResultFromDict(data map[string]interface{}) PrepareDownloadByGenerationAndUserIdResult {
 	return PrepareDownloadByGenerationAndUserIdResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		FileUrl: func() *string {
+			v, ok := data["fileUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fileUrl"])
+		}(),
+		ContentLength: func() *int64 {
+			v, ok := data["contentLength"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["contentLength"])
+		}(),
 	}
 }
 
@@ -1064,9 +1307,27 @@ func NewPrepareDownloadOwnDataResultFromJson(data string) PrepareDownloadOwnData
 
 func NewPrepareDownloadOwnDataResultFromDict(data map[string]interface{}) PrepareDownloadOwnDataResult {
 	return PrepareDownloadOwnDataResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		FileUrl: func() *string {
+			v, ok := data["fileUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fileUrl"])
+		}(),
+		ContentLength: func() *int64 {
+			v, ok := data["contentLength"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["contentLength"])
+		}(),
 	}
 }
 
@@ -1106,9 +1367,27 @@ func NewPrepareDownloadByUserIdAndDataObjectNameResultFromJson(data string) Prep
 
 func NewPrepareDownloadByUserIdAndDataObjectNameResultFromDict(data map[string]interface{}) PrepareDownloadByUserIdAndDataObjectNameResult {
 	return PrepareDownloadByUserIdAndDataObjectNameResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		FileUrl: func() *string {
+			v, ok := data["fileUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fileUrl"])
+		}(),
+		ContentLength: func() *int64 {
+			v, ok := data["contentLength"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["contentLength"])
+		}(),
 	}
 }
 
@@ -1148,9 +1427,27 @@ func NewPrepareDownloadOwnDataByGenerationResultFromJson(data string) PrepareDow
 
 func NewPrepareDownloadOwnDataByGenerationResultFromDict(data map[string]interface{}) PrepareDownloadOwnDataByGenerationResult {
 	return PrepareDownloadOwnDataByGenerationResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		FileUrl: func() *string {
+			v, ok := data["fileUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fileUrl"])
+		}(),
+		ContentLength: func() *int64 {
+			v, ok := data["contentLength"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["contentLength"])
+		}(),
 	}
 }
 
@@ -1190,9 +1487,27 @@ func NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationResultFromJson(data
 
 func NewPrepareDownloadByUserIdAndDataObjectNameAndGenerationResultFromDict(data map[string]interface{}) PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult {
 	return PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult{
-		Item:          NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
-		FileUrl:       core.CastString(data["fileUrl"]),
-		ContentLength: core.CastInt64(data["contentLength"]),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		FileUrl: func() *string {
+			v, ok := data["fileUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["fileUrl"])
+		}(),
+		ContentLength: func() *int64 {
+			v, ok := data["contentLength"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["contentLength"])
+		}(),
 	}
 }
 
@@ -1230,7 +1545,13 @@ func NewRestoreDataObjectResultFromJson(data string) RestoreDataObjectResult {
 
 func NewRestoreDataObjectResultFromDict(data map[string]interface{}) RestoreDataObjectResult {
 	return RestoreDataObjectResult{
-		Item: NewDataObjectFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DataObject {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1267,8 +1588,19 @@ func NewDescribeDataObjectHistoriesResultFromJson(data string) DescribeDataObjec
 
 func NewDescribeDataObjectHistoriesResultFromDict(data map[string]interface{}) DescribeDataObjectHistoriesResult {
 	return DescribeDataObjectHistoriesResult{
-		Items:         CastDataObjectHistories(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []DataObjectHistory {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastDataObjectHistories(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1303,8 +1635,19 @@ func NewDescribeDataObjectHistoriesByUserIdResultFromJson(data string) DescribeD
 
 func NewDescribeDataObjectHistoriesByUserIdResultFromDict(data map[string]interface{}) DescribeDataObjectHistoriesByUserIdResult {
 	return DescribeDataObjectHistoriesByUserIdResult{
-		Items:         CastDataObjectHistories(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []DataObjectHistory {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastDataObjectHistories(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -1338,7 +1681,13 @@ func NewGetDataObjectHistoryResultFromJson(data string) GetDataObjectHistoryResu
 
 func NewGetDataObjectHistoryResultFromDict(data map[string]interface{}) GetDataObjectHistoryResult {
 	return GetDataObjectHistoryResult{
-		Item: NewDataObjectHistoryFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DataObjectHistory {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectHistoryFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
@@ -1374,7 +1723,13 @@ func NewGetDataObjectHistoryByUserIdResultFromJson(data string) GetDataObjectHis
 
 func NewGetDataObjectHistoryByUserIdResultFromDict(data map[string]interface{}) GetDataObjectHistoryByUserIdResult {
 	return GetDataObjectHistoryByUserIdResult{
-		Item: NewDataObjectHistoryFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *DataObjectHistory {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewDataObjectHistoryFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 

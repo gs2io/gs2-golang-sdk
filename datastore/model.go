@@ -152,14 +152,62 @@ func NewNamespaceFromJson(data string) Namespace {
 
 func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 	return Namespace{
-		NamespaceId:      core.CastString(data["namespaceId"]),
-		Name:             core.CastString(data["name"]),
-		Description:      core.CastString(data["description"]),
-		DoneUploadScript: NewScriptSettingFromDict(core.CastMap(data["doneUploadScript"])).Pointer(),
-		LogSetting:       NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
-		CreatedAt:        core.CastInt64(data["createdAt"]),
-		UpdatedAt:        core.CastInt64(data["updatedAt"]),
-		Revision:         core.CastInt64(data["revision"]),
+		NamespaceId: func() *string {
+			v, ok := data["namespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		DoneUploadScript: func() *ScriptSetting {
+			v, ok := data["doneUploadScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["doneUploadScript"])).Pointer()
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -372,10 +420,34 @@ func NewScriptSettingFromJson(data string) ScriptSetting {
 
 func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 	return ScriptSetting{
-		TriggerScriptId:             core.CastString(data["triggerScriptId"]),
-		DoneTriggerTargetType:       core.CastString(data["doneTriggerTargetType"]),
-		DoneTriggerScriptId:         core.CastString(data["doneTriggerScriptId"]),
-		DoneTriggerQueueNamespaceId: core.CastString(data["doneTriggerQueueNamespaceId"]),
+		TriggerScriptId: func() *string {
+			v, ok := data["triggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["triggerScriptId"])
+		}(),
+		DoneTriggerTargetType: func() *string {
+			v, ok := data["doneTriggerTargetType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerTargetType"])
+		}(),
+		DoneTriggerScriptId: func() *string {
+			v, ok := data["doneTriggerScriptId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerScriptId"])
+		}(),
+		DoneTriggerQueueNamespaceId: func() *string {
+			v, ok := data["doneTriggerQueueNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneTriggerQueueNamespaceId"])
+		}(),
 	}
 }
 
@@ -669,17 +741,83 @@ func NewDataObjectFromJson(data string) DataObject {
 
 func NewDataObjectFromDict(data map[string]interface{}) DataObject {
 	return DataObject{
-		DataObjectId:       core.CastString(data["dataObjectId"]),
-		Name:               core.CastString(data["name"]),
-		UserId:             core.CastString(data["userId"]),
-		Scope:              core.CastString(data["scope"]),
-		AllowUserIds:       core.CastStrings(core.CastArray(data["allowUserIds"])),
-		Status:             core.CastString(data["status"]),
-		Generation:         core.CastString(data["generation"]),
-		PreviousGeneration: core.CastString(data["previousGeneration"]),
-		CreatedAt:          core.CastInt64(data["createdAt"]),
-		UpdatedAt:          core.CastInt64(data["updatedAt"]),
-		Revision:           core.CastInt64(data["revision"]),
+		DataObjectId: func() *string {
+			v, ok := data["dataObjectId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["dataObjectId"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Scope: func() *string {
+			v, ok := data["scope"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["scope"])
+		}(),
+		AllowUserIds: func() []*string {
+			v, ok := data["allowUserIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+		Status: func() *string {
+			v, ok := data["status"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["status"])
+		}(),
+		Generation: func() *string {
+			v, ok := data["generation"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["generation"])
+		}(),
+		PreviousGeneration: func() *string {
+			v, ok := data["previousGeneration"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["previousGeneration"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		UpdatedAt: func() *int64 {
+			v, ok := data["updatedAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["updatedAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -887,12 +1025,48 @@ func NewDataObjectHistoryFromJson(data string) DataObjectHistory {
 
 func NewDataObjectHistoryFromDict(data map[string]interface{}) DataObjectHistory {
 	return DataObjectHistory{
-		DataObjectHistoryId: core.CastString(data["dataObjectHistoryId"]),
-		DataObjectName:      core.CastString(data["dataObjectName"]),
-		Generation:          core.CastString(data["generation"]),
-		ContentLength:       core.CastInt64(data["contentLength"]),
-		CreatedAt:           core.CastInt64(data["createdAt"]),
-		Revision:            core.CastInt64(data["revision"]),
+		DataObjectHistoryId: func() *string {
+			v, ok := data["dataObjectHistoryId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["dataObjectHistoryId"])
+		}(),
+		DataObjectName: func() *string {
+			v, ok := data["dataObjectName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["dataObjectName"])
+		}(),
+		Generation: func() *string {
+			v, ok := data["generation"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["generation"])
+		}(),
+		ContentLength: func() *int64 {
+			v, ok := data["contentLength"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["contentLength"])
+		}(),
+		CreatedAt: func() *int64 {
+			v, ok := data["createdAt"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["createdAt"])
+		}(),
+		Revision: func() *int64 {
+			v, ok := data["revision"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["revision"])
+		}(),
 	}
 }
 
@@ -1013,7 +1187,13 @@ func NewLogSettingFromJson(data string) LogSetting {
 
 func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 	return LogSetting{
-		LoggingNamespaceId: core.CastString(data["loggingNamespaceId"]),
+		LoggingNamespaceId: func() *string {
+			v, ok := data["loggingNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["loggingNamespaceId"])
+		}(),
 	}
 }
 

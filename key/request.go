@@ -94,8 +94,20 @@ func NewDescribeNamespacesRequestFromJson(data string) (DescribeNamespacesReques
 
 func NewDescribeNamespacesRequestFromDict(data map[string]interface{}) DescribeNamespacesRequest {
 	return DescribeNamespacesRequest{
-		PageToken: core.CastString(data["pageToken"]),
-		Limit:     core.CastInt32(data["limit"]),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -205,9 +217,27 @@ func NewCreateNamespaceRequestFromJson(data string) (CreateNamespaceRequest, err
 
 func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamespaceRequest {
 	return CreateNamespaceRequest{
-		Name:        core.CastString(data["name"]),
-		Description: core.CastString(data["description"]),
-		LogSetting:  NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -295,7 +325,13 @@ func NewGetNamespaceStatusRequestFromJson(data string) (GetNamespaceStatusReques
 
 func NewGetNamespaceStatusRequestFromDict(data map[string]interface{}) GetNamespaceStatusRequest {
 	return GetNamespaceStatusRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -376,7 +412,13 @@ func NewGetNamespaceRequestFromJson(data string) (GetNamespaceRequest, error) {
 
 func NewGetNamespaceRequestFromDict(data map[string]interface{}) GetNamespaceRequest {
 	return GetNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -485,9 +527,27 @@ func NewUpdateNamespaceRequestFromJson(data string) (UpdateNamespaceRequest, err
 
 func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamespaceRequest {
 	return UpdateNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Description:   core.CastString(data["description"]),
-		LogSetting:    NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		LogSetting: func() *LogSetting {
+			v, ok := data["logSetting"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewLogSettingFromDict(core.CastMap(data["logSetting"])).Pointer()
+		}(),
 	}
 }
 
@@ -575,7 +635,13 @@ func NewDeleteNamespaceRequestFromJson(data string) (DeleteNamespaceRequest, err
 
 func NewDeleteNamespaceRequestFromDict(data map[string]interface{}) DeleteNamespaceRequest {
 	return DeleteNamespaceRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
 	}
 }
 
@@ -684,9 +750,27 @@ func NewDescribeKeysRequestFromJson(data string) (DescribeKeysRequest, error) {
 
 func NewDescribeKeysRequestFromDict(data map[string]interface{}) DescribeKeysRequest {
 	return DescribeKeysRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -817,9 +901,27 @@ func NewCreateKeyRequestFromJson(data string) (CreateKeyRequest, error) {
 
 func NewCreateKeyRequestFromDict(data map[string]interface{}) CreateKeyRequest {
 	return CreateKeyRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		Name:          core.CastString(data["name"]),
-		Description:   core.CastString(data["description"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
 	}
 }
 
@@ -950,9 +1052,27 @@ func NewUpdateKeyRequestFromJson(data string) (UpdateKeyRequest, error) {
 
 func NewUpdateKeyRequestFromDict(data map[string]interface{}) UpdateKeyRequest {
 	return UpdateKeyRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		KeyName:       core.CastString(data["keyName"]),
-		Description:   core.CastString(data["description"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		KeyName: func() *string {
+			v, ok := data["keyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
 	}
 }
 
@@ -1059,8 +1179,20 @@ func NewGetKeyRequestFromJson(data string) (GetKeyRequest, error) {
 
 func NewGetKeyRequestFromDict(data map[string]interface{}) GetKeyRequest {
 	return GetKeyRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		KeyName:       core.CastString(data["keyName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		KeyName: func() *string {
+			v, ok := data["keyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyName"])
+		}(),
 	}
 }
 
@@ -1166,8 +1298,20 @@ func NewDeleteKeyRequestFromJson(data string) (DeleteKeyRequest, error) {
 
 func NewDeleteKeyRequestFromDict(data map[string]interface{}) DeleteKeyRequest {
 	return DeleteKeyRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		KeyName:       core.CastString(data["keyName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		KeyName: func() *string {
+			v, ok := data["keyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyName"])
+		}(),
 	}
 }
 
@@ -1297,9 +1441,27 @@ func NewEncryptRequestFromJson(data string) (EncryptRequest, error) {
 
 func NewEncryptRequestFromDict(data map[string]interface{}) EncryptRequest {
 	return EncryptRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		KeyName:       core.CastString(data["keyName"]),
-		Data:          core.CastString(data["data"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		KeyName: func() *string {
+			v, ok := data["keyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyName"])
+		}(),
+		Data: func() *string {
+			v, ok := data["data"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["data"])
+		}(),
 	}
 }
 
@@ -1430,9 +1592,27 @@ func NewDecryptRequestFromJson(data string) (DecryptRequest, error) {
 
 func NewDecryptRequestFromDict(data map[string]interface{}) DecryptRequest {
 	return DecryptRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		KeyName:       core.CastString(data["keyName"]),
-		Data:          core.CastString(data["data"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		KeyName: func() *string {
+			v, ok := data["keyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyName"])
+		}(),
+		Data: func() *string {
+			v, ok := data["data"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["data"])
+		}(),
 	}
 }
 
@@ -1543,9 +1723,27 @@ func NewDescribeGitHubApiKeysRequestFromJson(data string) (DescribeGitHubApiKeys
 
 func NewDescribeGitHubApiKeysRequestFromDict(data map[string]interface{}) DescribeGitHubApiKeysRequest {
 	return DescribeGitHubApiKeysRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		PageToken:     core.CastString(data["pageToken"]),
-		Limit:         core.CastInt32(data["limit"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		PageToken: func() *string {
+			v, ok := data["pageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["pageToken"])
+		}(),
+		Limit: func() *int32 {
+			v, ok := data["limit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["limit"])
+		}(),
 	}
 }
 
@@ -1724,11 +1922,41 @@ func NewCreateGitHubApiKeyRequestFromJson(data string) (CreateGitHubApiKeyReques
 
 func NewCreateGitHubApiKeyRequestFromDict(data map[string]interface{}) CreateGitHubApiKeyRequest {
 	return CreateGitHubApiKeyRequest{
-		NamespaceName:     core.CastString(data["namespaceName"]),
-		Name:              core.CastString(data["name"]),
-		Description:       core.CastString(data["description"]),
-		ApiKey:            core.CastString(data["apiKey"]),
-		EncryptionKeyName: core.CastString(data["encryptionKeyName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		Name: func() *string {
+			v, ok := data["name"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["name"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		ApiKey: func() *string {
+			v, ok := data["apiKey"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKey"])
+		}(),
+		EncryptionKeyName: func() *string {
+			v, ok := data["encryptionKeyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["encryptionKeyName"])
+		}(),
 	}
 }
 
@@ -1909,11 +2137,41 @@ func NewUpdateGitHubApiKeyRequestFromJson(data string) (UpdateGitHubApiKeyReques
 
 func NewUpdateGitHubApiKeyRequestFromDict(data map[string]interface{}) UpdateGitHubApiKeyRequest {
 	return UpdateGitHubApiKeyRequest{
-		NamespaceName:     core.CastString(data["namespaceName"]),
-		ApiKeyName:        core.CastString(data["apiKeyName"]),
-		Description:       core.CastString(data["description"]),
-		ApiKey:            core.CastString(data["apiKey"]),
-		EncryptionKeyName: core.CastString(data["encryptionKeyName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ApiKeyName: func() *string {
+			v, ok := data["apiKeyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyName"])
+		}(),
+		Description: func() *string {
+			v, ok := data["description"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["description"])
+		}(),
+		ApiKey: func() *string {
+			v, ok := data["apiKey"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKey"])
+		}(),
+		EncryptionKeyName: func() *string {
+			v, ok := data["encryptionKeyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["encryptionKeyName"])
+		}(),
 	}
 }
 
@@ -2022,8 +2280,20 @@ func NewGetGitHubApiKeyRequestFromJson(data string) (GetGitHubApiKeyRequest, err
 
 func NewGetGitHubApiKeyRequestFromDict(data map[string]interface{}) GetGitHubApiKeyRequest {
 	return GetGitHubApiKeyRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ApiKeyName:    core.CastString(data["apiKeyName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ApiKeyName: func() *string {
+			v, ok := data["apiKeyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyName"])
+		}(),
 	}
 }
 
@@ -2129,8 +2399,20 @@ func NewDeleteGitHubApiKeyRequestFromJson(data string) (DeleteGitHubApiKeyReques
 
 func NewDeleteGitHubApiKeyRequestFromDict(data map[string]interface{}) DeleteGitHubApiKeyRequest {
 	return DeleteGitHubApiKeyRequest{
-		NamespaceName: core.CastString(data["namespaceName"]),
-		ApiKeyName:    core.CastString(data["apiKeyName"]),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		ApiKeyName: func() *string {
+			v, ok := data["apiKeyName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["apiKeyName"])
+		}(),
 	}
 }
 
