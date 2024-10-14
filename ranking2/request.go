@@ -4217,6 +4217,597 @@ func (p DeleteGlobalRankingScoreByUserIdRequest) Pointer() *DeleteGlobalRankingS
 	return &p
 }
 
+type VerifyGlobalRankingScoreRequest struct {
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	RankingName                     *string `json:"rankingName"`
+	VerifyType                      *string `json:"verifyType"`
+	Season                          *int64  `json:"season"`
+	Score                           *int64  `json:"score"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+}
+
+func (p *VerifyGlobalRankingScoreRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyGlobalRankingScoreRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyGlobalRankingScoreRequest{}
+	} else {
+		*p = VerifyGlobalRankingScoreRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["rankingName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RankingName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RankingName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RankingName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RankingName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["season"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Season)
+		}
+		if v, ok := d["score"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Score)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+	}
+	return nil
+}
+
+func NewVerifyGlobalRankingScoreRequestFromJson(data string) (VerifyGlobalRankingScoreRequest, error) {
+	req := VerifyGlobalRankingScoreRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyGlobalRankingScoreRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyGlobalRankingScoreRequestFromDict(data map[string]interface{}) VerifyGlobalRankingScoreRequest {
+	return VerifyGlobalRankingScoreRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		RankingName: func() *string {
+			v, ok := data["rankingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rankingName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
+		Score: func() *int64 {
+			v, ok := data["score"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["score"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+	}
+}
+
+func (p VerifyGlobalRankingScoreRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"rankingName":                     p.RankingName,
+		"verifyType":                      p.VerifyType,
+		"season":                          p.Season,
+		"score":                           p.Score,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+	}
+}
+
+func (p VerifyGlobalRankingScoreRequest) Pointer() *VerifyGlobalRankingScoreRequest {
+	return &p
+}
+
+type VerifyGlobalRankingScoreByUserIdRequest struct {
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	RankingName                     *string `json:"rankingName"`
+	VerifyType                      *string `json:"verifyType"`
+	Season                          *int64  `json:"season"`
+	Score                           *int64  `json:"score"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
+}
+
+func (p *VerifyGlobalRankingScoreByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyGlobalRankingScoreByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyGlobalRankingScoreByUserIdRequest{}
+	} else {
+		*p = VerifyGlobalRankingScoreByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["rankingName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RankingName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RankingName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RankingName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RankingName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["season"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Season)
+		}
+		if v, ok := d["score"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Score)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyGlobalRankingScoreByUserIdRequestFromJson(data string) (VerifyGlobalRankingScoreByUserIdRequest, error) {
+	req := VerifyGlobalRankingScoreByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyGlobalRankingScoreByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyGlobalRankingScoreByUserIdRequestFromDict(data map[string]interface{}) VerifyGlobalRankingScoreByUserIdRequest {
+	return VerifyGlobalRankingScoreByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		RankingName: func() *string {
+			v, ok := data["rankingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rankingName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
+		Score: func() *int64 {
+			v, ok := data["score"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["score"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p VerifyGlobalRankingScoreByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"rankingName":                     p.RankingName,
+		"verifyType":                      p.VerifyType,
+		"season":                          p.Season,
+		"score":                           p.Score,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
+	}
+}
+
+func (p VerifyGlobalRankingScoreByUserIdRequest) Pointer() *VerifyGlobalRankingScoreByUserIdRequest {
+	return &p
+}
+
+type VerifyGlobalRankingScoreByStampTaskRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *VerifyGlobalRankingScoreByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyGlobalRankingScoreByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyGlobalRankingScoreByStampTaskRequest{}
+	} else {
+		*p = VerifyGlobalRankingScoreByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyGlobalRankingScoreByStampTaskRequestFromJson(data string) (VerifyGlobalRankingScoreByStampTaskRequest, error) {
+	req := VerifyGlobalRankingScoreByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyGlobalRankingScoreByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyGlobalRankingScoreByStampTaskRequestFromDict(data map[string]interface{}) VerifyGlobalRankingScoreByStampTaskRequest {
+	return VerifyGlobalRankingScoreByStampTaskRequest{
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p VerifyGlobalRankingScoreByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyGlobalRankingScoreByStampTaskRequest) Pointer() *VerifyGlobalRankingScoreByStampTaskRequest {
+	return &p
+}
+
 type DescribeGlobalRankingReceivedRewardsRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`
@@ -9850,6 +10441,661 @@ func (p DeleteClusterRankingScoreByUserIdRequest) ToDict() map[string]interface{
 }
 
 func (p DeleteClusterRankingScoreByUserIdRequest) Pointer() *DeleteClusterRankingScoreByUserIdRequest {
+	return &p
+}
+
+type VerifyClusterRankingScoreRequest struct {
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	RankingName                     *string `json:"rankingName"`
+	ClusterName                     *string `json:"clusterName"`
+	VerifyType                      *string `json:"verifyType"`
+	Season                          *int64  `json:"season"`
+	Score                           *int64  `json:"score"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+}
+
+func (p *VerifyClusterRankingScoreRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyClusterRankingScoreRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyClusterRankingScoreRequest{}
+	} else {
+		*p = VerifyClusterRankingScoreRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["rankingName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RankingName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RankingName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RankingName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RankingName)
+				}
+			}
+		}
+		if v, ok := d["clusterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ClusterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ClusterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ClusterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ClusterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ClusterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ClusterName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["season"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Season)
+		}
+		if v, ok := d["score"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Score)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+	}
+	return nil
+}
+
+func NewVerifyClusterRankingScoreRequestFromJson(data string) (VerifyClusterRankingScoreRequest, error) {
+	req := VerifyClusterRankingScoreRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyClusterRankingScoreRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyClusterRankingScoreRequestFromDict(data map[string]interface{}) VerifyClusterRankingScoreRequest {
+	return VerifyClusterRankingScoreRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		RankingName: func() *string {
+			v, ok := data["rankingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rankingName"])
+		}(),
+		ClusterName: func() *string {
+			v, ok := data["clusterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["clusterName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
+		Score: func() *int64 {
+			v, ok := data["score"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["score"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+	}
+}
+
+func (p VerifyClusterRankingScoreRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"rankingName":                     p.RankingName,
+		"clusterName":                     p.ClusterName,
+		"verifyType":                      p.VerifyType,
+		"season":                          p.Season,
+		"score":                           p.Score,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+	}
+}
+
+func (p VerifyClusterRankingScoreRequest) Pointer() *VerifyClusterRankingScoreRequest {
+	return &p
+}
+
+type VerifyClusterRankingScoreByUserIdRequest struct {
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	RankingName                     *string `json:"rankingName"`
+	ClusterName                     *string `json:"clusterName"`
+	VerifyType                      *string `json:"verifyType"`
+	Season                          *int64  `json:"season"`
+	Score                           *int64  `json:"score"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
+}
+
+func (p *VerifyClusterRankingScoreByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyClusterRankingScoreByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyClusterRankingScoreByUserIdRequest{}
+	} else {
+		*p = VerifyClusterRankingScoreByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["rankingName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RankingName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RankingName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RankingName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RankingName)
+				}
+			}
+		}
+		if v, ok := d["clusterName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ClusterName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ClusterName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ClusterName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ClusterName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ClusterName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ClusterName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["season"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Season)
+		}
+		if v, ok := d["score"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Score)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyClusterRankingScoreByUserIdRequestFromJson(data string) (VerifyClusterRankingScoreByUserIdRequest, error) {
+	req := VerifyClusterRankingScoreByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyClusterRankingScoreByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyClusterRankingScoreByUserIdRequestFromDict(data map[string]interface{}) VerifyClusterRankingScoreByUserIdRequest {
+	return VerifyClusterRankingScoreByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		RankingName: func() *string {
+			v, ok := data["rankingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rankingName"])
+		}(),
+		ClusterName: func() *string {
+			v, ok := data["clusterName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["clusterName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
+		Score: func() *int64 {
+			v, ok := data["score"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["score"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p VerifyClusterRankingScoreByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"rankingName":                     p.RankingName,
+		"clusterName":                     p.ClusterName,
+		"verifyType":                      p.VerifyType,
+		"season":                          p.Season,
+		"score":                           p.Score,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
+	}
+}
+
+func (p VerifyClusterRankingScoreByUserIdRequest) Pointer() *VerifyClusterRankingScoreByUserIdRequest {
+	return &p
+}
+
+type VerifyClusterRankingScoreByStampTaskRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *VerifyClusterRankingScoreByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyClusterRankingScoreByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyClusterRankingScoreByStampTaskRequest{}
+	} else {
+		*p = VerifyClusterRankingScoreByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyClusterRankingScoreByStampTaskRequestFromJson(data string) (VerifyClusterRankingScoreByStampTaskRequest, error) {
+	req := VerifyClusterRankingScoreByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifyClusterRankingScoreByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifyClusterRankingScoreByStampTaskRequestFromDict(data map[string]interface{}) VerifyClusterRankingScoreByStampTaskRequest {
+	return VerifyClusterRankingScoreByStampTaskRequest{
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p VerifyClusterRankingScoreByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifyClusterRankingScoreByStampTaskRequest) Pointer() *VerifyClusterRankingScoreByStampTaskRequest {
 	return &p
 }
 
@@ -16386,6 +17632,597 @@ func (p DeleteSubscribeRankingScoreByUserIdRequest) ToDict() map[string]interfac
 }
 
 func (p DeleteSubscribeRankingScoreByUserIdRequest) Pointer() *DeleteSubscribeRankingScoreByUserIdRequest {
+	return &p
+}
+
+type VerifySubscribeRankingScoreRequest struct {
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	AccessToken                     *string `json:"accessToken"`
+	RankingName                     *string `json:"rankingName"`
+	VerifyType                      *string `json:"verifyType"`
+	Season                          *int64  `json:"season"`
+	Score                           *int64  `json:"score"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+}
+
+func (p *VerifySubscribeRankingScoreRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifySubscribeRankingScoreRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifySubscribeRankingScoreRequest{}
+	} else {
+		*p = VerifySubscribeRankingScoreRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["rankingName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RankingName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RankingName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RankingName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RankingName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["season"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Season)
+		}
+		if v, ok := d["score"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Score)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+	}
+	return nil
+}
+
+func NewVerifySubscribeRankingScoreRequestFromJson(data string) (VerifySubscribeRankingScoreRequest, error) {
+	req := VerifySubscribeRankingScoreRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifySubscribeRankingScoreRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifySubscribeRankingScoreRequestFromDict(data map[string]interface{}) VerifySubscribeRankingScoreRequest {
+	return VerifySubscribeRankingScoreRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		RankingName: func() *string {
+			v, ok := data["rankingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rankingName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
+		Score: func() *int64 {
+			v, ok := data["score"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["score"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+	}
+}
+
+func (p VerifySubscribeRankingScoreRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"accessToken":                     p.AccessToken,
+		"rankingName":                     p.RankingName,
+		"verifyType":                      p.VerifyType,
+		"season":                          p.Season,
+		"score":                           p.Score,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+	}
+}
+
+func (p VerifySubscribeRankingScoreRequest) Pointer() *VerifySubscribeRankingScoreRequest {
+	return &p
+}
+
+type VerifySubscribeRankingScoreByUserIdRequest struct {
+	SourceRequestId                 *string `json:"sourceRequestId"`
+	RequestId                       *string `json:"requestId"`
+	ContextStack                    *string `json:"contextStack"`
+	DuplicationAvoider              *string `json:"duplicationAvoider"`
+	NamespaceName                   *string `json:"namespaceName"`
+	UserId                          *string `json:"userId"`
+	RankingName                     *string `json:"rankingName"`
+	VerifyType                      *string `json:"verifyType"`
+	Season                          *int64  `json:"season"`
+	Score                           *int64  `json:"score"`
+	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	TimeOffsetToken                 *string `json:"timeOffsetToken"`
+}
+
+func (p *VerifySubscribeRankingScoreByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifySubscribeRankingScoreByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifySubscribeRankingScoreByUserIdRequest{}
+	} else {
+		*p = VerifySubscribeRankingScoreByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["rankingName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.RankingName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.RankingName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.RankingName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.RankingName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.RankingName)
+				}
+			}
+		}
+		if v, ok := d["verifyType"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyType = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyType = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyType = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyType = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyType)
+				}
+			}
+		}
+		if v, ok := d["season"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Season)
+		}
+		if v, ok := d["score"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Score)
+		}
+		if v, ok := d["multiplyValueSpecifyingQuantity"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MultiplyValueSpecifyingQuantity)
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifySubscribeRankingScoreByUserIdRequestFromJson(data string) (VerifySubscribeRankingScoreByUserIdRequest, error) {
+	req := VerifySubscribeRankingScoreByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifySubscribeRankingScoreByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifySubscribeRankingScoreByUserIdRequestFromDict(data map[string]interface{}) VerifySubscribeRankingScoreByUserIdRequest {
+	return VerifySubscribeRankingScoreByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		RankingName: func() *string {
+			v, ok := data["rankingName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["rankingName"])
+		}(),
+		VerifyType: func() *string {
+			v, ok := data["verifyType"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyType"])
+		}(),
+		Season: func() *int64 {
+			v, ok := data["season"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["season"])
+		}(),
+		Score: func() *int64 {
+			v, ok := data["score"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt64(data["score"])
+		}(),
+		MultiplyValueSpecifyingQuantity: func() *bool {
+			v, ok := data["multiplyValueSpecifyingQuantity"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["multiplyValueSpecifyingQuantity"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p VerifySubscribeRankingScoreByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":                   p.NamespaceName,
+		"userId":                          p.UserId,
+		"rankingName":                     p.RankingName,
+		"verifyType":                      p.VerifyType,
+		"season":                          p.Season,
+		"score":                           p.Score,
+		"multiplyValueSpecifyingQuantity": p.MultiplyValueSpecifyingQuantity,
+		"timeOffsetToken":                 p.TimeOffsetToken,
+	}
+}
+
+func (p VerifySubscribeRankingScoreByUserIdRequest) Pointer() *VerifySubscribeRankingScoreByUserIdRequest {
+	return &p
+}
+
+type VerifySubscribeRankingScoreByStampTaskRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	StampTask       *string `json:"stampTask"`
+	KeyId           *string `json:"keyId"`
+}
+
+func (p *VerifySubscribeRankingScoreByStampTaskRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifySubscribeRankingScoreByStampTaskRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifySubscribeRankingScoreByStampTaskRequest{}
+	} else {
+		*p = VerifySubscribeRankingScoreByStampTaskRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["stampTask"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.StampTask = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.StampTask = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.StampTask = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.StampTask = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.StampTask)
+				}
+			}
+		}
+		if v, ok := d["keyId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.KeyId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.KeyId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.KeyId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.KeyId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.KeyId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifySubscribeRankingScoreByStampTaskRequestFromJson(data string) (VerifySubscribeRankingScoreByStampTaskRequest, error) {
+	req := VerifySubscribeRankingScoreByStampTaskRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return VerifySubscribeRankingScoreByStampTaskRequest{}, err
+	}
+	return req, nil
+}
+
+func NewVerifySubscribeRankingScoreByStampTaskRequestFromDict(data map[string]interface{}) VerifySubscribeRankingScoreByStampTaskRequest {
+	return VerifySubscribeRankingScoreByStampTaskRequest{
+		StampTask: func() *string {
+			v, ok := data["stampTask"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampTask"])
+		}(),
+		KeyId: func() *string {
+			v, ok := data["keyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["keyId"])
+		}(),
+	}
+}
+
+func (p VerifySubscribeRankingScoreByStampTaskRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"stampTask": p.StampTask,
+		"keyId":     p.KeyId,
+	}
+}
+
+func (p VerifySubscribeRankingScoreByStampTaskRequest) Pointer() *VerifySubscribeRankingScoreByStampTaskRequest {
 	return &p
 }
 

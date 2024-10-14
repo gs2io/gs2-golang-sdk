@@ -2454,6 +2454,300 @@ func (p Gs2Ranking2WebSocketClient) DeleteGlobalRankingScoreByUserId(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2Ranking2WebSocketClient) verifyGlobalRankingScoreAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyGlobalRankingScoreAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyGlobalRankingScoreAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyGlobalRankingScoreResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyGlobalRankingScoreAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyGlobalRankingScoreAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifyGlobalRankingScoreAsync(
+	request *VerifyGlobalRankingScoreRequest,
+	callback chan<- VerifyGlobalRankingScoreAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ranking2",
+			"component":   "globalRankingScore",
+			"function":    "verifyGlobalRankingScore",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		bodies["rankingName"] = *request.RankingName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.Score != nil {
+		bodies["score"] = *request.Score
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyGlobalRankingScoreAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifyGlobalRankingScore(
+	request *VerifyGlobalRankingScoreRequest,
+) (*VerifyGlobalRankingScoreResult, error) {
+	callback := make(chan VerifyGlobalRankingScoreAsyncResult, 1)
+	go p.VerifyGlobalRankingScoreAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Ranking2WebSocketClient) verifyGlobalRankingScoreByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyGlobalRankingScoreByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyGlobalRankingScoreByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyGlobalRankingScoreByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyGlobalRankingScoreByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyGlobalRankingScoreByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifyGlobalRankingScoreByUserIdAsync(
+	request *VerifyGlobalRankingScoreByUserIdRequest,
+	callback chan<- VerifyGlobalRankingScoreByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ranking2",
+			"component":   "globalRankingScore",
+			"function":    "verifyGlobalRankingScoreByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		bodies["rankingName"] = *request.RankingName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.Score != nil {
+		bodies["score"] = *request.Score
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyGlobalRankingScoreByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifyGlobalRankingScoreByUserId(
+	request *VerifyGlobalRankingScoreByUserIdRequest,
+) (*VerifyGlobalRankingScoreByUserIdResult, error) {
+	callback := make(chan VerifyGlobalRankingScoreByUserIdAsyncResult, 1)
+	go p.VerifyGlobalRankingScoreByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Ranking2WebSocketClient) verifyGlobalRankingScoreByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyGlobalRankingScoreByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyGlobalRankingScoreByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyGlobalRankingScoreByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyGlobalRankingScoreByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyGlobalRankingScoreByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifyGlobalRankingScoreByStampTaskAsync(
+	request *VerifyGlobalRankingScoreByStampTaskRequest,
+	callback chan<- VerifyGlobalRankingScoreByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ranking2",
+			"component":   "globalRankingScore",
+			"function":    "verifyGlobalRankingScoreByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.verifyGlobalRankingScoreByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifyGlobalRankingScoreByStampTask(
+	request *VerifyGlobalRankingScoreByStampTaskRequest,
+) (*VerifyGlobalRankingScoreByStampTaskResult, error) {
+	callback := make(chan VerifyGlobalRankingScoreByStampTaskAsyncResult, 1)
+	go p.VerifyGlobalRankingScoreByStampTaskAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2Ranking2WebSocketClient) describeGlobalRankingReceivedRewardsAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribeGlobalRankingReceivedRewardsAsyncResult,
@@ -5154,6 +5448,306 @@ func (p Gs2Ranking2WebSocketClient) DeleteClusterRankingScoreByUserId(
 ) (*DeleteClusterRankingScoreByUserIdResult, error) {
 	callback := make(chan DeleteClusterRankingScoreByUserIdAsyncResult, 1)
 	go p.DeleteClusterRankingScoreByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Ranking2WebSocketClient) verifyClusterRankingScoreAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyClusterRankingScoreAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyClusterRankingScoreAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyClusterRankingScoreResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyClusterRankingScoreAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyClusterRankingScoreAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifyClusterRankingScoreAsync(
+	request *VerifyClusterRankingScoreRequest,
+	callback chan<- VerifyClusterRankingScoreAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ranking2",
+			"component":   "clusterRankingScore",
+			"function":    "verifyClusterRankingScore",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		bodies["rankingName"] = *request.RankingName
+	}
+	if request.ClusterName != nil && *request.ClusterName != "" {
+		bodies["clusterName"] = *request.ClusterName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.Score != nil {
+		bodies["score"] = *request.Score
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyClusterRankingScoreAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifyClusterRankingScore(
+	request *VerifyClusterRankingScoreRequest,
+) (*VerifyClusterRankingScoreResult, error) {
+	callback := make(chan VerifyClusterRankingScoreAsyncResult, 1)
+	go p.VerifyClusterRankingScoreAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Ranking2WebSocketClient) verifyClusterRankingScoreByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyClusterRankingScoreByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyClusterRankingScoreByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyClusterRankingScoreByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyClusterRankingScoreByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyClusterRankingScoreByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifyClusterRankingScoreByUserIdAsync(
+	request *VerifyClusterRankingScoreByUserIdRequest,
+	callback chan<- VerifyClusterRankingScoreByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ranking2",
+			"component":   "clusterRankingScore",
+			"function":    "verifyClusterRankingScoreByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		bodies["rankingName"] = *request.RankingName
+	}
+	if request.ClusterName != nil && *request.ClusterName != "" {
+		bodies["clusterName"] = *request.ClusterName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.Score != nil {
+		bodies["score"] = *request.Score
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifyClusterRankingScoreByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifyClusterRankingScoreByUserId(
+	request *VerifyClusterRankingScoreByUserIdRequest,
+) (*VerifyClusterRankingScoreByUserIdResult, error) {
+	callback := make(chan VerifyClusterRankingScoreByUserIdAsyncResult, 1)
+	go p.VerifyClusterRankingScoreByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Ranking2WebSocketClient) verifyClusterRankingScoreByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifyClusterRankingScoreByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifyClusterRankingScoreByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifyClusterRankingScoreByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifyClusterRankingScoreByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifyClusterRankingScoreByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifyClusterRankingScoreByStampTaskAsync(
+	request *VerifyClusterRankingScoreByStampTaskRequest,
+	callback chan<- VerifyClusterRankingScoreByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ranking2",
+			"component":   "clusterRankingScore",
+			"function":    "verifyClusterRankingScoreByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.verifyClusterRankingScoreByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifyClusterRankingScoreByStampTask(
+	request *VerifyClusterRankingScoreByStampTaskRequest,
+) (*VerifyClusterRankingScoreByStampTaskResult, error) {
+	callback := make(chan VerifyClusterRankingScoreByStampTaskAsyncResult, 1)
+	go p.VerifyClusterRankingScoreByStampTaskAsync(
 		request,
 		callback,
 	)
@@ -8237,6 +8831,300 @@ func (p Gs2Ranking2WebSocketClient) DeleteSubscribeRankingScoreByUserId(
 ) (*DeleteSubscribeRankingScoreByUserIdResult, error) {
 	callback := make(chan DeleteSubscribeRankingScoreByUserIdAsyncResult, 1)
 	go p.DeleteSubscribeRankingScoreByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Ranking2WebSocketClient) verifySubscribeRankingScoreAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifySubscribeRankingScoreAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifySubscribeRankingScoreAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifySubscribeRankingScoreResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifySubscribeRankingScoreAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifySubscribeRankingScoreAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifySubscribeRankingScoreAsync(
+	request *VerifySubscribeRankingScoreRequest,
+	callback chan<- VerifySubscribeRankingScoreAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ranking2",
+			"component":   "subscribeRankingScore",
+			"function":    "verifySubscribeRankingScore",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		bodies["rankingName"] = *request.RankingName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.Score != nil {
+		bodies["score"] = *request.Score
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifySubscribeRankingScoreAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifySubscribeRankingScore(
+	request *VerifySubscribeRankingScoreRequest,
+) (*VerifySubscribeRankingScoreResult, error) {
+	callback := make(chan VerifySubscribeRankingScoreAsyncResult, 1)
+	go p.VerifySubscribeRankingScoreAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Ranking2WebSocketClient) verifySubscribeRankingScoreByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifySubscribeRankingScoreByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifySubscribeRankingScoreByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifySubscribeRankingScoreByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifySubscribeRankingScoreByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifySubscribeRankingScoreByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifySubscribeRankingScoreByUserIdAsync(
+	request *VerifySubscribeRankingScoreByUserIdRequest,
+	callback chan<- VerifySubscribeRankingScoreByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ranking2",
+			"component":   "subscribeRankingScore",
+			"function":    "verifySubscribeRankingScoreByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.RankingName != nil && *request.RankingName != "" {
+		bodies["rankingName"] = *request.RankingName
+	}
+	if request.VerifyType != nil && *request.VerifyType != "" {
+		bodies["verifyType"] = *request.VerifyType
+	}
+	if request.Season != nil {
+		bodies["season"] = *request.Season
+	}
+	if request.Score != nil {
+		bodies["score"] = *request.Score
+	}
+	if request.MultiplyValueSpecifyingQuantity != nil {
+		bodies["multiplyValueSpecifyingQuantity"] = *request.MultiplyValueSpecifyingQuantity
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+
+	go p.verifySubscribeRankingScoreByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifySubscribeRankingScoreByUserId(
+	request *VerifySubscribeRankingScoreByUserIdRequest,
+) (*VerifySubscribeRankingScoreByUserIdResult, error) {
+	callback := make(chan VerifySubscribeRankingScoreByUserIdAsyncResult, 1)
+	go p.VerifySubscribeRankingScoreByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2Ranking2WebSocketClient) verifySubscribeRankingScoreByStampTaskAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- VerifySubscribeRankingScoreByStampTaskAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- VerifySubscribeRankingScoreByStampTaskAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result VerifySubscribeRankingScoreByStampTaskResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- VerifySubscribeRankingScoreByStampTaskAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- VerifySubscribeRankingScoreByStampTaskAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifySubscribeRankingScoreByStampTaskAsync(
+	request *VerifySubscribeRankingScoreByStampTaskRequest,
+	callback chan<- VerifySubscribeRankingScoreByStampTaskAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "ranking2",
+			"component":   "subscribeRankingScore",
+			"function":    "verifySubscribeRankingScoreByStampTask",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.StampTask != nil && *request.StampTask != "" {
+		bodies["stampTask"] = *request.StampTask
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.verifySubscribeRankingScoreByStampTaskAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2Ranking2WebSocketClient) VerifySubscribeRankingScoreByStampTask(
+	request *VerifySubscribeRankingScoreByStampTaskRequest,
+) (*VerifySubscribeRankingScoreByStampTaskResult, error) {
+	callback := make(chan VerifySubscribeRankingScoreByStampTaskAsyncResult, 1)
+	go p.VerifySubscribeRankingScoreByStampTaskAsync(
 		request,
 		callback,
 	)

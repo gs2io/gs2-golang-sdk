@@ -1097,6 +1097,141 @@ func (p DeleteGlobalRankingScoreByUserIdResult) Pointer() *DeleteGlobalRankingSc
 	return &p
 }
 
+type VerifyGlobalRankingScoreResult struct {
+	Item *GlobalRankingScore `json:"item"`
+}
+
+type VerifyGlobalRankingScoreAsyncResult struct {
+	result *VerifyGlobalRankingScoreResult
+	err    error
+}
+
+func NewVerifyGlobalRankingScoreResultFromJson(data string) VerifyGlobalRankingScoreResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyGlobalRankingScoreResultFromDict(dict)
+}
+
+func NewVerifyGlobalRankingScoreResultFromDict(data map[string]interface{}) VerifyGlobalRankingScoreResult {
+	return VerifyGlobalRankingScoreResult{
+		Item: func() *GlobalRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+	}
+}
+
+func (p VerifyGlobalRankingScoreResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyGlobalRankingScoreResult) Pointer() *VerifyGlobalRankingScoreResult {
+	return &p
+}
+
+type VerifyGlobalRankingScoreByUserIdResult struct {
+	Item *GlobalRankingScore `json:"item"`
+}
+
+type VerifyGlobalRankingScoreByUserIdAsyncResult struct {
+	result *VerifyGlobalRankingScoreByUserIdResult
+	err    error
+}
+
+func NewVerifyGlobalRankingScoreByUserIdResultFromJson(data string) VerifyGlobalRankingScoreByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyGlobalRankingScoreByUserIdResultFromDict(dict)
+}
+
+func NewVerifyGlobalRankingScoreByUserIdResultFromDict(data map[string]interface{}) VerifyGlobalRankingScoreByUserIdResult {
+	return VerifyGlobalRankingScoreByUserIdResult{
+		Item: func() *GlobalRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+	}
+}
+
+func (p VerifyGlobalRankingScoreByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyGlobalRankingScoreByUserIdResult) Pointer() *VerifyGlobalRankingScoreByUserIdResult {
+	return &p
+}
+
+type VerifyGlobalRankingScoreByStampTaskResult struct {
+	Item            *GlobalRankingScore `json:"item"`
+	NewContextStack *string             `json:"newContextStack"`
+}
+
+type VerifyGlobalRankingScoreByStampTaskAsyncResult struct {
+	result *VerifyGlobalRankingScoreByStampTaskResult
+	err    error
+}
+
+func NewVerifyGlobalRankingScoreByStampTaskResultFromJson(data string) VerifyGlobalRankingScoreByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyGlobalRankingScoreByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyGlobalRankingScoreByStampTaskResultFromDict(data map[string]interface{}) VerifyGlobalRankingScoreByStampTaskResult {
+	return VerifyGlobalRankingScoreByStampTaskResult{
+		Item: func() *GlobalRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGlobalRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+	}
+}
+
+func (p VerifyGlobalRankingScoreByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyGlobalRankingScoreByStampTaskResult) Pointer() *VerifyGlobalRankingScoreByStampTaskResult {
+	return &p
+}
+
 type DescribeGlobalRankingReceivedRewardsResult struct {
 	Items         []GlobalRankingReceivedReward `json:"items"`
 	NextPageToken *string                       `json:"nextPageToken"`
@@ -2402,6 +2537,141 @@ func (p DeleteClusterRankingScoreByUserIdResult) ToDict() map[string]interface{}
 }
 
 func (p DeleteClusterRankingScoreByUserIdResult) Pointer() *DeleteClusterRankingScoreByUserIdResult {
+	return &p
+}
+
+type VerifyClusterRankingScoreResult struct {
+	Item *ClusterRankingScore `json:"item"`
+}
+
+type VerifyClusterRankingScoreAsyncResult struct {
+	result *VerifyClusterRankingScoreResult
+	err    error
+}
+
+func NewVerifyClusterRankingScoreResultFromJson(data string) VerifyClusterRankingScoreResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyClusterRankingScoreResultFromDict(dict)
+}
+
+func NewVerifyClusterRankingScoreResultFromDict(data map[string]interface{}) VerifyClusterRankingScoreResult {
+	return VerifyClusterRankingScoreResult{
+		Item: func() *ClusterRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+	}
+}
+
+func (p VerifyClusterRankingScoreResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyClusterRankingScoreResult) Pointer() *VerifyClusterRankingScoreResult {
+	return &p
+}
+
+type VerifyClusterRankingScoreByUserIdResult struct {
+	Item *ClusterRankingScore `json:"item"`
+}
+
+type VerifyClusterRankingScoreByUserIdAsyncResult struct {
+	result *VerifyClusterRankingScoreByUserIdResult
+	err    error
+}
+
+func NewVerifyClusterRankingScoreByUserIdResultFromJson(data string) VerifyClusterRankingScoreByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyClusterRankingScoreByUserIdResultFromDict(dict)
+}
+
+func NewVerifyClusterRankingScoreByUserIdResultFromDict(data map[string]interface{}) VerifyClusterRankingScoreByUserIdResult {
+	return VerifyClusterRankingScoreByUserIdResult{
+		Item: func() *ClusterRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+	}
+}
+
+func (p VerifyClusterRankingScoreByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p VerifyClusterRankingScoreByUserIdResult) Pointer() *VerifyClusterRankingScoreByUserIdResult {
+	return &p
+}
+
+type VerifyClusterRankingScoreByStampTaskResult struct {
+	Item            *ClusterRankingScore `json:"item"`
+	NewContextStack *string              `json:"newContextStack"`
+}
+
+type VerifyClusterRankingScoreByStampTaskAsyncResult struct {
+	result *VerifyClusterRankingScoreByStampTaskResult
+	err    error
+}
+
+func NewVerifyClusterRankingScoreByStampTaskResultFromJson(data string) VerifyClusterRankingScoreByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifyClusterRankingScoreByStampTaskResultFromDict(dict)
+}
+
+func NewVerifyClusterRankingScoreByStampTaskResultFromDict(data map[string]interface{}) VerifyClusterRankingScoreByStampTaskResult {
+	return VerifyClusterRankingScoreByStampTaskResult{
+		Item: func() *ClusterRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewClusterRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+	}
+}
+
+func (p VerifyClusterRankingScoreByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifyClusterRankingScoreByStampTaskResult) Pointer() *VerifyClusterRankingScoreByStampTaskResult {
 	return &p
 }
 
@@ -3888,6 +4158,141 @@ func (p DeleteSubscribeRankingScoreByUserIdResult) ToDict() map[string]interface
 }
 
 func (p DeleteSubscribeRankingScoreByUserIdResult) Pointer() *DeleteSubscribeRankingScoreByUserIdResult {
+	return &p
+}
+
+type VerifySubscribeRankingScoreResult struct {
+	Item *SubscribeRankingScore `json:"item"`
+}
+
+type VerifySubscribeRankingScoreAsyncResult struct {
+	result *VerifySubscribeRankingScoreResult
+	err    error
+}
+
+func NewVerifySubscribeRankingScoreResultFromJson(data string) VerifySubscribeRankingScoreResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifySubscribeRankingScoreResultFromDict(dict)
+}
+
+func NewVerifySubscribeRankingScoreResultFromDict(data map[string]interface{}) VerifySubscribeRankingScoreResult {
+	return VerifySubscribeRankingScoreResult{
+		Item: func() *SubscribeRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+	}
+}
+
+func (p VerifySubscribeRankingScoreResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p VerifySubscribeRankingScoreResult) Pointer() *VerifySubscribeRankingScoreResult {
+	return &p
+}
+
+type VerifySubscribeRankingScoreByUserIdResult struct {
+	Item *SubscribeRankingScore `json:"item"`
+}
+
+type VerifySubscribeRankingScoreByUserIdAsyncResult struct {
+	result *VerifySubscribeRankingScoreByUserIdResult
+	err    error
+}
+
+func NewVerifySubscribeRankingScoreByUserIdResultFromJson(data string) VerifySubscribeRankingScoreByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifySubscribeRankingScoreByUserIdResultFromDict(dict)
+}
+
+func NewVerifySubscribeRankingScoreByUserIdResultFromDict(data map[string]interface{}) VerifySubscribeRankingScoreByUserIdResult {
+	return VerifySubscribeRankingScoreByUserIdResult{
+		Item: func() *SubscribeRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+	}
+}
+
+func (p VerifySubscribeRankingScoreByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p VerifySubscribeRankingScoreByUserIdResult) Pointer() *VerifySubscribeRankingScoreByUserIdResult {
+	return &p
+}
+
+type VerifySubscribeRankingScoreByStampTaskResult struct {
+	Item            *SubscribeRankingScore `json:"item"`
+	NewContextStack *string                `json:"newContextStack"`
+}
+
+type VerifySubscribeRankingScoreByStampTaskAsyncResult struct {
+	result *VerifySubscribeRankingScoreByStampTaskResult
+	err    error
+}
+
+func NewVerifySubscribeRankingScoreByStampTaskResultFromJson(data string) VerifySubscribeRankingScoreByStampTaskResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewVerifySubscribeRankingScoreByStampTaskResultFromDict(dict)
+}
+
+func NewVerifySubscribeRankingScoreByStampTaskResultFromDict(data map[string]interface{}) VerifySubscribeRankingScoreByStampTaskResult {
+	return VerifySubscribeRankingScoreByStampTaskResult{
+		Item: func() *SubscribeRankingScore {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSubscribeRankingScoreFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+	}
+}
+
+func (p VerifySubscribeRankingScoreByStampTaskResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p VerifySubscribeRankingScoreByStampTaskResult) Pointer() *VerifySubscribeRankingScoreByStampTaskResult {
 	return &p
 }
 
