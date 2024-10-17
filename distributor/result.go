@@ -1414,6 +1414,80 @@ func (p SetTransactionDefaultConfigByUserIdResult) Pointer() *SetTransactionDefa
 	return &p
 }
 
+type FreezeMasterDataResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type FreezeMasterDataAsyncResult struct {
+	result *FreezeMasterDataResult
+	err    error
+}
+
+func NewFreezeMasterDataResultFromJson(data string) FreezeMasterDataResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFreezeMasterDataResultFromDict(dict)
+}
+
+func NewFreezeMasterDataResultFromDict(data map[string]interface{}) FreezeMasterDataResult {
+	return FreezeMasterDataResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+	}
+}
+
+func (p FreezeMasterDataResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p FreezeMasterDataResult) Pointer() *FreezeMasterDataResult {
+	return &p
+}
+
+type FreezeMasterDataByUserIdResult struct {
+	NewContextStack *string `json:"newContextStack"`
+}
+
+type FreezeMasterDataByUserIdAsyncResult struct {
+	result *FreezeMasterDataByUserIdResult
+	err    error
+}
+
+func NewFreezeMasterDataByUserIdResultFromJson(data string) FreezeMasterDataByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewFreezeMasterDataByUserIdResultFromDict(dict)
+}
+
+func NewFreezeMasterDataByUserIdResultFromDict(data map[string]interface{}) FreezeMasterDataByUserIdResult {
+	return FreezeMasterDataByUserIdResult{
+		NewContextStack: func() *string {
+			v, ok := data["newContextStack"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["newContextStack"])
+		}(),
+	}
+}
+
+func (p FreezeMasterDataByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"newContextStack": p.NewContextStack,
+	}
+}
+
+func (p FreezeMasterDataByUserIdResult) Pointer() *FreezeMasterDataByUserIdResult {
+	return &p
+}
+
 type IfExpressionByUserIdResult struct {
 }
 
