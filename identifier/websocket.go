@@ -1285,6 +1285,264 @@ func (p Gs2IdentifierWebSocketClient) DeleteIdentifier(
 	return asyncResult.result, asyncResult.err
 }
 
+func (p Gs2IdentifierWebSocketClient) describeAttachedGuardsAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DescribeAttachedGuardsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeAttachedGuardsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeAttachedGuardsResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeAttachedGuardsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DescribeAttachedGuardsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2IdentifierWebSocketClient) DescribeAttachedGuardsAsync(
+	request *DescribeAttachedGuardsRequest,
+	callback chan<- DescribeAttachedGuardsAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "identifier",
+			"component":   "identifier",
+			"function":    "describeAttachedGuards",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.ClientId != nil && *request.ClientId != "" {
+		bodies["clientId"] = *request.ClientId
+	}
+	if request.UserName != nil && *request.UserName != "" {
+		bodies["userName"] = *request.UserName
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.describeAttachedGuardsAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2IdentifierWebSocketClient) DescribeAttachedGuards(
+	request *DescribeAttachedGuardsRequest,
+) (*DescribeAttachedGuardsResult, error) {
+	callback := make(chan DescribeAttachedGuardsAsyncResult, 1)
+	go p.DescribeAttachedGuardsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2IdentifierWebSocketClient) attachGuardAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- AttachGuardAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AttachGuardAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AttachGuardResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AttachGuardAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- AttachGuardAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2IdentifierWebSocketClient) AttachGuardAsync(
+	request *AttachGuardRequest,
+	callback chan<- AttachGuardAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "identifier",
+			"component":   "identifier",
+			"function":    "attachGuard",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.UserName != nil && *request.UserName != "" {
+		bodies["userName"] = *request.UserName
+	}
+	if request.ClientId != nil && *request.ClientId != "" {
+		bodies["clientId"] = *request.ClientId
+	}
+	if request.GuardNamespaceId != nil && *request.GuardNamespaceId != "" {
+		bodies["guardNamespaceId"] = *request.GuardNamespaceId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.attachGuardAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2IdentifierWebSocketClient) AttachGuard(
+	request *AttachGuardRequest,
+) (*AttachGuardResult, error) {
+	callback := make(chan AttachGuardAsyncResult, 1)
+	go p.AttachGuardAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2IdentifierWebSocketClient) detachGuardAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- DetachGuardAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DetachGuardAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DetachGuardResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DetachGuardAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- DetachGuardAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2IdentifierWebSocketClient) DetachGuardAsync(
+	request *DetachGuardRequest,
+	callback chan<- DetachGuardAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "identifier",
+			"component":   "identifier",
+			"function":    "detachGuard",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.UserName != nil && *request.UserName != "" {
+		bodies["userName"] = *request.UserName
+	}
+	if request.ClientId != nil && *request.ClientId != "" {
+		bodies["clientId"] = *request.ClientId
+	}
+	if request.GuardNamespaceId != nil && *request.GuardNamespaceId != "" {
+		bodies["guardNamespaceId"] = *request.GuardNamespaceId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	go p.detachGuardAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2IdentifierWebSocketClient) DetachGuard(
+	request *DetachGuardRequest,
+) (*DetachGuardResult, error) {
+	callback := make(chan DetachGuardAsyncResult, 1)
+	go p.DetachGuardAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func (p Gs2IdentifierWebSocketClient) describePasswordsAsyncHandler(
 	job *core.WebSocketNetworkJob,
 	callback chan<- DescribePasswordsAsyncResult,

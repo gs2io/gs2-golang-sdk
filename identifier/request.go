@@ -1664,6 +1664,427 @@ func (p DeleteIdentifierRequest) Pointer() *DeleteIdentifierRequest {
 	return &p
 }
 
+type DescribeAttachedGuardsRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	ClientId        *string `json:"clientId"`
+	UserName        *string `json:"userName"`
+}
+
+func (p *DescribeAttachedGuardsRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DescribeAttachedGuardsRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DescribeAttachedGuardsRequest{}
+	} else {
+		*p = DescribeAttachedGuardsRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["clientId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ClientId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ClientId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ClientId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ClientId)
+				}
+			}
+		}
+		if v, ok := d["userName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserName)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDescribeAttachedGuardsRequestFromJson(data string) (DescribeAttachedGuardsRequest, error) {
+	req := DescribeAttachedGuardsRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DescribeAttachedGuardsRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDescribeAttachedGuardsRequestFromDict(data map[string]interface{}) DescribeAttachedGuardsRequest {
+	return DescribeAttachedGuardsRequest{
+		ClientId: func() *string {
+			v, ok := data["clientId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["clientId"])
+		}(),
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+	}
+}
+
+func (p DescribeAttachedGuardsRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"clientId": p.ClientId,
+		"userName": p.UserName,
+	}
+}
+
+func (p DescribeAttachedGuardsRequest) Pointer() *DescribeAttachedGuardsRequest {
+	return &p
+}
+
+type AttachGuardRequest struct {
+	SourceRequestId  *string `json:"sourceRequestId"`
+	RequestId        *string `json:"requestId"`
+	ContextStack     *string `json:"contextStack"`
+	UserName         *string `json:"userName"`
+	ClientId         *string `json:"clientId"`
+	GuardNamespaceId *string `json:"guardNamespaceId"`
+}
+
+func (p *AttachGuardRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AttachGuardRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AttachGuardRequest{}
+	} else {
+		*p = AttachGuardRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserName)
+				}
+			}
+		}
+		if v, ok := d["clientId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ClientId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ClientId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ClientId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ClientId)
+				}
+			}
+		}
+		if v, ok := d["guardNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuardNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuardNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuardNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuardNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuardNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuardNamespaceId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewAttachGuardRequestFromJson(data string) (AttachGuardRequest, error) {
+	req := AttachGuardRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return AttachGuardRequest{}, err
+	}
+	return req, nil
+}
+
+func NewAttachGuardRequestFromDict(data map[string]interface{}) AttachGuardRequest {
+	return AttachGuardRequest{
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		ClientId: func() *string {
+			v, ok := data["clientId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["clientId"])
+		}(),
+		GuardNamespaceId: func() *string {
+			v, ok := data["guardNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guardNamespaceId"])
+		}(),
+	}
+}
+
+func (p AttachGuardRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userName":         p.UserName,
+		"clientId":         p.ClientId,
+		"guardNamespaceId": p.GuardNamespaceId,
+	}
+}
+
+func (p AttachGuardRequest) Pointer() *AttachGuardRequest {
+	return &p
+}
+
+type DetachGuardRequest struct {
+	SourceRequestId  *string `json:"sourceRequestId"`
+	RequestId        *string `json:"requestId"`
+	ContextStack     *string `json:"contextStack"`
+	UserName         *string `json:"userName"`
+	ClientId         *string `json:"clientId"`
+	GuardNamespaceId *string `json:"guardNamespaceId"`
+}
+
+func (p *DetachGuardRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = DetachGuardRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = DetachGuardRequest{}
+	} else {
+		*p = DetachGuardRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["userName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserName)
+				}
+			}
+		}
+		if v, ok := d["clientId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ClientId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ClientId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ClientId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ClientId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ClientId)
+				}
+			}
+		}
+		if v, ok := d["guardNamespaceId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuardNamespaceId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuardNamespaceId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuardNamespaceId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuardNamespaceId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuardNamespaceId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuardNamespaceId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewDetachGuardRequestFromJson(data string) (DetachGuardRequest, error) {
+	req := DetachGuardRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return DetachGuardRequest{}, err
+	}
+	return req, nil
+}
+
+func NewDetachGuardRequestFromDict(data map[string]interface{}) DetachGuardRequest {
+	return DetachGuardRequest{
+		UserName: func() *string {
+			v, ok := data["userName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userName"])
+		}(),
+		ClientId: func() *string {
+			v, ok := data["clientId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["clientId"])
+		}(),
+		GuardNamespaceId: func() *string {
+			v, ok := data["guardNamespaceId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guardNamespaceId"])
+		}(),
+	}
+}
+
+func (p DetachGuardRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"userName":         p.UserName,
+		"clientId":         p.ClientId,
+		"guardNamespaceId": p.GuardNamespaceId,
+	}
+}
+
+func (p DetachGuardRequest) Pointer() *DetachGuardRequest {
+	return &p
+}
+
 type DescribePasswordsRequest struct {
 	SourceRequestId *string `json:"sourceRequestId"`
 	RequestId       *string `json:"requestId"`

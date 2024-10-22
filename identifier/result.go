@@ -42,8 +42,19 @@ func NewDescribeUsersResultFromJson(data string) DescribeUsersResult {
 
 func NewDescribeUsersResultFromDict(data map[string]interface{}) DescribeUsersResult {
 	return DescribeUsersResult{
-		Items:         CastUsers(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []User {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastUsers(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -77,13 +88,24 @@ func NewCreateUserResultFromJson(data string) CreateUserResult {
 
 func NewCreateUserResultFromDict(data map[string]interface{}) CreateUserResult {
 	return CreateUserResult{
-		Item: NewUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *User {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p CreateUserResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -108,13 +130,24 @@ func NewUpdateUserResultFromJson(data string) UpdateUserResult {
 
 func NewUpdateUserResultFromDict(data map[string]interface{}) UpdateUserResult {
 	return UpdateUserResult{
-		Item: NewUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *User {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p UpdateUserResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -139,13 +172,24 @@ func NewGetUserResultFromJson(data string) GetUserResult {
 
 func NewGetUserResultFromDict(data map[string]interface{}) GetUserResult {
 	return GetUserResult{
-		Item: NewUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *User {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p GetUserResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -170,13 +214,24 @@ func NewDeleteUserResultFromJson(data string) DeleteUserResult {
 
 func NewDeleteUserResultFromDict(data map[string]interface{}) DeleteUserResult {
 	return DeleteUserResult{
-		Item: NewUserFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *User {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewUserFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p DeleteUserResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -202,8 +257,19 @@ func NewDescribeSecurityPoliciesResultFromJson(data string) DescribeSecurityPoli
 
 func NewDescribeSecurityPoliciesResultFromDict(data map[string]interface{}) DescribeSecurityPoliciesResult {
 	return DescribeSecurityPoliciesResult{
-		Items:         CastSecurityPolicies(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []SecurityPolicy {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSecurityPolicies(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -238,8 +304,19 @@ func NewDescribeCommonSecurityPoliciesResultFromJson(data string) DescribeCommon
 
 func NewDescribeCommonSecurityPoliciesResultFromDict(data map[string]interface{}) DescribeCommonSecurityPoliciesResult {
 	return DescribeCommonSecurityPoliciesResult{
-		Items:         CastSecurityPolicies(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []SecurityPolicy {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSecurityPolicies(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -273,13 +350,24 @@ func NewCreateSecurityPolicyResultFromJson(data string) CreateSecurityPolicyResu
 
 func NewCreateSecurityPolicyResultFromDict(data map[string]interface{}) CreateSecurityPolicyResult {
 	return CreateSecurityPolicyResult{
-		Item: NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SecurityPolicy {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p CreateSecurityPolicyResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -304,13 +392,24 @@ func NewUpdateSecurityPolicyResultFromJson(data string) UpdateSecurityPolicyResu
 
 func NewUpdateSecurityPolicyResultFromDict(data map[string]interface{}) UpdateSecurityPolicyResult {
 	return UpdateSecurityPolicyResult{
-		Item: NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SecurityPolicy {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p UpdateSecurityPolicyResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -335,13 +434,24 @@ func NewGetSecurityPolicyResultFromJson(data string) GetSecurityPolicyResult {
 
 func NewGetSecurityPolicyResultFromDict(data map[string]interface{}) GetSecurityPolicyResult {
 	return GetSecurityPolicyResult{
-		Item: NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SecurityPolicy {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p GetSecurityPolicyResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -366,13 +476,24 @@ func NewDeleteSecurityPolicyResultFromJson(data string) DeleteSecurityPolicyResu
 
 func NewDeleteSecurityPolicyResultFromDict(data map[string]interface{}) DeleteSecurityPolicyResult {
 	return DeleteSecurityPolicyResult{
-		Item: NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *SecurityPolicy {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSecurityPolicyFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p DeleteSecurityPolicyResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -398,8 +519,19 @@ func NewDescribeIdentifiersResultFromJson(data string) DescribeIdentifiersResult
 
 func NewDescribeIdentifiersResultFromDict(data map[string]interface{}) DescribeIdentifiersResult {
 	return DescribeIdentifiersResult{
-		Items:         CastIdentifiers(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Identifier {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastIdentifiers(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -434,14 +566,31 @@ func NewCreateIdentifierResultFromJson(data string) CreateIdentifierResult {
 
 func NewCreateIdentifierResultFromDict(data map[string]interface{}) CreateIdentifierResult {
 	return CreateIdentifierResult{
-		Item:         NewIdentifierFromDict(core.CastMap(data["item"])).Pointer(),
-		ClientSecret: core.CastString(data["clientSecret"]),
+		Item: func() *Identifier {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewIdentifierFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		ClientSecret: func() *string {
+			v, ok := data["clientSecret"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["clientSecret"])
+		}(),
 	}
 }
 
 func (p CreateIdentifierResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":         p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"clientSecret": p.ClientSecret,
 	}
 }
@@ -467,13 +616,24 @@ func NewGetIdentifierResultFromJson(data string) GetIdentifierResult {
 
 func NewGetIdentifierResultFromDict(data map[string]interface{}) GetIdentifierResult {
 	return GetIdentifierResult{
-		Item: NewIdentifierFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Identifier {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewIdentifierFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p GetIdentifierResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -498,17 +658,145 @@ func NewDeleteIdentifierResultFromJson(data string) DeleteIdentifierResult {
 
 func NewDeleteIdentifierResultFromDict(data map[string]interface{}) DeleteIdentifierResult {
 	return DeleteIdentifierResult{
-		Item: NewIdentifierFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Identifier {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewIdentifierFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p DeleteIdentifierResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
 func (p DeleteIdentifierResult) Pointer() *DeleteIdentifierResult {
+	return &p
+}
+
+type DescribeAttachedGuardsResult struct {
+	Items []*string `json:"items"`
+}
+
+type DescribeAttachedGuardsAsyncResult struct {
+	result *DescribeAttachedGuardsResult
+	err    error
+}
+
+func NewDescribeAttachedGuardsResultFromJson(data string) DescribeAttachedGuardsResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDescribeAttachedGuardsResultFromDict(dict)
+}
+
+func NewDescribeAttachedGuardsResultFromDict(data map[string]interface{}) DescribeAttachedGuardsResult {
+	return DescribeAttachedGuardsResult{
+		Items: func() []*string {
+			v, ok := data["items"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+	}
+}
+
+func (p DescribeAttachedGuardsResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": core.CastStringsFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p DescribeAttachedGuardsResult) Pointer() *DescribeAttachedGuardsResult {
+	return &p
+}
+
+type AttachGuardResult struct {
+	Items []*string `json:"items"`
+}
+
+type AttachGuardAsyncResult struct {
+	result *AttachGuardResult
+	err    error
+}
+
+func NewAttachGuardResultFromJson(data string) AttachGuardResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAttachGuardResultFromDict(dict)
+}
+
+func NewAttachGuardResultFromDict(data map[string]interface{}) AttachGuardResult {
+	return AttachGuardResult{
+		Items: func() []*string {
+			v, ok := data["items"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+	}
+}
+
+func (p AttachGuardResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": core.CastStringsFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p AttachGuardResult) Pointer() *AttachGuardResult {
+	return &p
+}
+
+type DetachGuardResult struct {
+	Items []*string `json:"items"`
+}
+
+type DetachGuardAsyncResult struct {
+	result *DetachGuardResult
+	err    error
+}
+
+func NewDetachGuardResultFromJson(data string) DetachGuardResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewDetachGuardResultFromDict(dict)
+}
+
+func NewDetachGuardResultFromDict(data map[string]interface{}) DetachGuardResult {
+	return DetachGuardResult{
+		Items: func() []*string {
+			v, ok := data["items"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
+	}
+}
+
+func (p DetachGuardResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"items": core.CastStringsFromDict(
+			p.Items,
+		),
+	}
+}
+
+func (p DetachGuardResult) Pointer() *DetachGuardResult {
 	return &p
 }
 
@@ -530,8 +818,19 @@ func NewDescribePasswordsResultFromJson(data string) DescribePasswordsResult {
 
 func NewDescribePasswordsResultFromDict(data map[string]interface{}) DescribePasswordsResult {
 	return DescribePasswordsResult{
-		Items:         CastPasswords(core.CastArray(data["items"])),
-		NextPageToken: core.CastString(data["nextPageToken"]),
+		Items: func() []Password {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastPasswords(core.CastArray(data["items"]))
+		}(),
+		NextPageToken: func() *string {
+			v, ok := data["nextPageToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["nextPageToken"])
+		}(),
 	}
 }
 
@@ -565,13 +864,24 @@ func NewCreatePasswordResultFromJson(data string) CreatePasswordResult {
 
 func NewCreatePasswordResultFromDict(data map[string]interface{}) CreatePasswordResult {
 	return CreatePasswordResult{
-		Item: NewPasswordFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Password {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPasswordFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p CreatePasswordResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -596,13 +906,24 @@ func NewGetPasswordResultFromJson(data string) GetPasswordResult {
 
 func NewGetPasswordResultFromDict(data map[string]interface{}) GetPasswordResult {
 	return GetPasswordResult{
-		Item: NewPasswordFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Password {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPasswordFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p GetPasswordResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -628,14 +949,31 @@ func NewEnableMfaResultFromJson(data string) EnableMfaResult {
 
 func NewEnableMfaResultFromDict(data map[string]interface{}) EnableMfaResult {
 	return EnableMfaResult{
-		Item:           NewPasswordFromDict(core.CastMap(data["item"])).Pointer(),
-		ChallengeToken: core.CastString(data["challengeToken"]),
+		Item: func() *Password {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPasswordFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		ChallengeToken: func() *string {
+			v, ok := data["challengeToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["challengeToken"])
+		}(),
 	}
 }
 
 func (p EnableMfaResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item":           p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 		"challengeToken": p.ChallengeToken,
 	}
 }
@@ -661,13 +999,24 @@ func NewChallengeMfaResultFromJson(data string) ChallengeMfaResult {
 
 func NewChallengeMfaResultFromDict(data map[string]interface{}) ChallengeMfaResult {
 	return ChallengeMfaResult{
-		Item: NewPasswordFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Password {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPasswordFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p ChallengeMfaResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -692,13 +1041,24 @@ func NewDisableMfaResultFromJson(data string) DisableMfaResult {
 
 func NewDisableMfaResultFromDict(data map[string]interface{}) DisableMfaResult {
 	return DisableMfaResult{
-		Item: NewPasswordFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Password {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPasswordFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p DisableMfaResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -723,13 +1083,24 @@ func NewDeletePasswordResultFromJson(data string) DeletePasswordResult {
 
 func NewDeletePasswordResultFromDict(data map[string]interface{}) DeletePasswordResult {
 	return DeletePasswordResult{
-		Item: NewPasswordFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *Password {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewPasswordFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p DeletePasswordResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 
@@ -754,7 +1125,12 @@ func NewGetHasSecurityPolicyResultFromJson(data string) GetHasSecurityPolicyResu
 
 func NewGetHasSecurityPolicyResultFromDict(data map[string]interface{}) GetHasSecurityPolicyResult {
 	return GetHasSecurityPolicyResult{
-		Items: CastSecurityPolicies(core.CastArray(data["items"])),
+		Items: func() []SecurityPolicy {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSecurityPolicies(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -787,7 +1163,12 @@ func NewAttachSecurityPolicyResultFromJson(data string) AttachSecurityPolicyResu
 
 func NewAttachSecurityPolicyResultFromDict(data map[string]interface{}) AttachSecurityPolicyResult {
 	return AttachSecurityPolicyResult{
-		Items: CastSecurityPolicies(core.CastArray(data["items"])),
+		Items: func() []SecurityPolicy {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSecurityPolicies(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -820,7 +1201,12 @@ func NewDetachSecurityPolicyResultFromJson(data string) DetachSecurityPolicyResu
 
 func NewDetachSecurityPolicyResultFromDict(data map[string]interface{}) DetachSecurityPolicyResult {
 	return DetachSecurityPolicyResult{
-		Items: CastSecurityPolicies(core.CastArray(data["items"])),
+		Items: func() []SecurityPolicy {
+			if data["items"] == nil {
+				return nil
+			}
+			return CastSecurityPolicies(core.CastArray(data["items"]))
+		}(),
 	}
 }
 
@@ -840,6 +1226,7 @@ type LoginResult struct {
 	AccessToken *string `json:"access_token"`
 	TokenType   *string `json:"token_type"`
 	ExpiresIn   *int32  `json:"expires_in"`
+	OwnerId     *string `json:"owner_id"`
 }
 
 type LoginAsyncResult struct {
@@ -855,9 +1242,34 @@ func NewLoginResultFromJson(data string) LoginResult {
 
 func NewLoginResultFromDict(data map[string]interface{}) LoginResult {
 	return LoginResult{
-		AccessToken: core.CastString(data["access_token"]),
-		TokenType:   core.CastString(data["token_type"]),
-		ExpiresIn:   core.CastInt32(data["expires_in"]),
+		AccessToken: func() *string {
+			v, ok := data["access_token"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["access_token"])
+		}(),
+		TokenType: func() *string {
+			v, ok := data["token_type"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["token_type"])
+		}(),
+		ExpiresIn: func() *int32 {
+			v, ok := data["expires_in"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["expires_in"])
+		}(),
+		OwnerId: func() *string {
+			v, ok := data["owner_id"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["owner_id"])
+		}(),
 	}
 }
 
@@ -866,6 +1278,7 @@ func (p LoginResult) ToDict() map[string]interface{} {
 		"access_token": p.AccessToken,
 		"token_type":   p.TokenType,
 		"expires_in":   p.ExpiresIn,
+		"owner_id":     p.OwnerId,
 	}
 }
 
@@ -890,13 +1303,24 @@ func NewLoginByUserResultFromJson(data string) LoginByUserResult {
 
 func NewLoginByUserResultFromDict(data map[string]interface{}) LoginByUserResult {
 	return LoginByUserResult{
-		Item: NewProjectTokenFromDict(core.CastMap(data["item"])).Pointer(),
+		Item: func() *ProjectToken {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewProjectTokenFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
 	}
 }
 
 func (p LoginByUserResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"item": p.Item.ToDict(),
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
 	}
 }
 

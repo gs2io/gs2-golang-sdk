@@ -1414,6 +1414,299 @@ func (p Gs2IdentifierRestClient) DeleteIdentifier(
 	return asyncResult.result, asyncResult.err
 }
 
+func describeAttachedGuardsAsyncHandler(
+	client Gs2IdentifierRestClient,
+	job *core.NetworkJob,
+	callback chan<- DescribeAttachedGuardsAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DescribeAttachedGuardsAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DescribeAttachedGuardsResult
+	if asyncResult.Err != nil {
+		callback <- DescribeAttachedGuardsAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DescribeAttachedGuardsAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DescribeAttachedGuardsAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2IdentifierRestClient) DescribeAttachedGuardsAsync(
+	request *DescribeAttachedGuardsRequest,
+	callback chan<- DescribeAttachedGuardsAsyncResult,
+) {
+	path := "/user/{userName}/identifier/{clientId}/guard"
+	if request.ClientId != nil && *request.ClientId != "" {
+		path = strings.ReplaceAll(path, "{clientId}", core.ToString(*request.ClientId))
+	} else {
+		path = strings.ReplaceAll(path, "{clientId}", "null")
+	}
+	if request.UserName != nil && *request.UserName != "" {
+		path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
+	} else {
+		path = strings.ReplaceAll(path, "{userName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go describeAttachedGuardsAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2IdentifierRestClient) DescribeAttachedGuards(
+	request *DescribeAttachedGuardsRequest,
+) (*DescribeAttachedGuardsResult, error) {
+	callback := make(chan DescribeAttachedGuardsAsyncResult, 1)
+	go p.DescribeAttachedGuardsAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func attachGuardAsyncHandler(
+	client Gs2IdentifierRestClient,
+	job *core.NetworkJob,
+	callback chan<- AttachGuardAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AttachGuardAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AttachGuardResult
+	if asyncResult.Err != nil {
+		callback <- AttachGuardAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AttachGuardAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- AttachGuardAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2IdentifierRestClient) AttachGuardAsync(
+	request *AttachGuardRequest,
+	callback chan<- AttachGuardAsyncResult,
+) {
+	path := "/user/{userName}/identifier/{clientId}/guard"
+	if request.UserName != nil && *request.UserName != "" {
+		path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
+	} else {
+		path = strings.ReplaceAll(path, "{userName}", "null")
+	}
+	if request.ClientId != nil && *request.ClientId != "" {
+		path = strings.ReplaceAll(path, "{clientId}", core.ToString(*request.ClientId))
+	} else {
+		path = strings.ReplaceAll(path, "{clientId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.GuardNamespaceId != nil && *request.GuardNamespaceId != "" {
+		bodies["guardNamespaceId"] = *request.GuardNamespaceId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go attachGuardAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2IdentifierRestClient) AttachGuard(
+	request *AttachGuardRequest,
+) (*AttachGuardResult, error) {
+	callback := make(chan AttachGuardAsyncResult, 1)
+	go p.AttachGuardAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func detachGuardAsyncHandler(
+	client Gs2IdentifierRestClient,
+	job *core.NetworkJob,
+	callback chan<- DetachGuardAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- DetachGuardAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result DetachGuardResult
+	if asyncResult.Err != nil {
+		callback <- DetachGuardAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- DetachGuardAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- DetachGuardAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2IdentifierRestClient) DetachGuardAsync(
+	request *DetachGuardRequest,
+	callback chan<- DetachGuardAsyncResult,
+) {
+	path := "/user/{userName}/identifier/{clientId}/guard/{guardNamespaceId}"
+	if request.UserName != nil && *request.UserName != "" {
+		path = strings.ReplaceAll(path, "{userName}", core.ToString(*request.UserName))
+	} else {
+		path = strings.ReplaceAll(path, "{userName}", "null")
+	}
+	if request.ClientId != nil && *request.ClientId != "" {
+		path = strings.ReplaceAll(path, "{clientId}", core.ToString(*request.ClientId))
+	} else {
+		path = strings.ReplaceAll(path, "{clientId}", "null")
+	}
+	if request.GuardNamespaceId != nil && *request.GuardNamespaceId != "" {
+		path = strings.ReplaceAll(path, "{guardNamespaceId}", core.ToString(*request.GuardNamespaceId))
+	} else {
+		path = strings.ReplaceAll(path, "{guardNamespaceId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go detachGuardAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("identifier").AppendPath(path, replacer),
+			Method:       core.Delete,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2IdentifierRestClient) DetachGuard(
+	request *DetachGuardRequest,
+) (*DetachGuardResult, error) {
+	callback := make(chan DetachGuardAsyncResult, 1)
+	go p.DetachGuardAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describePasswordsAsyncHandler(
 	client Gs2IdentifierRestClient,
 	job *core.NetworkJob,
