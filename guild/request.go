@@ -128,12 +128,14 @@ type CreateNamespaceRequest struct {
 	ContextStack               *string              `json:"contextStack"`
 	Name                       *string              `json:"name"`
 	Description                *string              `json:"description"`
+	ChangeNotification         *NotificationSetting `json:"changeNotification"`
 	JoinNotification           *NotificationSetting `json:"joinNotification"`
 	LeaveNotification          *NotificationSetting `json:"leaveNotification"`
 	ChangeMemberNotification   *NotificationSetting `json:"changeMemberNotification"`
 	ReceiveRequestNotification *NotificationSetting `json:"receiveRequestNotification"`
 	RemoveRequestNotification  *NotificationSetting `json:"removeRequestNotification"`
 	CreateGuildScript          *ScriptSetting       `json:"createGuildScript"`
+	UpdateGuildScript          *ScriptSetting       `json:"updateGuildScript"`
 	JoinGuildScript            *ScriptSetting       `json:"joinGuildScript"`
 	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
 	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
@@ -208,6 +210,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["changeNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangeNotification)
+		}
 		if v, ok := d["joinNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.JoinNotification)
 		}
@@ -225,6 +230,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["createGuildScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreateGuildScript)
+		}
+		if v, ok := d["updateGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdateGuildScript)
 		}
 		if v, ok := d["joinGuildScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.JoinGuildScript)
@@ -266,6 +274,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 				return nil
 			}
 			return core.CastString(data["description"])
+		}(),
+		ChangeNotification: func() *NotificationSetting {
+			v, ok := data["changeNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["changeNotification"])).Pointer()
 		}(),
 		JoinNotification: func() *NotificationSetting {
 			v, ok := data["joinNotification"]
@@ -309,6 +324,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["createGuildScript"])).Pointer()
 		}(),
+		UpdateGuildScript: func() *ScriptSetting {
+			v, ok := data["updateGuildScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["updateGuildScript"])).Pointer()
+		}(),
 		JoinGuildScript: func() *ScriptSetting {
 			v, ok := data["joinGuildScript"]
 			if !ok || v == nil {
@@ -344,6 +366,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"name":        p.Name,
 		"description": p.Description,
+		"changeNotification": func() map[string]interface{} {
+			if p.ChangeNotification == nil {
+				return nil
+			}
+			return p.ChangeNotification.ToDict()
+		}(),
 		"joinNotification": func() map[string]interface{} {
 			if p.JoinNotification == nil {
 				return nil
@@ -379,6 +407,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.CreateGuildScript.ToDict()
+		}(),
+		"updateGuildScript": func() map[string]interface{} {
+			if p.UpdateGuildScript == nil {
+				return nil
+			}
+			return p.UpdateGuildScript.ToDict()
 		}(),
 		"joinGuildScript": func() map[string]interface{} {
 			if p.JoinGuildScript == nil {
@@ -591,12 +625,14 @@ type UpdateNamespaceRequest struct {
 	ContextStack               *string              `json:"contextStack"`
 	NamespaceName              *string              `json:"namespaceName"`
 	Description                *string              `json:"description"`
+	ChangeNotification         *NotificationSetting `json:"changeNotification"`
 	JoinNotification           *NotificationSetting `json:"joinNotification"`
 	LeaveNotification          *NotificationSetting `json:"leaveNotification"`
 	ChangeMemberNotification   *NotificationSetting `json:"changeMemberNotification"`
 	ReceiveRequestNotification *NotificationSetting `json:"receiveRequestNotification"`
 	RemoveRequestNotification  *NotificationSetting `json:"removeRequestNotification"`
 	CreateGuildScript          *ScriptSetting       `json:"createGuildScript"`
+	UpdateGuildScript          *ScriptSetting       `json:"updateGuildScript"`
 	JoinGuildScript            *ScriptSetting       `json:"joinGuildScript"`
 	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
 	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
@@ -671,6 +707,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["changeNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangeNotification)
+		}
 		if v, ok := d["joinNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.JoinNotification)
 		}
@@ -688,6 +727,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["createGuildScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreateGuildScript)
+		}
+		if v, ok := d["updateGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdateGuildScript)
 		}
 		if v, ok := d["joinGuildScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.JoinGuildScript)
@@ -729,6 +771,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 				return nil
 			}
 			return core.CastString(data["description"])
+		}(),
+		ChangeNotification: func() *NotificationSetting {
+			v, ok := data["changeNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["changeNotification"])).Pointer()
 		}(),
 		JoinNotification: func() *NotificationSetting {
 			v, ok := data["joinNotification"]
@@ -772,6 +821,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["createGuildScript"])).Pointer()
 		}(),
+		UpdateGuildScript: func() *ScriptSetting {
+			v, ok := data["updateGuildScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["updateGuildScript"])).Pointer()
+		}(),
 		JoinGuildScript: func() *ScriptSetting {
 			v, ok := data["joinGuildScript"]
 			if !ok || v == nil {
@@ -807,6 +863,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"namespaceName": p.NamespaceName,
 		"description":   p.Description,
+		"changeNotification": func() map[string]interface{} {
+			if p.ChangeNotification == nil {
+				return nil
+			}
+			return p.ChangeNotification.ToDict()
+		}(),
 		"joinNotification": func() map[string]interface{} {
 			if p.JoinNotification == nil {
 				return nil
@@ -842,6 +904,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.CreateGuildScript.ToDict()
+		}(),
+		"updateGuildScript": func() map[string]interface{} {
+			if p.UpdateGuildScript == nil {
+				return nil
+			}
+			return p.UpdateGuildScript.ToDict()
 		}(),
 		"joinGuildScript": func() map[string]interface{} {
 			if p.JoinGuildScript == nil {

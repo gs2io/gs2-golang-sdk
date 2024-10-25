@@ -27,12 +27,14 @@ type Namespace struct {
 	NamespaceId                *string              `json:"namespaceId"`
 	Name                       *string              `json:"name"`
 	Description                *string              `json:"description"`
+	ChangeNotification         *NotificationSetting `json:"changeNotification"`
 	JoinNotification           *NotificationSetting `json:"joinNotification"`
 	LeaveNotification          *NotificationSetting `json:"leaveNotification"`
 	ChangeMemberNotification   *NotificationSetting `json:"changeMemberNotification"`
 	ReceiveRequestNotification *NotificationSetting `json:"receiveRequestNotification"`
 	RemoveRequestNotification  *NotificationSetting `json:"removeRequestNotification"`
 	CreateGuildScript          *ScriptSetting       `json:"createGuildScript"`
+	UpdateGuildScript          *ScriptSetting       `json:"updateGuildScript"`
 	JoinGuildScript            *ScriptSetting       `json:"joinGuildScript"`
 	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
 	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
@@ -133,6 +135,9 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["changeNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ChangeNotification)
+		}
 		if v, ok := d["joinNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.JoinNotification)
 		}
@@ -150,6 +155,9 @@ func (p *Namespace) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["createGuildScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreateGuildScript)
+		}
+		if v, ok := d["updateGuildScript"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.UpdateGuildScript)
 		}
 		if v, ok := d["joinGuildScript"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.JoinGuildScript)
@@ -205,6 +213,13 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 			}
 			return core.CastString(data["description"])
 		}(),
+		ChangeNotification: func() *NotificationSetting {
+			v, ok := data["changeNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["changeNotification"])).Pointer()
+		}(),
 		JoinNotification: func() *NotificationSetting {
 			v, ok := data["joinNotification"]
 			if !ok || v == nil {
@@ -246,6 +261,13 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 				return nil
 			}
 			return NewScriptSettingFromDict(core.CastMap(data["createGuildScript"])).Pointer()
+		}(),
+		UpdateGuildScript: func() *ScriptSetting {
+			v, ok := data["updateGuildScript"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewScriptSettingFromDict(core.CastMap(data["updateGuildScript"])).Pointer()
 		}(),
 		JoinGuildScript: func() *ScriptSetting {
 			v, ok := data["joinGuildScript"]
@@ -313,6 +335,15 @@ func (p Namespace) ToDict() map[string]interface{} {
 	if p.Description != nil {
 		description = p.Description
 	}
+	var changeNotification map[string]interface{}
+	if p.ChangeNotification != nil {
+		changeNotification = func() map[string]interface{} {
+			if p.ChangeNotification == nil {
+				return nil
+			}
+			return p.ChangeNotification.ToDict()
+		}()
+	}
 	var joinNotification map[string]interface{}
 	if p.JoinNotification != nil {
 		joinNotification = func() map[string]interface{} {
@@ -367,6 +398,15 @@ func (p Namespace) ToDict() map[string]interface{} {
 			return p.CreateGuildScript.ToDict()
 		}()
 	}
+	var updateGuildScript map[string]interface{}
+	if p.UpdateGuildScript != nil {
+		updateGuildScript = func() map[string]interface{} {
+			if p.UpdateGuildScript == nil {
+				return nil
+			}
+			return p.UpdateGuildScript.ToDict()
+		}()
+	}
 	var joinGuildScript map[string]interface{}
 	if p.JoinGuildScript != nil {
 		joinGuildScript = func() map[string]interface{} {
@@ -419,12 +459,14 @@ func (p Namespace) ToDict() map[string]interface{} {
 		"namespaceId":                namespaceId,
 		"name":                       name,
 		"description":                description,
+		"changeNotification":         changeNotification,
 		"joinNotification":           joinNotification,
 		"leaveNotification":          leaveNotification,
 		"changeMemberNotification":   changeMemberNotification,
 		"receiveRequestNotification": receiveRequestNotification,
 		"removeRequestNotification":  removeRequestNotification,
 		"createGuildScript":          createGuildScript,
+		"updateGuildScript":          updateGuildScript,
 		"joinGuildScript":            joinGuildScript,
 		"leaveGuildScript":           leaveGuildScript,
 		"changeRoleScript":           changeRoleScript,

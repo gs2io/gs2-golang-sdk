@@ -177,6 +177,9 @@ func (p Gs2GuildRestClient) CreateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.ChangeNotification != nil {
+		bodies["changeNotification"] = request.ChangeNotification.ToDict()
+	}
 	if request.JoinNotification != nil {
 		bodies["joinNotification"] = request.JoinNotification.ToDict()
 	}
@@ -194,6 +197,9 @@ func (p Gs2GuildRestClient) CreateNamespaceAsync(
 	}
 	if request.CreateGuildScript != nil {
 		bodies["createGuildScript"] = request.CreateGuildScript.ToDict()
+	}
+	if request.UpdateGuildScript != nil {
+		bodies["updateGuildScript"] = request.UpdateGuildScript.ToDict()
 	}
 	if request.JoinGuildScript != nil {
 		bodies["joinGuildScript"] = request.JoinGuildScript.ToDict()
@@ -480,6 +486,9 @@ func (p Gs2GuildRestClient) UpdateNamespaceAsync(
 	if request.Description != nil && *request.Description != "" {
 		bodies["description"] = *request.Description
 	}
+	if request.ChangeNotification != nil {
+		bodies["changeNotification"] = request.ChangeNotification.ToDict()
+	}
 	if request.JoinNotification != nil {
 		bodies["joinNotification"] = request.JoinNotification.ToDict()
 	}
@@ -497,6 +506,9 @@ func (p Gs2GuildRestClient) UpdateNamespaceAsync(
 	}
 	if request.CreateGuildScript != nil {
 		bodies["createGuildScript"] = request.CreateGuildScript.ToDict()
+	}
+	if request.UpdateGuildScript != nil {
+		bodies["updateGuildScript"] = request.UpdateGuildScript.ToDict()
 	}
 	if request.JoinGuildScript != nil {
 		bodies["joinGuildScript"] = request.JoinGuildScript.ToDict()

@@ -19,6 +19,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -281,7 +282,13 @@ func (p Gs2RestSession) send(job *NetworkJob) error {
 	request, err := http.NewRequest(
 		string(job.Method),
 		httpUrl,
-		reader,
+		func() io.Reader {
+			if job.Method == Post || job.Method == Put {
+				return reader
+			} else {
+				return nil
+			}
+		}(),
 	)
 	if err != nil {
 		err := BadRequestException{}
