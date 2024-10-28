@@ -1918,6 +1918,7 @@ type OpenIdConnectSetting struct {
 	AppleTeamId        *string `json:"appleTeamId"`
 	AppleKeyId         *string `json:"appleKeyId"`
 	ApplePrivateKeyPem *string `json:"applePrivateKeyPem"`
+	DoneEndpointUrl    *string `json:"doneEndpointUrl"`
 }
 
 func (p *OpenIdConnectSetting) UnmarshalJSON(data []byte) error {
@@ -2080,6 +2081,29 @@ func (p *OpenIdConnectSetting) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["doneEndpointUrl"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.DoneEndpointUrl = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.DoneEndpointUrl = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.DoneEndpointUrl = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneEndpointUrl = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.DoneEndpointUrl = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.DoneEndpointUrl)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -2134,6 +2158,13 @@ func NewOpenIdConnectSettingFromDict(data map[string]interface{}) OpenIdConnectS
 			}
 			return core.CastString(data["applePrivateKeyPem"])
 		}(),
+		DoneEndpointUrl: func() *string {
+			v, ok := data["doneEndpointUrl"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["doneEndpointUrl"])
+		}(),
 	}
 }
 
@@ -2163,6 +2194,10 @@ func (p OpenIdConnectSetting) ToDict() map[string]interface{} {
 	if p.ApplePrivateKeyPem != nil {
 		applePrivateKeyPem = p.ApplePrivateKeyPem
 	}
+	var doneEndpointUrl *string
+	if p.DoneEndpointUrl != nil {
+		doneEndpointUrl = p.DoneEndpointUrl
+	}
 	return map[string]interface{}{
 		"configurationPath":  configurationPath,
 		"clientId":           clientId,
@@ -2170,6 +2205,7 @@ func (p OpenIdConnectSetting) ToDict() map[string]interface{} {
 		"appleTeamId":        appleTeamId,
 		"appleKeyId":         appleKeyId,
 		"applePrivateKeyPem": applePrivateKeyPem,
+		"doneEndpointUrl":    doneEndpointUrl,
 	}
 }
 
