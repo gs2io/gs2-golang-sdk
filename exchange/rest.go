@@ -5010,6 +5010,97 @@ func (p Gs2ExchangeRestClient) CreateAwaitByStampSheet(
 	return asyncResult.result, asyncResult.err
 }
 
+func acquireForceByStampSheetAsyncHandler(
+	client Gs2ExchangeRestClient,
+	job *core.NetworkJob,
+	callback chan<- AcquireForceByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- AcquireForceByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result AcquireForceByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- AcquireForceByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- AcquireForceByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- AcquireForceByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2ExchangeRestClient) AcquireForceByStampSheetAsync(
+	request *AcquireForceByStampSheetRequest,
+	callback chan<- AcquireForceByStampSheetAsyncResult,
+) {
+	path := "/stamp/await/acquire/force"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go acquireForceByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("exchange").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2ExchangeRestClient) AcquireForceByStampSheet(
+	request *AcquireForceByStampSheetRequest,
+) (*AcquireForceByStampSheetResult, error) {
+	callback := make(chan AcquireForceByStampSheetAsyncResult, 1)
+	go p.AcquireForceByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func skipByStampSheetAsyncHandler(
 	client Gs2ExchangeRestClient,
 	job *core.NetworkJob,

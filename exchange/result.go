@@ -2346,6 +2346,84 @@ func (p CreateAwaitByStampSheetResult) Pointer() *CreateAwaitByStampSheetResult 
 	return &p
 }
 
+type AcquireForceByStampSheetResult struct {
+	Item                      *Await  `json:"item"`
+	TransactionId             *string `json:"transactionId"`
+	StampSheet                *string `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool   `json:"autoRunStampSheet"`
+}
+
+type AcquireForceByStampSheetAsyncResult struct {
+	result *AcquireForceByStampSheetResult
+	err    error
+}
+
+func NewAcquireForceByStampSheetResultFromJson(data string) AcquireForceByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewAcquireForceByStampSheetResultFromDict(dict)
+}
+
+func NewAcquireForceByStampSheetResultFromDict(data map[string]interface{}) AcquireForceByStampSheetResult {
+	return AcquireForceByStampSheetResult{
+		Item: func() *Await {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewAwaitFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		StampSheet: func() *string {
+			v, ok := data["stampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheet"])
+		}(),
+		StampSheetEncryptionKeyId: func() *string {
+			v, ok := data["stampSheetEncryptionKeyId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["stampSheetEncryptionKeyId"])
+		}(),
+		AutoRunStampSheet: func() *bool {
+			v, ok := data["autoRunStampSheet"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["autoRunStampSheet"])
+		}(),
+	}
+}
+
+func (p AcquireForceByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"transactionId":             p.TransactionId,
+		"stampSheet":                p.StampSheet,
+		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
+		"autoRunStampSheet":         p.AutoRunStampSheet,
+	}
+}
+
+func (p AcquireForceByStampSheetResult) Pointer() *AcquireForceByStampSheetResult {
+	return &p
+}
+
 type SkipByStampSheetResult struct {
 	Item *Await `json:"item"`
 }
