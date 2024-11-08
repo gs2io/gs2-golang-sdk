@@ -5039,6 +5039,9 @@ func (p Gs2ExperienceWebSocketClient) MultiplyAcquireActionsByUserIdAsync(
 		}
 		bodies["acquireActions"] = _acquireActions
 	}
+	if request.BaseRate != nil {
+		bodies["baseRate"] = *request.BaseRate
+	}
 	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
 		bodies["timeOffsetToken"] = *request.TimeOffsetToken
 	}

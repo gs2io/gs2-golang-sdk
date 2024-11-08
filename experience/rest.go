@@ -5602,6 +5602,9 @@ func (p Gs2ExperienceRestClient) MultiplyAcquireActionsByUserIdAsync(
 		}
 		bodies["acquireActions"] = _acquireActions
 	}
+	if request.BaseRate != nil {
+		bodies["baseRate"] = *request.BaseRate
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}

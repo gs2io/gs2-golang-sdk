@@ -9098,6 +9098,7 @@ type MultiplyAcquireActionsByUserIdRequest struct {
 	PropertyId         *string         `json:"propertyId"`
 	RateName           *string         `json:"rateName"`
 	AcquireActions     []AcquireAction `json:"acquireActions"`
+	BaseRate           *float32        `json:"baseRate"`
 	TimeOffsetToken    *string         `json:"timeOffsetToken"`
 }
 
@@ -9241,6 +9242,9 @@ func (p *MultiplyAcquireActionsByUserIdRequest) UnmarshalJSON(data []byte) error
 		if v, ok := d["acquireActions"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AcquireActions)
 		}
+		if v, ok := d["baseRate"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.BaseRate)
+		}
 		if v, ok := d["timeOffsetToken"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -9320,6 +9324,13 @@ func NewMultiplyAcquireActionsByUserIdRequestFromDict(data map[string]interface{
 			}
 			return CastAcquireActions(core.CastArray(data["acquireActions"]))
 		}(),
+		BaseRate: func() *float32 {
+			v, ok := data["baseRate"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat32(data["baseRate"])
+		}(),
 		TimeOffsetToken: func() *string {
 			v, ok := data["timeOffsetToken"]
 			if !ok || v == nil {
@@ -9340,6 +9351,7 @@ func (p MultiplyAcquireActionsByUserIdRequest) ToDict() map[string]interface{} {
 		"acquireActions": CastAcquireActionsFromDict(
 			p.AcquireActions,
 		),
+		"baseRate":        p.BaseRate,
 		"timeOffsetToken": p.TimeOffsetToken,
 	}
 }
