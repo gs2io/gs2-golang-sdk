@@ -1236,8 +1236,7 @@ func (p VerifyByStampTaskResult) Pointer() *VerifyByStampTaskResult {
 }
 
 type IssueOnceByStampSheetResult struct {
-	Item          *SerialKey     `json:"item"`
-	CampaignModel *CampaignModel `json:"campaignModel"`
+	Item *SerialKey `json:"item"`
 }
 
 type IssueOnceByStampSheetAsyncResult struct {
@@ -1260,13 +1259,6 @@ func NewIssueOnceByStampSheetResultFromDict(data map[string]interface{}) IssueOn
 			}
 			return NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
-		CampaignModel: func() *CampaignModel {
-			v, ok := data["campaignModel"]
-			if !ok || v == nil {
-				return nil
-			}
-			return NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer()
-		}(),
 	}
 }
 
@@ -1277,12 +1269,6 @@ func (p IssueOnceByStampSheetResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Item.ToDict()
-		}(),
-		"campaignModel": func() map[string]interface{} {
-			if p.CampaignModel == nil {
-				return nil
-			}
-			return p.CampaignModel.ToDict()
 		}(),
 	}
 }
