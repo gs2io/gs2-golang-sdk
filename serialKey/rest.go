@@ -2746,6 +2746,97 @@ func (p Gs2SerialKeyRestClient) VerifyByStampTask(
 	return asyncResult.result, asyncResult.err
 }
 
+func issueOnceByStampSheetAsyncHandler(
+	client Gs2SerialKeyRestClient,
+	job *core.NetworkJob,
+	callback chan<- IssueOnceByStampSheetAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- IssueOnceByStampSheetAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result IssueOnceByStampSheetResult
+	if asyncResult.Err != nil {
+		callback <- IssueOnceByStampSheetAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- IssueOnceByStampSheetAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- IssueOnceByStampSheetAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2SerialKeyRestClient) IssueOnceByStampSheetAsync(
+	request *IssueOnceByStampSheetRequest,
+	callback chan<- IssueOnceByStampSheetAsyncResult,
+) {
+	path := "/serialKey/issueOnce"
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.StampSheet != nil && *request.StampSheet != "" {
+		bodies["stampSheet"] = *request.StampSheet
+	}
+	if request.KeyId != nil && *request.KeyId != "" {
+		bodies["keyId"] = *request.KeyId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+
+	go issueOnceByStampSheetAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("serial-key").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2SerialKeyRestClient) IssueOnceByStampSheet(
+	request *IssueOnceByStampSheetRequest,
+) (*IssueOnceByStampSheetResult, error) {
+	callback := make(chan IssueOnceByStampSheetAsyncResult, 1)
+	go p.IssueOnceByStampSheetAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
 func describeCampaignModelsAsyncHandler(
 	client Gs2SerialKeyRestClient,
 	job *core.NetworkJob,

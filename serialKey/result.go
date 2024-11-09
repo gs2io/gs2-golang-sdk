@@ -1235,6 +1235,62 @@ func (p VerifyByStampTaskResult) Pointer() *VerifyByStampTaskResult {
 	return &p
 }
 
+type IssueOnceByStampSheetResult struct {
+	Item          *SerialKey     `json:"item"`
+	CampaignModel *CampaignModel `json:"campaignModel"`
+}
+
+type IssueOnceByStampSheetAsyncResult struct {
+	result *IssueOnceByStampSheetResult
+	err    error
+}
+
+func NewIssueOnceByStampSheetResultFromJson(data string) IssueOnceByStampSheetResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewIssueOnceByStampSheetResultFromDict(dict)
+}
+
+func NewIssueOnceByStampSheetResultFromDict(data map[string]interface{}) IssueOnceByStampSheetResult {
+	return IssueOnceByStampSheetResult{
+		Item: func() *SerialKey {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+		CampaignModel: func() *CampaignModel {
+			v, ok := data["campaignModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer()
+		}(),
+	}
+}
+
+func (p IssueOnceByStampSheetResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+		"campaignModel": func() map[string]interface{} {
+			if p.CampaignModel == nil {
+				return nil
+			}
+			return p.CampaignModel.ToDict()
+		}(),
+	}
+}
+
+func (p IssueOnceByStampSheetResult) Pointer() *IssueOnceByStampSheetResult {
+	return &p
+}
+
 type DescribeCampaignModelsResult struct {
 	Items []CampaignModel `json:"items"`
 }
