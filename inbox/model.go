@@ -331,114 +331,83 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var isAutomaticDeletingEnabled *bool
 	if p.IsAutomaticDeletingEnabled != nil {
-		isAutomaticDeletingEnabled = p.IsAutomaticDeletingEnabled
+		m["isAutomaticDeletingEnabled"] = p.IsAutomaticDeletingEnabled
 	}
-	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = func() map[string]interface{} {
+		m["transactionSetting"] = func() map[string]interface{} {
 			if p.TransactionSetting == nil {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
 		}()
 	}
-	var receiveMessageScript map[string]interface{}
 	if p.ReceiveMessageScript != nil {
-		receiveMessageScript = func() map[string]interface{} {
+		m["receiveMessageScript"] = func() map[string]interface{} {
 			if p.ReceiveMessageScript == nil {
 				return nil
 			}
 			return p.ReceiveMessageScript.ToDict()
 		}()
 	}
-	var readMessageScript map[string]interface{}
 	if p.ReadMessageScript != nil {
-		readMessageScript = func() map[string]interface{} {
+		m["readMessageScript"] = func() map[string]interface{} {
 			if p.ReadMessageScript == nil {
 				return nil
 			}
 			return p.ReadMessageScript.ToDict()
 		}()
 	}
-	var deleteMessageScript map[string]interface{}
 	if p.DeleteMessageScript != nil {
-		deleteMessageScript = func() map[string]interface{} {
+		m["deleteMessageScript"] = func() map[string]interface{} {
 			if p.DeleteMessageScript == nil {
 				return nil
 			}
 			return p.DeleteMessageScript.ToDict()
 		}()
 	}
-	var receiveNotification map[string]interface{}
 	if p.ReceiveNotification != nil {
-		receiveNotification = func() map[string]interface{} {
+		m["receiveNotification"] = func() map[string]interface{} {
 			if p.ReceiveNotification == nil {
 				return nil
 			}
 			return p.ReceiveNotification.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":                namespaceId,
-		"name":                       name,
-		"description":                description,
-		"isAutomaticDeletingEnabled": isAutomaticDeletingEnabled,
-		"transactionSetting":         transactionSetting,
-		"receiveMessageScript":       receiveMessageScript,
-		"readMessageScript":          readMessageScript,
-		"deleteMessageScript":        deleteMessageScript,
-		"receiveNotification":        receiveNotification,
-		"logSetting":                 logSetting,
-		"createdAt":                  createdAt,
-		"updatedAt":                  updatedAt,
-		"queueNamespaceId":           queueNamespaceId,
-		"keyId":                      keyId,
-		"revision":                   revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -446,9 +415,6 @@ func (p Namespace) Pointer() *Namespace {
 }
 
 func CastNamespaces(data []interface{}) []Namespace {
-	if data == nil {
-		return nil
-	}
 	v := make([]Namespace, 0)
 	for _, d := range data {
 		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
@@ -457,9 +423,6 @@ func CastNamespaces(data []interface{}) []Namespace {
 }
 
 func CastNamespacesFromDict(data []Namespace) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -697,61 +660,40 @@ func NewMessageFromDict(data map[string]interface{}) Message {
 }
 
 func (p Message) ToDict() map[string]interface{} {
-
-	var messageId *string
+	m := map[string]interface{}{}
 	if p.MessageId != nil {
-		messageId = p.MessageId
+		m["messageId"] = p.MessageId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var isRead *bool
 	if p.IsRead != nil {
-		isRead = p.IsRead
+		m["isRead"] = p.IsRead
 	}
-	var readAcquireActions []interface{}
 	if p.ReadAcquireActions != nil {
-		readAcquireActions = CastAcquireActionsFromDict(
+		m["readAcquireActions"] = CastAcquireActionsFromDict(
 			p.ReadAcquireActions,
 		)
 	}
-	var receivedAt *int64
 	if p.ReceivedAt != nil {
-		receivedAt = p.ReceivedAt
+		m["receivedAt"] = p.ReceivedAt
 	}
-	var readAt *int64
 	if p.ReadAt != nil {
-		readAt = p.ReadAt
+		m["readAt"] = p.ReadAt
 	}
-	var expiresAt *int64
 	if p.ExpiresAt != nil {
-		expiresAt = p.ExpiresAt
+		m["expiresAt"] = p.ExpiresAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"messageId":          messageId,
-		"name":               name,
-		"userId":             userId,
-		"metadata":           metadata,
-		"isRead":             isRead,
-		"readAcquireActions": readAcquireActions,
-		"receivedAt":         receivedAt,
-		"readAt":             readAt,
-		"expiresAt":          expiresAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p Message) Pointer() *Message {
@@ -759,9 +701,6 @@ func (p Message) Pointer() *Message {
 }
 
 func CastMessages(data []interface{}) []Message {
-	if data == nil {
-		return nil
-	}
 	v := make([]Message, 0)
 	for _, d := range data {
 		v = append(v, NewMessageFromDict(d.(map[string]interface{})))
@@ -770,9 +709,6 @@ func CastMessages(data []interface{}) []Message {
 }
 
 func CastMessagesFromDict(data []Message) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -883,19 +819,14 @@ func NewCurrentMessageMasterFromDict(data map[string]interface{}) CurrentMessage
 }
 
 func (p CurrentMessageMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentMessageMaster) Pointer() *CurrentMessageMaster {
@@ -903,9 +834,6 @@ func (p CurrentMessageMaster) Pointer() *CurrentMessageMaster {
 }
 
 func CastCurrentMessageMasters(data []interface{}) []CurrentMessageMaster {
-	if data == nil {
-		return nil
-	}
 	v := make([]CurrentMessageMaster, 0)
 	for _, d := range data {
 		v = append(v, NewCurrentMessageMasterFromDict(d.(map[string]interface{})))
@@ -914,9 +842,6 @@ func CastCurrentMessageMasters(data []interface{}) []CurrentMessageMaster {
 }
 
 func CastCurrentMessageMastersFromDict(data []CurrentMessageMaster) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -1144,61 +1069,42 @@ func NewGlobalMessageMasterFromDict(data map[string]interface{}) GlobalMessageMa
 }
 
 func (p GlobalMessageMaster) ToDict() map[string]interface{} {
-
-	var globalMessageId *string
+	m := map[string]interface{}{}
 	if p.GlobalMessageId != nil {
-		globalMessageId = p.GlobalMessageId
+		m["globalMessageId"] = p.GlobalMessageId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var readAcquireActions []interface{}
 	if p.ReadAcquireActions != nil {
-		readAcquireActions = CastAcquireActionsFromDict(
+		m["readAcquireActions"] = CastAcquireActionsFromDict(
 			p.ReadAcquireActions,
 		)
 	}
-	var expiresTimeSpan map[string]interface{}
 	if p.ExpiresTimeSpan != nil {
-		expiresTimeSpan = func() map[string]interface{} {
+		m["expiresTimeSpan"] = func() map[string]interface{} {
 			if p.ExpiresTimeSpan == nil {
 				return nil
 			}
 			return p.ExpiresTimeSpan.ToDict()
 		}()
 	}
-	var expiresAt *int64
 	if p.ExpiresAt != nil {
-		expiresAt = p.ExpiresAt
+		m["expiresAt"] = p.ExpiresAt
 	}
-	var messageReceptionPeriodEventId *string
 	if p.MessageReceptionPeriodEventId != nil {
-		messageReceptionPeriodEventId = p.MessageReceptionPeriodEventId
+		m["messageReceptionPeriodEventId"] = p.MessageReceptionPeriodEventId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"globalMessageId":               globalMessageId,
-		"name":                          name,
-		"metadata":                      metadata,
-		"readAcquireActions":            readAcquireActions,
-		"expiresTimeSpan":               expiresTimeSpan,
-		"expiresAt":                     expiresAt,
-		"messageReceptionPeriodEventId": messageReceptionPeriodEventId,
-		"createdAt":                     createdAt,
-		"revision":                      revision,
-	}
+	return m
 }
 
 func (p GlobalMessageMaster) Pointer() *GlobalMessageMaster {
@@ -1206,9 +1112,6 @@ func (p GlobalMessageMaster) Pointer() *GlobalMessageMaster {
 }
 
 func CastGlobalMessageMasters(data []interface{}) []GlobalMessageMaster {
-	if data == nil {
-		return nil
-	}
 	v := make([]GlobalMessageMaster, 0)
 	for _, d := range data {
 		v = append(v, NewGlobalMessageMasterFromDict(d.(map[string]interface{})))
@@ -1217,9 +1120,6 @@ func CastGlobalMessageMasters(data []interface{}) []GlobalMessageMaster {
 }
 
 func CastGlobalMessageMastersFromDict(data []GlobalMessageMaster) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -1425,51 +1325,36 @@ func NewGlobalMessageFromDict(data map[string]interface{}) GlobalMessage {
 }
 
 func (p GlobalMessage) ToDict() map[string]interface{} {
-
-	var globalMessageId *string
+	m := map[string]interface{}{}
 	if p.GlobalMessageId != nil {
-		globalMessageId = p.GlobalMessageId
+		m["globalMessageId"] = p.GlobalMessageId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var readAcquireActions []interface{}
 	if p.ReadAcquireActions != nil {
-		readAcquireActions = CastAcquireActionsFromDict(
+		m["readAcquireActions"] = CastAcquireActionsFromDict(
 			p.ReadAcquireActions,
 		)
 	}
-	var expiresTimeSpan map[string]interface{}
 	if p.ExpiresTimeSpan != nil {
-		expiresTimeSpan = func() map[string]interface{} {
+		m["expiresTimeSpan"] = func() map[string]interface{} {
 			if p.ExpiresTimeSpan == nil {
 				return nil
 			}
 			return p.ExpiresTimeSpan.ToDict()
 		}()
 	}
-	var expiresAt *int64
 	if p.ExpiresAt != nil {
-		expiresAt = p.ExpiresAt
+		m["expiresAt"] = p.ExpiresAt
 	}
-	var messageReceptionPeriodEventId *string
 	if p.MessageReceptionPeriodEventId != nil {
-		messageReceptionPeriodEventId = p.MessageReceptionPeriodEventId
+		m["messageReceptionPeriodEventId"] = p.MessageReceptionPeriodEventId
 	}
-	return map[string]interface{}{
-		"globalMessageId":               globalMessageId,
-		"name":                          name,
-		"metadata":                      metadata,
-		"readAcquireActions":            readAcquireActions,
-		"expiresTimeSpan":               expiresTimeSpan,
-		"expiresAt":                     expiresAt,
-		"messageReceptionPeriodEventId": messageReceptionPeriodEventId,
-	}
+	return m
 }
 
 func (p GlobalMessage) Pointer() *GlobalMessage {
@@ -1477,9 +1362,6 @@ func (p GlobalMessage) Pointer() *GlobalMessage {
 }
 
 func CastGlobalMessages(data []interface{}) []GlobalMessage {
-	if data == nil {
-		return nil
-	}
 	v := make([]GlobalMessage, 0)
 	for _, d := range data {
 		v = append(v, NewGlobalMessageFromDict(d.(map[string]interface{})))
@@ -1488,9 +1370,6 @@ func CastGlobalMessages(data []interface{}) []GlobalMessage {
 }
 
 func CastGlobalMessagesFromDict(data []GlobalMessage) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -1668,41 +1547,28 @@ func NewReceivedFromDict(data map[string]interface{}) Received {
 }
 
 func (p Received) ToDict() map[string]interface{} {
-
-	var receivedId *string
+	m := map[string]interface{}{}
 	if p.ReceivedId != nil {
-		receivedId = p.ReceivedId
+		m["receivedId"] = p.ReceivedId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var receivedGlobalMessageNames []interface{}
 	if p.ReceivedGlobalMessageNames != nil {
-		receivedGlobalMessageNames = core.CastStringsFromDict(
+		m["receivedGlobalMessageNames"] = core.CastStringsFromDict(
 			p.ReceivedGlobalMessageNames,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"receivedId":                 receivedId,
-		"userId":                     userId,
-		"receivedGlobalMessageNames": receivedGlobalMessageNames,
-		"createdAt":                  createdAt,
-		"updatedAt":                  updatedAt,
-		"revision":                   revision,
-	}
+	return m
 }
 
 func (p Received) Pointer() *Received {
@@ -1710,9 +1576,6 @@ func (p Received) Pointer() *Received {
 }
 
 func CastReceiveds(data []interface{}) []Received {
-	if data == nil {
-		return nil
-	}
 	v := make([]Received, 0)
 	for _, d := range data {
 		v = append(v, NewReceivedFromDict(d.(map[string]interface{})))
@@ -1721,9 +1584,6 @@ func CastReceiveds(data []interface{}) []Received {
 }
 
 func CastReceivedsFromDict(data []Received) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -1805,24 +1665,17 @@ func NewTimeSpanFromDict(data map[string]interface{}) TimeSpan {
 }
 
 func (p TimeSpan) ToDict() map[string]interface{} {
-
-	var days *int32
+	m := map[string]interface{}{}
 	if p.Days != nil {
-		days = p.Days
+		m["days"] = p.Days
 	}
-	var hours *int32
 	if p.Hours != nil {
-		hours = p.Hours
+		m["hours"] = p.Hours
 	}
-	var minutes *int32
 	if p.Minutes != nil {
-		minutes = p.Minutes
+		m["minutes"] = p.Minutes
 	}
-	return map[string]interface{}{
-		"days":    days,
-		"hours":   hours,
-		"minutes": minutes,
-	}
+	return m
 }
 
 func (p TimeSpan) Pointer() *TimeSpan {
@@ -1830,9 +1683,6 @@ func (p TimeSpan) Pointer() *TimeSpan {
 }
 
 func CastTimeSpans(data []interface{}) []TimeSpan {
-	if data == nil {
-		return nil
-	}
 	v := make([]TimeSpan, 0)
 	for _, d := range data {
 		v = append(v, NewTimeSpanFromDict(d.(map[string]interface{})))
@@ -1841,9 +1691,6 @@ func CastTimeSpans(data []interface{}) []TimeSpan {
 }
 
 func CastTimeSpansFromDict(data []TimeSpan) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -1954,19 +1801,14 @@ func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 }
 
 func (p AcquireAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p AcquireAction) Pointer() *AcquireAction {
@@ -1974,9 +1816,6 @@ func (p AcquireAction) Pointer() *AcquireAction {
 }
 
 func CastAcquireActions(data []interface{}) []AcquireAction {
-	if data == nil {
-		return nil
-	}
 	v := make([]AcquireAction, 0)
 	for _, d := range data {
 		v = append(v, NewAcquireActionFromDict(d.(map[string]interface{})))
@@ -1985,9 +1824,6 @@ func CastAcquireActions(data []interface{}) []AcquireAction {
 }
 
 func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -2098,19 +1934,14 @@ func NewConfigFromDict(data map[string]interface{}) Config {
 }
 
 func (p Config) ToDict() map[string]interface{} {
-
-	var key *string
+	m := map[string]interface{}{}
 	if p.Key != nil {
-		key = p.Key
+		m["key"] = p.Key
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"key":   key,
-		"value": value,
-	}
+	return m
 }
 
 func (p Config) Pointer() *Config {
@@ -2118,9 +1949,6 @@ func (p Config) Pointer() *Config {
 }
 
 func CastConfigs(data []interface{}) []Config {
-	if data == nil {
-		return nil
-	}
 	v := make([]Config, 0)
 	for _, d := range data {
 		v = append(v, NewConfigFromDict(d.(map[string]interface{})))
@@ -2129,9 +1957,6 @@ func CastConfigs(data []interface{}) []Config {
 }
 
 func CastConfigsFromDict(data []Config) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -2304,29 +2129,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -2334,9 +2150,6 @@ func (p ScriptSetting) Pointer() *ScriptSetting {
 }
 
 func CastScriptSettings(data []interface{}) []ScriptSetting {
-	if data == nil {
-		return nil
-	}
 	v := make([]ScriptSetting, 0)
 	for _, d := range data {
 		v = append(v, NewScriptSettingFromDict(d.(map[string]interface{})))
@@ -2345,9 +2158,6 @@ func CastScriptSettings(data []interface{}) []ScriptSetting {
 }
 
 func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -2469,24 +2279,17 @@ func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSet
 }
 
 func (p NotificationSetting) ToDict() map[string]interface{} {
-
-	var gatewayNamespaceId *string
+	m := map[string]interface{}{}
 	if p.GatewayNamespaceId != nil {
-		gatewayNamespaceId = p.GatewayNamespaceId
+		m["gatewayNamespaceId"] = p.GatewayNamespaceId
 	}
-	var enableTransferMobileNotification *bool
 	if p.EnableTransferMobileNotification != nil {
-		enableTransferMobileNotification = p.EnableTransferMobileNotification
+		m["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
 	}
-	var sound *string
 	if p.Sound != nil {
-		sound = p.Sound
+		m["sound"] = p.Sound
 	}
-	return map[string]interface{}{
-		"gatewayNamespaceId":               gatewayNamespaceId,
-		"enableTransferMobileNotification": enableTransferMobileNotification,
-		"sound":                            sound,
-	}
+	return m
 }
 
 func (p NotificationSetting) Pointer() *NotificationSetting {
@@ -2494,9 +2297,6 @@ func (p NotificationSetting) Pointer() *NotificationSetting {
 }
 
 func CastNotificationSettings(data []interface{}) []NotificationSetting {
-	if data == nil {
-		return nil
-	}
 	v := make([]NotificationSetting, 0)
 	for _, d := range data {
 		v = append(v, NewNotificationSettingFromDict(d.(map[string]interface{})))
@@ -2505,9 +2305,6 @@ func CastNotificationSettings(data []interface{}) []NotificationSetting {
 }
 
 func CastNotificationSettingsFromDict(data []NotificationSetting) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -2773,44 +2570,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -2818,9 +2600,6 @@ func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
 }
 
 func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
-	if data == nil {
-		return nil
-	}
 	v := make([]GitHubCheckoutSetting, 0)
 	for _, d := range data {
 		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
@@ -2829,9 +2608,6 @@ func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
 }
 
 func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -2911,14 +2687,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -2926,9 +2699,6 @@ func (p LogSetting) Pointer() *LogSetting {
 }
 
 func CastLogSettings(data []interface{}) []LogSetting {
-	if data == nil {
-		return nil
-	}
 	v := make([]LogSetting, 0)
 	for _, d := range data {
 		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
@@ -2937,9 +2707,6 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -3093,29 +2860,20 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 }
 
 func (p TransactionSetting) ToDict() map[string]interface{} {
-
-	var enableAutoRun *bool
+	m := map[string]interface{}{}
 	if p.EnableAutoRun != nil {
-		enableAutoRun = p.EnableAutoRun
+		m["enableAutoRun"] = p.EnableAutoRun
 	}
-	var distributorNamespaceId *string
 	if p.DistributorNamespaceId != nil {
-		distributorNamespaceId = p.DistributorNamespaceId
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	return map[string]interface{}{
-		"enableAutoRun":          enableAutoRun,
-		"distributorNamespaceId": distributorNamespaceId,
-		"keyId":                  keyId,
-		"queueNamespaceId":       queueNamespaceId,
-	}
+	return m
 }
 
 func (p TransactionSetting) Pointer() *TransactionSetting {
@@ -3123,9 +2881,6 @@ func (p TransactionSetting) Pointer() *TransactionSetting {
 }
 
 func CastTransactionSettings(data []interface{}) []TransactionSetting {
-	if data == nil {
-		return nil
-	}
 	v := make([]TransactionSetting, 0)
 	for _, d := range data {
 		v = append(v, NewTransactionSettingFromDict(d.(map[string]interface{})))
@@ -3134,9 +2889,6 @@ func CastTransactionSettings(data []interface{}) []TransactionSetting {
 }
 
 func CastTransactionSettingsFromDict(data []TransactionSetting) []interface{} {
-	if data == nil {
-		return nil
-	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
