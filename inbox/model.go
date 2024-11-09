@@ -446,6 +446,9 @@ func (p Namespace) Pointer() *Namespace {
 }
 
 func CastNamespaces(data []interface{}) []Namespace {
+	if data == nil {
+		return nil
+	}
 	v := make([]Namespace, 0)
 	for _, d := range data {
 		v = append(v, NewNamespaceFromDict(d.(map[string]interface{})))
@@ -454,6 +457,9 @@ func CastNamespaces(data []interface{}) []Namespace {
 }
 
 func CastNamespacesFromDict(data []Namespace) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -753,6 +759,9 @@ func (p Message) Pointer() *Message {
 }
 
 func CastMessages(data []interface{}) []Message {
+	if data == nil {
+		return nil
+	}
 	v := make([]Message, 0)
 	for _, d := range data {
 		v = append(v, NewMessageFromDict(d.(map[string]interface{})))
@@ -761,6 +770,9 @@ func CastMessages(data []interface{}) []Message {
 }
 
 func CastMessagesFromDict(data []Message) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -891,6 +903,9 @@ func (p CurrentMessageMaster) Pointer() *CurrentMessageMaster {
 }
 
 func CastCurrentMessageMasters(data []interface{}) []CurrentMessageMaster {
+	if data == nil {
+		return nil
+	}
 	v := make([]CurrentMessageMaster, 0)
 	for _, d := range data {
 		v = append(v, NewCurrentMessageMasterFromDict(d.(map[string]interface{})))
@@ -899,6 +914,9 @@ func CastCurrentMessageMasters(data []interface{}) []CurrentMessageMaster {
 }
 
 func CastCurrentMessageMastersFromDict(data []CurrentMessageMaster) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -1188,6 +1206,9 @@ func (p GlobalMessageMaster) Pointer() *GlobalMessageMaster {
 }
 
 func CastGlobalMessageMasters(data []interface{}) []GlobalMessageMaster {
+	if data == nil {
+		return nil
+	}
 	v := make([]GlobalMessageMaster, 0)
 	for _, d := range data {
 		v = append(v, NewGlobalMessageMasterFromDict(d.(map[string]interface{})))
@@ -1196,6 +1217,9 @@ func CastGlobalMessageMasters(data []interface{}) []GlobalMessageMaster {
 }
 
 func CastGlobalMessageMastersFromDict(data []GlobalMessageMaster) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -1453,6 +1477,9 @@ func (p GlobalMessage) Pointer() *GlobalMessage {
 }
 
 func CastGlobalMessages(data []interface{}) []GlobalMessage {
+	if data == nil {
+		return nil
+	}
 	v := make([]GlobalMessage, 0)
 	for _, d := range data {
 		v = append(v, NewGlobalMessageFromDict(d.(map[string]interface{})))
@@ -1461,6 +1488,9 @@ func CastGlobalMessages(data []interface{}) []GlobalMessage {
 }
 
 func CastGlobalMessagesFromDict(data []GlobalMessage) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -1680,6 +1710,9 @@ func (p Received) Pointer() *Received {
 }
 
 func CastReceiveds(data []interface{}) []Received {
+	if data == nil {
+		return nil
+	}
 	v := make([]Received, 0)
 	for _, d := range data {
 		v = append(v, NewReceivedFromDict(d.(map[string]interface{})))
@@ -1688,6 +1721,9 @@ func CastReceiveds(data []interface{}) []Received {
 }
 
 func CastReceivedsFromDict(data []Received) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -1794,6 +1830,9 @@ func (p TimeSpan) Pointer() *TimeSpan {
 }
 
 func CastTimeSpans(data []interface{}) []TimeSpan {
+	if data == nil {
+		return nil
+	}
 	v := make([]TimeSpan, 0)
 	for _, d := range data {
 		v = append(v, NewTimeSpanFromDict(d.(map[string]interface{})))
@@ -1802,6 +1841,9 @@ func CastTimeSpans(data []interface{}) []TimeSpan {
 }
 
 func CastTimeSpansFromDict(data []TimeSpan) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -1932,6 +1974,9 @@ func (p AcquireAction) Pointer() *AcquireAction {
 }
 
 func CastAcquireActions(data []interface{}) []AcquireAction {
+	if data == nil {
+		return nil
+	}
 	v := make([]AcquireAction, 0)
 	for _, d := range data {
 		v = append(v, NewAcquireActionFromDict(d.(map[string]interface{})))
@@ -1940,6 +1985,9 @@ func CastAcquireActions(data []interface{}) []AcquireAction {
 }
 
 func CastAcquireActionsFromDict(data []AcquireAction) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -2070,6 +2118,9 @@ func (p Config) Pointer() *Config {
 }
 
 func CastConfigs(data []interface{}) []Config {
+	if data == nil {
+		return nil
+	}
 	v := make([]Config, 0)
 	for _, d := range data {
 		v = append(v, NewConfigFromDict(d.(map[string]interface{})))
@@ -2078,6 +2129,9 @@ func CastConfigs(data []interface{}) []Config {
 }
 
 func CastConfigsFromDict(data []Config) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -2280,6 +2334,9 @@ func (p ScriptSetting) Pointer() *ScriptSetting {
 }
 
 func CastScriptSettings(data []interface{}) []ScriptSetting {
+	if data == nil {
+		return nil
+	}
 	v := make([]ScriptSetting, 0)
 	for _, d := range data {
 		v = append(v, NewScriptSettingFromDict(d.(map[string]interface{})))
@@ -2288,6 +2345,9 @@ func CastScriptSettings(data []interface{}) []ScriptSetting {
 }
 
 func CastScriptSettingsFromDict(data []ScriptSetting) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -2434,6 +2494,9 @@ func (p NotificationSetting) Pointer() *NotificationSetting {
 }
 
 func CastNotificationSettings(data []interface{}) []NotificationSetting {
+	if data == nil {
+		return nil
+	}
 	v := make([]NotificationSetting, 0)
 	for _, d := range data {
 		v = append(v, NewNotificationSettingFromDict(d.(map[string]interface{})))
@@ -2442,6 +2505,9 @@ func CastNotificationSettings(data []interface{}) []NotificationSetting {
 }
 
 func CastNotificationSettingsFromDict(data []NotificationSetting) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -2752,6 +2818,9 @@ func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
 }
 
 func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
+	if data == nil {
+		return nil
+	}
 	v := make([]GitHubCheckoutSetting, 0)
 	for _, d := range data {
 		v = append(v, NewGitHubCheckoutSettingFromDict(d.(map[string]interface{})))
@@ -2760,6 +2829,9 @@ func CastGitHubCheckoutSettings(data []interface{}) []GitHubCheckoutSetting {
 }
 
 func CastGitHubCheckoutSettingsFromDict(data []GitHubCheckoutSetting) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -2854,6 +2926,9 @@ func (p LogSetting) Pointer() *LogSetting {
 }
 
 func CastLogSettings(data []interface{}) []LogSetting {
+	if data == nil {
+		return nil
+	}
 	v := make([]LogSetting, 0)
 	for _, d := range data {
 		v = append(v, NewLogSettingFromDict(d.(map[string]interface{})))
@@ -2862,6 +2937,9 @@ func CastLogSettings(data []interface{}) []LogSetting {
 }
 
 func CastLogSettingsFromDict(data []LogSetting) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
@@ -3045,6 +3123,9 @@ func (p TransactionSetting) Pointer() *TransactionSetting {
 }
 
 func CastTransactionSettings(data []interface{}) []TransactionSetting {
+	if data == nil {
+		return nil
+	}
 	v := make([]TransactionSetting, 0)
 	for _, d := range data {
 		v = append(v, NewTransactionSettingFromDict(d.(map[string]interface{})))
@@ -3053,6 +3134,9 @@ func CastTransactionSettings(data []interface{}) []TransactionSetting {
 }
 
 func CastTransactionSettingsFromDict(data []TransactionSetting) []interface{} {
+	if data == nil {
+		return nil
+	}
 	v := make([]interface{}, 0)
 	for _, d := range data {
 		v = append(v, d.ToDict())
