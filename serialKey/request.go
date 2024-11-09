@@ -2653,6 +2653,7 @@ type VerifyCodeRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	AccessToken        *string `json:"accessToken"`
 	Code               *string `json:"code"`
+	CampaignModelName  *string `json:"campaignModelName"`
 	VerifyType         *string `json:"verifyType"`
 }
 
@@ -2747,6 +2748,29 @@ func (p *VerifyCodeRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["campaignModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CampaignModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CampaignModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CampaignModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CampaignModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CampaignModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CampaignModelName)
+				}
+			}
+		}
 		if v, ok := d["verifyType"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -2806,6 +2830,13 @@ func NewVerifyCodeRequestFromDict(data map[string]interface{}) VerifyCodeRequest
 			}
 			return core.CastString(data["code"])
 		}(),
+		CampaignModelName: func() *string {
+			v, ok := data["campaignModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["campaignModelName"])
+		}(),
 		VerifyType: func() *string {
 			v, ok := data["verifyType"]
 			if !ok || v == nil {
@@ -2818,10 +2849,11 @@ func NewVerifyCodeRequestFromDict(data map[string]interface{}) VerifyCodeRequest
 
 func (p VerifyCodeRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName": p.NamespaceName,
-		"accessToken":   p.AccessToken,
-		"code":          p.Code,
-		"verifyType":    p.VerifyType,
+		"namespaceName":     p.NamespaceName,
+		"accessToken":       p.AccessToken,
+		"code":              p.Code,
+		"campaignModelName": p.CampaignModelName,
+		"verifyType":        p.VerifyType,
 	}
 }
 
@@ -2837,6 +2869,7 @@ type VerifyCodeByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	Code               *string `json:"code"`
+	CampaignModelName  *string `json:"campaignModelName"`
 	VerifyType         *string `json:"verifyType"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
 }
@@ -2932,6 +2965,29 @@ func (p *VerifyCodeByUserIdRequest) UnmarshalJSON(data []byte) error {
 				}
 			}
 		}
+		if v, ok := d["campaignModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.CampaignModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.CampaignModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.CampaignModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.CampaignModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.CampaignModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.CampaignModelName)
+				}
+			}
+		}
 		if v, ok := d["verifyType"]; ok && v != nil {
 			var temp interface{}
 			if err := json.Unmarshal(*v, &temp); err == nil {
@@ -3014,6 +3070,13 @@ func NewVerifyCodeByUserIdRequestFromDict(data map[string]interface{}) VerifyCod
 			}
 			return core.CastString(data["code"])
 		}(),
+		CampaignModelName: func() *string {
+			v, ok := data["campaignModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["campaignModelName"])
+		}(),
 		VerifyType: func() *string {
 			v, ok := data["verifyType"]
 			if !ok || v == nil {
@@ -3033,11 +3096,12 @@ func NewVerifyCodeByUserIdRequestFromDict(data map[string]interface{}) VerifyCod
 
 func (p VerifyCodeByUserIdRequest) ToDict() map[string]interface{} {
 	return map[string]interface{}{
-		"namespaceName":   p.NamespaceName,
-		"userId":          p.UserId,
-		"code":            p.Code,
-		"verifyType":      p.VerifyType,
-		"timeOffsetToken": p.TimeOffsetToken,
+		"namespaceName":     p.NamespaceName,
+		"userId":            p.UserId,
+		"code":              p.Code,
+		"campaignModelName": p.CampaignModelName,
+		"verifyType":        p.VerifyType,
+		"timeOffsetToken":   p.TimeOffsetToken,
 	}
 }
 

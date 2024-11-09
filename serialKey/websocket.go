@@ -1806,6 +1806,9 @@ func (p Gs2SerialKeyWebSocketClient) VerifyCodeAsync(
 	if request.Code != nil && *request.Code != "" {
 		bodies["code"] = *request.Code
 	}
+	if request.CampaignModelName != nil && *request.CampaignModelName != "" {
+		bodies["campaignModelName"] = *request.CampaignModelName
+	}
 	if request.VerifyType != nil && *request.VerifyType != "" {
 		bodies["verifyType"] = *request.VerifyType
 	}
@@ -1901,6 +1904,9 @@ func (p Gs2SerialKeyWebSocketClient) VerifyCodeByUserIdAsync(
 	}
 	if request.Code != nil && *request.Code != "" {
 		bodies["code"] = *request.Code
+	}
+	if request.CampaignModelName != nil && *request.CampaignModelName != "" {
+		bodies["campaignModelName"] = *request.CampaignModelName
 	}
 	if request.VerifyType != nil && *request.VerifyType != "" {
 		bodies["verifyType"] = *request.VerifyType
