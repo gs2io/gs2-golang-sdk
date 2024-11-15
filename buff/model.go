@@ -212,59 +212,42 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var applyBuffScript map[string]interface{}
 	if p.ApplyBuffScript != nil {
-		applyBuffScript = func() map[string]interface{} {
+		m["applyBuffScript"] = func() map[string]interface{} {
 			if p.ApplyBuffScript == nil {
 				return nil
 			}
 			return p.ApplyBuffScript.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":     namespaceId,
-		"name":            name,
-		"description":     description,
-		"applyBuffScript": applyBuffScript,
-		"logSetting":      logSetting,
-		"createdAt":       createdAt,
-		"updatedAt":       updatedAt,
-		"revision":        revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -411,31 +394,22 @@ func NewBuffTargetModelFromDict(data map[string]interface{}) BuffTargetModel {
 }
 
 func (p BuffTargetModel) ToDict() map[string]interface{} {
-
-	var targetModelName *string
+	m := map[string]interface{}{}
 	if p.TargetModelName != nil {
-		targetModelName = p.TargetModelName
+		m["targetModelName"] = p.TargetModelName
 	}
-	var targetFieldName *string
 	if p.TargetFieldName != nil {
-		targetFieldName = p.TargetFieldName
+		m["targetFieldName"] = p.TargetFieldName
 	}
-	var conditionGrns []interface{}
 	if p.ConditionGrns != nil {
-		conditionGrns = CastBuffTargetGrnsFromDict(
+		m["conditionGrns"] = CastBuffTargetGrnsFromDict(
 			p.ConditionGrns,
 		)
 	}
-	var rate *float32
 	if p.Rate != nil {
-		rate = p.Rate
+		m["rate"] = p.Rate
 	}
-	return map[string]interface{}{
-		"targetModelName": targetModelName,
-		"targetFieldName": targetFieldName,
-		"conditionGrns":   conditionGrns,
-		"rate":            rate,
-	}
+	return m
 }
 
 func (p BuffTargetModel) Pointer() *BuffTargetModel {
@@ -582,31 +556,22 @@ func NewBuffTargetActionFromDict(data map[string]interface{}) BuffTargetAction {
 }
 
 func (p BuffTargetAction) ToDict() map[string]interface{} {
-
-	var targetActionName *string
+	m := map[string]interface{}{}
 	if p.TargetActionName != nil {
-		targetActionName = p.TargetActionName
+		m["targetActionName"] = p.TargetActionName
 	}
-	var targetFieldName *string
 	if p.TargetFieldName != nil {
-		targetFieldName = p.TargetFieldName
+		m["targetFieldName"] = p.TargetFieldName
 	}
-	var conditionGrns []interface{}
 	if p.ConditionGrns != nil {
-		conditionGrns = CastBuffTargetGrnsFromDict(
+		m["conditionGrns"] = CastBuffTargetGrnsFromDict(
 			p.ConditionGrns,
 		)
 	}
-	var rate *float32
 	if p.Rate != nil {
-		rate = p.Rate
+		m["rate"] = p.Rate
 	}
-	return map[string]interface{}{
-		"targetActionName": targetActionName,
-		"targetFieldName":  targetFieldName,
-		"conditionGrns":    conditionGrns,
-		"rate":             rate,
-	}
+	return m
 }
 
 func (p BuffTargetAction) Pointer() *BuffTargetAction {
@@ -732,19 +697,14 @@ func NewBuffTargetGrnFromDict(data map[string]interface{}) BuffTargetGrn {
 }
 
 func (p BuffTargetGrn) ToDict() map[string]interface{} {
-
-	var targetModelName *string
+	m := map[string]interface{}{}
 	if p.TargetModelName != nil {
-		targetModelName = p.TargetModelName
+		m["targetModelName"] = p.TargetModelName
 	}
-	var targetGrn *string
 	if p.TargetGrn != nil {
-		targetGrn = p.TargetGrn
+		m["targetGrn"] = p.TargetGrn
 	}
-	return map[string]interface{}{
-		"targetModelName": targetModelName,
-		"targetGrn":       targetGrn,
-	}
+	return m
 }
 
 func (p BuffTargetGrn) Pointer() *BuffTargetGrn {
@@ -1027,64 +987,45 @@ func NewBuffEntryModelFromDict(data map[string]interface{}) BuffEntryModel {
 }
 
 func (p BuffEntryModel) ToDict() map[string]interface{} {
-
-	var buffEntryModelId *string
+	m := map[string]interface{}{}
 	if p.BuffEntryModelId != nil {
-		buffEntryModelId = p.BuffEntryModelId
+		m["buffEntryModelId"] = p.BuffEntryModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var expression *string
 	if p.Expression != nil {
-		expression = p.Expression
+		m["expression"] = p.Expression
 	}
-	var targetType *string
 	if p.TargetType != nil {
-		targetType = p.TargetType
+		m["targetType"] = p.TargetType
 	}
-	var targetModel map[string]interface{}
 	if p.TargetModel != nil {
-		targetModel = func() map[string]interface{} {
+		m["targetModel"] = func() map[string]interface{} {
 			if p.TargetModel == nil {
 				return nil
 			}
 			return p.TargetModel.ToDict()
 		}()
 	}
-	var targetAction map[string]interface{}
 	if p.TargetAction != nil {
-		targetAction = func() map[string]interface{} {
+		m["targetAction"] = func() map[string]interface{} {
 			if p.TargetAction == nil {
 				return nil
 			}
 			return p.TargetAction.ToDict()
 		}()
 	}
-	var priority *int32
 	if p.Priority != nil {
-		priority = p.Priority
+		m["priority"] = p.Priority
 	}
-	var applyPeriodScheduleEventId *string
 	if p.ApplyPeriodScheduleEventId != nil {
-		applyPeriodScheduleEventId = p.ApplyPeriodScheduleEventId
+		m["applyPeriodScheduleEventId"] = p.ApplyPeriodScheduleEventId
 	}
-	return map[string]interface{}{
-		"buffEntryModelId":           buffEntryModelId,
-		"name":                       name,
-		"metadata":                   metadata,
-		"expression":                 expression,
-		"targetType":                 targetType,
-		"targetModel":                targetModel,
-		"targetAction":               targetAction,
-		"priority":                   priority,
-		"applyPeriodScheduleEventId": applyPeriodScheduleEventId,
-	}
+	return m
 }
 
 func (p BuffEntryModel) Pointer() *BuffEntryModel {
@@ -1431,84 +1372,57 @@ func NewBuffEntryModelMasterFromDict(data map[string]interface{}) BuffEntryModel
 }
 
 func (p BuffEntryModelMaster) ToDict() map[string]interface{} {
-
-	var buffEntryModelId *string
+	m := map[string]interface{}{}
 	if p.BuffEntryModelId != nil {
-		buffEntryModelId = p.BuffEntryModelId
+		m["buffEntryModelId"] = p.BuffEntryModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var expression *string
 	if p.Expression != nil {
-		expression = p.Expression
+		m["expression"] = p.Expression
 	}
-	var targetType *string
 	if p.TargetType != nil {
-		targetType = p.TargetType
+		m["targetType"] = p.TargetType
 	}
-	var targetModel map[string]interface{}
 	if p.TargetModel != nil {
-		targetModel = func() map[string]interface{} {
+		m["targetModel"] = func() map[string]interface{} {
 			if p.TargetModel == nil {
 				return nil
 			}
 			return p.TargetModel.ToDict()
 		}()
 	}
-	var targetAction map[string]interface{}
 	if p.TargetAction != nil {
-		targetAction = func() map[string]interface{} {
+		m["targetAction"] = func() map[string]interface{} {
 			if p.TargetAction == nil {
 				return nil
 			}
 			return p.TargetAction.ToDict()
 		}()
 	}
-	var priority *int32
 	if p.Priority != nil {
-		priority = p.Priority
+		m["priority"] = p.Priority
 	}
-	var applyPeriodScheduleEventId *string
 	if p.ApplyPeriodScheduleEventId != nil {
-		applyPeriodScheduleEventId = p.ApplyPeriodScheduleEventId
+		m["applyPeriodScheduleEventId"] = p.ApplyPeriodScheduleEventId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"buffEntryModelId":           buffEntryModelId,
-		"name":                       name,
-		"description":                description,
-		"metadata":                   metadata,
-		"expression":                 expression,
-		"targetType":                 targetType,
-		"targetModel":                targetModel,
-		"targetAction":               targetAction,
-		"priority":                   priority,
-		"applyPeriodScheduleEventId": applyPeriodScheduleEventId,
-		"createdAt":                  createdAt,
-		"updatedAt":                  updatedAt,
-		"revision":                   revision,
-	}
+	return m
 }
 
 func (p BuffEntryModelMaster) Pointer() *BuffEntryModelMaster {
@@ -1634,19 +1548,14 @@ func NewCurrentBuffMasterFromDict(data map[string]interface{}) CurrentBuffMaster
 }
 
 func (p CurrentBuffMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentBuffMaster) Pointer() *CurrentBuffMaster {
@@ -1752,19 +1661,14 @@ func NewOverrideBuffRateFromDict(data map[string]interface{}) OverrideBuffRate {
 }
 
 func (p OverrideBuffRate) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var rate *float32
 	if p.Rate != nil {
-		rate = p.Rate
+		m["rate"] = p.Rate
 	}
-	return map[string]interface{}{
-		"name": name,
-		"rate": rate,
-	}
+	return m
 }
 
 func (p OverrideBuffRate) Pointer() *OverrideBuffRate {
@@ -1952,29 +1856,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -2255,44 +2150,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -2387,14 +2267,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {

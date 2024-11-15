@@ -232,54 +232,37 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var firebaseSecret *string
 	if p.FirebaseSecret != nil {
-		firebaseSecret = p.FirebaseSecret
+		m["firebaseSecret"] = p.FirebaseSecret
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":    namespaceId,
-		"name":           name,
-		"description":    description,
-		"firebaseSecret": firebaseSecret,
-		"logSetting":     logSetting,
-		"createdAt":      createdAt,
-		"updatedAt":      updatedAt,
-		"revision":       revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -500,44 +483,29 @@ func NewWebSocketSessionFromDict(data map[string]interface{}) WebSocketSession {
 }
 
 func (p WebSocketSession) ToDict() map[string]interface{} {
-
-	var webSocketSessionId *string
+	m := map[string]interface{}{}
 	if p.WebSocketSessionId != nil {
-		webSocketSessionId = p.WebSocketSessionId
+		m["webSocketSessionId"] = p.WebSocketSessionId
 	}
-	var connectionId *string
 	if p.ConnectionId != nil {
-		connectionId = p.ConnectionId
+		m["connectionId"] = p.ConnectionId
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"webSocketSessionId": webSocketSessionId,
-		"connectionId":       connectionId,
-		"namespaceName":      namespaceName,
-		"userId":             userId,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p WebSocketSession) Pointer() *WebSocketSession {
@@ -727,39 +695,26 @@ func NewFirebaseTokenFromDict(data map[string]interface{}) FirebaseToken {
 }
 
 func (p FirebaseToken) ToDict() map[string]interface{} {
-
-	var firebaseTokenId *string
+	m := map[string]interface{}{}
 	if p.FirebaseTokenId != nil {
-		firebaseTokenId = p.FirebaseTokenId
+		m["firebaseTokenId"] = p.FirebaseTokenId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var token *string
 	if p.Token != nil {
-		token = p.Token
+		m["token"] = p.Token
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"firebaseTokenId": firebaseTokenId,
-		"userId":          userId,
-		"token":           token,
-		"createdAt":       createdAt,
-		"updatedAt":       updatedAt,
-		"revision":        revision,
-	}
+	return m
 }
 
 func (p FirebaseToken) Pointer() *FirebaseToken {
@@ -854,14 +809,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {

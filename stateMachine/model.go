@@ -287,99 +287,72 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var supportSpeculativeExecution *string
 	if p.SupportSpeculativeExecution != nil {
-		supportSpeculativeExecution = p.SupportSpeculativeExecution
+		m["supportSpeculativeExecution"] = p.SupportSpeculativeExecution
 	}
-	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = func() map[string]interface{} {
+		m["transactionSetting"] = func() map[string]interface{} {
 			if p.TransactionSetting == nil {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
 		}()
 	}
-	var startScript map[string]interface{}
 	if p.StartScript != nil {
-		startScript = func() map[string]interface{} {
+		m["startScript"] = func() map[string]interface{} {
 			if p.StartScript == nil {
 				return nil
 			}
 			return p.StartScript.ToDict()
 		}()
 	}
-	var passScript map[string]interface{}
 	if p.PassScript != nil {
-		passScript = func() map[string]interface{} {
+		m["passScript"] = func() map[string]interface{} {
 			if p.PassScript == nil {
 				return nil
 			}
 			return p.PassScript.ToDict()
 		}()
 	}
-	var errorScript map[string]interface{}
 	if p.ErrorScript != nil {
-		errorScript = func() map[string]interface{} {
+		m["errorScript"] = func() map[string]interface{} {
 			if p.ErrorScript == nil {
 				return nil
 			}
 			return p.ErrorScript.ToDict()
 		}()
 	}
-	var lowestStateMachineVersion *int64
 	if p.LowestStateMachineVersion != nil {
-		lowestStateMachineVersion = p.LowestStateMachineVersion
+		m["lowestStateMachineVersion"] = p.LowestStateMachineVersion
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":                 namespaceId,
-		"name":                        name,
-		"description":                 description,
-		"supportSpeculativeExecution": supportSpeculativeExecution,
-		"transactionSetting":          transactionSetting,
-		"startScript":                 startScript,
-		"passScript":                  passScript,
-		"errorScript":                 errorScript,
-		"lowestStateMachineVersion":   lowestStateMachineVersion,
-		"logSetting":                  logSetting,
-		"createdAt":                   createdAt,
-		"updatedAt":                   updatedAt,
-		"revision":                    revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -580,44 +553,29 @@ func NewStateMachineMasterFromDict(data map[string]interface{}) StateMachineMast
 }
 
 func (p StateMachineMaster) ToDict() map[string]interface{} {
-
-	var stateMachineId *string
+	m := map[string]interface{}{}
 	if p.StateMachineId != nil {
-		stateMachineId = p.StateMachineId
+		m["stateMachineId"] = p.StateMachineId
 	}
-	var mainStateMachineName *string
 	if p.MainStateMachineName != nil {
-		mainStateMachineName = p.MainStateMachineName
+		m["mainStateMachineName"] = p.MainStateMachineName
 	}
-	var payload *string
 	if p.Payload != nil {
-		payload = p.Payload
+		m["payload"] = p.Payload
 	}
-	var version *int64
 	if p.Version != nil {
-		version = p.Version
+		m["version"] = p.Version
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"stateMachineId":       stateMachineId,
-		"mainStateMachineName": mainStateMachineName,
-		"payload":              payload,
-		"version":              version,
-		"createdAt":            createdAt,
-		"updatedAt":            updatedAt,
-		"revision":             revision,
-	}
+	return m
 }
 
 func (p StateMachineMaster) Pointer() *StateMachineMaster {
@@ -973,88 +931,59 @@ func NewStatusFromDict(data map[string]interface{}) Status {
 }
 
 func (p Status) ToDict() map[string]interface{} {
-
-	var statusId *string
+	m := map[string]interface{}{}
 	if p.StatusId != nil {
-		statusId = p.StatusId
+		m["statusId"] = p.StatusId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var stateMachineVersion *int64
 	if p.StateMachineVersion != nil {
-		stateMachineVersion = p.StateMachineVersion
+		m["stateMachineVersion"] = p.StateMachineVersion
 	}
-	var enableSpeculativeExecution *string
 	if p.EnableSpeculativeExecution != nil {
-		enableSpeculativeExecution = p.EnableSpeculativeExecution
+		m["enableSpeculativeExecution"] = p.EnableSpeculativeExecution
 	}
-	var stateMachineDefinition *string
 	if p.StateMachineDefinition != nil {
-		stateMachineDefinition = p.StateMachineDefinition
+		m["stateMachineDefinition"] = p.StateMachineDefinition
 	}
-	var randomStatus map[string]interface{}
 	if p.RandomStatus != nil {
-		randomStatus = func() map[string]interface{} {
+		m["randomStatus"] = func() map[string]interface{} {
 			if p.RandomStatus == nil {
 				return nil
 			}
 			return p.RandomStatus.ToDict()
 		}()
 	}
-	var stacks []interface{}
 	if p.Stacks != nil {
-		stacks = CastStackEntriesFromDict(
+		m["stacks"] = CastStackEntriesFromDict(
 			p.Stacks,
 		)
 	}
-	var variables []interface{}
 	if p.Variables != nil {
-		variables = CastVariablesFromDict(
+		m["variables"] = CastVariablesFromDict(
 			p.Variables,
 		)
 	}
-	var status *string
 	if p.Status != nil {
-		status = p.Status
+		m["status"] = p.Status
 	}
-	var lastError *string
 	if p.LastError != nil {
-		lastError = p.LastError
+		m["lastError"] = p.LastError
 	}
-	var transitionCount *int32
 	if p.TransitionCount != nil {
-		transitionCount = p.TransitionCount
+		m["transitionCount"] = p.TransitionCount
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"statusId":                   statusId,
-		"userId":                     userId,
-		"name":                       name,
-		"stateMachineVersion":        stateMachineVersion,
-		"enableSpeculativeExecution": enableSpeculativeExecution,
-		"stateMachineDefinition":     stateMachineDefinition,
-		"randomStatus":               randomStatus,
-		"stacks":                     stacks,
-		"variables":                  variables,
-		"status":                     status,
-		"lastError":                  lastError,
-		"transitionCount":            transitionCount,
-		"createdAt":                  createdAt,
-		"updatedAt":                  updatedAt,
-	}
+	return m
 }
 
 func (p Status) Pointer() *Status {
@@ -1180,19 +1109,14 @@ func NewStackEntryFromDict(data map[string]interface{}) StackEntry {
 }
 
 func (p StackEntry) ToDict() map[string]interface{} {
-
-	var stateMachineName *string
+	m := map[string]interface{}{}
 	if p.StateMachineName != nil {
-		stateMachineName = p.StateMachineName
+		m["stateMachineName"] = p.StateMachineName
 	}
-	var taskName *string
 	if p.TaskName != nil {
-		taskName = p.TaskName
+		m["taskName"] = p.TaskName
 	}
-	return map[string]interface{}{
-		"stateMachineName": stateMachineName,
-		"taskName":         taskName,
-	}
+	return m
 }
 
 func (p StackEntry) Pointer() *StackEntry {
@@ -1318,19 +1242,14 @@ func NewVariableFromDict(data map[string]interface{}) Variable {
 }
 
 func (p Variable) ToDict() map[string]interface{} {
-
-	var stateMachineName *string
+	m := map[string]interface{}{}
 	if p.StateMachineName != nil {
-		stateMachineName = p.StateMachineName
+		m["stateMachineName"] = p.StateMachineName
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"stateMachineName": stateMachineName,
-		"value":            value,
-	}
+	return m
 }
 
 func (p Variable) Pointer() *Variable {
@@ -1499,29 +1418,20 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 }
 
 func (p TransactionSetting) ToDict() map[string]interface{} {
-
-	var enableAutoRun *bool
+	m := map[string]interface{}{}
 	if p.EnableAutoRun != nil {
-		enableAutoRun = p.EnableAutoRun
+		m["enableAutoRun"] = p.EnableAutoRun
 	}
-	var distributorNamespaceId *string
 	if p.DistributorNamespaceId != nil {
-		distributorNamespaceId = p.DistributorNamespaceId
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	return map[string]interface{}{
-		"enableAutoRun":          enableAutoRun,
-		"distributorNamespaceId": distributorNamespaceId,
-		"keyId":                  keyId,
-		"queueNamespaceId":       queueNamespaceId,
-	}
+	return m
 }
 
 func (p TransactionSetting) Pointer() *TransactionSetting {
@@ -1638,34 +1548,27 @@ func NewEventFromDict(data map[string]interface{}) Event {
 }
 
 func (p Event) ToDict() map[string]interface{} {
-
-	var eventType *string
+	m := map[string]interface{}{}
 	if p.EventType != nil {
-		eventType = p.EventType
+		m["eventType"] = p.EventType
 	}
-	var changeStateEvent map[string]interface{}
 	if p.ChangeStateEvent != nil {
-		changeStateEvent = func() map[string]interface{} {
+		m["changeStateEvent"] = func() map[string]interface{} {
 			if p.ChangeStateEvent == nil {
 				return nil
 			}
 			return p.ChangeStateEvent.ToDict()
 		}()
 	}
-	var emitEvent map[string]interface{}
 	if p.EmitEvent != nil {
-		emitEvent = func() map[string]interface{} {
+		m["emitEvent"] = func() map[string]interface{} {
 			if p.EmitEvent == nil {
 				return nil
 			}
 			return p.EmitEvent.ToDict()
 		}()
 	}
-	return map[string]interface{}{
-		"eventType":        eventType,
-		"changeStateEvent": changeStateEvent,
-		"emitEvent":        emitEvent,
-	}
+	return m
 }
 
 func (p Event) Pointer() *Event {
@@ -1802,24 +1705,17 @@ func NewChangeStateEventFromDict(data map[string]interface{}) ChangeStateEvent {
 }
 
 func (p ChangeStateEvent) ToDict() map[string]interface{} {
-
-	var taskName *string
+	m := map[string]interface{}{}
 	if p.TaskName != nil {
-		taskName = p.TaskName
+		m["taskName"] = p.TaskName
 	}
-	var hash *string
 	if p.Hash != nil {
-		hash = p.Hash
+		m["hash"] = p.Hash
 	}
-	var timestamp *int64
 	if p.Timestamp != nil {
-		timestamp = p.Timestamp
+		m["timestamp"] = p.Timestamp
 	}
-	return map[string]interface{}{
-		"taskName":  taskName,
-		"hash":      hash,
-		"timestamp": timestamp,
-	}
+	return m
 }
 
 func (p ChangeStateEvent) Pointer() *ChangeStateEvent {
@@ -1956,24 +1852,17 @@ func NewEmitEventFromDict(data map[string]interface{}) EmitEvent {
 }
 
 func (p EmitEvent) ToDict() map[string]interface{} {
-
-	var event *string
+	m := map[string]interface{}{}
 	if p.Event != nil {
-		event = p.Event
+		m["event"] = p.Event
 	}
-	var parameters *string
 	if p.Parameters != nil {
-		parameters = p.Parameters
+		m["parameters"] = p.Parameters
 	}
-	var timestamp *int64
 	if p.Timestamp != nil {
-		timestamp = p.Timestamp
+		m["timestamp"] = p.Timestamp
 	}
-	return map[string]interface{}{
-		"event":      event,
-		"parameters": parameters,
-		"timestamp":  timestamp,
-	}
+	return m
 }
 
 func (p EmitEvent) Pointer() *EmitEvent {
@@ -2058,21 +1947,16 @@ func NewRandomStatusFromDict(data map[string]interface{}) RandomStatus {
 }
 
 func (p RandomStatus) ToDict() map[string]interface{} {
-
-	var seed *int64
+	m := map[string]interface{}{}
 	if p.Seed != nil {
-		seed = p.Seed
+		m["seed"] = p.Seed
 	}
-	var used []interface{}
 	if p.Used != nil {
-		used = CastRandomUsedsFromDict(
+		m["used"] = CastRandomUsedsFromDict(
 			p.Used,
 		)
 	}
-	return map[string]interface{}{
-		"seed": seed,
-		"used": used,
-	}
+	return m
 }
 
 func (p RandomStatus) Pointer() *RandomStatus {
@@ -2158,19 +2042,14 @@ func NewRandomUsedFromDict(data map[string]interface{}) RandomUsed {
 }
 
 func (p RandomUsed) ToDict() map[string]interface{} {
-
-	var category *int64
+	m := map[string]interface{}{}
 	if p.Category != nil {
-		category = p.Category
+		m["category"] = p.Category
 	}
-	var used *int64
 	if p.Used != nil {
-		used = p.Used
+		m["used"] = p.Used
 	}
-	return map[string]interface{}{
-		"category": category,
-		"used":     used,
-	}
+	return m
 }
 
 func (p RandomUsed) Pointer() *RandomUsed {
@@ -2265,14 +2144,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -2460,29 +2336,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {

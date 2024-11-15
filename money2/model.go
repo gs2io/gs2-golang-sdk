@@ -276,89 +276,64 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var currencyUsagePriority *string
 	if p.CurrencyUsagePriority != nil {
-		currencyUsagePriority = p.CurrencyUsagePriority
+		m["currencyUsagePriority"] = p.CurrencyUsagePriority
 	}
-	var sharedFreeCurrency *bool
 	if p.SharedFreeCurrency != nil {
-		sharedFreeCurrency = p.SharedFreeCurrency
+		m["sharedFreeCurrency"] = p.SharedFreeCurrency
 	}
-	var platformSetting map[string]interface{}
 	if p.PlatformSetting != nil {
-		platformSetting = func() map[string]interface{} {
+		m["platformSetting"] = func() map[string]interface{} {
 			if p.PlatformSetting == nil {
 				return nil
 			}
 			return p.PlatformSetting.ToDict()
 		}()
 	}
-	var depositBalanceScript map[string]interface{}
 	if p.DepositBalanceScript != nil {
-		depositBalanceScript = func() map[string]interface{} {
+		m["depositBalanceScript"] = func() map[string]interface{} {
 			if p.DepositBalanceScript == nil {
 				return nil
 			}
 			return p.DepositBalanceScript.ToDict()
 		}()
 	}
-	var withdrawBalanceScript map[string]interface{}
 	if p.WithdrawBalanceScript != nil {
-		withdrawBalanceScript = func() map[string]interface{} {
+		m["withdrawBalanceScript"] = func() map[string]interface{} {
 			if p.WithdrawBalanceScript == nil {
 				return nil
 			}
 			return p.WithdrawBalanceScript.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":           namespaceId,
-		"name":                  name,
-		"description":           description,
-		"currencyUsagePriority": currencyUsagePriority,
-		"sharedFreeCurrency":    sharedFreeCurrency,
-		"platformSetting":       platformSetting,
-		"depositBalanceScript":  depositBalanceScript,
-		"withdrawBalanceScript": withdrawBalanceScript,
-		"logSetting":            logSetting,
-		"createdAt":             createdAt,
-		"updatedAt":             updatedAt,
-		"revision":              revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -560,61 +535,42 @@ func NewWalletFromDict(data map[string]interface{}) Wallet {
 }
 
 func (p Wallet) ToDict() map[string]interface{} {
-
-	var walletId *string
+	m := map[string]interface{}{}
 	if p.WalletId != nil {
-		walletId = p.WalletId
+		m["walletId"] = p.WalletId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var slot *int32
 	if p.Slot != nil {
-		slot = p.Slot
+		m["slot"] = p.Slot
 	}
-	var summary map[string]interface{}
 	if p.Summary != nil {
-		summary = func() map[string]interface{} {
+		m["summary"] = func() map[string]interface{} {
 			if p.Summary == nil {
 				return nil
 			}
 			return p.Summary.ToDict()
 		}()
 	}
-	var depositTransactions []interface{}
 	if p.DepositTransactions != nil {
-		depositTransactions = CastDepositTransactionsFromDict(
+		m["depositTransactions"] = CastDepositTransactionsFromDict(
 			p.DepositTransactions,
 		)
 	}
-	var sharedFreeCurrency *bool
 	if p.SharedFreeCurrency != nil {
-		sharedFreeCurrency = p.SharedFreeCurrency
+		m["sharedFreeCurrency"] = p.SharedFreeCurrency
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"walletId":            walletId,
-		"userId":              userId,
-		"slot":                slot,
-		"summary":             summary,
-		"depositTransactions": depositTransactions,
-		"sharedFreeCurrency":  sharedFreeCurrency,
-		"createdAt":           createdAt,
-		"updatedAt":           updatedAt,
-		"revision":            revision,
-	}
+	return m
 }
 
 func (p Wallet) Pointer() *Wallet {
@@ -857,69 +813,50 @@ func NewEventFromDict(data map[string]interface{}) Event {
 }
 
 func (p Event) ToDict() map[string]interface{} {
-
-	var eventId *string
+	m := map[string]interface{}{}
 	if p.EventId != nil {
-		eventId = p.EventId
+		m["eventId"] = p.EventId
 	}
-	var transactionId *string
 	if p.TransactionId != nil {
-		transactionId = p.TransactionId
+		m["transactionId"] = p.TransactionId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var eventType *string
 	if p.EventType != nil {
-		eventType = p.EventType
+		m["eventType"] = p.EventType
 	}
-	var verifyReceiptEvent map[string]interface{}
 	if p.VerifyReceiptEvent != nil {
-		verifyReceiptEvent = func() map[string]interface{} {
+		m["verifyReceiptEvent"] = func() map[string]interface{} {
 			if p.VerifyReceiptEvent == nil {
 				return nil
 			}
 			return p.VerifyReceiptEvent.ToDict()
 		}()
 	}
-	var depositEvent map[string]interface{}
 	if p.DepositEvent != nil {
-		depositEvent = func() map[string]interface{} {
+		m["depositEvent"] = func() map[string]interface{} {
 			if p.DepositEvent == nil {
 				return nil
 			}
 			return p.DepositEvent.ToDict()
 		}()
 	}
-	var withdrawEvent map[string]interface{}
 	if p.WithdrawEvent != nil {
-		withdrawEvent = func() map[string]interface{} {
+		m["withdrawEvent"] = func() map[string]interface{} {
 			if p.WithdrawEvent == nil {
 				return nil
 			}
 			return p.WithdrawEvent.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"eventId":            eventId,
-		"transactionId":      transactionId,
-		"userId":             userId,
-		"eventType":          eventType,
-		"verifyReceiptEvent": verifyReceiptEvent,
-		"depositEvent":       depositEvent,
-		"withdrawEvent":      withdrawEvent,
-		"createdAt":          createdAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p Event) Pointer() *Event {
@@ -1098,44 +1035,33 @@ func NewStoreContentModelFromDict(data map[string]interface{}) StoreContentModel
 }
 
 func (p StoreContentModel) ToDict() map[string]interface{} {
-
-	var storeContentModelId *string
+	m := map[string]interface{}{}
 	if p.StoreContentModelId != nil {
-		storeContentModelId = p.StoreContentModelId
+		m["storeContentModelId"] = p.StoreContentModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var appleAppStore map[string]interface{}
 	if p.AppleAppStore != nil {
-		appleAppStore = func() map[string]interface{} {
+		m["appleAppStore"] = func() map[string]interface{} {
 			if p.AppleAppStore == nil {
 				return nil
 			}
 			return p.AppleAppStore.ToDict()
 		}()
 	}
-	var googlePlay map[string]interface{}
 	if p.GooglePlay != nil {
-		googlePlay = func() map[string]interface{} {
+		m["googlePlay"] = func() map[string]interface{} {
 			if p.GooglePlay == nil {
 				return nil
 			}
 			return p.GooglePlay.ToDict()
 		}()
 	}
-	return map[string]interface{}{
-		"storeContentModelId": storeContentModelId,
-		"name":                name,
-		"metadata":            metadata,
-		"appleAppStore":       appleAppStore,
-		"googlePlay":          googlePlay,
-	}
+	return m
 }
 
 func (p StoreContentModel) Pointer() *StoreContentModel {
@@ -1378,64 +1304,45 @@ func NewStoreContentModelMasterFromDict(data map[string]interface{}) StoreConten
 }
 
 func (p StoreContentModelMaster) ToDict() map[string]interface{} {
-
-	var storeContentModelId *string
+	m := map[string]interface{}{}
 	if p.StoreContentModelId != nil {
-		storeContentModelId = p.StoreContentModelId
+		m["storeContentModelId"] = p.StoreContentModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var appleAppStore map[string]interface{}
 	if p.AppleAppStore != nil {
-		appleAppStore = func() map[string]interface{} {
+		m["appleAppStore"] = func() map[string]interface{} {
 			if p.AppleAppStore == nil {
 				return nil
 			}
 			return p.AppleAppStore.ToDict()
 		}()
 	}
-	var googlePlay map[string]interface{}
 	if p.GooglePlay != nil {
-		googlePlay = func() map[string]interface{} {
+		m["googlePlay"] = func() map[string]interface{} {
 			if p.GooglePlay == nil {
 				return nil
 			}
 			return p.GooglePlay.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"storeContentModelId": storeContentModelId,
-		"name":                name,
-		"description":         description,
-		"metadata":            metadata,
-		"appleAppStore":       appleAppStore,
-		"googlePlay":          googlePlay,
-		"createdAt":           createdAt,
-		"updatedAt":           updatedAt,
-		"revision":            revision,
-	}
+	return m
 }
 
 func (p StoreContentModelMaster) Pointer() *StoreContentModelMaster {
@@ -1561,19 +1468,14 @@ func NewCurrentModelMasterFromDict(data map[string]interface{}) CurrentModelMast
 }
 
 func (p CurrentModelMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentModelMaster) Pointer() *CurrentModelMaster {
@@ -1730,24 +1632,17 @@ func NewReceiptFromDict(data map[string]interface{}) Receipt {
 }
 
 func (p Receipt) ToDict() map[string]interface{} {
-
-	var store *string
+	m := map[string]interface{}{}
 	if p.Store != nil {
-		store = p.Store
+		m["Store"] = p.Store
 	}
-	var transactionID *string
 	if p.TransactionID != nil {
-		transactionID = p.TransactionID
+		m["TransactionID"] = p.TransactionID
 	}
-	var payload *string
 	if p.Payload != nil {
-		payload = p.Payload
+		m["Payload"] = p.Payload
 	}
-	return map[string]interface{}{
-		"Store":         store,
-		"TransactionID": transactionID,
-		"Payload":       payload,
-	}
+	return m
 }
 
 func (p Receipt) Pointer() *Receipt {
@@ -1844,39 +1739,32 @@ func NewPlatformSettingFromDict(data map[string]interface{}) PlatformSetting {
 }
 
 func (p PlatformSetting) ToDict() map[string]interface{} {
-
-	var appleAppStore map[string]interface{}
+	m := map[string]interface{}{}
 	if p.AppleAppStore != nil {
-		appleAppStore = func() map[string]interface{} {
+		m["appleAppStore"] = func() map[string]interface{} {
 			if p.AppleAppStore == nil {
 				return nil
 			}
 			return p.AppleAppStore.ToDict()
 		}()
 	}
-	var googlePlay map[string]interface{}
 	if p.GooglePlay != nil {
-		googlePlay = func() map[string]interface{} {
+		m["googlePlay"] = func() map[string]interface{} {
 			if p.GooglePlay == nil {
 				return nil
 			}
 			return p.GooglePlay.ToDict()
 		}()
 	}
-	var fake map[string]interface{}
 	if p.Fake != nil {
-		fake = func() map[string]interface{} {
+		m["fake"] = func() map[string]interface{} {
 			if p.Fake == nil {
 				return nil
 			}
 			return p.Fake.ToDict()
 		}()
 	}
-	return map[string]interface{}{
-		"appleAppStore": appleAppStore,
-		"googlePlay":    googlePlay,
-		"fake":          fake,
-	}
+	return m
 }
 
 func (p PlatformSetting) Pointer() *PlatformSetting {
@@ -1971,14 +1859,11 @@ func NewAppleAppStoreSettingFromDict(data map[string]interface{}) AppleAppStoreS
 }
 
 func (p AppleAppStoreSetting) ToDict() map[string]interface{} {
-
-	var bundleId *string
+	m := map[string]interface{}{}
 	if p.BundleId != nil {
-		bundleId = p.BundleId
+		m["bundleId"] = p.BundleId
 	}
-	return map[string]interface{}{
-		"bundleId": bundleId,
-	}
+	return m
 }
 
 func (p AppleAppStoreSetting) Pointer() *AppleAppStoreSetting {
@@ -2104,19 +1989,14 @@ func NewGooglePlaySettingFromDict(data map[string]interface{}) GooglePlaySetting
 }
 
 func (p GooglePlaySetting) ToDict() map[string]interface{} {
-
-	var packageName *string
+	m := map[string]interface{}{}
 	if p.PackageName != nil {
-		packageName = p.PackageName
+		m["packageName"] = p.PackageName
 	}
-	var publicKey *string
 	if p.PublicKey != nil {
-		publicKey = p.PublicKey
+		m["publicKey"] = p.PublicKey
 	}
-	return map[string]interface{}{
-		"packageName": packageName,
-		"publicKey":   publicKey,
-	}
+	return m
 }
 
 func (p GooglePlaySetting) Pointer() *GooglePlaySetting {
@@ -2211,14 +2091,11 @@ func NewFakeSettingFromDict(data map[string]interface{}) FakeSetting {
 }
 
 func (p FakeSetting) ToDict() map[string]interface{} {
-
-	var acceptFakeReceipt *string
+	m := map[string]interface{}{}
 	if p.AcceptFakeReceipt != nil {
-		acceptFakeReceipt = p.AcceptFakeReceipt
+		m["acceptFakeReceipt"] = p.AcceptFakeReceipt
 	}
-	return map[string]interface{}{
-		"acceptFakeReceipt": acceptFakeReceipt,
-	}
+	return m
 }
 
 func (p FakeSetting) Pointer() *FakeSetting {
@@ -2315,24 +2192,17 @@ func NewWalletSummaryFromDict(data map[string]interface{}) WalletSummary {
 }
 
 func (p WalletSummary) ToDict() map[string]interface{} {
-
-	var paid *int32
+	m := map[string]interface{}{}
 	if p.Paid != nil {
-		paid = p.Paid
+		m["paid"] = p.Paid
 	}
-	var free *int32
 	if p.Free != nil {
-		free = p.Free
+		m["free"] = p.Free
 	}
-	var total *int32
 	if p.Total != nil {
-		total = p.Total
+		m["total"] = p.Total
 	}
-	return map[string]interface{}{
-		"paid":  paid,
-		"free":  free,
-		"total": total,
-	}
+	return m
 }
 
 func (p WalletSummary) Pointer() *WalletSummary {
@@ -2460,29 +2330,20 @@ func NewDepositTransactionFromDict(data map[string]interface{}) DepositTransacti
 }
 
 func (p DepositTransaction) ToDict() map[string]interface{} {
-
-	var price *float32
+	m := map[string]interface{}{}
 	if p.Price != nil {
-		price = p.Price
+		m["price"] = p.Price
 	}
-	var currency *string
 	if p.Currency != nil {
-		currency = p.Currency
+		m["currency"] = p.Currency
 	}
-	var count *int32
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var depositedAt *int64
 	if p.DepositedAt != nil {
-		depositedAt = p.DepositedAt
+		m["depositedAt"] = p.DepositedAt
 	}
-	return map[string]interface{}{
-		"price":       price,
-		"currency":    currency,
-		"count":       count,
-		"depositedAt": depositedAt,
-	}
+	return m
 }
 
 func (p DepositTransaction) Pointer() *DepositTransaction {
@@ -2630,39 +2491,30 @@ func NewVerifyReceiptEventFromDict(data map[string]interface{}) VerifyReceiptEve
 }
 
 func (p VerifyReceiptEvent) ToDict() map[string]interface{} {
-
-	var contentName *string
+	m := map[string]interface{}{}
 	if p.ContentName != nil {
-		contentName = p.ContentName
+		m["contentName"] = p.ContentName
 	}
-	var platform *string
 	if p.Platform != nil {
-		platform = p.Platform
+		m["platform"] = p.Platform
 	}
-	var appleAppStoreVerifyReceiptEvent map[string]interface{}
 	if p.AppleAppStoreVerifyReceiptEvent != nil {
-		appleAppStoreVerifyReceiptEvent = func() map[string]interface{} {
+		m["appleAppStoreVerifyReceiptEvent"] = func() map[string]interface{} {
 			if p.AppleAppStoreVerifyReceiptEvent == nil {
 				return nil
 			}
 			return p.AppleAppStoreVerifyReceiptEvent.ToDict()
 		}()
 	}
-	var googlePlayVerifyReceiptEvent map[string]interface{}
 	if p.GooglePlayVerifyReceiptEvent != nil {
-		googlePlayVerifyReceiptEvent = func() map[string]interface{} {
+		m["googlePlayVerifyReceiptEvent"] = func() map[string]interface{} {
 			if p.GooglePlayVerifyReceiptEvent == nil {
 				return nil
 			}
 			return p.GooglePlayVerifyReceiptEvent.ToDict()
 		}()
 	}
-	return map[string]interface{}{
-		"contentName":                     contentName,
-		"platform":                        platform,
-		"appleAppStoreVerifyReceiptEvent": appleAppStoreVerifyReceiptEvent,
-		"googlePlayVerifyReceiptEvent":    googlePlayVerifyReceiptEvent,
-	}
+	return m
 }
 
 func (p VerifyReceiptEvent) Pointer() *VerifyReceiptEvent {
@@ -2758,31 +2610,24 @@ func NewDepositEventFromDict(data map[string]interface{}) DepositEvent {
 }
 
 func (p DepositEvent) ToDict() map[string]interface{} {
-
-	var slot *int32
+	m := map[string]interface{}{}
 	if p.Slot != nil {
-		slot = p.Slot
+		m["slot"] = p.Slot
 	}
-	var depositTransactions []interface{}
 	if p.DepositTransactions != nil {
-		depositTransactions = CastDepositTransactionsFromDict(
+		m["depositTransactions"] = CastDepositTransactionsFromDict(
 			p.DepositTransactions,
 		)
 	}
-	var status map[string]interface{}
 	if p.Status != nil {
-		status = func() map[string]interface{} {
+		m["status"] = func() map[string]interface{} {
 			if p.Status == nil {
 				return nil
 			}
 			return p.Status.ToDict()
 		}()
 	}
-	return map[string]interface{}{
-		"slot":                slot,
-		"depositTransactions": depositTransactions,
-		"status":              status,
-	}
+	return m
 }
 
 func (p DepositEvent) Pointer() *DepositEvent {
@@ -2878,31 +2723,24 @@ func NewWithdrawEventFromDict(data map[string]interface{}) WithdrawEvent {
 }
 
 func (p WithdrawEvent) ToDict() map[string]interface{} {
-
-	var slot *int32
+	m := map[string]interface{}{}
 	if p.Slot != nil {
-		slot = p.Slot
+		m["slot"] = p.Slot
 	}
-	var withdrawDetails []interface{}
 	if p.WithdrawDetails != nil {
-		withdrawDetails = CastDepositTransactionsFromDict(
+		m["withdrawDetails"] = CastDepositTransactionsFromDict(
 			p.WithdrawDetails,
 		)
 	}
-	var status map[string]interface{}
 	if p.Status != nil {
-		status = func() map[string]interface{} {
+		m["status"] = func() map[string]interface{} {
 			if p.Status == nil {
 				return nil
 			}
 			return p.Status.ToDict()
 		}()
 	}
-	return map[string]interface{}{
-		"slot":            slot,
-		"withdrawDetails": withdrawDetails,
-		"status":          status,
-	}
+	return m
 }
 
 func (p WithdrawEvent) Pointer() *WithdrawEvent {
@@ -2997,14 +2835,11 @@ func NewAppleAppStoreVerifyReceiptEventFromDict(data map[string]interface{}) App
 }
 
 func (p AppleAppStoreVerifyReceiptEvent) ToDict() map[string]interface{} {
-
-	var environment *string
+	m := map[string]interface{}{}
 	if p.Environment != nil {
-		environment = p.Environment
+		m["environment"] = p.Environment
 	}
-	return map[string]interface{}{
-		"environment": environment,
-	}
+	return m
 }
 
 func (p AppleAppStoreVerifyReceiptEvent) Pointer() *AppleAppStoreVerifyReceiptEvent {
@@ -3099,14 +2934,11 @@ func NewGooglePlayVerifyReceiptEventFromDict(data map[string]interface{}) Google
 }
 
 func (p GooglePlayVerifyReceiptEvent) ToDict() map[string]interface{} {
-
-	var purchaseToken *string
+	m := map[string]interface{}{}
 	if p.PurchaseToken != nil {
-		purchaseToken = p.PurchaseToken
+		m["purchaseToken"] = p.PurchaseToken
 	}
-	return map[string]interface{}{
-		"purchaseToken": purchaseToken,
-	}
+	return m
 }
 
 func (p GooglePlayVerifyReceiptEvent) Pointer() *GooglePlayVerifyReceiptEvent {
@@ -3201,14 +3033,11 @@ func NewAppleAppStoreContentFromDict(data map[string]interface{}) AppleAppStoreC
 }
 
 func (p AppleAppStoreContent) ToDict() map[string]interface{} {
-
-	var productId *string
+	m := map[string]interface{}{}
 	if p.ProductId != nil {
-		productId = p.ProductId
+		m["productId"] = p.ProductId
 	}
-	return map[string]interface{}{
-		"productId": productId,
-	}
+	return m
 }
 
 func (p AppleAppStoreContent) Pointer() *AppleAppStoreContent {
@@ -3303,14 +3132,11 @@ func NewGooglePlayContentFromDict(data map[string]interface{}) GooglePlayContent
 }
 
 func (p GooglePlayContent) ToDict() map[string]interface{} {
-
-	var productId *string
+	m := map[string]interface{}{}
 	if p.ProductId != nil {
-		productId = p.ProductId
+		m["productId"] = p.ProductId
 	}
-	return map[string]interface{}{
-		"productId": productId,
-	}
+	return m
 }
 
 func (p GooglePlayContent) Pointer() *GooglePlayContent {
@@ -3591,44 +3417,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -3816,29 +3627,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -3933,14 +3735,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -4143,54 +3942,35 @@ func NewDailyTransactionHistoryFromDict(data map[string]interface{}) DailyTransa
 }
 
 func (p DailyTransactionHistory) ToDict() map[string]interface{} {
-
-	var dailyTransactionHistoryId *string
+	m := map[string]interface{}{}
 	if p.DailyTransactionHistoryId != nil {
-		dailyTransactionHistoryId = p.DailyTransactionHistoryId
+		m["dailyTransactionHistoryId"] = p.DailyTransactionHistoryId
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var day *int32
 	if p.Day != nil {
-		day = p.Day
+		m["day"] = p.Day
 	}
-	var currency *string
 	if p.Currency != nil {
-		currency = p.Currency
+		m["currency"] = p.Currency
 	}
-	var depositAmount *float32
 	if p.DepositAmount != nil {
-		depositAmount = p.DepositAmount
+		m["depositAmount"] = p.DepositAmount
 	}
-	var withdrawAmount *float32
 	if p.WithdrawAmount != nil {
-		withdrawAmount = p.WithdrawAmount
+		m["withdrawAmount"] = p.WithdrawAmount
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"dailyTransactionHistoryId": dailyTransactionHistoryId,
-		"year":                      year,
-		"month":                     month,
-		"day":                       day,
-		"currency":                  currency,
-		"depositAmount":             depositAmount,
-		"withdrawAmount":            withdrawAmount,
-		"updatedAt":                 updatedAt,
-		"revision":                  revision,
-	}
+	return m
 }
 
 func (p DailyTransactionHistory) Pointer() *DailyTransactionHistory {
@@ -4349,34 +4129,23 @@ func NewUnusedBalanceFromDict(data map[string]interface{}) UnusedBalance {
 }
 
 func (p UnusedBalance) ToDict() map[string]interface{} {
-
-	var unusedBalanceId *string
+	m := map[string]interface{}{}
 	if p.UnusedBalanceId != nil {
-		unusedBalanceId = p.UnusedBalanceId
+		m["unusedBalanceId"] = p.UnusedBalanceId
 	}
-	var currency *string
 	if p.Currency != nil {
-		currency = p.Currency
+		m["currency"] = p.Currency
 	}
-	var balance *float32
 	if p.Balance != nil {
-		balance = p.Balance
+		m["balance"] = p.Balance
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"unusedBalanceId": unusedBalanceId,
-		"currency":        currency,
-		"balance":         balance,
-		"updatedAt":       updatedAt,
-		"revision":        revision,
-	}
+	return m
 }
 
 func (p UnusedBalance) Pointer() *UnusedBalance {

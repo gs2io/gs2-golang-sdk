@@ -212,59 +212,42 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = func() map[string]interface{} {
+		m["transactionSetting"] = func() map[string]interface{} {
 			if p.TransactionSetting == nil {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":        namespaceId,
-		"name":               name,
-		"description":        description,
-		"transactionSetting": transactionSetting,
-		"logSetting":         logSetting,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -557,61 +540,40 @@ func NewGlobalRankingModelFromDict(data map[string]interface{}) GlobalRankingMod
 }
 
 func (p GlobalRankingModel) ToDict() map[string]interface{} {
-
-	var globalRankingModelId *string
+	m := map[string]interface{}{}
 	if p.GlobalRankingModelId != nil {
-		globalRankingModelId = p.GlobalRankingModelId
+		m["globalRankingModelId"] = p.GlobalRankingModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var minimumValue *int64
 	if p.MinimumValue != nil {
-		minimumValue = p.MinimumValue
+		m["minimumValue"] = p.MinimumValue
 	}
-	var maximumValue *int64
 	if p.MaximumValue != nil {
-		maximumValue = p.MaximumValue
+		m["maximumValue"] = p.MaximumValue
 	}
-	var sum *bool
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	var orderDirection *string
 	if p.OrderDirection != nil {
-		orderDirection = p.OrderDirection
+		m["orderDirection"] = p.OrderDirection
 	}
-	var entryPeriodEventId *string
 	if p.EntryPeriodEventId != nil {
-		entryPeriodEventId = p.EntryPeriodEventId
+		m["entryPeriodEventId"] = p.EntryPeriodEventId
 	}
-	var rankingRewards []interface{}
 	if p.RankingRewards != nil {
-		rankingRewards = CastRankingRewardsFromDict(
+		m["rankingRewards"] = CastRankingRewardsFromDict(
 			p.RankingRewards,
 		)
 	}
-	var accessPeriodEventId *string
 	if p.AccessPeriodEventId != nil {
-		accessPeriodEventId = p.AccessPeriodEventId
+		m["accessPeriodEventId"] = p.AccessPeriodEventId
 	}
-	return map[string]interface{}{
-		"globalRankingModelId": globalRankingModelId,
-		"name":                 name,
-		"metadata":             metadata,
-		"minimumValue":         minimumValue,
-		"maximumValue":         maximumValue,
-		"sum":                  sum,
-		"orderDirection":       orderDirection,
-		"entryPeriodEventId":   entryPeriodEventId,
-		"rankingRewards":       rankingRewards,
-		"accessPeriodEventId":  accessPeriodEventId,
-	}
+	return m
 }
 
 func (p GlobalRankingModel) Pointer() *GlobalRankingModel {
@@ -968,81 +930,52 @@ func NewGlobalRankingModelMasterFromDict(data map[string]interface{}) GlobalRank
 }
 
 func (p GlobalRankingModelMaster) ToDict() map[string]interface{} {
-
-	var globalRankingModelId *string
+	m := map[string]interface{}{}
 	if p.GlobalRankingModelId != nil {
-		globalRankingModelId = p.GlobalRankingModelId
+		m["globalRankingModelId"] = p.GlobalRankingModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var minimumValue *int64
 	if p.MinimumValue != nil {
-		minimumValue = p.MinimumValue
+		m["minimumValue"] = p.MinimumValue
 	}
-	var maximumValue *int64
 	if p.MaximumValue != nil {
-		maximumValue = p.MaximumValue
+		m["maximumValue"] = p.MaximumValue
 	}
-	var sum *bool
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	var orderDirection *string
 	if p.OrderDirection != nil {
-		orderDirection = p.OrderDirection
+		m["orderDirection"] = p.OrderDirection
 	}
-	var entryPeriodEventId *string
 	if p.EntryPeriodEventId != nil {
-		entryPeriodEventId = p.EntryPeriodEventId
+		m["entryPeriodEventId"] = p.EntryPeriodEventId
 	}
-	var rankingRewards []interface{}
 	if p.RankingRewards != nil {
-		rankingRewards = CastRankingRewardsFromDict(
+		m["rankingRewards"] = CastRankingRewardsFromDict(
 			p.RankingRewards,
 		)
 	}
-	var accessPeriodEventId *string
 	if p.AccessPeriodEventId != nil {
-		accessPeriodEventId = p.AccessPeriodEventId
+		m["accessPeriodEventId"] = p.AccessPeriodEventId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"globalRankingModelId": globalRankingModelId,
-		"name":                 name,
-		"description":          description,
-		"metadata":             metadata,
-		"minimumValue":         minimumValue,
-		"maximumValue":         maximumValue,
-		"sum":                  sum,
-		"orderDirection":       orderDirection,
-		"entryPeriodEventId":   entryPeriodEventId,
-		"rankingRewards":       rankingRewards,
-		"accessPeriodEventId":  accessPeriodEventId,
-		"createdAt":            createdAt,
-		"updatedAt":            updatedAt,
-		"revision":             revision,
-	}
+	return m
 }
 
 func (p GlobalRankingModelMaster) Pointer() *GlobalRankingModelMaster {
@@ -1285,54 +1218,35 @@ func NewGlobalRankingScoreFromDict(data map[string]interface{}) GlobalRankingSco
 }
 
 func (p GlobalRankingScore) ToDict() map[string]interface{} {
-
-	var globalRankingScoreId *string
+	m := map[string]interface{}{}
 	if p.GlobalRankingScoreId != nil {
-		globalRankingScoreId = p.GlobalRankingScoreId
+		m["globalRankingScoreId"] = p.GlobalRankingScoreId
 	}
-	var rankingName *string
 	if p.RankingName != nil {
-		rankingName = p.RankingName
+		m["rankingName"] = p.RankingName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var season *int64
 	if p.Season != nil {
-		season = p.Season
+		m["season"] = p.Season
 	}
-	var score *int64
 	if p.Score != nil {
-		score = p.Score
+		m["score"] = p.Score
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"globalRankingScoreId": globalRankingScoreId,
-		"rankingName":          rankingName,
-		"userId":               userId,
-		"season":               season,
-		"score":                score,
-		"metadata":             metadata,
-		"createdAt":            createdAt,
-		"updatedAt":            updatedAt,
-		"revision":             revision,
-	}
+	return m
 }
 
 func (p GlobalRankingScore) Pointer() *GlobalRankingScore {
@@ -1522,39 +1436,26 @@ func NewGlobalRankingReceivedRewardFromDict(data map[string]interface{}) GlobalR
 }
 
 func (p GlobalRankingReceivedReward) ToDict() map[string]interface{} {
-
-	var globalRankingReceivedRewardId *string
+	m := map[string]interface{}{}
 	if p.GlobalRankingReceivedRewardId != nil {
-		globalRankingReceivedRewardId = p.GlobalRankingReceivedRewardId
+		m["globalRankingReceivedRewardId"] = p.GlobalRankingReceivedRewardId
 	}
-	var rankingName *string
 	if p.RankingName != nil {
-		rankingName = p.RankingName
+		m["rankingName"] = p.RankingName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var season *int64
 	if p.Season != nil {
-		season = p.Season
+		m["season"] = p.Season
 	}
-	var receivedAt *int64
 	if p.ReceivedAt != nil {
-		receivedAt = p.ReceivedAt
+		m["receivedAt"] = p.ReceivedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"globalRankingReceivedRewardId": globalRankingReceivedRewardId,
-		"rankingName":                   rankingName,
-		"userId":                        userId,
-		"season":                        season,
-		"receivedAt":                    receivedAt,
-		"revision":                      revision,
-	}
+	return m
 }
 
 func (p GlobalRankingReceivedReward) Pointer() *GlobalRankingReceivedReward {
@@ -1819,64 +1720,41 @@ func NewGlobalRankingDataFromDict(data map[string]interface{}) GlobalRankingData
 }
 
 func (p GlobalRankingData) ToDict() map[string]interface{} {
-
-	var globalRankingDataId *string
+	m := map[string]interface{}{}
 	if p.GlobalRankingDataId != nil {
-		globalRankingDataId = p.GlobalRankingDataId
+		m["globalRankingDataId"] = p.GlobalRankingDataId
 	}
-	var rankingName *string
 	if p.RankingName != nil {
-		rankingName = p.RankingName
+		m["rankingName"] = p.RankingName
 	}
-	var season *int64
 	if p.Season != nil {
-		season = p.Season
+		m["season"] = p.Season
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var index *int32
 	if p.Index != nil {
-		index = p.Index
+		m["index"] = p.Index
 	}
-	var rank *int32
 	if p.Rank != nil {
-		rank = p.Rank
+		m["rank"] = p.Rank
 	}
-	var score *int64
 	if p.Score != nil {
-		score = p.Score
+		m["score"] = p.Score
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"globalRankingDataId": globalRankingDataId,
-		"rankingName":         rankingName,
-		"season":              season,
-		"userId":              userId,
-		"index":               index,
-		"rank":                rank,
-		"score":               score,
-		"metadata":            metadata,
-		"createdAt":           createdAt,
-		"updatedAt":           updatedAt,
-		"revision":            revision,
-	}
+	return m
 }
 
 func (p GlobalRankingData) Pointer() *GlobalRankingData {
@@ -2200,66 +2078,43 @@ func NewClusterRankingModelFromDict(data map[string]interface{}) ClusterRankingM
 }
 
 func (p ClusterRankingModel) ToDict() map[string]interface{} {
-
-	var clusterRankingModelId *string
+	m := map[string]interface{}{}
 	if p.ClusterRankingModelId != nil {
-		clusterRankingModelId = p.ClusterRankingModelId
+		m["clusterRankingModelId"] = p.ClusterRankingModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var clusterType *string
 	if p.ClusterType != nil {
-		clusterType = p.ClusterType
+		m["clusterType"] = p.ClusterType
 	}
-	var minimumValue *int64
 	if p.MinimumValue != nil {
-		minimumValue = p.MinimumValue
+		m["minimumValue"] = p.MinimumValue
 	}
-	var maximumValue *int64
 	if p.MaximumValue != nil {
-		maximumValue = p.MaximumValue
+		m["maximumValue"] = p.MaximumValue
 	}
-	var sum *bool
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	var orderDirection *string
 	if p.OrderDirection != nil {
-		orderDirection = p.OrderDirection
+		m["orderDirection"] = p.OrderDirection
 	}
-	var entryPeriodEventId *string
 	if p.EntryPeriodEventId != nil {
-		entryPeriodEventId = p.EntryPeriodEventId
+		m["entryPeriodEventId"] = p.EntryPeriodEventId
 	}
-	var rankingRewards []interface{}
 	if p.RankingRewards != nil {
-		rankingRewards = CastRankingRewardsFromDict(
+		m["rankingRewards"] = CastRankingRewardsFromDict(
 			p.RankingRewards,
 		)
 	}
-	var accessPeriodEventId *string
 	if p.AccessPeriodEventId != nil {
-		accessPeriodEventId = p.AccessPeriodEventId
+		m["accessPeriodEventId"] = p.AccessPeriodEventId
 	}
-	return map[string]interface{}{
-		"clusterRankingModelId": clusterRankingModelId,
-		"name":                  name,
-		"metadata":              metadata,
-		"clusterType":           clusterType,
-		"minimumValue":          minimumValue,
-		"maximumValue":          maximumValue,
-		"sum":                   sum,
-		"orderDirection":        orderDirection,
-		"entryPeriodEventId":    entryPeriodEventId,
-		"rankingRewards":        rankingRewards,
-		"accessPeriodEventId":   accessPeriodEventId,
-	}
+	return m
 }
 
 func (p ClusterRankingModel) Pointer() *ClusterRankingModel {
@@ -2658,91 +2513,58 @@ func NewClusterRankingModelMasterFromDict(data map[string]interface{}) ClusterRa
 }
 
 func (p ClusterRankingModelMaster) ToDict() map[string]interface{} {
-
-	var clusterRankingModelId *string
+	m := map[string]interface{}{}
 	if p.ClusterRankingModelId != nil {
-		clusterRankingModelId = p.ClusterRankingModelId
+		m["clusterRankingModelId"] = p.ClusterRankingModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var clusterType *string
 	if p.ClusterType != nil {
-		clusterType = p.ClusterType
+		m["clusterType"] = p.ClusterType
 	}
-	var minimumValue *int64
 	if p.MinimumValue != nil {
-		minimumValue = p.MinimumValue
+		m["minimumValue"] = p.MinimumValue
 	}
-	var maximumValue *int64
 	if p.MaximumValue != nil {
-		maximumValue = p.MaximumValue
+		m["maximumValue"] = p.MaximumValue
 	}
-	var sum *bool
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	var scoreTtlDays *int32
 	if p.ScoreTtlDays != nil {
-		scoreTtlDays = p.ScoreTtlDays
+		m["scoreTtlDays"] = p.ScoreTtlDays
 	}
-	var orderDirection *string
 	if p.OrderDirection != nil {
-		orderDirection = p.OrderDirection
+		m["orderDirection"] = p.OrderDirection
 	}
-	var entryPeriodEventId *string
 	if p.EntryPeriodEventId != nil {
-		entryPeriodEventId = p.EntryPeriodEventId
+		m["entryPeriodEventId"] = p.EntryPeriodEventId
 	}
-	var rankingRewards []interface{}
 	if p.RankingRewards != nil {
-		rankingRewards = CastRankingRewardsFromDict(
+		m["rankingRewards"] = CastRankingRewardsFromDict(
 			p.RankingRewards,
 		)
 	}
-	var accessPeriodEventId *string
 	if p.AccessPeriodEventId != nil {
-		accessPeriodEventId = p.AccessPeriodEventId
+		m["accessPeriodEventId"] = p.AccessPeriodEventId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"clusterRankingModelId": clusterRankingModelId,
-		"name":                  name,
-		"description":           description,
-		"metadata":              metadata,
-		"clusterType":           clusterType,
-		"minimumValue":          minimumValue,
-		"maximumValue":          maximumValue,
-		"sum":                   sum,
-		"scoreTtlDays":          scoreTtlDays,
-		"orderDirection":        orderDirection,
-		"entryPeriodEventId":    entryPeriodEventId,
-		"rankingRewards":        rankingRewards,
-		"accessPeriodEventId":   accessPeriodEventId,
-		"createdAt":             createdAt,
-		"updatedAt":             updatedAt,
-		"revision":              revision,
-	}
+	return m
 }
 
 func (p ClusterRankingModelMaster) Pointer() *ClusterRankingModelMaster {
@@ -3016,59 +2838,38 @@ func NewClusterRankingScoreFromDict(data map[string]interface{}) ClusterRankingS
 }
 
 func (p ClusterRankingScore) ToDict() map[string]interface{} {
-
-	var clusterRankingScoreId *string
+	m := map[string]interface{}{}
 	if p.ClusterRankingScoreId != nil {
-		clusterRankingScoreId = p.ClusterRankingScoreId
+		m["clusterRankingScoreId"] = p.ClusterRankingScoreId
 	}
-	var rankingName *string
 	if p.RankingName != nil {
-		rankingName = p.RankingName
+		m["rankingName"] = p.RankingName
 	}
-	var clusterName *string
 	if p.ClusterName != nil {
-		clusterName = p.ClusterName
+		m["clusterName"] = p.ClusterName
 	}
-	var season *int64
 	if p.Season != nil {
-		season = p.Season
+		m["season"] = p.Season
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var score *int64
 	if p.Score != nil {
-		score = p.Score
+		m["score"] = p.Score
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"clusterRankingScoreId": clusterRankingScoreId,
-		"rankingName":           rankingName,
-		"clusterName":           clusterName,
-		"season":                season,
-		"userId":                userId,
-		"score":                 score,
-		"metadata":              metadata,
-		"createdAt":             createdAt,
-		"updatedAt":             updatedAt,
-		"revision":              revision,
-	}
+	return m
 }
 
 func (p ClusterRankingScore) Pointer() *ClusterRankingScore {
@@ -3289,44 +3090,29 @@ func NewClusterRankingReceivedRewardFromDict(data map[string]interface{}) Cluste
 }
 
 func (p ClusterRankingReceivedReward) ToDict() map[string]interface{} {
-
-	var clusterRankingReceivedRewardId *string
+	m := map[string]interface{}{}
 	if p.ClusterRankingReceivedRewardId != nil {
-		clusterRankingReceivedRewardId = p.ClusterRankingReceivedRewardId
+		m["clusterRankingReceivedRewardId"] = p.ClusterRankingReceivedRewardId
 	}
-	var rankingName *string
 	if p.RankingName != nil {
-		rankingName = p.RankingName
+		m["rankingName"] = p.RankingName
 	}
-	var clusterName *string
 	if p.ClusterName != nil {
-		clusterName = p.ClusterName
+		m["clusterName"] = p.ClusterName
 	}
-	var season *int64
 	if p.Season != nil {
-		season = p.Season
+		m["season"] = p.Season
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var receivedAt *int64
 	if p.ReceivedAt != nil {
-		receivedAt = p.ReceivedAt
+		m["receivedAt"] = p.ReceivedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"clusterRankingReceivedRewardId": clusterRankingReceivedRewardId,
-		"rankingName":                    rankingName,
-		"clusterName":                    clusterName,
-		"season":                         season,
-		"userId":                         userId,
-		"receivedAt":                     receivedAt,
-		"revision":                       revision,
-	}
+	return m
 }
 
 func (p ClusterRankingReceivedReward) Pointer() *ClusterRankingReceivedReward {
@@ -3622,69 +3408,44 @@ func NewClusterRankingDataFromDict(data map[string]interface{}) ClusterRankingDa
 }
 
 func (p ClusterRankingData) ToDict() map[string]interface{} {
-
-	var clusterRankingDataId *string
+	m := map[string]interface{}{}
 	if p.ClusterRankingDataId != nil {
-		clusterRankingDataId = p.ClusterRankingDataId
+		m["clusterRankingDataId"] = p.ClusterRankingDataId
 	}
-	var rankingName *string
 	if p.RankingName != nil {
-		rankingName = p.RankingName
+		m["rankingName"] = p.RankingName
 	}
-	var clusterName *string
 	if p.ClusterName != nil {
-		clusterName = p.ClusterName
+		m["clusterName"] = p.ClusterName
 	}
-	var season *int64
 	if p.Season != nil {
-		season = p.Season
+		m["season"] = p.Season
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var index *int32
 	if p.Index != nil {
-		index = p.Index
+		m["index"] = p.Index
 	}
-	var rank *int32
 	if p.Rank != nil {
-		rank = p.Rank
+		m["rank"] = p.Rank
 	}
-	var score *int64
 	if p.Score != nil {
-		score = p.Score
+		m["score"] = p.Score
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"clusterRankingDataId": clusterRankingDataId,
-		"rankingName":          rankingName,
-		"clusterName":          clusterName,
-		"season":               season,
-		"userId":               userId,
-		"index":                index,
-		"rank":                 rank,
-		"score":                score,
-		"metadata":             metadata,
-		"createdAt":            createdAt,
-		"updatedAt":            updatedAt,
-		"revision":             revision,
-	}
+	return m
 }
 
 func (p ClusterRankingData) Pointer() *ClusterRankingData {
@@ -3967,54 +3728,35 @@ func NewSubscribeRankingModelFromDict(data map[string]interface{}) SubscribeRank
 }
 
 func (p SubscribeRankingModel) ToDict() map[string]interface{} {
-
-	var subscribeRankingModelId *string
+	m := map[string]interface{}{}
 	if p.SubscribeRankingModelId != nil {
-		subscribeRankingModelId = p.SubscribeRankingModelId
+		m["subscribeRankingModelId"] = p.SubscribeRankingModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var minimumValue *int64
 	if p.MinimumValue != nil {
-		minimumValue = p.MinimumValue
+		m["minimumValue"] = p.MinimumValue
 	}
-	var maximumValue *int64
 	if p.MaximumValue != nil {
-		maximumValue = p.MaximumValue
+		m["maximumValue"] = p.MaximumValue
 	}
-	var sum *bool
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	var orderDirection *string
 	if p.OrderDirection != nil {
-		orderDirection = p.OrderDirection
+		m["orderDirection"] = p.OrderDirection
 	}
-	var entryPeriodEventId *string
 	if p.EntryPeriodEventId != nil {
-		entryPeriodEventId = p.EntryPeriodEventId
+		m["entryPeriodEventId"] = p.EntryPeriodEventId
 	}
-	var accessPeriodEventId *string
 	if p.AccessPeriodEventId != nil {
-		accessPeriodEventId = p.AccessPeriodEventId
+		m["accessPeriodEventId"] = p.AccessPeriodEventId
 	}
-	return map[string]interface{}{
-		"subscribeRankingModelId": subscribeRankingModelId,
-		"name":                    name,
-		"metadata":                metadata,
-		"minimumValue":            minimumValue,
-		"maximumValue":            maximumValue,
-		"sum":                     sum,
-		"orderDirection":          orderDirection,
-		"entryPeriodEventId":      entryPeriodEventId,
-		"accessPeriodEventId":     accessPeriodEventId,
-	}
+	return m
 }
 
 func (p SubscribeRankingModel) Pointer() *SubscribeRankingModel {
@@ -4372,79 +4114,50 @@ func NewSubscribeRankingModelMasterFromDict(data map[string]interface{}) Subscri
 }
 
 func (p SubscribeRankingModelMaster) ToDict() map[string]interface{} {
-
-	var subscribeRankingModelId *string
+	m := map[string]interface{}{}
 	if p.SubscribeRankingModelId != nil {
-		subscribeRankingModelId = p.SubscribeRankingModelId
+		m["subscribeRankingModelId"] = p.SubscribeRankingModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var minimumValue *int64
 	if p.MinimumValue != nil {
-		minimumValue = p.MinimumValue
+		m["minimumValue"] = p.MinimumValue
 	}
-	var maximumValue *int64
 	if p.MaximumValue != nil {
-		maximumValue = p.MaximumValue
+		m["maximumValue"] = p.MaximumValue
 	}
-	var sum *bool
 	if p.Sum != nil {
-		sum = p.Sum
+		m["sum"] = p.Sum
 	}
-	var scoreTtlDays *int32
 	if p.ScoreTtlDays != nil {
-		scoreTtlDays = p.ScoreTtlDays
+		m["scoreTtlDays"] = p.ScoreTtlDays
 	}
-	var orderDirection *string
 	if p.OrderDirection != nil {
-		orderDirection = p.OrderDirection
+		m["orderDirection"] = p.OrderDirection
 	}
-	var entryPeriodEventId *string
 	if p.EntryPeriodEventId != nil {
-		entryPeriodEventId = p.EntryPeriodEventId
+		m["entryPeriodEventId"] = p.EntryPeriodEventId
 	}
-	var accessPeriodEventId *string
 	if p.AccessPeriodEventId != nil {
-		accessPeriodEventId = p.AccessPeriodEventId
+		m["accessPeriodEventId"] = p.AccessPeriodEventId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"subscribeRankingModelId": subscribeRankingModelId,
-		"name":                    name,
-		"description":             description,
-		"metadata":                metadata,
-		"minimumValue":            minimumValue,
-		"maximumValue":            maximumValue,
-		"sum":                     sum,
-		"scoreTtlDays":            scoreTtlDays,
-		"orderDirection":          orderDirection,
-		"entryPeriodEventId":      entryPeriodEventId,
-		"accessPeriodEventId":     accessPeriodEventId,
-		"createdAt":               createdAt,
-		"updatedAt":               updatedAt,
-		"revision":                revision,
-	}
+	return m
 }
 
 func (p SubscribeRankingModelMaster) Pointer() *SubscribeRankingModelMaster {
@@ -4702,53 +4415,36 @@ func NewSubscribeFromDict(data map[string]interface{}) Subscribe {
 }
 
 func (p Subscribe) ToDict() map[string]interface{} {
-
-	var subscribeId *string
+	m := map[string]interface{}{}
 	if p.SubscribeId != nil {
-		subscribeId = p.SubscribeId
+		m["subscribeId"] = p.SubscribeId
 	}
-	var rankingName *string
 	if p.RankingName != nil {
-		rankingName = p.RankingName
+		m["rankingName"] = p.RankingName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var targetUserIds []interface{}
 	if p.TargetUserIds != nil {
-		targetUserIds = core.CastStringsFromDict(
+		m["targetUserIds"] = core.CastStringsFromDict(
 			p.TargetUserIds,
 		)
 	}
-	var fromUserIds []interface{}
 	if p.FromUserIds != nil {
-		fromUserIds = core.CastStringsFromDict(
+		m["fromUserIds"] = core.CastStringsFromDict(
 			p.FromUserIds,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"subscribeId":   subscribeId,
-		"rankingName":   rankingName,
-		"userId":        userId,
-		"targetUserIds": targetUserIds,
-		"fromUserIds":   fromUserIds,
-		"createdAt":     createdAt,
-		"updatedAt":     updatedAt,
-		"revision":      revision,
-	}
+	return m
 }
 
 func (p Subscribe) Pointer() *Subscribe {
@@ -4991,54 +4687,35 @@ func NewSubscribeRankingScoreFromDict(data map[string]interface{}) SubscribeRank
 }
 
 func (p SubscribeRankingScore) ToDict() map[string]interface{} {
-
-	var subscribeRankingScoreId *string
+	m := map[string]interface{}{}
 	if p.SubscribeRankingScoreId != nil {
-		subscribeRankingScoreId = p.SubscribeRankingScoreId
+		m["subscribeRankingScoreId"] = p.SubscribeRankingScoreId
 	}
-	var rankingName *string
 	if p.RankingName != nil {
-		rankingName = p.RankingName
+		m["rankingName"] = p.RankingName
 	}
-	var season *int64
 	if p.Season != nil {
-		season = p.Season
+		m["season"] = p.Season
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var score *int64
 	if p.Score != nil {
-		score = p.Score
+		m["score"] = p.Score
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"subscribeRankingScoreId": subscribeRankingScoreId,
-		"rankingName":             rankingName,
-		"season":                  season,
-		"userId":                  userId,
-		"score":                   score,
-		"metadata":                metadata,
-		"createdAt":               createdAt,
-		"updatedAt":               updatedAt,
-		"revision":                revision,
-	}
+	return m
 }
 
 func (p SubscribeRankingScore) Pointer() *SubscribeRankingScore {
@@ -5334,69 +5011,44 @@ func NewSubscribeRankingDataFromDict(data map[string]interface{}) SubscribeRanki
 }
 
 func (p SubscribeRankingData) ToDict() map[string]interface{} {
-
-	var subscribeRankingDataId *string
+	m := map[string]interface{}{}
 	if p.SubscribeRankingDataId != nil {
-		subscribeRankingDataId = p.SubscribeRankingDataId
+		m["subscribeRankingDataId"] = p.SubscribeRankingDataId
 	}
-	var rankingName *string
 	if p.RankingName != nil {
-		rankingName = p.RankingName
+		m["rankingName"] = p.RankingName
 	}
-	var season *int64
 	if p.Season != nil {
-		season = p.Season
+		m["season"] = p.Season
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var index *int32
 	if p.Index != nil {
-		index = p.Index
+		m["index"] = p.Index
 	}
-	var rank *int32
 	if p.Rank != nil {
-		rank = p.Rank
+		m["rank"] = p.Rank
 	}
-	var scorerUserId *string
 	if p.ScorerUserId != nil {
-		scorerUserId = p.ScorerUserId
+		m["scorerUserId"] = p.ScorerUserId
 	}
-	var score *int64
 	if p.Score != nil {
-		score = p.Score
+		m["score"] = p.Score
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"subscribeRankingDataId": subscribeRankingDataId,
-		"rankingName":            rankingName,
-		"season":                 season,
-		"userId":                 userId,
-		"index":                  index,
-		"rank":                   rank,
-		"scorerUserId":           scorerUserId,
-		"score":                  score,
-		"metadata":               metadata,
-		"createdAt":              createdAt,
-		"updatedAt":              updatedAt,
-		"revision":               revision,
-	}
+	return m
 }
 
 func (p SubscribeRankingData) Pointer() *SubscribeRankingData {
@@ -5522,19 +5174,14 @@ func NewCurrentRankingMasterFromDict(data map[string]interface{}) CurrentRanking
 }
 
 func (p CurrentRankingMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentRankingMaster) Pointer() *CurrentRankingMaster {
@@ -5691,24 +5338,17 @@ func NewSubscribeUserFromDict(data map[string]interface{}) SubscribeUser {
 }
 
 func (p SubscribeUser) ToDict() map[string]interface{} {
-
-	var rankingName *string
+	m := map[string]interface{}{}
 	if p.RankingName != nil {
-		rankingName = p.RankingName
+		m["rankingName"] = p.RankingName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var targetUserId *string
 	if p.TargetUserId != nil {
-		targetUserId = p.TargetUserId
+		m["targetUserId"] = p.TargetUserId
 	}
-	return map[string]interface{}{
-		"rankingName":  rankingName,
-		"userId":       userId,
-		"targetUserId": targetUserId,
-	}
+	return m
 }
 
 func (p SubscribeUser) Pointer() *SubscribeUser {
@@ -5824,26 +5464,19 @@ func NewRankingRewardFromDict(data map[string]interface{}) RankingReward {
 }
 
 func (p RankingReward) ToDict() map[string]interface{} {
-
-	var thresholdRank *int32
+	m := map[string]interface{}{}
 	if p.ThresholdRank != nil {
-		thresholdRank = p.ThresholdRank
+		m["thresholdRank"] = p.ThresholdRank
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var acquireActions []interface{}
 	if p.AcquireActions != nil {
-		acquireActions = CastAcquireActionsFromDict(
+		m["acquireActions"] = CastAcquireActionsFromDict(
 			p.AcquireActions,
 		)
 	}
-	return map[string]interface{}{
-		"thresholdRank":  thresholdRank,
-		"metadata":       metadata,
-		"acquireActions": acquireActions,
-	}
+	return m
 }
 
 func (p RankingReward) Pointer() *RankingReward {
@@ -6012,29 +5645,20 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 }
 
 func (p TransactionSetting) ToDict() map[string]interface{} {
-
-	var enableAutoRun *bool
+	m := map[string]interface{}{}
 	if p.EnableAutoRun != nil {
-		enableAutoRun = p.EnableAutoRun
+		m["enableAutoRun"] = p.EnableAutoRun
 	}
-	var distributorNamespaceId *string
 	if p.DistributorNamespaceId != nil {
-		distributorNamespaceId = p.DistributorNamespaceId
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	return map[string]interface{}{
-		"enableAutoRun":          enableAutoRun,
-		"distributorNamespaceId": distributorNamespaceId,
-		"keyId":                  keyId,
-		"queueNamespaceId":       queueNamespaceId,
-	}
+	return m
 }
 
 func (p TransactionSetting) Pointer() *TransactionSetting {
@@ -6129,14 +5753,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -6417,44 +6038,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -6580,19 +6186,14 @@ func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 }
 
 func (p AcquireAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p AcquireAction) Pointer() *AcquireAction {
@@ -6718,19 +6319,14 @@ func NewConfigFromDict(data map[string]interface{}) Config {
 }
 
 func (p Config) ToDict() map[string]interface{} {
-
-	var key *string
+	m := map[string]interface{}{}
 	if p.Key != nil {
-		key = p.Key
+		m["key"] = p.Key
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"key":   key,
-		"value": value,
-	}
+	return m
 }
 
 func (p Config) Pointer() *Config {

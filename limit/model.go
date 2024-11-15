@@ -201,49 +201,34 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"name":        name,
-		"description": description,
-		"logSetting":  logSetting,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -486,54 +471,35 @@ func NewCounterFromDict(data map[string]interface{}) Counter {
 }
 
 func (p Counter) ToDict() map[string]interface{} {
-
-	var counterId *string
+	m := map[string]interface{}{}
 	if p.CounterId != nil {
-		counterId = p.CounterId
+		m["counterId"] = p.CounterId
 	}
-	var limitName *string
 	if p.LimitName != nil {
-		limitName = p.LimitName
+		m["limitName"] = p.LimitName
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var count *int32
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var nextResetAt *int64
 	if p.NextResetAt != nil {
-		nextResetAt = p.NextResetAt
+		m["nextResetAt"] = p.NextResetAt
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"counterId":   counterId,
-		"limitName":   limitName,
-		"name":        name,
-		"userId":      userId,
-		"count":       count,
-		"nextResetAt": nextResetAt,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p Counter) Pointer() *Counter {
@@ -838,64 +804,41 @@ func NewLimitModelMasterFromDict(data map[string]interface{}) LimitModelMaster {
 }
 
 func (p LimitModelMaster) ToDict() map[string]interface{} {
-
-	var limitModelId *string
+	m := map[string]interface{}{}
 	if p.LimitModelId != nil {
-		limitModelId = p.LimitModelId
+		m["limitModelId"] = p.LimitModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var resetType *string
 	if p.ResetType != nil {
-		resetType = p.ResetType
+		m["resetType"] = p.ResetType
 	}
-	var resetDayOfMonth *int32
 	if p.ResetDayOfMonth != nil {
-		resetDayOfMonth = p.ResetDayOfMonth
+		m["resetDayOfMonth"] = p.ResetDayOfMonth
 	}
-	var resetDayOfWeek *string
 	if p.ResetDayOfWeek != nil {
-		resetDayOfWeek = p.ResetDayOfWeek
+		m["resetDayOfWeek"] = p.ResetDayOfWeek
 	}
-	var resetHour *int32
 	if p.ResetHour != nil {
-		resetHour = p.ResetHour
+		m["resetHour"] = p.ResetHour
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"limitModelId":    limitModelId,
-		"name":            name,
-		"description":     description,
-		"metadata":        metadata,
-		"resetType":       resetType,
-		"resetDayOfMonth": resetDayOfMonth,
-		"resetDayOfWeek":  resetDayOfWeek,
-		"resetHour":       resetHour,
-		"createdAt":       createdAt,
-		"updatedAt":       updatedAt,
-		"revision":        revision,
-	}
+	return m
 }
 
 func (p LimitModelMaster) Pointer() *LimitModelMaster {
@@ -1021,19 +964,14 @@ func NewCurrentLimitMasterFromDict(data map[string]interface{}) CurrentLimitMast
 }
 
 func (p CurrentLimitMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentLimitMaster) Pointer() *CurrentLimitMaster {
@@ -1314,44 +1252,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -1446,14 +1369,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -1694,44 +1614,29 @@ func NewLimitModelFromDict(data map[string]interface{}) LimitModel {
 }
 
 func (p LimitModel) ToDict() map[string]interface{} {
-
-	var limitModelId *string
+	m := map[string]interface{}{}
 	if p.LimitModelId != nil {
-		limitModelId = p.LimitModelId
+		m["limitModelId"] = p.LimitModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var resetType *string
 	if p.ResetType != nil {
-		resetType = p.ResetType
+		m["resetType"] = p.ResetType
 	}
-	var resetDayOfMonth *int32
 	if p.ResetDayOfMonth != nil {
-		resetDayOfMonth = p.ResetDayOfMonth
+		m["resetDayOfMonth"] = p.ResetDayOfMonth
 	}
-	var resetDayOfWeek *string
 	if p.ResetDayOfWeek != nil {
-		resetDayOfWeek = p.ResetDayOfWeek
+		m["resetDayOfWeek"] = p.ResetDayOfWeek
 	}
-	var resetHour *int32
 	if p.ResetHour != nil {
-		resetHour = p.ResetHour
+		m["resetHour"] = p.ResetHour
 	}
-	return map[string]interface{}{
-		"limitModelId":    limitModelId,
-		"name":            name,
-		"metadata":        metadata,
-		"resetType":       resetType,
-		"resetDayOfMonth": resetDayOfMonth,
-		"resetDayOfWeek":  resetDayOfWeek,
-		"resetHour":       resetHour,
-	}
+	return m
 }
 
 func (p LimitModel) Pointer() *LimitModel {

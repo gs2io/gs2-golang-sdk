@@ -201,49 +201,34 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"name":        name,
-		"description": description,
-		"logSetting":  logSetting,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -703,109 +688,70 @@ func NewEventMasterFromDict(data map[string]interface{}) EventMaster {
 }
 
 func (p EventMaster) ToDict() map[string]interface{} {
-
-	var eventId *string
+	m := map[string]interface{}{}
 	if p.EventId != nil {
-		eventId = p.EventId
+		m["eventId"] = p.EventId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var scheduleType *string
 	if p.ScheduleType != nil {
-		scheduleType = p.ScheduleType
+		m["scheduleType"] = p.ScheduleType
 	}
-	var absoluteBegin *int64
 	if p.AbsoluteBegin != nil {
-		absoluteBegin = p.AbsoluteBegin
+		m["absoluteBegin"] = p.AbsoluteBegin
 	}
-	var absoluteEnd *int64
 	if p.AbsoluteEnd != nil {
-		absoluteEnd = p.AbsoluteEnd
+		m["absoluteEnd"] = p.AbsoluteEnd
 	}
-	var relativeTriggerName *string
 	if p.RelativeTriggerName != nil {
-		relativeTriggerName = p.RelativeTriggerName
+		m["relativeTriggerName"] = p.RelativeTriggerName
 	}
-	var repeatSetting map[string]interface{}
 	if p.RepeatSetting != nil {
-		repeatSetting = func() map[string]interface{} {
+		m["repeatSetting"] = func() map[string]interface{} {
 			if p.RepeatSetting == nil {
 				return nil
 			}
 			return p.RepeatSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	var repeatType *string
 	if p.RepeatType != nil {
-		repeatType = p.RepeatType
+		m["repeatType"] = p.RepeatType
 	}
-	var repeatBeginDayOfMonth *int32
 	if p.RepeatBeginDayOfMonth != nil {
-		repeatBeginDayOfMonth = p.RepeatBeginDayOfMonth
+		m["repeatBeginDayOfMonth"] = p.RepeatBeginDayOfMonth
 	}
-	var repeatEndDayOfMonth *int32
 	if p.RepeatEndDayOfMonth != nil {
-		repeatEndDayOfMonth = p.RepeatEndDayOfMonth
+		m["repeatEndDayOfMonth"] = p.RepeatEndDayOfMonth
 	}
-	var repeatBeginDayOfWeek *string
 	if p.RepeatBeginDayOfWeek != nil {
-		repeatBeginDayOfWeek = p.RepeatBeginDayOfWeek
+		m["repeatBeginDayOfWeek"] = p.RepeatBeginDayOfWeek
 	}
-	var repeatEndDayOfWeek *string
 	if p.RepeatEndDayOfWeek != nil {
-		repeatEndDayOfWeek = p.RepeatEndDayOfWeek
+		m["repeatEndDayOfWeek"] = p.RepeatEndDayOfWeek
 	}
-	var repeatBeginHour *int32
 	if p.RepeatBeginHour != nil {
-		repeatBeginHour = p.RepeatBeginHour
+		m["repeatBeginHour"] = p.RepeatBeginHour
 	}
-	var repeatEndHour *int32
 	if p.RepeatEndHour != nil {
-		repeatEndHour = p.RepeatEndHour
+		m["repeatEndHour"] = p.RepeatEndHour
 	}
-	return map[string]interface{}{
-		"eventId":               eventId,
-		"name":                  name,
-		"description":           description,
-		"metadata":              metadata,
-		"scheduleType":          scheduleType,
-		"absoluteBegin":         absoluteBegin,
-		"absoluteEnd":           absoluteEnd,
-		"relativeTriggerName":   relativeTriggerName,
-		"repeatSetting":         repeatSetting,
-		"createdAt":             createdAt,
-		"updatedAt":             updatedAt,
-		"revision":              revision,
-		"repeatType":            repeatType,
-		"repeatBeginDayOfMonth": repeatBeginDayOfMonth,
-		"repeatEndDayOfMonth":   repeatEndDayOfMonth,
-		"repeatBeginDayOfWeek":  repeatBeginDayOfWeek,
-		"repeatEndDayOfWeek":    repeatEndDayOfWeek,
-		"repeatBeginHour":       repeatBeginHour,
-		"repeatEndHour":         repeatEndHour,
-	}
+	return m
 }
 
 func (p EventMaster) Pointer() *EventMaster {
@@ -995,39 +941,26 @@ func NewTriggerFromDict(data map[string]interface{}) Trigger {
 }
 
 func (p Trigger) ToDict() map[string]interface{} {
-
-	var triggerId *string
+	m := map[string]interface{}{}
 	if p.TriggerId != nil {
-		triggerId = p.TriggerId
+		m["triggerId"] = p.TriggerId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var expiresAt *int64
 	if p.ExpiresAt != nil {
-		expiresAt = p.ExpiresAt
+		m["expiresAt"] = p.ExpiresAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"triggerId": triggerId,
-		"name":      name,
-		"userId":    userId,
-		"createdAt": createdAt,
-		"expiresAt": expiresAt,
-		"revision":  revision,
-	}
+	return m
 }
 
 func (p Trigger) Pointer() *Trigger {
@@ -1423,89 +1356,58 @@ func NewEventFromDict(data map[string]interface{}) Event {
 }
 
 func (p Event) ToDict() map[string]interface{} {
-
-	var eventId *string
+	m := map[string]interface{}{}
 	if p.EventId != nil {
-		eventId = p.EventId
+		m["eventId"] = p.EventId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var scheduleType *string
 	if p.ScheduleType != nil {
-		scheduleType = p.ScheduleType
+		m["scheduleType"] = p.ScheduleType
 	}
-	var absoluteBegin *int64
 	if p.AbsoluteBegin != nil {
-		absoluteBegin = p.AbsoluteBegin
+		m["absoluteBegin"] = p.AbsoluteBegin
 	}
-	var absoluteEnd *int64
 	if p.AbsoluteEnd != nil {
-		absoluteEnd = p.AbsoluteEnd
+		m["absoluteEnd"] = p.AbsoluteEnd
 	}
-	var relativeTriggerName *string
 	if p.RelativeTriggerName != nil {
-		relativeTriggerName = p.RelativeTriggerName
+		m["relativeTriggerName"] = p.RelativeTriggerName
 	}
-	var repeatSetting map[string]interface{}
 	if p.RepeatSetting != nil {
-		repeatSetting = func() map[string]interface{} {
+		m["repeatSetting"] = func() map[string]interface{} {
 			if p.RepeatSetting == nil {
 				return nil
 			}
 			return p.RepeatSetting.ToDict()
 		}()
 	}
-	var repeatType *string
 	if p.RepeatType != nil {
-		repeatType = p.RepeatType
+		m["repeatType"] = p.RepeatType
 	}
-	var repeatBeginDayOfMonth *int32
 	if p.RepeatBeginDayOfMonth != nil {
-		repeatBeginDayOfMonth = p.RepeatBeginDayOfMonth
+		m["repeatBeginDayOfMonth"] = p.RepeatBeginDayOfMonth
 	}
-	var repeatEndDayOfMonth *int32
 	if p.RepeatEndDayOfMonth != nil {
-		repeatEndDayOfMonth = p.RepeatEndDayOfMonth
+		m["repeatEndDayOfMonth"] = p.RepeatEndDayOfMonth
 	}
-	var repeatBeginDayOfWeek *string
 	if p.RepeatBeginDayOfWeek != nil {
-		repeatBeginDayOfWeek = p.RepeatBeginDayOfWeek
+		m["repeatBeginDayOfWeek"] = p.RepeatBeginDayOfWeek
 	}
-	var repeatEndDayOfWeek *string
 	if p.RepeatEndDayOfWeek != nil {
-		repeatEndDayOfWeek = p.RepeatEndDayOfWeek
+		m["repeatEndDayOfWeek"] = p.RepeatEndDayOfWeek
 	}
-	var repeatBeginHour *int32
 	if p.RepeatBeginHour != nil {
-		repeatBeginHour = p.RepeatBeginHour
+		m["repeatBeginHour"] = p.RepeatBeginHour
 	}
-	var repeatEndHour *int32
 	if p.RepeatEndHour != nil {
-		repeatEndHour = p.RepeatEndHour
+		m["repeatEndHour"] = p.RepeatEndHour
 	}
-	return map[string]interface{}{
-		"eventId":               eventId,
-		"name":                  name,
-		"metadata":              metadata,
-		"scheduleType":          scheduleType,
-		"absoluteBegin":         absoluteBegin,
-		"absoluteEnd":           absoluteEnd,
-		"relativeTriggerName":   relativeTriggerName,
-		"repeatSetting":         repeatSetting,
-		"repeatType":            repeatType,
-		"repeatBeginDayOfMonth": repeatBeginDayOfMonth,
-		"repeatEndDayOfMonth":   repeatEndDayOfMonth,
-		"repeatBeginDayOfWeek":  repeatBeginDayOfWeek,
-		"repeatEndDayOfWeek":    repeatEndDayOfWeek,
-		"repeatBeginHour":       repeatBeginHour,
-		"repeatEndHour":         repeatEndHour,
-	}
+	return m
 }
 
 func (p Event) Pointer() *Event {
@@ -1739,59 +1641,38 @@ func NewRepeatSettingFromDict(data map[string]interface{}) RepeatSetting {
 }
 
 func (p RepeatSetting) ToDict() map[string]interface{} {
-
-	var repeatType *string
+	m := map[string]interface{}{}
 	if p.RepeatType != nil {
-		repeatType = p.RepeatType
+		m["repeatType"] = p.RepeatType
 	}
-	var beginDayOfMonth *int32
 	if p.BeginDayOfMonth != nil {
-		beginDayOfMonth = p.BeginDayOfMonth
+		m["beginDayOfMonth"] = p.BeginDayOfMonth
 	}
-	var endDayOfMonth *int32
 	if p.EndDayOfMonth != nil {
-		endDayOfMonth = p.EndDayOfMonth
+		m["endDayOfMonth"] = p.EndDayOfMonth
 	}
-	var beginDayOfWeek *string
 	if p.BeginDayOfWeek != nil {
-		beginDayOfWeek = p.BeginDayOfWeek
+		m["beginDayOfWeek"] = p.BeginDayOfWeek
 	}
-	var endDayOfWeek *string
 	if p.EndDayOfWeek != nil {
-		endDayOfWeek = p.EndDayOfWeek
+		m["endDayOfWeek"] = p.EndDayOfWeek
 	}
-	var beginHour *int32
 	if p.BeginHour != nil {
-		beginHour = p.BeginHour
+		m["beginHour"] = p.BeginHour
 	}
-	var endHour *int32
 	if p.EndHour != nil {
-		endHour = p.EndHour
+		m["endHour"] = p.EndHour
 	}
-	var anchorTimestamp *int64
 	if p.AnchorTimestamp != nil {
-		anchorTimestamp = p.AnchorTimestamp
+		m["anchorTimestamp"] = p.AnchorTimestamp
 	}
-	var activeDays *int32
 	if p.ActiveDays != nil {
-		activeDays = p.ActiveDays
+		m["activeDays"] = p.ActiveDays
 	}
-	var inactiveDays *int32
 	if p.InactiveDays != nil {
-		inactiveDays = p.InactiveDays
+		m["inactiveDays"] = p.InactiveDays
 	}
-	return map[string]interface{}{
-		"repeatType":      repeatType,
-		"beginDayOfMonth": beginDayOfMonth,
-		"endDayOfMonth":   endDayOfMonth,
-		"beginDayOfWeek":  beginDayOfWeek,
-		"endDayOfWeek":    endDayOfWeek,
-		"beginHour":       beginHour,
-		"endHour":         endHour,
-		"anchorTimestamp": anchorTimestamp,
-		"activeDays":      activeDays,
-		"inactiveDays":    inactiveDays,
-	}
+	return m
 }
 
 func (p RepeatSetting) Pointer() *RepeatSetting {
@@ -1910,34 +1791,23 @@ func NewRepeatScheduleFromDict(data map[string]interface{}) RepeatSchedule {
 }
 
 func (p RepeatSchedule) ToDict() map[string]interface{} {
-
-	var repeatCount *int32
+	m := map[string]interface{}{}
 	if p.RepeatCount != nil {
-		repeatCount = p.RepeatCount
+		m["repeatCount"] = p.RepeatCount
 	}
-	var currentRepeatStartAt *int64
 	if p.CurrentRepeatStartAt != nil {
-		currentRepeatStartAt = p.CurrentRepeatStartAt
+		m["currentRepeatStartAt"] = p.CurrentRepeatStartAt
 	}
-	var currentRepeatEndAt *int64
 	if p.CurrentRepeatEndAt != nil {
-		currentRepeatEndAt = p.CurrentRepeatEndAt
+		m["currentRepeatEndAt"] = p.CurrentRepeatEndAt
 	}
-	var lastRepeatEndAt *int64
 	if p.LastRepeatEndAt != nil {
-		lastRepeatEndAt = p.LastRepeatEndAt
+		m["lastRepeatEndAt"] = p.LastRepeatEndAt
 	}
-	var nextRepeatStartAt *int64
 	if p.NextRepeatStartAt != nil {
-		nextRepeatStartAt = p.NextRepeatStartAt
+		m["nextRepeatStartAt"] = p.NextRepeatStartAt
 	}
-	return map[string]interface{}{
-		"repeatCount":          repeatCount,
-		"currentRepeatStartAt": currentRepeatStartAt,
-		"currentRepeatEndAt":   currentRepeatEndAt,
-		"lastRepeatEndAt":      lastRepeatEndAt,
-		"nextRepeatStartAt":    nextRepeatStartAt,
-	}
+	return m
 }
 
 func (p RepeatSchedule) Pointer() *RepeatSchedule {
@@ -2063,19 +1933,14 @@ func NewCurrentEventMasterFromDict(data map[string]interface{}) CurrentEventMast
 }
 
 func (p CurrentEventMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentEventMaster) Pointer() *CurrentEventMaster {
@@ -2356,44 +2221,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -2488,14 +2338,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {

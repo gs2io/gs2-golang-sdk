@@ -274,69 +274,48 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var assumeUserId *string
 	if p.AssumeUserId != nil {
-		assumeUserId = p.AssumeUserId
+		m["assumeUserId"] = p.AssumeUserId
 	}
-	var acceptVersionScript map[string]interface{}
 	if p.AcceptVersionScript != nil {
-		acceptVersionScript = func() map[string]interface{} {
+		m["acceptVersionScript"] = func() map[string]interface{} {
 			if p.AcceptVersionScript == nil {
 				return nil
 			}
 			return p.AcceptVersionScript.ToDict()
 		}()
 	}
-	var checkVersionTriggerScriptId *string
 	if p.CheckVersionTriggerScriptId != nil {
-		checkVersionTriggerScriptId = p.CheckVersionTriggerScriptId
+		m["checkVersionTriggerScriptId"] = p.CheckVersionTriggerScriptId
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":                 namespaceId,
-		"name":                        name,
-		"description":                 description,
-		"assumeUserId":                assumeUserId,
-		"acceptVersionScript":         acceptVersionScript,
-		"checkVersionTriggerScriptId": checkVersionTriggerScriptId,
-		"logSetting":                  logSetting,
-		"createdAt":                   createdAt,
-		"updatedAt":                   updatedAt,
-		"revision":                    revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -704,101 +683,70 @@ func NewVersionModelMasterFromDict(data map[string]interface{}) VersionModelMast
 }
 
 func (p VersionModelMaster) ToDict() map[string]interface{} {
-
-	var versionModelId *string
+	m := map[string]interface{}{}
 	if p.VersionModelId != nil {
-		versionModelId = p.VersionModelId
+		m["versionModelId"] = p.VersionModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var scope *string
 	if p.Scope != nil {
-		scope = p.Scope
+		m["scope"] = p.Scope
 	}
-	var _type *string
 	if p.Type != nil {
-		_type = p.Type
+		m["type"] = p.Type
 	}
-	var currentVersion map[string]interface{}
 	if p.CurrentVersion != nil {
-		currentVersion = func() map[string]interface{} {
+		m["currentVersion"] = func() map[string]interface{} {
 			if p.CurrentVersion == nil {
 				return nil
 			}
 			return p.CurrentVersion.ToDict()
 		}()
 	}
-	var warningVersion map[string]interface{}
 	if p.WarningVersion != nil {
-		warningVersion = func() map[string]interface{} {
+		m["warningVersion"] = func() map[string]interface{} {
 			if p.WarningVersion == nil {
 				return nil
 			}
 			return p.WarningVersion.ToDict()
 		}()
 	}
-	var errorVersion map[string]interface{}
 	if p.ErrorVersion != nil {
-		errorVersion = func() map[string]interface{} {
+		m["errorVersion"] = func() map[string]interface{} {
 			if p.ErrorVersion == nil {
 				return nil
 			}
 			return p.ErrorVersion.ToDict()
 		}()
 	}
-	var scheduleVersions []interface{}
 	if p.ScheduleVersions != nil {
-		scheduleVersions = CastScheduleVersionsFromDict(
+		m["scheduleVersions"] = CastScheduleVersionsFromDict(
 			p.ScheduleVersions,
 		)
 	}
-	var needSignature *bool
 	if p.NeedSignature != nil {
-		needSignature = p.NeedSignature
+		m["needSignature"] = p.NeedSignature
 	}
-	var signatureKeyId *string
 	if p.SignatureKeyId != nil {
-		signatureKeyId = p.SignatureKeyId
+		m["signatureKeyId"] = p.SignatureKeyId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"versionModelId":   versionModelId,
-		"name":             name,
-		"description":      description,
-		"metadata":         metadata,
-		"scope":            scope,
-		"type":             _type,
-		"currentVersion":   currentVersion,
-		"warningVersion":   warningVersion,
-		"errorVersion":     errorVersion,
-		"scheduleVersions": scheduleVersions,
-		"needSignature":    needSignature,
-		"signatureKeyId":   signatureKeyId,
-		"createdAt":        createdAt,
-		"updatedAt":        updatedAt,
-		"revision":         revision,
-	}
+	return m
 }
 
 func (p VersionModelMaster) Pointer() *VersionModelMaster {
@@ -1102,81 +1050,58 @@ func NewVersionModelFromDict(data map[string]interface{}) VersionModel {
 }
 
 func (p VersionModel) ToDict() map[string]interface{} {
-
-	var versionModelId *string
+	m := map[string]interface{}{}
 	if p.VersionModelId != nil {
-		versionModelId = p.VersionModelId
+		m["versionModelId"] = p.VersionModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var scope *string
 	if p.Scope != nil {
-		scope = p.Scope
+		m["scope"] = p.Scope
 	}
-	var _type *string
 	if p.Type != nil {
-		_type = p.Type
+		m["type"] = p.Type
 	}
-	var currentVersion map[string]interface{}
 	if p.CurrentVersion != nil {
-		currentVersion = func() map[string]interface{} {
+		m["currentVersion"] = func() map[string]interface{} {
 			if p.CurrentVersion == nil {
 				return nil
 			}
 			return p.CurrentVersion.ToDict()
 		}()
 	}
-	var warningVersion map[string]interface{}
 	if p.WarningVersion != nil {
-		warningVersion = func() map[string]interface{} {
+		m["warningVersion"] = func() map[string]interface{} {
 			if p.WarningVersion == nil {
 				return nil
 			}
 			return p.WarningVersion.ToDict()
 		}()
 	}
-	var errorVersion map[string]interface{}
 	if p.ErrorVersion != nil {
-		errorVersion = func() map[string]interface{} {
+		m["errorVersion"] = func() map[string]interface{} {
 			if p.ErrorVersion == nil {
 				return nil
 			}
 			return p.ErrorVersion.ToDict()
 		}()
 	}
-	var scheduleVersions []interface{}
 	if p.ScheduleVersions != nil {
-		scheduleVersions = CastScheduleVersionsFromDict(
+		m["scheduleVersions"] = CastScheduleVersionsFromDict(
 			p.ScheduleVersions,
 		)
 	}
-	var needSignature *bool
 	if p.NeedSignature != nil {
-		needSignature = p.NeedSignature
+		m["needSignature"] = p.NeedSignature
 	}
-	var signatureKeyId *string
 	if p.SignatureKeyId != nil {
-		signatureKeyId = p.SignatureKeyId
+		m["signatureKeyId"] = p.SignatureKeyId
 	}
-	return map[string]interface{}{
-		"versionModelId":   versionModelId,
-		"name":             name,
-		"metadata":         metadata,
-		"scope":            scope,
-		"type":             _type,
-		"currentVersion":   currentVersion,
-		"warningVersion":   warningVersion,
-		"errorVersion":     errorVersion,
-		"scheduleVersions": scheduleVersions,
-		"needSignature":    needSignature,
-		"signatureKeyId":   signatureKeyId,
-	}
+	return m
 }
 
 func (p VersionModel) Pointer() *VersionModel {
@@ -1377,49 +1302,34 @@ func NewAcceptVersionFromDict(data map[string]interface{}) AcceptVersion {
 }
 
 func (p AcceptVersion) ToDict() map[string]interface{} {
-
-	var acceptVersionId *string
+	m := map[string]interface{}{}
 	if p.AcceptVersionId != nil {
-		acceptVersionId = p.AcceptVersionId
+		m["acceptVersionId"] = p.AcceptVersionId
 	}
-	var versionName *string
 	if p.VersionName != nil {
-		versionName = p.VersionName
+		m["versionName"] = p.VersionName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var version map[string]interface{}
 	if p.Version != nil {
-		version = func() map[string]interface{} {
+		m["version"] = func() map[string]interface{} {
 			if p.Version == nil {
 				return nil
 			}
 			return p.Version.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"acceptVersionId": acceptVersionId,
-		"versionName":     versionName,
-		"userId":          userId,
-		"version":         version,
-		"createdAt":       createdAt,
-		"updatedAt":       updatedAt,
-		"revision":        revision,
-	}
+	return m
 }
 
 func (p AcceptVersion) Pointer() *AcceptVersion {
@@ -1505,29 +1415,24 @@ func NewStatusFromDict(data map[string]interface{}) Status {
 }
 
 func (p Status) ToDict() map[string]interface{} {
-
-	var versionModel map[string]interface{}
+	m := map[string]interface{}{}
 	if p.VersionModel != nil {
-		versionModel = func() map[string]interface{} {
+		m["versionModel"] = func() map[string]interface{} {
 			if p.VersionModel == nil {
 				return nil
 			}
 			return p.VersionModel.ToDict()
 		}()
 	}
-	var currentVersion map[string]interface{}
 	if p.CurrentVersion != nil {
-		currentVersion = func() map[string]interface{} {
+		m["currentVersion"] = func() map[string]interface{} {
 			if p.CurrentVersion == nil {
 				return nil
 			}
 			return p.CurrentVersion.ToDict()
 		}()
 	}
-	return map[string]interface{}{
-		"versionModel":   versionModel,
-		"currentVersion": currentVersion,
-	}
+	return m
 }
 
 func (p Status) Pointer() *Status {
@@ -1695,34 +1600,25 @@ func NewTargetVersionFromDict(data map[string]interface{}) TargetVersion {
 }
 
 func (p TargetVersion) ToDict() map[string]interface{} {
-
-	var versionName *string
+	m := map[string]interface{}{}
 	if p.VersionName != nil {
-		versionName = p.VersionName
+		m["versionName"] = p.VersionName
 	}
-	var body *string
 	if p.Body != nil {
-		body = p.Body
+		m["body"] = p.Body
 	}
-	var signature *string
 	if p.Signature != nil {
-		signature = p.Signature
+		m["signature"] = p.Signature
 	}
-	var version map[string]interface{}
 	if p.Version != nil {
-		version = func() map[string]interface{} {
+		m["version"] = func() map[string]interface{} {
 			if p.Version == nil {
 				return nil
 			}
 			return p.Version.ToDict()
 		}()
 	}
-	return map[string]interface{}{
-		"versionName": versionName,
-		"body":        body,
-		"signature":   signature,
-		"version":     version,
-	}
+	return m
 }
 
 func (p TargetVersion) Pointer() *TargetVersion {
@@ -1890,34 +1786,25 @@ func NewSignTargetVersionFromDict(data map[string]interface{}) SignTargetVersion
 }
 
 func (p SignTargetVersion) ToDict() map[string]interface{} {
-
-	var region *string
+	m := map[string]interface{}{}
 	if p.Region != nil {
-		region = p.Region
+		m["region"] = p.Region
 	}
-	var namespaceName *string
 	if p.NamespaceName != nil {
-		namespaceName = p.NamespaceName
+		m["namespaceName"] = p.NamespaceName
 	}
-	var versionName *string
 	if p.VersionName != nil {
-		versionName = p.VersionName
+		m["versionName"] = p.VersionName
 	}
-	var version map[string]interface{}
 	if p.Version != nil {
-		version = func() map[string]interface{} {
+		m["version"] = func() map[string]interface{} {
 			if p.Version == nil {
 				return nil
 			}
 			return p.Version.ToDict()
 		}()
 	}
-	return map[string]interface{}{
-		"region":        region,
-		"namespaceName": namespaceName,
-		"versionName":   versionName,
-		"version":       version,
-	}
+	return m
 }
 
 func (p SignTargetVersion) Pointer() *SignTargetVersion {
@@ -2043,19 +1930,14 @@ func NewCurrentVersionMasterFromDict(data map[string]interface{}) CurrentVersion
 }
 
 func (p CurrentVersionMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentVersionMaster) Pointer() *CurrentVersionMaster {
@@ -2243,29 +2125,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -2546,44 +2419,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -2678,14 +2536,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -2782,24 +2637,17 @@ func NewVersionFromDict(data map[string]interface{}) Version {
 }
 
 func (p Version) ToDict() map[string]interface{} {
-
-	var major *int32
+	m := map[string]interface{}{}
 	if p.Major != nil {
-		major = p.Major
+		m["major"] = p.Major
 	}
-	var minor *int32
 	if p.Minor != nil {
-		minor = p.Minor
+		m["minor"] = p.Minor
 	}
-	var micro *int32
 	if p.Micro != nil {
-		micro = p.Micro
+		m["micro"] = p.Micro
 	}
-	return map[string]interface{}{
-		"major": major,
-		"minor": minor,
-		"micro": micro,
-	}
+	return m
 }
 
 func (p Version) Pointer() *Version {
@@ -2927,44 +2775,35 @@ func NewScheduleVersionFromDict(data map[string]interface{}) ScheduleVersion {
 }
 
 func (p ScheduleVersion) ToDict() map[string]interface{} {
-
-	var currentVersion map[string]interface{}
+	m := map[string]interface{}{}
 	if p.CurrentVersion != nil {
-		currentVersion = func() map[string]interface{} {
+		m["currentVersion"] = func() map[string]interface{} {
 			if p.CurrentVersion == nil {
 				return nil
 			}
 			return p.CurrentVersion.ToDict()
 		}()
 	}
-	var warningVersion map[string]interface{}
 	if p.WarningVersion != nil {
-		warningVersion = func() map[string]interface{} {
+		m["warningVersion"] = func() map[string]interface{} {
 			if p.WarningVersion == nil {
 				return nil
 			}
 			return p.WarningVersion.ToDict()
 		}()
 	}
-	var errorVersion map[string]interface{}
 	if p.ErrorVersion != nil {
-		errorVersion = func() map[string]interface{} {
+		m["errorVersion"] = func() map[string]interface{} {
 			if p.ErrorVersion == nil {
 				return nil
 			}
 			return p.ErrorVersion.ToDict()
 		}()
 	}
-	var scheduleEventId *string
 	if p.ScheduleEventId != nil {
-		scheduleEventId = p.ScheduleEventId
+		m["scheduleEventId"] = p.ScheduleEventId
 	}
-	return map[string]interface{}{
-		"currentVersion":  currentVersion,
-		"warningVersion":  warningVersion,
-		"errorVersion":    errorVersion,
-		"scheduleEventId": scheduleEventId,
-	}
+	return m
 }
 
 func (p ScheduleVersion) Pointer() *ScheduleVersion {

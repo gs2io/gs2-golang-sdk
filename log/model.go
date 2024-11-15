@@ -449,84 +449,53 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var _type *string
 	if p.Type != nil {
-		_type = p.Type
+		m["type"] = p.Type
 	}
-	var gcpCredentialJson *string
 	if p.GcpCredentialJson != nil {
-		gcpCredentialJson = p.GcpCredentialJson
+		m["gcpCredentialJson"] = p.GcpCredentialJson
 	}
-	var bigQueryDatasetName *string
 	if p.BigQueryDatasetName != nil {
-		bigQueryDatasetName = p.BigQueryDatasetName
+		m["bigQueryDatasetName"] = p.BigQueryDatasetName
 	}
-	var logExpireDays *int32
 	if p.LogExpireDays != nil {
-		logExpireDays = p.LogExpireDays
+		m["logExpireDays"] = p.LogExpireDays
 	}
-	var awsRegion *string
 	if p.AwsRegion != nil {
-		awsRegion = p.AwsRegion
+		m["awsRegion"] = p.AwsRegion
 	}
-	var awsAccessKeyId *string
 	if p.AwsAccessKeyId != nil {
-		awsAccessKeyId = p.AwsAccessKeyId
+		m["awsAccessKeyId"] = p.AwsAccessKeyId
 	}
-	var awsSecretAccessKey *string
 	if p.AwsSecretAccessKey != nil {
-		awsSecretAccessKey = p.AwsSecretAccessKey
+		m["awsSecretAccessKey"] = p.AwsSecretAccessKey
 	}
-	var firehoseStreamName *string
 	if p.FirehoseStreamName != nil {
-		firehoseStreamName = p.FirehoseStreamName
+		m["firehoseStreamName"] = p.FirehoseStreamName
 	}
-	var status *string
 	if p.Status != nil {
-		status = p.Status
+		m["status"] = p.Status
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":         namespaceId,
-		"name":                name,
-		"description":         description,
-		"type":                _type,
-		"gcpCredentialJson":   gcpCredentialJson,
-		"bigQueryDatasetName": bigQueryDatasetName,
-		"logExpireDays":       logExpireDays,
-		"awsRegion":           awsRegion,
-		"awsAccessKeyId":      awsAccessKeyId,
-		"awsSecretAccessKey":  awsSecretAccessKey,
-		"firehoseStreamName":  firehoseStreamName,
-		"status":              status,
-		"createdAt":           createdAt,
-		"updatedAt":           updatedAt,
-		"revision":            revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -787,44 +756,29 @@ func NewAccessLogFromDict(data map[string]interface{}) AccessLog {
 }
 
 func (p AccessLog) ToDict() map[string]interface{} {
-
-	var timestamp *int64
+	m := map[string]interface{}{}
 	if p.Timestamp != nil {
-		timestamp = p.Timestamp
+		m["timestamp"] = p.Timestamp
 	}
-	var requestId *string
 	if p.RequestId != nil {
-		requestId = p.RequestId
+		m["requestId"] = p.RequestId
 	}
-	var service *string
 	if p.Service != nil {
-		service = p.Service
+		m["service"] = p.Service
 	}
-	var method *string
 	if p.Method != nil {
-		method = p.Method
+		m["method"] = p.Method
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	var result *string
 	if p.Result != nil {
-		result = p.Result
+		m["result"] = p.Result
 	}
-	return map[string]interface{}{
-		"timestamp": timestamp,
-		"requestId": requestId,
-		"service":   service,
-		"method":    method,
-		"userId":    userId,
-		"request":   request,
-		"result":    result,
-	}
+	return m
 }
 
 func (p AccessLog) Pointer() *AccessLog {
@@ -992,29 +946,20 @@ func NewAccessLogCountFromDict(data map[string]interface{}) AccessLogCount {
 }
 
 func (p AccessLogCount) ToDict() map[string]interface{} {
-
-	var service *string
+	m := map[string]interface{}{}
 	if p.Service != nil {
-		service = p.Service
+		m["service"] = p.Service
 	}
-	var method *string
 	if p.Method != nil {
-		method = p.Method
+		m["method"] = p.Method
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"service": service,
-		"method":  method,
-		"userId":  userId,
-		"count":   count,
-	}
+	return m
 }
 
 func (p AccessLogCount) Pointer() *AccessLogCount {
@@ -1309,51 +1254,34 @@ func NewIssueStampSheetLogFromDict(data map[string]interface{}) IssueStampSheetL
 }
 
 func (p IssueStampSheetLog) ToDict() map[string]interface{} {
-
-	var timestamp *int64
+	m := map[string]interface{}{}
 	if p.Timestamp != nil {
-		timestamp = p.Timestamp
+		m["timestamp"] = p.Timestamp
 	}
-	var transactionId *string
 	if p.TransactionId != nil {
-		transactionId = p.TransactionId
+		m["transactionId"] = p.TransactionId
 	}
-	var service *string
 	if p.Service != nil {
-		service = p.Service
+		m["service"] = p.Service
 	}
-	var method *string
 	if p.Method != nil {
-		method = p.Method
+		m["method"] = p.Method
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var action *string
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var args *string
 	if p.Args != nil {
-		args = p.Args
+		m["args"] = p.Args
 	}
-	var tasks []interface{}
 	if p.Tasks != nil {
-		tasks = core.CastStringsFromDict(
+		m["tasks"] = core.CastStringsFromDict(
 			p.Tasks,
 		)
 	}
-	return map[string]interface{}{
-		"timestamp":     timestamp,
-		"transactionId": transactionId,
-		"service":       service,
-		"method":        method,
-		"userId":        userId,
-		"action":        action,
-		"args":          args,
-		"tasks":         tasks,
-	}
+	return m
 }
 
 func (p IssueStampSheetLog) Pointer() *IssueStampSheetLog {
@@ -1552,34 +1480,23 @@ func NewIssueStampSheetLogCountFromDict(data map[string]interface{}) IssueStampS
 }
 
 func (p IssueStampSheetLogCount) ToDict() map[string]interface{} {
-
-	var service *string
+	m := map[string]interface{}{}
 	if p.Service != nil {
-		service = p.Service
+		m["service"] = p.Service
 	}
-	var method *string
 	if p.Method != nil {
-		method = p.Method
+		m["method"] = p.Method
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var action *string
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"service": service,
-		"method":  method,
-		"userId":  userId,
-		"action":  action,
-		"count":   count,
-	}
+	return m
 }
 
 func (p IssueStampSheetLogCount) Pointer() *IssueStampSheetLogCount {
@@ -1840,44 +1757,29 @@ func NewExecuteStampSheetLogFromDict(data map[string]interface{}) ExecuteStampSh
 }
 
 func (p ExecuteStampSheetLog) ToDict() map[string]interface{} {
-
-	var timestamp *int64
+	m := map[string]interface{}{}
 	if p.Timestamp != nil {
-		timestamp = p.Timestamp
+		m["timestamp"] = p.Timestamp
 	}
-	var transactionId *string
 	if p.TransactionId != nil {
-		transactionId = p.TransactionId
+		m["transactionId"] = p.TransactionId
 	}
-	var service *string
 	if p.Service != nil {
-		service = p.Service
+		m["service"] = p.Service
 	}
-	var method *string
 	if p.Method != nil {
-		method = p.Method
+		m["method"] = p.Method
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var action *string
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var args *string
 	if p.Args != nil {
-		args = p.Args
+		m["args"] = p.Args
 	}
-	return map[string]interface{}{
-		"timestamp":     timestamp,
-		"transactionId": transactionId,
-		"service":       service,
-		"method":        method,
-		"userId":        userId,
-		"action":        action,
-		"args":          args,
-	}
+	return m
 }
 
 func (p ExecuteStampSheetLog) Pointer() *ExecuteStampSheetLog {
@@ -2076,34 +1978,23 @@ func NewExecuteStampSheetLogCountFromDict(data map[string]interface{}) ExecuteSt
 }
 
 func (p ExecuteStampSheetLogCount) ToDict() map[string]interface{} {
-
-	var service *string
+	m := map[string]interface{}{}
 	if p.Service != nil {
-		service = p.Service
+		m["service"] = p.Service
 	}
-	var method *string
 	if p.Method != nil {
-		method = p.Method
+		m["method"] = p.Method
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var action *string
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"service": service,
-		"method":  method,
-		"userId":  userId,
-		"action":  action,
-		"count":   count,
-	}
+	return m
 }
 
 func (p ExecuteStampSheetLogCount) Pointer() *ExecuteStampSheetLogCount {
@@ -2364,44 +2255,29 @@ func NewExecuteStampTaskLogFromDict(data map[string]interface{}) ExecuteStampTas
 }
 
 func (p ExecuteStampTaskLog) ToDict() map[string]interface{} {
-
-	var timestamp *int64
+	m := map[string]interface{}{}
 	if p.Timestamp != nil {
-		timestamp = p.Timestamp
+		m["timestamp"] = p.Timestamp
 	}
-	var taskId *string
 	if p.TaskId != nil {
-		taskId = p.TaskId
+		m["taskId"] = p.TaskId
 	}
-	var service *string
 	if p.Service != nil {
-		service = p.Service
+		m["service"] = p.Service
 	}
-	var method *string
 	if p.Method != nil {
-		method = p.Method
+		m["method"] = p.Method
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var action *string
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var args *string
 	if p.Args != nil {
-		args = p.Args
+		m["args"] = p.Args
 	}
-	return map[string]interface{}{
-		"timestamp": timestamp,
-		"taskId":    taskId,
-		"service":   service,
-		"method":    method,
-		"userId":    userId,
-		"action":    action,
-		"args":      args,
-	}
+	return m
 }
 
 func (p ExecuteStampTaskLog) Pointer() *ExecuteStampTaskLog {
@@ -2600,34 +2476,23 @@ func NewExecuteStampTaskLogCountFromDict(data map[string]interface{}) ExecuteSta
 }
 
 func (p ExecuteStampTaskLogCount) ToDict() map[string]interface{} {
-
-	var service *string
+	m := map[string]interface{}{}
 	if p.Service != nil {
-		service = p.Service
+		m["service"] = p.Service
 	}
-	var method *string
 	if p.Method != nil {
-		method = p.Method
+		m["method"] = p.Method
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var action *string
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"service": service,
-		"method":  method,
-		"userId":  userId,
-		"action":  action,
-		"count":   count,
-	}
+	return m
 }
 
 func (p ExecuteStampTaskLogCount) Pointer() *ExecuteStampTaskLogCount {
@@ -2805,36 +2670,25 @@ func NewInGameLogFromDict(data map[string]interface{}) InGameLog {
 }
 
 func (p InGameLog) ToDict() map[string]interface{} {
-
-	var timestamp *int64
+	m := map[string]interface{}{}
 	if p.Timestamp != nil {
-		timestamp = p.Timestamp
+		m["timestamp"] = p.Timestamp
 	}
-	var requestId *string
 	if p.RequestId != nil {
-		requestId = p.RequestId
+		m["requestId"] = p.RequestId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var tags []interface{}
 	if p.Tags != nil {
-		tags = CastInGameLogTagsFromDict(
+		m["tags"] = CastInGameLogTagsFromDict(
 			p.Tags,
 		)
 	}
-	var payload *string
 	if p.Payload != nil {
-		payload = p.Payload
+		m["payload"] = p.Payload
 	}
-	return map[string]interface{}{
-		"timestamp": timestamp,
-		"requestId": requestId,
-		"userId":    userId,
-		"tags":      tags,
-		"payload":   payload,
-	}
+	return m
 }
 
 func (p InGameLog) Pointer() *InGameLog {
@@ -3168,59 +3022,38 @@ func NewAccessLogWithTelemetryFromDict(data map[string]interface{}) AccessLogWit
 }
 
 func (p AccessLogWithTelemetry) ToDict() map[string]interface{} {
-
-	var timestamp *int64
+	m := map[string]interface{}{}
 	if p.Timestamp != nil {
-		timestamp = p.Timestamp
+		m["timestamp"] = p.Timestamp
 	}
-	var sourceRequestId *string
 	if p.SourceRequestId != nil {
-		sourceRequestId = p.SourceRequestId
+		m["sourceRequestId"] = p.SourceRequestId
 	}
-	var requestId *string
 	if p.RequestId != nil {
-		requestId = p.RequestId
+		m["requestId"] = p.RequestId
 	}
-	var duration *int64
 	if p.Duration != nil {
-		duration = p.Duration
+		m["duration"] = p.Duration
 	}
-	var service *string
 	if p.Service != nil {
-		service = p.Service
+		m["service"] = p.Service
 	}
-	var method *string
 	if p.Method != nil {
-		method = p.Method
+		m["method"] = p.Method
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	var result *string
 	if p.Result != nil {
-		result = p.Result
+		m["result"] = p.Result
 	}
-	var status *string
 	if p.Status != nil {
-		status = p.Status
+		m["status"] = p.Status
 	}
-	return map[string]interface{}{
-		"timestamp":       timestamp,
-		"sourceRequestId": sourceRequestId,
-		"requestId":       requestId,
-		"duration":        duration,
-		"service":         service,
-		"method":          method,
-		"userId":          userId,
-		"request":         request,
-		"result":          result,
-		"status":          status,
-	}
+	return m
 }
 
 func (p AccessLogWithTelemetry) Pointer() *AccessLogWithTelemetry {
@@ -3492,49 +3325,32 @@ func NewInsightFromDict(data map[string]interface{}) Insight {
 }
 
 func (p Insight) ToDict() map[string]interface{} {
-
-	var insightId *string
+	m := map[string]interface{}{}
 	if p.InsightId != nil {
-		insightId = p.InsightId
+		m["insightId"] = p.InsightId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var taskId *string
 	if p.TaskId != nil {
-		taskId = p.TaskId
+		m["taskId"] = p.TaskId
 	}
-	var host *string
 	if p.Host != nil {
-		host = p.Host
+		m["host"] = p.Host
 	}
-	var password *string
 	if p.Password != nil {
-		password = p.Password
+		m["password"] = p.Password
 	}
-	var status *string
 	if p.Status != nil {
-		status = p.Status
+		m["status"] = p.Status
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"insightId": insightId,
-		"name":      name,
-		"taskId":    taskId,
-		"host":      host,
-		"password":  password,
-		"status":    status,
-		"createdAt": createdAt,
-		"revision":  revision,
-	}
+	return m
 }
 
 func (p Insight) Pointer() *Insight {
@@ -3660,19 +3476,14 @@ func NewInGameLogTagFromDict(data map[string]interface{}) InGameLogTag {
 }
 
 func (p InGameLogTag) ToDict() map[string]interface{} {
-
-	var key *string
+	m := map[string]interface{}{}
 	if p.Key != nil {
-		key = p.Key
+		m["key"] = p.Key
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"key":   key,
-		"value": value,
-	}
+	return m
 }
 
 func (p InGameLogTag) Pointer() *InGameLogTag {

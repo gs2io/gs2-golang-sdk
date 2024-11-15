@@ -245,89 +245,66 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = func() map[string]interface{} {
+		m["transactionSetting"] = func() map[string]interface{} {
 			if p.TransactionSetting == nil {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
 		}()
 	}
-	var updateMoldScript map[string]interface{}
 	if p.UpdateMoldScript != nil {
-		updateMoldScript = func() map[string]interface{} {
+		m["updateMoldScript"] = func() map[string]interface{} {
 			if p.UpdateMoldScript == nil {
 				return nil
 			}
 			return p.UpdateMoldScript.ToDict()
 		}()
 	}
-	var updateFormScript map[string]interface{}
 	if p.UpdateFormScript != nil {
-		updateFormScript = func() map[string]interface{} {
+		m["updateFormScript"] = func() map[string]interface{} {
 			if p.UpdateFormScript == nil {
 				return nil
 			}
 			return p.UpdateFormScript.ToDict()
 		}()
 	}
-	var updatePropertyFormScript map[string]interface{}
 	if p.UpdatePropertyFormScript != nil {
-		updatePropertyFormScript = func() map[string]interface{} {
+		m["updatePropertyFormScript"] = func() map[string]interface{} {
 			if p.UpdatePropertyFormScript == nil {
 				return nil
 			}
 			return p.UpdatePropertyFormScript.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":              namespaceId,
-		"name":                     name,
-		"description":              description,
-		"transactionSetting":       transactionSetting,
-		"updateMoldScript":         updateMoldScript,
-		"updateFormScript":         updateFormScript,
-		"updatePropertyFormScript": updatePropertyFormScript,
-		"logSetting":               logSetting,
-		"createdAt":                createdAt,
-		"updatedAt":                updatedAt,
-		"revision":                 revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -494,31 +471,22 @@ func NewFormModelFromDict(data map[string]interface{}) FormModel {
 }
 
 func (p FormModel) ToDict() map[string]interface{} {
-
-	var formModelId *string
+	m := map[string]interface{}{}
 	if p.FormModelId != nil {
-		formModelId = p.FormModelId
+		m["formModelId"] = p.FormModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var slots []interface{}
 	if p.Slots != nil {
-		slots = CastSlotModelsFromDict(
+		m["slots"] = CastSlotModelsFromDict(
 			p.Slots,
 		)
 	}
-	return map[string]interface{}{
-		"formModelId": formModelId,
-		"name":        name,
-		"metadata":    metadata,
-		"slots":       slots,
-	}
+	return m
 }
 
 func (p FormModel) Pointer() *FormModel {
@@ -749,51 +717,34 @@ func NewFormModelMasterFromDict(data map[string]interface{}) FormModelMaster {
 }
 
 func (p FormModelMaster) ToDict() map[string]interface{} {
-
-	var formModelId *string
+	m := map[string]interface{}{}
 	if p.FormModelId != nil {
-		formModelId = p.FormModelId
+		m["formModelId"] = p.FormModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var slots []interface{}
 	if p.Slots != nil {
-		slots = CastSlotModelsFromDict(
+		m["slots"] = CastSlotModelsFromDict(
 			p.Slots,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"formModelId": formModelId,
-		"name":        name,
-		"description": description,
-		"metadata":    metadata,
-		"slots":       slots,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p FormModelMaster) Pointer() *FormModelMaster {
@@ -983,44 +934,31 @@ func NewMoldModelFromDict(data map[string]interface{}) MoldModel {
 }
 
 func (p MoldModel) ToDict() map[string]interface{} {
-
-	var moldModelId *string
+	m := map[string]interface{}{}
 	if p.MoldModelId != nil {
-		moldModelId = p.MoldModelId
+		m["moldModelId"] = p.MoldModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var initialMaxCapacity *int32
 	if p.InitialMaxCapacity != nil {
-		initialMaxCapacity = p.InitialMaxCapacity
+		m["initialMaxCapacity"] = p.InitialMaxCapacity
 	}
-	var maxCapacity *int32
 	if p.MaxCapacity != nil {
-		maxCapacity = p.MaxCapacity
+		m["maxCapacity"] = p.MaxCapacity
 	}
-	var formModel map[string]interface{}
 	if p.FormModel != nil {
-		formModel = func() map[string]interface{} {
+		m["formModel"] = func() map[string]interface{} {
 			if p.FormModel == nil {
 				return nil
 			}
 			return p.FormModel.ToDict()
 		}()
 	}
-	return map[string]interface{}{
-		"moldModelId":        moldModelId,
-		"name":               name,
-		"metadata":           metadata,
-		"initialMaxCapacity": initialMaxCapacity,
-		"maxCapacity":        maxCapacity,
-		"formModel":          formModel,
-	}
+	return m
 }
 
 func (p MoldModel) Pointer() *MoldModel {
@@ -1294,59 +1232,38 @@ func NewMoldModelMasterFromDict(data map[string]interface{}) MoldModelMaster {
 }
 
 func (p MoldModelMaster) ToDict() map[string]interface{} {
-
-	var moldModelId *string
+	m := map[string]interface{}{}
 	if p.MoldModelId != nil {
-		moldModelId = p.MoldModelId
+		m["moldModelId"] = p.MoldModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var initialMaxCapacity *int32
 	if p.InitialMaxCapacity != nil {
-		initialMaxCapacity = p.InitialMaxCapacity
+		m["initialMaxCapacity"] = p.InitialMaxCapacity
 	}
-	var maxCapacity *int32
 	if p.MaxCapacity != nil {
-		maxCapacity = p.MaxCapacity
+		m["maxCapacity"] = p.MaxCapacity
 	}
-	var formModelName *string
 	if p.FormModelName != nil {
-		formModelName = p.FormModelName
+		m["formModelName"] = p.FormModelName
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"moldModelId":        moldModelId,
-		"name":               name,
-		"description":        description,
-		"metadata":           metadata,
-		"initialMaxCapacity": initialMaxCapacity,
-		"maxCapacity":        maxCapacity,
-		"formModelName":      formModelName,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p MoldModelMaster) Pointer() *MoldModelMaster {
@@ -1513,31 +1430,22 @@ func NewPropertyFormModelFromDict(data map[string]interface{}) PropertyFormModel
 }
 
 func (p PropertyFormModel) ToDict() map[string]interface{} {
-
-	var propertyFormModelId *string
+	m := map[string]interface{}{}
 	if p.PropertyFormModelId != nil {
-		propertyFormModelId = p.PropertyFormModelId
+		m["propertyFormModelId"] = p.PropertyFormModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var slots []interface{}
 	if p.Slots != nil {
-		slots = CastSlotModelsFromDict(
+		m["slots"] = CastSlotModelsFromDict(
 			p.Slots,
 		)
 	}
-	return map[string]interface{}{
-		"propertyFormModelId": propertyFormModelId,
-		"name":                name,
-		"metadata":            metadata,
-		"slots":               slots,
-	}
+	return m
 }
 
 func (p PropertyFormModel) Pointer() *PropertyFormModel {
@@ -1768,51 +1676,34 @@ func NewPropertyFormModelMasterFromDict(data map[string]interface{}) PropertyFor
 }
 
 func (p PropertyFormModelMaster) ToDict() map[string]interface{} {
-
-	var propertyFormModelId *string
+	m := map[string]interface{}{}
 	if p.PropertyFormModelId != nil {
-		propertyFormModelId = p.PropertyFormModelId
+		m["propertyFormModelId"] = p.PropertyFormModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var slots []interface{}
 	if p.Slots != nil {
-		slots = CastSlotModelsFromDict(
+		m["slots"] = CastSlotModelsFromDict(
 			p.Slots,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"propertyFormModelId": propertyFormModelId,
-		"name":                name,
-		"description":         description,
-		"metadata":            metadata,
-		"slots":               slots,
-		"createdAt":           createdAt,
-		"updatedAt":           updatedAt,
-		"revision":            revision,
-	}
+	return m
 }
 
 func (p PropertyFormModelMaster) Pointer() *PropertyFormModelMaster {
@@ -1938,19 +1829,14 @@ func NewCurrentFormMasterFromDict(data map[string]interface{}) CurrentFormMaster
 }
 
 func (p CurrentFormMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentFormMaster) Pointer() *CurrentFormMaster {
@@ -2151,44 +2037,29 @@ func NewMoldFromDict(data map[string]interface{}) Mold {
 }
 
 func (p Mold) ToDict() map[string]interface{} {
-
-	var moldId *string
+	m := map[string]interface{}{}
 	if p.MoldId != nil {
-		moldId = p.MoldId
+		m["moldId"] = p.MoldId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var capacity *int32
 	if p.Capacity != nil {
-		capacity = p.Capacity
+		m["capacity"] = p.Capacity
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"moldId":    moldId,
-		"name":      name,
-		"userId":    userId,
-		"capacity":  capacity,
-		"createdAt": createdAt,
-		"updatedAt": updatedAt,
-		"revision":  revision,
-	}
+	return m
 }
 
 func (p Mold) Pointer() *Mold {
@@ -2368,46 +2239,31 @@ func NewFormFromDict(data map[string]interface{}) Form {
 }
 
 func (p Form) ToDict() map[string]interface{} {
-
-	var formId *string
+	m := map[string]interface{}{}
 	if p.FormId != nil {
-		formId = p.FormId
+		m["formId"] = p.FormId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var index *int32
 	if p.Index != nil {
-		index = p.Index
+		m["index"] = p.Index
 	}
-	var slots []interface{}
 	if p.Slots != nil {
-		slots = CastSlotsFromDict(
+		m["slots"] = CastSlotsFromDict(
 			p.Slots,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"formId":    formId,
-		"name":      name,
-		"index":     index,
-		"slots":     slots,
-		"createdAt": createdAt,
-		"updatedAt": updatedAt,
-		"revision":  revision,
-	}
+	return m
 }
 
 func (p Form) Pointer() *Form {
@@ -2638,51 +2494,34 @@ func NewPropertyFormFromDict(data map[string]interface{}) PropertyForm {
 }
 
 func (p PropertyForm) ToDict() map[string]interface{} {
-
-	var formId *string
+	m := map[string]interface{}{}
 	if p.FormId != nil {
-		formId = p.FormId
+		m["formId"] = p.FormId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var propertyId *string
 	if p.PropertyId != nil {
-		propertyId = p.PropertyId
+		m["propertyId"] = p.PropertyId
 	}
-	var slots []interface{}
 	if p.Slots != nil {
-		slots = CastSlotsFromDict(
+		m["slots"] = CastSlotsFromDict(
 			p.Slots,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"formId":     formId,
-		"userId":     userId,
-		"name":       name,
-		"propertyId": propertyId,
-		"slots":      slots,
-		"createdAt":  createdAt,
-		"updatedAt":  updatedAt,
-		"revision":   revision,
-	}
+	return m
 }
 
 func (p PropertyForm) Pointer() *PropertyForm {
@@ -2839,24 +2678,17 @@ func NewSlotFromDict(data map[string]interface{}) Slot {
 }
 
 func (p Slot) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var propertyId *string
 	if p.PropertyId != nil {
-		propertyId = p.PropertyId
+		m["propertyId"] = p.PropertyId
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	return map[string]interface{}{
-		"name":       name,
-		"propertyId": propertyId,
-		"metadata":   metadata,
-	}
+	return m
 }
 
 func (p Slot) Pointer() *Slot {
@@ -3013,24 +2845,17 @@ func NewSlotModelFromDict(data map[string]interface{}) SlotModel {
 }
 
 func (p SlotModel) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var propertyRegex *string
 	if p.PropertyRegex != nil {
-		propertyRegex = p.PropertyRegex
+		m["propertyRegex"] = p.PropertyRegex
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	return map[string]interface{}{
-		"name":          name,
-		"propertyRegex": propertyRegex,
-		"metadata":      metadata,
-	}
+	return m
 }
 
 func (p SlotModel) Pointer() *SlotModel {
@@ -3249,34 +3074,23 @@ func NewSlotWithSignatureFromDict(data map[string]interface{}) SlotWithSignature
 }
 
 func (p SlotWithSignature) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var propertyType *string
 	if p.PropertyType != nil {
-		propertyType = p.PropertyType
+		m["propertyType"] = p.PropertyType
 	}
-	var body *string
 	if p.Body != nil {
-		body = p.Body
+		m["body"] = p.Body
 	}
-	var signature *string
 	if p.Signature != nil {
-		signature = p.Signature
+		m["signature"] = p.Signature
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	return map[string]interface{}{
-		"name":         name,
-		"propertyType": propertyType,
-		"body":         body,
-		"signature":    signature,
-		"metadata":     metadata,
-	}
+	return m
 }
 
 func (p SlotWithSignature) Pointer() *SlotWithSignature {
@@ -3402,19 +3216,14 @@ func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 }
 
 func (p AcquireAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p AcquireAction) Pointer() *AcquireAction {
@@ -3540,19 +3349,14 @@ func NewConfigFromDict(data map[string]interface{}) Config {
 }
 
 func (p Config) ToDict() map[string]interface{} {
-
-	var key *string
+	m := map[string]interface{}{}
 	if p.Key != nil {
-		key = p.Key
+		m["key"] = p.Key
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"key":   key,
-		"value": value,
-	}
+	return m
 }
 
 func (p Config) Pointer() *Config {
@@ -3833,44 +3637,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -4058,29 +3847,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -4175,14 +3955,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -4351,29 +4128,20 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 }
 
 func (p TransactionSetting) ToDict() map[string]interface{} {
-
-	var enableAutoRun *bool
+	m := map[string]interface{}{}
 	if p.EnableAutoRun != nil {
-		enableAutoRun = p.EnableAutoRun
+		m["enableAutoRun"] = p.EnableAutoRun
 	}
-	var distributorNamespaceId *string
 	if p.DistributorNamespaceId != nil {
-		distributorNamespaceId = p.DistributorNamespaceId
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	return map[string]interface{}{
-		"enableAutoRun":          enableAutoRun,
-		"distributorNamespaceId": distributorNamespaceId,
-		"keyId":                  keyId,
-		"queueNamespaceId":       queueNamespaceId,
-	}
+	return m
 }
 
 func (p TransactionSetting) Pointer() *TransactionSetting {

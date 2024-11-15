@@ -232,54 +232,37 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var version *string
 	if p.Version != nil {
-		version = p.Version
+		m["version"] = p.Version
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"name":        name,
-		"description": description,
-		"version":     version,
-		"logSetting":  logSetting,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -460,44 +443,29 @@ func NewProgressFromDict(data map[string]interface{}) Progress {
 }
 
 func (p Progress) ToDict() map[string]interface{} {
-
-	var progressId *string
+	m := map[string]interface{}{}
 	if p.ProgressId != nil {
-		progressId = p.ProgressId
+		m["progressId"] = p.ProgressId
 	}
-	var uploadToken *string
 	if p.UploadToken != nil {
-		uploadToken = p.UploadToken
+		m["uploadToken"] = p.UploadToken
 	}
-	var generated *int32
 	if p.Generated != nil {
-		generated = p.Generated
+		m["generated"] = p.Generated
 	}
-	var patternCount *int32
 	if p.PatternCount != nil {
-		patternCount = p.PatternCount
+		m["patternCount"] = p.PatternCount
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"progressId":   progressId,
-		"uploadToken":  uploadToken,
-		"generated":    generated,
-		"patternCount": patternCount,
-		"createdAt":    createdAt,
-		"updatedAt":    updatedAt,
-		"revision":     revision,
-	}
+	return m
 }
 
 func (p Progress) Pointer() *Progress {
@@ -676,34 +644,23 @@ func NewOutputFromDict(data map[string]interface{}) Output {
 }
 
 func (p Output) ToDict() map[string]interface{} {
-
-	var outputId *string
+	m := map[string]interface{}{}
 	if p.OutputId != nil {
-		outputId = p.OutputId
+		m["outputId"] = p.OutputId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var text *string
 	if p.Text != nil {
-		text = p.Text
+		m["text"] = p.Text
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"outputId":  outputId,
-		"name":      name,
-		"text":      text,
-		"createdAt": createdAt,
-		"revision":  revision,
-	}
+	return m
 }
 
 func (p Output) Pointer() *Output {
@@ -787,23 +744,18 @@ func NewViewFromDict(data map[string]interface{}) View {
 }
 
 func (p View) ToDict() map[string]interface{} {
-
-	var contents []interface{}
+	m := map[string]interface{}{}
 	if p.Contents != nil {
-		contents = CastContentsFromDict(
+		m["contents"] = CastContentsFromDict(
 			p.Contents,
 		)
 	}
-	var removeContents []interface{}
 	if p.RemoveContents != nil {
-		removeContents = CastContentsFromDict(
+		m["removeContents"] = CastContentsFromDict(
 			p.RemoveContents,
 		)
 	}
-	return map[string]interface{}{
-		"contents":       contents,
-		"removeContents": removeContents,
-	}
+	return m
 }
 
 func (p View) Pointer() *View {
@@ -960,24 +912,17 @@ func NewContentFromDict(data map[string]interface{}) Content {
 }
 
 func (p Content) ToDict() map[string]interface{} {
-
-	var section *string
+	m := map[string]interface{}{}
 	if p.Section != nil {
-		section = p.Section
+		m["section"] = p.Section
 	}
-	var content *string
 	if p.Content != nil {
-		content = p.Content
+		m["content"] = p.Content
 	}
-	var frontMatter *string
 	if p.FrontMatter != nil {
-		frontMatter = p.FrontMatter
+		m["frontMatter"] = p.FrontMatter
 	}
-	return map[string]interface{}{
-		"section":     section,
-		"content":     content,
-		"frontMatter": frontMatter,
-	}
+	return m
 }
 
 func (p Content) Pointer() *Content {
@@ -1207,39 +1152,26 @@ func NewNewsFromDict(data map[string]interface{}) News {
 }
 
 func (p News) ToDict() map[string]interface{} {
-
-	var section *string
+	m := map[string]interface{}{}
 	if p.Section != nil {
-		section = p.Section
+		m["section"] = p.Section
 	}
-	var content *string
 	if p.Content != nil {
-		content = p.Content
+		m["content"] = p.Content
 	}
-	var title *string
 	if p.Title != nil {
-		title = p.Title
+		m["title"] = p.Title
 	}
-	var scheduleEventId *string
 	if p.ScheduleEventId != nil {
-		scheduleEventId = p.ScheduleEventId
+		m["scheduleEventId"] = p.ScheduleEventId
 	}
-	var timestamp *int64
 	if p.Timestamp != nil {
-		timestamp = p.Timestamp
+		m["timestamp"] = p.Timestamp
 	}
-	var frontMatter *string
 	if p.FrontMatter != nil {
-		frontMatter = p.FrontMatter
+		m["frontMatter"] = p.FrontMatter
 	}
-	return map[string]interface{}{
-		"section":         section,
-		"content":         content,
-		"title":           title,
-		"scheduleEventId": scheduleEventId,
-		"timestamp":       timestamp,
-		"frontMatter":     frontMatter,
-	}
+	return m
 }
 
 func (p News) Pointer() *News {
@@ -1365,19 +1297,14 @@ func NewSetCookieRequestEntryFromDict(data map[string]interface{}) SetCookieRequ
 }
 
 func (p SetCookieRequestEntry) ToDict() map[string]interface{} {
-
-	var key *string
+	m := map[string]interface{}{}
 	if p.Key != nil {
-		key = p.Key
+		m["key"] = p.Key
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"key":   key,
-		"value": value,
-	}
+	return m
 }
 
 func (p SetCookieRequestEntry) Pointer() *SetCookieRequestEntry {
@@ -1472,14 +1399,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -1760,44 +1684,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {

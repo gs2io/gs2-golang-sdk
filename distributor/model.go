@@ -243,64 +243,45 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var assumeUserId *string
 	if p.AssumeUserId != nil {
-		assumeUserId = p.AssumeUserId
+		m["assumeUserId"] = p.AssumeUserId
 	}
-	var autoRunStampSheetNotification map[string]interface{}
 	if p.AutoRunStampSheetNotification != nil {
-		autoRunStampSheetNotification = func() map[string]interface{} {
+		m["autoRunStampSheetNotification"] = func() map[string]interface{} {
 			if p.AutoRunStampSheetNotification == nil {
 				return nil
 			}
 			return p.AutoRunStampSheetNotification.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":                   namespaceId,
-		"name":                          name,
-		"description":                   description,
-		"assumeUserId":                  assumeUserId,
-		"autoRunStampSheetNotification": autoRunStampSheetNotification,
-		"logSetting":                    logSetting,
-		"createdAt":                     createdAt,
-		"updatedAt":                     updatedAt,
-		"revision":                      revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -586,56 +567,37 @@ func NewDistributorModelMasterFromDict(data map[string]interface{}) DistributorM
 }
 
 func (p DistributorModelMaster) ToDict() map[string]interface{} {
-
-	var distributorModelId *string
+	m := map[string]interface{}{}
 	if p.DistributorModelId != nil {
-		distributorModelId = p.DistributorModelId
+		m["distributorModelId"] = p.DistributorModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var inboxNamespaceId *string
 	if p.InboxNamespaceId != nil {
-		inboxNamespaceId = p.InboxNamespaceId
+		m["inboxNamespaceId"] = p.InboxNamespaceId
 	}
-	var whiteListTargetIds []interface{}
 	if p.WhiteListTargetIds != nil {
-		whiteListTargetIds = core.CastStringsFromDict(
+		m["whiteListTargetIds"] = core.CastStringsFromDict(
 			p.WhiteListTargetIds,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"distributorModelId": distributorModelId,
-		"name":               name,
-		"description":        description,
-		"metadata":           metadata,
-		"inboxNamespaceId":   inboxNamespaceId,
-		"whiteListTargetIds": whiteListTargetIds,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p DistributorModelMaster) Pointer() *DistributorModelMaster {
@@ -857,36 +819,25 @@ func NewDistributorModelFromDict(data map[string]interface{}) DistributorModel {
 }
 
 func (p DistributorModel) ToDict() map[string]interface{} {
-
-	var distributorModelId *string
+	m := map[string]interface{}{}
 	if p.DistributorModelId != nil {
-		distributorModelId = p.DistributorModelId
+		m["distributorModelId"] = p.DistributorModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var inboxNamespaceId *string
 	if p.InboxNamespaceId != nil {
-		inboxNamespaceId = p.InboxNamespaceId
+		m["inboxNamespaceId"] = p.InboxNamespaceId
 	}
-	var whiteListTargetIds []interface{}
 	if p.WhiteListTargetIds != nil {
-		whiteListTargetIds = core.CastStringsFromDict(
+		m["whiteListTargetIds"] = core.CastStringsFromDict(
 			p.WhiteListTargetIds,
 		)
 	}
-	return map[string]interface{}{
-		"distributorModelId": distributorModelId,
-		"name":               name,
-		"metadata":           metadata,
-		"inboxNamespaceId":   inboxNamespaceId,
-		"whiteListTargetIds": whiteListTargetIds,
-	}
+	return m
 }
 
 func (p DistributorModel) Pointer() *DistributorModel {
@@ -1012,19 +963,14 @@ func NewCurrentDistributorMasterFromDict(data map[string]interface{}) CurrentDis
 }
 
 func (p CurrentDistributorMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentDistributorMaster) Pointer() *CurrentDistributorMaster {
@@ -1397,101 +1343,70 @@ func NewStampSheetResultFromDict(data map[string]interface{}) StampSheetResult {
 }
 
 func (p StampSheetResult) ToDict() map[string]interface{} {
-
-	var stampSheetResultId *string
+	m := map[string]interface{}{}
 	if p.StampSheetResultId != nil {
-		stampSheetResultId = p.StampSheetResultId
+		m["stampSheetResultId"] = p.StampSheetResultId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var transactionId *string
 	if p.TransactionId != nil {
-		transactionId = p.TransactionId
+		m["transactionId"] = p.TransactionId
 	}
-	var verifyTaskRequests []interface{}
 	if p.VerifyTaskRequests != nil {
-		verifyTaskRequests = CastVerifyActionsFromDict(
+		m["verifyTaskRequests"] = CastVerifyActionsFromDict(
 			p.VerifyTaskRequests,
 		)
 	}
-	var taskRequests []interface{}
 	if p.TaskRequests != nil {
-		taskRequests = CastConsumeActionsFromDict(
+		m["taskRequests"] = CastConsumeActionsFromDict(
 			p.TaskRequests,
 		)
 	}
-	var sheetRequest map[string]interface{}
 	if p.SheetRequest != nil {
-		sheetRequest = func() map[string]interface{} {
+		m["sheetRequest"] = func() map[string]interface{} {
 			if p.SheetRequest == nil {
 				return nil
 			}
 			return p.SheetRequest.ToDict()
 		}()
 	}
-	var verifyTaskResultCodes []interface{}
 	if p.VerifyTaskResultCodes != nil {
-		verifyTaskResultCodes = core.CastInt32sFromDict(
+		m["verifyTaskResultCodes"] = core.CastInt32sFromDict(
 			p.VerifyTaskResultCodes,
 		)
 	}
-	var verifyTaskResults []interface{}
 	if p.VerifyTaskResults != nil {
-		verifyTaskResults = core.CastStringsFromDict(
+		m["verifyTaskResults"] = core.CastStringsFromDict(
 			p.VerifyTaskResults,
 		)
 	}
-	var taskResultCodes []interface{}
 	if p.TaskResultCodes != nil {
-		taskResultCodes = core.CastInt32sFromDict(
+		m["taskResultCodes"] = core.CastInt32sFromDict(
 			p.TaskResultCodes,
 		)
 	}
-	var taskResults []interface{}
 	if p.TaskResults != nil {
-		taskResults = core.CastStringsFromDict(
+		m["taskResults"] = core.CastStringsFromDict(
 			p.TaskResults,
 		)
 	}
-	var sheetResultCode *int32
 	if p.SheetResultCode != nil {
-		sheetResultCode = p.SheetResultCode
+		m["sheetResultCode"] = p.SheetResultCode
 	}
-	var sheetResult *string
 	if p.SheetResult != nil {
-		sheetResult = p.SheetResult
+		m["sheetResult"] = p.SheetResult
 	}
-	var nextTransactionId *string
 	if p.NextTransactionId != nil {
-		nextTransactionId = p.NextTransactionId
+		m["nextTransactionId"] = p.NextTransactionId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"stampSheetResultId":    stampSheetResultId,
-		"userId":                userId,
-		"transactionId":         transactionId,
-		"verifyTaskRequests":    verifyTaskRequests,
-		"taskRequests":          taskRequests,
-		"sheetRequest":          sheetRequest,
-		"verifyTaskResultCodes": verifyTaskResultCodes,
-		"verifyTaskResults":     verifyTaskResults,
-		"taskResultCodes":       taskResultCodes,
-		"taskResults":           taskResults,
-		"sheetResultCode":       sheetResultCode,
-		"sheetResult":           sheetResult,
-		"nextTransactionId":     nextTransactionId,
-		"createdAt":             createdAt,
-		"revision":              revision,
-	}
+	return m
 }
 
 func (p StampSheetResult) Pointer() *StampSheetResult {
@@ -1617,19 +1532,14 @@ func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 }
 
 func (p AcquireAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p AcquireAction) Pointer() *AcquireAction {
@@ -1755,19 +1665,14 @@ func NewConsumeActionFromDict(data map[string]interface{}) ConsumeAction {
 }
 
 func (p ConsumeAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p ConsumeAction) Pointer() *ConsumeAction {
@@ -1893,19 +1798,14 @@ func NewVerifyActionFromDict(data map[string]interface{}) VerifyAction {
 }
 
 func (p VerifyAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p VerifyAction) Pointer() *VerifyAction {
@@ -2031,19 +1931,14 @@ func NewConfigFromDict(data map[string]interface{}) Config {
 }
 
 func (p Config) ToDict() map[string]interface{} {
-
-	var key *string
+	m := map[string]interface{}{}
 	if p.Key != nil {
-		key = p.Key
+		m["key"] = p.Key
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"key":   key,
-		"value": value,
-	}
+	return m
 }
 
 func (p Config) Pointer() *Config {
@@ -2324,44 +2219,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -2487,19 +2367,14 @@ func NewDistributeResourceFromDict(data map[string]interface{}) DistributeResour
 }
 
 func (p DistributeResource) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p DistributeResource) Pointer() *DistributeResource {
@@ -2594,14 +2469,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -2738,24 +2610,17 @@ func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSet
 }
 
 func (p NotificationSetting) ToDict() map[string]interface{} {
-
-	var gatewayNamespaceId *string
+	m := map[string]interface{}{}
 	if p.GatewayNamespaceId != nil {
-		gatewayNamespaceId = p.GatewayNamespaceId
+		m["gatewayNamespaceId"] = p.GatewayNamespaceId
 	}
-	var enableTransferMobileNotification *bool
 	if p.EnableTransferMobileNotification != nil {
-		enableTransferMobileNotification = p.EnableTransferMobileNotification
+		m["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
 	}
-	var sound *string
 	if p.Sound != nil {
-		sound = p.Sound
+		m["sound"] = p.Sound
 	}
-	return map[string]interface{}{
-		"gatewayNamespaceId":               gatewayNamespaceId,
-		"enableTransferMobileNotification": enableTransferMobileNotification,
-		"sound":                            sound,
-	}
+	return m
 }
 
 func (p NotificationSetting) Pointer() *NotificationSetting {

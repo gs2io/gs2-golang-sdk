@@ -355,189 +355,146 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var followScript map[string]interface{}
 	if p.FollowScript != nil {
-		followScript = func() map[string]interface{} {
+		m["followScript"] = func() map[string]interface{} {
 			if p.FollowScript == nil {
 				return nil
 			}
 			return p.FollowScript.ToDict()
 		}()
 	}
-	var unfollowScript map[string]interface{}
 	if p.UnfollowScript != nil {
-		unfollowScript = func() map[string]interface{} {
+		m["unfollowScript"] = func() map[string]interface{} {
 			if p.UnfollowScript == nil {
 				return nil
 			}
 			return p.UnfollowScript.ToDict()
 		}()
 	}
-	var sendRequestScript map[string]interface{}
 	if p.SendRequestScript != nil {
-		sendRequestScript = func() map[string]interface{} {
+		m["sendRequestScript"] = func() map[string]interface{} {
 			if p.SendRequestScript == nil {
 				return nil
 			}
 			return p.SendRequestScript.ToDict()
 		}()
 	}
-	var cancelRequestScript map[string]interface{}
 	if p.CancelRequestScript != nil {
-		cancelRequestScript = func() map[string]interface{} {
+		m["cancelRequestScript"] = func() map[string]interface{} {
 			if p.CancelRequestScript == nil {
 				return nil
 			}
 			return p.CancelRequestScript.ToDict()
 		}()
 	}
-	var acceptRequestScript map[string]interface{}
 	if p.AcceptRequestScript != nil {
-		acceptRequestScript = func() map[string]interface{} {
+		m["acceptRequestScript"] = func() map[string]interface{} {
 			if p.AcceptRequestScript == nil {
 				return nil
 			}
 			return p.AcceptRequestScript.ToDict()
 		}()
 	}
-	var rejectRequestScript map[string]interface{}
 	if p.RejectRequestScript != nil {
-		rejectRequestScript = func() map[string]interface{} {
+		m["rejectRequestScript"] = func() map[string]interface{} {
 			if p.RejectRequestScript == nil {
 				return nil
 			}
 			return p.RejectRequestScript.ToDict()
 		}()
 	}
-	var deleteFriendScript map[string]interface{}
 	if p.DeleteFriendScript != nil {
-		deleteFriendScript = func() map[string]interface{} {
+		m["deleteFriendScript"] = func() map[string]interface{} {
 			if p.DeleteFriendScript == nil {
 				return nil
 			}
 			return p.DeleteFriendScript.ToDict()
 		}()
 	}
-	var updateProfileScript map[string]interface{}
 	if p.UpdateProfileScript != nil {
-		updateProfileScript = func() map[string]interface{} {
+		m["updateProfileScript"] = func() map[string]interface{} {
 			if p.UpdateProfileScript == nil {
 				return nil
 			}
 			return p.UpdateProfileScript.ToDict()
 		}()
 	}
-	var followNotification map[string]interface{}
 	if p.FollowNotification != nil {
-		followNotification = func() map[string]interface{} {
+		m["followNotification"] = func() map[string]interface{} {
 			if p.FollowNotification == nil {
 				return nil
 			}
 			return p.FollowNotification.ToDict()
 		}()
 	}
-	var receiveRequestNotification map[string]interface{}
 	if p.ReceiveRequestNotification != nil {
-		receiveRequestNotification = func() map[string]interface{} {
+		m["receiveRequestNotification"] = func() map[string]interface{} {
 			if p.ReceiveRequestNotification == nil {
 				return nil
 			}
 			return p.ReceiveRequestNotification.ToDict()
 		}()
 	}
-	var cancelRequestNotification map[string]interface{}
 	if p.CancelRequestNotification != nil {
-		cancelRequestNotification = func() map[string]interface{} {
+		m["cancelRequestNotification"] = func() map[string]interface{} {
 			if p.CancelRequestNotification == nil {
 				return nil
 			}
 			return p.CancelRequestNotification.ToDict()
 		}()
 	}
-	var acceptRequestNotification map[string]interface{}
 	if p.AcceptRequestNotification != nil {
-		acceptRequestNotification = func() map[string]interface{} {
+		m["acceptRequestNotification"] = func() map[string]interface{} {
 			if p.AcceptRequestNotification == nil {
 				return nil
 			}
 			return p.AcceptRequestNotification.ToDict()
 		}()
 	}
-	var rejectRequestNotification map[string]interface{}
 	if p.RejectRequestNotification != nil {
-		rejectRequestNotification = func() map[string]interface{} {
+		m["rejectRequestNotification"] = func() map[string]interface{} {
 			if p.RejectRequestNotification == nil {
 				return nil
 			}
 			return p.RejectRequestNotification.ToDict()
 		}()
 	}
-	var deleteFriendNotification map[string]interface{}
 	if p.DeleteFriendNotification != nil {
-		deleteFriendNotification = func() map[string]interface{} {
+		m["deleteFriendNotification"] = func() map[string]interface{} {
 			if p.DeleteFriendNotification == nil {
 				return nil
 			}
 			return p.DeleteFriendNotification.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":                namespaceId,
-		"name":                       name,
-		"description":                description,
-		"followScript":               followScript,
-		"unfollowScript":             unfollowScript,
-		"sendRequestScript":          sendRequestScript,
-		"cancelRequestScript":        cancelRequestScript,
-		"acceptRequestScript":        acceptRequestScript,
-		"rejectRequestScript":        rejectRequestScript,
-		"deleteFriendScript":         deleteFriendScript,
-		"updateProfileScript":        updateProfileScript,
-		"followNotification":         followNotification,
-		"receiveRequestNotification": receiveRequestNotification,
-		"cancelRequestNotification":  cancelRequestNotification,
-		"acceptRequestNotification":  acceptRequestNotification,
-		"rejectRequestNotification":  rejectRequestNotification,
-		"deleteFriendNotification":   deleteFriendNotification,
-		"logSetting":                 logSetting,
-		"createdAt":                  createdAt,
-		"updatedAt":                  updatedAt,
-		"revision":                   revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -789,49 +746,32 @@ func NewProfileFromDict(data map[string]interface{}) Profile {
 }
 
 func (p Profile) ToDict() map[string]interface{} {
-
-	var profileId *string
+	m := map[string]interface{}{}
 	if p.ProfileId != nil {
-		profileId = p.ProfileId
+		m["profileId"] = p.ProfileId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var publicProfile *string
 	if p.PublicProfile != nil {
-		publicProfile = p.PublicProfile
+		m["publicProfile"] = p.PublicProfile
 	}
-	var followerProfile *string
 	if p.FollowerProfile != nil {
-		followerProfile = p.FollowerProfile
+		m["followerProfile"] = p.FollowerProfile
 	}
-	var friendProfile *string
 	if p.FriendProfile != nil {
-		friendProfile = p.FriendProfile
+		m["friendProfile"] = p.FriendProfile
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"profileId":       profileId,
-		"userId":          userId,
-		"publicProfile":   publicProfile,
-		"followerProfile": followerProfile,
-		"friendProfile":   friendProfile,
-		"createdAt":       createdAt,
-		"updatedAt":       updatedAt,
-		"revision":        revision,
-	}
+	return m
 }
 
 func (p Profile) Pointer() *Profile {
@@ -1024,41 +964,28 @@ func NewFollowFromDict(data map[string]interface{}) Follow {
 }
 
 func (p Follow) ToDict() map[string]interface{} {
-
-	var followId *string
+	m := map[string]interface{}{}
 	if p.FollowId != nil {
-		followId = p.FollowId
+		m["followId"] = p.FollowId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var targetUserIds []interface{}
 	if p.TargetUserIds != nil {
-		targetUserIds = core.CastStringsFromDict(
+		m["targetUserIds"] = core.CastStringsFromDict(
 			p.TargetUserIds,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"followId":      followId,
-		"userId":        userId,
-		"targetUserIds": targetUserIds,
-		"createdAt":     createdAt,
-		"updatedAt":     updatedAt,
-		"revision":      revision,
-	}
+	return m
 }
 
 func (p Follow) Pointer() *Follow {
@@ -1251,41 +1178,28 @@ func NewFriendFromDict(data map[string]interface{}) Friend {
 }
 
 func (p Friend) ToDict() map[string]interface{} {
-
-	var friendId *string
+	m := map[string]interface{}{}
 	if p.FriendId != nil {
-		friendId = p.FriendId
+		m["friendId"] = p.FriendId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var targetUserIds []interface{}
 	if p.TargetUserIds != nil {
-		targetUserIds = core.CastStringsFromDict(
+		m["targetUserIds"] = core.CastStringsFromDict(
 			p.TargetUserIds,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"friendId":      friendId,
-		"userId":        userId,
-		"targetUserIds": targetUserIds,
-		"createdAt":     createdAt,
-		"updatedAt":     updatedAt,
-		"revision":      revision,
-	}
+	return m
 }
 
 func (p Friend) Pointer() *Friend {
@@ -1478,41 +1392,28 @@ func NewSendBoxFromDict(data map[string]interface{}) SendBox {
 }
 
 func (p SendBox) ToDict() map[string]interface{} {
-
-	var sendBoxId *string
+	m := map[string]interface{}{}
 	if p.SendBoxId != nil {
-		sendBoxId = p.SendBoxId
+		m["sendBoxId"] = p.SendBoxId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var targetUserIds []interface{}
 	if p.TargetUserIds != nil {
-		targetUserIds = core.CastStringsFromDict(
+		m["targetUserIds"] = core.CastStringsFromDict(
 			p.TargetUserIds,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"sendBoxId":     sendBoxId,
-		"userId":        userId,
-		"targetUserIds": targetUserIds,
-		"createdAt":     createdAt,
-		"updatedAt":     updatedAt,
-		"revision":      revision,
-	}
+	return m
 }
 
 func (p SendBox) Pointer() *SendBox {
@@ -1705,41 +1606,28 @@ func NewInboxFromDict(data map[string]interface{}) Inbox {
 }
 
 func (p Inbox) ToDict() map[string]interface{} {
-
-	var inboxId *string
+	m := map[string]interface{}{}
 	if p.InboxId != nil {
-		inboxId = p.InboxId
+		m["inboxId"] = p.InboxId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var fromUserIds []interface{}
 	if p.FromUserIds != nil {
-		fromUserIds = core.CastStringsFromDict(
+		m["fromUserIds"] = core.CastStringsFromDict(
 			p.FromUserIds,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"inboxId":     inboxId,
-		"userId":      userId,
-		"fromUserIds": fromUserIds,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p Inbox) Pointer() *Inbox {
@@ -1932,41 +1820,28 @@ func NewBlackListFromDict(data map[string]interface{}) BlackList {
 }
 
 func (p BlackList) ToDict() map[string]interface{} {
-
-	var blackListId *string
+	m := map[string]interface{}{}
 	if p.BlackListId != nil {
-		blackListId = p.BlackListId
+		m["blackListId"] = p.BlackListId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var targetUserIds []interface{}
 	if p.TargetUserIds != nil {
-		targetUserIds = core.CastStringsFromDict(
+		m["targetUserIds"] = core.CastStringsFromDict(
 			p.TargetUserIds,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"blackListId":   blackListId,
-		"userId":        userId,
-		"targetUserIds": targetUserIds,
-		"createdAt":     createdAt,
-		"updatedAt":     updatedAt,
-		"revision":      revision,
-	}
+	return m
 }
 
 func (p BlackList) Pointer() *BlackList {
@@ -2123,24 +1998,17 @@ func NewFollowUserFromDict(data map[string]interface{}) FollowUser {
 }
 
 func (p FollowUser) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var publicProfile *string
 	if p.PublicProfile != nil {
-		publicProfile = p.PublicProfile
+		m["publicProfile"] = p.PublicProfile
 	}
-	var followerProfile *string
 	if p.FollowerProfile != nil {
-		followerProfile = p.FollowerProfile
+		m["followerProfile"] = p.FollowerProfile
 	}
-	return map[string]interface{}{
-		"userId":          userId,
-		"publicProfile":   publicProfile,
-		"followerProfile": followerProfile,
-	}
+	return m
 }
 
 func (p FollowUser) Pointer() *FollowUser {
@@ -2297,24 +2165,17 @@ func NewFriendUserFromDict(data map[string]interface{}) FriendUser {
 }
 
 func (p FriendUser) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var publicProfile *string
 	if p.PublicProfile != nil {
-		publicProfile = p.PublicProfile
+		m["publicProfile"] = p.PublicProfile
 	}
-	var friendProfile *string
 	if p.FriendProfile != nil {
-		friendProfile = p.FriendProfile
+		m["friendProfile"] = p.FriendProfile
 	}
-	return map[string]interface{}{
-		"userId":        userId,
-		"publicProfile": publicProfile,
-		"friendProfile": friendProfile,
-	}
+	return m
 }
 
 func (p FriendUser) Pointer() *FriendUser {
@@ -2440,19 +2301,14 @@ func NewFriendRequestFromDict(data map[string]interface{}) FriendRequest {
 }
 
 func (p FriendRequest) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var targetUserId *string
 	if p.TargetUserId != nil {
-		targetUserId = p.TargetUserId
+		m["targetUserId"] = p.TargetUserId
 	}
-	return map[string]interface{}{
-		"userId":       userId,
-		"targetUserId": targetUserId,
-	}
+	return m
 }
 
 func (p FriendRequest) Pointer() *FriendRequest {
@@ -2578,19 +2434,14 @@ func NewSendFriendRequestFromDict(data map[string]interface{}) SendFriendRequest
 }
 
 func (p SendFriendRequest) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var targetUserId *string
 	if p.TargetUserId != nil {
-		targetUserId = p.TargetUserId
+		m["targetUserId"] = p.TargetUserId
 	}
-	return map[string]interface{}{
-		"userId":       userId,
-		"targetUserId": targetUserId,
-	}
+	return m
 }
 
 func (p SendFriendRequest) Pointer() *SendFriendRequest {
@@ -2716,19 +2567,14 @@ func NewReceiveFriendRequestFromDict(data map[string]interface{}) ReceiveFriendR
 }
 
 func (p ReceiveFriendRequest) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var targetUserId *string
 	if p.TargetUserId != nil {
-		targetUserId = p.TargetUserId
+		m["targetUserId"] = p.TargetUserId
 	}
-	return map[string]interface{}{
-		"userId":       userId,
-		"targetUserId": targetUserId,
-	}
+	return m
 }
 
 func (p ReceiveFriendRequest) Pointer() *ReceiveFriendRequest {
@@ -2854,19 +2700,14 @@ func NewPublicProfileFromDict(data map[string]interface{}) PublicProfile {
 }
 
 func (p PublicProfile) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var publicProfile *string
 	if p.PublicProfile != nil {
-		publicProfile = p.PublicProfile
+		m["publicProfile"] = p.PublicProfile
 	}
-	return map[string]interface{}{
-		"userId":        userId,
-		"publicProfile": publicProfile,
-	}
+	return m
 }
 
 func (p PublicProfile) Pointer() *PublicProfile {
@@ -3054,29 +2895,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -3213,24 +3045,17 @@ func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSet
 }
 
 func (p NotificationSetting) ToDict() map[string]interface{} {
-
-	var gatewayNamespaceId *string
+	m := map[string]interface{}{}
 	if p.GatewayNamespaceId != nil {
-		gatewayNamespaceId = p.GatewayNamespaceId
+		m["gatewayNamespaceId"] = p.GatewayNamespaceId
 	}
-	var enableTransferMobileNotification *bool
 	if p.EnableTransferMobileNotification != nil {
-		enableTransferMobileNotification = p.EnableTransferMobileNotification
+		m["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
 	}
-	var sound *string
 	if p.Sound != nil {
-		sound = p.Sound
+		m["sound"] = p.Sound
 	}
-	return map[string]interface{}{
-		"gatewayNamespaceId":               gatewayNamespaceId,
-		"enableTransferMobileNotification": enableTransferMobileNotification,
-		"sound":                            sound,
-	}
+	return m
 }
 
 func (p NotificationSetting) Pointer() *NotificationSetting {
@@ -3325,14 +3150,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {

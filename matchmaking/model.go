@@ -568,159 +568,110 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var enableRating *bool
 	if p.EnableRating != nil {
-		enableRating = p.EnableRating
+		m["enableRating"] = p.EnableRating
 	}
-	var enableDisconnectDetection *string
 	if p.EnableDisconnectDetection != nil {
-		enableDisconnectDetection = p.EnableDisconnectDetection
+		m["enableDisconnectDetection"] = p.EnableDisconnectDetection
 	}
-	var disconnectDetectionTimeoutSeconds *int32
 	if p.DisconnectDetectionTimeoutSeconds != nil {
-		disconnectDetectionTimeoutSeconds = p.DisconnectDetectionTimeoutSeconds
+		m["disconnectDetectionTimeoutSeconds"] = p.DisconnectDetectionTimeoutSeconds
 	}
-	var createGatheringTriggerType *string
 	if p.CreateGatheringTriggerType != nil {
-		createGatheringTriggerType = p.CreateGatheringTriggerType
+		m["createGatheringTriggerType"] = p.CreateGatheringTriggerType
 	}
-	var createGatheringTriggerRealtimeNamespaceId *string
 	if p.CreateGatheringTriggerRealtimeNamespaceId != nil {
-		createGatheringTriggerRealtimeNamespaceId = p.CreateGatheringTriggerRealtimeNamespaceId
+		m["createGatheringTriggerRealtimeNamespaceId"] = p.CreateGatheringTriggerRealtimeNamespaceId
 	}
-	var createGatheringTriggerScriptId *string
 	if p.CreateGatheringTriggerScriptId != nil {
-		createGatheringTriggerScriptId = p.CreateGatheringTriggerScriptId
+		m["createGatheringTriggerScriptId"] = p.CreateGatheringTriggerScriptId
 	}
-	var completeMatchmakingTriggerType *string
 	if p.CompleteMatchmakingTriggerType != nil {
-		completeMatchmakingTriggerType = p.CompleteMatchmakingTriggerType
+		m["completeMatchmakingTriggerType"] = p.CompleteMatchmakingTriggerType
 	}
-	var completeMatchmakingTriggerRealtimeNamespaceId *string
 	if p.CompleteMatchmakingTriggerRealtimeNamespaceId != nil {
-		completeMatchmakingTriggerRealtimeNamespaceId = p.CompleteMatchmakingTriggerRealtimeNamespaceId
+		m["completeMatchmakingTriggerRealtimeNamespaceId"] = p.CompleteMatchmakingTriggerRealtimeNamespaceId
 	}
-	var completeMatchmakingTriggerScriptId *string
 	if p.CompleteMatchmakingTriggerScriptId != nil {
-		completeMatchmakingTriggerScriptId = p.CompleteMatchmakingTriggerScriptId
+		m["completeMatchmakingTriggerScriptId"] = p.CompleteMatchmakingTriggerScriptId
 	}
-	var enableCollaborateSeasonRating *string
 	if p.EnableCollaborateSeasonRating != nil {
-		enableCollaborateSeasonRating = p.EnableCollaborateSeasonRating
+		m["enableCollaborateSeasonRating"] = p.EnableCollaborateSeasonRating
 	}
-	var collaborateSeasonRatingNamespaceId *string
 	if p.CollaborateSeasonRatingNamespaceId != nil {
-		collaborateSeasonRatingNamespaceId = p.CollaborateSeasonRatingNamespaceId
+		m["collaborateSeasonRatingNamespaceId"] = p.CollaborateSeasonRatingNamespaceId
 	}
-	var collaborateSeasonRatingTtl *int32
 	if p.CollaborateSeasonRatingTtl != nil {
-		collaborateSeasonRatingTtl = p.CollaborateSeasonRatingTtl
+		m["collaborateSeasonRatingTtl"] = p.CollaborateSeasonRatingTtl
 	}
-	var changeRatingScript map[string]interface{}
 	if p.ChangeRatingScript != nil {
-		changeRatingScript = func() map[string]interface{} {
+		m["changeRatingScript"] = func() map[string]interface{} {
 			if p.ChangeRatingScript == nil {
 				return nil
 			}
 			return p.ChangeRatingScript.ToDict()
 		}()
 	}
-	var joinNotification map[string]interface{}
 	if p.JoinNotification != nil {
-		joinNotification = func() map[string]interface{} {
+		m["joinNotification"] = func() map[string]interface{} {
 			if p.JoinNotification == nil {
 				return nil
 			}
 			return p.JoinNotification.ToDict()
 		}()
 	}
-	var leaveNotification map[string]interface{}
 	if p.LeaveNotification != nil {
-		leaveNotification = func() map[string]interface{} {
+		m["leaveNotification"] = func() map[string]interface{} {
 			if p.LeaveNotification == nil {
 				return nil
 			}
 			return p.LeaveNotification.ToDict()
 		}()
 	}
-	var completeNotification map[string]interface{}
 	if p.CompleteNotification != nil {
-		completeNotification = func() map[string]interface{} {
+		m["completeNotification"] = func() map[string]interface{} {
 			if p.CompleteNotification == nil {
 				return nil
 			}
 			return p.CompleteNotification.ToDict()
 		}()
 	}
-	var changeRatingNotification map[string]interface{}
 	if p.ChangeRatingNotification != nil {
-		changeRatingNotification = func() map[string]interface{} {
+		m["changeRatingNotification"] = func() map[string]interface{} {
 			if p.ChangeRatingNotification == nil {
 				return nil
 			}
 			return p.ChangeRatingNotification.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":                       namespaceId,
-		"name":                              name,
-		"description":                       description,
-		"enableRating":                      enableRating,
-		"enableDisconnectDetection":         enableDisconnectDetection,
-		"disconnectDetectionTimeoutSeconds": disconnectDetectionTimeoutSeconds,
-		"createGatheringTriggerType":        createGatheringTriggerType,
-		"createGatheringTriggerRealtimeNamespaceId":     createGatheringTriggerRealtimeNamespaceId,
-		"createGatheringTriggerScriptId":                createGatheringTriggerScriptId,
-		"completeMatchmakingTriggerType":                completeMatchmakingTriggerType,
-		"completeMatchmakingTriggerRealtimeNamespaceId": completeMatchmakingTriggerRealtimeNamespaceId,
-		"completeMatchmakingTriggerScriptId":            completeMatchmakingTriggerScriptId,
-		"enableCollaborateSeasonRating":                 enableCollaborateSeasonRating,
-		"collaborateSeasonRatingNamespaceId":            collaborateSeasonRatingNamespaceId,
-		"collaborateSeasonRatingTtl":                    collaborateSeasonRatingTtl,
-		"changeRatingScript":                            changeRatingScript,
-		"joinNotification":                              joinNotification,
-		"leaveNotification":                             leaveNotification,
-		"completeNotification":                          completeNotification,
-		"changeRatingNotification":                      changeRatingNotification,
-		"logSetting":                                    logSetting,
-		"createdAt":                                     createdAt,
-		"updatedAt":                                     updatedAt,
-		"revision":                                      revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -975,65 +926,44 @@ func NewGatheringFromDict(data map[string]interface{}) Gathering {
 }
 
 func (p Gathering) ToDict() map[string]interface{} {
-
-	var gatheringId *string
+	m := map[string]interface{}{}
 	if p.GatheringId != nil {
-		gatheringId = p.GatheringId
+		m["gatheringId"] = p.GatheringId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var attributeRanges []interface{}
 	if p.AttributeRanges != nil {
-		attributeRanges = CastAttributeRangesFromDict(
+		m["attributeRanges"] = CastAttributeRangesFromDict(
 			p.AttributeRanges,
 		)
 	}
-	var capacityOfRoles []interface{}
 	if p.CapacityOfRoles != nil {
-		capacityOfRoles = CastCapacityOfRolesFromDict(
+		m["capacityOfRoles"] = CastCapacityOfRolesFromDict(
 			p.CapacityOfRoles,
 		)
 	}
-	var allowUserIds []interface{}
 	if p.AllowUserIds != nil {
-		allowUserIds = core.CastStringsFromDict(
+		m["allowUserIds"] = core.CastStringsFromDict(
 			p.AllowUserIds,
 		)
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var expiresAt *int64
 	if p.ExpiresAt != nil {
-		expiresAt = p.ExpiresAt
+		m["expiresAt"] = p.ExpiresAt
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"gatheringId":     gatheringId,
-		"name":            name,
-		"attributeRanges": attributeRanges,
-		"capacityOfRoles": capacityOfRoles,
-		"allowUserIds":    allowUserIds,
-		"metadata":        metadata,
-		"expiresAt":       expiresAt,
-		"createdAt":       createdAt,
-		"updatedAt":       updatedAt,
-		"revision":        revision,
-	}
+	return m
 }
 
 func (p Gathering) Pointer() *Gathering {
@@ -1276,54 +1206,35 @@ func NewRatingModelMasterFromDict(data map[string]interface{}) RatingModelMaster
 }
 
 func (p RatingModelMaster) ToDict() map[string]interface{} {
-
-	var ratingModelId *string
+	m := map[string]interface{}{}
 	if p.RatingModelId != nil {
-		ratingModelId = p.RatingModelId
+		m["ratingModelId"] = p.RatingModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var initialValue *int32
 	if p.InitialValue != nil {
-		initialValue = p.InitialValue
+		m["initialValue"] = p.InitialValue
 	}
-	var volatility *int32
 	if p.Volatility != nil {
-		volatility = p.Volatility
+		m["volatility"] = p.Volatility
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"ratingModelId": ratingModelId,
-		"name":          name,
-		"metadata":      metadata,
-		"description":   description,
-		"initialValue":  initialValue,
-		"volatility":    volatility,
-		"createdAt":     createdAt,
-		"updatedAt":     updatedAt,
-		"revision":      revision,
-	}
+	return m
 }
 
 func (p RatingModelMaster) Pointer() *RatingModelMaster {
@@ -1502,34 +1413,23 @@ func NewRatingModelFromDict(data map[string]interface{}) RatingModel {
 }
 
 func (p RatingModel) ToDict() map[string]interface{} {
-
-	var ratingModelId *string
+	m := map[string]interface{}{}
 	if p.RatingModelId != nil {
-		ratingModelId = p.RatingModelId
+		m["ratingModelId"] = p.RatingModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var initialValue *int32
 	if p.InitialValue != nil {
-		initialValue = p.InitialValue
+		m["initialValue"] = p.InitialValue
 	}
-	var volatility *int32
 	if p.Volatility != nil {
-		volatility = p.Volatility
+		m["volatility"] = p.Volatility
 	}
-	return map[string]interface{}{
-		"ratingModelId": ratingModelId,
-		"name":          name,
-		"metadata":      metadata,
-		"initialValue":  initialValue,
-		"volatility":    volatility,
-	}
+	return m
 }
 
 func (p RatingModel) Pointer() *RatingModel {
@@ -1655,19 +1555,14 @@ func NewCurrentModelMasterFromDict(data map[string]interface{}) CurrentModelMast
 }
 
 func (p CurrentModelMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentModelMaster) Pointer() *CurrentModelMaster {
@@ -1897,39 +1792,26 @@ func NewSeasonModelFromDict(data map[string]interface{}) SeasonModel {
 }
 
 func (p SeasonModel) ToDict() map[string]interface{} {
-
-	var seasonModelId *string
+	m := map[string]interface{}{}
 	if p.SeasonModelId != nil {
-		seasonModelId = p.SeasonModelId
+		m["seasonModelId"] = p.SeasonModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var maximumParticipants *int32
 	if p.MaximumParticipants != nil {
-		maximumParticipants = p.MaximumParticipants
+		m["maximumParticipants"] = p.MaximumParticipants
 	}
-	var experienceModelId *string
 	if p.ExperienceModelId != nil {
-		experienceModelId = p.ExperienceModelId
+		m["experienceModelId"] = p.ExperienceModelId
 	}
-	var challengePeriodEventId *string
 	if p.ChallengePeriodEventId != nil {
-		challengePeriodEventId = p.ChallengePeriodEventId
+		m["challengePeriodEventId"] = p.ChallengePeriodEventId
 	}
-	return map[string]interface{}{
-		"seasonModelId":          seasonModelId,
-		"name":                   name,
-		"metadata":               metadata,
-		"maximumParticipants":    maximumParticipants,
-		"experienceModelId":      experienceModelId,
-		"challengePeriodEventId": challengePeriodEventId,
-	}
+	return m
 }
 
 func (p SeasonModel) Pointer() *SeasonModel {
@@ -2223,59 +2105,38 @@ func NewSeasonModelMasterFromDict(data map[string]interface{}) SeasonModelMaster
 }
 
 func (p SeasonModelMaster) ToDict() map[string]interface{} {
-
-	var seasonModelId *string
+	m := map[string]interface{}{}
 	if p.SeasonModelId != nil {
-		seasonModelId = p.SeasonModelId
+		m["seasonModelId"] = p.SeasonModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var maximumParticipants *int32
 	if p.MaximumParticipants != nil {
-		maximumParticipants = p.MaximumParticipants
+		m["maximumParticipants"] = p.MaximumParticipants
 	}
-	var experienceModelId *string
 	if p.ExperienceModelId != nil {
-		experienceModelId = p.ExperienceModelId
+		m["experienceModelId"] = p.ExperienceModelId
 	}
-	var challengePeriodEventId *string
 	if p.ChallengePeriodEventId != nil {
-		challengePeriodEventId = p.ChallengePeriodEventId
+		m["challengePeriodEventId"] = p.ChallengePeriodEventId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"seasonModelId":          seasonModelId,
-		"name":                   name,
-		"metadata":               metadata,
-		"description":            description,
-		"maximumParticipants":    maximumParticipants,
-		"experienceModelId":      experienceModelId,
-		"challengePeriodEventId": challengePeriodEventId,
-		"createdAt":              createdAt,
-		"updatedAt":              updatedAt,
-		"revision":               revision,
-	}
+	return m
 }
 
 func (p SeasonModelMaster) Pointer() *SeasonModelMaster {
@@ -2510,51 +2371,34 @@ func NewSeasonGatheringFromDict(data map[string]interface{}) SeasonGathering {
 }
 
 func (p SeasonGathering) ToDict() map[string]interface{} {
-
-	var seasonGatheringId *string
+	m := map[string]interface{}{}
 	if p.SeasonGatheringId != nil {
-		seasonGatheringId = p.SeasonGatheringId
+		m["seasonGatheringId"] = p.SeasonGatheringId
 	}
-	var seasonName *string
 	if p.SeasonName != nil {
-		seasonName = p.SeasonName
+		m["seasonName"] = p.SeasonName
 	}
-	var season *int64
 	if p.Season != nil {
-		season = p.Season
+		m["season"] = p.Season
 	}
-	var tier *int64
 	if p.Tier != nil {
-		tier = p.Tier
+		m["tier"] = p.Tier
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var participants []interface{}
 	if p.Participants != nil {
-		participants = core.CastStringsFromDict(
+		m["participants"] = core.CastStringsFromDict(
 			p.Participants,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"seasonGatheringId": seasonGatheringId,
-		"seasonName":        seasonName,
-		"season":            season,
-		"tier":              tier,
-		"name":              name,
-		"participants":      participants,
-		"createdAt":         createdAt,
-		"revision":          revision,
-	}
+	return m
 }
 
 func (p SeasonGathering) Pointer() *SeasonGathering {
@@ -2775,44 +2619,29 @@ func NewJoinedSeasonGatheringFromDict(data map[string]interface{}) JoinedSeasonG
 }
 
 func (p JoinedSeasonGathering) ToDict() map[string]interface{} {
-
-	var joinedSeasonGatheringId *string
+	m := map[string]interface{}{}
 	if p.JoinedSeasonGatheringId != nil {
-		joinedSeasonGatheringId = p.JoinedSeasonGatheringId
+		m["joinedSeasonGatheringId"] = p.JoinedSeasonGatheringId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var seasonName *string
 	if p.SeasonName != nil {
-		seasonName = p.SeasonName
+		m["seasonName"] = p.SeasonName
 	}
-	var season *int64
 	if p.Season != nil {
-		season = p.Season
+		m["season"] = p.Season
 	}
-	var tier *int64
 	if p.Tier != nil {
-		tier = p.Tier
+		m["tier"] = p.Tier
 	}
-	var seasonGatheringName *string
 	if p.SeasonGatheringName != nil {
-		seasonGatheringName = p.SeasonGatheringName
+		m["seasonGatheringName"] = p.SeasonGatheringName
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	return map[string]interface{}{
-		"joinedSeasonGatheringId": joinedSeasonGatheringId,
-		"userId":                  userId,
-		"seasonName":              seasonName,
-		"season":                  season,
-		"tier":                    tier,
-		"seasonGatheringName":     seasonGatheringName,
-		"createdAt":               createdAt,
-	}
+	return m
 }
 
 func (p JoinedSeasonGathering) Pointer() *JoinedSeasonGathering {
@@ -3000,29 +2829,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -3159,24 +2979,17 @@ func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSet
 }
 
 func (p NotificationSetting) ToDict() map[string]interface{} {
-
-	var gatewayNamespaceId *string
+	m := map[string]interface{}{}
 	if p.GatewayNamespaceId != nil {
-		gatewayNamespaceId = p.GatewayNamespaceId
+		m["gatewayNamespaceId"] = p.GatewayNamespaceId
 	}
-	var enableTransferMobileNotification *bool
 	if p.EnableTransferMobileNotification != nil {
-		enableTransferMobileNotification = p.EnableTransferMobileNotification
+		m["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
 	}
-	var sound *string
 	if p.Sound != nil {
-		sound = p.Sound
+		m["sound"] = p.Sound
 	}
-	return map[string]interface{}{
-		"gatewayNamespaceId":               gatewayNamespaceId,
-		"enableTransferMobileNotification": enableTransferMobileNotification,
-		"sound":                            sound,
-	}
+	return m
 }
 
 func (p NotificationSetting) Pointer() *NotificationSetting {
@@ -3271,14 +3084,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -3559,44 +3369,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -3713,24 +3508,17 @@ func NewAttributeRangeFromDict(data map[string]interface{}) AttributeRange {
 }
 
 func (p AttributeRange) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var min *int32
 	if p.Min != nil {
-		min = p.Min
+		m["min"] = p.Min
 	}
-	var max *int32
 	if p.Max != nil {
-		max = p.Max
+		m["max"] = p.Max
 	}
-	return map[string]interface{}{
-		"name": name,
-		"min":  min,
-		"max":  max,
-	}
+	return m
 }
 
 func (p AttributeRange) Pointer() *AttributeRange {
@@ -3880,33 +3668,24 @@ func NewCapacityOfRoleFromDict(data map[string]interface{}) CapacityOfRole {
 }
 
 func (p CapacityOfRole) ToDict() map[string]interface{} {
-
-	var roleName *string
+	m := map[string]interface{}{}
 	if p.RoleName != nil {
-		roleName = p.RoleName
+		m["roleName"] = p.RoleName
 	}
-	var roleAliases []interface{}
 	if p.RoleAliases != nil {
-		roleAliases = core.CastStringsFromDict(
+		m["roleAliases"] = core.CastStringsFromDict(
 			p.RoleAliases,
 		)
 	}
-	var capacity *int32
 	if p.Capacity != nil {
-		capacity = p.Capacity
+		m["capacity"] = p.Capacity
 	}
-	var participants []interface{}
 	if p.Participants != nil {
-		participants = CastPlayersFromDict(
+		m["participants"] = CastPlayersFromDict(
 			p.Participants,
 		)
 	}
-	return map[string]interface{}{
-		"roleName":     roleName,
-		"roleAliases":  roleAliases,
-		"capacity":     capacity,
-		"participants": participants,
-	}
+	return m
 }
 
 func (p CapacityOfRole) Pointer() *CapacityOfRole {
@@ -4012,19 +3791,14 @@ func NewAttributeFromDict(data map[string]interface{}) Attribute {
 }
 
 func (p Attribute) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var value *int32
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"name":  name,
-		"value": value,
-	}
+	return m
 }
 
 func (p Attribute) Pointer() *Attribute {
@@ -4205,38 +3979,27 @@ func NewPlayerFromDict(data map[string]interface{}) Player {
 }
 
 func (p Player) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var attributes []interface{}
 	if p.Attributes != nil {
-		attributes = CastAttributesFromDict(
+		m["attributes"] = CastAttributesFromDict(
 			p.Attributes,
 		)
 	}
-	var roleName *string
 	if p.RoleName != nil {
-		roleName = p.RoleName
+		m["roleName"] = p.RoleName
 	}
-	var denyUserIds []interface{}
 	if p.DenyUserIds != nil {
-		denyUserIds = core.CastStringsFromDict(
+		m["denyUserIds"] = core.CastStringsFromDict(
 			p.DenyUserIds,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	return map[string]interface{}{
-		"userId":      userId,
-		"attributes":  attributes,
-		"roleName":    roleName,
-		"denyUserIds": denyUserIds,
-		"createdAt":   createdAt,
-	}
+	return m
 }
 
 func (p Player) Pointer() *Player {
@@ -4437,44 +4200,29 @@ func NewRatingFromDict(data map[string]interface{}) Rating {
 }
 
 func (p Rating) ToDict() map[string]interface{} {
-
-	var ratingId *string
+	m := map[string]interface{}{}
 	if p.RatingId != nil {
-		ratingId = p.RatingId
+		m["ratingId"] = p.RatingId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var rateValue *float32
 	if p.RateValue != nil {
-		rateValue = p.RateValue
+		m["rateValue"] = p.RateValue
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"ratingId":  ratingId,
-		"name":      name,
-		"userId":    userId,
-		"rateValue": rateValue,
-		"createdAt": createdAt,
-		"updatedAt": updatedAt,
-		"revision":  revision,
-	}
+	return m
 }
 
 func (p Rating) Pointer() *Rating {
@@ -4580,19 +4328,14 @@ func NewGameResultFromDict(data map[string]interface{}) GameResult {
 }
 
 func (p GameResult) ToDict() map[string]interface{} {
-
-	var rank *int32
+	m := map[string]interface{}{}
 	if p.Rank != nil {
-		rank = p.Rank
+		m["rank"] = p.Rank
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	return map[string]interface{}{
-		"rank":   rank,
-		"userId": userId,
-	}
+	return m
 }
 
 func (p GameResult) Pointer() *GameResult {
@@ -4760,29 +4503,20 @@ func NewBallotFromDict(data map[string]interface{}) Ballot {
 }
 
 func (p Ballot) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var ratingName *string
 	if p.RatingName != nil {
-		ratingName = p.RatingName
+		m["ratingName"] = p.RatingName
 	}
-	var gatheringName *string
 	if p.GatheringName != nil {
-		gatheringName = p.GatheringName
+		m["gatheringName"] = p.GatheringName
 	}
-	var numberOfPlayer *int32
 	if p.NumberOfPlayer != nil {
-		numberOfPlayer = p.NumberOfPlayer
+		m["numberOfPlayer"] = p.NumberOfPlayer
 	}
-	return map[string]interface{}{
-		"userId":         userId,
-		"ratingName":     ratingName,
-		"gatheringName":  gatheringName,
-		"numberOfPlayer": numberOfPlayer,
-	}
+	return m
 }
 
 func (p Ballot) Pointer() *Ballot {
@@ -4908,19 +4642,14 @@ func NewSignedBallotFromDict(data map[string]interface{}) SignedBallot {
 }
 
 func (p SignedBallot) ToDict() map[string]interface{} {
-
-	var body *string
+	m := map[string]interface{}{}
 	if p.Body != nil {
-		body = p.Body
+		m["body"] = p.Body
 	}
-	var signature *string
 	if p.Signature != nil {
-		signature = p.Signature
+		m["signature"] = p.Signature
 	}
-	return map[string]interface{}{
-		"body":      body,
-		"signature": signature,
-	}
+	return m
 }
 
 func (p SignedBallot) Pointer() *SignedBallot {
@@ -5005,26 +4734,21 @@ func NewWrittenBallotFromDict(data map[string]interface{}) WrittenBallot {
 }
 
 func (p WrittenBallot) ToDict() map[string]interface{} {
-
-	var ballot map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Ballot != nil {
-		ballot = func() map[string]interface{} {
+		m["ballot"] = func() map[string]interface{} {
 			if p.Ballot == nil {
 				return nil
 			}
 			return p.Ballot.ToDict()
 		}()
 	}
-	var gameResults []interface{}
 	if p.GameResults != nil {
-		gameResults = CastGameResultsFromDict(
+		m["gameResults"] = CastGameResultsFromDict(
 			p.GameResults,
 		)
 	}
-	return map[string]interface{}{
-		"ballot":      ballot,
-		"gameResults": gameResults,
-	}
+	return m
 }
 
 func (p WrittenBallot) Pointer() *WrittenBallot {
@@ -5213,41 +4937,28 @@ func NewVoteFromDict(data map[string]interface{}) Vote {
 }
 
 func (p Vote) ToDict() map[string]interface{} {
-
-	var voteId *string
+	m := map[string]interface{}{}
 	if p.VoteId != nil {
-		voteId = p.VoteId
+		m["voteId"] = p.VoteId
 	}
-	var ratingName *string
 	if p.RatingName != nil {
-		ratingName = p.RatingName
+		m["ratingName"] = p.RatingName
 	}
-	var gatheringName *string
 	if p.GatheringName != nil {
-		gatheringName = p.GatheringName
+		m["gatheringName"] = p.GatheringName
 	}
-	var writtenBallots []interface{}
 	if p.WrittenBallots != nil {
-		writtenBallots = CastWrittenBallotsFromDict(
+		m["writtenBallots"] = CastWrittenBallotsFromDict(
 			p.WrittenBallots,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"voteId":         voteId,
-		"ratingName":     ratingName,
-		"gatheringName":  gatheringName,
-		"writtenBallots": writtenBallots,
-		"createdAt":      createdAt,
-		"updatedAt":      updatedAt,
-	}
+	return m
 }
 
 func (p Vote) Pointer() *Vote {
@@ -5344,24 +5055,17 @@ func NewTimeSpanFromDict(data map[string]interface{}) TimeSpan {
 }
 
 func (p TimeSpan) ToDict() map[string]interface{} {
-
-	var days *int32
+	m := map[string]interface{}{}
 	if p.Days != nil {
-		days = p.Days
+		m["days"] = p.Days
 	}
-	var hours *int32
 	if p.Hours != nil {
-		hours = p.Hours
+		m["hours"] = p.Hours
 	}
-	var minutes *int32
 	if p.Minutes != nil {
-		minutes = p.Minutes
+		m["minutes"] = p.Minutes
 	}
-	return map[string]interface{}{
-		"days":    days,
-		"hours":   hours,
-		"minutes": minutes,
-	}
+	return m
 }
 
 func (p TimeSpan) Pointer() *TimeSpan {

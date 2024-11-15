@@ -201,49 +201,34 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var blockingPolicy map[string]interface{}
 	if p.BlockingPolicy != nil {
-		blockingPolicy = func() map[string]interface{} {
+		m["blockingPolicy"] = func() map[string]interface{} {
 			if p.BlockingPolicy == nil {
 				return nil
 			}
 			return p.BlockingPolicy.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":    namespaceId,
-		"name":           name,
-		"description":    description,
-		"blockingPolicy": blockingPolicy,
-		"createdAt":      createdAt,
-		"updatedAt":      updatedAt,
-		"revision":       revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -750,85 +735,56 @@ func NewBlockingPolicyModelFromDict(data map[string]interface{}) BlockingPolicyM
 }
 
 func (p BlockingPolicyModel) ToDict() map[string]interface{} {
-
-	var passServices []interface{}
+	m := map[string]interface{}{}
 	if p.PassServices != nil {
-		passServices = core.CastStringsFromDict(
+		m["passServices"] = core.CastStringsFromDict(
 			p.PassServices,
 		)
 	}
-	var defaultRestriction *string
 	if p.DefaultRestriction != nil {
-		defaultRestriction = p.DefaultRestriction
+		m["defaultRestriction"] = p.DefaultRestriction
 	}
-	var locationDetection *string
 	if p.LocationDetection != nil {
-		locationDetection = p.LocationDetection
+		m["locationDetection"] = p.LocationDetection
 	}
-	var locations []interface{}
 	if p.Locations != nil {
-		locations = core.CastStringsFromDict(
+		m["locations"] = core.CastStringsFromDict(
 			p.Locations,
 		)
 	}
-	var locationRestriction *string
 	if p.LocationRestriction != nil {
-		locationRestriction = p.LocationRestriction
+		m["locationRestriction"] = p.LocationRestriction
 	}
-	var anonymousIpDetection *string
 	if p.AnonymousIpDetection != nil {
-		anonymousIpDetection = p.AnonymousIpDetection
+		m["anonymousIpDetection"] = p.AnonymousIpDetection
 	}
-	var anonymousIpRestriction *string
 	if p.AnonymousIpRestriction != nil {
-		anonymousIpRestriction = p.AnonymousIpRestriction
+		m["anonymousIpRestriction"] = p.AnonymousIpRestriction
 	}
-	var hostingProviderIpDetection *string
 	if p.HostingProviderIpDetection != nil {
-		hostingProviderIpDetection = p.HostingProviderIpDetection
+		m["hostingProviderIpDetection"] = p.HostingProviderIpDetection
 	}
-	var hostingProviderIpRestriction *string
 	if p.HostingProviderIpRestriction != nil {
-		hostingProviderIpRestriction = p.HostingProviderIpRestriction
+		m["hostingProviderIpRestriction"] = p.HostingProviderIpRestriction
 	}
-	var reputationIpDetection *string
 	if p.ReputationIpDetection != nil {
-		reputationIpDetection = p.ReputationIpDetection
+		m["reputationIpDetection"] = p.ReputationIpDetection
 	}
-	var reputationIpRestriction *string
 	if p.ReputationIpRestriction != nil {
-		reputationIpRestriction = p.ReputationIpRestriction
+		m["reputationIpRestriction"] = p.ReputationIpRestriction
 	}
-	var ipAddressesDetection *string
 	if p.IpAddressesDetection != nil {
-		ipAddressesDetection = p.IpAddressesDetection
+		m["ipAddressesDetection"] = p.IpAddressesDetection
 	}
-	var ipAddresses []interface{}
 	if p.IpAddresses != nil {
-		ipAddresses = core.CastStringsFromDict(
+		m["ipAddresses"] = core.CastStringsFromDict(
 			p.IpAddresses,
 		)
 	}
-	var ipAddressRestriction *string
 	if p.IpAddressRestriction != nil {
-		ipAddressRestriction = p.IpAddressRestriction
+		m["ipAddressRestriction"] = p.IpAddressRestriction
 	}
-	return map[string]interface{}{
-		"passServices":                 passServices,
-		"defaultRestriction":           defaultRestriction,
-		"locationDetection":            locationDetection,
-		"locations":                    locations,
-		"locationRestriction":          locationRestriction,
-		"anonymousIpDetection":         anonymousIpDetection,
-		"anonymousIpRestriction":       anonymousIpRestriction,
-		"hostingProviderIpDetection":   hostingProviderIpDetection,
-		"hostingProviderIpRestriction": hostingProviderIpRestriction,
-		"reputationIpDetection":        reputationIpDetection,
-		"reputationIpRestriction":      reputationIpRestriction,
-		"ipAddressesDetection":         ipAddressesDetection,
-		"ipAddresses":                  ipAddresses,
-		"ipAddressRestriction":         ipAddressRestriction,
-	}
+	return m
 }
 
 func (p BlockingPolicyModel) Pointer() *BlockingPolicyModel {

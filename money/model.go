@@ -391,114 +391,79 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var priority *string
 	if p.Priority != nil {
-		priority = p.Priority
+		m["priority"] = p.Priority
 	}
-	var shareFree *bool
 	if p.ShareFree != nil {
-		shareFree = p.ShareFree
+		m["shareFree"] = p.ShareFree
 	}
-	var currency *string
 	if p.Currency != nil {
-		currency = p.Currency
+		m["currency"] = p.Currency
 	}
-	var appleKey *string
 	if p.AppleKey != nil {
-		appleKey = p.AppleKey
+		m["appleKey"] = p.AppleKey
 	}
-	var googleKey *string
 	if p.GoogleKey != nil {
-		googleKey = p.GoogleKey
+		m["googleKey"] = p.GoogleKey
 	}
-	var enableFakeReceipt *bool
 	if p.EnableFakeReceipt != nil {
-		enableFakeReceipt = p.EnableFakeReceipt
+		m["enableFakeReceipt"] = p.EnableFakeReceipt
 	}
-	var createWalletScript map[string]interface{}
 	if p.CreateWalletScript != nil {
-		createWalletScript = func() map[string]interface{} {
+		m["createWalletScript"] = func() map[string]interface{} {
 			if p.CreateWalletScript == nil {
 				return nil
 			}
 			return p.CreateWalletScript.ToDict()
 		}()
 	}
-	var depositScript map[string]interface{}
 	if p.DepositScript != nil {
-		depositScript = func() map[string]interface{} {
+		m["depositScript"] = func() map[string]interface{} {
 			if p.DepositScript == nil {
 				return nil
 			}
 			return p.DepositScript.ToDict()
 		}()
 	}
-	var withdrawScript map[string]interface{}
 	if p.WithdrawScript != nil {
-		withdrawScript = func() map[string]interface{} {
+		m["withdrawScript"] = func() map[string]interface{} {
 			if p.WithdrawScript == nil {
 				return nil
 			}
 			return p.WithdrawScript.ToDict()
 		}()
 	}
-	var balance *float64
 	if p.Balance != nil {
-		balance = p.Balance
+		m["balance"] = p.Balance
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":        namespaceId,
-		"name":               name,
-		"description":        description,
-		"priority":           priority,
-		"shareFree":          shareFree,
-		"currency":           currency,
-		"appleKey":           appleKey,
-		"googleKey":          googleKey,
-		"enableFakeReceipt":  enableFakeReceipt,
-		"createWalletScript": createWalletScript,
-		"depositScript":      depositScript,
-		"withdrawScript":     withdrawScript,
-		"balance":            balance,
-		"logSetting":         logSetting,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -711,61 +676,40 @@ func NewWalletFromDict(data map[string]interface{}) Wallet {
 }
 
 func (p Wallet) ToDict() map[string]interface{} {
-
-	var walletId *string
+	m := map[string]interface{}{}
 	if p.WalletId != nil {
-		walletId = p.WalletId
+		m["walletId"] = p.WalletId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var slot *int32
 	if p.Slot != nil {
-		slot = p.Slot
+		m["slot"] = p.Slot
 	}
-	var paid *int32
 	if p.Paid != nil {
-		paid = p.Paid
+		m["paid"] = p.Paid
 	}
-	var free *int32
 	if p.Free != nil {
-		free = p.Free
+		m["free"] = p.Free
 	}
-	var detail []interface{}
 	if p.Detail != nil {
-		detail = CastWalletDetailsFromDict(
+		m["detail"] = CastWalletDetailsFromDict(
 			p.Detail,
 		)
 	}
-	var shareFree *bool
 	if p.ShareFree != nil {
-		shareFree = p.ShareFree
+		m["shareFree"] = p.ShareFree
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"walletId":  walletId,
-		"userId":    userId,
-		"slot":      slot,
-		"paid":      paid,
-		"free":      free,
-		"detail":    detail,
-		"shareFree": shareFree,
-		"createdAt": createdAt,
-		"updatedAt": updatedAt,
-		"revision":  revision,
-	}
+	return m
 }
 
 func (p Wallet) Pointer() *Wallet {
@@ -1092,74 +1036,47 @@ func NewReceiptFromDict(data map[string]interface{}) Receipt {
 }
 
 func (p Receipt) ToDict() map[string]interface{} {
-
-	var receiptId *string
+	m := map[string]interface{}{}
 	if p.ReceiptId != nil {
-		receiptId = p.ReceiptId
+		m["receiptId"] = p.ReceiptId
 	}
-	var transactionId *string
 	if p.TransactionId != nil {
-		transactionId = p.TransactionId
+		m["transactionId"] = p.TransactionId
 	}
-	var purchaseToken *string
 	if p.PurchaseToken != nil {
-		purchaseToken = p.PurchaseToken
+		m["purchaseToken"] = p.PurchaseToken
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var _type *string
 	if p.Type != nil {
-		_type = p.Type
+		m["type"] = p.Type
 	}
-	var slot *int32
 	if p.Slot != nil {
-		slot = p.Slot
+		m["slot"] = p.Slot
 	}
-	var price *float32
 	if p.Price != nil {
-		price = p.Price
+		m["price"] = p.Price
 	}
-	var paid *int32
 	if p.Paid != nil {
-		paid = p.Paid
+		m["paid"] = p.Paid
 	}
-	var free *int32
 	if p.Free != nil {
-		free = p.Free
+		m["free"] = p.Free
 	}
-	var total *int32
 	if p.Total != nil {
-		total = p.Total
+		m["total"] = p.Total
 	}
-	var contentsId *string
 	if p.ContentsId != nil {
-		contentsId = p.ContentsId
+		m["contentsId"] = p.ContentsId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"receiptId":     receiptId,
-		"transactionId": transactionId,
-		"purchaseToken": purchaseToken,
-		"userId":        userId,
-		"type":          _type,
-		"slot":          slot,
-		"price":         price,
-		"paid":          paid,
-		"free":          free,
-		"total":         total,
-		"contentsId":    contentsId,
-		"createdAt":     createdAt,
-		"revision":      revision,
-	}
+	return m
 }
 
 func (p Receipt) Pointer() *Receipt {
@@ -1245,19 +1162,14 @@ func NewWalletDetailFromDict(data map[string]interface{}) WalletDetail {
 }
 
 func (p WalletDetail) ToDict() map[string]interface{} {
-
-	var price *float32
+	m := map[string]interface{}{}
 	if p.Price != nil {
-		price = p.Price
+		m["price"] = p.Price
 	}
-	var count *int32
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"price": price,
-		"count": count,
-	}
+	return m
 }
 
 func (p WalletDetail) Pointer() *WalletDetail {
@@ -1445,29 +1357,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -1562,14 +1465,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {

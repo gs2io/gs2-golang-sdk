@@ -254,74 +254,53 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = func() map[string]interface{} {
+		m["transactionSetting"] = func() map[string]interface{} {
 			if p.TransactionSetting == nil {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
 		}()
 	}
-	var receiveScript map[string]interface{}
 	if p.ReceiveScript != nil {
-		receiveScript = func() map[string]interface{} {
+		m["receiveScript"] = func() map[string]interface{} {
 			if p.ReceiveScript == nil {
 				return nil
 			}
 			return p.ReceiveScript.ToDict()
 		}()
 	}
-	var overrideAcquireActionsScriptId *string
 	if p.OverrideAcquireActionsScriptId != nil {
-		overrideAcquireActionsScriptId = p.OverrideAcquireActionsScriptId
+		m["overrideAcquireActionsScriptId"] = p.OverrideAcquireActionsScriptId
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":                    namespaceId,
-		"name":                           name,
-		"description":                    description,
-		"transactionSetting":             transactionSetting,
-		"receiveScript":                  receiveScript,
-		"overrideAcquireActionsScriptId": overrideAcquireActionsScriptId,
-		"logSetting":                     logSetting,
-		"createdAt":                      createdAt,
-		"updatedAt":                      updatedAt,
-		"revision":                       revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -636,71 +615,46 @@ func NewCategoryModelMasterFromDict(data map[string]interface{}) CategoryModelMa
 }
 
 func (p CategoryModelMaster) ToDict() map[string]interface{} {
-
-	var categoryModelId *string
+	m := map[string]interface{}{}
 	if p.CategoryModelId != nil {
-		categoryModelId = p.CategoryModelId
+		m["categoryModelId"] = p.CategoryModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var rewardIntervalMinutes *int32
 	if p.RewardIntervalMinutes != nil {
-		rewardIntervalMinutes = p.RewardIntervalMinutes
+		m["rewardIntervalMinutes"] = p.RewardIntervalMinutes
 	}
-	var defaultMaximumIdleMinutes *int32
 	if p.DefaultMaximumIdleMinutes != nil {
-		defaultMaximumIdleMinutes = p.DefaultMaximumIdleMinutes
+		m["defaultMaximumIdleMinutes"] = p.DefaultMaximumIdleMinutes
 	}
-	var acquireActions []interface{}
 	if p.AcquireActions != nil {
-		acquireActions = CastAcquireActionListFromDict(
+		m["acquireActions"] = CastAcquireActionListFromDict(
 			p.AcquireActions,
 		)
 	}
-	var idlePeriodScheduleId *string
 	if p.IdlePeriodScheduleId != nil {
-		idlePeriodScheduleId = p.IdlePeriodScheduleId
+		m["idlePeriodScheduleId"] = p.IdlePeriodScheduleId
 	}
-	var receivePeriodScheduleId *string
 	if p.ReceivePeriodScheduleId != nil {
-		receivePeriodScheduleId = p.ReceivePeriodScheduleId
+		m["receivePeriodScheduleId"] = p.ReceivePeriodScheduleId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"categoryModelId":           categoryModelId,
-		"name":                      name,
-		"description":               description,
-		"metadata":                  metadata,
-		"rewardIntervalMinutes":     rewardIntervalMinutes,
-		"defaultMaximumIdleMinutes": defaultMaximumIdleMinutes,
-		"acquireActions":            acquireActions,
-		"idlePeriodScheduleId":      idlePeriodScheduleId,
-		"receivePeriodScheduleId":   receivePeriodScheduleId,
-		"createdAt":                 createdAt,
-		"updatedAt":                 updatedAt,
-		"revision":                  revision,
-	}
+	return m
 }
 
 func (p CategoryModelMaster) Pointer() *CategoryModelMaster {
@@ -951,51 +905,34 @@ func NewCategoryModelFromDict(data map[string]interface{}) CategoryModel {
 }
 
 func (p CategoryModel) ToDict() map[string]interface{} {
-
-	var categoryModelId *string
+	m := map[string]interface{}{}
 	if p.CategoryModelId != nil {
-		categoryModelId = p.CategoryModelId
+		m["categoryModelId"] = p.CategoryModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var rewardIntervalMinutes *int32
 	if p.RewardIntervalMinutes != nil {
-		rewardIntervalMinutes = p.RewardIntervalMinutes
+		m["rewardIntervalMinutes"] = p.RewardIntervalMinutes
 	}
-	var defaultMaximumIdleMinutes *int32
 	if p.DefaultMaximumIdleMinutes != nil {
-		defaultMaximumIdleMinutes = p.DefaultMaximumIdleMinutes
+		m["defaultMaximumIdleMinutes"] = p.DefaultMaximumIdleMinutes
 	}
-	var acquireActions []interface{}
 	if p.AcquireActions != nil {
-		acquireActions = CastAcquireActionListFromDict(
+		m["acquireActions"] = CastAcquireActionListFromDict(
 			p.AcquireActions,
 		)
 	}
-	var idlePeriodScheduleId *string
 	if p.IdlePeriodScheduleId != nil {
-		idlePeriodScheduleId = p.IdlePeriodScheduleId
+		m["idlePeriodScheduleId"] = p.IdlePeriodScheduleId
 	}
-	var receivePeriodScheduleId *string
 	if p.ReceivePeriodScheduleId != nil {
-		receivePeriodScheduleId = p.ReceivePeriodScheduleId
+		m["receivePeriodScheduleId"] = p.ReceivePeriodScheduleId
 	}
-	return map[string]interface{}{
-		"categoryModelId":           categoryModelId,
-		"name":                      name,
-		"metadata":                  metadata,
-		"rewardIntervalMinutes":     rewardIntervalMinutes,
-		"defaultMaximumIdleMinutes": defaultMaximumIdleMinutes,
-		"acquireActions":            acquireActions,
-		"idlePeriodScheduleId":      idlePeriodScheduleId,
-		"receivePeriodScheduleId":   receivePeriodScheduleId,
-	}
+	return m
 }
 
 func (p CategoryModel) Pointer() *CategoryModel {
@@ -1229,59 +1166,38 @@ func NewStatusFromDict(data map[string]interface{}) Status {
 }
 
 func (p Status) ToDict() map[string]interface{} {
-
-	var statusId *string
+	m := map[string]interface{}{}
 	if p.StatusId != nil {
-		statusId = p.StatusId
+		m["statusId"] = p.StatusId
 	}
-	var categoryName *string
 	if p.CategoryName != nil {
-		categoryName = p.CategoryName
+		m["categoryName"] = p.CategoryName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var randomSeed *int64
 	if p.RandomSeed != nil {
-		randomSeed = p.RandomSeed
+		m["randomSeed"] = p.RandomSeed
 	}
-	var idleMinutes *int32
 	if p.IdleMinutes != nil {
-		idleMinutes = p.IdleMinutes
+		m["idleMinutes"] = p.IdleMinutes
 	}
-	var nextRewardsAt *int64
 	if p.NextRewardsAt != nil {
-		nextRewardsAt = p.NextRewardsAt
+		m["nextRewardsAt"] = p.NextRewardsAt
 	}
-	var maximumIdleMinutes *int32
 	if p.MaximumIdleMinutes != nil {
-		maximumIdleMinutes = p.MaximumIdleMinutes
+		m["maximumIdleMinutes"] = p.MaximumIdleMinutes
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"statusId":           statusId,
-		"categoryName":       categoryName,
-		"userId":             userId,
-		"randomSeed":         randomSeed,
-		"idleMinutes":        idleMinutes,
-		"nextRewardsAt":      nextRewardsAt,
-		"maximumIdleMinutes": maximumIdleMinutes,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p Status) Pointer() *Status {
@@ -1407,19 +1323,14 @@ func NewCurrentCategoryMasterFromDict(data map[string]interface{}) CurrentCatego
 }
 
 func (p CurrentCategoryMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentCategoryMaster) Pointer() *CurrentCategoryMaster {
@@ -1545,19 +1456,14 @@ func NewConfigFromDict(data map[string]interface{}) Config {
 }
 
 func (p Config) ToDict() map[string]interface{} {
-
-	var key *string
+	m := map[string]interface{}{}
 	if p.Key != nil {
-		key = p.Key
+		m["key"] = p.Key
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"key":   key,
-		"value": value,
-	}
+	return m
 }
 
 func (p Config) Pointer() *Config {
@@ -1683,19 +1589,14 @@ func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 }
 
 func (p AcquireAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p AcquireAction) Pointer() *AcquireAction {
@@ -1769,16 +1670,13 @@ func NewAcquireActionListFromDict(data map[string]interface{}) AcquireActionList
 }
 
 func (p AcquireActionList) ToDict() map[string]interface{} {
-
-	var acquireActions []interface{}
+	m := map[string]interface{}{}
 	if p.AcquireActions != nil {
-		acquireActions = CastAcquireActionsFromDict(
+		m["acquireActions"] = CastAcquireActionsFromDict(
 			p.AcquireActions,
 		)
 	}
-	return map[string]interface{}{
-		"acquireActions": acquireActions,
-	}
+	return m
 }
 
 func (p AcquireActionList) Pointer() *AcquireActionList {
@@ -1947,29 +1845,20 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 }
 
 func (p TransactionSetting) ToDict() map[string]interface{} {
-
-	var enableAutoRun *bool
+	m := map[string]interface{}{}
 	if p.EnableAutoRun != nil {
-		enableAutoRun = p.EnableAutoRun
+		m["enableAutoRun"] = p.EnableAutoRun
 	}
-	var distributorNamespaceId *string
 	if p.DistributorNamespaceId != nil {
-		distributorNamespaceId = p.DistributorNamespaceId
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	return map[string]interface{}{
-		"enableAutoRun":          enableAutoRun,
-		"distributorNamespaceId": distributorNamespaceId,
-		"keyId":                  keyId,
-		"queueNamespaceId":       queueNamespaceId,
-	}
+	return m
 }
 
 func (p TransactionSetting) Pointer() *TransactionSetting {
@@ -2157,29 +2046,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -2274,14 +2154,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -2562,44 +2439,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {

@@ -266,106 +266,79 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var admob map[string]interface{}
 	if p.Admob != nil {
-		admob = func() map[string]interface{} {
+		m["admob"] = func() map[string]interface{} {
 			if p.Admob == nil {
 				return nil
 			}
 			return p.Admob.ToDict()
 		}()
 	}
-	var unityAd map[string]interface{}
 	if p.UnityAd != nil {
-		unityAd = func() map[string]interface{} {
+		m["unityAd"] = func() map[string]interface{} {
 			if p.UnityAd == nil {
 				return nil
 			}
 			return p.UnityAd.ToDict()
 		}()
 	}
-	var appLovinMaxes []interface{}
 	if p.AppLovinMaxes != nil {
-		appLovinMaxes = CastAppLovinMaxesFromDict(
+		m["appLovinMaxes"] = CastAppLovinMaxesFromDict(
 			p.AppLovinMaxes,
 		)
 	}
-	var acquirePointScript map[string]interface{}
 	if p.AcquirePointScript != nil {
-		acquirePointScript = func() map[string]interface{} {
+		m["acquirePointScript"] = func() map[string]interface{} {
 			if p.AcquirePointScript == nil {
 				return nil
 			}
 			return p.AcquirePointScript.ToDict()
 		}()
 	}
-	var consumePointScript map[string]interface{}
 	if p.ConsumePointScript != nil {
-		consumePointScript = func() map[string]interface{} {
+		m["consumePointScript"] = func() map[string]interface{} {
 			if p.ConsumePointScript == nil {
 				return nil
 			}
 			return p.ConsumePointScript.ToDict()
 		}()
 	}
-	var changePointNotification map[string]interface{}
 	if p.ChangePointNotification != nil {
-		changePointNotification = func() map[string]interface{} {
+		m["changePointNotification"] = func() map[string]interface{} {
 			if p.ChangePointNotification == nil {
 				return nil
 			}
 			return p.ChangePointNotification.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":             namespaceId,
-		"name":                    name,
-		"description":             description,
-		"admob":                   admob,
-		"unityAd":                 unityAd,
-		"appLovinMaxes":           appLovinMaxes,
-		"acquirePointScript":      acquirePointScript,
-		"consumePointScript":      consumePointScript,
-		"changePointNotification": changePointNotification,
-		"logSetting":              logSetting,
-		"createdAt":               createdAt,
-		"updatedAt":               updatedAt,
-		"revision":                revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -535,39 +508,26 @@ func NewPointFromDict(data map[string]interface{}) Point {
 }
 
 func (p Point) ToDict() map[string]interface{} {
-
-	var pointId *string
+	m := map[string]interface{}{}
 	if p.PointId != nil {
-		pointId = p.PointId
+		m["pointId"] = p.PointId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var point *int64
 	if p.Point != nil {
-		point = p.Point
+		m["point"] = p.Point
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"pointId":   pointId,
-		"userId":    userId,
-		"point":     point,
-		"createdAt": createdAt,
-		"updatedAt": updatedAt,
-		"revision":  revision,
-	}
+	return m
 }
 
 func (p Point) Pointer() *Point {
@@ -665,16 +625,13 @@ func NewAdMobFromDict(data map[string]interface{}) AdMob {
 }
 
 func (p AdMob) ToDict() map[string]interface{} {
-
-	var allowAdUnitIds []interface{}
+	m := map[string]interface{}{}
 	if p.AllowAdUnitIds != nil {
-		allowAdUnitIds = core.CastStringsFromDict(
+		m["allowAdUnitIds"] = core.CastStringsFromDict(
 			p.AllowAdUnitIds,
 		)
 	}
-	return map[string]interface{}{
-		"allowAdUnitIds": allowAdUnitIds,
-	}
+	return m
 }
 
 func (p AdMob) Pointer() *AdMob {
@@ -772,16 +729,13 @@ func NewUnityAdFromDict(data map[string]interface{}) UnityAd {
 }
 
 func (p UnityAd) ToDict() map[string]interface{} {
-
-	var keys []interface{}
+	m := map[string]interface{}{}
 	if p.Keys != nil {
-		keys = core.CastStringsFromDict(
+		m["keys"] = core.CastStringsFromDict(
 			p.Keys,
 		)
 	}
-	return map[string]interface{}{
-		"keys": keys,
-	}
+	return m
 }
 
 func (p UnityAd) Pointer() *UnityAd {
@@ -907,19 +861,14 @@ func NewAppLovinMaxFromDict(data map[string]interface{}) AppLovinMax {
 }
 
 func (p AppLovinMax) ToDict() map[string]interface{} {
-
-	var allowAdUnitId *string
+	m := map[string]interface{}{}
 	if p.AllowAdUnitId != nil {
-		allowAdUnitId = p.AllowAdUnitId
+		m["allowAdUnitId"] = p.AllowAdUnitId
 	}
-	var eventKey *string
 	if p.EventKey != nil {
-		eventKey = p.EventKey
+		m["eventKey"] = p.EventKey
 	}
-	return map[string]interface{}{
-		"allowAdUnitId": allowAdUnitId,
-		"eventKey":      eventKey,
-	}
+	return m
 }
 
 func (p AppLovinMax) Pointer() *AppLovinMax {
@@ -1107,29 +1056,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -1266,24 +1206,17 @@ func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSet
 }
 
 func (p NotificationSetting) ToDict() map[string]interface{} {
-
-	var gatewayNamespaceId *string
+	m := map[string]interface{}{}
 	if p.GatewayNamespaceId != nil {
-		gatewayNamespaceId = p.GatewayNamespaceId
+		m["gatewayNamespaceId"] = p.GatewayNamespaceId
 	}
-	var enableTransferMobileNotification *bool
 	if p.EnableTransferMobileNotification != nil {
-		enableTransferMobileNotification = p.EnableTransferMobileNotification
+		m["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
 	}
-	var sound *string
 	if p.Sound != nil {
-		sound = p.Sound
+		m["sound"] = p.Sound
 	}
-	return map[string]interface{}{
-		"gatewayNamespaceId":               gatewayNamespaceId,
-		"enableTransferMobileNotification": enableTransferMobileNotification,
-		"sound":                            sound,
-	}
+	return m
 }
 
 func (p NotificationSetting) Pointer() *NotificationSetting {
@@ -1378,14 +1311,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {

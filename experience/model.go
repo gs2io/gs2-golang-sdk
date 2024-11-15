@@ -307,99 +307,72 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = func() map[string]interface{} {
+		m["transactionSetting"] = func() map[string]interface{} {
 			if p.TransactionSetting == nil {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
 		}()
 	}
-	var rankCapScriptId *string
 	if p.RankCapScriptId != nil {
-		rankCapScriptId = p.RankCapScriptId
+		m["rankCapScriptId"] = p.RankCapScriptId
 	}
-	var changeExperienceScript map[string]interface{}
 	if p.ChangeExperienceScript != nil {
-		changeExperienceScript = func() map[string]interface{} {
+		m["changeExperienceScript"] = func() map[string]interface{} {
 			if p.ChangeExperienceScript == nil {
 				return nil
 			}
 			return p.ChangeExperienceScript.ToDict()
 		}()
 	}
-	var changeRankScript map[string]interface{}
 	if p.ChangeRankScript != nil {
-		changeRankScript = func() map[string]interface{} {
+		m["changeRankScript"] = func() map[string]interface{} {
 			if p.ChangeRankScript == nil {
 				return nil
 			}
 			return p.ChangeRankScript.ToDict()
 		}()
 	}
-	var changeRankCapScript map[string]interface{}
 	if p.ChangeRankCapScript != nil {
-		changeRankCapScript = func() map[string]interface{} {
+		m["changeRankCapScript"] = func() map[string]interface{} {
 			if p.ChangeRankCapScript == nil {
 				return nil
 			}
 			return p.ChangeRankCapScript.ToDict()
 		}()
 	}
-	var overflowExperienceScript *string
 	if p.OverflowExperienceScript != nil {
-		overflowExperienceScript = p.OverflowExperienceScript
+		m["overflowExperienceScript"] = p.OverflowExperienceScript
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":              namespaceId,
-		"name":                     name,
-		"description":              description,
-		"transactionSetting":       transactionSetting,
-		"rankCapScriptId":          rankCapScriptId,
-		"changeExperienceScript":   changeExperienceScript,
-		"changeRankScript":         changeRankScript,
-		"changeRankCapScript":      changeRankCapScript,
-		"overflowExperienceScript": overflowExperienceScript,
-		"logSetting":               logSetting,
-		"createdAt":                createdAt,
-		"updatedAt":                updatedAt,
-		"revision":                 revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -694,71 +667,46 @@ func NewExperienceModelMasterFromDict(data map[string]interface{}) ExperienceMod
 }
 
 func (p ExperienceModelMaster) ToDict() map[string]interface{} {
-
-	var experienceModelId *string
+	m := map[string]interface{}{}
 	if p.ExperienceModelId != nil {
-		experienceModelId = p.ExperienceModelId
+		m["experienceModelId"] = p.ExperienceModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var defaultExperience *int64
 	if p.DefaultExperience != nil {
-		defaultExperience = p.DefaultExperience
+		m["defaultExperience"] = p.DefaultExperience
 	}
-	var defaultRankCap *int64
 	if p.DefaultRankCap != nil {
-		defaultRankCap = p.DefaultRankCap
+		m["defaultRankCap"] = p.DefaultRankCap
 	}
-	var maxRankCap *int64
 	if p.MaxRankCap != nil {
-		maxRankCap = p.MaxRankCap
+		m["maxRankCap"] = p.MaxRankCap
 	}
-	var rankThresholdName *string
 	if p.RankThresholdName != nil {
-		rankThresholdName = p.RankThresholdName
+		m["rankThresholdName"] = p.RankThresholdName
 	}
-	var acquireActionRates []interface{}
 	if p.AcquireActionRates != nil {
-		acquireActionRates = CastAcquireActionRatesFromDict(
+		m["acquireActionRates"] = CastAcquireActionRatesFromDict(
 			p.AcquireActionRates,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"experienceModelId":  experienceModelId,
-		"name":               name,
-		"description":        description,
-		"metadata":           metadata,
-		"defaultExperience":  defaultExperience,
-		"defaultRankCap":     defaultRankCap,
-		"maxRankCap":         maxRankCap,
-		"rankThresholdName":  rankThresholdName,
-		"acquireActionRates": acquireActionRates,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p ExperienceModelMaster) Pointer() *ExperienceModelMaster {
@@ -969,56 +917,39 @@ func NewExperienceModelFromDict(data map[string]interface{}) ExperienceModel {
 }
 
 func (p ExperienceModel) ToDict() map[string]interface{} {
-
-	var experienceModelId *string
+	m := map[string]interface{}{}
 	if p.ExperienceModelId != nil {
-		experienceModelId = p.ExperienceModelId
+		m["experienceModelId"] = p.ExperienceModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var defaultExperience *int64
 	if p.DefaultExperience != nil {
-		defaultExperience = p.DefaultExperience
+		m["defaultExperience"] = p.DefaultExperience
 	}
-	var defaultRankCap *int64
 	if p.DefaultRankCap != nil {
-		defaultRankCap = p.DefaultRankCap
+		m["defaultRankCap"] = p.DefaultRankCap
 	}
-	var maxRankCap *int64
 	if p.MaxRankCap != nil {
-		maxRankCap = p.MaxRankCap
+		m["maxRankCap"] = p.MaxRankCap
 	}
-	var rankThreshold map[string]interface{}
 	if p.RankThreshold != nil {
-		rankThreshold = func() map[string]interface{} {
+		m["rankThreshold"] = func() map[string]interface{} {
 			if p.RankThreshold == nil {
 				return nil
 			}
 			return p.RankThreshold.ToDict()
 		}()
 	}
-	var acquireActionRates []interface{}
 	if p.AcquireActionRates != nil {
-		acquireActionRates = CastAcquireActionRatesFromDict(
+		m["acquireActionRates"] = CastAcquireActionRatesFromDict(
 			p.AcquireActionRates,
 		)
 	}
-	return map[string]interface{}{
-		"experienceModelId":  experienceModelId,
-		"name":               name,
-		"metadata":           metadata,
-		"defaultExperience":  defaultExperience,
-		"defaultRankCap":     defaultRankCap,
-		"maxRankCap":         maxRankCap,
-		"rankThreshold":      rankThreshold,
-		"acquireActionRates": acquireActionRates,
-	}
+	return m
 }
 
 func (p ExperienceModel) Pointer() *ExperienceModel {
@@ -1250,51 +1181,34 @@ func NewThresholdMasterFromDict(data map[string]interface{}) ThresholdMaster {
 }
 
 func (p ThresholdMaster) ToDict() map[string]interface{} {
-
-	var thresholdId *string
+	m := map[string]interface{}{}
 	if p.ThresholdId != nil {
-		thresholdId = p.ThresholdId
+		m["thresholdId"] = p.ThresholdId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var values []interface{}
 	if p.Values != nil {
-		values = core.CastInt64sFromDict(
+		m["values"] = core.CastInt64sFromDict(
 			p.Values,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"thresholdId": thresholdId,
-		"name":        name,
-		"description": description,
-		"metadata":    metadata,
-		"values":      values,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p ThresholdMaster) Pointer() *ThresholdMaster {
@@ -1400,21 +1314,16 @@ func NewThresholdFromDict(data map[string]interface{}) Threshold {
 }
 
 func (p Threshold) ToDict() map[string]interface{} {
-
-	var metadata *string
+	m := map[string]interface{}{}
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var values []interface{}
 	if p.Values != nil {
-		values = core.CastInt64sFromDict(
+		m["values"] = core.CastInt64sFromDict(
 			p.Values,
 		)
 	}
-	return map[string]interface{}{
-		"metadata": metadata,
-		"values":   values,
-	}
+	return m
 }
 
 func (p Threshold) Pointer() *Threshold {
@@ -1585,33 +1494,24 @@ func NewAcquireActionRateFromDict(data map[string]interface{}) AcquireActionRate
 }
 
 func (p AcquireActionRate) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var mode *string
 	if p.Mode != nil {
-		mode = p.Mode
+		m["mode"] = p.Mode
 	}
-	var rates []interface{}
 	if p.Rates != nil {
-		rates = core.CastFloat64sFromDict(
+		m["rates"] = core.CastFloat64sFromDict(
 			p.Rates,
 		)
 	}
-	var bigRates []interface{}
 	if p.BigRates != nil {
-		bigRates = core.CastStringsFromDict(
+		m["bigRates"] = core.CastStringsFromDict(
 			p.BigRates,
 		)
 	}
-	return map[string]interface{}{
-		"name":     name,
-		"mode":     mode,
-		"rates":    rates,
-		"bigRates": bigRates,
-	}
+	return m
 }
 
 func (p AcquireActionRate) Pointer() *AcquireActionRate {
@@ -1737,19 +1637,14 @@ func NewCurrentExperienceMasterFromDict(data map[string]interface{}) CurrentExpe
 }
 
 func (p CurrentExperienceMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentExperienceMaster) Pointer() *CurrentExperienceMaster {
@@ -2014,64 +1909,41 @@ func NewStatusFromDict(data map[string]interface{}) Status {
 }
 
 func (p Status) ToDict() map[string]interface{} {
-
-	var statusId *string
+	m := map[string]interface{}{}
 	if p.StatusId != nil {
-		statusId = p.StatusId
+		m["statusId"] = p.StatusId
 	}
-	var experienceName *string
 	if p.ExperienceName != nil {
-		experienceName = p.ExperienceName
+		m["experienceName"] = p.ExperienceName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var propertyId *string
 	if p.PropertyId != nil {
-		propertyId = p.PropertyId
+		m["propertyId"] = p.PropertyId
 	}
-	var experienceValue *int64
 	if p.ExperienceValue != nil {
-		experienceValue = p.ExperienceValue
+		m["experienceValue"] = p.ExperienceValue
 	}
-	var rankValue *int64
 	if p.RankValue != nil {
-		rankValue = p.RankValue
+		m["rankValue"] = p.RankValue
 	}
-	var rankCapValue *int64
 	if p.RankCapValue != nil {
-		rankCapValue = p.RankCapValue
+		m["rankCapValue"] = p.RankCapValue
 	}
-	var nextRankUpExperienceValue *int64
 	if p.NextRankUpExperienceValue != nil {
-		nextRankUpExperienceValue = p.NextRankUpExperienceValue
+		m["nextRankUpExperienceValue"] = p.NextRankUpExperienceValue
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"statusId":                  statusId,
-		"experienceName":            experienceName,
-		"userId":                    userId,
-		"propertyId":                propertyId,
-		"experienceValue":           experienceValue,
-		"rankValue":                 rankValue,
-		"rankCapValue":              rankCapValue,
-		"nextRankUpExperienceValue": nextRankUpExperienceValue,
-		"createdAt":                 createdAt,
-		"updatedAt":                 updatedAt,
-		"revision":                  revision,
-	}
+	return m
 }
 
 func (p Status) Pointer() *Status {
@@ -2197,19 +2069,14 @@ func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 }
 
 func (p AcquireAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p AcquireAction) Pointer() *AcquireAction {
@@ -2490,44 +2357,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -2715,29 +2567,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -2832,14 +2675,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -3008,29 +2848,20 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 }
 
 func (p TransactionSetting) ToDict() map[string]interface{} {
-
-	var enableAutoRun *bool
+	m := map[string]interface{}{}
 	if p.EnableAutoRun != nil {
-		enableAutoRun = p.EnableAutoRun
+		m["enableAutoRun"] = p.EnableAutoRun
 	}
-	var distributorNamespaceId *string
 	if p.DistributorNamespaceId != nil {
-		distributorNamespaceId = p.DistributorNamespaceId
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	return map[string]interface{}{
-		"enableAutoRun":          enableAutoRun,
-		"distributorNamespaceId": distributorNamespaceId,
-		"keyId":                  keyId,
-		"queueNamespaceId":       queueNamespaceId,
-	}
+	return m
 }
 
 func (p TransactionSetting) Pointer() *TransactionSetting {

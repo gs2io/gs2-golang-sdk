@@ -201,49 +201,34 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"name":        name,
-		"description": description,
-		"logSetting":  logSetting,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -475,49 +460,32 @@ func NewIssueJobFromDict(data map[string]interface{}) IssueJob {
 }
 
 func (p IssueJob) ToDict() map[string]interface{} {
-
-	var issueJobId *string
+	m := map[string]interface{}{}
 	if p.IssueJobId != nil {
-		issueJobId = p.IssueJobId
+		m["issueJobId"] = p.IssueJobId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var issuedCount *int32
 	if p.IssuedCount != nil {
-		issuedCount = p.IssuedCount
+		m["issuedCount"] = p.IssuedCount
 	}
-	var issueRequestCount *int32
 	if p.IssueRequestCount != nil {
-		issueRequestCount = p.IssueRequestCount
+		m["issueRequestCount"] = p.IssueRequestCount
 	}
-	var status *string
 	if p.Status != nil {
-		status = p.Status
+		m["status"] = p.Status
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"issueJobId":        issueJobId,
-		"name":              name,
-		"metadata":          metadata,
-		"issuedCount":       issuedCount,
-		"issueRequestCount": issueRequestCount,
-		"status":            status,
-		"createdAt":         createdAt,
-		"revision":          revision,
-	}
+	return m
 }
 
 func (p IssueJob) Pointer() *IssueJob {
@@ -811,59 +779,38 @@ func NewSerialKeyFromDict(data map[string]interface{}) SerialKey {
 }
 
 func (p SerialKey) ToDict() map[string]interface{} {
-
-	var serialKeyId *string
+	m := map[string]interface{}{}
 	if p.SerialKeyId != nil {
-		serialKeyId = p.SerialKeyId
+		m["serialKeyId"] = p.SerialKeyId
 	}
-	var campaignModelName *string
 	if p.CampaignModelName != nil {
-		campaignModelName = p.CampaignModelName
+		m["campaignModelName"] = p.CampaignModelName
 	}
-	var code *string
 	if p.Code != nil {
-		code = p.Code
+		m["code"] = p.Code
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var status *string
 	if p.Status != nil {
-		status = p.Status
+		m["status"] = p.Status
 	}
-	var usedUserId *string
 	if p.UsedUserId != nil {
-		usedUserId = p.UsedUserId
+		m["usedUserId"] = p.UsedUserId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var usedAt *int64
 	if p.UsedAt != nil {
-		usedAt = p.UsedAt
+		m["usedAt"] = p.UsedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"serialKeyId":       serialKeyId,
-		"campaignModelName": campaignModelName,
-		"code":              code,
-		"metadata":          metadata,
-		"status":            status,
-		"usedUserId":        usedUserId,
-		"createdAt":         createdAt,
-		"usedAt":            usedAt,
-		"updatedAt":         updatedAt,
-		"revision":          revision,
-	}
+	return m
 }
 
 func (p SerialKey) Pointer() *SerialKey {
@@ -1031,29 +978,20 @@ func NewCampaignModelFromDict(data map[string]interface{}) CampaignModel {
 }
 
 func (p CampaignModel) ToDict() map[string]interface{} {
-
-	var campaignId *string
+	m := map[string]interface{}{}
 	if p.CampaignId != nil {
-		campaignId = p.CampaignId
+		m["campaignId"] = p.CampaignId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var enableCampaignCode *bool
 	if p.EnableCampaignCode != nil {
-		enableCampaignCode = p.EnableCampaignCode
+		m["enableCampaignCode"] = p.EnableCampaignCode
 	}
-	return map[string]interface{}{
-		"campaignId":         campaignId,
-		"name":               name,
-		"metadata":           metadata,
-		"enableCampaignCode": enableCampaignCode,
-	}
+	return m
 }
 
 func (p CampaignModel) Pointer() *CampaignModel {
@@ -1285,49 +1223,32 @@ func NewCampaignModelMasterFromDict(data map[string]interface{}) CampaignModelMa
 }
 
 func (p CampaignModelMaster) ToDict() map[string]interface{} {
-
-	var campaignId *string
+	m := map[string]interface{}{}
 	if p.CampaignId != nil {
-		campaignId = p.CampaignId
+		m["campaignId"] = p.CampaignId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var enableCampaignCode *bool
 	if p.EnableCampaignCode != nil {
-		enableCampaignCode = p.EnableCampaignCode
+		m["enableCampaignCode"] = p.EnableCampaignCode
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"campaignId":         campaignId,
-		"name":               name,
-		"description":        description,
-		"metadata":           metadata,
-		"enableCampaignCode": enableCampaignCode,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p CampaignModelMaster) Pointer() *CampaignModelMaster {
@@ -1453,19 +1374,14 @@ func NewCurrentCampaignMasterFromDict(data map[string]interface{}) CurrentCampai
 }
 
 func (p CurrentCampaignMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentCampaignMaster) Pointer() *CurrentCampaignMaster {
@@ -1560,14 +1476,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -1848,44 +1761,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {

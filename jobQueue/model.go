@@ -234,74 +234,53 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var enableAutoRun *bool
 	if p.EnableAutoRun != nil {
-		enableAutoRun = p.EnableAutoRun
+		m["enableAutoRun"] = p.EnableAutoRun
 	}
-	var runNotification map[string]interface{}
 	if p.RunNotification != nil {
-		runNotification = func() map[string]interface{} {
+		m["runNotification"] = func() map[string]interface{} {
 			if p.RunNotification == nil {
 				return nil
 			}
 			return p.RunNotification.ToDict()
 		}()
 	}
-	var pushNotification map[string]interface{}
 	if p.PushNotification != nil {
-		pushNotification = func() map[string]interface{} {
+		m["pushNotification"] = func() map[string]interface{} {
 			if p.PushNotification == nil {
 				return nil
 			}
 			return p.PushNotification.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":      namespaceId,
-		"name":             name,
-		"description":      description,
-		"enableAutoRun":    enableAutoRun,
-		"runNotification":  runNotification,
-		"pushNotification": pushNotification,
-		"logSetting":       logSetting,
-		"createdAt":        createdAt,
-		"updatedAt":        updatedAt,
-		"revision":         revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -564,54 +543,35 @@ func NewJobFromDict(data map[string]interface{}) Job {
 }
 
 func (p Job) ToDict() map[string]interface{} {
-
-	var jobId *string
+	m := map[string]interface{}{}
 	if p.JobId != nil {
-		jobId = p.JobId
+		m["jobId"] = p.JobId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var scriptId *string
 	if p.ScriptId != nil {
-		scriptId = p.ScriptId
+		m["scriptId"] = p.ScriptId
 	}
-	var args *string
 	if p.Args != nil {
-		args = p.Args
+		m["args"] = p.Args
 	}
-	var currentRetryCount *int32
 	if p.CurrentRetryCount != nil {
-		currentRetryCount = p.CurrentRetryCount
+		m["currentRetryCount"] = p.CurrentRetryCount
 	}
-	var maxTryCount *int32
 	if p.MaxTryCount != nil {
-		maxTryCount = p.MaxTryCount
+		m["maxTryCount"] = p.MaxTryCount
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"jobId":             jobId,
-		"name":              name,
-		"userId":            userId,
-		"scriptId":          scriptId,
-		"args":              args,
-		"currentRetryCount": currentRetryCount,
-		"maxTryCount":       maxTryCount,
-		"createdAt":         createdAt,
-		"updatedAt":         updatedAt,
-	}
+	return m
 }
 
 func (p Job) Pointer() *Job {
@@ -863,49 +823,32 @@ func NewJobResultFromDict(data map[string]interface{}) JobResult {
 }
 
 func (p JobResult) ToDict() map[string]interface{} {
-
-	var jobResultId *string
+	m := map[string]interface{}{}
 	if p.JobResultId != nil {
-		jobResultId = p.JobResultId
+		m["jobResultId"] = p.JobResultId
 	}
-	var jobId *string
 	if p.JobId != nil {
-		jobId = p.JobId
+		m["jobId"] = p.JobId
 	}
-	var scriptId *string
 	if p.ScriptId != nil {
-		scriptId = p.ScriptId
+		m["scriptId"] = p.ScriptId
 	}
-	var args *string
 	if p.Args != nil {
-		args = p.Args
+		m["args"] = p.Args
 	}
-	var tryNumber *int32
 	if p.TryNumber != nil {
-		tryNumber = p.TryNumber
+		m["tryNumber"] = p.TryNumber
 	}
-	var statusCode *int32
 	if p.StatusCode != nil {
-		statusCode = p.StatusCode
+		m["statusCode"] = p.StatusCode
 	}
-	var result *string
 	if p.Result != nil {
-		result = p.Result
+		m["result"] = p.Result
 	}
-	var tryAt *int64
 	if p.TryAt != nil {
-		tryAt = p.TryAt
+		m["tryAt"] = p.TryAt
 	}
-	return map[string]interface{}{
-		"jobResultId": jobResultId,
-		"jobId":       jobId,
-		"scriptId":    scriptId,
-		"args":        args,
-		"tryNumber":   tryNumber,
-		"statusCode":  statusCode,
-		"result":      result,
-		"tryAt":       tryAt,
-	}
+	return m
 }
 
 func (p JobResult) Pointer() *JobResult {
@@ -1156,51 +1099,34 @@ func NewDeadLetterJobFromDict(data map[string]interface{}) DeadLetterJob {
 }
 
 func (p DeadLetterJob) ToDict() map[string]interface{} {
-
-	var deadLetterJobId *string
+	m := map[string]interface{}{}
 	if p.DeadLetterJobId != nil {
-		deadLetterJobId = p.DeadLetterJobId
+		m["deadLetterJobId"] = p.DeadLetterJobId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var scriptId *string
 	if p.ScriptId != nil {
-		scriptId = p.ScriptId
+		m["scriptId"] = p.ScriptId
 	}
-	var args *string
 	if p.Args != nil {
-		args = p.Args
+		m["args"] = p.Args
 	}
-	var result []interface{}
 	if p.Result != nil {
-		result = CastJobResultBodiesFromDict(
+		m["result"] = CastJobResultBodiesFromDict(
 			p.Result,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"deadLetterJobId": deadLetterJobId,
-		"name":            name,
-		"userId":          userId,
-		"scriptId":        scriptId,
-		"args":            args,
-		"result":          result,
-		"createdAt":       createdAt,
-		"updatedAt":       updatedAt,
-	}
+	return m
 }
 
 func (p DeadLetterJob) Pointer() *DeadLetterJob {
@@ -1337,24 +1263,17 @@ func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSet
 }
 
 func (p NotificationSetting) ToDict() map[string]interface{} {
-
-	var gatewayNamespaceId *string
+	m := map[string]interface{}{}
 	if p.GatewayNamespaceId != nil {
-		gatewayNamespaceId = p.GatewayNamespaceId
+		m["gatewayNamespaceId"] = p.GatewayNamespaceId
 	}
-	var enableTransferMobileNotification *bool
 	if p.EnableTransferMobileNotification != nil {
-		enableTransferMobileNotification = p.EnableTransferMobileNotification
+		m["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
 	}
-	var sound *string
 	if p.Sound != nil {
-		sound = p.Sound
+		m["sound"] = p.Sound
 	}
-	return map[string]interface{}{
-		"gatewayNamespaceId":               gatewayNamespaceId,
-		"enableTransferMobileNotification": enableTransferMobileNotification,
-		"sound":                            sound,
-	}
+	return m
 }
 
 func (p NotificationSetting) Pointer() *NotificationSetting {
@@ -1449,14 +1368,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -1593,24 +1509,17 @@ func NewJobEntryFromDict(data map[string]interface{}) JobEntry {
 }
 
 func (p JobEntry) ToDict() map[string]interface{} {
-
-	var scriptId *string
+	m := map[string]interface{}{}
 	if p.ScriptId != nil {
-		scriptId = p.ScriptId
+		m["scriptId"] = p.ScriptId
 	}
-	var args *string
 	if p.Args != nil {
-		args = p.Args
+		m["args"] = p.Args
 	}
-	var maxTryCount *int32
 	if p.MaxTryCount != nil {
-		maxTryCount = p.MaxTryCount
+		m["maxTryCount"] = p.MaxTryCount
 	}
-	return map[string]interface{}{
-		"scriptId":    scriptId,
-		"args":        args,
-		"maxTryCount": maxTryCount,
-	}
+	return m
 }
 
 func (p JobEntry) Pointer() *JobEntry {
@@ -1738,29 +1647,20 @@ func NewJobResultBodyFromDict(data map[string]interface{}) JobResultBody {
 }
 
 func (p JobResultBody) ToDict() map[string]interface{} {
-
-	var tryNumber *int32
+	m := map[string]interface{}{}
 	if p.TryNumber != nil {
-		tryNumber = p.TryNumber
+		m["tryNumber"] = p.TryNumber
 	}
-	var statusCode *int32
 	if p.StatusCode != nil {
-		statusCode = p.StatusCode
+		m["statusCode"] = p.StatusCode
 	}
-	var result *string
 	if p.Result != nil {
-		result = p.Result
+		m["result"] = p.Result
 	}
-	var tryAt *int64
 	if p.TryAt != nil {
-		tryAt = p.TryAt
+		m["tryAt"] = p.TryAt
 	}
-	return map[string]interface{}{
-		"tryNumber":  tryNumber,
-		"statusCode": statusCode,
-		"result":     result,
-		"tryAt":      tryAt,
-	}
+	return m
 }
 
 func (p JobResultBody) Pointer() *JobResultBody {

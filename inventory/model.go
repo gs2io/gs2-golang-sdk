@@ -278,119 +278,90 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var acquireScript map[string]interface{}
 	if p.AcquireScript != nil {
-		acquireScript = func() map[string]interface{} {
+		m["acquireScript"] = func() map[string]interface{} {
 			if p.AcquireScript == nil {
 				return nil
 			}
 			return p.AcquireScript.ToDict()
 		}()
 	}
-	var overflowScript map[string]interface{}
 	if p.OverflowScript != nil {
-		overflowScript = func() map[string]interface{} {
+		m["overflowScript"] = func() map[string]interface{} {
 			if p.OverflowScript == nil {
 				return nil
 			}
 			return p.OverflowScript.ToDict()
 		}()
 	}
-	var consumeScript map[string]interface{}
 	if p.ConsumeScript != nil {
-		consumeScript = func() map[string]interface{} {
+		m["consumeScript"] = func() map[string]interface{} {
 			if p.ConsumeScript == nil {
 				return nil
 			}
 			return p.ConsumeScript.ToDict()
 		}()
 	}
-	var simpleItemAcquireScript map[string]interface{}
 	if p.SimpleItemAcquireScript != nil {
-		simpleItemAcquireScript = func() map[string]interface{} {
+		m["simpleItemAcquireScript"] = func() map[string]interface{} {
 			if p.SimpleItemAcquireScript == nil {
 				return nil
 			}
 			return p.SimpleItemAcquireScript.ToDict()
 		}()
 	}
-	var simpleItemConsumeScript map[string]interface{}
 	if p.SimpleItemConsumeScript != nil {
-		simpleItemConsumeScript = func() map[string]interface{} {
+		m["simpleItemConsumeScript"] = func() map[string]interface{} {
 			if p.SimpleItemConsumeScript == nil {
 				return nil
 			}
 			return p.SimpleItemConsumeScript.ToDict()
 		}()
 	}
-	var bigItemAcquireScript map[string]interface{}
 	if p.BigItemAcquireScript != nil {
-		bigItemAcquireScript = func() map[string]interface{} {
+		m["bigItemAcquireScript"] = func() map[string]interface{} {
 			if p.BigItemAcquireScript == nil {
 				return nil
 			}
 			return p.BigItemAcquireScript.ToDict()
 		}()
 	}
-	var bigItemConsumeScript map[string]interface{}
 	if p.BigItemConsumeScript != nil {
-		bigItemConsumeScript = func() map[string]interface{} {
+		m["bigItemConsumeScript"] = func() map[string]interface{} {
 			if p.BigItemConsumeScript == nil {
 				return nil
 			}
 			return p.BigItemConsumeScript.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":             namespaceId,
-		"name":                    name,
-		"description":             description,
-		"acquireScript":           acquireScript,
-		"overflowScript":          overflowScript,
-		"consumeScript":           consumeScript,
-		"simpleItemAcquireScript": simpleItemAcquireScript,
-		"simpleItemConsumeScript": simpleItemConsumeScript,
-		"bigItemAcquireScript":    bigItemAcquireScript,
-		"bigItemConsumeScript":    bigItemConsumeScript,
-		"logSetting":              logSetting,
-		"createdAt":               createdAt,
-		"updatedAt":               updatedAt,
-		"revision":                revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -644,59 +615,38 @@ func NewInventoryModelMasterFromDict(data map[string]interface{}) InventoryModel
 }
 
 func (p InventoryModelMaster) ToDict() map[string]interface{} {
-
-	var inventoryModelId *string
+	m := map[string]interface{}{}
 	if p.InventoryModelId != nil {
-		inventoryModelId = p.InventoryModelId
+		m["inventoryModelId"] = p.InventoryModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var initialCapacity *int32
 	if p.InitialCapacity != nil {
-		initialCapacity = p.InitialCapacity
+		m["initialCapacity"] = p.InitialCapacity
 	}
-	var maxCapacity *int32
 	if p.MaxCapacity != nil {
-		maxCapacity = p.MaxCapacity
+		m["maxCapacity"] = p.MaxCapacity
 	}
-	var protectReferencedItem *bool
 	if p.ProtectReferencedItem != nil {
-		protectReferencedItem = p.ProtectReferencedItem
+		m["protectReferencedItem"] = p.ProtectReferencedItem
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"inventoryModelId":      inventoryModelId,
-		"name":                  name,
-		"metadata":              metadata,
-		"description":           description,
-		"initialCapacity":       initialCapacity,
-		"maxCapacity":           maxCapacity,
-		"protectReferencedItem": protectReferencedItem,
-		"createdAt":             createdAt,
-		"updatedAt":             updatedAt,
-		"revision":              revision,
-	}
+	return m
 }
 
 func (p InventoryModelMaster) Pointer() *InventoryModelMaster {
@@ -896,46 +846,31 @@ func NewInventoryModelFromDict(data map[string]interface{}) InventoryModel {
 }
 
 func (p InventoryModel) ToDict() map[string]interface{} {
-
-	var inventoryModelId *string
+	m := map[string]interface{}{}
 	if p.InventoryModelId != nil {
-		inventoryModelId = p.InventoryModelId
+		m["inventoryModelId"] = p.InventoryModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var initialCapacity *int32
 	if p.InitialCapacity != nil {
-		initialCapacity = p.InitialCapacity
+		m["initialCapacity"] = p.InitialCapacity
 	}
-	var maxCapacity *int32
 	if p.MaxCapacity != nil {
-		maxCapacity = p.MaxCapacity
+		m["maxCapacity"] = p.MaxCapacity
 	}
-	var protectReferencedItem *bool
 	if p.ProtectReferencedItem != nil {
-		protectReferencedItem = p.ProtectReferencedItem
+		m["protectReferencedItem"] = p.ProtectReferencedItem
 	}
-	var itemModels []interface{}
 	if p.ItemModels != nil {
-		itemModels = CastItemModelsFromDict(
+		m["itemModels"] = CastItemModelsFromDict(
 			p.ItemModels,
 		)
 	}
-	return map[string]interface{}{
-		"inventoryModelId":      inventoryModelId,
-		"name":                  name,
-		"metadata":              metadata,
-		"initialCapacity":       initialCapacity,
-		"maxCapacity":           maxCapacity,
-		"protectReferencedItem": protectReferencedItem,
-		"itemModels":            itemModels,
-	}
+	return m
 }
 
 func (p InventoryModel) Pointer() *InventoryModel {
@@ -1220,64 +1155,41 @@ func NewItemModelMasterFromDict(data map[string]interface{}) ItemModelMaster {
 }
 
 func (p ItemModelMaster) ToDict() map[string]interface{} {
-
-	var itemModelId *string
+	m := map[string]interface{}{}
 	if p.ItemModelId != nil {
-		itemModelId = p.ItemModelId
+		m["itemModelId"] = p.ItemModelId
 	}
-	var inventoryName *string
 	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
+		m["inventoryName"] = p.InventoryName
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var stackingLimit *int64
 	if p.StackingLimit != nil {
-		stackingLimit = p.StackingLimit
+		m["stackingLimit"] = p.StackingLimit
 	}
-	var allowMultipleStacks *bool
 	if p.AllowMultipleStacks != nil {
-		allowMultipleStacks = p.AllowMultipleStacks
+		m["allowMultipleStacks"] = p.AllowMultipleStacks
 	}
-	var sortValue *int32
 	if p.SortValue != nil {
-		sortValue = p.SortValue
+		m["sortValue"] = p.SortValue
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"itemModelId":         itemModelId,
-		"inventoryName":       inventoryName,
-		"name":                name,
-		"description":         description,
-		"metadata":            metadata,
-		"stackingLimit":       stackingLimit,
-		"allowMultipleStacks": allowMultipleStacks,
-		"sortValue":           sortValue,
-		"createdAt":           createdAt,
-		"updatedAt":           updatedAt,
-		"revision":            revision,
-	}
+	return m
 }
 
 func (p ItemModelMaster) Pointer() *ItemModelMaster {
@@ -1467,39 +1379,26 @@ func NewItemModelFromDict(data map[string]interface{}) ItemModel {
 }
 
 func (p ItemModel) ToDict() map[string]interface{} {
-
-	var itemModelId *string
+	m := map[string]interface{}{}
 	if p.ItemModelId != nil {
-		itemModelId = p.ItemModelId
+		m["itemModelId"] = p.ItemModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var stackingLimit *int64
 	if p.StackingLimit != nil {
-		stackingLimit = p.StackingLimit
+		m["stackingLimit"] = p.StackingLimit
 	}
-	var allowMultipleStacks *bool
 	if p.AllowMultipleStacks != nil {
-		allowMultipleStacks = p.AllowMultipleStacks
+		m["allowMultipleStacks"] = p.AllowMultipleStacks
 	}
-	var sortValue *int32
 	if p.SortValue != nil {
-		sortValue = p.SortValue
+		m["sortValue"] = p.SortValue
 	}
-	return map[string]interface{}{
-		"itemModelId":         itemModelId,
-		"name":                name,
-		"metadata":            metadata,
-		"stackingLimit":       stackingLimit,
-		"allowMultipleStacks": allowMultipleStacks,
-		"sortValue":           sortValue,
-	}
+	return m
 }
 
 func (p ItemModel) Pointer() *ItemModel {
@@ -1720,44 +1619,29 @@ func NewSimpleInventoryModelMasterFromDict(data map[string]interface{}) SimpleIn
 }
 
 func (p SimpleInventoryModelMaster) ToDict() map[string]interface{} {
-
-	var inventoryModelId *string
+	m := map[string]interface{}{}
 	if p.InventoryModelId != nil {
-		inventoryModelId = p.InventoryModelId
+		m["inventoryModelId"] = p.InventoryModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"inventoryModelId": inventoryModelId,
-		"name":             name,
-		"metadata":         metadata,
-		"description":      description,
-		"createdAt":        createdAt,
-		"updatedAt":        updatedAt,
-		"revision":         revision,
-	}
+	return m
 }
 
 func (p SimpleInventoryModelMaster) Pointer() *SimpleInventoryModelMaster {
@@ -1924,31 +1808,22 @@ func NewSimpleInventoryModelFromDict(data map[string]interface{}) SimpleInventor
 }
 
 func (p SimpleInventoryModel) ToDict() map[string]interface{} {
-
-	var inventoryModelId *string
+	m := map[string]interface{}{}
 	if p.InventoryModelId != nil {
-		inventoryModelId = p.InventoryModelId
+		m["inventoryModelId"] = p.InventoryModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var simpleItemModels []interface{}
 	if p.SimpleItemModels != nil {
-		simpleItemModels = CastSimpleItemModelsFromDict(
+		m["simpleItemModels"] = CastSimpleItemModelsFromDict(
 			p.SimpleItemModels,
 		)
 	}
-	return map[string]interface{}{
-		"inventoryModelId": inventoryModelId,
-		"name":             name,
-		"metadata":         metadata,
-		"simpleItemModels": simpleItemModels,
-	}
+	return m
 }
 
 func (p SimpleInventoryModel) Pointer() *SimpleInventoryModel {
@@ -2169,44 +2044,29 @@ func NewSimpleItemModelMasterFromDict(data map[string]interface{}) SimpleItemMod
 }
 
 func (p SimpleItemModelMaster) ToDict() map[string]interface{} {
-
-	var itemModelId *string
+	m := map[string]interface{}{}
 	if p.ItemModelId != nil {
-		itemModelId = p.ItemModelId
+		m["itemModelId"] = p.ItemModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"itemModelId": itemModelId,
-		"name":        name,
-		"description": description,
-		"metadata":    metadata,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p SimpleItemModelMaster) Pointer() *SimpleItemModelMaster {
@@ -2363,24 +2223,17 @@ func NewSimpleItemModelFromDict(data map[string]interface{}) SimpleItemModel {
 }
 
 func (p SimpleItemModel) ToDict() map[string]interface{} {
-
-	var itemModelId *string
+	m := map[string]interface{}{}
 	if p.ItemModelId != nil {
-		itemModelId = p.ItemModelId
+		m["itemModelId"] = p.ItemModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	return map[string]interface{}{
-		"itemModelId": itemModelId,
-		"name":        name,
-		"metadata":    metadata,
-	}
+	return m
 }
 
 func (p SimpleItemModel) Pointer() *SimpleItemModel {
@@ -2601,44 +2454,29 @@ func NewBigInventoryModelMasterFromDict(data map[string]interface{}) BigInventor
 }
 
 func (p BigInventoryModelMaster) ToDict() map[string]interface{} {
-
-	var inventoryModelId *string
+	m := map[string]interface{}{}
 	if p.InventoryModelId != nil {
-		inventoryModelId = p.InventoryModelId
+		m["inventoryModelId"] = p.InventoryModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"inventoryModelId": inventoryModelId,
-		"name":             name,
-		"metadata":         metadata,
-		"description":      description,
-		"createdAt":        createdAt,
-		"updatedAt":        updatedAt,
-		"revision":         revision,
-	}
+	return m
 }
 
 func (p BigInventoryModelMaster) Pointer() *BigInventoryModelMaster {
@@ -2805,31 +2643,22 @@ func NewBigInventoryModelFromDict(data map[string]interface{}) BigInventoryModel
 }
 
 func (p BigInventoryModel) ToDict() map[string]interface{} {
-
-	var inventoryModelId *string
+	m := map[string]interface{}{}
 	if p.InventoryModelId != nil {
-		inventoryModelId = p.InventoryModelId
+		m["inventoryModelId"] = p.InventoryModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var bigItemModels []interface{}
 	if p.BigItemModels != nil {
-		bigItemModels = CastBigItemModelsFromDict(
+		m["bigItemModels"] = CastBigItemModelsFromDict(
 			p.BigItemModels,
 		)
 	}
-	return map[string]interface{}{
-		"inventoryModelId": inventoryModelId,
-		"name":             name,
-		"metadata":         metadata,
-		"bigItemModels":    bigItemModels,
-	}
+	return m
 }
 
 func (p BigInventoryModel) Pointer() *BigInventoryModel {
@@ -3050,44 +2879,29 @@ func NewBigItemModelMasterFromDict(data map[string]interface{}) BigItemModelMast
 }
 
 func (p BigItemModelMaster) ToDict() map[string]interface{} {
-
-	var itemModelId *string
+	m := map[string]interface{}{}
 	if p.ItemModelId != nil {
-		itemModelId = p.ItemModelId
+		m["itemModelId"] = p.ItemModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"itemModelId": itemModelId,
-		"name":        name,
-		"description": description,
-		"metadata":    metadata,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p BigItemModelMaster) Pointer() *BigItemModelMaster {
@@ -3244,24 +3058,17 @@ func NewBigItemModelFromDict(data map[string]interface{}) BigItemModel {
 }
 
 func (p BigItemModel) ToDict() map[string]interface{} {
-
-	var itemModelId *string
+	m := map[string]interface{}{}
 	if p.ItemModelId != nil {
-		itemModelId = p.ItemModelId
+		m["itemModelId"] = p.ItemModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	return map[string]interface{}{
-		"itemModelId": itemModelId,
-		"name":        name,
-		"metadata":    metadata,
-	}
+	return m
 }
 
 func (p BigItemModel) Pointer() *BigItemModel {
@@ -3387,19 +3194,14 @@ func NewCurrentItemModelMasterFromDict(data map[string]interface{}) CurrentItemM
 }
 
 func (p CurrentItemModelMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentItemModelMaster) Pointer() *CurrentItemModelMaster {
@@ -3611,49 +3413,32 @@ func NewInventoryFromDict(data map[string]interface{}) Inventory {
 }
 
 func (p Inventory) ToDict() map[string]interface{} {
-
-	var inventoryId *string
+	m := map[string]interface{}{}
 	if p.InventoryId != nil {
-		inventoryId = p.InventoryId
+		m["inventoryId"] = p.InventoryId
 	}
-	var inventoryName *string
 	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
+		m["inventoryName"] = p.InventoryName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var currentInventoryCapacityUsage *int32
 	if p.CurrentInventoryCapacityUsage != nil {
-		currentInventoryCapacityUsage = p.CurrentInventoryCapacityUsage
+		m["currentInventoryCapacityUsage"] = p.CurrentInventoryCapacityUsage
 	}
-	var currentInventoryMaxCapacity *int32
 	if p.CurrentInventoryMaxCapacity != nil {
-		currentInventoryMaxCapacity = p.CurrentInventoryMaxCapacity
+		m["currentInventoryMaxCapacity"] = p.CurrentInventoryMaxCapacity
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"inventoryId":                   inventoryId,
-		"inventoryName":                 inventoryName,
-		"userId":                        userId,
-		"currentInventoryCapacityUsage": currentInventoryCapacityUsage,
-		"currentInventoryMaxCapacity":   currentInventoryMaxCapacity,
-		"createdAt":                     createdAt,
-		"updatedAt":                     updatedAt,
-		"revision":                      revision,
-	}
+	return m
 }
 
 func (p Inventory) Pointer() *Inventory {
@@ -3961,66 +3746,43 @@ func NewItemSetFromDict(data map[string]interface{}) ItemSet {
 }
 
 func (p ItemSet) ToDict() map[string]interface{} {
-
-	var itemSetId *string
+	m := map[string]interface{}{}
 	if p.ItemSetId != nil {
-		itemSetId = p.ItemSetId
+		m["itemSetId"] = p.ItemSetId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var inventoryName *string
 	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
+		m["inventoryName"] = p.InventoryName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var itemName *string
 	if p.ItemName != nil {
-		itemName = p.ItemName
+		m["itemName"] = p.ItemName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var referenceOf []interface{}
 	if p.ReferenceOf != nil {
-		referenceOf = core.CastStringsFromDict(
+		m["referenceOf"] = core.CastStringsFromDict(
 			p.ReferenceOf,
 		)
 	}
-	var sortValue *int32
 	if p.SortValue != nil {
-		sortValue = p.SortValue
+		m["sortValue"] = p.SortValue
 	}
-	var expiresAt *int64
 	if p.ExpiresAt != nil {
-		expiresAt = p.ExpiresAt
+		m["expiresAt"] = p.ExpiresAt
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"itemSetId":     itemSetId,
-		"name":          name,
-		"inventoryName": inventoryName,
-		"userId":        userId,
-		"itemName":      itemName,
-		"count":         count,
-		"referenceOf":   referenceOf,
-		"sortValue":     sortValue,
-		"expiresAt":     expiresAt,
-		"createdAt":     createdAt,
-		"updatedAt":     updatedAt,
-	}
+	return m
 }
 
 func (p ItemSet) Pointer() *ItemSet {
@@ -4146,19 +3908,14 @@ func NewReferenceOfFromDict(data map[string]interface{}) ReferenceOf {
 }
 
 func (p ReferenceOf) ToDict() map[string]interface{} {
-
-	var referenceOfId *string
+	m := map[string]interface{}{}
 	if p.ReferenceOfId != nil {
-		referenceOfId = p.ReferenceOfId
+		m["referenceOfId"] = p.ReferenceOfId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	return map[string]interface{}{
-		"referenceOfId": referenceOfId,
-		"name":          name,
-	}
+	return m
 }
 
 func (p ReferenceOf) Pointer() *ReferenceOf {
@@ -4358,46 +4115,31 @@ func NewSimpleInventoryFromDict(data map[string]interface{}) SimpleInventory {
 }
 
 func (p SimpleInventory) ToDict() map[string]interface{} {
-
-	var inventoryId *string
+	m := map[string]interface{}{}
 	if p.InventoryId != nil {
-		inventoryId = p.InventoryId
+		m["inventoryId"] = p.InventoryId
 	}
-	var inventoryName *string
 	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
+		m["inventoryName"] = p.InventoryName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var simpleItems []interface{}
 	if p.SimpleItems != nil {
-		simpleItems = CastSimpleItemsFromDict(
+		m["simpleItems"] = CastSimpleItemsFromDict(
 			p.SimpleItems,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"inventoryId":   inventoryId,
-		"inventoryName": inventoryName,
-		"userId":        userId,
-		"simpleItems":   simpleItems,
-		"createdAt":     createdAt,
-		"updatedAt":     updatedAt,
-		"revision":      revision,
-	}
+	return m
 }
 
 func (p SimpleInventory) Pointer() *SimpleInventory {
@@ -4576,34 +4318,23 @@ func NewSimpleItemFromDict(data map[string]interface{}) SimpleItem {
 }
 
 func (p SimpleItem) ToDict() map[string]interface{} {
-
-	var itemId *string
+	m := map[string]interface{}{}
 	if p.ItemId != nil {
-		itemId = p.ItemId
+		m["itemId"] = p.ItemId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var itemName *string
 	if p.ItemName != nil {
-		itemName = p.ItemName
+		m["itemName"] = p.ItemName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"itemId":   itemId,
-		"userId":   userId,
-		"itemName": itemName,
-		"count":    count,
-		"revision": revision,
-	}
+	return m
 }
 
 func (p SimpleItem) Pointer() *SimpleItem {
@@ -4792,41 +4523,28 @@ func NewBigInventoryFromDict(data map[string]interface{}) BigInventory {
 }
 
 func (p BigInventory) ToDict() map[string]interface{} {
-
-	var inventoryId *string
+	m := map[string]interface{}{}
 	if p.InventoryId != nil {
-		inventoryId = p.InventoryId
+		m["inventoryId"] = p.InventoryId
 	}
-	var inventoryName *string
 	if p.InventoryName != nil {
-		inventoryName = p.InventoryName
+		m["inventoryName"] = p.InventoryName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var bigItems []interface{}
 	if p.BigItems != nil {
-		bigItems = CastBigItemsFromDict(
+		m["bigItems"] = CastBigItemsFromDict(
 			p.BigItems,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"inventoryId":   inventoryId,
-		"inventoryName": inventoryName,
-		"userId":        userId,
-		"bigItems":      bigItems,
-		"createdAt":     createdAt,
-		"updatedAt":     updatedAt,
-	}
+	return m
 }
 
 func (p BigInventory) Pointer() *BigInventory {
@@ -5047,44 +4765,29 @@ func NewBigItemFromDict(data map[string]interface{}) BigItem {
 }
 
 func (p BigItem) ToDict() map[string]interface{} {
-
-	var itemId *string
+	m := map[string]interface{}{}
 	if p.ItemId != nil {
-		itemId = p.ItemId
+		m["itemId"] = p.ItemId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var itemName *string
 	if p.ItemName != nil {
-		itemName = p.ItemName
+		m["itemName"] = p.ItemName
 	}
-	var count *string
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"itemId":    itemId,
-		"userId":    userId,
-		"itemName":  itemName,
-		"count":     count,
-		"createdAt": createdAt,
-		"updatedAt": updatedAt,
-		"revision":  revision,
-	}
+	return m
 }
 
 func (p BigItem) Pointer() *BigItem {
@@ -5365,44 +5068,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -5590,29 +5278,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -5707,14 +5386,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -5820,19 +5496,14 @@ func NewAcquireCountFromDict(data map[string]interface{}) AcquireCount {
 }
 
 func (p AcquireCount) ToDict() map[string]interface{} {
-
-	var itemName *string
+	m := map[string]interface{}{}
 	if p.ItemName != nil {
-		itemName = p.ItemName
+		m["itemName"] = p.ItemName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"itemName": itemName,
-		"count":    count,
-	}
+	return m
 }
 
 func (p AcquireCount) Pointer() *AcquireCount {
@@ -5938,19 +5609,14 @@ func NewConsumeCountFromDict(data map[string]interface{}) ConsumeCount {
 }
 
 func (p ConsumeCount) ToDict() map[string]interface{} {
-
-	var itemName *string
+	m := map[string]interface{}{}
 	if p.ItemName != nil {
-		itemName = p.ItemName
+		m["itemName"] = p.ItemName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"itemName": itemName,
-		"count":    count,
-	}
+	return m
 }
 
 func (p ConsumeCount) Pointer() *ConsumeCount {
@@ -6056,19 +5722,14 @@ func NewHeldCountFromDict(data map[string]interface{}) HeldCount {
 }
 
 func (p HeldCount) ToDict() map[string]interface{} {
-
-	var itemName *string
+	m := map[string]interface{}{}
 	if p.ItemName != nil {
-		itemName = p.ItemName
+		m["itemName"] = p.ItemName
 	}
-	var count *int64
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	return map[string]interface{}{
-		"itemName": itemName,
-		"count":    count,
-	}
+	return m
 }
 
 func (p HeldCount) Pointer() *HeldCount {

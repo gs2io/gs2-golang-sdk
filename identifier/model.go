@@ -190,39 +190,26 @@ func NewUserFromDict(data map[string]interface{}) User {
 }
 
 func (p User) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"userId":      userId,
-		"name":        name,
-		"description": description,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p User) Pointer() *User {
@@ -432,39 +419,26 @@ func NewSecurityPolicyFromDict(data map[string]interface{}) SecurityPolicy {
 }
 
 func (p SecurityPolicy) ToDict() map[string]interface{} {
-
-	var securityPolicyId *string
+	m := map[string]interface{}{}
 	if p.SecurityPolicyId != nil {
-		securityPolicyId = p.SecurityPolicyId
+		m["securityPolicyId"] = p.SecurityPolicyId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var policy *string
 	if p.Policy != nil {
-		policy = p.Policy
+		m["policy"] = p.Policy
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"securityPolicyId": securityPolicyId,
-		"name":             name,
-		"description":      description,
-		"policy":           policy,
-		"createdAt":        createdAt,
-		"updatedAt":        updatedAt,
-	}
+	return m
 }
 
 func (p SecurityPolicy) Pointer() *SecurityPolicy {
@@ -643,34 +617,23 @@ func NewIdentifierFromDict(data map[string]interface{}) Identifier {
 }
 
 func (p Identifier) ToDict() map[string]interface{} {
-
-	var clientId *string
+	m := map[string]interface{}{}
 	if p.ClientId != nil {
-		clientId = p.ClientId
+		m["clientId"] = p.ClientId
 	}
-	var userName *string
 	if p.UserName != nil {
-		userName = p.UserName
+		m["userName"] = p.UserName
 	}
-	var clientSecret *string
 	if p.ClientSecret != nil {
-		clientSecret = p.ClientSecret
+		m["clientSecret"] = p.ClientSecret
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"clientId":     clientId,
-		"userName":     userName,
-		"clientSecret": clientSecret,
-		"createdAt":    createdAt,
-		"revision":     revision,
-	}
+	return m
 }
 
 func (p Identifier) Pointer() *Identifier {
@@ -891,49 +854,34 @@ func NewPasswordFromDict(data map[string]interface{}) Password {
 }
 
 func (p Password) ToDict() map[string]interface{} {
-
-	var passwordId *string
+	m := map[string]interface{}{}
 	if p.PasswordId != nil {
-		passwordId = p.PasswordId
+		m["passwordId"] = p.PasswordId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var userName *string
 	if p.UserName != nil {
-		userName = p.UserName
+		m["userName"] = p.UserName
 	}
-	var enableTwoFactorAuthentication *string
 	if p.EnableTwoFactorAuthentication != nil {
-		enableTwoFactorAuthentication = p.EnableTwoFactorAuthentication
+		m["enableTwoFactorAuthentication"] = p.EnableTwoFactorAuthentication
 	}
-	var twoFactorAuthenticationSetting map[string]interface{}
 	if p.TwoFactorAuthenticationSetting != nil {
-		twoFactorAuthenticationSetting = func() map[string]interface{} {
+		m["twoFactorAuthenticationSetting"] = func() map[string]interface{} {
 			if p.TwoFactorAuthenticationSetting == nil {
 				return nil
 			}
 			return p.TwoFactorAuthenticationSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"passwordId":                     passwordId,
-		"userId":                         userId,
-		"userName":                       userName,
-		"enableTwoFactorAuthentication":  enableTwoFactorAuthentication,
-		"twoFactorAuthenticationSetting": twoFactorAuthenticationSetting,
-		"createdAt":                      createdAt,
-		"revision":                       revision,
-	}
+	return m
 }
 
 func (p Password) Pointer() *Password {
@@ -1084,31 +1032,22 @@ func NewAttachSecurityPolicyFromDict(data map[string]interface{}) AttachSecurity
 }
 
 func (p AttachSecurityPolicy) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var securityPolicyIds []interface{}
 	if p.SecurityPolicyIds != nil {
-		securityPolicyIds = core.CastStringsFromDict(
+		m["securityPolicyIds"] = core.CastStringsFromDict(
 			p.SecurityPolicyIds,
 		)
 	}
-	var attachedAt *int64
 	if p.AttachedAt != nil {
-		attachedAt = p.AttachedAt
+		m["attachedAt"] = p.AttachedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"userId":            userId,
-		"securityPolicyIds": securityPolicyIds,
-		"attachedAt":        attachedAt,
-		"revision":          revision,
-	}
+	return m
 }
 
 func (p AttachSecurityPolicy) Pointer() *AttachSecurityPolicy {
@@ -1203,14 +1142,11 @@ func NewProjectTokenFromDict(data map[string]interface{}) ProjectToken {
 }
 
 func (p ProjectToken) ToDict() map[string]interface{} {
-
-	var token *string
+	m := map[string]interface{}{}
 	if p.Token != nil {
-		token = p.Token
+		m["token"] = p.Token
 	}
-	return map[string]interface{}{
-		"token": token,
-	}
+	return m
 }
 
 func (p ProjectToken) Pointer() *ProjectToken {
@@ -1305,14 +1241,11 @@ func NewTwoFactorAuthenticationSettingFromDict(data map[string]interface{}) TwoF
 }
 
 func (p TwoFactorAuthenticationSetting) ToDict() map[string]interface{} {
-
-	var status *string
+	m := map[string]interface{}{}
 	if p.Status != nil {
-		status = p.Status
+		m["status"] = p.Status
 	}
-	return map[string]interface{}{
-		"status": status,
-	}
+	return m
 }
 
 func (p TwoFactorAuthenticationSetting) Pointer() *TwoFactorAuthenticationSetting {

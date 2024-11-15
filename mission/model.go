@@ -269,58 +269,39 @@ func NewCompleteFromDict(data map[string]interface{}) Complete {
 }
 
 func (p Complete) ToDict() map[string]interface{} {
-
-	var completeId *string
+	m := map[string]interface{}{}
 	if p.CompleteId != nil {
-		completeId = p.CompleteId
+		m["completeId"] = p.CompleteId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var missionGroupName *string
 	if p.MissionGroupName != nil {
-		missionGroupName = p.MissionGroupName
+		m["missionGroupName"] = p.MissionGroupName
 	}
-	var completedMissionTaskNames []interface{}
 	if p.CompletedMissionTaskNames != nil {
-		completedMissionTaskNames = core.CastStringsFromDict(
+		m["completedMissionTaskNames"] = core.CastStringsFromDict(
 			p.CompletedMissionTaskNames,
 		)
 	}
-	var receivedMissionTaskNames []interface{}
 	if p.ReceivedMissionTaskNames != nil {
-		receivedMissionTaskNames = core.CastStringsFromDict(
+		m["receivedMissionTaskNames"] = core.CastStringsFromDict(
 			p.ReceivedMissionTaskNames,
 		)
 	}
-	var nextResetAt *int64
 	if p.NextResetAt != nil {
-		nextResetAt = p.NextResetAt
+		m["nextResetAt"] = p.NextResetAt
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"completeId":                completeId,
-		"userId":                    userId,
-		"missionGroupName":          missionGroupName,
-		"completedMissionTaskNames": completedMissionTaskNames,
-		"receivedMissionTaskNames":  receivedMissionTaskNames,
-		"nextResetAt":               nextResetAt,
-		"createdAt":                 createdAt,
-		"updatedAt":                 updatedAt,
-		"revision":                  revision,
-	}
+	return m
 }
 
 func (p Complete) Pointer() *Complete {
@@ -457,24 +438,17 @@ func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSet
 }
 
 func (p NotificationSetting) ToDict() map[string]interface{} {
-
-	var gatewayNamespaceId *string
+	m := map[string]interface{}{}
 	if p.GatewayNamespaceId != nil {
-		gatewayNamespaceId = p.GatewayNamespaceId
+		m["gatewayNamespaceId"] = p.GatewayNamespaceId
 	}
-	var enableTransferMobileNotification *bool
 	if p.EnableTransferMobileNotification != nil {
-		enableTransferMobileNotification = p.EnableTransferMobileNotification
+		m["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
 	}
-	var sound *string
 	if p.Sound != nil {
-		sound = p.Sound
+		m["sound"] = p.Sound
 	}
-	return map[string]interface{}{
-		"gatewayNamespaceId":               gatewayNamespaceId,
-		"enableTransferMobileNotification": enableTransferMobileNotification,
-		"sound":                            sound,
-	}
+	return m
 }
 
 func (p NotificationSetting) Pointer() *NotificationSetting {
@@ -736,56 +710,37 @@ func NewCounterModelMasterFromDict(data map[string]interface{}) CounterModelMast
 }
 
 func (p CounterModelMaster) ToDict() map[string]interface{} {
-
-	var counterId *string
+	m := map[string]interface{}{}
 	if p.CounterId != nil {
-		counterId = p.CounterId
+		m["counterId"] = p.CounterId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var scopes []interface{}
 	if p.Scopes != nil {
-		scopes = CastCounterScopeModelsFromDict(
+		m["scopes"] = CastCounterScopeModelsFromDict(
 			p.Scopes,
 		)
 	}
-	var challengePeriodEventId *string
 	if p.ChallengePeriodEventId != nil {
-		challengePeriodEventId = p.ChallengePeriodEventId
+		m["challengePeriodEventId"] = p.ChallengePeriodEventId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"counterId":              counterId,
-		"name":                   name,
-		"metadata":               metadata,
-		"description":            description,
-		"scopes":                 scopes,
-		"challengePeriodEventId": challengePeriodEventId,
-		"createdAt":              createdAt,
-		"updatedAt":              updatedAt,
-		"revision":               revision,
-	}
+	return m
 }
 
 func (p CounterModelMaster) Pointer() *CounterModelMaster {
@@ -1006,49 +961,34 @@ func NewCounterScopeModelFromDict(data map[string]interface{}) CounterScopeModel
 }
 
 func (p CounterScopeModel) ToDict() map[string]interface{} {
-
-	var scopeType *string
+	m := map[string]interface{}{}
 	if p.ScopeType != nil {
-		scopeType = p.ScopeType
+		m["scopeType"] = p.ScopeType
 	}
-	var resetType *string
 	if p.ResetType != nil {
-		resetType = p.ResetType
+		m["resetType"] = p.ResetType
 	}
-	var resetDayOfMonth *int32
 	if p.ResetDayOfMonth != nil {
-		resetDayOfMonth = p.ResetDayOfMonth
+		m["resetDayOfMonth"] = p.ResetDayOfMonth
 	}
-	var resetDayOfWeek *string
 	if p.ResetDayOfWeek != nil {
-		resetDayOfWeek = p.ResetDayOfWeek
+		m["resetDayOfWeek"] = p.ResetDayOfWeek
 	}
-	var resetHour *int32
 	if p.ResetHour != nil {
-		resetHour = p.ResetHour
+		m["resetHour"] = p.ResetHour
 	}
-	var conditionName *string
 	if p.ConditionName != nil {
-		conditionName = p.ConditionName
+		m["conditionName"] = p.ConditionName
 	}
-	var condition map[string]interface{}
 	if p.Condition != nil {
-		condition = func() map[string]interface{} {
+		m["condition"] = func() map[string]interface{} {
 			if p.Condition == nil {
 				return nil
 			}
 			return p.Condition.ToDict()
 		}()
 	}
-	return map[string]interface{}{
-		"scopeType":       scopeType,
-		"resetType":       resetType,
-		"resetDayOfMonth": resetDayOfMonth,
-		"resetDayOfWeek":  resetDayOfWeek,
-		"resetHour":       resetHour,
-		"conditionName":   conditionName,
-		"condition":       condition,
-	}
+	return m
 }
 
 func (p CounterScopeModel) Pointer() *CounterScopeModel {
@@ -1384,69 +1324,44 @@ func NewMissionGroupModelMasterFromDict(data map[string]interface{}) MissionGrou
 }
 
 func (p MissionGroupModelMaster) ToDict() map[string]interface{} {
-
-	var missionGroupId *string
+	m := map[string]interface{}{}
 	if p.MissionGroupId != nil {
-		missionGroupId = p.MissionGroupId
+		m["missionGroupId"] = p.MissionGroupId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var resetType *string
 	if p.ResetType != nil {
-		resetType = p.ResetType
+		m["resetType"] = p.ResetType
 	}
-	var resetDayOfMonth *int32
 	if p.ResetDayOfMonth != nil {
-		resetDayOfMonth = p.ResetDayOfMonth
+		m["resetDayOfMonth"] = p.ResetDayOfMonth
 	}
-	var resetDayOfWeek *string
 	if p.ResetDayOfWeek != nil {
-		resetDayOfWeek = p.ResetDayOfWeek
+		m["resetDayOfWeek"] = p.ResetDayOfWeek
 	}
-	var resetHour *int32
 	if p.ResetHour != nil {
-		resetHour = p.ResetHour
+		m["resetHour"] = p.ResetHour
 	}
-	var completeNotificationNamespaceId *string
 	if p.CompleteNotificationNamespaceId != nil {
-		completeNotificationNamespaceId = p.CompleteNotificationNamespaceId
+		m["completeNotificationNamespaceId"] = p.CompleteNotificationNamespaceId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"missionGroupId":                  missionGroupId,
-		"name":                            name,
-		"metadata":                        metadata,
-		"description":                     description,
-		"resetType":                       resetType,
-		"resetDayOfMonth":                 resetDayOfMonth,
-		"resetDayOfWeek":                  resetDayOfWeek,
-		"resetHour":                       resetHour,
-		"completeNotificationNamespaceId": completeNotificationNamespaceId,
-		"createdAt":                       createdAt,
-		"updatedAt":                       updatedAt,
-		"revision":                        revision,
-	}
+	return m
 }
 
 func (p MissionGroupModelMaster) Pointer() *MissionGroupModelMaster {
@@ -1766,109 +1681,80 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = func() map[string]interface{} {
+		m["transactionSetting"] = func() map[string]interface{} {
 			if p.TransactionSetting == nil {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
 		}()
 	}
-	var missionCompleteScript map[string]interface{}
 	if p.MissionCompleteScript != nil {
-		missionCompleteScript = func() map[string]interface{} {
+		m["missionCompleteScript"] = func() map[string]interface{} {
 			if p.MissionCompleteScript == nil {
 				return nil
 			}
 			return p.MissionCompleteScript.ToDict()
 		}()
 	}
-	var counterIncrementScript map[string]interface{}
 	if p.CounterIncrementScript != nil {
-		counterIncrementScript = func() map[string]interface{} {
+		m["counterIncrementScript"] = func() map[string]interface{} {
 			if p.CounterIncrementScript == nil {
 				return nil
 			}
 			return p.CounterIncrementScript.ToDict()
 		}()
 	}
-	var receiveRewardsScript map[string]interface{}
 	if p.ReceiveRewardsScript != nil {
-		receiveRewardsScript = func() map[string]interface{} {
+		m["receiveRewardsScript"] = func() map[string]interface{} {
 			if p.ReceiveRewardsScript == nil {
 				return nil
 			}
 			return p.ReceiveRewardsScript.ToDict()
 		}()
 	}
-	var completeNotification map[string]interface{}
 	if p.CompleteNotification != nil {
-		completeNotification = func() map[string]interface{} {
+		m["completeNotification"] = func() map[string]interface{} {
 			if p.CompleteNotification == nil {
 				return nil
 			}
 			return p.CompleteNotification.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":            namespaceId,
-		"name":                   name,
-		"description":            description,
-		"transactionSetting":     transactionSetting,
-		"missionCompleteScript":  missionCompleteScript,
-		"counterIncrementScript": counterIncrementScript,
-		"receiveRewardsScript":   receiveRewardsScript,
-		"completeNotification":   completeNotification,
-		"logSetting":             logSetting,
-		"createdAt":              createdAt,
-		"updatedAt":              updatedAt,
-		"queueNamespaceId":       queueNamespaceId,
-		"keyId":                  keyId,
-		"revision":               revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -2068,46 +1954,31 @@ func NewCounterFromDict(data map[string]interface{}) Counter {
 }
 
 func (p Counter) ToDict() map[string]interface{} {
-
-	var counterId *string
+	m := map[string]interface{}{}
 	if p.CounterId != nil {
-		counterId = p.CounterId
+		m["counterId"] = p.CounterId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var values []interface{}
 	if p.Values != nil {
-		values = CastScopedValuesFromDict(
+		m["values"] = CastScopedValuesFromDict(
 			p.Values,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"counterId": counterId,
-		"userId":    userId,
-		"name":      name,
-		"values":    values,
-		"createdAt": createdAt,
-		"updatedAt": updatedAt,
-		"revision":  revision,
-	}
+	return m
 }
 
 func (p Counter) Pointer() *Counter {
@@ -2233,19 +2104,14 @@ func NewCurrentMissionMasterFromDict(data map[string]interface{}) CurrentMission
 }
 
 func (p CurrentMissionMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentMissionMaster) Pointer() *CurrentMissionMaster {
@@ -2443,36 +2309,25 @@ func NewCounterModelFromDict(data map[string]interface{}) CounterModel {
 }
 
 func (p CounterModel) ToDict() map[string]interface{} {
-
-	var counterId *string
+	m := map[string]interface{}{}
 	if p.CounterId != nil {
-		counterId = p.CounterId
+		m["counterId"] = p.CounterId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var scopes []interface{}
 	if p.Scopes != nil {
-		scopes = CastCounterScopeModelsFromDict(
+		m["scopes"] = CastCounterScopeModelsFromDict(
 			p.Scopes,
 		)
 	}
-	var challengePeriodEventId *string
 	if p.ChallengePeriodEventId != nil {
-		challengePeriodEventId = p.ChallengePeriodEventId
+		m["challengePeriodEventId"] = p.ChallengePeriodEventId
 	}
-	return map[string]interface{}{
-		"counterId":              counterId,
-		"name":                   name,
-		"metadata":               metadata,
-		"scopes":                 scopes,
-		"challengePeriodEventId": challengePeriodEventId,
-	}
+	return m
 }
 
 func (p CounterModel) Pointer() *CounterModel {
@@ -2754,56 +2609,37 @@ func NewMissionGroupModelFromDict(data map[string]interface{}) MissionGroupModel
 }
 
 func (p MissionGroupModel) ToDict() map[string]interface{} {
-
-	var missionGroupId *string
+	m := map[string]interface{}{}
 	if p.MissionGroupId != nil {
-		missionGroupId = p.MissionGroupId
+		m["missionGroupId"] = p.MissionGroupId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var tasks []interface{}
 	if p.Tasks != nil {
-		tasks = CastMissionTaskModelsFromDict(
+		m["tasks"] = CastMissionTaskModelsFromDict(
 			p.Tasks,
 		)
 	}
-	var resetType *string
 	if p.ResetType != nil {
-		resetType = p.ResetType
+		m["resetType"] = p.ResetType
 	}
-	var resetDayOfMonth *int32
 	if p.ResetDayOfMonth != nil {
-		resetDayOfMonth = p.ResetDayOfMonth
+		m["resetDayOfMonth"] = p.ResetDayOfMonth
 	}
-	var resetDayOfWeek *string
 	if p.ResetDayOfWeek != nil {
-		resetDayOfWeek = p.ResetDayOfWeek
+		m["resetDayOfWeek"] = p.ResetDayOfWeek
 	}
-	var resetHour *int32
 	if p.ResetHour != nil {
-		resetHour = p.ResetHour
+		m["resetHour"] = p.ResetHour
 	}
-	var completeNotificationNamespaceId *string
 	if p.CompleteNotificationNamespaceId != nil {
-		completeNotificationNamespaceId = p.CompleteNotificationNamespaceId
+		m["completeNotificationNamespaceId"] = p.CompleteNotificationNamespaceId
 	}
-	return map[string]interface{}{
-		"missionGroupId":                  missionGroupId,
-		"name":                            name,
-		"metadata":                        metadata,
-		"tasks":                           tasks,
-		"resetType":                       resetType,
-		"resetDayOfMonth":                 resetDayOfMonth,
-		"resetDayOfWeek":                  resetDayOfWeek,
-		"resetHour":                       resetHour,
-		"completeNotificationNamespaceId": completeNotificationNamespaceId,
-	}
+	return m
 }
 
 func (p MissionGroupModel) Pointer() *MissionGroupModel {
@@ -3160,78 +2996,53 @@ func NewMissionTaskModelFromDict(data map[string]interface{}) MissionTaskModel {
 }
 
 func (p MissionTaskModel) ToDict() map[string]interface{} {
-
-	var missionTaskId *string
+	m := map[string]interface{}{}
 	if p.MissionTaskId != nil {
-		missionTaskId = p.MissionTaskId
+		m["missionTaskId"] = p.MissionTaskId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var verifyCompleteType *string
 	if p.VerifyCompleteType != nil {
-		verifyCompleteType = p.VerifyCompleteType
+		m["verifyCompleteType"] = p.VerifyCompleteType
 	}
-	var targetCounter map[string]interface{}
 	if p.TargetCounter != nil {
-		targetCounter = func() map[string]interface{} {
+		m["targetCounter"] = func() map[string]interface{} {
 			if p.TargetCounter == nil {
 				return nil
 			}
 			return p.TargetCounter.ToDict()
 		}()
 	}
-	var verifyCompleteConsumeActions []interface{}
 	if p.VerifyCompleteConsumeActions != nil {
-		verifyCompleteConsumeActions = CastVerifyActionsFromDict(
+		m["verifyCompleteConsumeActions"] = CastVerifyActionsFromDict(
 			p.VerifyCompleteConsumeActions,
 		)
 	}
-	var completeAcquireActions []interface{}
 	if p.CompleteAcquireActions != nil {
-		completeAcquireActions = CastAcquireActionsFromDict(
+		m["completeAcquireActions"] = CastAcquireActionsFromDict(
 			p.CompleteAcquireActions,
 		)
 	}
-	var challengePeriodEventId *string
 	if p.ChallengePeriodEventId != nil {
-		challengePeriodEventId = p.ChallengePeriodEventId
+		m["challengePeriodEventId"] = p.ChallengePeriodEventId
 	}
-	var premiseMissionTaskName *string
 	if p.PremiseMissionTaskName != nil {
-		premiseMissionTaskName = p.PremiseMissionTaskName
+		m["premiseMissionTaskName"] = p.PremiseMissionTaskName
 	}
-	var counterName *string
 	if p.CounterName != nil {
-		counterName = p.CounterName
+		m["counterName"] = p.CounterName
 	}
-	var targetResetType *string
 	if p.TargetResetType != nil {
-		targetResetType = p.TargetResetType
+		m["targetResetType"] = p.TargetResetType
 	}
-	var targetValue *int64
 	if p.TargetValue != nil {
-		targetValue = p.TargetValue
+		m["targetValue"] = p.TargetValue
 	}
-	return map[string]interface{}{
-		"missionTaskId":                missionTaskId,
-		"name":                         name,
-		"metadata":                     metadata,
-		"verifyCompleteType":           verifyCompleteType,
-		"targetCounter":                targetCounter,
-		"verifyCompleteConsumeActions": verifyCompleteConsumeActions,
-		"completeAcquireActions":       completeAcquireActions,
-		"challengePeriodEventId":       challengePeriodEventId,
-		"premiseMissionTaskName":       premiseMissionTaskName,
-		"counterName":                  counterName,
-		"targetResetType":              targetResetType,
-		"targetValue":                  targetValue,
-	}
+	return m
 }
 
 func (p MissionTaskModel) Pointer() *MissionTaskModel {
@@ -3652,98 +3463,65 @@ func NewMissionTaskModelMasterFromDict(data map[string]interface{}) MissionTaskM
 }
 
 func (p MissionTaskModelMaster) ToDict() map[string]interface{} {
-
-	var missionTaskId *string
+	m := map[string]interface{}{}
 	if p.MissionTaskId != nil {
-		missionTaskId = p.MissionTaskId
+		m["missionTaskId"] = p.MissionTaskId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var verifyCompleteType *string
 	if p.VerifyCompleteType != nil {
-		verifyCompleteType = p.VerifyCompleteType
+		m["verifyCompleteType"] = p.VerifyCompleteType
 	}
-	var targetCounter map[string]interface{}
 	if p.TargetCounter != nil {
-		targetCounter = func() map[string]interface{} {
+		m["targetCounter"] = func() map[string]interface{} {
 			if p.TargetCounter == nil {
 				return nil
 			}
 			return p.TargetCounter.ToDict()
 		}()
 	}
-	var verifyCompleteConsumeActions []interface{}
 	if p.VerifyCompleteConsumeActions != nil {
-		verifyCompleteConsumeActions = CastVerifyActionsFromDict(
+		m["verifyCompleteConsumeActions"] = CastVerifyActionsFromDict(
 			p.VerifyCompleteConsumeActions,
 		)
 	}
-	var completeAcquireActions []interface{}
 	if p.CompleteAcquireActions != nil {
-		completeAcquireActions = CastAcquireActionsFromDict(
+		m["completeAcquireActions"] = CastAcquireActionsFromDict(
 			p.CompleteAcquireActions,
 		)
 	}
-	var challengePeriodEventId *string
 	if p.ChallengePeriodEventId != nil {
-		challengePeriodEventId = p.ChallengePeriodEventId
+		m["challengePeriodEventId"] = p.ChallengePeriodEventId
 	}
-	var premiseMissionTaskName *string
 	if p.PremiseMissionTaskName != nil {
-		premiseMissionTaskName = p.PremiseMissionTaskName
+		m["premiseMissionTaskName"] = p.PremiseMissionTaskName
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	var counterName *string
 	if p.CounterName != nil {
-		counterName = p.CounterName
+		m["counterName"] = p.CounterName
 	}
-	var targetResetType *string
 	if p.TargetResetType != nil {
-		targetResetType = p.TargetResetType
+		m["targetResetType"] = p.TargetResetType
 	}
-	var targetValue *int64
 	if p.TargetValue != nil {
-		targetValue = p.TargetValue
+		m["targetValue"] = p.TargetValue
 	}
-	return map[string]interface{}{
-		"missionTaskId":                missionTaskId,
-		"name":                         name,
-		"metadata":                     metadata,
-		"description":                  description,
-		"verifyCompleteType":           verifyCompleteType,
-		"targetCounter":                targetCounter,
-		"verifyCompleteConsumeActions": verifyCompleteConsumeActions,
-		"completeAcquireActions":       completeAcquireActions,
-		"challengePeriodEventId":       challengePeriodEventId,
-		"premiseMissionTaskName":       premiseMissionTaskName,
-		"createdAt":                    createdAt,
-		"updatedAt":                    updatedAt,
-		"revision":                     revision,
-		"counterName":                  counterName,
-		"targetResetType":              targetResetType,
-		"targetValue":                  targetValue,
-	}
+	return m
 }
 
 func (p MissionTaskModelMaster) Pointer() *MissionTaskModelMaster {
@@ -3933,39 +3711,26 @@ func NewScopedValueFromDict(data map[string]interface{}) ScopedValue {
 }
 
 func (p ScopedValue) ToDict() map[string]interface{} {
-
-	var scopeType *string
+	m := map[string]interface{}{}
 	if p.ScopeType != nil {
-		scopeType = p.ScopeType
+		m["scopeType"] = p.ScopeType
 	}
-	var resetType *string
 	if p.ResetType != nil {
-		resetType = p.ResetType
+		m["resetType"] = p.ResetType
 	}
-	var conditionName *string
 	if p.ConditionName != nil {
-		conditionName = p.ConditionName
+		m["conditionName"] = p.ConditionName
 	}
-	var value *int64
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	var nextResetAt *int64
 	if p.NextResetAt != nil {
-		nextResetAt = p.NextResetAt
+		m["nextResetAt"] = p.NextResetAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"scopeType":     scopeType,
-		"resetType":     resetType,
-		"conditionName": conditionName,
-		"value":         value,
-		"nextResetAt":   nextResetAt,
-		"updatedAt":     updatedAt,
-	}
+	return m
 }
 
 func (p ScopedValue) Pointer() *ScopedValue {
@@ -4164,34 +3929,23 @@ func NewTargetCounterModelFromDict(data map[string]interface{}) TargetCounterMod
 }
 
 func (p TargetCounterModel) ToDict() map[string]interface{} {
-
-	var counterName *string
+	m := map[string]interface{}{}
 	if p.CounterName != nil {
-		counterName = p.CounterName
+		m["counterName"] = p.CounterName
 	}
-	var scopeType *string
 	if p.ScopeType != nil {
-		scopeType = p.ScopeType
+		m["scopeType"] = p.ScopeType
 	}
-	var resetType *string
 	if p.ResetType != nil {
-		resetType = p.ResetType
+		m["resetType"] = p.ResetType
 	}
-	var conditionName *string
 	if p.ConditionName != nil {
-		conditionName = p.ConditionName
+		m["conditionName"] = p.ConditionName
 	}
-	var value *int64
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"counterName":   counterName,
-		"scopeType":     scopeType,
-		"resetType":     resetType,
-		"conditionName": conditionName,
-		"value":         value,
-	}
+	return m
 }
 
 func (p TargetCounterModel) Pointer() *TargetCounterModel {
@@ -4317,19 +4071,14 @@ func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 }
 
 func (p AcquireAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p AcquireAction) Pointer() *AcquireAction {
@@ -4455,19 +4204,14 @@ func NewConsumeActionFromDict(data map[string]interface{}) ConsumeAction {
 }
 
 func (p ConsumeAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p ConsumeAction) Pointer() *ConsumeAction {
@@ -4593,19 +4337,14 @@ func NewVerifyActionFromDict(data map[string]interface{}) VerifyAction {
 }
 
 func (p VerifyAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p VerifyAction) Pointer() *VerifyAction {
@@ -4731,19 +4470,14 @@ func NewConfigFromDict(data map[string]interface{}) Config {
 }
 
 func (p Config) ToDict() map[string]interface{} {
-
-	var key *string
+	m := map[string]interface{}{}
 	if p.Key != nil {
-		key = p.Key
+		m["key"] = p.Key
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"key":   key,
-		"value": value,
-	}
+	return m
 }
 
 func (p Config) Pointer() *Config {
@@ -4838,14 +4572,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -5126,44 +4857,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -5351,29 +5067,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -5542,29 +5249,20 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 }
 
 func (p TransactionSetting) ToDict() map[string]interface{} {
-
-	var enableAutoRun *bool
+	m := map[string]interface{}{}
 	if p.EnableAutoRun != nil {
-		enableAutoRun = p.EnableAutoRun
+		m["enableAutoRun"] = p.EnableAutoRun
 	}
-	var distributorNamespaceId *string
 	if p.DistributorNamespaceId != nil {
-		distributorNamespaceId = p.DistributorNamespaceId
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	return map[string]interface{}{
-		"enableAutoRun":          enableAutoRun,
-		"distributorNamespaceId": distributorNamespaceId,
-		"keyId":                  keyId,
-		"queueNamespaceId":       queueNamespaceId,
-	}
+	return m
 }
 
 func (p TransactionSetting) Pointer() *TransactionSetting {

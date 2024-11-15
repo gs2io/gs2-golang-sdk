@@ -232,54 +232,37 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var overflowTriggerScript *string
 	if p.OverflowTriggerScript != nil {
-		overflowTriggerScript = p.OverflowTriggerScript
+		m["overflowTriggerScript"] = p.OverflowTriggerScript
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":           namespaceId,
-		"name":                  name,
-		"description":           description,
-		"overflowTriggerScript": overflowTriggerScript,
-		"logSetting":            logSetting,
-		"createdAt":             createdAt,
-		"updatedAt":             updatedAt,
-		"revision":              revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -648,84 +631,53 @@ func NewStaminaModelMasterFromDict(data map[string]interface{}) StaminaModelMast
 }
 
 func (p StaminaModelMaster) ToDict() map[string]interface{} {
-
-	var staminaModelId *string
+	m := map[string]interface{}{}
 	if p.StaminaModelId != nil {
-		staminaModelId = p.StaminaModelId
+		m["staminaModelId"] = p.StaminaModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var recoverIntervalMinutes *int32
 	if p.RecoverIntervalMinutes != nil {
-		recoverIntervalMinutes = p.RecoverIntervalMinutes
+		m["recoverIntervalMinutes"] = p.RecoverIntervalMinutes
 	}
-	var recoverValue *int32
 	if p.RecoverValue != nil {
-		recoverValue = p.RecoverValue
+		m["recoverValue"] = p.RecoverValue
 	}
-	var initialCapacity *int32
 	if p.InitialCapacity != nil {
-		initialCapacity = p.InitialCapacity
+		m["initialCapacity"] = p.InitialCapacity
 	}
-	var isOverflow *bool
 	if p.IsOverflow != nil {
-		isOverflow = p.IsOverflow
+		m["isOverflow"] = p.IsOverflow
 	}
-	var maxCapacity *int32
 	if p.MaxCapacity != nil {
-		maxCapacity = p.MaxCapacity
+		m["maxCapacity"] = p.MaxCapacity
 	}
-	var maxStaminaTableName *string
 	if p.MaxStaminaTableName != nil {
-		maxStaminaTableName = p.MaxStaminaTableName
+		m["maxStaminaTableName"] = p.MaxStaminaTableName
 	}
-	var recoverIntervalTableName *string
 	if p.RecoverIntervalTableName != nil {
-		recoverIntervalTableName = p.RecoverIntervalTableName
+		m["recoverIntervalTableName"] = p.RecoverIntervalTableName
 	}
-	var recoverValueTableName *string
 	if p.RecoverValueTableName != nil {
-		recoverValueTableName = p.RecoverValueTableName
+		m["recoverValueTableName"] = p.RecoverValueTableName
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"staminaModelId":           staminaModelId,
-		"name":                     name,
-		"metadata":                 metadata,
-		"description":              description,
-		"recoverIntervalMinutes":   recoverIntervalMinutes,
-		"recoverValue":             recoverValue,
-		"initialCapacity":          initialCapacity,
-		"isOverflow":               isOverflow,
-		"maxCapacity":              maxCapacity,
-		"maxStaminaTableName":      maxStaminaTableName,
-		"recoverIntervalTableName": recoverIntervalTableName,
-		"recoverValueTableName":    recoverValueTableName,
-		"createdAt":                createdAt,
-		"updatedAt":                updatedAt,
-		"revision":                 revision,
-	}
+	return m
 }
 
 func (p StaminaModelMaster) Pointer() *StaminaModelMaster {
@@ -988,56 +940,37 @@ func NewMaxStaminaTableMasterFromDict(data map[string]interface{}) MaxStaminaTab
 }
 
 func (p MaxStaminaTableMaster) ToDict() map[string]interface{} {
-
-	var maxStaminaTableId *string
+	m := map[string]interface{}{}
 	if p.MaxStaminaTableId != nil {
-		maxStaminaTableId = p.MaxStaminaTableId
+		m["maxStaminaTableId"] = p.MaxStaminaTableId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var experienceModelId *string
 	if p.ExperienceModelId != nil {
-		experienceModelId = p.ExperienceModelId
+		m["experienceModelId"] = p.ExperienceModelId
 	}
-	var values []interface{}
 	if p.Values != nil {
-		values = core.CastInt32sFromDict(
+		m["values"] = core.CastInt32sFromDict(
 			p.Values,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"maxStaminaTableId": maxStaminaTableId,
-		"name":              name,
-		"metadata":          metadata,
-		"description":       description,
-		"experienceModelId": experienceModelId,
-		"values":            values,
-		"createdAt":         createdAt,
-		"updatedAt":         updatedAt,
-		"revision":          revision,
-	}
+	return m
 }
 
 func (p MaxStaminaTableMaster) Pointer() *MaxStaminaTableMaster {
@@ -1300,56 +1233,37 @@ func NewRecoverIntervalTableMasterFromDict(data map[string]interface{}) RecoverI
 }
 
 func (p RecoverIntervalTableMaster) ToDict() map[string]interface{} {
-
-	var recoverIntervalTableId *string
+	m := map[string]interface{}{}
 	if p.RecoverIntervalTableId != nil {
-		recoverIntervalTableId = p.RecoverIntervalTableId
+		m["recoverIntervalTableId"] = p.RecoverIntervalTableId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var experienceModelId *string
 	if p.ExperienceModelId != nil {
-		experienceModelId = p.ExperienceModelId
+		m["experienceModelId"] = p.ExperienceModelId
 	}
-	var values []interface{}
 	if p.Values != nil {
-		values = core.CastInt32sFromDict(
+		m["values"] = core.CastInt32sFromDict(
 			p.Values,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"recoverIntervalTableId": recoverIntervalTableId,
-		"name":                   name,
-		"metadata":               metadata,
-		"description":            description,
-		"experienceModelId":      experienceModelId,
-		"values":                 values,
-		"createdAt":              createdAt,
-		"updatedAt":              updatedAt,
-		"revision":               revision,
-	}
+	return m
 }
 
 func (p RecoverIntervalTableMaster) Pointer() *RecoverIntervalTableMaster {
@@ -1612,56 +1526,37 @@ func NewRecoverValueTableMasterFromDict(data map[string]interface{}) RecoverValu
 }
 
 func (p RecoverValueTableMaster) ToDict() map[string]interface{} {
-
-	var recoverValueTableId *string
+	m := map[string]interface{}{}
 	if p.RecoverValueTableId != nil {
-		recoverValueTableId = p.RecoverValueTableId
+		m["recoverValueTableId"] = p.RecoverValueTableId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var experienceModelId *string
 	if p.ExperienceModelId != nil {
-		experienceModelId = p.ExperienceModelId
+		m["experienceModelId"] = p.ExperienceModelId
 	}
-	var values []interface{}
 	if p.Values != nil {
-		values = core.CastInt32sFromDict(
+		m["values"] = core.CastInt32sFromDict(
 			p.Values,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"recoverValueTableId": recoverValueTableId,
-		"name":                name,
-		"metadata":            metadata,
-		"description":         description,
-		"experienceModelId":   experienceModelId,
-		"values":              values,
-		"createdAt":           createdAt,
-		"updatedAt":           updatedAt,
-		"revision":            revision,
-	}
+	return m
 }
 
 func (p RecoverValueTableMaster) Pointer() *RecoverValueTableMaster {
@@ -1787,19 +1682,14 @@ func NewCurrentStaminaMasterFromDict(data map[string]interface{}) CurrentStamina
 }
 
 func (p CurrentStaminaMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentStaminaMaster) Pointer() *CurrentStaminaMaster {
@@ -2044,79 +1934,56 @@ func NewStaminaModelFromDict(data map[string]interface{}) StaminaModel {
 }
 
 func (p StaminaModel) ToDict() map[string]interface{} {
-
-	var staminaModelId *string
+	m := map[string]interface{}{}
 	if p.StaminaModelId != nil {
-		staminaModelId = p.StaminaModelId
+		m["staminaModelId"] = p.StaminaModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var recoverIntervalMinutes *int32
 	if p.RecoverIntervalMinutes != nil {
-		recoverIntervalMinutes = p.RecoverIntervalMinutes
+		m["recoverIntervalMinutes"] = p.RecoverIntervalMinutes
 	}
-	var recoverValue *int32
 	if p.RecoverValue != nil {
-		recoverValue = p.RecoverValue
+		m["recoverValue"] = p.RecoverValue
 	}
-	var initialCapacity *int32
 	if p.InitialCapacity != nil {
-		initialCapacity = p.InitialCapacity
+		m["initialCapacity"] = p.InitialCapacity
 	}
-	var isOverflow *bool
 	if p.IsOverflow != nil {
-		isOverflow = p.IsOverflow
+		m["isOverflow"] = p.IsOverflow
 	}
-	var maxCapacity *int32
 	if p.MaxCapacity != nil {
-		maxCapacity = p.MaxCapacity
+		m["maxCapacity"] = p.MaxCapacity
 	}
-	var maxStaminaTable map[string]interface{}
 	if p.MaxStaminaTable != nil {
-		maxStaminaTable = func() map[string]interface{} {
+		m["maxStaminaTable"] = func() map[string]interface{} {
 			if p.MaxStaminaTable == nil {
 				return nil
 			}
 			return p.MaxStaminaTable.ToDict()
 		}()
 	}
-	var recoverIntervalTable map[string]interface{}
 	if p.RecoverIntervalTable != nil {
-		recoverIntervalTable = func() map[string]interface{} {
+		m["recoverIntervalTable"] = func() map[string]interface{} {
 			if p.RecoverIntervalTable == nil {
 				return nil
 			}
 			return p.RecoverIntervalTable.ToDict()
 		}()
 	}
-	var recoverValueTable map[string]interface{}
 	if p.RecoverValueTable != nil {
-		recoverValueTable = func() map[string]interface{} {
+		m["recoverValueTable"] = func() map[string]interface{} {
 			if p.RecoverValueTable == nil {
 				return nil
 			}
 			return p.RecoverValueTable.ToDict()
 		}()
 	}
-	return map[string]interface{}{
-		"staminaModelId":         staminaModelId,
-		"name":                   name,
-		"metadata":               metadata,
-		"recoverIntervalMinutes": recoverIntervalMinutes,
-		"recoverValue":           recoverValue,
-		"initialCapacity":        initialCapacity,
-		"isOverflow":             isOverflow,
-		"maxCapacity":            maxCapacity,
-		"maxStaminaTable":        maxStaminaTable,
-		"recoverIntervalTable":   recoverIntervalTable,
-		"recoverValueTable":      recoverValueTable,
-	}
+	return m
 }
 
 func (p StaminaModel) Pointer() *StaminaModel {
@@ -2284,31 +2151,22 @@ func NewMaxStaminaTableFromDict(data map[string]interface{}) MaxStaminaTable {
 }
 
 func (p MaxStaminaTable) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var experienceModelId *string
 	if p.ExperienceModelId != nil {
-		experienceModelId = p.ExperienceModelId
+		m["experienceModelId"] = p.ExperienceModelId
 	}
-	var values []interface{}
 	if p.Values != nil {
-		values = core.CastInt32sFromDict(
+		m["values"] = core.CastInt32sFromDict(
 			p.Values,
 		)
 	}
-	return map[string]interface{}{
-		"name":              name,
-		"metadata":          metadata,
-		"experienceModelId": experienceModelId,
-		"values":            values,
-	}
+	return m
 }
 
 func (p MaxStaminaTable) Pointer() *MaxStaminaTable {
@@ -2476,31 +2334,22 @@ func NewRecoverIntervalTableFromDict(data map[string]interface{}) RecoverInterva
 }
 
 func (p RecoverIntervalTable) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var experienceModelId *string
 	if p.ExperienceModelId != nil {
-		experienceModelId = p.ExperienceModelId
+		m["experienceModelId"] = p.ExperienceModelId
 	}
-	var values []interface{}
 	if p.Values != nil {
-		values = core.CastInt32sFromDict(
+		m["values"] = core.CastInt32sFromDict(
 			p.Values,
 		)
 	}
-	return map[string]interface{}{
-		"name":              name,
-		"metadata":          metadata,
-		"experienceModelId": experienceModelId,
-		"values":            values,
-	}
+	return m
 }
 
 func (p RecoverIntervalTable) Pointer() *RecoverIntervalTable {
@@ -2668,31 +2517,22 @@ func NewRecoverValueTableFromDict(data map[string]interface{}) RecoverValueTable
 }
 
 func (p RecoverValueTable) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var experienceModelId *string
 	if p.ExperienceModelId != nil {
-		experienceModelId = p.ExperienceModelId
+		m["experienceModelId"] = p.ExperienceModelId
 	}
-	var values []interface{}
 	if p.Values != nil {
-		values = core.CastInt32sFromDict(
+		m["values"] = core.CastInt32sFromDict(
 			p.Values,
 		)
 	}
-	return map[string]interface{}{
-		"name":              name,
-		"metadata":          metadata,
-		"experienceModelId": experienceModelId,
-		"values":            values,
-	}
+	return m
 }
 
 func (p RecoverValueTable) Pointer() *RecoverValueTable {
@@ -2959,74 +2799,47 @@ func NewStaminaFromDict(data map[string]interface{}) Stamina {
 }
 
 func (p Stamina) ToDict() map[string]interface{} {
-
-	var staminaId *string
+	m := map[string]interface{}{}
 	if p.StaminaId != nil {
-		staminaId = p.StaminaId
+		m["staminaId"] = p.StaminaId
 	}
-	var staminaName *string
 	if p.StaminaName != nil {
-		staminaName = p.StaminaName
+		m["staminaName"] = p.StaminaName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var value *int32
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	var maxValue *int32
 	if p.MaxValue != nil {
-		maxValue = p.MaxValue
+		m["maxValue"] = p.MaxValue
 	}
-	var recoverIntervalMinutes *int32
 	if p.RecoverIntervalMinutes != nil {
-		recoverIntervalMinutes = p.RecoverIntervalMinutes
+		m["recoverIntervalMinutes"] = p.RecoverIntervalMinutes
 	}
-	var recoverValue *int32
 	if p.RecoverValue != nil {
-		recoverValue = p.RecoverValue
+		m["recoverValue"] = p.RecoverValue
 	}
-	var overflowValue *int32
 	if p.OverflowValue != nil {
-		overflowValue = p.OverflowValue
+		m["overflowValue"] = p.OverflowValue
 	}
-	var nextRecoverAt *int64
 	if p.NextRecoverAt != nil {
-		nextRecoverAt = p.NextRecoverAt
+		m["nextRecoverAt"] = p.NextRecoverAt
 	}
-	var lastRecoveredAt *int64
 	if p.LastRecoveredAt != nil {
-		lastRecoveredAt = p.LastRecoveredAt
+		m["lastRecoveredAt"] = p.LastRecoveredAt
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"staminaId":              staminaId,
-		"staminaName":            staminaName,
-		"userId":                 userId,
-		"value":                  value,
-		"maxValue":               maxValue,
-		"recoverIntervalMinutes": recoverIntervalMinutes,
-		"recoverValue":           recoverValue,
-		"overflowValue":          overflowValue,
-		"nextRecoverAt":          nextRecoverAt,
-		"lastRecoveredAt":        lastRecoveredAt,
-		"createdAt":              createdAt,
-		"updatedAt":              updatedAt,
-		"revision":               revision,
-	}
+	return m
 }
 
 func (p Stamina) Pointer() *Stamina {
@@ -3307,44 +3120,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -3439,14 +3237,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -3634,29 +3429,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {

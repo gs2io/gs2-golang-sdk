@@ -252,49 +252,32 @@ func NewStackFromDict(data map[string]interface{}) Stack {
 }
 
 func (p Stack) ToDict() map[string]interface{} {
-
-	var stackId *string
+	m := map[string]interface{}{}
 	if p.StackId != nil {
-		stackId = p.StackId
+		m["stackId"] = p.StackId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var template *string
 	if p.Template != nil {
-		template = p.Template
+		m["template"] = p.Template
 	}
-	var status *string
 	if p.Status != nil {
-		status = p.Status
+		m["status"] = p.Status
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"stackId":     stackId,
-		"name":        name,
-		"description": description,
-		"template":    template,
-		"status":      status,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p Stack) Pointer() *Stack {
@@ -661,68 +644,45 @@ func NewResourceFromDict(data map[string]interface{}) Resource {
 }
 
 func (p Resource) ToDict() map[string]interface{} {
-
-	var resourceId *string
+	m := map[string]interface{}{}
 	if p.ResourceId != nil {
-		resourceId = p.ResourceId
+		m["resourceId"] = p.ResourceId
 	}
-	var _type *string
 	if p.Type != nil {
-		_type = p.Type
+		m["type"] = p.Type
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	var response *string
 	if p.Response != nil {
-		response = p.Response
+		m["response"] = p.Response
 	}
-	var rollbackContext *string
 	if p.RollbackContext != nil {
-		rollbackContext = p.RollbackContext
+		m["rollbackContext"] = p.RollbackContext
 	}
-	var rollbackRequest *string
 	if p.RollbackRequest != nil {
-		rollbackRequest = p.RollbackRequest
+		m["rollbackRequest"] = p.RollbackRequest
 	}
-	var rollbackAfter []interface{}
 	if p.RollbackAfter != nil {
-		rollbackAfter = core.CastStringsFromDict(
+		m["rollbackAfter"] = core.CastStringsFromDict(
 			p.RollbackAfter,
 		)
 	}
-	var outputFields []interface{}
 	if p.OutputFields != nil {
-		outputFields = CastOutputFieldsFromDict(
+		m["outputFields"] = CastOutputFieldsFromDict(
 			p.OutputFields,
 		)
 	}
-	var workId *string
 	if p.WorkId != nil {
-		workId = p.WorkId
+		m["workId"] = p.WorkId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	return map[string]interface{}{
-		"resourceId":      resourceId,
-		"type":            _type,
-		"name":            name,
-		"request":         request,
-		"response":        response,
-		"rollbackContext": rollbackContext,
-		"rollbackRequest": rollbackRequest,
-		"rollbackAfter":   rollbackAfter,
-		"outputFields":    outputFields,
-		"workId":          workId,
-		"createdAt":       createdAt,
-	}
+	return m
 }
 
 func (p Resource) Pointer() *Resource {
@@ -963,44 +923,29 @@ func NewEventFromDict(data map[string]interface{}) Event {
 }
 
 func (p Event) ToDict() map[string]interface{} {
-
-	var eventId *string
+	m := map[string]interface{}{}
 	if p.EventId != nil {
-		eventId = p.EventId
+		m["eventId"] = p.EventId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var resourceName *string
 	if p.ResourceName != nil {
-		resourceName = p.ResourceName
+		m["resourceName"] = p.ResourceName
 	}
-	var _type *string
 	if p.Type != nil {
-		_type = p.Type
+		m["type"] = p.Type
 	}
-	var message *string
 	if p.Message != nil {
-		message = p.Message
+		m["message"] = p.Message
 	}
-	var eventAt *int64
 	if p.EventAt != nil {
-		eventAt = p.EventAt
+		m["eventAt"] = p.EventAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"eventId":      eventId,
-		"name":         name,
-		"resourceName": resourceName,
-		"type":         _type,
-		"message":      message,
-		"eventAt":      eventAt,
-		"revision":     revision,
-	}
+	return m
 }
 
 func (p Event) Pointer() *Event {
@@ -1168,29 +1113,20 @@ func NewOutputFromDict(data map[string]interface{}) Output {
 }
 
 func (p Output) ToDict() map[string]interface{} {
-
-	var outputId *string
+	m := map[string]interface{}{}
 	if p.OutputId != nil {
-		outputId = p.OutputId
+		m["outputId"] = p.OutputId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	return map[string]interface{}{
-		"outputId":  outputId,
-		"name":      name,
-		"value":     value,
-		"createdAt": createdAt,
-	}
+	return m
 }
 
 func (p Output) Pointer() *Output {
@@ -1316,19 +1252,14 @@ func NewOutputFieldFromDict(data map[string]interface{}) OutputField {
 }
 
 func (p OutputField) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var fieldName *string
 	if p.FieldName != nil {
-		fieldName = p.FieldName
+		m["fieldName"] = p.FieldName
 	}
-	return map[string]interface{}{
-		"name":      name,
-		"fieldName": fieldName,
-	}
+	return m
 }
 
 func (p OutputField) Pointer() *OutputField {
@@ -1485,24 +1416,17 @@ func NewChangeSetFromDict(data map[string]interface{}) ChangeSet {
 }
 
 func (p ChangeSet) ToDict() map[string]interface{} {
-
-	var resourceName *string
+	m := map[string]interface{}{}
 	if p.ResourceName != nil {
-		resourceName = p.ResourceName
+		m["resourceName"] = p.ResourceName
 	}
-	var resourceType *string
 	if p.ResourceType != nil {
-		resourceType = p.ResourceType
+		m["resourceType"] = p.ResourceType
 	}
-	var operation *string
 	if p.Operation != nil {
-		operation = p.Operation
+		m["operation"] = p.Operation
 	}
-	return map[string]interface{}{
-		"resourceName": resourceName,
-		"resourceType": resourceType,
-		"operation":    operation,
-	}
+	return m
 }
 
 func (p ChangeSet) Pointer() *ChangeSet {
@@ -1783,44 +1707,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {

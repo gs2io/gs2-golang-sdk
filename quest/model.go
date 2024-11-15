@@ -309,99 +309,72 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = func() map[string]interface{} {
+		m["transactionSetting"] = func() map[string]interface{} {
 			if p.TransactionSetting == nil {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
 		}()
 	}
-	var startQuestScript map[string]interface{}
 	if p.StartQuestScript != nil {
-		startQuestScript = func() map[string]interface{} {
+		m["startQuestScript"] = func() map[string]interface{} {
 			if p.StartQuestScript == nil {
 				return nil
 			}
 			return p.StartQuestScript.ToDict()
 		}()
 	}
-	var completeQuestScript map[string]interface{}
 	if p.CompleteQuestScript != nil {
-		completeQuestScript = func() map[string]interface{} {
+		m["completeQuestScript"] = func() map[string]interface{} {
 			if p.CompleteQuestScript == nil {
 				return nil
 			}
 			return p.CompleteQuestScript.ToDict()
 		}()
 	}
-	var failedQuestScript map[string]interface{}
 	if p.FailedQuestScript != nil {
-		failedQuestScript = func() map[string]interface{} {
+		m["failedQuestScript"] = func() map[string]interface{} {
 			if p.FailedQuestScript == nil {
 				return nil
 			}
 			return p.FailedQuestScript.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":         namespaceId,
-		"name":                name,
-		"description":         description,
-		"transactionSetting":  transactionSetting,
-		"startQuestScript":    startQuestScript,
-		"completeQuestScript": completeQuestScript,
-		"failedQuestScript":   failedQuestScript,
-		"logSetting":          logSetting,
-		"createdAt":           createdAt,
-		"updatedAt":           updatedAt,
-		"queueNamespaceId":    queueNamespaceId,
-		"keyId":               keyId,
-		"revision":            revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -653,49 +626,32 @@ func NewQuestGroupModelMasterFromDict(data map[string]interface{}) QuestGroupMod
 }
 
 func (p QuestGroupModelMaster) ToDict() map[string]interface{} {
-
-	var questGroupModelId *string
+	m := map[string]interface{}{}
 	if p.QuestGroupModelId != nil {
-		questGroupModelId = p.QuestGroupModelId
+		m["questGroupModelId"] = p.QuestGroupModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var challengePeriodEventId *string
 	if p.ChallengePeriodEventId != nil {
-		challengePeriodEventId = p.ChallengePeriodEventId
+		m["challengePeriodEventId"] = p.ChallengePeriodEventId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"questGroupModelId":      questGroupModelId,
-		"name":                   name,
-		"description":            description,
-		"metadata":               metadata,
-		"challengePeriodEventId": challengePeriodEventId,
-		"createdAt":              createdAt,
-		"updatedAt":              updatedAt,
-		"revision":               revision,
-	}
+	return m
 }
 
 func (p QuestGroupModelMaster) Pointer() *QuestGroupModelMaster {
@@ -1062,96 +1018,65 @@ func NewQuestModelMasterFromDict(data map[string]interface{}) QuestModelMaster {
 }
 
 func (p QuestModelMaster) ToDict() map[string]interface{} {
-
-	var questModelId *string
+	m := map[string]interface{}{}
 	if p.QuestModelId != nil {
-		questModelId = p.QuestModelId
+		m["questModelId"] = p.QuestModelId
 	}
-	var questGroupName *string
 	if p.QuestGroupName != nil {
-		questGroupName = p.QuestGroupName
+		m["questGroupName"] = p.QuestGroupName
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var contents []interface{}
 	if p.Contents != nil {
-		contents = CastContentsesFromDict(
+		m["contents"] = CastContentsesFromDict(
 			p.Contents,
 		)
 	}
-	var challengePeriodEventId *string
 	if p.ChallengePeriodEventId != nil {
-		challengePeriodEventId = p.ChallengePeriodEventId
+		m["challengePeriodEventId"] = p.ChallengePeriodEventId
 	}
-	var firstCompleteAcquireActions []interface{}
 	if p.FirstCompleteAcquireActions != nil {
-		firstCompleteAcquireActions = CastAcquireActionsFromDict(
+		m["firstCompleteAcquireActions"] = CastAcquireActionsFromDict(
 			p.FirstCompleteAcquireActions,
 		)
 	}
-	var verifyActions []interface{}
 	if p.VerifyActions != nil {
-		verifyActions = CastVerifyActionsFromDict(
+		m["verifyActions"] = CastVerifyActionsFromDict(
 			p.VerifyActions,
 		)
 	}
-	var consumeActions []interface{}
 	if p.ConsumeActions != nil {
-		consumeActions = CastConsumeActionsFromDict(
+		m["consumeActions"] = CastConsumeActionsFromDict(
 			p.ConsumeActions,
 		)
 	}
-	var failedAcquireActions []interface{}
 	if p.FailedAcquireActions != nil {
-		failedAcquireActions = CastAcquireActionsFromDict(
+		m["failedAcquireActions"] = CastAcquireActionsFromDict(
 			p.FailedAcquireActions,
 		)
 	}
-	var premiseQuestNames []interface{}
 	if p.PremiseQuestNames != nil {
-		premiseQuestNames = core.CastStringsFromDict(
+		m["premiseQuestNames"] = core.CastStringsFromDict(
 			p.PremiseQuestNames,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"questModelId":                questModelId,
-		"questGroupName":              questGroupName,
-		"name":                        name,
-		"description":                 description,
-		"metadata":                    metadata,
-		"contents":                    contents,
-		"challengePeriodEventId":      challengePeriodEventId,
-		"firstCompleteAcquireActions": firstCompleteAcquireActions,
-		"verifyActions":               verifyActions,
-		"consumeActions":              consumeActions,
-		"failedAcquireActions":        failedAcquireActions,
-		"premiseQuestNames":           premiseQuestNames,
-		"createdAt":                   createdAt,
-		"updatedAt":                   updatedAt,
-		"revision":                    revision,
-	}
+	return m
 }
 
 func (p QuestModelMaster) Pointer() *QuestModelMaster {
@@ -1277,19 +1202,14 @@ func NewCurrentQuestMasterFromDict(data map[string]interface{}) CurrentQuestMast
 }
 
 func (p CurrentQuestMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentQuestMaster) Pointer() *CurrentQuestMaster {
@@ -1405,26 +1325,19 @@ func NewContentsFromDict(data map[string]interface{}) Contents {
 }
 
 func (p Contents) ToDict() map[string]interface{} {
-
-	var metadata *string
+	m := map[string]interface{}{}
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var completeAcquireActions []interface{}
 	if p.CompleteAcquireActions != nil {
-		completeAcquireActions = CastAcquireActionsFromDict(
+		m["completeAcquireActions"] = CastAcquireActionsFromDict(
 			p.CompleteAcquireActions,
 		)
 	}
-	var weight *int32
 	if p.Weight != nil {
-		weight = p.Weight
+		m["weight"] = p.Weight
 	}
-	return map[string]interface{}{
-		"metadata":               metadata,
-		"completeAcquireActions": completeAcquireActions,
-		"weight":                 weight,
-	}
+	return m
 }
 
 func (p Contents) Pointer() *Contents {
@@ -1592,29 +1505,20 @@ func NewRewardFromDict(data map[string]interface{}) Reward {
 }
 
 func (p Reward) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	var itemId *string
 	if p.ItemId != nil {
-		itemId = p.ItemId
+		m["itemId"] = p.ItemId
 	}
-	var value *int32
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-		"itemId":  itemId,
-		"value":   value,
-	}
+	return m
 }
 
 func (p Reward) Pointer() *Reward {
@@ -1897,68 +1801,45 @@ func NewProgressFromDict(data map[string]interface{}) Progress {
 }
 
 func (p Progress) ToDict() map[string]interface{} {
-
-	var progressId *string
+	m := map[string]interface{}{}
 	if p.ProgressId != nil {
-		progressId = p.ProgressId
+		m["progressId"] = p.ProgressId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var transactionId *string
 	if p.TransactionId != nil {
-		transactionId = p.TransactionId
+		m["transactionId"] = p.TransactionId
 	}
-	var questModelId *string
 	if p.QuestModelId != nil {
-		questModelId = p.QuestModelId
+		m["questModelId"] = p.QuestModelId
 	}
-	var randomSeed *int64
 	if p.RandomSeed != nil {
-		randomSeed = p.RandomSeed
+		m["randomSeed"] = p.RandomSeed
 	}
-	var rewards []interface{}
 	if p.Rewards != nil {
-		rewards = CastRewardsFromDict(
+		m["rewards"] = CastRewardsFromDict(
 			p.Rewards,
 		)
 	}
-	var failedRewards []interface{}
 	if p.FailedRewards != nil {
-		failedRewards = CastRewardsFromDict(
+		m["failedRewards"] = CastRewardsFromDict(
 			p.FailedRewards,
 		)
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"progressId":    progressId,
-		"userId":        userId,
-		"transactionId": transactionId,
-		"questModelId":  questModelId,
-		"randomSeed":    randomSeed,
-		"rewards":       rewards,
-		"failedRewards": failedRewards,
-		"metadata":      metadata,
-		"createdAt":     createdAt,
-		"updatedAt":     updatedAt,
-		"revision":      revision,
-	}
+	return m
 }
 
 func (p Progress) Pointer() *Progress {
@@ -2182,46 +2063,31 @@ func NewCompletedQuestListFromDict(data map[string]interface{}) CompletedQuestLi
 }
 
 func (p CompletedQuestList) ToDict() map[string]interface{} {
-
-	var completedQuestListId *string
+	m := map[string]interface{}{}
 	if p.CompletedQuestListId != nil {
-		completedQuestListId = p.CompletedQuestListId
+		m["completedQuestListId"] = p.CompletedQuestListId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var questGroupName *string
 	if p.QuestGroupName != nil {
-		questGroupName = p.QuestGroupName
+		m["questGroupName"] = p.QuestGroupName
 	}
-	var completeQuestNames []interface{}
 	if p.CompleteQuestNames != nil {
-		completeQuestNames = core.CastStringsFromDict(
+		m["completeQuestNames"] = core.CastStringsFromDict(
 			p.CompleteQuestNames,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"completedQuestListId": completedQuestListId,
-		"userId":               userId,
-		"questGroupName":       questGroupName,
-		"completeQuestNames":   completeQuestNames,
-		"createdAt":            createdAt,
-		"updatedAt":            updatedAt,
-		"revision":             revision,
-	}
+	return m
 }
 
 func (p CompletedQuestList) Pointer() *CompletedQuestList {
@@ -2419,36 +2285,25 @@ func NewQuestGroupModelFromDict(data map[string]interface{}) QuestGroupModel {
 }
 
 func (p QuestGroupModel) ToDict() map[string]interface{} {
-
-	var questGroupModelId *string
+	m := map[string]interface{}{}
 	if p.QuestGroupModelId != nil {
-		questGroupModelId = p.QuestGroupModelId
+		m["questGroupModelId"] = p.QuestGroupModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var quests []interface{}
 	if p.Quests != nil {
-		quests = CastQuestModelsFromDict(
+		m["quests"] = CastQuestModelsFromDict(
 			p.Quests,
 		)
 	}
-	var challengePeriodEventId *string
 	if p.ChallengePeriodEventId != nil {
-		challengePeriodEventId = p.ChallengePeriodEventId
+		m["challengePeriodEventId"] = p.ChallengePeriodEventId
 	}
-	return map[string]interface{}{
-		"questGroupModelId":      questGroupModelId,
-		"name":                   name,
-		"metadata":               metadata,
-		"quests":                 quests,
-		"challengePeriodEventId": challengePeriodEventId,
-	}
+	return m
 }
 
 func (p QuestGroupModel) Pointer() *QuestGroupModel {
@@ -2720,71 +2575,50 @@ func NewQuestModelFromDict(data map[string]interface{}) QuestModel {
 }
 
 func (p QuestModel) ToDict() map[string]interface{} {
-
-	var questModelId *string
+	m := map[string]interface{}{}
 	if p.QuestModelId != nil {
-		questModelId = p.QuestModelId
+		m["questModelId"] = p.QuestModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var contents []interface{}
 	if p.Contents != nil {
-		contents = CastContentsesFromDict(
+		m["contents"] = CastContentsesFromDict(
 			p.Contents,
 		)
 	}
-	var challengePeriodEventId *string
 	if p.ChallengePeriodEventId != nil {
-		challengePeriodEventId = p.ChallengePeriodEventId
+		m["challengePeriodEventId"] = p.ChallengePeriodEventId
 	}
-	var firstCompleteAcquireActions []interface{}
 	if p.FirstCompleteAcquireActions != nil {
-		firstCompleteAcquireActions = CastAcquireActionsFromDict(
+		m["firstCompleteAcquireActions"] = CastAcquireActionsFromDict(
 			p.FirstCompleteAcquireActions,
 		)
 	}
-	var verifyActions []interface{}
 	if p.VerifyActions != nil {
-		verifyActions = CastVerifyActionsFromDict(
+		m["verifyActions"] = CastVerifyActionsFromDict(
 			p.VerifyActions,
 		)
 	}
-	var consumeActions []interface{}
 	if p.ConsumeActions != nil {
-		consumeActions = CastConsumeActionsFromDict(
+		m["consumeActions"] = CastConsumeActionsFromDict(
 			p.ConsumeActions,
 		)
 	}
-	var failedAcquireActions []interface{}
 	if p.FailedAcquireActions != nil {
-		failedAcquireActions = CastAcquireActionsFromDict(
+		m["failedAcquireActions"] = CastAcquireActionsFromDict(
 			p.FailedAcquireActions,
 		)
 	}
-	var premiseQuestNames []interface{}
 	if p.PremiseQuestNames != nil {
-		premiseQuestNames = core.CastStringsFromDict(
+		m["premiseQuestNames"] = core.CastStringsFromDict(
 			p.PremiseQuestNames,
 		)
 	}
-	return map[string]interface{}{
-		"questModelId":                questModelId,
-		"name":                        name,
-		"metadata":                    metadata,
-		"contents":                    contents,
-		"challengePeriodEventId":      challengePeriodEventId,
-		"firstCompleteAcquireActions": firstCompleteAcquireActions,
-		"verifyActions":               verifyActions,
-		"consumeActions":              consumeActions,
-		"failedAcquireActions":        failedAcquireActions,
-		"premiseQuestNames":           premiseQuestNames,
-	}
+	return m
 }
 
 func (p QuestModel) Pointer() *QuestModel {
@@ -2910,19 +2744,14 @@ func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 }
 
 func (p AcquireAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p AcquireAction) Pointer() *AcquireAction {
@@ -3048,19 +2877,14 @@ func NewConsumeActionFromDict(data map[string]interface{}) ConsumeAction {
 }
 
 func (p ConsumeAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p ConsumeAction) Pointer() *ConsumeAction {
@@ -3186,19 +3010,14 @@ func NewVerifyActionFromDict(data map[string]interface{}) VerifyAction {
 }
 
 func (p VerifyAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p VerifyAction) Pointer() *VerifyAction {
@@ -3324,19 +3143,14 @@ func NewConfigFromDict(data map[string]interface{}) Config {
 }
 
 func (p Config) ToDict() map[string]interface{} {
-
-	var key *string
+	m := map[string]interface{}{}
 	if p.Key != nil {
-		key = p.Key
+		m["key"] = p.Key
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"key":   key,
-		"value": value,
-	}
+	return m
 }
 
 func (p Config) Pointer() *Config {
@@ -3617,44 +3431,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -3842,29 +3641,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -3959,14 +3749,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -4135,29 +3922,20 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 }
 
 func (p TransactionSetting) ToDict() map[string]interface{} {
-
-	var enableAutoRun *bool
+	m := map[string]interface{}{}
 	if p.EnableAutoRun != nil {
-		enableAutoRun = p.EnableAutoRun
+		m["enableAutoRun"] = p.EnableAutoRun
 	}
-	var distributorNamespaceId *string
 	if p.DistributorNamespaceId != nil {
-		distributorNamespaceId = p.DistributorNamespaceId
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	return map[string]interface{}{
-		"enableAutoRun":          enableAutoRun,
-		"distributorNamespaceId": distributorNamespaceId,
-		"keyId":                  keyId,
-		"queueNamespaceId":       queueNamespaceId,
-	}
+	return m
 }
 
 func (p TransactionSetting) Pointer() *TransactionSetting {

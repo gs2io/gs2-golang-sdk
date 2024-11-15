@@ -201,49 +201,34 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"name":        name,
-		"description": description,
-		"logSetting":  logSetting,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -410,31 +395,22 @@ func NewAreaModelFromDict(data map[string]interface{}) AreaModel {
 }
 
 func (p AreaModel) ToDict() map[string]interface{} {
-
-	var areaModelId *string
+	m := map[string]interface{}{}
 	if p.AreaModelId != nil {
-		areaModelId = p.AreaModelId
+		m["areaModelId"] = p.AreaModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var layerModels []interface{}
 	if p.LayerModels != nil {
-		layerModels = CastLayerModelsFromDict(
+		m["layerModels"] = CastLayerModelsFromDict(
 			p.LayerModels,
 		)
 	}
-	return map[string]interface{}{
-		"areaModelId": areaModelId,
-		"name":        name,
-		"metadata":    metadata,
-		"layerModels": layerModels,
-	}
+	return m
 }
 
 func (p AreaModel) Pointer() *AreaModel {
@@ -655,44 +631,29 @@ func NewAreaModelMasterFromDict(data map[string]interface{}) AreaModelMaster {
 }
 
 func (p AreaModelMaster) ToDict() map[string]interface{} {
-
-	var areaModelMasterId *string
+	m := map[string]interface{}{}
 	if p.AreaModelMasterId != nil {
-		areaModelMasterId = p.AreaModelMasterId
+		m["areaModelMasterId"] = p.AreaModelMasterId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"areaModelMasterId": areaModelMasterId,
-		"name":              name,
-		"description":       description,
-		"metadata":          metadata,
-		"createdAt":         createdAt,
-		"updatedAt":         updatedAt,
-		"revision":          revision,
-	}
+	return m
 }
 
 func (p AreaModelMaster) Pointer() *AreaModelMaster {
@@ -849,24 +810,17 @@ func NewLayerModelFromDict(data map[string]interface{}) LayerModel {
 }
 
 func (p LayerModel) ToDict() map[string]interface{} {
-
-	var layerModelId *string
+	m := map[string]interface{}{}
 	if p.LayerModelId != nil {
-		layerModelId = p.LayerModelId
+		m["layerModelId"] = p.LayerModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	return map[string]interface{}{
-		"layerModelId": layerModelId,
-		"name":         name,
-		"metadata":     metadata,
-	}
+	return m
 }
 
 func (p LayerModel) Pointer() *LayerModel {
@@ -1087,44 +1041,29 @@ func NewLayerModelMasterFromDict(data map[string]interface{}) LayerModelMaster {
 }
 
 func (p LayerModelMaster) ToDict() map[string]interface{} {
-
-	var layerModelMasterId *string
+	m := map[string]interface{}{}
 	if p.LayerModelMasterId != nil {
-		layerModelMasterId = p.LayerModelMasterId
+		m["layerModelMasterId"] = p.LayerModelMasterId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"layerModelMasterId": layerModelMasterId,
-		"name":               name,
-		"description":        description,
-		"metadata":           metadata,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p LayerModelMaster) Pointer() *LayerModelMaster {
@@ -1250,19 +1189,14 @@ func NewCurrentFieldMasterFromDict(data map[string]interface{}) CurrentFieldMast
 }
 
 func (p CurrentFieldMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentFieldMaster) Pointer() *CurrentFieldMaster {
@@ -1452,39 +1386,26 @@ func NewLayerFromDict(data map[string]interface{}) Layer {
 }
 
 func (p Layer) ToDict() map[string]interface{} {
-
-	var layerId *string
+	m := map[string]interface{}{}
 	if p.LayerId != nil {
-		layerId = p.LayerId
+		m["layerId"] = p.LayerId
 	}
-	var areaModelName *string
 	if p.AreaModelName != nil {
-		areaModelName = p.AreaModelName
+		m["areaModelName"] = p.AreaModelName
 	}
-	var layerModelName *string
 	if p.LayerModelName != nil {
-		layerModelName = p.LayerModelName
+		m["layerModelName"] = p.LayerModelName
 	}
-	var numberOfMinEntries *int32
 	if p.NumberOfMinEntries != nil {
-		numberOfMinEntries = p.NumberOfMinEntries
+		m["numberOfMinEntries"] = p.NumberOfMinEntries
 	}
-	var numberOfMaxEntries *int32
 	if p.NumberOfMaxEntries != nil {
-		numberOfMaxEntries = p.NumberOfMaxEntries
+		m["numberOfMaxEntries"] = p.NumberOfMaxEntries
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	return map[string]interface{}{
-		"layerId":            layerId,
-		"areaModelName":      areaModelName,
-		"layerModelName":     layerModelName,
-		"numberOfMinEntries": numberOfMinEntries,
-		"numberOfMaxEntries": numberOfMaxEntries,
-		"createdAt":          createdAt,
-	}
+	return m
 }
 
 func (p Layer) Pointer() *Layer {
@@ -1727,64 +1648,45 @@ func NewSpatialFromDict(data map[string]interface{}) Spatial {
 }
 
 func (p Spatial) ToDict() map[string]interface{} {
-
-	var spatialId *string
+	m := map[string]interface{}{}
 	if p.SpatialId != nil {
-		spatialId = p.SpatialId
+		m["spatialId"] = p.SpatialId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var areaModelName *string
 	if p.AreaModelName != nil {
-		areaModelName = p.AreaModelName
+		m["areaModelName"] = p.AreaModelName
 	}
-	var layerModelName *string
 	if p.LayerModelName != nil {
-		layerModelName = p.LayerModelName
+		m["layerModelName"] = p.LayerModelName
 	}
-	var position map[string]interface{}
 	if p.Position != nil {
-		position = func() map[string]interface{} {
+		m["position"] = func() map[string]interface{} {
 			if p.Position == nil {
 				return nil
 			}
 			return p.Position.ToDict()
 		}()
 	}
-	var vector map[string]interface{}
 	if p.Vector != nil {
-		vector = func() map[string]interface{} {
+		m["vector"] = func() map[string]interface{} {
 			if p.Vector == nil {
 				return nil
 			}
 			return p.Vector.ToDict()
 		}()
 	}
-	var r *float32
 	if p.R != nil {
-		r = p.R
+		m["r"] = p.R
 	}
-	var lastSyncAt *int64
 	if p.LastSyncAt != nil {
-		lastSyncAt = p.LastSyncAt
+		m["lastSyncAt"] = p.LastSyncAt
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	return map[string]interface{}{
-		"spatialId":      spatialId,
-		"userId":         userId,
-		"areaModelName":  areaModelName,
-		"layerModelName": layerModelName,
-		"position":       position,
-		"vector":         vector,
-		"r":              r,
-		"lastSyncAt":     lastSyncAt,
-		"createdAt":      createdAt,
-	}
+	return m
 }
 
 func (p Spatial) Pointer() *Spatial {
@@ -1881,24 +1783,17 @@ func NewPositionFromDict(data map[string]interface{}) Position {
 }
 
 func (p Position) ToDict() map[string]interface{} {
-
-	var x *float32
+	m := map[string]interface{}{}
 	if p.X != nil {
-		x = p.X
+		m["x"] = p.X
 	}
-	var y *float32
 	if p.Y != nil {
-		y = p.Y
+		m["y"] = p.Y
 	}
-	var z *float32
 	if p.Z != nil {
-		z = p.Z
+		m["z"] = p.Z
 	}
-	return map[string]interface{}{
-		"x": x,
-		"y": y,
-		"z": z,
-	}
+	return m
 }
 
 func (p Position) Pointer() *Position {
@@ -1995,34 +1890,27 @@ func NewMyPositionFromDict(data map[string]interface{}) MyPosition {
 }
 
 func (p MyPosition) ToDict() map[string]interface{} {
-
-	var position map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Position != nil {
-		position = func() map[string]interface{} {
+		m["position"] = func() map[string]interface{} {
 			if p.Position == nil {
 				return nil
 			}
 			return p.Position.ToDict()
 		}()
 	}
-	var vector map[string]interface{}
 	if p.Vector != nil {
-		vector = func() map[string]interface{} {
+		m["vector"] = func() map[string]interface{} {
 			if p.Vector == nil {
 				return nil
 			}
 			return p.Vector.ToDict()
 		}()
 	}
-	var r *float32
 	if p.R != nil {
-		r = p.R
+		m["r"] = p.R
 	}
-	return map[string]interface{}{
-		"position": position,
-		"vector":   vector,
-		"r":        r,
-	}
+	return m
 }
 
 func (p MyPosition) Pointer() *MyPosition {
@@ -2139,24 +2027,17 @@ func NewScopeFromDict(data map[string]interface{}) Scope {
 }
 
 func (p Scope) ToDict() map[string]interface{} {
-
-	var layerName *string
+	m := map[string]interface{}{}
 	if p.LayerName != nil {
-		layerName = p.LayerName
+		m["layerName"] = p.LayerName
 	}
-	var r *float32
 	if p.R != nil {
-		r = p.R
+		m["r"] = p.R
 	}
-	var limit *int32
 	if p.Limit != nil {
-		limit = p.Limit
+		m["limit"] = p.Limit
 	}
-	return map[string]interface{}{
-		"layerName": layerName,
-		"r":         r,
-		"limit":     limit,
-	}
+	return m
 }
 
 func (p Scope) Pointer() *Scope {
@@ -2253,24 +2134,17 @@ func NewVectorFromDict(data map[string]interface{}) Vector {
 }
 
 func (p Vector) ToDict() map[string]interface{} {
-
-	var x *float32
+	m := map[string]interface{}{}
 	if p.X != nil {
-		x = p.X
+		m["x"] = p.X
 	}
-	var y *float32
 	if p.Y != nil {
-		y = p.Y
+		m["y"] = p.Y
 	}
-	var z *float32
 	if p.Z != nil {
-		z = p.Z
+		m["z"] = p.Z
 	}
-	return map[string]interface{}{
-		"x": x,
-		"y": y,
-		"z": z,
-	}
+	return m
 }
 
 func (p Vector) Pointer() *Vector {
@@ -2365,14 +2239,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -2653,44 +2524,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {

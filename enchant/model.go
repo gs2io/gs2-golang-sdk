@@ -212,59 +212,42 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = func() map[string]interface{} {
+		m["transactionSetting"] = func() map[string]interface{} {
 			if p.TransactionSetting == nil {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":        namespaceId,
-		"name":               name,
-		"description":        description,
-		"transactionSetting": transactionSetting,
-		"logSetting":         logSetting,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -473,41 +456,28 @@ func NewBalanceParameterModelFromDict(data map[string]interface{}) BalanceParame
 }
 
 func (p BalanceParameterModel) ToDict() map[string]interface{} {
-
-	var balanceParameterModelId *string
+	m := map[string]interface{}{}
 	if p.BalanceParameterModelId != nil {
-		balanceParameterModelId = p.BalanceParameterModelId
+		m["balanceParameterModelId"] = p.BalanceParameterModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var totalValue *int64
 	if p.TotalValue != nil {
-		totalValue = p.TotalValue
+		m["totalValue"] = p.TotalValue
 	}
-	var initialValueStrategy *string
 	if p.InitialValueStrategy != nil {
-		initialValueStrategy = p.InitialValueStrategy
+		m["initialValueStrategy"] = p.InitialValueStrategy
 	}
-	var parameters []interface{}
 	if p.Parameters != nil {
-		parameters = CastBalanceParameterValueModelsFromDict(
+		m["parameters"] = CastBalanceParameterValueModelsFromDict(
 			p.Parameters,
 		)
 	}
-	return map[string]interface{}{
-		"balanceParameterModelId": balanceParameterModelId,
-		"name":                    name,
-		"metadata":                metadata,
-		"totalValue":              totalValue,
-		"initialValueStrategy":    initialValueStrategy,
-		"parameters":              parameters,
-	}
+	return m
 }
 
 func (p BalanceParameterModel) Pointer() *BalanceParameterModel {
@@ -780,61 +750,40 @@ func NewBalanceParameterModelMasterFromDict(data map[string]interface{}) Balance
 }
 
 func (p BalanceParameterModelMaster) ToDict() map[string]interface{} {
-
-	var balanceParameterModelId *string
+	m := map[string]interface{}{}
 	if p.BalanceParameterModelId != nil {
-		balanceParameterModelId = p.BalanceParameterModelId
+		m["balanceParameterModelId"] = p.BalanceParameterModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var totalValue *int64
 	if p.TotalValue != nil {
-		totalValue = p.TotalValue
+		m["totalValue"] = p.TotalValue
 	}
-	var initialValueStrategy *string
 	if p.InitialValueStrategy != nil {
-		initialValueStrategy = p.InitialValueStrategy
+		m["initialValueStrategy"] = p.InitialValueStrategy
 	}
-	var parameters []interface{}
 	if p.Parameters != nil {
-		parameters = CastBalanceParameterValueModelsFromDict(
+		m["parameters"] = CastBalanceParameterValueModelsFromDict(
 			p.Parameters,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"balanceParameterModelId": balanceParameterModelId,
-		"name":                    name,
-		"description":             description,
-		"metadata":                metadata,
-		"totalValue":              totalValue,
-		"initialValueStrategy":    initialValueStrategy,
-		"parameters":              parameters,
-		"createdAt":               createdAt,
-		"updatedAt":               updatedAt,
-		"revision":                revision,
-	}
+	return m
 }
 
 func (p BalanceParameterModelMaster) Pointer() *BalanceParameterModelMaster {
@@ -1022,43 +971,30 @@ func NewRarityParameterModelFromDict(data map[string]interface{}) RarityParamete
 }
 
 func (p RarityParameterModel) ToDict() map[string]interface{} {
-
-	var rarityParameterModelId *string
+	m := map[string]interface{}{}
 	if p.RarityParameterModelId != nil {
-		rarityParameterModelId = p.RarityParameterModelId
+		m["rarityParameterModelId"] = p.RarityParameterModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var maximumParameterCount *int32
 	if p.MaximumParameterCount != nil {
-		maximumParameterCount = p.MaximumParameterCount
+		m["maximumParameterCount"] = p.MaximumParameterCount
 	}
-	var parameterCounts []interface{}
 	if p.ParameterCounts != nil {
-		parameterCounts = CastRarityParameterCountModelsFromDict(
+		m["parameterCounts"] = CastRarityParameterCountModelsFromDict(
 			p.ParameterCounts,
 		)
 	}
-	var parameters []interface{}
 	if p.Parameters != nil {
-		parameters = CastRarityParameterValueModelsFromDict(
+		m["parameters"] = CastRarityParameterValueModelsFromDict(
 			p.Parameters,
 		)
 	}
-	return map[string]interface{}{
-		"rarityParameterModelId": rarityParameterModelId,
-		"name":                   name,
-		"metadata":               metadata,
-		"maximumParameterCount":  maximumParameterCount,
-		"parameterCounts":        parameterCounts,
-		"parameters":             parameters,
-	}
+	return m
 }
 
 func (p RarityParameterModel) Pointer() *RarityParameterModel {
@@ -1310,63 +1246,42 @@ func NewRarityParameterModelMasterFromDict(data map[string]interface{}) RarityPa
 }
 
 func (p RarityParameterModelMaster) ToDict() map[string]interface{} {
-
-	var rarityParameterModelId *string
+	m := map[string]interface{}{}
 	if p.RarityParameterModelId != nil {
-		rarityParameterModelId = p.RarityParameterModelId
+		m["rarityParameterModelId"] = p.RarityParameterModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var maximumParameterCount *int32
 	if p.MaximumParameterCount != nil {
-		maximumParameterCount = p.MaximumParameterCount
+		m["maximumParameterCount"] = p.MaximumParameterCount
 	}
-	var parameterCounts []interface{}
 	if p.ParameterCounts != nil {
-		parameterCounts = CastRarityParameterCountModelsFromDict(
+		m["parameterCounts"] = CastRarityParameterCountModelsFromDict(
 			p.ParameterCounts,
 		)
 	}
-	var parameters []interface{}
 	if p.Parameters != nil {
-		parameters = CastRarityParameterValueModelsFromDict(
+		m["parameters"] = CastRarityParameterValueModelsFromDict(
 			p.Parameters,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"rarityParameterModelId": rarityParameterModelId,
-		"name":                   name,
-		"description":            description,
-		"metadata":               metadata,
-		"maximumParameterCount":  maximumParameterCount,
-		"parameterCounts":        parameterCounts,
-		"parameters":             parameters,
-		"createdAt":              createdAt,
-		"updatedAt":              updatedAt,
-		"revision":               revision,
-	}
+	return m
 }
 
 func (p RarityParameterModelMaster) Pointer() *RarityParameterModelMaster {
@@ -1492,19 +1407,14 @@ func NewCurrentParameterMasterFromDict(data map[string]interface{}) CurrentParam
 }
 
 func (p CurrentParameterMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentParameterMaster) Pointer() *CurrentParameterMaster {
@@ -1735,51 +1645,34 @@ func NewBalanceParameterStatusFromDict(data map[string]interface{}) BalanceParam
 }
 
 func (p BalanceParameterStatus) ToDict() map[string]interface{} {
-
-	var balanceParameterStatusId *string
+	m := map[string]interface{}{}
 	if p.BalanceParameterStatusId != nil {
-		balanceParameterStatusId = p.BalanceParameterStatusId
+		m["balanceParameterStatusId"] = p.BalanceParameterStatusId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var parameterName *string
 	if p.ParameterName != nil {
-		parameterName = p.ParameterName
+		m["parameterName"] = p.ParameterName
 	}
-	var propertyId *string
 	if p.PropertyId != nil {
-		propertyId = p.PropertyId
+		m["propertyId"] = p.PropertyId
 	}
-	var parameterValues []interface{}
 	if p.ParameterValues != nil {
-		parameterValues = CastBalanceParameterValuesFromDict(
+		m["parameterValues"] = CastBalanceParameterValuesFromDict(
 			p.ParameterValues,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"balanceParameterStatusId": balanceParameterStatusId,
-		"userId":                   userId,
-		"parameterName":            parameterName,
-		"propertyId":               propertyId,
-		"parameterValues":          parameterValues,
-		"createdAt":                createdAt,
-		"updatedAt":                updatedAt,
-		"revision":                 revision,
-	}
+	return m
 }
 
 func (p BalanceParameterStatus) Pointer() *BalanceParameterStatus {
@@ -2010,51 +1903,34 @@ func NewRarityParameterStatusFromDict(data map[string]interface{}) RarityParamet
 }
 
 func (p RarityParameterStatus) ToDict() map[string]interface{} {
-
-	var rarityParameterStatusId *string
+	m := map[string]interface{}{}
 	if p.RarityParameterStatusId != nil {
-		rarityParameterStatusId = p.RarityParameterStatusId
+		m["rarityParameterStatusId"] = p.RarityParameterStatusId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var parameterName *string
 	if p.ParameterName != nil {
-		parameterName = p.ParameterName
+		m["parameterName"] = p.ParameterName
 	}
-	var propertyId *string
 	if p.PropertyId != nil {
-		propertyId = p.PropertyId
+		m["propertyId"] = p.PropertyId
 	}
-	var parameterValues []interface{}
 	if p.ParameterValues != nil {
-		parameterValues = CastRarityParameterValuesFromDict(
+		m["parameterValues"] = CastRarityParameterValuesFromDict(
 			p.ParameterValues,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"rarityParameterStatusId": rarityParameterStatusId,
-		"userId":                  userId,
-		"parameterName":           parameterName,
-		"propertyId":              propertyId,
-		"parameterValues":         parameterValues,
-		"createdAt":               createdAt,
-		"updatedAt":               updatedAt,
-		"revision":                revision,
-	}
+	return m
 }
 
 func (p RarityParameterStatus) Pointer() *RarityParameterStatus {
@@ -2180,19 +2056,14 @@ func NewBalanceParameterValueModelFromDict(data map[string]interface{}) BalanceP
 }
 
 func (p BalanceParameterValueModel) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	return map[string]interface{}{
-		"name":     name,
-		"metadata": metadata,
-	}
+	return m
 }
 
 func (p BalanceParameterValueModel) Pointer() *BalanceParameterValueModel {
@@ -2278,19 +2149,14 @@ func NewRarityParameterCountModelFromDict(data map[string]interface{}) RarityPar
 }
 
 func (p RarityParameterCountModel) ToDict() map[string]interface{} {
-
-	var count *int32
+	m := map[string]interface{}{}
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var weight *int32
 	if p.Weight != nil {
-		weight = p.Weight
+		m["weight"] = p.Weight
 	}
-	return map[string]interface{}{
-		"count":  count,
-		"weight": weight,
-	}
+	return m
 }
 
 func (p RarityParameterCountModel) Pointer() *RarityParameterCountModel {
@@ -2469,34 +2335,23 @@ func NewRarityParameterValueModelFromDict(data map[string]interface{}) RarityPar
 }
 
 func (p RarityParameterValueModel) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var resourceName *string
 	if p.ResourceName != nil {
-		resourceName = p.ResourceName
+		m["resourceName"] = p.ResourceName
 	}
-	var resourceValue *int64
 	if p.ResourceValue != nil {
-		resourceValue = p.ResourceValue
+		m["resourceValue"] = p.ResourceValue
 	}
-	var weight *int32
 	if p.Weight != nil {
-		weight = p.Weight
+		m["weight"] = p.Weight
 	}
-	return map[string]interface{}{
-		"name":          name,
-		"metadata":      metadata,
-		"resourceName":  resourceName,
-		"resourceValue": resourceValue,
-		"weight":        weight,
-	}
+	return m
 }
 
 func (p RarityParameterValueModel) Pointer() *RarityParameterValueModel {
@@ -2602,19 +2457,14 @@ func NewBalanceParameterValueFromDict(data map[string]interface{}) BalanceParame
 }
 
 func (p BalanceParameterValue) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var value *int64
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"name":  name,
-		"value": value,
-	}
+	return m
 }
 
 func (p BalanceParameterValue) Pointer() *BalanceParameterValue {
@@ -2751,24 +2601,17 @@ func NewRarityParameterValueFromDict(data map[string]interface{}) RarityParamete
 }
 
 func (p RarityParameterValue) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var resourceName *string
 	if p.ResourceName != nil {
-		resourceName = p.ResourceName
+		m["resourceName"] = p.ResourceName
 	}
-	var resourceValue *int64
 	if p.ResourceValue != nil {
-		resourceValue = p.ResourceValue
+		m["resourceValue"] = p.ResourceValue
 	}
-	return map[string]interface{}{
-		"name":          name,
-		"resourceName":  resourceName,
-		"resourceValue": resourceValue,
-	}
+	return m
 }
 
 func (p RarityParameterValue) Pointer() *RarityParameterValue {
@@ -2894,19 +2737,14 @@ func NewConfigFromDict(data map[string]interface{}) Config {
 }
 
 func (p Config) ToDict() map[string]interface{} {
-
-	var key *string
+	m := map[string]interface{}{}
 	if p.Key != nil {
-		key = p.Key
+		m["key"] = p.Key
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"key":   key,
-		"value": value,
-	}
+	return m
 }
 
 func (p Config) Pointer() *Config {
@@ -3187,44 +3025,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -3412,29 +3235,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -3529,14 +3343,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -3705,29 +3516,20 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 }
 
 func (p TransactionSetting) ToDict() map[string]interface{} {
-
-	var enableAutoRun *bool
+	m := map[string]interface{}{}
 	if p.EnableAutoRun != nil {
-		enableAutoRun = p.EnableAutoRun
+		m["enableAutoRun"] = p.EnableAutoRun
 	}
-	var distributorNamespaceId *string
 	if p.DistributorNamespaceId != nil {
-		distributorNamespaceId = p.DistributorNamespaceId
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	return map[string]interface{}{
-		"enableAutoRun":          enableAutoRun,
-		"distributorNamespaceId": distributorNamespaceId,
-		"keyId":                  keyId,
-		"queueNamespaceId":       queueNamespaceId,
-	}
+	return m
 }
 
 func (p TransactionSetting) Pointer() *TransactionSetting {

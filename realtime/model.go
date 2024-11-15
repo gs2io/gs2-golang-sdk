@@ -274,69 +274,48 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var serverType *string
 	if p.ServerType != nil {
-		serverType = p.ServerType
+		m["serverType"] = p.ServerType
 	}
-	var serverSpec *string
 	if p.ServerSpec != nil {
-		serverSpec = p.ServerSpec
+		m["serverSpec"] = p.ServerSpec
 	}
-	var createNotification map[string]interface{}
 	if p.CreateNotification != nil {
-		createNotification = func() map[string]interface{} {
+		m["createNotification"] = func() map[string]interface{} {
 			if p.CreateNotification == nil {
 				return nil
 			}
 			return p.CreateNotification.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":        namespaceId,
-		"name":               name,
-		"description":        description,
-		"serverType":         serverType,
-		"serverSpec":         serverSpec,
-		"createNotification": createNotification,
-		"logSetting":         logSetting,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -602,56 +581,37 @@ func NewRoomFromDict(data map[string]interface{}) Room {
 }
 
 func (p Room) ToDict() map[string]interface{} {
-
-	var roomId *string
+	m := map[string]interface{}{}
 	if p.RoomId != nil {
-		roomId = p.RoomId
+		m["roomId"] = p.RoomId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var ipAddress *string
 	if p.IpAddress != nil {
-		ipAddress = p.IpAddress
+		m["ipAddress"] = p.IpAddress
 	}
-	var port *int32
 	if p.Port != nil {
-		port = p.Port
+		m["port"] = p.Port
 	}
-	var encryptionKey *string
 	if p.EncryptionKey != nil {
-		encryptionKey = p.EncryptionKey
+		m["encryptionKey"] = p.EncryptionKey
 	}
-	var notificationUserIds []interface{}
 	if p.NotificationUserIds != nil {
-		notificationUserIds = core.CastStringsFromDict(
+		m["notificationUserIds"] = core.CastStringsFromDict(
 			p.NotificationUserIds,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"roomId":              roomId,
-		"name":                name,
-		"ipAddress":           ipAddress,
-		"port":                port,
-		"encryptionKey":       encryptionKey,
-		"notificationUserIds": notificationUserIds,
-		"createdAt":           createdAt,
-		"updatedAt":           updatedAt,
-		"revision":            revision,
-	}
+	return m
 }
 
 func (p Room) Pointer() *Room {
@@ -788,24 +748,17 @@ func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSet
 }
 
 func (p NotificationSetting) ToDict() map[string]interface{} {
-
-	var gatewayNamespaceId *string
+	m := map[string]interface{}{}
 	if p.GatewayNamespaceId != nil {
-		gatewayNamespaceId = p.GatewayNamespaceId
+		m["gatewayNamespaceId"] = p.GatewayNamespaceId
 	}
-	var enableTransferMobileNotification *bool
 	if p.EnableTransferMobileNotification != nil {
-		enableTransferMobileNotification = p.EnableTransferMobileNotification
+		m["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
 	}
-	var sound *string
 	if p.Sound != nil {
-		sound = p.Sound
+		m["sound"] = p.Sound
 	}
-	return map[string]interface{}{
-		"gatewayNamespaceId":               gatewayNamespaceId,
-		"enableTransferMobileNotification": enableTransferMobileNotification,
-		"sound":                            sound,
-	}
+	return m
 }
 
 func (p NotificationSetting) Pointer() *NotificationSetting {
@@ -900,14 +853,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {

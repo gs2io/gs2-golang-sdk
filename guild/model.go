@@ -322,159 +322,122 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var changeNotification map[string]interface{}
 	if p.ChangeNotification != nil {
-		changeNotification = func() map[string]interface{} {
+		m["changeNotification"] = func() map[string]interface{} {
 			if p.ChangeNotification == nil {
 				return nil
 			}
 			return p.ChangeNotification.ToDict()
 		}()
 	}
-	var joinNotification map[string]interface{}
 	if p.JoinNotification != nil {
-		joinNotification = func() map[string]interface{} {
+		m["joinNotification"] = func() map[string]interface{} {
 			if p.JoinNotification == nil {
 				return nil
 			}
 			return p.JoinNotification.ToDict()
 		}()
 	}
-	var leaveNotification map[string]interface{}
 	if p.LeaveNotification != nil {
-		leaveNotification = func() map[string]interface{} {
+		m["leaveNotification"] = func() map[string]interface{} {
 			if p.LeaveNotification == nil {
 				return nil
 			}
 			return p.LeaveNotification.ToDict()
 		}()
 	}
-	var changeMemberNotification map[string]interface{}
 	if p.ChangeMemberNotification != nil {
-		changeMemberNotification = func() map[string]interface{} {
+		m["changeMemberNotification"] = func() map[string]interface{} {
 			if p.ChangeMemberNotification == nil {
 				return nil
 			}
 			return p.ChangeMemberNotification.ToDict()
 		}()
 	}
-	var receiveRequestNotification map[string]interface{}
 	if p.ReceiveRequestNotification != nil {
-		receiveRequestNotification = func() map[string]interface{} {
+		m["receiveRequestNotification"] = func() map[string]interface{} {
 			if p.ReceiveRequestNotification == nil {
 				return nil
 			}
 			return p.ReceiveRequestNotification.ToDict()
 		}()
 	}
-	var removeRequestNotification map[string]interface{}
 	if p.RemoveRequestNotification != nil {
-		removeRequestNotification = func() map[string]interface{} {
+		m["removeRequestNotification"] = func() map[string]interface{} {
 			if p.RemoveRequestNotification == nil {
 				return nil
 			}
 			return p.RemoveRequestNotification.ToDict()
 		}()
 	}
-	var createGuildScript map[string]interface{}
 	if p.CreateGuildScript != nil {
-		createGuildScript = func() map[string]interface{} {
+		m["createGuildScript"] = func() map[string]interface{} {
 			if p.CreateGuildScript == nil {
 				return nil
 			}
 			return p.CreateGuildScript.ToDict()
 		}()
 	}
-	var updateGuildScript map[string]interface{}
 	if p.UpdateGuildScript != nil {
-		updateGuildScript = func() map[string]interface{} {
+		m["updateGuildScript"] = func() map[string]interface{} {
 			if p.UpdateGuildScript == nil {
 				return nil
 			}
 			return p.UpdateGuildScript.ToDict()
 		}()
 	}
-	var joinGuildScript map[string]interface{}
 	if p.JoinGuildScript != nil {
-		joinGuildScript = func() map[string]interface{} {
+		m["joinGuildScript"] = func() map[string]interface{} {
 			if p.JoinGuildScript == nil {
 				return nil
 			}
 			return p.JoinGuildScript.ToDict()
 		}()
 	}
-	var leaveGuildScript map[string]interface{}
 	if p.LeaveGuildScript != nil {
-		leaveGuildScript = func() map[string]interface{} {
+		m["leaveGuildScript"] = func() map[string]interface{} {
 			if p.LeaveGuildScript == nil {
 				return nil
 			}
 			return p.LeaveGuildScript.ToDict()
 		}()
 	}
-	var changeRoleScript map[string]interface{}
 	if p.ChangeRoleScript != nil {
-		changeRoleScript = func() map[string]interface{} {
+		m["changeRoleScript"] = func() map[string]interface{} {
 			if p.ChangeRoleScript == nil {
 				return nil
 			}
 			return p.ChangeRoleScript.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":                namespaceId,
-		"name":                       name,
-		"description":                description,
-		"changeNotification":         changeNotification,
-		"joinNotification":           joinNotification,
-		"leaveNotification":          leaveNotification,
-		"changeMemberNotification":   changeMemberNotification,
-		"receiveRequestNotification": receiveRequestNotification,
-		"removeRequestNotification":  removeRequestNotification,
-		"createGuildScript":          createGuildScript,
-		"updateGuildScript":          updateGuildScript,
-		"joinGuildScript":            joinGuildScript,
-		"leaveGuildScript":           leaveGuildScript,
-		"changeRoleScript":           changeRoleScript,
-		"logSetting":                 logSetting,
-		"createdAt":                  createdAt,
-		"updatedAt":                  updatedAt,
-		"revision":                   revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -811,81 +774,52 @@ func NewGuildModelMasterFromDict(data map[string]interface{}) GuildModelMaster {
 }
 
 func (p GuildModelMaster) ToDict() map[string]interface{} {
-
-	var guildModelId *string
+	m := map[string]interface{}{}
 	if p.GuildModelId != nil {
-		guildModelId = p.GuildModelId
+		m["guildModelId"] = p.GuildModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var defaultMaximumMemberCount *int32
 	if p.DefaultMaximumMemberCount != nil {
-		defaultMaximumMemberCount = p.DefaultMaximumMemberCount
+		m["defaultMaximumMemberCount"] = p.DefaultMaximumMemberCount
 	}
-	var maximumMemberCount *int32
 	if p.MaximumMemberCount != nil {
-		maximumMemberCount = p.MaximumMemberCount
+		m["maximumMemberCount"] = p.MaximumMemberCount
 	}
-	var inactivityPeriodDays *int32
 	if p.InactivityPeriodDays != nil {
-		inactivityPeriodDays = p.InactivityPeriodDays
+		m["inactivityPeriodDays"] = p.InactivityPeriodDays
 	}
-	var roles []interface{}
 	if p.Roles != nil {
-		roles = CastRoleModelsFromDict(
+		m["roles"] = CastRoleModelsFromDict(
 			p.Roles,
 		)
 	}
-	var guildMasterRole *string
 	if p.GuildMasterRole != nil {
-		guildMasterRole = p.GuildMasterRole
+		m["guildMasterRole"] = p.GuildMasterRole
 	}
-	var guildMemberDefaultRole *string
 	if p.GuildMemberDefaultRole != nil {
-		guildMemberDefaultRole = p.GuildMemberDefaultRole
+		m["guildMemberDefaultRole"] = p.GuildMemberDefaultRole
 	}
-	var rejoinCoolTimeMinutes *int32
 	if p.RejoinCoolTimeMinutes != nil {
-		rejoinCoolTimeMinutes = p.RejoinCoolTimeMinutes
+		m["rejoinCoolTimeMinutes"] = p.RejoinCoolTimeMinutes
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"guildModelId":              guildModelId,
-		"name":                      name,
-		"description":               description,
-		"metadata":                  metadata,
-		"defaultMaximumMemberCount": defaultMaximumMemberCount,
-		"maximumMemberCount":        maximumMemberCount,
-		"inactivityPeriodDays":      inactivityPeriodDays,
-		"roles":                     roles,
-		"guildMasterRole":           guildMasterRole,
-		"guildMemberDefaultRole":    guildMemberDefaultRole,
-		"rejoinCoolTimeMinutes":     rejoinCoolTimeMinutes,
-		"createdAt":                 createdAt,
-		"updatedAt":                 updatedAt,
-		"revision":                  revision,
-	}
+	return m
 }
 
 func (p GuildModelMaster) Pointer() *GuildModelMaster {
@@ -1158,61 +1092,40 @@ func NewGuildModelFromDict(data map[string]interface{}) GuildModel {
 }
 
 func (p GuildModel) ToDict() map[string]interface{} {
-
-	var guildModelId *string
+	m := map[string]interface{}{}
 	if p.GuildModelId != nil {
-		guildModelId = p.GuildModelId
+		m["guildModelId"] = p.GuildModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var defaultMaximumMemberCount *int32
 	if p.DefaultMaximumMemberCount != nil {
-		defaultMaximumMemberCount = p.DefaultMaximumMemberCount
+		m["defaultMaximumMemberCount"] = p.DefaultMaximumMemberCount
 	}
-	var maximumMemberCount *int32
 	if p.MaximumMemberCount != nil {
-		maximumMemberCount = p.MaximumMemberCount
+		m["maximumMemberCount"] = p.MaximumMemberCount
 	}
-	var inactivityPeriodDays *int32
 	if p.InactivityPeriodDays != nil {
-		inactivityPeriodDays = p.InactivityPeriodDays
+		m["inactivityPeriodDays"] = p.InactivityPeriodDays
 	}
-	var roles []interface{}
 	if p.Roles != nil {
-		roles = CastRoleModelsFromDict(
+		m["roles"] = CastRoleModelsFromDict(
 			p.Roles,
 		)
 	}
-	var guildMasterRole *string
 	if p.GuildMasterRole != nil {
-		guildMasterRole = p.GuildMasterRole
+		m["guildMasterRole"] = p.GuildMasterRole
 	}
-	var guildMemberDefaultRole *string
 	if p.GuildMemberDefaultRole != nil {
-		guildMemberDefaultRole = p.GuildMemberDefaultRole
+		m["guildMemberDefaultRole"] = p.GuildMemberDefaultRole
 	}
-	var rejoinCoolTimeMinutes *int32
 	if p.RejoinCoolTimeMinutes != nil {
-		rejoinCoolTimeMinutes = p.RejoinCoolTimeMinutes
+		m["rejoinCoolTimeMinutes"] = p.RejoinCoolTimeMinutes
 	}
-	return map[string]interface{}{
-		"guildModelId":              guildModelId,
-		"name":                      name,
-		"metadata":                  metadata,
-		"defaultMaximumMemberCount": defaultMaximumMemberCount,
-		"maximumMemberCount":        maximumMemberCount,
-		"inactivityPeriodDays":      inactivityPeriodDays,
-		"roles":                     roles,
-		"guildMasterRole":           guildMasterRole,
-		"guildMemberDefaultRole":    guildMemberDefaultRole,
-		"rejoinCoolTimeMinutes":     rejoinCoolTimeMinutes,
-	}
+	return m
 }
 
 func (p GuildModel) Pointer() *GuildModel {
@@ -1405,41 +1318,28 @@ func NewInboxFromDict(data map[string]interface{}) Inbox {
 }
 
 func (p Inbox) ToDict() map[string]interface{} {
-
-	var inboxId *string
+	m := map[string]interface{}{}
 	if p.InboxId != nil {
-		inboxId = p.InboxId
+		m["inboxId"] = p.InboxId
 	}
-	var guildName *string
 	if p.GuildName != nil {
-		guildName = p.GuildName
+		m["guildName"] = p.GuildName
 	}
-	var fromUserIds []interface{}
 	if p.FromUserIds != nil {
-		fromUserIds = core.CastStringsFromDict(
+		m["fromUserIds"] = core.CastStringsFromDict(
 			p.FromUserIds,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"inboxId":     inboxId,
-		"guildName":   guildName,
-		"fromUserIds": fromUserIds,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p Inbox) Pointer() *Inbox {
@@ -1663,46 +1563,31 @@ func NewSendBoxFromDict(data map[string]interface{}) SendBox {
 }
 
 func (p SendBox) ToDict() map[string]interface{} {
-
-	var sendBoxId *string
+	m := map[string]interface{}{}
 	if p.SendBoxId != nil {
-		sendBoxId = p.SendBoxId
+		m["sendBoxId"] = p.SendBoxId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var guildModelName *string
 	if p.GuildModelName != nil {
-		guildModelName = p.GuildModelName
+		m["guildModelName"] = p.GuildModelName
 	}
-	var targetGuildNames []interface{}
 	if p.TargetGuildNames != nil {
-		targetGuildNames = core.CastStringsFromDict(
+		m["targetGuildNames"] = core.CastStringsFromDict(
 			p.TargetGuildNames,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"sendBoxId":        sendBoxId,
-		"userId":           userId,
-		"guildModelName":   guildModelName,
-		"targetGuildNames": targetGuildNames,
-		"createdAt":        createdAt,
-		"updatedAt":        updatedAt,
-		"revision":         revision,
-	}
+	return m
 }
 
 func (p SendBox) Pointer() *SendBox {
@@ -2071,98 +1956,63 @@ func NewGuildFromDict(data map[string]interface{}) Guild {
 }
 
 func (p Guild) ToDict() map[string]interface{} {
-
-	var guildId *string
+	m := map[string]interface{}{}
 	if p.GuildId != nil {
-		guildId = p.GuildId
+		m["guildId"] = p.GuildId
 	}
-	var guildModelName *string
 	if p.GuildModelName != nil {
-		guildModelName = p.GuildModelName
+		m["guildModelName"] = p.GuildModelName
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var displayName *string
 	if p.DisplayName != nil {
-		displayName = p.DisplayName
+		m["displayName"] = p.DisplayName
 	}
-	var attribute1 *int32
 	if p.Attribute1 != nil {
-		attribute1 = p.Attribute1
+		m["attribute1"] = p.Attribute1
 	}
-	var attribute2 *int32
 	if p.Attribute2 != nil {
-		attribute2 = p.Attribute2
+		m["attribute2"] = p.Attribute2
 	}
-	var attribute3 *int32
 	if p.Attribute3 != nil {
-		attribute3 = p.Attribute3
+		m["attribute3"] = p.Attribute3
 	}
-	var attribute4 *int32
 	if p.Attribute4 != nil {
-		attribute4 = p.Attribute4
+		m["attribute4"] = p.Attribute4
 	}
-	var attribute5 *int32
 	if p.Attribute5 != nil {
-		attribute5 = p.Attribute5
+		m["attribute5"] = p.Attribute5
 	}
-	var joinPolicy *string
 	if p.JoinPolicy != nil {
-		joinPolicy = p.JoinPolicy
+		m["joinPolicy"] = p.JoinPolicy
 	}
-	var customRoles []interface{}
 	if p.CustomRoles != nil {
-		customRoles = CastRoleModelsFromDict(
+		m["customRoles"] = CastRoleModelsFromDict(
 			p.CustomRoles,
 		)
 	}
-	var guildMemberDefaultRole *string
 	if p.GuildMemberDefaultRole != nil {
-		guildMemberDefaultRole = p.GuildMemberDefaultRole
+		m["guildMemberDefaultRole"] = p.GuildMemberDefaultRole
 	}
-	var currentMaximumMemberCount *int32
 	if p.CurrentMaximumMemberCount != nil {
-		currentMaximumMemberCount = p.CurrentMaximumMemberCount
+		m["currentMaximumMemberCount"] = p.CurrentMaximumMemberCount
 	}
-	var members []interface{}
 	if p.Members != nil {
-		members = CastMembersFromDict(
+		m["members"] = CastMembersFromDict(
 			p.Members,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"guildId":                   guildId,
-		"guildModelName":            guildModelName,
-		"name":                      name,
-		"displayName":               displayName,
-		"attribute1":                attribute1,
-		"attribute2":                attribute2,
-		"attribute3":                attribute3,
-		"attribute4":                attribute4,
-		"attribute5":                attribute5,
-		"joinPolicy":                joinPolicy,
-		"customRoles":               customRoles,
-		"guildMemberDefaultRole":    guildMemberDefaultRole,
-		"currentMaximumMemberCount": currentMaximumMemberCount,
-		"members":                   members,
-		"createdAt":                 createdAt,
-		"updatedAt":                 updatedAt,
-		"revision":                  revision,
-	}
+	return m
 }
 
 func (p Guild) Pointer() *Guild {
@@ -2361,34 +2211,23 @@ func NewJoinedGuildFromDict(data map[string]interface{}) JoinedGuild {
 }
 
 func (p JoinedGuild) ToDict() map[string]interface{} {
-
-	var joinedGuildId *string
+	m := map[string]interface{}{}
 	if p.JoinedGuildId != nil {
-		joinedGuildId = p.JoinedGuildId
+		m["joinedGuildId"] = p.JoinedGuildId
 	}
-	var guildModelName *string
 	if p.GuildModelName != nil {
-		guildModelName = p.GuildModelName
+		m["guildModelName"] = p.GuildModelName
 	}
-	var guildName *string
 	if p.GuildName != nil {
-		guildName = p.GuildName
+		m["guildName"] = p.GuildName
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	return map[string]interface{}{
-		"joinedGuildId":  joinedGuildId,
-		"guildModelName": guildModelName,
-		"guildName":      guildName,
-		"userId":         userId,
-		"createdAt":      createdAt,
-	}
+	return m
 }
 
 func (p JoinedGuild) Pointer() *JoinedGuild {
@@ -2494,19 +2333,14 @@ func NewLastGuildMasterActivityFromDict(data map[string]interface{}) LastGuildMa
 }
 
 func (p LastGuildMasterActivity) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"userId":    userId,
-		"updatedAt": updatedAt,
-	}
+	return m
 }
 
 func (p LastGuildMasterActivity) Pointer() *LastGuildMasterActivity {
@@ -2632,19 +2466,14 @@ func NewCurrentGuildMasterFromDict(data map[string]interface{}) CurrentGuildMast
 }
 
 func (p CurrentGuildMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentGuildMaster) Pointer() *CurrentGuildMaster {
@@ -2801,24 +2630,17 @@ func NewRoleModelFromDict(data map[string]interface{}) RoleModel {
 }
 
 func (p RoleModel) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var policyDocument *string
 	if p.PolicyDocument != nil {
-		policyDocument = p.PolicyDocument
+		m["policyDocument"] = p.PolicyDocument
 	}
-	return map[string]interface{}{
-		"name":           name,
-		"metadata":       metadata,
-		"policyDocument": policyDocument,
-	}
+	return m
 }
 
 func (p RoleModel) Pointer() *RoleModel {
@@ -2955,24 +2777,17 @@ func NewMemberFromDict(data map[string]interface{}) Member {
 }
 
 func (p Member) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var roleName *string
 	if p.RoleName != nil {
-		roleName = p.RoleName
+		m["roleName"] = p.RoleName
 	}
-	var joinedAt *int64
 	if p.JoinedAt != nil {
-		joinedAt = p.JoinedAt
+		m["joinedAt"] = p.JoinedAt
 	}
-	return map[string]interface{}{
-		"userId":   userId,
-		"roleName": roleName,
-		"joinedAt": joinedAt,
-	}
+	return m
 }
 
 func (p Member) Pointer() *Member {
@@ -3098,19 +2913,14 @@ func NewReceiveMemberRequestFromDict(data map[string]interface{}) ReceiveMemberR
 }
 
 func (p ReceiveMemberRequest) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var targetGuildName *string
 	if p.TargetGuildName != nil {
-		targetGuildName = p.TargetGuildName
+		m["targetGuildName"] = p.TargetGuildName
 	}
-	return map[string]interface{}{
-		"userId":          userId,
-		"targetGuildName": targetGuildName,
-	}
+	return m
 }
 
 func (p ReceiveMemberRequest) Pointer() *ReceiveMemberRequest {
@@ -3236,19 +3046,14 @@ func NewSendMemberRequestFromDict(data map[string]interface{}) SendMemberRequest
 }
 
 func (p SendMemberRequest) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var targetGuildName *string
 	if p.TargetGuildName != nil {
-		targetGuildName = p.TargetGuildName
+		m["targetGuildName"] = p.TargetGuildName
 	}
-	return map[string]interface{}{
-		"userId":          userId,
-		"targetGuildName": targetGuildName,
-	}
+	return m
 }
 
 func (p SendMemberRequest) Pointer() *SendMemberRequest {
@@ -3354,19 +3159,14 @@ func NewIgnoreUserFromDict(data map[string]interface{}) IgnoreUser {
 }
 
 func (p IgnoreUser) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	return map[string]interface{}{
-		"userId":    userId,
-		"createdAt": createdAt,
-	}
+	return m
 }
 
 func (p IgnoreUser) Pointer() *IgnoreUser {
@@ -3535,29 +3335,20 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 }
 
 func (p TransactionSetting) ToDict() map[string]interface{} {
-
-	var enableAutoRun *bool
+	m := map[string]interface{}{}
 	if p.EnableAutoRun != nil {
-		enableAutoRun = p.EnableAutoRun
+		m["enableAutoRun"] = p.EnableAutoRun
 	}
-	var distributorNamespaceId *string
 	if p.DistributorNamespaceId != nil {
-		distributorNamespaceId = p.DistributorNamespaceId
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	return map[string]interface{}{
-		"enableAutoRun":          enableAutoRun,
-		"distributorNamespaceId": distributorNamespaceId,
-		"keyId":                  keyId,
-		"queueNamespaceId":       queueNamespaceId,
-	}
+	return m
 }
 
 func (p TransactionSetting) Pointer() *TransactionSetting {
@@ -3694,24 +3485,17 @@ func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSet
 }
 
 func (p NotificationSetting) ToDict() map[string]interface{} {
-
-	var gatewayNamespaceId *string
+	m := map[string]interface{}{}
 	if p.GatewayNamespaceId != nil {
-		gatewayNamespaceId = p.GatewayNamespaceId
+		m["gatewayNamespaceId"] = p.GatewayNamespaceId
 	}
-	var enableTransferMobileNotification *bool
 	if p.EnableTransferMobileNotification != nil {
-		enableTransferMobileNotification = p.EnableTransferMobileNotification
+		m["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
 	}
-	var sound *string
 	if p.Sound != nil {
-		sound = p.Sound
+		m["sound"] = p.Sound
 	}
-	return map[string]interface{}{
-		"gatewayNamespaceId":               gatewayNamespaceId,
-		"enableTransferMobileNotification": enableTransferMobileNotification,
-		"sound":                            sound,
-	}
+	return m
 }
 
 func (p NotificationSetting) Pointer() *NotificationSetting {
@@ -3899,29 +3683,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -4016,14 +3791,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -4304,44 +4076,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {

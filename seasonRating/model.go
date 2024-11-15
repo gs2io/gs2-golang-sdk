@@ -212,59 +212,42 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = func() map[string]interface{} {
+		m["transactionSetting"] = func() map[string]interface{} {
 			if p.TransactionSetting == nil {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":        namespaceId,
-		"name":               name,
-		"description":        description,
-		"transactionSetting": transactionSetting,
-		"logSetting":         logSetting,
-		"createdAt":          createdAt,
-		"updatedAt":          updatedAt,
-		"revision":           revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -412,29 +395,20 @@ func NewMatchSessionFromDict(data map[string]interface{}) MatchSession {
 }
 
 func (p MatchSession) ToDict() map[string]interface{} {
-
-	var sessionId *string
+	m := map[string]interface{}{}
 	if p.SessionId != nil {
-		sessionId = p.SessionId
+		m["sessionId"] = p.SessionId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"sessionId": sessionId,
-		"name":      name,
-		"createdAt": createdAt,
-		"revision":  revision,
-	}
+	return m
 }
 
 func (p MatchSession) Pointer() *MatchSession {
@@ -727,61 +701,40 @@ func NewSeasonModelMasterFromDict(data map[string]interface{}) SeasonModelMaster
 }
 
 func (p SeasonModelMaster) ToDict() map[string]interface{} {
-
-	var seasonModelId *string
+	m := map[string]interface{}{}
 	if p.SeasonModelId != nil {
-		seasonModelId = p.SeasonModelId
+		m["seasonModelId"] = p.SeasonModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var tiers []interface{}
 	if p.Tiers != nil {
-		tiers = CastTierModelsFromDict(
+		m["tiers"] = CastTierModelsFromDict(
 			p.Tiers,
 		)
 	}
-	var experienceModelId *string
 	if p.ExperienceModelId != nil {
-		experienceModelId = p.ExperienceModelId
+		m["experienceModelId"] = p.ExperienceModelId
 	}
-	var challengePeriodEventId *string
 	if p.ChallengePeriodEventId != nil {
-		challengePeriodEventId = p.ChallengePeriodEventId
+		m["challengePeriodEventId"] = p.ChallengePeriodEventId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"seasonModelId":          seasonModelId,
-		"name":                   name,
-		"metadata":               metadata,
-		"description":            description,
-		"tiers":                  tiers,
-		"experienceModelId":      experienceModelId,
-		"challengePeriodEventId": challengePeriodEventId,
-		"createdAt":              createdAt,
-		"updatedAt":              updatedAt,
-		"revision":               revision,
-	}
+	return m
 }
 
 func (p SeasonModelMaster) Pointer() *SeasonModelMaster {
@@ -1010,41 +963,28 @@ func NewSeasonModelFromDict(data map[string]interface{}) SeasonModel {
 }
 
 func (p SeasonModel) ToDict() map[string]interface{} {
-
-	var seasonModelId *string
+	m := map[string]interface{}{}
 	if p.SeasonModelId != nil {
-		seasonModelId = p.SeasonModelId
+		m["seasonModelId"] = p.SeasonModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var tiers []interface{}
 	if p.Tiers != nil {
-		tiers = CastTierModelsFromDict(
+		m["tiers"] = CastTierModelsFromDict(
 			p.Tiers,
 		)
 	}
-	var experienceModelId *string
 	if p.ExperienceModelId != nil {
-		experienceModelId = p.ExperienceModelId
+		m["experienceModelId"] = p.ExperienceModelId
 	}
-	var challengePeriodEventId *string
 	if p.ChallengePeriodEventId != nil {
-		challengePeriodEventId = p.ChallengePeriodEventId
+		m["challengePeriodEventId"] = p.ChallengePeriodEventId
 	}
-	return map[string]interface{}{
-		"seasonModelId":          seasonModelId,
-		"name":                   name,
-		"metadata":               metadata,
-		"tiers":                  tiers,
-		"experienceModelId":      experienceModelId,
-		"challengePeriodEventId": challengePeriodEventId,
-	}
+	return m
 }
 
 func (p SeasonModel) Pointer() *SeasonModel {
@@ -1183,34 +1123,23 @@ func NewTierModelFromDict(data map[string]interface{}) TierModel {
 }
 
 func (p TierModel) ToDict() map[string]interface{} {
-
-	var metadata *string
+	m := map[string]interface{}{}
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var raiseRankBonus *int32
 	if p.RaiseRankBonus != nil {
-		raiseRankBonus = p.RaiseRankBonus
+		m["raiseRankBonus"] = p.RaiseRankBonus
 	}
-	var entryFee *int32
 	if p.EntryFee != nil {
-		entryFee = p.EntryFee
+		m["entryFee"] = p.EntryFee
 	}
-	var minimumChangePoint *int32
 	if p.MinimumChangePoint != nil {
-		minimumChangePoint = p.MinimumChangePoint
+		m["minimumChangePoint"] = p.MinimumChangePoint
 	}
-	var maximumChangePoint *int32
 	if p.MaximumChangePoint != nil {
-		maximumChangePoint = p.MaximumChangePoint
+		m["maximumChangePoint"] = p.MaximumChangePoint
 	}
-	return map[string]interface{}{
-		"metadata":           metadata,
-		"raiseRankBonus":     raiseRankBonus,
-		"entryFee":           entryFee,
-		"minimumChangePoint": minimumChangePoint,
-		"maximumChangePoint": maximumChangePoint,
-	}
+	return m
 }
 
 func (p TierModel) Pointer() *TierModel {
@@ -1336,19 +1265,14 @@ func NewCurrentSeasonModelMasterFromDict(data map[string]interface{}) CurrentSea
 }
 
 func (p CurrentSeasonModelMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentSeasonModelMaster) Pointer() *CurrentSeasonModelMaster {
@@ -1474,19 +1398,14 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 }
 
 func (p TransactionSetting) ToDict() map[string]interface{} {
-
-	var distributorNamespaceId *string
+	m := map[string]interface{}{}
 	if p.DistributorNamespaceId != nil {
-		distributorNamespaceId = p.DistributorNamespaceId
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	return map[string]interface{}{
-		"distributorNamespaceId": distributorNamespaceId,
-		"queueNamespaceId":       queueNamespaceId,
-	}
+	return m
 }
 
 func (p TransactionSetting) Pointer() *TransactionSetting {
@@ -1674,29 +1593,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -1791,14 +1701,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -2079,44 +1986,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -2222,19 +2114,14 @@ func NewGameResultFromDict(data map[string]interface{}) GameResult {
 }
 
 func (p GameResult) ToDict() map[string]interface{} {
-
-	var rank *int32
+	m := map[string]interface{}{}
 	if p.Rank != nil {
-		rank = p.Rank
+		m["rank"] = p.Rank
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	return map[string]interface{}{
-		"rank":   rank,
-		"userId": userId,
-	}
+	return m
 }
 
 func (p GameResult) Pointer() *GameResult {
@@ -2402,29 +2289,20 @@ func NewBallotFromDict(data map[string]interface{}) Ballot {
 }
 
 func (p Ballot) ToDict() map[string]interface{} {
-
-	var userId *string
+	m := map[string]interface{}{}
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var seasonName *string
 	if p.SeasonName != nil {
-		seasonName = p.SeasonName
+		m["seasonName"] = p.SeasonName
 	}
-	var sessionName *string
 	if p.SessionName != nil {
-		sessionName = p.SessionName
+		m["sessionName"] = p.SessionName
 	}
-	var numberOfPlayer *int32
 	if p.NumberOfPlayer != nil {
-		numberOfPlayer = p.NumberOfPlayer
+		m["numberOfPlayer"] = p.NumberOfPlayer
 	}
-	return map[string]interface{}{
-		"userId":         userId,
-		"seasonName":     seasonName,
-		"sessionName":    sessionName,
-		"numberOfPlayer": numberOfPlayer,
-	}
+	return m
 }
 
 func (p Ballot) Pointer() *Ballot {
@@ -2550,19 +2428,14 @@ func NewSignedBallotFromDict(data map[string]interface{}) SignedBallot {
 }
 
 func (p SignedBallot) ToDict() map[string]interface{} {
-
-	var body *string
+	m := map[string]interface{}{}
 	if p.Body != nil {
-		body = p.Body
+		m["body"] = p.Body
 	}
-	var signature *string
 	if p.Signature != nil {
-		signature = p.Signature
+		m["signature"] = p.Signature
 	}
-	return map[string]interface{}{
-		"body":      body,
-		"signature": signature,
-	}
+	return m
 }
 
 func (p SignedBallot) Pointer() *SignedBallot {
@@ -2647,26 +2520,21 @@ func NewWrittenBallotFromDict(data map[string]interface{}) WrittenBallot {
 }
 
 func (p WrittenBallot) ToDict() map[string]interface{} {
-
-	var ballot map[string]interface{}
+	m := map[string]interface{}{}
 	if p.Ballot != nil {
-		ballot = func() map[string]interface{} {
+		m["ballot"] = func() map[string]interface{} {
 			if p.Ballot == nil {
 				return nil
 			}
 			return p.Ballot.ToDict()
 		}()
 	}
-	var gameResults []interface{}
 	if p.GameResults != nil {
-		gameResults = CastGameResultsFromDict(
+		m["gameResults"] = CastGameResultsFromDict(
 			p.GameResults,
 		)
 	}
-	return map[string]interface{}{
-		"ballot":      ballot,
-		"gameResults": gameResults,
-	}
+	return m
 }
 
 func (p WrittenBallot) Pointer() *WrittenBallot {
@@ -2866,46 +2734,31 @@ func NewVoteFromDict(data map[string]interface{}) Vote {
 }
 
 func (p Vote) ToDict() map[string]interface{} {
-
-	var voteId *string
+	m := map[string]interface{}{}
 	if p.VoteId != nil {
-		voteId = p.VoteId
+		m["voteId"] = p.VoteId
 	}
-	var seasonName *string
 	if p.SeasonName != nil {
-		seasonName = p.SeasonName
+		m["seasonName"] = p.SeasonName
 	}
-	var sessionName *string
 	if p.SessionName != nil {
-		sessionName = p.SessionName
+		m["sessionName"] = p.SessionName
 	}
-	var writtenBallots []interface{}
 	if p.WrittenBallots != nil {
-		writtenBallots = CastWrittenBallotsFromDict(
+		m["writtenBallots"] = CastWrittenBallotsFromDict(
 			p.WrittenBallots,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"voteId":         voteId,
-		"seasonName":     seasonName,
-		"sessionName":    sessionName,
-		"writtenBallots": writtenBallots,
-		"createdAt":      createdAt,
-		"updatedAt":      updatedAt,
-		"revision":       revision,
-	}
+	return m
 }
 
 func (p Vote) Pointer() *Vote {

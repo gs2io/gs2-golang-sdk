@@ -320,99 +320,70 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var enableDirectExchange *bool
 	if p.EnableDirectExchange != nil {
-		enableDirectExchange = p.EnableDirectExchange
+		m["enableDirectExchange"] = p.EnableDirectExchange
 	}
-	var enableAwaitExchange *bool
 	if p.EnableAwaitExchange != nil {
-		enableAwaitExchange = p.EnableAwaitExchange
+		m["enableAwaitExchange"] = p.EnableAwaitExchange
 	}
-	var transactionSetting map[string]interface{}
 	if p.TransactionSetting != nil {
-		transactionSetting = func() map[string]interface{} {
+		m["transactionSetting"] = func() map[string]interface{} {
 			if p.TransactionSetting == nil {
 				return nil
 			}
 			return p.TransactionSetting.ToDict()
 		}()
 	}
-	var exchangeScript map[string]interface{}
 	if p.ExchangeScript != nil {
-		exchangeScript = func() map[string]interface{} {
+		m["exchangeScript"] = func() map[string]interface{} {
 			if p.ExchangeScript == nil {
 				return nil
 			}
 			return p.ExchangeScript.ToDict()
 		}()
 	}
-	var incrementalExchangeScript map[string]interface{}
 	if p.IncrementalExchangeScript != nil {
-		incrementalExchangeScript = func() map[string]interface{} {
+		m["incrementalExchangeScript"] = func() map[string]interface{} {
 			if p.IncrementalExchangeScript == nil {
 				return nil
 			}
 			return p.IncrementalExchangeScript.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":               namespaceId,
-		"name":                      name,
-		"description":               description,
-		"enableDirectExchange":      enableDirectExchange,
-		"enableAwaitExchange":       enableAwaitExchange,
-		"transactionSetting":        transactionSetting,
-		"exchangeScript":            exchangeScript,
-		"incrementalExchangeScript": incrementalExchangeScript,
-		"logSetting":                logSetting,
-		"createdAt":                 createdAt,
-		"updatedAt":                 updatedAt,
-		"queueNamespaceId":          queueNamespaceId,
-		"keyId":                     keyId,
-		"revision":                  revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -641,55 +612,38 @@ func NewRateModelFromDict(data map[string]interface{}) RateModel {
 }
 
 func (p RateModel) ToDict() map[string]interface{} {
-
-	var rateModelId *string
+	m := map[string]interface{}{}
 	if p.RateModelId != nil {
-		rateModelId = p.RateModelId
+		m["rateModelId"] = p.RateModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var verifyActions []interface{}
 	if p.VerifyActions != nil {
-		verifyActions = CastVerifyActionsFromDict(
+		m["verifyActions"] = CastVerifyActionsFromDict(
 			p.VerifyActions,
 		)
 	}
-	var consumeActions []interface{}
 	if p.ConsumeActions != nil {
-		consumeActions = CastConsumeActionsFromDict(
+		m["consumeActions"] = CastConsumeActionsFromDict(
 			p.ConsumeActions,
 		)
 	}
-	var timingType *string
 	if p.TimingType != nil {
-		timingType = p.TimingType
+		m["timingType"] = p.TimingType
 	}
-	var lockTime *int32
 	if p.LockTime != nil {
-		lockTime = p.LockTime
+		m["lockTime"] = p.LockTime
 	}
-	var acquireActions []interface{}
 	if p.AcquireActions != nil {
-		acquireActions = CastAcquireActionsFromDict(
+		m["acquireActions"] = CastAcquireActionsFromDict(
 			p.AcquireActions,
 		)
 	}
-	return map[string]interface{}{
-		"rateModelId":    rateModelId,
-		"name":           name,
-		"metadata":       metadata,
-		"verifyActions":  verifyActions,
-		"consumeActions": consumeActions,
-		"timingType":     timingType,
-		"lockTime":       lockTime,
-		"acquireActions": acquireActions,
-	}
+	return m
 }
 
 func (p RateModel) Pointer() *RateModel {
@@ -982,75 +936,50 @@ func NewRateModelMasterFromDict(data map[string]interface{}) RateModelMaster {
 }
 
 func (p RateModelMaster) ToDict() map[string]interface{} {
-
-	var rateModelId *string
+	m := map[string]interface{}{}
 	if p.RateModelId != nil {
-		rateModelId = p.RateModelId
+		m["rateModelId"] = p.RateModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var verifyActions []interface{}
 	if p.VerifyActions != nil {
-		verifyActions = CastVerifyActionsFromDict(
+		m["verifyActions"] = CastVerifyActionsFromDict(
 			p.VerifyActions,
 		)
 	}
-	var consumeActions []interface{}
 	if p.ConsumeActions != nil {
-		consumeActions = CastConsumeActionsFromDict(
+		m["consumeActions"] = CastConsumeActionsFromDict(
 			p.ConsumeActions,
 		)
 	}
-	var timingType *string
 	if p.TimingType != nil {
-		timingType = p.TimingType
+		m["timingType"] = p.TimingType
 	}
-	var lockTime *int32
 	if p.LockTime != nil {
-		lockTime = p.LockTime
+		m["lockTime"] = p.LockTime
 	}
-	var acquireActions []interface{}
 	if p.AcquireActions != nil {
-		acquireActions = CastAcquireActionsFromDict(
+		m["acquireActions"] = CastAcquireActionsFromDict(
 			p.AcquireActions,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"rateModelId":    rateModelId,
-		"name":           name,
-		"description":    description,
-		"metadata":       metadata,
-		"verifyActions":  verifyActions,
-		"consumeActions": consumeActions,
-		"timingType":     timingType,
-		"lockTime":       lockTime,
-		"acquireActions": acquireActions,
-		"createdAt":      createdAt,
-		"updatedAt":      updatedAt,
-		"revision":       revision,
-	}
+	return m
 }
 
 func (p RateModelMaster) Pointer() *RateModelMaster {
@@ -1354,71 +1283,48 @@ func NewIncrementalRateModelFromDict(data map[string]interface{}) IncrementalRat
 }
 
 func (p IncrementalRateModel) ToDict() map[string]interface{} {
-
-	var incrementalRateModelId *string
+	m := map[string]interface{}{}
 	if p.IncrementalRateModelId != nil {
-		incrementalRateModelId = p.IncrementalRateModelId
+		m["incrementalRateModelId"] = p.IncrementalRateModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var consumeAction map[string]interface{}
 	if p.ConsumeAction != nil {
-		consumeAction = func() map[string]interface{} {
+		m["consumeAction"] = func() map[string]interface{} {
 			if p.ConsumeAction == nil {
 				return nil
 			}
 			return p.ConsumeAction.ToDict()
 		}()
 	}
-	var calculateType *string
 	if p.CalculateType != nil {
-		calculateType = p.CalculateType
+		m["calculateType"] = p.CalculateType
 	}
-	var baseValue *int64
 	if p.BaseValue != nil {
-		baseValue = p.BaseValue
+		m["baseValue"] = p.BaseValue
 	}
-	var coefficientValue *int64
 	if p.CoefficientValue != nil {
-		coefficientValue = p.CoefficientValue
+		m["coefficientValue"] = p.CoefficientValue
 	}
-	var calculateScriptId *string
 	if p.CalculateScriptId != nil {
-		calculateScriptId = p.CalculateScriptId
+		m["calculateScriptId"] = p.CalculateScriptId
 	}
-	var exchangeCountId *string
 	if p.ExchangeCountId != nil {
-		exchangeCountId = p.ExchangeCountId
+		m["exchangeCountId"] = p.ExchangeCountId
 	}
-	var maximumExchangeCount *int32
 	if p.MaximumExchangeCount != nil {
-		maximumExchangeCount = p.MaximumExchangeCount
+		m["maximumExchangeCount"] = p.MaximumExchangeCount
 	}
-	var acquireActions []interface{}
 	if p.AcquireActions != nil {
-		acquireActions = CastAcquireActionsFromDict(
+		m["acquireActions"] = CastAcquireActionsFromDict(
 			p.AcquireActions,
 		)
 	}
-	return map[string]interface{}{
-		"incrementalRateModelId": incrementalRateModelId,
-		"name":                   name,
-		"metadata":               metadata,
-		"consumeAction":          consumeAction,
-		"calculateType":          calculateType,
-		"baseValue":              baseValue,
-		"coefficientValue":       coefficientValue,
-		"calculateScriptId":      calculateScriptId,
-		"exchangeCountId":        exchangeCountId,
-		"maximumExchangeCount":   maximumExchangeCount,
-		"acquireActions":         acquireActions,
-	}
+	return m
 }
 
 func (p IncrementalRateModel) Pointer() *IncrementalRateModel {
@@ -1786,91 +1692,60 @@ func NewIncrementalRateModelMasterFromDict(data map[string]interface{}) Incremen
 }
 
 func (p IncrementalRateModelMaster) ToDict() map[string]interface{} {
-
-	var incrementalRateModelId *string
+	m := map[string]interface{}{}
 	if p.IncrementalRateModelId != nil {
-		incrementalRateModelId = p.IncrementalRateModelId
+		m["incrementalRateModelId"] = p.IncrementalRateModelId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var consumeAction map[string]interface{}
 	if p.ConsumeAction != nil {
-		consumeAction = func() map[string]interface{} {
+		m["consumeAction"] = func() map[string]interface{} {
 			if p.ConsumeAction == nil {
 				return nil
 			}
 			return p.ConsumeAction.ToDict()
 		}()
 	}
-	var calculateType *string
 	if p.CalculateType != nil {
-		calculateType = p.CalculateType
+		m["calculateType"] = p.CalculateType
 	}
-	var baseValue *int64
 	if p.BaseValue != nil {
-		baseValue = p.BaseValue
+		m["baseValue"] = p.BaseValue
 	}
-	var coefficientValue *int64
 	if p.CoefficientValue != nil {
-		coefficientValue = p.CoefficientValue
+		m["coefficientValue"] = p.CoefficientValue
 	}
-	var calculateScriptId *string
 	if p.CalculateScriptId != nil {
-		calculateScriptId = p.CalculateScriptId
+		m["calculateScriptId"] = p.CalculateScriptId
 	}
-	var exchangeCountId *string
 	if p.ExchangeCountId != nil {
-		exchangeCountId = p.ExchangeCountId
+		m["exchangeCountId"] = p.ExchangeCountId
 	}
-	var maximumExchangeCount *int32
 	if p.MaximumExchangeCount != nil {
-		maximumExchangeCount = p.MaximumExchangeCount
+		m["maximumExchangeCount"] = p.MaximumExchangeCount
 	}
-	var acquireActions []interface{}
 	if p.AcquireActions != nil {
-		acquireActions = CastAcquireActionsFromDict(
+		m["acquireActions"] = CastAcquireActionsFromDict(
 			p.AcquireActions,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"incrementalRateModelId": incrementalRateModelId,
-		"name":                   name,
-		"description":            description,
-		"metadata":               metadata,
-		"consumeAction":          consumeAction,
-		"calculateType":          calculateType,
-		"baseValue":              baseValue,
-		"coefficientValue":       coefficientValue,
-		"calculateScriptId":      calculateScriptId,
-		"exchangeCountId":        exchangeCountId,
-		"maximumExchangeCount":   maximumExchangeCount,
-		"acquireActions":         acquireActions,
-		"createdAt":              createdAt,
-		"updatedAt":              updatedAt,
-		"revision":               revision,
-	}
+	return m
 }
 
 func (p IncrementalRateModelMaster) Pointer() *IncrementalRateModelMaster {
@@ -1996,19 +1871,14 @@ func NewCurrentRateMasterFromDict(data map[string]interface{}) CurrentRateMaster
 }
 
 func (p CurrentRateMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentRateMaster) Pointer() *CurrentRateMaster {
@@ -2261,61 +2131,40 @@ func NewAwaitFromDict(data map[string]interface{}) Await {
 }
 
 func (p Await) ToDict() map[string]interface{} {
-
-	var awaitId *string
+	m := map[string]interface{}{}
 	if p.AwaitId != nil {
-		awaitId = p.AwaitId
+		m["awaitId"] = p.AwaitId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var rateName *string
 	if p.RateName != nil {
-		rateName = p.RateName
+		m["rateName"] = p.RateName
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var count *int32
 	if p.Count != nil {
-		count = p.Count
+		m["count"] = p.Count
 	}
-	var skipSeconds *int32
 	if p.SkipSeconds != nil {
-		skipSeconds = p.SkipSeconds
+		m["skipSeconds"] = p.SkipSeconds
 	}
-	var config []interface{}
 	if p.Config != nil {
-		config = CastConfigsFromDict(
+		m["config"] = CastConfigsFromDict(
 			p.Config,
 		)
 	}
-	var acquirableAt *int64
 	if p.AcquirableAt != nil {
-		acquirableAt = p.AcquirableAt
+		m["acquirableAt"] = p.AcquirableAt
 	}
-	var exchangedAt *int64
 	if p.ExchangedAt != nil {
-		exchangedAt = p.ExchangedAt
+		m["exchangedAt"] = p.ExchangedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"awaitId":      awaitId,
-		"userId":       userId,
-		"rateName":     rateName,
-		"name":         name,
-		"count":        count,
-		"skipSeconds":  skipSeconds,
-		"config":       config,
-		"acquirableAt": acquirableAt,
-		"exchangedAt":  exchangedAt,
-		"revision":     revision,
-	}
+	return m
 }
 
 func (p Await) Pointer() *Await {
@@ -2412,28 +2261,21 @@ func NewLogCostFromDict(data map[string]interface{}) LogCost {
 }
 
 func (p LogCost) ToDict() map[string]interface{} {
-
-	var base *float64
+	m := map[string]interface{}{}
 	if p.Base != nil {
-		base = p.Base
+		m["base"] = p.Base
 	}
-	var adds []interface{}
 	if p.Adds != nil {
-		adds = core.CastFloat64sFromDict(
+		m["adds"] = core.CastFloat64sFromDict(
 			p.Adds,
 		)
 	}
-	var subs []interface{}
 	if p.Subs != nil {
-		subs = core.CastFloat64sFromDict(
+		m["subs"] = core.CastFloat64sFromDict(
 			p.Subs,
 		)
 	}
-	return map[string]interface{}{
-		"base": base,
-		"adds": adds,
-		"subs": subs,
-	}
+	return m
 }
 
 func (p LogCost) Pointer() *LogCost {
@@ -2559,19 +2401,14 @@ func NewAcquireActionFromDict(data map[string]interface{}) AcquireAction {
 }
 
 func (p AcquireAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p AcquireAction) Pointer() *AcquireAction {
@@ -2697,19 +2534,14 @@ func NewConsumeActionFromDict(data map[string]interface{}) ConsumeAction {
 }
 
 func (p ConsumeAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p ConsumeAction) Pointer() *ConsumeAction {
@@ -2835,19 +2667,14 @@ func NewVerifyActionFromDict(data map[string]interface{}) VerifyAction {
 }
 
 func (p VerifyAction) ToDict() map[string]interface{} {
-
-	var action *string
+	m := map[string]interface{}{}
 	if p.Action != nil {
-		action = p.Action
+		m["action"] = p.Action
 	}
-	var request *string
 	if p.Request != nil {
-		request = p.Request
+		m["request"] = p.Request
 	}
-	return map[string]interface{}{
-		"action":  action,
-		"request": request,
-	}
+	return m
 }
 
 func (p VerifyAction) Pointer() *VerifyAction {
@@ -2973,19 +2800,14 @@ func NewConfigFromDict(data map[string]interface{}) Config {
 }
 
 func (p Config) ToDict() map[string]interface{} {
-
-	var key *string
+	m := map[string]interface{}{}
 	if p.Key != nil {
-		key = p.Key
+		m["key"] = p.Key
 	}
-	var value *string
 	if p.Value != nil {
-		value = p.Value
+		m["value"] = p.Value
 	}
-	return map[string]interface{}{
-		"key":   key,
-		"value": value,
-	}
+	return m
 }
 
 func (p Config) Pointer() *Config {
@@ -3266,44 +3088,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -3491,29 +3298,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -3608,14 +3406,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
@@ -3783,29 +3578,20 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 }
 
 func (p TransactionSetting) ToDict() map[string]interface{} {
-
-	var enableAutoRun *bool
+	m := map[string]interface{}{}
 	if p.EnableAutoRun != nil {
-		enableAutoRun = p.EnableAutoRun
+		m["enableAutoRun"] = p.EnableAutoRun
 	}
-	var distributorNamespaceId *string
 	if p.DistributorNamespaceId != nil {
-		distributorNamespaceId = p.DistributorNamespaceId
+		m["distributorNamespaceId"] = p.DistributorNamespaceId
 	}
-	var keyId *string
 	if p.KeyId != nil {
-		keyId = p.KeyId
+		m["keyId"] = p.KeyId
 	}
-	var queueNamespaceId *string
 	if p.QueueNamespaceId != nil {
-		queueNamespaceId = p.QueueNamespaceId
+		m["queueNamespaceId"] = p.QueueNamespaceId
 	}
-	return map[string]interface{}{
-		"enableAutoRun":          enableAutoRun,
-		"distributorNamespaceId": distributorNamespaceId,
-		"keyId":                  keyId,
-		"queueNamespaceId":       queueNamespaceId,
-	}
+	return m
 }
 
 func (p TransactionSetting) Pointer() *TransactionSetting {

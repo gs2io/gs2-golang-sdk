@@ -267,99 +267,72 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var changePasswordIfTakeOver *bool
 	if p.ChangePasswordIfTakeOver != nil {
-		changePasswordIfTakeOver = p.ChangePasswordIfTakeOver
+		m["changePasswordIfTakeOver"] = p.ChangePasswordIfTakeOver
 	}
-	var differentUserIdForLoginAndDataRetention *bool
 	if p.DifferentUserIdForLoginAndDataRetention != nil {
-		differentUserIdForLoginAndDataRetention = p.DifferentUserIdForLoginAndDataRetention
+		m["differentUserIdForLoginAndDataRetention"] = p.DifferentUserIdForLoginAndDataRetention
 	}
-	var createAccountScript map[string]interface{}
 	if p.CreateAccountScript != nil {
-		createAccountScript = func() map[string]interface{} {
+		m["createAccountScript"] = func() map[string]interface{} {
 			if p.CreateAccountScript == nil {
 				return nil
 			}
 			return p.CreateAccountScript.ToDict()
 		}()
 	}
-	var authenticationScript map[string]interface{}
 	if p.AuthenticationScript != nil {
-		authenticationScript = func() map[string]interface{} {
+		m["authenticationScript"] = func() map[string]interface{} {
 			if p.AuthenticationScript == nil {
 				return nil
 			}
 			return p.AuthenticationScript.ToDict()
 		}()
 	}
-	var createTakeOverScript map[string]interface{}
 	if p.CreateTakeOverScript != nil {
-		createTakeOverScript = func() map[string]interface{} {
+		m["createTakeOverScript"] = func() map[string]interface{} {
 			if p.CreateTakeOverScript == nil {
 				return nil
 			}
 			return p.CreateTakeOverScript.ToDict()
 		}()
 	}
-	var doTakeOverScript map[string]interface{}
 	if p.DoTakeOverScript != nil {
-		doTakeOverScript = func() map[string]interface{} {
+		m["doTakeOverScript"] = func() map[string]interface{} {
 			if p.DoTakeOverScript == nil {
 				return nil
 			}
 			return p.DoTakeOverScript.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":              namespaceId,
-		"name":                     name,
-		"description":              description,
-		"changePasswordIfTakeOver": changePasswordIfTakeOver,
-		"differentUserIdForLoginAndDataRetention": differentUserIdForLoginAndDataRetention,
-		"createAccountScript":                     createAccountScript,
-		"authenticationScript":                    authenticationScript,
-		"createTakeOverScript":                    createTakeOverScript,
-		"doTakeOverScript":                        doTakeOverScript,
-		"logSetting":                              logSetting,
-		"createdAt":                               createdAt,
-		"updatedAt":                               updatedAt,
-		"revision":                                revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -581,56 +554,37 @@ func NewAccountFromDict(data map[string]interface{}) Account {
 }
 
 func (p Account) ToDict() map[string]interface{} {
-
-	var accountId *string
+	m := map[string]interface{}{}
 	if p.AccountId != nil {
-		accountId = p.AccountId
+		m["accountId"] = p.AccountId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var password *string
 	if p.Password != nil {
-		password = p.Password
+		m["password"] = p.Password
 	}
-	var timeOffset *int32
 	if p.TimeOffset != nil {
-		timeOffset = p.TimeOffset
+		m["timeOffset"] = p.TimeOffset
 	}
-	var banStatuses []interface{}
 	if p.BanStatuses != nil {
-		banStatuses = CastBanStatusesFromDict(
+		m["banStatuses"] = CastBanStatusesFromDict(
 			p.BanStatuses,
 		)
 	}
-	var banned *bool
 	if p.Banned != nil {
-		banned = p.Banned
+		m["banned"] = p.Banned
 	}
-	var lastAuthenticatedAt *int64
 	if p.LastAuthenticatedAt != nil {
-		lastAuthenticatedAt = p.LastAuthenticatedAt
+		m["lastAuthenticatedAt"] = p.LastAuthenticatedAt
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"accountId":           accountId,
-		"userId":              userId,
-		"password":            password,
-		"timeOffset":          timeOffset,
-		"banStatuses":         banStatuses,
-		"banned":              banned,
-		"lastAuthenticatedAt": lastAuthenticatedAt,
-		"createdAt":           createdAt,
-		"revision":            revision,
-	}
+	return m
 }
 
 func (p Account) Pointer() *Account {
@@ -851,44 +805,29 @@ func NewTakeOverFromDict(data map[string]interface{}) TakeOver {
 }
 
 func (p TakeOver) ToDict() map[string]interface{} {
-
-	var takeOverId *string
+	m := map[string]interface{}{}
 	if p.TakeOverId != nil {
-		takeOverId = p.TakeOverId
+		m["takeOverId"] = p.TakeOverId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var _type *int32
 	if p.Type != nil {
-		_type = p.Type
+		m["type"] = p.Type
 	}
-	var userIdentifier *string
 	if p.UserIdentifier != nil {
-		userIdentifier = p.UserIdentifier
+		m["userIdentifier"] = p.UserIdentifier
 	}
-	var password *string
 	if p.Password != nil {
-		password = p.Password
+		m["password"] = p.Password
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"takeOverId":     takeOverId,
-		"userId":         userId,
-		"type":           _type,
-		"userIdentifier": userIdentifier,
-		"password":       password,
-		"createdAt":      createdAt,
-		"revision":       revision,
-	}
+	return m
 }
 
 func (p TakeOver) Pointer() *TakeOver {
@@ -1078,39 +1017,26 @@ func NewPlatformIdFromDict(data map[string]interface{}) PlatformId {
 }
 
 func (p PlatformId) ToDict() map[string]interface{} {
-
-	var platformId *string
+	m := map[string]interface{}{}
 	if p.PlatformId != nil {
-		platformId = p.PlatformId
+		m["platformId"] = p.PlatformId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var _type *int32
 	if p.Type != nil {
-		_type = p.Type
+		m["type"] = p.Type
 	}
-	var userIdentifier *string
 	if p.UserIdentifier != nil {
-		userIdentifier = p.UserIdentifier
+		m["userIdentifier"] = p.UserIdentifier
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"platformId":     platformId,
-		"userId":         userId,
-		"type":           _type,
-		"userIdentifier": userIdentifier,
-		"createdAt":      createdAt,
-		"revision":       revision,
-	}
+	return m
 }
 
 func (p PlatformId) Pointer() *PlatformId {
@@ -1289,34 +1215,23 @@ func NewDataOwnerFromDict(data map[string]interface{}) DataOwner {
 }
 
 func (p DataOwner) ToDict() map[string]interface{} {
-
-	var dataOwnerId *string
+	m := map[string]interface{}{}
 	if p.DataOwnerId != nil {
-		dataOwnerId = p.DataOwnerId
+		m["dataOwnerId"] = p.DataOwnerId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"dataOwnerId": dataOwnerId,
-		"userId":      userId,
-		"name":        name,
-		"createdAt":   createdAt,
-		"revision":    revision,
-	}
+	return m
 }
 
 func (p DataOwner) Pointer() *DataOwner {
@@ -1464,34 +1379,25 @@ func NewTakeOverTypeModelFromDict(data map[string]interface{}) TakeOverTypeModel
 }
 
 func (p TakeOverTypeModel) ToDict() map[string]interface{} {
-
-	var takeOverTypeModelId *string
+	m := map[string]interface{}{}
 	if p.TakeOverTypeModelId != nil {
-		takeOverTypeModelId = p.TakeOverTypeModelId
+		m["takeOverTypeModelId"] = p.TakeOverTypeModelId
 	}
-	var _type *int32
 	if p.Type != nil {
-		_type = p.Type
+		m["type"] = p.Type
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var openIdConnectSetting map[string]interface{}
 	if p.OpenIdConnectSetting != nil {
-		openIdConnectSetting = func() map[string]interface{} {
+		m["openIdConnectSetting"] = func() map[string]interface{} {
 			if p.OpenIdConnectSetting == nil {
 				return nil
 			}
 			return p.OpenIdConnectSetting.ToDict()
 		}()
 	}
-	return map[string]interface{}{
-		"takeOverTypeModelId":  takeOverTypeModelId,
-		"type":                 _type,
-		"metadata":             metadata,
-		"openIdConnectSetting": openIdConnectSetting,
-	}
+	return m
 }
 
 func (p TakeOverTypeModel) Pointer() *TakeOverTypeModel {
@@ -1703,54 +1609,37 @@ func NewTakeOverTypeModelMasterFromDict(data map[string]interface{}) TakeOverTyp
 }
 
 func (p TakeOverTypeModelMaster) ToDict() map[string]interface{} {
-
-	var takeOverTypeModelId *string
+	m := map[string]interface{}{}
 	if p.TakeOverTypeModelId != nil {
-		takeOverTypeModelId = p.TakeOverTypeModelId
+		m["takeOverTypeModelId"] = p.TakeOverTypeModelId
 	}
-	var _type *int32
 	if p.Type != nil {
-		_type = p.Type
+		m["type"] = p.Type
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var openIdConnectSetting map[string]interface{}
 	if p.OpenIdConnectSetting != nil {
-		openIdConnectSetting = func() map[string]interface{} {
+		m["openIdConnectSetting"] = func() map[string]interface{} {
 			if p.OpenIdConnectSetting == nil {
 				return nil
 			}
 			return p.OpenIdConnectSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"takeOverTypeModelId":  takeOverTypeModelId,
-		"type":                 _type,
-		"description":          description,
-		"metadata":             metadata,
-		"openIdConnectSetting": openIdConnectSetting,
-		"createdAt":            createdAt,
-		"updatedAt":            updatedAt,
-		"revision":             revision,
-	}
+	return m
 }
 
 func (p TakeOverTypeModelMaster) Pointer() *TakeOverTypeModelMaster {
@@ -1876,19 +1765,14 @@ func NewCurrentModelMasterFromDict(data map[string]interface{}) CurrentModelMast
 }
 
 func (p CurrentModelMaster) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var settings *string
 	if p.Settings != nil {
-		settings = p.Settings
+		m["settings"] = p.Settings
 	}
-	return map[string]interface{}{
-		"namespaceId": namespaceId,
-		"settings":    settings,
-	}
+	return m
 }
 
 func (p CurrentModelMaster) Pointer() *CurrentModelMaster {
@@ -2169,44 +2053,29 @@ func NewOpenIdConnectSettingFromDict(data map[string]interface{}) OpenIdConnectS
 }
 
 func (p OpenIdConnectSetting) ToDict() map[string]interface{} {
-
-	var configurationPath *string
+	m := map[string]interface{}{}
 	if p.ConfigurationPath != nil {
-		configurationPath = p.ConfigurationPath
+		m["configurationPath"] = p.ConfigurationPath
 	}
-	var clientId *string
 	if p.ClientId != nil {
-		clientId = p.ClientId
+		m["clientId"] = p.ClientId
 	}
-	var clientSecret *string
 	if p.ClientSecret != nil {
-		clientSecret = p.ClientSecret
+		m["clientSecret"] = p.ClientSecret
 	}
-	var appleTeamId *string
 	if p.AppleTeamId != nil {
-		appleTeamId = p.AppleTeamId
+		m["appleTeamId"] = p.AppleTeamId
 	}
-	var appleKeyId *string
 	if p.AppleKeyId != nil {
-		appleKeyId = p.AppleKeyId
+		m["appleKeyId"] = p.AppleKeyId
 	}
-	var applePrivateKeyPem *string
 	if p.ApplePrivateKeyPem != nil {
-		applePrivateKeyPem = p.ApplePrivateKeyPem
+		m["applePrivateKeyPem"] = p.ApplePrivateKeyPem
 	}
-	var doneEndpointUrl *string
 	if p.DoneEndpointUrl != nil {
-		doneEndpointUrl = p.DoneEndpointUrl
+		m["doneEndpointUrl"] = p.DoneEndpointUrl
 	}
-	return map[string]interface{}{
-		"configurationPath":  configurationPath,
-		"clientId":           clientId,
-		"clientSecret":       clientSecret,
-		"appleTeamId":        appleTeamId,
-		"appleKeyId":         appleKeyId,
-		"applePrivateKeyPem": applePrivateKeyPem,
-		"doneEndpointUrl":    doneEndpointUrl,
-	}
+	return m
 }
 
 func (p OpenIdConnectSetting) Pointer() *OpenIdConnectSetting {
@@ -2343,24 +2212,17 @@ func NewPlatformUserFromDict(data map[string]interface{}) PlatformUser {
 }
 
 func (p PlatformUser) ToDict() map[string]interface{} {
-
-	var _type *int32
+	m := map[string]interface{}{}
 	if p.Type != nil {
-		_type = p.Type
+		m["type"] = p.Type
 	}
-	var userIdentifier *string
 	if p.UserIdentifier != nil {
-		userIdentifier = p.UserIdentifier
+		m["userIdentifier"] = p.UserIdentifier
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	return map[string]interface{}{
-		"type":           _type,
-		"userIdentifier": userIdentifier,
-		"userId":         userId,
-	}
+	return m
 }
 
 func (p PlatformUser) Pointer() *PlatformUser {
@@ -2497,24 +2359,17 @@ func NewBanStatusFromDict(data map[string]interface{}) BanStatus {
 }
 
 func (p BanStatus) ToDict() map[string]interface{} {
-
-	var name *string
+	m := map[string]interface{}{}
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var reason *string
 	if p.Reason != nil {
-		reason = p.Reason
+		m["reason"] = p.Reason
 	}
-	var releaseTimestamp *int64
 	if p.ReleaseTimestamp != nil {
-		releaseTimestamp = p.ReleaseTimestamp
+		m["releaseTimestamp"] = p.ReleaseTimestamp
 	}
-	return map[string]interface{}{
-		"name":             name,
-		"reason":           reason,
-		"releaseTimestamp": releaseTimestamp,
-	}
+	return m
 }
 
 func (p BanStatus) Pointer() *BanStatus {
@@ -2795,44 +2650,29 @@ func NewGitHubCheckoutSettingFromDict(data map[string]interface{}) GitHubCheckou
 }
 
 func (p GitHubCheckoutSetting) ToDict() map[string]interface{} {
-
-	var apiKeyId *string
+	m := map[string]interface{}{}
 	if p.ApiKeyId != nil {
-		apiKeyId = p.ApiKeyId
+		m["apiKeyId"] = p.ApiKeyId
 	}
-	var repositoryName *string
 	if p.RepositoryName != nil {
-		repositoryName = p.RepositoryName
+		m["repositoryName"] = p.RepositoryName
 	}
-	var sourcePath *string
 	if p.SourcePath != nil {
-		sourcePath = p.SourcePath
+		m["sourcePath"] = p.SourcePath
 	}
-	var referenceType *string
 	if p.ReferenceType != nil {
-		referenceType = p.ReferenceType
+		m["referenceType"] = p.ReferenceType
 	}
-	var commitHash *string
 	if p.CommitHash != nil {
-		commitHash = p.CommitHash
+		m["commitHash"] = p.CommitHash
 	}
-	var branchName *string
 	if p.BranchName != nil {
-		branchName = p.BranchName
+		m["branchName"] = p.BranchName
 	}
-	var tagName *string
 	if p.TagName != nil {
-		tagName = p.TagName
+		m["tagName"] = p.TagName
 	}
-	return map[string]interface{}{
-		"apiKeyId":       apiKeyId,
-		"repositoryName": repositoryName,
-		"sourcePath":     sourcePath,
-		"referenceType":  referenceType,
-		"commitHash":     commitHash,
-		"branchName":     branchName,
-		"tagName":        tagName,
-	}
+	return m
 }
 
 func (p GitHubCheckoutSetting) Pointer() *GitHubCheckoutSetting {
@@ -3020,29 +2860,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -3137,14 +2968,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {
