@@ -1307,6 +1307,90 @@ func (p UpdateMemberRoleByGuildNameResult) Pointer() *UpdateMemberRoleByGuildNam
 	return &p
 }
 
+type BatchUpdateMemberRoleResult struct {
+	Item *Guild `json:"item"`
+}
+
+type BatchUpdateMemberRoleAsyncResult struct {
+	result *BatchUpdateMemberRoleResult
+	err    error
+}
+
+func NewBatchUpdateMemberRoleResultFromJson(data string) BatchUpdateMemberRoleResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBatchUpdateMemberRoleResultFromDict(dict)
+}
+
+func NewBatchUpdateMemberRoleResultFromDict(data map[string]interface{}) BatchUpdateMemberRoleResult {
+	return BatchUpdateMemberRoleResult{
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+	}
+}
+
+func (p BatchUpdateMemberRoleResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p BatchUpdateMemberRoleResult) Pointer() *BatchUpdateMemberRoleResult {
+	return &p
+}
+
+type BatchUpdateMemberRoleByGuildNameResult struct {
+	Item *Guild `json:"item"`
+}
+
+type BatchUpdateMemberRoleByGuildNameAsyncResult struct {
+	result *BatchUpdateMemberRoleByGuildNameResult
+	err    error
+}
+
+func NewBatchUpdateMemberRoleByGuildNameResultFromJson(data string) BatchUpdateMemberRoleByGuildNameResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewBatchUpdateMemberRoleByGuildNameResultFromDict(dict)
+}
+
+func NewBatchUpdateMemberRoleByGuildNameResultFromDict(data map[string]interface{}) BatchUpdateMemberRoleByGuildNameResult {
+	return BatchUpdateMemberRoleByGuildNameResult{
+		Item: func() *Guild {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewGuildFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+	}
+}
+
+func (p BatchUpdateMemberRoleByGuildNameResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p BatchUpdateMemberRoleByGuildNameResult) Pointer() *BatchUpdateMemberRoleByGuildNameResult {
+	return &p
+}
+
 type DeleteGuildResult struct {
 	Item *Guild `json:"item"`
 }

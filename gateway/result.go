@@ -677,7 +677,8 @@ func (p SetUserIdByUserIdResult) Pointer() *SetUserIdByUserIdResult {
 }
 
 type SendNotificationResult struct {
-	Protocol *string `json:"protocol"`
+	Protocol          *string   `json:"protocol"`
+	SendConnectionIds []*string `json:"sendConnectionIds"`
 }
 
 type SendNotificationAsyncResult struct {
@@ -700,12 +701,22 @@ func NewSendNotificationResultFromDict(data map[string]interface{}) SendNotifica
 			}
 			return core.CastString(data["protocol"])
 		}(),
+		SendConnectionIds: func() []*string {
+			v, ok := data["sendConnectionIds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastStrings(core.CastArray(v))
+		}(),
 	}
 }
 
 func (p SendNotificationResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"protocol": p.Protocol,
+		"sendConnectionIds": core.CastStringsFromDict(
+			p.SendConnectionIds,
+		),
 	}
 }
 

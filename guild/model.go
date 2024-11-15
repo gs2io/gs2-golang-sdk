@@ -461,20 +461,22 @@ func CastNamespacesFromDict(data []Namespace) []interface{} {
 }
 
 type GuildModelMaster struct {
-	GuildModelId              *string     `json:"guildModelId"`
-	Name                      *string     `json:"name"`
-	Description               *string     `json:"description"`
-	Metadata                  *string     `json:"metadata"`
-	DefaultMaximumMemberCount *int32      `json:"defaultMaximumMemberCount"`
-	MaximumMemberCount        *int32      `json:"maximumMemberCount"`
-	InactivityPeriodDays      *int32      `json:"inactivityPeriodDays"`
-	Roles                     []RoleModel `json:"roles"`
-	GuildMasterRole           *string     `json:"guildMasterRole"`
-	GuildMemberDefaultRole    *string     `json:"guildMemberDefaultRole"`
-	RejoinCoolTimeMinutes     *int32      `json:"rejoinCoolTimeMinutes"`
-	CreatedAt                 *int64      `json:"createdAt"`
-	UpdatedAt                 *int64      `json:"updatedAt"`
-	Revision                  *int64      `json:"revision"`
+	GuildModelId                  *string     `json:"guildModelId"`
+	Name                          *string     `json:"name"`
+	Description                   *string     `json:"description"`
+	Metadata                      *string     `json:"metadata"`
+	DefaultMaximumMemberCount     *int32      `json:"defaultMaximumMemberCount"`
+	MaximumMemberCount            *int32      `json:"maximumMemberCount"`
+	InactivityPeriodDays          *int32      `json:"inactivityPeriodDays"`
+	Roles                         []RoleModel `json:"roles"`
+	GuildMasterRole               *string     `json:"guildMasterRole"`
+	GuildMemberDefaultRole        *string     `json:"guildMemberDefaultRole"`
+	RejoinCoolTimeMinutes         *int32      `json:"rejoinCoolTimeMinutes"`
+	MaxConcurrentJoinGuilds       *int32      `json:"maxConcurrentJoinGuilds"`
+	MaxConcurrentGuildMasterCount *int32      `json:"maxConcurrentGuildMasterCount"`
+	CreatedAt                     *int64      `json:"createdAt"`
+	UpdatedAt                     *int64      `json:"updatedAt"`
+	Revision                      *int64      `json:"revision"`
 }
 
 func (p *GuildModelMaster) UnmarshalJSON(data []byte) error {
@@ -652,6 +654,12 @@ func (p *GuildModelMaster) UnmarshalJSON(data []byte) error {
 		if v, ok := d["rejoinCoolTimeMinutes"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RejoinCoolTimeMinutes)
 		}
+		if v, ok := d["maxConcurrentJoinGuilds"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MaxConcurrentJoinGuilds)
+		}
+		if v, ok := d["maxConcurrentGuildMasterCount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MaxConcurrentGuildMasterCount)
+		}
 		if v, ok := d["createdAt"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.CreatedAt)
 		}
@@ -749,6 +757,20 @@ func NewGuildModelMasterFromDict(data map[string]interface{}) GuildModelMaster {
 			}
 			return core.CastInt32(data["rejoinCoolTimeMinutes"])
 		}(),
+		MaxConcurrentJoinGuilds: func() *int32 {
+			v, ok := data["maxConcurrentJoinGuilds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxConcurrentJoinGuilds"])
+		}(),
+		MaxConcurrentGuildMasterCount: func() *int32 {
+			v, ok := data["maxConcurrentGuildMasterCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxConcurrentGuildMasterCount"])
+		}(),
 		CreatedAt: func() *int64 {
 			v, ok := data["createdAt"]
 			if !ok || v == nil {
@@ -810,6 +832,12 @@ func (p GuildModelMaster) ToDict() map[string]interface{} {
 	if p.RejoinCoolTimeMinutes != nil {
 		m["rejoinCoolTimeMinutes"] = p.RejoinCoolTimeMinutes
 	}
+	if p.MaxConcurrentJoinGuilds != nil {
+		m["maxConcurrentJoinGuilds"] = p.MaxConcurrentJoinGuilds
+	}
+	if p.MaxConcurrentGuildMasterCount != nil {
+		m["maxConcurrentGuildMasterCount"] = p.MaxConcurrentGuildMasterCount
+	}
 	if p.CreatedAt != nil {
 		m["createdAt"] = p.CreatedAt
 	}
@@ -843,16 +871,18 @@ func CastGuildModelMastersFromDict(data []GuildModelMaster) []interface{} {
 }
 
 type GuildModel struct {
-	GuildModelId              *string     `json:"guildModelId"`
-	Name                      *string     `json:"name"`
-	Metadata                  *string     `json:"metadata"`
-	DefaultMaximumMemberCount *int32      `json:"defaultMaximumMemberCount"`
-	MaximumMemberCount        *int32      `json:"maximumMemberCount"`
-	InactivityPeriodDays      *int32      `json:"inactivityPeriodDays"`
-	Roles                     []RoleModel `json:"roles"`
-	GuildMasterRole           *string     `json:"guildMasterRole"`
-	GuildMemberDefaultRole    *string     `json:"guildMemberDefaultRole"`
-	RejoinCoolTimeMinutes     *int32      `json:"rejoinCoolTimeMinutes"`
+	GuildModelId                  *string     `json:"guildModelId"`
+	Name                          *string     `json:"name"`
+	Metadata                      *string     `json:"metadata"`
+	DefaultMaximumMemberCount     *int32      `json:"defaultMaximumMemberCount"`
+	MaximumMemberCount            *int32      `json:"maximumMemberCount"`
+	InactivityPeriodDays          *int32      `json:"inactivityPeriodDays"`
+	Roles                         []RoleModel `json:"roles"`
+	GuildMasterRole               *string     `json:"guildMasterRole"`
+	GuildMemberDefaultRole        *string     `json:"guildMemberDefaultRole"`
+	RejoinCoolTimeMinutes         *int32      `json:"rejoinCoolTimeMinutes"`
+	MaxConcurrentJoinGuilds       *int32      `json:"maxConcurrentJoinGuilds"`
+	MaxConcurrentGuildMasterCount *int32      `json:"maxConcurrentGuildMasterCount"`
 }
 
 func (p *GuildModel) UnmarshalJSON(data []byte) error {
@@ -1007,6 +1037,12 @@ func (p *GuildModel) UnmarshalJSON(data []byte) error {
 		if v, ok := d["rejoinCoolTimeMinutes"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RejoinCoolTimeMinutes)
 		}
+		if v, ok := d["maxConcurrentJoinGuilds"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MaxConcurrentJoinGuilds)
+		}
+		if v, ok := d["maxConcurrentGuildMasterCount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MaxConcurrentGuildMasterCount)
+		}
 	}
 	return nil
 }
@@ -1088,6 +1124,20 @@ func NewGuildModelFromDict(data map[string]interface{}) GuildModel {
 			}
 			return core.CastInt32(data["rejoinCoolTimeMinutes"])
 		}(),
+		MaxConcurrentJoinGuilds: func() *int32 {
+			v, ok := data["maxConcurrentJoinGuilds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxConcurrentJoinGuilds"])
+		}(),
+		MaxConcurrentGuildMasterCount: func() *int32 {
+			v, ok := data["maxConcurrentGuildMasterCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxConcurrentGuildMasterCount"])
+		}(),
 	}
 }
 
@@ -1124,6 +1174,12 @@ func (p GuildModel) ToDict() map[string]interface{} {
 	}
 	if p.RejoinCoolTimeMinutes != nil {
 		m["rejoinCoolTimeMinutes"] = p.RejoinCoolTimeMinutes
+	}
+	if p.MaxConcurrentJoinGuilds != nil {
+		m["maxConcurrentJoinGuilds"] = p.MaxConcurrentJoinGuilds
+	}
+	if p.MaxConcurrentGuildMasterCount != nil {
+		m["maxConcurrentGuildMasterCount"] = p.MaxConcurrentGuildMasterCount
 	}
 	return m
 }

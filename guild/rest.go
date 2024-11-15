@@ -1491,6 +1491,12 @@ func (p Gs2GuildRestClient) CreateGuildModelMasterAsync(
 	if request.RejoinCoolTimeMinutes != nil {
 		bodies["rejoinCoolTimeMinutes"] = *request.RejoinCoolTimeMinutes
 	}
+	if request.MaxConcurrentJoinGuilds != nil {
+		bodies["maxConcurrentJoinGuilds"] = *request.MaxConcurrentJoinGuilds
+	}
+	if request.MaxConcurrentGuildMasterCount != nil {
+		bodies["maxConcurrentGuildMasterCount"] = *request.MaxConcurrentGuildMasterCount
+	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
@@ -1711,6 +1717,12 @@ func (p Gs2GuildRestClient) UpdateGuildModelMasterAsync(
 	}
 	if request.RejoinCoolTimeMinutes != nil {
 		bodies["rejoinCoolTimeMinutes"] = *request.RejoinCoolTimeMinutes
+	}
+	if request.MaxConcurrentJoinGuilds != nil {
+		bodies["maxConcurrentJoinGuilds"] = *request.MaxConcurrentJoinGuilds
+	}
+	if request.MaxConcurrentGuildMasterCount != nil {
+		bodies["maxConcurrentGuildMasterCount"] = *request.MaxConcurrentGuildMasterCount
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
@@ -3522,6 +3534,224 @@ func (p Gs2GuildRestClient) UpdateMemberRoleByGuildName(
 ) (*UpdateMemberRoleByGuildNameResult, error) {
 	callback := make(chan UpdateMemberRoleByGuildNameAsyncResult, 1)
 	go p.UpdateMemberRoleByGuildNameAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func batchUpdateMemberRoleAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- BatchUpdateMemberRoleAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchUpdateMemberRoleAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchUpdateMemberRoleResult
+	if asyncResult.Err != nil {
+		callback <- BatchUpdateMemberRoleAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchUpdateMemberRoleAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- BatchUpdateMemberRoleAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) BatchUpdateMemberRoleAsync(
+	request *BatchUpdateMemberRoleRequest,
+	callback chan<- BatchUpdateMemberRoleAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/me/batch/member/role"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Members != nil {
+		var _members []interface{}
+		for _, item := range request.Members {
+			_members = append(_members, item)
+		}
+		bodies["members"] = _members
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go batchUpdateMemberRoleAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) BatchUpdateMemberRole(
+	request *BatchUpdateMemberRoleRequest,
+) (*BatchUpdateMemberRoleResult, error) {
+	callback := make(chan BatchUpdateMemberRoleAsyncResult, 1)
+	go p.BatchUpdateMemberRoleAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func batchUpdateMemberRoleByGuildNameAsyncHandler(
+	client Gs2GuildRestClient,
+	job *core.NetworkJob,
+	callback chan<- BatchUpdateMemberRoleByGuildNameAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- BatchUpdateMemberRoleByGuildNameAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result BatchUpdateMemberRoleByGuildNameResult
+	if asyncResult.Err != nil {
+		callback <- BatchUpdateMemberRoleByGuildNameAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- BatchUpdateMemberRoleByGuildNameAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- BatchUpdateMemberRoleByGuildNameAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2GuildRestClient) BatchUpdateMemberRoleByGuildNameAsync(
+	request *BatchUpdateMemberRoleByGuildNameRequest,
+	callback chan<- BatchUpdateMemberRoleByGuildNameAsyncResult,
+) {
+	path := "/{namespaceName}/guild/{guildModelName}/{guildName}/batch/member/role"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.GuildModelName != nil && *request.GuildModelName != "" {
+		path = strings.ReplaceAll(path, "{guildModelName}", core.ToString(*request.GuildModelName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildModelName}", "null")
+	}
+	if request.GuildName != nil && *request.GuildName != "" {
+		path = strings.ReplaceAll(path, "{guildName}", core.ToString(*request.GuildName))
+	} else {
+		path = strings.ReplaceAll(path, "{guildName}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Members != nil {
+		var _members []interface{}
+		for _, item := range request.Members {
+			_members = append(_members, item)
+		}
+		bodies["members"] = _members
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+
+	go batchUpdateMemberRoleByGuildNameAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("guild").AppendPath(path, replacer),
+			Method:  core.Put,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2GuildRestClient) BatchUpdateMemberRoleByGuildName(
+	request *BatchUpdateMemberRoleByGuildNameRequest,
+) (*BatchUpdateMemberRoleByGuildNameResult, error) {
+	callback := make(chan BatchUpdateMemberRoleByGuildNameAsyncResult, 1)
+	go p.BatchUpdateMemberRoleByGuildNameAsync(
 		request,
 		callback,
 	)

@@ -812,7 +812,8 @@ func (p GetSerialKeyResult) Pointer() *GetSerialKeyResult {
 }
 
 type VerifyCodeResult struct {
-	Item *SerialKey `json:"item"`
+	Item          *SerialKey     `json:"item"`
+	CampaignModel *CampaignModel `json:"campaignModel"`
 }
 
 type VerifyCodeAsyncResult struct {
@@ -835,6 +836,13 @@ func NewVerifyCodeResultFromDict(data map[string]interface{}) VerifyCodeResult {
 			}
 			return NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		CampaignModel: func() *CampaignModel {
+			v, ok := data["campaignModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -846,6 +854,12 @@ func (p VerifyCodeResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"campaignModel": func() map[string]interface{} {
+			if p.CampaignModel == nil {
+				return nil
+			}
+			return p.CampaignModel.ToDict()
+		}(),
 	}
 }
 
@@ -854,7 +868,8 @@ func (p VerifyCodeResult) Pointer() *VerifyCodeResult {
 }
 
 type VerifyCodeByUserIdResult struct {
-	Item *SerialKey `json:"item"`
+	Item          *SerialKey     `json:"item"`
+	CampaignModel *CampaignModel `json:"campaignModel"`
 }
 
 type VerifyCodeByUserIdAsyncResult struct {
@@ -877,6 +892,13 @@ func NewVerifyCodeByUserIdResultFromDict(data map[string]interface{}) VerifyCode
 			}
 			return NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		CampaignModel: func() *CampaignModel {
+			v, ok := data["campaignModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer()
+		}(),
 	}
 }
 
@@ -887,6 +909,12 @@ func (p VerifyCodeByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Item.ToDict()
+		}(),
+		"campaignModel": func() map[string]interface{} {
+			if p.CampaignModel == nil {
+				return nil
+			}
+			return p.CampaignModel.ToDict()
 		}(),
 	}
 }
@@ -1185,8 +1213,9 @@ func (p RevertUseByStampSheetResult) Pointer() *RevertUseByStampSheetResult {
 }
 
 type VerifyByStampTaskResult struct {
-	Item            *SerialKey `json:"item"`
-	NewContextStack *string    `json:"newContextStack"`
+	Item            *SerialKey     `json:"item"`
+	CampaignModel   *CampaignModel `json:"campaignModel"`
+	NewContextStack *string        `json:"newContextStack"`
 }
 
 type VerifyByStampTaskAsyncResult struct {
@@ -1209,6 +1238,13 @@ func NewVerifyByStampTaskResultFromDict(data map[string]interface{}) VerifyBySta
 			}
 			return NewSerialKeyFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		CampaignModel: func() *CampaignModel {
+			v, ok := data["campaignModel"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewCampaignModelFromDict(core.CastMap(data["campaignModel"])).Pointer()
+		}(),
 		NewContextStack: func() *string {
 			v, ok := data["newContextStack"]
 			if !ok || v == nil {
@@ -1226,6 +1262,12 @@ func (p VerifyByStampTaskResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Item.ToDict()
+		}(),
+		"campaignModel": func() map[string]interface{} {
+			if p.CampaignModel == nil {
+				return nil
+			}
+			return p.CampaignModel.ToDict()
 		}(),
 		"newContextStack": p.NewContextStack,
 	}

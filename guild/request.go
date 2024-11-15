@@ -2058,20 +2058,22 @@ func (p DescribeGuildModelMastersRequest) Pointer() *DescribeGuildModelMastersRe
 }
 
 type CreateGuildModelMasterRequest struct {
-	SourceRequestId           *string     `json:"sourceRequestId"`
-	RequestId                 *string     `json:"requestId"`
-	ContextStack              *string     `json:"contextStack"`
-	NamespaceName             *string     `json:"namespaceName"`
-	Name                      *string     `json:"name"`
-	Description               *string     `json:"description"`
-	Metadata                  *string     `json:"metadata"`
-	DefaultMaximumMemberCount *int32      `json:"defaultMaximumMemberCount"`
-	MaximumMemberCount        *int32      `json:"maximumMemberCount"`
-	InactivityPeriodDays      *int32      `json:"inactivityPeriodDays"`
-	Roles                     []RoleModel `json:"roles"`
-	GuildMasterRole           *string     `json:"guildMasterRole"`
-	GuildMemberDefaultRole    *string     `json:"guildMemberDefaultRole"`
-	RejoinCoolTimeMinutes     *int32      `json:"rejoinCoolTimeMinutes"`
+	SourceRequestId               *string     `json:"sourceRequestId"`
+	RequestId                     *string     `json:"requestId"`
+	ContextStack                  *string     `json:"contextStack"`
+	NamespaceName                 *string     `json:"namespaceName"`
+	Name                          *string     `json:"name"`
+	Description                   *string     `json:"description"`
+	Metadata                      *string     `json:"metadata"`
+	DefaultMaximumMemberCount     *int32      `json:"defaultMaximumMemberCount"`
+	MaximumMemberCount            *int32      `json:"maximumMemberCount"`
+	InactivityPeriodDays          *int32      `json:"inactivityPeriodDays"`
+	Roles                         []RoleModel `json:"roles"`
+	GuildMasterRole               *string     `json:"guildMasterRole"`
+	GuildMemberDefaultRole        *string     `json:"guildMemberDefaultRole"`
+	RejoinCoolTimeMinutes         *int32      `json:"rejoinCoolTimeMinutes"`
+	MaxConcurrentJoinGuilds       *int32      `json:"maxConcurrentJoinGuilds"`
+	MaxConcurrentGuildMasterCount *int32      `json:"maxConcurrentGuildMasterCount"`
 }
 
 func (p *CreateGuildModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2249,6 +2251,12 @@ func (p *CreateGuildModelMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["rejoinCoolTimeMinutes"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RejoinCoolTimeMinutes)
 		}
+		if v, ok := d["maxConcurrentJoinGuilds"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MaxConcurrentJoinGuilds)
+		}
+		if v, ok := d["maxConcurrentGuildMasterCount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MaxConcurrentGuildMasterCount)
+		}
 	}
 	return nil
 }
@@ -2340,6 +2348,20 @@ func NewCreateGuildModelMasterRequestFromDict(data map[string]interface{}) Creat
 			}
 			return core.CastInt32(data["rejoinCoolTimeMinutes"])
 		}(),
+		MaxConcurrentJoinGuilds: func() *int32 {
+			v, ok := data["maxConcurrentJoinGuilds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxConcurrentJoinGuilds"])
+		}(),
+		MaxConcurrentGuildMasterCount: func() *int32 {
+			v, ok := data["maxConcurrentGuildMasterCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxConcurrentGuildMasterCount"])
+		}(),
 	}
 }
 
@@ -2355,9 +2377,11 @@ func (p CreateGuildModelMasterRequest) ToDict() map[string]interface{} {
 		"roles": CastRoleModelsFromDict(
 			p.Roles,
 		),
-		"guildMasterRole":        p.GuildMasterRole,
-		"guildMemberDefaultRole": p.GuildMemberDefaultRole,
-		"rejoinCoolTimeMinutes":  p.RejoinCoolTimeMinutes,
+		"guildMasterRole":               p.GuildMasterRole,
+		"guildMemberDefaultRole":        p.GuildMemberDefaultRole,
+		"rejoinCoolTimeMinutes":         p.RejoinCoolTimeMinutes,
+		"maxConcurrentJoinGuilds":       p.MaxConcurrentJoinGuilds,
+		"maxConcurrentGuildMasterCount": p.MaxConcurrentGuildMasterCount,
 	}
 }
 
@@ -2485,20 +2509,22 @@ func (p GetGuildModelMasterRequest) Pointer() *GetGuildModelMasterRequest {
 }
 
 type UpdateGuildModelMasterRequest struct {
-	SourceRequestId           *string     `json:"sourceRequestId"`
-	RequestId                 *string     `json:"requestId"`
-	ContextStack              *string     `json:"contextStack"`
-	NamespaceName             *string     `json:"namespaceName"`
-	GuildModelName            *string     `json:"guildModelName"`
-	Description               *string     `json:"description"`
-	Metadata                  *string     `json:"metadata"`
-	DefaultMaximumMemberCount *int32      `json:"defaultMaximumMemberCount"`
-	MaximumMemberCount        *int32      `json:"maximumMemberCount"`
-	InactivityPeriodDays      *int32      `json:"inactivityPeriodDays"`
-	Roles                     []RoleModel `json:"roles"`
-	GuildMasterRole           *string     `json:"guildMasterRole"`
-	GuildMemberDefaultRole    *string     `json:"guildMemberDefaultRole"`
-	RejoinCoolTimeMinutes     *int32      `json:"rejoinCoolTimeMinutes"`
+	SourceRequestId               *string     `json:"sourceRequestId"`
+	RequestId                     *string     `json:"requestId"`
+	ContextStack                  *string     `json:"contextStack"`
+	NamespaceName                 *string     `json:"namespaceName"`
+	GuildModelName                *string     `json:"guildModelName"`
+	Description                   *string     `json:"description"`
+	Metadata                      *string     `json:"metadata"`
+	DefaultMaximumMemberCount     *int32      `json:"defaultMaximumMemberCount"`
+	MaximumMemberCount            *int32      `json:"maximumMemberCount"`
+	InactivityPeriodDays          *int32      `json:"inactivityPeriodDays"`
+	Roles                         []RoleModel `json:"roles"`
+	GuildMasterRole               *string     `json:"guildMasterRole"`
+	GuildMemberDefaultRole        *string     `json:"guildMemberDefaultRole"`
+	RejoinCoolTimeMinutes         *int32      `json:"rejoinCoolTimeMinutes"`
+	MaxConcurrentJoinGuilds       *int32      `json:"maxConcurrentJoinGuilds"`
+	MaxConcurrentGuildMasterCount *int32      `json:"maxConcurrentGuildMasterCount"`
 }
 
 func (p *UpdateGuildModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2676,6 +2702,12 @@ func (p *UpdateGuildModelMasterRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["rejoinCoolTimeMinutes"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.RejoinCoolTimeMinutes)
 		}
+		if v, ok := d["maxConcurrentJoinGuilds"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MaxConcurrentJoinGuilds)
+		}
+		if v, ok := d["maxConcurrentGuildMasterCount"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.MaxConcurrentGuildMasterCount)
+		}
 	}
 	return nil
 }
@@ -2767,6 +2799,20 @@ func NewUpdateGuildModelMasterRequestFromDict(data map[string]interface{}) Updat
 			}
 			return core.CastInt32(data["rejoinCoolTimeMinutes"])
 		}(),
+		MaxConcurrentJoinGuilds: func() *int32 {
+			v, ok := data["maxConcurrentJoinGuilds"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxConcurrentJoinGuilds"])
+		}(),
+		MaxConcurrentGuildMasterCount: func() *int32 {
+			v, ok := data["maxConcurrentGuildMasterCount"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["maxConcurrentGuildMasterCount"])
+		}(),
 	}
 }
 
@@ -2782,9 +2828,11 @@ func (p UpdateGuildModelMasterRequest) ToDict() map[string]interface{} {
 		"roles": CastRoleModelsFromDict(
 			p.Roles,
 		),
-		"guildMasterRole":        p.GuildMasterRole,
-		"guildMemberDefaultRole": p.GuildMemberDefaultRole,
-		"rejoinCoolTimeMinutes":  p.RejoinCoolTimeMinutes,
+		"guildMasterRole":               p.GuildMasterRole,
+		"guildMemberDefaultRole":        p.GuildMemberDefaultRole,
+		"rejoinCoolTimeMinutes":         p.RejoinCoolTimeMinutes,
+		"maxConcurrentJoinGuilds":       p.MaxConcurrentJoinGuilds,
+		"maxConcurrentGuildMasterCount": p.MaxConcurrentGuildMasterCount,
 	}
 }
 
@@ -6418,6 +6466,336 @@ func (p UpdateMemberRoleByGuildNameRequest) ToDict() map[string]interface{} {
 }
 
 func (p UpdateMemberRoleByGuildNameRequest) Pointer() *UpdateMemberRoleByGuildNameRequest {
+	return &p
+}
+
+type BatchUpdateMemberRoleRequest struct {
+	SourceRequestId    *string  `json:"sourceRequestId"`
+	RequestId          *string  `json:"requestId"`
+	ContextStack       *string  `json:"contextStack"`
+	DuplicationAvoider *string  `json:"duplicationAvoider"`
+	NamespaceName      *string  `json:"namespaceName"`
+	GuildModelName     *string  `json:"guildModelName"`
+	AccessToken        *string  `json:"accessToken"`
+	Members            []Member `json:"members"`
+}
+
+func (p *BatchUpdateMemberRoleRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = BatchUpdateMemberRoleRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = BatchUpdateMemberRoleRequest{}
+	} else {
+		*p = BatchUpdateMemberRoleRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["guildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildModelName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["members"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Members)
+		}
+	}
+	return nil
+}
+
+func NewBatchUpdateMemberRoleRequestFromJson(data string) (BatchUpdateMemberRoleRequest, error) {
+	req := BatchUpdateMemberRoleRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return BatchUpdateMemberRoleRequest{}, err
+	}
+	return req, nil
+}
+
+func NewBatchUpdateMemberRoleRequestFromDict(data map[string]interface{}) BatchUpdateMemberRoleRequest {
+	return BatchUpdateMemberRoleRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		Members: func() []Member {
+			if data["members"] == nil {
+				return nil
+			}
+			return CastMembers(core.CastArray(data["members"]))
+		}(),
+	}
+}
+
+func (p BatchUpdateMemberRoleRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"guildModelName": p.GuildModelName,
+		"accessToken":    p.AccessToken,
+		"members": CastMembersFromDict(
+			p.Members,
+		),
+	}
+}
+
+func (p BatchUpdateMemberRoleRequest) Pointer() *BatchUpdateMemberRoleRequest {
+	return &p
+}
+
+type BatchUpdateMemberRoleByGuildNameRequest struct {
+	SourceRequestId    *string  `json:"sourceRequestId"`
+	RequestId          *string  `json:"requestId"`
+	ContextStack       *string  `json:"contextStack"`
+	DuplicationAvoider *string  `json:"duplicationAvoider"`
+	NamespaceName      *string  `json:"namespaceName"`
+	GuildModelName     *string  `json:"guildModelName"`
+	GuildName          *string  `json:"guildName"`
+	Members            []Member `json:"members"`
+}
+
+func (p *BatchUpdateMemberRoleByGuildNameRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = BatchUpdateMemberRoleByGuildNameRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = BatchUpdateMemberRoleByGuildNameRequest{}
+	} else {
+		*p = BatchUpdateMemberRoleByGuildNameRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["guildModelName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildModelName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildModelName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildModelName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildModelName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildModelName)
+				}
+			}
+		}
+		if v, ok := d["guildName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.GuildName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.GuildName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.GuildName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.GuildName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.GuildName)
+				}
+			}
+		}
+		if v, ok := d["members"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Members)
+		}
+	}
+	return nil
+}
+
+func NewBatchUpdateMemberRoleByGuildNameRequestFromJson(data string) (BatchUpdateMemberRoleByGuildNameRequest, error) {
+	req := BatchUpdateMemberRoleByGuildNameRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return BatchUpdateMemberRoleByGuildNameRequest{}, err
+	}
+	return req, nil
+}
+
+func NewBatchUpdateMemberRoleByGuildNameRequestFromDict(data map[string]interface{}) BatchUpdateMemberRoleByGuildNameRequest {
+	return BatchUpdateMemberRoleByGuildNameRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		GuildModelName: func() *string {
+			v, ok := data["guildModelName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildModelName"])
+		}(),
+		GuildName: func() *string {
+			v, ok := data["guildName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["guildName"])
+		}(),
+		Members: func() []Member {
+			if data["members"] == nil {
+				return nil
+			}
+			return CastMembers(core.CastArray(data["members"]))
+		}(),
+	}
+}
+
+func (p BatchUpdateMemberRoleByGuildNameRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":  p.NamespaceName,
+		"guildModelName": p.GuildModelName,
+		"guildName":      p.GuildName,
+		"members": CastMembersFromDict(
+			p.Members,
+		),
+	}
+}
+
+func (p BatchUpdateMemberRoleByGuildNameRequest) Pointer() *BatchUpdateMemberRoleByGuildNameRequest {
 	return &p
 }
 
