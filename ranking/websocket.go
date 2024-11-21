@@ -93,6 +93,13 @@ func (p Gs2RankingWebSocketClient) DescribeNamespacesAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -180,6 +187,13 @@ func (p Gs2RankingWebSocketClient) CreateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -261,6 +275,13 @@ func (p Gs2RankingWebSocketClient) GetNamespaceStatusAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -341,6 +362,13 @@ func (p Gs2RankingWebSocketClient) GetNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getNamespaceAsyncHandler(
@@ -429,6 +457,13 @@ func (p Gs2RankingWebSocketClient) UpdateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -509,6 +544,13 @@ func (p Gs2RankingWebSocketClient) DeleteNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteNamespaceAsyncHandler(
@@ -594,6 +636,13 @@ func (p Gs2RankingWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.dumpUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -677,6 +726,13 @@ func (p Gs2RankingWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.checkDumpUserDataByUserIdAsyncHandler(
@@ -762,6 +818,13 @@ func (p Gs2RankingWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.cleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -846,6 +909,13 @@ func (p Gs2RankingWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkCleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -929,6 +999,13 @@ func (p Gs2RankingWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.prepareImportUserDataByUserIdAsyncHandler(
@@ -1017,6 +1094,13 @@ func (p Gs2RankingWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.importUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1104,6 +1188,13 @@ func (p Gs2RankingWebSocketClient) CheckImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkImportUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1184,6 +1275,13 @@ func (p Gs2RankingWebSocketClient) DescribeCategoryModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeCategoryModelsAsyncHandler(
@@ -1268,6 +1366,13 @@ func (p Gs2RankingWebSocketClient) GetCategoryModelAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getCategoryModelAsyncHandler(
@@ -1355,6 +1460,13 @@ func (p Gs2RankingWebSocketClient) DescribeCategoryModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeCategoryModelMastersAsyncHandler(
@@ -1499,6 +1611,13 @@ func (p Gs2RankingWebSocketClient) CreateCategoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createCategoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1582,6 +1701,13 @@ func (p Gs2RankingWebSocketClient) GetCategoryModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getCategoryModelMasterAsyncHandler(
@@ -1726,6 +1852,13 @@ func (p Gs2RankingWebSocketClient) UpdateCategoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateCategoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1809,6 +1942,13 @@ func (p Gs2RankingWebSocketClient) DeleteCategoryModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteCategoryModelMasterAsyncHandler(
@@ -1906,6 +2046,13 @@ func (p Gs2RankingWebSocketClient) SubscribeAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.subscribeAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2001,6 +2148,13 @@ func (p Gs2RankingWebSocketClient) SubscribeByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.subscribeByUserIdAsyncHandler(
@@ -2101,6 +2255,13 @@ func (p Gs2RankingWebSocketClient) DescribeScoresAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeScoresAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2200,6 +2361,13 @@ func (p Gs2RankingWebSocketClient) DescribeScoresByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeScoresByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2296,6 +2464,13 @@ func (p Gs2RankingWebSocketClient) GetScoreAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getScoreAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2391,6 +2566,13 @@ func (p Gs2RankingWebSocketClient) GetScoreByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getScoreByUserIdAsyncHandler(
@@ -2494,6 +2676,13 @@ func (p Gs2RankingWebSocketClient) DescribeRankingsAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeRankingsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2596,6 +2785,13 @@ func (p Gs2RankingWebSocketClient) DescribeRankingssByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeRankingssByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2685,6 +2881,13 @@ func (p Gs2RankingWebSocketClient) DescribeNearRankingsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeNearRankingsAsyncHandler(
@@ -2785,6 +2988,13 @@ func (p Gs2RankingWebSocketClient) GetRankingAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getRankingAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2883,6 +3093,13 @@ func (p Gs2RankingWebSocketClient) GetRankingByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getRankingByUserIdAsyncHandler(
@@ -2983,6 +3200,13 @@ func (p Gs2RankingWebSocketClient) PutScoreAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.putScoreAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3082,6 +3306,13 @@ func (p Gs2RankingWebSocketClient) PutScoreByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.putScoreByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3169,6 +3400,13 @@ func (p Gs2RankingWebSocketClient) CalcRankingAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.calcRankingAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3250,6 +3488,13 @@ func (p Gs2RankingWebSocketClient) ExportMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3330,6 +3575,13 @@ func (p Gs2RankingWebSocketClient) GetCurrentRankingMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getCurrentRankingMasterAsyncHandler(
@@ -3415,6 +3667,13 @@ func (p Gs2RankingWebSocketClient) UpdateCurrentRankingMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateCurrentRankingMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3498,6 +3757,13 @@ func (p Gs2RankingWebSocketClient) UpdateCurrentRankingMasterFromGitHubAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.updateCurrentRankingMasterFromGitHubAsyncHandler(
@@ -3592,6 +3858,13 @@ func (p Gs2RankingWebSocketClient) GetSubscribeAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getSubscribeAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3684,6 +3957,13 @@ func (p Gs2RankingWebSocketClient) GetSubscribeByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getSubscribeByUserIdAsyncHandler(
@@ -3781,6 +4061,13 @@ func (p Gs2RankingWebSocketClient) UnsubscribeAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.unsubscribeAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3877,6 +4164,13 @@ func (p Gs2RankingWebSocketClient) UnsubscribeByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.unsubscribeByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3967,6 +4261,13 @@ func (p Gs2RankingWebSocketClient) DescribeSubscribesByCategoryNameAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeSubscribesByCategoryNameAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4056,6 +4357,13 @@ func (p Gs2RankingWebSocketClient) DescribeSubscribesByCategoryNameAndUserIdAsyn
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeSubscribesByCategoryNameAndUserIdAsyncHandler(

@@ -93,6 +93,13 @@ func (p Gs2KeyWebSocketClient) DescribeNamespacesAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -180,6 +187,13 @@ func (p Gs2KeyWebSocketClient) CreateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -261,6 +275,13 @@ func (p Gs2KeyWebSocketClient) GetNamespaceStatusAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -341,6 +362,13 @@ func (p Gs2KeyWebSocketClient) GetNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getNamespaceAsyncHandler(
@@ -429,6 +457,13 @@ func (p Gs2KeyWebSocketClient) UpdateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -509,6 +544,13 @@ func (p Gs2KeyWebSocketClient) DeleteNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteNamespaceAsyncHandler(
@@ -597,6 +639,13 @@ func (p Gs2KeyWebSocketClient) DescribeKeysAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeKeysAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -683,6 +732,13 @@ func (p Gs2KeyWebSocketClient) CreateKeyAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.createKeyAsyncHandler(
@@ -771,6 +827,13 @@ func (p Gs2KeyWebSocketClient) UpdateKeyAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateKeyAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -855,6 +918,13 @@ func (p Gs2KeyWebSocketClient) GetKeyAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getKeyAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -938,6 +1008,13 @@ func (p Gs2KeyWebSocketClient) DeleteKeyAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteKeyAsyncHandler(
@@ -1026,6 +1103,13 @@ func (p Gs2KeyWebSocketClient) EncryptAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.encryptAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1113,6 +1197,13 @@ func (p Gs2KeyWebSocketClient) DecryptAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.decryptAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1199,6 +1290,13 @@ func (p Gs2KeyWebSocketClient) DescribeGitHubApiKeysAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeGitHubApiKeysAsyncHandler(
@@ -1293,6 +1391,13 @@ func (p Gs2KeyWebSocketClient) CreateGitHubApiKeyAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createGitHubApiKeyAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1386,6 +1491,13 @@ func (p Gs2KeyWebSocketClient) UpdateGitHubApiKeyAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateGitHubApiKeyAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1470,6 +1582,13 @@ func (p Gs2KeyWebSocketClient) GetGitHubApiKeyAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getGitHubApiKeyAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1553,6 +1672,13 @@ func (p Gs2KeyWebSocketClient) DeleteGitHubApiKeyAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteGitHubApiKeyAsyncHandler(

@@ -93,6 +93,13 @@ func (p Gs2FormationWebSocketClient) DescribeNamespacesAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -192,6 +199,13 @@ func (p Gs2FormationWebSocketClient) CreateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -273,6 +287,13 @@ func (p Gs2FormationWebSocketClient) GetNamespaceStatusAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -353,6 +374,13 @@ func (p Gs2FormationWebSocketClient) GetNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getNamespaceAsyncHandler(
@@ -453,6 +481,13 @@ func (p Gs2FormationWebSocketClient) UpdateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -533,6 +568,13 @@ func (p Gs2FormationWebSocketClient) DeleteNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteNamespaceAsyncHandler(
@@ -618,6 +660,13 @@ func (p Gs2FormationWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.dumpUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -701,6 +750,13 @@ func (p Gs2FormationWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.checkDumpUserDataByUserIdAsyncHandler(
@@ -786,6 +842,13 @@ func (p Gs2FormationWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.cleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -870,6 +933,13 @@ func (p Gs2FormationWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkCleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -953,6 +1023,13 @@ func (p Gs2FormationWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.prepareImportUserDataByUserIdAsyncHandler(
@@ -1041,6 +1118,13 @@ func (p Gs2FormationWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.importUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1128,6 +1212,13 @@ func (p Gs2FormationWebSocketClient) CheckImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkImportUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1211,6 +1302,13 @@ func (p Gs2FormationWebSocketClient) GetFormModelAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getFormModelAsyncHandler(
@@ -1298,6 +1396,13 @@ func (p Gs2FormationWebSocketClient) DescribeFormModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeFormModelMastersAsyncHandler(
@@ -1396,6 +1501,13 @@ func (p Gs2FormationWebSocketClient) CreateFormModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createFormModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1479,6 +1591,13 @@ func (p Gs2FormationWebSocketClient) GetFormModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getFormModelMasterAsyncHandler(
@@ -1577,6 +1696,13 @@ func (p Gs2FormationWebSocketClient) UpdateFormModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateFormModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1661,6 +1787,13 @@ func (p Gs2FormationWebSocketClient) DeleteFormModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteFormModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1741,6 +1874,13 @@ func (p Gs2FormationWebSocketClient) DescribeMoldModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeMoldModelsAsyncHandler(
@@ -1825,6 +1965,13 @@ func (p Gs2FormationWebSocketClient) GetMoldModelAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getMoldModelAsyncHandler(
@@ -1912,6 +2059,13 @@ func (p Gs2FormationWebSocketClient) DescribeMoldModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeMoldModelMastersAsyncHandler(
@@ -2012,6 +2166,13 @@ func (p Gs2FormationWebSocketClient) CreateMoldModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createMoldModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2095,6 +2256,13 @@ func (p Gs2FormationWebSocketClient) GetMoldModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getMoldModelMasterAsyncHandler(
@@ -2195,6 +2363,13 @@ func (p Gs2FormationWebSocketClient) UpdateMoldModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateMoldModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2279,6 +2454,13 @@ func (p Gs2FormationWebSocketClient) DeleteMoldModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteMoldModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2359,6 +2541,13 @@ func (p Gs2FormationWebSocketClient) DescribePropertyFormModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describePropertyFormModelsAsyncHandler(
@@ -2443,6 +2632,13 @@ func (p Gs2FormationWebSocketClient) GetPropertyFormModelAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getPropertyFormModelAsyncHandler(
@@ -2530,6 +2726,13 @@ func (p Gs2FormationWebSocketClient) DescribePropertyFormModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describePropertyFormModelMastersAsyncHandler(
@@ -2628,6 +2831,13 @@ func (p Gs2FormationWebSocketClient) CreatePropertyFormModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createPropertyFormModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2711,6 +2921,13 @@ func (p Gs2FormationWebSocketClient) GetPropertyFormModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getPropertyFormModelMasterAsyncHandler(
@@ -2809,6 +3026,13 @@ func (p Gs2FormationWebSocketClient) UpdatePropertyFormModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updatePropertyFormModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2893,6 +3117,13 @@ func (p Gs2FormationWebSocketClient) DeletePropertyFormModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deletePropertyFormModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2974,6 +3205,13 @@ func (p Gs2FormationWebSocketClient) ExportMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3054,6 +3292,13 @@ func (p Gs2FormationWebSocketClient) GetCurrentFormMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getCurrentFormMasterAsyncHandler(
@@ -3139,6 +3384,13 @@ func (p Gs2FormationWebSocketClient) UpdateCurrentFormMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateCurrentFormMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3222,6 +3474,13 @@ func (p Gs2FormationWebSocketClient) UpdateCurrentFormMasterFromGitHubAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.updateCurrentFormMasterFromGitHubAsyncHandler(
@@ -3316,6 +3575,13 @@ func (p Gs2FormationWebSocketClient) DescribeMoldsAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeMoldsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3409,6 +3675,13 @@ func (p Gs2FormationWebSocketClient) DescribeMoldsByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeMoldsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3499,6 +3772,13 @@ func (p Gs2FormationWebSocketClient) GetMoldAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getMoldAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3588,6 +3868,13 @@ func (p Gs2FormationWebSocketClient) GetMoldByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getMoldByUserIdAsyncHandler(
@@ -3685,6 +3972,13 @@ func (p Gs2FormationWebSocketClient) SetMoldCapacityByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setMoldCapacityByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3780,6 +4074,13 @@ func (p Gs2FormationWebSocketClient) AddMoldCapacityByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.addMoldCapacityByUserIdAsyncHandler(
@@ -3877,6 +4178,13 @@ func (p Gs2FormationWebSocketClient) SubMoldCapacityAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.subMoldCapacityAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3973,6 +4281,13 @@ func (p Gs2FormationWebSocketClient) SubMoldCapacityByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.subMoldCapacityByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4065,6 +4380,13 @@ func (p Gs2FormationWebSocketClient) DeleteMoldAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteMoldAsyncHandler(
@@ -4159,6 +4481,13 @@ func (p Gs2FormationWebSocketClient) DeleteMoldByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteMoldByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4242,6 +4571,13 @@ func (p Gs2FormationWebSocketClient) AddCapacityByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.addCapacityByStampSheetAsyncHandler(
@@ -4327,6 +4663,13 @@ func (p Gs2FormationWebSocketClient) SubCapacityByStampTaskAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.subCapacityByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4410,6 +4753,13 @@ func (p Gs2FormationWebSocketClient) SetCapacityByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setCapacityByStampSheetAsyncHandler(
@@ -4507,6 +4857,13 @@ func (p Gs2FormationWebSocketClient) DescribeFormsAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeFormsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4603,6 +4960,13 @@ func (p Gs2FormationWebSocketClient) DescribeFormsByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeFormsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4696,6 +5060,13 @@ func (p Gs2FormationWebSocketClient) GetFormAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getFormAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4788,6 +5159,13 @@ func (p Gs2FormationWebSocketClient) GetFormByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getFormByUserIdAsyncHandler(
@@ -4885,6 +5263,13 @@ func (p Gs2FormationWebSocketClient) GetFormWithSignatureAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getFormWithSignatureAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4980,6 +5365,13 @@ func (p Gs2FormationWebSocketClient) GetFormWithSignatureByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getFormWithSignatureByUserIdAsyncHandler(
@@ -5083,6 +5475,13 @@ func (p Gs2FormationWebSocketClient) SetFormByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setFormByUserIdAsyncHandler(
@@ -5190,6 +5589,13 @@ func (p Gs2FormationWebSocketClient) SetFormWithSignatureAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setFormWithSignatureAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5296,6 +5702,13 @@ func (p Gs2FormationWebSocketClient) AcquireActionsToFormPropertiesAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.acquireActionsToFormPropertiesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5391,6 +5804,13 @@ func (p Gs2FormationWebSocketClient) DeleteFormAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteFormAsyncHandler(
@@ -5488,6 +5908,13 @@ func (p Gs2FormationWebSocketClient) DeleteFormByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteFormByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5572,6 +5999,13 @@ func (p Gs2FormationWebSocketClient) AcquireActionToFormPropertiesByStampSheetAs
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.acquireActionToFormPropertiesByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5655,6 +6089,13 @@ func (p Gs2FormationWebSocketClient) SetFormByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setFormByStampSheetAsyncHandler(
@@ -5752,6 +6193,13 @@ func (p Gs2FormationWebSocketClient) DescribePropertyFormsAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describePropertyFormsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5848,6 +6296,13 @@ func (p Gs2FormationWebSocketClient) DescribePropertyFormsByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describePropertyFormsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5941,6 +6396,13 @@ func (p Gs2FormationWebSocketClient) GetPropertyFormAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getPropertyFormAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6033,6 +6495,13 @@ func (p Gs2FormationWebSocketClient) GetPropertyFormByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getPropertyFormByUserIdAsyncHandler(
@@ -6130,6 +6599,13 @@ func (p Gs2FormationWebSocketClient) GetPropertyFormWithSignatureAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getPropertyFormWithSignatureAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6225,6 +6701,13 @@ func (p Gs2FormationWebSocketClient) GetPropertyFormWithSignatureByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getPropertyFormWithSignatureByUserIdAsyncHandler(
@@ -6328,6 +6811,13 @@ func (p Gs2FormationWebSocketClient) SetPropertyFormByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setPropertyFormByUserIdAsyncHandler(
@@ -6435,6 +6925,13 @@ func (p Gs2FormationWebSocketClient) SetPropertyFormWithSignatureAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setPropertyFormWithSignatureAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6541,6 +7038,13 @@ func (p Gs2FormationWebSocketClient) AcquireActionsToPropertyFormPropertiesAsync
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.acquireActionsToPropertyFormPropertiesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6636,6 +7140,13 @@ func (p Gs2FormationWebSocketClient) DeletePropertyFormAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deletePropertyFormAsyncHandler(
@@ -6733,6 +7244,13 @@ func (p Gs2FormationWebSocketClient) DeletePropertyFormByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deletePropertyFormByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6816,6 +7334,13 @@ func (p Gs2FormationWebSocketClient) AcquireActionToPropertyFormPropertiesByStam
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.acquireActionToPropertyFormPropertiesByStampSheetAsyncHandler(

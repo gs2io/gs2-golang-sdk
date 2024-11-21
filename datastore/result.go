@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -499,8 +512,9 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type DescribeDataObjectsResult struct {
-	Items         []DataObject `json:"items"`
-	NextPageToken *string      `json:"nextPageToken"`
+	Items         []DataObject         `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeDataObjectsAsyncResult struct {
@@ -546,8 +560,9 @@ func (p DescribeDataObjectsResult) Pointer() *DescribeDataObjectsResult {
 }
 
 type DescribeDataObjectsByUserIdResult struct {
-	Items         []DataObject `json:"items"`
-	NextPageToken *string      `json:"nextPageToken"`
+	Items         []DataObject         `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeDataObjectsByUserIdAsyncResult struct {
@@ -593,8 +608,9 @@ func (p DescribeDataObjectsByUserIdResult) Pointer() *DescribeDataObjectsByUserI
 }
 
 type PrepareUploadResult struct {
-	Item      *DataObject `json:"item"`
-	UploadUrl *string     `json:"uploadUrl"`
+	Item      *DataObject          `json:"item"`
+	UploadUrl *string              `json:"uploadUrl"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareUploadAsyncResult struct {
@@ -644,8 +660,9 @@ func (p PrepareUploadResult) Pointer() *PrepareUploadResult {
 }
 
 type PrepareUploadByUserIdResult struct {
-	Item      *DataObject `json:"item"`
-	UploadUrl *string     `json:"uploadUrl"`
+	Item      *DataObject          `json:"item"`
+	UploadUrl *string              `json:"uploadUrl"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareUploadByUserIdAsyncResult struct {
@@ -695,7 +712,8 @@ func (p PrepareUploadByUserIdResult) Pointer() *PrepareUploadByUserIdResult {
 }
 
 type UpdateDataObjectResult struct {
-	Item *DataObject `json:"item"`
+	Item     *DataObject          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateDataObjectAsyncResult struct {
@@ -737,7 +755,8 @@ func (p UpdateDataObjectResult) Pointer() *UpdateDataObjectResult {
 }
 
 type UpdateDataObjectByUserIdResult struct {
-	Item *DataObject `json:"item"`
+	Item     *DataObject          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateDataObjectByUserIdAsyncResult struct {
@@ -779,8 +798,9 @@ func (p UpdateDataObjectByUserIdResult) Pointer() *UpdateDataObjectByUserIdResul
 }
 
 type PrepareReUploadResult struct {
-	Item      *DataObject `json:"item"`
-	UploadUrl *string     `json:"uploadUrl"`
+	Item      *DataObject          `json:"item"`
+	UploadUrl *string              `json:"uploadUrl"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareReUploadAsyncResult struct {
@@ -830,8 +850,9 @@ func (p PrepareReUploadResult) Pointer() *PrepareReUploadResult {
 }
 
 type PrepareReUploadByUserIdResult struct {
-	Item      *DataObject `json:"item"`
-	UploadUrl *string     `json:"uploadUrl"`
+	Item      *DataObject          `json:"item"`
+	UploadUrl *string              `json:"uploadUrl"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareReUploadByUserIdAsyncResult struct {
@@ -881,7 +902,8 @@ func (p PrepareReUploadByUserIdResult) Pointer() *PrepareReUploadByUserIdResult 
 }
 
 type DoneUploadResult struct {
-	Item *DataObject `json:"item"`
+	Item     *DataObject          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DoneUploadAsyncResult struct {
@@ -923,7 +945,8 @@ func (p DoneUploadResult) Pointer() *DoneUploadResult {
 }
 
 type DoneUploadByUserIdResult struct {
-	Item *DataObject `json:"item"`
+	Item     *DataObject          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DoneUploadByUserIdAsyncResult struct {
@@ -965,7 +988,8 @@ func (p DoneUploadByUserIdResult) Pointer() *DoneUploadByUserIdResult {
 }
 
 type DeleteDataObjectResult struct {
-	Item *DataObject `json:"item"`
+	Item     *DataObject          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteDataObjectAsyncResult struct {
@@ -1007,7 +1031,8 @@ func (p DeleteDataObjectResult) Pointer() *DeleteDataObjectResult {
 }
 
 type DeleteDataObjectByUserIdResult struct {
-	Item *DataObject `json:"item"`
+	Item     *DataObject          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteDataObjectByUserIdAsyncResult struct {
@@ -1049,9 +1074,10 @@ func (p DeleteDataObjectByUserIdResult) Pointer() *DeleteDataObjectByUserIdResul
 }
 
 type PrepareDownloadResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+	Item          *DataObject          `json:"item"`
+	FileUrl       *string              `json:"fileUrl"`
+	ContentLength *int64               `json:"contentLength"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareDownloadAsyncResult struct {
@@ -1109,9 +1135,10 @@ func (p PrepareDownloadResult) Pointer() *PrepareDownloadResult {
 }
 
 type PrepareDownloadByUserIdResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+	Item          *DataObject          `json:"item"`
+	FileUrl       *string              `json:"fileUrl"`
+	ContentLength *int64               `json:"contentLength"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareDownloadByUserIdAsyncResult struct {
@@ -1169,9 +1196,10 @@ func (p PrepareDownloadByUserIdResult) Pointer() *PrepareDownloadByUserIdResult 
 }
 
 type PrepareDownloadByGenerationResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+	Item          *DataObject          `json:"item"`
+	FileUrl       *string              `json:"fileUrl"`
+	ContentLength *int64               `json:"contentLength"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareDownloadByGenerationAsyncResult struct {
@@ -1229,9 +1257,10 @@ func (p PrepareDownloadByGenerationResult) Pointer() *PrepareDownloadByGeneratio
 }
 
 type PrepareDownloadByGenerationAndUserIdResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+	Item          *DataObject          `json:"item"`
+	FileUrl       *string              `json:"fileUrl"`
+	ContentLength *int64               `json:"contentLength"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareDownloadByGenerationAndUserIdAsyncResult struct {
@@ -1289,9 +1318,10 @@ func (p PrepareDownloadByGenerationAndUserIdResult) Pointer() *PrepareDownloadBy
 }
 
 type PrepareDownloadOwnDataResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+	Item          *DataObject          `json:"item"`
+	FileUrl       *string              `json:"fileUrl"`
+	ContentLength *int64               `json:"contentLength"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareDownloadOwnDataAsyncResult struct {
@@ -1349,9 +1379,10 @@ func (p PrepareDownloadOwnDataResult) Pointer() *PrepareDownloadOwnDataResult {
 }
 
 type PrepareDownloadByUserIdAndDataObjectNameResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+	Item          *DataObject          `json:"item"`
+	FileUrl       *string              `json:"fileUrl"`
+	ContentLength *int64               `json:"contentLength"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareDownloadByUserIdAndDataObjectNameAsyncResult struct {
@@ -1409,9 +1440,10 @@ func (p PrepareDownloadByUserIdAndDataObjectNameResult) Pointer() *PrepareDownlo
 }
 
 type PrepareDownloadOwnDataByGenerationResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+	Item          *DataObject          `json:"item"`
+	FileUrl       *string              `json:"fileUrl"`
+	ContentLength *int64               `json:"contentLength"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareDownloadOwnDataByGenerationAsyncResult struct {
@@ -1469,9 +1501,10 @@ func (p PrepareDownloadOwnDataByGenerationResult) Pointer() *PrepareDownloadOwnD
 }
 
 type PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult struct {
-	Item          *DataObject `json:"item"`
-	FileUrl       *string     `json:"fileUrl"`
-	ContentLength *int64      `json:"contentLength"`
+	Item          *DataObject          `json:"item"`
+	FileUrl       *string              `json:"fileUrl"`
+	ContentLength *int64               `json:"contentLength"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareDownloadByUserIdAndDataObjectNameAndGenerationAsyncResult struct {
@@ -1529,7 +1562,8 @@ func (p PrepareDownloadByUserIdAndDataObjectNameAndGenerationResult) Pointer() *
 }
 
 type RestoreDataObjectResult struct {
-	Item *DataObject `json:"item"`
+	Item     *DataObject          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type RestoreDataObjectAsyncResult struct {
@@ -1571,8 +1605,9 @@ func (p RestoreDataObjectResult) Pointer() *RestoreDataObjectResult {
 }
 
 type DescribeDataObjectHistoriesResult struct {
-	Items         []DataObjectHistory `json:"items"`
-	NextPageToken *string             `json:"nextPageToken"`
+	Items         []DataObjectHistory  `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeDataObjectHistoriesAsyncResult struct {
@@ -1618,8 +1653,9 @@ func (p DescribeDataObjectHistoriesResult) Pointer() *DescribeDataObjectHistorie
 }
 
 type DescribeDataObjectHistoriesByUserIdResult struct {
-	Items         []DataObjectHistory `json:"items"`
-	NextPageToken *string             `json:"nextPageToken"`
+	Items         []DataObjectHistory  `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeDataObjectHistoriesByUserIdAsyncResult struct {
@@ -1665,7 +1701,8 @@ func (p DescribeDataObjectHistoriesByUserIdResult) Pointer() *DescribeDataObject
 }
 
 type GetDataObjectHistoryResult struct {
-	Item *DataObjectHistory `json:"item"`
+	Item     *DataObjectHistory   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetDataObjectHistoryAsyncResult struct {
@@ -1707,7 +1744,8 @@ func (p GetDataObjectHistoryResult) Pointer() *GetDataObjectHistoryResult {
 }
 
 type GetDataObjectHistoryByUserIdResult struct {
-	Item *DataObjectHistory `json:"item"`
+	Item     *DataObjectHistory   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetDataObjectHistoryByUserIdAsyncResult struct {

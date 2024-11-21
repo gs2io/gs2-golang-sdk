@@ -97,6 +97,13 @@ func (p Gs2RealtimeRestClient) DescribeNamespacesAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -200,6 +207,13 @@ func (p Gs2RealtimeRestClient) CreateNamespaceAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go createNamespaceAsyncHandler(
 		p,
@@ -290,6 +304,13 @@ func (p Gs2RealtimeRestClient) GetNamespaceStatusAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -379,6 +400,13 @@ func (p Gs2RealtimeRestClient) GetNamespaceAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getNamespaceAsyncHandler(
@@ -485,6 +513,13 @@ func (p Gs2RealtimeRestClient) UpdateNamespaceAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go updateNamespaceAsyncHandler(
 		p,
@@ -575,6 +610,13 @@ func (p Gs2RealtimeRestClient) DeleteNamespaceAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go deleteNamespaceAsyncHandler(
 		p,
@@ -662,6 +704,13 @@ func (p Gs2RealtimeRestClient) NowAsync(
 	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go nowAsyncHandler(
@@ -758,6 +807,13 @@ func (p Gs2RealtimeRestClient) DescribeRoomsAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeRoomsAsyncHandler(
@@ -859,6 +915,13 @@ func (p Gs2RealtimeRestClient) WantRoomAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go wantRoomAsyncHandler(
 		p,
@@ -954,6 +1017,13 @@ func (p Gs2RealtimeRestClient) GetRoomAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go getRoomAsyncHandler(
 		p,
@@ -1048,6 +1118,13 @@ func (p Gs2RealtimeRestClient) DeleteRoomAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go deleteRoomAsyncHandler(

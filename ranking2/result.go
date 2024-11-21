@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -499,7 +512,8 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type DescribeGlobalRankingModelsResult struct {
-	Items []GlobalRankingModel `json:"items"`
+	Items    []GlobalRankingModel `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeGlobalRankingModelsAsyncResult struct {
@@ -537,7 +551,8 @@ func (p DescribeGlobalRankingModelsResult) Pointer() *DescribeGlobalRankingModel
 }
 
 type GetGlobalRankingModelResult struct {
-	Item *GlobalRankingModel `json:"item"`
+	Item     *GlobalRankingModel  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetGlobalRankingModelAsyncResult struct {
@@ -581,6 +596,7 @@ func (p GetGlobalRankingModelResult) Pointer() *GetGlobalRankingModelResult {
 type DescribeGlobalRankingModelMastersResult struct {
 	Items         []GlobalRankingModelMaster `json:"items"`
 	NextPageToken *string                    `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata       `json:"metadata"`
 }
 
 type DescribeGlobalRankingModelMastersAsyncResult struct {
@@ -626,7 +642,8 @@ func (p DescribeGlobalRankingModelMastersResult) Pointer() *DescribeGlobalRankin
 }
 
 type CreateGlobalRankingModelMasterResult struct {
-	Item *GlobalRankingModelMaster `json:"item"`
+	Item     *GlobalRankingModelMaster `json:"item"`
+	Metadata *core.ResultMetadata      `json:"metadata"`
 }
 
 type CreateGlobalRankingModelMasterAsyncResult struct {
@@ -668,7 +685,8 @@ func (p CreateGlobalRankingModelMasterResult) Pointer() *CreateGlobalRankingMode
 }
 
 type GetGlobalRankingModelMasterResult struct {
-	Item *GlobalRankingModelMaster `json:"item"`
+	Item     *GlobalRankingModelMaster `json:"item"`
+	Metadata *core.ResultMetadata      `json:"metadata"`
 }
 
 type GetGlobalRankingModelMasterAsyncResult struct {
@@ -710,7 +728,8 @@ func (p GetGlobalRankingModelMasterResult) Pointer() *GetGlobalRankingModelMaste
 }
 
 type UpdateGlobalRankingModelMasterResult struct {
-	Item *GlobalRankingModelMaster `json:"item"`
+	Item     *GlobalRankingModelMaster `json:"item"`
+	Metadata *core.ResultMetadata      `json:"metadata"`
 }
 
 type UpdateGlobalRankingModelMasterAsyncResult struct {
@@ -752,7 +771,8 @@ func (p UpdateGlobalRankingModelMasterResult) Pointer() *UpdateGlobalRankingMode
 }
 
 type DeleteGlobalRankingModelMasterResult struct {
-	Item *GlobalRankingModelMaster `json:"item"`
+	Item     *GlobalRankingModelMaster `json:"item"`
+	Metadata *core.ResultMetadata      `json:"metadata"`
 }
 
 type DeleteGlobalRankingModelMasterAsyncResult struct {
@@ -796,6 +816,7 @@ func (p DeleteGlobalRankingModelMasterResult) Pointer() *DeleteGlobalRankingMode
 type DescribeGlobalRankingScoresResult struct {
 	Items         []GlobalRankingScore `json:"items"`
 	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeGlobalRankingScoresAsyncResult struct {
@@ -843,6 +864,7 @@ func (p DescribeGlobalRankingScoresResult) Pointer() *DescribeGlobalRankingScore
 type DescribeGlobalRankingScoresByUserIdResult struct {
 	Items         []GlobalRankingScore `json:"items"`
 	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeGlobalRankingScoresByUserIdAsyncResult struct {
@@ -888,7 +910,8 @@ func (p DescribeGlobalRankingScoresByUserIdResult) Pointer() *DescribeGlobalRank
 }
 
 type PutGlobalRankingScoreResult struct {
-	Item *GlobalRankingScore `json:"item"`
+	Item     *GlobalRankingScore  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type PutGlobalRankingScoreAsyncResult struct {
@@ -930,7 +953,8 @@ func (p PutGlobalRankingScoreResult) Pointer() *PutGlobalRankingScoreResult {
 }
 
 type PutGlobalRankingScoreByUserIdResult struct {
-	Item *GlobalRankingScore `json:"item"`
+	Item     *GlobalRankingScore  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type PutGlobalRankingScoreByUserIdAsyncResult struct {
@@ -972,7 +996,8 @@ func (p PutGlobalRankingScoreByUserIdResult) Pointer() *PutGlobalRankingScoreByU
 }
 
 type GetGlobalRankingScoreResult struct {
-	Item *GlobalRankingScore `json:"item"`
+	Item     *GlobalRankingScore  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetGlobalRankingScoreAsyncResult struct {
@@ -1014,7 +1039,8 @@ func (p GetGlobalRankingScoreResult) Pointer() *GetGlobalRankingScoreResult {
 }
 
 type GetGlobalRankingScoreByUserIdResult struct {
-	Item *GlobalRankingScore `json:"item"`
+	Item     *GlobalRankingScore  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetGlobalRankingScoreByUserIdAsyncResult struct {
@@ -1056,7 +1082,8 @@ func (p GetGlobalRankingScoreByUserIdResult) Pointer() *GetGlobalRankingScoreByU
 }
 
 type DeleteGlobalRankingScoreByUserIdResult struct {
-	Item *GlobalRankingScore `json:"item"`
+	Item     *GlobalRankingScore  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteGlobalRankingScoreByUserIdAsyncResult struct {
@@ -1098,7 +1125,8 @@ func (p DeleteGlobalRankingScoreByUserIdResult) Pointer() *DeleteGlobalRankingSc
 }
 
 type VerifyGlobalRankingScoreResult struct {
-	Item *GlobalRankingScore `json:"item"`
+	Item     *GlobalRankingScore  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyGlobalRankingScoreAsyncResult struct {
@@ -1140,7 +1168,8 @@ func (p VerifyGlobalRankingScoreResult) Pointer() *VerifyGlobalRankingScoreResul
 }
 
 type VerifyGlobalRankingScoreByUserIdResult struct {
-	Item *GlobalRankingScore `json:"item"`
+	Item     *GlobalRankingScore  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyGlobalRankingScoreByUserIdAsyncResult struct {
@@ -1182,8 +1211,9 @@ func (p VerifyGlobalRankingScoreByUserIdResult) Pointer() *VerifyGlobalRankingSc
 }
 
 type VerifyGlobalRankingScoreByStampTaskResult struct {
-	Item            *GlobalRankingScore `json:"item"`
-	NewContextStack *string             `json:"newContextStack"`
+	Item            *GlobalRankingScore  `json:"item"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyGlobalRankingScoreByStampTaskAsyncResult struct {
@@ -1235,6 +1265,7 @@ func (p VerifyGlobalRankingScoreByStampTaskResult) Pointer() *VerifyGlobalRankin
 type DescribeGlobalRankingReceivedRewardsResult struct {
 	Items         []GlobalRankingReceivedReward `json:"items"`
 	NextPageToken *string                       `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata          `json:"metadata"`
 }
 
 type DescribeGlobalRankingReceivedRewardsAsyncResult struct {
@@ -1282,6 +1313,7 @@ func (p DescribeGlobalRankingReceivedRewardsResult) Pointer() *DescribeGlobalRan
 type DescribeGlobalRankingReceivedRewardsByUserIdResult struct {
 	Items         []GlobalRankingReceivedReward `json:"items"`
 	NextPageToken *string                       `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata          `json:"metadata"`
 }
 
 type DescribeGlobalRankingReceivedRewardsByUserIdAsyncResult struct {
@@ -1327,7 +1359,8 @@ func (p DescribeGlobalRankingReceivedRewardsByUserIdResult) Pointer() *DescribeG
 }
 
 type CreateGlobalRankingReceivedRewardResult struct {
-	Item *GlobalRankingReceivedReward `json:"item"`
+	Item     *GlobalRankingReceivedReward `json:"item"`
+	Metadata *core.ResultMetadata         `json:"metadata"`
 }
 
 type CreateGlobalRankingReceivedRewardAsyncResult struct {
@@ -1369,7 +1402,8 @@ func (p CreateGlobalRankingReceivedRewardResult) Pointer() *CreateGlobalRankingR
 }
 
 type CreateGlobalRankingReceivedRewardByUserIdResult struct {
-	Item *GlobalRankingReceivedReward `json:"item"`
+	Item     *GlobalRankingReceivedReward `json:"item"`
+	Metadata *core.ResultMetadata         `json:"metadata"`
 }
 
 type CreateGlobalRankingReceivedRewardByUserIdAsyncResult struct {
@@ -1411,12 +1445,13 @@ func (p CreateGlobalRankingReceivedRewardByUserIdResult) Pointer() *CreateGlobal
 }
 
 type ReceiveGlobalRankingReceivedRewardResult struct {
-	Item                      *GlobalRankingModel `json:"item"`
-	AcquireActions            []AcquireAction     `json:"acquireActions"`
-	TransactionId             *string             `json:"transactionId"`
-	StampSheet                *string             `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string             `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool               `json:"autoRunStampSheet"`
+	Item                      *GlobalRankingModel  `json:"item"`
+	AcquireActions            []AcquireAction      `json:"acquireActions"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type ReceiveGlobalRankingReceivedRewardAsyncResult struct {
@@ -1499,12 +1534,13 @@ func (p ReceiveGlobalRankingReceivedRewardResult) Pointer() *ReceiveGlobalRankin
 }
 
 type ReceiveGlobalRankingReceivedRewardByUserIdResult struct {
-	Item                      *GlobalRankingModel `json:"item"`
-	AcquireActions            []AcquireAction     `json:"acquireActions"`
-	TransactionId             *string             `json:"transactionId"`
-	StampSheet                *string             `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string             `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool               `json:"autoRunStampSheet"`
+	Item                      *GlobalRankingModel  `json:"item"`
+	AcquireActions            []AcquireAction      `json:"acquireActions"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type ReceiveGlobalRankingReceivedRewardByUserIdAsyncResult struct {
@@ -1587,7 +1623,8 @@ func (p ReceiveGlobalRankingReceivedRewardByUserIdResult) Pointer() *ReceiveGlob
 }
 
 type GetGlobalRankingReceivedRewardResult struct {
-	Item *GlobalRankingReceivedReward `json:"item"`
+	Item     *GlobalRankingReceivedReward `json:"item"`
+	Metadata *core.ResultMetadata         `json:"metadata"`
 }
 
 type GetGlobalRankingReceivedRewardAsyncResult struct {
@@ -1629,7 +1666,8 @@ func (p GetGlobalRankingReceivedRewardResult) Pointer() *GetGlobalRankingReceive
 }
 
 type GetGlobalRankingReceivedRewardByUserIdResult struct {
-	Item *GlobalRankingReceivedReward `json:"item"`
+	Item     *GlobalRankingReceivedReward `json:"item"`
+	Metadata *core.ResultMetadata         `json:"metadata"`
 }
 
 type GetGlobalRankingReceivedRewardByUserIdAsyncResult struct {
@@ -1671,7 +1709,8 @@ func (p GetGlobalRankingReceivedRewardByUserIdResult) Pointer() *GetGlobalRankin
 }
 
 type DeleteGlobalRankingReceivedRewardByUserIdResult struct {
-	Item *GlobalRankingReceivedReward `json:"item"`
+	Item     *GlobalRankingReceivedReward `json:"item"`
+	Metadata *core.ResultMetadata         `json:"metadata"`
 }
 
 type DeleteGlobalRankingReceivedRewardByUserIdAsyncResult struct {
@@ -1715,6 +1754,7 @@ func (p DeleteGlobalRankingReceivedRewardByUserIdResult) Pointer() *DeleteGlobal
 type CreateGlobalRankingReceivedRewardByStampTaskResult struct {
 	Item            *GlobalRankingReceivedReward `json:"item"`
 	NewContextStack *string                      `json:"newContextStack"`
+	Metadata        *core.ResultMetadata         `json:"metadata"`
 }
 
 type CreateGlobalRankingReceivedRewardByStampTaskAsyncResult struct {
@@ -1764,8 +1804,9 @@ func (p CreateGlobalRankingReceivedRewardByStampTaskResult) Pointer() *CreateGlo
 }
 
 type DescribeGlobalRankingsResult struct {
-	Items         []GlobalRankingData `json:"items"`
-	NextPageToken *string             `json:"nextPageToken"`
+	Items         []GlobalRankingData  `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeGlobalRankingsAsyncResult struct {
@@ -1811,8 +1852,9 @@ func (p DescribeGlobalRankingsResult) Pointer() *DescribeGlobalRankingsResult {
 }
 
 type DescribeGlobalRankingsByUserIdResult struct {
-	Items         []GlobalRankingData `json:"items"`
-	NextPageToken *string             `json:"nextPageToken"`
+	Items         []GlobalRankingData  `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeGlobalRankingsByUserIdAsyncResult struct {
@@ -1858,7 +1900,8 @@ func (p DescribeGlobalRankingsByUserIdResult) Pointer() *DescribeGlobalRankingsB
 }
 
 type GetGlobalRankingResult struct {
-	Item *GlobalRankingData `json:"item"`
+	Item     *GlobalRankingData   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetGlobalRankingAsyncResult struct {
@@ -1900,7 +1943,8 @@ func (p GetGlobalRankingResult) Pointer() *GetGlobalRankingResult {
 }
 
 type GetGlobalRankingByUserIdResult struct {
-	Item *GlobalRankingData `json:"item"`
+	Item     *GlobalRankingData   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetGlobalRankingByUserIdAsyncResult struct {
@@ -1942,7 +1986,8 @@ func (p GetGlobalRankingByUserIdResult) Pointer() *GetGlobalRankingByUserIdResul
 }
 
 type DescribeClusterRankingModelsResult struct {
-	Items []ClusterRankingModel `json:"items"`
+	Items    []ClusterRankingModel `json:"items"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type DescribeClusterRankingModelsAsyncResult struct {
@@ -1980,7 +2025,8 @@ func (p DescribeClusterRankingModelsResult) Pointer() *DescribeClusterRankingMod
 }
 
 type GetClusterRankingModelResult struct {
-	Item *ClusterRankingModel `json:"item"`
+	Item     *ClusterRankingModel `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetClusterRankingModelAsyncResult struct {
@@ -2024,6 +2070,7 @@ func (p GetClusterRankingModelResult) Pointer() *GetClusterRankingModelResult {
 type DescribeClusterRankingModelMastersResult struct {
 	Items         []ClusterRankingModelMaster `json:"items"`
 	NextPageToken *string                     `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata        `json:"metadata"`
 }
 
 type DescribeClusterRankingModelMastersAsyncResult struct {
@@ -2069,7 +2116,8 @@ func (p DescribeClusterRankingModelMastersResult) Pointer() *DescribeClusterRank
 }
 
 type CreateClusterRankingModelMasterResult struct {
-	Item *ClusterRankingModelMaster `json:"item"`
+	Item     *ClusterRankingModelMaster `json:"item"`
+	Metadata *core.ResultMetadata       `json:"metadata"`
 }
 
 type CreateClusterRankingModelMasterAsyncResult struct {
@@ -2111,7 +2159,8 @@ func (p CreateClusterRankingModelMasterResult) Pointer() *CreateClusterRankingMo
 }
 
 type GetClusterRankingModelMasterResult struct {
-	Item *ClusterRankingModelMaster `json:"item"`
+	Item     *ClusterRankingModelMaster `json:"item"`
+	Metadata *core.ResultMetadata       `json:"metadata"`
 }
 
 type GetClusterRankingModelMasterAsyncResult struct {
@@ -2153,7 +2202,8 @@ func (p GetClusterRankingModelMasterResult) Pointer() *GetClusterRankingModelMas
 }
 
 type UpdateClusterRankingModelMasterResult struct {
-	Item *ClusterRankingModelMaster `json:"item"`
+	Item     *ClusterRankingModelMaster `json:"item"`
+	Metadata *core.ResultMetadata       `json:"metadata"`
 }
 
 type UpdateClusterRankingModelMasterAsyncResult struct {
@@ -2195,7 +2245,8 @@ func (p UpdateClusterRankingModelMasterResult) Pointer() *UpdateClusterRankingMo
 }
 
 type DeleteClusterRankingModelMasterResult struct {
-	Item *ClusterRankingModelMaster `json:"item"`
+	Item     *ClusterRankingModelMaster `json:"item"`
+	Metadata *core.ResultMetadata       `json:"metadata"`
 }
 
 type DeleteClusterRankingModelMasterAsyncResult struct {
@@ -2239,6 +2290,7 @@ func (p DeleteClusterRankingModelMasterResult) Pointer() *DeleteClusterRankingMo
 type DescribeClusterRankingScoresResult struct {
 	Items         []ClusterRankingScore `json:"items"`
 	NextPageToken *string               `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata  `json:"metadata"`
 }
 
 type DescribeClusterRankingScoresAsyncResult struct {
@@ -2286,6 +2338,7 @@ func (p DescribeClusterRankingScoresResult) Pointer() *DescribeClusterRankingSco
 type DescribeClusterRankingScoresByUserIdResult struct {
 	Items         []ClusterRankingScore `json:"items"`
 	NextPageToken *string               `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata  `json:"metadata"`
 }
 
 type DescribeClusterRankingScoresByUserIdAsyncResult struct {
@@ -2331,7 +2384,8 @@ func (p DescribeClusterRankingScoresByUserIdResult) Pointer() *DescribeClusterRa
 }
 
 type PutClusterRankingScoreResult struct {
-	Item *ClusterRankingScore `json:"item"`
+	Item     *ClusterRankingScore `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type PutClusterRankingScoreAsyncResult struct {
@@ -2373,7 +2427,8 @@ func (p PutClusterRankingScoreResult) Pointer() *PutClusterRankingScoreResult {
 }
 
 type PutClusterRankingScoreByUserIdResult struct {
-	Item *ClusterRankingScore `json:"item"`
+	Item     *ClusterRankingScore `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type PutClusterRankingScoreByUserIdAsyncResult struct {
@@ -2415,7 +2470,8 @@ func (p PutClusterRankingScoreByUserIdResult) Pointer() *PutClusterRankingScoreB
 }
 
 type GetClusterRankingScoreResult struct {
-	Item *ClusterRankingScore `json:"item"`
+	Item     *ClusterRankingScore `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetClusterRankingScoreAsyncResult struct {
@@ -2457,7 +2513,8 @@ func (p GetClusterRankingScoreResult) Pointer() *GetClusterRankingScoreResult {
 }
 
 type GetClusterRankingScoreByUserIdResult struct {
-	Item *ClusterRankingScore `json:"item"`
+	Item     *ClusterRankingScore `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetClusterRankingScoreByUserIdAsyncResult struct {
@@ -2499,7 +2556,8 @@ func (p GetClusterRankingScoreByUserIdResult) Pointer() *GetClusterRankingScoreB
 }
 
 type DeleteClusterRankingScoreByUserIdResult struct {
-	Item *ClusterRankingScore `json:"item"`
+	Item     *ClusterRankingScore `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteClusterRankingScoreByUserIdAsyncResult struct {
@@ -2541,7 +2599,8 @@ func (p DeleteClusterRankingScoreByUserIdResult) Pointer() *DeleteClusterRanking
 }
 
 type VerifyClusterRankingScoreResult struct {
-	Item *ClusterRankingScore `json:"item"`
+	Item     *ClusterRankingScore `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyClusterRankingScoreAsyncResult struct {
@@ -2583,7 +2642,8 @@ func (p VerifyClusterRankingScoreResult) Pointer() *VerifyClusterRankingScoreRes
 }
 
 type VerifyClusterRankingScoreByUserIdResult struct {
-	Item *ClusterRankingScore `json:"item"`
+	Item     *ClusterRankingScore `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyClusterRankingScoreByUserIdAsyncResult struct {
@@ -2627,6 +2687,7 @@ func (p VerifyClusterRankingScoreByUserIdResult) Pointer() *VerifyClusterRanking
 type VerifyClusterRankingScoreByStampTaskResult struct {
 	Item            *ClusterRankingScore `json:"item"`
 	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyClusterRankingScoreByStampTaskAsyncResult struct {
@@ -2678,6 +2739,7 @@ func (p VerifyClusterRankingScoreByStampTaskResult) Pointer() *VerifyClusterRank
 type DescribeClusterRankingReceivedRewardsResult struct {
 	Items         []ClusterRankingReceivedReward `json:"items"`
 	NextPageToken *string                        `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata           `json:"metadata"`
 }
 
 type DescribeClusterRankingReceivedRewardsAsyncResult struct {
@@ -2725,6 +2787,7 @@ func (p DescribeClusterRankingReceivedRewardsResult) Pointer() *DescribeClusterR
 type DescribeClusterRankingReceivedRewardsByUserIdResult struct {
 	Items         []ClusterRankingReceivedReward `json:"items"`
 	NextPageToken *string                        `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata           `json:"metadata"`
 }
 
 type DescribeClusterRankingReceivedRewardsByUserIdAsyncResult struct {
@@ -2770,7 +2833,8 @@ func (p DescribeClusterRankingReceivedRewardsByUserIdResult) Pointer() *Describe
 }
 
 type CreateClusterRankingReceivedRewardResult struct {
-	Item *ClusterRankingReceivedReward `json:"item"`
+	Item     *ClusterRankingReceivedReward `json:"item"`
+	Metadata *core.ResultMetadata          `json:"metadata"`
 }
 
 type CreateClusterRankingReceivedRewardAsyncResult struct {
@@ -2812,7 +2876,8 @@ func (p CreateClusterRankingReceivedRewardResult) Pointer() *CreateClusterRankin
 }
 
 type CreateClusterRankingReceivedRewardByUserIdResult struct {
-	Item *ClusterRankingReceivedReward `json:"item"`
+	Item     *ClusterRankingReceivedReward `json:"item"`
+	Metadata *core.ResultMetadata          `json:"metadata"`
 }
 
 type CreateClusterRankingReceivedRewardByUserIdAsyncResult struct {
@@ -2860,6 +2925,7 @@ type ReceiveClusterRankingReceivedRewardResult struct {
 	StampSheet                *string              `json:"stampSheet"`
 	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
 	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type ReceiveClusterRankingReceivedRewardAsyncResult struct {
@@ -2948,6 +3014,7 @@ type ReceiveClusterRankingReceivedRewardByUserIdResult struct {
 	StampSheet                *string              `json:"stampSheet"`
 	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
 	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type ReceiveClusterRankingReceivedRewardByUserIdAsyncResult struct {
@@ -3030,7 +3097,8 @@ func (p ReceiveClusterRankingReceivedRewardByUserIdResult) Pointer() *ReceiveClu
 }
 
 type GetClusterRankingReceivedRewardResult struct {
-	Item *ClusterRankingReceivedReward `json:"item"`
+	Item     *ClusterRankingReceivedReward `json:"item"`
+	Metadata *core.ResultMetadata          `json:"metadata"`
 }
 
 type GetClusterRankingReceivedRewardAsyncResult struct {
@@ -3072,7 +3140,8 @@ func (p GetClusterRankingReceivedRewardResult) Pointer() *GetClusterRankingRecei
 }
 
 type GetClusterRankingReceivedRewardByUserIdResult struct {
-	Item *ClusterRankingReceivedReward `json:"item"`
+	Item     *ClusterRankingReceivedReward `json:"item"`
+	Metadata *core.ResultMetadata          `json:"metadata"`
 }
 
 type GetClusterRankingReceivedRewardByUserIdAsyncResult struct {
@@ -3114,7 +3183,8 @@ func (p GetClusterRankingReceivedRewardByUserIdResult) Pointer() *GetClusterRank
 }
 
 type DeleteClusterRankingReceivedRewardByUserIdResult struct {
-	Item *ClusterRankingReceivedReward `json:"item"`
+	Item     *ClusterRankingReceivedReward `json:"item"`
+	Metadata *core.ResultMetadata          `json:"metadata"`
 }
 
 type DeleteClusterRankingReceivedRewardByUserIdAsyncResult struct {
@@ -3158,6 +3228,7 @@ func (p DeleteClusterRankingReceivedRewardByUserIdResult) Pointer() *DeleteClust
 type CreateClusterRankingReceivedRewardByStampTaskResult struct {
 	Item            *ClusterRankingReceivedReward `json:"item"`
 	NewContextStack *string                       `json:"newContextStack"`
+	Metadata        *core.ResultMetadata          `json:"metadata"`
 }
 
 type CreateClusterRankingReceivedRewardByStampTaskAsyncResult struct {
@@ -3209,6 +3280,7 @@ func (p CreateClusterRankingReceivedRewardByStampTaskResult) Pointer() *CreateCl
 type DescribeClusterRankingsResult struct {
 	Items         []ClusterRankingData `json:"items"`
 	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeClusterRankingsAsyncResult struct {
@@ -3256,6 +3328,7 @@ func (p DescribeClusterRankingsResult) Pointer() *DescribeClusterRankingsResult 
 type DescribeClusterRankingsByUserIdResult struct {
 	Items         []ClusterRankingData `json:"items"`
 	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeClusterRankingsByUserIdAsyncResult struct {
@@ -3301,7 +3374,8 @@ func (p DescribeClusterRankingsByUserIdResult) Pointer() *DescribeClusterRanking
 }
 
 type GetClusterRankingResult struct {
-	Item *ClusterRankingData `json:"item"`
+	Item     *ClusterRankingData  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetClusterRankingAsyncResult struct {
@@ -3343,7 +3417,8 @@ func (p GetClusterRankingResult) Pointer() *GetClusterRankingResult {
 }
 
 type GetClusterRankingByUserIdResult struct {
-	Item *ClusterRankingData `json:"item"`
+	Item     *ClusterRankingData  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetClusterRankingByUserIdAsyncResult struct {
@@ -3385,7 +3460,8 @@ func (p GetClusterRankingByUserIdResult) Pointer() *GetClusterRankingByUserIdRes
 }
 
 type DescribeSubscribeRankingModelsResult struct {
-	Items []SubscribeRankingModel `json:"items"`
+	Items    []SubscribeRankingModel `json:"items"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type DescribeSubscribeRankingModelsAsyncResult struct {
@@ -3423,7 +3499,8 @@ func (p DescribeSubscribeRankingModelsResult) Pointer() *DescribeSubscribeRankin
 }
 
 type GetSubscribeRankingModelResult struct {
-	Item *SubscribeRankingModel `json:"item"`
+	Item     *SubscribeRankingModel `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type GetSubscribeRankingModelAsyncResult struct {
@@ -3467,6 +3544,7 @@ func (p GetSubscribeRankingModelResult) Pointer() *GetSubscribeRankingModelResul
 type DescribeSubscribeRankingModelMastersResult struct {
 	Items         []SubscribeRankingModelMaster `json:"items"`
 	NextPageToken *string                       `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata          `json:"metadata"`
 }
 
 type DescribeSubscribeRankingModelMastersAsyncResult struct {
@@ -3512,7 +3590,8 @@ func (p DescribeSubscribeRankingModelMastersResult) Pointer() *DescribeSubscribe
 }
 
 type CreateSubscribeRankingModelMasterResult struct {
-	Item *SubscribeRankingModelMaster `json:"item"`
+	Item     *SubscribeRankingModelMaster `json:"item"`
+	Metadata *core.ResultMetadata         `json:"metadata"`
 }
 
 type CreateSubscribeRankingModelMasterAsyncResult struct {
@@ -3554,7 +3633,8 @@ func (p CreateSubscribeRankingModelMasterResult) Pointer() *CreateSubscribeRanki
 }
 
 type GetSubscribeRankingModelMasterResult struct {
-	Item *SubscribeRankingModelMaster `json:"item"`
+	Item     *SubscribeRankingModelMaster `json:"item"`
+	Metadata *core.ResultMetadata         `json:"metadata"`
 }
 
 type GetSubscribeRankingModelMasterAsyncResult struct {
@@ -3596,7 +3676,8 @@ func (p GetSubscribeRankingModelMasterResult) Pointer() *GetSubscribeRankingMode
 }
 
 type UpdateSubscribeRankingModelMasterResult struct {
-	Item *SubscribeRankingModelMaster `json:"item"`
+	Item     *SubscribeRankingModelMaster `json:"item"`
+	Metadata *core.ResultMetadata         `json:"metadata"`
 }
 
 type UpdateSubscribeRankingModelMasterAsyncResult struct {
@@ -3638,7 +3719,8 @@ func (p UpdateSubscribeRankingModelMasterResult) Pointer() *UpdateSubscribeRanki
 }
 
 type DeleteSubscribeRankingModelMasterResult struct {
-	Item *SubscribeRankingModelMaster `json:"item"`
+	Item     *SubscribeRankingModelMaster `json:"item"`
+	Metadata *core.ResultMetadata         `json:"metadata"`
 }
 
 type DeleteSubscribeRankingModelMasterAsyncResult struct {
@@ -3680,8 +3762,9 @@ func (p DeleteSubscribeRankingModelMasterResult) Pointer() *DeleteSubscribeRanki
 }
 
 type DescribeSubscribesResult struct {
-	Items         []SubscribeUser `json:"items"`
-	NextPageToken *string         `json:"nextPageToken"`
+	Items         []SubscribeUser      `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeSubscribesAsyncResult struct {
@@ -3727,8 +3810,9 @@ func (p DescribeSubscribesResult) Pointer() *DescribeSubscribesResult {
 }
 
 type DescribeSubscribesByUserIdResult struct {
-	Items         []SubscribeUser `json:"items"`
-	NextPageToken *string         `json:"nextPageToken"`
+	Items         []SubscribeUser      `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeSubscribesByUserIdAsyncResult struct {
@@ -3774,7 +3858,8 @@ func (p DescribeSubscribesByUserIdResult) Pointer() *DescribeSubscribesByUserIdR
 }
 
 type AddSubscribeResult struct {
-	Item *SubscribeUser `json:"item"`
+	Item     *SubscribeUser       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AddSubscribeAsyncResult struct {
@@ -3816,7 +3901,8 @@ func (p AddSubscribeResult) Pointer() *AddSubscribeResult {
 }
 
 type AddSubscribeByUserIdResult struct {
-	Item *SubscribeUser `json:"item"`
+	Item     *SubscribeUser       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AddSubscribeByUserIdAsyncResult struct {
@@ -3860,6 +3946,7 @@ func (p AddSubscribeByUserIdResult) Pointer() *AddSubscribeByUserIdResult {
 type DescribeSubscribeRankingScoresResult struct {
 	Items         []SubscribeRankingScore `json:"items"`
 	NextPageToken *string                 `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata    `json:"metadata"`
 }
 
 type DescribeSubscribeRankingScoresAsyncResult struct {
@@ -3907,6 +3994,7 @@ func (p DescribeSubscribeRankingScoresResult) Pointer() *DescribeSubscribeRankin
 type DescribeSubscribeRankingScoresByUserIdResult struct {
 	Items         []SubscribeRankingScore `json:"items"`
 	NextPageToken *string                 `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata    `json:"metadata"`
 }
 
 type DescribeSubscribeRankingScoresByUserIdAsyncResult struct {
@@ -3952,7 +4040,8 @@ func (p DescribeSubscribeRankingScoresByUserIdResult) Pointer() *DescribeSubscri
 }
 
 type PutSubscribeRankingScoreResult struct {
-	Item *SubscribeRankingScore `json:"item"`
+	Item     *SubscribeRankingScore `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type PutSubscribeRankingScoreAsyncResult struct {
@@ -3994,7 +4083,8 @@ func (p PutSubscribeRankingScoreResult) Pointer() *PutSubscribeRankingScoreResul
 }
 
 type PutSubscribeRankingScoreByUserIdResult struct {
-	Item *SubscribeRankingScore `json:"item"`
+	Item     *SubscribeRankingScore `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type PutSubscribeRankingScoreByUserIdAsyncResult struct {
@@ -4036,7 +4126,8 @@ func (p PutSubscribeRankingScoreByUserIdResult) Pointer() *PutSubscribeRankingSc
 }
 
 type GetSubscribeRankingScoreResult struct {
-	Item *SubscribeRankingScore `json:"item"`
+	Item     *SubscribeRankingScore `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type GetSubscribeRankingScoreAsyncResult struct {
@@ -4078,7 +4169,8 @@ func (p GetSubscribeRankingScoreResult) Pointer() *GetSubscribeRankingScoreResul
 }
 
 type GetSubscribeRankingScoreByUserIdResult struct {
-	Item *SubscribeRankingScore `json:"item"`
+	Item     *SubscribeRankingScore `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type GetSubscribeRankingScoreByUserIdAsyncResult struct {
@@ -4120,7 +4212,8 @@ func (p GetSubscribeRankingScoreByUserIdResult) Pointer() *GetSubscribeRankingSc
 }
 
 type DeleteSubscribeRankingScoreByUserIdResult struct {
-	Item *SubscribeRankingScore `json:"item"`
+	Item     *SubscribeRankingScore `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type DeleteSubscribeRankingScoreByUserIdAsyncResult struct {
@@ -4162,7 +4255,8 @@ func (p DeleteSubscribeRankingScoreByUserIdResult) Pointer() *DeleteSubscribeRan
 }
 
 type VerifySubscribeRankingScoreResult struct {
-	Item *SubscribeRankingScore `json:"item"`
+	Item     *SubscribeRankingScore `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type VerifySubscribeRankingScoreAsyncResult struct {
@@ -4204,7 +4298,8 @@ func (p VerifySubscribeRankingScoreResult) Pointer() *VerifySubscribeRankingScor
 }
 
 type VerifySubscribeRankingScoreByUserIdResult struct {
-	Item *SubscribeRankingScore `json:"item"`
+	Item     *SubscribeRankingScore `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type VerifySubscribeRankingScoreByUserIdAsyncResult struct {
@@ -4248,6 +4343,7 @@ func (p VerifySubscribeRankingScoreByUserIdResult) Pointer() *VerifySubscribeRan
 type VerifySubscribeRankingScoreByStampTaskResult struct {
 	Item            *SubscribeRankingScore `json:"item"`
 	NewContextStack *string                `json:"newContextStack"`
+	Metadata        *core.ResultMetadata   `json:"metadata"`
 }
 
 type VerifySubscribeRankingScoreByStampTaskAsyncResult struct {
@@ -4299,6 +4395,7 @@ func (p VerifySubscribeRankingScoreByStampTaskResult) Pointer() *VerifySubscribe
 type DescribeSubscribeRankingsResult struct {
 	Items         []SubscribeRankingData `json:"items"`
 	NextPageToken *string                `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata   `json:"metadata"`
 }
 
 type DescribeSubscribeRankingsAsyncResult struct {
@@ -4346,6 +4443,7 @@ func (p DescribeSubscribeRankingsResult) Pointer() *DescribeSubscribeRankingsRes
 type DescribeSubscribeRankingsByUserIdResult struct {
 	Items         []SubscribeRankingData `json:"items"`
 	NextPageToken *string                `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata   `json:"metadata"`
 }
 
 type DescribeSubscribeRankingsByUserIdAsyncResult struct {
@@ -4391,7 +4489,8 @@ func (p DescribeSubscribeRankingsByUserIdResult) Pointer() *DescribeSubscribeRan
 }
 
 type GetSubscribeRankingResult struct {
-	Item *SubscribeRankingData `json:"item"`
+	Item     *SubscribeRankingData `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type GetSubscribeRankingAsyncResult struct {
@@ -4433,7 +4532,8 @@ func (p GetSubscribeRankingResult) Pointer() *GetSubscribeRankingResult {
 }
 
 type GetSubscribeRankingByUserIdResult struct {
-	Item *SubscribeRankingData `json:"item"`
+	Item     *SubscribeRankingData `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type GetSubscribeRankingByUserIdAsyncResult struct {
@@ -4475,7 +4575,8 @@ func (p GetSubscribeRankingByUserIdResult) Pointer() *GetSubscribeRankingByUserI
 }
 
 type ExportMasterResult struct {
-	Item *CurrentRankingMaster `json:"item"`
+	Item     *CurrentRankingMaster `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -4517,7 +4618,8 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
 }
 
 type GetCurrentRankingMasterResult struct {
-	Item *CurrentRankingMaster `json:"item"`
+	Item     *CurrentRankingMaster `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type GetCurrentRankingMasterAsyncResult struct {
@@ -4559,7 +4661,8 @@ func (p GetCurrentRankingMasterResult) Pointer() *GetCurrentRankingMasterResult 
 }
 
 type UpdateCurrentRankingMasterResult struct {
-	Item *CurrentRankingMaster `json:"item"`
+	Item     *CurrentRankingMaster `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type UpdateCurrentRankingMasterAsyncResult struct {
@@ -4601,7 +4704,8 @@ func (p UpdateCurrentRankingMasterResult) Pointer() *UpdateCurrentRankingMasterR
 }
 
 type UpdateCurrentRankingMasterFromGitHubResult struct {
-	Item *CurrentRankingMaster `json:"item"`
+	Item     *CurrentRankingMaster `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type UpdateCurrentRankingMasterFromGitHubAsyncResult struct {
@@ -4643,7 +4747,8 @@ func (p UpdateCurrentRankingMasterFromGitHubResult) Pointer() *UpdateCurrentRank
 }
 
 type GetSubscribeResult struct {
-	Item *SubscribeUser `json:"item"`
+	Item     *SubscribeUser       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetSubscribeAsyncResult struct {
@@ -4685,7 +4790,8 @@ func (p GetSubscribeResult) Pointer() *GetSubscribeResult {
 }
 
 type GetSubscribeByUserIdResult struct {
-	Item *SubscribeUser `json:"item"`
+	Item     *SubscribeUser       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetSubscribeByUserIdAsyncResult struct {
@@ -4727,7 +4833,8 @@ func (p GetSubscribeByUserIdResult) Pointer() *GetSubscribeByUserIdResult {
 }
 
 type DeleteSubscribeResult struct {
-	Item *SubscribeUser `json:"item"`
+	Item     *SubscribeUser       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteSubscribeAsyncResult struct {
@@ -4769,7 +4876,8 @@ func (p DeleteSubscribeResult) Pointer() *DeleteSubscribeResult {
 }
 
 type DeleteSubscribeByUserIdResult struct {
-	Item *SubscribeUser `json:"item"`
+	Item     *SubscribeUser       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteSubscribeByUserIdAsyncResult struct {

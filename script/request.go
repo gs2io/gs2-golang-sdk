@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -130,6 +131,7 @@ type CreateNamespaceRequest struct {
 	Description        *string             `json:"description"`
 	TransactionSetting *TransactionSetting `json:"transactionSetting"`
 	LogSetting         *LogSetting         `json:"logSetting"`
+	DryRun             *bool               `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -280,6 +282,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -367,6 +370,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -457,6 +461,7 @@ type UpdateNamespaceRequest struct {
 	Description        *string             `json:"description"`
 	TransactionSetting *TransactionSetting `json:"transactionSetting"`
 	LogSetting         *LogSetting         `json:"logSetting"`
+	DryRun             *bool               `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -607,6 +612,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -696,6 +702,7 @@ type DescribeScriptsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeScriptsRequest) UnmarshalJSON(data []byte) error {
@@ -829,6 +836,7 @@ type CreateScriptRequest struct {
 	Description                 *string `json:"description"`
 	Script                      *string `json:"script"`
 	DisableStringNumberToNumber *bool   `json:"disableStringNumberToNumber"`
+	DryRun                      *bool   `json:"dryRun"`
 }
 
 func (p *CreateScriptRequest) UnmarshalJSON(data []byte) error {
@@ -1024,6 +1032,7 @@ type CreateScriptFromGitHubRequest struct {
 	Description                 *string                `json:"description"`
 	CheckoutSetting             *GitHubCheckoutSetting `json:"checkoutSetting"`
 	DisableStringNumberToNumber *bool                  `json:"disableStringNumberToNumber"`
+	DryRun                      *bool                  `json:"dryRun"`
 }
 
 func (p *CreateScriptFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -1201,6 +1210,7 @@ type GetScriptRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ScriptName      *string `json:"scriptName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetScriptRequest) UnmarshalJSON(data []byte) error {
@@ -1323,6 +1333,7 @@ type UpdateScriptRequest struct {
 	Description                 *string `json:"description"`
 	Script                      *string `json:"script"`
 	DisableStringNumberToNumber *bool   `json:"disableStringNumberToNumber"`
+	DryRun                      *bool   `json:"dryRun"`
 }
 
 func (p *UpdateScriptRequest) UnmarshalJSON(data []byte) error {
@@ -1518,6 +1529,7 @@ type UpdateScriptFromGitHubRequest struct {
 	Description                 *string                `json:"description"`
 	CheckoutSetting             *GitHubCheckoutSetting `json:"checkoutSetting"`
 	DisableStringNumberToNumber *bool                  `json:"disableStringNumberToNumber"`
+	DryRun                      *bool                  `json:"dryRun"`
 }
 
 func (p *UpdateScriptFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -1695,6 +1707,7 @@ type DeleteScriptRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ScriptName      *string `json:"scriptName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteScriptRequest) UnmarshalJSON(data []byte) error {
@@ -1818,6 +1831,7 @@ type InvokeScriptRequest struct {
 	Args               *string       `json:"args"`
 	RandomStatus       *RandomStatus `json:"randomStatus"`
 	TimeOffsetToken    *string       `json:"timeOffsetToken"`
+	DryRun             *bool         `json:"dryRun"`
 }
 
 func (p *InvokeScriptRequest) UnmarshalJSON(data []byte) error {
@@ -2017,6 +2031,7 @@ type DebugInvokeRequest struct {
 	Args                        *string       `json:"args"`
 	RandomStatus                *RandomStatus `json:"randomStatus"`
 	DisableStringNumberToNumber *bool         `json:"disableStringNumberToNumber"`
+	DryRun                      *bool         `json:"dryRun"`
 }
 
 func (p *DebugInvokeRequest) UnmarshalJSON(data []byte) error {
@@ -2163,6 +2178,7 @@ type InvokeByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *InvokeByStampSheetRequest) UnmarshalJSON(data []byte) error {

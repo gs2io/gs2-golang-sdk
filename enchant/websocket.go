@@ -93,6 +93,13 @@ func (p Gs2EnchantWebSocketClient) DescribeNamespacesAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -183,6 +190,13 @@ func (p Gs2EnchantWebSocketClient) CreateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -264,6 +278,13 @@ func (p Gs2EnchantWebSocketClient) GetNamespaceStatusAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -344,6 +365,13 @@ func (p Gs2EnchantWebSocketClient) GetNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getNamespaceAsyncHandler(
@@ -435,6 +463,13 @@ func (p Gs2EnchantWebSocketClient) UpdateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -515,6 +550,13 @@ func (p Gs2EnchantWebSocketClient) DeleteNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteNamespaceAsyncHandler(
@@ -600,6 +642,13 @@ func (p Gs2EnchantWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.dumpUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -683,6 +732,13 @@ func (p Gs2EnchantWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.checkDumpUserDataByUserIdAsyncHandler(
@@ -768,6 +824,13 @@ func (p Gs2EnchantWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.cleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -852,6 +915,13 @@ func (p Gs2EnchantWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkCleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -935,6 +1005,13 @@ func (p Gs2EnchantWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.prepareImportUserDataByUserIdAsyncHandler(
@@ -1023,6 +1100,13 @@ func (p Gs2EnchantWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.importUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1110,6 +1194,13 @@ func (p Gs2EnchantWebSocketClient) CheckImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkImportUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1190,6 +1281,13 @@ func (p Gs2EnchantWebSocketClient) DescribeBalanceParameterModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeBalanceParameterModelsAsyncHandler(
@@ -1274,6 +1372,13 @@ func (p Gs2EnchantWebSocketClient) GetBalanceParameterModelAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getBalanceParameterModelAsyncHandler(
@@ -1361,6 +1466,13 @@ func (p Gs2EnchantWebSocketClient) DescribeBalanceParameterModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeBalanceParameterModelMastersAsyncHandler(
@@ -1465,6 +1577,13 @@ func (p Gs2EnchantWebSocketClient) CreateBalanceParameterModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createBalanceParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1548,6 +1667,13 @@ func (p Gs2EnchantWebSocketClient) GetBalanceParameterModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getBalanceParameterModelMasterAsyncHandler(
@@ -1652,6 +1778,13 @@ func (p Gs2EnchantWebSocketClient) UpdateBalanceParameterModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateBalanceParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1736,6 +1869,13 @@ func (p Gs2EnchantWebSocketClient) DeleteBalanceParameterModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteBalanceParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1816,6 +1956,13 @@ func (p Gs2EnchantWebSocketClient) DescribeRarityParameterModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeRarityParameterModelsAsyncHandler(
@@ -1900,6 +2047,13 @@ func (p Gs2EnchantWebSocketClient) GetRarityParameterModelAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getRarityParameterModelAsyncHandler(
@@ -1987,6 +2141,13 @@ func (p Gs2EnchantWebSocketClient) DescribeRarityParameterModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeRarityParameterModelMastersAsyncHandler(
@@ -2095,6 +2256,13 @@ func (p Gs2EnchantWebSocketClient) CreateRarityParameterModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createRarityParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2178,6 +2346,13 @@ func (p Gs2EnchantWebSocketClient) GetRarityParameterModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getRarityParameterModelMasterAsyncHandler(
@@ -2286,6 +2461,13 @@ func (p Gs2EnchantWebSocketClient) UpdateRarityParameterModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateRarityParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2370,6 +2552,13 @@ func (p Gs2EnchantWebSocketClient) DeleteRarityParameterModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteRarityParameterModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2451,6 +2640,13 @@ func (p Gs2EnchantWebSocketClient) ExportMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2531,6 +2727,13 @@ func (p Gs2EnchantWebSocketClient) GetCurrentParameterMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getCurrentParameterMasterAsyncHandler(
@@ -2616,6 +2819,13 @@ func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateCurrentParameterMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2699,6 +2909,13 @@ func (p Gs2EnchantWebSocketClient) UpdateCurrentParameterMasterFromGitHubAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.updateCurrentParameterMasterFromGitHubAsyncHandler(
@@ -2796,6 +3013,13 @@ func (p Gs2EnchantWebSocketClient) DescribeBalanceParameterStatusesAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeBalanceParameterStatusesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2892,6 +3116,13 @@ func (p Gs2EnchantWebSocketClient) DescribeBalanceParameterStatusesByUserIdAsync
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeBalanceParameterStatusesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2985,6 +3216,13 @@ func (p Gs2EnchantWebSocketClient) GetBalanceParameterStatusAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getBalanceParameterStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3077,6 +3315,13 @@ func (p Gs2EnchantWebSocketClient) GetBalanceParameterStatusByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getBalanceParameterStatusByUserIdAsyncHandler(
@@ -3173,6 +3418,13 @@ func (p Gs2EnchantWebSocketClient) DeleteBalanceParameterStatusByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteBalanceParameterStatusByUserIdAsyncHandler(
@@ -3277,6 +3529,13 @@ func (p Gs2EnchantWebSocketClient) ReDrawBalanceParameterStatusByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.reDrawBalanceParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3360,6 +3619,13 @@ func (p Gs2EnchantWebSocketClient) ReDrawBalanceParameterStatusByStampSheetAsync
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.reDrawBalanceParameterStatusByStampSheetAsyncHandler(
@@ -3464,6 +3730,13 @@ func (p Gs2EnchantWebSocketClient) SetBalanceParameterStatusByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setBalanceParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3547,6 +3820,13 @@ func (p Gs2EnchantWebSocketClient) SetBalanceParameterStatusByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setBalanceParameterStatusByStampSheetAsyncHandler(
@@ -3644,6 +3924,13 @@ func (p Gs2EnchantWebSocketClient) DescribeRarityParameterStatusesAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeRarityParameterStatusesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3740,6 +4027,13 @@ func (p Gs2EnchantWebSocketClient) DescribeRarityParameterStatusesByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeRarityParameterStatusesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3833,6 +4127,13 @@ func (p Gs2EnchantWebSocketClient) GetRarityParameterStatusAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getRarityParameterStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3925,6 +4226,13 @@ func (p Gs2EnchantWebSocketClient) GetRarityParameterStatusByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getRarityParameterStatusByUserIdAsyncHandler(
@@ -4021,6 +4329,13 @@ func (p Gs2EnchantWebSocketClient) DeleteRarityParameterStatusByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteRarityParameterStatusByUserIdAsyncHandler(
@@ -4125,6 +4440,13 @@ func (p Gs2EnchantWebSocketClient) ReDrawRarityParameterStatusByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.reDrawRarityParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4208,6 +4530,13 @@ func (p Gs2EnchantWebSocketClient) ReDrawRarityParameterStatusByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.reDrawRarityParameterStatusByStampSheetAsyncHandler(
@@ -4308,6 +4637,13 @@ func (p Gs2EnchantWebSocketClient) AddRarityParameterStatusByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.addRarityParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4391,6 +4727,13 @@ func (p Gs2EnchantWebSocketClient) AddRarityParameterStatusByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.addRarityParameterStatusByStampSheetAsyncHandler(
@@ -4500,6 +4843,13 @@ func (p Gs2EnchantWebSocketClient) VerifyRarityParameterStatusAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyRarityParameterStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4608,6 +4958,13 @@ func (p Gs2EnchantWebSocketClient) VerifyRarityParameterStatusByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyRarityParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4691,6 +5048,13 @@ func (p Gs2EnchantWebSocketClient) VerifyRarityParameterStatusByStampTaskAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.verifyRarityParameterStatusByStampTaskAsyncHandler(
@@ -4795,6 +5159,13 @@ func (p Gs2EnchantWebSocketClient) SetRarityParameterStatusByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setRarityParameterStatusByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4878,6 +5249,13 @@ func (p Gs2EnchantWebSocketClient) SetRarityParameterStatusByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setRarityParameterStatusByStampSheetAsyncHandler(

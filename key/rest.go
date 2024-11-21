@@ -97,6 +97,13 @@ func (p Gs2KeyRestClient) DescribeNamespacesAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -191,6 +198,13 @@ func (p Gs2KeyRestClient) CreateNamespaceAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go createNamespaceAsyncHandler(
 		p,
@@ -281,6 +295,13 @@ func (p Gs2KeyRestClient) GetNamespaceStatusAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -370,6 +391,13 @@ func (p Gs2KeyRestClient) GetNamespaceAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getNamespaceAsyncHandler(
@@ -467,6 +495,13 @@ func (p Gs2KeyRestClient) UpdateNamespaceAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go updateNamespaceAsyncHandler(
 		p,
@@ -556,6 +591,13 @@ func (p Gs2KeyRestClient) DeleteNamespaceAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go deleteNamespaceAsyncHandler(
@@ -653,6 +695,13 @@ func (p Gs2KeyRestClient) DescribeKeysAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go describeKeysAsyncHandler(
 		p,
@@ -748,6 +797,13 @@ func (p Gs2KeyRestClient) CreateKeyAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go createKeyAsyncHandler(
@@ -847,6 +903,13 @@ func (p Gs2KeyRestClient) UpdateKeyAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go updateKeyAsyncHandler(
 		p,
@@ -942,6 +1005,13 @@ func (p Gs2KeyRestClient) GetKeyAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go getKeyAsyncHandler(
 		p,
@@ -1036,6 +1106,13 @@ func (p Gs2KeyRestClient) DeleteKeyAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go deleteKeyAsyncHandler(
@@ -1135,6 +1212,13 @@ func (p Gs2KeyRestClient) EncryptAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go encryptAsyncHandler(
 		p,
@@ -1233,6 +1317,13 @@ func (p Gs2KeyRestClient) DecryptAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go decryptAsyncHandler(
 		p,
@@ -1328,6 +1419,13 @@ func (p Gs2KeyRestClient) DescribeGitHubApiKeysAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeGitHubApiKeysAsyncHandler(
@@ -1430,6 +1528,13 @@ func (p Gs2KeyRestClient) CreateGitHubApiKeyAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go createGitHubApiKeyAsyncHandler(
@@ -1535,6 +1640,13 @@ func (p Gs2KeyRestClient) UpdateGitHubApiKeyAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go updateGitHubApiKeyAsyncHandler(
 		p,
@@ -1630,6 +1742,13 @@ func (p Gs2KeyRestClient) GetGitHubApiKeyAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go getGitHubApiKeyAsyncHandler(
 		p,
@@ -1724,6 +1843,13 @@ func (p Gs2KeyRestClient) DeleteGitHubApiKeyAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go deleteGitHubApiKeyAsyncHandler(

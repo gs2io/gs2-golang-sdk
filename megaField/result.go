@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,7 +281,8 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DescribeAreaModelsResult struct {
-	Items []AreaModel `json:"items"`
+	Items    []AreaModel          `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeAreaModelsAsyncResult struct {
@@ -313,7 +320,8 @@ func (p DescribeAreaModelsResult) Pointer() *DescribeAreaModelsResult {
 }
 
 type GetAreaModelResult struct {
-	Item *AreaModel `json:"item"`
+	Item     *AreaModel           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetAreaModelAsyncResult struct {
@@ -355,8 +363,9 @@ func (p GetAreaModelResult) Pointer() *GetAreaModelResult {
 }
 
 type DescribeAreaModelMastersResult struct {
-	Items         []AreaModelMaster `json:"items"`
-	NextPageToken *string           `json:"nextPageToken"`
+	Items         []AreaModelMaster    `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeAreaModelMastersAsyncResult struct {
@@ -402,7 +411,8 @@ func (p DescribeAreaModelMastersResult) Pointer() *DescribeAreaModelMastersResul
 }
 
 type CreateAreaModelMasterResult struct {
-	Item *AreaModelMaster `json:"item"`
+	Item     *AreaModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateAreaModelMasterAsyncResult struct {
@@ -444,7 +454,8 @@ func (p CreateAreaModelMasterResult) Pointer() *CreateAreaModelMasterResult {
 }
 
 type GetAreaModelMasterResult struct {
-	Item *AreaModelMaster `json:"item"`
+	Item     *AreaModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetAreaModelMasterAsyncResult struct {
@@ -486,7 +497,8 @@ func (p GetAreaModelMasterResult) Pointer() *GetAreaModelMasterResult {
 }
 
 type UpdateAreaModelMasterResult struct {
-	Item *AreaModelMaster `json:"item"`
+	Item     *AreaModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateAreaModelMasterAsyncResult struct {
@@ -528,7 +540,8 @@ func (p UpdateAreaModelMasterResult) Pointer() *UpdateAreaModelMasterResult {
 }
 
 type DeleteAreaModelMasterResult struct {
-	Item *AreaModelMaster `json:"item"`
+	Item     *AreaModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteAreaModelMasterAsyncResult struct {
@@ -570,7 +583,8 @@ func (p DeleteAreaModelMasterResult) Pointer() *DeleteAreaModelMasterResult {
 }
 
 type DescribeLayerModelsResult struct {
-	Items []LayerModel `json:"items"`
+	Items    []LayerModel         `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeLayerModelsAsyncResult struct {
@@ -608,7 +622,8 @@ func (p DescribeLayerModelsResult) Pointer() *DescribeLayerModelsResult {
 }
 
 type GetLayerModelResult struct {
-	Item *LayerModel `json:"item"`
+	Item     *LayerModel          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetLayerModelAsyncResult struct {
@@ -650,8 +665,9 @@ func (p GetLayerModelResult) Pointer() *GetLayerModelResult {
 }
 
 type DescribeLayerModelMastersResult struct {
-	Items         []LayerModelMaster `json:"items"`
-	NextPageToken *string            `json:"nextPageToken"`
+	Items         []LayerModelMaster   `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeLayerModelMastersAsyncResult struct {
@@ -697,7 +713,8 @@ func (p DescribeLayerModelMastersResult) Pointer() *DescribeLayerModelMastersRes
 }
 
 type CreateLayerModelMasterResult struct {
-	Item *LayerModelMaster `json:"item"`
+	Item     *LayerModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateLayerModelMasterAsyncResult struct {
@@ -739,7 +756,8 @@ func (p CreateLayerModelMasterResult) Pointer() *CreateLayerModelMasterResult {
 }
 
 type GetLayerModelMasterResult struct {
-	Item *LayerModelMaster `json:"item"`
+	Item     *LayerModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetLayerModelMasterAsyncResult struct {
@@ -781,7 +799,8 @@ func (p GetLayerModelMasterResult) Pointer() *GetLayerModelMasterResult {
 }
 
 type UpdateLayerModelMasterResult struct {
-	Item *LayerModelMaster `json:"item"`
+	Item     *LayerModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateLayerModelMasterAsyncResult struct {
@@ -823,7 +842,8 @@ func (p UpdateLayerModelMasterResult) Pointer() *UpdateLayerModelMasterResult {
 }
 
 type DeleteLayerModelMasterResult struct {
-	Item *LayerModelMaster `json:"item"`
+	Item     *LayerModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteLayerModelMasterAsyncResult struct {
@@ -865,7 +885,8 @@ func (p DeleteLayerModelMasterResult) Pointer() *DeleteLayerModelMasterResult {
 }
 
 type ExportMasterResult struct {
-	Item *CurrentFieldMaster `json:"item"`
+	Item     *CurrentFieldMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -907,7 +928,8 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
 }
 
 type GetCurrentFieldMasterResult struct {
-	Item *CurrentFieldMaster `json:"item"`
+	Item     *CurrentFieldMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetCurrentFieldMasterAsyncResult struct {
@@ -949,7 +971,8 @@ func (p GetCurrentFieldMasterResult) Pointer() *GetCurrentFieldMasterResult {
 }
 
 type UpdateCurrentFieldMasterResult struct {
-	Item *CurrentFieldMaster `json:"item"`
+	Item     *CurrentFieldMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCurrentFieldMasterAsyncResult struct {
@@ -991,7 +1014,8 @@ func (p UpdateCurrentFieldMasterResult) Pointer() *UpdateCurrentFieldMasterResul
 }
 
 type UpdateCurrentFieldMasterFromGitHubResult struct {
-	Item *CurrentFieldMaster `json:"item"`
+	Item     *CurrentFieldMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCurrentFieldMasterFromGitHubAsyncResult struct {
@@ -1033,7 +1057,8 @@ func (p UpdateCurrentFieldMasterFromGitHubResult) Pointer() *UpdateCurrentFieldM
 }
 
 type PutPositionResult struct {
-	Item *Spatial `json:"item"`
+	Item     *Spatial             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type PutPositionAsyncResult struct {
@@ -1075,7 +1100,8 @@ func (p PutPositionResult) Pointer() *PutPositionResult {
 }
 
 type PutPositionByUserIdResult struct {
-	Item *Spatial `json:"item"`
+	Item     *Spatial             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type PutPositionByUserIdAsyncResult struct {
@@ -1117,7 +1143,8 @@ func (p PutPositionByUserIdResult) Pointer() *PutPositionByUserIdResult {
 }
 
 type FetchPositionResult struct {
-	Items []Spatial `json:"items"`
+	Items    []Spatial            `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type FetchPositionAsyncResult struct {
@@ -1155,7 +1182,8 @@ func (p FetchPositionResult) Pointer() *FetchPositionResult {
 }
 
 type FetchPositionFromSystemResult struct {
-	Items []Spatial `json:"items"`
+	Items    []Spatial            `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type FetchPositionFromSystemAsyncResult struct {
@@ -1193,7 +1221,8 @@ func (p FetchPositionFromSystemResult) Pointer() *FetchPositionFromSystemResult 
 }
 
 type NearUserIdsResult struct {
-	Items []*string `json:"items"`
+	Items    []*string            `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type NearUserIdsAsyncResult struct {
@@ -1232,7 +1261,8 @@ func (p NearUserIdsResult) Pointer() *NearUserIdsResult {
 }
 
 type NearUserIdsFromSystemResult struct {
-	Items []*string `json:"items"`
+	Items    []*string            `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type NearUserIdsFromSystemAsyncResult struct {
@@ -1271,7 +1301,8 @@ func (p NearUserIdsFromSystemResult) Pointer() *NearUserIdsFromSystemResult {
 }
 
 type ActionResult struct {
-	Items []Spatial `json:"items"`
+	Items    []Spatial            `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ActionAsyncResult struct {
@@ -1309,7 +1340,8 @@ func (p ActionResult) Pointer() *ActionResult {
 }
 
 type ActionByUserIdResult struct {
-	Items []Spatial `json:"items"`
+	Items    []Spatial            `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ActionByUserIdAsyncResult struct {

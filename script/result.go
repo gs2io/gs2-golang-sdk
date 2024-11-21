@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,8 +281,9 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DescribeScriptsResult struct {
-	Items         []Script `json:"items"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Items         []Script             `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeScriptsAsyncResult struct {
@@ -322,7 +329,8 @@ func (p DescribeScriptsResult) Pointer() *DescribeScriptsResult {
 }
 
 type CreateScriptResult struct {
-	Item *Script `json:"item"`
+	Item     *Script              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateScriptAsyncResult struct {
@@ -364,7 +372,8 @@ func (p CreateScriptResult) Pointer() *CreateScriptResult {
 }
 
 type CreateScriptFromGitHubResult struct {
-	Item *Script `json:"item"`
+	Item     *Script              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateScriptFromGitHubAsyncResult struct {
@@ -406,7 +415,8 @@ func (p CreateScriptFromGitHubResult) Pointer() *CreateScriptFromGitHubResult {
 }
 
 type GetScriptResult struct {
-	Item *Script `json:"item"`
+	Item     *Script              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetScriptAsyncResult struct {
@@ -448,7 +458,8 @@ func (p GetScriptResult) Pointer() *GetScriptResult {
 }
 
 type UpdateScriptResult struct {
-	Item *Script `json:"item"`
+	Item     *Script              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateScriptAsyncResult struct {
@@ -490,7 +501,8 @@ func (p UpdateScriptResult) Pointer() *UpdateScriptResult {
 }
 
 type UpdateScriptFromGitHubResult struct {
-	Item *Script `json:"item"`
+	Item     *Script              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateScriptFromGitHubAsyncResult struct {
@@ -532,7 +544,8 @@ func (p UpdateScriptFromGitHubResult) Pointer() *UpdateScriptFromGitHubResult {
 }
 
 type DeleteScriptResult struct {
-	Item *Script `json:"item"`
+	Item     *Script              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteScriptAsyncResult struct {
@@ -574,13 +587,14 @@ func (p DeleteScriptResult) Pointer() *DeleteScriptResult {
 }
 
 type InvokeScriptResult struct {
-	Code         *int32        `json:"code"`
-	Result       *string       `json:"result"`
-	Transaction  *Transaction  `json:"transaction"`
-	RandomStatus *RandomStatus `json:"randomStatus"`
-	ExecuteTime  *int32        `json:"executeTime"`
-	Charged      *int32        `json:"charged"`
-	Output       []*string     `json:"output"`
+	Code         *int32               `json:"code"`
+	Result       *string              `json:"result"`
+	Transaction  *Transaction         `json:"transaction"`
+	RandomStatus *RandomStatus        `json:"randomStatus"`
+	ExecuteTime  *int32               `json:"executeTime"`
+	Charged      *int32               `json:"charged"`
+	Output       []*string            `json:"output"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type InvokeScriptAsyncResult struct {
@@ -677,13 +691,14 @@ func (p InvokeScriptResult) Pointer() *InvokeScriptResult {
 }
 
 type DebugInvokeResult struct {
-	Code         *int32        `json:"code"`
-	Result       *string       `json:"result"`
-	Transaction  *Transaction  `json:"transaction"`
-	RandomStatus *RandomStatus `json:"randomStatus"`
-	ExecuteTime  *int32        `json:"executeTime"`
-	Charged      *int32        `json:"charged"`
-	Output       []*string     `json:"output"`
+	Code         *int32               `json:"code"`
+	Result       *string              `json:"result"`
+	Transaction  *Transaction         `json:"transaction"`
+	RandomStatus *RandomStatus        `json:"randomStatus"`
+	ExecuteTime  *int32               `json:"executeTime"`
+	Charged      *int32               `json:"charged"`
+	Output       []*string            `json:"output"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type DebugInvokeAsyncResult struct {
@@ -780,13 +795,14 @@ func (p DebugInvokeResult) Pointer() *DebugInvokeResult {
 }
 
 type InvokeByStampSheetResult struct {
-	Code         *int32        `json:"code"`
-	Result       *string       `json:"result"`
-	Transaction  *Transaction  `json:"transaction"`
-	RandomStatus *RandomStatus `json:"randomStatus"`
-	ExecuteTime  *int32        `json:"executeTime"`
-	Charged      *int32        `json:"charged"`
-	Output       []*string     `json:"output"`
+	Code         *int32               `json:"code"`
+	Result       *string              `json:"result"`
+	Transaction  *Transaction         `json:"transaction"`
+	RandomStatus *RandomStatus        `json:"randomStatus"`
+	ExecuteTime  *int32               `json:"executeTime"`
+	Charged      *int32               `json:"charged"`
+	Output       []*string            `json:"output"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type InvokeByStampSheetAsyncResult struct {

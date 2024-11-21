@@ -93,6 +93,13 @@ func (p Gs2StaminaWebSocketClient) DescribeNamespacesAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -183,6 +190,13 @@ func (p Gs2StaminaWebSocketClient) CreateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -264,6 +278,13 @@ func (p Gs2StaminaWebSocketClient) GetNamespaceStatusAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -344,6 +365,13 @@ func (p Gs2StaminaWebSocketClient) GetNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getNamespaceAsyncHandler(
@@ -435,6 +463,13 @@ func (p Gs2StaminaWebSocketClient) UpdateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -515,6 +550,13 @@ func (p Gs2StaminaWebSocketClient) DeleteNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteNamespaceAsyncHandler(
@@ -600,6 +642,13 @@ func (p Gs2StaminaWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.dumpUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -683,6 +732,13 @@ func (p Gs2StaminaWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.checkDumpUserDataByUserIdAsyncHandler(
@@ -768,6 +824,13 @@ func (p Gs2StaminaWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.cleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -852,6 +915,13 @@ func (p Gs2StaminaWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkCleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -935,6 +1005,13 @@ func (p Gs2StaminaWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.prepareImportUserDataByUserIdAsyncHandler(
@@ -1023,6 +1100,13 @@ func (p Gs2StaminaWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.importUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1110,6 +1194,13 @@ func (p Gs2StaminaWebSocketClient) CheckImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkImportUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1196,6 +1287,13 @@ func (p Gs2StaminaWebSocketClient) DescribeStaminaModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeStaminaModelMastersAsyncHandler(
@@ -1311,6 +1409,13 @@ func (p Gs2StaminaWebSocketClient) CreateStaminaModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createStaminaModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1394,6 +1499,13 @@ func (p Gs2StaminaWebSocketClient) GetStaminaModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getStaminaModelMasterAsyncHandler(
@@ -1509,6 +1621,13 @@ func (p Gs2StaminaWebSocketClient) UpdateStaminaModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateStaminaModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1592,6 +1711,13 @@ func (p Gs2StaminaWebSocketClient) DeleteStaminaModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteStaminaModelMasterAsyncHandler(
@@ -1679,6 +1805,13 @@ func (p Gs2StaminaWebSocketClient) DescribeMaxStaminaTableMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeMaxStaminaTableMastersAsyncHandler(
@@ -1780,6 +1913,13 @@ func (p Gs2StaminaWebSocketClient) CreateMaxStaminaTableMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createMaxStaminaTableMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1863,6 +2003,13 @@ func (p Gs2StaminaWebSocketClient) GetMaxStaminaTableMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getMaxStaminaTableMasterAsyncHandler(
@@ -1964,6 +2111,13 @@ func (p Gs2StaminaWebSocketClient) UpdateMaxStaminaTableMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateMaxStaminaTableMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2047,6 +2201,13 @@ func (p Gs2StaminaWebSocketClient) DeleteMaxStaminaTableMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteMaxStaminaTableMasterAsyncHandler(
@@ -2134,6 +2295,13 @@ func (p Gs2StaminaWebSocketClient) DescribeRecoverIntervalTableMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeRecoverIntervalTableMastersAsyncHandler(
@@ -2235,6 +2403,13 @@ func (p Gs2StaminaWebSocketClient) CreateRecoverIntervalTableMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createRecoverIntervalTableMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2318,6 +2493,13 @@ func (p Gs2StaminaWebSocketClient) GetRecoverIntervalTableMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getRecoverIntervalTableMasterAsyncHandler(
@@ -2419,6 +2601,13 @@ func (p Gs2StaminaWebSocketClient) UpdateRecoverIntervalTableMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateRecoverIntervalTableMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2502,6 +2691,13 @@ func (p Gs2StaminaWebSocketClient) DeleteRecoverIntervalTableMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteRecoverIntervalTableMasterAsyncHandler(
@@ -2589,6 +2785,13 @@ func (p Gs2StaminaWebSocketClient) DescribeRecoverValueTableMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeRecoverValueTableMastersAsyncHandler(
@@ -2690,6 +2893,13 @@ func (p Gs2StaminaWebSocketClient) CreateRecoverValueTableMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createRecoverValueTableMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2773,6 +2983,13 @@ func (p Gs2StaminaWebSocketClient) GetRecoverValueTableMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getRecoverValueTableMasterAsyncHandler(
@@ -2874,6 +3091,13 @@ func (p Gs2StaminaWebSocketClient) UpdateRecoverValueTableMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateRecoverValueTableMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2958,6 +3182,13 @@ func (p Gs2StaminaWebSocketClient) DeleteRecoverValueTableMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteRecoverValueTableMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3039,6 +3270,13 @@ func (p Gs2StaminaWebSocketClient) ExportMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3119,6 +3357,13 @@ func (p Gs2StaminaWebSocketClient) GetCurrentStaminaMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getCurrentStaminaMasterAsyncHandler(
@@ -3204,6 +3449,13 @@ func (p Gs2StaminaWebSocketClient) UpdateCurrentStaminaMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateCurrentStaminaMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3288,6 +3540,13 @@ func (p Gs2StaminaWebSocketClient) UpdateCurrentStaminaMasterFromGitHubAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateCurrentStaminaMasterFromGitHubAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3368,6 +3627,13 @@ func (p Gs2StaminaWebSocketClient) DescribeStaminaModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeStaminaModelsAsyncHandler(
@@ -3452,6 +3718,13 @@ func (p Gs2StaminaWebSocketClient) GetStaminaModelAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getStaminaModelAsyncHandler(
@@ -3546,6 +3819,13 @@ func (p Gs2StaminaWebSocketClient) DescribeStaminasAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeStaminasAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3639,6 +3919,13 @@ func (p Gs2StaminaWebSocketClient) DescribeStaminasByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeStaminasByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3729,6 +4016,13 @@ func (p Gs2StaminaWebSocketClient) GetStaminaAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getStaminaAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3818,6 +4112,13 @@ func (p Gs2StaminaWebSocketClient) GetStaminaByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getStaminaByUserIdAsyncHandler(
@@ -3924,6 +4225,13 @@ func (p Gs2StaminaWebSocketClient) UpdateStaminaByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateStaminaByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4025,6 +4333,13 @@ func (p Gs2StaminaWebSocketClient) ConsumeStaminaAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.consumeStaminaAsyncHandler(
@@ -4128,6 +4443,13 @@ func (p Gs2StaminaWebSocketClient) ConsumeStaminaByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.consumeStaminaByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4223,6 +4545,13 @@ func (p Gs2StaminaWebSocketClient) RecoverStaminaByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.recoverStaminaByUserIdAsyncHandler(
@@ -4320,6 +4649,13 @@ func (p Gs2StaminaWebSocketClient) RaiseMaxValueByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.raiseMaxValueByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4415,6 +4751,13 @@ func (p Gs2StaminaWebSocketClient) DecreaseMaxValueAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.decreaseMaxValueAsyncHandler(
@@ -4512,6 +4855,13 @@ func (p Gs2StaminaWebSocketClient) DecreaseMaxValueByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.decreaseMaxValueByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4607,6 +4957,13 @@ func (p Gs2StaminaWebSocketClient) SetMaxValueByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setMaxValueByUserIdAsyncHandler(
@@ -4704,6 +5061,13 @@ func (p Gs2StaminaWebSocketClient) SetRecoverIntervalByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setRecoverIntervalByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4799,6 +5163,13 @@ func (p Gs2StaminaWebSocketClient) SetRecoverValueByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setRecoverValueByUserIdAsyncHandler(
@@ -4902,6 +5273,13 @@ func (p Gs2StaminaWebSocketClient) SetMaxValueByStatusAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setMaxValueByStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5003,6 +5381,13 @@ func (p Gs2StaminaWebSocketClient) SetRecoverIntervalByStatusAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setRecoverIntervalByStatusAsyncHandler(
@@ -5106,6 +5491,13 @@ func (p Gs2StaminaWebSocketClient) SetRecoverValueByStatusAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setRecoverValueByStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5199,6 +5591,13 @@ func (p Gs2StaminaWebSocketClient) DeleteStaminaByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteStaminaByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5282,6 +5681,13 @@ func (p Gs2StaminaWebSocketClient) RecoverStaminaByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.recoverStaminaByStampSheetAsyncHandler(
@@ -5367,6 +5773,13 @@ func (p Gs2StaminaWebSocketClient) RaiseMaxValueByStampSheetAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.raiseMaxValueByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5450,6 +5863,13 @@ func (p Gs2StaminaWebSocketClient) DecreaseMaxValueByStampTaskAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.decreaseMaxValueByStampTaskAsyncHandler(
@@ -5535,6 +5955,13 @@ func (p Gs2StaminaWebSocketClient) SetMaxValueByStampSheetAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setMaxValueByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5618,6 +6045,13 @@ func (p Gs2StaminaWebSocketClient) SetRecoverIntervalByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setRecoverIntervalByStampSheetAsyncHandler(
@@ -5703,6 +6137,13 @@ func (p Gs2StaminaWebSocketClient) SetRecoverValueByStampSheetAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setRecoverValueByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5786,6 +6227,13 @@ func (p Gs2StaminaWebSocketClient) ConsumeStaminaByStampTaskAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.consumeStaminaByStampTaskAsyncHandler(

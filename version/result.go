@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -501,6 +514,7 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 type DescribeVersionModelMastersResult struct {
 	Items         []VersionModelMaster `json:"items"`
 	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeVersionModelMastersAsyncResult struct {
@@ -546,7 +560,8 @@ func (p DescribeVersionModelMastersResult) Pointer() *DescribeVersionModelMaster
 }
 
 type CreateVersionModelMasterResult struct {
-	Item *VersionModelMaster `json:"item"`
+	Item     *VersionModelMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateVersionModelMasterAsyncResult struct {
@@ -588,7 +603,8 @@ func (p CreateVersionModelMasterResult) Pointer() *CreateVersionModelMasterResul
 }
 
 type GetVersionModelMasterResult struct {
-	Item *VersionModelMaster `json:"item"`
+	Item     *VersionModelMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetVersionModelMasterAsyncResult struct {
@@ -630,7 +646,8 @@ func (p GetVersionModelMasterResult) Pointer() *GetVersionModelMasterResult {
 }
 
 type UpdateVersionModelMasterResult struct {
-	Item *VersionModelMaster `json:"item"`
+	Item     *VersionModelMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateVersionModelMasterAsyncResult struct {
@@ -672,7 +689,8 @@ func (p UpdateVersionModelMasterResult) Pointer() *UpdateVersionModelMasterResul
 }
 
 type DeleteVersionModelMasterResult struct {
-	Item *VersionModelMaster `json:"item"`
+	Item     *VersionModelMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteVersionModelMasterAsyncResult struct {
@@ -714,7 +732,8 @@ func (p DeleteVersionModelMasterResult) Pointer() *DeleteVersionModelMasterResul
 }
 
 type DescribeVersionModelsResult struct {
-	Items []VersionModel `json:"items"`
+	Items    []VersionModel       `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeVersionModelsAsyncResult struct {
@@ -752,7 +771,8 @@ func (p DescribeVersionModelsResult) Pointer() *DescribeVersionModelsResult {
 }
 
 type GetVersionModelResult struct {
-	Item *VersionModel `json:"item"`
+	Item     *VersionModel        `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetVersionModelAsyncResult struct {
@@ -794,8 +814,9 @@ func (p GetVersionModelResult) Pointer() *GetVersionModelResult {
 }
 
 type DescribeAcceptVersionsResult struct {
-	Items         []AcceptVersion `json:"items"`
-	NextPageToken *string         `json:"nextPageToken"`
+	Items         []AcceptVersion      `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeAcceptVersionsAsyncResult struct {
@@ -841,8 +862,9 @@ func (p DescribeAcceptVersionsResult) Pointer() *DescribeAcceptVersionsResult {
 }
 
 type DescribeAcceptVersionsByUserIdResult struct {
-	Items         []AcceptVersion `json:"items"`
-	NextPageToken *string         `json:"nextPageToken"`
+	Items         []AcceptVersion      `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeAcceptVersionsByUserIdAsyncResult struct {
@@ -888,7 +910,8 @@ func (p DescribeAcceptVersionsByUserIdResult) Pointer() *DescribeAcceptVersionsB
 }
 
 type AcceptResult struct {
-	Item *AcceptVersion `json:"item"`
+	Item     *AcceptVersion       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AcceptAsyncResult struct {
@@ -930,7 +953,8 @@ func (p AcceptResult) Pointer() *AcceptResult {
 }
 
 type AcceptByUserIdResult struct {
-	Item *AcceptVersion `json:"item"`
+	Item     *AcceptVersion       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AcceptByUserIdAsyncResult struct {
@@ -972,7 +996,8 @@ func (p AcceptByUserIdResult) Pointer() *AcceptByUserIdResult {
 }
 
 type GetAcceptVersionResult struct {
-	Item *AcceptVersion `json:"item"`
+	Item     *AcceptVersion       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetAcceptVersionAsyncResult struct {
@@ -1014,7 +1039,8 @@ func (p GetAcceptVersionResult) Pointer() *GetAcceptVersionResult {
 }
 
 type GetAcceptVersionByUserIdResult struct {
-	Item *AcceptVersion `json:"item"`
+	Item     *AcceptVersion       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetAcceptVersionByUserIdAsyncResult struct {
@@ -1056,7 +1082,8 @@ func (p GetAcceptVersionByUserIdResult) Pointer() *GetAcceptVersionByUserIdResul
 }
 
 type DeleteAcceptVersionResult struct {
-	Item *AcceptVersion `json:"item"`
+	Item     *AcceptVersion       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteAcceptVersionAsyncResult struct {
@@ -1098,7 +1125,8 @@ func (p DeleteAcceptVersionResult) Pointer() *DeleteAcceptVersionResult {
 }
 
 type DeleteAcceptVersionByUserIdResult struct {
-	Item *AcceptVersion `json:"item"`
+	Item     *AcceptVersion       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteAcceptVersionByUserIdAsyncResult struct {
@@ -1140,9 +1168,10 @@ func (p DeleteAcceptVersionByUserIdResult) Pointer() *DeleteAcceptVersionByUserI
 }
 
 type CheckVersionResult struct {
-	ProjectToken *string  `json:"projectToken"`
-	Warnings     []Status `json:"warnings"`
-	Errors       []Status `json:"errors"`
+	ProjectToken *string              `json:"projectToken"`
+	Warnings     []Status             `json:"warnings"`
+	Errors       []Status             `json:"errors"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckVersionAsyncResult struct {
@@ -1197,9 +1226,10 @@ func (p CheckVersionResult) Pointer() *CheckVersionResult {
 }
 
 type CheckVersionByUserIdResult struct {
-	ProjectToken *string  `json:"projectToken"`
-	Warnings     []Status `json:"warnings"`
-	Errors       []Status `json:"errors"`
+	ProjectToken *string              `json:"projectToken"`
+	Warnings     []Status             `json:"warnings"`
+	Errors       []Status             `json:"errors"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckVersionByUserIdAsyncResult struct {
@@ -1254,8 +1284,9 @@ func (p CheckVersionByUserIdResult) Pointer() *CheckVersionByUserIdResult {
 }
 
 type CalculateSignatureResult struct {
-	Body      *string `json:"body"`
-	Signature *string `json:"signature"`
+	Body      *string              `json:"body"`
+	Signature *string              `json:"signature"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type CalculateSignatureAsyncResult struct {
@@ -1300,7 +1331,8 @@ func (p CalculateSignatureResult) Pointer() *CalculateSignatureResult {
 }
 
 type ExportMasterResult struct {
-	Item *CurrentVersionMaster `json:"item"`
+	Item     *CurrentVersionMaster `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -1342,7 +1374,8 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
 }
 
 type GetCurrentVersionMasterResult struct {
-	Item *CurrentVersionMaster `json:"item"`
+	Item     *CurrentVersionMaster `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type GetCurrentVersionMasterAsyncResult struct {
@@ -1384,7 +1417,8 @@ func (p GetCurrentVersionMasterResult) Pointer() *GetCurrentVersionMasterResult 
 }
 
 type UpdateCurrentVersionMasterResult struct {
-	Item *CurrentVersionMaster `json:"item"`
+	Item     *CurrentVersionMaster `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type UpdateCurrentVersionMasterAsyncResult struct {
@@ -1426,7 +1460,8 @@ func (p UpdateCurrentVersionMasterResult) Pointer() *UpdateCurrentVersionMasterR
 }
 
 type UpdateCurrentVersionMasterFromGitHubResult struct {
-	Item *CurrentVersionMaster `json:"item"`
+	Item     *CurrentVersionMaster `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type UpdateCurrentVersionMasterFromGitHubAsyncResult struct {

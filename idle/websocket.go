@@ -93,6 +93,13 @@ func (p Gs2IdleWebSocketClient) DescribeNamespacesAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -189,6 +196,13 @@ func (p Gs2IdleWebSocketClient) CreateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -270,6 +284,13 @@ func (p Gs2IdleWebSocketClient) GetNamespaceStatusAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -350,6 +371,13 @@ func (p Gs2IdleWebSocketClient) GetNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getNamespaceAsyncHandler(
@@ -447,6 +475,13 @@ func (p Gs2IdleWebSocketClient) UpdateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -527,6 +562,13 @@ func (p Gs2IdleWebSocketClient) DeleteNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteNamespaceAsyncHandler(
@@ -612,6 +654,13 @@ func (p Gs2IdleWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.dumpUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -695,6 +744,13 @@ func (p Gs2IdleWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.checkDumpUserDataByUserIdAsyncHandler(
@@ -780,6 +836,13 @@ func (p Gs2IdleWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.cleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -864,6 +927,13 @@ func (p Gs2IdleWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkCleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -947,6 +1017,13 @@ func (p Gs2IdleWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.prepareImportUserDataByUserIdAsyncHandler(
@@ -1035,6 +1112,13 @@ func (p Gs2IdleWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.importUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1122,6 +1206,13 @@ func (p Gs2IdleWebSocketClient) CheckImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkImportUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1208,6 +1299,13 @@ func (p Gs2IdleWebSocketClient) DescribeCategoryModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeCategoryModelMastersAsyncHandler(
@@ -1318,6 +1416,13 @@ func (p Gs2IdleWebSocketClient) CreateCategoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createCategoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1401,6 +1506,13 @@ func (p Gs2IdleWebSocketClient) GetCategoryModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getCategoryModelMasterAsyncHandler(
@@ -1511,6 +1623,13 @@ func (p Gs2IdleWebSocketClient) UpdateCategoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateCategoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1595,6 +1714,13 @@ func (p Gs2IdleWebSocketClient) DeleteCategoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteCategoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1675,6 +1801,13 @@ func (p Gs2IdleWebSocketClient) DescribeCategoryModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeCategoryModelsAsyncHandler(
@@ -1759,6 +1892,13 @@ func (p Gs2IdleWebSocketClient) GetCategoryModelAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getCategoryModelAsyncHandler(
@@ -1853,6 +1993,13 @@ func (p Gs2IdleWebSocketClient) DescribeStatusesAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeStatusesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1946,6 +2093,13 @@ func (p Gs2IdleWebSocketClient) DescribeStatusesByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeStatusesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2036,6 +2190,13 @@ func (p Gs2IdleWebSocketClient) GetStatusAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2125,6 +2286,13 @@ func (p Gs2IdleWebSocketClient) GetStatusByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getStatusByUserIdAsyncHandler(
@@ -2219,6 +2387,13 @@ func (p Gs2IdleWebSocketClient) PredictionAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.predictionAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2311,6 +2486,13 @@ func (p Gs2IdleWebSocketClient) PredictionByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.predictionByUserIdAsyncHandler(
@@ -2412,6 +2594,13 @@ func (p Gs2IdleWebSocketClient) ReceiveAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.receiveAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2512,6 +2701,13 @@ func (p Gs2IdleWebSocketClient) ReceiveByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.receiveByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2607,6 +2803,13 @@ func (p Gs2IdleWebSocketClient) IncreaseMaximumIdleMinutesByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.increaseMaximumIdleMinutesByUserIdAsyncHandler(
@@ -2704,6 +2907,13 @@ func (p Gs2IdleWebSocketClient) DecreaseMaximumIdleMinutesAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.decreaseMaximumIdleMinutesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2799,6 +3009,13 @@ func (p Gs2IdleWebSocketClient) DecreaseMaximumIdleMinutesByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.decreaseMaximumIdleMinutesByUserIdAsyncHandler(
@@ -2896,6 +3113,13 @@ func (p Gs2IdleWebSocketClient) SetMaximumIdleMinutesByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setMaximumIdleMinutesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2979,6 +3203,13 @@ func (p Gs2IdleWebSocketClient) IncreaseMaximumIdleMinutesByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.increaseMaximumIdleMinutesByStampSheetAsyncHandler(
@@ -3064,6 +3295,13 @@ func (p Gs2IdleWebSocketClient) DecreaseMaximumIdleMinutesByStampTaskAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.decreaseMaximumIdleMinutesByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3147,6 +3385,13 @@ func (p Gs2IdleWebSocketClient) SetMaximumIdleMinutesByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setMaximumIdleMinutesByStampSheetAsyncHandler(
@@ -3232,6 +3477,13 @@ func (p Gs2IdleWebSocketClient) ReceiveByStampSheetAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.receiveByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3313,6 +3565,13 @@ func (p Gs2IdleWebSocketClient) ExportMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3393,6 +3652,13 @@ func (p Gs2IdleWebSocketClient) GetCurrentCategoryMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getCurrentCategoryMasterAsyncHandler(
@@ -3478,6 +3744,13 @@ func (p Gs2IdleWebSocketClient) UpdateCurrentCategoryMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateCurrentCategoryMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3561,6 +3834,13 @@ func (p Gs2IdleWebSocketClient) UpdateCurrentCategoryMasterFromGitHubAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.updateCurrentCategoryMasterFromGitHubAsyncHandler(

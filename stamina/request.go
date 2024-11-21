@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -130,6 +131,7 @@ type CreateNamespaceRequest struct {
 	Description           *string     `json:"description"`
 	OverflowTriggerScript *string     `json:"overflowTriggerScript"`
 	LogSetting            *LogSetting `json:"logSetting"`
+	DryRun                *bool       `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -295,6 +297,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -382,6 +385,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -472,6 +476,7 @@ type UpdateNamespaceRequest struct {
 	Description           *string     `json:"description"`
 	OverflowTriggerScript *string     `json:"overflowTriggerScript"`
 	LogSetting            *LogSetting `json:"logSetting"`
+	DryRun                *bool       `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -637,6 +642,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -725,6 +731,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -844,6 +851,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckDumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -963,6 +971,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1082,6 +1091,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckCleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1201,6 +1211,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *PrepareImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1321,6 +1332,7 @@ type ImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1472,6 +1484,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1623,6 +1636,7 @@ type DescribeStaminaModelMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeStaminaModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -1763,6 +1777,7 @@ type CreateStaminaModelMasterRequest struct {
 	MaxStaminaTableName      *string `json:"maxStaminaTableName"`
 	RecoverIntervalTableName *string `json:"recoverIntervalTableName"`
 	RecoverValueTableName    *string `json:"recoverValueTableName"`
+	DryRun                   *bool   `json:"dryRun"`
 }
 
 func (p *CreateStaminaModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2092,6 +2107,7 @@ type GetStaminaModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	StaminaName     *string `json:"staminaName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetStaminaModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2221,6 +2237,7 @@ type UpdateStaminaModelMasterRequest struct {
 	MaxStaminaTableName      *string `json:"maxStaminaTableName"`
 	RecoverIntervalTableName *string `json:"recoverIntervalTableName"`
 	RecoverValueTableName    *string `json:"recoverValueTableName"`
+	DryRun                   *bool   `json:"dryRun"`
 }
 
 func (p *UpdateStaminaModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2550,6 +2567,7 @@ type DeleteStaminaModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	StaminaName     *string `json:"staminaName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteStaminaModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2670,6 +2688,7 @@ type DescribeMaxStaminaTableMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMaxStaminaTableMastersRequest) UnmarshalJSON(data []byte) error {
@@ -2804,6 +2823,7 @@ type CreateMaxStaminaTableMasterRequest struct {
 	Metadata          *string  `json:"metadata"`
 	ExperienceModelId *string  `json:"experienceModelId"`
 	Values            []*int32 `json:"values"`
+	DryRun            *bool    `json:"dryRun"`
 }
 
 func (p *CreateMaxStaminaTableMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3029,6 +3049,7 @@ type GetMaxStaminaTableMasterRequest struct {
 	ContextStack        *string `json:"contextStack"`
 	NamespaceName       *string `json:"namespaceName"`
 	MaxStaminaTableName *string `json:"maxStaminaTableName"`
+	DryRun              *bool   `json:"dryRun"`
 }
 
 func (p *GetMaxStaminaTableMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3152,6 +3173,7 @@ type UpdateMaxStaminaTableMasterRequest struct {
 	Metadata            *string  `json:"metadata"`
 	ExperienceModelId   *string  `json:"experienceModelId"`
 	Values              []*int32 `json:"values"`
+	DryRun              *bool    `json:"dryRun"`
 }
 
 func (p *UpdateMaxStaminaTableMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3377,6 +3399,7 @@ type DeleteMaxStaminaTableMasterRequest struct {
 	ContextStack        *string `json:"contextStack"`
 	NamespaceName       *string `json:"namespaceName"`
 	MaxStaminaTableName *string `json:"maxStaminaTableName"`
+	DryRun              *bool   `json:"dryRun"`
 }
 
 func (p *DeleteMaxStaminaTableMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3497,6 +3520,7 @@ type DescribeRecoverIntervalTableMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRecoverIntervalTableMastersRequest) UnmarshalJSON(data []byte) error {
@@ -3631,6 +3655,7 @@ type CreateRecoverIntervalTableMasterRequest struct {
 	Metadata          *string  `json:"metadata"`
 	ExperienceModelId *string  `json:"experienceModelId"`
 	Values            []*int32 `json:"values"`
+	DryRun            *bool    `json:"dryRun"`
 }
 
 func (p *CreateRecoverIntervalTableMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3856,6 +3881,7 @@ type GetRecoverIntervalTableMasterRequest struct {
 	ContextStack             *string `json:"contextStack"`
 	NamespaceName            *string `json:"namespaceName"`
 	RecoverIntervalTableName *string `json:"recoverIntervalTableName"`
+	DryRun                   *bool   `json:"dryRun"`
 }
 
 func (p *GetRecoverIntervalTableMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3979,6 +4005,7 @@ type UpdateRecoverIntervalTableMasterRequest struct {
 	Metadata                 *string  `json:"metadata"`
 	ExperienceModelId        *string  `json:"experienceModelId"`
 	Values                   []*int32 `json:"values"`
+	DryRun                   *bool    `json:"dryRun"`
 }
 
 func (p *UpdateRecoverIntervalTableMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4204,6 +4231,7 @@ type DeleteRecoverIntervalTableMasterRequest struct {
 	ContextStack             *string `json:"contextStack"`
 	NamespaceName            *string `json:"namespaceName"`
 	RecoverIntervalTableName *string `json:"recoverIntervalTableName"`
+	DryRun                   *bool   `json:"dryRun"`
 }
 
 func (p *DeleteRecoverIntervalTableMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4324,6 +4352,7 @@ type DescribeRecoverValueTableMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRecoverValueTableMastersRequest) UnmarshalJSON(data []byte) error {
@@ -4458,6 +4487,7 @@ type CreateRecoverValueTableMasterRequest struct {
 	Metadata          *string  `json:"metadata"`
 	ExperienceModelId *string  `json:"experienceModelId"`
 	Values            []*int32 `json:"values"`
+	DryRun            *bool    `json:"dryRun"`
 }
 
 func (p *CreateRecoverValueTableMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4683,6 +4713,7 @@ type GetRecoverValueTableMasterRequest struct {
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	RecoverValueTableName *string `json:"recoverValueTableName"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *GetRecoverValueTableMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4806,6 +4837,7 @@ type UpdateRecoverValueTableMasterRequest struct {
 	Metadata              *string  `json:"metadata"`
 	ExperienceModelId     *string  `json:"experienceModelId"`
 	Values                []*int32 `json:"values"`
+	DryRun                *bool    `json:"dryRun"`
 }
 
 func (p *UpdateRecoverValueTableMasterRequest) UnmarshalJSON(data []byte) error {
@@ -5031,6 +5063,7 @@ type DeleteRecoverValueTableMasterRequest struct {
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	RecoverValueTableName *string `json:"recoverValueTableName"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *DeleteRecoverValueTableMasterRequest) UnmarshalJSON(data []byte) error {
@@ -5149,6 +5182,7 @@ type ExportMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -5236,6 +5270,7 @@ type GetCurrentStaminaMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentStaminaMasterRequest) UnmarshalJSON(data []byte) error {
@@ -5324,6 +5359,7 @@ type UpdateCurrentStaminaMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Settings        *string `json:"settings"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentStaminaMasterRequest) UnmarshalJSON(data []byte) error {
@@ -5443,6 +5479,7 @@ type UpdateCurrentStaminaMasterFromGitHubRequest struct {
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DryRun          *bool                  `json:"dryRun"`
 }
 
 func (p *UpdateCurrentStaminaMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -5546,6 +5583,7 @@ type DescribeStaminaModelsRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeStaminaModelsRequest) UnmarshalJSON(data []byte) error {
@@ -5634,6 +5672,7 @@ type GetStaminaModelRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	StaminaName     *string `json:"staminaName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetStaminaModelRequest) UnmarshalJSON(data []byte) error {
@@ -5755,6 +5794,7 @@ type DescribeStaminasRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeStaminasRequest) UnmarshalJSON(data []byte) error {
@@ -5919,6 +5959,7 @@ type DescribeStaminasByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeStaminasByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6112,6 +6153,7 @@ type GetStaminaRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	StaminaName     *string `json:"staminaName"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetStaminaRequest) UnmarshalJSON(data []byte) error {
@@ -6264,6 +6306,7 @@ type GetStaminaByUserIdRequest struct {
 	StaminaName     *string `json:"staminaName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetStaminaByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6452,6 +6495,7 @@ type UpdateStaminaByUserIdRequest struct {
 	RecoverIntervalMinutes *int32  `json:"recoverIntervalMinutes"`
 	RecoverValue           *int32  `json:"recoverValue"`
 	TimeOffsetToken        *string `json:"timeOffsetToken"`
+	DryRun                 *bool   `json:"dryRun"`
 }
 
 func (p *UpdateStaminaByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6680,6 +6724,7 @@ type ConsumeStaminaRequest struct {
 	StaminaName        *string `json:"staminaName"`
 	AccessToken        *string `json:"accessToken"`
 	ConsumeValue       *int32  `json:"consumeValue"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *ConsumeStaminaRequest) UnmarshalJSON(data []byte) error {
@@ -6845,6 +6890,7 @@ type ConsumeStaminaByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	ConsumeValue       *int32  `json:"consumeValue"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *ConsumeStaminaByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7041,6 +7087,7 @@ type RecoverStaminaByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	RecoverValue       *int32  `json:"recoverValue"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *RecoverStaminaByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7237,6 +7284,7 @@ type RaiseMaxValueByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	RaiseValue         *int32  `json:"raiseValue"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *RaiseMaxValueByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7432,6 +7480,7 @@ type DecreaseMaxValueRequest struct {
 	StaminaName        *string `json:"staminaName"`
 	AccessToken        *string `json:"accessToken"`
 	DecreaseValue      *int32  `json:"decreaseValue"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DecreaseMaxValueRequest) UnmarshalJSON(data []byte) error {
@@ -7597,6 +7646,7 @@ type DecreaseMaxValueByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	DecreaseValue      *int32  `json:"decreaseValue"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DecreaseMaxValueByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7793,6 +7843,7 @@ type SetMaxValueByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	MaxValue           *int32  `json:"maxValue"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *SetMaxValueByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7989,6 +8040,7 @@ type SetRecoverIntervalByUserIdRequest struct {
 	UserId                 *string `json:"userId"`
 	RecoverIntervalMinutes *int32  `json:"recoverIntervalMinutes"`
 	TimeOffsetToken        *string `json:"timeOffsetToken"`
+	DryRun                 *bool   `json:"dryRun"`
 }
 
 func (p *SetRecoverIntervalByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -8185,6 +8237,7 @@ type SetRecoverValueByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	RecoverValue       *int32  `json:"recoverValue"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *SetRecoverValueByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -8382,6 +8435,7 @@ type SetMaxValueByStatusRequest struct {
 	KeyId                 *string `json:"keyId"`
 	SignedStatusBody      *string `json:"signedStatusBody"`
 	SignedStatusSignature *string `json:"signedStatusSignature"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *SetMaxValueByStatusRequest) UnmarshalJSON(data []byte) error {
@@ -8630,6 +8684,7 @@ type SetRecoverIntervalByStatusRequest struct {
 	KeyId                 *string `json:"keyId"`
 	SignedStatusBody      *string `json:"signedStatusBody"`
 	SignedStatusSignature *string `json:"signedStatusSignature"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *SetRecoverIntervalByStatusRequest) UnmarshalJSON(data []byte) error {
@@ -8878,6 +8933,7 @@ type SetRecoverValueByStatusRequest struct {
 	KeyId                 *string `json:"keyId"`
 	SignedStatusBody      *string `json:"signedStatusBody"`
 	SignedStatusSignature *string `json:"signedStatusSignature"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *SetRecoverValueByStatusRequest) UnmarshalJSON(data []byte) error {
@@ -9124,6 +9180,7 @@ type DeleteStaminaByUserIdRequest struct {
 	StaminaName        *string `json:"staminaName"`
 	UserId             *string `json:"userId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteStaminaByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -9305,6 +9362,7 @@ type RecoverStaminaByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *RecoverStaminaByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -9424,6 +9482,7 @@ type RaiseMaxValueByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *RaiseMaxValueByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -9543,6 +9602,7 @@ type DecreaseMaxValueByStampTaskRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DecreaseMaxValueByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -9662,6 +9722,7 @@ type SetMaxValueByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *SetMaxValueByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -9781,6 +9842,7 @@ type SetRecoverIntervalByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *SetRecoverIntervalByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -9900,6 +9962,7 @@ type SetRecoverValueByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *SetRecoverValueByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -10019,6 +10082,7 @@ type ConsumeStaminaByStampTaskRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ConsumeStaminaByStampTaskRequest) UnmarshalJSON(data []byte) error {

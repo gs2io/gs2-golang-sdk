@@ -97,6 +97,13 @@ func (p Gs2VersionRestClient) DescribeNamespacesAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -200,6 +207,13 @@ func (p Gs2VersionRestClient) CreateNamespaceAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go createNamespaceAsyncHandler(
 		p,
@@ -290,6 +304,13 @@ func (p Gs2VersionRestClient) GetNamespaceStatusAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -379,6 +400,13 @@ func (p Gs2VersionRestClient) GetNamespaceAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getNamespaceAsyncHandler(
@@ -485,6 +513,13 @@ func (p Gs2VersionRestClient) UpdateNamespaceAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go updateNamespaceAsyncHandler(
 		p,
@@ -574,6 +609,13 @@ func (p Gs2VersionRestClient) DeleteNamespaceAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go deleteNamespaceAsyncHandler(
@@ -668,6 +710,13 @@ func (p Gs2VersionRestClient) DumpUserDataByUserIdAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go dumpUserDataByUserIdAsyncHandler(
 		p,
@@ -760,6 +809,13 @@ func (p Gs2VersionRestClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go checkDumpUserDataByUserIdAsyncHandler(
@@ -854,6 +910,13 @@ func (p Gs2VersionRestClient) CleanUserDataByUserIdAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go cleanUserDataByUserIdAsyncHandler(
 		p,
@@ -947,6 +1010,13 @@ func (p Gs2VersionRestClient) CheckCleanUserDataByUserIdAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go checkCleanUserDataByUserIdAsyncHandler(
 		p,
@@ -1039,6 +1109,13 @@ func (p Gs2VersionRestClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go prepareImportUserDataByUserIdAsyncHandler(
@@ -1135,6 +1212,13 @@ func (p Gs2VersionRestClient) ImportUserDataByUserIdAsync(
 	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go importUserDataByUserIdAsyncHandler(
@@ -1234,6 +1318,13 @@ func (p Gs2VersionRestClient) CheckImportUserDataByUserIdAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go checkImportUserDataByUserIdAsyncHandler(
 		p,
@@ -1329,6 +1420,13 @@ func (p Gs2VersionRestClient) DescribeVersionModelMastersAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeVersionModelMastersAsyncHandler(
@@ -1457,6 +1555,13 @@ func (p Gs2VersionRestClient) CreateVersionModelMasterAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go createVersionModelMasterAsyncHandler(
 		p,
@@ -1551,6 +1656,13 @@ func (p Gs2VersionRestClient) GetVersionModelMasterAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getVersionModelMasterAsyncHandler(
@@ -1681,6 +1793,13 @@ func (p Gs2VersionRestClient) UpdateVersionModelMasterAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go updateVersionModelMasterAsyncHandler(
 		p,
@@ -1776,6 +1895,13 @@ func (p Gs2VersionRestClient) DeleteVersionModelMasterAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go deleteVersionModelMasterAsyncHandler(
 		p,
@@ -1865,6 +1991,13 @@ func (p Gs2VersionRestClient) DescribeVersionModelsAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeVersionModelsAsyncHandler(
@@ -1960,6 +2093,13 @@ func (p Gs2VersionRestClient) GetVersionModelAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getVersionModelAsyncHandler(
@@ -2059,6 +2199,13 @@ func (p Gs2VersionRestClient) DescribeAcceptVersionsAsync(
 	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeAcceptVersionsAsyncHandler(
@@ -2161,6 +2308,13 @@ func (p Gs2VersionRestClient) DescribeAcceptVersionsByUserIdAsync(
 	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go describeAcceptVersionsByUserIdAsyncHandler(
@@ -2269,6 +2423,13 @@ func (p Gs2VersionRestClient) AcceptAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go acceptAsyncHandler(
@@ -2383,6 +2544,13 @@ func (p Gs2VersionRestClient) AcceptByUserIdAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go acceptByUserIdAsyncHandler(
 		p,
@@ -2480,6 +2648,13 @@ func (p Gs2VersionRestClient) GetAcceptVersionAsync(
 	}
 	if request.AccessToken != nil {
 		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getAcceptVersionAsyncHandler(
@@ -2584,6 +2759,13 @@ func (p Gs2VersionRestClient) GetAcceptVersionByUserIdAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go getAcceptVersionByUserIdAsyncHandler(
 		p,
@@ -2684,6 +2866,13 @@ func (p Gs2VersionRestClient) DeleteAcceptVersionAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go deleteAcceptVersionAsyncHandler(
@@ -2791,6 +2980,13 @@ func (p Gs2VersionRestClient) DeleteAcceptVersionByUserIdAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go deleteAcceptVersionByUserIdAsyncHandler(
 		p,
@@ -2893,6 +3089,13 @@ func (p Gs2VersionRestClient) CheckVersionAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go checkVersionAsyncHandler(
@@ -3002,6 +3205,13 @@ func (p Gs2VersionRestClient) CheckVersionByUserIdAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go checkVersionByUserIdAsyncHandler(
 		p,
@@ -3100,6 +3310,13 @@ func (p Gs2VersionRestClient) CalculateSignatureAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go calculateSignatureAsyncHandler(
 		p,
@@ -3190,6 +3407,13 @@ func (p Gs2VersionRestClient) ExportMasterAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go exportMasterAsyncHandler(
 		p,
@@ -3279,6 +3503,13 @@ func (p Gs2VersionRestClient) GetCurrentVersionMasterAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getCurrentVersionMasterAsyncHandler(
@@ -3373,6 +3604,13 @@ func (p Gs2VersionRestClient) UpdateCurrentVersionMasterAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go updateCurrentVersionMasterAsyncHandler(
 		p,
@@ -3465,6 +3703,13 @@ func (p Gs2VersionRestClient) UpdateCurrentVersionMasterFromGitHubAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go updateCurrentVersionMasterFromGitHubAsyncHandler(

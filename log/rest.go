@@ -97,6 +97,13 @@ func (p Gs2LogRestClient) DescribeNamespacesAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go describeNamespacesAsyncHandler(
 		p,
@@ -212,6 +219,13 @@ func (p Gs2LogRestClient) CreateNamespaceAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go createNamespaceAsyncHandler(
 		p,
@@ -302,6 +316,13 @@ func (p Gs2LogRestClient) GetNamespaceStatusAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go getNamespaceStatusAsyncHandler(
 		p,
@@ -391,6 +412,13 @@ func (p Gs2LogRestClient) GetNamespaceAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go getNamespaceAsyncHandler(
@@ -509,6 +537,13 @@ func (p Gs2LogRestClient) UpdateNamespaceAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go updateNamespaceAsyncHandler(
 		p,
@@ -598,6 +633,13 @@ func (p Gs2LogRestClient) DeleteNamespaceAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go deleteNamespaceAsyncHandler(
@@ -716,6 +758,13 @@ func (p Gs2LogRestClient) QueryAccessLogAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go queryAccessLogAsyncHandler(
 		p,
@@ -832,6 +881,13 @@ func (p Gs2LogRestClient) CountAccessLogAsync(
 	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go countAccessLogAsyncHandler(
@@ -953,6 +1009,13 @@ func (p Gs2LogRestClient) QueryIssueStampSheetLogAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go queryIssueStampSheetLogAsyncHandler(
 		p,
@@ -1072,6 +1135,13 @@ func (p Gs2LogRestClient) CountIssueStampSheetLogAsync(
 	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go countIssueStampSheetLogAsyncHandler(
@@ -1193,6 +1263,13 @@ func (p Gs2LogRestClient) QueryExecuteStampSheetLogAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go queryExecuteStampSheetLogAsyncHandler(
 		p,
@@ -1312,6 +1389,13 @@ func (p Gs2LogRestClient) CountExecuteStampSheetLogAsync(
 	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go countExecuteStampSheetLogAsyncHandler(
@@ -1433,6 +1517,13 @@ func (p Gs2LogRestClient) QueryExecuteStampTaskLogAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go queryExecuteStampTaskLogAsyncHandler(
 		p,
@@ -1552,6 +1643,13 @@ func (p Gs2LogRestClient) CountExecuteStampTaskLogAsync(
 	}
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go countExecuteStampTaskLogAsyncHandler(
@@ -1674,6 +1772,13 @@ func (p Gs2LogRestClient) QueryInGameLogAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go queryInGameLogAsyncHandler(
 		p,
@@ -1779,6 +1884,13 @@ func (p Gs2LogRestClient) SendInGameLogAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go sendInGameLogAsyncHandler(
@@ -1891,6 +2003,13 @@ func (p Gs2LogRestClient) SendInGameLogByUserIdAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go sendInGameLogByUserIdAsyncHandler(
 		p,
@@ -2002,6 +2121,13 @@ func (p Gs2LogRestClient) QueryAccessLogWithTelemetryAsync(
 	if request.TimeOffsetToken != nil {
 		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go queryAccessLogWithTelemetryAsyncHandler(
 		p,
@@ -2098,6 +2224,13 @@ func (p Gs2LogRestClient) DescribeInsightsAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go describeInsightsAsyncHandler(
 		p,
@@ -2187,6 +2320,13 @@ func (p Gs2LogRestClient) CreateInsightAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go createInsightAsyncHandler(
@@ -2283,6 +2423,13 @@ func (p Gs2LogRestClient) GetInsightAsync(
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
 
 	go getInsightAsyncHandler(
 		p,
@@ -2377,6 +2524,13 @@ func (p Gs2LogRestClient) DeleteInsightAsync(
 	}
 	if request.RequestId != nil {
 		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
 	}
 
 	go deleteInsightAsyncHandler(

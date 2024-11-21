@@ -93,6 +93,13 @@ func (p Gs2InventoryWebSocketClient) DescribeNamespacesAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -201,6 +208,13 @@ func (p Gs2InventoryWebSocketClient) CreateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -282,6 +296,13 @@ func (p Gs2InventoryWebSocketClient) GetNamespaceStatusAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -362,6 +383,13 @@ func (p Gs2InventoryWebSocketClient) GetNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getNamespaceAsyncHandler(
@@ -471,6 +499,13 @@ func (p Gs2InventoryWebSocketClient) UpdateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -551,6 +586,13 @@ func (p Gs2InventoryWebSocketClient) DeleteNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteNamespaceAsyncHandler(
@@ -636,6 +678,13 @@ func (p Gs2InventoryWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.dumpUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -719,6 +768,13 @@ func (p Gs2InventoryWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.checkDumpUserDataByUserIdAsyncHandler(
@@ -804,6 +860,13 @@ func (p Gs2InventoryWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.cleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -888,6 +951,13 @@ func (p Gs2InventoryWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkCleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -971,6 +1041,13 @@ func (p Gs2InventoryWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.prepareImportUserDataByUserIdAsyncHandler(
@@ -1059,6 +1136,13 @@ func (p Gs2InventoryWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.importUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1146,6 +1230,13 @@ func (p Gs2InventoryWebSocketClient) CheckImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkImportUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1232,6 +1323,13 @@ func (p Gs2InventoryWebSocketClient) DescribeInventoryModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeInventoryModelMastersAsyncHandler(
@@ -1332,6 +1430,13 @@ func (p Gs2InventoryWebSocketClient) CreateInventoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createInventoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1415,6 +1520,13 @@ func (p Gs2InventoryWebSocketClient) GetInventoryModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getInventoryModelMasterAsyncHandler(
@@ -1515,6 +1627,13 @@ func (p Gs2InventoryWebSocketClient) UpdateInventoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateInventoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1599,6 +1718,13 @@ func (p Gs2InventoryWebSocketClient) DeleteInventoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteInventoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1679,6 +1805,13 @@ func (p Gs2InventoryWebSocketClient) DescribeInventoryModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeInventoryModelsAsyncHandler(
@@ -1763,6 +1896,13 @@ func (p Gs2InventoryWebSocketClient) GetInventoryModelAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getInventoryModelAsyncHandler(
@@ -1853,6 +1993,13 @@ func (p Gs2InventoryWebSocketClient) DescribeItemModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeItemModelMastersAsyncHandler(
@@ -1956,6 +2103,13 @@ func (p Gs2InventoryWebSocketClient) CreateItemModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2042,6 +2196,13 @@ func (p Gs2InventoryWebSocketClient) GetItemModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getItemModelMasterAsyncHandler(
@@ -2145,6 +2306,13 @@ func (p Gs2InventoryWebSocketClient) UpdateItemModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2232,6 +2400,13 @@ func (p Gs2InventoryWebSocketClient) DeleteItemModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2315,6 +2490,13 @@ func (p Gs2InventoryWebSocketClient) DescribeItemModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeItemModelsAsyncHandler(
@@ -2403,6 +2585,13 @@ func (p Gs2InventoryWebSocketClient) GetItemModelAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getItemModelAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2489,6 +2678,13 @@ func (p Gs2InventoryWebSocketClient) DescribeSimpleInventoryModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeSimpleInventoryModelMastersAsyncHandler(
@@ -2580,6 +2776,13 @@ func (p Gs2InventoryWebSocketClient) CreateSimpleInventoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createSimpleInventoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2663,6 +2866,13 @@ func (p Gs2InventoryWebSocketClient) GetSimpleInventoryModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getSimpleInventoryModelMasterAsyncHandler(
@@ -2754,6 +2964,13 @@ func (p Gs2InventoryWebSocketClient) UpdateSimpleInventoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateSimpleInventoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2838,6 +3055,13 @@ func (p Gs2InventoryWebSocketClient) DeleteSimpleInventoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteSimpleInventoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2918,6 +3142,13 @@ func (p Gs2InventoryWebSocketClient) DescribeSimpleInventoryModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeSimpleInventoryModelsAsyncHandler(
@@ -3002,6 +3233,13 @@ func (p Gs2InventoryWebSocketClient) GetSimpleInventoryModelAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getSimpleInventoryModelAsyncHandler(
@@ -3092,6 +3330,13 @@ func (p Gs2InventoryWebSocketClient) DescribeSimpleItemModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeSimpleItemModelMastersAsyncHandler(
@@ -3186,6 +3431,13 @@ func (p Gs2InventoryWebSocketClient) CreateSimpleItemModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createSimpleItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3272,6 +3524,13 @@ func (p Gs2InventoryWebSocketClient) GetSimpleItemModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getSimpleItemModelMasterAsyncHandler(
@@ -3366,6 +3625,13 @@ func (p Gs2InventoryWebSocketClient) UpdateSimpleItemModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateSimpleItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3453,6 +3719,13 @@ func (p Gs2InventoryWebSocketClient) DeleteSimpleItemModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteSimpleItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3536,6 +3809,13 @@ func (p Gs2InventoryWebSocketClient) DescribeSimpleItemModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeSimpleItemModelsAsyncHandler(
@@ -3624,6 +3904,13 @@ func (p Gs2InventoryWebSocketClient) GetSimpleItemModelAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getSimpleItemModelAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3710,6 +3997,13 @@ func (p Gs2InventoryWebSocketClient) DescribeBigInventoryModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeBigInventoryModelMastersAsyncHandler(
@@ -3801,6 +4095,13 @@ func (p Gs2InventoryWebSocketClient) CreateBigInventoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createBigInventoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3884,6 +4185,13 @@ func (p Gs2InventoryWebSocketClient) GetBigInventoryModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getBigInventoryModelMasterAsyncHandler(
@@ -3975,6 +4283,13 @@ func (p Gs2InventoryWebSocketClient) UpdateBigInventoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateBigInventoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4059,6 +4374,13 @@ func (p Gs2InventoryWebSocketClient) DeleteBigInventoryModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteBigInventoryModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4139,6 +4461,13 @@ func (p Gs2InventoryWebSocketClient) DescribeBigInventoryModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeBigInventoryModelsAsyncHandler(
@@ -4223,6 +4552,13 @@ func (p Gs2InventoryWebSocketClient) GetBigInventoryModelAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getBigInventoryModelAsyncHandler(
@@ -4313,6 +4649,13 @@ func (p Gs2InventoryWebSocketClient) DescribeBigItemModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeBigItemModelMastersAsyncHandler(
@@ -4407,6 +4750,13 @@ func (p Gs2InventoryWebSocketClient) CreateBigItemModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createBigItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4493,6 +4843,13 @@ func (p Gs2InventoryWebSocketClient) GetBigItemModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getBigItemModelMasterAsyncHandler(
@@ -4587,6 +4944,13 @@ func (p Gs2InventoryWebSocketClient) UpdateBigItemModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateBigItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4674,6 +5038,13 @@ func (p Gs2InventoryWebSocketClient) DeleteBigItemModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteBigItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4757,6 +5128,13 @@ func (p Gs2InventoryWebSocketClient) DescribeBigItemModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeBigItemModelsAsyncHandler(
@@ -4845,6 +5223,13 @@ func (p Gs2InventoryWebSocketClient) GetBigItemModelAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getBigItemModelAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4926,6 +5311,13 @@ func (p Gs2InventoryWebSocketClient) ExportMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5006,6 +5398,13 @@ func (p Gs2InventoryWebSocketClient) GetCurrentItemModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getCurrentItemModelMasterAsyncHandler(
@@ -5091,6 +5490,13 @@ func (p Gs2InventoryWebSocketClient) UpdateCurrentItemModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateCurrentItemModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5174,6 +5580,13 @@ func (p Gs2InventoryWebSocketClient) UpdateCurrentItemModelMasterFromGitHubAsync
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.updateCurrentItemModelMasterFromGitHubAsyncHandler(
@@ -5268,6 +5681,13 @@ func (p Gs2InventoryWebSocketClient) DescribeInventoriesAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeInventoriesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5361,6 +5781,13 @@ func (p Gs2InventoryWebSocketClient) DescribeInventoriesByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeInventoriesByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5451,6 +5878,13 @@ func (p Gs2InventoryWebSocketClient) GetInventoryAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getInventoryAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5540,6 +5974,13 @@ func (p Gs2InventoryWebSocketClient) GetInventoryByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getInventoryByUserIdAsyncHandler(
@@ -5637,6 +6078,13 @@ func (p Gs2InventoryWebSocketClient) AddCapacityByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.addCapacityByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5733,6 +6181,13 @@ func (p Gs2InventoryWebSocketClient) SetCapacityByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setCapacityByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5825,6 +6280,13 @@ func (p Gs2InventoryWebSocketClient) DeleteInventoryByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteInventoryByUserIdAsyncHandler(
@@ -5928,6 +6390,13 @@ func (p Gs2InventoryWebSocketClient) VerifyInventoryCurrentMaxCapacityAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyInventoryCurrentMaxCapacityAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6030,6 +6499,13 @@ func (p Gs2InventoryWebSocketClient) VerifyInventoryCurrentMaxCapacityByUserIdAs
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyInventoryCurrentMaxCapacityByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6113,6 +6589,13 @@ func (p Gs2InventoryWebSocketClient) VerifyInventoryCurrentMaxCapacityByStampTas
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.verifyInventoryCurrentMaxCapacityByStampTaskAsyncHandler(
@@ -6198,6 +6681,13 @@ func (p Gs2InventoryWebSocketClient) AddCapacityByStampSheetAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.addCapacityByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6281,6 +6771,13 @@ func (p Gs2InventoryWebSocketClient) SetCapacityByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setCapacityByStampSheetAsyncHandler(
@@ -6378,6 +6875,13 @@ func (p Gs2InventoryWebSocketClient) DescribeItemSetsAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeItemSetsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6473,6 +6977,13 @@ func (p Gs2InventoryWebSocketClient) DescribeItemSetsByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeItemSetsByUserIdAsyncHandler(
@@ -6570,6 +7081,13 @@ func (p Gs2InventoryWebSocketClient) GetItemSetAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getItemSetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6665,6 +7183,13 @@ func (p Gs2InventoryWebSocketClient) GetItemSetByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getItemSetByUserIdAsyncHandler(
@@ -6765,6 +7290,13 @@ func (p Gs2InventoryWebSocketClient) GetItemWithSignatureAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getItemWithSignatureAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6863,6 +7395,13 @@ func (p Gs2InventoryWebSocketClient) GetItemWithSignatureByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getItemWithSignatureByUserIdAsyncHandler(
@@ -6978,6 +7517,13 @@ func (p Gs2InventoryWebSocketClient) AcquireItemSetByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.acquireItemSetByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -7085,6 +7631,13 @@ func (p Gs2InventoryWebSocketClient) AcquireItemSetWithGradeByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.acquireItemSetWithGradeByUserIdAsyncHandler(
@@ -7197,6 +7750,13 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.consumeItemSetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -7308,6 +7868,13 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.consumeItemSetByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -7406,6 +7973,13 @@ func (p Gs2InventoryWebSocketClient) DeleteItemSetByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteItemSetByUserIdAsyncHandler(
@@ -7515,6 +8089,13 @@ func (p Gs2InventoryWebSocketClient) VerifyItemSetAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyItemSetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -7623,6 +8204,13 @@ func (p Gs2InventoryWebSocketClient) VerifyItemSetByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyItemSetByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -7706,6 +8294,13 @@ func (p Gs2InventoryWebSocketClient) AcquireItemSetByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.acquireItemSetByStampSheetAsyncHandler(
@@ -7791,6 +8386,13 @@ func (p Gs2InventoryWebSocketClient) AcquireItemSetWithGradeByStampSheetAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.acquireItemSetWithGradeByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -7875,6 +8477,13 @@ func (p Gs2InventoryWebSocketClient) ConsumeItemSetByStampTaskAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.consumeItemSetByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -7958,6 +8567,13 @@ func (p Gs2InventoryWebSocketClient) VerifyItemSetByStampTaskAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.verifyItemSetByStampTaskAsyncHandler(
@@ -8055,6 +8671,13 @@ func (p Gs2InventoryWebSocketClient) DescribeReferenceOfAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeReferenceOfAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -8150,6 +8773,13 @@ func (p Gs2InventoryWebSocketClient) DescribeReferenceOfByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeReferenceOfByUserIdAsyncHandler(
@@ -8250,6 +8880,13 @@ func (p Gs2InventoryWebSocketClient) GetReferenceOfAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getReferenceOfAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -8348,6 +8985,13 @@ func (p Gs2InventoryWebSocketClient) GetReferenceOfByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getReferenceOfByUserIdAsyncHandler(
@@ -8454,6 +9098,13 @@ func (p Gs2InventoryWebSocketClient) VerifyReferenceOfAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyReferenceOfAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -8559,6 +9210,13 @@ func (p Gs2InventoryWebSocketClient) VerifyReferenceOfByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyReferenceOfByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -8660,6 +9318,13 @@ func (p Gs2InventoryWebSocketClient) AddReferenceOfAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.addReferenceOfAsyncHandler(
@@ -8763,6 +9428,13 @@ func (p Gs2InventoryWebSocketClient) AddReferenceOfByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.addReferenceOfByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -8864,6 +9536,13 @@ func (p Gs2InventoryWebSocketClient) DeleteReferenceOfAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteReferenceOfAsyncHandler(
@@ -8967,6 +9646,13 @@ func (p Gs2InventoryWebSocketClient) DeleteReferenceOfByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteReferenceOfByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -9050,6 +9736,13 @@ func (p Gs2InventoryWebSocketClient) AddReferenceOfItemSetByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.addReferenceOfItemSetByStampSheetAsyncHandler(
@@ -9135,6 +9828,13 @@ func (p Gs2InventoryWebSocketClient) DeleteReferenceOfItemSetByStampSheetAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteReferenceOfItemSetByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -9218,6 +9918,13 @@ func (p Gs2InventoryWebSocketClient) VerifyReferenceOfByStampTaskAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.verifyReferenceOfByStampTaskAsyncHandler(
@@ -9315,6 +10022,13 @@ func (p Gs2InventoryWebSocketClient) DescribeSimpleItemsAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeSimpleItemsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -9411,6 +10125,13 @@ func (p Gs2InventoryWebSocketClient) DescribeSimpleItemsByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeSimpleItemsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -9504,6 +10225,13 @@ func (p Gs2InventoryWebSocketClient) GetSimpleItemAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getSimpleItemAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -9596,6 +10324,13 @@ func (p Gs2InventoryWebSocketClient) GetSimpleItemByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getSimpleItemByUserIdAsyncHandler(
@@ -9693,6 +10428,13 @@ func (p Gs2InventoryWebSocketClient) GetSimpleItemWithSignatureAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getSimpleItemWithSignatureAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -9788,6 +10530,13 @@ func (p Gs2InventoryWebSocketClient) GetSimpleItemWithSignatureByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getSimpleItemWithSignatureByUserIdAsyncHandler(
@@ -9894,6 +10643,13 @@ func (p Gs2InventoryWebSocketClient) AcquireSimpleItemsByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.acquireSimpleItemsByUserIdAsyncHandler(
@@ -10004,6 +10760,13 @@ func (p Gs2InventoryWebSocketClient) ConsumeSimpleItemsAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.consumeSimpleItemsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -10113,6 +10876,13 @@ func (p Gs2InventoryWebSocketClient) ConsumeSimpleItemsByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.consumeSimpleItemsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -10219,6 +10989,13 @@ func (p Gs2InventoryWebSocketClient) SetSimpleItemsByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setSimpleItemsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -10311,6 +11088,13 @@ func (p Gs2InventoryWebSocketClient) DeleteSimpleItemsByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteSimpleItemsByUserIdAsyncHandler(
@@ -10417,6 +11201,13 @@ func (p Gs2InventoryWebSocketClient) VerifySimpleItemAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifySimpleItemAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -10522,6 +11313,13 @@ func (p Gs2InventoryWebSocketClient) VerifySimpleItemByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifySimpleItemByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -10605,6 +11403,13 @@ func (p Gs2InventoryWebSocketClient) AcquireSimpleItemsByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.acquireSimpleItemsByStampSheetAsyncHandler(
@@ -10690,6 +11495,13 @@ func (p Gs2InventoryWebSocketClient) ConsumeSimpleItemsByStampTaskAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.consumeSimpleItemsByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -10774,6 +11586,13 @@ func (p Gs2InventoryWebSocketClient) SetSimpleItemsByStampSheetAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setSimpleItemsByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -10857,6 +11676,13 @@ func (p Gs2InventoryWebSocketClient) VerifySimpleItemByStampTaskAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.verifySimpleItemByStampTaskAsyncHandler(
@@ -10954,6 +11780,13 @@ func (p Gs2InventoryWebSocketClient) DescribeBigItemsAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeBigItemsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -11050,6 +11883,13 @@ func (p Gs2InventoryWebSocketClient) DescribeBigItemsByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeBigItemsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -11143,6 +11983,13 @@ func (p Gs2InventoryWebSocketClient) GetBigItemAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getBigItemAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -11235,6 +12082,13 @@ func (p Gs2InventoryWebSocketClient) GetBigItemByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getBigItemByUserIdAsyncHandler(
@@ -11340,6 +12194,13 @@ func (p Gs2InventoryWebSocketClient) AcquireBigItemByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.acquireBigItemByUserIdAsyncHandler(
@@ -11449,6 +12310,13 @@ func (p Gs2InventoryWebSocketClient) ConsumeBigItemAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.consumeBigItemAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -11557,6 +12425,13 @@ func (p Gs2InventoryWebSocketClient) ConsumeBigItemByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.consumeBigItemByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -11662,6 +12537,13 @@ func (p Gs2InventoryWebSocketClient) SetBigItemByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setBigItemByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -11757,6 +12639,13 @@ func (p Gs2InventoryWebSocketClient) DeleteBigItemByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteBigItemByUserIdAsyncHandler(
@@ -11863,6 +12752,13 @@ func (p Gs2InventoryWebSocketClient) VerifyBigItemAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyBigItemAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -11968,6 +12864,13 @@ func (p Gs2InventoryWebSocketClient) VerifyBigItemByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyBigItemByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -12051,6 +12954,13 @@ func (p Gs2InventoryWebSocketClient) AcquireBigItemByStampSheetAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.acquireBigItemByStampSheetAsyncHandler(
@@ -12136,6 +13046,13 @@ func (p Gs2InventoryWebSocketClient) ConsumeBigItemByStampTaskAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.consumeBigItemByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -12220,6 +13137,13 @@ func (p Gs2InventoryWebSocketClient) SetBigItemByStampSheetAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.setBigItemByStampSheetAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -12303,6 +13227,13 @@ func (p Gs2InventoryWebSocketClient) VerifyBigItemByStampTaskAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.verifyBigItemByStampTaskAsyncHandler(

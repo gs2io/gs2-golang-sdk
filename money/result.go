@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -499,8 +512,9 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type DescribeWalletsResult struct {
-	Items         []Wallet `json:"items"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Items         []Wallet             `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeWalletsAsyncResult struct {
@@ -546,8 +560,9 @@ func (p DescribeWalletsResult) Pointer() *DescribeWalletsResult {
 }
 
 type DescribeWalletsByUserIdResult struct {
-	Items         []Wallet `json:"items"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Items         []Wallet             `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeWalletsByUserIdAsyncResult struct {
@@ -593,7 +608,8 @@ func (p DescribeWalletsByUserIdResult) Pointer() *DescribeWalletsByUserIdResult 
 }
 
 type GetWalletResult struct {
-	Item *Wallet `json:"item"`
+	Item     *Wallet              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetWalletAsyncResult struct {
@@ -635,7 +651,8 @@ func (p GetWalletResult) Pointer() *GetWalletResult {
 }
 
 type GetWalletByUserIdResult struct {
-	Item *Wallet `json:"item"`
+	Item     *Wallet              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetWalletByUserIdAsyncResult struct {
@@ -677,7 +694,8 @@ func (p GetWalletByUserIdResult) Pointer() *GetWalletByUserIdResult {
 }
 
 type DepositByUserIdResult struct {
-	Item *Wallet `json:"item"`
+	Item     *Wallet              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DepositByUserIdAsyncResult struct {
@@ -719,8 +737,9 @@ func (p DepositByUserIdResult) Pointer() *DepositByUserIdResult {
 }
 
 type WithdrawResult struct {
-	Item  *Wallet  `json:"item"`
-	Price *float32 `json:"price"`
+	Item     *Wallet              `json:"item"`
+	Price    *float32             `json:"price"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type WithdrawAsyncResult struct {
@@ -770,8 +789,9 @@ func (p WithdrawResult) Pointer() *WithdrawResult {
 }
 
 type WithdrawByUserIdResult struct {
-	Item  *Wallet  `json:"item"`
-	Price *float32 `json:"price"`
+	Item     *Wallet              `json:"item"`
+	Price    *float32             `json:"price"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type WithdrawByUserIdAsyncResult struct {
@@ -821,7 +841,8 @@ func (p WithdrawByUserIdResult) Pointer() *WithdrawByUserIdResult {
 }
 
 type DepositByStampSheetResult struct {
-	Item *Wallet `json:"item"`
+	Item     *Wallet              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DepositByStampSheetAsyncResult struct {
@@ -863,9 +884,10 @@ func (p DepositByStampSheetResult) Pointer() *DepositByStampSheetResult {
 }
 
 type WithdrawByStampTaskResult struct {
-	Item            *Wallet  `json:"item"`
-	Price           *float32 `json:"price"`
-	NewContextStack *string  `json:"newContextStack"`
+	Item            *Wallet              `json:"item"`
+	Price           *float32             `json:"price"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type WithdrawByStampTaskAsyncResult struct {
@@ -923,8 +945,9 @@ func (p WithdrawByStampTaskResult) Pointer() *WithdrawByStampTaskResult {
 }
 
 type DescribeReceiptsResult struct {
-	Items         []Receipt `json:"items"`
-	NextPageToken *string   `json:"nextPageToken"`
+	Items         []Receipt            `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeReceiptsAsyncResult struct {
@@ -970,7 +993,8 @@ func (p DescribeReceiptsResult) Pointer() *DescribeReceiptsResult {
 }
 
 type GetByUserIdAndTransactionIdResult struct {
-	Item *Receipt `json:"item"`
+	Item     *Receipt             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetByUserIdAndTransactionIdAsyncResult struct {
@@ -1012,7 +1036,8 @@ func (p GetByUserIdAndTransactionIdResult) Pointer() *GetByUserIdAndTransactionI
 }
 
 type RecordReceiptResult struct {
-	Item *Receipt `json:"item"`
+	Item     *Receipt             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type RecordReceiptAsyncResult struct {
@@ -1054,7 +1079,8 @@ func (p RecordReceiptResult) Pointer() *RecordReceiptResult {
 }
 
 type RevertRecordReceiptResult struct {
-	Item *Receipt `json:"item"`
+	Item     *Receipt             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type RevertRecordReceiptAsyncResult struct {
@@ -1096,8 +1122,9 @@ func (p RevertRecordReceiptResult) Pointer() *RevertRecordReceiptResult {
 }
 
 type RecordReceiptByStampTaskResult struct {
-	Item            *Receipt `json:"item"`
-	NewContextStack *string  `json:"newContextStack"`
+	Item            *Receipt             `json:"item"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type RecordReceiptByStampTaskAsyncResult struct {
@@ -1147,7 +1174,8 @@ func (p RecordReceiptByStampTaskResult) Pointer() *RecordReceiptByStampTaskResul
 }
 
 type RevertRecordReceiptByStampSheetResult struct {
-	Item *Receipt `json:"item"`
+	Item     *Receipt             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type RevertRecordReceiptByStampSheetAsyncResult struct {

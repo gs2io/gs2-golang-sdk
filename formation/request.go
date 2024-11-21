@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -133,6 +134,7 @@ type CreateNamespaceRequest struct {
 	UpdateFormScript         *ScriptSetting      `json:"updateFormScript"`
 	UpdatePropertyFormScript *ScriptSetting      `json:"updatePropertyFormScript"`
 	LogSetting               *LogSetting         `json:"logSetting"`
+	DryRun                   *bool               `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -331,6 +333,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -418,6 +421,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -511,6 +515,7 @@ type UpdateNamespaceRequest struct {
 	UpdateFormScript         *ScriptSetting      `json:"updateFormScript"`
 	UpdatePropertyFormScript *ScriptSetting      `json:"updatePropertyFormScript"`
 	LogSetting               *LogSetting         `json:"logSetting"`
+	DryRun                   *bool               `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -709,6 +714,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -797,6 +803,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -916,6 +923,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckDumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1035,6 +1043,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1154,6 +1163,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckCleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1273,6 +1283,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *PrepareImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1393,6 +1404,7 @@ type ImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1544,6 +1556,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1694,6 +1707,7 @@ type GetFormModelRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	MoldModelName   *string `json:"moldModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetFormModelRequest) UnmarshalJSON(data []byte) error {
@@ -1814,6 +1828,7 @@ type DescribeFormModelMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeFormModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -1947,6 +1962,7 @@ type CreateFormModelMasterRequest struct {
 	Description     *string     `json:"description"`
 	Metadata        *string     `json:"metadata"`
 	Slots           []SlotModel `json:"slots"`
+	DryRun          *bool       `json:"dryRun"`
 }
 
 func (p *CreateFormModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2140,6 +2156,7 @@ type GetFormModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	FormModelName   *string `json:"formModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetFormModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2262,6 +2279,7 @@ type UpdateFormModelMasterRequest struct {
 	Description     *string     `json:"description"`
 	Metadata        *string     `json:"metadata"`
 	Slots           []SlotModel `json:"slots"`
+	DryRun          *bool       `json:"dryRun"`
 }
 
 func (p *UpdateFormModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2455,6 +2473,7 @@ type DeleteFormModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	FormModelName   *string `json:"formModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteFormModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2573,6 +2592,7 @@ type DescribeMoldModelsRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMoldModelsRequest) UnmarshalJSON(data []byte) error {
@@ -2661,6 +2681,7 @@ type GetMoldModelRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	MoldModelName   *string `json:"moldModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetMoldModelRequest) UnmarshalJSON(data []byte) error {
@@ -2781,6 +2802,7 @@ type DescribeMoldModelMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMoldModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -2916,6 +2938,7 @@ type CreateMoldModelMasterRequest struct {
 	FormModelName      *string `json:"formModelName"`
 	InitialMaxCapacity *int32  `json:"initialMaxCapacity"`
 	MaxCapacity        *int32  `json:"maxCapacity"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *CreateMoldModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3150,6 +3173,7 @@ type GetMoldModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	MoldModelName   *string `json:"moldModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetMoldModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3274,6 +3298,7 @@ type UpdateMoldModelMasterRequest struct {
 	FormModelName      *string `json:"formModelName"`
 	InitialMaxCapacity *int32  `json:"initialMaxCapacity"`
 	MaxCapacity        *int32  `json:"maxCapacity"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *UpdateMoldModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3508,6 +3533,7 @@ type DeleteMoldModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	MoldModelName   *string `json:"moldModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteMoldModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3626,6 +3652,7 @@ type DescribePropertyFormModelsRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribePropertyFormModelsRequest) UnmarshalJSON(data []byte) error {
@@ -3714,6 +3741,7 @@ type GetPropertyFormModelRequest struct {
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	PropertyFormModelName *string `json:"propertyFormModelName"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *GetPropertyFormModelRequest) UnmarshalJSON(data []byte) error {
@@ -3834,6 +3862,7 @@ type DescribePropertyFormModelMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribePropertyFormModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -3967,6 +3996,7 @@ type CreatePropertyFormModelMasterRequest struct {
 	Description     *string     `json:"description"`
 	Metadata        *string     `json:"metadata"`
 	Slots           []SlotModel `json:"slots"`
+	DryRun          *bool       `json:"dryRun"`
 }
 
 func (p *CreatePropertyFormModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4160,6 +4190,7 @@ type GetPropertyFormModelMasterRequest struct {
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	PropertyFormModelName *string `json:"propertyFormModelName"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *GetPropertyFormModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4282,6 +4313,7 @@ type UpdatePropertyFormModelMasterRequest struct {
 	Description           *string     `json:"description"`
 	Metadata              *string     `json:"metadata"`
 	Slots                 []SlotModel `json:"slots"`
+	DryRun                *bool       `json:"dryRun"`
 }
 
 func (p *UpdatePropertyFormModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4475,6 +4507,7 @@ type DeletePropertyFormModelMasterRequest struct {
 	ContextStack          *string `json:"contextStack"`
 	NamespaceName         *string `json:"namespaceName"`
 	PropertyFormModelName *string `json:"propertyFormModelName"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *DeletePropertyFormModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4593,6 +4626,7 @@ type ExportMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4680,6 +4714,7 @@ type GetCurrentFormMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentFormMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4768,6 +4803,7 @@ type UpdateCurrentFormMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Settings        *string `json:"settings"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentFormMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4887,6 +4923,7 @@ type UpdateCurrentFormMasterFromGitHubRequest struct {
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DryRun          *bool                  `json:"dryRun"`
 }
 
 func (p *UpdateCurrentFormMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -4993,6 +5030,7 @@ type DescribeMoldsRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMoldsRequest) UnmarshalJSON(data []byte) error {
@@ -5157,6 +5195,7 @@ type DescribeMoldsByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMoldsByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5350,6 +5389,7 @@ type GetMoldRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	AccessToken     *string `json:"accessToken"`
 	MoldModelName   *string `json:"moldModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetMoldRequest) UnmarshalJSON(data []byte) error {
@@ -5502,6 +5542,7 @@ type GetMoldByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	MoldModelName   *string `json:"moldModelName"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetMoldByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5687,6 +5728,7 @@ type SetMoldCapacityByUserIdRequest struct {
 	MoldModelName      *string `json:"moldModelName"`
 	Capacity           *int32  `json:"capacity"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *SetMoldCapacityByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5883,6 +5925,7 @@ type AddMoldCapacityByUserIdRequest struct {
 	MoldModelName      *string `json:"moldModelName"`
 	Capacity           *int32  `json:"capacity"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *AddMoldCapacityByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6078,6 +6121,7 @@ type SubMoldCapacityRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	MoldModelName      *string `json:"moldModelName"`
 	Capacity           *int32  `json:"capacity"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *SubMoldCapacityRequest) UnmarshalJSON(data []byte) error {
@@ -6243,6 +6287,7 @@ type SubMoldCapacityByUserIdRequest struct {
 	MoldModelName      *string `json:"moldModelName"`
 	Capacity           *int32  `json:"capacity"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *SubMoldCapacityByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6437,6 +6482,7 @@ type DeleteMoldRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	AccessToken        *string `json:"accessToken"`
 	MoldModelName      *string `json:"moldModelName"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteMoldRequest) UnmarshalJSON(data []byte) error {
@@ -6590,6 +6636,7 @@ type DeleteMoldByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	MoldModelName      *string `json:"moldModelName"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteMoldByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6771,6 +6818,7 @@ type AddCapacityByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *AddCapacityByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -6890,6 +6938,7 @@ type SubCapacityByStampTaskRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *SubCapacityByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -7009,6 +7058,7 @@ type SetCapacityByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *SetCapacityByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -7131,6 +7181,7 @@ type DescribeFormsRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeFormsRequest) UnmarshalJSON(data []byte) error {
@@ -7327,6 +7378,7 @@ type DescribeFormsByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeFormsByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7552,6 +7604,7 @@ type GetFormRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	MoldModelName   *string `json:"moldModelName"`
 	Index           *int32  `json:"index"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetFormRequest) UnmarshalJSON(data []byte) error {
@@ -7716,6 +7769,7 @@ type GetFormByUserIdRequest struct {
 	MoldModelName   *string `json:"moldModelName"`
 	Index           *int32  `json:"index"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetFormByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7911,6 +7965,7 @@ type GetFormWithSignatureRequest struct {
 	MoldModelName   *string `json:"moldModelName"`
 	Index           *int32  `json:"index"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetFormWithSignatureRequest) UnmarshalJSON(data []byte) error {
@@ -8107,6 +8162,7 @@ type GetFormWithSignatureByUserIdRequest struct {
 	Index           *int32  `json:"index"`
 	KeyId           *string `json:"keyId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetFormWithSignatureByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -8335,6 +8391,7 @@ type SetFormByUserIdRequest struct {
 	Index              *int32  `json:"index"`
 	Slots              []Slot  `json:"slots"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *SetFormByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -8544,6 +8601,7 @@ type SetFormWithSignatureRequest struct {
 	Index              *int32              `json:"index"`
 	Slots              []SlotWithSignature `json:"slots"`
 	KeyId              *string             `json:"keyId"`
+	DryRun             *bool               `json:"dryRun"`
 }
 
 func (p *SetFormWithSignatureRequest) UnmarshalJSON(data []byte) error {
@@ -8754,6 +8812,7 @@ type AcquireActionsToFormPropertiesRequest struct {
 	AcquireAction      *AcquireAction `json:"acquireAction"`
 	Config             []Config       `json:"config"`
 	TimeOffsetToken    *string        `json:"timeOffsetToken"`
+	DryRun             *bool          `json:"dryRun"`
 }
 
 func (p *AcquireActionsToFormPropertiesRequest) UnmarshalJSON(data []byte) error {
@@ -8977,6 +9036,7 @@ type DeleteFormRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	MoldModelName      *string `json:"moldModelName"`
 	Index              *int32  `json:"index"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteFormRequest) UnmarshalJSON(data []byte) error {
@@ -9142,6 +9202,7 @@ type DeleteFormByUserIdRequest struct {
 	MoldModelName      *string `json:"moldModelName"`
 	Index              *int32  `json:"index"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteFormByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -9334,6 +9395,7 @@ type AcquireActionToFormPropertiesByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *AcquireActionToFormPropertiesByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -9453,6 +9515,7 @@ type SetFormByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *SetFormByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -9575,6 +9638,7 @@ type DescribePropertyFormsRequest struct {
 	PropertyFormModelName *string `json:"propertyFormModelName"`
 	PageToken             *string `json:"pageToken"`
 	Limit                 *int32  `json:"limit"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *DescribePropertyFormsRequest) UnmarshalJSON(data []byte) error {
@@ -9771,6 +9835,7 @@ type DescribePropertyFormsByUserIdRequest struct {
 	PageToken             *string `json:"pageToken"`
 	Limit                 *int32  `json:"limit"`
 	TimeOffsetToken       *string `json:"timeOffsetToken"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *DescribePropertyFormsByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -9996,6 +10061,7 @@ type GetPropertyFormRequest struct {
 	AccessToken           *string `json:"accessToken"`
 	PropertyFormModelName *string `json:"propertyFormModelName"`
 	PropertyId            *string `json:"propertyId"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *GetPropertyFormRequest) UnmarshalJSON(data []byte) error {
@@ -10180,6 +10246,7 @@ type GetPropertyFormByUserIdRequest struct {
 	PropertyFormModelName *string `json:"propertyFormModelName"`
 	PropertyId            *string `json:"propertyId"`
 	TimeOffsetToken       *string `json:"timeOffsetToken"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *GetPropertyFormByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -10395,6 +10462,7 @@ type GetPropertyFormWithSignatureRequest struct {
 	PropertyFormModelName *string `json:"propertyFormModelName"`
 	PropertyId            *string `json:"propertyId"`
 	KeyId                 *string `json:"keyId"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *GetPropertyFormWithSignatureRequest) UnmarshalJSON(data []byte) error {
@@ -10611,6 +10679,7 @@ type GetPropertyFormWithSignatureByUserIdRequest struct {
 	PropertyId            *string `json:"propertyId"`
 	KeyId                 *string `json:"keyId"`
 	TimeOffsetToken       *string `json:"timeOffsetToken"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *GetPropertyFormWithSignatureByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -10859,6 +10928,7 @@ type SetPropertyFormByUserIdRequest struct {
 	PropertyId            *string `json:"propertyId"`
 	Slots                 []Slot  `json:"slots"`
 	TimeOffsetToken       *string `json:"timeOffsetToken"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *SetPropertyFormByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -11088,6 +11158,7 @@ type SetPropertyFormWithSignatureRequest struct {
 	PropertyId            *string             `json:"propertyId"`
 	Slots                 []SlotWithSignature `json:"slots"`
 	KeyId                 *string             `json:"keyId"`
+	DryRun                *bool               `json:"dryRun"`
 }
 
 func (p *SetPropertyFormWithSignatureRequest) UnmarshalJSON(data []byte) error {
@@ -11318,6 +11389,7 @@ type AcquireActionsToPropertyFormPropertiesRequest struct {
 	AcquireAction         *AcquireAction `json:"acquireAction"`
 	Config                []Config       `json:"config"`
 	TimeOffsetToken       *string        `json:"timeOffsetToken"`
+	DryRun                *bool          `json:"dryRun"`
 }
 
 func (p *AcquireActionsToPropertyFormPropertiesRequest) UnmarshalJSON(data []byte) error {
@@ -11561,6 +11633,7 @@ type DeletePropertyFormRequest struct {
 	AccessToken           *string `json:"accessToken"`
 	PropertyFormModelName *string `json:"propertyFormModelName"`
 	PropertyId            *string `json:"propertyId"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *DeletePropertyFormRequest) UnmarshalJSON(data []byte) error {
@@ -11746,6 +11819,7 @@ type DeletePropertyFormByUserIdRequest struct {
 	PropertyFormModelName *string `json:"propertyFormModelName"`
 	PropertyId            *string `json:"propertyId"`
 	TimeOffsetToken       *string `json:"timeOffsetToken"`
+	DryRun                *bool   `json:"dryRun"`
 }
 
 func (p *DeletePropertyFormByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -11958,6 +12032,7 @@ type AcquireActionToPropertyFormPropertiesByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *AcquireActionToPropertyFormPropertiesByStampSheetRequest) UnmarshalJSON(data []byte) error {

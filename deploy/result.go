@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeStacksResult struct {
-	Items         []Stack `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Stack              `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeStacksAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeStacksResult) Pointer() *DescribeStacksResult {
 }
 
 type CreateStackResult struct {
-	Item *Stack `json:"item"`
+	Item     *Stack               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateStackAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateStackResult) Pointer() *CreateStackResult {
 }
 
 type CreateStackFromGitHubResult struct {
-	Item *Stack `json:"item"`
+	Item     *Stack               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateStackFromGitHubAsyncResult struct {
@@ -154,6 +157,7 @@ func (p CreateStackFromGitHubResult) Pointer() *CreateStackFromGitHubResult {
 }
 
 type ValidateResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ValidateAsyncResult struct {
@@ -180,7 +184,8 @@ func (p ValidateResult) Pointer() *ValidateResult {
 }
 
 type GetStackStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetStackStatusAsyncResult struct {
@@ -217,7 +222,8 @@ func (p GetStackStatusResult) Pointer() *GetStackStatusResult {
 }
 
 type GetStackResult struct {
-	Item *Stack `json:"item"`
+	Item     *Stack               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetStackAsyncResult struct {
@@ -259,7 +265,8 @@ func (p GetStackResult) Pointer() *GetStackResult {
 }
 
 type UpdateStackResult struct {
-	Item *Stack `json:"item"`
+	Item     *Stack               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateStackAsyncResult struct {
@@ -301,7 +308,8 @@ func (p UpdateStackResult) Pointer() *UpdateStackResult {
 }
 
 type ChangeSetResult struct {
-	Items []ChangeSet `json:"items"`
+	Items    []ChangeSet          `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ChangeSetAsyncResult struct {
@@ -339,7 +347,8 @@ func (p ChangeSetResult) Pointer() *ChangeSetResult {
 }
 
 type UpdateStackFromGitHubResult struct {
-	Item *Stack `json:"item"`
+	Item     *Stack               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateStackFromGitHubAsyncResult struct {
@@ -381,7 +390,8 @@ func (p UpdateStackFromGitHubResult) Pointer() *UpdateStackFromGitHubResult {
 }
 
 type DeleteStackResult struct {
-	Item *Stack `json:"item"`
+	Item     *Stack               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteStackAsyncResult struct {
@@ -423,7 +433,8 @@ func (p DeleteStackResult) Pointer() *DeleteStackResult {
 }
 
 type ForceDeleteStackResult struct {
-	Item *Stack `json:"item"`
+	Item     *Stack               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ForceDeleteStackAsyncResult struct {
@@ -465,7 +476,8 @@ func (p ForceDeleteStackResult) Pointer() *ForceDeleteStackResult {
 }
 
 type DeleteStackResourcesResult struct {
-	Item *Stack `json:"item"`
+	Item     *Stack               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteStackResourcesAsyncResult struct {
@@ -507,7 +519,8 @@ func (p DeleteStackResourcesResult) Pointer() *DeleteStackResourcesResult {
 }
 
 type DeleteStackEntityResult struct {
-	Item *Stack `json:"item"`
+	Item     *Stack               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteStackEntityAsyncResult struct {
@@ -549,8 +562,9 @@ func (p DeleteStackEntityResult) Pointer() *DeleteStackEntityResult {
 }
 
 type DescribeResourcesResult struct {
-	Items         []Resource `json:"items"`
-	NextPageToken *string    `json:"nextPageToken"`
+	Items         []Resource           `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeResourcesAsyncResult struct {
@@ -596,7 +610,8 @@ func (p DescribeResourcesResult) Pointer() *DescribeResourcesResult {
 }
 
 type GetResourceResult struct {
-	Item *Resource `json:"item"`
+	Item     *Resource            `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetResourceAsyncResult struct {
@@ -638,8 +653,9 @@ func (p GetResourceResult) Pointer() *GetResourceResult {
 }
 
 type DescribeEventsResult struct {
-	Items         []Event `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Event              `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeEventsAsyncResult struct {
@@ -685,7 +701,8 @@ func (p DescribeEventsResult) Pointer() *DescribeEventsResult {
 }
 
 type GetEventResult struct {
-	Item *Event `json:"item"`
+	Item     *Event               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetEventAsyncResult struct {
@@ -727,8 +744,9 @@ func (p GetEventResult) Pointer() *GetEventResult {
 }
 
 type DescribeOutputsResult struct {
-	Items         []Output `json:"items"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Items         []Output             `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeOutputsAsyncResult struct {
@@ -774,7 +792,8 @@ func (p DescribeOutputsResult) Pointer() *DescribeOutputsResult {
 }
 
 type GetOutputResult struct {
-	Item *Output `json:"item"`
+	Item     *Output              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetOutputAsyncResult struct {

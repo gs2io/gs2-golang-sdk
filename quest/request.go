@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -136,7 +137,8 @@ type CreateNamespaceRequest struct {
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	// Deprecated: should not be used
-	KeyId *string `json:"keyId"`
+	KeyId  *string `json:"keyId"`
+	DryRun *bool   `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -397,6 +399,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -484,6 +487,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -580,7 +584,8 @@ type UpdateNamespaceRequest struct {
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	// Deprecated: should not be used
-	KeyId *string `json:"keyId"`
+	KeyId  *string `json:"keyId"`
+	DryRun *bool   `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -841,6 +846,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -929,6 +935,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1048,6 +1055,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckDumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1167,6 +1175,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1286,6 +1295,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckCleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1405,6 +1415,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *PrepareImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1525,6 +1536,7 @@ type ImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1676,6 +1688,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1827,6 +1840,7 @@ type DescribeQuestGroupModelMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeQuestGroupModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -1960,6 +1974,7 @@ type CreateQuestGroupModelMasterRequest struct {
 	Description            *string `json:"description"`
 	Metadata               *string `json:"metadata"`
 	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
+	DryRun                 *bool   `json:"dryRun"`
 }
 
 func (p *CreateQuestGroupModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2172,6 +2187,7 @@ type GetQuestGroupModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	QuestGroupName  *string `json:"questGroupName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetQuestGroupModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2294,6 +2310,7 @@ type UpdateQuestGroupModelMasterRequest struct {
 	Description            *string `json:"description"`
 	Metadata               *string `json:"metadata"`
 	ChallengePeriodEventId *string `json:"challengePeriodEventId"`
+	DryRun                 *bool   `json:"dryRun"`
 }
 
 func (p *UpdateQuestGroupModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2506,6 +2523,7 @@ type DeleteQuestGroupModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	QuestGroupName  *string `json:"questGroupName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteQuestGroupModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2627,6 +2645,7 @@ type DescribeQuestModelMastersRequest struct {
 	QuestGroupName  *string `json:"questGroupName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeQuestModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -2798,6 +2817,7 @@ type CreateQuestModelMasterRequest struct {
 	ConsumeActions              []ConsumeAction `json:"consumeActions"`
 	FailedAcquireActions        []AcquireAction `json:"failedAcquireActions"`
 	PremiseQuestNames           []*string       `json:"premiseQuestNames"`
+	DryRun                      *bool           `json:"dryRun"`
 }
 
 func (p *CreateQuestModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3138,6 +3158,7 @@ type GetQuestModelMasterRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	QuestGroupName  *string `json:"questGroupName"`
 	QuestName       *string `json:"questName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetQuestModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3298,6 +3319,7 @@ type UpdateQuestModelMasterRequest struct {
 	ConsumeActions              []ConsumeAction `json:"consumeActions"`
 	FailedAcquireActions        []AcquireAction `json:"failedAcquireActions"`
 	PremiseQuestNames           []*string       `json:"premiseQuestNames"`
+	DryRun                      *bool           `json:"dryRun"`
 }
 
 func (p *UpdateQuestModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3638,6 +3660,7 @@ type DeleteQuestModelMasterRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	QuestGroupName  *string `json:"questGroupName"`
 	QuestName       *string `json:"questName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteQuestModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3787,6 +3810,7 @@ type ExportMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3874,6 +3898,7 @@ type GetCurrentQuestMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentQuestMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3962,6 +3987,7 @@ type UpdateCurrentQuestMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Settings        *string `json:"settings"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentQuestMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4081,6 +4107,7 @@ type UpdateCurrentQuestMasterFromGitHubRequest struct {
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DryRun          *bool                  `json:"dryRun"`
 }
 
 func (p *UpdateCurrentQuestMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -4188,6 +4215,7 @@ type DescribeProgressesByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeProgressesByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4385,6 +4413,7 @@ type CreateProgressByUserIdRequest struct {
 	Force              *bool    `json:"force"`
 	Config             []Config `json:"config"`
 	TimeOffsetToken    *string  `json:"timeOffsetToken"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *CreateProgressByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4589,6 +4618,7 @@ type GetProgressRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetProgressRequest) UnmarshalJSON(data []byte) error {
@@ -4709,6 +4739,7 @@ type GetProgressByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetProgressByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4864,6 +4895,7 @@ type StartRequest struct {
 	AccessToken        *string  `json:"accessToken"`
 	Force              *bool    `json:"force"`
 	Config             []Config `json:"config"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *StartRequest) UnmarshalJSON(data []byte) error {
@@ -5074,6 +5106,7 @@ type StartByUserIdRequest struct {
 	Force              *bool    `json:"force"`
 	Config             []Config `json:"config"`
 	TimeOffsetToken    *string  `json:"timeOffsetToken"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *StartByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5313,6 +5346,7 @@ type EndRequest struct {
 	Rewards            []Reward `json:"rewards"`
 	IsComplete         *bool    `json:"isComplete"`
 	Config             []Config `json:"config"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *EndRequest) UnmarshalJSON(data []byte) error {
@@ -5472,6 +5506,7 @@ type EndByUserIdRequest struct {
 	IsComplete         *bool    `json:"isComplete"`
 	Config             []Config `json:"config"`
 	TimeOffsetToken    *string  `json:"timeOffsetToken"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *EndByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5658,6 +5693,7 @@ type DeleteProgressRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	AccessToken        *string `json:"accessToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteProgressRequest) UnmarshalJSON(data []byte) error {
@@ -5779,6 +5815,7 @@ type DeleteProgressByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteProgressByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5929,6 +5966,7 @@ type CreateProgressByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CreateProgressByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -6048,6 +6086,7 @@ type DeleteProgressByStampTaskRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteProgressByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -6169,6 +6208,7 @@ type DescribeCompletedQuestListsRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeCompletedQuestListsRequest) UnmarshalJSON(data []byte) error {
@@ -6333,6 +6373,7 @@ type DescribeCompletedQuestListsByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeCompletedQuestListsByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6526,6 +6567,7 @@ type GetCompletedQuestListRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	QuestGroupName  *string `json:"questGroupName"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetCompletedQuestListRequest) UnmarshalJSON(data []byte) error {
@@ -6678,6 +6720,7 @@ type GetCompletedQuestListByUserIdRequest struct {
 	QuestGroupName  *string `json:"questGroupName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetCompletedQuestListByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6862,6 +6905,7 @@ type DeleteCompletedQuestListByUserIdRequest struct {
 	QuestGroupName     *string `json:"questGroupName"`
 	UserId             *string `json:"userId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteCompletedQuestListByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7042,6 +7086,7 @@ type DescribeQuestGroupModelsRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeQuestGroupModelsRequest) UnmarshalJSON(data []byte) error {
@@ -7130,6 +7175,7 @@ type GetQuestGroupModelRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	QuestGroupName  *string `json:"questGroupName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetQuestGroupModelRequest) UnmarshalJSON(data []byte) error {
@@ -7249,6 +7295,7 @@ type DescribeQuestModelsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	QuestGroupName  *string `json:"questGroupName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeQuestModelsRequest) UnmarshalJSON(data []byte) error {
@@ -7369,6 +7416,7 @@ type GetQuestModelRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	QuestGroupName  *string `json:"questGroupName"`
 	QuestName       *string `json:"questName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetQuestModelRequest) UnmarshalJSON(data []byte) error {

@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -499,7 +512,8 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type DescribeBalanceParameterModelsResult struct {
-	Items []BalanceParameterModel `json:"items"`
+	Items    []BalanceParameterModel `json:"items"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type DescribeBalanceParameterModelsAsyncResult struct {
@@ -537,7 +551,8 @@ func (p DescribeBalanceParameterModelsResult) Pointer() *DescribeBalanceParamete
 }
 
 type GetBalanceParameterModelResult struct {
-	Item *BalanceParameterModel `json:"item"`
+	Item     *BalanceParameterModel `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type GetBalanceParameterModelAsyncResult struct {
@@ -581,6 +596,7 @@ func (p GetBalanceParameterModelResult) Pointer() *GetBalanceParameterModelResul
 type DescribeBalanceParameterModelMastersResult struct {
 	Items         []BalanceParameterModelMaster `json:"items"`
 	NextPageToken *string                       `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata          `json:"metadata"`
 }
 
 type DescribeBalanceParameterModelMastersAsyncResult struct {
@@ -626,7 +642,8 @@ func (p DescribeBalanceParameterModelMastersResult) Pointer() *DescribeBalancePa
 }
 
 type CreateBalanceParameterModelMasterResult struct {
-	Item *BalanceParameterModelMaster `json:"item"`
+	Item     *BalanceParameterModelMaster `json:"item"`
+	Metadata *core.ResultMetadata         `json:"metadata"`
 }
 
 type CreateBalanceParameterModelMasterAsyncResult struct {
@@ -668,7 +685,8 @@ func (p CreateBalanceParameterModelMasterResult) Pointer() *CreateBalanceParamet
 }
 
 type GetBalanceParameterModelMasterResult struct {
-	Item *BalanceParameterModelMaster `json:"item"`
+	Item     *BalanceParameterModelMaster `json:"item"`
+	Metadata *core.ResultMetadata         `json:"metadata"`
 }
 
 type GetBalanceParameterModelMasterAsyncResult struct {
@@ -710,7 +728,8 @@ func (p GetBalanceParameterModelMasterResult) Pointer() *GetBalanceParameterMode
 }
 
 type UpdateBalanceParameterModelMasterResult struct {
-	Item *BalanceParameterModelMaster `json:"item"`
+	Item     *BalanceParameterModelMaster `json:"item"`
+	Metadata *core.ResultMetadata         `json:"metadata"`
 }
 
 type UpdateBalanceParameterModelMasterAsyncResult struct {
@@ -752,7 +771,8 @@ func (p UpdateBalanceParameterModelMasterResult) Pointer() *UpdateBalanceParamet
 }
 
 type DeleteBalanceParameterModelMasterResult struct {
-	Item *BalanceParameterModelMaster `json:"item"`
+	Item     *BalanceParameterModelMaster `json:"item"`
+	Metadata *core.ResultMetadata         `json:"metadata"`
 }
 
 type DeleteBalanceParameterModelMasterAsyncResult struct {
@@ -794,7 +814,8 @@ func (p DeleteBalanceParameterModelMasterResult) Pointer() *DeleteBalanceParamet
 }
 
 type DescribeRarityParameterModelsResult struct {
-	Items []RarityParameterModel `json:"items"`
+	Items    []RarityParameterModel `json:"items"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type DescribeRarityParameterModelsAsyncResult struct {
@@ -832,7 +853,8 @@ func (p DescribeRarityParameterModelsResult) Pointer() *DescribeRarityParameterM
 }
 
 type GetRarityParameterModelResult struct {
-	Item *RarityParameterModel `json:"item"`
+	Item     *RarityParameterModel `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type GetRarityParameterModelAsyncResult struct {
@@ -876,6 +898,7 @@ func (p GetRarityParameterModelResult) Pointer() *GetRarityParameterModelResult 
 type DescribeRarityParameterModelMastersResult struct {
 	Items         []RarityParameterModelMaster `json:"items"`
 	NextPageToken *string                      `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata         `json:"metadata"`
 }
 
 type DescribeRarityParameterModelMastersAsyncResult struct {
@@ -921,7 +944,8 @@ func (p DescribeRarityParameterModelMastersResult) Pointer() *DescribeRarityPara
 }
 
 type CreateRarityParameterModelMasterResult struct {
-	Item *RarityParameterModelMaster `json:"item"`
+	Item     *RarityParameterModelMaster `json:"item"`
+	Metadata *core.ResultMetadata        `json:"metadata"`
 }
 
 type CreateRarityParameterModelMasterAsyncResult struct {
@@ -963,7 +987,8 @@ func (p CreateRarityParameterModelMasterResult) Pointer() *CreateRarityParameter
 }
 
 type GetRarityParameterModelMasterResult struct {
-	Item *RarityParameterModelMaster `json:"item"`
+	Item     *RarityParameterModelMaster `json:"item"`
+	Metadata *core.ResultMetadata        `json:"metadata"`
 }
 
 type GetRarityParameterModelMasterAsyncResult struct {
@@ -1005,7 +1030,8 @@ func (p GetRarityParameterModelMasterResult) Pointer() *GetRarityParameterModelM
 }
 
 type UpdateRarityParameterModelMasterResult struct {
-	Item *RarityParameterModelMaster `json:"item"`
+	Item     *RarityParameterModelMaster `json:"item"`
+	Metadata *core.ResultMetadata        `json:"metadata"`
 }
 
 type UpdateRarityParameterModelMasterAsyncResult struct {
@@ -1047,7 +1073,8 @@ func (p UpdateRarityParameterModelMasterResult) Pointer() *UpdateRarityParameter
 }
 
 type DeleteRarityParameterModelMasterResult struct {
-	Item *RarityParameterModelMaster `json:"item"`
+	Item     *RarityParameterModelMaster `json:"item"`
+	Metadata *core.ResultMetadata        `json:"metadata"`
 }
 
 type DeleteRarityParameterModelMasterAsyncResult struct {
@@ -1089,7 +1116,8 @@ func (p DeleteRarityParameterModelMasterResult) Pointer() *DeleteRarityParameter
 }
 
 type ExportMasterResult struct {
-	Item *CurrentParameterMaster `json:"item"`
+	Item     *CurrentParameterMaster `json:"item"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -1131,7 +1159,8 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
 }
 
 type GetCurrentParameterMasterResult struct {
-	Item *CurrentParameterMaster `json:"item"`
+	Item     *CurrentParameterMaster `json:"item"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type GetCurrentParameterMasterAsyncResult struct {
@@ -1173,7 +1202,8 @@ func (p GetCurrentParameterMasterResult) Pointer() *GetCurrentParameterMasterRes
 }
 
 type UpdateCurrentParameterMasterResult struct {
-	Item *CurrentParameterMaster `json:"item"`
+	Item     *CurrentParameterMaster `json:"item"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type UpdateCurrentParameterMasterAsyncResult struct {
@@ -1215,7 +1245,8 @@ func (p UpdateCurrentParameterMasterResult) Pointer() *UpdateCurrentParameterMas
 }
 
 type UpdateCurrentParameterMasterFromGitHubResult struct {
-	Item *CurrentParameterMaster `json:"item"`
+	Item     *CurrentParameterMaster `json:"item"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type UpdateCurrentParameterMasterFromGitHubAsyncResult struct {
@@ -1259,6 +1290,7 @@ func (p UpdateCurrentParameterMasterFromGitHubResult) Pointer() *UpdateCurrentPa
 type DescribeBalanceParameterStatusesResult struct {
 	Items         []BalanceParameterStatus `json:"items"`
 	NextPageToken *string                  `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata     `json:"metadata"`
 }
 
 type DescribeBalanceParameterStatusesAsyncResult struct {
@@ -1306,6 +1338,7 @@ func (p DescribeBalanceParameterStatusesResult) Pointer() *DescribeBalanceParame
 type DescribeBalanceParameterStatusesByUserIdResult struct {
 	Items         []BalanceParameterStatus `json:"items"`
 	NextPageToken *string                  `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata     `json:"metadata"`
 }
 
 type DescribeBalanceParameterStatusesByUserIdAsyncResult struct {
@@ -1351,7 +1384,8 @@ func (p DescribeBalanceParameterStatusesByUserIdResult) Pointer() *DescribeBalan
 }
 
 type GetBalanceParameterStatusResult struct {
-	Item *BalanceParameterStatus `json:"item"`
+	Item     *BalanceParameterStatus `json:"item"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type GetBalanceParameterStatusAsyncResult struct {
@@ -1393,7 +1427,8 @@ func (p GetBalanceParameterStatusResult) Pointer() *GetBalanceParameterStatusRes
 }
 
 type GetBalanceParameterStatusByUserIdResult struct {
-	Item *BalanceParameterStatus `json:"item"`
+	Item     *BalanceParameterStatus `json:"item"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type GetBalanceParameterStatusByUserIdAsyncResult struct {
@@ -1435,7 +1470,8 @@ func (p GetBalanceParameterStatusByUserIdResult) Pointer() *GetBalanceParameterS
 }
 
 type DeleteBalanceParameterStatusByUserIdResult struct {
-	Item *BalanceParameterStatus `json:"item"`
+	Item     *BalanceParameterStatus `json:"item"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type DeleteBalanceParameterStatusByUserIdAsyncResult struct {
@@ -1477,8 +1513,9 @@ func (p DeleteBalanceParameterStatusByUserIdResult) Pointer() *DeleteBalancePara
 }
 
 type ReDrawBalanceParameterStatusByUserIdResult struct {
-	Item *BalanceParameterStatus `json:"item"`
-	Old  *BalanceParameterStatus `json:"old"`
+	Item     *BalanceParameterStatus `json:"item"`
+	Old      *BalanceParameterStatus `json:"old"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type ReDrawBalanceParameterStatusByUserIdAsyncResult struct {
@@ -1533,8 +1570,9 @@ func (p ReDrawBalanceParameterStatusByUserIdResult) Pointer() *ReDrawBalancePara
 }
 
 type ReDrawBalanceParameterStatusByStampSheetResult struct {
-	Item *BalanceParameterStatus `json:"item"`
-	Old  *BalanceParameterStatus `json:"old"`
+	Item     *BalanceParameterStatus `json:"item"`
+	Old      *BalanceParameterStatus `json:"old"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type ReDrawBalanceParameterStatusByStampSheetAsyncResult struct {
@@ -1589,8 +1627,9 @@ func (p ReDrawBalanceParameterStatusByStampSheetResult) Pointer() *ReDrawBalance
 }
 
 type SetBalanceParameterStatusByUserIdResult struct {
-	Item *BalanceParameterStatus `json:"item"`
-	Old  *BalanceParameterStatus `json:"old"`
+	Item     *BalanceParameterStatus `json:"item"`
+	Old      *BalanceParameterStatus `json:"old"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type SetBalanceParameterStatusByUserIdAsyncResult struct {
@@ -1645,8 +1684,9 @@ func (p SetBalanceParameterStatusByUserIdResult) Pointer() *SetBalanceParameterS
 }
 
 type SetBalanceParameterStatusByStampSheetResult struct {
-	Item *BalanceParameterStatus `json:"item"`
-	Old  *BalanceParameterStatus `json:"old"`
+	Item     *BalanceParameterStatus `json:"item"`
+	Old      *BalanceParameterStatus `json:"old"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type SetBalanceParameterStatusByStampSheetAsyncResult struct {
@@ -1703,6 +1743,7 @@ func (p SetBalanceParameterStatusByStampSheetResult) Pointer() *SetBalanceParame
 type DescribeRarityParameterStatusesResult struct {
 	Items         []RarityParameterStatus `json:"items"`
 	NextPageToken *string                 `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata    `json:"metadata"`
 }
 
 type DescribeRarityParameterStatusesAsyncResult struct {
@@ -1750,6 +1791,7 @@ func (p DescribeRarityParameterStatusesResult) Pointer() *DescribeRarityParamete
 type DescribeRarityParameterStatusesByUserIdResult struct {
 	Items         []RarityParameterStatus `json:"items"`
 	NextPageToken *string                 `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata    `json:"metadata"`
 }
 
 type DescribeRarityParameterStatusesByUserIdAsyncResult struct {
@@ -1795,7 +1837,8 @@ func (p DescribeRarityParameterStatusesByUserIdResult) Pointer() *DescribeRarity
 }
 
 type GetRarityParameterStatusResult struct {
-	Item *RarityParameterStatus `json:"item"`
+	Item     *RarityParameterStatus `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type GetRarityParameterStatusAsyncResult struct {
@@ -1837,7 +1880,8 @@ func (p GetRarityParameterStatusResult) Pointer() *GetRarityParameterStatusResul
 }
 
 type GetRarityParameterStatusByUserIdResult struct {
-	Item *RarityParameterStatus `json:"item"`
+	Item     *RarityParameterStatus `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type GetRarityParameterStatusByUserIdAsyncResult struct {
@@ -1879,7 +1923,8 @@ func (p GetRarityParameterStatusByUserIdResult) Pointer() *GetRarityParameterSta
 }
 
 type DeleteRarityParameterStatusByUserIdResult struct {
-	Item *RarityParameterStatus `json:"item"`
+	Item     *RarityParameterStatus `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type DeleteRarityParameterStatusByUserIdAsyncResult struct {
@@ -1921,8 +1966,9 @@ func (p DeleteRarityParameterStatusByUserIdResult) Pointer() *DeleteRarityParame
 }
 
 type ReDrawRarityParameterStatusByUserIdResult struct {
-	Item *RarityParameterStatus `json:"item"`
-	Old  *RarityParameterStatus `json:"old"`
+	Item     *RarityParameterStatus `json:"item"`
+	Old      *RarityParameterStatus `json:"old"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type ReDrawRarityParameterStatusByUserIdAsyncResult struct {
@@ -1977,8 +2023,9 @@ func (p ReDrawRarityParameterStatusByUserIdResult) Pointer() *ReDrawRarityParame
 }
 
 type ReDrawRarityParameterStatusByStampSheetResult struct {
-	Item *RarityParameterStatus `json:"item"`
-	Old  *RarityParameterStatus `json:"old"`
+	Item     *RarityParameterStatus `json:"item"`
+	Old      *RarityParameterStatus `json:"old"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type ReDrawRarityParameterStatusByStampSheetAsyncResult struct {
@@ -2033,8 +2080,9 @@ func (p ReDrawRarityParameterStatusByStampSheetResult) Pointer() *ReDrawRarityPa
 }
 
 type AddRarityParameterStatusByUserIdResult struct {
-	Item *RarityParameterStatus `json:"item"`
-	Old  *RarityParameterStatus `json:"old"`
+	Item     *RarityParameterStatus `json:"item"`
+	Old      *RarityParameterStatus `json:"old"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type AddRarityParameterStatusByUserIdAsyncResult struct {
@@ -2089,8 +2137,9 @@ func (p AddRarityParameterStatusByUserIdResult) Pointer() *AddRarityParameterSta
 }
 
 type AddRarityParameterStatusByStampSheetResult struct {
-	Item *RarityParameterStatus `json:"item"`
-	Old  *RarityParameterStatus `json:"old"`
+	Item     *RarityParameterStatus `json:"item"`
+	Old      *RarityParameterStatus `json:"old"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type AddRarityParameterStatusByStampSheetAsyncResult struct {
@@ -2145,7 +2194,8 @@ func (p AddRarityParameterStatusByStampSheetResult) Pointer() *AddRarityParamete
 }
 
 type VerifyRarityParameterStatusResult struct {
-	Item *RarityParameterStatus `json:"item"`
+	Item     *RarityParameterStatus `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type VerifyRarityParameterStatusAsyncResult struct {
@@ -2187,7 +2237,8 @@ func (p VerifyRarityParameterStatusResult) Pointer() *VerifyRarityParameterStatu
 }
 
 type VerifyRarityParameterStatusByUserIdResult struct {
-	Item *RarityParameterStatus `json:"item"`
+	Item     *RarityParameterStatus `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type VerifyRarityParameterStatusByUserIdAsyncResult struct {
@@ -2231,6 +2282,7 @@ func (p VerifyRarityParameterStatusByUserIdResult) Pointer() *VerifyRarityParame
 type VerifyRarityParameterStatusByStampTaskResult struct {
 	Item            *RarityParameterStatus `json:"item"`
 	NewContextStack *string                `json:"newContextStack"`
+	Metadata        *core.ResultMetadata   `json:"metadata"`
 }
 
 type VerifyRarityParameterStatusByStampTaskAsyncResult struct {
@@ -2280,8 +2332,9 @@ func (p VerifyRarityParameterStatusByStampTaskResult) Pointer() *VerifyRarityPar
 }
 
 type SetRarityParameterStatusByUserIdResult struct {
-	Item *RarityParameterStatus `json:"item"`
-	Old  *RarityParameterStatus `json:"old"`
+	Item     *RarityParameterStatus `json:"item"`
+	Old      *RarityParameterStatus `json:"old"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type SetRarityParameterStatusByUserIdAsyncResult struct {
@@ -2336,8 +2389,9 @@ func (p SetRarityParameterStatusByUserIdResult) Pointer() *SetRarityParameterSta
 }
 
 type SetRarityParameterStatusByStampSheetResult struct {
-	Item *RarityParameterStatus `json:"item"`
-	Old  *RarityParameterStatus `json:"old"`
+	Item     *RarityParameterStatus `json:"item"`
+	Old      *RarityParameterStatus `json:"old"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type SetRarityParameterStatusByStampSheetAsyncResult struct {

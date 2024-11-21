@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -129,6 +130,7 @@ type CreateNamespaceRequest struct {
 	Name            *string     `json:"name"`
 	Description     *string     `json:"description"`
 	LogSetting      *LogSetting `json:"logSetting"`
+	DryRun          *bool       `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -263,6 +265,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -350,6 +353,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -439,6 +443,7 @@ type UpdateNamespaceRequest struct {
 	NamespaceName   *string     `json:"namespaceName"`
 	Description     *string     `json:"description"`
 	LogSetting      *LogSetting `json:"logSetting"`
+	DryRun          *bool       `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -573,6 +578,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -662,6 +668,7 @@ type DescribeKeysRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeKeysRequest) UnmarshalJSON(data []byte) error {
@@ -793,6 +800,7 @@ type CreateKeyRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	Name            *string `json:"name"`
 	Description     *string `json:"description"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CreateKeyRequest) UnmarshalJSON(data []byte) error {
@@ -944,6 +952,7 @@ type UpdateKeyRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	KeyName         *string `json:"keyName"`
 	Description     *string `json:"description"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateKeyRequest) UnmarshalJSON(data []byte) error {
@@ -1094,6 +1103,7 @@ type GetKeyRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	KeyName         *string `json:"keyName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetKeyRequest) UnmarshalJSON(data []byte) error {
@@ -1213,6 +1223,7 @@ type DeleteKeyRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	KeyName         *string `json:"keyName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteKeyRequest) UnmarshalJSON(data []byte) error {
@@ -1333,6 +1344,7 @@ type EncryptRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	KeyName         *string `json:"keyName"`
 	Data            *string `json:"data"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *EncryptRequest) UnmarshalJSON(data []byte) error {
@@ -1484,6 +1496,7 @@ type DecryptRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	KeyName         *string `json:"keyName"`
 	Data            *string `json:"data"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DecryptRequest) UnmarshalJSON(data []byte) error {
@@ -1635,6 +1648,7 @@ type DescribeGitHubApiKeysRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeGitHubApiKeysRequest) UnmarshalJSON(data []byte) error {
@@ -1768,6 +1782,7 @@ type CreateGitHubApiKeyRequest struct {
 	Description       *string `json:"description"`
 	ApiKey            *string `json:"apiKey"`
 	EncryptionKeyName *string `json:"encryptionKeyName"`
+	DryRun            *bool   `json:"dryRun"`
 }
 
 func (p *CreateGitHubApiKeyRequest) UnmarshalJSON(data []byte) error {
@@ -1983,6 +1998,7 @@ type UpdateGitHubApiKeyRequest struct {
 	Description       *string `json:"description"`
 	ApiKey            *string `json:"apiKey"`
 	EncryptionKeyName *string `json:"encryptionKeyName"`
+	DryRun            *bool   `json:"dryRun"`
 }
 
 func (p *UpdateGitHubApiKeyRequest) UnmarshalJSON(data []byte) error {
@@ -2195,6 +2211,7 @@ type GetGitHubApiKeyRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ApiKeyName      *string `json:"apiKeyName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetGitHubApiKeyRequest) UnmarshalJSON(data []byte) error {
@@ -2314,6 +2331,7 @@ type DeleteGitHubApiKeyRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ApiKeyName      *string `json:"apiKeyName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteGitHubApiKeyRequest) UnmarshalJSON(data []byte) error {

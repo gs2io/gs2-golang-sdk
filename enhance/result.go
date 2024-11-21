@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -499,7 +512,8 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type DescribeRateModelsResult struct {
-	Items []RateModel `json:"items"`
+	Items    []RateModel          `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeRateModelsAsyncResult struct {
@@ -537,7 +551,8 @@ func (p DescribeRateModelsResult) Pointer() *DescribeRateModelsResult {
 }
 
 type GetRateModelResult struct {
-	Item *RateModel `json:"item"`
+	Item     *RateModel           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetRateModelAsyncResult struct {
@@ -579,8 +594,9 @@ func (p GetRateModelResult) Pointer() *GetRateModelResult {
 }
 
 type DescribeRateModelMastersResult struct {
-	Items         []RateModelMaster `json:"items"`
-	NextPageToken *string           `json:"nextPageToken"`
+	Items         []RateModelMaster    `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeRateModelMastersAsyncResult struct {
@@ -626,7 +642,8 @@ func (p DescribeRateModelMastersResult) Pointer() *DescribeRateModelMastersResul
 }
 
 type CreateRateModelMasterResult struct {
-	Item *RateModelMaster `json:"item"`
+	Item     *RateModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateRateModelMasterAsyncResult struct {
@@ -668,7 +685,8 @@ func (p CreateRateModelMasterResult) Pointer() *CreateRateModelMasterResult {
 }
 
 type GetRateModelMasterResult struct {
-	Item *RateModelMaster `json:"item"`
+	Item     *RateModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetRateModelMasterAsyncResult struct {
@@ -710,7 +728,8 @@ func (p GetRateModelMasterResult) Pointer() *GetRateModelMasterResult {
 }
 
 type UpdateRateModelMasterResult struct {
-	Item *RateModelMaster `json:"item"`
+	Item     *RateModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateRateModelMasterAsyncResult struct {
@@ -752,7 +771,8 @@ func (p UpdateRateModelMasterResult) Pointer() *UpdateRateModelMasterResult {
 }
 
 type DeleteRateModelMasterResult struct {
-	Item *RateModelMaster `json:"item"`
+	Item     *RateModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteRateModelMasterAsyncResult struct {
@@ -794,7 +814,8 @@ func (p DeleteRateModelMasterResult) Pointer() *DeleteRateModelMasterResult {
 }
 
 type DescribeUnleashRateModelsResult struct {
-	Items []UnleashRateModel `json:"items"`
+	Items    []UnleashRateModel   `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeUnleashRateModelsAsyncResult struct {
@@ -832,7 +853,8 @@ func (p DescribeUnleashRateModelsResult) Pointer() *DescribeUnleashRateModelsRes
 }
 
 type GetUnleashRateModelResult struct {
-	Item *UnleashRateModel `json:"item"`
+	Item     *UnleashRateModel    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetUnleashRateModelAsyncResult struct {
@@ -876,6 +898,7 @@ func (p GetUnleashRateModelResult) Pointer() *GetUnleashRateModelResult {
 type DescribeUnleashRateModelMastersResult struct {
 	Items         []UnleashRateModelMaster `json:"items"`
 	NextPageToken *string                  `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata     `json:"metadata"`
 }
 
 type DescribeUnleashRateModelMastersAsyncResult struct {
@@ -921,7 +944,8 @@ func (p DescribeUnleashRateModelMastersResult) Pointer() *DescribeUnleashRateMod
 }
 
 type CreateUnleashRateModelMasterResult struct {
-	Item *UnleashRateModelMaster `json:"item"`
+	Item     *UnleashRateModelMaster `json:"item"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type CreateUnleashRateModelMasterAsyncResult struct {
@@ -963,7 +987,8 @@ func (p CreateUnleashRateModelMasterResult) Pointer() *CreateUnleashRateModelMas
 }
 
 type GetUnleashRateModelMasterResult struct {
-	Item *UnleashRateModelMaster `json:"item"`
+	Item     *UnleashRateModelMaster `json:"item"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type GetUnleashRateModelMasterAsyncResult struct {
@@ -1005,7 +1030,8 @@ func (p GetUnleashRateModelMasterResult) Pointer() *GetUnleashRateModelMasterRes
 }
 
 type UpdateUnleashRateModelMasterResult struct {
-	Item *UnleashRateModelMaster `json:"item"`
+	Item     *UnleashRateModelMaster `json:"item"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type UpdateUnleashRateModelMasterAsyncResult struct {
@@ -1047,7 +1073,8 @@ func (p UpdateUnleashRateModelMasterResult) Pointer() *UpdateUnleashRateModelMas
 }
 
 type DeleteUnleashRateModelMasterResult struct {
-	Item *UnleashRateModelMaster `json:"item"`
+	Item     *UnleashRateModelMaster `json:"item"`
+	Metadata *core.ResultMetadata    `json:"metadata"`
 }
 
 type DeleteUnleashRateModelMasterAsyncResult struct {
@@ -1089,13 +1116,14 @@ func (p DeleteUnleashRateModelMasterResult) Pointer() *DeleteUnleashRateModelMas
 }
 
 type DirectEnhanceResult struct {
-	Item                      *RateModel `json:"item"`
-	TransactionId             *string    `json:"transactionId"`
-	StampSheet                *string    `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string    `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool      `json:"autoRunStampSheet"`
-	AcquireExperience         *int64     `json:"acquireExperience"`
-	BonusRate                 *float32   `json:"bonusRate"`
+	Item                      *RateModel           `json:"item"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	AcquireExperience         *int64               `json:"acquireExperience"`
+	BonusRate                 *float32             `json:"bonusRate"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type DirectEnhanceAsyncResult struct {
@@ -1185,13 +1213,14 @@ func (p DirectEnhanceResult) Pointer() *DirectEnhanceResult {
 }
 
 type DirectEnhanceByUserIdResult struct {
-	Item                      *RateModel `json:"item"`
-	TransactionId             *string    `json:"transactionId"`
-	StampSheet                *string    `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string    `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool      `json:"autoRunStampSheet"`
-	AcquireExperience         *int64     `json:"acquireExperience"`
-	BonusRate                 *float32   `json:"bonusRate"`
+	Item                      *RateModel           `json:"item"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	AcquireExperience         *int64               `json:"acquireExperience"`
+	BonusRate                 *float32             `json:"bonusRate"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type DirectEnhanceByUserIdAsyncResult struct {
@@ -1281,13 +1310,14 @@ func (p DirectEnhanceByUserIdResult) Pointer() *DirectEnhanceByUserIdResult {
 }
 
 type DirectEnhanceByStampSheetResult struct {
-	Item                      *RateModel `json:"item"`
-	TransactionId             *string    `json:"transactionId"`
-	StampSheet                *string    `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string    `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool      `json:"autoRunStampSheet"`
-	AcquireExperience         *int64     `json:"acquireExperience"`
-	BonusRate                 *float32   `json:"bonusRate"`
+	Item                      *RateModel           `json:"item"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	AcquireExperience         *int64               `json:"acquireExperience"`
+	BonusRate                 *float32             `json:"bonusRate"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type DirectEnhanceByStampSheetAsyncResult struct {
@@ -1377,11 +1407,12 @@ func (p DirectEnhanceByStampSheetResult) Pointer() *DirectEnhanceByStampSheetRes
 }
 
 type UnleashResult struct {
-	Item                      *UnleashRateModel `json:"item"`
-	TransactionId             *string           `json:"transactionId"`
-	StampSheet                *string           `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string           `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool             `json:"autoRunStampSheet"`
+	Item                      *UnleashRateModel    `json:"item"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type UnleashAsyncResult struct {
@@ -1455,11 +1486,12 @@ func (p UnleashResult) Pointer() *UnleashResult {
 }
 
 type UnleashByUserIdResult struct {
-	Item                      *UnleashRateModel `json:"item"`
-	TransactionId             *string           `json:"transactionId"`
-	StampSheet                *string           `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string           `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool             `json:"autoRunStampSheet"`
+	Item                      *UnleashRateModel    `json:"item"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type UnleashByUserIdAsyncResult struct {
@@ -1533,11 +1565,12 @@ func (p UnleashByUserIdResult) Pointer() *UnleashByUserIdResult {
 }
 
 type UnleashByStampSheetResult struct {
-	Item                      *UnleashRateModel `json:"item"`
-	TransactionId             *string           `json:"transactionId"`
-	StampSheet                *string           `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string           `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool             `json:"autoRunStampSheet"`
+	Item                      *UnleashRateModel    `json:"item"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type UnleashByStampSheetAsyncResult struct {
@@ -1611,7 +1644,8 @@ func (p UnleashByStampSheetResult) Pointer() *UnleashByStampSheetResult {
 }
 
 type CreateProgressByUserIdResult struct {
-	Item *Progress `json:"item"`
+	Item     *Progress            `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateProgressByUserIdAsyncResult struct {
@@ -1653,7 +1687,8 @@ func (p CreateProgressByUserIdResult) Pointer() *CreateProgressByUserIdResult {
 }
 
 type GetProgressResult struct {
-	Item *Progress `json:"item"`
+	Item     *Progress            `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetProgressAsyncResult struct {
@@ -1695,7 +1730,8 @@ func (p GetProgressResult) Pointer() *GetProgressResult {
 }
 
 type GetProgressByUserIdResult struct {
-	Item *Progress `json:"item"`
+	Item     *Progress            `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetProgressByUserIdAsyncResult struct {
@@ -1737,10 +1773,11 @@ func (p GetProgressByUserIdResult) Pointer() *GetProgressByUserIdResult {
 }
 
 type StartResult struct {
-	TransactionId             *string `json:"transactionId"`
-	StampSheet                *string `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool   `json:"autoRunStampSheet"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type StartAsyncResult struct {
@@ -1801,10 +1838,11 @@ func (p StartResult) Pointer() *StartResult {
 }
 
 type StartByUserIdResult struct {
-	TransactionId             *string `json:"transactionId"`
-	StampSheet                *string `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool   `json:"autoRunStampSheet"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type StartByUserIdAsyncResult struct {
@@ -1865,13 +1903,14 @@ func (p StartByUserIdResult) Pointer() *StartByUserIdResult {
 }
 
 type EndResult struct {
-	Item                      *Progress `json:"item"`
-	TransactionId             *string   `json:"transactionId"`
-	StampSheet                *string   `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string   `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool     `json:"autoRunStampSheet"`
-	AcquireExperience         *int64    `json:"acquireExperience"`
-	BonusRate                 *float32  `json:"bonusRate"`
+	Item                      *Progress            `json:"item"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	AcquireExperience         *int64               `json:"acquireExperience"`
+	BonusRate                 *float32             `json:"bonusRate"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type EndAsyncResult struct {
@@ -1961,13 +2000,14 @@ func (p EndResult) Pointer() *EndResult {
 }
 
 type EndByUserIdResult struct {
-	Item                      *Progress `json:"item"`
-	TransactionId             *string   `json:"transactionId"`
-	StampSheet                *string   `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string   `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool     `json:"autoRunStampSheet"`
-	AcquireExperience         *int64    `json:"acquireExperience"`
-	BonusRate                 *float32  `json:"bonusRate"`
+	Item                      *Progress            `json:"item"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	AcquireExperience         *int64               `json:"acquireExperience"`
+	BonusRate                 *float32             `json:"bonusRate"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type EndByUserIdAsyncResult struct {
@@ -2057,7 +2097,8 @@ func (p EndByUserIdResult) Pointer() *EndByUserIdResult {
 }
 
 type DeleteProgressResult struct {
-	Item *Progress `json:"item"`
+	Item     *Progress            `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteProgressAsyncResult struct {
@@ -2099,7 +2140,8 @@ func (p DeleteProgressResult) Pointer() *DeleteProgressResult {
 }
 
 type DeleteProgressByUserIdResult struct {
-	Item *Progress `json:"item"`
+	Item     *Progress            `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteProgressByUserIdAsyncResult struct {
@@ -2141,7 +2183,8 @@ func (p DeleteProgressByUserIdResult) Pointer() *DeleteProgressByUserIdResult {
 }
 
 type CreateProgressByStampSheetResult struct {
-	Item *Progress `json:"item"`
+	Item     *Progress            `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateProgressByStampSheetAsyncResult struct {
@@ -2183,8 +2226,9 @@ func (p CreateProgressByStampSheetResult) Pointer() *CreateProgressByStampSheetR
 }
 
 type DeleteProgressByStampTaskResult struct {
-	Item            *Progress `json:"item"`
-	NewContextStack *string   `json:"newContextStack"`
+	Item            *Progress            `json:"item"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteProgressByStampTaskAsyncResult struct {
@@ -2234,7 +2278,8 @@ func (p DeleteProgressByStampTaskResult) Pointer() *DeleteProgressByStampTaskRes
 }
 
 type ExportMasterResult struct {
-	Item *CurrentRateMaster `json:"item"`
+	Item     *CurrentRateMaster   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -2276,7 +2321,8 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
 }
 
 type GetCurrentRateMasterResult struct {
-	Item *CurrentRateMaster `json:"item"`
+	Item     *CurrentRateMaster   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetCurrentRateMasterAsyncResult struct {
@@ -2318,7 +2364,8 @@ func (p GetCurrentRateMasterResult) Pointer() *GetCurrentRateMasterResult {
 }
 
 type UpdateCurrentRateMasterResult struct {
-	Item *CurrentRateMaster `json:"item"`
+	Item     *CurrentRateMaster   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCurrentRateMasterAsyncResult struct {
@@ -2360,7 +2407,8 @@ func (p UpdateCurrentRateMasterResult) Pointer() *UpdateCurrentRateMasterResult 
 }
 
 type UpdateCurrentRateMasterFromGitHubResult struct {
-	Item *CurrentRateMaster `json:"item"`
+	Item     *CurrentRateMaster   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCurrentRateMasterFromGitHubAsyncResult struct {

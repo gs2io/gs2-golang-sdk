@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -499,8 +512,9 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type DescribeJobsByUserIdResult struct {
-	Items         []Job   `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Job                `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeJobsByUserIdAsyncResult struct {
@@ -546,7 +560,8 @@ func (p DescribeJobsByUserIdResult) Pointer() *DescribeJobsByUserIdResult {
 }
 
 type GetJobByUserIdResult struct {
-	Item *Job `json:"item"`
+	Item     *Job                 `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetJobByUserIdAsyncResult struct {
@@ -588,8 +603,9 @@ func (p GetJobByUserIdResult) Pointer() *GetJobByUserIdResult {
 }
 
 type PushByUserIdResult struct {
-	Items   []Job `json:"items"`
-	AutoRun *bool `json:"autoRun"`
+	Items    []Job                `json:"items"`
+	AutoRun  *bool                `json:"autoRun"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type PushByUserIdAsyncResult struct {
@@ -635,9 +651,10 @@ func (p PushByUserIdResult) Pointer() *PushByUserIdResult {
 }
 
 type RunResult struct {
-	Item      *Job           `json:"item"`
-	Result    *JobResultBody `json:"result"`
-	IsLastJob *bool          `json:"isLastJob"`
+	Item      *Job                 `json:"item"`
+	Result    *JobResultBody       `json:"result"`
+	IsLastJob *bool                `json:"isLastJob"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type RunAsyncResult struct {
@@ -700,9 +717,10 @@ func (p RunResult) Pointer() *RunResult {
 }
 
 type RunByUserIdResult struct {
-	Item      *Job           `json:"item"`
-	Result    *JobResultBody `json:"result"`
-	IsLastJob *bool          `json:"isLastJob"`
+	Item      *Job                 `json:"item"`
+	Result    *JobResultBody       `json:"result"`
+	IsLastJob *bool                `json:"isLastJob"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type RunByUserIdAsyncResult struct {
@@ -765,7 +783,8 @@ func (p RunByUserIdResult) Pointer() *RunByUserIdResult {
 }
 
 type DeleteJobResult struct {
-	Item *Job `json:"item"`
+	Item     *Job                 `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteJobAsyncResult struct {
@@ -807,7 +826,8 @@ func (p DeleteJobResult) Pointer() *DeleteJobResult {
 }
 
 type DeleteJobByUserIdResult struct {
-	Item *Job `json:"item"`
+	Item     *Job                 `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteJobByUserIdAsyncResult struct {
@@ -849,8 +869,9 @@ func (p DeleteJobByUserIdResult) Pointer() *DeleteJobByUserIdResult {
 }
 
 type PushByStampSheetResult struct {
-	Items   []Job `json:"items"`
-	AutoRun *bool `json:"autoRun"`
+	Items    []Job                `json:"items"`
+	AutoRun  *bool                `json:"autoRun"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type PushByStampSheetAsyncResult struct {
@@ -896,8 +917,9 @@ func (p PushByStampSheetResult) Pointer() *PushByStampSheetResult {
 }
 
 type DeleteByStampTaskResult struct {
-	Item            *Job    `json:"item"`
-	NewContextStack *string `json:"newContextStack"`
+	Item            *Job                 `json:"item"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteByStampTaskAsyncResult struct {
@@ -947,7 +969,8 @@ func (p DeleteByStampTaskResult) Pointer() *DeleteByStampTaskResult {
 }
 
 type GetJobResultResult struct {
-	Item *JobResult `json:"item"`
+	Item     *JobResult           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetJobResultAsyncResult struct {
@@ -989,7 +1012,8 @@ func (p GetJobResultResult) Pointer() *GetJobResultResult {
 }
 
 type GetJobResultByUserIdResult struct {
-	Item *JobResult `json:"item"`
+	Item     *JobResult           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetJobResultByUserIdAsyncResult struct {
@@ -1031,8 +1055,9 @@ func (p GetJobResultByUserIdResult) Pointer() *GetJobResultByUserIdResult {
 }
 
 type DescribeDeadLetterJobsByUserIdResult struct {
-	Items         []DeadLetterJob `json:"items"`
-	NextPageToken *string         `json:"nextPageToken"`
+	Items         []DeadLetterJob      `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeDeadLetterJobsByUserIdAsyncResult struct {
@@ -1078,7 +1103,8 @@ func (p DescribeDeadLetterJobsByUserIdResult) Pointer() *DescribeDeadLetterJobsB
 }
 
 type GetDeadLetterJobByUserIdResult struct {
-	Item *DeadLetterJob `json:"item"`
+	Item     *DeadLetterJob       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetDeadLetterJobByUserIdAsyncResult struct {
@@ -1120,7 +1146,8 @@ func (p GetDeadLetterJobByUserIdResult) Pointer() *GetDeadLetterJobByUserIdResul
 }
 
 type DeleteDeadLetterJobByUserIdResult struct {
-	Item *DeadLetterJob `json:"item"`
+	Item     *DeadLetterJob       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteDeadLetterJobByUserIdAsyncResult struct {

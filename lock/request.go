@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -129,6 +130,7 @@ type CreateNamespaceRequest struct {
 	Name            *string     `json:"name"`
 	Description     *string     `json:"description"`
 	LogSetting      *LogSetting `json:"logSetting"`
+	DryRun          *bool       `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -263,6 +265,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -350,6 +353,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -439,6 +443,7 @@ type UpdateNamespaceRequest struct {
 	NamespaceName   *string     `json:"namespaceName"`
 	Description     *string     `json:"description"`
 	LogSetting      *LogSetting `json:"logSetting"`
+	DryRun          *bool       `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -573,6 +578,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -665,6 +671,7 @@ type LockRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	TransactionId      *string `json:"transactionId"`
 	Ttl                *int64  `json:"ttl"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *LockRequest) UnmarshalJSON(data []byte) error {
@@ -862,6 +869,7 @@ type LockByUserIdRequest struct {
 	TransactionId      *string `json:"transactionId"`
 	Ttl                *int64  `json:"ttl"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *LockByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1088,6 +1096,7 @@ type UnlockRequest struct {
 	PropertyId         *string `json:"propertyId"`
 	AccessToken        *string `json:"accessToken"`
 	TransactionId      *string `json:"transactionId"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *UnlockRequest) UnmarshalJSON(data []byte) error {
@@ -1273,6 +1282,7 @@ type UnlockByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	TransactionId      *string `json:"transactionId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *UnlockByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1486,6 +1496,7 @@ type GetMutexRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	AccessToken     *string `json:"accessToken"`
 	PropertyId      *string `json:"propertyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetMutexRequest) UnmarshalJSON(data []byte) error {
@@ -1638,6 +1649,7 @@ type GetMutexByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	PropertyId      *string `json:"propertyId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetMutexByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1822,6 +1834,7 @@ type DeleteMutexByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	PropertyId         *string `json:"propertyId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteMutexByUserIdRequest) UnmarshalJSON(data []byte) error {

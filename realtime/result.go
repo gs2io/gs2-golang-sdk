@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,7 +281,8 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type NowResult struct {
-	Timestamp *int64 `json:"timestamp"`
+	Timestamp *int64               `json:"timestamp"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type NowAsyncResult struct {
@@ -312,8 +319,9 @@ func (p NowResult) Pointer() *NowResult {
 }
 
 type DescribeRoomsResult struct {
-	Items         []Room  `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Room               `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeRoomsAsyncResult struct {
@@ -359,7 +367,8 @@ func (p DescribeRoomsResult) Pointer() *DescribeRoomsResult {
 }
 
 type WantRoomResult struct {
-	Item *Room `json:"item"`
+	Item     *Room                `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type WantRoomAsyncResult struct {
@@ -401,7 +410,8 @@ func (p WantRoomResult) Pointer() *WantRoomResult {
 }
 
 type GetRoomResult struct {
-	Item *Room `json:"item"`
+	Item     *Room                `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetRoomAsyncResult struct {
@@ -443,7 +453,8 @@ func (p GetRoomResult) Pointer() *GetRoomResult {
 }
 
 type DeleteRoomResult struct {
-	Item *Room `json:"item"`
+	Item     *Room                `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteRoomAsyncResult struct {

@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -499,7 +512,8 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type GetPointResult struct {
-	Item *Point `json:"item"`
+	Item     *Point               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetPointAsyncResult struct {
@@ -541,7 +555,8 @@ func (p GetPointResult) Pointer() *GetPointResult {
 }
 
 type GetPointByUserIdResult struct {
-	Item *Point `json:"item"`
+	Item     *Point               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetPointByUserIdAsyncResult struct {
@@ -583,7 +598,8 @@ func (p GetPointByUserIdResult) Pointer() *GetPointByUserIdResult {
 }
 
 type AcquirePointByUserIdResult struct {
-	Item *Point `json:"item"`
+	Item     *Point               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AcquirePointByUserIdAsyncResult struct {
@@ -625,7 +641,8 @@ func (p AcquirePointByUserIdResult) Pointer() *AcquirePointByUserIdResult {
 }
 
 type ConsumePointResult struct {
-	Item *Point `json:"item"`
+	Item     *Point               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ConsumePointAsyncResult struct {
@@ -667,7 +684,8 @@ func (p ConsumePointResult) Pointer() *ConsumePointResult {
 }
 
 type ConsumePointByUserIdResult struct {
-	Item *Point `json:"item"`
+	Item     *Point               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ConsumePointByUserIdAsyncResult struct {
@@ -709,7 +727,8 @@ func (p ConsumePointByUserIdResult) Pointer() *ConsumePointByUserIdResult {
 }
 
 type DeletePointByUserIdResult struct {
-	Item *Point `json:"item"`
+	Item     *Point               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeletePointByUserIdAsyncResult struct {
@@ -751,8 +770,9 @@ func (p DeletePointByUserIdResult) Pointer() *DeletePointByUserIdResult {
 }
 
 type ConsumePointByStampTaskResult struct {
-	Item            *Point  `json:"item"`
-	NewContextStack *string `json:"newContextStack"`
+	Item            *Point               `json:"item"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type ConsumePointByStampTaskAsyncResult struct {
@@ -802,7 +822,8 @@ func (p ConsumePointByStampTaskResult) Pointer() *ConsumePointByStampTaskResult 
 }
 
 type AcquirePointByStampSheetResult struct {
-	Item *Point `json:"item"`
+	Item     *Point               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AcquirePointByStampSheetAsyncResult struct {

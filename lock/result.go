@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,7 +281,8 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type LockResult struct {
-	Item *Mutex `json:"item"`
+	Item     *Mutex               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type LockAsyncResult struct {
@@ -317,7 +324,8 @@ func (p LockResult) Pointer() *LockResult {
 }
 
 type LockByUserIdResult struct {
-	Item *Mutex `json:"item"`
+	Item     *Mutex               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type LockByUserIdAsyncResult struct {
@@ -359,7 +367,8 @@ func (p LockByUserIdResult) Pointer() *LockByUserIdResult {
 }
 
 type UnlockResult struct {
-	Item *Mutex `json:"item"`
+	Item     *Mutex               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UnlockAsyncResult struct {
@@ -401,7 +410,8 @@ func (p UnlockResult) Pointer() *UnlockResult {
 }
 
 type UnlockByUserIdResult struct {
-	Item *Mutex `json:"item"`
+	Item     *Mutex               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UnlockByUserIdAsyncResult struct {
@@ -443,7 +453,8 @@ func (p UnlockByUserIdResult) Pointer() *UnlockByUserIdResult {
 }
 
 type GetMutexResult struct {
-	Item *Mutex `json:"item"`
+	Item     *Mutex               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetMutexAsyncResult struct {
@@ -485,7 +496,8 @@ func (p GetMutexResult) Pointer() *GetMutexResult {
 }
 
 type GetMutexByUserIdResult struct {
-	Item *Mutex `json:"item"`
+	Item     *Mutex               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetMutexByUserIdAsyncResult struct {
@@ -527,7 +539,8 @@ func (p GetMutexByUserIdResult) Pointer() *GetMutexByUserIdResult {
 }
 
 type DeleteMutexByUserIdResult struct {
-	Item *Mutex `json:"item"`
+	Item     *Mutex               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteMutexByUserIdAsyncResult struct {

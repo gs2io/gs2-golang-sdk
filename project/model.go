@@ -314,64 +314,43 @@ func NewAccountFromDict(data map[string]interface{}) Account {
 }
 
 func (p Account) ToDict() map[string]interface{} {
-
-	var accountId *string
+	m := map[string]interface{}{}
 	if p.AccountId != nil {
-		accountId = p.AccountId
+		m["accountId"] = p.AccountId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var email *string
 	if p.Email != nil {
-		email = p.Email
+		m["email"] = p.Email
 	}
-	var fullName *string
 	if p.FullName != nil {
-		fullName = p.FullName
+		m["fullName"] = p.FullName
 	}
-	var companyName *string
 	if p.CompanyName != nil {
-		companyName = p.CompanyName
+		m["companyName"] = p.CompanyName
 	}
-	var enableTwoFactorAuthentication *string
 	if p.EnableTwoFactorAuthentication != nil {
-		enableTwoFactorAuthentication = p.EnableTwoFactorAuthentication
+		m["enableTwoFactorAuthentication"] = p.EnableTwoFactorAuthentication
 	}
-	var twoFactorAuthenticationSetting map[string]interface{}
 	if p.TwoFactorAuthenticationSetting != nil {
-		twoFactorAuthenticationSetting = func() map[string]interface{} {
+		m["twoFactorAuthenticationSetting"] = func() map[string]interface{} {
 			if p.TwoFactorAuthenticationSetting == nil {
 				return nil
 			}
 			return p.TwoFactorAuthenticationSetting.ToDict()
 		}()
 	}
-	var status *string
 	if p.Status != nil {
-		status = p.Status
+		m["status"] = p.Status
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"accountId":                      accountId,
-		"name":                           name,
-		"email":                          email,
-		"fullName":                       fullName,
-		"companyName":                    companyName,
-		"enableTwoFactorAuthentication":  enableTwoFactorAuthentication,
-		"twoFactorAuthenticationSetting": twoFactorAuthenticationSetting,
-		"status":                         status,
-		"createdAt":                      createdAt,
-		"updatedAt":                      updatedAt,
-	}
+	return m
 }
 
 func (p Account) Pointer() *Account {
@@ -777,76 +756,49 @@ func NewProjectFromDict(data map[string]interface{}) Project {
 }
 
 func (p Project) ToDict() map[string]interface{} {
-
-	var projectId *string
+	m := map[string]interface{}{}
 	if p.ProjectId != nil {
-		projectId = p.ProjectId
+		m["projectId"] = p.ProjectId
 	}
-	var accountName *string
 	if p.AccountName != nil {
-		accountName = p.AccountName
+		m["accountName"] = p.AccountName
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var plan *string
 	if p.Plan != nil {
-		plan = p.Plan
+		m["plan"] = p.Plan
 	}
-	var regions []interface{}
 	if p.Regions != nil {
-		regions = CastGs2RegionsFromDict(
+		m["regions"] = CastGs2RegionsFromDict(
 			p.Regions,
 		)
 	}
-	var billingMethodName *string
 	if p.BillingMethodName != nil {
-		billingMethodName = p.BillingMethodName
+		m["billingMethodName"] = p.BillingMethodName
 	}
-	var enableEventBridge *string
 	if p.EnableEventBridge != nil {
-		enableEventBridge = p.EnableEventBridge
+		m["enableEventBridge"] = p.EnableEventBridge
 	}
-	var currency *string
 	if p.Currency != nil {
-		currency = p.Currency
+		m["currency"] = p.Currency
 	}
-	var eventBridgeAwsAccountId *string
 	if p.EventBridgeAwsAccountId != nil {
-		eventBridgeAwsAccountId = p.EventBridgeAwsAccountId
+		m["eventBridgeAwsAccountId"] = p.EventBridgeAwsAccountId
 	}
-	var eventBridgeAwsRegion *string
 	if p.EventBridgeAwsRegion != nil {
-		eventBridgeAwsRegion = p.EventBridgeAwsRegion
+		m["eventBridgeAwsRegion"] = p.EventBridgeAwsRegion
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"projectId":               projectId,
-		"accountName":             accountName,
-		"name":                    name,
-		"description":             description,
-		"plan":                    plan,
-		"regions":                 regions,
-		"billingMethodName":       billingMethodName,
-		"enableEventBridge":       enableEventBridge,
-		"currency":                currency,
-		"eventBridgeAwsAccountId": eventBridgeAwsAccountId,
-		"eventBridgeAwsRegion":    eventBridgeAwsRegion,
-		"createdAt":               createdAt,
-		"updatedAt":               updatedAt,
-	}
+	return m
 }
 
 func (p Project) Pointer() *Project {
@@ -972,19 +924,14 @@ func NewGs2RegionFromDict(data map[string]interface{}) Gs2Region {
 }
 
 func (p Gs2Region) ToDict() map[string]interface{} {
-
-	var regionName *string
+	m := map[string]interface{}{}
 	if p.RegionName != nil {
-		regionName = p.RegionName
+		m["regionName"] = p.RegionName
 	}
-	var status *string
 	if p.Status != nil {
-		status = p.Status
+		m["status"] = p.Status
 	}
-	return map[string]interface{}{
-		"regionName": regionName,
-		"status":     status,
-	}
+	return m
 }
 
 func (p Gs2Region) Pointer() *Gs2Region {
@@ -1349,64 +1296,41 @@ func NewBillingMethodFromDict(data map[string]interface{}) BillingMethod {
 }
 
 func (p BillingMethod) ToDict() map[string]interface{} {
-
-	var billingMethodId *string
+	m := map[string]interface{}{}
 	if p.BillingMethodId != nil {
-		billingMethodId = p.BillingMethodId
+		m["billingMethodId"] = p.BillingMethodId
 	}
-	var accountName *string
 	if p.AccountName != nil {
-		accountName = p.AccountName
+		m["accountName"] = p.AccountName
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var methodType *string
 	if p.MethodType != nil {
-		methodType = p.MethodType
+		m["methodType"] = p.MethodType
 	}
-	var cardSignatureName *string
 	if p.CardSignatureName != nil {
-		cardSignatureName = p.CardSignatureName
+		m["cardSignatureName"] = p.CardSignatureName
 	}
-	var cardBrand *string
 	if p.CardBrand != nil {
-		cardBrand = p.CardBrand
+		m["cardBrand"] = p.CardBrand
 	}
-	var cardLast4 *string
 	if p.CardLast4 != nil {
-		cardLast4 = p.CardLast4
+		m["cardLast4"] = p.CardLast4
 	}
-	var partnerId *string
 	if p.PartnerId != nil {
-		partnerId = p.PartnerId
+		m["partnerId"] = p.PartnerId
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"billingMethodId":   billingMethodId,
-		"accountName":       accountName,
-		"name":              name,
-		"description":       description,
-		"methodType":        methodType,
-		"cardSignatureName": cardSignatureName,
-		"cardBrand":         cardBrand,
-		"cardLast4":         cardLast4,
-		"partnerId":         partnerId,
-		"createdAt":         createdAt,
-		"updatedAt":         updatedAt,
-	}
+	return m
 }
 
 func (p BillingMethod) Pointer() *BillingMethod {
@@ -1658,49 +1582,32 @@ func NewReceiptFromDict(data map[string]interface{}) Receipt {
 }
 
 func (p Receipt) ToDict() map[string]interface{} {
-
-	var receiptId *string
+	m := map[string]interface{}{}
 	if p.ReceiptId != nil {
-		receiptId = p.ReceiptId
+		m["receiptId"] = p.ReceiptId
 	}
-	var accountName *string
 	if p.AccountName != nil {
-		accountName = p.AccountName
+		m["accountName"] = p.AccountName
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var date *int64
 	if p.Date != nil {
-		date = p.Date
+		m["date"] = p.Date
 	}
-	var amount *string
 	if p.Amount != nil {
-		amount = p.Amount
+		m["amount"] = p.Amount
 	}
-	var pdfUrl *string
 	if p.PdfUrl != nil {
-		pdfUrl = p.PdfUrl
+		m["pdfUrl"] = p.PdfUrl
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"receiptId":   receiptId,
-		"accountName": accountName,
-		"name":        name,
-		"date":        date,
-		"amount":      amount,
-		"pdfUrl":      pdfUrl,
-		"createdAt":   createdAt,
-		"updatedAt":   updatedAt,
-	}
+	return m
 }
 
 func (p Receipt) Pointer() *Receipt {
@@ -2047,74 +1954,47 @@ func NewBillingFromDict(data map[string]interface{}) Billing {
 }
 
 func (p Billing) ToDict() map[string]interface{} {
-
-	var billingId *string
+	m := map[string]interface{}{}
 	if p.BillingId != nil {
-		billingId = p.BillingId
+		m["billingId"] = p.BillingId
 	}
-	var projectName *string
 	if p.ProjectName != nil {
-		projectName = p.ProjectName
+		m["projectName"] = p.ProjectName
 	}
-	var year *int32
 	if p.Year != nil {
-		year = p.Year
+		m["year"] = p.Year
 	}
-	var month *int32
 	if p.Month != nil {
-		month = p.Month
+		m["month"] = p.Month
 	}
-	var region *string
 	if p.Region != nil {
-		region = p.Region
+		m["region"] = p.Region
 	}
-	var service *string
 	if p.Service != nil {
-		service = p.Service
+		m["service"] = p.Service
 	}
-	var activityType *string
 	if p.ActivityType != nil {
-		activityType = p.ActivityType
+		m["activityType"] = p.ActivityType
 	}
-	var unit *float64
 	if p.Unit != nil {
-		unit = p.Unit
+		m["unit"] = p.Unit
 	}
-	var unitName *string
 	if p.UnitName != nil {
-		unitName = p.UnitName
+		m["unitName"] = p.UnitName
 	}
-	var price *float64
 	if p.Price != nil {
-		price = p.Price
+		m["price"] = p.Price
 	}
-	var currency *string
 	if p.Currency != nil {
-		currency = p.Currency
+		m["currency"] = p.Currency
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	return map[string]interface{}{
-		"billingId":    billingId,
-		"projectName":  projectName,
-		"year":         year,
-		"month":        month,
-		"region":       region,
-		"service":      service,
-		"activityType": activityType,
-		"unit":         unit,
-		"unitName":     unitName,
-		"price":        price,
-		"currency":     currency,
-		"createdAt":    createdAt,
-		"updatedAt":    updatedAt,
-	}
+	return m
 }
 
 func (p Billing) Pointer() *Billing {
@@ -2209,14 +2089,11 @@ func NewTwoFactorAuthenticationSettingFromDict(data map[string]interface{}) TwoF
 }
 
 func (p TwoFactorAuthenticationSetting) ToDict() map[string]interface{} {
-
-	var status *string
+	m := map[string]interface{}{}
 	if p.Status != nil {
-		status = p.Status
+		m["status"] = p.Status
 	}
-	return map[string]interface{}{
-		"status": status,
-	}
+	return m
 }
 
 func (p TwoFactorAuthenticationSetting) Pointer() *TwoFactorAuthenticationSetting {
@@ -2428,49 +2305,32 @@ func NewDumpProgressFromDict(data map[string]interface{}) DumpProgress {
 }
 
 func (p DumpProgress) ToDict() map[string]interface{} {
-
-	var dumpProgressId *string
+	m := map[string]interface{}{}
 	if p.DumpProgressId != nil {
-		dumpProgressId = p.DumpProgressId
+		m["dumpProgressId"] = p.DumpProgressId
 	}
-	var transactionId *string
 	if p.TransactionId != nil {
-		transactionId = p.TransactionId
+		m["transactionId"] = p.TransactionId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var dumped *int32
 	if p.Dumped != nil {
-		dumped = p.Dumped
+		m["dumped"] = p.Dumped
 	}
-	var microserviceCount *int32
 	if p.MicroserviceCount != nil {
-		microserviceCount = p.MicroserviceCount
+		m["microserviceCount"] = p.MicroserviceCount
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"dumpProgressId":    dumpProgressId,
-		"transactionId":     transactionId,
-		"userId":            userId,
-		"dumped":            dumped,
-		"microserviceCount": microserviceCount,
-		"createdAt":         createdAt,
-		"updatedAt":         updatedAt,
-		"revision":          revision,
-	}
+	return m
 }
 
 func (p DumpProgress) Pointer() *DumpProgress {
@@ -2682,49 +2542,32 @@ func NewCleanProgressFromDict(data map[string]interface{}) CleanProgress {
 }
 
 func (p CleanProgress) ToDict() map[string]interface{} {
-
-	var cleanProgressId *string
+	m := map[string]interface{}{}
 	if p.CleanProgressId != nil {
-		cleanProgressId = p.CleanProgressId
+		m["cleanProgressId"] = p.CleanProgressId
 	}
-	var transactionId *string
 	if p.TransactionId != nil {
-		transactionId = p.TransactionId
+		m["transactionId"] = p.TransactionId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var cleaned *int32
 	if p.Cleaned != nil {
-		cleaned = p.Cleaned
+		m["cleaned"] = p.Cleaned
 	}
-	var microserviceCount *int32
 	if p.MicroserviceCount != nil {
-		microserviceCount = p.MicroserviceCount
+		m["microserviceCount"] = p.MicroserviceCount
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"cleanProgressId":   cleanProgressId,
-		"transactionId":     transactionId,
-		"userId":            userId,
-		"cleaned":           cleaned,
-		"microserviceCount": microserviceCount,
-		"createdAt":         createdAt,
-		"updatedAt":         updatedAt,
-		"revision":          revision,
-	}
+	return m
 }
 
 func (p CleanProgress) Pointer() *CleanProgress {
@@ -2936,49 +2779,32 @@ func NewImportProgressFromDict(data map[string]interface{}) ImportProgress {
 }
 
 func (p ImportProgress) ToDict() map[string]interface{} {
-
-	var importProgressId *string
+	m := map[string]interface{}{}
 	if p.ImportProgressId != nil {
-		importProgressId = p.ImportProgressId
+		m["importProgressId"] = p.ImportProgressId
 	}
-	var transactionId *string
 	if p.TransactionId != nil {
-		transactionId = p.TransactionId
+		m["transactionId"] = p.TransactionId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var imported *int32
 	if p.Imported != nil {
-		imported = p.Imported
+		m["imported"] = p.Imported
 	}
-	var microserviceCount *int32
 	if p.MicroserviceCount != nil {
-		microserviceCount = p.MicroserviceCount
+		m["microserviceCount"] = p.MicroserviceCount
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"importProgressId":  importProgressId,
-		"transactionId":     transactionId,
-		"userId":            userId,
-		"imported":          imported,
-		"microserviceCount": microserviceCount,
-		"createdAt":         createdAt,
-		"updatedAt":         updatedAt,
-		"revision":          revision,
-	}
+	return m
 }
 
 func (p ImportProgress) Pointer() *ImportProgress {
@@ -3188,39 +3014,26 @@ func NewImportErrorLogFromDict(data map[string]interface{}) ImportErrorLog {
 }
 
 func (p ImportErrorLog) ToDict() map[string]interface{} {
-
-	var dumpProgressId *string
+	m := map[string]interface{}{}
 	if p.DumpProgressId != nil {
-		dumpProgressId = p.DumpProgressId
+		m["dumpProgressId"] = p.DumpProgressId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var microserviceName *string
 	if p.MicroserviceName != nil {
-		microserviceName = p.MicroserviceName
+		m["microserviceName"] = p.MicroserviceName
 	}
-	var message *string
 	if p.Message != nil {
-		message = p.Message
+		m["message"] = p.Message
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"dumpProgressId":   dumpProgressId,
-		"name":             name,
-		"microserviceName": microserviceName,
-		"message":          message,
-		"createdAt":        createdAt,
-		"revision":         revision,
-	}
+	return m
 }
 
 func (p ImportErrorLog) Pointer() *ImportErrorLog {

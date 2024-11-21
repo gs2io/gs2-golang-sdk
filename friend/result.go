@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -499,7 +512,8 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type GetProfileResult struct {
-	Item *Profile `json:"item"`
+	Item     *Profile             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetProfileAsyncResult struct {
@@ -541,7 +555,8 @@ func (p GetProfileResult) Pointer() *GetProfileResult {
 }
 
 type GetProfileByUserIdResult struct {
-	Item *Profile `json:"item"`
+	Item     *Profile             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetProfileByUserIdAsyncResult struct {
@@ -583,7 +598,8 @@ func (p GetProfileByUserIdResult) Pointer() *GetProfileByUserIdResult {
 }
 
 type UpdateProfileResult struct {
-	Item *Profile `json:"item"`
+	Item     *Profile             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateProfileAsyncResult struct {
@@ -625,7 +641,8 @@ func (p UpdateProfileResult) Pointer() *UpdateProfileResult {
 }
 
 type UpdateProfileByUserIdResult struct {
-	Item *Profile `json:"item"`
+	Item     *Profile             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateProfileByUserIdAsyncResult struct {
@@ -667,7 +684,8 @@ func (p UpdateProfileByUserIdResult) Pointer() *UpdateProfileByUserIdResult {
 }
 
 type DeleteProfileByUserIdResult struct {
-	Item *Profile `json:"item"`
+	Item     *Profile             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteProfileByUserIdAsyncResult struct {
@@ -709,7 +727,8 @@ func (p DeleteProfileByUserIdResult) Pointer() *DeleteProfileByUserIdResult {
 }
 
 type UpdateProfileByStampSheetResult struct {
-	Item *Profile `json:"item"`
+	Item     *Profile             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateProfileByStampSheetAsyncResult struct {
@@ -751,8 +770,9 @@ func (p UpdateProfileByStampSheetResult) Pointer() *UpdateProfileByStampSheetRes
 }
 
 type DescribeFriendsResult struct {
-	Items         []FriendUser `json:"items"`
-	NextPageToken *string      `json:"nextPageToken"`
+	Items         []FriendUser         `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeFriendsAsyncResult struct {
@@ -798,8 +818,9 @@ func (p DescribeFriendsResult) Pointer() *DescribeFriendsResult {
 }
 
 type DescribeFriendsByUserIdResult struct {
-	Items         []FriendUser `json:"items"`
-	NextPageToken *string      `json:"nextPageToken"`
+	Items         []FriendUser         `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeFriendsByUserIdAsyncResult struct {
@@ -845,8 +866,9 @@ func (p DescribeFriendsByUserIdResult) Pointer() *DescribeFriendsByUserIdResult 
 }
 
 type DescribeBlackListResult struct {
-	Items         []*string `json:"items"`
-	NextPageToken *string   `json:"nextPageToken"`
+	Items         []*string            `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeBlackListAsyncResult struct {
@@ -893,8 +915,9 @@ func (p DescribeBlackListResult) Pointer() *DescribeBlackListResult {
 }
 
 type DescribeBlackListByUserIdResult struct {
-	Items         []*string `json:"items"`
-	NextPageToken *string   `json:"nextPageToken"`
+	Items         []*string            `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeBlackListByUserIdAsyncResult struct {
@@ -941,7 +964,8 @@ func (p DescribeBlackListByUserIdResult) Pointer() *DescribeBlackListByUserIdRes
 }
 
 type RegisterBlackListResult struct {
-	Item *BlackList `json:"item"`
+	Item     *BlackList           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type RegisterBlackListAsyncResult struct {
@@ -983,7 +1007,8 @@ func (p RegisterBlackListResult) Pointer() *RegisterBlackListResult {
 }
 
 type RegisterBlackListByUserIdResult struct {
-	Item *BlackList `json:"item"`
+	Item     *BlackList           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type RegisterBlackListByUserIdAsyncResult struct {
@@ -1025,7 +1050,8 @@ func (p RegisterBlackListByUserIdResult) Pointer() *RegisterBlackListByUserIdRes
 }
 
 type UnregisterBlackListResult struct {
-	Item *BlackList `json:"item"`
+	Item     *BlackList           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UnregisterBlackListAsyncResult struct {
@@ -1067,7 +1093,8 @@ func (p UnregisterBlackListResult) Pointer() *UnregisterBlackListResult {
 }
 
 type UnregisterBlackListByUserIdResult struct {
-	Item *BlackList `json:"item"`
+	Item     *BlackList           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UnregisterBlackListByUserIdAsyncResult struct {
@@ -1109,8 +1136,9 @@ func (p UnregisterBlackListByUserIdResult) Pointer() *UnregisterBlackListByUserI
 }
 
 type DescribeFollowsResult struct {
-	Items         []FollowUser `json:"items"`
-	NextPageToken *string      `json:"nextPageToken"`
+	Items         []FollowUser         `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeFollowsAsyncResult struct {
@@ -1156,8 +1184,9 @@ func (p DescribeFollowsResult) Pointer() *DescribeFollowsResult {
 }
 
 type DescribeFollowsByUserIdResult struct {
-	Items         []FollowUser `json:"items"`
-	NextPageToken *string      `json:"nextPageToken"`
+	Items         []FollowUser         `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeFollowsByUserIdAsyncResult struct {
@@ -1203,7 +1232,8 @@ func (p DescribeFollowsByUserIdResult) Pointer() *DescribeFollowsByUserIdResult 
 }
 
 type GetFollowResult struct {
-	Item *FollowUser `json:"item"`
+	Item     *FollowUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFollowAsyncResult struct {
@@ -1245,7 +1275,8 @@ func (p GetFollowResult) Pointer() *GetFollowResult {
 }
 
 type GetFollowByUserIdResult struct {
-	Item *FollowUser `json:"item"`
+	Item     *FollowUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFollowByUserIdAsyncResult struct {
@@ -1287,7 +1318,8 @@ func (p GetFollowByUserIdResult) Pointer() *GetFollowByUserIdResult {
 }
 
 type FollowResult struct {
-	Item *FollowUser `json:"item"`
+	Item     *FollowUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type FollowAsyncResult struct {
@@ -1329,7 +1361,8 @@ func (p FollowResult) Pointer() *FollowResult {
 }
 
 type FollowByUserIdResult struct {
-	Item *FollowUser `json:"item"`
+	Item     *FollowUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type FollowByUserIdAsyncResult struct {
@@ -1371,7 +1404,8 @@ func (p FollowByUserIdResult) Pointer() *FollowByUserIdResult {
 }
 
 type UnfollowResult struct {
-	Item *FollowUser `json:"item"`
+	Item     *FollowUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UnfollowAsyncResult struct {
@@ -1413,7 +1447,8 @@ func (p UnfollowResult) Pointer() *UnfollowResult {
 }
 
 type UnfollowByUserIdResult struct {
-	Item *FollowUser `json:"item"`
+	Item     *FollowUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UnfollowByUserIdAsyncResult struct {
@@ -1455,7 +1490,8 @@ func (p UnfollowByUserIdResult) Pointer() *UnfollowByUserIdResult {
 }
 
 type GetFriendResult struct {
-	Item *FriendUser `json:"item"`
+	Item     *FriendUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFriendAsyncResult struct {
@@ -1497,7 +1533,8 @@ func (p GetFriendResult) Pointer() *GetFriendResult {
 }
 
 type GetFriendByUserIdResult struct {
-	Item *FriendUser `json:"item"`
+	Item     *FriendUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFriendByUserIdAsyncResult struct {
@@ -1539,7 +1576,8 @@ func (p GetFriendByUserIdResult) Pointer() *GetFriendByUserIdResult {
 }
 
 type DeleteFriendResult struct {
-	Item *FriendUser `json:"item"`
+	Item     *FriendUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteFriendAsyncResult struct {
@@ -1581,7 +1619,8 @@ func (p DeleteFriendResult) Pointer() *DeleteFriendResult {
 }
 
 type DeleteFriendByUserIdResult struct {
-	Item *FriendUser `json:"item"`
+	Item     *FriendUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteFriendByUserIdAsyncResult struct {
@@ -1623,8 +1662,9 @@ func (p DeleteFriendByUserIdResult) Pointer() *DeleteFriendByUserIdResult {
 }
 
 type DescribeSendRequestsResult struct {
-	Items         []FriendRequest `json:"items"`
-	NextPageToken *string         `json:"nextPageToken"`
+	Items         []FriendRequest      `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeSendRequestsAsyncResult struct {
@@ -1670,8 +1710,9 @@ func (p DescribeSendRequestsResult) Pointer() *DescribeSendRequestsResult {
 }
 
 type DescribeSendRequestsByUserIdResult struct {
-	Items         []FriendRequest `json:"items"`
-	NextPageToken *string         `json:"nextPageToken"`
+	Items         []FriendRequest      `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeSendRequestsByUserIdAsyncResult struct {
@@ -1717,7 +1758,8 @@ func (p DescribeSendRequestsByUserIdResult) Pointer() *DescribeSendRequestsByUse
 }
 
 type GetSendRequestResult struct {
-	Item *FriendRequest `json:"item"`
+	Item     *FriendRequest       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetSendRequestAsyncResult struct {
@@ -1759,7 +1801,8 @@ func (p GetSendRequestResult) Pointer() *GetSendRequestResult {
 }
 
 type GetSendRequestByUserIdResult struct {
-	Item *FriendRequest `json:"item"`
+	Item     *FriendRequest       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetSendRequestByUserIdAsyncResult struct {
@@ -1801,7 +1844,8 @@ func (p GetSendRequestByUserIdResult) Pointer() *GetSendRequestByUserIdResult {
 }
 
 type SendRequestResult struct {
-	Item *FriendRequest `json:"item"`
+	Item     *FriendRequest       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type SendRequestAsyncResult struct {
@@ -1843,7 +1887,8 @@ func (p SendRequestResult) Pointer() *SendRequestResult {
 }
 
 type SendRequestByUserIdResult struct {
-	Item *FriendRequest `json:"item"`
+	Item     *FriendRequest       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type SendRequestByUserIdAsyncResult struct {
@@ -1885,7 +1930,8 @@ func (p SendRequestByUserIdResult) Pointer() *SendRequestByUserIdResult {
 }
 
 type DeleteRequestResult struct {
-	Item *FriendRequest `json:"item"`
+	Item     *FriendRequest       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteRequestAsyncResult struct {
@@ -1927,7 +1973,8 @@ func (p DeleteRequestResult) Pointer() *DeleteRequestResult {
 }
 
 type DeleteRequestByUserIdResult struct {
-	Item *FriendRequest `json:"item"`
+	Item     *FriendRequest       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteRequestByUserIdAsyncResult struct {
@@ -1969,8 +2016,9 @@ func (p DeleteRequestByUserIdResult) Pointer() *DeleteRequestByUserIdResult {
 }
 
 type DescribeReceiveRequestsResult struct {
-	Items         []FriendRequest `json:"items"`
-	NextPageToken *string         `json:"nextPageToken"`
+	Items         []FriendRequest      `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeReceiveRequestsAsyncResult struct {
@@ -2016,8 +2064,9 @@ func (p DescribeReceiveRequestsResult) Pointer() *DescribeReceiveRequestsResult 
 }
 
 type DescribeReceiveRequestsByUserIdResult struct {
-	Items         []FriendRequest `json:"items"`
-	NextPageToken *string         `json:"nextPageToken"`
+	Items         []FriendRequest      `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeReceiveRequestsByUserIdAsyncResult struct {
@@ -2063,7 +2112,8 @@ func (p DescribeReceiveRequestsByUserIdResult) Pointer() *DescribeReceiveRequest
 }
 
 type GetReceiveRequestResult struct {
-	Item *FriendRequest `json:"item"`
+	Item     *FriendRequest       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetReceiveRequestAsyncResult struct {
@@ -2105,7 +2155,8 @@ func (p GetReceiveRequestResult) Pointer() *GetReceiveRequestResult {
 }
 
 type GetReceiveRequestByUserIdResult struct {
-	Item *FriendRequest `json:"item"`
+	Item     *FriendRequest       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetReceiveRequestByUserIdAsyncResult struct {
@@ -2147,7 +2198,8 @@ func (p GetReceiveRequestByUserIdResult) Pointer() *GetReceiveRequestByUserIdRes
 }
 
 type AcceptRequestResult struct {
-	Item *FriendRequest `json:"item"`
+	Item     *FriendRequest       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AcceptRequestAsyncResult struct {
@@ -2189,7 +2241,8 @@ func (p AcceptRequestResult) Pointer() *AcceptRequestResult {
 }
 
 type AcceptRequestByUserIdResult struct {
-	Item *FriendRequest `json:"item"`
+	Item     *FriendRequest       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AcceptRequestByUserIdAsyncResult struct {
@@ -2231,7 +2284,8 @@ func (p AcceptRequestByUserIdResult) Pointer() *AcceptRequestByUserIdResult {
 }
 
 type RejectRequestResult struct {
-	Item *FriendRequest `json:"item"`
+	Item     *FriendRequest       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type RejectRequestAsyncResult struct {
@@ -2273,7 +2327,8 @@ func (p RejectRequestResult) Pointer() *RejectRequestResult {
 }
 
 type RejectRequestByUserIdResult struct {
-	Item *FriendRequest `json:"item"`
+	Item     *FriendRequest       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type RejectRequestByUserIdAsyncResult struct {
@@ -2315,7 +2370,8 @@ func (p RejectRequestByUserIdResult) Pointer() *RejectRequestByUserIdResult {
 }
 
 type GetPublicProfileResult struct {
-	Item *PublicProfile `json:"item"`
+	Item     *PublicProfile       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetPublicProfileAsyncResult struct {

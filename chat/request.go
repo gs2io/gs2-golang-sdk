@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -137,6 +138,7 @@ type CreateNamespaceRequest struct {
 	UnsubscribeRoomScript *ScriptSetting       `json:"unsubscribeRoomScript"`
 	PostNotification      *NotificationSetting `json:"postNotification"`
 	LogSetting            *LogSetting          `json:"logSetting"`
+	DryRun                *bool                `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -389,6 +391,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -476,6 +479,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -573,6 +577,7 @@ type UpdateNamespaceRequest struct {
 	UnsubscribeRoomScript *ScriptSetting       `json:"unsubscribeRoomScript"`
 	PostNotification      *NotificationSetting `json:"postNotification"`
 	LogSetting            *LogSetting          `json:"logSetting"`
+	DryRun                *bool                `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -825,6 +830,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -913,6 +919,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1032,6 +1039,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckDumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1151,6 +1159,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1270,6 +1279,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckCleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1389,6 +1399,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *PrepareImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1509,6 +1520,7 @@ type ImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1660,6 +1672,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1811,6 +1824,7 @@ type DescribeRoomsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRoomsRequest) UnmarshalJSON(data []byte) error {
@@ -1946,6 +1960,7 @@ type CreateRoomRequest struct {
 	Metadata           *string   `json:"metadata"`
 	Password           *string   `json:"password"`
 	WhiteListUserIds   []*string `json:"whiteListUserIds"`
+	DryRun             *bool     `json:"dryRun"`
 }
 
 func (p *CreateRoomRequest) UnmarshalJSON(data []byte) error {
@@ -2200,6 +2215,7 @@ type CreateRoomFromBackendRequest struct {
 	Password           *string   `json:"password"`
 	WhiteListUserIds   []*string `json:"whiteListUserIds"`
 	TimeOffsetToken    *string   `json:"timeOffsetToken"`
+	DryRun             *bool     `json:"dryRun"`
 }
 
 func (p *CreateRoomFromBackendRequest) UnmarshalJSON(data []byte) error {
@@ -2479,6 +2495,7 @@ type GetRoomRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	RoomName        *string `json:"roomName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetRoomRequest) UnmarshalJSON(data []byte) error {
@@ -2603,6 +2620,7 @@ type UpdateRoomRequest struct {
 	Password           *string   `json:"password"`
 	WhiteListUserIds   []*string `json:"whiteListUserIds"`
 	AccessToken        *string   `json:"accessToken"`
+	DryRun             *bool     `json:"dryRun"`
 }
 
 func (p *UpdateRoomRequest) UnmarshalJSON(data []byte) error {
@@ -2857,6 +2875,7 @@ type UpdateRoomFromBackendRequest struct {
 	WhiteListUserIds   []*string `json:"whiteListUserIds"`
 	UserId             *string   `json:"userId"`
 	TimeOffsetToken    *string   `json:"timeOffsetToken"`
+	DryRun             *bool     `json:"dryRun"`
 }
 
 func (p *UpdateRoomFromBackendRequest) UnmarshalJSON(data []byte) error {
@@ -3138,6 +3157,7 @@ type DeleteRoomRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	RoomName           *string `json:"roomName"`
 	AccessToken        *string `json:"accessToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteRoomRequest) UnmarshalJSON(data []byte) error {
@@ -3291,6 +3311,7 @@ type DeleteRoomFromBackendRequest struct {
 	RoomName           *string `json:"roomName"`
 	UserId             *string `json:"userId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteRoomFromBackendRequest) UnmarshalJSON(data []byte) error {
@@ -3476,6 +3497,7 @@ type DescribeMessagesRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	StartAt         *int64  `json:"startAt"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMessagesRequest) UnmarshalJSON(data []byte) error {
@@ -3684,6 +3706,7 @@ type DescribeMessagesByUserIdRequest struct {
 	StartAt         *int64  `json:"startAt"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeMessagesByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -3921,6 +3944,7 @@ type DescribeLatestMessagesRequest struct {
 	Password        *string `json:"password"`
 	AccessToken     *string `json:"accessToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeLatestMessagesRequest) UnmarshalJSON(data []byte) error {
@@ -4117,6 +4141,7 @@ type DescribeLatestMessagesByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeLatestMessagesByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4345,6 +4370,7 @@ type PostRequest struct {
 	Category           *int32  `json:"category"`
 	Metadata           *string `json:"metadata"`
 	Password           *string `json:"password"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *PostRequest) UnmarshalJSON(data []byte) error {
@@ -4574,6 +4600,7 @@ type PostByUserIdRequest struct {
 	Metadata           *string `json:"metadata"`
 	Password           *string `json:"password"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *PostByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4831,6 +4858,7 @@ type GetMessageRequest struct {
 	MessageName     *string `json:"messageName"`
 	Password        *string `json:"password"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetMessageRequest) UnmarshalJSON(data []byte) error {
@@ -5047,6 +5075,7 @@ type GetMessageByUserIdRequest struct {
 	Password        *string `json:"password"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetMessageByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5294,6 +5323,7 @@ type DeleteMessageRequest struct {
 	UserId             *string `json:"userId"`
 	MessageName        *string `json:"messageName"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteMessageRequest) UnmarshalJSON(data []byte) error {
@@ -5508,6 +5538,7 @@ type DescribeSubscribesRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeSubscribesRequest) UnmarshalJSON(data []byte) error {
@@ -5672,6 +5703,7 @@ type DescribeSubscribesByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeSubscribesByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5866,6 +5898,7 @@ type DescribeSubscribesByRoomNameRequest struct {
 	RoomName        *string `json:"roomName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeSubscribesByRoomNameRequest) UnmarshalJSON(data []byte) error {
@@ -6030,6 +6063,7 @@ type SubscribeRequest struct {
 	RoomName           *string            `json:"roomName"`
 	AccessToken        *string            `json:"accessToken"`
 	NotificationTypes  []NotificationType `json:"notificationTypes"`
+	DryRun             *bool              `json:"dryRun"`
 }
 
 func (p *SubscribeRequest) UnmarshalJSON(data []byte) error {
@@ -6196,6 +6230,7 @@ type SubscribeByUserIdRequest struct {
 	UserId             *string            `json:"userId"`
 	NotificationTypes  []NotificationType `json:"notificationTypes"`
 	TimeOffsetToken    *string            `json:"timeOffsetToken"`
+	DryRun             *bool              `json:"dryRun"`
 }
 
 func (p *SubscribeByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6390,6 +6425,7 @@ type GetSubscribeRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	RoomName        *string `json:"roomName"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetSubscribeRequest) UnmarshalJSON(data []byte) error {
@@ -6542,6 +6578,7 @@ type GetSubscribeByUserIdRequest struct {
 	RoomName        *string `json:"roomName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetSubscribeByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6726,6 +6763,7 @@ type UpdateNotificationTypeRequest struct {
 	RoomName           *string            `json:"roomName"`
 	AccessToken        *string            `json:"accessToken"`
 	NotificationTypes  []NotificationType `json:"notificationTypes"`
+	DryRun             *bool              `json:"dryRun"`
 }
 
 func (p *UpdateNotificationTypeRequest) UnmarshalJSON(data []byte) error {
@@ -6892,6 +6930,7 @@ type UpdateNotificationTypeByUserIdRequest struct {
 	UserId             *string            `json:"userId"`
 	NotificationTypes  []NotificationType `json:"notificationTypes"`
 	TimeOffsetToken    *string            `json:"timeOffsetToken"`
+	DryRun             *bool              `json:"dryRun"`
 }
 
 func (p *UpdateNotificationTypeByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7087,6 +7126,7 @@ type UnsubscribeRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	RoomName           *string `json:"roomName"`
 	AccessToken        *string `json:"accessToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *UnsubscribeRequest) UnmarshalJSON(data []byte) error {
@@ -7240,6 +7280,7 @@ type UnsubscribeByUserIdRequest struct {
 	RoomName           *string `json:"roomName"`
 	UserId             *string `json:"userId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *UnsubscribeByUserIdRequest) UnmarshalJSON(data []byte) error {

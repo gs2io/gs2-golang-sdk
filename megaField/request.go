@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -129,6 +130,7 @@ type CreateNamespaceRequest struct {
 	Name            *string     `json:"name"`
 	Description     *string     `json:"description"`
 	LogSetting      *LogSetting `json:"logSetting"`
+	DryRun          *bool       `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -263,6 +265,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -350,6 +353,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -439,6 +443,7 @@ type UpdateNamespaceRequest struct {
 	NamespaceName   *string     `json:"namespaceName"`
 	Description     *string     `json:"description"`
 	LogSetting      *LogSetting `json:"logSetting"`
+	DryRun          *bool       `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -573,6 +578,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -660,6 +666,7 @@ type DescribeAreaModelsRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeAreaModelsRequest) UnmarshalJSON(data []byte) error {
@@ -748,6 +755,7 @@ type GetAreaModelRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	AreaModelName   *string `json:"areaModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetAreaModelRequest) UnmarshalJSON(data []byte) error {
@@ -868,6 +876,7 @@ type DescribeAreaModelMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeAreaModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -1000,6 +1009,7 @@ type CreateAreaModelMasterRequest struct {
 	Name            *string `json:"name"`
 	Description     *string `json:"description"`
 	Metadata        *string `json:"metadata"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CreateAreaModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -1181,6 +1191,7 @@ type GetAreaModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	AreaModelName   *string `json:"areaModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetAreaModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -1302,6 +1313,7 @@ type UpdateAreaModelMasterRequest struct {
 	AreaModelName   *string `json:"areaModelName"`
 	Description     *string `json:"description"`
 	Metadata        *string `json:"metadata"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateAreaModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -1483,6 +1495,7 @@ type DeleteAreaModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	AreaModelName   *string `json:"areaModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteAreaModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -1602,6 +1615,7 @@ type DescribeLayerModelsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	AreaModelName   *string `json:"areaModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeLayerModelsRequest) UnmarshalJSON(data []byte) error {
@@ -1722,6 +1736,7 @@ type GetLayerModelRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	AreaModelName   *string `json:"areaModelName"`
 	LayerModelName  *string `json:"layerModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetLayerModelRequest) UnmarshalJSON(data []byte) error {
@@ -1874,6 +1889,7 @@ type DescribeLayerModelMastersRequest struct {
 	AreaModelName   *string `json:"areaModelName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeLayerModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -2038,6 +2054,7 @@ type CreateLayerModelMasterRequest struct {
 	Name            *string `json:"name"`
 	Description     *string `json:"description"`
 	Metadata        *string `json:"metadata"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CreateLayerModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2251,6 +2268,7 @@ type GetLayerModelMasterRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	AreaModelName   *string `json:"areaModelName"`
 	LayerModelName  *string `json:"layerModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetLayerModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2404,6 +2422,7 @@ type UpdateLayerModelMasterRequest struct {
 	LayerModelName  *string `json:"layerModelName"`
 	Description     *string `json:"description"`
 	Metadata        *string `json:"metadata"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateLayerModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2617,6 +2636,7 @@ type DeleteLayerModelMasterRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	AreaModelName   *string `json:"areaModelName"`
 	LayerModelName  *string `json:"layerModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteLayerModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2766,6 +2786,7 @@ type ExportMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2853,6 +2874,7 @@ type GetCurrentFieldMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentFieldMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2941,6 +2963,7 @@ type UpdateCurrentFieldMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Settings        *string `json:"settings"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentFieldMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3060,6 +3083,7 @@ type UpdateCurrentFieldMasterFromGitHubRequest struct {
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DryRun          *bool                  `json:"dryRun"`
 }
 
 func (p *UpdateCurrentFieldMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -3170,6 +3194,7 @@ type PutPositionRequest struct {
 	Position           *Position `json:"position"`
 	Vector             *Vector   `json:"vector"`
 	R                  *float32  `json:"r"`
+	DryRun             *bool     `json:"dryRun"`
 }
 
 func (p *PutPositionRequest) UnmarshalJSON(data []byte) error {
@@ -3401,6 +3426,7 @@ type PutPositionByUserIdRequest struct {
 	Vector             *Vector   `json:"vector"`
 	R                  *float32  `json:"r"`
 	TimeOffsetToken    *string   `json:"timeOffsetToken"`
+	DryRun             *bool     `json:"dryRun"`
 }
 
 func (p *PutPositionByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -3660,6 +3686,7 @@ type FetchPositionRequest struct {
 	AreaModelName      *string   `json:"areaModelName"`
 	LayerModelName     *string   `json:"layerModelName"`
 	UserIds            []*string `json:"userIds"`
+	DryRun             *bool     `json:"dryRun"`
 }
 
 func (p *FetchPositionRequest) UnmarshalJSON(data []byte) error {
@@ -3880,6 +3907,7 @@ type FetchPositionFromSystemRequest struct {
 	AreaModelName      *string   `json:"areaModelName"`
 	LayerModelName     *string   `json:"layerModelName"`
 	UserIds            []*string `json:"userIds"`
+	DryRun             *bool     `json:"dryRun"`
 }
 
 func (p *FetchPositionFromSystemRequest) UnmarshalJSON(data []byte) error {
@@ -4072,6 +4100,7 @@ type NearUserIdsRequest struct {
 	Point              *Position `json:"point"`
 	R                  *float32  `json:"r"`
 	Limit              *int32    `json:"limit"`
+	DryRun             *bool     `json:"dryRun"`
 }
 
 func (p *NearUserIdsRequest) UnmarshalJSON(data []byte) error {
@@ -4296,6 +4325,7 @@ type NearUserIdsFromSystemRequest struct {
 	Point              *Position `json:"point"`
 	R                  *float32  `json:"r"`
 	Limit              *int32    `json:"limit"`
+	DryRun             *bool     `json:"dryRun"`
 }
 
 func (p *NearUserIdsFromSystemRequest) UnmarshalJSON(data []byte) error {
@@ -4489,6 +4519,7 @@ type ActionRequest struct {
 	LayerModelName     *string     `json:"layerModelName"`
 	Position           *MyPosition `json:"position"`
 	Scopes             []Scope     `json:"scopes"`
+	DryRun             *bool       `json:"dryRun"`
 }
 
 func (p *ActionRequest) UnmarshalJSON(data []byte) error {
@@ -4704,6 +4735,7 @@ type ActionByUserIdRequest struct {
 	Position           *MyPosition `json:"position"`
 	Scopes             []Scope     `json:"scopes"`
 	TimeOffsetToken    *string     `json:"timeOffsetToken"`
+	DryRun             *bool       `json:"dryRun"`
 }
 
 func (p *ActionByUserIdRequest) UnmarshalJSON(data []byte) error {

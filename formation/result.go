@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -499,7 +512,8 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type GetFormModelResult struct {
-	Item *FormModel `json:"item"`
+	Item     *FormModel           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFormModelAsyncResult struct {
@@ -541,8 +555,9 @@ func (p GetFormModelResult) Pointer() *GetFormModelResult {
 }
 
 type DescribeFormModelMastersResult struct {
-	Items         []FormModelMaster `json:"items"`
-	NextPageToken *string           `json:"nextPageToken"`
+	Items         []FormModelMaster    `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeFormModelMastersAsyncResult struct {
@@ -588,7 +603,8 @@ func (p DescribeFormModelMastersResult) Pointer() *DescribeFormModelMastersResul
 }
 
 type CreateFormModelMasterResult struct {
-	Item *FormModelMaster `json:"item"`
+	Item     *FormModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateFormModelMasterAsyncResult struct {
@@ -630,7 +646,8 @@ func (p CreateFormModelMasterResult) Pointer() *CreateFormModelMasterResult {
 }
 
 type GetFormModelMasterResult struct {
-	Item *FormModelMaster `json:"item"`
+	Item     *FormModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFormModelMasterAsyncResult struct {
@@ -672,7 +689,8 @@ func (p GetFormModelMasterResult) Pointer() *GetFormModelMasterResult {
 }
 
 type UpdateFormModelMasterResult struct {
-	Item *FormModelMaster `json:"item"`
+	Item     *FormModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateFormModelMasterAsyncResult struct {
@@ -714,7 +732,8 @@ func (p UpdateFormModelMasterResult) Pointer() *UpdateFormModelMasterResult {
 }
 
 type DeleteFormModelMasterResult struct {
-	Item *FormModelMaster `json:"item"`
+	Item     *FormModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteFormModelMasterAsyncResult struct {
@@ -756,7 +775,8 @@ func (p DeleteFormModelMasterResult) Pointer() *DeleteFormModelMasterResult {
 }
 
 type DescribeMoldModelsResult struct {
-	Items []MoldModel `json:"items"`
+	Items    []MoldModel          `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeMoldModelsAsyncResult struct {
@@ -794,7 +814,8 @@ func (p DescribeMoldModelsResult) Pointer() *DescribeMoldModelsResult {
 }
 
 type GetMoldModelResult struct {
-	Item *MoldModel `json:"item"`
+	Item     *MoldModel           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetMoldModelAsyncResult struct {
@@ -836,8 +857,9 @@ func (p GetMoldModelResult) Pointer() *GetMoldModelResult {
 }
 
 type DescribeMoldModelMastersResult struct {
-	Items         []MoldModelMaster `json:"items"`
-	NextPageToken *string           `json:"nextPageToken"`
+	Items         []MoldModelMaster    `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeMoldModelMastersAsyncResult struct {
@@ -883,7 +905,8 @@ func (p DescribeMoldModelMastersResult) Pointer() *DescribeMoldModelMastersResul
 }
 
 type CreateMoldModelMasterResult struct {
-	Item *MoldModelMaster `json:"item"`
+	Item     *MoldModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateMoldModelMasterAsyncResult struct {
@@ -925,7 +948,8 @@ func (p CreateMoldModelMasterResult) Pointer() *CreateMoldModelMasterResult {
 }
 
 type GetMoldModelMasterResult struct {
-	Item *MoldModelMaster `json:"item"`
+	Item     *MoldModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetMoldModelMasterAsyncResult struct {
@@ -967,7 +991,8 @@ func (p GetMoldModelMasterResult) Pointer() *GetMoldModelMasterResult {
 }
 
 type UpdateMoldModelMasterResult struct {
-	Item *MoldModelMaster `json:"item"`
+	Item     *MoldModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateMoldModelMasterAsyncResult struct {
@@ -1009,7 +1034,8 @@ func (p UpdateMoldModelMasterResult) Pointer() *UpdateMoldModelMasterResult {
 }
 
 type DeleteMoldModelMasterResult struct {
-	Item *MoldModelMaster `json:"item"`
+	Item     *MoldModelMaster     `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteMoldModelMasterAsyncResult struct {
@@ -1051,7 +1077,8 @@ func (p DeleteMoldModelMasterResult) Pointer() *DeleteMoldModelMasterResult {
 }
 
 type DescribePropertyFormModelsResult struct {
-	Items []PropertyFormModel `json:"items"`
+	Items    []PropertyFormModel  `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribePropertyFormModelsAsyncResult struct {
@@ -1089,7 +1116,8 @@ func (p DescribePropertyFormModelsResult) Pointer() *DescribePropertyFormModelsR
 }
 
 type GetPropertyFormModelResult struct {
-	Item *PropertyFormModel `json:"item"`
+	Item     *PropertyFormModel   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetPropertyFormModelAsyncResult struct {
@@ -1133,6 +1161,7 @@ func (p GetPropertyFormModelResult) Pointer() *GetPropertyFormModelResult {
 type DescribePropertyFormModelMastersResult struct {
 	Items         []PropertyFormModelMaster `json:"items"`
 	NextPageToken *string                   `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata      `json:"metadata"`
 }
 
 type DescribePropertyFormModelMastersAsyncResult struct {
@@ -1178,7 +1207,8 @@ func (p DescribePropertyFormModelMastersResult) Pointer() *DescribePropertyFormM
 }
 
 type CreatePropertyFormModelMasterResult struct {
-	Item *PropertyFormModelMaster `json:"item"`
+	Item     *PropertyFormModelMaster `json:"item"`
+	Metadata *core.ResultMetadata     `json:"metadata"`
 }
 
 type CreatePropertyFormModelMasterAsyncResult struct {
@@ -1220,7 +1250,8 @@ func (p CreatePropertyFormModelMasterResult) Pointer() *CreatePropertyFormModelM
 }
 
 type GetPropertyFormModelMasterResult struct {
-	Item *PropertyFormModelMaster `json:"item"`
+	Item     *PropertyFormModelMaster `json:"item"`
+	Metadata *core.ResultMetadata     `json:"metadata"`
 }
 
 type GetPropertyFormModelMasterAsyncResult struct {
@@ -1262,7 +1293,8 @@ func (p GetPropertyFormModelMasterResult) Pointer() *GetPropertyFormModelMasterR
 }
 
 type UpdatePropertyFormModelMasterResult struct {
-	Item *PropertyFormModelMaster `json:"item"`
+	Item     *PropertyFormModelMaster `json:"item"`
+	Metadata *core.ResultMetadata     `json:"metadata"`
 }
 
 type UpdatePropertyFormModelMasterAsyncResult struct {
@@ -1304,7 +1336,8 @@ func (p UpdatePropertyFormModelMasterResult) Pointer() *UpdatePropertyFormModelM
 }
 
 type DeletePropertyFormModelMasterResult struct {
-	Item *PropertyFormModelMaster `json:"item"`
+	Item     *PropertyFormModelMaster `json:"item"`
+	Metadata *core.ResultMetadata     `json:"metadata"`
 }
 
 type DeletePropertyFormModelMasterAsyncResult struct {
@@ -1346,7 +1379,8 @@ func (p DeletePropertyFormModelMasterResult) Pointer() *DeletePropertyFormModelM
 }
 
 type ExportMasterResult struct {
-	Item *CurrentFormMaster `json:"item"`
+	Item     *CurrentFormMaster   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -1388,7 +1422,8 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
 }
 
 type GetCurrentFormMasterResult struct {
-	Item *CurrentFormMaster `json:"item"`
+	Item     *CurrentFormMaster   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetCurrentFormMasterAsyncResult struct {
@@ -1430,7 +1465,8 @@ func (p GetCurrentFormMasterResult) Pointer() *GetCurrentFormMasterResult {
 }
 
 type UpdateCurrentFormMasterResult struct {
-	Item *CurrentFormMaster `json:"item"`
+	Item     *CurrentFormMaster   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCurrentFormMasterAsyncResult struct {
@@ -1472,7 +1508,8 @@ func (p UpdateCurrentFormMasterResult) Pointer() *UpdateCurrentFormMasterResult 
 }
 
 type UpdateCurrentFormMasterFromGitHubResult struct {
-	Item *CurrentFormMaster `json:"item"`
+	Item     *CurrentFormMaster   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCurrentFormMasterFromGitHubAsyncResult struct {
@@ -1514,8 +1551,9 @@ func (p UpdateCurrentFormMasterFromGitHubResult) Pointer() *UpdateCurrentFormMas
 }
 
 type DescribeMoldsResult struct {
-	Items         []Mold  `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Mold               `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeMoldsAsyncResult struct {
@@ -1561,8 +1599,9 @@ func (p DescribeMoldsResult) Pointer() *DescribeMoldsResult {
 }
 
 type DescribeMoldsByUserIdResult struct {
-	Items         []Mold  `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Mold               `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeMoldsByUserIdAsyncResult struct {
@@ -1608,8 +1647,9 @@ func (p DescribeMoldsByUserIdResult) Pointer() *DescribeMoldsByUserIdResult {
 }
 
 type GetMoldResult struct {
-	Item      *Mold      `json:"item"`
-	MoldModel *MoldModel `json:"moldModel"`
+	Item      *Mold                `json:"item"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type GetMoldAsyncResult struct {
@@ -1664,8 +1704,9 @@ func (p GetMoldResult) Pointer() *GetMoldResult {
 }
 
 type GetMoldByUserIdResult struct {
-	Item      *Mold      `json:"item"`
-	MoldModel *MoldModel `json:"moldModel"`
+	Item      *Mold                `json:"item"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type GetMoldByUserIdAsyncResult struct {
@@ -1720,9 +1761,10 @@ func (p GetMoldByUserIdResult) Pointer() *GetMoldByUserIdResult {
 }
 
 type SetMoldCapacityByUserIdResult struct {
-	Item      *Mold      `json:"item"`
-	Old       *Mold      `json:"old"`
-	MoldModel *MoldModel `json:"moldModel"`
+	Item      *Mold                `json:"item"`
+	Old       *Mold                `json:"old"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type SetMoldCapacityByUserIdAsyncResult struct {
@@ -1790,8 +1832,9 @@ func (p SetMoldCapacityByUserIdResult) Pointer() *SetMoldCapacityByUserIdResult 
 }
 
 type AddMoldCapacityByUserIdResult struct {
-	Item      *Mold      `json:"item"`
-	MoldModel *MoldModel `json:"moldModel"`
+	Item      *Mold                `json:"item"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type AddMoldCapacityByUserIdAsyncResult struct {
@@ -1846,8 +1889,9 @@ func (p AddMoldCapacityByUserIdResult) Pointer() *AddMoldCapacityByUserIdResult 
 }
 
 type SubMoldCapacityResult struct {
-	Item      *Mold      `json:"item"`
-	MoldModel *MoldModel `json:"moldModel"`
+	Item      *Mold                `json:"item"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type SubMoldCapacityAsyncResult struct {
@@ -1902,8 +1946,9 @@ func (p SubMoldCapacityResult) Pointer() *SubMoldCapacityResult {
 }
 
 type SubMoldCapacityByUserIdResult struct {
-	Item      *Mold      `json:"item"`
-	MoldModel *MoldModel `json:"moldModel"`
+	Item      *Mold                `json:"item"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type SubMoldCapacityByUserIdAsyncResult struct {
@@ -1958,7 +2003,8 @@ func (p SubMoldCapacityByUserIdResult) Pointer() *SubMoldCapacityByUserIdResult 
 }
 
 type DeleteMoldResult struct {
-	Item *Mold `json:"item"`
+	Item     *Mold                `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteMoldAsyncResult struct {
@@ -2000,7 +2046,8 @@ func (p DeleteMoldResult) Pointer() *DeleteMoldResult {
 }
 
 type DeleteMoldByUserIdResult struct {
-	Item *Mold `json:"item"`
+	Item     *Mold                `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteMoldByUserIdAsyncResult struct {
@@ -2042,8 +2089,9 @@ func (p DeleteMoldByUserIdResult) Pointer() *DeleteMoldByUserIdResult {
 }
 
 type AddCapacityByStampSheetResult struct {
-	Item      *Mold      `json:"item"`
-	MoldModel *MoldModel `json:"moldModel"`
+	Item      *Mold                `json:"item"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type AddCapacityByStampSheetAsyncResult struct {
@@ -2098,9 +2146,10 @@ func (p AddCapacityByStampSheetResult) Pointer() *AddCapacityByStampSheetResult 
 }
 
 type SubCapacityByStampTaskResult struct {
-	Item            *Mold      `json:"item"`
-	MoldModel       *MoldModel `json:"moldModel"`
-	NewContextStack *string    `json:"newContextStack"`
+	Item            *Mold                `json:"item"`
+	MoldModel       *MoldModel           `json:"moldModel"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type SubCapacityByStampTaskAsyncResult struct {
@@ -2163,9 +2212,10 @@ func (p SubCapacityByStampTaskResult) Pointer() *SubCapacityByStampTaskResult {
 }
 
 type SetCapacityByStampSheetResult struct {
-	Item      *Mold      `json:"item"`
-	Old       *Mold      `json:"old"`
-	MoldModel *MoldModel `json:"moldModel"`
+	Item      *Mold                `json:"item"`
+	Old       *Mold                `json:"old"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type SetCapacityByStampSheetAsyncResult struct {
@@ -2233,8 +2283,9 @@ func (p SetCapacityByStampSheetResult) Pointer() *SetCapacityByStampSheetResult 
 }
 
 type DescribeFormsResult struct {
-	Items         []Form  `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Form               `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeFormsAsyncResult struct {
@@ -2280,8 +2331,9 @@ func (p DescribeFormsResult) Pointer() *DescribeFormsResult {
 }
 
 type DescribeFormsByUserIdResult struct {
-	Items         []Form  `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Form               `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeFormsByUserIdAsyncResult struct {
@@ -2327,10 +2379,11 @@ func (p DescribeFormsByUserIdResult) Pointer() *DescribeFormsByUserIdResult {
 }
 
 type GetFormResult struct {
-	Item      *Form      `json:"item"`
-	Mold      *Mold      `json:"mold"`
-	MoldModel *MoldModel `json:"moldModel"`
-	FormModel *FormModel `json:"formModel"`
+	Item      *Form                `json:"item"`
+	Mold      *Mold                `json:"mold"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	FormModel *FormModel           `json:"formModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFormAsyncResult struct {
@@ -2411,10 +2464,11 @@ func (p GetFormResult) Pointer() *GetFormResult {
 }
 
 type GetFormByUserIdResult struct {
-	Item      *Form      `json:"item"`
-	Mold      *Mold      `json:"mold"`
-	MoldModel *MoldModel `json:"moldModel"`
-	FormModel *FormModel `json:"formModel"`
+	Item      *Form                `json:"item"`
+	Mold      *Mold                `json:"mold"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	FormModel *FormModel           `json:"formModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFormByUserIdAsyncResult struct {
@@ -2495,12 +2549,13 @@ func (p GetFormByUserIdResult) Pointer() *GetFormByUserIdResult {
 }
 
 type GetFormWithSignatureResult struct {
-	Item      *Form      `json:"item"`
-	Body      *string    `json:"body"`
-	Signature *string    `json:"signature"`
-	Mold      *Mold      `json:"mold"`
-	MoldModel *MoldModel `json:"moldModel"`
-	FormModel *FormModel `json:"formModel"`
+	Item      *Form                `json:"item"`
+	Body      *string              `json:"body"`
+	Signature *string              `json:"signature"`
+	Mold      *Mold                `json:"mold"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	FormModel *FormModel           `json:"formModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFormWithSignatureAsyncResult struct {
@@ -2597,12 +2652,13 @@ func (p GetFormWithSignatureResult) Pointer() *GetFormWithSignatureResult {
 }
 
 type GetFormWithSignatureByUserIdResult struct {
-	Item      *Form      `json:"item"`
-	Body      *string    `json:"body"`
-	Signature *string    `json:"signature"`
-	Mold      *Mold      `json:"mold"`
-	MoldModel *MoldModel `json:"moldModel"`
-	FormModel *FormModel `json:"formModel"`
+	Item      *Form                `json:"item"`
+	Body      *string              `json:"body"`
+	Signature *string              `json:"signature"`
+	Mold      *Mold                `json:"mold"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	FormModel *FormModel           `json:"formModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFormWithSignatureByUserIdAsyncResult struct {
@@ -2699,10 +2755,11 @@ func (p GetFormWithSignatureByUserIdResult) Pointer() *GetFormWithSignatureByUse
 }
 
 type SetFormByUserIdResult struct {
-	Item      *Form      `json:"item"`
-	Mold      *Mold      `json:"mold"`
-	MoldModel *MoldModel `json:"moldModel"`
-	FormModel *FormModel `json:"formModel"`
+	Item      *Form                `json:"item"`
+	Mold      *Mold                `json:"mold"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	FormModel *FormModel           `json:"formModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type SetFormByUserIdAsyncResult struct {
@@ -2783,10 +2840,11 @@ func (p SetFormByUserIdResult) Pointer() *SetFormByUserIdResult {
 }
 
 type SetFormWithSignatureResult struct {
-	Item      *Form      `json:"item"`
-	Mold      *Mold      `json:"mold"`
-	MoldModel *MoldModel `json:"moldModel"`
-	FormModel *FormModel `json:"formModel"`
+	Item      *Form                `json:"item"`
+	Mold      *Mold                `json:"mold"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	FormModel *FormModel           `json:"formModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type SetFormWithSignatureAsyncResult struct {
@@ -2867,12 +2925,13 @@ func (p SetFormWithSignatureResult) Pointer() *SetFormWithSignatureResult {
 }
 
 type AcquireActionsToFormPropertiesResult struct {
-	Item                      *Form   `json:"item"`
-	Mold                      *Mold   `json:"mold"`
-	TransactionId             *string `json:"transactionId"`
-	StampSheet                *string `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool   `json:"autoRunStampSheet"`
+	Item                      *Form                `json:"item"`
+	Mold                      *Mold                `json:"mold"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type AcquireActionsToFormPropertiesAsyncResult struct {
@@ -2959,10 +3018,11 @@ func (p AcquireActionsToFormPropertiesResult) Pointer() *AcquireActionsToFormPro
 }
 
 type DeleteFormResult struct {
-	Item      *Form      `json:"item"`
-	Mold      *Mold      `json:"mold"`
-	MoldModel *MoldModel `json:"moldModel"`
-	FormModel *FormModel `json:"formModel"`
+	Item      *Form                `json:"item"`
+	Mold      *Mold                `json:"mold"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	FormModel *FormModel           `json:"formModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteFormAsyncResult struct {
@@ -3043,10 +3103,11 @@ func (p DeleteFormResult) Pointer() *DeleteFormResult {
 }
 
 type DeleteFormByUserIdResult struct {
-	Item      *Form      `json:"item"`
-	Mold      *Mold      `json:"mold"`
-	MoldModel *MoldModel `json:"moldModel"`
-	FormModel *FormModel `json:"formModel"`
+	Item      *Form                `json:"item"`
+	Mold      *Mold                `json:"mold"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	FormModel *FormModel           `json:"formModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteFormByUserIdAsyncResult struct {
@@ -3127,12 +3188,13 @@ func (p DeleteFormByUserIdResult) Pointer() *DeleteFormByUserIdResult {
 }
 
 type AcquireActionToFormPropertiesByStampSheetResult struct {
-	Item                      *Form   `json:"item"`
-	Mold                      *Mold   `json:"mold"`
-	TransactionId             *string `json:"transactionId"`
-	StampSheet                *string `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool   `json:"autoRunStampSheet"`
+	Item                      *Form                `json:"item"`
+	Mold                      *Mold                `json:"mold"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type AcquireActionToFormPropertiesByStampSheetAsyncResult struct {
@@ -3219,10 +3281,11 @@ func (p AcquireActionToFormPropertiesByStampSheetResult) Pointer() *AcquireActio
 }
 
 type SetFormByStampSheetResult struct {
-	Item      *Form      `json:"item"`
-	Mold      *Mold      `json:"mold"`
-	MoldModel *MoldModel `json:"moldModel"`
-	FormModel *FormModel `json:"formModel"`
+	Item      *Form                `json:"item"`
+	Mold      *Mold                `json:"mold"`
+	MoldModel *MoldModel           `json:"moldModel"`
+	FormModel *FormModel           `json:"formModel"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type SetFormByStampSheetAsyncResult struct {
@@ -3303,8 +3366,9 @@ func (p SetFormByStampSheetResult) Pointer() *SetFormByStampSheetResult {
 }
 
 type DescribePropertyFormsResult struct {
-	Items         []PropertyForm `json:"items"`
-	NextPageToken *string        `json:"nextPageToken"`
+	Items         []PropertyForm       `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribePropertyFormsAsyncResult struct {
@@ -3350,8 +3414,9 @@ func (p DescribePropertyFormsResult) Pointer() *DescribePropertyFormsResult {
 }
 
 type DescribePropertyFormsByUserIdResult struct {
-	Items         []PropertyForm `json:"items"`
-	NextPageToken *string        `json:"nextPageToken"`
+	Items         []PropertyForm       `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribePropertyFormsByUserIdAsyncResult struct {
@@ -3397,8 +3462,9 @@ func (p DescribePropertyFormsByUserIdResult) Pointer() *DescribePropertyFormsByU
 }
 
 type GetPropertyFormResult struct {
-	Item              *PropertyForm      `json:"item"`
-	PropertyFormModel *PropertyFormModel `json:"propertyFormModel"`
+	Item              *PropertyForm        `json:"item"`
+	PropertyFormModel *PropertyFormModel   `json:"propertyFormModel"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
 }
 
 type GetPropertyFormAsyncResult struct {
@@ -3453,8 +3519,9 @@ func (p GetPropertyFormResult) Pointer() *GetPropertyFormResult {
 }
 
 type GetPropertyFormByUserIdResult struct {
-	Item              *PropertyForm      `json:"item"`
-	PropertyFormModel *PropertyFormModel `json:"propertyFormModel"`
+	Item              *PropertyForm        `json:"item"`
+	PropertyFormModel *PropertyFormModel   `json:"propertyFormModel"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
 }
 
 type GetPropertyFormByUserIdAsyncResult struct {
@@ -3509,10 +3576,11 @@ func (p GetPropertyFormByUserIdResult) Pointer() *GetPropertyFormByUserIdResult 
 }
 
 type GetPropertyFormWithSignatureResult struct {
-	Item              *PropertyForm      `json:"item"`
-	Body              *string            `json:"body"`
-	Signature         *string            `json:"signature"`
-	PropertyFormModel *PropertyFormModel `json:"propertyFormModel"`
+	Item              *PropertyForm        `json:"item"`
+	Body              *string              `json:"body"`
+	Signature         *string              `json:"signature"`
+	PropertyFormModel *PropertyFormModel   `json:"propertyFormModel"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
 }
 
 type GetPropertyFormWithSignatureAsyncResult struct {
@@ -3583,10 +3651,11 @@ func (p GetPropertyFormWithSignatureResult) Pointer() *GetPropertyFormWithSignat
 }
 
 type GetPropertyFormWithSignatureByUserIdResult struct {
-	Item              *PropertyForm      `json:"item"`
-	Body              *string            `json:"body"`
-	Signature         *string            `json:"signature"`
-	PropertyFormModel *PropertyFormModel `json:"propertyFormModel"`
+	Item              *PropertyForm        `json:"item"`
+	Body              *string              `json:"body"`
+	Signature         *string              `json:"signature"`
+	PropertyFormModel *PropertyFormModel   `json:"propertyFormModel"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
 }
 
 type GetPropertyFormWithSignatureByUserIdAsyncResult struct {
@@ -3657,8 +3726,9 @@ func (p GetPropertyFormWithSignatureByUserIdResult) Pointer() *GetPropertyFormWi
 }
 
 type SetPropertyFormByUserIdResult struct {
-	Item              *PropertyForm      `json:"item"`
-	PropertyFormModel *PropertyFormModel `json:"propertyFormModel"`
+	Item              *PropertyForm        `json:"item"`
+	PropertyFormModel *PropertyFormModel   `json:"propertyFormModel"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
 }
 
 type SetPropertyFormByUserIdAsyncResult struct {
@@ -3713,8 +3783,9 @@ func (p SetPropertyFormByUserIdResult) Pointer() *SetPropertyFormByUserIdResult 
 }
 
 type SetPropertyFormWithSignatureResult struct {
-	Item              *PropertyForm      `json:"item"`
-	ProeprtyFormModel *PropertyFormModel `json:"proeprtyFormModel"`
+	Item              *PropertyForm        `json:"item"`
+	ProeprtyFormModel *PropertyFormModel   `json:"proeprtyFormModel"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
 }
 
 type SetPropertyFormWithSignatureAsyncResult struct {
@@ -3769,11 +3840,12 @@ func (p SetPropertyFormWithSignatureResult) Pointer() *SetPropertyFormWithSignat
 }
 
 type AcquireActionsToPropertyFormPropertiesResult struct {
-	Item                      *PropertyForm `json:"item"`
-	TransactionId             *string       `json:"transactionId"`
-	StampSheet                *string       `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string       `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool         `json:"autoRunStampSheet"`
+	Item                      *PropertyForm        `json:"item"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type AcquireActionsToPropertyFormPropertiesAsyncResult struct {
@@ -3847,8 +3919,9 @@ func (p AcquireActionsToPropertyFormPropertiesResult) Pointer() *AcquireActionsT
 }
 
 type DeletePropertyFormResult struct {
-	Item              *PropertyForm      `json:"item"`
-	PropertyFormModel *PropertyFormModel `json:"propertyFormModel"`
+	Item              *PropertyForm        `json:"item"`
+	PropertyFormModel *PropertyFormModel   `json:"propertyFormModel"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
 }
 
 type DeletePropertyFormAsyncResult struct {
@@ -3903,8 +3976,9 @@ func (p DeletePropertyFormResult) Pointer() *DeletePropertyFormResult {
 }
 
 type DeletePropertyFormByUserIdResult struct {
-	Item              *PropertyForm      `json:"item"`
-	PropertyFormModel *PropertyFormModel `json:"propertyFormModel"`
+	Item              *PropertyForm        `json:"item"`
+	PropertyFormModel *PropertyFormModel   `json:"propertyFormModel"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
 }
 
 type DeletePropertyFormByUserIdAsyncResult struct {
@@ -3959,11 +4033,12 @@ func (p DeletePropertyFormByUserIdResult) Pointer() *DeletePropertyFormByUserIdR
 }
 
 type AcquireActionToPropertyFormPropertiesByStampSheetResult struct {
-	Item                      *PropertyForm `json:"item"`
-	TransactionId             *string       `json:"transactionId"`
-	StampSheet                *string       `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string       `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool         `json:"autoRunStampSheet"`
+	Item                      *PropertyForm        `json:"item"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type AcquireActionToPropertyFormPropertiesByStampSheetAsyncResult struct {

@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -131,6 +132,7 @@ type CreateNamespaceRequest struct {
 	TransactionSetting *TransactionSetting `json:"transactionSetting"`
 	ReceiveScript      *ScriptSetting      `json:"receiveScript"`
 	LogSetting         *LogSetting         `json:"logSetting"`
+	DryRun             *bool               `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -297,6 +299,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -384,6 +387,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -475,6 +479,7 @@ type UpdateNamespaceRequest struct {
 	TransactionSetting *TransactionSetting `json:"transactionSetting"`
 	ReceiveScript      *ScriptSetting      `json:"receiveScript"`
 	LogSetting         *LogSetting         `json:"logSetting"`
+	DryRun             *bool               `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -641,6 +646,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -729,6 +735,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -848,6 +855,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckDumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -967,6 +975,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1086,6 +1095,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckCleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1205,6 +1215,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *PrepareImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1325,6 +1336,7 @@ type ImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1476,6 +1488,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1627,6 +1640,7 @@ type DescribeBonusModelMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeBonusModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -1767,6 +1781,7 @@ type CreateBonusModelMasterRequest struct {
 	MissedReceiveRelief               *string         `json:"missedReceiveRelief"`
 	MissedReceiveReliefVerifyActions  []VerifyAction  `json:"missedReceiveReliefVerifyActions"`
 	MissedReceiveReliefConsumeActions []ConsumeAction `json:"missedReceiveReliefConsumeActions"`
+	DryRun                            *bool           `json:"dryRun"`
 }
 
 func (p *CreateBonusModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2119,6 +2134,7 @@ type GetBonusModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	BonusModelName  *string `json:"bonusModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetBonusModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2248,6 +2264,7 @@ type UpdateBonusModelMasterRequest struct {
 	MissedReceiveRelief               *string         `json:"missedReceiveRelief"`
 	MissedReceiveReliefVerifyActions  []VerifyAction  `json:"missedReceiveReliefVerifyActions"`
 	MissedReceiveReliefConsumeActions []ConsumeAction `json:"missedReceiveReliefConsumeActions"`
+	DryRun                            *bool           `json:"dryRun"`
 }
 
 func (p *UpdateBonusModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2600,6 +2617,7 @@ type DeleteBonusModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	BonusModelName  *string `json:"bonusModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteBonusModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2718,6 +2736,7 @@ type ExportMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2805,6 +2824,7 @@ type GetCurrentBonusMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentBonusMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2893,6 +2913,7 @@ type UpdateCurrentBonusMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Settings        *string `json:"settings"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentBonusMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3012,6 +3033,7 @@ type UpdateCurrentBonusMasterFromGitHubRequest struct {
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DryRun          *bool                  `json:"dryRun"`
 }
 
 func (p *UpdateCurrentBonusMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -3115,6 +3137,7 @@ type DescribeBonusModelsRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeBonusModelsRequest) UnmarshalJSON(data []byte) error {
@@ -3203,6 +3226,7 @@ type GetBonusModelRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	BonusModelName  *string `json:"bonusModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetBonusModelRequest) UnmarshalJSON(data []byte) error {
@@ -3325,6 +3349,7 @@ type ReceiveRequest struct {
 	BonusModelName     *string  `json:"bonusModelName"`
 	AccessToken        *string  `json:"accessToken"`
 	Config             []Config `json:"config"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *ReceiveRequest) UnmarshalJSON(data []byte) error {
@@ -3491,6 +3516,7 @@ type ReceiveByUserIdRequest struct {
 	UserId             *string  `json:"userId"`
 	Config             []Config `json:"config"`
 	TimeOffsetToken    *string  `json:"timeOffsetToken"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *ReceiveByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -3688,6 +3714,7 @@ type MissedReceiveRequest struct {
 	AccessToken        *string  `json:"accessToken"`
 	StepNumber         *int32   `json:"stepNumber"`
 	Config             []Config `json:"config"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *MissedReceiveRequest) UnmarshalJSON(data []byte) error {
@@ -3866,6 +3893,7 @@ type MissedReceiveByUserIdRequest struct {
 	StepNumber         *int32   `json:"stepNumber"`
 	Config             []Config `json:"config"`
 	TimeOffsetToken    *string  `json:"timeOffsetToken"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *MissedReceiveByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4072,6 +4100,7 @@ type DescribeReceiveStatusesRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeReceiveStatusesRequest) UnmarshalJSON(data []byte) error {
@@ -4236,6 +4265,7 @@ type DescribeReceiveStatusesByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeReceiveStatusesByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4429,6 +4459,7 @@ type GetReceiveStatusRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	BonusModelName  *string `json:"bonusModelName"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetReceiveStatusRequest) UnmarshalJSON(data []byte) error {
@@ -4581,6 +4612,7 @@ type GetReceiveStatusByUserIdRequest struct {
 	BonusModelName  *string `json:"bonusModelName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetReceiveStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4765,6 +4797,7 @@ type DeleteReceiveStatusByUserIdRequest struct {
 	BonusModelName     *string `json:"bonusModelName"`
 	UserId             *string `json:"userId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteReceiveStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4946,6 +4979,7 @@ type DeleteReceiveStatusByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteReceiveStatusByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -5068,6 +5102,7 @@ type MarkReceivedRequest struct {
 	BonusModelName     *string `json:"bonusModelName"`
 	AccessToken        *string `json:"accessToken"`
 	StepNumber         *int32  `json:"stepNumber"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *MarkReceivedRequest) UnmarshalJSON(data []byte) error {
@@ -5233,6 +5268,7 @@ type MarkReceivedByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	StepNumber         *int32  `json:"stepNumber"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *MarkReceivedByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5429,6 +5465,7 @@ type UnmarkReceivedByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	StepNumber         *int32  `json:"stepNumber"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *UnmarkReceivedByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5621,6 +5658,7 @@ type MarkReceivedByStampTaskRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *MarkReceivedByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -5740,6 +5778,7 @@ type UnmarkReceivedByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UnmarkReceivedByStampSheetRequest) UnmarshalJSON(data []byte) error {

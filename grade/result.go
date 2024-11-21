@@ -24,8 +24,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -71,7 +72,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -113,7 +115,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -150,7 +153,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -192,7 +196,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -234,7 +239,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -276,6 +282,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -302,7 +309,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -339,6 +347,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -365,6 +374,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -391,8 +401,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -437,6 +448,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -463,7 +475,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -500,8 +513,9 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type DescribeGradeModelMastersResult struct {
-	Items         []GradeModelMaster `json:"items"`
-	NextPageToken *string            `json:"nextPageToken"`
+	Items         []GradeModelMaster   `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeGradeModelMastersAsyncResult struct {
@@ -547,7 +561,8 @@ func (p DescribeGradeModelMastersResult) Pointer() *DescribeGradeModelMastersRes
 }
 
 type CreateGradeModelMasterResult struct {
-	Item *GradeModelMaster `json:"item"`
+	Item     *GradeModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateGradeModelMasterAsyncResult struct {
@@ -589,7 +604,8 @@ func (p CreateGradeModelMasterResult) Pointer() *CreateGradeModelMasterResult {
 }
 
 type GetGradeModelMasterResult struct {
-	Item *GradeModelMaster `json:"item"`
+	Item     *GradeModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetGradeModelMasterAsyncResult struct {
@@ -631,7 +647,8 @@ func (p GetGradeModelMasterResult) Pointer() *GetGradeModelMasterResult {
 }
 
 type UpdateGradeModelMasterResult struct {
-	Item *GradeModelMaster `json:"item"`
+	Item     *GradeModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateGradeModelMasterAsyncResult struct {
@@ -673,7 +690,8 @@ func (p UpdateGradeModelMasterResult) Pointer() *UpdateGradeModelMasterResult {
 }
 
 type DeleteGradeModelMasterResult struct {
-	Item *GradeModelMaster `json:"item"`
+	Item     *GradeModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteGradeModelMasterAsyncResult struct {
@@ -715,7 +733,8 @@ func (p DeleteGradeModelMasterResult) Pointer() *DeleteGradeModelMasterResult {
 }
 
 type DescribeGradeModelsResult struct {
-	Items []GradeModel `json:"items"`
+	Items    []GradeModel         `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeGradeModelsAsyncResult struct {
@@ -753,7 +772,8 @@ func (p DescribeGradeModelsResult) Pointer() *DescribeGradeModelsResult {
 }
 
 type GetGradeModelResult struct {
-	Item *GradeModel `json:"item"`
+	Item     *GradeModel          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetGradeModelAsyncResult struct {
@@ -795,8 +815,9 @@ func (p GetGradeModelResult) Pointer() *GetGradeModelResult {
 }
 
 type DescribeStatusesResult struct {
-	Items         []Status `json:"items"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Items         []Status             `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeStatusesAsyncResult struct {
@@ -842,8 +863,9 @@ func (p DescribeStatusesResult) Pointer() *DescribeStatusesResult {
 }
 
 type DescribeStatusesByUserIdResult struct {
-	Items         []Status `json:"items"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Items         []Status             `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeStatusesByUserIdAsyncResult struct {
@@ -889,7 +911,8 @@ func (p DescribeStatusesByUserIdResult) Pointer() *DescribeStatusesByUserIdResul
 }
 
 type GetStatusResult struct {
-	Item *Status `json:"item"`
+	Item     *Status              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetStatusAsyncResult struct {
@@ -931,7 +954,8 @@ func (p GetStatusResult) Pointer() *GetStatusResult {
 }
 
 type GetStatusByUserIdResult struct {
-	Item *Status `json:"item"`
+	Item     *Status              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetStatusByUserIdAsyncResult struct {
@@ -973,9 +997,10 @@ func (p GetStatusByUserIdResult) Pointer() *GetStatusByUserIdResult {
 }
 
 type AddGradeByUserIdResult struct {
-	Item                    *Status            `json:"item"`
-	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
-	ExperienceStatus        *experience.Status `json:"experienceStatus"`
+	Item                    *Status              `json:"item"`
+	ExperienceNamespaceName *string              `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status   `json:"experienceStatus"`
+	Metadata                *core.ResultMetadata `json:"metadata"`
 }
 
 type AddGradeByUserIdAsyncResult struct {
@@ -1038,9 +1063,10 @@ func (p AddGradeByUserIdResult) Pointer() *AddGradeByUserIdResult {
 }
 
 type SubGradeResult struct {
-	Item                    *Status            `json:"item"`
-	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
-	ExperienceStatus        *experience.Status `json:"experienceStatus"`
+	Item                    *Status              `json:"item"`
+	ExperienceNamespaceName *string              `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status   `json:"experienceStatus"`
+	Metadata                *core.ResultMetadata `json:"metadata"`
 }
 
 type SubGradeAsyncResult struct {
@@ -1103,9 +1129,10 @@ func (p SubGradeResult) Pointer() *SubGradeResult {
 }
 
 type SubGradeByUserIdResult struct {
-	Item                    *Status            `json:"item"`
-	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
-	ExperienceStatus        *experience.Status `json:"experienceStatus"`
+	Item                    *Status              `json:"item"`
+	ExperienceNamespaceName *string              `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status   `json:"experienceStatus"`
+	Metadata                *core.ResultMetadata `json:"metadata"`
 }
 
 type SubGradeByUserIdAsyncResult struct {
@@ -1168,10 +1195,11 @@ func (p SubGradeByUserIdResult) Pointer() *SubGradeByUserIdResult {
 }
 
 type SetGradeByUserIdResult struct {
-	Item                    *Status            `json:"item"`
-	Old                     *Status            `json:"old"`
-	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
-	ExperienceStatus        *experience.Status `json:"experienceStatus"`
+	Item                    *Status              `json:"item"`
+	Old                     *Status              `json:"old"`
+	ExperienceNamespaceName *string              `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status   `json:"experienceStatus"`
+	Metadata                *core.ResultMetadata `json:"metadata"`
 }
 
 type SetGradeByUserIdAsyncResult struct {
@@ -1247,9 +1275,10 @@ func (p SetGradeByUserIdResult) Pointer() *SetGradeByUserIdResult {
 }
 
 type ApplyRankCapResult struct {
-	Item                    *Status            `json:"item"`
-	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
-	ExperienceStatus        *experience.Status `json:"experienceStatus"`
+	Item                    *Status              `json:"item"`
+	ExperienceNamespaceName *string              `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status   `json:"experienceStatus"`
+	Metadata                *core.ResultMetadata `json:"metadata"`
 }
 
 type ApplyRankCapAsyncResult struct {
@@ -1312,9 +1341,10 @@ func (p ApplyRankCapResult) Pointer() *ApplyRankCapResult {
 }
 
 type ApplyRankCapByUserIdResult struct {
-	Item                    *Status            `json:"item"`
-	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
-	ExperienceStatus        *experience.Status `json:"experienceStatus"`
+	Item                    *Status              `json:"item"`
+	ExperienceNamespaceName *string              `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status   `json:"experienceStatus"`
+	Metadata                *core.ResultMetadata `json:"metadata"`
 }
 
 type ApplyRankCapByUserIdAsyncResult struct {
@@ -1377,7 +1407,8 @@ func (p ApplyRankCapByUserIdResult) Pointer() *ApplyRankCapByUserIdResult {
 }
 
 type DeleteStatusByUserIdResult struct {
-	Item *Status `json:"item"`
+	Item     *Status              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteStatusByUserIdAsyncResult struct {
@@ -1419,6 +1450,7 @@ func (p DeleteStatusByUserIdResult) Pointer() *DeleteStatusByUserIdResult {
 }
 
 type VerifyGradeResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyGradeAsyncResult struct {
@@ -1445,6 +1477,7 @@ func (p VerifyGradeResult) Pointer() *VerifyGradeResult {
 }
 
 type VerifyGradeByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyGradeByUserIdAsyncResult struct {
@@ -1471,6 +1504,7 @@ func (p VerifyGradeByUserIdResult) Pointer() *VerifyGradeByUserIdResult {
 }
 
 type VerifyGradeUpMaterialResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyGradeUpMaterialAsyncResult struct {
@@ -1497,6 +1531,7 @@ func (p VerifyGradeUpMaterialResult) Pointer() *VerifyGradeUpMaterialResult {
 }
 
 type VerifyGradeUpMaterialByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyGradeUpMaterialByUserIdAsyncResult struct {
@@ -1523,9 +1558,10 @@ func (p VerifyGradeUpMaterialByUserIdResult) Pointer() *VerifyGradeUpMaterialByU
 }
 
 type AddGradeByStampSheetResult struct {
-	Item                    *Status            `json:"item"`
-	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
-	ExperienceStatus        *experience.Status `json:"experienceStatus"`
+	Item                    *Status              `json:"item"`
+	ExperienceNamespaceName *string              `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status   `json:"experienceStatus"`
+	Metadata                *core.ResultMetadata `json:"metadata"`
 }
 
 type AddGradeByStampSheetAsyncResult struct {
@@ -1588,9 +1624,10 @@ func (p AddGradeByStampSheetResult) Pointer() *AddGradeByStampSheetResult {
 }
 
 type ApplyRankCapByStampSheetResult struct {
-	Item                    *Status            `json:"item"`
-	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
-	ExperienceStatus        *experience.Status `json:"experienceStatus"`
+	Item                    *Status              `json:"item"`
+	ExperienceNamespaceName *string              `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status   `json:"experienceStatus"`
+	Metadata                *core.ResultMetadata `json:"metadata"`
 }
 
 type ApplyRankCapByStampSheetAsyncResult struct {
@@ -1653,10 +1690,11 @@ func (p ApplyRankCapByStampSheetResult) Pointer() *ApplyRankCapByStampSheetResul
 }
 
 type SubGradeByStampTaskResult struct {
-	Item                    *Status            `json:"item"`
-	NewContextStack         *string            `json:"newContextStack"`
-	ExperienceNamespaceName *string            `json:"experienceNamespaceName"`
-	ExperienceStatus        *experience.Status `json:"experienceStatus"`
+	Item                    *Status              `json:"item"`
+	NewContextStack         *string              `json:"newContextStack"`
+	ExperienceNamespaceName *string              `json:"experienceNamespaceName"`
+	ExperienceStatus        *experience.Status   `json:"experienceStatus"`
+	Metadata                *core.ResultMetadata `json:"metadata"`
 }
 
 type SubGradeByStampTaskAsyncResult struct {
@@ -1727,11 +1765,12 @@ func (p SubGradeByStampTaskResult) Pointer() *SubGradeByStampTaskResult {
 }
 
 type MultiplyAcquireActionsByUserIdResult struct {
-	Items                     []AcquireAction `json:"items"`
-	TransactionId             *string         `json:"transactionId"`
-	StampSheet                *string         `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string         `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool           `json:"autoRunStampSheet"`
+	Items                     []AcquireAction      `json:"items"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type MultiplyAcquireActionsByUserIdAsyncResult struct {
@@ -1801,11 +1840,12 @@ func (p MultiplyAcquireActionsByUserIdResult) Pointer() *MultiplyAcquireActionsB
 }
 
 type MultiplyAcquireActionsByStampSheetResult struct {
-	Items                     []AcquireAction `json:"items"`
-	TransactionId             *string         `json:"transactionId"`
-	StampSheet                *string         `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string         `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool           `json:"autoRunStampSheet"`
+	Items                     []AcquireAction      `json:"items"`
+	TransactionId             *string              `json:"transactionId"`
+	StampSheet                *string              `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
+	Metadata                  *core.ResultMetadata `json:"metadata"`
 }
 
 type MultiplyAcquireActionsByStampSheetAsyncResult struct {
@@ -1875,7 +1915,8 @@ func (p MultiplyAcquireActionsByStampSheetResult) Pointer() *MultiplyAcquireActi
 }
 
 type VerifyGradeByStampTaskResult struct {
-	NewContextStack *string `json:"newContextStack"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyGradeByStampTaskAsyncResult struct {
@@ -1912,7 +1953,8 @@ func (p VerifyGradeByStampTaskResult) Pointer() *VerifyGradeByStampTaskResult {
 }
 
 type VerifyGradeUpMaterialByStampTaskResult struct {
-	NewContextStack *string `json:"newContextStack"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyGradeUpMaterialByStampTaskAsyncResult struct {
@@ -1949,7 +1991,8 @@ func (p VerifyGradeUpMaterialByStampTaskResult) Pointer() *VerifyGradeUpMaterial
 }
 
 type ExportMasterResult struct {
-	Item *CurrentGradeMaster `json:"item"`
+	Item     *CurrentGradeMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -1991,7 +2034,8 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
 }
 
 type GetCurrentGradeMasterResult struct {
-	Item *CurrentGradeMaster `json:"item"`
+	Item     *CurrentGradeMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetCurrentGradeMasterAsyncResult struct {
@@ -2033,7 +2077,8 @@ func (p GetCurrentGradeMasterResult) Pointer() *GetCurrentGradeMasterResult {
 }
 
 type UpdateCurrentGradeMasterResult struct {
-	Item *CurrentGradeMaster `json:"item"`
+	Item     *CurrentGradeMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCurrentGradeMasterAsyncResult struct {
@@ -2075,7 +2120,8 @@ func (p UpdateCurrentGradeMasterResult) Pointer() *UpdateCurrentGradeMasterResul
 }
 
 type UpdateCurrentGradeMasterFromGitHubResult struct {
-	Item *CurrentGradeMaster `json:"item"`
+	Item     *CurrentGradeMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCurrentGradeMasterFromGitHubAsyncResult struct {

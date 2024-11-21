@@ -2298,6 +2298,101 @@ func CastLogCostsFromDict(data []LogCost) []interface{} {
 	return v
 }
 
+type LogRate struct {
+	Base *float64   `json:"base"`
+	Logs []*float64 `json:"logs"`
+}
+
+func (p *LogRate) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = LogRate{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = LogRate{}
+	} else {
+		*p = LogRate{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["base"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Base)
+		}
+		if v, ok := d["logs"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Logs)
+		}
+	}
+	return nil
+}
+
+func NewLogRateFromJson(data string) LogRate {
+	req := LogRate{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewLogRateFromDict(data map[string]interface{}) LogRate {
+	return LogRate{
+		Base: func() *float64 {
+			v, ok := data["base"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat64(data["base"])
+		}(),
+		Logs: func() []*float64 {
+			v, ok := data["logs"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastFloat64s(core.CastArray(v))
+		}(),
+	}
+}
+
+func (p LogRate) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Base != nil {
+		m["base"] = p.Base
+	}
+	if p.Logs != nil {
+		m["logs"] = core.CastFloat64sFromDict(
+			p.Logs,
+		)
+	}
+	return m
+}
+
+func (p LogRate) Pointer() *LogRate {
+	return &p
+}
+
+func CastLogRates(data []interface{}) []LogRate {
+	v := make([]LogRate, 0)
+	for _, d := range data {
+		v = append(v, NewLogRateFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastLogRatesFromDict(data []LogRate) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type AcquireAction struct {
 	Action  *string `json:"action"`
 	Request *string `json:"request"`

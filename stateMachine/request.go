@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -135,6 +136,7 @@ type CreateNamespaceRequest struct {
 	ErrorScript                 *ScriptSetting      `json:"errorScript"`
 	LowestStateMachineVersion   *int64              `json:"lowestStateMachineVersion"`
 	LogSetting                  *LogSetting         `json:"logSetting"`
+	DryRun                      *bool               `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -375,6 +377,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -462,6 +465,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -557,6 +561,7 @@ type UpdateNamespaceRequest struct {
 	ErrorScript                 *ScriptSetting      `json:"errorScript"`
 	LowestStateMachineVersion   *int64              `json:"lowestStateMachineVersion"`
 	LogSetting                  *LogSetting         `json:"logSetting"`
+	DryRun                      *bool               `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -797,6 +802,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -885,6 +891,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1004,6 +1011,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckDumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1123,6 +1131,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1242,6 +1251,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckCleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1361,6 +1371,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *PrepareImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1481,6 +1492,7 @@ type ImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1632,6 +1644,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1783,6 +1796,7 @@ type DescribeStateMachineMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeStateMachineMastersRequest) UnmarshalJSON(data []byte) error {
@@ -1914,6 +1928,7 @@ type UpdateStateMachineMasterRequest struct {
 	NamespaceName        *string `json:"namespaceName"`
 	MainStateMachineName *string `json:"mainStateMachineName"`
 	Payload              *string `json:"payload"`
+	DryRun               *bool   `json:"dryRun"`
 }
 
 func (p *UpdateStateMachineMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2064,6 +2079,7 @@ type GetStateMachineMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Version         *int64  `json:"version"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetStateMachineMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2163,6 +2179,7 @@ type DeleteStateMachineMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Version         *int64  `json:"version"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteStateMachineMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2265,6 +2282,7 @@ type DescribeStatusesRequest struct {
 	Status          *string `json:"status"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeStatusesRequest) UnmarshalJSON(data []byte) error {
@@ -2461,6 +2479,7 @@ type DescribeStatusesByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeStatusesByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -2685,6 +2704,7 @@ type GetStatusRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	AccessToken     *string `json:"accessToken"`
 	StatusName      *string `json:"statusName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetStatusRequest) UnmarshalJSON(data []byte) error {
@@ -2837,6 +2857,7 @@ type GetStatusByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	StatusName      *string `json:"statusName"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -3022,6 +3043,7 @@ type StartStateMachineByUserIdRequest struct {
 	Args               *string `json:"args"`
 	Ttl                *int32  `json:"ttl"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *StartStateMachineByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -3214,6 +3236,7 @@ type StartStateMachineByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *StartStateMachineByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -3337,6 +3360,7 @@ type EmitRequest struct {
 	StatusName         *string `json:"statusName"`
 	EventName          *string `json:"eventName"`
 	Args               *string `json:"args"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *EmitRequest) UnmarshalJSON(data []byte) error {
@@ -3554,6 +3578,7 @@ type EmitByUserIdRequest struct {
 	EventName          *string `json:"eventName"`
 	Args               *string `json:"args"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *EmitByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -3800,6 +3825,7 @@ type ReportRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	StatusName         *string `json:"statusName"`
 	Events             []Event `json:"events"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *ReportRequest) UnmarshalJSON(data []byte) error {
@@ -3966,6 +3992,7 @@ type ReportByUserIdRequest struct {
 	StatusName         *string `json:"statusName"`
 	Events             []Event `json:"events"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *ReportByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4162,6 +4189,7 @@ type DeleteStatusByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	StatusName         *string `json:"statusName"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4345,6 +4373,7 @@ type ExitStateMachineRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	AccessToken        *string `json:"accessToken"`
 	StatusName         *string `json:"statusName"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *ExitStateMachineRequest) UnmarshalJSON(data []byte) error {
@@ -4498,6 +4527,7 @@ type ExitStateMachineByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	StatusName         *string `json:"statusName"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *ExitStateMachineByUserIdRequest) UnmarshalJSON(data []byte) error {

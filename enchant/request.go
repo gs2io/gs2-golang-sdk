@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -130,6 +131,7 @@ type CreateNamespaceRequest struct {
 	Description        *string             `json:"description"`
 	TransactionSetting *TransactionSetting `json:"transactionSetting"`
 	LogSetting         *LogSetting         `json:"logSetting"`
+	DryRun             *bool               `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -280,6 +282,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -367,6 +370,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -457,6 +461,7 @@ type UpdateNamespaceRequest struct {
 	Description        *string             `json:"description"`
 	TransactionSetting *TransactionSetting `json:"transactionSetting"`
 	LogSetting         *LogSetting         `json:"logSetting"`
+	DryRun             *bool               `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -607,6 +612,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -695,6 +701,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -814,6 +821,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckDumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -933,6 +941,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1052,6 +1061,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckCleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1171,6 +1181,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *PrepareImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1291,6 +1302,7 @@ type ImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1442,6 +1454,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1591,6 +1604,7 @@ type DescribeBalanceParameterModelsRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeBalanceParameterModelsRequest) UnmarshalJSON(data []byte) error {
@@ -1679,6 +1693,7 @@ type GetBalanceParameterModelRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ParameterName   *string `json:"parameterName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetBalanceParameterModelRequest) UnmarshalJSON(data []byte) error {
@@ -1799,6 +1814,7 @@ type DescribeBalanceParameterModelMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeBalanceParameterModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -1934,6 +1950,7 @@ type CreateBalanceParameterModelMasterRequest struct {
 	TotalValue           *int64                       `json:"totalValue"`
 	InitialValueStrategy *string                      `json:"initialValueStrategy"`
 	Parameters           []BalanceParameterValueModel `json:"parameters"`
+	DryRun               *bool                        `json:"dryRun"`
 }
 
 func (p *CreateBalanceParameterModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2169,6 +2186,7 @@ type GetBalanceParameterModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ParameterName   *string `json:"parameterName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetBalanceParameterModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2293,6 +2311,7 @@ type UpdateBalanceParameterModelMasterRequest struct {
 	TotalValue           *int64                       `json:"totalValue"`
 	InitialValueStrategy *string                      `json:"initialValueStrategy"`
 	Parameters           []BalanceParameterValueModel `json:"parameters"`
+	DryRun               *bool                        `json:"dryRun"`
 }
 
 func (p *UpdateBalanceParameterModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2528,6 +2547,7 @@ type DeleteBalanceParameterModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ParameterName   *string `json:"parameterName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteBalanceParameterModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2646,6 +2666,7 @@ type DescribeRarityParameterModelsRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRarityParameterModelsRequest) UnmarshalJSON(data []byte) error {
@@ -2734,6 +2755,7 @@ type GetRarityParameterModelRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ParameterName   *string `json:"parameterName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetRarityParameterModelRequest) UnmarshalJSON(data []byte) error {
@@ -2854,6 +2876,7 @@ type DescribeRarityParameterModelMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRarityParameterModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -2989,6 +3012,7 @@ type CreateRarityParameterModelMasterRequest struct {
 	MaximumParameterCount *int32                      `json:"maximumParameterCount"`
 	ParameterCounts       []RarityParameterCountModel `json:"parameterCounts"`
 	Parameters            []RarityParameterValueModel `json:"parameters"`
+	DryRun                *bool                       `json:"dryRun"`
 }
 
 func (p *CreateRarityParameterModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3205,6 +3229,7 @@ type GetRarityParameterModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ParameterName   *string `json:"parameterName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetRarityParameterModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3329,6 +3354,7 @@ type UpdateRarityParameterModelMasterRequest struct {
 	MaximumParameterCount *int32                      `json:"maximumParameterCount"`
 	ParameterCounts       []RarityParameterCountModel `json:"parameterCounts"`
 	Parameters            []RarityParameterValueModel `json:"parameters"`
+	DryRun                *bool                       `json:"dryRun"`
 }
 
 func (p *UpdateRarityParameterModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3545,6 +3571,7 @@ type DeleteRarityParameterModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ParameterName   *string `json:"parameterName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteRarityParameterModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3663,6 +3690,7 @@ type ExportMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3750,6 +3778,7 @@ type GetCurrentParameterMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentParameterMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3838,6 +3867,7 @@ type UpdateCurrentParameterMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Settings        *string `json:"settings"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentParameterMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3957,6 +3987,7 @@ type UpdateCurrentParameterMasterFromGitHubRequest struct {
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DryRun          *bool                  `json:"dryRun"`
 }
 
 func (p *UpdateCurrentParameterMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -4064,6 +4095,7 @@ type DescribeBalanceParameterStatusesRequest struct {
 	ParameterName   *string `json:"parameterName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeBalanceParameterStatusesRequest) UnmarshalJSON(data []byte) error {
@@ -4260,6 +4292,7 @@ type DescribeBalanceParameterStatusesByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeBalanceParameterStatusesByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4485,6 +4518,7 @@ type GetBalanceParameterStatusRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	ParameterName   *string `json:"parameterName"`
 	PropertyId      *string `json:"propertyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetBalanceParameterStatusRequest) UnmarshalJSON(data []byte) error {
@@ -4669,6 +4703,7 @@ type GetBalanceParameterStatusByUserIdRequest struct {
 	ParameterName   *string `json:"parameterName"`
 	PropertyId      *string `json:"propertyId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetBalanceParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4885,6 +4920,7 @@ type DeleteBalanceParameterStatusByUserIdRequest struct {
 	ParameterName      *string `json:"parameterName"`
 	PropertyId         *string `json:"propertyId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteBalanceParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5102,6 +5138,7 @@ type ReDrawBalanceParameterStatusByUserIdRequest struct {
 	PropertyId          *string   `json:"propertyId"`
 	FixedParameterNames []*string `json:"fixedParameterNames"`
 	TimeOffsetToken     *string   `json:"timeOffsetToken"`
+	DryRun              *bool     `json:"dryRun"`
 }
 
 func (p *ReDrawBalanceParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5350,6 +5387,7 @@ type ReDrawBalanceParameterStatusByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ReDrawBalanceParameterStatusByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -5474,6 +5512,7 @@ type SetBalanceParameterStatusByUserIdRequest struct {
 	PropertyId         *string                 `json:"propertyId"`
 	ParameterValues    []BalanceParameterValue `json:"parameterValues"`
 	TimeOffsetToken    *string                 `json:"timeOffsetToken"`
+	DryRun             *bool                   `json:"dryRun"`
 }
 
 func (p *SetBalanceParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5698,6 +5737,7 @@ type SetBalanceParameterStatusByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *SetBalanceParameterStatusByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -5820,6 +5860,7 @@ type DescribeRarityParameterStatusesRequest struct {
 	ParameterName   *string `json:"parameterName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRarityParameterStatusesRequest) UnmarshalJSON(data []byte) error {
@@ -6016,6 +6057,7 @@ type DescribeRarityParameterStatusesByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRarityParameterStatusesByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6241,6 +6283,7 @@ type GetRarityParameterStatusRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	ParameterName   *string `json:"parameterName"`
 	PropertyId      *string `json:"propertyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetRarityParameterStatusRequest) UnmarshalJSON(data []byte) error {
@@ -6425,6 +6468,7 @@ type GetRarityParameterStatusByUserIdRequest struct {
 	ParameterName   *string `json:"parameterName"`
 	PropertyId      *string `json:"propertyId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetRarityParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6641,6 +6685,7 @@ type DeleteRarityParameterStatusByUserIdRequest struct {
 	ParameterName      *string `json:"parameterName"`
 	PropertyId         *string `json:"propertyId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteRarityParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6858,6 +6903,7 @@ type ReDrawRarityParameterStatusByUserIdRequest struct {
 	PropertyId          *string   `json:"propertyId"`
 	FixedParameterNames []*string `json:"fixedParameterNames"`
 	TimeOffsetToken     *string   `json:"timeOffsetToken"`
+	DryRun              *bool     `json:"dryRun"`
 }
 
 func (p *ReDrawRarityParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7106,6 +7152,7 @@ type ReDrawRarityParameterStatusByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ReDrawRarityParameterStatusByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -7230,6 +7277,7 @@ type AddRarityParameterStatusByUserIdRequest struct {
 	PropertyId         *string `json:"propertyId"`
 	Count              *int32  `json:"count"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *AddRarityParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7453,6 +7501,7 @@ type AddRarityParameterStatusByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *AddRarityParameterStatusByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -7579,6 +7628,7 @@ type VerifyRarityParameterStatusRequest struct {
 	ParameterValueName              *string `json:"parameterValueName"`
 	ParameterCount                  *int32  `json:"parameterCount"`
 	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	DryRun                          *bool   `json:"dryRun"`
 }
 
 func (p *VerifyRarityParameterStatusRequest) UnmarshalJSON(data []byte) error {
@@ -7852,6 +7902,7 @@ type VerifyRarityParameterStatusByUserIdRequest struct {
 	ParameterCount                  *int32  `json:"parameterCount"`
 	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
 	TimeOffsetToken                 *string `json:"timeOffsetToken"`
+	DryRun                          *bool   `json:"dryRun"`
 }
 
 func (p *VerifyRarityParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -8148,6 +8199,7 @@ type VerifyRarityParameterStatusByStampTaskRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *VerifyRarityParameterStatusByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -8272,6 +8324,7 @@ type SetRarityParameterStatusByUserIdRequest struct {
 	PropertyId         *string                `json:"propertyId"`
 	ParameterValues    []RarityParameterValue `json:"parameterValues"`
 	TimeOffsetToken    *string                `json:"timeOffsetToken"`
+	DryRun             *bool                  `json:"dryRun"`
 }
 
 func (p *SetRarityParameterStatusByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -8496,6 +8549,7 @@ type SetRarityParameterStatusByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *SetRarityParameterStatusByStampSheetRequest) UnmarshalJSON(data []byte) error {

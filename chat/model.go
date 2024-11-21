@@ -289,119 +289,88 @@ func NewNamespaceFromDict(data map[string]interface{}) Namespace {
 }
 
 func (p Namespace) ToDict() map[string]interface{} {
-
-	var namespaceId *string
+	m := map[string]interface{}{}
 	if p.NamespaceId != nil {
-		namespaceId = p.NamespaceId
+		m["namespaceId"] = p.NamespaceId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var description *string
 	if p.Description != nil {
-		description = p.Description
+		m["description"] = p.Description
 	}
-	var allowCreateRoom *bool
 	if p.AllowCreateRoom != nil {
-		allowCreateRoom = p.AllowCreateRoom
+		m["allowCreateRoom"] = p.AllowCreateRoom
 	}
-	var messageLifeTimeDays *int32
 	if p.MessageLifeTimeDays != nil {
-		messageLifeTimeDays = p.MessageLifeTimeDays
+		m["messageLifeTimeDays"] = p.MessageLifeTimeDays
 	}
-	var postMessageScript map[string]interface{}
 	if p.PostMessageScript != nil {
-		postMessageScript = func() map[string]interface{} {
+		m["postMessageScript"] = func() map[string]interface{} {
 			if p.PostMessageScript == nil {
 				return nil
 			}
 			return p.PostMessageScript.ToDict()
 		}()
 	}
-	var createRoomScript map[string]interface{}
 	if p.CreateRoomScript != nil {
-		createRoomScript = func() map[string]interface{} {
+		m["createRoomScript"] = func() map[string]interface{} {
 			if p.CreateRoomScript == nil {
 				return nil
 			}
 			return p.CreateRoomScript.ToDict()
 		}()
 	}
-	var deleteRoomScript map[string]interface{}
 	if p.DeleteRoomScript != nil {
-		deleteRoomScript = func() map[string]interface{} {
+		m["deleteRoomScript"] = func() map[string]interface{} {
 			if p.DeleteRoomScript == nil {
 				return nil
 			}
 			return p.DeleteRoomScript.ToDict()
 		}()
 	}
-	var subscribeRoomScript map[string]interface{}
 	if p.SubscribeRoomScript != nil {
-		subscribeRoomScript = func() map[string]interface{} {
+		m["subscribeRoomScript"] = func() map[string]interface{} {
 			if p.SubscribeRoomScript == nil {
 				return nil
 			}
 			return p.SubscribeRoomScript.ToDict()
 		}()
 	}
-	var unsubscribeRoomScript map[string]interface{}
 	if p.UnsubscribeRoomScript != nil {
-		unsubscribeRoomScript = func() map[string]interface{} {
+		m["unsubscribeRoomScript"] = func() map[string]interface{} {
 			if p.UnsubscribeRoomScript == nil {
 				return nil
 			}
 			return p.UnsubscribeRoomScript.ToDict()
 		}()
 	}
-	var postNotification map[string]interface{}
 	if p.PostNotification != nil {
-		postNotification = func() map[string]interface{} {
+		m["postNotification"] = func() map[string]interface{} {
 			if p.PostNotification == nil {
 				return nil
 			}
 			return p.PostNotification.ToDict()
 		}()
 	}
-	var logSetting map[string]interface{}
 	if p.LogSetting != nil {
-		logSetting = func() map[string]interface{} {
+		m["logSetting"] = func() map[string]interface{} {
 			if p.LogSetting == nil {
 				return nil
 			}
 			return p.LogSetting.ToDict()
 		}()
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"namespaceId":           namespaceId,
-		"name":                  name,
-		"description":           description,
-		"allowCreateRoom":       allowCreateRoom,
-		"messageLifeTimeDays":   messageLifeTimeDays,
-		"postMessageScript":     postMessageScript,
-		"createRoomScript":      createRoomScript,
-		"deleteRoomScript":      deleteRoomScript,
-		"subscribeRoomScript":   subscribeRoomScript,
-		"unsubscribeRoomScript": unsubscribeRoomScript,
-		"postNotification":      postNotification,
-		"logSetting":            logSetting,
-		"createdAt":             createdAt,
-		"updatedAt":             updatedAt,
-		"revision":              revision,
-	}
+	return m
 }
 
 func (p Namespace) Pointer() *Namespace {
@@ -687,56 +656,37 @@ func NewRoomFromDict(data map[string]interface{}) Room {
 }
 
 func (p Room) ToDict() map[string]interface{} {
-
-	var roomId *string
+	m := map[string]interface{}{}
 	if p.RoomId != nil {
-		roomId = p.RoomId
+		m["roomId"] = p.RoomId
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var password *string
 	if p.Password != nil {
-		password = p.Password
+		m["password"] = p.Password
 	}
-	var whiteListUserIds []interface{}
 	if p.WhiteListUserIds != nil {
-		whiteListUserIds = core.CastStringsFromDict(
+		m["whiteListUserIds"] = core.CastStringsFromDict(
 			p.WhiteListUserIds,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var updatedAt *int64
 	if p.UpdatedAt != nil {
-		updatedAt = p.UpdatedAt
+		m["updatedAt"] = p.UpdatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"roomId":           roomId,
-		"name":             name,
-		"userId":           userId,
-		"metadata":         metadata,
-		"password":         password,
-		"whiteListUserIds": whiteListUserIds,
-		"createdAt":        createdAt,
-		"updatedAt":        updatedAt,
-		"revision":         revision,
-	}
+	return m
 }
 
 func (p Room) Pointer() *Room {
@@ -988,49 +938,32 @@ func NewMessageFromDict(data map[string]interface{}) Message {
 }
 
 func (p Message) ToDict() map[string]interface{} {
-
-	var messageId *string
+	m := map[string]interface{}{}
 	if p.MessageId != nil {
-		messageId = p.MessageId
+		m["messageId"] = p.MessageId
 	}
-	var roomName *string
 	if p.RoomName != nil {
-		roomName = p.RoomName
+		m["roomName"] = p.RoomName
 	}
-	var name *string
 	if p.Name != nil {
-		name = p.Name
+		m["name"] = p.Name
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var category *int32
 	if p.Category != nil {
-		category = p.Category
+		m["category"] = p.Category
 	}
-	var metadata *string
 	if p.Metadata != nil {
-		metadata = p.Metadata
+		m["metadata"] = p.Metadata
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"messageId": messageId,
-		"roomName":  roomName,
-		"name":      name,
-		"userId":    userId,
-		"category":  category,
-		"metadata":  metadata,
-		"createdAt": createdAt,
-		"revision":  revision,
-	}
+	return m
 }
 
 func (p Message) Pointer() *Message {
@@ -1219,41 +1152,28 @@ func NewSubscribeFromDict(data map[string]interface{}) Subscribe {
 }
 
 func (p Subscribe) ToDict() map[string]interface{} {
-
-	var subscribeId *string
+	m := map[string]interface{}{}
 	if p.SubscribeId != nil {
-		subscribeId = p.SubscribeId
+		m["subscribeId"] = p.SubscribeId
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var roomName *string
 	if p.RoomName != nil {
-		roomName = p.RoomName
+		m["roomName"] = p.RoomName
 	}
-	var notificationTypes []interface{}
 	if p.NotificationTypes != nil {
-		notificationTypes = CastNotificationTypesFromDict(
+		m["notificationTypes"] = CastNotificationTypesFromDict(
 			p.NotificationTypes,
 		)
 	}
-	var createdAt *int64
 	if p.CreatedAt != nil {
-		createdAt = p.CreatedAt
+		m["createdAt"] = p.CreatedAt
 	}
-	var revision *int64
 	if p.Revision != nil {
-		revision = p.Revision
+		m["revision"] = p.Revision
 	}
-	return map[string]interface{}{
-		"subscribeId":       subscribeId,
-		"userId":            userId,
-		"roomName":          roomName,
-		"notificationTypes": notificationTypes,
-		"createdAt":         createdAt,
-		"revision":          revision,
-	}
+	return m
 }
 
 func (p Subscribe) Pointer() *Subscribe {
@@ -1339,19 +1259,14 @@ func NewNotificationTypeFromDict(data map[string]interface{}) NotificationType {
 }
 
 func (p NotificationType) ToDict() map[string]interface{} {
-
-	var category *int32
+	m := map[string]interface{}{}
 	if p.Category != nil {
-		category = p.Category
+		m["category"] = p.Category
 	}
-	var enableTransferMobilePushNotification *bool
 	if p.EnableTransferMobilePushNotification != nil {
-		enableTransferMobilePushNotification = p.EnableTransferMobilePushNotification
+		m["enableTransferMobilePushNotification"] = p.EnableTransferMobilePushNotification
 	}
-	return map[string]interface{}{
-		"category":                             category,
-		"enableTransferMobilePushNotification": enableTransferMobilePushNotification,
-	}
+	return m
 }
 
 func (p NotificationType) Pointer() *NotificationType {
@@ -1539,29 +1454,20 @@ func NewScriptSettingFromDict(data map[string]interface{}) ScriptSetting {
 }
 
 func (p ScriptSetting) ToDict() map[string]interface{} {
-
-	var triggerScriptId *string
+	m := map[string]interface{}{}
 	if p.TriggerScriptId != nil {
-		triggerScriptId = p.TriggerScriptId
+		m["triggerScriptId"] = p.TriggerScriptId
 	}
-	var doneTriggerTargetType *string
 	if p.DoneTriggerTargetType != nil {
-		doneTriggerTargetType = p.DoneTriggerTargetType
+		m["doneTriggerTargetType"] = p.DoneTriggerTargetType
 	}
-	var doneTriggerScriptId *string
 	if p.DoneTriggerScriptId != nil {
-		doneTriggerScriptId = p.DoneTriggerScriptId
+		m["doneTriggerScriptId"] = p.DoneTriggerScriptId
 	}
-	var doneTriggerQueueNamespaceId *string
 	if p.DoneTriggerQueueNamespaceId != nil {
-		doneTriggerQueueNamespaceId = p.DoneTriggerQueueNamespaceId
+		m["doneTriggerQueueNamespaceId"] = p.DoneTriggerQueueNamespaceId
 	}
-	return map[string]interface{}{
-		"triggerScriptId":             triggerScriptId,
-		"doneTriggerTargetType":       doneTriggerTargetType,
-		"doneTriggerScriptId":         doneTriggerScriptId,
-		"doneTriggerQueueNamespaceId": doneTriggerQueueNamespaceId,
-	}
+	return m
 }
 
 func (p ScriptSetting) Pointer() *ScriptSetting {
@@ -1698,24 +1604,17 @@ func NewNotificationSettingFromDict(data map[string]interface{}) NotificationSet
 }
 
 func (p NotificationSetting) ToDict() map[string]interface{} {
-
-	var gatewayNamespaceId *string
+	m := map[string]interface{}{}
 	if p.GatewayNamespaceId != nil {
-		gatewayNamespaceId = p.GatewayNamespaceId
+		m["gatewayNamespaceId"] = p.GatewayNamespaceId
 	}
-	var enableTransferMobileNotification *bool
 	if p.EnableTransferMobileNotification != nil {
-		enableTransferMobileNotification = p.EnableTransferMobileNotification
+		m["enableTransferMobileNotification"] = p.EnableTransferMobileNotification
 	}
-	var sound *string
 	if p.Sound != nil {
-		sound = p.Sound
+		m["sound"] = p.Sound
 	}
-	return map[string]interface{}{
-		"gatewayNamespaceId":               gatewayNamespaceId,
-		"enableTransferMobileNotification": enableTransferMobileNotification,
-		"sound":                            sound,
-	}
+	return m
 }
 
 func (p NotificationSetting) Pointer() *NotificationSetting {
@@ -1810,14 +1709,11 @@ func NewLogSettingFromDict(data map[string]interface{}) LogSetting {
 }
 
 func (p LogSetting) ToDict() map[string]interface{} {
-
-	var loggingNamespaceId *string
+	m := map[string]interface{}{}
 	if p.LoggingNamespaceId != nil {
-		loggingNamespaceId = p.LoggingNamespaceId
+		m["loggingNamespaceId"] = p.LoggingNamespaceId
 	}
-	return map[string]interface{}{
-		"loggingNamespaceId": loggingNamespaceId,
-	}
+	return m
 }
 
 func (p LogSetting) Pointer() *LogSetting {

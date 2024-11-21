@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -499,7 +512,8 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type DescribeEntryModelsResult struct {
-	Items []EntryModel `json:"items"`
+	Items    []EntryModel         `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeEntryModelsAsyncResult struct {
@@ -537,7 +551,8 @@ func (p DescribeEntryModelsResult) Pointer() *DescribeEntryModelsResult {
 }
 
 type GetEntryModelResult struct {
-	Item *EntryModel `json:"item"`
+	Item     *EntryModel          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetEntryModelAsyncResult struct {
@@ -579,8 +594,9 @@ func (p GetEntryModelResult) Pointer() *GetEntryModelResult {
 }
 
 type DescribeEntryModelMastersResult struct {
-	Items         []EntryModelMaster `json:"items"`
-	NextPageToken *string            `json:"nextPageToken"`
+	Items         []EntryModelMaster   `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeEntryModelMastersAsyncResult struct {
@@ -626,7 +642,8 @@ func (p DescribeEntryModelMastersResult) Pointer() *DescribeEntryModelMastersRes
 }
 
 type CreateEntryModelMasterResult struct {
-	Item *EntryModelMaster `json:"item"`
+	Item     *EntryModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateEntryModelMasterAsyncResult struct {
@@ -668,7 +685,8 @@ func (p CreateEntryModelMasterResult) Pointer() *CreateEntryModelMasterResult {
 }
 
 type GetEntryModelMasterResult struct {
-	Item *EntryModelMaster `json:"item"`
+	Item     *EntryModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetEntryModelMasterAsyncResult struct {
@@ -710,7 +728,8 @@ func (p GetEntryModelMasterResult) Pointer() *GetEntryModelMasterResult {
 }
 
 type UpdateEntryModelMasterResult struct {
-	Item *EntryModelMaster `json:"item"`
+	Item     *EntryModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateEntryModelMasterAsyncResult struct {
@@ -752,7 +771,8 @@ func (p UpdateEntryModelMasterResult) Pointer() *UpdateEntryModelMasterResult {
 }
 
 type DeleteEntryModelMasterResult struct {
-	Item *EntryModelMaster `json:"item"`
+	Item     *EntryModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteEntryModelMasterAsyncResult struct {
@@ -794,8 +814,9 @@ func (p DeleteEntryModelMasterResult) Pointer() *DeleteEntryModelMasterResult {
 }
 
 type DescribeEntriesResult struct {
-	Items         []Entry `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Entry              `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeEntriesAsyncResult struct {
@@ -841,8 +862,9 @@ func (p DescribeEntriesResult) Pointer() *DescribeEntriesResult {
 }
 
 type DescribeEntriesByUserIdResult struct {
-	Items         []Entry `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Entry              `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeEntriesByUserIdAsyncResult struct {
@@ -888,7 +910,8 @@ func (p DescribeEntriesByUserIdResult) Pointer() *DescribeEntriesByUserIdResult 
 }
 
 type AddEntriesByUserIdResult struct {
-	Items []Entry `json:"items"`
+	Items    []Entry              `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AddEntriesByUserIdAsyncResult struct {
@@ -926,7 +949,8 @@ func (p AddEntriesByUserIdResult) Pointer() *AddEntriesByUserIdResult {
 }
 
 type GetEntryResult struct {
-	Item *Entry `json:"item"`
+	Item     *Entry               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetEntryAsyncResult struct {
@@ -968,7 +992,8 @@ func (p GetEntryResult) Pointer() *GetEntryResult {
 }
 
 type GetEntryByUserIdResult struct {
-	Item *Entry `json:"item"`
+	Item     *Entry               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetEntryByUserIdAsyncResult struct {
@@ -1010,9 +1035,10 @@ func (p GetEntryByUserIdResult) Pointer() *GetEntryByUserIdResult {
 }
 
 type GetEntryWithSignatureResult struct {
-	Item      *Entry  `json:"item"`
-	Body      *string `json:"body"`
-	Signature *string `json:"signature"`
+	Item      *Entry               `json:"item"`
+	Body      *string              `json:"body"`
+	Signature *string              `json:"signature"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type GetEntryWithSignatureAsyncResult struct {
@@ -1070,9 +1096,10 @@ func (p GetEntryWithSignatureResult) Pointer() *GetEntryWithSignatureResult {
 }
 
 type GetEntryWithSignatureByUserIdResult struct {
-	Item      *Entry  `json:"item"`
-	Body      *string `json:"body"`
-	Signature *string `json:"signature"`
+	Item      *Entry               `json:"item"`
+	Body      *string              `json:"body"`
+	Signature *string              `json:"signature"`
+	Metadata  *core.ResultMetadata `json:"metadata"`
 }
 
 type GetEntryWithSignatureByUserIdAsyncResult struct {
@@ -1130,6 +1157,7 @@ func (p GetEntryWithSignatureByUserIdResult) Pointer() *GetEntryWithSignatureByU
 }
 
 type ResetByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ResetByUserIdAsyncResult struct {
@@ -1156,6 +1184,7 @@ func (p ResetByUserIdResult) Pointer() *ResetByUserIdResult {
 }
 
 type VerifyEntryResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyEntryAsyncResult struct {
@@ -1182,6 +1211,7 @@ func (p VerifyEntryResult) Pointer() *VerifyEntryResult {
 }
 
 type VerifyEntryByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyEntryByUserIdAsyncResult struct {
@@ -1208,7 +1238,8 @@ func (p VerifyEntryByUserIdResult) Pointer() *VerifyEntryByUserIdResult {
 }
 
 type DeleteEntriesResult struct {
-	Items []Entry `json:"items"`
+	Items    []Entry              `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteEntriesAsyncResult struct {
@@ -1246,7 +1277,8 @@ func (p DeleteEntriesResult) Pointer() *DeleteEntriesResult {
 }
 
 type DeleteEntriesByUserIdResult struct {
-	Items []Entry `json:"items"`
+	Items    []Entry              `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteEntriesByUserIdAsyncResult struct {
@@ -1284,7 +1316,8 @@ func (p DeleteEntriesByUserIdResult) Pointer() *DeleteEntriesByUserIdResult {
 }
 
 type AddEntriesByStampSheetResult struct {
-	Items []Entry `json:"items"`
+	Items    []Entry              `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AddEntriesByStampSheetAsyncResult struct {
@@ -1322,8 +1355,9 @@ func (p AddEntriesByStampSheetResult) Pointer() *AddEntriesByStampSheetResult {
 }
 
 type DeleteEntriesByStampTaskResult struct {
-	Items           []Entry `json:"items"`
-	NewContextStack *string `json:"newContextStack"`
+	Items           []Entry              `json:"items"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteEntriesByStampTaskAsyncResult struct {
@@ -1369,7 +1403,8 @@ func (p DeleteEntriesByStampTaskResult) Pointer() *DeleteEntriesByStampTaskResul
 }
 
 type VerifyEntryByStampTaskResult struct {
-	NewContextStack *string `json:"newContextStack"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyEntryByStampTaskAsyncResult struct {
@@ -1406,7 +1441,8 @@ func (p VerifyEntryByStampTaskResult) Pointer() *VerifyEntryByStampTaskResult {
 }
 
 type ExportMasterResult struct {
-	Item *CurrentEntryMaster `json:"item"`
+	Item     *CurrentEntryMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -1448,7 +1484,8 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
 }
 
 type GetCurrentEntryMasterResult struct {
-	Item *CurrentEntryMaster `json:"item"`
+	Item     *CurrentEntryMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetCurrentEntryMasterAsyncResult struct {
@@ -1490,7 +1527,8 @@ func (p GetCurrentEntryMasterResult) Pointer() *GetCurrentEntryMasterResult {
 }
 
 type UpdateCurrentEntryMasterResult struct {
-	Item *CurrentEntryMaster `json:"item"`
+	Item     *CurrentEntryMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCurrentEntryMasterAsyncResult struct {
@@ -1532,7 +1570,8 @@ func (p UpdateCurrentEntryMasterResult) Pointer() *UpdateCurrentEntryMasterResul
 }
 
 type UpdateCurrentEntryMasterFromGitHubResult struct {
-	Item *CurrentEntryMaster `json:"item"`
+	Item     *CurrentEntryMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCurrentEntryMasterFromGitHubAsyncResult struct {

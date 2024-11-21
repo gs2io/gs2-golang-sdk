@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -499,8 +512,9 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type DescribeWebSocketSessionsResult struct {
-	Items         []WebSocketSession `json:"items"`
-	NextPageToken *string            `json:"nextPageToken"`
+	Items         []WebSocketSession   `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeWebSocketSessionsAsyncResult struct {
@@ -546,8 +560,9 @@ func (p DescribeWebSocketSessionsResult) Pointer() *DescribeWebSocketSessionsRes
 }
 
 type DescribeWebSocketSessionsByUserIdResult struct {
-	Items         []WebSocketSession `json:"items"`
-	NextPageToken *string            `json:"nextPageToken"`
+	Items         []WebSocketSession   `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeWebSocketSessionsByUserIdAsyncResult struct {
@@ -593,7 +608,8 @@ func (p DescribeWebSocketSessionsByUserIdResult) Pointer() *DescribeWebSocketSes
 }
 
 type SetUserIdResult struct {
-	Item *WebSocketSession `json:"item"`
+	Item     *WebSocketSession    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type SetUserIdAsyncResult struct {
@@ -635,7 +651,8 @@ func (p SetUserIdResult) Pointer() *SetUserIdResult {
 }
 
 type SetUserIdByUserIdResult struct {
-	Item *WebSocketSession `json:"item"`
+	Item     *WebSocketSession    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type SetUserIdByUserIdAsyncResult struct {
@@ -677,8 +694,9 @@ func (p SetUserIdByUserIdResult) Pointer() *SetUserIdByUserIdResult {
 }
 
 type SendNotificationResult struct {
-	Protocol          *string   `json:"protocol"`
-	SendConnectionIds []*string `json:"sendConnectionIds"`
+	Protocol          *string              `json:"protocol"`
+	SendConnectionIds []*string            `json:"sendConnectionIds"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
 }
 
 type SendNotificationAsyncResult struct {
@@ -725,7 +743,8 @@ func (p SendNotificationResult) Pointer() *SendNotificationResult {
 }
 
 type DisconnectByUserIdResult struct {
-	Items []WebSocketSession `json:"items"`
+	Items    []WebSocketSession   `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DisconnectByUserIdAsyncResult struct {
@@ -763,6 +782,7 @@ func (p DisconnectByUserIdResult) Pointer() *DisconnectByUserIdResult {
 }
 
 type DisconnectAllResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DisconnectAllAsyncResult struct {
@@ -789,7 +809,8 @@ func (p DisconnectAllResult) Pointer() *DisconnectAllResult {
 }
 
 type SetFirebaseTokenResult struct {
-	Item *FirebaseToken `json:"item"`
+	Item     *FirebaseToken       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type SetFirebaseTokenAsyncResult struct {
@@ -831,7 +852,8 @@ func (p SetFirebaseTokenResult) Pointer() *SetFirebaseTokenResult {
 }
 
 type SetFirebaseTokenByUserIdResult struct {
-	Item *FirebaseToken `json:"item"`
+	Item     *FirebaseToken       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type SetFirebaseTokenByUserIdAsyncResult struct {
@@ -873,7 +895,8 @@ func (p SetFirebaseTokenByUserIdResult) Pointer() *SetFirebaseTokenByUserIdResul
 }
 
 type GetFirebaseTokenResult struct {
-	Item *FirebaseToken `json:"item"`
+	Item     *FirebaseToken       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFirebaseTokenAsyncResult struct {
@@ -915,7 +938,8 @@ func (p GetFirebaseTokenResult) Pointer() *GetFirebaseTokenResult {
 }
 
 type GetFirebaseTokenByUserIdResult struct {
-	Item *FirebaseToken `json:"item"`
+	Item     *FirebaseToken       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetFirebaseTokenByUserIdAsyncResult struct {
@@ -957,7 +981,8 @@ func (p GetFirebaseTokenByUserIdResult) Pointer() *GetFirebaseTokenByUserIdResul
 }
 
 type DeleteFirebaseTokenResult struct {
-	Item *FirebaseToken `json:"item"`
+	Item     *FirebaseToken       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteFirebaseTokenAsyncResult struct {
@@ -999,7 +1024,8 @@ func (p DeleteFirebaseTokenResult) Pointer() *DeleteFirebaseTokenResult {
 }
 
 type DeleteFirebaseTokenByUserIdResult struct {
-	Item *FirebaseToken `json:"item"`
+	Item     *FirebaseToken       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteFirebaseTokenByUserIdAsyncResult struct {
@@ -1041,6 +1067,7 @@ func (p DeleteFirebaseTokenByUserIdResult) Pointer() *DeleteFirebaseTokenByUserI
 }
 
 type SendMobileNotificationByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type SendMobileNotificationByUserIdAsyncResult struct {

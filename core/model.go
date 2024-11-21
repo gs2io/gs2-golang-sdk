@@ -15,6 +15,10 @@
  */
 package core
 
+import (
+	"encoding/json"
+)
+
 type Region string
 type OwnerId string
 
@@ -115,4 +119,83 @@ type Notification struct {
 	Issuer  string `json:"issuer"`
 	Subject string `json:"subject"`
 	Payload string `json:"payload"`
+}
+
+type ResultMetadata struct {
+	Uncommitted *string `json:"uncommitted"`
+}
+
+func (p *ResultMetadata) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ResultMetadata{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ResultMetadata{}
+	} else {
+		*p = ResultMetadata{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["uncommitted"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.Uncommitted)
+		}
+	}
+	return nil
+}
+
+func NewResultMetadataFromJson(data string) ResultMetadata {
+	req := ResultMetadata{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewResultMetadataFromDict(data map[string]interface{}) ResultMetadata {
+	return ResultMetadata{
+		Uncommitted: func() *string {
+			v, ok := data["uncommitted"]
+			if !ok || v == nil {
+				return nil
+			}
+			return CastString(data["uncommitted"])
+		}(),
+	}
+}
+
+func (p ResultMetadata) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Uncommitted != nil {
+		m["uncommitted"] = p.Uncommitted
+	}
+	return m
+}
+
+func (p ResultMetadata) Pointer() *ResultMetadata {
+	return &p
+}
+
+func CastResultMetadatas(data []interface{}) []ResultMetadata {
+	v := make([]ResultMetadata, 0)
+	for _, d := range data {
+		v = append(v, NewResultMetadataFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastResultMetadatasFromDict(data []ResultMetadata) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
 }

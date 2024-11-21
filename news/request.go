@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -129,6 +130,7 @@ type CreateNamespaceRequest struct {
 	Name            *string     `json:"name"`
 	Description     *string     `json:"description"`
 	LogSetting      *LogSetting `json:"logSetting"`
+	DryRun          *bool       `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -263,6 +265,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -350,6 +353,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -439,6 +443,7 @@ type UpdateNamespaceRequest struct {
 	NamespaceName   *string     `json:"namespaceName"`
 	Description     *string     `json:"description"`
 	LogSetting      *LogSetting `json:"logSetting"`
+	DryRun          *bool       `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -573,6 +578,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -662,6 +668,7 @@ type DescribeProgressesRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeProgressesRequest) UnmarshalJSON(data []byte) error {
@@ -792,6 +799,7 @@ type GetProgressRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UploadToken     *string `json:"uploadToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetProgressRequest) UnmarshalJSON(data []byte) error {
@@ -913,6 +921,7 @@ type DescribeOutputsRequest struct {
 	UploadToken     *string `json:"uploadToken"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeOutputsRequest) UnmarshalJSON(data []byte) error {
@@ -1075,6 +1084,7 @@ type GetOutputRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UploadToken     *string `json:"uploadToken"`
 	OutputName      *string `json:"outputName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetOutputRequest) UnmarshalJSON(data []byte) error {
@@ -1224,6 +1234,7 @@ type PrepareUpdateCurrentNewsMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *PrepareUpdateCurrentNewsMasterRequest) UnmarshalJSON(data []byte) error {
@@ -1312,6 +1323,7 @@ type UpdateCurrentNewsMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	UploadToken     *string `json:"uploadToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentNewsMasterRequest) UnmarshalJSON(data []byte) error {
@@ -1431,6 +1443,7 @@ type PrepareUpdateCurrentNewsMasterFromGitHubRequest struct {
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DryRun          *bool                  `json:"dryRun"`
 }
 
 func (p *PrepareUpdateCurrentNewsMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -1535,6 +1548,7 @@ type DescribeNewsRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNewsRequest) UnmarshalJSON(data []byte) error {
@@ -1655,6 +1669,7 @@ type DescribeNewsByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNewsByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1805,6 +1820,7 @@ type WantGrantRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *WantGrantRequest) UnmarshalJSON(data []byte) error {
@@ -1925,6 +1941,7 @@ type WantGrantByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *WantGrantByUserIdRequest) UnmarshalJSON(data []byte) error {

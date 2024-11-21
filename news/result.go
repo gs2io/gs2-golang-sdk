@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,8 +281,9 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DescribeProgressesResult struct {
-	Items         []Progress `json:"items"`
-	NextPageToken *string    `json:"nextPageToken"`
+	Items         []Progress           `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeProgressesAsyncResult struct {
@@ -322,7 +329,8 @@ func (p DescribeProgressesResult) Pointer() *DescribeProgressesResult {
 }
 
 type GetProgressResult struct {
-	Item *Progress `json:"item"`
+	Item     *Progress            `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetProgressAsyncResult struct {
@@ -364,8 +372,9 @@ func (p GetProgressResult) Pointer() *GetProgressResult {
 }
 
 type DescribeOutputsResult struct {
-	Items         []Output `json:"items"`
-	NextPageToken *string  `json:"nextPageToken"`
+	Items         []Output             `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeOutputsAsyncResult struct {
@@ -411,7 +420,8 @@ func (p DescribeOutputsResult) Pointer() *DescribeOutputsResult {
 }
 
 type GetOutputResult struct {
-	Item *Output `json:"item"`
+	Item     *Output              `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetOutputAsyncResult struct {
@@ -453,8 +463,9 @@ func (p GetOutputResult) Pointer() *GetOutputResult {
 }
 
 type PrepareUpdateCurrentNewsMasterResult struct {
-	UploadToken       *string `json:"uploadToken"`
-	TemplateUploadUrl *string `json:"templateUploadUrl"`
+	UploadToken       *string              `json:"uploadToken"`
+	TemplateUploadUrl *string              `json:"templateUploadUrl"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareUpdateCurrentNewsMasterAsyncResult struct {
@@ -499,6 +510,7 @@ func (p PrepareUpdateCurrentNewsMasterResult) Pointer() *PrepareUpdateCurrentNew
 }
 
 type UpdateCurrentNewsMasterResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCurrentNewsMasterAsyncResult struct {
@@ -525,7 +537,8 @@ func (p UpdateCurrentNewsMasterResult) Pointer() *UpdateCurrentNewsMasterResult 
 }
 
 type PrepareUpdateCurrentNewsMasterFromGitHubResult struct {
-	UploadToken *string `json:"uploadToken"`
+	UploadToken *string              `json:"uploadToken"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareUpdateCurrentNewsMasterFromGitHubAsyncResult struct {
@@ -562,9 +575,10 @@ func (p PrepareUpdateCurrentNewsMasterFromGitHubResult) Pointer() *PrepareUpdate
 }
 
 type DescribeNewsResult struct {
-	Items        []News  `json:"items"`
-	ContentHash  *string `json:"contentHash"`
-	TemplateHash *string `json:"templateHash"`
+	Items        []News               `json:"items"`
+	ContentHash  *string              `json:"contentHash"`
+	TemplateHash *string              `json:"templateHash"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNewsAsyncResult struct {
@@ -618,9 +632,10 @@ func (p DescribeNewsResult) Pointer() *DescribeNewsResult {
 }
 
 type DescribeNewsByUserIdResult struct {
-	Items        []News  `json:"items"`
-	ContentHash  *string `json:"contentHash"`
-	TemplateHash *string `json:"templateHash"`
+	Items        []News               `json:"items"`
+	ContentHash  *string              `json:"contentHash"`
+	TemplateHash *string              `json:"templateHash"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNewsByUserIdAsyncResult struct {
@@ -677,6 +692,7 @@ type WantGrantResult struct {
 	Items      []SetCookieRequestEntry `json:"items"`
 	BrowserUrl *string                 `json:"browserUrl"`
 	ZipUrl     *string                 `json:"zipUrl"`
+	Metadata   *core.ResultMetadata    `json:"metadata"`
 }
 
 type WantGrantAsyncResult struct {
@@ -733,6 +749,7 @@ type WantGrantByUserIdResult struct {
 	Items      []SetCookieRequestEntry `json:"items"`
 	BrowserUrl *string                 `json:"browserUrl"`
 	ZipUrl     *string                 `json:"zipUrl"`
+	Metadata   *core.ResultMetadata    `json:"metadata"`
 }
 
 type WantGrantByUserIdAsyncResult struct {

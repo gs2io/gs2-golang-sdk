@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -499,8 +512,9 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type DescribeGuildModelMastersResult struct {
-	Items         []GuildModelMaster `json:"items"`
-	NextPageToken *string            `json:"nextPageToken"`
+	Items         []GuildModelMaster   `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeGuildModelMastersAsyncResult struct {
@@ -546,7 +560,8 @@ func (p DescribeGuildModelMastersResult) Pointer() *DescribeGuildModelMastersRes
 }
 
 type CreateGuildModelMasterResult struct {
-	Item *GuildModelMaster `json:"item"`
+	Item     *GuildModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateGuildModelMasterAsyncResult struct {
@@ -588,7 +603,8 @@ func (p CreateGuildModelMasterResult) Pointer() *CreateGuildModelMasterResult {
 }
 
 type GetGuildModelMasterResult struct {
-	Item *GuildModelMaster `json:"item"`
+	Item     *GuildModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetGuildModelMasterAsyncResult struct {
@@ -630,7 +646,8 @@ func (p GetGuildModelMasterResult) Pointer() *GetGuildModelMasterResult {
 }
 
 type UpdateGuildModelMasterResult struct {
-	Item *GuildModelMaster `json:"item"`
+	Item     *GuildModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateGuildModelMasterAsyncResult struct {
@@ -672,7 +689,8 @@ func (p UpdateGuildModelMasterResult) Pointer() *UpdateGuildModelMasterResult {
 }
 
 type DeleteGuildModelMasterResult struct {
-	Item *GuildModelMaster `json:"item"`
+	Item     *GuildModelMaster    `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteGuildModelMasterAsyncResult struct {
@@ -714,7 +732,8 @@ func (p DeleteGuildModelMasterResult) Pointer() *DeleteGuildModelMasterResult {
 }
 
 type DescribeGuildModelsResult struct {
-	Items []GuildModel `json:"items"`
+	Items    []GuildModel         `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeGuildModelsAsyncResult struct {
@@ -752,7 +771,8 @@ func (p DescribeGuildModelsResult) Pointer() *DescribeGuildModelsResult {
 }
 
 type GetGuildModelResult struct {
-	Item *GuildModel `json:"item"`
+	Item     *GuildModel          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetGuildModelAsyncResult struct {
@@ -794,8 +814,9 @@ func (p GetGuildModelResult) Pointer() *GetGuildModelResult {
 }
 
 type SearchGuildsResult struct {
-	Items         []Guild `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Guild              `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type SearchGuildsAsyncResult struct {
@@ -841,8 +862,9 @@ func (p SearchGuildsResult) Pointer() *SearchGuildsResult {
 }
 
 type SearchGuildsByUserIdResult struct {
-	Items         []Guild `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Guild              `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type SearchGuildsByUserIdAsyncResult struct {
@@ -888,7 +910,8 @@ func (p SearchGuildsByUserIdResult) Pointer() *SearchGuildsByUserIdResult {
 }
 
 type CreateGuildResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateGuildAsyncResult struct {
@@ -930,7 +953,8 @@ func (p CreateGuildResult) Pointer() *CreateGuildResult {
 }
 
 type CreateGuildByUserIdResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateGuildByUserIdAsyncResult struct {
@@ -972,7 +996,8 @@ func (p CreateGuildByUserIdResult) Pointer() *CreateGuildByUserIdResult {
 }
 
 type GetGuildResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetGuildAsyncResult struct {
@@ -1014,7 +1039,8 @@ func (p GetGuildResult) Pointer() *GetGuildResult {
 }
 
 type GetGuildByUserIdResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetGuildByUserIdAsyncResult struct {
@@ -1056,7 +1082,8 @@ func (p GetGuildByUserIdResult) Pointer() *GetGuildByUserIdResult {
 }
 
 type UpdateGuildResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateGuildAsyncResult struct {
@@ -1098,7 +1125,8 @@ func (p UpdateGuildResult) Pointer() *UpdateGuildResult {
 }
 
 type UpdateGuildByGuildNameResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateGuildByGuildNameAsyncResult struct {
@@ -1140,7 +1168,8 @@ func (p UpdateGuildByGuildNameResult) Pointer() *UpdateGuildByGuildNameResult {
 }
 
 type DeleteMemberResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteMemberAsyncResult struct {
@@ -1182,7 +1211,8 @@ func (p DeleteMemberResult) Pointer() *DeleteMemberResult {
 }
 
 type DeleteMemberByGuildNameResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteMemberByGuildNameAsyncResult struct {
@@ -1224,7 +1254,8 @@ func (p DeleteMemberByGuildNameResult) Pointer() *DeleteMemberByGuildNameResult 
 }
 
 type UpdateMemberRoleResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateMemberRoleAsyncResult struct {
@@ -1266,7 +1297,8 @@ func (p UpdateMemberRoleResult) Pointer() *UpdateMemberRoleResult {
 }
 
 type UpdateMemberRoleByGuildNameResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateMemberRoleByGuildNameAsyncResult struct {
@@ -1308,7 +1340,8 @@ func (p UpdateMemberRoleByGuildNameResult) Pointer() *UpdateMemberRoleByGuildNam
 }
 
 type BatchUpdateMemberRoleResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type BatchUpdateMemberRoleAsyncResult struct {
@@ -1350,7 +1383,8 @@ func (p BatchUpdateMemberRoleResult) Pointer() *BatchUpdateMemberRoleResult {
 }
 
 type BatchUpdateMemberRoleByGuildNameResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type BatchUpdateMemberRoleByGuildNameAsyncResult struct {
@@ -1392,7 +1426,8 @@ func (p BatchUpdateMemberRoleByGuildNameResult) Pointer() *BatchUpdateMemberRole
 }
 
 type DeleteGuildResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteGuildAsyncResult struct {
@@ -1434,7 +1469,8 @@ func (p DeleteGuildResult) Pointer() *DeleteGuildResult {
 }
 
 type DeleteGuildByGuildNameResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteGuildByGuildNameAsyncResult struct {
@@ -1476,7 +1512,8 @@ func (p DeleteGuildByGuildNameResult) Pointer() *DeleteGuildByGuildNameResult {
 }
 
 type IncreaseMaximumCurrentMaximumMemberCountByGuildNameResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type IncreaseMaximumCurrentMaximumMemberCountByGuildNameAsyncResult struct {
@@ -1518,7 +1555,8 @@ func (p IncreaseMaximumCurrentMaximumMemberCountByGuildNameResult) Pointer() *In
 }
 
 type DecreaseMaximumCurrentMaximumMemberCountResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DecreaseMaximumCurrentMaximumMemberCountAsyncResult struct {
@@ -1560,7 +1598,8 @@ func (p DecreaseMaximumCurrentMaximumMemberCountResult) Pointer() *DecreaseMaxim
 }
 
 type DecreaseMaximumCurrentMaximumMemberCountByGuildNameResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DecreaseMaximumCurrentMaximumMemberCountByGuildNameAsyncResult struct {
@@ -1602,6 +1641,7 @@ func (p DecreaseMaximumCurrentMaximumMemberCountByGuildNameResult) Pointer() *De
 }
 
 type VerifyCurrentMaximumMemberCountResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyCurrentMaximumMemberCountAsyncResult struct {
@@ -1628,6 +1668,7 @@ func (p VerifyCurrentMaximumMemberCountResult) Pointer() *VerifyCurrentMaximumMe
 }
 
 type VerifyCurrentMaximumMemberCountByGuildNameResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyCurrentMaximumMemberCountByGuildNameAsyncResult struct {
@@ -1654,6 +1695,7 @@ func (p VerifyCurrentMaximumMemberCountByGuildNameResult) Pointer() *VerifyCurre
 }
 
 type VerifyIncludeMemberResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyIncludeMemberAsyncResult struct {
@@ -1680,6 +1722,7 @@ func (p VerifyIncludeMemberResult) Pointer() *VerifyIncludeMemberResult {
 }
 
 type VerifyIncludeMemberByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyIncludeMemberByUserIdAsyncResult struct {
@@ -1706,8 +1749,9 @@ func (p VerifyIncludeMemberByUserIdResult) Pointer() *VerifyIncludeMemberByUserI
 }
 
 type SetMaximumCurrentMaximumMemberCountByGuildNameResult struct {
-	Item *Guild `json:"item"`
-	Old  *Guild `json:"old"`
+	Item     *Guild               `json:"item"`
+	Old      *Guild               `json:"old"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type SetMaximumCurrentMaximumMemberCountByGuildNameAsyncResult struct {
@@ -1762,9 +1806,10 @@ func (p SetMaximumCurrentMaximumMemberCountByGuildNameResult) Pointer() *SetMaxi
 }
 
 type AssumeResult struct {
-	Token  *string `json:"token"`
-	UserId *string `json:"userId"`
-	Expire *int64  `json:"expire"`
+	Token    *string              `json:"token"`
+	UserId   *string              `json:"userId"`
+	Expire   *int64               `json:"expire"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AssumeAsyncResult struct {
@@ -1817,9 +1862,10 @@ func (p AssumeResult) Pointer() *AssumeResult {
 }
 
 type AssumeByUserIdResult struct {
-	Token  *string `json:"token"`
-	UserId *string `json:"userId"`
-	Expire *int64  `json:"expire"`
+	Token    *string              `json:"token"`
+	UserId   *string              `json:"userId"`
+	Expire   *int64               `json:"expire"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AssumeByUserIdAsyncResult struct {
@@ -1872,7 +1918,8 @@ func (p AssumeByUserIdResult) Pointer() *AssumeByUserIdResult {
 }
 
 type IncreaseMaximumCurrentMaximumMemberCountByStampSheetResult struct {
-	Item *Guild `json:"item"`
+	Item     *Guild               `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type IncreaseMaximumCurrentMaximumMemberCountByStampSheetAsyncResult struct {
@@ -1914,8 +1961,9 @@ func (p IncreaseMaximumCurrentMaximumMemberCountByStampSheetResult) Pointer() *I
 }
 
 type DecreaseMaximumCurrentMaximumMemberCountByStampTaskResult struct {
-	Item            *Guild  `json:"item"`
-	NewContextStack *string `json:"newContextStack"`
+	Item            *Guild               `json:"item"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type DecreaseMaximumCurrentMaximumMemberCountByStampTaskAsyncResult struct {
@@ -1965,8 +2013,9 @@ func (p DecreaseMaximumCurrentMaximumMemberCountByStampTaskResult) Pointer() *De
 }
 
 type SetMaximumCurrentMaximumMemberCountByStampSheetResult struct {
-	Item *Guild `json:"item"`
-	Old  *Guild `json:"old"`
+	Item     *Guild               `json:"item"`
+	Old      *Guild               `json:"old"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type SetMaximumCurrentMaximumMemberCountByStampSheetAsyncResult struct {
@@ -2021,7 +2070,8 @@ func (p SetMaximumCurrentMaximumMemberCountByStampSheetResult) Pointer() *SetMax
 }
 
 type VerifyCurrentMaximumMemberCountByStampTaskResult struct {
-	NewContextStack *string `json:"newContextStack"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyCurrentMaximumMemberCountByStampTaskAsyncResult struct {
@@ -2058,7 +2108,8 @@ func (p VerifyCurrentMaximumMemberCountByStampTaskResult) Pointer() *VerifyCurre
 }
 
 type VerifyIncludeMemberByStampTaskResult struct {
-	NewContextStack *string `json:"newContextStack"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyIncludeMemberByStampTaskAsyncResult struct {
@@ -2095,8 +2146,9 @@ func (p VerifyIncludeMemberByStampTaskResult) Pointer() *VerifyIncludeMemberBySt
 }
 
 type DescribeJoinedGuildsResult struct {
-	Items         []JoinedGuild `json:"items"`
-	NextPageToken *string       `json:"nextPageToken"`
+	Items         []JoinedGuild        `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeJoinedGuildsAsyncResult struct {
@@ -2142,8 +2194,9 @@ func (p DescribeJoinedGuildsResult) Pointer() *DescribeJoinedGuildsResult {
 }
 
 type DescribeJoinedGuildsByUserIdResult struct {
-	Items         []JoinedGuild `json:"items"`
-	NextPageToken *string       `json:"nextPageToken"`
+	Items         []JoinedGuild        `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeJoinedGuildsByUserIdAsyncResult struct {
@@ -2189,7 +2242,8 @@ func (p DescribeJoinedGuildsByUserIdResult) Pointer() *DescribeJoinedGuildsByUse
 }
 
 type GetJoinedGuildResult struct {
-	Item *JoinedGuild `json:"item"`
+	Item     *JoinedGuild         `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetJoinedGuildAsyncResult struct {
@@ -2231,7 +2285,8 @@ func (p GetJoinedGuildResult) Pointer() *GetJoinedGuildResult {
 }
 
 type GetJoinedGuildByUserIdResult struct {
-	Item *JoinedGuild `json:"item"`
+	Item     *JoinedGuild         `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetJoinedGuildByUserIdAsyncResult struct {
@@ -2273,8 +2328,9 @@ func (p GetJoinedGuildByUserIdResult) Pointer() *GetJoinedGuildByUserIdResult {
 }
 
 type WithdrawalResult struct {
-	Item  *JoinedGuild `json:"item"`
-	Guild *Guild       `json:"guild"`
+	Item     *JoinedGuild         `json:"item"`
+	Guild    *Guild               `json:"guild"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type WithdrawalAsyncResult struct {
@@ -2329,8 +2385,9 @@ func (p WithdrawalResult) Pointer() *WithdrawalResult {
 }
 
 type WithdrawalByUserIdResult struct {
-	Item  *JoinedGuild `json:"item"`
-	Guild *Guild       `json:"guild"`
+	Item     *JoinedGuild         `json:"item"`
+	Guild    *Guild               `json:"guild"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type WithdrawalByUserIdAsyncResult struct {
@@ -2385,8 +2442,9 @@ func (p WithdrawalByUserIdResult) Pointer() *WithdrawalByUserIdResult {
 }
 
 type GetLastGuildMasterActivityResult struct {
-	Item  *LastGuildMasterActivity `json:"item"`
-	Guild *Guild                   `json:"guild"`
+	Item     *LastGuildMasterActivity `json:"item"`
+	Guild    *Guild                   `json:"guild"`
+	Metadata *core.ResultMetadata     `json:"metadata"`
 }
 
 type GetLastGuildMasterActivityAsyncResult struct {
@@ -2441,8 +2499,9 @@ func (p GetLastGuildMasterActivityResult) Pointer() *GetLastGuildMasterActivityR
 }
 
 type GetLastGuildMasterActivityByGuildNameResult struct {
-	Item  *LastGuildMasterActivity `json:"item"`
-	Guild *Guild                   `json:"guild"`
+	Item     *LastGuildMasterActivity `json:"item"`
+	Guild    *Guild                   `json:"guild"`
+	Metadata *core.ResultMetadata     `json:"metadata"`
 }
 
 type GetLastGuildMasterActivityByGuildNameAsyncResult struct {
@@ -2497,8 +2556,9 @@ func (p GetLastGuildMasterActivityByGuildNameResult) Pointer() *GetLastGuildMast
 }
 
 type PromoteSeniorMemberResult struct {
-	Item  *LastGuildMasterActivity `json:"item"`
-	Guild *Guild                   `json:"guild"`
+	Item     *LastGuildMasterActivity `json:"item"`
+	Guild    *Guild                   `json:"guild"`
+	Metadata *core.ResultMetadata     `json:"metadata"`
 }
 
 type PromoteSeniorMemberAsyncResult struct {
@@ -2553,8 +2613,9 @@ func (p PromoteSeniorMemberResult) Pointer() *PromoteSeniorMemberResult {
 }
 
 type PromoteSeniorMemberByGuildNameResult struct {
-	Item  *LastGuildMasterActivity `json:"item"`
-	Guild *Guild                   `json:"guild"`
+	Item     *LastGuildMasterActivity `json:"item"`
+	Guild    *Guild                   `json:"guild"`
+	Metadata *core.ResultMetadata     `json:"metadata"`
 }
 
 type PromoteSeniorMemberByGuildNameAsyncResult struct {
@@ -2609,7 +2670,8 @@ func (p PromoteSeniorMemberByGuildNameResult) Pointer() *PromoteSeniorMemberByGu
 }
 
 type ExportMasterResult struct {
-	Item *CurrentGuildMaster `json:"item"`
+	Item     *CurrentGuildMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -2651,7 +2713,8 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
 }
 
 type GetCurrentGuildMasterResult struct {
-	Item *CurrentGuildMaster `json:"item"`
+	Item     *CurrentGuildMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetCurrentGuildMasterAsyncResult struct {
@@ -2693,7 +2756,8 @@ func (p GetCurrentGuildMasterResult) Pointer() *GetCurrentGuildMasterResult {
 }
 
 type UpdateCurrentGuildMasterResult struct {
-	Item *CurrentGuildMaster `json:"item"`
+	Item     *CurrentGuildMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCurrentGuildMasterAsyncResult struct {
@@ -2735,7 +2799,8 @@ func (p UpdateCurrentGuildMasterResult) Pointer() *UpdateCurrentGuildMasterResul
 }
 
 type UpdateCurrentGuildMasterFromGitHubResult struct {
-	Item *CurrentGuildMaster `json:"item"`
+	Item     *CurrentGuildMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCurrentGuildMasterFromGitHubAsyncResult struct {
@@ -2779,6 +2844,7 @@ func (p UpdateCurrentGuildMasterFromGitHubResult) Pointer() *UpdateCurrentGuildM
 type DescribeReceiveRequestsResult struct {
 	Items         []ReceiveMemberRequest `json:"items"`
 	NextPageToken *string                `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata   `json:"metadata"`
 }
 
 type DescribeReceiveRequestsAsyncResult struct {
@@ -2826,6 +2892,7 @@ func (p DescribeReceiveRequestsResult) Pointer() *DescribeReceiveRequestsResult 
 type DescribeReceiveRequestsByGuildNameResult struct {
 	Items         []ReceiveMemberRequest `json:"items"`
 	NextPageToken *string                `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata   `json:"metadata"`
 }
 
 type DescribeReceiveRequestsByGuildNameAsyncResult struct {
@@ -2871,7 +2938,8 @@ func (p DescribeReceiveRequestsByGuildNameResult) Pointer() *DescribeReceiveRequ
 }
 
 type GetReceiveRequestResult struct {
-	Item *ReceiveMemberRequest `json:"item"`
+	Item     *ReceiveMemberRequest `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type GetReceiveRequestAsyncResult struct {
@@ -2913,7 +2981,8 @@ func (p GetReceiveRequestResult) Pointer() *GetReceiveRequestResult {
 }
 
 type GetReceiveRequestByGuildNameResult struct {
-	Item *ReceiveMemberRequest `json:"item"`
+	Item     *ReceiveMemberRequest `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type GetReceiveRequestByGuildNameAsyncResult struct {
@@ -2955,8 +3024,9 @@ func (p GetReceiveRequestByGuildNameResult) Pointer() *GetReceiveRequestByGuildN
 }
 
 type AcceptRequestResult struct {
-	Item  *ReceiveMemberRequest `json:"item"`
-	Guild *Guild                `json:"guild"`
+	Item     *ReceiveMemberRequest `json:"item"`
+	Guild    *Guild                `json:"guild"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type AcceptRequestAsyncResult struct {
@@ -3011,8 +3081,9 @@ func (p AcceptRequestResult) Pointer() *AcceptRequestResult {
 }
 
 type AcceptRequestByGuildNameResult struct {
-	Item  *ReceiveMemberRequest `json:"item"`
-	Guild *Guild                `json:"guild"`
+	Item     *ReceiveMemberRequest `json:"item"`
+	Guild    *Guild                `json:"guild"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type AcceptRequestByGuildNameAsyncResult struct {
@@ -3067,7 +3138,8 @@ func (p AcceptRequestByGuildNameResult) Pointer() *AcceptRequestByGuildNameResul
 }
 
 type RejectRequestResult struct {
-	Item *ReceiveMemberRequest `json:"item"`
+	Item     *ReceiveMemberRequest `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type RejectRequestAsyncResult struct {
@@ -3109,7 +3181,8 @@ func (p RejectRequestResult) Pointer() *RejectRequestResult {
 }
 
 type RejectRequestByGuildNameResult struct {
-	Item *ReceiveMemberRequest `json:"item"`
+	Item     *ReceiveMemberRequest `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type RejectRequestByGuildNameAsyncResult struct {
@@ -3151,8 +3224,9 @@ func (p RejectRequestByGuildNameResult) Pointer() *RejectRequestByGuildNameResul
 }
 
 type DescribeSendRequestsResult struct {
-	Items         []SendMemberRequest `json:"items"`
-	NextPageToken *string             `json:"nextPageToken"`
+	Items         []SendMemberRequest  `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeSendRequestsAsyncResult struct {
@@ -3198,8 +3272,9 @@ func (p DescribeSendRequestsResult) Pointer() *DescribeSendRequestsResult {
 }
 
 type DescribeSendRequestsByUserIdResult struct {
-	Items         []SendMemberRequest `json:"items"`
-	NextPageToken *string             `json:"nextPageToken"`
+	Items         []SendMemberRequest  `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeSendRequestsByUserIdAsyncResult struct {
@@ -3245,7 +3320,8 @@ func (p DescribeSendRequestsByUserIdResult) Pointer() *DescribeSendRequestsByUse
 }
 
 type GetSendRequestResult struct {
-	Item *SendMemberRequest `json:"item"`
+	Item     *SendMemberRequest   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetSendRequestAsyncResult struct {
@@ -3287,7 +3363,8 @@ func (p GetSendRequestResult) Pointer() *GetSendRequestResult {
 }
 
 type GetSendRequestByUserIdResult struct {
-	Item *SendMemberRequest `json:"item"`
+	Item     *SendMemberRequest   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetSendRequestByUserIdAsyncResult struct {
@@ -3329,8 +3406,9 @@ func (p GetSendRequestByUserIdResult) Pointer() *GetSendRequestByUserIdResult {
 }
 
 type SendRequestResult struct {
-	Item              *Guild             `json:"item"`
-	SendMemberRequest *SendMemberRequest `json:"sendMemberRequest"`
+	Item              *Guild               `json:"item"`
+	SendMemberRequest *SendMemberRequest   `json:"sendMemberRequest"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
 }
 
 type SendRequestAsyncResult struct {
@@ -3385,8 +3463,9 @@ func (p SendRequestResult) Pointer() *SendRequestResult {
 }
 
 type SendRequestByUserIdResult struct {
-	Item              *Guild             `json:"item"`
-	SendMemberRequest *SendMemberRequest `json:"sendMemberRequest"`
+	Item              *Guild               `json:"item"`
+	SendMemberRequest *SendMemberRequest   `json:"sendMemberRequest"`
+	Metadata          *core.ResultMetadata `json:"metadata"`
 }
 
 type SendRequestByUserIdAsyncResult struct {
@@ -3441,7 +3520,8 @@ func (p SendRequestByUserIdResult) Pointer() *SendRequestByUserIdResult {
 }
 
 type DeleteRequestResult struct {
-	Item *SendMemberRequest `json:"item"`
+	Item     *SendMemberRequest   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteRequestAsyncResult struct {
@@ -3483,7 +3563,8 @@ func (p DeleteRequestResult) Pointer() *DeleteRequestResult {
 }
 
 type DeleteRequestByUserIdResult struct {
-	Item *SendMemberRequest `json:"item"`
+	Item     *SendMemberRequest   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteRequestByUserIdAsyncResult struct {
@@ -3525,8 +3606,9 @@ func (p DeleteRequestByUserIdResult) Pointer() *DeleteRequestByUserIdResult {
 }
 
 type DescribeIgnoreUsersResult struct {
-	Items         []IgnoreUser `json:"items"`
-	NextPageToken *string      `json:"nextPageToken"`
+	Items         []IgnoreUser         `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeIgnoreUsersAsyncResult struct {
@@ -3572,8 +3654,9 @@ func (p DescribeIgnoreUsersResult) Pointer() *DescribeIgnoreUsersResult {
 }
 
 type DescribeIgnoreUsersByGuildNameResult struct {
-	Items         []IgnoreUser `json:"items"`
-	NextPageToken *string      `json:"nextPageToken"`
+	Items         []IgnoreUser         `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeIgnoreUsersByGuildNameAsyncResult struct {
@@ -3619,7 +3702,8 @@ func (p DescribeIgnoreUsersByGuildNameResult) Pointer() *DescribeIgnoreUsersByGu
 }
 
 type GetIgnoreUserResult struct {
-	Item *IgnoreUser `json:"item"`
+	Item     *IgnoreUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetIgnoreUserAsyncResult struct {
@@ -3661,7 +3745,8 @@ func (p GetIgnoreUserResult) Pointer() *GetIgnoreUserResult {
 }
 
 type GetIgnoreUserByGuildNameResult struct {
-	Item *IgnoreUser `json:"item"`
+	Item     *IgnoreUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetIgnoreUserByGuildNameAsyncResult struct {
@@ -3703,8 +3788,9 @@ func (p GetIgnoreUserByGuildNameResult) Pointer() *GetIgnoreUserByGuildNameResul
 }
 
 type AddIgnoreUserResult struct {
-	Item  *IgnoreUser `json:"item"`
-	Guild *Guild      `json:"guild"`
+	Item     *IgnoreUser          `json:"item"`
+	Guild    *Guild               `json:"guild"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AddIgnoreUserAsyncResult struct {
@@ -3759,8 +3845,9 @@ func (p AddIgnoreUserResult) Pointer() *AddIgnoreUserResult {
 }
 
 type AddIgnoreUserByGuildNameResult struct {
-	Item  *IgnoreUser `json:"item"`
-	Guild *Guild      `json:"guild"`
+	Item     *IgnoreUser          `json:"item"`
+	Guild    *Guild               `json:"guild"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type AddIgnoreUserByGuildNameAsyncResult struct {
@@ -3815,7 +3902,8 @@ func (p AddIgnoreUserByGuildNameResult) Pointer() *AddIgnoreUserByGuildNameResul
 }
 
 type DeleteIgnoreUserResult struct {
-	Item *IgnoreUser `json:"item"`
+	Item     *IgnoreUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteIgnoreUserAsyncResult struct {
@@ -3857,7 +3945,8 @@ func (p DeleteIgnoreUserResult) Pointer() *DeleteIgnoreUserResult {
 }
 
 type DeleteIgnoreUserByGuildNameResult struct {
-	Item *IgnoreUser `json:"item"`
+	Item     *IgnoreUser          `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteIgnoreUserByGuildNameAsyncResult struct {

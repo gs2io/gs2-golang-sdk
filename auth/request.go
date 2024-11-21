@@ -30,6 +30,7 @@ type LoginRequest struct {
 	UserId          *string `json:"userId"`
 	TimeOffset      *int32  `json:"timeOffset"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *LoginRequest) UnmarshalJSON(data []byte) error {
@@ -161,6 +162,7 @@ type LoginBySignatureRequest struct {
 	KeyId           *string `json:"keyId"`
 	Body            *string `json:"body"`
 	Signature       *string `json:"signature"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *LoginBySignatureRequest) UnmarshalJSON(data []byte) error {
@@ -314,6 +316,7 @@ type FederationRequest struct {
 	PolicyDocument  *string `json:"policyDocument"`
 	TimeOffset      *int32  `json:"timeOffset"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *FederationRequest) UnmarshalJSON(data []byte) error {
@@ -507,6 +510,7 @@ type IssueTimeOffsetTokenByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	TimeOffset      *int32  `json:"timeOffset"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *IssueTimeOffsetTokenByUserIdRequest) UnmarshalJSON(data []byte) error {

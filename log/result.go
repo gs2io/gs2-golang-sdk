@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,10 +281,11 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type QueryAccessLogResult struct {
-	Items         []AccessLog `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
-	TotalCount    *int64      `json:"totalCount"`
-	ScanSize      *int64      `json:"scanSize"`
+	Items         []AccessLog          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	TotalCount    *int64               `json:"totalCount"`
+	ScanSize      *int64               `json:"scanSize"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type QueryAccessLogAsyncResult struct {
@@ -340,10 +347,11 @@ func (p QueryAccessLogResult) Pointer() *QueryAccessLogResult {
 }
 
 type CountAccessLogResult struct {
-	Items         []AccessLogCount `json:"items"`
-	NextPageToken *string          `json:"nextPageToken"`
-	TotalCount    *int64           `json:"totalCount"`
-	ScanSize      *int64           `json:"scanSize"`
+	Items         []AccessLogCount     `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	TotalCount    *int64               `json:"totalCount"`
+	ScanSize      *int64               `json:"scanSize"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type CountAccessLogAsyncResult struct {
@@ -409,6 +417,7 @@ type QueryIssueStampSheetLogResult struct {
 	NextPageToken *string              `json:"nextPageToken"`
 	TotalCount    *int64               `json:"totalCount"`
 	ScanSize      *int64               `json:"scanSize"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type QueryIssueStampSheetLogAsyncResult struct {
@@ -474,6 +483,7 @@ type CountIssueStampSheetLogResult struct {
 	NextPageToken *string                   `json:"nextPageToken"`
 	TotalCount    *int64                    `json:"totalCount"`
 	ScanSize      *int64                    `json:"scanSize"`
+	Metadata      *core.ResultMetadata      `json:"metadata"`
 }
 
 type CountIssueStampSheetLogAsyncResult struct {
@@ -539,6 +549,7 @@ type QueryExecuteStampSheetLogResult struct {
 	NextPageToken *string                `json:"nextPageToken"`
 	TotalCount    *int64                 `json:"totalCount"`
 	ScanSize      *int64                 `json:"scanSize"`
+	Metadata      *core.ResultMetadata   `json:"metadata"`
 }
 
 type QueryExecuteStampSheetLogAsyncResult struct {
@@ -604,6 +615,7 @@ type CountExecuteStampSheetLogResult struct {
 	NextPageToken *string                     `json:"nextPageToken"`
 	TotalCount    *int64                      `json:"totalCount"`
 	ScanSize      *int64                      `json:"scanSize"`
+	Metadata      *core.ResultMetadata        `json:"metadata"`
 }
 
 type CountExecuteStampSheetLogAsyncResult struct {
@@ -669,6 +681,7 @@ type QueryExecuteStampTaskLogResult struct {
 	NextPageToken *string               `json:"nextPageToken"`
 	TotalCount    *int64                `json:"totalCount"`
 	ScanSize      *int64                `json:"scanSize"`
+	Metadata      *core.ResultMetadata  `json:"metadata"`
 }
 
 type QueryExecuteStampTaskLogAsyncResult struct {
@@ -734,6 +747,7 @@ type CountExecuteStampTaskLogResult struct {
 	NextPageToken *string                    `json:"nextPageToken"`
 	TotalCount    *int64                     `json:"totalCount"`
 	ScanSize      *int64                     `json:"scanSize"`
+	Metadata      *core.ResultMetadata       `json:"metadata"`
 }
 
 type CountExecuteStampTaskLogAsyncResult struct {
@@ -795,10 +809,11 @@ func (p CountExecuteStampTaskLogResult) Pointer() *CountExecuteStampTaskLogResul
 }
 
 type QueryInGameLogResult struct {
-	Items         []InGameLog `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
-	TotalCount    *int64      `json:"totalCount"`
-	ScanSize      *int64      `json:"scanSize"`
+	Items         []InGameLog          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	TotalCount    *int64               `json:"totalCount"`
+	ScanSize      *int64               `json:"scanSize"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type QueryInGameLogAsyncResult struct {
@@ -860,7 +875,8 @@ func (p QueryInGameLogResult) Pointer() *QueryInGameLogResult {
 }
 
 type SendInGameLogResult struct {
-	Item *InGameLog `json:"item"`
+	Item     *InGameLog           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type SendInGameLogAsyncResult struct {
@@ -902,7 +918,8 @@ func (p SendInGameLogResult) Pointer() *SendInGameLogResult {
 }
 
 type SendInGameLogByUserIdResult struct {
-	Item *InGameLog `json:"item"`
+	Item     *InGameLog           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type SendInGameLogByUserIdAsyncResult struct {
@@ -948,6 +965,7 @@ type QueryAccessLogWithTelemetryResult struct {
 	NextPageToken *string                  `json:"nextPageToken"`
 	TotalCount    *int64                   `json:"totalCount"`
 	ScanSize      *int64                   `json:"scanSize"`
+	Metadata      *core.ResultMetadata     `json:"metadata"`
 }
 
 type QueryAccessLogWithTelemetryAsyncResult struct {
@@ -1009,8 +1027,9 @@ func (p QueryAccessLogWithTelemetryResult) Pointer() *QueryAccessLogWithTelemetr
 }
 
 type DescribeInsightsResult struct {
-	Items         []Insight `json:"items"`
-	NextPageToken *string   `json:"nextPageToken"`
+	Items         []Insight            `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeInsightsAsyncResult struct {
@@ -1056,7 +1075,8 @@ func (p DescribeInsightsResult) Pointer() *DescribeInsightsResult {
 }
 
 type CreateInsightResult struct {
-	Item *Insight `json:"item"`
+	Item     *Insight             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateInsightAsyncResult struct {
@@ -1098,7 +1118,8 @@ func (p CreateInsightResult) Pointer() *CreateInsightResult {
 }
 
 type GetInsightResult struct {
-	Item *Insight `json:"item"`
+	Item     *Insight             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetInsightAsyncResult struct {
@@ -1140,7 +1161,8 @@ func (p GetInsightResult) Pointer() *GetInsightResult {
 }
 
 type DeleteInsightResult struct {
-	Item *Insight `json:"item"`
+	Item     *Insight             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteInsightAsyncResult struct {

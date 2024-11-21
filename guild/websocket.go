@@ -93,6 +93,13 @@ func (p Gs2GuildWebSocketClient) DescribeNamespacesAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeNamespacesAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -213,6 +220,13 @@ func (p Gs2GuildWebSocketClient) CreateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -294,6 +308,13 @@ func (p Gs2GuildWebSocketClient) GetNamespaceStatusAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getNamespaceStatusAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -374,6 +395,13 @@ func (p Gs2GuildWebSocketClient) GetNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getNamespaceAsyncHandler(
@@ -495,6 +523,13 @@ func (p Gs2GuildWebSocketClient) UpdateNamespaceAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateNamespaceAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -575,6 +610,13 @@ func (p Gs2GuildWebSocketClient) DeleteNamespaceAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteNamespaceAsyncHandler(
@@ -660,6 +702,13 @@ func (p Gs2GuildWebSocketClient) DumpUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.dumpUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -743,6 +792,13 @@ func (p Gs2GuildWebSocketClient) CheckDumpUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.checkDumpUserDataByUserIdAsyncHandler(
@@ -828,6 +884,13 @@ func (p Gs2GuildWebSocketClient) CleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.cleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -912,6 +975,13 @@ func (p Gs2GuildWebSocketClient) CheckCleanUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkCleanUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -995,6 +1065,13 @@ func (p Gs2GuildWebSocketClient) PrepareImportUserDataByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.prepareImportUserDataByUserIdAsyncHandler(
@@ -1083,6 +1160,13 @@ func (p Gs2GuildWebSocketClient) ImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.importUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1170,6 +1254,13 @@ func (p Gs2GuildWebSocketClient) CheckImportUserDataByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.checkImportUserDataByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1256,6 +1347,13 @@ func (p Gs2GuildWebSocketClient) DescribeGuildModelMastersAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeGuildModelMastersAsyncHandler(
@@ -1378,6 +1476,13 @@ func (p Gs2GuildWebSocketClient) CreateGuildModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createGuildModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1461,6 +1566,13 @@ func (p Gs2GuildWebSocketClient) GetGuildModelMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getGuildModelMasterAsyncHandler(
@@ -1583,6 +1695,13 @@ func (p Gs2GuildWebSocketClient) UpdateGuildModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateGuildModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1667,6 +1786,13 @@ func (p Gs2GuildWebSocketClient) DeleteGuildModelMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteGuildModelMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -1747,6 +1873,13 @@ func (p Gs2GuildWebSocketClient) DescribeGuildModelsAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeGuildModelsAsyncHandler(
@@ -1831,6 +1964,13 @@ func (p Gs2GuildWebSocketClient) GetGuildModelAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getGuildModelAsyncHandler(
@@ -1982,6 +2122,13 @@ func (p Gs2GuildWebSocketClient) SearchGuildsAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.searchGuildsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2132,6 +2279,13 @@ func (p Gs2GuildWebSocketClient) SearchGuildsByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.searchGuildsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2255,6 +2409,13 @@ func (p Gs2GuildWebSocketClient) CreateGuildAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.createGuildAsyncHandler(
@@ -2380,6 +2541,13 @@ func (p Gs2GuildWebSocketClient) CreateGuildByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.createGuildByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2473,6 +2641,13 @@ func (p Gs2GuildWebSocketClient) GetGuildAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getGuildAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2565,6 +2740,13 @@ func (p Gs2GuildWebSocketClient) GetGuildByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getGuildByUserIdAsyncHandler(
@@ -2690,6 +2872,13 @@ func (p Gs2GuildWebSocketClient) UpdateGuildAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateGuildAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2811,6 +3000,13 @@ func (p Gs2GuildWebSocketClient) UpdateGuildByGuildNameAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateGuildByGuildNameAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2907,6 +3103,13 @@ func (p Gs2GuildWebSocketClient) DeleteMemberAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteMemberAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -2999,6 +3202,13 @@ func (p Gs2GuildWebSocketClient) DeleteMemberByGuildNameAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteMemberByGuildNameAsyncHandler(
@@ -3099,6 +3309,13 @@ func (p Gs2GuildWebSocketClient) UpdateMemberRoleAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateMemberRoleAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3194,6 +3411,13 @@ func (p Gs2GuildWebSocketClient) UpdateMemberRoleByGuildNameAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.updateMemberRoleByGuildNameAsyncHandler(
@@ -3295,6 +3519,13 @@ func (p Gs2GuildWebSocketClient) BatchUpdateMemberRoleAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.batchUpdateMemberRoleAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3392,6 +3623,13 @@ func (p Gs2GuildWebSocketClient) BatchUpdateMemberRoleByGuildNameAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.batchUpdateMemberRoleByGuildNameAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3485,6 +3723,13 @@ func (p Gs2GuildWebSocketClient) DeleteGuildAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteGuildAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3574,6 +3819,13 @@ func (p Gs2GuildWebSocketClient) DeleteGuildByGuildNameAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteGuildByGuildNameAsyncHandler(
@@ -3667,6 +3919,13 @@ func (p Gs2GuildWebSocketClient) IncreaseMaximumCurrentMaximumMemberCountByGuild
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.increaseMaximumCurrentMaximumMemberCountByGuildNameAsyncHandler(
@@ -3764,6 +4023,13 @@ func (p Gs2GuildWebSocketClient) DecreaseMaximumCurrentMaximumMemberCountAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.decreaseMaximumCurrentMaximumMemberCountAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -3856,6 +4122,13 @@ func (p Gs2GuildWebSocketClient) DecreaseMaximumCurrentMaximumMemberCountByGuild
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.decreaseMaximumCurrentMaximumMemberCountByGuildNameAsyncHandler(
@@ -3959,6 +4232,13 @@ func (p Gs2GuildWebSocketClient) VerifyCurrentMaximumMemberCountAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyCurrentMaximumMemberCountAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4057,6 +4337,13 @@ func (p Gs2GuildWebSocketClient) VerifyCurrentMaximumMemberCountByGuildNameAsync
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.verifyCurrentMaximumMemberCountByGuildNameAsyncHandler(
@@ -4157,6 +4444,13 @@ func (p Gs2GuildWebSocketClient) VerifyIncludeMemberAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyIncludeMemberAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4256,6 +4550,13 @@ func (p Gs2GuildWebSocketClient) VerifyIncludeMemberByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyIncludeMemberByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4348,6 +4649,13 @@ func (p Gs2GuildWebSocketClient) SetMaximumCurrentMaximumMemberCountByGuildNameA
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setMaximumCurrentMaximumMemberCountByGuildNameAsyncHandler(
@@ -4445,6 +4753,13 @@ func (p Gs2GuildWebSocketClient) AssumeAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.assumeAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4541,6 +4856,13 @@ func (p Gs2GuildWebSocketClient) AssumeByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.assumeByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4624,6 +4946,13 @@ func (p Gs2GuildWebSocketClient) IncreaseMaximumCurrentMaximumMemberCountByStamp
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.increaseMaximumCurrentMaximumMemberCountByStampSheetAsyncHandler(
@@ -4709,6 +5038,13 @@ func (p Gs2GuildWebSocketClient) DecreaseMaximumCurrentMaximumMemberCountByStamp
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.decreaseMaximumCurrentMaximumMemberCountByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4792,6 +5128,13 @@ func (p Gs2GuildWebSocketClient) SetMaximumCurrentMaximumMemberCountByStampSheet
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.setMaximumCurrentMaximumMemberCountByStampSheetAsyncHandler(
@@ -4877,6 +5220,13 @@ func (p Gs2GuildWebSocketClient) VerifyCurrentMaximumMemberCountByStampTaskAsync
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.verifyCurrentMaximumMemberCountByStampTaskAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -4960,6 +5310,13 @@ func (p Gs2GuildWebSocketClient) VerifyIncludeMemberByStampTaskAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.verifyIncludeMemberByStampTaskAsyncHandler(
@@ -5057,6 +5414,13 @@ func (p Gs2GuildWebSocketClient) DescribeJoinedGuildsAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeJoinedGuildsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5153,6 +5517,13 @@ func (p Gs2GuildWebSocketClient) DescribeJoinedGuildsByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeJoinedGuildsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5246,6 +5617,13 @@ func (p Gs2GuildWebSocketClient) GetJoinedGuildAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getJoinedGuildAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5338,6 +5716,13 @@ func (p Gs2GuildWebSocketClient) GetJoinedGuildByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getJoinedGuildByUserIdAsyncHandler(
@@ -5435,6 +5820,13 @@ func (p Gs2GuildWebSocketClient) WithdrawalAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.withdrawalAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5531,6 +5923,13 @@ func (p Gs2GuildWebSocketClient) WithdrawalByUserIdAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.withdrawalByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5621,6 +6020,13 @@ func (p Gs2GuildWebSocketClient) GetLastGuildMasterActivityAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getLastGuildMasterActivityAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5707,6 +6113,13 @@ func (p Gs2GuildWebSocketClient) GetLastGuildMasterActivityByGuildNameAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getLastGuildMasterActivityByGuildNameAsyncHandler(
@@ -5801,6 +6214,13 @@ func (p Gs2GuildWebSocketClient) PromoteSeniorMemberAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.promoteSeniorMemberAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5891,6 +6311,13 @@ func (p Gs2GuildWebSocketClient) PromoteSeniorMemberByGuildNameAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.promoteSeniorMemberByGuildNameAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -5972,6 +6399,13 @@ func (p Gs2GuildWebSocketClient) ExportMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.exportMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6052,6 +6486,13 @@ func (p Gs2GuildWebSocketClient) GetCurrentGuildMasterAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getCurrentGuildMasterAsyncHandler(
@@ -6137,6 +6578,13 @@ func (p Gs2GuildWebSocketClient) UpdateCurrentGuildMasterAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.updateCurrentGuildMasterAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6220,6 +6668,13 @@ func (p Gs2GuildWebSocketClient) UpdateCurrentGuildMasterFromGitHubAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.updateCurrentGuildMasterFromGitHubAsyncHandler(
@@ -6317,6 +6772,13 @@ func (p Gs2GuildWebSocketClient) DescribeReceiveRequestsAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeReceiveRequestsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6409,6 +6871,13 @@ func (p Gs2GuildWebSocketClient) DescribeReceiveRequestsByGuildNameAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeReceiveRequestsByGuildNameAsyncHandler(
@@ -6503,6 +6972,13 @@ func (p Gs2GuildWebSocketClient) GetReceiveRequestAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getReceiveRequestAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6592,6 +7068,13 @@ func (p Gs2GuildWebSocketClient) GetReceiveRequestByGuildNameAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getReceiveRequestByGuildNameAsyncHandler(
@@ -6689,6 +7172,13 @@ func (p Gs2GuildWebSocketClient) AcceptRequestAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.acceptRequestAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6781,6 +7271,13 @@ func (p Gs2GuildWebSocketClient) AcceptRequestByGuildNameAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.acceptRequestByGuildNameAsyncHandler(
@@ -6878,6 +7375,13 @@ func (p Gs2GuildWebSocketClient) RejectRequestAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.rejectRequestAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -6970,6 +7474,13 @@ func (p Gs2GuildWebSocketClient) RejectRequestByGuildNameAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.rejectRequestByGuildNameAsyncHandler(
@@ -7067,6 +7578,13 @@ func (p Gs2GuildWebSocketClient) DescribeSendRequestsAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeSendRequestsAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -7163,6 +7681,13 @@ func (p Gs2GuildWebSocketClient) DescribeSendRequestsByUserIdAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeSendRequestsByUserIdAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -7256,6 +7781,13 @@ func (p Gs2GuildWebSocketClient) GetSendRequestAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getSendRequestAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -7348,6 +7880,13 @@ func (p Gs2GuildWebSocketClient) GetSendRequestByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getSendRequestByUserIdAsyncHandler(
@@ -7445,6 +7984,13 @@ func (p Gs2GuildWebSocketClient) SendRequestAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.sendRequestAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -7540,6 +8086,13 @@ func (p Gs2GuildWebSocketClient) SendRequestByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.sendRequestByUserIdAsyncHandler(
@@ -7637,6 +8190,13 @@ func (p Gs2GuildWebSocketClient) DeleteRequestAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteRequestAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -7732,6 +8292,13 @@ func (p Gs2GuildWebSocketClient) DeleteRequestByUserIdAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteRequestByUserIdAsyncHandler(
@@ -7829,6 +8396,13 @@ func (p Gs2GuildWebSocketClient) DescribeIgnoreUsersAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.describeIgnoreUsersAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -7921,6 +8495,13 @@ func (p Gs2GuildWebSocketClient) DescribeIgnoreUsersByGuildNameAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.describeIgnoreUsersByGuildNameAsyncHandler(
@@ -8015,6 +8596,13 @@ func (p Gs2GuildWebSocketClient) GetIgnoreUserAsync(
 	if request.AccessToken != nil {
 		bodies["xGs2AccessToken"] = string(*request.AccessToken)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.getIgnoreUserAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -8107,6 +8695,13 @@ func (p Gs2GuildWebSocketClient) GetIgnoreUserByGuildNameAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.getIgnoreUserByGuildNameAsyncHandler(
@@ -8204,6 +8799,13 @@ func (p Gs2GuildWebSocketClient) AddIgnoreUserAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.addIgnoreUserAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -8299,6 +8901,13 @@ func (p Gs2GuildWebSocketClient) AddIgnoreUserByGuildNameAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.addIgnoreUserByGuildNameAsyncHandler(
@@ -8396,6 +9005,13 @@ func (p Gs2GuildWebSocketClient) DeleteIgnoreUserAsync(
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.deleteIgnoreUserAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -8491,6 +9107,13 @@ func (p Gs2GuildWebSocketClient) DeleteIgnoreUserByGuildNameAsync(
 	}
 	if request.DuplicationAvoider != nil {
 		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.deleteIgnoreUserByGuildNameAsyncHandler(

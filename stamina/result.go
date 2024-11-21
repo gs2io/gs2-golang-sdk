@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -501,6 +514,7 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 type DescribeStaminaModelMastersResult struct {
 	Items         []StaminaModelMaster `json:"items"`
 	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeStaminaModelMastersAsyncResult struct {
@@ -546,7 +560,8 @@ func (p DescribeStaminaModelMastersResult) Pointer() *DescribeStaminaModelMaster
 }
 
 type CreateStaminaModelMasterResult struct {
-	Item *StaminaModelMaster `json:"item"`
+	Item     *StaminaModelMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateStaminaModelMasterAsyncResult struct {
@@ -588,7 +603,8 @@ func (p CreateStaminaModelMasterResult) Pointer() *CreateStaminaModelMasterResul
 }
 
 type GetStaminaModelMasterResult struct {
-	Item *StaminaModelMaster `json:"item"`
+	Item     *StaminaModelMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetStaminaModelMasterAsyncResult struct {
@@ -630,7 +646,8 @@ func (p GetStaminaModelMasterResult) Pointer() *GetStaminaModelMasterResult {
 }
 
 type UpdateStaminaModelMasterResult struct {
-	Item *StaminaModelMaster `json:"item"`
+	Item     *StaminaModelMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateStaminaModelMasterAsyncResult struct {
@@ -672,7 +689,8 @@ func (p UpdateStaminaModelMasterResult) Pointer() *UpdateStaminaModelMasterResul
 }
 
 type DeleteStaminaModelMasterResult struct {
-	Item *StaminaModelMaster `json:"item"`
+	Item     *StaminaModelMaster  `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteStaminaModelMasterAsyncResult struct {
@@ -716,6 +734,7 @@ func (p DeleteStaminaModelMasterResult) Pointer() *DeleteStaminaModelMasterResul
 type DescribeMaxStaminaTableMastersResult struct {
 	Items         []MaxStaminaTableMaster `json:"items"`
 	NextPageToken *string                 `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata    `json:"metadata"`
 }
 
 type DescribeMaxStaminaTableMastersAsyncResult struct {
@@ -761,7 +780,8 @@ func (p DescribeMaxStaminaTableMastersResult) Pointer() *DescribeMaxStaminaTable
 }
 
 type CreateMaxStaminaTableMasterResult struct {
-	Item *MaxStaminaTableMaster `json:"item"`
+	Item     *MaxStaminaTableMaster `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type CreateMaxStaminaTableMasterAsyncResult struct {
@@ -803,7 +823,8 @@ func (p CreateMaxStaminaTableMasterResult) Pointer() *CreateMaxStaminaTableMaste
 }
 
 type GetMaxStaminaTableMasterResult struct {
-	Item *MaxStaminaTableMaster `json:"item"`
+	Item     *MaxStaminaTableMaster `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type GetMaxStaminaTableMasterAsyncResult struct {
@@ -845,7 +866,8 @@ func (p GetMaxStaminaTableMasterResult) Pointer() *GetMaxStaminaTableMasterResul
 }
 
 type UpdateMaxStaminaTableMasterResult struct {
-	Item *MaxStaminaTableMaster `json:"item"`
+	Item     *MaxStaminaTableMaster `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type UpdateMaxStaminaTableMasterAsyncResult struct {
@@ -887,7 +909,8 @@ func (p UpdateMaxStaminaTableMasterResult) Pointer() *UpdateMaxStaminaTableMaste
 }
 
 type DeleteMaxStaminaTableMasterResult struct {
-	Item *MaxStaminaTableMaster `json:"item"`
+	Item     *MaxStaminaTableMaster `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type DeleteMaxStaminaTableMasterAsyncResult struct {
@@ -931,6 +954,7 @@ func (p DeleteMaxStaminaTableMasterResult) Pointer() *DeleteMaxStaminaTableMaste
 type DescribeRecoverIntervalTableMastersResult struct {
 	Items         []RecoverIntervalTableMaster `json:"items"`
 	NextPageToken *string                      `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata         `json:"metadata"`
 }
 
 type DescribeRecoverIntervalTableMastersAsyncResult struct {
@@ -976,7 +1000,8 @@ func (p DescribeRecoverIntervalTableMastersResult) Pointer() *DescribeRecoverInt
 }
 
 type CreateRecoverIntervalTableMasterResult struct {
-	Item *RecoverIntervalTableMaster `json:"item"`
+	Item     *RecoverIntervalTableMaster `json:"item"`
+	Metadata *core.ResultMetadata        `json:"metadata"`
 }
 
 type CreateRecoverIntervalTableMasterAsyncResult struct {
@@ -1018,7 +1043,8 @@ func (p CreateRecoverIntervalTableMasterResult) Pointer() *CreateRecoverInterval
 }
 
 type GetRecoverIntervalTableMasterResult struct {
-	Item *RecoverIntervalTableMaster `json:"item"`
+	Item     *RecoverIntervalTableMaster `json:"item"`
+	Metadata *core.ResultMetadata        `json:"metadata"`
 }
 
 type GetRecoverIntervalTableMasterAsyncResult struct {
@@ -1060,7 +1086,8 @@ func (p GetRecoverIntervalTableMasterResult) Pointer() *GetRecoverIntervalTableM
 }
 
 type UpdateRecoverIntervalTableMasterResult struct {
-	Item *RecoverIntervalTableMaster `json:"item"`
+	Item     *RecoverIntervalTableMaster `json:"item"`
+	Metadata *core.ResultMetadata        `json:"metadata"`
 }
 
 type UpdateRecoverIntervalTableMasterAsyncResult struct {
@@ -1102,7 +1129,8 @@ func (p UpdateRecoverIntervalTableMasterResult) Pointer() *UpdateRecoverInterval
 }
 
 type DeleteRecoverIntervalTableMasterResult struct {
-	Item *RecoverIntervalTableMaster `json:"item"`
+	Item     *RecoverIntervalTableMaster `json:"item"`
+	Metadata *core.ResultMetadata        `json:"metadata"`
 }
 
 type DeleteRecoverIntervalTableMasterAsyncResult struct {
@@ -1146,6 +1174,7 @@ func (p DeleteRecoverIntervalTableMasterResult) Pointer() *DeleteRecoverInterval
 type DescribeRecoverValueTableMastersResult struct {
 	Items         []RecoverValueTableMaster `json:"items"`
 	NextPageToken *string                   `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata      `json:"metadata"`
 }
 
 type DescribeRecoverValueTableMastersAsyncResult struct {
@@ -1191,7 +1220,8 @@ func (p DescribeRecoverValueTableMastersResult) Pointer() *DescribeRecoverValueT
 }
 
 type CreateRecoverValueTableMasterResult struct {
-	Item *RecoverValueTableMaster `json:"item"`
+	Item     *RecoverValueTableMaster `json:"item"`
+	Metadata *core.ResultMetadata     `json:"metadata"`
 }
 
 type CreateRecoverValueTableMasterAsyncResult struct {
@@ -1233,7 +1263,8 @@ func (p CreateRecoverValueTableMasterResult) Pointer() *CreateRecoverValueTableM
 }
 
 type GetRecoverValueTableMasterResult struct {
-	Item *RecoverValueTableMaster `json:"item"`
+	Item     *RecoverValueTableMaster `json:"item"`
+	Metadata *core.ResultMetadata     `json:"metadata"`
 }
 
 type GetRecoverValueTableMasterAsyncResult struct {
@@ -1275,7 +1306,8 @@ func (p GetRecoverValueTableMasterResult) Pointer() *GetRecoverValueTableMasterR
 }
 
 type UpdateRecoverValueTableMasterResult struct {
-	Item *RecoverValueTableMaster `json:"item"`
+	Item     *RecoverValueTableMaster `json:"item"`
+	Metadata *core.ResultMetadata     `json:"metadata"`
 }
 
 type UpdateRecoverValueTableMasterAsyncResult struct {
@@ -1317,7 +1349,8 @@ func (p UpdateRecoverValueTableMasterResult) Pointer() *UpdateRecoverValueTableM
 }
 
 type DeleteRecoverValueTableMasterResult struct {
-	Item *RecoverValueTableMaster `json:"item"`
+	Item     *RecoverValueTableMaster `json:"item"`
+	Metadata *core.ResultMetadata     `json:"metadata"`
 }
 
 type DeleteRecoverValueTableMasterAsyncResult struct {
@@ -1359,7 +1392,8 @@ func (p DeleteRecoverValueTableMasterResult) Pointer() *DeleteRecoverValueTableM
 }
 
 type ExportMasterResult struct {
-	Item *CurrentStaminaMaster `json:"item"`
+	Item     *CurrentStaminaMaster `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -1401,7 +1435,8 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
 }
 
 type GetCurrentStaminaMasterResult struct {
-	Item *CurrentStaminaMaster `json:"item"`
+	Item     *CurrentStaminaMaster `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type GetCurrentStaminaMasterAsyncResult struct {
@@ -1443,7 +1478,8 @@ func (p GetCurrentStaminaMasterResult) Pointer() *GetCurrentStaminaMasterResult 
 }
 
 type UpdateCurrentStaminaMasterResult struct {
-	Item *CurrentStaminaMaster `json:"item"`
+	Item     *CurrentStaminaMaster `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type UpdateCurrentStaminaMasterAsyncResult struct {
@@ -1485,7 +1521,8 @@ func (p UpdateCurrentStaminaMasterResult) Pointer() *UpdateCurrentStaminaMasterR
 }
 
 type UpdateCurrentStaminaMasterFromGitHubResult struct {
-	Item *CurrentStaminaMaster `json:"item"`
+	Item     *CurrentStaminaMaster `json:"item"`
+	Metadata *core.ResultMetadata  `json:"metadata"`
 }
 
 type UpdateCurrentStaminaMasterFromGitHubAsyncResult struct {
@@ -1527,7 +1564,8 @@ func (p UpdateCurrentStaminaMasterFromGitHubResult) Pointer() *UpdateCurrentStam
 }
 
 type DescribeStaminaModelsResult struct {
-	Items []StaminaModel `json:"items"`
+	Items    []StaminaModel       `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeStaminaModelsAsyncResult struct {
@@ -1565,7 +1603,8 @@ func (p DescribeStaminaModelsResult) Pointer() *DescribeStaminaModelsResult {
 }
 
 type GetStaminaModelResult struct {
-	Item *StaminaModel `json:"item"`
+	Item     *StaminaModel        `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetStaminaModelAsyncResult struct {
@@ -1607,8 +1646,9 @@ func (p GetStaminaModelResult) Pointer() *GetStaminaModelResult {
 }
 
 type DescribeStaminasResult struct {
-	Items         []Stamina `json:"items"`
-	NextPageToken *string   `json:"nextPageToken"`
+	Items         []Stamina            `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeStaminasAsyncResult struct {
@@ -1654,8 +1694,9 @@ func (p DescribeStaminasResult) Pointer() *DescribeStaminasResult {
 }
 
 type DescribeStaminasByUserIdResult struct {
-	Items         []Stamina `json:"items"`
-	NextPageToken *string   `json:"nextPageToken"`
+	Items         []Stamina            `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeStaminasByUserIdAsyncResult struct {
@@ -1701,8 +1742,9 @@ func (p DescribeStaminasByUserIdResult) Pointer() *DescribeStaminasByUserIdResul
 }
 
 type GetStaminaResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type GetStaminaAsyncResult struct {
@@ -1757,8 +1799,9 @@ func (p GetStaminaResult) Pointer() *GetStaminaResult {
 }
 
 type GetStaminaByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type GetStaminaByUserIdAsyncResult struct {
@@ -1813,8 +1856,9 @@ func (p GetStaminaByUserIdResult) Pointer() *GetStaminaByUserIdResult {
 }
 
 type UpdateStaminaByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateStaminaByUserIdAsyncResult struct {
@@ -1869,8 +1913,9 @@ func (p UpdateStaminaByUserIdResult) Pointer() *UpdateStaminaByUserIdResult {
 }
 
 type ConsumeStaminaResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type ConsumeStaminaAsyncResult struct {
@@ -1925,8 +1970,9 @@ func (p ConsumeStaminaResult) Pointer() *ConsumeStaminaResult {
 }
 
 type ConsumeStaminaByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type ConsumeStaminaByUserIdAsyncResult struct {
@@ -1981,9 +2027,10 @@ func (p ConsumeStaminaByUserIdResult) Pointer() *ConsumeStaminaByUserIdResult {
 }
 
 type RecoverStaminaByUserIdResult struct {
-	Item          *Stamina      `json:"item"`
-	StaminaModel  *StaminaModel `json:"staminaModel"`
-	OverflowValue *int32        `json:"overflowValue"`
+	Item          *Stamina             `json:"item"`
+	StaminaModel  *StaminaModel        `json:"staminaModel"`
+	OverflowValue *int32               `json:"overflowValue"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type RecoverStaminaByUserIdAsyncResult struct {
@@ -2046,8 +2093,9 @@ func (p RecoverStaminaByUserIdResult) Pointer() *RecoverStaminaByUserIdResult {
 }
 
 type RaiseMaxValueByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type RaiseMaxValueByUserIdAsyncResult struct {
@@ -2102,8 +2150,9 @@ func (p RaiseMaxValueByUserIdResult) Pointer() *RaiseMaxValueByUserIdResult {
 }
 
 type DecreaseMaxValueResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type DecreaseMaxValueAsyncResult struct {
@@ -2158,8 +2207,9 @@ func (p DecreaseMaxValueResult) Pointer() *DecreaseMaxValueResult {
 }
 
 type DecreaseMaxValueByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type DecreaseMaxValueByUserIdAsyncResult struct {
@@ -2214,9 +2264,10 @@ func (p DecreaseMaxValueByUserIdResult) Pointer() *DecreaseMaxValueByUserIdResul
 }
 
 type SetMaxValueByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	Old          *Stamina      `json:"old"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	Old          *Stamina             `json:"old"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type SetMaxValueByUserIdAsyncResult struct {
@@ -2284,9 +2335,10 @@ func (p SetMaxValueByUserIdResult) Pointer() *SetMaxValueByUserIdResult {
 }
 
 type SetRecoverIntervalByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	Old          *Stamina      `json:"old"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	Old          *Stamina             `json:"old"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type SetRecoverIntervalByUserIdAsyncResult struct {
@@ -2354,9 +2406,10 @@ func (p SetRecoverIntervalByUserIdResult) Pointer() *SetRecoverIntervalByUserIdR
 }
 
 type SetRecoverValueByUserIdResult struct {
-	Item         *Stamina      `json:"item"`
-	Old          *Stamina      `json:"old"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	Old          *Stamina             `json:"old"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type SetRecoverValueByUserIdAsyncResult struct {
@@ -2424,9 +2477,10 @@ func (p SetRecoverValueByUserIdResult) Pointer() *SetRecoverValueByUserIdResult 
 }
 
 type SetMaxValueByStatusResult struct {
-	Item         *Stamina      `json:"item"`
-	Old          *Stamina      `json:"old"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	Old          *Stamina             `json:"old"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type SetMaxValueByStatusAsyncResult struct {
@@ -2494,9 +2548,10 @@ func (p SetMaxValueByStatusResult) Pointer() *SetMaxValueByStatusResult {
 }
 
 type SetRecoverIntervalByStatusResult struct {
-	Item         *Stamina      `json:"item"`
-	Old          *Stamina      `json:"old"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	Old          *Stamina             `json:"old"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type SetRecoverIntervalByStatusAsyncResult struct {
@@ -2564,9 +2619,10 @@ func (p SetRecoverIntervalByStatusResult) Pointer() *SetRecoverIntervalByStatusR
 }
 
 type SetRecoverValueByStatusResult struct {
-	Item         *Stamina      `json:"item"`
-	Old          *Stamina      `json:"old"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	Old          *Stamina             `json:"old"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type SetRecoverValueByStatusAsyncResult struct {
@@ -2634,7 +2690,8 @@ func (p SetRecoverValueByStatusResult) Pointer() *SetRecoverValueByStatusResult 
 }
 
 type DeleteStaminaByUserIdResult struct {
-	Item *Stamina `json:"item"`
+	Item     *Stamina             `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteStaminaByUserIdAsyncResult struct {
@@ -2676,9 +2733,10 @@ func (p DeleteStaminaByUserIdResult) Pointer() *DeleteStaminaByUserIdResult {
 }
 
 type RecoverStaminaByStampSheetResult struct {
-	Item          *Stamina      `json:"item"`
-	StaminaModel  *StaminaModel `json:"staminaModel"`
-	OverflowValue *int32        `json:"overflowValue"`
+	Item          *Stamina             `json:"item"`
+	StaminaModel  *StaminaModel        `json:"staminaModel"`
+	OverflowValue *int32               `json:"overflowValue"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type RecoverStaminaByStampSheetAsyncResult struct {
@@ -2741,8 +2799,9 @@ func (p RecoverStaminaByStampSheetResult) Pointer() *RecoverStaminaByStampSheetR
 }
 
 type RaiseMaxValueByStampSheetResult struct {
-	Item         *Stamina      `json:"item"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type RaiseMaxValueByStampSheetAsyncResult struct {
@@ -2797,9 +2856,10 @@ func (p RaiseMaxValueByStampSheetResult) Pointer() *RaiseMaxValueByStampSheetRes
 }
 
 type DecreaseMaxValueByStampTaskResult struct {
-	Item            *Stamina      `json:"item"`
-	StaminaModel    *StaminaModel `json:"staminaModel"`
-	NewContextStack *string       `json:"newContextStack"`
+	Item            *Stamina             `json:"item"`
+	StaminaModel    *StaminaModel        `json:"staminaModel"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type DecreaseMaxValueByStampTaskAsyncResult struct {
@@ -2862,9 +2922,10 @@ func (p DecreaseMaxValueByStampTaskResult) Pointer() *DecreaseMaxValueByStampTas
 }
 
 type SetMaxValueByStampSheetResult struct {
-	Item         *Stamina      `json:"item"`
-	Old          *Stamina      `json:"old"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	Old          *Stamina             `json:"old"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type SetMaxValueByStampSheetAsyncResult struct {
@@ -2932,9 +2993,10 @@ func (p SetMaxValueByStampSheetResult) Pointer() *SetMaxValueByStampSheetResult 
 }
 
 type SetRecoverIntervalByStampSheetResult struct {
-	Item         *Stamina      `json:"item"`
-	Old          *Stamina      `json:"old"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	Old          *Stamina             `json:"old"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type SetRecoverIntervalByStampSheetAsyncResult struct {
@@ -3002,9 +3064,10 @@ func (p SetRecoverIntervalByStampSheetResult) Pointer() *SetRecoverIntervalBySta
 }
 
 type SetRecoverValueByStampSheetResult struct {
-	Item         *Stamina      `json:"item"`
-	Old          *Stamina      `json:"old"`
-	StaminaModel *StaminaModel `json:"staminaModel"`
+	Item         *Stamina             `json:"item"`
+	Old          *Stamina             `json:"old"`
+	StaminaModel *StaminaModel        `json:"staminaModel"`
+	Metadata     *core.ResultMetadata `json:"metadata"`
 }
 
 type SetRecoverValueByStampSheetAsyncResult struct {
@@ -3072,9 +3135,10 @@ func (p SetRecoverValueByStampSheetResult) Pointer() *SetRecoverValueByStampShee
 }
 
 type ConsumeStaminaByStampTaskResult struct {
-	Item            *Stamina      `json:"item"`
-	StaminaModel    *StaminaModel `json:"staminaModel"`
-	NewContextStack *string       `json:"newContextStack"`
+	Item            *Stamina             `json:"item"`
+	StaminaModel    *StaminaModel        `json:"staminaModel"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type ConsumeStaminaByStampTaskAsyncResult struct {

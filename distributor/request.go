@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -131,6 +132,7 @@ type CreateNamespaceRequest struct {
 	AssumeUserId                  *string              `json:"assumeUserId"`
 	AutoRunStampSheetNotification *NotificationSetting `json:"autoRunStampSheetNotification"`
 	LogSetting                    *LogSetting          `json:"logSetting"`
+	DryRun                        *bool                `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -312,6 +314,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -399,6 +402,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -490,6 +494,7 @@ type UpdateNamespaceRequest struct {
 	AssumeUserId                  *string              `json:"assumeUserId"`
 	AutoRunStampSheetNotification *NotificationSetting `json:"autoRunStampSheetNotification"`
 	LogSetting                    *LogSetting          `json:"logSetting"`
+	DryRun                        *bool                `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -671,6 +676,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -760,6 +766,7 @@ type DescribeDistributorModelMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeDistributorModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -894,6 +901,7 @@ type CreateDistributorModelMasterRequest struct {
 	Metadata           *string   `json:"metadata"`
 	InboxNamespaceId   *string   `json:"inboxNamespaceId"`
 	WhiteListTargetIds []*string `json:"whiteListTargetIds"`
+	DryRun             *bool     `json:"dryRun"`
 }
 
 func (p *CreateDistributorModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -1142,6 +1150,7 @@ type GetDistributorModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	DistributorName *string `json:"distributorName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetDistributorModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -1265,6 +1274,7 @@ type UpdateDistributorModelMasterRequest struct {
 	Metadata           *string   `json:"metadata"`
 	InboxNamespaceId   *string   `json:"inboxNamespaceId"`
 	WhiteListTargetIds []*string `json:"whiteListTargetIds"`
+	DryRun             *bool     `json:"dryRun"`
 }
 
 func (p *UpdateDistributorModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -1513,6 +1523,7 @@ type DeleteDistributorModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	DistributorName *string `json:"distributorName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteDistributorModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -1631,6 +1642,7 @@ type DescribeDistributorModelsRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeDistributorModelsRequest) UnmarshalJSON(data []byte) error {
@@ -1719,6 +1731,7 @@ type GetDistributorModelRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	DistributorName *string `json:"distributorName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetDistributorModelRequest) UnmarshalJSON(data []byte) error {
@@ -1837,6 +1850,7 @@ type ExportMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -1924,6 +1938,7 @@ type GetCurrentDistributorMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentDistributorMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2012,6 +2027,7 @@ type UpdateCurrentDistributorMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Settings        *string `json:"settings"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentDistributorMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2131,6 +2147,7 @@ type UpdateCurrentDistributorMasterFromGitHubRequest struct {
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DryRun          *bool                  `json:"dryRun"`
 }
 
 func (p *UpdateCurrentDistributorMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -2239,6 +2256,7 @@ type DistributeRequest struct {
 	UserId             *string             `json:"userId"`
 	DistributeResource *DistributeResource `json:"distributeResource"`
 	TimeOffsetToken    *string             `json:"timeOffsetToken"`
+	DryRun             *bool               `json:"dryRun"`
 }
 
 func (p *DistributeRequest) UnmarshalJSON(data []byte) error {
@@ -2438,6 +2456,7 @@ type DistributeWithoutOverflowProcessRequest struct {
 	UserId             *string             `json:"userId"`
 	DistributeResource *DistributeResource `json:"distributeResource"`
 	TimeOffsetToken    *string             `json:"timeOffsetToken"`
+	DryRun             *bool               `json:"dryRun"`
 }
 
 func (p *DistributeWithoutOverflowProcessRequest) UnmarshalJSON(data []byte) error {
@@ -2574,6 +2593,7 @@ type RunVerifyTaskRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	VerifyTask      *string `json:"verifyTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *RunVerifyTaskRequest) UnmarshalJSON(data []byte) error {
@@ -2725,6 +2745,7 @@ type RunStampTaskRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *RunStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -2876,6 +2897,7 @@ type RunStampSheetRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *RunStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -3027,6 +3049,7 @@ type RunStampSheetExpressRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *RunStampSheetExpressRequest) UnmarshalJSON(data []byte) error {
@@ -3177,6 +3200,7 @@ type RunVerifyTaskWithoutNamespaceRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	VerifyTask      *string `json:"verifyTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *RunVerifyTaskWithoutNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -3296,6 +3320,7 @@ type RunStampTaskWithoutNamespaceRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *RunStampTaskWithoutNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -3415,6 +3440,7 @@ type RunStampSheetWithoutNamespaceRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *RunStampSheetWithoutNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -3534,6 +3560,7 @@ type RunStampSheetExpressWithoutNamespaceRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *RunStampSheetExpressWithoutNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -3654,6 +3681,7 @@ type SetTransactionDefaultConfigRequest struct {
 	DuplicationAvoider *string  `json:"duplicationAvoider"`
 	AccessToken        *string  `json:"accessToken"`
 	Config             []Config `json:"config"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *SetTransactionDefaultConfigRequest) UnmarshalJSON(data []byte) error {
@@ -3756,6 +3784,7 @@ type SetTransactionDefaultConfigByUserIdRequest struct {
 	UserId             *string  `json:"userId"`
 	Config             []Config `json:"config"`
 	TimeOffsetToken    *string  `json:"timeOffsetToken"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *SetTransactionDefaultConfigByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -3888,6 +3917,7 @@ type FreezeMasterDataRequest struct {
 	DuplicationAvoider *string `json:"duplicationAvoider"`
 	NamespaceName      *string `json:"namespaceName"`
 	AccessToken        *string `json:"accessToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *FreezeMasterDataRequest) UnmarshalJSON(data []byte) error {
@@ -4009,6 +4039,7 @@ type FreezeMasterDataByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *FreezeMasterDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4165,6 +4196,7 @@ type IfExpressionByUserIdRequest struct {
 	FalseActions                    []ConsumeAction `json:"falseActions"`
 	MultiplyValueSpecifyingQuantity *bool           `json:"multiplyValueSpecifyingQuantity"`
 	TimeOffsetToken                 *string         `json:"timeOffsetToken"`
+	DryRun                          *bool           `json:"dryRun"`
 }
 
 func (p *IfExpressionByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4369,6 +4401,7 @@ type AndExpressionByUserIdRequest struct {
 	UserId             *string        `json:"userId"`
 	Actions            []VerifyAction `json:"actions"`
 	TimeOffsetToken    *string        `json:"timeOffsetToken"`
+	DryRun             *bool          `json:"dryRun"`
 }
 
 func (p *AndExpressionByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4534,6 +4567,7 @@ type OrExpressionByUserIdRequest struct {
 	UserId             *string        `json:"userId"`
 	Actions            []VerifyAction `json:"actions"`
 	TimeOffsetToken    *string        `json:"timeOffsetToken"`
+	DryRun             *bool          `json:"dryRun"`
 }
 
 func (p *OrExpressionByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4696,6 +4730,7 @@ type IfExpressionByStampTaskRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *IfExpressionByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -4815,6 +4850,7 @@ type AndExpressionByStampTaskRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *AndExpressionByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -4934,6 +4970,7 @@ type OrExpressionByStampTaskRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *OrExpressionByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -5054,6 +5091,7 @@ type GetStampSheetResultRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	AccessToken     *string `json:"accessToken"`
 	TransactionId   *string `json:"transactionId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetStampSheetResultRequest) UnmarshalJSON(data []byte) error {
@@ -5206,6 +5244,7 @@ type GetStampSheetResultByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	TransactionId   *string `json:"transactionId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetStampSheetResultByUserIdRequest) UnmarshalJSON(data []byte) error {

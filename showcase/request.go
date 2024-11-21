@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -135,6 +136,7 @@ type CreateNamespaceRequest struct {
 	// Deprecated: should not be used
 	KeyId      *string     `json:"keyId"`
 	LogSetting *LogSetting `json:"logSetting"`
+	DryRun     *bool       `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -363,6 +365,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -450,6 +453,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -544,7 +548,8 @@ type UpdateNamespaceRequest struct {
 	// Deprecated: should not be used
 	QueueNamespaceId *string `json:"queueNamespaceId"`
 	// Deprecated: should not be used
-	KeyId *string `json:"keyId"`
+	KeyId  *string `json:"keyId"`
+	DryRun *bool   `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -773,6 +778,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -861,6 +867,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -980,6 +987,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckDumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1099,6 +1107,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1218,6 +1227,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckCleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1337,6 +1347,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *PrepareImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1457,6 +1468,7 @@ type ImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1608,6 +1620,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1759,6 +1772,7 @@ type DescribeSalesItemMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeSalesItemMastersRequest) UnmarshalJSON(data []byte) error {
@@ -1894,6 +1908,7 @@ type CreateSalesItemMasterRequest struct {
 	VerifyActions   []VerifyAction  `json:"verifyActions"`
 	ConsumeActions  []ConsumeAction `json:"consumeActions"`
 	AcquireActions  []AcquireAction `json:"acquireActions"`
+	DryRun          *bool           `json:"dryRun"`
 }
 
 func (p *CreateSalesItemMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2111,6 +2126,7 @@ type GetSalesItemMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	SalesItemName   *string `json:"salesItemName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetSalesItemMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2235,6 +2251,7 @@ type UpdateSalesItemMasterRequest struct {
 	VerifyActions   []VerifyAction  `json:"verifyActions"`
 	ConsumeActions  []ConsumeAction `json:"consumeActions"`
 	AcquireActions  []AcquireAction `json:"acquireActions"`
+	DryRun          *bool           `json:"dryRun"`
 }
 
 func (p *UpdateSalesItemMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2452,6 +2469,7 @@ type DeleteSalesItemMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	SalesItemName   *string `json:"salesItemName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteSalesItemMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2572,6 +2590,7 @@ type DescribeSalesItemGroupMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeSalesItemGroupMastersRequest) UnmarshalJSON(data []byte) error {
@@ -2705,6 +2724,7 @@ type CreateSalesItemGroupMasterRequest struct {
 	Description     *string   `json:"description"`
 	Metadata        *string   `json:"metadata"`
 	SalesItemNames  []*string `json:"salesItemNames"`
+	DryRun          *bool     `json:"dryRun"`
 }
 
 func (p *CreateSalesItemGroupMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2922,6 +2942,7 @@ type GetSalesItemGroupMasterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	NamespaceName      *string `json:"namespaceName"`
 	SalesItemGroupName *string `json:"salesItemGroupName"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *GetSalesItemGroupMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3044,6 +3065,7 @@ type UpdateSalesItemGroupMasterRequest struct {
 	Description        *string   `json:"description"`
 	Metadata           *string   `json:"metadata"`
 	SalesItemNames     []*string `json:"salesItemNames"`
+	DryRun             *bool     `json:"dryRun"`
 }
 
 func (p *UpdateSalesItemGroupMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3261,6 +3283,7 @@ type DeleteSalesItemGroupMasterRequest struct {
 	ContextStack       *string `json:"contextStack"`
 	NamespaceName      *string `json:"namespaceName"`
 	SalesItemGroupName *string `json:"salesItemGroupName"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteSalesItemGroupMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3381,6 +3404,7 @@ type DescribeShowcaseMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeShowcaseMastersRequest) UnmarshalJSON(data []byte) error {
@@ -3515,6 +3539,7 @@ type CreateShowcaseMasterRequest struct {
 	Metadata           *string             `json:"metadata"`
 	DisplayItems       []DisplayItemMaster `json:"displayItems"`
 	SalesPeriodEventId *string             `json:"salesPeriodEventId"`
+	DryRun             *bool               `json:"dryRun"`
 }
 
 func (p *CreateShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3739,6 +3764,7 @@ type GetShowcaseMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ShowcaseName    *string `json:"showcaseName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
@@ -3862,6 +3888,7 @@ type UpdateShowcaseMasterRequest struct {
 	Metadata           *string             `json:"metadata"`
 	DisplayItems       []DisplayItemMaster `json:"displayItems"`
 	SalesPeriodEventId *string             `json:"salesPeriodEventId"`
+	DryRun             *bool               `json:"dryRun"`
 }
 
 func (p *UpdateShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4086,6 +4113,7 @@ type DeleteShowcaseMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ShowcaseName    *string `json:"showcaseName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4204,6 +4232,7 @@ type ExportMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4291,6 +4320,7 @@ type GetCurrentShowcaseMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4379,6 +4409,7 @@ type UpdateCurrentShowcaseMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Settings        *string `json:"settings"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
@@ -4498,6 +4529,7 @@ type UpdateCurrentShowcaseMasterFromGitHubRequest struct {
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DryRun          *bool                  `json:"dryRun"`
 }
 
 func (p *UpdateCurrentShowcaseMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -4602,6 +4634,7 @@ type DescribeShowcasesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeShowcasesRequest) UnmarshalJSON(data []byte) error {
@@ -4722,6 +4755,7 @@ type DescribeShowcasesByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeShowcasesByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4873,6 +4907,7 @@ type GetShowcaseRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	ShowcaseName    *string `json:"showcaseName"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetShowcaseRequest) UnmarshalJSON(data []byte) error {
@@ -5025,6 +5060,7 @@ type GetShowcaseByUserIdRequest struct {
 	ShowcaseName    *string `json:"showcaseName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetShowcaseByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5211,6 +5247,7 @@ type BuyRequest struct {
 	AccessToken        *string  `json:"accessToken"`
 	Quantity           *int32   `json:"quantity"`
 	Config             []Config `json:"config"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *BuyRequest) UnmarshalJSON(data []byte) error {
@@ -5421,6 +5458,7 @@ type BuyByUserIdRequest struct {
 	Quantity           *int32   `json:"quantity"`
 	Config             []Config `json:"config"`
 	TimeOffsetToken    *string  `json:"timeOffsetToken"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *BuyByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5657,6 +5695,7 @@ type DescribeRandomShowcaseMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRandomShowcaseMastersRequest) UnmarshalJSON(data []byte) error {
@@ -5794,6 +5833,7 @@ type CreateRandomShowcaseMasterRequest struct {
 	BaseTimestamp         *int64                   `json:"baseTimestamp"`
 	ResetIntervalHours    *int32                   `json:"resetIntervalHours"`
 	SalesPeriodEventId    *string                  `json:"salesPeriodEventId"`
+	DryRun                *bool                    `json:"dryRun"`
 }
 
 func (p *CreateRandomShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
@@ -6051,6 +6091,7 @@ type GetRandomShowcaseMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ShowcaseName    *string `json:"showcaseName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetRandomShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
@@ -6177,6 +6218,7 @@ type UpdateRandomShowcaseMasterRequest struct {
 	BaseTimestamp         *int64                   `json:"baseTimestamp"`
 	ResetIntervalHours    *int32                   `json:"resetIntervalHours"`
 	SalesPeriodEventId    *string                  `json:"salesPeriodEventId"`
+	DryRun                *bool                    `json:"dryRun"`
 }
 
 func (p *UpdateRandomShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
@@ -6434,6 +6476,7 @@ type DeleteRandomShowcaseMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	ShowcaseName    *string `json:"showcaseName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteRandomShowcaseMasterRequest) UnmarshalJSON(data []byte) error {
@@ -6557,6 +6600,7 @@ type IncrementPurchaseCountRequest struct {
 	DisplayItemName    *string `json:"displayItemName"`
 	AccessToken        *string `json:"accessToken"`
 	Count              *int32  `json:"count"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *IncrementPurchaseCountRequest) UnmarshalJSON(data []byte) error {
@@ -6754,6 +6798,7 @@ type IncrementPurchaseCountByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	Count              *int32  `json:"count"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *IncrementPurchaseCountByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6982,6 +7027,7 @@ type DecrementPurchaseCountByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	Count              *int32  `json:"count"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DecrementPurchaseCountByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7205,6 +7251,7 @@ type IncrementPurchaseCountByStampTaskRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *IncrementPurchaseCountByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -7324,6 +7371,7 @@ type DecrementPurchaseCountByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DecrementPurchaseCountByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -7446,6 +7494,7 @@ type ForceReDrawByUserIdRequest struct {
 	ShowcaseName       *string `json:"showcaseName"`
 	UserId             *string `json:"userId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *ForceReDrawByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7627,6 +7676,7 @@ type ForceReDrawByUserIdByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ForceReDrawByUserIdByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -7747,6 +7797,7 @@ type DescribeRandomDisplayItemsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	ShowcaseName    *string `json:"showcaseName"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRandomDisplayItemsRequest) UnmarshalJSON(data []byte) error {
@@ -7899,6 +7950,7 @@ type DescribeRandomDisplayItemsByUserIdRequest struct {
 	ShowcaseName    *string `json:"showcaseName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRandomDisplayItemsByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -8082,6 +8134,7 @@ type GetRandomDisplayItemRequest struct {
 	ShowcaseName    *string `json:"showcaseName"`
 	DisplayItemName *string `json:"displayItemName"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetRandomDisplayItemRequest) UnmarshalJSON(data []byte) error {
@@ -8266,6 +8319,7 @@ type GetRandomDisplayItemByUserIdRequest struct {
 	DisplayItemName *string `json:"displayItemName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetRandomDisplayItemByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -8483,6 +8537,7 @@ type RandomShowcaseBuyRequest struct {
 	AccessToken        *string  `json:"accessToken"`
 	Quantity           *int32   `json:"quantity"`
 	Config             []Config `json:"config"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *RandomShowcaseBuyRequest) UnmarshalJSON(data []byte) error {
@@ -8693,6 +8748,7 @@ type RandomShowcaseBuyByUserIdRequest struct {
 	Quantity           *int32   `json:"quantity"`
 	Config             []Config `json:"config"`
 	TimeOffsetToken    *string  `json:"timeOffsetToken"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *RandomShowcaseBuyByUserIdRequest) UnmarshalJSON(data []byte) error {

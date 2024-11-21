@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,8 +281,9 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DescribeKeysResult struct {
-	Items         []Key   `json:"items"`
-	NextPageToken *string `json:"nextPageToken"`
+	Items         []Key                `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeKeysAsyncResult struct {
@@ -322,7 +329,8 @@ func (p DescribeKeysResult) Pointer() *DescribeKeysResult {
 }
 
 type CreateKeyResult struct {
-	Item *Key `json:"item"`
+	Item     *Key                 `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateKeyAsyncResult struct {
@@ -364,7 +372,8 @@ func (p CreateKeyResult) Pointer() *CreateKeyResult {
 }
 
 type UpdateKeyResult struct {
-	Item *Key `json:"item"`
+	Item     *Key                 `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateKeyAsyncResult struct {
@@ -406,7 +415,8 @@ func (p UpdateKeyResult) Pointer() *UpdateKeyResult {
 }
 
 type GetKeyResult struct {
-	Item *Key `json:"item"`
+	Item     *Key                 `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetKeyAsyncResult struct {
@@ -448,7 +458,8 @@ func (p GetKeyResult) Pointer() *GetKeyResult {
 }
 
 type DeleteKeyResult struct {
-	Item *Key `json:"item"`
+	Item     *Key                 `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteKeyAsyncResult struct {
@@ -490,7 +501,8 @@ func (p DeleteKeyResult) Pointer() *DeleteKeyResult {
 }
 
 type EncryptResult struct {
-	Data *string `json:"data"`
+	Data     *string              `json:"data"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type EncryptAsyncResult struct {
@@ -527,7 +539,8 @@ func (p EncryptResult) Pointer() *EncryptResult {
 }
 
 type DecryptResult struct {
-	Data *string `json:"data"`
+	Data     *string              `json:"data"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DecryptAsyncResult struct {
@@ -564,8 +577,9 @@ func (p DecryptResult) Pointer() *DecryptResult {
 }
 
 type DescribeGitHubApiKeysResult struct {
-	Items         []GitHubApiKey `json:"items"`
-	NextPageToken *string        `json:"nextPageToken"`
+	Items         []GitHubApiKey       `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeGitHubApiKeysAsyncResult struct {
@@ -611,7 +625,8 @@ func (p DescribeGitHubApiKeysResult) Pointer() *DescribeGitHubApiKeysResult {
 }
 
 type CreateGitHubApiKeyResult struct {
-	Item *GitHubApiKey `json:"item"`
+	Item     *GitHubApiKey        `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateGitHubApiKeyAsyncResult struct {
@@ -653,7 +668,8 @@ func (p CreateGitHubApiKeyResult) Pointer() *CreateGitHubApiKeyResult {
 }
 
 type UpdateGitHubApiKeyResult struct {
-	Item *GitHubApiKey `json:"item"`
+	Item     *GitHubApiKey        `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateGitHubApiKeyAsyncResult struct {
@@ -695,7 +711,8 @@ func (p UpdateGitHubApiKeyResult) Pointer() *UpdateGitHubApiKeyResult {
 }
 
 type GetGitHubApiKeyResult struct {
-	Item *GitHubApiKey `json:"item"`
+	Item     *GitHubApiKey        `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetGitHubApiKeyAsyncResult struct {
@@ -737,7 +754,8 @@ func (p GetGitHubApiKeyResult) Pointer() *GetGitHubApiKeyResult {
 }
 
 type DeleteGitHubApiKeyResult struct {
-	Item *GitHubApiKey `json:"item"`
+	Item     *GitHubApiKey        `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteGitHubApiKeyAsyncResult struct {

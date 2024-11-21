@@ -96,6 +96,13 @@ func (p Gs2AuthWebSocketClient) LoginAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.loginAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -182,6 +189,13 @@ func (p Gs2AuthWebSocketClient) LoginBySignatureAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.loginBySignatureAsyncHandler(
@@ -276,6 +290,13 @@ func (p Gs2AuthWebSocketClient) FederationAsync(
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
 	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
 
 	go p.federationAsyncHandler(
 		&core.WebSocketNetworkJob{
@@ -362,6 +383,13 @@ func (p Gs2AuthWebSocketClient) IssueTimeOffsetTokenByUserIdAsync(
 	}
 	if request.ContextStack != nil {
 		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
 	}
 
 	go p.issueTimeOffsetTokenByUserIdAsyncHandler(

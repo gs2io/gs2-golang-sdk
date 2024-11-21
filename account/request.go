@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -135,6 +136,7 @@ type CreateNamespaceRequest struct {
 	CreateTakeOverScript                    *ScriptSetting `json:"createTakeOverScript"`
 	DoTakeOverScript                        *ScriptSetting `json:"doTakeOverScript"`
 	LogSetting                              *LogSetting    `json:"logSetting"`
+	DryRun                                  *bool          `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -355,6 +357,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -442,6 +445,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -536,6 +540,7 @@ type UpdateNamespaceRequest struct {
 	CreateTakeOverScript     *ScriptSetting `json:"createTakeOverScript"`
 	DoTakeOverScript         *ScriptSetting `json:"doTakeOverScript"`
 	LogSetting               *LogSetting    `json:"logSetting"`
+	DryRun                   *bool          `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -745,6 +750,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -833,6 +839,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -952,6 +959,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckDumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1071,6 +1079,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1190,6 +1199,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckCleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1309,6 +1319,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *PrepareImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1429,6 +1440,7 @@ type ImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1580,6 +1592,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1731,6 +1744,7 @@ type DescribeAccountsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeAccountsRequest) UnmarshalJSON(data []byte) error {
@@ -1860,6 +1874,7 @@ type CreateAccountRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CreateAccountRequest) UnmarshalJSON(data []byte) error {
@@ -1951,6 +1966,7 @@ type UpdateTimeOffsetRequest struct {
 	UserId             *string `json:"userId"`
 	TimeOffset         *int32  `json:"timeOffset"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *UpdateTimeOffsetRequest) UnmarshalJSON(data []byte) error {
@@ -2115,6 +2131,7 @@ type UpdateBannedRequest struct {
 	UserId             *string `json:"userId"`
 	Banned             *bool   `json:"banned"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *UpdateBannedRequest) UnmarshalJSON(data []byte) error {
@@ -2279,6 +2296,7 @@ type AddBanRequest struct {
 	UserId             *string    `json:"userId"`
 	BanStatus          *BanStatus `json:"banStatus"`
 	TimeOffsetToken    *string    `json:"timeOffsetToken"`
+	DryRun             *bool      `json:"dryRun"`
 }
 
 func (p *AddBanRequest) UnmarshalJSON(data []byte) error {
@@ -2448,6 +2466,7 @@ type RemoveBanRequest struct {
 	UserId             *string `json:"userId"`
 	BanStatusName      *string `json:"banStatusName"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *RemoveBanRequest) UnmarshalJSON(data []byte) error {
@@ -2630,6 +2649,7 @@ type GetAccountRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetAccountRequest) UnmarshalJSON(data []byte) error {
@@ -2782,6 +2802,7 @@ type DeleteAccountRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteAccountRequest) UnmarshalJSON(data []byte) error {
@@ -2936,6 +2957,7 @@ type AuthenticationRequest struct {
 	KeyId              *string `json:"keyId"`
 	Password           *string `json:"password"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *AuthenticationRequest) UnmarshalJSON(data []byte) error {
@@ -3150,6 +3172,7 @@ type DescribeTakeOversRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeTakeOversRequest) UnmarshalJSON(data []byte) error {
@@ -3314,6 +3337,7 @@ type DescribeTakeOversByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeTakeOversByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -3510,6 +3534,7 @@ type CreateTakeOverRequest struct {
 	Type               *int32  `json:"type"`
 	UserIdentifier     *string `json:"userIdentifier"`
 	Password           *string `json:"password"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *CreateTakeOverRequest) UnmarshalJSON(data []byte) error {
@@ -3707,6 +3732,7 @@ type CreateTakeOverByUserIdRequest struct {
 	UserIdentifier     *string `json:"userIdentifier"`
 	Password           *string `json:"password"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *CreateTakeOverByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -3933,6 +3959,7 @@ type CreateTakeOverOpenIdConnectRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	Type               *int32  `json:"type"`
 	IdToken            *string `json:"idToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *CreateTakeOverOpenIdConnectRequest) UnmarshalJSON(data []byte) error {
@@ -4098,6 +4125,7 @@ type CreateTakeOverOpenIdConnectAndByUserIdRequest struct {
 	Type               *int32  `json:"type"`
 	IdToken            *string `json:"idToken"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *CreateTakeOverOpenIdConnectAndByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4291,6 +4319,7 @@ type GetTakeOverRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	AccessToken     *string `json:"accessToken"`
 	Type            *int32  `json:"type"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetTakeOverRequest) UnmarshalJSON(data []byte) error {
@@ -4423,6 +4452,7 @@ type GetTakeOverByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	Type            *int32  `json:"type"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetTakeOverByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4588,6 +4618,7 @@ type UpdateTakeOverRequest struct {
 	Type               *int32  `json:"type"`
 	OldPassword        *string `json:"oldPassword"`
 	Password           *string `json:"password"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *UpdateTakeOverRequest) UnmarshalJSON(data []byte) error {
@@ -4785,6 +4816,7 @@ type UpdateTakeOverByUserIdRequest struct {
 	OldPassword        *string `json:"oldPassword"`
 	Password           *string `json:"password"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *UpdateTakeOverByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5010,6 +5042,7 @@ type DeleteTakeOverRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	AccessToken        *string `json:"accessToken"`
 	Type               *int32  `json:"type"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteTakeOverRequest) UnmarshalJSON(data []byte) error {
@@ -5142,6 +5175,7 @@ type DeleteTakeOverByUserIdentifierRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	Type               *int32  `json:"type"`
 	UserIdentifier     *string `json:"userIdentifier"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteTakeOverByUserIdentifierRequest) UnmarshalJSON(data []byte) error {
@@ -5275,6 +5309,7 @@ type DeleteTakeOverByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	Type               *int32  `json:"type"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteTakeOverByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5438,6 +5473,7 @@ type DoTakeOverRequest struct {
 	Type            *int32  `json:"type"`
 	UserIdentifier  *string `json:"userIdentifier"`
 	Password        *string `json:"password"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DoTakeOverRequest) UnmarshalJSON(data []byte) error {
@@ -5600,6 +5636,7 @@ type DoTakeOverOpenIdConnectRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	Type            *int32  `json:"type"`
 	IdToken         *string `json:"idToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DoTakeOverOpenIdConnectRequest) UnmarshalJSON(data []byte) error {
@@ -5731,6 +5768,7 @@ type GetAuthorizationUrlRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	AccessToken     *string `json:"accessToken"`
 	Type            *int32  `json:"type"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetAuthorizationUrlRequest) UnmarshalJSON(data []byte) error {
@@ -5863,6 +5901,7 @@ type DescribePlatformIdsRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribePlatformIdsRequest) UnmarshalJSON(data []byte) error {
@@ -6027,6 +6066,7 @@ type DescribePlatformIdsByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribePlatformIdsByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6222,6 +6262,7 @@ type CreatePlatformIdRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	Type               *int32  `json:"type"`
 	UserIdentifier     *string `json:"userIdentifier"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *CreatePlatformIdRequest) UnmarshalJSON(data []byte) error {
@@ -6387,6 +6428,7 @@ type CreatePlatformIdByUserIdRequest struct {
 	Type               *int32  `json:"type"`
 	UserIdentifier     *string `json:"userIdentifier"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *CreatePlatformIdByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6580,6 +6622,7 @@ type GetPlatformIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	AccessToken     *string `json:"accessToken"`
 	Type            *int32  `json:"type"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetPlatformIdRequest) UnmarshalJSON(data []byte) error {
@@ -6712,6 +6755,7 @@ type GetPlatformIdByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	Type            *int32  `json:"type"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetPlatformIdByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -6876,6 +6920,7 @@ type FindPlatformIdRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	Type               *int32  `json:"type"`
 	UserIdentifier     *string `json:"userIdentifier"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *FindPlatformIdRequest) UnmarshalJSON(data []byte) error {
@@ -7041,6 +7086,7 @@ type FindPlatformIdByUserIdRequest struct {
 	Type               *int32  `json:"type"`
 	UserIdentifier     *string `json:"userIdentifier"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *FindPlatformIdByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7236,6 +7282,7 @@ type DeletePlatformIdRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	Type               *int32  `json:"type"`
 	UserIdentifier     *string `json:"userIdentifier"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeletePlatformIdRequest) UnmarshalJSON(data []byte) error {
@@ -7399,6 +7446,7 @@ type DeletePlatformIdByUserIdentifierRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	Type               *int32  `json:"type"`
 	UserIdentifier     *string `json:"userIdentifier"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeletePlatformIdByUserIdentifierRequest) UnmarshalJSON(data []byte) error {
@@ -7532,6 +7580,7 @@ type DeletePlatformIdByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	Type               *int32  `json:"type"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeletePlatformIdByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7694,6 +7743,7 @@ type GetDataOwnerByUserIdRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetDataOwnerByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7846,6 +7896,7 @@ type DeleteDataOwnerByUserIdRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	UserId             *string `json:"userId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteDataOwnerByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -7995,6 +8046,7 @@ type DescribeTakeOverTypeModelsRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeTakeOverTypeModelsRequest) UnmarshalJSON(data []byte) error {
@@ -8083,6 +8135,7 @@ type GetTakeOverTypeModelRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Type            *int32  `json:"type"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetTakeOverTypeModelRequest) UnmarshalJSON(data []byte) error {
@@ -8183,6 +8236,7 @@ type DescribeTakeOverTypeModelMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeTakeOverTypeModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -8316,6 +8370,7 @@ type CreateTakeOverTypeModelMasterRequest struct {
 	Description          *string               `json:"description"`
 	Metadata             *string               `json:"metadata"`
 	OpenIdConnectSetting *OpenIdConnectSetting `json:"openIdConnectSetting"`
+	DryRun               *bool                 `json:"dryRun"`
 }
 
 func (p *CreateTakeOverTypeModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -8493,6 +8548,7 @@ type GetTakeOverTypeModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Type            *int32  `json:"type"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetTakeOverTypeModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -8595,6 +8651,7 @@ type UpdateTakeOverTypeModelMasterRequest struct {
 	Description          *string               `json:"description"`
 	Metadata             *string               `json:"metadata"`
 	OpenIdConnectSetting *OpenIdConnectSetting `json:"openIdConnectSetting"`
+	DryRun               *bool                 `json:"dryRun"`
 }
 
 func (p *UpdateTakeOverTypeModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -8772,6 +8829,7 @@ type DeleteTakeOverTypeModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Type            *int32  `json:"type"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteTakeOverTypeModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -8870,6 +8928,7 @@ type ExportMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -8957,6 +9016,7 @@ type GetCurrentModelMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -9045,6 +9105,7 @@ type UpdateCurrentModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Settings        *string `json:"settings"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -9164,6 +9225,7 @@ type UpdateCurrentModelMasterFromGitHubRequest struct {
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DryRun          *bool                  `json:"dryRun"`
 }
 
 func (p *UpdateCurrentModelMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {

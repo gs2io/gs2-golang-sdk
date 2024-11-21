@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -132,6 +133,7 @@ type CreateNamespaceRequest struct {
 	ServerSpec         *string              `json:"serverSpec"`
 	CreateNotification *NotificationSetting `json:"createNotification"`
 	LogSetting         *LogSetting          `json:"logSetting"`
+	DryRun             *bool                `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -344,6 +346,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -431,6 +434,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -523,6 +527,7 @@ type UpdateNamespaceRequest struct {
 	ServerSpec         *string              `json:"serverSpec"`
 	CreateNotification *NotificationSetting `json:"createNotification"`
 	LogSetting         *LogSetting          `json:"logSetting"`
+	DryRun             *bool                `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -735,6 +740,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -822,6 +828,7 @@ type NowRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *NowRequest) UnmarshalJSON(data []byte) error {
@@ -911,6 +918,7 @@ type DescribeRoomsRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeRoomsRequest) UnmarshalJSON(data []byte) error {
@@ -1042,6 +1050,7 @@ type WantRoomRequest struct {
 	NamespaceName       *string   `json:"namespaceName"`
 	Name                *string   `json:"name"`
 	NotificationUserIds []*string `json:"notificationUserIds"`
+	DryRun              *bool     `json:"dryRun"`
 }
 
 func (p *WantRoomRequest) UnmarshalJSON(data []byte) error {
@@ -1197,6 +1206,7 @@ type GetRoomRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	RoomName        *string `json:"roomName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetRoomRequest) UnmarshalJSON(data []byte) error {
@@ -1316,6 +1326,7 @@ type DeleteRoomRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	RoomName        *string `json:"roomName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteRoomRequest) UnmarshalJSON(data []byte) error {

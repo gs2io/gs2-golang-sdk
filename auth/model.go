@@ -179,34 +179,23 @@ func NewAccessTokenFromDict(data map[string]interface{}) AccessToken {
 }
 
 func (p AccessToken) ToDict() map[string]interface{} {
-
-	var token *string
+	m := map[string]interface{}{}
 	if p.Token != nil {
-		token = p.Token
+		m["token"] = p.Token
 	}
-	var userId *string
 	if p.UserId != nil {
-		userId = p.UserId
+		m["userId"] = p.UserId
 	}
-	var federationFromUserId *string
 	if p.FederationFromUserId != nil {
-		federationFromUserId = p.FederationFromUserId
+		m["federationFromUserId"] = p.FederationFromUserId
 	}
-	var expire *int64
 	if p.Expire != nil {
-		expire = p.Expire
+		m["expire"] = p.Expire
 	}
-	var timeOffset *int32
 	if p.TimeOffset != nil {
-		timeOffset = p.TimeOffset
+		m["timeOffset"] = p.TimeOffset
 	}
-	return map[string]interface{}{
-		"token":                token,
-		"userId":               userId,
-		"federationFromUserId": federationFromUserId,
-		"expire":               expire,
-		"timeOffset":           timeOffset,
-	}
+	return m
 }
 
 func (p AccessToken) Pointer() *AccessToken {

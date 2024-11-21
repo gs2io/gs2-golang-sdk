@@ -29,6 +29,7 @@ type DescribeNamespacesRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeNamespacesRequest) UnmarshalJSON(data []byte) error {
@@ -140,6 +141,7 @@ type CreateNamespaceRequest struct {
 	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
 	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
 	LogSetting                 *LogSetting          `json:"logSetting"`
+	DryRun                     *bool                `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -450,6 +452,7 @@ type GetNamespaceStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceStatusRequest) UnmarshalJSON(data []byte) error {
@@ -537,6 +540,7 @@ type GetNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -637,6 +641,7 @@ type UpdateNamespaceRequest struct {
 	LeaveGuildScript           *ScriptSetting       `json:"leaveGuildScript"`
 	ChangeRoleScript           *ScriptSetting       `json:"changeRoleScript"`
 	LogSetting                 *LogSetting          `json:"logSetting"`
+	DryRun                     *bool                `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -947,6 +952,7 @@ type DeleteNamespaceRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -1035,6 +1041,7 @@ type DumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1154,6 +1161,7 @@ type CheckDumpUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckDumpUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1273,6 +1281,7 @@ type CleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1392,6 +1401,7 @@ type CheckCleanUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckCleanUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1511,6 +1521,7 @@ type PrepareImportUserDataByUserIdRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *PrepareImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1631,6 +1642,7 @@ type ImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1782,6 +1794,7 @@ type CheckImportUserDataByUserIdRequest struct {
 	UserId          *string `json:"userId"`
 	UploadToken     *string `json:"uploadToken"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CheckImportUserDataByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -1933,6 +1946,7 @@ type DescribeGuildModelMastersRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeGuildModelMastersRequest) UnmarshalJSON(data []byte) error {
@@ -2074,6 +2088,7 @@ type CreateGuildModelMasterRequest struct {
 	RejoinCoolTimeMinutes         *int32      `json:"rejoinCoolTimeMinutes"`
 	MaxConcurrentJoinGuilds       *int32      `json:"maxConcurrentJoinGuilds"`
 	MaxConcurrentGuildMasterCount *int32      `json:"maxConcurrentGuildMasterCount"`
+	DryRun                        *bool       `json:"dryRun"`
 }
 
 func (p *CreateGuildModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2395,6 +2410,7 @@ type GetGuildModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	GuildModelName  *string `json:"guildModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetGuildModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2525,6 +2541,7 @@ type UpdateGuildModelMasterRequest struct {
 	RejoinCoolTimeMinutes         *int32      `json:"rejoinCoolTimeMinutes"`
 	MaxConcurrentJoinGuilds       *int32      `json:"maxConcurrentJoinGuilds"`
 	MaxConcurrentGuildMasterCount *int32      `json:"maxConcurrentGuildMasterCount"`
+	DryRun                        *bool       `json:"dryRun"`
 }
 
 func (p *UpdateGuildModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2846,6 +2863,7 @@ type DeleteGuildModelMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	GuildModelName  *string `json:"guildModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteGuildModelMasterRequest) UnmarshalJSON(data []byte) error {
@@ -2964,6 +2982,7 @@ type DescribeGuildModelsRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeGuildModelsRequest) UnmarshalJSON(data []byte) error {
@@ -3052,6 +3071,7 @@ type GetGuildModelRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	GuildModelName  *string `json:"guildModelName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetGuildModelRequest) UnmarshalJSON(data []byte) error {
@@ -3184,6 +3204,7 @@ type SearchGuildsRequest struct {
 	OrderBy                 *string   `json:"orderBy"`
 	PageToken               *string   `json:"pageToken"`
 	Limit                   *int32    `json:"limit"`
+	DryRun                  *bool     `json:"dryRun"`
 }
 
 func (p *SearchGuildsRequest) UnmarshalJSON(data []byte) error {
@@ -3564,6 +3585,7 @@ type SearchGuildsByUserIdRequest struct {
 	PageToken               *string   `json:"pageToken"`
 	Limit                   *int32    `json:"limit"`
 	TimeOffsetToken         *string   `json:"timeOffsetToken"`
+	DryRun                  *bool     `json:"dryRun"`
 }
 
 func (p *SearchGuildsByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -3972,6 +3994,7 @@ type CreateGuildRequest struct {
 	JoinPolicy             *string     `json:"joinPolicy"`
 	CustomRoles            []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole *string     `json:"guildMemberDefaultRole"`
+	DryRun                 *bool       `json:"dryRun"`
 }
 
 func (p *CreateGuildRequest) UnmarshalJSON(data []byte) error {
@@ -4294,6 +4317,7 @@ type CreateGuildByUserIdRequest struct {
 	CustomRoles            []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole *string     `json:"guildMemberDefaultRole"`
 	TimeOffsetToken        *string     `json:"timeOffsetToken"`
+	DryRun                 *bool       `json:"dryRun"`
 }
 
 func (p *CreateGuildByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -4637,6 +4661,7 @@ type GetGuildRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	GuildModelName  *string `json:"guildModelName"`
 	GuildName       *string `json:"guildName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetGuildRequest) UnmarshalJSON(data []byte) error {
@@ -4821,6 +4846,7 @@ type GetGuildByUserIdRequest struct {
 	GuildModelName  *string `json:"guildModelName"`
 	GuildName       *string `json:"guildName"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetGuildByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -5044,6 +5070,7 @@ type UpdateGuildRequest struct {
 	JoinPolicy             *string     `json:"joinPolicy"`
 	CustomRoles            []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole *string     `json:"guildMemberDefaultRole"`
+	DryRun                 *bool       `json:"dryRun"`
 }
 
 func (p *UpdateGuildRequest) UnmarshalJSON(data []byte) error {
@@ -5365,6 +5392,7 @@ type UpdateGuildByGuildNameRequest struct {
 	JoinPolicy             *string     `json:"joinPolicy"`
 	CustomRoles            []RoleModel `json:"customRoles"`
 	GuildMemberDefaultRole *string     `json:"guildMemberDefaultRole"`
+	DryRun                 *bool       `json:"dryRun"`
 }
 
 func (p *UpdateGuildByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -5678,6 +5706,7 @@ type DeleteMemberRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	AccessToken        *string `json:"accessToken"`
 	TargetUserId       *string `json:"targetUserId"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteMemberRequest) UnmarshalJSON(data []byte) error {
@@ -5862,6 +5891,7 @@ type DeleteMemberByGuildNameRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	GuildName          *string `json:"guildName"`
 	TargetUserId       *string `json:"targetUserId"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteMemberByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -6047,6 +6077,7 @@ type UpdateMemberRoleRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	TargetUserId       *string `json:"targetUserId"`
 	RoleName           *string `json:"roleName"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *UpdateMemberRoleRequest) UnmarshalJSON(data []byte) error {
@@ -6263,6 +6294,7 @@ type UpdateMemberRoleByGuildNameRequest struct {
 	GuildName          *string `json:"guildName"`
 	TargetUserId       *string `json:"targetUserId"`
 	RoleName           *string `json:"roleName"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *UpdateMemberRoleByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -6478,6 +6510,7 @@ type BatchUpdateMemberRoleRequest struct {
 	GuildModelName     *string  `json:"guildModelName"`
 	AccessToken        *string  `json:"accessToken"`
 	Members            []Member `json:"members"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *BatchUpdateMemberRoleRequest) UnmarshalJSON(data []byte) error {
@@ -6643,6 +6676,7 @@ type BatchUpdateMemberRoleByGuildNameRequest struct {
 	GuildModelName     *string  `json:"guildModelName"`
 	GuildName          *string  `json:"guildName"`
 	Members            []Member `json:"members"`
+	DryRun             *bool    `json:"dryRun"`
 }
 
 func (p *BatchUpdateMemberRoleByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -6807,6 +6841,7 @@ type DeleteGuildRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	GuildModelName     *string `json:"guildModelName"`
 	AccessToken        *string `json:"accessToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteGuildRequest) UnmarshalJSON(data []byte) error {
@@ -6959,6 +6994,7 @@ type DeleteGuildByGuildNameRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	GuildModelName     *string `json:"guildModelName"`
 	GuildName          *string `json:"guildName"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteGuildByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -7112,6 +7148,7 @@ type IncreaseMaximumCurrentMaximumMemberCountByGuildNameRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	GuildName          *string `json:"guildName"`
 	Value              *int32  `json:"value"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *IncreaseMaximumCurrentMaximumMemberCountByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -7276,6 +7313,7 @@ type DecreaseMaximumCurrentMaximumMemberCountRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	AccessToken        *string `json:"accessToken"`
 	Value              *int32  `json:"value"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DecreaseMaximumCurrentMaximumMemberCountRequest) UnmarshalJSON(data []byte) error {
@@ -7440,6 +7478,7 @@ type DecreaseMaximumCurrentMaximumMemberCountByGuildNameRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	GuildName          *string `json:"guildName"`
 	Value              *int32  `json:"value"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DecreaseMaximumCurrentMaximumMemberCountByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -7606,6 +7645,7 @@ type VerifyCurrentMaximumMemberCountRequest struct {
 	VerifyType                      *string `json:"verifyType"`
 	Value                           *int32  `json:"value"`
 	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	DryRun                          *bool   `json:"dryRun"`
 }
 
 func (p *VerifyCurrentMaximumMemberCountRequest) UnmarshalJSON(data []byte) error {
@@ -7814,6 +7854,7 @@ type VerifyCurrentMaximumMemberCountByGuildNameRequest struct {
 	VerifyType                      *string `json:"verifyType"`
 	Value                           *int32  `json:"value"`
 	MultiplyValueSpecifyingQuantity *bool   `json:"multiplyValueSpecifyingQuantity"`
+	DryRun                          *bool   `json:"dryRun"`
 }
 
 func (p *VerifyCurrentMaximumMemberCountByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -8021,6 +8062,7 @@ type VerifyIncludeMemberRequest struct {
 	GuildName          *string `json:"guildName"`
 	AccessToken        *string `json:"accessToken"`
 	VerifyType         *string `json:"verifyType"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *VerifyIncludeMemberRequest) UnmarshalJSON(data []byte) error {
@@ -8238,6 +8280,7 @@ type VerifyIncludeMemberByUserIdRequest struct {
 	UserId             *string `json:"userId"`
 	VerifyType         *string `json:"verifyType"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *VerifyIncludeMemberByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -8484,6 +8527,7 @@ type SetMaximumCurrentMaximumMemberCountByGuildNameRequest struct {
 	GuildName          *string `json:"guildName"`
 	GuildModelName     *string `json:"guildModelName"`
 	Value              *int32  `json:"value"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *SetMaximumCurrentMaximumMemberCountByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -8648,6 +8692,7 @@ type AssumeRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	GuildModelName     *string `json:"guildModelName"`
 	GuildName          *string `json:"guildName"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *AssumeRequest) UnmarshalJSON(data []byte) error {
@@ -8833,6 +8878,7 @@ type AssumeByUserIdRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	GuildName          *string `json:"guildName"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *AssumeByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -9045,6 +9091,7 @@ type IncreaseMaximumCurrentMaximumMemberCountByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *IncreaseMaximumCurrentMaximumMemberCountByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -9164,6 +9211,7 @@ type DecreaseMaximumCurrentMaximumMemberCountByStampTaskRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DecreaseMaximumCurrentMaximumMemberCountByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -9283,6 +9331,7 @@ type SetMaximumCurrentMaximumMemberCountByStampSheetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampSheet      *string `json:"stampSheet"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *SetMaximumCurrentMaximumMemberCountByStampSheetRequest) UnmarshalJSON(data []byte) error {
@@ -9402,6 +9451,7 @@ type VerifyCurrentMaximumMemberCountByStampTaskRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *VerifyCurrentMaximumMemberCountByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -9521,6 +9571,7 @@ type VerifyIncludeMemberByStampTaskRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StampTask       *string `json:"stampTask"`
 	KeyId           *string `json:"keyId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *VerifyIncludeMemberByStampTaskRequest) UnmarshalJSON(data []byte) error {
@@ -9643,6 +9694,7 @@ type DescribeJoinedGuildsRequest struct {
 	GuildModelName  *string `json:"guildModelName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeJoinedGuildsRequest) UnmarshalJSON(data []byte) error {
@@ -9839,6 +9891,7 @@ type DescribeJoinedGuildsByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeJoinedGuildsByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -10064,6 +10117,7 @@ type GetJoinedGuildRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	GuildModelName  *string `json:"guildModelName"`
 	GuildName       *string `json:"guildName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetJoinedGuildRequest) UnmarshalJSON(data []byte) error {
@@ -10248,6 +10302,7 @@ type GetJoinedGuildByUserIdRequest struct {
 	GuildModelName  *string `json:"guildModelName"`
 	GuildName       *string `json:"guildName"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetJoinedGuildByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -10463,6 +10518,7 @@ type WithdrawalRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	GuildModelName     *string `json:"guildModelName"`
 	GuildName          *string `json:"guildName"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *WithdrawalRequest) UnmarshalJSON(data []byte) error {
@@ -10648,6 +10704,7 @@ type WithdrawalByUserIdRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	GuildName          *string `json:"guildName"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *WithdrawalByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -10861,6 +10918,7 @@ type GetLastGuildMasterActivityRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	GuildModelName  *string `json:"guildModelName"`
 	AccessToken     *string `json:"accessToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetLastGuildMasterActivityRequest) UnmarshalJSON(data []byte) error {
@@ -11012,6 +11070,7 @@ type GetLastGuildMasterActivityByGuildNameRequest struct {
 	NamespaceName   *string `json:"namespaceName"`
 	GuildModelName  *string `json:"guildModelName"`
 	GuildName       *string `json:"guildName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetLastGuildMasterActivityByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -11164,6 +11223,7 @@ type PromoteSeniorMemberRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	GuildModelName     *string `json:"guildModelName"`
 	AccessToken        *string `json:"accessToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *PromoteSeniorMemberRequest) UnmarshalJSON(data []byte) error {
@@ -11316,6 +11376,7 @@ type PromoteSeniorMemberByGuildNameRequest struct {
 	NamespaceName      *string `json:"namespaceName"`
 	GuildModelName     *string `json:"guildModelName"`
 	GuildName          *string `json:"guildName"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *PromoteSeniorMemberByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -11465,6 +11526,7 @@ type ExportMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ExportMasterRequest) UnmarshalJSON(data []byte) error {
@@ -11552,6 +11614,7 @@ type GetCurrentGuildMasterRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetCurrentGuildMasterRequest) UnmarshalJSON(data []byte) error {
@@ -11640,6 +11703,7 @@ type UpdateCurrentGuildMasterRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	NamespaceName   *string `json:"namespaceName"`
 	Settings        *string `json:"settings"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateCurrentGuildMasterRequest) UnmarshalJSON(data []byte) error {
@@ -11759,6 +11823,7 @@ type UpdateCurrentGuildMasterFromGitHubRequest struct {
 	ContextStack    *string                `json:"contextStack"`
 	NamespaceName   *string                `json:"namespaceName"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DryRun          *bool                  `json:"dryRun"`
 }
 
 func (p *UpdateCurrentGuildMasterFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -11866,6 +11931,7 @@ type DescribeReceiveRequestsRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeReceiveRequestsRequest) UnmarshalJSON(data []byte) error {
@@ -12061,6 +12127,7 @@ type DescribeReceiveRequestsByGuildNameRequest struct {
 	GuildName       *string `json:"guildName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeReceiveRequestsByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -12255,6 +12322,7 @@ type GetReceiveRequestRequest struct {
 	GuildModelName  *string `json:"guildModelName"`
 	AccessToken     *string `json:"accessToken"`
 	FromUserId      *string `json:"fromUserId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetReceiveRequestRequest) UnmarshalJSON(data []byte) error {
@@ -12438,6 +12506,7 @@ type GetReceiveRequestByGuildNameRequest struct {
 	GuildModelName  *string `json:"guildModelName"`
 	GuildName       *string `json:"guildName"`
 	FromUserId      *string `json:"fromUserId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetReceiveRequestByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -12622,6 +12691,7 @@ type AcceptRequestRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	AccessToken        *string `json:"accessToken"`
 	FromUserId         *string `json:"fromUserId"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *AcceptRequestRequest) UnmarshalJSON(data []byte) error {
@@ -12806,6 +12876,7 @@ type AcceptRequestByGuildNameRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	GuildName          *string `json:"guildName"`
 	FromUserId         *string `json:"fromUserId"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *AcceptRequestByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -12990,6 +13061,7 @@ type RejectRequestRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	AccessToken        *string `json:"accessToken"`
 	FromUserId         *string `json:"fromUserId"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *RejectRequestRequest) UnmarshalJSON(data []byte) error {
@@ -13174,6 +13246,7 @@ type RejectRequestByGuildNameRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	GuildName          *string `json:"guildName"`
 	FromUserId         *string `json:"fromUserId"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *RejectRequestByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -13358,6 +13431,7 @@ type DescribeSendRequestsRequest struct {
 	GuildModelName  *string `json:"guildModelName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeSendRequestsRequest) UnmarshalJSON(data []byte) error {
@@ -13554,6 +13628,7 @@ type DescribeSendRequestsByUserIdRequest struct {
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeSendRequestsByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -13779,6 +13854,7 @@ type GetSendRequestRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	GuildModelName  *string `json:"guildModelName"`
 	TargetGuildName *string `json:"targetGuildName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetSendRequestRequest) UnmarshalJSON(data []byte) error {
@@ -13963,6 +14039,7 @@ type GetSendRequestByUserIdRequest struct {
 	GuildModelName  *string `json:"guildModelName"`
 	TargetGuildName *string `json:"targetGuildName"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetSendRequestByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -14178,6 +14255,7 @@ type SendRequestRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	GuildModelName     *string `json:"guildModelName"`
 	TargetGuildName    *string `json:"targetGuildName"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *SendRequestRequest) UnmarshalJSON(data []byte) error {
@@ -14363,6 +14441,7 @@ type SendRequestByUserIdRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	TargetGuildName    *string `json:"targetGuildName"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *SendRequestByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -14578,6 +14657,7 @@ type DeleteRequestRequest struct {
 	AccessToken        *string `json:"accessToken"`
 	GuildModelName     *string `json:"guildModelName"`
 	TargetGuildName    *string `json:"targetGuildName"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteRequestRequest) UnmarshalJSON(data []byte) error {
@@ -14763,6 +14843,7 @@ type DeleteRequestByUserIdRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	TargetGuildName    *string `json:"targetGuildName"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteRequestByUserIdRequest) UnmarshalJSON(data []byte) error {
@@ -14978,6 +15059,7 @@ type DescribeIgnoreUsersRequest struct {
 	AccessToken     *string `json:"accessToken"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeIgnoreUsersRequest) UnmarshalJSON(data []byte) error {
@@ -15173,6 +15255,7 @@ type DescribeIgnoreUsersByGuildNameRequest struct {
 	GuildName       *string `json:"guildName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeIgnoreUsersByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -15367,6 +15450,7 @@ type GetIgnoreUserRequest struct {
 	GuildModelName  *string `json:"guildModelName"`
 	AccessToken     *string `json:"accessToken"`
 	UserId          *string `json:"userId"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetIgnoreUserRequest) UnmarshalJSON(data []byte) error {
@@ -15551,6 +15635,7 @@ type GetIgnoreUserByGuildNameRequest struct {
 	GuildName       *string `json:"guildName"`
 	UserId          *string `json:"userId"`
 	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetIgnoreUserByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -15766,6 +15851,7 @@ type AddIgnoreUserRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	AccessToken        *string `json:"accessToken"`
 	UserId             *string `json:"userId"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *AddIgnoreUserRequest) UnmarshalJSON(data []byte) error {
@@ -15951,6 +16037,7 @@ type AddIgnoreUserByGuildNameRequest struct {
 	GuildName          *string `json:"guildName"`
 	UserId             *string `json:"userId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *AddIgnoreUserByGuildNameRequest) UnmarshalJSON(data []byte) error {
@@ -16166,6 +16253,7 @@ type DeleteIgnoreUserRequest struct {
 	GuildModelName     *string `json:"guildModelName"`
 	AccessToken        *string `json:"accessToken"`
 	UserId             *string `json:"userId"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteIgnoreUserRequest) UnmarshalJSON(data []byte) error {
@@ -16351,6 +16439,7 @@ type DeleteIgnoreUserByGuildNameRequest struct {
 	GuildName          *string `json:"guildName"`
 	UserId             *string `json:"userId"`
 	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
 }
 
 func (p *DeleteIgnoreUserByGuildNameRequest) UnmarshalJSON(data []byte) error {

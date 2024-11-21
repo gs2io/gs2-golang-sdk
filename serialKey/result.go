@@ -23,8 +23,9 @@ import (
 )
 
 type DescribeNamespacesResult struct {
-	Items         []Namespace `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []Namespace          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeNamespacesAsyncResult struct {
@@ -70,7 +71,8 @@ func (p DescribeNamespacesResult) Pointer() *DescribeNamespacesResult {
 }
 
 type CreateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateNamespaceAsyncResult struct {
@@ -112,7 +114,8 @@ func (p CreateNamespaceResult) Pointer() *CreateNamespaceResult {
 }
 
 type GetNamespaceStatusResult struct {
-	Status *string `json:"status"`
+	Status   *string              `json:"status"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceStatusAsyncResult struct {
@@ -149,7 +152,8 @@ func (p GetNamespaceStatusResult) Pointer() *GetNamespaceStatusResult {
 }
 
 type GetNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetNamespaceAsyncResult struct {
@@ -191,7 +195,8 @@ func (p GetNamespaceResult) Pointer() *GetNamespaceResult {
 }
 
 type UpdateNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateNamespaceAsyncResult struct {
@@ -233,7 +238,8 @@ func (p UpdateNamespaceResult) Pointer() *UpdateNamespaceResult {
 }
 
 type DeleteNamespaceResult struct {
-	Item *Namespace `json:"item"`
+	Item     *Namespace           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteNamespaceAsyncResult struct {
@@ -275,6 +281,7 @@ func (p DeleteNamespaceResult) Pointer() *DeleteNamespaceResult {
 }
 
 type DumpUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DumpUserDataByUserIdAsyncResult struct {
@@ -301,7 +308,8 @@ func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
 }
 
 type CheckDumpUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckDumpUserDataByUserIdAsyncResult struct {
@@ -338,6 +346,7 @@ func (p CheckDumpUserDataByUserIdResult) Pointer() *CheckDumpUserDataByUserIdRes
 }
 
 type CleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CleanUserDataByUserIdAsyncResult struct {
@@ -364,6 +373,7 @@ func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
 }
 
 type CheckCleanUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckCleanUserDataByUserIdAsyncResult struct {
@@ -390,8 +400,9 @@ func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdR
 }
 
 type PrepareImportUserDataByUserIdResult struct {
-	UploadToken *string `json:"uploadToken"`
-	UploadUrl   *string `json:"uploadUrl"`
+	UploadToken *string              `json:"uploadToken"`
+	UploadUrl   *string              `json:"uploadUrl"`
+	Metadata    *core.ResultMetadata `json:"metadata"`
 }
 
 type PrepareImportUserDataByUserIdAsyncResult struct {
@@ -436,6 +447,7 @@ func (p PrepareImportUserDataByUserIdResult) Pointer() *PrepareImportUserDataByU
 }
 
 type ImportUserDataByUserIdResult struct {
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type ImportUserDataByUserIdAsyncResult struct {
@@ -462,7 +474,8 @@ func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
 }
 
 type CheckImportUserDataByUserIdResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CheckImportUserDataByUserIdAsyncResult struct {
@@ -499,8 +512,9 @@ func (p CheckImportUserDataByUserIdResult) Pointer() *CheckImportUserDataByUserI
 }
 
 type DescribeIssueJobsResult struct {
-	Items         []IssueJob `json:"items"`
-	NextPageToken *string    `json:"nextPageToken"`
+	Items         []IssueJob           `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeIssueJobsAsyncResult struct {
@@ -546,7 +560,8 @@ func (p DescribeIssueJobsResult) Pointer() *DescribeIssueJobsResult {
 }
 
 type GetIssueJobResult struct {
-	Item *IssueJob `json:"item"`
+	Item     *IssueJob            `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetIssueJobAsyncResult struct {
@@ -588,7 +603,8 @@ func (p GetIssueJobResult) Pointer() *GetIssueJobResult {
 }
 
 type IssueResult struct {
-	Item *IssueJob `json:"item"`
+	Item     *IssueJob            `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type IssueAsyncResult struct {
@@ -630,8 +646,9 @@ func (p IssueResult) Pointer() *IssueResult {
 }
 
 type DescribeSerialKeysResult struct {
-	Items         []SerialKey `json:"items"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Items         []SerialKey          `json:"items"`
+	NextPageToken *string              `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeSerialKeysAsyncResult struct {
@@ -677,7 +694,8 @@ func (p DescribeSerialKeysResult) Pointer() *DescribeSerialKeysResult {
 }
 
 type DownloadSerialCodesResult struct {
-	Url *string `json:"url"`
+	Url      *string              `json:"url"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DownloadSerialCodesAsyncResult struct {
@@ -714,7 +732,8 @@ func (p DownloadSerialCodesResult) Pointer() *DownloadSerialCodesResult {
 }
 
 type IssueOnceResult struct {
-	Item *SerialKey `json:"item"`
+	Item     *SerialKey           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type IssueOnceAsyncResult struct {
@@ -756,8 +775,9 @@ func (p IssueOnceResult) Pointer() *IssueOnceResult {
 }
 
 type GetSerialKeyResult struct {
-	Item          *SerialKey     `json:"item"`
-	CampaignModel *CampaignModel `json:"campaignModel"`
+	Item          *SerialKey           `json:"item"`
+	CampaignModel *CampaignModel       `json:"campaignModel"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type GetSerialKeyAsyncResult struct {
@@ -812,8 +832,9 @@ func (p GetSerialKeyResult) Pointer() *GetSerialKeyResult {
 }
 
 type VerifyCodeResult struct {
-	Item          *SerialKey     `json:"item"`
-	CampaignModel *CampaignModel `json:"campaignModel"`
+	Item          *SerialKey           `json:"item"`
+	CampaignModel *CampaignModel       `json:"campaignModel"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyCodeAsyncResult struct {
@@ -868,8 +889,9 @@ func (p VerifyCodeResult) Pointer() *VerifyCodeResult {
 }
 
 type VerifyCodeByUserIdResult struct {
-	Item          *SerialKey     `json:"item"`
-	CampaignModel *CampaignModel `json:"campaignModel"`
+	Item          *SerialKey           `json:"item"`
+	CampaignModel *CampaignModel       `json:"campaignModel"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyCodeByUserIdAsyncResult struct {
@@ -924,8 +946,9 @@ func (p VerifyCodeByUserIdResult) Pointer() *VerifyCodeByUserIdResult {
 }
 
 type UseResult struct {
-	Item          *SerialKey     `json:"item"`
-	CampaignModel *CampaignModel `json:"campaignModel"`
+	Item          *SerialKey           `json:"item"`
+	CampaignModel *CampaignModel       `json:"campaignModel"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type UseAsyncResult struct {
@@ -980,8 +1003,9 @@ func (p UseResult) Pointer() *UseResult {
 }
 
 type UseByUserIdResult struct {
-	Item          *SerialKey     `json:"item"`
-	CampaignModel *CampaignModel `json:"campaignModel"`
+	Item          *SerialKey           `json:"item"`
+	CampaignModel *CampaignModel       `json:"campaignModel"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type UseByUserIdAsyncResult struct {
@@ -1036,8 +1060,9 @@ func (p UseByUserIdResult) Pointer() *UseByUserIdResult {
 }
 
 type RevertUseByUserIdResult struct {
-	Item          *SerialKey     `json:"item"`
-	CampaignModel *CampaignModel `json:"campaignModel"`
+	Item          *SerialKey           `json:"item"`
+	CampaignModel *CampaignModel       `json:"campaignModel"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type RevertUseByUserIdAsyncResult struct {
@@ -1092,9 +1117,10 @@ func (p RevertUseByUserIdResult) Pointer() *RevertUseByUserIdResult {
 }
 
 type UseByStampTaskResult struct {
-	Item            *SerialKey     `json:"item"`
-	CampaignModel   *CampaignModel `json:"campaignModel"`
-	NewContextStack *string        `json:"newContextStack"`
+	Item            *SerialKey           `json:"item"`
+	CampaignModel   *CampaignModel       `json:"campaignModel"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type UseByStampTaskAsyncResult struct {
@@ -1157,8 +1183,9 @@ func (p UseByStampTaskResult) Pointer() *UseByStampTaskResult {
 }
 
 type RevertUseByStampSheetResult struct {
-	Item          *SerialKey     `json:"item"`
-	CampaignModel *CampaignModel `json:"campaignModel"`
+	Item          *SerialKey           `json:"item"`
+	CampaignModel *CampaignModel       `json:"campaignModel"`
+	Metadata      *core.ResultMetadata `json:"metadata"`
 }
 
 type RevertUseByStampSheetAsyncResult struct {
@@ -1213,9 +1240,10 @@ func (p RevertUseByStampSheetResult) Pointer() *RevertUseByStampSheetResult {
 }
 
 type VerifyByStampTaskResult struct {
-	Item            *SerialKey     `json:"item"`
-	CampaignModel   *CampaignModel `json:"campaignModel"`
-	NewContextStack *string        `json:"newContextStack"`
+	Item            *SerialKey           `json:"item"`
+	CampaignModel   *CampaignModel       `json:"campaignModel"`
+	NewContextStack *string              `json:"newContextStack"`
+	Metadata        *core.ResultMetadata `json:"metadata"`
 }
 
 type VerifyByStampTaskAsyncResult struct {
@@ -1278,7 +1306,8 @@ func (p VerifyByStampTaskResult) Pointer() *VerifyByStampTaskResult {
 }
 
 type IssueOnceByStampSheetResult struct {
-	Item *SerialKey `json:"item"`
+	Item     *SerialKey           `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type IssueOnceByStampSheetAsyncResult struct {
@@ -1320,7 +1349,8 @@ func (p IssueOnceByStampSheetResult) Pointer() *IssueOnceByStampSheetResult {
 }
 
 type DescribeCampaignModelsResult struct {
-	Items []CampaignModel `json:"items"`
+	Items    []CampaignModel      `json:"items"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DescribeCampaignModelsAsyncResult struct {
@@ -1358,7 +1388,8 @@ func (p DescribeCampaignModelsResult) Pointer() *DescribeCampaignModelsResult {
 }
 
 type GetCampaignModelResult struct {
-	Item *CampaignModel `json:"item"`
+	Item     *CampaignModel       `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetCampaignModelAsyncResult struct {
@@ -1402,6 +1433,7 @@ func (p GetCampaignModelResult) Pointer() *GetCampaignModelResult {
 type DescribeCampaignModelMastersResult struct {
 	Items         []CampaignModelMaster `json:"items"`
 	NextPageToken *string               `json:"nextPageToken"`
+	Metadata      *core.ResultMetadata  `json:"metadata"`
 }
 
 type DescribeCampaignModelMastersAsyncResult struct {
@@ -1447,7 +1479,8 @@ func (p DescribeCampaignModelMastersResult) Pointer() *DescribeCampaignModelMast
 }
 
 type CreateCampaignModelMasterResult struct {
-	Item *CampaignModelMaster `json:"item"`
+	Item     *CampaignModelMaster `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type CreateCampaignModelMasterAsyncResult struct {
@@ -1489,7 +1522,8 @@ func (p CreateCampaignModelMasterResult) Pointer() *CreateCampaignModelMasterRes
 }
 
 type GetCampaignModelMasterResult struct {
-	Item *CampaignModelMaster `json:"item"`
+	Item     *CampaignModelMaster `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type GetCampaignModelMasterAsyncResult struct {
@@ -1531,7 +1565,8 @@ func (p GetCampaignModelMasterResult) Pointer() *GetCampaignModelMasterResult {
 }
 
 type UpdateCampaignModelMasterResult struct {
-	Item *CampaignModelMaster `json:"item"`
+	Item     *CampaignModelMaster `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type UpdateCampaignModelMasterAsyncResult struct {
@@ -1573,7 +1608,8 @@ func (p UpdateCampaignModelMasterResult) Pointer() *UpdateCampaignModelMasterRes
 }
 
 type DeleteCampaignModelMasterResult struct {
-	Item *CampaignModelMaster `json:"item"`
+	Item     *CampaignModelMaster `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
 }
 
 type DeleteCampaignModelMasterAsyncResult struct {
@@ -1615,7 +1651,8 @@ func (p DeleteCampaignModelMasterResult) Pointer() *DeleteCampaignModelMasterRes
 }
 
 type ExportMasterResult struct {
-	Item *CurrentCampaignMaster `json:"item"`
+	Item     *CurrentCampaignMaster `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type ExportMasterAsyncResult struct {
@@ -1657,7 +1694,8 @@ func (p ExportMasterResult) Pointer() *ExportMasterResult {
 }
 
 type GetCurrentCampaignMasterResult struct {
-	Item *CurrentCampaignMaster `json:"item"`
+	Item     *CurrentCampaignMaster `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type GetCurrentCampaignMasterAsyncResult struct {
@@ -1699,7 +1737,8 @@ func (p GetCurrentCampaignMasterResult) Pointer() *GetCurrentCampaignMasterResul
 }
 
 type UpdateCurrentCampaignMasterResult struct {
-	Item *CurrentCampaignMaster `json:"item"`
+	Item     *CurrentCampaignMaster `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type UpdateCurrentCampaignMasterAsyncResult struct {
@@ -1741,7 +1780,8 @@ func (p UpdateCurrentCampaignMasterResult) Pointer() *UpdateCurrentCampaignMaste
 }
 
 type UpdateCurrentCampaignMasterFromGitHubResult struct {
-	Item *CurrentCampaignMaster `json:"item"`
+	Item     *CurrentCampaignMaster `json:"item"`
+	Metadata *core.ResultMetadata   `json:"metadata"`
 }
 
 type UpdateCurrentCampaignMasterFromGitHubAsyncResult struct {

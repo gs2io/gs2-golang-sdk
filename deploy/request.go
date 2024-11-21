@@ -29,6 +29,7 @@ type DescribeStacksRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeStacksRequest) UnmarshalJSON(data []byte) error {
@@ -129,6 +130,7 @@ type CreateStackRequest struct {
 	Name            *string `json:"name"`
 	Description     *string `json:"description"`
 	Template        *string `json:"template"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *CreateStackRequest) UnmarshalJSON(data []byte) error {
@@ -280,6 +282,7 @@ type CreateStackFromGitHubRequest struct {
 	Name            *string                `json:"name"`
 	Description     *string                `json:"description"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DryRun          *bool                  `json:"dryRun"`
 }
 
 func (p *CreateStackFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -414,6 +417,7 @@ type ValidateRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	Template        *string `json:"template"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ValidateRequest) UnmarshalJSON(data []byte) error {
@@ -501,6 +505,7 @@ type GetStackStatusRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	StackName       *string `json:"stackName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetStackStatusRequest) UnmarshalJSON(data []byte) error {
@@ -588,6 +593,7 @@ type GetStackRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	StackName       *string `json:"stackName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetStackRequest) UnmarshalJSON(data []byte) error {
@@ -677,6 +683,7 @@ type UpdateStackRequest struct {
 	StackName       *string `json:"stackName"`
 	Description     *string `json:"description"`
 	Template        *string `json:"template"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *UpdateStackRequest) UnmarshalJSON(data []byte) error {
@@ -827,6 +834,7 @@ type ChangeSetRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StackName       *string `json:"stackName"`
 	Template        *string `json:"template"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ChangeSetRequest) UnmarshalJSON(data []byte) error {
@@ -947,6 +955,7 @@ type UpdateStackFromGitHubRequest struct {
 	StackName       *string                `json:"stackName"`
 	Description     *string                `json:"description"`
 	CheckoutSetting *GitHubCheckoutSetting `json:"checkoutSetting"`
+	DryRun          *bool                  `json:"dryRun"`
 }
 
 func (p *UpdateStackFromGitHubRequest) UnmarshalJSON(data []byte) error {
@@ -1081,6 +1090,7 @@ type DeleteStackRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	StackName       *string `json:"stackName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteStackRequest) UnmarshalJSON(data []byte) error {
@@ -1168,6 +1178,7 @@ type ForceDeleteStackRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	StackName       *string `json:"stackName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *ForceDeleteStackRequest) UnmarshalJSON(data []byte) error {
@@ -1255,6 +1266,7 @@ type DeleteStackResourcesRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	StackName       *string `json:"stackName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteStackResourcesRequest) UnmarshalJSON(data []byte) error {
@@ -1342,6 +1354,7 @@ type DeleteStackEntityRequest struct {
 	RequestId       *string `json:"requestId"`
 	ContextStack    *string `json:"contextStack"`
 	StackName       *string `json:"stackName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DeleteStackEntityRequest) UnmarshalJSON(data []byte) error {
@@ -1431,6 +1444,7 @@ type DescribeResourcesRequest struct {
 	StackName       *string `json:"stackName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeResourcesRequest) UnmarshalJSON(data []byte) error {
@@ -1561,6 +1575,7 @@ type GetResourceRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StackName       *string `json:"stackName"`
 	ResourceName    *string `json:"resourceName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetResourceRequest) UnmarshalJSON(data []byte) error {
@@ -1681,6 +1696,7 @@ type DescribeEventsRequest struct {
 	StackName       *string `json:"stackName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeEventsRequest) UnmarshalJSON(data []byte) error {
@@ -1811,6 +1827,7 @@ type GetEventRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StackName       *string `json:"stackName"`
 	EventName       *string `json:"eventName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetEventRequest) UnmarshalJSON(data []byte) error {
@@ -1931,6 +1948,7 @@ type DescribeOutputsRequest struct {
 	StackName       *string `json:"stackName"`
 	PageToken       *string `json:"pageToken"`
 	Limit           *int32  `json:"limit"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *DescribeOutputsRequest) UnmarshalJSON(data []byte) error {
@@ -2061,6 +2079,7 @@ type GetOutputRequest struct {
 	ContextStack    *string `json:"contextStack"`
 	StackName       *string `json:"stackName"`
 	OutputName      *string `json:"outputName"`
+	DryRun          *bool   `json:"dryRun"`
 }
 
 func (p *GetOutputRequest) UnmarshalJSON(data []byte) error {
