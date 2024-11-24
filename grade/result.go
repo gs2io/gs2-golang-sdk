@@ -55,6 +55,13 @@ func NewDescribeNamespacesResultFromDict(data map[string]interface{}) DescribeNa
 			}
 			return core.CastString(data["nextPageToken"])
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -64,6 +71,12 @@ func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
 			p.Items,
 		),
 		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -96,6 +109,13 @@ func NewCreateNamespaceResultFromDict(data map[string]interface{}) CreateNamespa
 			}
 			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -107,6 +127,12 @@ func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -139,12 +165,25 @@ func NewGetNamespaceStatusResultFromDict(data map[string]interface{}) GetNamespa
 			}
 			return core.CastString(data["status"])
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"status": p.Status,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -177,6 +216,13 @@ func NewGetNamespaceResultFromDict(data map[string]interface{}) GetNamespaceResu
 			}
 			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -188,6 +234,12 @@ func (p GetNamespaceResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -220,6 +272,13 @@ func NewUpdateNamespaceResultFromDict(data map[string]interface{}) UpdateNamespa
 			}
 			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -231,6 +290,12 @@ func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -263,6 +328,13 @@ func NewDeleteNamespaceResultFromDict(data map[string]interface{}) DeleteNamespa
 			}
 			return NewNamespaceFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -274,6 +346,12 @@ func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -297,11 +375,26 @@ func NewDumpUserDataByUserIdResultFromJson(data string) DumpUserDataByUserIdResu
 }
 
 func NewDumpUserDataByUserIdResultFromDict(data map[string]interface{}) DumpUserDataByUserIdResult {
-	return DumpUserDataByUserIdResult{}
+	return DumpUserDataByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
 }
 
 func (p DumpUserDataByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
+	}
 }
 
 func (p DumpUserDataByUserIdResult) Pointer() *DumpUserDataByUserIdResult {
@@ -333,12 +426,25 @@ func NewCheckDumpUserDataByUserIdResultFromDict(data map[string]interface{}) Che
 			}
 			return core.CastString(data["url"])
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p CheckDumpUserDataByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"url": p.Url,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -362,11 +468,26 @@ func NewCleanUserDataByUserIdResultFromJson(data string) CleanUserDataByUserIdRe
 }
 
 func NewCleanUserDataByUserIdResultFromDict(data map[string]interface{}) CleanUserDataByUserIdResult {
-	return CleanUserDataByUserIdResult{}
+	return CleanUserDataByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
 }
 
 func (p CleanUserDataByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
+	}
 }
 
 func (p CleanUserDataByUserIdResult) Pointer() *CleanUserDataByUserIdResult {
@@ -389,11 +510,26 @@ func NewCheckCleanUserDataByUserIdResultFromJson(data string) CheckCleanUserData
 }
 
 func NewCheckCleanUserDataByUserIdResultFromDict(data map[string]interface{}) CheckCleanUserDataByUserIdResult {
-	return CheckCleanUserDataByUserIdResult{}
+	return CheckCleanUserDataByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
 }
 
 func (p CheckCleanUserDataByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
+	}
 }
 
 func (p CheckCleanUserDataByUserIdResult) Pointer() *CheckCleanUserDataByUserIdResult {
@@ -433,6 +569,13 @@ func NewPrepareImportUserDataByUserIdResultFromDict(data map[string]interface{})
 			}
 			return core.CastString(data["uploadUrl"])
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -440,6 +583,12 @@ func (p PrepareImportUserDataByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"uploadToken": p.UploadToken,
 		"uploadUrl":   p.UploadUrl,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -463,11 +612,26 @@ func NewImportUserDataByUserIdResultFromJson(data string) ImportUserDataByUserId
 }
 
 func NewImportUserDataByUserIdResultFromDict(data map[string]interface{}) ImportUserDataByUserIdResult {
-	return ImportUserDataByUserIdResult{}
+	return ImportUserDataByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
 }
 
 func (p ImportUserDataByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
+	}
 }
 
 func (p ImportUserDataByUserIdResult) Pointer() *ImportUserDataByUserIdResult {
@@ -499,12 +663,25 @@ func NewCheckImportUserDataByUserIdResultFromDict(data map[string]interface{}) C
 			}
 			return core.CastString(data["url"])
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p CheckImportUserDataByUserIdResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"url": p.Url,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -544,6 +721,13 @@ func NewDescribeGradeModelMastersResultFromDict(data map[string]interface{}) Des
 			}
 			return core.CastString(data["nextPageToken"])
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -553,6 +737,12 @@ func (p DescribeGradeModelMastersResult) ToDict() map[string]interface{} {
 			p.Items,
 		),
 		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -585,6 +775,13 @@ func NewCreateGradeModelMasterResultFromDict(data map[string]interface{}) Create
 			}
 			return NewGradeModelMasterFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -596,6 +793,12 @@ func (p CreateGradeModelMasterResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -628,6 +831,13 @@ func NewGetGradeModelMasterResultFromDict(data map[string]interface{}) GetGradeM
 			}
 			return NewGradeModelMasterFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -639,6 +849,12 @@ func (p GetGradeModelMasterResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -671,6 +887,13 @@ func NewUpdateGradeModelMasterResultFromDict(data map[string]interface{}) Update
 			}
 			return NewGradeModelMasterFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -682,6 +905,12 @@ func (p UpdateGradeModelMasterResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -714,6 +943,13 @@ func NewDeleteGradeModelMasterResultFromDict(data map[string]interface{}) Delete
 			}
 			return NewGradeModelMasterFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -725,6 +961,12 @@ func (p DeleteGradeModelMasterResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -756,6 +998,13 @@ func NewDescribeGradeModelsResultFromDict(data map[string]interface{}) DescribeG
 			}
 			return CastGradeModels(core.CastArray(data["items"]))
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -764,6 +1013,12 @@ func (p DescribeGradeModelsResult) ToDict() map[string]interface{} {
 		"items": CastGradeModelsFromDict(
 			p.Items,
 		),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -796,6 +1051,13 @@ func NewGetGradeModelResultFromDict(data map[string]interface{}) GetGradeModelRe
 			}
 			return NewGradeModelFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -807,6 +1069,12 @@ func (p GetGradeModelResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -846,6 +1114,13 @@ func NewDescribeStatusesResultFromDict(data map[string]interface{}) DescribeStat
 			}
 			return core.CastString(data["nextPageToken"])
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -855,6 +1130,12 @@ func (p DescribeStatusesResult) ToDict() map[string]interface{} {
 			p.Items,
 		),
 		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -894,6 +1175,13 @@ func NewDescribeStatusesByUserIdResultFromDict(data map[string]interface{}) Desc
 			}
 			return core.CastString(data["nextPageToken"])
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -903,6 +1191,12 @@ func (p DescribeStatusesByUserIdResult) ToDict() map[string]interface{} {
 			p.Items,
 		),
 		"nextPageToken": p.NextPageToken,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -935,6 +1229,13 @@ func NewGetStatusResultFromDict(data map[string]interface{}) GetStatusResult {
 			}
 			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -946,6 +1247,12 @@ func (p GetStatusResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -978,6 +1285,13 @@ func NewGetStatusByUserIdResultFromDict(data map[string]interface{}) GetStatusBy
 			}
 			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -989,6 +1303,12 @@ func (p GetStatusByUserIdResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -1037,6 +1357,13 @@ func NewAddGradeByUserIdResultFromDict(data map[string]interface{}) AddGradeByUs
 			}
 			return experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1055,6 +1382,12 @@ func (p AddGradeByUserIdResult) ToDict() map[string]interface{} {
 			}
 			return p.ExperienceStatus.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -1103,6 +1436,13 @@ func NewSubGradeResultFromDict(data map[string]interface{}) SubGradeResult {
 			}
 			return experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1121,6 +1461,12 @@ func (p SubGradeResult) ToDict() map[string]interface{} {
 			}
 			return p.ExperienceStatus.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -1169,6 +1515,13 @@ func NewSubGradeByUserIdResultFromDict(data map[string]interface{}) SubGradeByUs
 			}
 			return experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1187,6 +1540,12 @@ func (p SubGradeByUserIdResult) ToDict() map[string]interface{} {
 			}
 			return p.ExperienceStatus.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -1243,6 +1602,13 @@ func NewSetGradeByUserIdResultFromDict(data map[string]interface{}) SetGradeByUs
 			}
 			return experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1267,6 +1633,12 @@ func (p SetGradeByUserIdResult) ToDict() map[string]interface{} {
 			}
 			return p.ExperienceStatus.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -1315,6 +1687,13 @@ func NewApplyRankCapResultFromDict(data map[string]interface{}) ApplyRankCapResu
 			}
 			return experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1333,6 +1712,12 @@ func (p ApplyRankCapResult) ToDict() map[string]interface{} {
 			}
 			return p.ExperienceStatus.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -1381,6 +1766,13 @@ func NewApplyRankCapByUserIdResultFromDict(data map[string]interface{}) ApplyRan
 			}
 			return experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1399,6 +1791,12 @@ func (p ApplyRankCapByUserIdResult) ToDict() map[string]interface{} {
 			}
 			return p.ExperienceStatus.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -1431,6 +1829,13 @@ func NewDeleteStatusByUserIdResultFromDict(data map[string]interface{}) DeleteSt
 			}
 			return NewStatusFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1442,6 +1847,12 @@ func (p DeleteStatusByUserIdResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -1465,11 +1876,26 @@ func NewVerifyGradeResultFromJson(data string) VerifyGradeResult {
 }
 
 func NewVerifyGradeResultFromDict(data map[string]interface{}) VerifyGradeResult {
-	return VerifyGradeResult{}
+	return VerifyGradeResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
 }
 
 func (p VerifyGradeResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
+	}
 }
 
 func (p VerifyGradeResult) Pointer() *VerifyGradeResult {
@@ -1492,11 +1918,26 @@ func NewVerifyGradeByUserIdResultFromJson(data string) VerifyGradeByUserIdResult
 }
 
 func NewVerifyGradeByUserIdResultFromDict(data map[string]interface{}) VerifyGradeByUserIdResult {
-	return VerifyGradeByUserIdResult{}
+	return VerifyGradeByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
 }
 
 func (p VerifyGradeByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
+	}
 }
 
 func (p VerifyGradeByUserIdResult) Pointer() *VerifyGradeByUserIdResult {
@@ -1519,11 +1960,26 @@ func NewVerifyGradeUpMaterialResultFromJson(data string) VerifyGradeUpMaterialRe
 }
 
 func NewVerifyGradeUpMaterialResultFromDict(data map[string]interface{}) VerifyGradeUpMaterialResult {
-	return VerifyGradeUpMaterialResult{}
+	return VerifyGradeUpMaterialResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
 }
 
 func (p VerifyGradeUpMaterialResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
+	}
 }
 
 func (p VerifyGradeUpMaterialResult) Pointer() *VerifyGradeUpMaterialResult {
@@ -1546,11 +2002,26 @@ func NewVerifyGradeUpMaterialByUserIdResultFromJson(data string) VerifyGradeUpMa
 }
 
 func NewVerifyGradeUpMaterialByUserIdResultFromDict(data map[string]interface{}) VerifyGradeUpMaterialByUserIdResult {
-	return VerifyGradeUpMaterialByUserIdResult{}
+	return VerifyGradeUpMaterialByUserIdResult{
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
+	}
 }
 
 func (p VerifyGradeUpMaterialByUserIdResult) ToDict() map[string]interface{} {
-	return map[string]interface{}{}
+	return map[string]interface{}{
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
+	}
 }
 
 func (p VerifyGradeUpMaterialByUserIdResult) Pointer() *VerifyGradeUpMaterialByUserIdResult {
@@ -1598,6 +2069,13 @@ func NewAddGradeByStampSheetResultFromDict(data map[string]interface{}) AddGrade
 			}
 			return experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1616,6 +2094,12 @@ func (p AddGradeByStampSheetResult) ToDict() map[string]interface{} {
 			}
 			return p.ExperienceStatus.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -1664,6 +2148,13 @@ func NewApplyRankCapByStampSheetResultFromDict(data map[string]interface{}) Appl
 			}
 			return experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1682,6 +2173,12 @@ func (p ApplyRankCapByStampSheetResult) ToDict() map[string]interface{} {
 			}
 			return p.ExperienceStatus.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -1738,6 +2235,13 @@ func NewSubGradeByStampTaskResultFromDict(data map[string]interface{}) SubGradeB
 			}
 			return experience.NewStatusFromDict(core.CastMap(data["experienceStatus"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1757,6 +2261,12 @@ func (p SubGradeByStampTaskResult) ToDict() map[string]interface{} {
 			}
 			return p.ExperienceStatus.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -1844,6 +2354,13 @@ func NewMultiplyAcquireActionsByUserIdResultFromDict(data map[string]interface{}
 			}
 			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1864,6 +2381,12 @@ func (p MultiplyAcquireActionsByUserIdResult) ToDict() map[string]interface{} {
 			}
 			return p.TransactionResult.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -1951,6 +2474,13 @@ func NewMultiplyAcquireActionsByStampSheetResultFromDict(data map[string]interfa
 			}
 			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -1971,6 +2501,12 @@ func (p MultiplyAcquireActionsByStampSheetResult) ToDict() map[string]interface{
 			}
 			return p.TransactionResult.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -2003,12 +2539,25 @@ func NewVerifyGradeByStampTaskResultFromDict(data map[string]interface{}) Verify
 			}
 			return core.CastString(data["newContextStack"])
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p VerifyGradeByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -2041,12 +2590,25 @@ func NewVerifyGradeUpMaterialByStampTaskResultFromDict(data map[string]interface
 			}
 			return core.CastString(data["newContextStack"])
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
 func (p VerifyGradeUpMaterialByStampTaskResult) ToDict() map[string]interface{} {
 	return map[string]interface{}{
 		"newContextStack": p.NewContextStack,
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -2079,6 +2641,13 @@ func NewExportMasterResultFromDict(data map[string]interface{}) ExportMasterResu
 			}
 			return NewCurrentGradeMasterFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -2090,6 +2659,12 @@ func (p ExportMasterResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -2122,6 +2697,13 @@ func NewGetCurrentGradeMasterResultFromDict(data map[string]interface{}) GetCurr
 			}
 			return NewCurrentGradeMasterFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -2133,6 +2715,12 @@ func (p GetCurrentGradeMasterResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -2165,6 +2753,13 @@ func NewUpdateCurrentGradeMasterResultFromDict(data map[string]interface{}) Upda
 			}
 			return NewCurrentGradeMasterFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -2176,6 +2771,12 @@ func (p UpdateCurrentGradeMasterResult) ToDict() map[string]interface{} {
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
@@ -2208,6 +2809,13 @@ func NewUpdateCurrentGradeMasterFromGitHubResultFromDict(data map[string]interfa
 			}
 			return NewCurrentGradeMasterFromDict(core.CastMap(data["item"])).Pointer()
 		}(),
+		Metadata: func() *core.ResultMetadata {
+			if data["metadata"] == nil {
+				return nil
+			}
+			v := core.NewResultMetadataFromDict(core.CastMap(data["metadata"]))
+			return &v
+		}(),
 	}
 }
 
@@ -2219,6 +2827,12 @@ func (p UpdateCurrentGradeMasterFromGitHubResult) ToDict() map[string]interface{
 			}
 			return p.Item.ToDict()
 		}(),
+		"metadata": func() map[string]interface{} {
+			if p.Metadata == nil {
+				return nil
+			}
+			return p.Metadata.ToDict()
+		},
 	}
 }
 
