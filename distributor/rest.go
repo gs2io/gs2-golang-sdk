@@ -190,6 +190,9 @@ func (p Gs2DistributorRestClient) CreateNamespaceAsync(
 	if request.AutoRunStampSheetNotification != nil {
 		bodies["autoRunStampSheetNotification"] = request.AutoRunStampSheetNotification.ToDict()
 	}
+	if request.AutoRunTransactionNotification != nil {
+		bodies["autoRunTransactionNotification"] = request.AutoRunTransactionNotification.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -492,6 +495,9 @@ func (p Gs2DistributorRestClient) UpdateNamespaceAsync(
 	}
 	if request.AutoRunStampSheetNotification != nil {
 		bodies["autoRunStampSheetNotification"] = request.AutoRunStampSheetNotification.ToDict()
+	}
+	if request.AutoRunTransactionNotification != nil {
+		bodies["autoRunTransactionNotification"] = request.AutoRunTransactionNotification.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
@@ -4072,6 +4078,337 @@ func (p Gs2DistributorRestClient) GetStampSheetResultByUserId(
 ) (*GetStampSheetResultByUserIdResult, error) {
 	callback := make(chan GetStampSheetResultByUserIdAsyncResult, 1)
 	go p.GetStampSheetResultByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func runTransactionAsyncHandler(
+	client Gs2DistributorRestClient,
+	job *core.NetworkJob,
+	callback chan<- RunTransactionAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RunTransactionAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RunTransactionResult
+	if asyncResult.Err != nil {
+		callback <- RunTransactionAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RunTransactionAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- RunTransactionAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorRestClient) RunTransactionAsync(
+	request *RunTransactionRequest,
+	callback chan<- RunTransactionAsyncResult,
+) {
+	path := "/system/{ownerId}/{namespaceName}/user/{userId}/transaction/run"
+	if request.OwnerId != nil && *request.OwnerId != "" {
+		path = strings.ReplaceAll(path, "{ownerId}", core.ToString(*request.OwnerId))
+	} else {
+		path = strings.ReplaceAll(path, "{ownerId}", "null")
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	var bodies = core.Bodies{}
+	if request.Transaction != nil && *request.Transaction != "" {
+		bodies["transaction"] = *request.Transaction
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.DuplicationAvoider != nil {
+		headers["X-GS2-DUPLICATION-AVOIDER"] = string(*request.DuplicationAvoider)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go runTransactionAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:     p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:  core.Post,
+			Headers: headers,
+			Bodies:  bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorRestClient) RunTransaction(
+	request *RunTransactionRequest,
+) (*RunTransactionResult, error) {
+	callback := make(chan RunTransactionAsyncResult, 1)
+	go p.RunTransactionAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getTransactionResultAsyncHandler(
+	client Gs2DistributorRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetTransactionResultAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetTransactionResultAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetTransactionResultResult
+	if asyncResult.Err != nil {
+		callback <- GetTransactionResultAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetTransactionResultAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetTransactionResultAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorRestClient) GetTransactionResultAsync(
+	request *GetTransactionResultRequest,
+	callback chan<- GetTransactionResultAsyncResult,
+) {
+	path := "/{namespaceName}/user/me/transaction/{transactionId}/result"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.TransactionId != nil && *request.TransactionId != "" {
+		path = strings.ReplaceAll(path, "{transactionId}", core.ToString(*request.TransactionId))
+	} else {
+		path = strings.ReplaceAll(path, "{transactionId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.AccessToken != nil {
+		headers["X-GS2-ACCESS-TOKEN"] = string(*request.AccessToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go getTransactionResultAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorRestClient) GetTransactionResult(
+	request *GetTransactionResultRequest,
+) (*GetTransactionResultResult, error) {
+	callback := make(chan GetTransactionResultAsyncResult, 1)
+	go p.GetTransactionResultAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func getTransactionResultByUserIdAsyncHandler(
+	client Gs2DistributorRestClient,
+	job *core.NetworkJob,
+	callback chan<- GetTransactionResultByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := client.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetTransactionResultByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetTransactionResultByUserIdResult
+	if asyncResult.Err != nil {
+		callback <- GetTransactionResultByUserIdAsyncResult{
+			err: asyncResult.Err,
+		}
+		return
+	}
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetTransactionResultByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	callback <- GetTransactionResultByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorRestClient) GetTransactionResultByUserIdAsync(
+	request *GetTransactionResultByUserIdRequest,
+	callback chan<- GetTransactionResultByUserIdAsyncResult,
+) {
+	path := "/{namespaceName}/user/{userId}/transaction/{transactionId}/result"
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		path = strings.ReplaceAll(path, "{namespaceName}", core.ToString(*request.NamespaceName))
+	} else {
+		path = strings.ReplaceAll(path, "{namespaceName}", "null")
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		path = strings.ReplaceAll(path, "{userId}", core.ToString(*request.UserId))
+	} else {
+		path = strings.ReplaceAll(path, "{userId}", "null")
+	}
+	if request.TransactionId != nil && *request.TransactionId != "" {
+		path = strings.ReplaceAll(path, "{transactionId}", core.ToString(*request.TransactionId))
+	} else {
+		path = strings.ReplaceAll(path, "{transactionId}", "null")
+	}
+
+	replacer := strings.NewReplacer()
+	queryStrings := core.QueryStrings{}
+	if request.ContextStack != nil {
+		queryStrings["contextStack"] = *request.ContextStack
+	}
+
+	headers := p.CreateAuthorizedHeaders()
+	if request.SourceRequestId != nil {
+		headers["X-GS2-SOURCE-REQUEST-ID"] = string(*request.SourceRequestId)
+	}
+	if request.RequestId != nil {
+		headers["X-GS2-REQUEST-ID"] = string(*request.RequestId)
+	}
+	if request.TimeOffsetToken != nil {
+		headers["X-GS2-TIME-OFFSET-TOKEN"] = string(*request.TimeOffsetToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			headers["X-GS2-DRY-RUN"] = "true"
+		} else {
+			headers["X-GS2-DRY-RUN"] = "false"
+		}
+	}
+
+	go getTransactionResultByUserIdAsyncHandler(
+		p,
+		&core.NetworkJob{
+			Url:          p.Session.EndpointHost("distributor").AppendPath(path, replacer),
+			Method:       core.Get,
+			Headers:      headers,
+			QueryStrings: queryStrings,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorRestClient) GetTransactionResultByUserId(
+	request *GetTransactionResultByUserIdRequest,
+) (*GetTransactionResultByUserIdResult, error) {
+	callback := make(chan GetTransactionResultByUserIdAsyncResult, 1)
+	go p.GetTransactionResultByUserIdAsync(
 		request,
 		callback,
 	)

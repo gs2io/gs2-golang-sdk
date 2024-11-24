@@ -1799,3 +1799,132 @@ func (p GetStampSheetResultByUserIdResult) ToDict() map[string]interface{} {
 func (p GetStampSheetResultByUserIdResult) Pointer() *GetStampSheetResultByUserIdResult {
 	return &p
 }
+
+type RunTransactionResult struct {
+	Item     *TransactionResult   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type RunTransactionAsyncResult struct {
+	result *RunTransactionResult
+	err    error
+}
+
+func NewRunTransactionResultFromJson(data string) RunTransactionResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewRunTransactionResultFromDict(dict)
+}
+
+func NewRunTransactionResultFromDict(data map[string]interface{}) RunTransactionResult {
+	return RunTransactionResult{
+		Item: func() *TransactionResult {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionResultFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+	}
+}
+
+func (p RunTransactionResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p RunTransactionResult) Pointer() *RunTransactionResult {
+	return &p
+}
+
+type GetTransactionResultResult struct {
+	Item     *TransactionResult   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetTransactionResultAsyncResult struct {
+	result *GetTransactionResultResult
+	err    error
+}
+
+func NewGetTransactionResultResultFromJson(data string) GetTransactionResultResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetTransactionResultResultFromDict(dict)
+}
+
+func NewGetTransactionResultResultFromDict(data map[string]interface{}) GetTransactionResultResult {
+	return GetTransactionResultResult{
+		Item: func() *TransactionResult {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionResultFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+	}
+}
+
+func (p GetTransactionResultResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p GetTransactionResultResult) Pointer() *GetTransactionResultResult {
+	return &p
+}
+
+type GetTransactionResultByUserIdResult struct {
+	Item     *TransactionResult   `json:"item"`
+	Metadata *core.ResultMetadata `json:"metadata"`
+}
+
+type GetTransactionResultByUserIdAsyncResult struct {
+	result *GetTransactionResultByUserIdResult
+	err    error
+}
+
+func NewGetTransactionResultByUserIdResultFromJson(data string) GetTransactionResultByUserIdResult {
+	dict := map[string]interface{}{}
+	_ = json.Unmarshal([]byte(data), &dict)
+	return NewGetTransactionResultByUserIdResultFromDict(dict)
+}
+
+func NewGetTransactionResultByUserIdResultFromDict(data map[string]interface{}) GetTransactionResultByUserIdResult {
+	return GetTransactionResultByUserIdResult{
+		Item: func() *TransactionResult {
+			v, ok := data["item"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewTransactionResultFromDict(core.CastMap(data["item"])).Pointer()
+		}(),
+	}
+}
+
+func (p GetTransactionResultByUserIdResult) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"item": func() map[string]interface{} {
+			if p.Item == nil {
+				return nil
+			}
+			return p.Item.ToDict()
+		}(),
+	}
+}
+
+func (p GetTransactionResultByUserIdResult) Pointer() *GetTransactionResultByUserIdResult {
+	return &p
+}

@@ -124,15 +124,16 @@ func (p DescribeNamespacesRequest) Pointer() *DescribeNamespacesRequest {
 }
 
 type CreateNamespaceRequest struct {
-	SourceRequestId               *string              `json:"sourceRequestId"`
-	RequestId                     *string              `json:"requestId"`
-	ContextStack                  *string              `json:"contextStack"`
-	Name                          *string              `json:"name"`
-	Description                   *string              `json:"description"`
-	AssumeUserId                  *string              `json:"assumeUserId"`
-	AutoRunStampSheetNotification *NotificationSetting `json:"autoRunStampSheetNotification"`
-	LogSetting                    *LogSetting          `json:"logSetting"`
-	DryRun                        *bool                `json:"dryRun"`
+	SourceRequestId                *string              `json:"sourceRequestId"`
+	RequestId                      *string              `json:"requestId"`
+	ContextStack                   *string              `json:"contextStack"`
+	Name                           *string              `json:"name"`
+	Description                    *string              `json:"description"`
+	AssumeUserId                   *string              `json:"assumeUserId"`
+	AutoRunStampSheetNotification  *NotificationSetting `json:"autoRunStampSheetNotification"`
+	AutoRunTransactionNotification *NotificationSetting `json:"autoRunTransactionNotification"`
+	LogSetting                     *LogSetting          `json:"logSetting"`
+	DryRun                         *bool                `json:"dryRun"`
 }
 
 func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -229,6 +230,9 @@ func (p *CreateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["autoRunStampSheetNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AutoRunStampSheetNotification)
 		}
+		if v, ok := d["autoRunTransactionNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AutoRunTransactionNotification)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -275,6 +279,13 @@ func NewCreateNamespaceRequestFromDict(data map[string]interface{}) CreateNamesp
 			}
 			return NewNotificationSettingFromDict(core.CastMap(data["autoRunStampSheetNotification"])).Pointer()
 		}(),
+		AutoRunTransactionNotification: func() *NotificationSetting {
+			v, ok := data["autoRunTransactionNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["autoRunTransactionNotification"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -295,6 +306,12 @@ func (p CreateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.AutoRunStampSheetNotification.ToDict()
+		}(),
+		"autoRunTransactionNotification": func() map[string]interface{} {
+			if p.AutoRunTransactionNotification == nil {
+				return nil
+			}
+			return p.AutoRunTransactionNotification.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
@@ -486,15 +503,16 @@ func (p GetNamespaceRequest) Pointer() *GetNamespaceRequest {
 }
 
 type UpdateNamespaceRequest struct {
-	SourceRequestId               *string              `json:"sourceRequestId"`
-	RequestId                     *string              `json:"requestId"`
-	ContextStack                  *string              `json:"contextStack"`
-	NamespaceName                 *string              `json:"namespaceName"`
-	Description                   *string              `json:"description"`
-	AssumeUserId                  *string              `json:"assumeUserId"`
-	AutoRunStampSheetNotification *NotificationSetting `json:"autoRunStampSheetNotification"`
-	LogSetting                    *LogSetting          `json:"logSetting"`
-	DryRun                        *bool                `json:"dryRun"`
+	SourceRequestId                *string              `json:"sourceRequestId"`
+	RequestId                      *string              `json:"requestId"`
+	ContextStack                   *string              `json:"contextStack"`
+	NamespaceName                  *string              `json:"namespaceName"`
+	Description                    *string              `json:"description"`
+	AssumeUserId                   *string              `json:"assumeUserId"`
+	AutoRunStampSheetNotification  *NotificationSetting `json:"autoRunStampSheetNotification"`
+	AutoRunTransactionNotification *NotificationSetting `json:"autoRunTransactionNotification"`
+	LogSetting                     *LogSetting          `json:"logSetting"`
+	DryRun                         *bool                `json:"dryRun"`
 }
 
 func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
@@ -591,6 +609,9 @@ func (p *UpdateNamespaceRequest) UnmarshalJSON(data []byte) error {
 		if v, ok := d["autoRunStampSheetNotification"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.AutoRunStampSheetNotification)
 		}
+		if v, ok := d["autoRunTransactionNotification"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AutoRunTransactionNotification)
+		}
 		if v, ok := d["logSetting"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.LogSetting)
 		}
@@ -637,6 +658,13 @@ func NewUpdateNamespaceRequestFromDict(data map[string]interface{}) UpdateNamesp
 			}
 			return NewNotificationSettingFromDict(core.CastMap(data["autoRunStampSheetNotification"])).Pointer()
 		}(),
+		AutoRunTransactionNotification: func() *NotificationSetting {
+			v, ok := data["autoRunTransactionNotification"]
+			if !ok || v == nil {
+				return nil
+			}
+			return NewNotificationSettingFromDict(core.CastMap(data["autoRunTransactionNotification"])).Pointer()
+		}(),
 		LogSetting: func() *LogSetting {
 			v, ok := data["logSetting"]
 			if !ok || v == nil {
@@ -657,6 +685,12 @@ func (p UpdateNamespaceRequest) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.AutoRunStampSheetNotification.ToDict()
+		}(),
+		"autoRunTransactionNotification": func() map[string]interface{} {
+			if p.AutoRunTransactionNotification == nil {
+				return nil
+			}
+			return p.AutoRunTransactionNotification.ToDict()
 		}(),
 		"logSetting": func() map[string]interface{} {
 			if p.LogSetting == nil {
@@ -5417,5 +5451,558 @@ func (p GetStampSheetResultByUserIdRequest) ToDict() map[string]interface{} {
 }
 
 func (p GetStampSheetResultByUserIdRequest) Pointer() *GetStampSheetResultByUserIdRequest {
+	return &p
+}
+
+type RunTransactionRequest struct {
+	SourceRequestId    *string `json:"sourceRequestId"`
+	RequestId          *string `json:"requestId"`
+	ContextStack       *string `json:"contextStack"`
+	DuplicationAvoider *string `json:"duplicationAvoider"`
+	OwnerId            *string `json:"ownerId"`
+	NamespaceName      *string `json:"namespaceName"`
+	UserId             *string `json:"userId"`
+	Transaction        *string `json:"transaction"`
+	TimeOffsetToken    *string `json:"timeOffsetToken"`
+	DryRun             *bool   `json:"dryRun"`
+}
+
+func (p *RunTransactionRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = RunTransactionRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = RunTransactionRequest{}
+	} else {
+		*p = RunTransactionRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["ownerId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.OwnerId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.OwnerId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.OwnerId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.OwnerId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.OwnerId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.OwnerId)
+				}
+			}
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["transaction"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Transaction = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Transaction = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Transaction = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Transaction = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Transaction = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Transaction)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewRunTransactionRequestFromJson(data string) (RunTransactionRequest, error) {
+	req := RunTransactionRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return RunTransactionRequest{}, err
+	}
+	return req, nil
+}
+
+func NewRunTransactionRequestFromDict(data map[string]interface{}) RunTransactionRequest {
+	return RunTransactionRequest{
+		OwnerId: func() *string {
+			v, ok := data["ownerId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["ownerId"])
+		}(),
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p RunTransactionRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"ownerId":         p.OwnerId,
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"transaction":     p.Transaction,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p RunTransactionRequest) Pointer() *RunTransactionRequest {
+	return &p
+}
+
+type GetTransactionResultRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	AccessToken     *string `json:"accessToken"`
+	TransactionId   *string `json:"transactionId"`
+	DryRun          *bool   `json:"dryRun"`
+}
+
+func (p *GetTransactionResultRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetTransactionResultRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetTransactionResultRequest{}
+	} else {
+		*p = GetTransactionResultRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["accessToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AccessToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AccessToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AccessToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AccessToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AccessToken)
+				}
+			}
+		}
+		if v, ok := d["transactionId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetTransactionResultRequestFromJson(data string) (GetTransactionResultRequest, error) {
+	req := GetTransactionResultRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetTransactionResultRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetTransactionResultRequestFromDict(data map[string]interface{}) GetTransactionResultRequest {
+	return GetTransactionResultRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		AccessToken: func() *string {
+			v, ok := data["accessToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["accessToken"])
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+	}
+}
+
+func (p GetTransactionResultRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName": p.NamespaceName,
+		"accessToken":   p.AccessToken,
+		"transactionId": p.TransactionId,
+	}
+}
+
+func (p GetTransactionResultRequest) Pointer() *GetTransactionResultRequest {
+	return &p
+}
+
+type GetTransactionResultByUserIdRequest struct {
+	SourceRequestId *string `json:"sourceRequestId"`
+	RequestId       *string `json:"requestId"`
+	ContextStack    *string `json:"contextStack"`
+	NamespaceName   *string `json:"namespaceName"`
+	UserId          *string `json:"userId"`
+	TransactionId   *string `json:"transactionId"`
+	TimeOffsetToken *string `json:"timeOffsetToken"`
+	DryRun          *bool   `json:"dryRun"`
+}
+
+func (p *GetTransactionResultByUserIdRequest) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = GetTransactionResultByUserIdRequest{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = GetTransactionResultByUserIdRequest{}
+	} else {
+		*p = GetTransactionResultByUserIdRequest{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["namespaceName"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.NamespaceName = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.NamespaceName = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.NamespaceName = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.NamespaceName = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.NamespaceName)
+				}
+			}
+		}
+		if v, ok := d["userId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.UserId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.UserId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.UserId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.UserId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.UserId)
+				}
+			}
+		}
+		if v, ok := d["transactionId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
+				}
+			}
+		}
+		if v, ok := d["timeOffsetToken"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TimeOffsetToken = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TimeOffsetToken = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TimeOffsetToken = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TimeOffsetToken = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TimeOffsetToken)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewGetTransactionResultByUserIdRequestFromJson(data string) (GetTransactionResultByUserIdRequest, error) {
+	req := GetTransactionResultByUserIdRequest{}
+	err := json.Unmarshal([]byte(data), &req)
+	if err != nil {
+		return GetTransactionResultByUserIdRequest{}, err
+	}
+	return req, nil
+}
+
+func NewGetTransactionResultByUserIdRequestFromDict(data map[string]interface{}) GetTransactionResultByUserIdRequest {
+	return GetTransactionResultByUserIdRequest{
+		NamespaceName: func() *string {
+			v, ok := data["namespaceName"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["namespaceName"])
+		}(),
+		UserId: func() *string {
+			v, ok := data["userId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["userId"])
+		}(),
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		TimeOffsetToken: func() *string {
+			v, ok := data["timeOffsetToken"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["timeOffsetToken"])
+		}(),
+	}
+}
+
+func (p GetTransactionResultByUserIdRequest) ToDict() map[string]interface{} {
+	return map[string]interface{}{
+		"namespaceName":   p.NamespaceName,
+		"userId":          p.UserId,
+		"transactionId":   p.TransactionId,
+		"timeOffsetToken": p.TimeOffsetToken,
+	}
+}
+
+func (p GetTransactionResultByUserIdRequest) Pointer() *GetTransactionResultByUserIdRequest {
 	return &p
 }

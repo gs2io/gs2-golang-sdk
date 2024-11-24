@@ -901,12 +901,15 @@ func (p OpenMessageByUserIdResult) Pointer() *OpenMessageByUserIdResult {
 }
 
 type ReadMessageResult struct {
-	Item                      *Message             `json:"item"`
-	TransactionId             *string              `json:"transactionId"`
-	StampSheet                *string              `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
-	Metadata                  *core.ResultMetadata `json:"metadata"`
+	Item                      *Message                `json:"item"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
 }
 
 type ReadMessageAsyncResult struct {
@@ -957,6 +960,27 @@ func NewReadMessageResultFromDict(data map[string]interface{}) ReadMessageResult
 			}
 			return core.CastBool(data["autoRunStampSheet"])
 		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
 	}
 }
 
@@ -972,6 +996,14 @@ func (p ReadMessageResult) ToDict() map[string]interface{} {
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
 		"autoRunStampSheet":         p.AutoRunStampSheet,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
 	}
 }
 
@@ -980,12 +1012,15 @@ func (p ReadMessageResult) Pointer() *ReadMessageResult {
 }
 
 type ReadMessageByUserIdResult struct {
-	Item                      *Message             `json:"item"`
-	TransactionId             *string              `json:"transactionId"`
-	StampSheet                *string              `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
-	Metadata                  *core.ResultMetadata `json:"metadata"`
+	Item                      *Message                `json:"item"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
 }
 
 type ReadMessageByUserIdAsyncResult struct {
@@ -1036,6 +1071,27 @@ func NewReadMessageByUserIdResultFromDict(data map[string]interface{}) ReadMessa
 			}
 			return core.CastBool(data["autoRunStampSheet"])
 		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
 	}
 }
 
@@ -1051,6 +1107,14 @@ func (p ReadMessageByUserIdResult) ToDict() map[string]interface{} {
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
 		"autoRunStampSheet":         p.AutoRunStampSheet,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
 	}
 }
 

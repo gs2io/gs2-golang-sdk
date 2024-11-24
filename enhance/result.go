@@ -1116,14 +1116,17 @@ func (p DeleteUnleashRateModelMasterResult) Pointer() *DeleteUnleashRateModelMas
 }
 
 type DirectEnhanceResult struct {
-	Item                      *RateModel           `json:"item"`
-	TransactionId             *string              `json:"transactionId"`
-	StampSheet                *string              `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
-	AcquireExperience         *int64               `json:"acquireExperience"`
-	BonusRate                 *float32             `json:"bonusRate"`
-	Metadata                  *core.ResultMetadata `json:"metadata"`
+	Item                      *RateModel              `json:"item"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	AcquireExperience         *int64                  `json:"acquireExperience"`
+	BonusRate                 *float32                `json:"bonusRate"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
 }
 
 type DirectEnhanceAsyncResult struct {
@@ -1174,6 +1177,27 @@ func NewDirectEnhanceResultFromDict(data map[string]interface{}) DirectEnhanceRe
 			}
 			return core.CastBool(data["autoRunStampSheet"])
 		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
 		AcquireExperience: func() *int64 {
 			v, ok := data["acquireExperience"]
 			if !ok || v == nil {
@@ -1203,8 +1227,16 @@ func (p DirectEnhanceResult) ToDict() map[string]interface{} {
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
 		"autoRunStampSheet":         p.AutoRunStampSheet,
-		"acquireExperience":         p.AcquireExperience,
-		"bonusRate":                 p.BonusRate,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
+		"acquireExperience": p.AcquireExperience,
+		"bonusRate":         p.BonusRate,
 	}
 }
 
@@ -1213,14 +1245,17 @@ func (p DirectEnhanceResult) Pointer() *DirectEnhanceResult {
 }
 
 type DirectEnhanceByUserIdResult struct {
-	Item                      *RateModel           `json:"item"`
-	TransactionId             *string              `json:"transactionId"`
-	StampSheet                *string              `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
-	AcquireExperience         *int64               `json:"acquireExperience"`
-	BonusRate                 *float32             `json:"bonusRate"`
-	Metadata                  *core.ResultMetadata `json:"metadata"`
+	Item                      *RateModel              `json:"item"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	AcquireExperience         *int64                  `json:"acquireExperience"`
+	BonusRate                 *float32                `json:"bonusRate"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
 }
 
 type DirectEnhanceByUserIdAsyncResult struct {
@@ -1271,6 +1306,27 @@ func NewDirectEnhanceByUserIdResultFromDict(data map[string]interface{}) DirectE
 			}
 			return core.CastBool(data["autoRunStampSheet"])
 		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
 		AcquireExperience: func() *int64 {
 			v, ok := data["acquireExperience"]
 			if !ok || v == nil {
@@ -1300,8 +1356,16 @@ func (p DirectEnhanceByUserIdResult) ToDict() map[string]interface{} {
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
 		"autoRunStampSheet":         p.AutoRunStampSheet,
-		"acquireExperience":         p.AcquireExperience,
-		"bonusRate":                 p.BonusRate,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
+		"acquireExperience": p.AcquireExperience,
+		"bonusRate":         p.BonusRate,
 	}
 }
 
@@ -1310,14 +1374,17 @@ func (p DirectEnhanceByUserIdResult) Pointer() *DirectEnhanceByUserIdResult {
 }
 
 type DirectEnhanceByStampSheetResult struct {
-	Item                      *RateModel           `json:"item"`
-	TransactionId             *string              `json:"transactionId"`
-	StampSheet                *string              `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
-	AcquireExperience         *int64               `json:"acquireExperience"`
-	BonusRate                 *float32             `json:"bonusRate"`
-	Metadata                  *core.ResultMetadata `json:"metadata"`
+	Item                      *RateModel              `json:"item"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	AcquireExperience         *int64                  `json:"acquireExperience"`
+	BonusRate                 *float32                `json:"bonusRate"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
 }
 
 type DirectEnhanceByStampSheetAsyncResult struct {
@@ -1368,6 +1435,27 @@ func NewDirectEnhanceByStampSheetResultFromDict(data map[string]interface{}) Dir
 			}
 			return core.CastBool(data["autoRunStampSheet"])
 		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
 		AcquireExperience: func() *int64 {
 			v, ok := data["acquireExperience"]
 			if !ok || v == nil {
@@ -1397,8 +1485,16 @@ func (p DirectEnhanceByStampSheetResult) ToDict() map[string]interface{} {
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
 		"autoRunStampSheet":         p.AutoRunStampSheet,
-		"acquireExperience":         p.AcquireExperience,
-		"bonusRate":                 p.BonusRate,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
+		"acquireExperience": p.AcquireExperience,
+		"bonusRate":         p.BonusRate,
 	}
 }
 
@@ -1407,12 +1503,15 @@ func (p DirectEnhanceByStampSheetResult) Pointer() *DirectEnhanceByStampSheetRes
 }
 
 type UnleashResult struct {
-	Item                      *UnleashRateModel    `json:"item"`
-	TransactionId             *string              `json:"transactionId"`
-	StampSheet                *string              `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
-	Metadata                  *core.ResultMetadata `json:"metadata"`
+	Item                      *UnleashRateModel       `json:"item"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
 }
 
 type UnleashAsyncResult struct {
@@ -1463,6 +1562,27 @@ func NewUnleashResultFromDict(data map[string]interface{}) UnleashResult {
 			}
 			return core.CastBool(data["autoRunStampSheet"])
 		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
 	}
 }
 
@@ -1478,6 +1598,14 @@ func (p UnleashResult) ToDict() map[string]interface{} {
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
 		"autoRunStampSheet":         p.AutoRunStampSheet,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
 	}
 }
 
@@ -1486,12 +1614,15 @@ func (p UnleashResult) Pointer() *UnleashResult {
 }
 
 type UnleashByUserIdResult struct {
-	Item                      *UnleashRateModel    `json:"item"`
-	TransactionId             *string              `json:"transactionId"`
-	StampSheet                *string              `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
-	Metadata                  *core.ResultMetadata `json:"metadata"`
+	Item                      *UnleashRateModel       `json:"item"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
 }
 
 type UnleashByUserIdAsyncResult struct {
@@ -1542,6 +1673,27 @@ func NewUnleashByUserIdResultFromDict(data map[string]interface{}) UnleashByUser
 			}
 			return core.CastBool(data["autoRunStampSheet"])
 		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
 	}
 }
 
@@ -1557,6 +1709,14 @@ func (p UnleashByUserIdResult) ToDict() map[string]interface{} {
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
 		"autoRunStampSheet":         p.AutoRunStampSheet,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
 	}
 }
 
@@ -1565,12 +1725,15 @@ func (p UnleashByUserIdResult) Pointer() *UnleashByUserIdResult {
 }
 
 type UnleashByStampSheetResult struct {
-	Item                      *UnleashRateModel    `json:"item"`
-	TransactionId             *string              `json:"transactionId"`
-	StampSheet                *string              `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
-	Metadata                  *core.ResultMetadata `json:"metadata"`
+	Item                      *UnleashRateModel       `json:"item"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
 }
 
 type UnleashByStampSheetAsyncResult struct {
@@ -1621,6 +1784,27 @@ func NewUnleashByStampSheetResultFromDict(data map[string]interface{}) UnleashBy
 			}
 			return core.CastBool(data["autoRunStampSheet"])
 		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
 	}
 }
 
@@ -1636,6 +1820,14 @@ func (p UnleashByStampSheetResult) ToDict() map[string]interface{} {
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
 		"autoRunStampSheet":         p.AutoRunStampSheet,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
 	}
 }
 
@@ -1773,11 +1965,14 @@ func (p GetProgressByUserIdResult) Pointer() *GetProgressByUserIdResult {
 }
 
 type StartResult struct {
-	TransactionId             *string              `json:"transactionId"`
-	StampSheet                *string              `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
-	Metadata                  *core.ResultMetadata `json:"metadata"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
 }
 
 type StartAsyncResult struct {
@@ -1821,6 +2016,27 @@ func NewStartResultFromDict(data map[string]interface{}) StartResult {
 			}
 			return core.CastBool(data["autoRunStampSheet"])
 		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
 	}
 }
 
@@ -1830,6 +2046,14 @@ func (p StartResult) ToDict() map[string]interface{} {
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
 		"autoRunStampSheet":         p.AutoRunStampSheet,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
 	}
 }
 
@@ -1838,11 +2062,14 @@ func (p StartResult) Pointer() *StartResult {
 }
 
 type StartByUserIdResult struct {
-	TransactionId             *string              `json:"transactionId"`
-	StampSheet                *string              `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
-	Metadata                  *core.ResultMetadata `json:"metadata"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
 }
 
 type StartByUserIdAsyncResult struct {
@@ -1886,6 +2113,27 @@ func NewStartByUserIdResultFromDict(data map[string]interface{}) StartByUserIdRe
 			}
 			return core.CastBool(data["autoRunStampSheet"])
 		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
 	}
 }
 
@@ -1895,6 +2143,14 @@ func (p StartByUserIdResult) ToDict() map[string]interface{} {
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
 		"autoRunStampSheet":         p.AutoRunStampSheet,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
 	}
 }
 
@@ -1903,14 +2159,17 @@ func (p StartByUserIdResult) Pointer() *StartByUserIdResult {
 }
 
 type EndResult struct {
-	Item                      *Progress            `json:"item"`
-	TransactionId             *string              `json:"transactionId"`
-	StampSheet                *string              `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
-	AcquireExperience         *int64               `json:"acquireExperience"`
-	BonusRate                 *float32             `json:"bonusRate"`
-	Metadata                  *core.ResultMetadata `json:"metadata"`
+	Item                      *Progress               `json:"item"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	AcquireExperience         *int64                  `json:"acquireExperience"`
+	BonusRate                 *float32                `json:"bonusRate"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
 }
 
 type EndAsyncResult struct {
@@ -1961,6 +2220,27 @@ func NewEndResultFromDict(data map[string]interface{}) EndResult {
 			}
 			return core.CastBool(data["autoRunStampSheet"])
 		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
 		AcquireExperience: func() *int64 {
 			v, ok := data["acquireExperience"]
 			if !ok || v == nil {
@@ -1990,8 +2270,16 @@ func (p EndResult) ToDict() map[string]interface{} {
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
 		"autoRunStampSheet":         p.AutoRunStampSheet,
-		"acquireExperience":         p.AcquireExperience,
-		"bonusRate":                 p.BonusRate,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
+		"acquireExperience": p.AcquireExperience,
+		"bonusRate":         p.BonusRate,
 	}
 }
 
@@ -2000,14 +2288,17 @@ func (p EndResult) Pointer() *EndResult {
 }
 
 type EndByUserIdResult struct {
-	Item                      *Progress            `json:"item"`
-	TransactionId             *string              `json:"transactionId"`
-	StampSheet                *string              `json:"stampSheet"`
-	StampSheetEncryptionKeyId *string              `json:"stampSheetEncryptionKeyId"`
-	AutoRunStampSheet         *bool                `json:"autoRunStampSheet"`
-	AcquireExperience         *int64               `json:"acquireExperience"`
-	BonusRate                 *float32             `json:"bonusRate"`
-	Metadata                  *core.ResultMetadata `json:"metadata"`
+	Item                      *Progress               `json:"item"`
+	TransactionId             *string                 `json:"transactionId"`
+	StampSheet                *string                 `json:"stampSheet"`
+	StampSheetEncryptionKeyId *string                 `json:"stampSheetEncryptionKeyId"`
+	AutoRunStampSheet         *bool                   `json:"autoRunStampSheet"`
+	AtomicCommit              *bool                   `json:"atomicCommit"`
+	Transaction               *string                 `json:"transaction"`
+	TransactionResult         *core.TransactionResult `json:"transactionResult"`
+	AcquireExperience         *int64                  `json:"acquireExperience"`
+	BonusRate                 *float32                `json:"bonusRate"`
+	Metadata                  *core.ResultMetadata    `json:"metadata"`
 }
 
 type EndByUserIdAsyncResult struct {
@@ -2058,6 +2349,27 @@ func NewEndByUserIdResultFromDict(data map[string]interface{}) EndByUserIdResult
 			}
 			return core.CastBool(data["autoRunStampSheet"])
 		}(),
+		AtomicCommit: func() *bool {
+			v, ok := data["atomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["atomicCommit"])
+		}(),
+		Transaction: func() *string {
+			v, ok := data["transaction"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transaction"])
+		}(),
+		TransactionResult: func() *core.TransactionResult {
+			v, ok := data["transactionResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.NewTransactionResultFromDict(core.CastMap(data["transactionResult"])).Pointer()
+		}(),
 		AcquireExperience: func() *int64 {
 			v, ok := data["acquireExperience"]
 			if !ok || v == nil {
@@ -2087,8 +2399,16 @@ func (p EndByUserIdResult) ToDict() map[string]interface{} {
 		"stampSheet":                p.StampSheet,
 		"stampSheetEncryptionKeyId": p.StampSheetEncryptionKeyId,
 		"autoRunStampSheet":         p.AutoRunStampSheet,
-		"acquireExperience":         p.AcquireExperience,
-		"bonusRate":                 p.BonusRate,
+		"atomicCommit":              p.AtomicCommit,
+		"transaction":               p.Transaction,
+		"transactionResult": func() map[string]interface{} {
+			if p.TransactionResult == nil {
+				return nil
+			}
+			return p.TransactionResult.ToDict()
+		}(),
+		"acquireExperience": p.AcquireExperience,
+		"bonusRate":         p.BonusRate,
 	}
 }
 

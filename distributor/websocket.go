@@ -187,6 +187,9 @@ func (p Gs2DistributorWebSocketClient) CreateNamespaceAsync(
 	if request.AutoRunStampSheetNotification != nil {
 		bodies["autoRunStampSheetNotification"] = request.AutoRunStampSheetNotification.ToDict()
 	}
+	if request.AutoRunTransactionNotification != nil {
+		bodies["autoRunTransactionNotification"] = request.AutoRunTransactionNotification.ToDict()
+	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
 	}
@@ -462,6 +465,9 @@ func (p Gs2DistributorWebSocketClient) UpdateNamespaceAsync(
 	}
 	if request.AutoRunStampSheetNotification != nil {
 		bodies["autoRunStampSheetNotification"] = request.AutoRunStampSheetNotification.ToDict()
+	}
+	if request.AutoRunTransactionNotification != nil {
+		bodies["autoRunTransactionNotification"] = request.AutoRunTransactionNotification.ToDict()
 	}
 	if request.LogSetting != nil {
 		bodies["logSetting"] = request.LogSetting.ToDict()
@@ -3734,6 +3740,303 @@ func (p Gs2DistributorWebSocketClient) GetStampSheetResultByUserId(
 ) (*GetStampSheetResultByUserIdResult, error) {
 	callback := make(chan GetStampSheetResultByUserIdAsyncResult, 1)
 	go p.GetStampSheetResultByUserIdAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2DistributorWebSocketClient) runTransactionAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- RunTransactionAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- RunTransactionAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result RunTransactionResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- RunTransactionAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- RunTransactionAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorWebSocketClient) RunTransactionAsync(
+	request *RunTransactionRequest,
+	callback chan<- RunTransactionAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "distributor",
+			"component":   "transactionResult",
+			"function":    "runTransaction",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.OwnerId != nil && *request.OwnerId != "" {
+		bodies["ownerId"] = *request.OwnerId
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.Transaction != nil && *request.Transaction != "" {
+		bodies["transaction"] = *request.Transaction
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DuplicationAvoider != nil {
+		bodies["xGs2DuplicationAvoider"] = string(*request.DuplicationAvoider)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.runTransactionAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorWebSocketClient) RunTransaction(
+	request *RunTransactionRequest,
+) (*RunTransactionResult, error) {
+	callback := make(chan RunTransactionAsyncResult, 1)
+	go p.RunTransactionAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2DistributorWebSocketClient) getTransactionResultAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetTransactionResultAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetTransactionResultAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetTransactionResultResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetTransactionResultAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetTransactionResultAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorWebSocketClient) GetTransactionResultAsync(
+	request *GetTransactionResultRequest,
+	callback chan<- GetTransactionResultAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "distributor",
+			"component":   "transactionResult",
+			"function":    "getTransactionResult",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.AccessToken != nil && *request.AccessToken != "" {
+		bodies["accessToken"] = *request.AccessToken
+	}
+	if request.TransactionId != nil && *request.TransactionId != "" {
+		bodies["transactionId"] = *request.TransactionId
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.AccessToken != nil {
+		bodies["xGs2AccessToken"] = string(*request.AccessToken)
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.getTransactionResultAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorWebSocketClient) GetTransactionResult(
+	request *GetTransactionResultRequest,
+) (*GetTransactionResultResult, error) {
+	callback := make(chan GetTransactionResultAsyncResult, 1)
+	go p.GetTransactionResultAsync(
+		request,
+		callback,
+	)
+	asyncResult := <-callback
+	return asyncResult.result, asyncResult.err
+}
+
+func (p Gs2DistributorWebSocketClient) getTransactionResultByUserIdAsyncHandler(
+	job *core.WebSocketNetworkJob,
+	callback chan<- GetTransactionResultByUserIdAsyncResult,
+) {
+	internalCallback := make(chan core.AsyncResult, 1)
+	job.Callback = internalCallback
+	err := p.Session.Send(
+		job,
+		false,
+	)
+	if err != nil {
+		callback <- GetTransactionResultByUserIdAsyncResult{
+			err: err,
+		}
+		return
+	}
+	asyncResult := <-internalCallback
+	var result GetTransactionResultByUserIdResult
+	if asyncResult.Payload != "" {
+		err = json.Unmarshal([]byte(asyncResult.Payload), &result)
+		if err != nil {
+			callback <- GetTransactionResultByUserIdAsyncResult{
+				err: err,
+			}
+			return
+		}
+	}
+	if asyncResult.Err != nil {
+	}
+	callback <- GetTransactionResultByUserIdAsyncResult{
+		result: &result,
+		err:    asyncResult.Err,
+	}
+
+}
+
+func (p Gs2DistributorWebSocketClient) GetTransactionResultByUserIdAsync(
+	request *GetTransactionResultByUserIdRequest,
+	callback chan<- GetTransactionResultByUserIdAsyncResult,
+) {
+	requestId := core.WebSocketRequestId(uuid.New().String())
+	var bodies = core.WebSocketBodies{
+		"x_gs2": map[string]interface{}{
+			"service":     "distributor",
+			"component":   "transactionResult",
+			"function":    "getTransactionResultByUserId",
+			"contentType": "application/json",
+			"requestId":   requestId,
+		},
+	}
+	for k, v := range p.Session.CreateAuthorizationHeader() {
+		bodies[k] = v
+	}
+	if request.NamespaceName != nil && *request.NamespaceName != "" {
+		bodies["namespaceName"] = *request.NamespaceName
+	}
+	if request.UserId != nil && *request.UserId != "" {
+		bodies["userId"] = *request.UserId
+	}
+	if request.TransactionId != nil && *request.TransactionId != "" {
+		bodies["transactionId"] = *request.TransactionId
+	}
+	if request.TimeOffsetToken != nil && *request.TimeOffsetToken != "" {
+		bodies["timeOffsetToken"] = *request.TimeOffsetToken
+	}
+	if request.ContextStack != nil {
+		bodies["contextStack"] = *request.ContextStack
+	}
+	if request.DryRun != nil {
+		if *request.DryRun {
+			bodies["xGs2DryRun"] = "true"
+		} else {
+			bodies["xGs2DryRun"] = "false"
+		}
+	}
+
+	go p.getTransactionResultByUserIdAsyncHandler(
+		&core.WebSocketNetworkJob{
+			RequestId: requestId,
+			Bodies:    bodies,
+		},
+		callback,
+	)
+}
+
+func (p Gs2DistributorWebSocketClient) GetTransactionResultByUserId(
+	request *GetTransactionResultByUserIdRequest,
+) (*GetTransactionResultByUserIdResult, error) {
+	callback := make(chan GetTransactionResultByUserIdAsyncResult, 1)
+	go p.GetTransactionResultByUserIdAsync(
 		request,
 		callback,
 	)

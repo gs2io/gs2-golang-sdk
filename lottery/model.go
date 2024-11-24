@@ -2898,6 +2898,693 @@ func CastConfigsFromDict(data []Config) []interface{} {
 	return v
 }
 
+type VerifyActionResult struct {
+	Action        *string `json:"action"`
+	VerifyRequest *string `json:"verifyRequest"`
+	StatusCode    *int32  `json:"statusCode"`
+	VerifyResult  *string `json:"verifyResult"`
+}
+
+func (p *VerifyActionResult) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = VerifyActionResult{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = VerifyActionResult{}
+	} else {
+		*p = VerifyActionResult{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["action"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Action = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Action = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Action = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Action)
+				}
+			}
+		}
+		if v, ok := d["verifyRequest"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyRequest = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyRequest = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyRequest = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyRequest = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyRequest = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyRequest)
+				}
+			}
+		}
+		if v, ok := d["statusCode"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.StatusCode)
+		}
+		if v, ok := d["verifyResult"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.VerifyResult = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.VerifyResult = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.VerifyResult = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyResult = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.VerifyResult = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.VerifyResult)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewVerifyActionResultFromJson(data string) VerifyActionResult {
+	req := VerifyActionResult{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewVerifyActionResultFromDict(data map[string]interface{}) VerifyActionResult {
+	return VerifyActionResult{
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		VerifyRequest: func() *string {
+			v, ok := data["verifyRequest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyRequest"])
+		}(),
+		StatusCode: func() *int32 {
+			v, ok := data["statusCode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["statusCode"])
+		}(),
+		VerifyResult: func() *string {
+			v, ok := data["verifyResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["verifyResult"])
+		}(),
+	}
+}
+
+func (p VerifyActionResult) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Action != nil {
+		m["action"] = p.Action
+	}
+	if p.VerifyRequest != nil {
+		m["verifyRequest"] = p.VerifyRequest
+	}
+	if p.StatusCode != nil {
+		m["statusCode"] = p.StatusCode
+	}
+	if p.VerifyResult != nil {
+		m["verifyResult"] = p.VerifyResult
+	}
+	return m
+}
+
+func (p VerifyActionResult) Pointer() *VerifyActionResult {
+	return &p
+}
+
+func CastVerifyActionResults(data []interface{}) []VerifyActionResult {
+	v := make([]VerifyActionResult, 0)
+	for _, d := range data {
+		v = append(v, NewVerifyActionResultFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastVerifyActionResultsFromDict(data []VerifyActionResult) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type ConsumeActionResult struct {
+	Action         *string `json:"action"`
+	ConsumeRequest *string `json:"consumeRequest"`
+	StatusCode     *int32  `json:"statusCode"`
+	ConsumeResult  *string `json:"consumeResult"`
+}
+
+func (p *ConsumeActionResult) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = ConsumeActionResult{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = ConsumeActionResult{}
+	} else {
+		*p = ConsumeActionResult{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["action"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Action = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Action = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Action = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Action)
+				}
+			}
+		}
+		if v, ok := d["consumeRequest"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ConsumeRequest = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ConsumeRequest = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ConsumeRequest = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ConsumeRequest = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ConsumeRequest = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ConsumeRequest)
+				}
+			}
+		}
+		if v, ok := d["statusCode"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.StatusCode)
+		}
+		if v, ok := d["consumeResult"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.ConsumeResult = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.ConsumeResult = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.ConsumeResult = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.ConsumeResult = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.ConsumeResult = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.ConsumeResult)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewConsumeActionResultFromJson(data string) ConsumeActionResult {
+	req := ConsumeActionResult{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewConsumeActionResultFromDict(data map[string]interface{}) ConsumeActionResult {
+	return ConsumeActionResult{
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		ConsumeRequest: func() *string {
+			v, ok := data["consumeRequest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["consumeRequest"])
+		}(),
+		StatusCode: func() *int32 {
+			v, ok := data["statusCode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["statusCode"])
+		}(),
+		ConsumeResult: func() *string {
+			v, ok := data["consumeResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["consumeResult"])
+		}(),
+	}
+}
+
+func (p ConsumeActionResult) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Action != nil {
+		m["action"] = p.Action
+	}
+	if p.ConsumeRequest != nil {
+		m["consumeRequest"] = p.ConsumeRequest
+	}
+	if p.StatusCode != nil {
+		m["statusCode"] = p.StatusCode
+	}
+	if p.ConsumeResult != nil {
+		m["consumeResult"] = p.ConsumeResult
+	}
+	return m
+}
+
+func (p ConsumeActionResult) Pointer() *ConsumeActionResult {
+	return &p
+}
+
+func CastConsumeActionResults(data []interface{}) []ConsumeActionResult {
+	v := make([]ConsumeActionResult, 0)
+	for _, d := range data {
+		v = append(v, NewConsumeActionResultFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastConsumeActionResultsFromDict(data []ConsumeActionResult) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type AcquireActionResult struct {
+	Action         *string `json:"action"`
+	AcquireRequest *string `json:"acquireRequest"`
+	StatusCode     *int32  `json:"statusCode"`
+	AcquireResult  *string `json:"acquireResult"`
+}
+
+func (p *AcquireActionResult) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = AcquireActionResult{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = AcquireActionResult{}
+	} else {
+		*p = AcquireActionResult{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["action"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.Action = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.Action = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.Action = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.Action = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.Action)
+				}
+			}
+		}
+		if v, ok := d["acquireRequest"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AcquireRequest = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AcquireRequest = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AcquireRequest = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AcquireRequest = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AcquireRequest = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AcquireRequest)
+				}
+			}
+		}
+		if v, ok := d["statusCode"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.StatusCode)
+		}
+		if v, ok := d["acquireResult"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.AcquireResult = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.AcquireResult = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.AcquireResult = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.AcquireResult = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.AcquireResult = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.AcquireResult)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func NewAcquireActionResultFromJson(data string) AcquireActionResult {
+	req := AcquireActionResult{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewAcquireActionResultFromDict(data map[string]interface{}) AcquireActionResult {
+	return AcquireActionResult{
+		Action: func() *string {
+			v, ok := data["action"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["action"])
+		}(),
+		AcquireRequest: func() *string {
+			v, ok := data["acquireRequest"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["acquireRequest"])
+		}(),
+		StatusCode: func() *int32 {
+			v, ok := data["statusCode"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastInt32(data["statusCode"])
+		}(),
+		AcquireResult: func() *string {
+			v, ok := data["acquireResult"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["acquireResult"])
+		}(),
+	}
+}
+
+func (p AcquireActionResult) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.Action != nil {
+		m["action"] = p.Action
+	}
+	if p.AcquireRequest != nil {
+		m["acquireRequest"] = p.AcquireRequest
+	}
+	if p.StatusCode != nil {
+		m["statusCode"] = p.StatusCode
+	}
+	if p.AcquireResult != nil {
+		m["acquireResult"] = p.AcquireResult
+	}
+	return m
+}
+
+func (p AcquireActionResult) Pointer() *AcquireActionResult {
+	return &p
+}
+
+func CastAcquireActionResults(data []interface{}) []AcquireActionResult {
+	v := make([]AcquireActionResult, 0)
+	for _, d := range data {
+		v = append(v, NewAcquireActionResultFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastAcquireActionResultsFromDict(data []AcquireActionResult) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
+type TransactionResult struct {
+	TransactionId  *string               `json:"transactionId"`
+	VerifyResults  []VerifyActionResult  `json:"verifyResults"`
+	ConsumeResults []ConsumeActionResult `json:"consumeResults"`
+	AcquireResults []AcquireActionResult `json:"acquireResults"`
+}
+
+func (p *TransactionResult) UnmarshalJSON(data []byte) error {
+	str := string(data)
+	if len(str) == 0 {
+		*p = TransactionResult{}
+		return nil
+	}
+	if str[0] == '"' {
+		var strVal string
+		err := json.Unmarshal(data, &strVal)
+		if err != nil {
+			return err
+		}
+		str = strVal
+	}
+	if str == "null" {
+		*p = TransactionResult{}
+	} else {
+		*p = TransactionResult{}
+		d := map[string]*json.RawMessage{}
+		if err := json.Unmarshal([]byte(str), &d); err != nil {
+			return err
+		}
+		if v, ok := d["transactionId"]; ok && v != nil {
+			var temp interface{}
+			if err := json.Unmarshal(*v, &temp); err == nil {
+				switch v2 := temp.(type) {
+				case string:
+					p.TransactionId = &v2
+				case float64:
+					strValue := strconv.FormatFloat(v2, 'f', -1, 64)
+					p.TransactionId = &strValue
+				case int:
+					strValue := strconv.Itoa(v2)
+					p.TransactionId = &strValue
+				case int32:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				case int64:
+					strValue := strconv.Itoa(int(v2))
+					p.TransactionId = &strValue
+				default:
+					_ = json.Unmarshal(*v, &p.TransactionId)
+				}
+			}
+		}
+		if v, ok := d["verifyResults"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.VerifyResults)
+		}
+		if v, ok := d["consumeResults"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.ConsumeResults)
+		}
+		if v, ok := d["acquireResults"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AcquireResults)
+		}
+	}
+	return nil
+}
+
+func NewTransactionResultFromJson(data string) TransactionResult {
+	req := TransactionResult{}
+	_ = json.Unmarshal([]byte(data), &req)
+	return req
+}
+
+func NewTransactionResultFromDict(data map[string]interface{}) TransactionResult {
+	return TransactionResult{
+		TransactionId: func() *string {
+			v, ok := data["transactionId"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastString(data["transactionId"])
+		}(),
+		VerifyResults: func() []VerifyActionResult {
+			if data["verifyResults"] == nil {
+				return nil
+			}
+			return CastVerifyActionResults(core.CastArray(data["verifyResults"]))
+		}(),
+		ConsumeResults: func() []ConsumeActionResult {
+			if data["consumeResults"] == nil {
+				return nil
+			}
+			return CastConsumeActionResults(core.CastArray(data["consumeResults"]))
+		}(),
+		AcquireResults: func() []AcquireActionResult {
+			if data["acquireResults"] == nil {
+				return nil
+			}
+			return CastAcquireActionResults(core.CastArray(data["acquireResults"]))
+		}(),
+	}
+}
+
+func (p TransactionResult) ToDict() map[string]interface{} {
+	m := map[string]interface{}{}
+	if p.TransactionId != nil {
+		m["transactionId"] = p.TransactionId
+	}
+	if p.VerifyResults != nil {
+		m["verifyResults"] = CastVerifyActionResultsFromDict(
+			p.VerifyResults,
+		)
+	}
+	if p.ConsumeResults != nil {
+		m["consumeResults"] = CastConsumeActionResultsFromDict(
+			p.ConsumeResults,
+		)
+	}
+	if p.AcquireResults != nil {
+		m["acquireResults"] = CastAcquireActionResultsFromDict(
+			p.AcquireResults,
+		)
+	}
+	return m
+}
+
+func (p TransactionResult) Pointer() *TransactionResult {
+	return &p
+}
+
+func CastTransactionResults(data []interface{}) []TransactionResult {
+	v := make([]TransactionResult, 0)
+	for _, d := range data {
+		v = append(v, NewTransactionResultFromDict(d.(map[string]interface{})))
+	}
+	return v
+}
+
+func CastTransactionResultsFromDict(data []TransactionResult) []interface{} {
+	v := make([]interface{}, 0)
+	for _, d := range data {
+		v = append(v, d.ToDict())
+	}
+	return v
+}
+
 type GitHubCheckoutSetting struct {
 	ApiKeyId       *string `json:"apiKeyId"`
 	RepositoryName *string `json:"repositoryName"`
@@ -3301,8 +3988,11 @@ func CastLogSettingsFromDict(data []LogSetting) []interface{} {
 }
 
 type TransactionSetting struct {
-	EnableAutoRun          *bool   `json:"enableAutoRun"`
-	DistributorNamespaceId *string `json:"distributorNamespaceId"`
+	EnableAutoRun             *bool   `json:"enableAutoRun"`
+	EnableAtomicCommit        *bool   `json:"enableAtomicCommit"`
+	TransactionUseDistributor *bool   `json:"transactionUseDistributor"`
+	AcquireActionUseJobQueue  *bool   `json:"acquireActionUseJobQueue"`
+	DistributorNamespaceId    *string `json:"distributorNamespaceId"`
 	// Deprecated: should not be used
 	KeyId            *string `json:"keyId"`
 	QueueNamespaceId *string `json:"queueNamespaceId"`
@@ -3332,6 +4022,15 @@ func (p *TransactionSetting) UnmarshalJSON(data []byte) error {
 		}
 		if v, ok := d["enableAutoRun"]; ok && v != nil {
 			_ = json.Unmarshal(*v, &p.EnableAutoRun)
+		}
+		if v, ok := d["enableAtomicCommit"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.EnableAtomicCommit)
+		}
+		if v, ok := d["transactionUseDistributor"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.TransactionUseDistributor)
+		}
+		if v, ok := d["acquireActionUseJobQueue"]; ok && v != nil {
+			_ = json.Unmarshal(*v, &p.AcquireActionUseJobQueue)
 		}
 		if v, ok := d["distributorNamespaceId"]; ok && v != nil {
 			var temp interface{}
@@ -3421,6 +4120,27 @@ func NewTransactionSettingFromDict(data map[string]interface{}) TransactionSetti
 			}
 			return core.CastBool(data["enableAutoRun"])
 		}(),
+		EnableAtomicCommit: func() *bool {
+			v, ok := data["enableAtomicCommit"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["enableAtomicCommit"])
+		}(),
+		TransactionUseDistributor: func() *bool {
+			v, ok := data["transactionUseDistributor"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["transactionUseDistributor"])
+		}(),
+		AcquireActionUseJobQueue: func() *bool {
+			v, ok := data["acquireActionUseJobQueue"]
+			if !ok || v == nil {
+				return nil
+			}
+			return core.CastBool(data["acquireActionUseJobQueue"])
+		}(),
 		DistributorNamespaceId: func() *string {
 			v, ok := data["distributorNamespaceId"]
 			if !ok || v == nil {
@@ -3449,6 +4169,15 @@ func (p TransactionSetting) ToDict() map[string]interface{} {
 	m := map[string]interface{}{}
 	if p.EnableAutoRun != nil {
 		m["enableAutoRun"] = p.EnableAutoRun
+	}
+	if p.EnableAtomicCommit != nil {
+		m["enableAtomicCommit"] = p.EnableAtomicCommit
+	}
+	if p.TransactionUseDistributor != nil {
+		m["transactionUseDistributor"] = p.TransactionUseDistributor
+	}
+	if p.AcquireActionUseJobQueue != nil {
+		m["acquireActionUseJobQueue"] = p.AcquireActionUseJobQueue
 	}
 	if p.DistributorNamespaceId != nil {
 		m["distributorNamespaceId"] = p.DistributorNamespaceId
