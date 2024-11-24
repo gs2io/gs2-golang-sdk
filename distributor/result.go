@@ -75,7 +75,7 @@ func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -131,7 +131,7 @@ func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -182,7 +182,7 @@ func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -238,7 +238,7 @@ func (p GetNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -294,7 +294,7 @@ func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -350,7 +350,7 @@ func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -411,7 +411,7 @@ func (p DescribeDistributorModelMastersResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -467,7 +467,7 @@ func (p CreateDistributorModelMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -523,7 +523,7 @@ func (p GetDistributorModelMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -579,7 +579,7 @@ func (p UpdateDistributorModelMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -635,7 +635,7 @@ func (p DeleteDistributorModelMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -687,7 +687,7 @@ func (p DescribeDistributorModelsResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -743,7 +743,7 @@ func (p GetDistributorModelResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -799,7 +799,7 @@ func (p ExportMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -855,7 +855,7 @@ func (p GetCurrentDistributorMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -911,7 +911,7 @@ func (p UpdateCurrentDistributorMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -967,7 +967,7 @@ func (p UpdateCurrentDistributorMasterFromGitHubResult) ToDict() map[string]inte
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1041,7 +1041,7 @@ func (p DistributeResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1106,7 +1106,7 @@ func (p DistributeWithoutOverflowProcessResult) ToDict() map[string]interface{} 
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1175,7 +1175,7 @@ func (p RunVerifyTaskResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1244,7 +1244,7 @@ func (p RunStampTaskResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1304,7 +1304,7 @@ func (p RunStampSheetResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1408,7 +1408,7 @@ func (p RunStampSheetExpressResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1477,7 +1477,7 @@ func (p RunVerifyTaskWithoutNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1546,7 +1546,7 @@ func (p RunStampTaskWithoutNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1606,7 +1606,7 @@ func (p RunStampSheetWithoutNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1710,7 +1710,7 @@ func (p RunStampSheetExpressWithoutNamespaceResult) ToDict() map[string]interfac
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1761,7 +1761,7 @@ func (p SetTransactionDefaultConfigResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1812,7 +1812,7 @@ func (p SetTransactionDefaultConfigByUserIdResult) ToDict() map[string]interface
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1863,7 +1863,7 @@ func (p FreezeMasterDataResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1914,7 +1914,7 @@ func (p FreezeMasterDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1956,7 +1956,7 @@ func (p IfExpressionByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1998,7 +1998,7 @@ func (p AndExpressionByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2040,7 +2040,7 @@ func (p OrExpressionByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2091,7 +2091,7 @@ func (p IfExpressionByStampTaskResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2142,7 +2142,7 @@ func (p AndExpressionByStampTaskResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2193,7 +2193,7 @@ func (p OrExpressionByStampTaskResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2249,7 +2249,7 @@ func (p GetStampSheetResultResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2305,7 +2305,7 @@ func (p GetStampSheetResultByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2361,7 +2361,7 @@ func (p RunTransactionResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2417,7 +2417,7 @@ func (p GetTransactionResultResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2473,7 +2473,7 @@ func (p GetTransactionResultByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 

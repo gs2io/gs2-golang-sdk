@@ -75,7 +75,7 @@ func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -131,7 +131,7 @@ func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -182,7 +182,7 @@ func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -238,7 +238,7 @@ func (p GetNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -294,7 +294,7 @@ func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -350,7 +350,7 @@ func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -392,7 +392,7 @@ func (p DumpUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -443,7 +443,7 @@ func (p CheckDumpUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -485,7 +485,7 @@ func (p CleanUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -527,7 +527,7 @@ func (p CheckCleanUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -587,7 +587,7 @@ func (p PrepareImportUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -629,7 +629,7 @@ func (p ImportUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -680,7 +680,7 @@ func (p CheckImportUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -732,7 +732,7 @@ func (p DescribeCategoryModelsResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -788,7 +788,7 @@ func (p GetCategoryModelResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -849,7 +849,7 @@ func (p DescribeCategoryModelMastersResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -905,7 +905,7 @@ func (p CreateCategoryModelMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -961,7 +961,7 @@ func (p GetCategoryModelMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1017,7 +1017,7 @@ func (p UpdateCategoryModelMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1073,7 +1073,7 @@ func (p DeleteCategoryModelMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1129,7 +1129,7 @@ func (p SubscribeResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1185,7 +1185,7 @@ func (p SubscribeByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1246,7 +1246,7 @@ func (p DescribeScoresResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1307,7 +1307,7 @@ func (p DescribeScoresByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1363,7 +1363,7 @@ func (p GetScoreResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1419,7 +1419,7 @@ func (p GetScoreByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1480,7 +1480,7 @@ func (p DescribeRankingsResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1541,7 +1541,7 @@ func (p DescribeRankingssByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1593,7 +1593,7 @@ func (p DescribeNearRankingsResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1649,7 +1649,7 @@ func (p GetRankingResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1705,7 +1705,7 @@ func (p GetRankingByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1761,7 +1761,7 @@ func (p PutScoreResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1817,7 +1817,7 @@ func (p PutScoreByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1868,7 +1868,7 @@ func (p CalcRankingResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1924,7 +1924,7 @@ func (p ExportMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1980,7 +1980,7 @@ func (p GetCurrentRankingMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2036,7 +2036,7 @@ func (p UpdateCurrentRankingMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2092,7 +2092,7 @@ func (p UpdateCurrentRankingMasterFromGitHubResult) ToDict() map[string]interfac
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2148,7 +2148,7 @@ func (p GetSubscribeResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2204,7 +2204,7 @@ func (p GetSubscribeByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2260,7 +2260,7 @@ func (p UnsubscribeResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2316,7 +2316,7 @@ func (p UnsubscribeByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2368,7 +2368,7 @@ func (p DescribeSubscribesByCategoryNameResult) ToDict() map[string]interface{} 
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2420,7 +2420,7 @@ func (p DescribeSubscribesByCategoryNameAndUserIdResult) ToDict() map[string]int
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 

@@ -75,7 +75,7 @@ func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -131,7 +131,7 @@ func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -182,7 +182,7 @@ func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -238,7 +238,7 @@ func (p GetNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -294,7 +294,7 @@ func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -350,7 +350,7 @@ func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -392,7 +392,7 @@ func (p DumpUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -443,7 +443,7 @@ func (p CheckDumpUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -485,7 +485,7 @@ func (p CleanUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -527,7 +527,7 @@ func (p CheckCleanUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -587,7 +587,7 @@ func (p PrepareImportUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -629,7 +629,7 @@ func (p ImportUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -680,7 +680,7 @@ func (p CheckImportUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -741,7 +741,7 @@ func (p DescribeEventMastersResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -797,7 +797,7 @@ func (p CreateEventMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -853,7 +853,7 @@ func (p GetEventMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -909,7 +909,7 @@ func (p UpdateEventMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -965,7 +965,7 @@ func (p DeleteEventMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1026,7 +1026,7 @@ func (p DescribeTriggersResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1087,7 +1087,7 @@ func (p DescribeTriggersByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1143,7 +1143,7 @@ func (p GetTriggerResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1199,7 +1199,7 @@ func (p GetTriggerByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1255,7 +1255,7 @@ func (p TriggerByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1311,7 +1311,7 @@ func (p TriggerByStampSheetResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1367,7 +1367,7 @@ func (p DeleteTriggerResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1423,7 +1423,7 @@ func (p DeleteTriggerByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1465,7 +1465,7 @@ func (p VerifyTriggerResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1507,7 +1507,7 @@ func (p VerifyTriggerByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1572,7 +1572,7 @@ func (p DeleteTriggerByStampTaskResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1623,7 +1623,7 @@ func (p VerifyTriggerByStampTaskResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1675,7 +1675,7 @@ func (p DescribeEventsResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1727,7 +1727,7 @@ func (p DescribeEventsByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1779,7 +1779,7 @@ func (p DescribeRawEventsResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1876,7 +1876,7 @@ func (p GetEventResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1973,7 +1973,7 @@ func (p GetEventByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2029,7 +2029,7 @@ func (p GetRawEventResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2071,7 +2071,7 @@ func (p VerifyEventResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2113,7 +2113,7 @@ func (p VerifyEventByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2164,7 +2164,7 @@ func (p VerifyEventByStampTaskResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2220,7 +2220,7 @@ func (p ExportMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2276,7 +2276,7 @@ func (p GetCurrentEventMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2332,7 +2332,7 @@ func (p UpdateCurrentEventMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2388,7 +2388,7 @@ func (p UpdateCurrentEventMasterFromGitHubResult) ToDict() map[string]interface{
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 

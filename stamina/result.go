@@ -75,7 +75,7 @@ func (p DescribeNamespacesResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -131,7 +131,7 @@ func (p CreateNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -182,7 +182,7 @@ func (p GetNamespaceStatusResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -238,7 +238,7 @@ func (p GetNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -294,7 +294,7 @@ func (p UpdateNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -350,7 +350,7 @@ func (p DeleteNamespaceResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -392,7 +392,7 @@ func (p DumpUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -443,7 +443,7 @@ func (p CheckDumpUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -485,7 +485,7 @@ func (p CleanUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -527,7 +527,7 @@ func (p CheckCleanUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -587,7 +587,7 @@ func (p PrepareImportUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -629,7 +629,7 @@ func (p ImportUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -680,7 +680,7 @@ func (p CheckImportUserDataByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -741,7 +741,7 @@ func (p DescribeStaminaModelMastersResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -797,7 +797,7 @@ func (p CreateStaminaModelMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -853,7 +853,7 @@ func (p GetStaminaModelMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -909,7 +909,7 @@ func (p UpdateStaminaModelMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -965,7 +965,7 @@ func (p DeleteStaminaModelMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1026,7 +1026,7 @@ func (p DescribeMaxStaminaTableMastersResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1082,7 +1082,7 @@ func (p CreateMaxStaminaTableMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1138,7 +1138,7 @@ func (p GetMaxStaminaTableMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1194,7 +1194,7 @@ func (p UpdateMaxStaminaTableMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1250,7 +1250,7 @@ func (p DeleteMaxStaminaTableMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1311,7 +1311,7 @@ func (p DescribeRecoverIntervalTableMastersResult) ToDict() map[string]interface
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1367,7 +1367,7 @@ func (p CreateRecoverIntervalTableMasterResult) ToDict() map[string]interface{} 
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1423,7 +1423,7 @@ func (p GetRecoverIntervalTableMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1479,7 +1479,7 @@ func (p UpdateRecoverIntervalTableMasterResult) ToDict() map[string]interface{} 
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1535,7 +1535,7 @@ func (p DeleteRecoverIntervalTableMasterResult) ToDict() map[string]interface{} 
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1596,7 +1596,7 @@ func (p DescribeRecoverValueTableMastersResult) ToDict() map[string]interface{} 
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1652,7 +1652,7 @@ func (p CreateRecoverValueTableMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1708,7 +1708,7 @@ func (p GetRecoverValueTableMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1764,7 +1764,7 @@ func (p UpdateRecoverValueTableMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1820,7 +1820,7 @@ func (p DeleteRecoverValueTableMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1876,7 +1876,7 @@ func (p ExportMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1932,7 +1932,7 @@ func (p GetCurrentStaminaMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -1988,7 +1988,7 @@ func (p UpdateCurrentStaminaMasterResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2044,7 +2044,7 @@ func (p UpdateCurrentStaminaMasterFromGitHubResult) ToDict() map[string]interfac
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2096,7 +2096,7 @@ func (p DescribeStaminaModelsResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2152,7 +2152,7 @@ func (p GetStaminaModelResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2213,7 +2213,7 @@ func (p DescribeStaminasResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2274,7 +2274,7 @@ func (p DescribeStaminasByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2344,7 +2344,7 @@ func (p GetStaminaResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2414,7 +2414,7 @@ func (p GetStaminaByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2484,7 +2484,7 @@ func (p UpdateStaminaByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2554,7 +2554,7 @@ func (p ConsumeStaminaResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2624,7 +2624,7 @@ func (p ConsumeStaminaByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2703,7 +2703,7 @@ func (p RecoverStaminaByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2773,7 +2773,7 @@ func (p RaiseMaxValueByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2843,7 +2843,7 @@ func (p DecreaseMaxValueResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2913,7 +2913,7 @@ func (p DecreaseMaxValueByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -2997,7 +2997,7 @@ func (p SetMaxValueByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -3081,7 +3081,7 @@ func (p SetRecoverIntervalByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -3165,7 +3165,7 @@ func (p SetRecoverValueByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -3249,7 +3249,7 @@ func (p SetMaxValueByStatusResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -3333,7 +3333,7 @@ func (p SetRecoverIntervalByStatusResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -3417,7 +3417,7 @@ func (p SetRecoverValueByStatusResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -3473,7 +3473,7 @@ func (p DeleteStaminaByUserIdResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -3552,7 +3552,7 @@ func (p RecoverStaminaByStampSheetResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -3622,7 +3622,7 @@ func (p RaiseMaxValueByStampSheetResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -3701,7 +3701,7 @@ func (p DecreaseMaxValueByStampTaskResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -3785,7 +3785,7 @@ func (p SetMaxValueByStampSheetResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -3869,7 +3869,7 @@ func (p SetRecoverIntervalByStampSheetResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -3953,7 +3953,7 @@ func (p SetRecoverValueByStampSheetResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
@@ -4032,7 +4032,7 @@ func (p ConsumeStaminaByStampTaskResult) ToDict() map[string]interface{} {
 				return nil
 			}
 			return p.Metadata.ToDict()
-		},
+		}(),
 	}
 }
 
